@@ -528,7 +528,7 @@ message GetOrderStatusStreamRequest {
 }
 
 message GetOrderStatusStreamResponse {
-  int64 blockHeight = 1;
+  int64 slot = 1;
   GetOrderStatusResponse orderInfo = 2;
 }
 
@@ -594,12 +594,12 @@ message GetUnsettledResponse {
 }
 
 message GetOrderbooksStreamResponse {
-  int64 blockHeight = 1;
+  int64 slot = 1;
   GetOrderbookResponse orderbook = 2;
 }
 
 message GetTickersStreamResponse {
-  int64 blockHeight = 1;
+  int64 slot = 1;
   GetTickersResponse ticker = 2;
 }
 
@@ -617,17 +617,17 @@ enum Step {
 }
 
 message GetMarketDepthStreamResponse {
-  int64 blockHeight = 1;
+  int64 slot = 1;
   MarketDepthTick tick = 2;
 }
 
 message MarketDepthTick {
-  int64 prevBlockHeight = 1;
+  int64 prevSlot = 1;
   repeated OrderbookItem asks = 2;
   repeated OrderbookItem bids = 3;
 }
 
 message GetTradesStreamResponse {
-  int64 blockHeight = 1;
+  int64 slot = 1;
   GetTradesResponse trades = 2;
 }
