@@ -232,14 +232,14 @@ service Api {
     };
   }
 
-  rpc Ping(PingRequest) returns (PingResponse) {
+  rpc Ping(GetPingRequest) returns (GetPingResponse) {
     option (google.api.http) = {
       get: "/api/v1/ping"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Indicates if the server is up";
-      summary: "Server ";
-      tags: "Trade";
+      description: "Returns a response if the server is working";
+      summary: "Indication that server is up";
+      tags: "Ping";
     };
   }
 
@@ -643,10 +643,10 @@ message GetTradesStreamResponse {
   GetTradesResponse trades = 2;
 }
 
-message PingRequest {
+message GetPingRequest {
 
 }
 
-message PingResponse {
+message GetPingResponse {
 
 }
