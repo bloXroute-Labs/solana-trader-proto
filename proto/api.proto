@@ -232,6 +232,17 @@ service Api {
     };
   }
 
+  rpc Ping(PingRequest) returns (PingResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/ping"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Indicates if the server is up";
+      summary: "Server ";
+      tags: "Trade";
+    };
+  }
+
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -630,4 +641,12 @@ message MarketDepthTick {
 message GetTradesStreamResponse {
   int64 slot = 1;
   GetTradesResponse trades = 2;
+}
+
+message PingRequest {
+
+}
+
+message PingResponse {
+
 }
