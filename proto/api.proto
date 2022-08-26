@@ -538,9 +538,10 @@ message GetOrderStatusResponse {
   string orderID = 3;
   uint64 clientOrderID = 4;
   float quantityReleased = 5;
-  float price = 6;
-  Side side = 7;
-  OrderStatus orderStatus = 8;
+  float quantityRemaining = 6;
+  float price = 7;
+  Side side = 8;
+  OrderStatus orderStatus = 9;
 }
 
 message PostSubmitRequest {
