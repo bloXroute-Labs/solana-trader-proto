@@ -1,6 +1,6 @@
 syntax = "proto3";
 package api;
-option go_package = "github.com/bloXroute-Labs/serum-api/api";
+option go_package = "github.com/bloXroute-Labs/solana-trader-api/proto/api";
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
