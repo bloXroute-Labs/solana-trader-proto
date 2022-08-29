@@ -254,6 +254,16 @@ service Api {
       tags: "AMMs";
     };
   }
+  rpc TradeSwap(TradeSwapRequest) returns (TradeSwapResponse) {
+    option(google.api.http) = {
+      get: "/api/v1/amm/trade-swap"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "routes swaps from supported amms";
+      summary: "Routes swaps";
+      tags: "AMMs";
+    };
+  }
 
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
