@@ -672,7 +672,7 @@ enum Project {
 }
 
 message QuoteRoute {
-  string project = 1;
+  string exchange = 1;
   string inToken = 2;
   string inTokenAddress = 3;
   string outToken = 4;
