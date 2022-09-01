@@ -649,7 +649,8 @@ message GetQuotesRequest{
   string inToken = 1;
   string outToken = 2;
   double inAmount = 3;
-  repeated Project projects = 4;
+  double slippage = 4;
+  repeated Project projects = 5;
 }
 
 
@@ -657,8 +658,7 @@ message GetQuotesResponse{
   string inToken = 1;
   string outToken = 2;
   double inAmount = 3;
-  double slippage = 4;
-  repeated ProjectQuote quotes = 5;
+  repeated ProjectQuote quotes = 4;
 }
 
 message ProjectQuote {
