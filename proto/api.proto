@@ -674,6 +674,10 @@ enum Project {
 }
 
 message QuoteRoute {
+  repeated QuoteStep steps = 1;
+}
+
+message QuoteStep {
   string exchange = 1;
   string inToken = 2;
   string inTokenAddress = 3;
