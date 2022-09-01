@@ -667,9 +667,10 @@ message ProjectQuote {
 }
 
 enum Project {
-  P_JUPITER = 0;
-  P_RAYDIUM = 1;
-  P_ALL = 2;
+  P_UNKNOWN = 0;
+  P_JUPITER = 1;
+  P_RAYDIUM = 2;
+  P_ALL = 3;
 }
 
 message QuoteRoute {
