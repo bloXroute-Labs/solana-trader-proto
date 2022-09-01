@@ -686,6 +686,6 @@ message QuoteStep {
   double inAmount = 6;
   double outAmount = 7;
   double slippage = 8;
-  double priceImpact = 9;
+  double priceImpactPercent = 9;
   double fee = 10;
 }
