@@ -674,7 +674,9 @@ enum Project {
 }
 
 message QuoteRoute {
-  repeated QuoteStep steps = 1;
+  double inAmount = 1;
+  double outAmount = 2;
+  repeated QuoteStep steps = 3;
 }
 
 message QuoteStep {
