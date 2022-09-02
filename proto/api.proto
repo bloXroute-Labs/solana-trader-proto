@@ -667,7 +667,9 @@ message GetQuotesRequest{
   string outToken = 2;
   double inAmount = 3;
   double slippage = 4;
+  repeated Project projects = 5;
 }
+
 
 message GetQuotesResponse{
   string inToken = 1;
@@ -677,20 +679,34 @@ message GetQuotesResponse{
 }
 
 message ProjectQuote {
-  string project = 1;
+  Project project = 1;
   repeated QuoteRoute routes = 2;
 }
 
+enum Project {
+  P_UNKNOWN = 0;
+  P_JUPITER = 1;
+  P_RAYDIUM = 2;
+  P_ALL = 3;
+}
+
 message QuoteRoute {
-  string inToken = 1;
-  string inTokenAddress = 2;
-  string outToken = 3;
-  string outTokenAddress = 4;
-  double inAmount = 5;
-  double outAmount = 6;
-  double slippage = 7;
-  double priceImpact = 8;
-  double fee = 9;
+  double inAmount = 1;
+  double outAmount = 2;
+  repeated QuoteStep steps = 3;
+}
+
+message QuoteStep {
+  string exchange = 1;
+  string inToken = 2;
+  string inTokenAddress = 3;
+  string outToken = 4;
+  string outTokenAddress = 5;
+  double inAmount = 6;
+  double outAmount = 7;
+  double slippage = 8;
+  double priceImpactPercent = 9;
+  double fee = 10;
 }
 
 message GetRecentBlockHashRequest {
