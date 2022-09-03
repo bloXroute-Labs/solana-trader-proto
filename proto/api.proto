@@ -77,6 +77,17 @@ service Api {
     };
   }
 
+  rpc GetRecentBlockHash(GetRecentBlockHashRequest) returns (GetRecentBlockHashResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/system/blockhash"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns recent block hash";
+      summary: "Recent block hash";
+      tags: "System";
+    };
+  }
+
   // account endpoints
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse) {
     option (google.api.http) = {
@@ -272,6 +283,12 @@ service Api {
   rpc GetOrderStatusStream(GetOrderStatusStreamRequest) returns (stream GetOrderStatusStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Trade";
+    };
+  }
+
+  rpc GetRecentBlockHashStream(GetRecentBlockHashRequest) returns (stream GetRecentBlockHashResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
     };
   }
 }
@@ -656,9 +673,11 @@ message GetQuotesRequest{
 
 message GetQuotesResponse{
   string inToken = 1;
-  string outToken = 2;
-  double inAmount = 3;
-  repeated ProjectQuote quotes = 4;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated ProjectQuote quotes = 6;
 }
 
 message ProjectQuote {
@@ -690,4 +709,12 @@ message QuoteStep {
   double slippage = 8;
   double priceImpactPercent = 9;
   double fee = 10;
+}
+
+message GetRecentBlockHashRequest {
+
+}
+
+message GetRecentBlockHashResponse {
+  string blockHash = 1;
 }
