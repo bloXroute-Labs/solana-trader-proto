@@ -695,6 +695,22 @@ message ProjectQuote {
   repeated QuoteRoute routes = 2;
 }
 
+message TradeSwapRequest{
+  string owner = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+}
+
+message TradeSwapResponse{
+  string transaction = 1;
+  double outAmount = 2;
+  double minOutAmount = 3;
+  double priceImpact = 4;
+  double fee = 5;
+}
+
 enum Project {
   P_UNKNOWN = 0;
   P_JUPITER = 1;
