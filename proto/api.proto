@@ -680,7 +680,6 @@ message GetQuotesRequest{
   repeated Project projects = 5;
 }
 
-
 message GetQuotesResponse{
   string inToken = 1;
   string inTokenAddress = 2;
