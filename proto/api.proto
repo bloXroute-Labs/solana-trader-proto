@@ -313,6 +313,12 @@ service Api {
       tags: "System";
     };
   }
+
+  rpc GetRecentBlockHash(GetRecentBlockHashRequest) returns (GetRecentBlockHashResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
 }
 
 message GetMarketsRequest {
@@ -682,6 +688,14 @@ message MarketDepthTick {
 message GetTradesStreamResponse {
   int64 slot = 1;
   GetTradesResponse trades = 2;
+}
+
+message GetRecentBlockHashRequest {
+
+}
+
+message GetRecentBlockHashResponse {
+  string blockHash = 1;
 }
 
 message GetQuotesRequest{
