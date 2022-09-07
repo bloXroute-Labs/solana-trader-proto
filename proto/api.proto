@@ -254,6 +254,16 @@ service Api {
       tags: "AMMs";
     };
   }
+  rpc TradeSwap(TradeSwapRequest) returns (TradeSwapResponse) {
+    option(google.api.http) = {
+      get: "/api/v1/amm/trade-swap"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "routes swaps from supported amms";
+      summary: "Routes swaps";
+      tags: "AMMs";
+    };
+  }
 
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
@@ -670,7 +680,6 @@ message GetQuotesRequest{
   repeated Project projects = 5;
 }
 
-
 message GetQuotesResponse{
   string inToken = 1;
   string inTokenAddress = 2;
@@ -683,6 +692,23 @@ message GetQuotesResponse{
 message ProjectQuote {
   Project project = 1;
   repeated QuoteRoute routes = 2;
+}
+
+message TradeSwapRequest{
+  string owner = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+}
+
+message TradeSwapResponse{
+  Project project = 1;
+  string transaction = 2;
+  double outAmount = 3;
+  double minOutAmount = 4;
+  double priceImpact = 5;
+  double fee = 6;
 }
 
 enum Project {
