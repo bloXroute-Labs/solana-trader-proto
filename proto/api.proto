@@ -266,7 +266,7 @@ service Api {
       tags: "AMMs";
     };
   }
-  rpc TradeSwap(TradeSwapRequest) returns (TradeSwapResponse) {
+  rpc PostTradeSwap(TradeSwapRequest) returns (TradeSwapResponse) {
     option(google.api.http) = {
       get: "/api/v1/amm/trade-swap"
     };
