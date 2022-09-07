@@ -20,6 +20,18 @@ service Api {
     };
   }
 
+  rpc GetPools(GetPoolsRequest) returns (GetPoolsResponse) {
+    option(google.api.http) = {
+      post: "/api/v1/market/pools"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of supported AMM pools";
+      summary: "Supported pools";
+      tags: "Market";
+    };
+  }
+
   rpc GetTickers(GetTickersRequest) returns (GetTickersResponse) {
     option(google.api.http) = {
       get: "/api/v1/market/tickers/{market}"
@@ -699,4 +711,26 @@ message GetRecentBlockHashRequest {
 
 message GetRecentBlockHashResponse {
   string blockHash = 1;
+}
+
+message GetPoolsRequest {
+  repeated string projects = 1;
+}
+
+message GetPoolsResponse {
+  repeated ProjectPools projects = 1;
+}
+
+message ProjectPools {
+  string project = 1;
+  repeated ProjectPool pools = 2;
+}
+
+message ProjectPool {
+  string name = 1;
+  string address = 2;
+  string token1MintAddress = 3;
+  string token1MintSymbol = 4;
+  string token2MintAddress = 5;
+  string token2MintSymbol = 6;
 }
