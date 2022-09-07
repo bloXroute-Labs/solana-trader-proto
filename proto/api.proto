@@ -695,11 +695,12 @@ message ProjectQuote {
 }
 
 message TradeSwapRequest{
-  string owner = 1;
-  string inToken = 2;
-  string outToken = 3;
-  double inAmount = 4;
-  double slippage = 5;
+  Project project = 1;
+  string owner = 2;
+  string inToken = 3;
+  string outToken = 4;
+  double inAmount = 5;
+  double slippage = 6;
 }
 
 message TradeSwapResponse{
