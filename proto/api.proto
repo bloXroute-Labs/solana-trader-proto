@@ -747,7 +747,13 @@ message QuoteStep {
   double outAmount = 7;
   double slippage = 8;
   double priceImpactPercent = 9;
-  double fee = 10;
+  Fee fee = 10;
+}
+
+message Fee {
+  string amount = 1;
+  string mint = 2;
+  float percent = 3;
 }
 
 message GetRecentBlockHashRequest {
