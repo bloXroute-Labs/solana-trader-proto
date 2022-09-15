@@ -721,8 +721,8 @@ message TradeSwapResponse{
   string transaction = 2;
   double outAmount = 3;
   double minOutAmount = 4;
-  double priceImpact = 5;
-  ffi.Fee fee = 6;
+  ffi.PriceImpactPercent priceImpact = 5;
+  Fee fee = 6;
 }
 
 enum Project {
@@ -748,7 +748,13 @@ message QuoteStep {
   double outAmount = 7;
   double slippage = 8;
   ffi.PriceImpactPercent priceImpactPercent = 9;
-  ffi.Fee fee = 10;
+  Fee fee = 10;
+}
+
+message Fee {
+  float amount = 1;
+  string mint = 2;
+  float percent = 3;
 }
 
 message GetRecentBlockHashRequest {
