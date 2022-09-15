@@ -7,6 +7,7 @@ import "google/protobuf/timestamp.proto";
 import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "../../proto/ffi/ffi.proto";
 
 service Api {
   rpc GetMarkets(GetMarketsRequest) returns (GetMarketsResponse) {
@@ -721,7 +722,7 @@ message TradeSwapResponse{
   double outAmount = 3;
   double minOutAmount = 4;
   double priceImpact = 5;
-  double fee = 6;
+  Fee fee = 6;
 }
 
 enum Project {
@@ -746,8 +747,19 @@ message QuoteStep {
   double inAmount = 6;
   double outAmount = 7;
   double slippage = 8;
-  double priceImpactPercent = 9;
+  PriceImpactPercent priceImpactPercent = 9;
   Fee fee = 10;
+}
+
+message PriceImpactPercent {
+  double percent = 1;
+  Infinity infinity = 2;
+}
+
+enum Infinity {
+  POS_INF = 0;
+  NEG_INF = 1;
+  NORMAL = 2;
 }
 
 message Fee {
