@@ -717,7 +717,7 @@ message TradeSwapRequest{
 
 message TradeSwapResponse{
   Project project = 1;
-  string transaction = 2;
+  repeated string transactions = 2;
   double outAmount = 3;
   double minOutAmount = 4;
   double priceImpact = 5;
