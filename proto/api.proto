@@ -7,7 +7,6 @@ import "google/protobuf/timestamp.proto";
 import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
-import "ffi/ffi.proto";
 
 service Api {
   rpc GetMarkets(GetMarketsRequest) returns (GetMarketsResponse) {
@@ -721,7 +720,7 @@ message TradeSwapResponse{
   string transaction = 2;
   double outAmount = 3;
   double minOutAmount = 4;
-  ffi.PriceImpactPercent priceImpact = 5;
+  PriceImpactPercent priceImpact = 5;
   Fee fee = 6;
 }
 
@@ -747,7 +746,7 @@ message QuoteStep {
   double inAmount = 6;
   double outAmount = 7;
   double slippage = 8;
-  ffi.PriceImpactPercent priceImpactPercent = 9;
+  PriceImpactPercent priceImpact = 9;
   Fee fee = 10;
 }
 
@@ -760,6 +759,17 @@ message Fee {
   float amount = 1;
   string mint = 2;
   float percent = 3;
+}
+
+message PriceImpactPercent {
+  double percent = 1;
+  Infinity infinity = 2;
+}
+
+enum Infinity {
+  INF_NOT = 0;
+  INF_POSITIVE = 1;
+  INF_NEGATIVE = 2;
 }
 
 message GetRecentBlockHashRequest {
