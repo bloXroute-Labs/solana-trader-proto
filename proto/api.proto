@@ -313,6 +313,12 @@ service Api {
       tags: "System";
     };
   }
+
+  rpc GetQuotesStream(GetQuotesStreamRequest) returns (stream GetQuotesStreamResponse){
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
 }
 
 message GetMarketsRequest {
@@ -800,4 +806,25 @@ message ProjectPool {
   string token1MintSymbol = 4;
   string token2MintAddress = 5;
   string token2MintSymbol = 6;
+}
+
+message GetQuotesStreamResponse {
+  int64 slot = 1;
+  string token1 = 2;
+  string token1Address = 3;
+  string token2 = 4;
+  string token2Address = 5;
+  double token1ToToken2 = 6;
+  double token2ToToken1 = 7;
+  Project project = 8;
+}
+
+message GetQuotesStreamRequest {
+  repeated Project   projects = 1;
+  repeated TokenPair tokenPairs = 2;
+}
+
+message TokenPair {
+  string token1 = 1;
+  string token2 = 2;
 }
