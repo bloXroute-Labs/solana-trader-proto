@@ -424,6 +424,8 @@ message Trade {
   double price = 3;
   string orderID = 4;
   bool isMaker = 5;
+  string address = 6;
+  double feeOrRebate = 7;
 }
 
 message GetServerTimeRequest {}
