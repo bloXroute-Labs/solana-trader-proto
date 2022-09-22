@@ -266,6 +266,18 @@ service Api {
       tags: "AMMs";
     };
   }
+
+  rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
+    option(google.api.http) = {
+      get: "/api/v1/market/price"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for supported tokens";
+      summary: "Prices list";
+      tags: "AMMs";
+    };
+  }
+
   rpc PostTradeSwap(TradeSwapRequest) returns (TradeSwapResponse) {
     option(google.api.http) = {
       get: "/api/v1/amm/trade-swap"
@@ -736,7 +748,8 @@ enum Project {
   P_UNKNOWN = 0;
   P_JUPITER = 1;
   P_RAYDIUM = 2;
-  P_ALL = 3;
+  P_Serum = 3;
+  P_ALL = 4;
 }
 
 message QuoteRoute {
@@ -829,4 +842,22 @@ message GetQuotesStreamRequest {
 message TokenPair {
   string token1 = 1;
   string token2 = 2;
+}
+
+message GetPriceRequest{
+  repeated string tokens = 1;
+}
+
+message GetPriceResponse {
+  repeated TokenPrice tokenPrices = 1;
+}
+
+message TokenPrice {
+  string token = 1;
+  string tokenAddress = 2;
+  Project project = 3;
+  double buy = 4;
+  double buySize = 5;
+  double sell = 6;
+  double sellSize = 7;
 }
