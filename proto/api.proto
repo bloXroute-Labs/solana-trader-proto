@@ -433,11 +433,12 @@ message GetTradesResponse {
 message Trade {
   Side side = 1;
   double size = 2;
-  double price = 3;
+  double fillPrice = 3;
   string orderID = 4;
   bool isMaker = 5;
   string address = 6;
   double feeOrRebate = 7;
+  double orderPrice = 8;
 }
 
 message GetServerTimeRequest {}
