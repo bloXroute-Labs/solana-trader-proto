@@ -331,6 +331,12 @@ service Api {
       tags: "AMMs";
     };
   }
+
+  rpc GetPoolReservesStream(GetPoolReservesStreamRequest) returns (stream GetPoolReservesStreamResponse){
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
 }
 
 message GetMarketsRequest {
@@ -862,4 +868,22 @@ message TokenPrice {
   double buySize = 5;
   double sell = 6;
   double sellSize = 7;
+}
+
+message GetPoolReservesStreamResponse {
+  int64 slot = 1;
+  PoolReserves reserves = 2;
+}
+
+message PoolReserves {
+  string token1Reserves = 1;
+  string token1Address = 2;
+  string token2Reserves = 3;
+  string Token2Address = 4;
+  string poolID = 5;
+  Project project = 6;
+}
+
+message GetPoolReservesStreamRequest {
+  repeated Project   projects = 1;
 }
