@@ -826,12 +826,12 @@ message ProjectPool {
 
 message GetQuotesStreamResponse {
   int64 slot = 1;
-  string token1 = 2;
-  string token1Address = 3;
-  string token2 = 4;
-  string token2Address = 5;
-  double token1ToToken2 = 6;
-  double token2ToToken1 = 7;
+  string inToken = 2;
+  string inTokenAddress = 3;
+  string outToken = 4;
+  string outTokenAddress = 5;
+  double inAmount = 6;
+  double outAmount = 7;
   Project project = 8;
 }
 
@@ -841,8 +841,9 @@ message GetQuotesStreamRequest {
 }
 
 message TokenPair {
-  string token1 = 1;
-  string token2 = 2;
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
 }
 
 message GetPriceRequest{
