@@ -22,8 +22,7 @@ service Api {
 
   rpc GetPools(GetPoolsRequest) returns (GetPoolsResponse) {
     option(google.api.http) = {
-      post: "/api/v1/market/pools"
-      body: "*"
+      get: "/api/v1/market/pools"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list of supported AMM pools";
