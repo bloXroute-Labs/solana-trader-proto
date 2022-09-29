@@ -808,7 +808,7 @@ message GetRecentBlockHashResponse {
 }
 
 message GetPoolsRequest {
-  repeated string projects = 1;
+  repeated Project projects = 1;
 }
 
 message GetPoolsResponse {
@@ -816,13 +816,13 @@ message GetPoolsResponse {
 }
 
 message ProjectPools {
-  string project = 1;
+  Project project = 1;
   repeated ProjectPool pools = 2;
 }
 
 message ProjectPool {
-  string name = 1;
-  string address = 2;
+  string pool = 1;
+  string poolAddress = 2;
   string token1MintAddress = 3;
   string token1MintSymbol = 4;
   string token2MintAddress = 5;
