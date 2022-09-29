@@ -715,7 +715,8 @@ message GetQuotesRequest{
   string outToken = 2;
   double inAmount = 3;
   double slippage = 4;
-  repeated Project projects = 5;
+  int32 limit = 5;
+  repeated Project projects = 6;
 }
 
 message GetQuotesResponse{
