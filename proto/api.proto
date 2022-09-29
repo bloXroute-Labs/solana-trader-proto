@@ -22,8 +22,7 @@ service Api {
 
   rpc GetPools(GetPoolsRequest) returns (GetPoolsResponse) {
     option(google.api.http) = {
-      post: "/api/v1/market/pools"
-      body: "*"
+      get: "/api/v1/market/pools"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list of supported AMM pools";
@@ -266,6 +265,18 @@ service Api {
       tags: "AMMs";
     };
   }
+
+  rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
+    option(google.api.http) = {
+      get: "/api/v1/market/price"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for supported tokens";
+      summary: "Prices list";
+      tags: "AMMs";
+    };
+  }
+
   rpc PostTradeSwap(TradeSwapRequest) returns (TradeSwapResponse) {
     option(google.api.http) = {
       get: "/api/v1/amm/trade-swap"
@@ -315,6 +326,12 @@ service Api {
   }
 
   rpc GetQuotesStream(GetQuotesStreamRequest) returns (stream GetQuotesStreamResponse){
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetPoolReservesStream(GetPoolReservesStreamRequest) returns (stream GetPoolReservesStreamResponse){
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
     };
@@ -421,11 +438,12 @@ message GetTradesResponse {
 message Trade {
   Side side = 1;
   double size = 2;
-  double price = 3;
+  double fillPrice = 3;
   string orderID = 4;
   bool isMaker = 5;
   string address = 6;
   double feeOrRebate = 7;
+  double orderPrice = 8;
 }
 
 message GetServerTimeRequest {}
@@ -737,7 +755,8 @@ enum Project {
   P_UNKNOWN = 0;
   P_JUPITER = 1;
   P_RAYDIUM = 2;
-  P_ALL = 3;
+  P_Serum = 3;
+  P_ALL = 4;
 }
 
 message QuoteRoute {
@@ -813,12 +832,12 @@ message ProjectPool {
 
 message GetQuotesStreamResponse {
   int64 slot = 1;
-  string token1 = 2;
-  string token1Address = 3;
-  string token2 = 4;
-  string token2Address = 5;
-  double token1ToToken2 = 6;
-  double token2ToToken1 = 7;
+  string inToken = 2;
+  string inTokenAddress = 3;
+  string outToken = 4;
+  string outTokenAddress = 5;
+  double inAmount = 6;
+  double outAmount = 7;
   Project project = 8;
 }
 
@@ -828,6 +847,43 @@ message GetQuotesStreamRequest {
 }
 
 message TokenPair {
-  string token1 = 1;
-  string token2 = 2;
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+}
+
+message GetPriceRequest{
+  repeated string tokens = 1;
+}
+
+message GetPriceResponse {
+  repeated TokenPrice tokenPrices = 1;
+}
+
+message TokenPrice {
+  string token = 1;
+  string tokenAddress = 2;
+  Project project = 3;
+  double buy = 4;
+  double buySize = 5;
+  double sell = 6;
+  double sellSize = 7;
+}
+
+message GetPoolReservesStreamResponse {
+  int64 slot = 1;
+  PoolReserves reserves = 2;
+}
+
+message PoolReserves {
+  string token1Reserves = 1;
+  string token1Address = 2;
+  string token2Reserves = 3;
+  string Token2Address = 4;
+  string poolID = 5;
+  Project project = 6;
+}
+
+message GetPoolReservesStreamRequest {
+  repeated Project   projects = 1;
 }
