@@ -311,7 +311,7 @@ service Api {
     };
   }
 
-  rpc PostMultiTradeSwap(MultiRouteSwapRequest) returns (TradeSwapResponse) {
+  rpc PostMultiRouteTradeSwap(MultiRouteSwapRequest) returns (TradeSwapResponse) {
     option(google.api.http) = {
       get: "/api/v1/amm/multi-route-trade-swap"
     };
