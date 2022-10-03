@@ -766,7 +766,7 @@ message TradeSwapRequest {
   double slippage = 7;
 }
 
-message MultiRouteSwap {
+message MultiRouteSwapRequest {
   StepProject project = 1;
   string owner = 2;
   repeated RouteStep steps = 3;
