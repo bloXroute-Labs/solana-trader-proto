@@ -760,9 +760,10 @@ message TradeSwapRequest {
   Project project = 1;
   string ownerAddress = 2;
   string inToken = 3;
-  string outToken = 4;
-  double inAmount = 5;
-  double slippage = 6;
+  string middleToken = 4;
+  string outToken = 5;
+  double inAmount = 6;
+  double slippage = 7;
 }
 
 message TradeSwapResponse {
