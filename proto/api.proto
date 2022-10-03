@@ -766,7 +766,22 @@ message TradeSwapRequest {
   double slippage = 7;
 }
 
-message TradeSwapResponse {
+message MultiRouteSwap {
+  StepProject project = 1;
+  string owner = 2;
+  repeated RouteStep steps = 3;
+}
+
+message RouteStep {
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  double slippage = 6;
+}
+
+message TradeSwapResponse{
   Project project = 1;
   repeated string transactions = 2;
   double outAmount = 3;
@@ -788,6 +803,7 @@ message QuoteRoute {
   double outAmount = 2;
   repeated QuoteStep steps = 3;
 }
+
 
 message QuoteStep {
   StepProject project = 1;
