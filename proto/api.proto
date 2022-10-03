@@ -311,7 +311,7 @@ service Api {
     };
   }
 
-  rpc PostMultiRouteTradeSwap(MultiRouteSwapRequest) returns (TradeSwapResponse) {
+  rpc PostMultiRouteTradeSwap(MultiRouteTradeSwapRequest) returns (TradeSwapResponse) {
     option(google.api.http) = {
       get: "/api/v1/amm/multi-route-trade-swap"
     };
@@ -777,7 +777,7 @@ message TradeSwapRequest {
   double slippage = 7;
 }
 
-message MultiRouteSwapRequest {
+message MultiRouteTradeSwapRequest {
   StepProject project = 1;
   string owner = 2;
   repeated RouteStep steps = 3;
