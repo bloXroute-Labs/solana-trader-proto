@@ -65,6 +65,17 @@ service Api {
     };
   }
 
+  rpc GetOrderbookWithInfo(GetOrderbookRequestWithInfo) returns (GetOrderbookWithInfoResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/orderbookswithinfo/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns market's orderbook with block height and node health. Use limit param to reduce the number of bids/asks returned";
+      summary: "Market orderbook";
+      tags: "Market";
+    };
+  }
+
   rpc GetTrades(GetTradesRequest) returns (GetTradesResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/trades/{market}"
@@ -409,6 +420,13 @@ message GetOrderbookRequest {
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
 }
 
+message GetOrderbookRequestWithInfo {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  uint32 height = 3;
+  bool isNodeHealthy = 4;
+}
+
 message GetOrderbooksRequest {
   repeated string markets = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
@@ -419,6 +437,16 @@ message GetOrderbookResponse {
   string marketAddress = 2;
   repeated OrderbookItem bids = 3;
   repeated OrderbookItem asks = 4;
+}
+
+message GetOrderbookWithInfoResponse {
+  string market = 1;
+  string marketAddress = 2;
+  uint64 height = 3;
+  bool isNodeHealthy = 4;
+  string nodeHealthDescription = 5;
+  repeated OrderbookItem bids = 6;
+  repeated OrderbookItem asks = 7;
 }
 
 message OrderbookItem {
