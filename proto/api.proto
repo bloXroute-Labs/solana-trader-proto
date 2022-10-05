@@ -784,7 +784,7 @@ message MultiRouteTradeSwapRequest {
 }
 
 message MultiRouteTradeSwapResponse{
-  repeated MultiRouteResponse swaps = 2;
+  repeated TradeSwapResponse swaps = 2;
 }
 
 message RouteStep {
@@ -796,14 +796,6 @@ message RouteStep {
 
 message TradeSwapResponse{
   Project project = 1;
-  repeated string transactions = 2;
-  double outAmount = 3;
-  double minOutAmount = 4;
-  PriceImpactPercent priceImpact = 5;
-  Fee fee = 6;
-}
-
-message MultiRouteResponse{
   repeated string transactions = 2;
   double outAmount = 3;
   double minOutAmount = 4;
