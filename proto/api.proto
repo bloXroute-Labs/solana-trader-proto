@@ -816,7 +816,6 @@ message QuoteRoute {
   repeated QuoteStep steps = 3;
 }
 
-
 message QuoteStep {
   StepProject project = 1;
   string inToken = 2;
