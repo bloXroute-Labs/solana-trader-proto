@@ -311,12 +311,12 @@ service Api {
     };
   }
 
-  rpc PostMultiRouteTradeSwap(MultiRouteTradeSwapRequest) returns (MultiRouteTradeSwapResponse) {
+  rpc PostRouteTradeSwap(RouteTradeSwapRequest) returns (RouteTradeSwapResponse) {
     option(google.api.http) = {
-      get: "/api/v1/amm/multi-route-trade-swap"
+      get: "/api/v1/amm/route-trade-swap"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "routes multi-route swaps from supported amms";
+      description: "routes swap(s) from supported amms";
       summary: "Routes swaps";
       tags: "AMMs";
     };
@@ -771,19 +771,18 @@ message TradeSwapRequest {
   Project project = 1;
   string ownerAddress = 2;
   string inToken = 3;
-  string middleToken = 4;
-  string outToken = 5;
-  double inAmount = 6;
-  double slippage = 7;
+  string outToken = 4;
+  double inAmount = 5;
+  double slippage = 6;
 }
 
-message MultiRouteTradeSwapRequest {
+message RouteTradeSwapRequest {
   Project project = 1;
   string owner = 2;
   repeated RouteStep steps = 3;
 }
 
-message MultiRouteTradeSwapResponse{
+message RouteTradeSwapResponse{
   repeated TradeSwapResponse swaps = 2;
 }
 
