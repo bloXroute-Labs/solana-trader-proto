@@ -755,7 +755,7 @@ enum Project {
   P_UNKNOWN = 0;
   P_JUPITER = 1;
   P_RAYDIUM = 2;
-  P_Serum = 3;
+  P_SERUM = 3;
   P_ALL = 4;
 }
 
