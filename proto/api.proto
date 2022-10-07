@@ -883,11 +883,11 @@ message PoolReserves {
   string token1Reserves = 1;
   string token1Address = 2;
   string token2Reserves = 3;
-  string Token2Address = 4;
+  string token2Address = 4;
   string poolID = 5;
   Project project = 6;
 }
 
 message GetPoolReservesStreamRequest {
-  repeated Project   projects = 1;
+  repeated Project projects = 1;
 }
