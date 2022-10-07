@@ -653,7 +653,7 @@ message GetOrderByIDResponse {
 
 message GetUnsettledRequest {
   string market = 1 [(google.api.field_behavior) = REQUIRED];
-  string owner = 2 [(google.api.field_behavior) = REQUIRED];
+  string ownerAddress = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 message UnsettledAccountToken {
@@ -736,7 +736,7 @@ message ProjectQuote {
 
 message TradeSwapRequest{
   Project project = 1;
-  string owner = 2;
+  string ownerAddress = 2;
   string inToken = 3;
   string outToken = 4;
   double inAmount = 5;
