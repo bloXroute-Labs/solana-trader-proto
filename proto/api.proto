@@ -279,7 +279,8 @@ service Api {
 
   rpc PostTradeSwap(TradeSwapRequest) returns (TradeSwapResponse) {
     option(google.api.http) = {
-      get: "/api/v1/amm/trade-swap"
+      post: "/api/v1/amm/trade-swap"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "routes swaps from supported amms";
