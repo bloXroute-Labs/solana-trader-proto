@@ -787,10 +787,11 @@ message RouteTradeSwapResponse{
 }
 
 message RouteStep {
-  string inToken = 1;
-  string outToken = 2;
+  string poolID = 1;
+  string inToken = 2;
   double inAmount = 3;
-  double slippage = 4;
+  double outAmount = 4;
+  double outAmountMin = 5;
 }
 
 message TradeSwapResponse{
@@ -813,7 +814,8 @@ enum Project {
 message QuoteRoute {
   double inAmount = 1;
   double outAmount = 2;
-  repeated QuoteStep steps = 3;
+  double outAmountMin = 3;
+  repeated QuoteStep steps = 4;
 }
 
 message QuoteStep {
@@ -827,6 +829,8 @@ message QuoteStep {
   double slippage = 8;
   PriceImpactPercent priceImpactPercent = 9;
   Fee fee = 10;
+  double outAmountMin = 11;
+  string poolID = 12;
 }
 
 message StepProject {
