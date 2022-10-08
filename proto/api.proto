@@ -778,7 +778,7 @@ message TradeSwapRequest {
 
 message RouteTradeSwapRequest {
   Project project = 1;
-  string owner = 2;
+  string ownerAddress = 2;
   repeated RouteStep steps = 3;
 }
 
