@@ -8,9 +8,24 @@ import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Trader API";
+    version: "1.1";
+    description: "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.";
+    contact: {
+      name: "bloXroute Labs";
+      url: "https://github.com/bloXroute-Labs/solana-trader-client-go";
+      email: "support@bloxroute.com";
+    };
+  };
+  consumes: "application/json";
+  produces: "application/json";
+};
+
 service Api {
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
-    option(google.api.http) = {
+    option (google.api.http) = {
       get: "/api/v1/market/price"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -21,7 +36,7 @@ service Api {
   }
 
   rpc GetMarkets(GetMarketsRequest) returns (GetMarketsResponse) {
-    option(google.api.http) = {
+    option (google.api.http) = {
       get: "/api/v1/market/markets"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -32,7 +47,7 @@ service Api {
   }
 
   rpc GetPools(GetPoolsRequest) returns (GetPoolsResponse) {
-    option(google.api.http) = {
+    option (google.api.http) = {
       get: "/api/v1/market/pools"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -43,7 +58,7 @@ service Api {
   }
 
   rpc GetTickers(GetTickersRequest) returns (GetTickersResponse) {
-    option(google.api.http) = {
+    option (google.api.http) = {
       get: "/api/v1/market/tickers/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -55,7 +70,7 @@ service Api {
 
   rpc GetKline(GetKlineRequest) returns (GetKlineResponse) {
     option (google.api.method_visibility).restriction = "INTERNAL";
-    option(google.api.http) = {
+    option (google.api.http) = {
       get: "/api/v1/market/kline/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -89,7 +104,7 @@ service Api {
   }
 
   rpc GetQuotes(GetQuotesRequest) returns (GetQuotesResponse) {
-    option(google.api.http) = {
+    option (google.api.http) = {
       get: "/api/v1/market/quote"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -232,7 +247,7 @@ service Api {
   }
 
   rpc PostTradeSwap(TradeSwapRequest) returns (TradeSwapResponse) {
-    option(google.api.http) = {
+    option (google.api.http) = {
       post: "/api/v1/trade/swap"
       body: "*"
     };
