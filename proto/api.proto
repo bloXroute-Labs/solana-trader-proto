@@ -279,7 +279,8 @@ service Api {
 
   rpc PostTradeSwap(TradeSwapRequest) returns (TradeSwapResponse) {
     option(google.api.http) = {
-      get: "/api/v1/amm/trade-swap"
+      post: "/api/v1/amm/trade-swap"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "routes swaps from supported amms";
@@ -652,7 +653,7 @@ message GetOrderByIDResponse {
 
 message GetUnsettledRequest {
   string market = 1 [(google.api.field_behavior) = REQUIRED];
-  string owner = 2 [(google.api.field_behavior) = REQUIRED];
+  string ownerAddress = 2 [(google.api.field_behavior) = REQUIRED];
 }
 
 message UnsettledAccountToken {
@@ -735,7 +736,7 @@ message ProjectQuote {
 
 message TradeSwapRequest{
   Project project = 1;
-  string owner = 2;
+  string ownerAddress = 2;
   string inToken = 3;
   string outToken = 4;
   double inAmount = 5;
