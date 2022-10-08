@@ -15,7 +15,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     description: "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.";
     contact: {
       name: "bloXroute Labs";
-      url: "https://github.com/bloXroute-Labs/solana-trader-client-go";
+      url: "https://bloxroute.com/";
       email: "support@bloxroute.com";
     };
   };
@@ -24,6 +24,13 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 };
 
 service Api {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    external_docs: {
+      description: "Detailed API documentation";
+      url: "https://bloxroute.gitbook.io/serum-api/about/welcome"
+    }
+  };
+
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/price"
