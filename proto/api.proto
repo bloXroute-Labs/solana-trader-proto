@@ -907,7 +907,7 @@ message PoolReserves {
   string token1Address = 2;
   string token2Reserves = 3;
   string token2Address = 4;
-  string poolID = 5;
+  string poolAddress = 5;
   Project project = 6;
 }
 
