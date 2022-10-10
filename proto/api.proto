@@ -348,13 +348,13 @@ service Api {
     };
   }
 
-  rpc GetQuotesStream(GetQuotesStreamRequest) returns (stream GetQuotesStreamResponse){
+  rpc GetQuotesStream(GetQuotesStreamRequest) returns (stream GetQuotesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
     };
   }
 
-  rpc GetPoolReservesStream(GetPoolReservesStreamRequest) returns (stream GetPoolReservesStreamResponse){
+  rpc GetPoolReservesStream(GetPoolReservesStreamRequest) returns (stream GetPoolReservesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
     };
