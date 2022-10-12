@@ -311,6 +311,17 @@ service Api {
     };
   }
 
+  rpc PostRouteTradeSwap(RouteTradeSwapRequest) returns (RouteTradeSwapResponse) {
+    option(google.api.http) = {
+      get: "/api/v1/trade/route-swap"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object for the AMM swap on the specified route";
+      summary: "Unsigned AMM swap transaction along route";
+      tags: ["Trade", "AMM"];
+    };
+  }
+
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -765,7 +776,25 @@ message TradeSwapRequest {
   double slippage = 6;
 }
 
-message TradeSwapResponse {
+message RouteTradeSwapRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  repeated RouteStep steps = 3;
+}
+
+message RouteTradeSwapResponse{
+  repeated TradeSwapResponse swaps = 2;
+}
+
+message RouteStep {
+  string poolAddress = 1;
+  string inToken = 2;
+  double inAmount = 3;
+  double outAmount = 4;
+  double outAmountMin = 5;
+}
+
+message TradeSwapResponse{
   Project project = 1;
   repeated string transactions = 2;
   double outAmount = 3;
@@ -785,7 +814,8 @@ enum Project {
 message QuoteRoute {
   double inAmount = 1;
   double outAmount = 2;
-  repeated QuoteStep steps = 3;
+  double outAmountMin = 3;
+  repeated QuoteStep steps = 4;
 }
 
 message QuoteStep {
@@ -799,6 +829,8 @@ message QuoteStep {
   double slippage = 8;
   PriceImpactPercent priceImpactPercent = 9;
   Fee fee = 10;
+  double outAmountMin = 11;
+  string poolAddress = 12;
 }
 
 message StepProject {
