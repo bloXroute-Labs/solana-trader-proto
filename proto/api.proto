@@ -787,7 +787,7 @@ message RouteTradeSwapResponse{
 }
 
 message RouteStep {
-  string poolID = 1;
+  string poolAddress = 1;
   string inToken = 2;
   double inAmount = 3;
   double outAmount = 4;
@@ -830,7 +830,7 @@ message QuoteStep {
   PriceImpactPercent priceImpactPercent = 9;
   Fee fee = 10;
   double outAmountMin = 11;
-  string poolID = 12;
+  string poolAddress = 12;
 }
 
 message StepProject {
