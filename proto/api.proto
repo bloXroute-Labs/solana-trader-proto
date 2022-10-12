@@ -313,7 +313,7 @@ service Api {
 
   rpc PostRouteTradeSwap(RouteTradeSwapRequest) returns (RouteTradeSwapResponse) {
     option(google.api.http) = {
-      get: "/api/v1/amm/route-swap"
+      get: "/api/v1/trade/route-swap"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Generates an unsigned transaction object for the AMM swap on the specified route";
