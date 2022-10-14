@@ -181,6 +181,18 @@ service Api {
     };
   }
 
+  rpc PostSubmitBatch(PostSubmitBatchRequest) returns (PostSubmitBatchResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/submitbatch"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits a batch of signed transactions";
+      summary: "Transaction batch submit";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
   rpc PostCancelOrder(PostCancelOrderRequest) returns (PostCancelOrderResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/cancel"
@@ -660,8 +672,22 @@ message PostSubmitRequest {
   bool skipPreFlight = 2;
 }
 
+message PostSubmitBatchRequest {
+  repeated string transactions = 1 ;
+  bool skipPreFlight = 2;
+}
+
 message PostSubmitResponse {
   string signature = 1;
+}
+
+message PostSubmitBatchResponseEntry {
+  string signature = 1;
+  string error = 2;
+}
+
+message PostSubmitBatchResponse {
+  repeated PostSubmitBatchResponseEntry transactions = 1;
 }
 
 message GetOpenOrdersRequest {
