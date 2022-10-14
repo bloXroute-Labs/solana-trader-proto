@@ -311,7 +311,7 @@ service Api {
     };
   }
 
-  rpc PostRouteTradeSwap(RouteTradeSwapRequest) returns (RouteTradeSwapResponse) {
+  rpc PostRouteTradeSwap(RouteTradeSwapRequest) returns (TradeSwapResponse) {
     option(google.api.http) = {
       get: "/api/v1/trade/route-swap"
     };
