@@ -672,9 +672,20 @@ message PostSubmitRequest {
   bool skipPreFlight = 2;
 }
 
-message PostSubmitBatchRequest {
-  repeated string transactions = 1 ;
+message PostSubmitBatchRequestEntry {
+  string transaction = 1;
   bool skipPreFlight = 2;
+}
+
+enum SubmitStrategy {
+  P_SUBMIT_ALL = 0;
+  P_ABORT_ON_FIRST_ERROR = 1;
+  P_ALWAYS_EXECUTE_LAST = 3;
+}
+
+message PostSubmitBatchRequest {
+  repeated PostSubmitBatchRequestEntry entries = 1;
+  SubmitStrategy SubmitStrategy = 2;
 }
 
 message PostSubmitResponse {
