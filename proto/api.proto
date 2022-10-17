@@ -678,8 +678,9 @@ message PostSubmitBatchRequestEntry {
 }
 
 enum SubmitStrategy {
-  P_SUBMIT_ALL = 0;
-  P_ABORT_ON_FIRST_ERROR = 1;
+  P_UKNOWN = 0;
+  P_SUBMIT_ALL = 1;
+  P_ABORT_ON_FIRST_ERROR = 2;
   P_ALWAYS_EXECUTE_LAST = 3;
   P_WAIT_FOR_CONFIRMATION = 4;
 }
