@@ -183,7 +183,7 @@ service Api {
 
   rpc PostSubmitBatch(PostSubmitBatchRequest) returns (PostSubmitBatchResponse) {
     option (google.api.http) = {
-      post: "/api/v1/trade/submitbatch"
+      post: "/api/v1/trade/submit-batch"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
