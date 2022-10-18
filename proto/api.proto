@@ -782,10 +782,6 @@ message RouteTradeSwapRequest {
   repeated RouteStep steps = 3;
 }
 
-message RouteTradeSwapResponse{
-  repeated TradeSwapResponse swaps = 2;
-}
-
 message RouteStep {
   string poolAddress = 1;
   string inToken = 2;
