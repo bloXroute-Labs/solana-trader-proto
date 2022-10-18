@@ -9,6 +9,16 @@ import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  security_definitions: {
+    security: {
+      key: "Authorization";
+      value: {
+        type: TYPE_API_KEY;
+        in: IN_HEADER;
+        name: "Authorization";
+      };
+    }
+  };
   info: {
     title: "Trader API";
     version: "1.1";
@@ -19,6 +29,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
       email: "support@bloxroute.com";
     };
   };
+
   consumes: "application/json";
   produces: "application/json";
 };
@@ -36,6 +47,11 @@ service Api {
       get: "/api/v1/market/price"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns the list of prices for specified tokens";
       summary: "Token prices";
       tags: ["Market", "Universal"];
@@ -46,7 +62,13 @@ service Api {
     option (google.api.http) = {
       get: "/api/v1/market/markets"
     };
+
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns the list of orderbook markets";
       summary: "Orderbook markets";
       tags: ["Market", "Orderbook"];
@@ -58,6 +80,11 @@ service Api {
       get: "/api/v1/market/pools"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns the list of supported AMM pools";
       summary: "AMM Pools";
       tags: ["Market", "AMM"];
@@ -69,6 +96,11 @@ service Api {
       get: "/api/v1/market/tickers/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns updated ticker(s). To receive all tickers use empty string for {market} param value";
       summary: "Orderbook tickers";
       tags: ["Market", "Orderbook"];
@@ -81,6 +113,11 @@ service Api {
       get: "/api/v1/market/kline/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns the KLine per market";
       summary: "Market KLine";
       tags: ["Market", "Orderbook"];
@@ -92,6 +129,11 @@ service Api {
       get: "/api/v1/market/orderbooks/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned";
       summary: "Market orderbook";
       tags: ["Market", "Orderbook"];
@@ -104,6 +146,11 @@ service Api {
       get: "/api/v1/market/trades/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns recent trades on the market";
       summary: "Market trades";
       tags: ["Market", "Orderbook"];
@@ -115,6 +162,11 @@ service Api {
       get: "/api/v1/market/quote"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns quotes from supported AMMs";
       summary: "AMM Quotes";
       tags: ["Market", "AMM"];
@@ -127,6 +179,11 @@ service Api {
       get: "/api/v1/system/time"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns current time on the server";
       summary: "Server time";
       tags: "System";
@@ -138,6 +195,11 @@ service Api {
       get: "/api/v1/system/blockhash"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns recent block hash";
       summary: "Recent block hash";
       tags: "System";
@@ -150,6 +212,11 @@ service Api {
       get: "/api/v1/account/balance"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns the all balances for a wallet";
       summary: "Account balances markets";
       tags: "Account";
@@ -163,6 +230,11 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Generates a NewOrderV3 unsigned transaction object";
       summary: "Unsigned NewOrderV3 transaction";
       tags: ["Trade", "Orderbook"];
@@ -175,6 +247,11 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Submits a signed transaction";
       summary: "Transaction submit";
       tags: ["Trade", "Universal"];
@@ -199,6 +276,11 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Generates a CancelOrder unsigned transaction object";
       summary: "Unsigned CancelOrder transaction";
       tags: ["Trade", "Orderbook"];
@@ -211,6 +293,11 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Generates a CancelOrderByID unsigned transaction object";
       summary: "Unsigned CancelOrderByID transaction";
       tags: ["Trade", "Orderbook"];
@@ -223,6 +310,11 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Generates a CancelAll unsigned transaction object";
       summary: "Unsigned CancelAll transaction";
       tags: ["Trade", "Orderbook"];
@@ -235,6 +327,11 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Generates a ReplaceByClientOrderID unsigned transaction object";
       summary: "Unsigned ReplaceByClientOrderID transaction";
       tags: ["Trade", "Orderbook"];
@@ -247,6 +344,11 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Generates a ReplaceOrder unsigned transaction object";
       summary: "Unsigned ReplaceOrder transaction";
       tags: ["Trade", "Orderbook"];
@@ -259,6 +361,11 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Generates a SettleFunds unsigned transaction object";
       summary: "Unsigned SettleFunds transaction";
       tags: ["Trade", "Orderbook"];
@@ -271,6 +378,11 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Generates an unsigned transaction object for the best available AMM swap";
       summary: "Unsigned best available AMM swap transaction";
       tags: ["Trade", "AMM"];
@@ -283,6 +395,11 @@ service Api {
       get: "/api/v1/trade/orders/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns all user's orders";
       summary: "List of user's orders";
       tags: ["Trade", "Orderbook"];
@@ -294,6 +411,11 @@ service Api {
       get: "/api/v1/trade/openorders/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns the list of open orders per user per market";
       summary: "List of user's open orders";
       tags: ["Trade", "Orderbook"];
@@ -306,6 +428,11 @@ service Api {
       get: "/api/v1/trade/orderbyid/{orderID}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns an order by ID";
       summary: "Order by ID";
       tags: ["Trade", "Orderbook"];
@@ -317,6 +444,11 @@ service Api {
       get: "/api/v1/trade/unsettled/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Returns the unsettled amounts of user in a market";
       summary: "Unsettled amounts";
       tags: ["Trade", "Orderbook"];
@@ -329,6 +461,11 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       description: "Generates an unsigned transaction object for the AMM swap on the specified route";
       summary: "Unsigned AMM swap transaction along route";
       tags: ["Trade", "AMM"];
@@ -338,48 +475,88 @@ service Api {
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       tags: "Trade";
     };
   }
 
   rpc GetTickersStream(GetTickersRequest) returns (stream GetTickersStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       tags: "Trade";
     };
   }
 
   rpc GetMarketDepthStream(GetMarketsRequest) returns (stream GetMarketDepthStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       tags: "Trade";
     };
   }
 
   rpc GetTradesStream(GetTradesRequest) returns (stream GetTradesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       tags: "Trade";
     };
   }
 
   rpc GetOrderStatusStream(GetOrderStatusStreamRequest) returns (stream GetOrderStatusStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       tags: "Trade";
     };
   }
 
   rpc GetRecentBlockHashStream(GetRecentBlockHashRequest) returns (stream GetRecentBlockHashResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       tags: "System";
     };
   }
 
   rpc GetQuotesStream(GetQuotesStreamRequest) returns (stream GetQuotesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       tags: "AMMs";
     };
   }
 
   rpc GetPoolReservesStream(GetPoolReservesStreamRequest) returns (stream GetPoolReservesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      security: {
+        security_requirement: {
+          key: "Authorization";
+        };
+      };
       tags: "AMMs";
     };
   }
