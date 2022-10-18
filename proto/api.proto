@@ -1010,7 +1010,7 @@ message TradeSwapResponse{
   double outAmount = 3;
   double minOutAmount = 4;
   PriceImpactPercent priceImpact = 5;
-  repeated Fee fee = 6;
+  Fee fee = 6;
 }
 
 enum Project {
