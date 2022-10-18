@@ -672,11 +672,6 @@ message PostSubmitRequest {
   bool skipPreFlight = 2;
 }
 
-message PostSubmitBatchRequestEntry {
-  string transaction = 1;
-  bool skipPreFlight = 2;
-}
-
 enum SubmitStrategy {
   P_UKNOWN = 0;
   P_SUBMIT_ALL = 1;
@@ -686,7 +681,7 @@ enum SubmitStrategy {
 }
 
 message PostSubmitBatchRequest {
-  repeated PostSubmitBatchRequestEntry entries = 1;
+  repeated PostSubmitRequest entries = 1;
   SubmitStrategy SubmitStrategy = 2;
 }
 
@@ -697,6 +692,7 @@ message PostSubmitResponse {
 message PostSubmitBatchResponseEntry {
   string signature = 1;
   string error = 2;
+  bool submitted = 3;
 }
 
 message PostSubmitBatchResponse {
