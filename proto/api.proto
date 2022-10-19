@@ -14,8 +14,8 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     version: "1.1";
     description: "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.";
     contact: {
-      name: "bloXroute Labs";
-      url: "https://bloxroute.com/";
+      name: "bloXroute Labs Trader API Documentation";
+      url: "https://bloxroute.gitbook.io/bloxroute-solana-trading-suite/about/welcome";
       email: "support@bloxroute.com";
     };
   };
