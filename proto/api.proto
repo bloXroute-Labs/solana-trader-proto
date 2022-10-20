@@ -311,7 +311,7 @@ service Api {
     };
   }
 
-  rpc PostRouteTradeSwap(RouteTradeSwapRequest) returns (RouteTradeSwapResponse) {
+  rpc PostRouteTradeSwap(RouteTradeSwapRequest) returns (TradeSwapResponse) {
     option(google.api.http) = {
       get: "/api/v1/trade/route-swap"
     };
@@ -782,16 +782,13 @@ message RouteTradeSwapRequest {
   repeated RouteStep steps = 3;
 }
 
-message RouteTradeSwapResponse{
-  repeated TradeSwapResponse swaps = 2;
-}
-
 message RouteStep {
-  string inToken = 1;
-  double inAmount = 2;
-  string outToken = 3;
-  double outAmount = 4;
-  double outAmountMin = 5;
+  string poolAddress = 1;
+  string inToken = 2;
+  double inAmount = 3;
+  string outToken = 4;
+  double outAmount = 5;
+  double outAmountMin = 6;
 }
 
 message TradeSwapResponse{
