@@ -55,11 +55,6 @@ service Api {
       get: "/api/v1/market/price"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      security: {
-        security_requirement: {
-          key: "Authorization";
-        };
-      };
       description: "Returns the list of prices for specified tokens";
       summary: "Token prices";
       tags: ["Market", "Universal"];
@@ -72,11 +67,6 @@ service Api {
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      security: {
-        security_requirement: {
-          key: "Authorization";
-        };
-      };
       description: "Returns the list of orderbook markets";
       summary: "Orderbook markets";
       tags: ["Market", "Orderbook"];
@@ -88,11 +78,6 @@ service Api {
       get: "/api/v1/market/pools"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      security: {
-        security_requirement: {
-          key: "Authorization";
-        };
-      };
       description: "Returns the list of supported AMM pools";
       summary: "AMM Pools";
       tags: ["Market", "AMM"];
