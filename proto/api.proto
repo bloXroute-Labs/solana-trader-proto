@@ -9,6 +9,24 @@ import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  security: {
+    security_requirement: {
+      key: "Auth Header";
+      value: {
+        scope: []
+      }
+    }
+  }
+  security_definitions: {
+    security: {
+      key: "Auth Header";
+      value: {
+        type: TYPE_API_KEY;
+        in: IN_HEADER;
+        name: "Auth Header";
+      };
+    }
+  };
   info: {
     title: "Trader API";
     version: "1.1";
@@ -19,6 +37,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
       email: "support@bloxroute.com";
     };
   };
+
   consumes: "application/json";
   produces: "application/json";
 };
@@ -46,6 +65,7 @@ service Api {
     option (google.api.http) = {
       get: "/api/v1/market/markets"
     };
+
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list of orderbook markets";
       summary: "Orderbook markets";
