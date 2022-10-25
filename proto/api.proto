@@ -824,7 +824,7 @@ message RouteStep {
   string outToken = 3;
   double outAmount = 4;
   double outAmountMin = 5;
-  JupiterStepProject jupiterProject = 6;
+  StepProject project = 6;
 }
 
 message TradeSwapResponse{
@@ -852,7 +852,7 @@ message QuoteRoute {
 }
 
 message QuoteStep {
-  JupiterStepProject jupiterStepProject = 1;
+  StepProject project = 1;
   string inToken = 2;
   string inTokenAddress = 3;
   string outToken = 4;
@@ -866,7 +866,7 @@ message QuoteStep {
   string poolAddress = 12;
 }
 
-message JupiterStepProject {
+message StepProject {
   string label = 1;
   string id = 2;
 }
