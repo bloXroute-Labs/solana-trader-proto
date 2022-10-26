@@ -683,7 +683,7 @@ enum SubmitStrategy {
 
 message PostSubmitBatchRequest {
   repeated PostSubmitRequest entries = 1;
-  SubmitStrategy SubmitStrategy = 2;
+  SubmitStrategy submitStrategy = 2;
 }
 
 message PostSubmitResponse {
