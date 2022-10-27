@@ -701,6 +701,11 @@ message GetOrderStatusResponse {
 }
 
 message PostSubmitRequest {
+  string transaction = 1 [(google.api.field_behavior) = REQUIRED];
+  bool skipPreFlight = 2;
+}
+
+message PostSubmitRequestEntry {
   Transaction transaction = 1 [(google.api.field_behavior) = REQUIRED];
   bool skipPreFlight = 2;
 }
@@ -713,7 +718,7 @@ enum SubmitStrategy {
 }
 
 message PostSubmitBatchRequest {
-  repeated PostSubmitRequest entries = 1;
+  repeated PostSubmitRequestEntry entries = 1;
   SubmitStrategy SubmitStrategy = 2;
 }
 
