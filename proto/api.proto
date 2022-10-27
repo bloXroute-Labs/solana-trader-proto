@@ -865,7 +865,7 @@ message RouteStep {
 
 message TradeSwapResponse{
   Project project = 1;
-  repeated string transactions = 2;
+  repeated Transaction transactions = 2;
   double outAmount = 3;
   double minOutAmount = 4;
   PriceImpactPercent priceImpact = 5;
