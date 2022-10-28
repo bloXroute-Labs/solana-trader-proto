@@ -706,7 +706,7 @@ message PostSubmitRequest {
 }
 
 message PostSubmitRequestEntry {
-  Transaction transaction = 1 [(google.api.field_behavior) = REQUIRED];
+  TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
   bool skipPreFlight = 2;
 }
 
@@ -865,7 +865,7 @@ message RouteStep {
 
 message TradeSwapResponse{
   Project project = 1;
-  repeated Transaction transactions = 2;
+  repeated TransactionMessage transactions = 2;
   double outAmount = 3;
   double minOutAmount = 4;
   PriceImpactPercent priceImpact = 5;
