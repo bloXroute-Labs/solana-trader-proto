@@ -610,6 +610,11 @@ message PostCancelAllRequest {
   repeated string openOrdersAddresses = 3;
 }
 
+message TransactionMessage {
+  string content = 1;
+  bool isCleanup = 2;
+}
+
 message PostCancelAllResponse {
   repeated string transactions = 1;
 }
@@ -700,16 +705,20 @@ message PostSubmitRequest {
   bool skipPreFlight = 2;
 }
 
+message PostSubmitRequestEntry {
+  TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
+  bool skipPreFlight = 2;
+}
+
 enum SubmitStrategy {
   P_UKNOWN = 0;
   P_SUBMIT_ALL = 1;
   P_ABORT_ON_FIRST_ERROR = 2;
-  P_ALWAYS_EXECUTE_LAST = 3;
-  P_WAIT_FOR_CONFIRMATION = 4;
+  P_WAIT_FOR_CONFIRMATION = 3;
 }
 
 message PostSubmitBatchRequest {
-  repeated PostSubmitRequest entries = 1;
+  repeated PostSubmitRequestEntry entries = 1;
   SubmitStrategy SubmitStrategy = 2;
 }
 
@@ -856,7 +865,7 @@ message RouteStep {
 
 message TradeSwapResponse{
   Project project = 1;
-  repeated string transactions = 2;
+  repeated TransactionMessage transactions = 2;
   double outAmount = 3;
   double minOutAmount = 4;
   PriceImpactPercent priceImpact = 5;
