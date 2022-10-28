@@ -610,8 +610,8 @@ message PostCancelAllRequest {
   repeated string openOrdersAddresses = 3;
 }
 
-message Transaction {
-  string messageContent = 1;
+message TransactionMessage {
+  string content = 1;
   bool isCleanup = 2;
 }
 
