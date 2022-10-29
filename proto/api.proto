@@ -855,12 +855,12 @@ message RouteTradeSwapRequest {
 }
 
 message RouteStep {
-  string poolAddress = 1;
-  string inToken = 2;
-  double inAmount = 3;
-  string outToken = 4;
-  double outAmount = 5;
-  double outAmountMin = 6;
+  string inToken = 1;
+  double inAmount = 2;
+  string outToken = 3;
+  double outAmount = 4;
+  double outAmountMin = 5;
+  StepProject project = 6;
 }
 
 message TradeSwapResponse{
