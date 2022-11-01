@@ -410,6 +410,11 @@ service Api {
     };
   }
 
+  rpc GetSwapsStream(GetSwapsStreamRequest) returns (stream GetSwapsStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
 }
 
 message GetMarketsRequest {
@@ -972,6 +977,17 @@ message GetQuotesStreamResponse {
 message GetQuotesStreamRequest {
   repeated Project   projects = 1;
   repeated TokenPair tokenPairs = 2;
+}
+
+message GetSwapsStreamRequest {
+  repeated string markets = 1;
+}
+
+message GetSwapsStreamResponse {
+  int64 slot = 1;
+  string market = 2;
+  uint64 inAmount = 3;
+  uint64 outAmount = 4;
 }
 
 message TokenPair {
