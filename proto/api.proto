@@ -980,14 +980,16 @@ message GetQuotesStreamRequest {
 }
 
 message GetSwapsStreamRequest {
-  repeated string markets = 1;
+  repeated Project projects = 1;
+  repeated string markets = 2;
 }
 
 message GetSwapsStreamResponse {
-  int64 slot = 1;
-  string market = 2;
-  uint64 inAmount = 3;
-  uint64 outAmount = 4;
+  Project project = 1;
+  int64 slot = 2;
+  string market = 3;
+  uint64 inAmount = 4;
+  uint64 outAmount = 5;
 }
 
 message TokenPair {
