@@ -586,7 +586,7 @@ enum OrderType {
 }
 
 message PostOrderResponse {
-  string transaction = 1;
+  TransactionMessage transaction = 1;
   string openOrdersAddress = 2;
 }
 
@@ -606,7 +606,7 @@ message PostCancelByClientOrderIDRequest {
 }
 
 message PostCancelOrderResponse {
-  string transaction = 1;
+  TransactionMessage transaction = 1;
 }
 
 message PostCancelAllRequest {
@@ -621,7 +621,7 @@ message TransactionMessage {
 }
 
 message PostCancelAllResponse {
-  repeated string transactions = 1;
+  repeated TransactionMessage transactions = 1;
 }
 
 message PostSettleRequest {
@@ -633,7 +633,7 @@ message PostSettleRequest {
 }
 
 message PostSettleResponse {
-  string transaction = 1;
+  TransactionMessage transaction = 1;
 }
 
 message Settlement {
@@ -706,7 +706,7 @@ message GetOrderStatusResponse {
 }
 
 message PostSubmitRequest {
-  string transaction = 1 [(google.api.field_behavior) = REQUIRED];
+  TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
   bool skipPreFlight = 2;
 }
 
