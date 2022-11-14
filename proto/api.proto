@@ -986,6 +986,7 @@ message GetQuotesStreamUpdate {
 message GetSwapsStreamRequest {
   repeated Project projects = 1;
   repeated string pools = 2;
+  bool includeFailed = 3;
 }
 
 message GetSwapsStreamResponse {
