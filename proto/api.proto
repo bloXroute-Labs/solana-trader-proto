@@ -963,33 +963,48 @@ message ProjectPool {
   string token2MintSymbol = 8;
 }
 
-message GetQuotesStreamResponse {
-  int64 slot = 1;
-  string inToken = 2;
-  string inTokenAddress = 3;
-  string outToken = 4;
-  string outTokenAddress = 5;
-  double inAmount = 6;
-  double outAmount = 7;
-  Project project = 8;
-}
-
 message GetQuotesStreamRequest {
   repeated Project   projects = 1;
   repeated TokenPair tokenPairs = 2;
 }
 
+message GetQuotesStreamResponse {
+  int64 slot = 1;
+  GetQuotesStreamUpdate quote = 2;
+}
+
+message GetQuotesStreamUpdate {
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  double outAmount = 6;
+  Project project = 7;
+}
+
 message GetSwapsStreamRequest {
   repeated Project projects = 1;
-  repeated string markets = 2;
+  repeated string pools = 2;
+  bool includeFailed = 3;
 }
 
 message GetSwapsStreamResponse {
-  Project project = 1;
-  int64 slot = 2;
-  string market = 3;
-  uint64 inAmount = 4;
-  uint64 outAmount = 5;
+  int64 slot = 1;
+  GetSwapsStreamUpdate swap = 2;
+}
+
+message GetSwapsStreamUpdate {
+  bool success = 1;
+  Project project = 2;
+  string poolAddress = 3;
+  string inToken = 4;
+  string inTokenAddress = 5;
+  uint64 inAmount = 6;
+  uint64 outAmount = 7;
+  string outToken = 8;
+  string outTokenAddress = 9;
+  string signature = 10;
 }
 
 message TokenPair {
@@ -998,7 +1013,7 @@ message TokenPair {
   double inAmount = 3;
 }
 
-message GetPriceRequest{
+message GetPriceRequest {
   repeated string tokens = 1;
 }
 
