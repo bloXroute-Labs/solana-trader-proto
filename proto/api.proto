@@ -996,7 +996,7 @@ message GetSwapsStreamResponse {
 message GetSwapsStreamUpdate {
   bool success = 1;
   Project project = 2;
-  string market = 3;
+  string poolAddress = 3;
   string inToken = 4;
   string inTokenAddress = 5;
   uint64 inAmount = 6;
