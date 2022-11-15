@@ -1002,7 +1002,7 @@ message GetSwapsStreamUpdate {
   string inToken = 4;
   string inTokenAddress = 5;
   uint64 inAmount = 6;
-  uint64 outAmount = 7;
+  uint64 outAmountMin = 7;
   string outToken = 8;
   string outTokenAddress = 9;
   string signature = 10;
