@@ -999,13 +999,15 @@ message GetSwapsStreamUpdate {
   bool success = 1;
   Project project = 2;
   string poolAddress = 3;
-  string inToken = 4;
-  string inTokenAddress = 5;
-  uint64 inAmount = 6;
-  uint64 outAmount = 7;
-  string outToken = 8;
-  string outTokenAddress = 9;
-  string signature = 10;
+  string baseToken = 4;
+  string baseTokenAddress = 5;
+  string quoteToken = 6;
+  string quoteTokenAddress = 7;
+  uint64 inAmount = 8;
+  uint64 outAmountMin = 9;
+  string sourceAccount = 10;
+  string destinationAccount = 11;
+  string signature = 12;
 }
 
 message TokenPair {
