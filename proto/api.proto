@@ -1007,7 +1007,8 @@ message GetSwapsStreamUpdate {
   uint64 outAmountMin = 9;
   string sourceAccount = 10;
   string destinationAccount = 11;
-  string signature = 12;
+  string ownerAccount = 12;
+  string signature = 13;
 }
 
 message TokenPair {
