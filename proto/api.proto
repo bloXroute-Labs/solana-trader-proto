@@ -700,11 +700,10 @@ message GetOrderStatusResponse {
   uint64 clientOrderID = 4;
   float quantityReleased = 5;
   float quantityRemaining = 6;
-  float price = 7;
+  float fillPrice = 7;
   Side side = 8;
   OrderStatus orderStatus = 9;
-  float fillPrice = 10;
-  float orderPrice = 11;
+  float orderPrice = 10;
 }
 
 message PostSubmitRequest {
@@ -874,7 +873,7 @@ message TradeSwapResponse{
   Project project = 1;
   repeated TransactionMessage transactions = 2;
   double outAmount = 3;
-  double minOutAmount = 4;
+  double outAmountMin = 4;
   PriceImpactPercent priceImpact = 5;
   repeated Fee fees = 6;
 }
