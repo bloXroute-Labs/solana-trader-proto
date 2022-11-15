@@ -703,6 +703,8 @@ message GetOrderStatusResponse {
   float price = 7;
   Side side = 8;
   OrderStatus orderStatus = 9;
+  float fillPrice = 10;
+  float orderPrice = 11;
 }
 
 message PostSubmitRequest {
