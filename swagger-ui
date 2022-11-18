@@ -1,22 +1,12 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Trader API",
-    "description": "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.",
-    "version": "1.1",
-    "contact": {
-      "name": "bloXroute Labs Trader API Documentation",
-      "url": "https://docs.bloxroute.com/solana/trader-api",
-      "email": "support@bloxroute.com"
-    }
+    "title": "api.proto",
+    "version": "version not set"
   },
   "tags": [
     {
-      "name": "Api",
-      "externalDocs": {
-        "description": "Detailed API documentation",
-        "url": "https://bloxroute.gitbook.io/serum-api/about/welcome"
-      }
+      "name": "Api"
     }
   ],
   "consumes": [
@@ -58,157 +48,10 @@
         ]
       }
     },
-    "/api/v1/market/markets": {
+    "/api/v1/amm/quote": {
       "get": {
-        "summary": "Orderbook markets",
-        "description": "Returns the list of orderbook markets",
-        "operationId": "Api_GetMarkets",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetMarketsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "tags": [
-          "Market",
-          "Orderbook"
-        ]
-      }
-    },
-    "/api/v1/market/orderbooks/{market}": {
-      "get": {
-        "summary": "Market orderbook",
-        "description": "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned",
-        "operationId": "Api_GetOrderbook",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetOrderbookResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "market",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "description": "Use 0 for no limits",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "Market",
-          "Orderbook"
-        ]
-      }
-    },
-    "/api/v1/market/pools": {
-      "get": {
-        "summary": "AMM Pools",
-        "description": "Returns the list of supported AMM pools",
-        "operationId": "Api_GetPools",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetPoolsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "projects",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "P_UNKNOWN",
-                "P_JUPITER",
-                "P_RAYDIUM",
-                "P_SERUM",
-                "P_ALL"
-              ]
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "tags": [
-          "Market",
-          "AMM"
-        ]
-      }
-    },
-    "/api/v1/market/price": {
-      "get": {
-        "summary": "Token prices",
-        "description": "Returns the list of prices for specified tokens",
-        "operationId": "Api_GetPrice",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetPriceResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "tokens",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "tags": [
-          "Market",
-          "Universal"
-        ]
-      }
-    },
-    "/api/v1/market/quote": {
-      "get": {
-        "summary": "AMM Quotes",
-        "description": "Returns quotes from supported AMMs",
+        "summary": "Quotes list",
+        "description": "Returns the list quotes from supported amms",
         "operationId": "Api_GetQuotes",
         "responses": {
           "200": {
@@ -252,13 +95,6 @@
             "format": "double"
           },
           {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "projects",
             "in": "query",
             "required": false,
@@ -269,7 +105,6 @@
                 "P_UNKNOWN",
                 "P_JUPITER",
                 "P_RAYDIUM",
-                "P_SERUM",
                 "P_ALL"
               ]
             },
@@ -277,14 +112,182 @@
           }
         ],
         "tags": [
-          "Market",
-          "AMM"
+          "AMMs"
+        ]
+      }
+    },
+    "/api/v1/amm/trade-swap": {
+      "get": {
+        "summary": "Routes swaps",
+        "description": "routes swaps from supported amms",
+        "operationId": "Api_PostTradeSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiTradeSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_ALL"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "AMMs"
+        ]
+      }
+    },
+    "/api/v1/market/markets": {
+      "get": {
+        "summary": "Supported markets",
+        "description": "Returns the list of supported markets",
+        "operationId": "Api_GetMarkets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetMarketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Market"
+        ]
+      }
+    },
+    "/api/v1/market/orderbooks/{market}": {
+      "get": {
+        "summary": "Market orderbook",
+        "description": "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Market"
+        ]
+      }
+    },
+    "/api/v1/market/pools": {
+      "post": {
+        "summary": "Supported pools",
+        "description": "Returns the list of supported AMM pools",
+        "operationId": "Api_GetPools",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPoolsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetPoolsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Market"
         ]
       }
     },
     "/api/v1/market/tickers/{market}": {
       "get": {
-        "summary": "Orderbook tickers",
+        "summary": "List of tickers",
         "description": "Returns updated ticker(s). To receive all tickers use empty string for {market} param value",
         "operationId": "Api_GetTickers",
         "responses": {
@@ -311,8 +314,47 @@
           }
         ],
         "tags": [
-          "Market",
-          "Orderbook"
+          "Market"
+        ]
+      }
+    },
+    "/api/v1/market/trades/{market}": {
+      "get": {
+        "summary": "Market trades",
+        "description": "Returns recent trades on the market",
+        "operationId": "Api_GetTrades",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTradesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Market"
         ]
       }
     },
@@ -394,8 +436,7 @@
           }
         ],
         "tags": [
-          "Trade",
-          "Orderbook"
+          "Trade"
         ]
       }
     },
@@ -429,8 +470,7 @@
           }
         ],
         "tags": [
-          "Trade",
-          "Orderbook"
+          "Trade"
         ]
       }
     },
@@ -464,8 +504,7 @@
           }
         ],
         "tags": [
-          "Trade",
-          "Orderbook"
+          "Trade"
         ]
       }
     },
@@ -518,8 +557,7 @@
           }
         ],
         "tags": [
-          "Trade",
-          "Orderbook"
+          "Trade"
         ]
       }
     },
@@ -553,8 +591,7 @@
           }
         ],
         "tags": [
-          "Trade",
-          "Orderbook"
+          "Trade"
         ]
       }
     },
@@ -588,8 +625,7 @@
           }
         ],
         "tags": [
-          "Trade",
-          "Orderbook"
+          "Trade"
         ]
       }
     },
@@ -623,43 +659,7 @@
           }
         ],
         "tags": [
-          "Trade",
-          "Orderbook"
-        ]
-      }
-    },
-    "/api/v1/trade/route-swap": {
-      "post": {
-        "summary": "Unsigned AMM swap transaction along route",
-        "description": "Generates an unsigned transaction object for the AMM swap on the specified route",
-        "operationId": "Api_PostRouteTradeSwap",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiTradeSwapResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiRouteTradeSwapRequest"
-            }
-          }
-        ],
-        "tags": [
-          "Trade",
-          "AMM"
+          "Trade"
         ]
       }
     },
@@ -693,8 +693,7 @@
           }
         ],
         "tags": [
-          "Trade",
-          "Orderbook"
+          "Trade"
         ]
       }
     },
@@ -728,78 +727,7 @@
           }
         ],
         "tags": [
-          "Trade",
-          "Universal"
-        ]
-      }
-    },
-    "/api/v1/trade/submit-batch": {
-      "post": {
-        "summary": "Transaction batch submit",
-        "description": "Submits a batch of signed transactions",
-        "operationId": "Api_PostSubmitBatch",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostSubmitBatchResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiPostSubmitBatchRequest"
-            }
-          }
-        ],
-        "tags": [
-          "Trade",
-          "Universal"
-        ]
-      }
-    },
-    "/api/v1/trade/swap": {
-      "post": {
-        "summary": "Unsigned best available AMM swap transaction",
-        "description": "Generates an unsigned transaction object for the best available AMM swap",
-        "operationId": "Api_PostTradeSwap",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiTradeSwapResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiTradeSwapRequest"
-            }
-          }
-        ],
-        "tags": [
-          "Trade",
-          "AMM"
+          "Trade"
         ]
       }
     },
@@ -830,15 +758,14 @@
             "type": "string"
           },
           {
-            "name": "ownerAddress",
+            "name": "owner",
             "in": "query",
             "required": true,
             "type": "string"
           }
         ],
         "tags": [
-          "Trade",
-          "Orderbook"
+          "Trade"
         ]
       }
     }
@@ -892,22 +819,6 @@
         "D_DESCENDING"
       ],
       "default": "D_ASCENDING"
-    },
-    "apiFee": {
-      "type": "object",
-      "properties": {
-        "amount": {
-          "type": "number",
-          "format": "float"
-        },
-        "mint": {
-          "type": "string"
-        },
-        "percent": {
-          "type": "number",
-          "format": "float"
-        }
-      }
     },
     "apiGetAccountBalanceResponse": {
       "type": "object",
@@ -1004,7 +915,7 @@
           "type": "number",
           "format": "float"
         },
-        "fillPrice": {
+        "price": {
           "type": "number",
           "format": "float"
         },
@@ -1013,10 +924,6 @@
         },
         "orderStatus": {
           "$ref": "#/definitions/apiOrderStatus"
-        },
-        "orderPrice": {
-          "type": "number",
-          "format": "float"
         }
       }
     },
@@ -1078,15 +985,14 @@
         }
       }
     },
-    "apiGetPoolReservesStreamResponse": {
+    "apiGetPoolsRequest": {
       "type": "object",
       "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "reserves": {
-          "$ref": "#/definitions/apiPoolReserves"
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1098,29 +1004,6 @@
           "items": {
             "$ref": "#/definitions/apiProjectPools"
           }
-        }
-      }
-    },
-    "apiGetPriceResponse": {
-      "type": "object",
-      "properties": {
-        "tokenPrices": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiTokenPrice"
-          }
-        }
-      }
-    },
-    "apiGetPricesStreamResponse": {
-      "type": "object",
-      "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "price": {
-          "$ref": "#/definitions/apiTokenPrice"
         }
       }
     },
@@ -1151,46 +1034,6 @@
         }
       }
     },
-    "apiGetQuotesStreamResponse": {
-      "type": "object",
-      "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "quote": {
-          "$ref": "#/definitions/apiGetQuotesStreamUpdate"
-        }
-      }
-    },
-    "apiGetQuotesStreamUpdate": {
-      "type": "object",
-      "properties": {
-        "inToken": {
-          "type": "string"
-        },
-        "inTokenAddress": {
-          "type": "string"
-        },
-        "outToken": {
-          "type": "string"
-        },
-        "outTokenAddress": {
-          "type": "string"
-        },
-        "inAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "outAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
-        }
-      }
-    },
     "apiGetRecentBlockHashResponse": {
       "type": "object",
       "properties": {
@@ -1203,64 +1046,6 @@
       "type": "object",
       "properties": {
         "timestamp": {
-          "type": "string"
-        }
-      }
-    },
-    "apiGetSwapsStreamResponse": {
-      "type": "object",
-      "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "swap": {
-          "$ref": "#/definitions/apiGetSwapsStreamUpdate"
-        }
-      }
-    },
-    "apiGetSwapsStreamUpdate": {
-      "type": "object",
-      "properties": {
-        "success": {
-          "type": "boolean"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
-        },
-        "poolAddress": {
-          "type": "string"
-        },
-        "baseToken": {
-          "type": "string"
-        },
-        "baseTokenAddress": {
-          "type": "string"
-        },
-        "quoteToken": {
-          "type": "string"
-        },
-        "quoteTokenAddress": {
-          "type": "string"
-        },
-        "inAmount": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "outAmountMin": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "sourceAccount": {
-          "type": "string"
-        },
-        "destinationAccount": {
-          "type": "string"
-        },
-        "ownerAccount": {
-          "type": "string"
-        },
-        "signature": {
           "type": "string"
         }
       }
@@ -1324,15 +1109,6 @@
           }
         }
       }
-    },
-    "apiInfinity": {
-      "type": "string",
-      "enum": [
-        "INF_NOT",
-        "INF_POSITIVE",
-        "INF_NEGATIVE"
-      ],
-      "default": "INF_NOT"
     },
     "apiMarket": {
       "type": "object",
@@ -1463,29 +1239,6 @@
         }
       }
     },
-    "apiPoolReserves": {
-      "type": "object",
-      "properties": {
-        "token1Reserves": {
-          "type": "string"
-        },
-        "token1Address": {
-          "type": "string"
-        },
-        "token2Reserves": {
-          "type": "string"
-        },
-        "token2Address": {
-          "type": "string"
-        },
-        "poolAddress": {
-          "type": "string"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
-        }
-      }
-    },
     "apiPostCancelAllRequest": {
       "type": "object",
       "properties": {
@@ -1519,7 +1272,7 @@
         "transactions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiTransactionMessage"
+            "type": "string"
           }
         }
       }
@@ -1602,7 +1355,7 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "$ref": "#/definitions/apiTransactionMessage"
+          "type": "string"
         }
       }
     },
@@ -1676,7 +1429,7 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "$ref": "#/definitions/apiTransactionMessage"
+          "type": "string"
         },
         "openOrdersAddress": {
           "type": "string"
@@ -1799,46 +1552,7 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "$ref": "#/definitions/apiTransactionMessage"
-        }
-      }
-    },
-    "apiPostSubmitBatchRequest": {
-      "type": "object",
-      "properties": {
-        "entries": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiPostSubmitRequestEntry"
-          }
-        },
-        "SubmitStrategy": {
-          "$ref": "#/definitions/apiSubmitStrategy"
-        }
-      }
-    },
-    "apiPostSubmitBatchResponse": {
-      "type": "object",
-      "properties": {
-        "transactions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiPostSubmitBatchResponseEntry"
-          }
-        }
-      }
-    },
-    "apiPostSubmitBatchResponseEntry": {
-      "type": "object",
-      "properties": {
-        "signature": {
           "type": "string"
-        },
-        "error": {
-          "type": "string"
-        },
-        "submitted": {
-          "type": "boolean"
         }
       }
     },
@@ -1846,23 +1560,18 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "$ref": "#/definitions/apiTransactionMessage"
+          "type": "string",
+          "required": [
+            "transaction"
+          ]
         },
         "skipPreFlight": {
           "type": "boolean"
         }
-      }
-    },
-    "apiPostSubmitRequestEntry": {
-      "type": "object",
-      "properties": {
-        "transaction": {
-          "$ref": "#/definitions/apiTransactionMessage"
-        },
-        "skipPreFlight": {
-          "type": "boolean"
-        }
-      }
+      },
+      "required": [
+        "transaction"
+      ]
     },
     "apiPostSubmitResponse": {
       "type": "object",
@@ -1872,25 +1581,12 @@
         }
       }
     },
-    "apiPriceImpactPercent": {
-      "type": "object",
-      "properties": {
-        "percent": {
-          "type": "number",
-          "format": "double"
-        },
-        "infinity": {
-          "$ref": "#/definitions/apiInfinity"
-        }
-      }
-    },
     "apiProject": {
       "type": "string",
       "enum": [
         "P_UNKNOWN",
         "P_JUPITER",
         "P_RAYDIUM",
-        "P_SERUM",
         "P_ALL"
       ],
       "default": "P_UNKNOWN"
@@ -1898,25 +1594,17 @@
     "apiProjectPool": {
       "type": "object",
       "properties": {
-        "pool": {
+        "name": {
           "type": "string"
         },
-        "poolAddress": {
+        "address": {
           "type": "string"
-        },
-        "token1Reserves": {
-          "type": "string",
-          "format": "int64"
         },
         "token1MintAddress": {
           "type": "string"
         },
         "token1MintSymbol": {
           "type": "string"
-        },
-        "token2Reserves": {
-          "type": "string",
-          "format": "int64"
         },
         "token2MintAddress": {
           "type": "string"
@@ -1930,7 +1618,7 @@
       "type": "object",
       "properties": {
         "project": {
-          "$ref": "#/definitions/apiProject"
+          "type": "string"
         },
         "pools": {
           "type": "array",
@@ -1965,10 +1653,6 @@
           "type": "number",
           "format": "double"
         },
-        "outAmountMin": {
-          "type": "number",
-          "format": "double"
-        },
         "steps": {
           "type": "array",
           "items": {
@@ -1980,8 +1664,8 @@
     "apiQuoteStep": {
       "type": "object",
       "properties": {
-        "project": {
-          "$ref": "#/definitions/apiStepProject"
+        "exchange": {
+          "type": "string"
         },
         "inToken": {
           "type": "string"
@@ -2008,60 +1692,12 @@
           "format": "double"
         },
         "priceImpactPercent": {
-          "$ref": "#/definitions/apiPriceImpactPercent"
+          "type": "number",
+          "format": "double"
         },
         "fee": {
-          "$ref": "#/definitions/apiFee"
-        },
-        "outAmountMin": {
           "type": "number",
           "format": "double"
-        },
-        "poolAddress": {
-          "type": "string"
-        }
-      }
-    },
-    "apiRouteStep": {
-      "type": "object",
-      "properties": {
-        "inToken": {
-          "type": "string"
-        },
-        "inAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "outToken": {
-          "type": "string"
-        },
-        "outAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "outAmountMin": {
-          "type": "number",
-          "format": "double"
-        },
-        "project": {
-          "$ref": "#/definitions/apiStepProject"
-        }
-      }
-    },
-    "apiRouteTradeSwapRequest": {
-      "type": "object",
-      "properties": {
-        "project": {
-          "$ref": "#/definitions/apiProject"
-        },
-        "ownerAddress": {
-          "type": "string"
-        },
-        "steps": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiRouteStep"
-          }
         }
       }
     },
@@ -2073,27 +1709,6 @@
         "S_ASK"
       ],
       "default": "S_UNKNOWN"
-    },
-    "apiStepProject": {
-      "type": "object",
-      "properties": {
-        "label": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        }
-      }
-    },
-    "apiSubmitStrategy": {
-      "type": "string",
-      "enum": [
-        "P_UKNOWN",
-        "P_SUBMIT_ALL",
-        "P_ABORT_ON_FIRST_ERROR",
-        "P_WAIT_FOR_CONFIRMATION"
-      ],
-      "default": "P_UKNOWN"
     },
     "apiTicker": {
       "type": "object",
@@ -2145,51 +1760,6 @@
         }
       }
     },
-    "apiTokenPair": {
-      "type": "object",
-      "properties": {
-        "inToken": {
-          "type": "string"
-        },
-        "outToken": {
-          "type": "string"
-        },
-        "inAmount": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "apiTokenPrice": {
-      "type": "object",
-      "properties": {
-        "token": {
-          "type": "string"
-        },
-        "tokenAddress": {
-          "type": "string"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
-        },
-        "buy": {
-          "type": "number",
-          "format": "double"
-        },
-        "buySize": {
-          "type": "number",
-          "format": "double"
-        },
-        "sell": {
-          "type": "number",
-          "format": "double"
-        },
-        "sellSize": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
     "apiTrade": {
       "type": "object",
       "properties": {
@@ -2200,7 +1770,7 @@
           "type": "number",
           "format": "double"
         },
-        "fillPrice": {
+        "price": {
           "type": "number",
           "format": "double"
         },
@@ -2209,42 +1779,6 @@
         },
         "isMaker": {
           "type": "boolean"
-        },
-        "address": {
-          "type": "string"
-        },
-        "feeOrRebate": {
-          "type": "number",
-          "format": "double"
-        },
-        "orderPrice": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "apiTradeSwapRequest": {
-      "type": "object",
-      "properties": {
-        "project": {
-          "$ref": "#/definitions/apiProject"
-        },
-        "ownerAddress": {
-          "type": "string"
-        },
-        "inToken": {
-          "type": "string"
-        },
-        "outToken": {
-          "type": "string"
-        },
-        "inAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "slippage": {
-          "type": "number",
-          "format": "double"
         }
       }
     },
@@ -2257,36 +1791,24 @@
         "transactions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiTransactionMessage"
+            "type": "string"
           }
         },
         "outAmount": {
           "type": "number",
           "format": "double"
         },
-        "outAmountMin": {
+        "minOutAmount": {
           "type": "number",
           "format": "double"
         },
         "priceImpact": {
-          "$ref": "#/definitions/apiPriceImpactPercent"
+          "type": "number",
+          "format": "double"
         },
-        "fees": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiFee"
-          }
-        }
-      }
-    },
-    "apiTransactionMessage": {
-      "type": "object",
-      "properties": {
-        "content": {
-          "type": "string"
-        },
-        "isCleanup": {
-          "type": "boolean"
+        "fee": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -2343,17 +1865,5 @@
         }
       }
     }
-  },
-  "securityDefinitions": {
-    "Auth Header": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header"
-    }
-  },
-  "security": [
-    {
-      "Auth Header": []
-    }
-  ]
+  }
 }
