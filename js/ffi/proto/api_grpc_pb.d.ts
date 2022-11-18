@@ -12,37 +12,53 @@ import * as google_api_visibility_pb from "./google/api/visibility_pb";
 import * as protoc_gen_openapiv2_options_annotations_pb from "./protoc-gen-openapiv2/options/annotations_pb";
 
 interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
+    getPrice: IApiService_IGetPrice;
     getMarkets: IApiService_IGetMarkets;
     getPools: IApiService_IGetPools;
     getTickers: IApiService_IGetTickers;
     getKline: IApiService_IGetKline;
     getOrderbook: IApiService_IGetOrderbook;
     getTrades: IApiService_IGetTrades;
+    getQuotes: IApiService_IGetQuotes;
     getServerTime: IApiService_IGetServerTime;
     getRecentBlockHash: IApiService_IGetRecentBlockHash;
     getAccountBalance: IApiService_IGetAccountBalance;
     postOrder: IApiService_IPostOrder;
     postSubmit: IApiService_IPostSubmit;
+    postSubmitBatch: IApiService_IPostSubmitBatch;
     postCancelOrder: IApiService_IPostCancelOrder;
     postCancelByClientOrderID: IApiService_IPostCancelByClientOrderID;
     postCancelAll: IApiService_IPostCancelAll;
     postReplaceByClientOrderID: IApiService_IPostReplaceByClientOrderID;
     postReplaceOrder: IApiService_IPostReplaceOrder;
     postSettle: IApiService_IPostSettle;
+    postTradeSwap: IApiService_IPostTradeSwap;
     getOrders: IApiService_IGetOrders;
     getOpenOrders: IApiService_IGetOpenOrders;
     getOrderByID: IApiService_IGetOrderByID;
     getUnsettled: IApiService_IGetUnsettled;
-    getQuotes: IApiService_IGetQuotes;
-    postTradeSwap: IApiService_IPostTradeSwap;
+    postRouteTradeSwap: IApiService_IPostRouteTradeSwap;
     getOrderbooksStream: IApiService_IGetOrderbooksStream;
     getTickersStream: IApiService_IGetTickersStream;
     getMarketDepthStream: IApiService_IGetMarketDepthStream;
     getTradesStream: IApiService_IGetTradesStream;
     getOrderStatusStream: IApiService_IGetOrderStatusStream;
     getRecentBlockHashStream: IApiService_IGetRecentBlockHashStream;
+    getQuotesStream: IApiService_IGetQuotesStream;
+    getPoolReservesStream: IApiService_IGetPoolReservesStream;
+    getPricesStream: IApiService_IGetPricesStream;
+    getSwapsStream: IApiService_IGetSwapsStream;
 }
 
+interface IApiService_IGetPrice extends grpc.MethodDefinition<api_pb.GetPriceRequest, api_pb.GetPriceResponse> {
+    path: "/api.Api/GetPrice";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetPriceRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetPriceRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetPriceResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetPriceResponse>;
+}
 interface IApiService_IGetMarkets extends grpc.MethodDefinition<api_pb.GetMarketsRequest, api_pb.GetMarketsResponse> {
     path: "/api.Api/GetMarkets";
     requestStream: false;
@@ -97,6 +113,15 @@ interface IApiService_IGetTrades extends grpc.MethodDefinition<api_pb.GetTradesR
     responseSerialize: grpc.serialize<api_pb.GetTradesResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetTradesResponse>;
 }
+interface IApiService_IGetQuotes extends grpc.MethodDefinition<api_pb.GetQuotesRequest, api_pb.GetQuotesResponse> {
+    path: "/api.Api/GetQuotes";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetQuotesRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetQuotesRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetQuotesResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetQuotesResponse>;
+}
 interface IApiService_IGetServerTime extends grpc.MethodDefinition<api_pb.GetServerTimeRequest, api_pb.GetServerTimeResponse> {
     path: "/api.Api/GetServerTime";
     requestStream: false;
@@ -141,6 +166,15 @@ interface IApiService_IPostSubmit extends grpc.MethodDefinition<api_pb.PostSubmi
     requestDeserialize: grpc.deserialize<api_pb.PostSubmitRequest>;
     responseSerialize: grpc.serialize<api_pb.PostSubmitResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostSubmitResponse>;
+}
+interface IApiService_IPostSubmitBatch extends grpc.MethodDefinition<api_pb.PostSubmitBatchRequest, api_pb.PostSubmitBatchResponse> {
+    path: "/api.Api/PostSubmitBatch";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostSubmitBatchRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostSubmitBatchRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostSubmitBatchResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostSubmitBatchResponse>;
 }
 interface IApiService_IPostCancelOrder extends grpc.MethodDefinition<api_pb.PostCancelOrderRequest, api_pb.PostCancelOrderResponse> {
     path: "/api.Api/PostCancelOrder";
@@ -196,6 +230,15 @@ interface IApiService_IPostSettle extends grpc.MethodDefinition<api_pb.PostSettl
     responseSerialize: grpc.serialize<api_pb.PostSettleResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostSettleResponse>;
 }
+interface IApiService_IPostTradeSwap extends grpc.MethodDefinition<api_pb.TradeSwapRequest, api_pb.TradeSwapResponse> {
+    path: "/api.Api/PostTradeSwap";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.TradeSwapRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.TradeSwapRequest>;
+    responseSerialize: grpc.serialize<api_pb.TradeSwapResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.TradeSwapResponse>;
+}
 interface IApiService_IGetOrders extends grpc.MethodDefinition<api_pb.GetOrdersRequest, api_pb.GetOrdersResponse> {
     path: "/api.Api/GetOrders";
     requestStream: false;
@@ -232,21 +275,12 @@ interface IApiService_IGetUnsettled extends grpc.MethodDefinition<api_pb.GetUnse
     responseSerialize: grpc.serialize<api_pb.GetUnsettledResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetUnsettledResponse>;
 }
-interface IApiService_IGetQuotes extends grpc.MethodDefinition<api_pb.GetQuotesRequest, api_pb.GetQuotesResponse> {
-    path: "/api.Api/GetQuotes";
+interface IApiService_IPostRouteTradeSwap extends grpc.MethodDefinition<api_pb.RouteTradeSwapRequest, api_pb.TradeSwapResponse> {
+    path: "/api.Api/PostRouteTradeSwap";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetQuotesRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetQuotesRequest>;
-    responseSerialize: grpc.serialize<api_pb.GetQuotesResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.GetQuotesResponse>;
-}
-interface IApiService_IPostTradeSwap extends grpc.MethodDefinition<api_pb.TradeSwapRequest, api_pb.TradeSwapResponse> {
-    path: "/api.Api/PostTradeSwap";
-    requestStream: false;
-    responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.TradeSwapRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.TradeSwapRequest>;
+    requestSerialize: grpc.serialize<api_pb.RouteTradeSwapRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.RouteTradeSwapRequest>;
     responseSerialize: grpc.serialize<api_pb.TradeSwapResponse>;
     responseDeserialize: grpc.deserialize<api_pb.TradeSwapResponse>;
 }
@@ -304,42 +338,88 @@ interface IApiService_IGetRecentBlockHashStream extends grpc.MethodDefinition<ap
     responseSerialize: grpc.serialize<api_pb.GetRecentBlockHashResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetRecentBlockHashResponse>;
 }
+interface IApiService_IGetQuotesStream extends grpc.MethodDefinition<api_pb.GetQuotesStreamRequest, api_pb.GetQuotesStreamResponse> {
+    path: "/api.Api/GetQuotesStream";
+    requestStream: false;
+    responseStream: true;
+    requestSerialize: grpc.serialize<api_pb.GetQuotesStreamRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetQuotesStreamRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetQuotesStreamResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetQuotesStreamResponse>;
+}
+interface IApiService_IGetPoolReservesStream extends grpc.MethodDefinition<api_pb.GetPoolReservesStreamRequest, api_pb.GetPoolReservesStreamResponse> {
+    path: "/api.Api/GetPoolReservesStream";
+    requestStream: false;
+    responseStream: true;
+    requestSerialize: grpc.serialize<api_pb.GetPoolReservesStreamRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetPoolReservesStreamRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetPoolReservesStreamResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetPoolReservesStreamResponse>;
+}
+interface IApiService_IGetPricesStream extends grpc.MethodDefinition<api_pb.GetPricesStreamRequest, api_pb.GetPricesStreamResponse> {
+    path: "/api.Api/GetPricesStream";
+    requestStream: false;
+    responseStream: true;
+    requestSerialize: grpc.serialize<api_pb.GetPricesStreamRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetPricesStreamRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetPricesStreamResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetPricesStreamResponse>;
+}
+interface IApiService_IGetSwapsStream extends grpc.MethodDefinition<api_pb.GetSwapsStreamRequest, api_pb.GetSwapsStreamResponse> {
+    path: "/api.Api/GetSwapsStream";
+    requestStream: false;
+    responseStream: true;
+    requestSerialize: grpc.serialize<api_pb.GetSwapsStreamRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetSwapsStreamRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetSwapsStreamResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetSwapsStreamResponse>;
+}
 
 export const ApiService: IApiService;
 
 export interface IApiServer extends grpc.UntypedServiceImplementation {
+    getPrice: grpc.handleUnaryCall<api_pb.GetPriceRequest, api_pb.GetPriceResponse>;
     getMarkets: grpc.handleUnaryCall<api_pb.GetMarketsRequest, api_pb.GetMarketsResponse>;
     getPools: grpc.handleUnaryCall<api_pb.GetPoolsRequest, api_pb.GetPoolsResponse>;
     getTickers: grpc.handleUnaryCall<api_pb.GetTickersRequest, api_pb.GetTickersResponse>;
     getKline: grpc.handleUnaryCall<api_pb.GetKlineRequest, api_pb.GetKlineResponse>;
     getOrderbook: grpc.handleUnaryCall<api_pb.GetOrderbookRequest, api_pb.GetOrderbookResponse>;
     getTrades: grpc.handleUnaryCall<api_pb.GetTradesRequest, api_pb.GetTradesResponse>;
+    getQuotes: grpc.handleUnaryCall<api_pb.GetQuotesRequest, api_pb.GetQuotesResponse>;
     getServerTime: grpc.handleUnaryCall<api_pb.GetServerTimeRequest, api_pb.GetServerTimeResponse>;
     getRecentBlockHash: grpc.handleUnaryCall<api_pb.GetRecentBlockHashRequest, api_pb.GetRecentBlockHashResponse>;
     getAccountBalance: grpc.handleUnaryCall<api_pb.GetAccountBalanceRequest, api_pb.GetAccountBalanceResponse>;
     postOrder: grpc.handleUnaryCall<api_pb.PostOrderRequest, api_pb.PostOrderResponse>;
     postSubmit: grpc.handleUnaryCall<api_pb.PostSubmitRequest, api_pb.PostSubmitResponse>;
+    postSubmitBatch: grpc.handleUnaryCall<api_pb.PostSubmitBatchRequest, api_pb.PostSubmitBatchResponse>;
     postCancelOrder: grpc.handleUnaryCall<api_pb.PostCancelOrderRequest, api_pb.PostCancelOrderResponse>;
     postCancelByClientOrderID: grpc.handleUnaryCall<api_pb.PostCancelByClientOrderIDRequest, api_pb.PostCancelOrderResponse>;
     postCancelAll: grpc.handleUnaryCall<api_pb.PostCancelAllRequest, api_pb.PostCancelAllResponse>;
     postReplaceByClientOrderID: grpc.handleUnaryCall<api_pb.PostOrderRequest, api_pb.PostOrderResponse>;
     postReplaceOrder: grpc.handleUnaryCall<api_pb.PostReplaceOrderRequest, api_pb.PostOrderResponse>;
     postSettle: grpc.handleUnaryCall<api_pb.PostSettleRequest, api_pb.PostSettleResponse>;
+    postTradeSwap: grpc.handleUnaryCall<api_pb.TradeSwapRequest, api_pb.TradeSwapResponse>;
     getOrders: grpc.handleUnaryCall<api_pb.GetOrdersRequest, api_pb.GetOrdersResponse>;
     getOpenOrders: grpc.handleUnaryCall<api_pb.GetOpenOrdersRequest, api_pb.GetOpenOrdersResponse>;
     getOrderByID: grpc.handleUnaryCall<api_pb.GetOrderByIDRequest, api_pb.GetOrderByIDResponse>;
     getUnsettled: grpc.handleUnaryCall<api_pb.GetUnsettledRequest, api_pb.GetUnsettledResponse>;
-    getQuotes: grpc.handleUnaryCall<api_pb.GetQuotesRequest, api_pb.GetQuotesResponse>;
-    postTradeSwap: grpc.handleUnaryCall<api_pb.TradeSwapRequest, api_pb.TradeSwapResponse>;
+    postRouteTradeSwap: grpc.handleUnaryCall<api_pb.RouteTradeSwapRequest, api_pb.TradeSwapResponse>;
     getOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetOrderbooksRequest, api_pb.GetOrderbooksStreamResponse>;
     getTickersStream: grpc.handleServerStreamingCall<api_pb.GetTickersRequest, api_pb.GetTickersStreamResponse>;
     getMarketDepthStream: grpc.handleServerStreamingCall<api_pb.GetMarketsRequest, api_pb.GetMarketDepthStreamResponse>;
     getTradesStream: grpc.handleServerStreamingCall<api_pb.GetTradesRequest, api_pb.GetTradesStreamResponse>;
     getOrderStatusStream: grpc.handleServerStreamingCall<api_pb.GetOrderStatusStreamRequest, api_pb.GetOrderStatusStreamResponse>;
     getRecentBlockHashStream: grpc.handleServerStreamingCall<api_pb.GetRecentBlockHashRequest, api_pb.GetRecentBlockHashResponse>;
+    getQuotesStream: grpc.handleServerStreamingCall<api_pb.GetQuotesStreamRequest, api_pb.GetQuotesStreamResponse>;
+    getPoolReservesStream: grpc.handleServerStreamingCall<api_pb.GetPoolReservesStreamRequest, api_pb.GetPoolReservesStreamResponse>;
+    getPricesStream: grpc.handleServerStreamingCall<api_pb.GetPricesStreamRequest, api_pb.GetPricesStreamResponse>;
+    getSwapsStream: grpc.handleServerStreamingCall<api_pb.GetSwapsStreamRequest, api_pb.GetSwapsStreamResponse>;
 }
 
 export interface IApiClient {
+    getPrice(request: api_pb.GetPriceRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
+    getPrice(request: api_pb.GetPriceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
+    getPrice(request: api_pb.GetPriceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
     getMarkets(request: api_pb.GetMarketsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
     getMarkets(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
     getMarkets(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
@@ -358,6 +438,9 @@ export interface IApiClient {
     getTrades(request: api_pb.GetTradesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
     getTrades(request: api_pb.GetTradesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
     getTrades(request: api_pb.GetTradesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
+    getQuotes(request: api_pb.GetQuotesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
+    getQuotes(request: api_pb.GetQuotesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
+    getQuotes(request: api_pb.GetQuotesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
     getServerTime(request: api_pb.GetServerTimeRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetServerTimeResponse) => void): grpc.ClientUnaryCall;
     getServerTime(request: api_pb.GetServerTimeRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetServerTimeResponse) => void): grpc.ClientUnaryCall;
     getServerTime(request: api_pb.GetServerTimeRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetServerTimeResponse) => void): grpc.ClientUnaryCall;
@@ -373,6 +456,9 @@ export interface IApiClient {
     postSubmit(request: api_pb.PostSubmitRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     postSubmit(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     postSubmit(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
+    postSubmitBatch(request: api_pb.PostSubmitBatchRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
+    postSubmitBatch(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
+    postSubmitBatch(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
     postCancelOrder(request: api_pb.PostCancelOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
     postCancelOrder(request: api_pb.PostCancelOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
     postCancelOrder(request: api_pb.PostCancelOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
@@ -391,6 +477,9 @@ export interface IApiClient {
     postSettle(request: api_pb.PostSettleRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
     postSettle(request: api_pb.PostSettleRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
     postSettle(request: api_pb.PostSettleRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
+    postTradeSwap(request: api_pb.TradeSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
+    postTradeSwap(request: api_pb.TradeSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
+    postTradeSwap(request: api_pb.TradeSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
     getOrders(request: api_pb.GetOrdersRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrdersResponse) => void): grpc.ClientUnaryCall;
     getOrders(request: api_pb.GetOrdersRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrdersResponse) => void): grpc.ClientUnaryCall;
     getOrders(request: api_pb.GetOrdersRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrdersResponse) => void): grpc.ClientUnaryCall;
@@ -403,12 +492,9 @@ export interface IApiClient {
     getUnsettled(request: api_pb.GetUnsettledRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
     getUnsettled(request: api_pb.GetUnsettledRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
     getUnsettled(request: api_pb.GetUnsettledRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
-    getQuotes(request: api_pb.GetQuotesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
-    getQuotes(request: api_pb.GetQuotesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
-    getQuotes(request: api_pb.GetQuotesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
-    postTradeSwap(request: api_pb.TradeSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
-    postTradeSwap(request: api_pb.TradeSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
-    postTradeSwap(request: api_pb.TradeSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
+    postRouteTradeSwap(request: api_pb.RouteTradeSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
+    postRouteTradeSwap(request: api_pb.RouteTradeSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
+    postRouteTradeSwap(request: api_pb.RouteTradeSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
     getOrderbooksStream(request: api_pb.GetOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     getOrderbooksStream(request: api_pb.GetOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     getTickersStream(request: api_pb.GetTickersRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetTickersStreamResponse>;
@@ -421,10 +507,21 @@ export interface IApiClient {
     getOrderStatusStream(request: api_pb.GetOrderStatusStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderStatusStreamResponse>;
     getRecentBlockHashStream(request: api_pb.GetRecentBlockHashRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetRecentBlockHashResponse>;
     getRecentBlockHashStream(request: api_pb.GetRecentBlockHashRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetRecentBlockHashResponse>;
+    getQuotesStream(request: api_pb.GetQuotesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetQuotesStreamResponse>;
+    getQuotesStream(request: api_pb.GetQuotesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetQuotesStreamResponse>;
+    getPoolReservesStream(request: api_pb.GetPoolReservesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPoolReservesStreamResponse>;
+    getPoolReservesStream(request: api_pb.GetPoolReservesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPoolReservesStreamResponse>;
+    getPricesStream(request: api_pb.GetPricesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPricesStreamResponse>;
+    getPricesStream(request: api_pb.GetPricesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPricesStreamResponse>;
+    getSwapsStream(request: api_pb.GetSwapsStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
+    getSwapsStream(request: api_pb.GetSwapsStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
 }
 
 export class ApiClient extends grpc.Client implements IApiClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: Partial<grpc.ClientOptions>);
+    public getPrice(request: api_pb.GetPriceRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
+    public getPrice(request: api_pb.GetPriceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
+    public getPrice(request: api_pb.GetPriceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
     public getMarkets(request: api_pb.GetMarketsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
     public getMarkets(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
     public getMarkets(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
@@ -443,6 +540,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getTrades(request: api_pb.GetTradesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
     public getTrades(request: api_pb.GetTradesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
     public getTrades(request: api_pb.GetTradesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
+    public getQuotes(request: api_pb.GetQuotesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getQuotes(request: api_pb.GetQuotesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getQuotes(request: api_pb.GetQuotesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
     public getServerTime(request: api_pb.GetServerTimeRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetServerTimeResponse) => void): grpc.ClientUnaryCall;
     public getServerTime(request: api_pb.GetServerTimeRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetServerTimeResponse) => void): grpc.ClientUnaryCall;
     public getServerTime(request: api_pb.GetServerTimeRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetServerTimeResponse) => void): grpc.ClientUnaryCall;
@@ -458,6 +558,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postSubmit(request: api_pb.PostSubmitRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     public postSubmit(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     public postSubmit(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
+    public postSubmitBatch(request: api_pb.PostSubmitBatchRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
+    public postSubmitBatch(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
+    public postSubmitBatch(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
     public postCancelOrder(request: api_pb.PostCancelOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
     public postCancelOrder(request: api_pb.PostCancelOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
     public postCancelOrder(request: api_pb.PostCancelOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
@@ -476,6 +579,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postSettle(request: api_pb.PostSettleRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
     public postSettle(request: api_pb.PostSettleRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
     public postSettle(request: api_pb.PostSettleRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
+    public postTradeSwap(request: api_pb.TradeSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
+    public postTradeSwap(request: api_pb.TradeSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
+    public postTradeSwap(request: api_pb.TradeSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
     public getOrders(request: api_pb.GetOrdersRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrdersResponse) => void): grpc.ClientUnaryCall;
     public getOrders(request: api_pb.GetOrdersRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrdersResponse) => void): grpc.ClientUnaryCall;
     public getOrders(request: api_pb.GetOrdersRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrdersResponse) => void): grpc.ClientUnaryCall;
@@ -488,12 +594,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getUnsettled(request: api_pb.GetUnsettledRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
     public getUnsettled(request: api_pb.GetUnsettledRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
     public getUnsettled(request: api_pb.GetUnsettledRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
-    public getQuotes(request: api_pb.GetQuotesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
-    public getQuotes(request: api_pb.GetQuotesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
-    public getQuotes(request: api_pb.GetQuotesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetQuotesResponse) => void): grpc.ClientUnaryCall;
-    public postTradeSwap(request: api_pb.TradeSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
-    public postTradeSwap(request: api_pb.TradeSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
-    public postTradeSwap(request: api_pb.TradeSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRouteTradeSwap(request: api_pb.RouteTradeSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRouteTradeSwap(request: api_pb.RouteTradeSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRouteTradeSwap(request: api_pb.RouteTradeSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
     public getOrderbooksStream(request: api_pb.GetOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     public getOrderbooksStream(request: api_pb.GetOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     public getTickersStream(request: api_pb.GetTickersRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetTickersStreamResponse>;
@@ -506,4 +609,12 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getOrderStatusStream(request: api_pb.GetOrderStatusStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderStatusStreamResponse>;
     public getRecentBlockHashStream(request: api_pb.GetRecentBlockHashRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetRecentBlockHashResponse>;
     public getRecentBlockHashStream(request: api_pb.GetRecentBlockHashRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetRecentBlockHashResponse>;
+    public getQuotesStream(request: api_pb.GetQuotesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetQuotesStreamResponse>;
+    public getQuotesStream(request: api_pb.GetQuotesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetQuotesStreamResponse>;
+    public getPoolReservesStream(request: api_pb.GetPoolReservesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPoolReservesStreamResponse>;
+    public getPoolReservesStream(request: api_pb.GetPoolReservesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPoolReservesStreamResponse>;
+    public getPricesStream(request: api_pb.GetPricesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPricesStreamResponse>;
+    public getPricesStream(request: api_pb.GetPricesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPricesStreamResponse>;
+    public getSwapsStream(request: api_pb.GetSwapsStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
+    public getSwapsStream(request: api_pb.GetSwapsStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
 }

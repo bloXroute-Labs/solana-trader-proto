@@ -218,6 +218,28 @@ function deserialize_api_GetOrdersResponse(buffer_arg) {
   return api_pb.GetOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetPoolReservesStreamRequest(arg) {
+  if (!(arg instanceof api_pb.GetPoolReservesStreamRequest)) {
+    throw new Error('Expected argument of type api.GetPoolReservesStreamRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetPoolReservesStreamRequest(buffer_arg) {
+  return api_pb.GetPoolReservesStreamRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetPoolReservesStreamResponse(arg) {
+  if (!(arg instanceof api_pb.GetPoolReservesStreamResponse)) {
+    throw new Error('Expected argument of type api.GetPoolReservesStreamResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetPoolReservesStreamResponse(buffer_arg) {
+  return api_pb.GetPoolReservesStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetPoolsRequest(arg) {
   if (!(arg instanceof api_pb.GetPoolsRequest)) {
     throw new Error('Expected argument of type api.GetPoolsRequest');
@@ -240,6 +262,50 @@ function deserialize_api_GetPoolsResponse(buffer_arg) {
   return api_pb.GetPoolsResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetPriceRequest(arg) {
+  if (!(arg instanceof api_pb.GetPriceRequest)) {
+    throw new Error('Expected argument of type api.GetPriceRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetPriceRequest(buffer_arg) {
+  return api_pb.GetPriceRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetPriceResponse(arg) {
+  if (!(arg instanceof api_pb.GetPriceResponse)) {
+    throw new Error('Expected argument of type api.GetPriceResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetPriceResponse(buffer_arg) {
+  return api_pb.GetPriceResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetPricesStreamRequest(arg) {
+  if (!(arg instanceof api_pb.GetPricesStreamRequest)) {
+    throw new Error('Expected argument of type api.GetPricesStreamRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetPricesStreamRequest(buffer_arg) {
+  return api_pb.GetPricesStreamRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetPricesStreamResponse(arg) {
+  if (!(arg instanceof api_pb.GetPricesStreamResponse)) {
+    throw new Error('Expected argument of type api.GetPricesStreamResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetPricesStreamResponse(buffer_arg) {
+  return api_pb.GetPricesStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetQuotesRequest(arg) {
   if (!(arg instanceof api_pb.GetQuotesRequest)) {
     throw new Error('Expected argument of type api.GetQuotesRequest');
@@ -260,6 +326,28 @@ function serialize_api_GetQuotesResponse(arg) {
 
 function deserialize_api_GetQuotesResponse(buffer_arg) {
   return api_pb.GetQuotesResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetQuotesStreamRequest(arg) {
+  if (!(arg instanceof api_pb.GetQuotesStreamRequest)) {
+    throw new Error('Expected argument of type api.GetQuotesStreamRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetQuotesStreamRequest(buffer_arg) {
+  return api_pb.GetQuotesStreamRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetQuotesStreamResponse(arg) {
+  if (!(arg instanceof api_pb.GetQuotesStreamResponse)) {
+    throw new Error('Expected argument of type api.GetQuotesStreamResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetQuotesStreamResponse(buffer_arg) {
+  return api_pb.GetQuotesStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetRecentBlockHashRequest(arg) {
@@ -304,6 +392,28 @@ function serialize_api_GetServerTimeResponse(arg) {
 
 function deserialize_api_GetServerTimeResponse(buffer_arg) {
   return api_pb.GetServerTimeResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetSwapsStreamRequest(arg) {
+  if (!(arg instanceof api_pb.GetSwapsStreamRequest)) {
+    throw new Error('Expected argument of type api.GetSwapsStreamRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetSwapsStreamRequest(buffer_arg) {
+  return api_pb.GetSwapsStreamRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetSwapsStreamResponse(arg) {
+  if (!(arg instanceof api_pb.GetSwapsStreamResponse)) {
+    throw new Error('Expected argument of type api.GetSwapsStreamResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetSwapsStreamResponse(buffer_arg) {
+  return api_pb.GetSwapsStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetTickersRequest(arg) {
@@ -504,6 +614,28 @@ function deserialize_api_PostSettleResponse(buffer_arg) {
   return api_pb.PostSettleResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostSubmitBatchRequest(arg) {
+  if (!(arg instanceof api_pb.PostSubmitBatchRequest)) {
+    throw new Error('Expected argument of type api.PostSubmitBatchRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostSubmitBatchRequest(buffer_arg) {
+  return api_pb.PostSubmitBatchRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostSubmitBatchResponse(arg) {
+  if (!(arg instanceof api_pb.PostSubmitBatchResponse)) {
+    throw new Error('Expected argument of type api.PostSubmitBatchResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostSubmitBatchResponse(buffer_arg) {
+  return api_pb.PostSubmitBatchResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostSubmitRequest(arg) {
   if (!(arg instanceof api_pb.PostSubmitRequest)) {
     throw new Error('Expected argument of type api.PostSubmitRequest');
@@ -524,6 +656,17 @@ function serialize_api_PostSubmitResponse(arg) {
 
 function deserialize_api_PostSubmitResponse(buffer_arg) {
   return api_pb.PostSubmitResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_RouteTradeSwapRequest(arg) {
+  if (!(arg instanceof api_pb.RouteTradeSwapRequest)) {
+    throw new Error('Expected argument of type api.RouteTradeSwapRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_RouteTradeSwapRequest(buffer_arg) {
+  return api_pb.RouteTradeSwapRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_TradeSwapRequest(arg) {
@@ -550,6 +693,17 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 
 var ApiService = exports.ApiService = {
+  getPrice: {
+    path: '/api.Api/GetPrice',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetPriceRequest,
+    responseType: api_pb.GetPriceResponse,
+    requestSerialize: serialize_api_GetPriceRequest,
+    requestDeserialize: deserialize_api_GetPriceRequest,
+    responseSerialize: serialize_api_GetPriceResponse,
+    responseDeserialize: deserialize_api_GetPriceResponse,
+  },
   getMarkets: {
     path: '/api.Api/GetMarkets',
     requestStream: false,
@@ -616,7 +770,19 @@ var ApiService = exports.ApiService = {
     responseSerialize: serialize_api_GetTradesResponse,
     responseDeserialize: deserialize_api_GetTradesResponse,
   },
-  getServerTime: {
+  getQuotes: {
+    path: '/api.Api/GetQuotes',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetQuotesRequest,
+    responseType: api_pb.GetQuotesResponse,
+    requestSerialize: serialize_api_GetQuotesRequest,
+    requestDeserialize: deserialize_api_GetQuotesRequest,
+    responseSerialize: serialize_api_GetQuotesResponse,
+    responseDeserialize: deserialize_api_GetQuotesResponse,
+  },
+  // system API
+getServerTime: {
     path: '/api.Api/GetServerTime',
     requestStream: false,
     responseStream: false,
@@ -672,6 +838,17 @@ postOrder: {
     requestDeserialize: deserialize_api_PostSubmitRequest,
     responseSerialize: serialize_api_PostSubmitResponse,
     responseDeserialize: deserialize_api_PostSubmitResponse,
+  },
+  postSubmitBatch: {
+    path: '/api.Api/PostSubmitBatch',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostSubmitBatchRequest,
+    responseType: api_pb.PostSubmitBatchResponse,
+    requestSerialize: serialize_api_PostSubmitBatchRequest,
+    requestDeserialize: deserialize_api_PostSubmitBatchRequest,
+    responseSerialize: serialize_api_PostSubmitBatchResponse,
+    responseDeserialize: deserialize_api_PostSubmitBatchResponse,
   },
   postCancelOrder: {
     path: '/api.Api/PostCancelOrder',
@@ -739,6 +916,17 @@ postOrder: {
     responseSerialize: serialize_api_PostSettleResponse,
     responseDeserialize: deserialize_api_PostSettleResponse,
   },
+  postTradeSwap: {
+    path: '/api.Api/PostTradeSwap',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.TradeSwapRequest,
+    responseType: api_pb.TradeSwapResponse,
+    requestSerialize: serialize_api_TradeSwapRequest,
+    requestDeserialize: deserialize_api_TradeSwapRequest,
+    responseSerialize: serialize_api_TradeSwapResponse,
+    responseDeserialize: deserialize_api_TradeSwapResponse,
+  },
   getOrders: {
     path: '/api.Api/GetOrders',
     requestStream: false,
@@ -783,26 +971,14 @@ postOrder: {
     responseSerialize: serialize_api_GetUnsettledResponse,
     responseDeserialize: deserialize_api_GetUnsettledResponse,
   },
-  // AMMs
-getQuotes: {
-    path: '/api.Api/GetQuotes',
+  postRouteTradeSwap: {
+    path: '/api.Api/PostRouteTradeSwap',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetQuotesRequest,
-    responseType: api_pb.GetQuotesResponse,
-    requestSerialize: serialize_api_GetQuotesRequest,
-    requestDeserialize: deserialize_api_GetQuotesRequest,
-    responseSerialize: serialize_api_GetQuotesResponse,
-    responseDeserialize: deserialize_api_GetQuotesResponse,
-  },
-  postTradeSwap: {
-    path: '/api.Api/PostTradeSwap',
-    requestStream: false,
-    responseStream: false,
-    requestType: api_pb.TradeSwapRequest,
+    requestType: api_pb.RouteTradeSwapRequest,
     responseType: api_pb.TradeSwapResponse,
-    requestSerialize: serialize_api_TradeSwapRequest,
-    requestDeserialize: deserialize_api_TradeSwapRequest,
+    requestSerialize: serialize_api_RouteTradeSwapRequest,
+    requestDeserialize: deserialize_api_RouteTradeSwapRequest,
     responseSerialize: serialize_api_TradeSwapResponse,
     responseDeserialize: deserialize_api_TradeSwapResponse,
   },
@@ -872,6 +1048,50 @@ getOrderbooksStream: {
     requestDeserialize: deserialize_api_GetRecentBlockHashRequest,
     responseSerialize: serialize_api_GetRecentBlockHashResponse,
     responseDeserialize: deserialize_api_GetRecentBlockHashResponse,
+  },
+  getQuotesStream: {
+    path: '/api.Api/GetQuotesStream',
+    requestStream: false,
+    responseStream: true,
+    requestType: api_pb.GetQuotesStreamRequest,
+    responseType: api_pb.GetQuotesStreamResponse,
+    requestSerialize: serialize_api_GetQuotesStreamRequest,
+    requestDeserialize: deserialize_api_GetQuotesStreamRequest,
+    responseSerialize: serialize_api_GetQuotesStreamResponse,
+    responseDeserialize: deserialize_api_GetQuotesStreamResponse,
+  },
+  getPoolReservesStream: {
+    path: '/api.Api/GetPoolReservesStream',
+    requestStream: false,
+    responseStream: true,
+    requestType: api_pb.GetPoolReservesStreamRequest,
+    responseType: api_pb.GetPoolReservesStreamResponse,
+    requestSerialize: serialize_api_GetPoolReservesStreamRequest,
+    requestDeserialize: deserialize_api_GetPoolReservesStreamRequest,
+    responseSerialize: serialize_api_GetPoolReservesStreamResponse,
+    responseDeserialize: deserialize_api_GetPoolReservesStreamResponse,
+  },
+  getPricesStream: {
+    path: '/api.Api/GetPricesStream',
+    requestStream: false,
+    responseStream: true,
+    requestType: api_pb.GetPricesStreamRequest,
+    responseType: api_pb.GetPricesStreamResponse,
+    requestSerialize: serialize_api_GetPricesStreamRequest,
+    requestDeserialize: deserialize_api_GetPricesStreamRequest,
+    responseSerialize: serialize_api_GetPricesStreamResponse,
+    responseDeserialize: deserialize_api_GetPricesStreamResponse,
+  },
+  getSwapsStream: {
+    path: '/api.Api/GetSwapsStream',
+    requestStream: false,
+    responseStream: true,
+    requestType: api_pb.GetSwapsStreamRequest,
+    responseType: api_pb.GetSwapsStreamResponse,
+    requestSerialize: serialize_api_GetSwapsStreamRequest,
+    requestDeserialize: deserialize_api_GetSwapsStreamRequest,
+    responseSerialize: serialize_api_GetSwapsStreamResponse,
+    responseDeserialize: deserialize_api_GetSwapsStreamResponse,
   },
 };
 
