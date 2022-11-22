@@ -2,7 +2,7 @@ PB_GO_IMAGE_NAME=bloxroute/bdn-protobuf:v3.19.3-go
 PB_JS_IMAGE_NAME=bloxroute/bdn-protobuf:v3.19.3-js
 
 .PHONY: all test integration fmt
-.PHONY: proto proto-build-gw proto-build-swagger proto-build-api proto-build-ffi-go proto-build-ffi-js proto-clean-swagger
+.PHONY: proto proto-build-gw proto-build-swagger proto-build-api proto-build-ffi-go proto-build-ffi-js
 .PHONY: proto-docker proto-docker-push-go proto-docker-build-go proto-docker-push-js proto-docker-build-js
 .PHONY: cred-github cred-solana data-accounts environment-dev
 
@@ -11,7 +11,7 @@ all: clean proto
 clean:
 	rm -rf js proto/api
 
-proto: proto-build-api-go proto-build-api-js proto-build-swagger proto-build-gw proto-clean-swagger
+proto: proto-build-api-go proto-build-api-js proto-build-swagger proto-build-gw
 
 proto-build-gw:
 	docker run -v $(CURDIR)/proto/api:/go/protobuf/out \
@@ -57,6 +57,3 @@ proto-docker-push-js:
 
 proto-docker-build-js:
 	cd proto && docker build . -f Dockerfile-js -t $(PB_JS_IMAGE_NAME) --platform linux/amd64
-
-proto-clean-swagger:
-	jq -c ".tags=$$(cat swagger-ui/tags.json)"  swagger-ui/api.swagger.json > tmp.$$.json && jq . tmp.$$.json > swagger-ui/api.swagger.json && rm tmp.$$.json
