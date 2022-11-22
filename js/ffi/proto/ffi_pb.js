@@ -387,7 +387,7 @@ proto.ffi.SolanaAccountsRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.ffi.SolanaAccountsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accountidsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+    accountpksList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -426,7 +426,7 @@ proto.ffi.SolanaAccountsRequest.deserializeBinaryFromReader = function(msg, read
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.addAccountids(value);
+      msg.addAccountpks(value);
       break;
     default:
       reader.skipField();
@@ -457,7 +457,7 @@ proto.ffi.SolanaAccountsRequest.prototype.serializeBinary = function() {
  */
 proto.ffi.SolanaAccountsRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAccountidsList();
+  f = message.getAccountpksList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       1,
@@ -468,10 +468,10 @@ proto.ffi.SolanaAccountsRequest.serializeBinaryToWriter = function(message, writ
 
 
 /**
- * repeated string accountIDs = 1;
+ * repeated string accountPks = 1;
  * @return {!Array<string>}
  */
-proto.ffi.SolanaAccountsRequest.prototype.getAccountidsList = function() {
+proto.ffi.SolanaAccountsRequest.prototype.getAccountpksList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
 };
 
@@ -480,7 +480,7 @@ proto.ffi.SolanaAccountsRequest.prototype.getAccountidsList = function() {
  * @param {!Array<string>} value
  * @return {!proto.ffi.SolanaAccountsRequest} returns this
  */
-proto.ffi.SolanaAccountsRequest.prototype.setAccountidsList = function(value) {
+proto.ffi.SolanaAccountsRequest.prototype.setAccountpksList = function(value) {
   return jspb.Message.setField(this, 1, value || []);
 };
 
@@ -490,7 +490,7 @@ proto.ffi.SolanaAccountsRequest.prototype.setAccountidsList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.ffi.SolanaAccountsRequest} returns this
  */
-proto.ffi.SolanaAccountsRequest.prototype.addAccountids = function(value, opt_index) {
+proto.ffi.SolanaAccountsRequest.prototype.addAccountpks = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
@@ -499,8 +499,8 @@ proto.ffi.SolanaAccountsRequest.prototype.addAccountids = function(value, opt_in
  * Clears the list making it empty but non-null.
  * @return {!proto.ffi.SolanaAccountsRequest} returns this
  */
-proto.ffi.SolanaAccountsRequest.prototype.clearAccountidsList = function() {
-  return this.setAccountidsList([]);
+proto.ffi.SolanaAccountsRequest.prototype.clearAccountpksList = function() {
+  return this.setAccountpksList([]);
 };
 
 
@@ -545,7 +545,7 @@ proto.ffi.SolanaAccountsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     accountsList: jspb.Message.toObjectList(msg.getAccountsList(),
     proto.ffi.SolanaAccount.toObject, includeInstance),
-    accountidsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+    accountpksList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
     error: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
@@ -590,7 +590,7 @@ proto.ffi.SolanaAccountsResponse.deserializeBinaryFromReader = function(msg, rea
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.addAccountids(value);
+      msg.addAccountpks(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -633,7 +633,7 @@ proto.ffi.SolanaAccountsResponse.serializeBinaryToWriter = function(message, wri
       proto.ffi.SolanaAccount.serializeBinaryToWriter
     );
   }
-  f = message.getAccountidsList();
+  f = message.getAccountpksList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       2,
@@ -689,10 +689,10 @@ proto.ffi.SolanaAccountsResponse.prototype.clearAccountsList = function() {
 
 
 /**
- * repeated string accountIDs = 2;
+ * repeated string accountPks = 2;
  * @return {!Array<string>}
  */
-proto.ffi.SolanaAccountsResponse.prototype.getAccountidsList = function() {
+proto.ffi.SolanaAccountsResponse.prototype.getAccountpksList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
 };
 
@@ -701,7 +701,7 @@ proto.ffi.SolanaAccountsResponse.prototype.getAccountidsList = function() {
  * @param {!Array<string>} value
  * @return {!proto.ffi.SolanaAccountsResponse} returns this
  */
-proto.ffi.SolanaAccountsResponse.prototype.setAccountidsList = function(value) {
+proto.ffi.SolanaAccountsResponse.prototype.setAccountpksList = function(value) {
   return jspb.Message.setField(this, 2, value || []);
 };
 
@@ -711,7 +711,7 @@ proto.ffi.SolanaAccountsResponse.prototype.setAccountidsList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.ffi.SolanaAccountsResponse} returns this
  */
-proto.ffi.SolanaAccountsResponse.prototype.addAccountids = function(value, opt_index) {
+proto.ffi.SolanaAccountsResponse.prototype.addAccountpks = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
 };
 
@@ -720,8 +720,8 @@ proto.ffi.SolanaAccountsResponse.prototype.addAccountids = function(value, opt_i
  * Clears the list making it empty but non-null.
  * @return {!proto.ffi.SolanaAccountsResponse} returns this
  */
-proto.ffi.SolanaAccountsResponse.prototype.clearAccountidsList = function() {
-  return this.setAccountidsList([]);
+proto.ffi.SolanaAccountsResponse.prototype.clearAccountpksList = function() {
+  return this.setAccountpksList([]);
 };
 
 
@@ -1216,7 +1216,7 @@ proto.ffi.JupiterPairToAccountsResponse.prototype.toObject = function(opt_includ
  */
 proto.ffi.JupiterPairToAccountsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    accountidsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+    accountpksList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1255,7 +1255,7 @@ proto.ffi.JupiterPairToAccountsResponse.deserializeBinaryFromReader = function(m
     switch (field) {
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.addAccountids(value);
+      msg.addAccountpks(value);
       break;
     default:
       reader.skipField();
@@ -1286,7 +1286,7 @@ proto.ffi.JupiterPairToAccountsResponse.prototype.serializeBinary = function() {
  */
 proto.ffi.JupiterPairToAccountsResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getAccountidsList();
+  f = message.getAccountpksList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       2,
@@ -1297,10 +1297,10 @@ proto.ffi.JupiterPairToAccountsResponse.serializeBinaryToWriter = function(messa
 
 
 /**
- * repeated string accountIDs = 2;
+ * repeated string accountPks = 2;
  * @return {!Array<string>}
  */
-proto.ffi.JupiterPairToAccountsResponse.prototype.getAccountidsList = function() {
+proto.ffi.JupiterPairToAccountsResponse.prototype.getAccountpksList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
 };
 
@@ -1309,7 +1309,7 @@ proto.ffi.JupiterPairToAccountsResponse.prototype.getAccountidsList = function()
  * @param {!Array<string>} value
  * @return {!proto.ffi.JupiterPairToAccountsResponse} returns this
  */
-proto.ffi.JupiterPairToAccountsResponse.prototype.setAccountidsList = function(value) {
+proto.ffi.JupiterPairToAccountsResponse.prototype.setAccountpksList = function(value) {
   return jspb.Message.setField(this, 2, value || []);
 };
 
@@ -1319,7 +1319,7 @@ proto.ffi.JupiterPairToAccountsResponse.prototype.setAccountidsList = function(v
  * @param {number=} opt_index
  * @return {!proto.ffi.JupiterPairToAccountsResponse} returns this
  */
-proto.ffi.JupiterPairToAccountsResponse.prototype.addAccountids = function(value, opt_index) {
+proto.ffi.JupiterPairToAccountsResponse.prototype.addAccountpks = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
 };
 
@@ -1328,8 +1328,8 @@ proto.ffi.JupiterPairToAccountsResponse.prototype.addAccountids = function(value
  * Clears the list making it empty but non-null.
  * @return {!proto.ffi.JupiterPairToAccountsResponse} returns this
  */
-proto.ffi.JupiterPairToAccountsResponse.prototype.clearAccountidsList = function() {
-  return this.setAccountidsList([]);
+proto.ffi.JupiterPairToAccountsResponse.prototype.clearAccountpksList = function() {
+  return this.setAccountpksList([]);
 };
 
 
@@ -1474,7 +1474,7 @@ proto.ffi.JupiterIsReadyResponse.prototype.toObject = function(opt_includeInstan
 proto.ffi.JupiterIsReadyResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     ready: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
-    accountidsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
+    accountpksList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -1517,7 +1517,7 @@ proto.ffi.JupiterIsReadyResponse.deserializeBinaryFromReader = function(msg, rea
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.addAccountids(value);
+      msg.addAccountpks(value);
       break;
     default:
       reader.skipField();
@@ -1555,7 +1555,7 @@ proto.ffi.JupiterIsReadyResponse.serializeBinaryToWriter = function(message, wri
       f
     );
   }
-  f = message.getAccountidsList();
+  f = message.getAccountpksList();
   if (f.length > 0) {
     writer.writeRepeatedString(
       2,
@@ -1584,10 +1584,10 @@ proto.ffi.JupiterIsReadyResponse.prototype.setReady = function(value) {
 
 
 /**
- * repeated string accountIDs = 2;
+ * repeated string accountPks = 2;
  * @return {!Array<string>}
  */
-proto.ffi.JupiterIsReadyResponse.prototype.getAccountidsList = function() {
+proto.ffi.JupiterIsReadyResponse.prototype.getAccountpksList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
 };
 
@@ -1596,7 +1596,7 @@ proto.ffi.JupiterIsReadyResponse.prototype.getAccountidsList = function() {
  * @param {!Array<string>} value
  * @return {!proto.ffi.JupiterIsReadyResponse} returns this
  */
-proto.ffi.JupiterIsReadyResponse.prototype.setAccountidsList = function(value) {
+proto.ffi.JupiterIsReadyResponse.prototype.setAccountpksList = function(value) {
   return jspb.Message.setField(this, 2, value || []);
 };
 
@@ -1606,7 +1606,7 @@ proto.ffi.JupiterIsReadyResponse.prototype.setAccountidsList = function(value) {
  * @param {number=} opt_index
  * @return {!proto.ffi.JupiterIsReadyResponse} returns this
  */
-proto.ffi.JupiterIsReadyResponse.prototype.addAccountids = function(value, opt_index) {
+proto.ffi.JupiterIsReadyResponse.prototype.addAccountpks = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
 };
 
@@ -1615,8 +1615,8 @@ proto.ffi.JupiterIsReadyResponse.prototype.addAccountids = function(value, opt_i
  * Clears the list making it empty but non-null.
  * @return {!proto.ffi.JupiterIsReadyResponse} returns this
  */
-proto.ffi.JupiterIsReadyResponse.prototype.clearAccountidsList = function() {
-  return this.setAccountidsList([]);
+proto.ffi.JupiterIsReadyResponse.prototype.clearAccountpksList = function() {
+  return this.setAccountpksList([]);
 };
 
 

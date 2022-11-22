@@ -48,7 +48,7 @@ service FFI {
 
 }
 message SolanaAccountsRequest {
-  repeated string accountIDs = 1;
+  repeated string accountPks = 1;
 }
 
 message SolanaAccountsResponse {
@@ -56,7 +56,7 @@ message SolanaAccountsResponse {
   repeated SolanaAccount accounts = 1;
 
   // empty if in response to a request, filled if unsolicited push
-  repeated string accountIDs = 2;
+  repeated string accountPks = 2;
 
   // signal for errors processing response
   string error = 3;
@@ -76,14 +76,14 @@ message JupiterPairToAccountsRequest {
 }
 
 message JupiterPairToAccountsResponse {
-  repeated string accountIDs = 2;
+  repeated string accountPks = 2;
 }
 
 message JupiterIsReadyRequest {}
 
 message JupiterIsReadyResponse {
   bool ready = 1;
-  repeated string accountIDs = 2;
+  repeated string accountPks = 2;
 }
 
 message JupiterComputeRoutesRequest {

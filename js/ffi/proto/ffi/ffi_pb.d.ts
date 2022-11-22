@@ -8,10 +8,10 @@ import * as jspb from "google-protobuf";
 import * as api_pb from "../api_pb";
 
 export class SolanaAccountsRequest extends jspb.Message { 
-    clearAccountidsList(): void;
-    getAccountidsList(): Array<string>;
-    setAccountidsList(value: Array<string>): SolanaAccountsRequest;
-    addAccountids(value: string, index?: number): string;
+    clearAccountpksList(): void;
+    getAccountpksList(): Array<string>;
+    setAccountpksList(value: Array<string>): SolanaAccountsRequest;
+    addAccountpks(value: string, index?: number): string;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): SolanaAccountsRequest.AsObject;
@@ -25,7 +25,7 @@ export class SolanaAccountsRequest extends jspb.Message {
 
 export namespace SolanaAccountsRequest {
     export type AsObject = {
-        accountidsList: Array<string>,
+        accountpksList: Array<string>,
     }
 }
 
@@ -34,10 +34,10 @@ export class SolanaAccountsResponse extends jspb.Message {
     getAccountsList(): Array<SolanaAccount>;
     setAccountsList(value: Array<SolanaAccount>): SolanaAccountsResponse;
     addAccounts(value?: SolanaAccount, index?: number): SolanaAccount;
-    clearAccountidsList(): void;
-    getAccountidsList(): Array<string>;
-    setAccountidsList(value: Array<string>): SolanaAccountsResponse;
-    addAccountids(value: string, index?: number): string;
+    clearAccountpksList(): void;
+    getAccountpksList(): Array<string>;
+    setAccountpksList(value: Array<string>): SolanaAccountsResponse;
+    addAccountpks(value: string, index?: number): string;
     getError(): string;
     setError(value: string): SolanaAccountsResponse;
 
@@ -54,7 +54,7 @@ export class SolanaAccountsResponse extends jspb.Message {
 export namespace SolanaAccountsResponse {
     export type AsObject = {
         accountsList: Array<SolanaAccount.AsObject>,
-        accountidsList: Array<string>,
+        accountpksList: Array<string>,
         error: string,
     }
 }
@@ -117,10 +117,10 @@ export namespace JupiterPairToAccountsRequest {
 }
 
 export class JupiterPairToAccountsResponse extends jspb.Message { 
-    clearAccountidsList(): void;
-    getAccountidsList(): Array<string>;
-    setAccountidsList(value: Array<string>): JupiterPairToAccountsResponse;
-    addAccountids(value: string, index?: number): string;
+    clearAccountpksList(): void;
+    getAccountpksList(): Array<string>;
+    setAccountpksList(value: Array<string>): JupiterPairToAccountsResponse;
+    addAccountpks(value: string, index?: number): string;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): JupiterPairToAccountsResponse.AsObject;
@@ -134,7 +134,7 @@ export class JupiterPairToAccountsResponse extends jspb.Message {
 
 export namespace JupiterPairToAccountsResponse {
     export type AsObject = {
-        accountidsList: Array<string>,
+        accountpksList: Array<string>,
     }
 }
 
@@ -158,10 +158,10 @@ export namespace JupiterIsReadyRequest {
 export class JupiterIsReadyResponse extends jspb.Message { 
     getReady(): boolean;
     setReady(value: boolean): JupiterIsReadyResponse;
-    clearAccountidsList(): void;
-    getAccountidsList(): Array<string>;
-    setAccountidsList(value: Array<string>): JupiterIsReadyResponse;
-    addAccountids(value: string, index?: number): string;
+    clearAccountpksList(): void;
+    getAccountpksList(): Array<string>;
+    setAccountpksList(value: Array<string>): JupiterIsReadyResponse;
+    addAccountpks(value: string, index?: number): string;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): JupiterIsReadyResponse.AsObject;
@@ -176,7 +176,7 @@ export class JupiterIsReadyResponse extends jspb.Message {
 export namespace JupiterIsReadyResponse {
     export type AsObject = {
         ready: boolean,
-        accountidsList: Array<string>,
+        accountpksList: Array<string>,
     }
 }
 
