@@ -20,7 +20,7 @@ proto-build-gw:
 			--grpc-gateway_out ../out \
 			--grpc-gateway_opt logtostderr=true \
 			--grpc-gateway_opt paths=source_relative \
-			api.proto
+			common.proto api.proto
 
 proto-build-swagger:
 	docker run -v $(CURDIR)/proto/api:/go/protobuf/out \
@@ -31,7 +31,7 @@ proto-build-swagger:
 proto-build-api-go:
 	docker run -v $(CURDIR)/proto/api:/go/protobuf/out \
 			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
-		protoc --go_out=../out --go_opt=paths=source_relative  --go-grpc_out=../out --go-grpc_opt=paths=source_relative api.proto
+		protoc --go_out=../out --go_opt=paths=source_relative  --go-grpc_out=../out --go-grpc_opt=paths=source_relative common.proto api.proto
 
 proto-build-api-js:
 	docker run -v $(CURDIR)/js/ffi/proto:/home/node/out \
