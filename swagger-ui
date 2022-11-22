@@ -893,22 +893,6 @@
       ],
       "default": "D_ASCENDING"
     },
-    "apiFee": {
-      "type": "object",
-      "properties": {
-        "amount": {
-          "type": "number",
-          "format": "float"
-        },
-        "mint": {
-          "type": "string"
-        },
-        "percent": {
-          "type": "number",
-          "format": "float"
-        }
-      }
-    },
     "apiGetAccountBalanceResponse": {
       "type": "object",
       "properties": {
@@ -1324,15 +1308,6 @@
           }
         }
       }
-    },
-    "apiInfinity": {
-      "type": "string",
-      "enum": [
-        "INF_NOT",
-        "INF_POSITIVE",
-        "INF_NEGATIVE"
-      ],
-      "default": "INF_NOT"
     },
     "apiMarket": {
       "type": "object",
@@ -1872,18 +1847,6 @@
         }
       }
     },
-    "apiPriceImpactPercent": {
-      "type": "object",
-      "properties": {
-        "percent": {
-          "type": "number",
-          "format": "double"
-        },
-        "infinity": {
-          "$ref": "#/definitions/apiInfinity"
-        }
-      }
-    },
     "apiProject": {
       "type": "string",
       "enum": [
@@ -2008,10 +1971,10 @@
           "format": "double"
         },
         "priceImpactPercent": {
-          "$ref": "#/definitions/apiPriceImpactPercent"
+          "$ref": "#/definitions/commonPriceImpactPercent"
         },
         "fee": {
-          "$ref": "#/definitions/apiFee"
+          "$ref": "#/definitions/commonFee"
         },
         "outAmountMin": {
           "type": "number",
@@ -2269,12 +2232,12 @@
           "format": "double"
         },
         "priceImpact": {
-          "$ref": "#/definitions/apiPriceImpactPercent"
+          "$ref": "#/definitions/commonPriceImpactPercent"
         },
         "fees": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiFee"
+            "$ref": "#/definitions/commonFee"
           }
         }
       }
@@ -2313,6 +2276,43 @@
         "amount": {
           "type": "number",
           "format": "double"
+        }
+      }
+    },
+    "commonFee": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "mint": {
+          "type": "string"
+        },
+        "percent": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "commonInfinity": {
+      "type": "string",
+      "enum": [
+        "INF_NOT",
+        "INF_POSITIVE",
+        "INF_NEGATIVE"
+      ],
+      "default": "INF_NOT"
+    },
+    "commonPriceImpactPercent": {
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "number",
+          "format": "double"
+        },
+        "infinity": {
+          "$ref": "#/definitions/commonInfinity"
         }
       }
     },

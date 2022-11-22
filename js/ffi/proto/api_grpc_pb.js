@@ -8,6 +8,7 @@ var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/time
 var google_api_field_behavior_pb = require('./google/api/field_behavior_pb.js');
 var google_api_visibility_pb = require('./google/api/visibility_pb.js');
 var protoc$gen$openapiv2_options_annotations_pb = require('./protoc-gen-openapiv2/options/annotations_pb.js');
+var common_pb = require('./common_pb.js');
 
 function serialize_api_GetAccountBalanceRequest(arg) {
   if (!(arg instanceof api_pb.GetAccountBalanceRequest)) {

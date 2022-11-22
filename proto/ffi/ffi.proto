@@ -2,7 +2,7 @@ syntax = "proto3";
 package ffi;
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/proto/ffi";
 
-import "api.proto";
+import "common.proto";
 
 /*
 FFI service definition for binding to external Typescript implementations.
@@ -104,7 +104,7 @@ message JupiterSwapTxRequest {
   float amount = 4;
   float otherAmountThreshold = 5;
   JupiterSwapMode swapMode = 6;
-  api.PriceImpactPercent priceImpactPercent = 7;
+  common.PriceImpactPercent priceImpactPercent = 7;
   string userPublicKey = 8;
 }
 
@@ -126,7 +126,7 @@ message JupiterRouteInfo {
   float amount = 4;
   float otherAmountThreshold = 5;
   JupiterSwapMode swapMode = 6;
-  api.PriceImpactPercent priceImpactPercent = 7;
+  common.PriceImpactPercent priceImpactPercent = 7;
 }
 
 message JupiterMarketInfo {
@@ -135,9 +135,9 @@ message JupiterMarketInfo {
   string outputMint = 3;
   float inAmount = 4;
   float outAmount = 5;
-  api.PriceImpactPercent priceImpactPercent = 6;
-  api.Fee liquidityPoolFee = 7;
-  api.Fee platformFee = 8;
+  common.PriceImpactPercent priceImpactPercent = 6;
+  common.Fee liquidityPoolFee = 7;
+  common.Fee platformFee = 8;
   bool notEnoughLiquidity = 9;
 }
 

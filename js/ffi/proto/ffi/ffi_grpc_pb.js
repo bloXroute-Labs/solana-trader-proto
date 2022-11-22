@@ -3,7 +3,7 @@
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var ffi_ffi_pb = require('../ffi/ffi_pb.js');
-var api_pb = require('../api_pb.js');
+var common_pb = require('../common_pb.js');
 
 function serialize_ffi_JupiterComputeRoutesRequest(arg) {
   if (!(arg instanceof ffi_ffi_pb.JupiterComputeRoutesRequest)) {

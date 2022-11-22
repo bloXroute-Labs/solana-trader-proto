@@ -5,7 +5,7 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
-import * as api_pb from "../api_pb";
+import * as common_pb from "../common_pb";
 
 export class SolanaAccountsRequest extends jspb.Message { 
     clearAccountpksList(): void;
@@ -249,8 +249,8 @@ export class JupiterSwapTxRequest extends jspb.Message {
 
     hasPriceimpactpercent(): boolean;
     clearPriceimpactpercent(): void;
-    getPriceimpactpercent(): api_pb.PriceImpactPercent | undefined;
-    setPriceimpactpercent(value?: api_pb.PriceImpactPercent): JupiterSwapTxRequest;
+    getPriceimpactpercent(): common_pb.PriceImpactPercent | undefined;
+    setPriceimpactpercent(value?: common_pb.PriceImpactPercent): JupiterSwapTxRequest;
     getUserpublickey(): string;
     setUserpublickey(value: string): JupiterSwapTxRequest;
 
@@ -272,7 +272,7 @@ export namespace JupiterSwapTxRequest {
         amount: number,
         otheramountthreshold: number,
         swapmode: JupiterSwapMode,
-        priceimpactpercent?: api_pb.PriceImpactPercent.AsObject,
+        priceimpactpercent?: common_pb.PriceImpactPercent.AsObject,
         userpublickey: string,
     }
 }
@@ -342,8 +342,8 @@ export class JupiterRouteInfo extends jspb.Message {
 
     hasPriceimpactpercent(): boolean;
     clearPriceimpactpercent(): void;
-    getPriceimpactpercent(): api_pb.PriceImpactPercent | undefined;
-    setPriceimpactpercent(value?: api_pb.PriceImpactPercent): JupiterRouteInfo;
+    getPriceimpactpercent(): common_pb.PriceImpactPercent | undefined;
+    setPriceimpactpercent(value?: common_pb.PriceImpactPercent): JupiterRouteInfo;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): JupiterRouteInfo.AsObject;
@@ -363,7 +363,7 @@ export namespace JupiterRouteInfo {
         amount: number,
         otheramountthreshold: number,
         swapmode: JupiterSwapMode,
-        priceimpactpercent?: api_pb.PriceImpactPercent.AsObject,
+        priceimpactpercent?: common_pb.PriceImpactPercent.AsObject,
     }
 }
 
@@ -384,18 +384,18 @@ export class JupiterMarketInfo extends jspb.Message {
 
     hasPriceimpactpercent(): boolean;
     clearPriceimpactpercent(): void;
-    getPriceimpactpercent(): api_pb.PriceImpactPercent | undefined;
-    setPriceimpactpercent(value?: api_pb.PriceImpactPercent): JupiterMarketInfo;
+    getPriceimpactpercent(): common_pb.PriceImpactPercent | undefined;
+    setPriceimpactpercent(value?: common_pb.PriceImpactPercent): JupiterMarketInfo;
 
     hasLiquiditypoolfee(): boolean;
     clearLiquiditypoolfee(): void;
-    getLiquiditypoolfee(): api_pb.Fee | undefined;
-    setLiquiditypoolfee(value?: api_pb.Fee): JupiterMarketInfo;
+    getLiquiditypoolfee(): common_pb.Fee | undefined;
+    setLiquiditypoolfee(value?: common_pb.Fee): JupiterMarketInfo;
 
     hasPlatformfee(): boolean;
     clearPlatformfee(): void;
-    getPlatformfee(): api_pb.Fee | undefined;
-    setPlatformfee(value?: api_pb.Fee): JupiterMarketInfo;
+    getPlatformfee(): common_pb.Fee | undefined;
+    setPlatformfee(value?: common_pb.Fee): JupiterMarketInfo;
     getNotenoughliquidity(): boolean;
     setNotenoughliquidity(value: boolean): JupiterMarketInfo;
 
@@ -416,9 +416,9 @@ export namespace JupiterMarketInfo {
         outputmint: string,
         inamount: number,
         outamount: number,
-        priceimpactpercent?: api_pb.PriceImpactPercent.AsObject,
-        liquiditypoolfee?: api_pb.Fee.AsObject,
-        platformfee?: api_pb.Fee.AsObject,
+        priceimpactpercent?: common_pb.PriceImpactPercent.AsObject,
+        liquiditypoolfee?: common_pb.Fee.AsObject,
+        platformfee?: common_pb.Fee.AsObject,
         notenoughliquidity: boolean,
     }
 }

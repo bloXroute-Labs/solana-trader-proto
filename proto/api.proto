@@ -7,6 +7,7 @@ import "google/protobuf/timestamp.proto";
 import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "common.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   security: {
@@ -874,8 +875,8 @@ message TradeSwapResponse{
   repeated TransactionMessage transactions = 2;
   double outAmount = 3;
   double outAmountMin = 4;
-  PriceImpactPercent priceImpact = 5;
-  repeated Fee fees = 6;
+  common.PriceImpactPercent priceImpact = 5;
+  repeated common.Fee fees = 6;
 }
 
 enum Project {
@@ -902,8 +903,8 @@ message QuoteStep {
   double inAmount = 6;
   double outAmount = 7;
   double slippage = 8;
-  PriceImpactPercent priceImpactPercent = 9;
-  Fee fee = 10;
+  common.PriceImpactPercent priceImpactPercent = 9;
+  common.Fee fee = 10;
   double outAmountMin = 11;
   string poolAddress = 12;
 }
@@ -911,23 +912,6 @@ message QuoteStep {
 message StepProject {
   string label = 1;
   string id = 2;
-}
-
-message Fee {
-  float amount = 1;
-  string mint = 2;
-  float percent = 3;
-}
-
-message PriceImpactPercent {
-  double percent = 1;
-  Infinity infinity = 2;
-}
-
-enum Infinity {
-  INF_NOT = 0;
-  INF_POSITIVE = 1;
-  INF_NEGATIVE = 2;
 }
 
 message GetRecentBlockHashRequest {

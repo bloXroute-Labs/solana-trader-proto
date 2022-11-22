@@ -15,8 +15,8 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-var api_pb = require('../api_pb.js');
-goog.object.extend(proto, api_pb);
+var common_pb = require('../common_pb.js');
+goog.object.extend(proto, common_pb);
 goog.exportSymbol('proto.ffi.JupiterAmm', null, global);
 goog.exportSymbol('proto.ffi.JupiterComputeRoutesRequest', null, global);
 goog.exportSymbol('proto.ffi.JupiterComputeRoutesResponse', null, global);
@@ -2046,7 +2046,7 @@ proto.ffi.JupiterSwapTxRequest.toObject = function(includeInstance, msg) {
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
     otheramountthreshold: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
     swapmode: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    priceimpactpercent: (f = msg.getPriceimpactpercent()) && api_pb.PriceImpactPercent.toObject(includeInstance, f),
+    priceimpactpercent: (f = msg.getPriceimpactpercent()) && common_pb.PriceImpactPercent.toObject(includeInstance, f),
     userpublickey: jspb.Message.getFieldWithDefault(msg, 8, "")
   };
 
@@ -2110,8 +2110,8 @@ proto.ffi.JupiterSwapTxRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setSwapmode(value);
       break;
     case 7:
-      var value = new api_pb.PriceImpactPercent;
-      reader.readMessage(value,api_pb.PriceImpactPercent.deserializeBinaryFromReader);
+      var value = new common_pb.PriceImpactPercent;
+      reader.readMessage(value,common_pb.PriceImpactPercent.deserializeBinaryFromReader);
       msg.setPriceimpactpercent(value);
       break;
     case 8:
@@ -2195,7 +2195,7 @@ proto.ffi.JupiterSwapTxRequest.serializeBinaryToWriter = function(message, write
     writer.writeMessage(
       7,
       f,
-      api_pb.PriceImpactPercent.serializeBinaryToWriter
+      common_pb.PriceImpactPercent.serializeBinaryToWriter
     );
   }
   f = message.getUserpublickey();
@@ -2337,17 +2337,17 @@ proto.ffi.JupiterSwapTxRequest.prototype.setSwapmode = function(value) {
 
 
 /**
- * optional api.PriceImpactPercent priceImpactPercent = 7;
- * @return {?proto.api.PriceImpactPercent}
+ * optional common.PriceImpactPercent priceImpactPercent = 7;
+ * @return {?proto.common.PriceImpactPercent}
  */
 proto.ffi.JupiterSwapTxRequest.prototype.getPriceimpactpercent = function() {
-  return /** @type{?proto.api.PriceImpactPercent} */ (
-    jspb.Message.getWrapperField(this, api_pb.PriceImpactPercent, 7));
+  return /** @type{?proto.common.PriceImpactPercent} */ (
+    jspb.Message.getWrapperField(this, common_pb.PriceImpactPercent, 7));
 };
 
 
 /**
- * @param {?proto.api.PriceImpactPercent|undefined} value
+ * @param {?proto.common.PriceImpactPercent|undefined} value
  * @return {!proto.ffi.JupiterSwapTxRequest} returns this
 */
 proto.ffi.JupiterSwapTxRequest.prototype.setPriceimpactpercent = function(value) {
@@ -2781,7 +2781,7 @@ proto.ffi.JupiterRouteInfo.toObject = function(includeInstance, msg) {
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
     otheramountthreshold: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
     swapmode: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    priceimpactpercent: (f = msg.getPriceimpactpercent()) && api_pb.PriceImpactPercent.toObject(includeInstance, f)
+    priceimpactpercent: (f = msg.getPriceimpactpercent()) && common_pb.PriceImpactPercent.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -2844,8 +2844,8 @@ proto.ffi.JupiterRouteInfo.deserializeBinaryFromReader = function(msg, reader) {
       msg.setSwapmode(value);
       break;
     case 7:
-      var value = new api_pb.PriceImpactPercent;
-      reader.readMessage(value,api_pb.PriceImpactPercent.deserializeBinaryFromReader);
+      var value = new common_pb.PriceImpactPercent;
+      reader.readMessage(value,common_pb.PriceImpactPercent.deserializeBinaryFromReader);
       msg.setPriceimpactpercent(value);
       break;
     default:
@@ -2925,7 +2925,7 @@ proto.ffi.JupiterRouteInfo.serializeBinaryToWriter = function(message, writer) {
     writer.writeMessage(
       7,
       f,
-      api_pb.PriceImpactPercent.serializeBinaryToWriter
+      common_pb.PriceImpactPercent.serializeBinaryToWriter
     );
   }
 };
@@ -3060,17 +3060,17 @@ proto.ffi.JupiterRouteInfo.prototype.setSwapmode = function(value) {
 
 
 /**
- * optional api.PriceImpactPercent priceImpactPercent = 7;
- * @return {?proto.api.PriceImpactPercent}
+ * optional common.PriceImpactPercent priceImpactPercent = 7;
+ * @return {?proto.common.PriceImpactPercent}
  */
 proto.ffi.JupiterRouteInfo.prototype.getPriceimpactpercent = function() {
-  return /** @type{?proto.api.PriceImpactPercent} */ (
-    jspb.Message.getWrapperField(this, api_pb.PriceImpactPercent, 7));
+  return /** @type{?proto.common.PriceImpactPercent} */ (
+    jspb.Message.getWrapperField(this, common_pb.PriceImpactPercent, 7));
 };
 
 
 /**
- * @param {?proto.api.PriceImpactPercent|undefined} value
+ * @param {?proto.common.PriceImpactPercent|undefined} value
  * @return {!proto.ffi.JupiterRouteInfo} returns this
 */
 proto.ffi.JupiterRouteInfo.prototype.setPriceimpactpercent = function(value) {
@@ -3133,9 +3133,9 @@ proto.ffi.JupiterMarketInfo.toObject = function(includeInstance, msg) {
     outputmint: jspb.Message.getFieldWithDefault(msg, 3, ""),
     inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
     outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    priceimpactpercent: (f = msg.getPriceimpactpercent()) && api_pb.PriceImpactPercent.toObject(includeInstance, f),
-    liquiditypoolfee: (f = msg.getLiquiditypoolfee()) && api_pb.Fee.toObject(includeInstance, f),
-    platformfee: (f = msg.getPlatformfee()) && api_pb.Fee.toObject(includeInstance, f),
+    priceimpactpercent: (f = msg.getPriceimpactpercent()) && common_pb.PriceImpactPercent.toObject(includeInstance, f),
+    liquiditypoolfee: (f = msg.getLiquiditypoolfee()) && common_pb.Fee.toObject(includeInstance, f),
+    platformfee: (f = msg.getPlatformfee()) && common_pb.Fee.toObject(includeInstance, f),
     notenoughliquidity: jspb.Message.getBooleanFieldWithDefault(msg, 9, false)
   };
 
@@ -3195,18 +3195,18 @@ proto.ffi.JupiterMarketInfo.deserializeBinaryFromReader = function(msg, reader) 
       msg.setOutamount(value);
       break;
     case 6:
-      var value = new api_pb.PriceImpactPercent;
-      reader.readMessage(value,api_pb.PriceImpactPercent.deserializeBinaryFromReader);
+      var value = new common_pb.PriceImpactPercent;
+      reader.readMessage(value,common_pb.PriceImpactPercent.deserializeBinaryFromReader);
       msg.setPriceimpactpercent(value);
       break;
     case 7:
-      var value = new api_pb.Fee;
-      reader.readMessage(value,api_pb.Fee.deserializeBinaryFromReader);
+      var value = new common_pb.Fee;
+      reader.readMessage(value,common_pb.Fee.deserializeBinaryFromReader);
       msg.setLiquiditypoolfee(value);
       break;
     case 8:
-      var value = new api_pb.Fee;
-      reader.readMessage(value,api_pb.Fee.deserializeBinaryFromReader);
+      var value = new common_pb.Fee;
+      reader.readMessage(value,common_pb.Fee.deserializeBinaryFromReader);
       msg.setPlatformfee(value);
       break;
     case 9:
@@ -3283,7 +3283,7 @@ proto.ffi.JupiterMarketInfo.serializeBinaryToWriter = function(message, writer) 
     writer.writeMessage(
       6,
       f,
-      api_pb.PriceImpactPercent.serializeBinaryToWriter
+      common_pb.PriceImpactPercent.serializeBinaryToWriter
     );
   }
   f = message.getLiquiditypoolfee();
@@ -3291,7 +3291,7 @@ proto.ffi.JupiterMarketInfo.serializeBinaryToWriter = function(message, writer) 
     writer.writeMessage(
       7,
       f,
-      api_pb.Fee.serializeBinaryToWriter
+      common_pb.Fee.serializeBinaryToWriter
     );
   }
   f = message.getPlatformfee();
@@ -3299,7 +3299,7 @@ proto.ffi.JupiterMarketInfo.serializeBinaryToWriter = function(message, writer) 
     writer.writeMessage(
       8,
       f,
-      api_pb.Fee.serializeBinaryToWriter
+      common_pb.Fee.serializeBinaryToWriter
     );
   }
   f = message.getNotenoughliquidity();
@@ -3422,17 +3422,17 @@ proto.ffi.JupiterMarketInfo.prototype.setOutamount = function(value) {
 
 
 /**
- * optional api.PriceImpactPercent priceImpactPercent = 6;
- * @return {?proto.api.PriceImpactPercent}
+ * optional common.PriceImpactPercent priceImpactPercent = 6;
+ * @return {?proto.common.PriceImpactPercent}
  */
 proto.ffi.JupiterMarketInfo.prototype.getPriceimpactpercent = function() {
-  return /** @type{?proto.api.PriceImpactPercent} */ (
-    jspb.Message.getWrapperField(this, api_pb.PriceImpactPercent, 6));
+  return /** @type{?proto.common.PriceImpactPercent} */ (
+    jspb.Message.getWrapperField(this, common_pb.PriceImpactPercent, 6));
 };
 
 
 /**
- * @param {?proto.api.PriceImpactPercent|undefined} value
+ * @param {?proto.common.PriceImpactPercent|undefined} value
  * @return {!proto.ffi.JupiterMarketInfo} returns this
 */
 proto.ffi.JupiterMarketInfo.prototype.setPriceimpactpercent = function(value) {
@@ -3459,17 +3459,17 @@ proto.ffi.JupiterMarketInfo.prototype.hasPriceimpactpercent = function() {
 
 
 /**
- * optional api.Fee liquidityPoolFee = 7;
- * @return {?proto.api.Fee}
+ * optional common.Fee liquidityPoolFee = 7;
+ * @return {?proto.common.Fee}
  */
 proto.ffi.JupiterMarketInfo.prototype.getLiquiditypoolfee = function() {
-  return /** @type{?proto.api.Fee} */ (
-    jspb.Message.getWrapperField(this, api_pb.Fee, 7));
+  return /** @type{?proto.common.Fee} */ (
+    jspb.Message.getWrapperField(this, common_pb.Fee, 7));
 };
 
 
 /**
- * @param {?proto.api.Fee|undefined} value
+ * @param {?proto.common.Fee|undefined} value
  * @return {!proto.ffi.JupiterMarketInfo} returns this
 */
 proto.ffi.JupiterMarketInfo.prototype.setLiquiditypoolfee = function(value) {
@@ -3496,17 +3496,17 @@ proto.ffi.JupiterMarketInfo.prototype.hasLiquiditypoolfee = function() {
 
 
 /**
- * optional api.Fee platformFee = 8;
- * @return {?proto.api.Fee}
+ * optional common.Fee platformFee = 8;
+ * @return {?proto.common.Fee}
  */
 proto.ffi.JupiterMarketInfo.prototype.getPlatformfee = function() {
-  return /** @type{?proto.api.Fee} */ (
-    jspb.Message.getWrapperField(this, api_pb.Fee, 8));
+  return /** @type{?proto.common.Fee} */ (
+    jspb.Message.getWrapperField(this, common_pb.Fee, 8));
 };
 
 
 /**
- * @param {?proto.api.Fee|undefined} value
+ * @param {?proto.common.Fee|undefined} value
  * @return {!proto.ffi.JupiterMarketInfo} returns this
 */
 proto.ffi.JupiterMarketInfo.prototype.setPlatformfee = function(value) {

@@ -6,7 +6,7 @@
 
 import * as grpc from "@grpc/grpc-js";
 import * as ffi_pb from "./ffi_pb";
-import * as api_pb from "./api_pb";
+import * as common_pb from "./common_pb";
 
 interface IFFIService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     solanaAccountsStream: IFFIService_ISolanaAccountsStream;

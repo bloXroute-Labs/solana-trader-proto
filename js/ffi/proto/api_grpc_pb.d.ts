@@ -10,6 +10,7 @@ import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/t
 import * as google_api_field_behavior_pb from "./google/api/field_behavior_pb";
 import * as google_api_visibility_pb from "./google/api/visibility_pb";
 import * as protoc_gen_openapiv2_options_annotations_pb from "./protoc-gen-openapiv2/options/annotations_pb";
+import * as common_pb from "./common_pb";
 
 interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     getPrice: IApiService_IGetPrice;

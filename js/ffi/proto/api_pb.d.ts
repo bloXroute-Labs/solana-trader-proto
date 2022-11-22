@@ -9,6 +9,7 @@ import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/t
 import * as google_api_field_behavior_pb from "./google/api/field_behavior_pb";
 import * as google_api_visibility_pb from "./google/api/visibility_pb";
 import * as protoc_gen_openapiv2_options_annotations_pb from "./protoc-gen-openapiv2/options/annotations_pb";
+import * as common_pb from "./common_pb";
 
 export class GetMarketsRequest extends jspb.Message { 
 
@@ -1878,12 +1879,12 @@ export class TradeSwapResponse extends jspb.Message {
 
     hasPriceimpact(): boolean;
     clearPriceimpact(): void;
-    getPriceimpact(): PriceImpactPercent | undefined;
-    setPriceimpact(value?: PriceImpactPercent): TradeSwapResponse;
+    getPriceimpact(): common_pb.PriceImpactPercent | undefined;
+    setPriceimpact(value?: common_pb.PriceImpactPercent): TradeSwapResponse;
     clearFeesList(): void;
-    getFeesList(): Array<Fee>;
-    setFeesList(value: Array<Fee>): TradeSwapResponse;
-    addFees(value?: Fee, index?: number): Fee;
+    getFeesList(): Array<common_pb.Fee>;
+    setFeesList(value: Array<common_pb.Fee>): TradeSwapResponse;
+    addFees(value?: common_pb.Fee, index?: number): common_pb.Fee;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): TradeSwapResponse.AsObject;
@@ -1901,8 +1902,8 @@ export namespace TradeSwapResponse {
         transactionsList: Array<TransactionMessage.AsObject>,
         outamount: number,
         outamountmin: number,
-        priceimpact?: PriceImpactPercent.AsObject,
-        feesList: Array<Fee.AsObject>,
+        priceimpact?: common_pb.PriceImpactPercent.AsObject,
+        feesList: Array<common_pb.Fee.AsObject>,
     }
 }
 
@@ -1960,13 +1961,13 @@ export class QuoteStep extends jspb.Message {
 
     hasPriceimpactpercent(): boolean;
     clearPriceimpactpercent(): void;
-    getPriceimpactpercent(): PriceImpactPercent | undefined;
-    setPriceimpactpercent(value?: PriceImpactPercent): QuoteStep;
+    getPriceimpactpercent(): common_pb.PriceImpactPercent | undefined;
+    setPriceimpactpercent(value?: common_pb.PriceImpactPercent): QuoteStep;
 
     hasFee(): boolean;
     clearFee(): void;
-    getFee(): Fee | undefined;
-    setFee(value?: Fee): QuoteStep;
+    getFee(): common_pb.Fee | undefined;
+    setFee(value?: common_pb.Fee): QuoteStep;
     getOutamountmin(): number;
     setOutamountmin(value: number): QuoteStep;
     getPooladdress(): string;
@@ -1992,8 +1993,8 @@ export namespace QuoteStep {
         inamount: number,
         outamount: number,
         slippage: number,
-        priceimpactpercent?: PriceImpactPercent.AsObject,
-        fee?: Fee.AsObject,
+        priceimpactpercent?: common_pb.PriceImpactPercent.AsObject,
+        fee?: common_pb.Fee.AsObject,
         outamountmin: number,
         pooladdress: string,
     }
@@ -2019,55 +2020,6 @@ export namespace StepProject {
     export type AsObject = {
         label: string,
         id: string,
-    }
-}
-
-export class Fee extends jspb.Message { 
-    getAmount(): number;
-    setAmount(value: number): Fee;
-    getMint(): string;
-    setMint(value: string): Fee;
-    getPercent(): number;
-    setPercent(value: number): Fee;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): Fee.AsObject;
-    static toObject(includeInstance: boolean, msg: Fee): Fee.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: Fee, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): Fee;
-    static deserializeBinaryFromReader(message: Fee, reader: jspb.BinaryReader): Fee;
-}
-
-export namespace Fee {
-    export type AsObject = {
-        amount: number,
-        mint: string,
-        percent: number,
-    }
-}
-
-export class PriceImpactPercent extends jspb.Message { 
-    getPercent(): number;
-    setPercent(value: number): PriceImpactPercent;
-    getInfinity(): Infinity;
-    setInfinity(value: Infinity): PriceImpactPercent;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PriceImpactPercent.AsObject;
-    static toObject(includeInstance: boolean, msg: PriceImpactPercent): PriceImpactPercent.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PriceImpactPercent, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PriceImpactPercent;
-    static deserializeBinaryFromReader(message: PriceImpactPercent, reader: jspb.BinaryReader): PriceImpactPercent;
-}
-
-export namespace PriceImpactPercent {
-    export type AsObject = {
-        percent: number,
-        infinity: Infinity,
     }
 }
 
@@ -2716,10 +2668,4 @@ export enum Project {
     P_RAYDIUM = 2,
     P_SERUM = 3,
     P_ALL = 4,
-}
-
-export enum Infinity {
-    INF_NOT = 0,
-    INF_POSITIVE = 1,
-    INF_NEGATIVE = 2,
 }
