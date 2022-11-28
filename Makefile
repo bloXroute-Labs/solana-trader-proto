@@ -9,12 +9,12 @@ PB_JS_IMAGE_NAME=bloxroute/bdn-protobuf:v3.19.3-js
 all: clean proto
 
 clean:
-	rm -rf js proto/api proto/common
+	rm -rf js api common
 
 proto: proto-build-api-go proto-build-common-go proto-build-api-js proto-build-swagger proto-build-gw
 
 proto-build-gw:
-	docker run -v $(CURDIR)/proto/api:/go/protobuf/out \
+	docker run -v $(CURDIR)/api:/go/protobuf/out \
 			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
 		protoc \
 			--grpc-gateway_out ../out \
@@ -23,18 +23,18 @@ proto-build-gw:
 			api.proto
 
 proto-build-swagger:
-	docker run -v $(CURDIR)/proto/api:/go/protobuf/out \
+	docker run -v $(CURDIR)/api:/go/protobuf/out \
 			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
 		protoc --openapiv2_out ../out --openapiv2_opt logtostderr=true api.proto
-	mv proto/api/api.swagger.json swagger-ui
+	mv api/api.swagger.json swagger-ui
 
 proto-build-api-go:
-	docker run -v $(CURDIR)/proto/api:/go/protobuf/out \
+	docker run -v $(CURDIR)/api:/go/protobuf/out \
 			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
 		protoc --go_out=../out --go_opt=paths=source_relative  --go-grpc_out=../out --go-grpc_opt=paths=source_relative api.proto
 
 proto-build-common-go:
-	docker run -v $(CURDIR)/proto/common:/go/protobuf/out \
+	docker run -v $(CURDIR)/common:/go/protobuf/out \
 			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
 		protoc --go_out=../out --go_opt=paths=source_relative  --go-grpc_out=../out --go-grpc_opt=paths=source_relative common.proto
 
