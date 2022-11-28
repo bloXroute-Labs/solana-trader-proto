@@ -434,6 +434,7 @@ message Market {
   string quotedMint = 5;
   int64 baseDecimals = 6;
   int64 quoteDecimals = 7;
+  MarketProgram program = 8;
 }
 
 enum MarketStatus {
@@ -441,8 +442,14 @@ enum MarketStatus {
   MS_ONLINE = 1;
 }
 
+enum MarketProgram{
+  MP_SERUM = 0;
+  MP_OPENBOOK = 1;
+}
+
 message GetTickersRequest {
   string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
+  MarketProgram program = 2;
 }
 
 message GetTickersResponse {
@@ -456,6 +463,7 @@ message Ticker {
   double bidSize = 4;
   double ask = 5;
   double askSize = 6;
+  MarketProgram program = 7;
 }
 
 message GetKlineRequest {
@@ -487,11 +495,13 @@ message Candle {
 message GetOrderbookRequest {
   string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  MarketProgram program = 3;
 }
 
 message GetOrderbooksRequest {
   repeated string markets = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  MarketProgram program = 3;
 }
 
 message GetOrderbookResponse {
@@ -509,6 +519,7 @@ message OrderbookItem {
 message GetTradesRequest {
   string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  MarketProgram program = 3;
 }
 
 message GetTradesResponse {
@@ -558,6 +569,7 @@ message PostOrderRequest {
   double price = 7 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
   uint64 clientOrderID = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Client defined OrderID"}];
+  MarketProgram program = 10;
 }
 
 message PostReplaceOrderRequest {
@@ -571,6 +583,7 @@ message PostReplaceOrderRequest {
   string openOrdersAddress = 8 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
   uint64 clientOrderID = 9;
   string orderID = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
+  MarketProgram program = 11;
 }
 
 enum Side {
@@ -597,6 +610,7 @@ message PostCancelOrderRequest {
   string marketAddress = 3 [(google.api.field_behavior) = REQUIRED];
   string ownerAddress = 4 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
+  MarketProgram program = 6;
 }
 
 message PostCancelByClientOrderIDRequest {
@@ -604,6 +618,7 @@ message PostCancelByClientOrderIDRequest {
   string marketAddress = 2 [(google.api.field_behavior) = REQUIRED];
   string ownerAddress = 3 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 4 [(google.api.field_behavior) = REQUIRED];
+  MarketProgram program = 5;
 }
 
 message PostCancelOrderResponse {
@@ -614,6 +629,7 @@ message PostCancelAllRequest {
   string market = 1 [(google.api.field_behavior) = REQUIRED];
   string ownerAddress = 2 [(google.api.field_behavior) = REQUIRED];
   repeated string openOrdersAddresses = 3;
+  MarketProgram program = 4;
 }
 
 message TransactionMessage {
@@ -631,6 +647,7 @@ message PostSettleRequest {
   string baseTokenWallet = 3 [(google.api.field_behavior) = REQUIRED];
   string quoteTokenWallet = 4 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
+  MarketProgram program = 6;
 }
 
 message PostSettleResponse {
@@ -653,6 +670,7 @@ message GetOrdersRequest {
   Direction direction = 7;
   string address = 8;
   string openOrdersAddress = 9;
+  MarketProgram program = 10;
 }
 
 enum OrderStatus {
@@ -687,6 +705,7 @@ message Order {
 message GetOrderStatusStreamRequest {
   string market = 1;
   string ownerAddress = 2;
+  MarketProgram program = 3;
 }
 
 message GetOrderStatusStreamResponse {
@@ -748,6 +767,7 @@ message GetOpenOrdersRequest {
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   string address = 3 [(google.api.field_behavior) = OPTIONAL];
   string openOrdersAddress = 4 [(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming, Setting both address and openOrdersAddress is invalid, openOrdersAddress is preferred."}];
+  MarketProgram program = 5;
 }
 
 message GetOpenOrdersResponse {
@@ -757,6 +777,7 @@ message GetOpenOrdersResponse {
 message GetOrderByIDRequest {
   string orderID = 1 [(google.api.field_behavior) = REQUIRED];
   string market = 2;
+  MarketProgram program = 3;
 }
 
 message GetOrderByIDResponse {
@@ -766,6 +787,7 @@ message GetOrderByIDResponse {
 message GetUnsettledRequest {
   string market = 1 [(google.api.field_behavior) = REQUIRED];
   string ownerAddress = 2 [(google.api.field_behavior) = REQUIRED];
+  MarketProgram program = 3;
 }
 
 message UnsettledAccountToken {
@@ -798,6 +820,7 @@ message GetMarketDepthRequest {
   string market = 1 [(google.api.field_behavior) = REQUIRED];
   int32 depth = 2 [(google.api.field_behavior) = REQUIRED];
   Step step = 3;
+  MarketProgram program = 4;
 }
 
 enum Step {
