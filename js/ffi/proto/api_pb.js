@@ -80,6 +80,7 @@ goog.exportSymbol('proto.api.GetUnsettledRequest', null, global);
 goog.exportSymbol('proto.api.GetUnsettledResponse', null, global);
 goog.exportSymbol('proto.api.Market', null, global);
 goog.exportSymbol('proto.api.MarketDepthTick', null, global);
+goog.exportSymbol('proto.api.MarketProgram', null, global);
 goog.exportSymbol('proto.api.MarketStatus', null, global);
 goog.exportSymbol('proto.api.Order', null, global);
 goog.exportSymbol('proto.api.OrderStatus', null, global);
@@ -2287,7 +2288,8 @@ proto.api.Market.toObject = function(includeInstance, msg) {
     basemint: jspb.Message.getFieldWithDefault(msg, 4, ""),
     quotedmint: jspb.Message.getFieldWithDefault(msg, 5, ""),
     basedecimals: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    quotedecimals: jspb.Message.getFieldWithDefault(msg, 7, 0)
+    quotedecimals: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    program: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -2351,6 +2353,10 @@ proto.api.Market.deserializeBinaryFromReader = function(msg, reader) {
     case 7:
       var value = /** @type {number} */ (reader.readInt64());
       msg.setQuotedecimals(value);
+      break;
+    case 8:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
       break;
     default:
       reader.skipField();
@@ -2427,6 +2433,13 @@ proto.api.Market.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeInt64(
       7,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      8,
       f
     );
   }
@@ -2559,6 +2572,24 @@ proto.api.Market.prototype.setQuotedecimals = function(value) {
 };
 
 
+/**
+ * optional MarketProgram program = 8;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.Market.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.Market} returns this
+ */
+proto.api.Market.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 8, value);
+};
+
+
 
 
 
@@ -2591,7 +2622,8 @@ proto.api.GetTickersRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.api.GetTickersRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    market: jspb.Message.getFieldWithDefault(msg, 1, "")
+    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    program: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -2632,6 +2664,10 @@ proto.api.GetTickersRequest.deserializeBinaryFromReader = function(msg, reader) 
       var value = /** @type {string} */ (reader.readString());
       msg.setMarket(value);
       break;
+    case 2:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -2668,6 +2704,13 @@ proto.api.GetTickersRequest.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      2,
+      f
+    );
+  }
 };
 
 
@@ -2686,6 +2729,24 @@ proto.api.GetTickersRequest.prototype.getMarket = function() {
  */
 proto.api.GetTickersRequest.prototype.setMarket = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional MarketProgram program = 2;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.GetTickersRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.GetTickersRequest} returns this
+ */
+proto.api.GetTickersRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 2, value);
 };
 
 
@@ -2886,7 +2947,8 @@ proto.api.Ticker.toObject = function(includeInstance, msg) {
     bid: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
     bidsize: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
     ask: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    asksize: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0)
+    asksize: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    program: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -2946,6 +3008,10 @@ proto.api.Ticker.deserializeBinaryFromReader = function(msg, reader) {
     case 6:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setAsksize(value);
+      break;
+    case 7:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
       break;
     default:
       reader.skipField();
@@ -3015,6 +3081,13 @@ proto.api.Ticker.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0.0) {
     writer.writeDouble(
       6,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      7,
       f
     );
   }
@@ -3126,6 +3199,24 @@ proto.api.Ticker.prototype.getAsksize = function() {
  */
 proto.api.Ticker.prototype.setAsksize = function(value) {
   return jspb.Message.setProto3FloatField(this, 6, value);
+};
+
+
+/**
+ * optional MarketProgram program = 7;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.Ticker.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.Ticker} returns this
+ */
+proto.api.Ticker.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 7, value);
 };
 
 
@@ -4107,7 +4198,8 @@ proto.api.GetOrderbookRequest.prototype.toObject = function(opt_includeInstance)
 proto.api.GetOrderbookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    limit: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    program: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -4152,6 +4244,10 @@ proto.api.GetOrderbookRequest.deserializeBinaryFromReader = function(msg, reader
       var value = /** @type {number} */ (reader.readUint32());
       msg.setLimit(value);
       break;
+    case 3:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -4195,6 +4291,13 @@ proto.api.GetOrderbookRequest.serializeBinaryToWriter = function(message, writer
       f
     );
   }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -4231,6 +4334,24 @@ proto.api.GetOrderbookRequest.prototype.getLimit = function() {
  */
 proto.api.GetOrderbookRequest.prototype.setLimit = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional MarketProgram program = 3;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.GetOrderbookRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.GetOrderbookRequest} returns this
+ */
+proto.api.GetOrderbookRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
@@ -4274,7 +4395,8 @@ proto.api.GetOrderbooksRequest.prototype.toObject = function(opt_includeInstance
 proto.api.GetOrderbooksRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     marketsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    limit: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    program: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -4319,6 +4441,10 @@ proto.api.GetOrderbooksRequest.deserializeBinaryFromReader = function(msg, reade
       var value = /** @type {number} */ (reader.readUint32());
       msg.setLimit(value);
       break;
+    case 3:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -4359,6 +4485,13 @@ proto.api.GetOrderbooksRequest.serializeBinaryToWriter = function(message, write
   if (f !== 0) {
     writer.writeUint32(
       2,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      3,
       f
     );
   }
@@ -4417,6 +4550,24 @@ proto.api.GetOrderbooksRequest.prototype.getLimit = function() {
  */
 proto.api.GetOrderbooksRequest.prototype.setLimit = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional MarketProgram program = 3;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.GetOrderbooksRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.GetOrderbooksRequest} returns this
+ */
+proto.api.GetOrderbooksRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
@@ -4886,7 +5037,8 @@ proto.api.GetTradesRequest.prototype.toObject = function(opt_includeInstance) {
 proto.api.GetTradesRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    limit: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    program: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -4931,6 +5083,10 @@ proto.api.GetTradesRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {number} */ (reader.readUint32());
       msg.setLimit(value);
       break;
+    case 3:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -4974,6 +5130,13 @@ proto.api.GetTradesRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -5010,6 +5173,24 @@ proto.api.GetTradesRequest.prototype.getLimit = function() {
  */
 proto.api.GetTradesRequest.prototype.setLimit = function(value) {
   return jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional MarketProgram program = 3;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.GetTradesRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.GetTradesRequest} returns this
+ */
+proto.api.GetTradesRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
@@ -6331,7 +6512,8 @@ proto.api.PostOrderRequest.toObject = function(includeInstance, msg) {
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0)
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    program: jspb.Message.getFieldWithDefault(msg, 10, 0)
   };
 
   if (includeInstance) {
@@ -6405,6 +6587,10 @@ proto.api.PostOrderRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 9:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setClientorderid(value);
+      break;
+    case 10:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
       break;
     default:
       reader.skipField();
@@ -6495,6 +6681,13 @@ proto.api.PostOrderRequest.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint64(
       9,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      10,
       f
     );
   }
@@ -6682,6 +6875,24 @@ proto.api.PostOrderRequest.prototype.setClientorderid = function(value) {
 };
 
 
+/**
+ * optional MarketProgram program = 10;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.PostOrderRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.PostOrderRequest} returns this
+ */
+proto.api.PostOrderRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 10, value);
+};
+
+
 
 /**
  * List of repeated fields within this message type.
@@ -6730,7 +6941,8 @@ proto.api.PostReplaceOrderRequest.toObject = function(includeInstance, msg) {
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
-    orderid: jspb.Message.getFieldWithDefault(msg, 10, "")
+    orderid: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    program: jspb.Message.getFieldWithDefault(msg, 11, 0)
   };
 
   if (includeInstance) {
@@ -6808,6 +7020,10 @@ proto.api.PostReplaceOrderRequest.deserializeBinaryFromReader = function(msg, re
     case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setOrderid(value);
+      break;
+    case 11:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
       break;
     default:
       reader.skipField();
@@ -6905,6 +7121,13 @@ proto.api.PostReplaceOrderRequest.serializeBinaryToWriter = function(message, wr
   if (f.length > 0) {
     writer.writeString(
       10,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      11,
       f
     );
   }
@@ -7107,6 +7330,24 @@ proto.api.PostReplaceOrderRequest.prototype.getOrderid = function() {
  */
 proto.api.PostReplaceOrderRequest.prototype.setOrderid = function(value) {
   return jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+/**
+ * optional MarketProgram program = 11;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.PostReplaceOrderRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.PostReplaceOrderRequest} returns this
+ */
+proto.api.PostReplaceOrderRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 11, value);
 };
 
 
@@ -7327,7 +7568,8 @@ proto.api.PostCancelOrderRequest.toObject = function(includeInstance, msg) {
     side: jspb.Message.getFieldWithDefault(msg, 2, 0),
     marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, "")
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    program: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -7383,6 +7625,10 @@ proto.api.PostCancelOrderRequest.deserializeBinaryFromReader = function(msg, rea
     case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setOpenordersaddress(value);
+      break;
+    case 6:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
       break;
     default:
       reader.skipField();
@@ -7445,6 +7691,13 @@ proto.api.PostCancelOrderRequest.serializeBinaryToWriter = function(message, wri
   if (f.length > 0) {
     writer.writeString(
       5,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      6,
       f
     );
   }
@@ -7541,6 +7794,24 @@ proto.api.PostCancelOrderRequest.prototype.setOpenordersaddress = function(value
 };
 
 
+/**
+ * optional MarketProgram program = 6;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.PostCancelOrderRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.PostCancelOrderRequest} returns this
+ */
+proto.api.PostCancelOrderRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 6, value);
+};
+
+
 
 
 
@@ -7576,7 +7847,8 @@ proto.api.PostCancelByClientOrderIDRequest.toObject = function(includeInstance, 
     clientorderid: jspb.Message.getFieldWithDefault(msg, 1, 0),
     marketaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    openordersaddress: jspb.Message.getFieldWithDefault(msg, 4, "")
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    program: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -7628,6 +7900,10 @@ proto.api.PostCancelByClientOrderIDRequest.deserializeBinaryFromReader = functio
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setOpenordersaddress(value);
+      break;
+    case 5:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
       break;
     default:
       reader.skipField();
@@ -7683,6 +7959,13 @@ proto.api.PostCancelByClientOrderIDRequest.serializeBinaryToWriter = function(me
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      5,
       f
     );
   }
@@ -7758,6 +8041,24 @@ proto.api.PostCancelByClientOrderIDRequest.prototype.getOpenordersaddress = func
  */
 proto.api.PostCancelByClientOrderIDRequest.prototype.setOpenordersaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional MarketProgram program = 5;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.PostCancelByClientOrderIDRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.PostCancelByClientOrderIDRequest} returns this
+ */
+proto.api.PostCancelByClientOrderIDRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 5, value);
 };
 
 
@@ -7953,7 +8254,8 @@ proto.api.PostCancelAllRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    openordersaddressesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
+    openordersaddressesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
+    program: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -8002,6 +8304,10 @@ proto.api.PostCancelAllRequest.deserializeBinaryFromReader = function(msg, reade
       var value = /** @type {string} */ (reader.readString());
       msg.addOpenordersaddresses(value);
       break;
+    case 4:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -8049,6 +8355,13 @@ proto.api.PostCancelAllRequest.serializeBinaryToWriter = function(message, write
   if (f.length > 0) {
     writer.writeRepeatedString(
       3,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      4,
       f
     );
   }
@@ -8125,6 +8438,24 @@ proto.api.PostCancelAllRequest.prototype.addOpenordersaddresses = function(value
  */
 proto.api.PostCancelAllRequest.prototype.clearOpenordersaddressesList = function() {
   return this.setOpenordersaddressesList([]);
+};
+
+
+/**
+ * optional MarketProgram program = 4;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.PostCancelAllRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.PostCancelAllRequest} returns this
+ */
+proto.api.PostCancelAllRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 4, value);
 };
 
 
@@ -8484,7 +8815,8 @@ proto.api.PostSettleRequest.toObject = function(includeInstance, msg) {
     market: jspb.Message.getFieldWithDefault(msg, 2, ""),
     basetokenwallet: jspb.Message.getFieldWithDefault(msg, 3, ""),
     quotetokenwallet: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, "")
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    program: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -8540,6 +8872,10 @@ proto.api.PostSettleRequest.deserializeBinaryFromReader = function(msg, reader) 
     case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setOpenordersaddress(value);
+      break;
+    case 6:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
       break;
     default:
       reader.skipField();
@@ -8602,6 +8938,13 @@ proto.api.PostSettleRequest.serializeBinaryToWriter = function(message, writer) 
   if (f.length > 0) {
     writer.writeString(
       5,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      6,
       f
     );
   }
@@ -8695,6 +9038,24 @@ proto.api.PostSettleRequest.prototype.getOpenordersaddress = function() {
  */
 proto.api.PostSettleRequest.prototype.setOpenordersaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional MarketProgram program = 6;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.PostSettleRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.PostSettleRequest} returns this
+ */
+proto.api.PostSettleRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 6, value);
 };
 
 
@@ -9086,7 +9447,8 @@ proto.api.GetOrdersRequest.toObject = function(includeInstance, msg) {
     limit: jspb.Message.getFieldWithDefault(msg, 6, 0),
     direction: jspb.Message.getFieldWithDefault(msg, 7, 0),
     address: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    openordersaddress: jspb.Message.getFieldWithDefault(msg, 9, "")
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    program: jspb.Message.getFieldWithDefault(msg, 10, 0)
   };
 
   if (includeInstance) {
@@ -9161,6 +9523,10 @@ proto.api.GetOrdersRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.setOpenordersaddress(value);
+      break;
+    case 10:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
       break;
     default:
       reader.skipField();
@@ -9252,6 +9618,13 @@ proto.api.GetOrdersRequest.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       9,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      10,
       f
     );
   }
@@ -9455,6 +9828,24 @@ proto.api.GetOrdersRequest.prototype.getOpenordersaddress = function() {
  */
 proto.api.GetOrdersRequest.prototype.setOpenordersaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
+/**
+ * optional MarketProgram program = 10;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.GetOrdersRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.GetOrdersRequest} returns this
+ */
+proto.api.GetOrdersRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 10, value);
 };
 
 
@@ -10070,7 +10461,8 @@ proto.api.GetOrderStatusStreamRequest.prototype.toObject = function(opt_includeI
 proto.api.GetOrderStatusStreamRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    owneraddress: jspb.Message.getFieldWithDefault(msg, 2, "")
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    program: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -10115,6 +10507,10 @@ proto.api.GetOrderStatusStreamRequest.deserializeBinaryFromReader = function(msg
       var value = /** @type {string} */ (reader.readString());
       msg.setOwneraddress(value);
       break;
+    case 3:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -10158,6 +10554,13 @@ proto.api.GetOrderStatusStreamRequest.serializeBinaryToWriter = function(message
       f
     );
   }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -10194,6 +10597,24 @@ proto.api.GetOrderStatusStreamRequest.prototype.getOwneraddress = function() {
  */
 proto.api.GetOrderStatusStreamRequest.prototype.setOwneraddress = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional MarketProgram program = 3;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.GetOrderStatusStreamRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.GetOrderStatusStreamRequest} returns this
+ */
+proto.api.GetOrderStatusStreamRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
@@ -11845,7 +12266,8 @@ proto.api.GetOpenOrdersRequest.toObject = function(includeInstance, msg) {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
     limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
     address: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    openordersaddress: jspb.Message.getFieldWithDefault(msg, 4, "")
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    program: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -11897,6 +12319,10 @@ proto.api.GetOpenOrdersRequest.deserializeBinaryFromReader = function(msg, reade
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setOpenordersaddress(value);
+      break;
+    case 5:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
       break;
     default:
       reader.skipField();
@@ -11952,6 +12378,13 @@ proto.api.GetOpenOrdersRequest.serializeBinaryToWriter = function(message, write
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      5,
       f
     );
   }
@@ -12027,6 +12460,24 @@ proto.api.GetOpenOrdersRequest.prototype.getOpenordersaddress = function() {
  */
 proto.api.GetOpenOrdersRequest.prototype.setOpenordersaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional MarketProgram program = 5;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.GetOpenOrdersRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.GetOpenOrdersRequest} returns this
+ */
+proto.api.GetOpenOrdersRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 5, value);
 };
 
 
@@ -12223,7 +12674,8 @@ proto.api.GetOrderByIDRequest.prototype.toObject = function(opt_includeInstance)
 proto.api.GetOrderByIDRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     orderid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    market: jspb.Message.getFieldWithDefault(msg, 2, "")
+    market: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    program: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -12268,6 +12720,10 @@ proto.api.GetOrderByIDRequest.deserializeBinaryFromReader = function(msg, reader
       var value = /** @type {string} */ (reader.readString());
       msg.setMarket(value);
       break;
+    case 3:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -12311,6 +12767,13 @@ proto.api.GetOrderByIDRequest.serializeBinaryToWriter = function(message, writer
       f
     );
   }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -12347,6 +12810,24 @@ proto.api.GetOrderByIDRequest.prototype.getMarket = function() {
  */
 proto.api.GetOrderByIDRequest.prototype.setMarket = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional MarketProgram program = 3;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.GetOrderByIDRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.GetOrderByIDRequest} returns this
+ */
+proto.api.GetOrderByIDRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
@@ -12534,7 +13015,8 @@ proto.api.GetUnsettledRequest.prototype.toObject = function(opt_includeInstance)
 proto.api.GetUnsettledRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    owneraddress: jspb.Message.getFieldWithDefault(msg, 2, "")
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    program: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -12579,6 +13061,10 @@ proto.api.GetUnsettledRequest.deserializeBinaryFromReader = function(msg, reader
       var value = /** @type {string} */ (reader.readString());
       msg.setOwneraddress(value);
       break;
+    case 3:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -12622,6 +13108,13 @@ proto.api.GetUnsettledRequest.serializeBinaryToWriter = function(message, writer
       f
     );
   }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -12658,6 +13151,24 @@ proto.api.GetUnsettledRequest.prototype.getOwneraddress = function() {
  */
 proto.api.GetUnsettledRequest.prototype.setOwneraddress = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional MarketProgram program = 3;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.GetUnsettledRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.GetUnsettledRequest} returns this
+ */
+proto.api.GetUnsettledRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
@@ -13639,7 +14150,8 @@ proto.api.GetMarketDepthRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
     depth: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    step: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    step: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    program: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -13688,6 +14200,10 @@ proto.api.GetMarketDepthRequest.deserializeBinaryFromReader = function(msg, read
       var value = /** @type {!proto.api.Step} */ (reader.readEnum());
       msg.setStep(value);
       break;
+    case 4:
+      var value = /** @type {!proto.api.MarketProgram} */ (reader.readEnum());
+      msg.setProgram(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -13735,6 +14251,13 @@ proto.api.GetMarketDepthRequest.serializeBinaryToWriter = function(message, writ
   if (f !== 0.0) {
     writer.writeEnum(
       3,
+      f
+    );
+  }
+  f = message.getProgram();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      4,
       f
     );
   }
@@ -13792,6 +14315,24 @@ proto.api.GetMarketDepthRequest.prototype.getStep = function() {
  */
 proto.api.GetMarketDepthRequest.prototype.setStep = function(value) {
   return jspb.Message.setProto3EnumField(this, 3, value);
+};
+
+
+/**
+ * optional MarketProgram program = 4;
+ * @return {!proto.api.MarketProgram}
+ */
+proto.api.GetMarketDepthRequest.prototype.getProgram = function() {
+  return /** @type {!proto.api.MarketProgram} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {!proto.api.MarketProgram} value
+ * @return {!proto.api.GetMarketDepthRequest} returns this
+ */
+proto.api.GetMarketDepthRequest.prototype.setProgram = function(value) {
+  return jspb.Message.setProto3EnumField(this, 4, value);
 };
 
 
@@ -21814,6 +22355,14 @@ proto.api.GetPricesStreamResponse.prototype.hasPrice = function() {
 proto.api.MarketStatus = {
   MS_UNKNOWN: 0,
   MS_ONLINE: 1
+};
+
+/**
+ * @enum {number}
+ */
+proto.api.MarketProgram = {
+  MP_SERUM: 0,
+  MP_OPENBOOK: 1
 };
 
 /**

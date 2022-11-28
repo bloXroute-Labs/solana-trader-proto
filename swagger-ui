@@ -116,6 +116,17 @@
             "required": false,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "program",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "MP_SERUM",
+              "MP_OPENBOOK"
+            ],
+            "default": "MP_SERUM"
           }
         ],
         "tags": [
@@ -308,6 +319,17 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "program",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "MP_SERUM",
+              "MP_OPENBOOK"
+            ],
+            "default": "MP_SERUM"
           }
         ],
         "tags": [
@@ -515,6 +537,17 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "program",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "MP_SERUM",
+              "MP_OPENBOOK"
+            ],
+            "default": "MP_SERUM"
           }
         ],
         "tags": [
@@ -834,6 +867,17 @@
             "in": "query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "program",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "MP_SERUM",
+              "MP_OPENBOOK"
+            ],
+            "default": "MP_SERUM"
           }
         ],
         "tags": [
@@ -1334,6 +1378,9 @@
         "quoteDecimals": {
           "type": "string",
           "format": "int64"
+        },
+        "program": {
+          "$ref": "#/definitions/apiMarketProgram"
         }
       }
     },
@@ -1357,6 +1404,14 @@
           }
         }
       }
+    },
+    "apiMarketProgram": {
+      "type": "string",
+      "enum": [
+        "MP_SERUM",
+        "MP_OPENBOOK"
+      ],
+      "default": "MP_SERUM"
     },
     "apiMarketStatus": {
       "type": "string",
@@ -1481,6 +1536,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "program": {
+          "$ref": "#/definitions/apiMarketProgram"
         }
       },
       "required": [
@@ -1526,6 +1584,9 @@
           "required": [
             "openOrdersAddress"
           ]
+        },
+        "program": {
+          "$ref": "#/definitions/apiMarketProgram"
         }
       },
       "required": [
@@ -1564,6 +1625,9 @@
           "required": [
             "openOrdersAddress"
           ]
+        },
+        "program": {
+          "$ref": "#/definitions/apiMarketProgram"
         }
       },
       "required": [
@@ -1636,6 +1700,9 @@
           "type": "string",
           "format": "uint64",
           "description": "Client defined OrderID"
+        },
+        "program": {
+          "$ref": "#/definitions/apiMarketProgram"
         }
       },
       "required": [
@@ -1719,6 +1786,9 @@
         "orderID": {
           "type": "string",
           "description": "Serum generated OrderID"
+        },
+        "program": {
+          "$ref": "#/definitions/apiMarketProgram"
         }
       },
       "required": [
@@ -1761,6 +1831,9 @@
         "openOrdersAddress": {
           "type": "string",
           "description": "If left empty the Serum API will lookup the account which can be time consuming"
+        },
+        "program": {
+          "$ref": "#/definitions/apiMarketProgram"
         }
       },
       "required": [
@@ -2082,6 +2155,9 @@
         "askSize": {
           "type": "number",
           "format": "double"
+        },
+        "program": {
+          "$ref": "#/definitions/apiMarketProgram"
         }
       }
     },

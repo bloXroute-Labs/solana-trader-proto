@@ -65,6 +65,8 @@ export class Market extends jspb.Message {
     setBasedecimals(value: number): Market;
     getQuotedecimals(): number;
     setQuotedecimals(value: number): Market;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): Market;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Market.AsObject;
@@ -85,12 +87,15 @@ export namespace Market {
         quotedmint: string,
         basedecimals: number,
         quotedecimals: number,
+        program: MarketProgram,
     }
 }
 
 export class GetTickersRequest extends jspb.Message { 
     getMarket(): string;
     setMarket(value: string): GetTickersRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetTickersRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTickersRequest.AsObject;
@@ -105,6 +110,7 @@ export class GetTickersRequest extends jspb.Message {
 export namespace GetTickersRequest {
     export type AsObject = {
         market: string,
+        program: MarketProgram,
     }
 }
 
@@ -143,6 +149,8 @@ export class Ticker extends jspb.Message {
     setAsk(value: number): Ticker;
     getAsksize(): number;
     setAsksize(value: number): Ticker;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): Ticker;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Ticker.AsObject;
@@ -162,6 +170,7 @@ export namespace Ticker {
         bidsize: number,
         ask: number,
         asksize: number,
+        program: MarketProgram,
     }
 }
 
@@ -289,6 +298,8 @@ export class GetOrderbookRequest extends jspb.Message {
     setMarket(value: string): GetOrderbookRequest;
     getLimit(): number;
     setLimit(value: number): GetOrderbookRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetOrderbookRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderbookRequest.AsObject;
@@ -304,6 +315,7 @@ export namespace GetOrderbookRequest {
     export type AsObject = {
         market: string,
         limit: number,
+        program: MarketProgram,
     }
 }
 
@@ -314,6 +326,8 @@ export class GetOrderbooksRequest extends jspb.Message {
     addMarkets(value: string, index?: number): string;
     getLimit(): number;
     setLimit(value: number): GetOrderbooksRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetOrderbooksRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderbooksRequest.AsObject;
@@ -329,6 +343,7 @@ export namespace GetOrderbooksRequest {
     export type AsObject = {
         marketsList: Array<string>,
         limit: number,
+        program: MarketProgram,
     }
 }
 
@@ -393,6 +408,8 @@ export class GetTradesRequest extends jspb.Message {
     setMarket(value: string): GetTradesRequest;
     getLimit(): number;
     setLimit(value: number): GetTradesRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetTradesRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTradesRequest.AsObject;
@@ -408,6 +425,7 @@ export namespace GetTradesRequest {
     export type AsObject = {
         market: string,
         limit: number,
+        program: MarketProgram,
     }
 }
 
@@ -606,6 +624,8 @@ export class PostOrderRequest extends jspb.Message {
     setOpenordersaddress(value: string): PostOrderRequest;
     getClientorderid(): number;
     setClientorderid(value: number): PostOrderRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): PostOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostOrderRequest.AsObject;
@@ -628,6 +648,7 @@ export namespace PostOrderRequest {
         price: number,
         openordersaddress: string,
         clientorderid: number,
+        program: MarketProgram,
     }
 }
 
@@ -654,6 +675,8 @@ export class PostReplaceOrderRequest extends jspb.Message {
     setClientorderid(value: number): PostReplaceOrderRequest;
     getOrderid(): string;
     setOrderid(value: string): PostReplaceOrderRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): PostReplaceOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostReplaceOrderRequest.AsObject;
@@ -677,6 +700,7 @@ export namespace PostReplaceOrderRequest {
         openordersaddress: string,
         clientorderid: number,
         orderid: string,
+        program: MarketProgram,
     }
 }
 
@@ -717,6 +741,8 @@ export class PostCancelOrderRequest extends jspb.Message {
     setOwneraddress(value: string): PostCancelOrderRequest;
     getOpenordersaddress(): string;
     setOpenordersaddress(value: string): PostCancelOrderRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): PostCancelOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelOrderRequest.AsObject;
@@ -735,6 +761,7 @@ export namespace PostCancelOrderRequest {
         marketaddress: string,
         owneraddress: string,
         openordersaddress: string,
+        program: MarketProgram,
     }
 }
 
@@ -747,6 +774,8 @@ export class PostCancelByClientOrderIDRequest extends jspb.Message {
     setOwneraddress(value: string): PostCancelByClientOrderIDRequest;
     getOpenordersaddress(): string;
     setOpenordersaddress(value: string): PostCancelByClientOrderIDRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): PostCancelByClientOrderIDRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelByClientOrderIDRequest.AsObject;
@@ -764,6 +793,7 @@ export namespace PostCancelByClientOrderIDRequest {
         marketaddress: string,
         owneraddress: string,
         openordersaddress: string,
+        program: MarketProgram,
     }
 }
 
@@ -799,6 +829,8 @@ export class PostCancelAllRequest extends jspb.Message {
     getOpenordersaddressesList(): Array<string>;
     setOpenordersaddressesList(value: Array<string>): PostCancelAllRequest;
     addOpenordersaddresses(value: string, index?: number): string;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): PostCancelAllRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelAllRequest.AsObject;
@@ -815,6 +847,7 @@ export namespace PostCancelAllRequest {
         market: string,
         owneraddress: string,
         openordersaddressesList: Array<string>,
+        program: MarketProgram,
     }
 }
 
@@ -874,6 +907,8 @@ export class PostSettleRequest extends jspb.Message {
     setQuotetokenwallet(value: string): PostSettleRequest;
     getOpenordersaddress(): string;
     setOpenordersaddress(value: string): PostSettleRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): PostSettleRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostSettleRequest.AsObject;
@@ -892,6 +927,7 @@ export namespace PostSettleRequest {
         basetokenwallet: string,
         quotetokenwallet: string,
         openordersaddress: string,
+        program: MarketProgram,
     }
 }
 
@@ -968,6 +1004,8 @@ export class GetOrdersRequest extends jspb.Message {
     setAddress(value: string): GetOrdersRequest;
     getOpenordersaddress(): string;
     setOpenordersaddress(value: string): GetOrdersRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetOrdersRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrdersRequest.AsObject;
@@ -990,6 +1028,7 @@ export namespace GetOrdersRequest {
         direction: Direction,
         address: string,
         openordersaddress: string,
+        program: MarketProgram,
     }
 }
 
@@ -1069,6 +1108,8 @@ export class GetOrderStatusStreamRequest extends jspb.Message {
     setMarket(value: string): GetOrderStatusStreamRequest;
     getOwneraddress(): string;
     setOwneraddress(value: string): GetOrderStatusStreamRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetOrderStatusStreamRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderStatusStreamRequest.AsObject;
@@ -1084,6 +1125,7 @@ export namespace GetOrderStatusStreamRequest {
     export type AsObject = {
         market: string,
         owneraddress: string,
+        program: MarketProgram,
     }
 }
 
@@ -1314,6 +1356,8 @@ export class GetOpenOrdersRequest extends jspb.Message {
     setAddress(value: string): GetOpenOrdersRequest;
     getOpenordersaddress(): string;
     setOpenordersaddress(value: string): GetOpenOrdersRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetOpenOrdersRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOpenOrdersRequest.AsObject;
@@ -1331,6 +1375,7 @@ export namespace GetOpenOrdersRequest {
         limit: number,
         address: string,
         openordersaddress: string,
+        program: MarketProgram,
     }
 }
 
@@ -1361,6 +1406,8 @@ export class GetOrderByIDRequest extends jspb.Message {
     setOrderid(value: string): GetOrderByIDRequest;
     getMarket(): string;
     setMarket(value: string): GetOrderByIDRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetOrderByIDRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderByIDRequest.AsObject;
@@ -1376,6 +1423,7 @@ export namespace GetOrderByIDRequest {
     export type AsObject = {
         orderid: string,
         market: string,
+        program: MarketProgram,
     }
 }
 
@@ -1407,6 +1455,8 @@ export class GetUnsettledRequest extends jspb.Message {
     setMarket(value: string): GetUnsettledRequest;
     getOwneraddress(): string;
     setOwneraddress(value: string): GetUnsettledRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetUnsettledRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetUnsettledRequest.AsObject;
@@ -1422,6 +1472,7 @@ export namespace GetUnsettledRequest {
     export type AsObject = {
         market: string,
         owneraddress: string,
+        program: MarketProgram,
     }
 }
 
@@ -1564,6 +1615,8 @@ export class GetMarketDepthRequest extends jspb.Message {
     setDepth(value: number): GetMarketDepthRequest;
     getStep(): Step;
     setStep(value: Step): GetMarketDepthRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetMarketDepthRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetMarketDepthRequest.AsObject;
@@ -1580,6 +1633,7 @@ export namespace GetMarketDepthRequest {
         market: string,
         depth: number,
         step: Step,
+        program: MarketProgram,
     }
 }
 
@@ -2620,6 +2674,11 @@ export namespace GetPricesStreamResponse {
 export enum MarketStatus {
     MS_UNKNOWN = 0,
     MS_ONLINE = 1,
+}
+
+export enum MarketProgram {
+    MP_SERUM = 0,
+    MP_OPENBOOK = 1,
 }
 
 export enum Side {
