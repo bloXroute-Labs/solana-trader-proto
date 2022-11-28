@@ -1,0 +1,2359 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Trader API",
+    "description": "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.",
+    "version": "1.1",
+    "contact": {
+      "name": "bloXroute Labs Trader API Documentation",
+      "url": "https://docs.bloxroute.com/solana/trader-api",
+      "email": "support@bloxroute.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "Api",
+      "externalDocs": {
+        "description": "Detailed API documentation",
+        "url": "https://bloxroute.gitbook.io/serum-api/about/welcome"
+      }
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/account/balance": {
+      "get": {
+        "summary": "Account balances markets",
+        "description": "Returns the all balances for a wallet",
+        "operationId": "Api_GetAccountBalance",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetAccountBalanceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Account"
+        ]
+      }
+    },
+    "/api/v1/market/markets": {
+      "get": {
+        "summary": "Orderbook markets",
+        "description": "Returns the list of orderbook markets",
+        "operationId": "Api_GetMarkets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetMarketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Market",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/market/orderbooks/{market}": {
+      "get": {
+        "summary": "Market orderbook",
+        "description": "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Market",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/market/pools": {
+      "get": {
+        "summary": "AMM Pools",
+        "description": "Returns the list of supported AMM pools",
+        "operationId": "Api_GetPools",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPoolsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projects",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "P_UNKNOWN",
+                "P_JUPITER",
+                "P_RAYDIUM",
+                "P_SERUM",
+                "P_ALL"
+              ]
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Market",
+          "AMM"
+        ]
+      }
+    },
+    "/api/v1/market/price": {
+      "get": {
+        "summary": "Token prices",
+        "description": "Returns the list of prices for specified tokens",
+        "operationId": "Api_GetPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tokens",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Market",
+          "Universal"
+        ]
+      }
+    },
+    "/api/v1/market/quote": {
+      "get": {
+        "summary": "AMM Quotes",
+        "description": "Returns quotes from supported AMMs",
+        "operationId": "Api_GetQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "projects",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "P_UNKNOWN",
+                "P_JUPITER",
+                "P_RAYDIUM",
+                "P_SERUM",
+                "P_ALL"
+              ]
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Market",
+          "AMM"
+        ]
+      }
+    },
+    "/api/v1/market/tickers/{market}": {
+      "get": {
+        "summary": "Orderbook tickers",
+        "description": "Returns updated ticker(s). To receive all tickers use empty string for {market} param value",
+        "operationId": "Api_GetTickers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTickersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "description": "Use empty string for all markets",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Market",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/system/blockhash": {
+      "get": {
+        "summary": "Recent block hash",
+        "description": "Returns recent block hash",
+        "operationId": "Api_GetRecentBlockHash",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRecentBlockHashResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/api/v1/system/time": {
+      "get": {
+        "summary": "Server time",
+        "description": "Returns current time on the server",
+        "operationId": "Api_GetServerTime",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetServerTimeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/api/v1/trade/cancel": {
+      "post": {
+        "summary": "Unsigned CancelOrder transaction",
+        "description": "Generates a CancelOrder unsigned transaction object",
+        "operationId": "Api_PostCancelOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/cancelall": {
+      "post": {
+        "summary": "Unsigned CancelAll transaction",
+        "description": "Generates a CancelAll unsigned transaction object",
+        "operationId": "Api_PostCancelAll",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelAllResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelAllRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/cancelbyid": {
+      "post": {
+        "summary": "Unsigned CancelOrderByID transaction",
+        "description": "Generates a CancelOrderByID unsigned transaction object",
+        "operationId": "Api_PostCancelByClientOrderID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelByClientOrderIDRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/openorders/{market}": {
+      "get": {
+        "summary": "List of user's open orders",
+        "description": "Returns the list of open orders per user per market",
+        "operationId": "Api_GetOpenOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOpenOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "openOrdersAddress",
+            "description": "If left empty the Serum API will lookup the account which can be time consuming, Setting both address and openOrdersAddress is invalid, openOrdersAddress is preferred.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/place": {
+      "post": {
+        "summary": "Unsigned NewOrderV3 transaction",
+        "description": "Generates a NewOrderV3 unsigned transaction object",
+        "operationId": "Api_PostOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/replace": {
+      "post": {
+        "summary": "Unsigned ReplaceOrder transaction",
+        "description": "Generates a ReplaceOrder unsigned transaction object",
+        "operationId": "Api_PostReplaceOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostReplaceOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/replacebyclientid": {
+      "post": {
+        "summary": "Unsigned ReplaceByClientOrderID transaction",
+        "description": "Generates a ReplaceByClientOrderID unsigned transaction object",
+        "operationId": "Api_PostReplaceByClientOrderID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/route-swap": {
+      "post": {
+        "summary": "Unsigned AMM swap transaction along route",
+        "description": "Generates an unsigned transaction object for the AMM swap on the specified route",
+        "operationId": "Api_PostRouteTradeSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiTradeSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiRouteTradeSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "AMM"
+        ]
+      }
+    },
+    "/api/v1/trade/settle": {
+      "post": {
+        "summary": "Unsigned SettleFunds transaction",
+        "description": "Generates a SettleFunds unsigned transaction object",
+        "operationId": "Api_PostSettle",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSettleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSettleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/submit": {
+      "post": {
+        "summary": "Transaction submit",
+        "description": "Submits a signed transaction",
+        "operationId": "Api_PostSubmit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
+    "/api/v1/trade/submit-batch": {
+      "post": {
+        "summary": "Transaction batch submit",
+        "description": "Submits a batch of signed transactions",
+        "operationId": "Api_PostSubmitBatch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitBatchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitBatchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
+    "/api/v1/trade/swap": {
+      "post": {
+        "summary": "Unsigned best available AMM swap transaction",
+        "description": "Generates an unsigned transaction object for the best available AMM swap",
+        "operationId": "Api_PostTradeSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiTradeSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiTradeSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "AMM"
+        ]
+      }
+    },
+    "/api/v1/trade/unsettled/{market}": {
+      "get": {
+        "summary": "Unsettled amounts",
+        "description": "Returns the unsettled amounts of user in a market",
+        "operationId": "Api_GetUnsettled",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetUnsettledResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiCandle": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "open": {
+          "type": "number",
+          "format": "double"
+        },
+        "close": {
+          "type": "number",
+          "format": "double"
+        },
+        "low": {
+          "type": "number",
+          "format": "double"
+        },
+        "high": {
+          "type": "number",
+          "format": "double"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "volume": {
+          "type": "number",
+          "format": "double"
+        },
+        "count": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiDirection": {
+      "type": "string",
+      "enum": [
+        "D_ASCENDING",
+        "D_DESCENDING"
+      ],
+      "default": "D_ASCENDING"
+    },
+    "apiGetAccountBalanceResponse": {
+      "type": "object",
+      "properties": {
+        "tokens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTokenBalance"
+          }
+        }
+      }
+    },
+    "apiGetKlineResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "candles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiCandle"
+          }
+        }
+      }
+    },
+    "apiGetMarketDepthStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "tick": {
+          "$ref": "#/definitions/apiMarketDepthTick"
+        }
+      }
+    },
+    "apiGetMarketsResponse": {
+      "type": "object",
+      "properties": {
+        "markets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiMarket"
+          }
+        }
+      }
+    },
+    "apiGetOpenOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrder"
+          }
+        }
+      }
+    },
+    "apiGetOrderByIDResponse": {
+      "type": "object",
+      "properties": {
+        "order": {
+          "$ref": "#/definitions/apiOrder"
+        }
+      }
+    },
+    "apiGetOrderStatusResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "openOrderAddress": {
+          "type": "string"
+        },
+        "orderID": {
+          "type": "string"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "quantityReleased": {
+          "type": "number",
+          "format": "float"
+        },
+        "quantityRemaining": {
+          "type": "number",
+          "format": "float"
+        },
+        "fillPrice": {
+          "type": "number",
+          "format": "float"
+        },
+        "side": {
+          "$ref": "#/definitions/apiSide"
+        },
+        "orderStatus": {
+          "$ref": "#/definitions/apiOrderStatus"
+        },
+        "orderPrice": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "apiGetOrderStatusStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orderInfo": {
+          "$ref": "#/definitions/apiGetOrderStatusResponse"
+        }
+      }
+    },
+    "apiGetOrderbookResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketAddress": {
+          "type": "string"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrderbookItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrderbookItem"
+          }
+        }
+      }
+    },
+    "apiGetOrderbooksStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orderbook": {
+          "$ref": "#/definitions/apiGetOrderbookResponse"
+        }
+      }
+    },
+    "apiGetOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrder"
+          }
+        }
+      }
+    },
+    "apiGetPoolReservesStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reserves": {
+          "$ref": "#/definitions/apiPoolReserves"
+        }
+      }
+    },
+    "apiGetPoolsResponse": {
+      "type": "object",
+      "properties": {
+        "projects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiProjectPools"
+          }
+        }
+      }
+    },
+    "apiGetPriceResponse": {
+      "type": "object",
+      "properties": {
+        "tokenPrices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTokenPrice"
+          }
+        }
+      }
+    },
+    "apiGetPricesStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "price": {
+          "$ref": "#/definitions/apiTokenPrice"
+        }
+      }
+    },
+    "apiGetQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "quotes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiProjectQuote"
+          }
+        }
+      }
+    },
+    "apiGetQuotesStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "quote": {
+          "$ref": "#/definitions/apiGetQuotesStreamUpdate"
+        }
+      }
+    },
+    "apiGetQuotesStreamUpdate": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiGetRecentBlockHashResponse": {
+      "type": "object",
+      "properties": {
+        "blockHash": {
+          "type": "string"
+        }
+      }
+    },
+    "apiGetServerTimeResponse": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "apiGetSwapsStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "swap": {
+          "$ref": "#/definitions/apiGetSwapsStreamUpdate"
+        }
+      }
+    },
+    "apiGetSwapsStreamUpdate": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "poolAddress": {
+          "type": "string"
+        },
+        "baseToken": {
+          "type": "string"
+        },
+        "baseTokenAddress": {
+          "type": "string"
+        },
+        "quoteToken": {
+          "type": "string"
+        },
+        "quoteTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "outAmountMin": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "sourceAccount": {
+          "type": "string"
+        },
+        "destinationAccount": {
+          "type": "string"
+        },
+        "ownerAccount": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    },
+    "apiGetTickersResponse": {
+      "type": "object",
+      "properties": {
+        "tickers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTicker"
+          }
+        }
+      }
+    },
+    "apiGetTickersStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ticker": {
+          "$ref": "#/definitions/apiGetTickersResponse"
+        }
+      }
+    },
+    "apiGetTradesResponse": {
+      "type": "object",
+      "properties": {
+        "trades": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTrade"
+          }
+        }
+      }
+    },
+    "apiGetTradesStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "trades": {
+          "$ref": "#/definitions/apiGetTradesResponse"
+        }
+      }
+    },
+    "apiGetUnsettledResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "unsettled": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiUnsettledAccount"
+          }
+        }
+      }
+    },
+    "apiMarket": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/apiMarketStatus"
+        },
+        "address": {
+          "type": "string"
+        },
+        "baseMint": {
+          "type": "string"
+        },
+        "quotedMint": {
+          "type": "string"
+        },
+        "baseDecimals": {
+          "type": "string",
+          "format": "int64"
+        },
+        "quoteDecimals": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "apiMarketDepthTick": {
+      "type": "object",
+      "properties": {
+        "prevSlot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrderbookItem"
+          }
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrderbookItem"
+          }
+        }
+      }
+    },
+    "apiMarketStatus": {
+      "type": "string",
+      "enum": [
+        "MS_UNKNOWN",
+        "MS_ONLINE"
+      ],
+      "default": "MS_UNKNOWN"
+    },
+    "apiOrder": {
+      "type": "object",
+      "properties": {
+        "orderID": {
+          "type": "string"
+        },
+        "market": {
+          "type": "string"
+        },
+        "side": {
+          "$ref": "#/definitions/apiSide"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrderType"
+          }
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "remainingSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "clientOrderID": {
+          "type": "string"
+        },
+        "openOrderAccount": {
+          "type": "string"
+        }
+      }
+    },
+    "apiOrderStatus": {
+      "type": "string",
+      "enum": [
+        "OS_UNKNOWN",
+        "OS_OPEN",
+        "OS_PARTIAL_FILL",
+        "OS_CANCELLED",
+        "OS_FILLED"
+      ],
+      "default": "OS_UNKNOWN"
+    },
+    "apiOrderType": {
+      "type": "string",
+      "enum": [
+        "OT_MARKET",
+        "OT_LIMIT",
+        "OT_IOC",
+        "OT_POST"
+      ],
+      "default": "OT_MARKET"
+    },
+    "apiOrderbookItem": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPoolReserves": {
+      "type": "object",
+      "properties": {
+        "token1Reserves": {
+          "type": "string"
+        },
+        "token1Address": {
+          "type": "string"
+        },
+        "token2Reserves": {
+          "type": "string"
+        },
+        "token2Address": {
+          "type": "string"
+        },
+        "poolAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiPostCancelAllRequest": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string",
+          "required": [
+            "market"
+          ]
+        },
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "openOrdersAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "market",
+        "ownerAddress"
+      ]
+    },
+    "apiPostCancelAllResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        }
+      }
+    },
+    "apiPostCancelByClientOrderIDRequest": {
+      "type": "object",
+      "properties": {
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64",
+          "required": [
+            "clientOrderID"
+          ]
+        },
+        "marketAddress": {
+          "type": "string",
+          "required": [
+            "marketAddress"
+          ]
+        },
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "openOrdersAddress": {
+          "type": "string",
+          "required": [
+            "openOrdersAddress"
+          ]
+        }
+      },
+      "required": [
+        "clientOrderID",
+        "marketAddress",
+        "ownerAddress",
+        "openOrdersAddress"
+      ]
+    },
+    "apiPostCancelOrderRequest": {
+      "type": "object",
+      "properties": {
+        "orderID": {
+          "type": "string",
+          "required": [
+            "orderID"
+          ]
+        },
+        "side": {
+          "$ref": "#/definitions/apiSide"
+        },
+        "marketAddress": {
+          "type": "string",
+          "required": [
+            "marketAddress"
+          ]
+        },
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "openOrdersAddress": {
+          "type": "string",
+          "required": [
+            "openOrdersAddress"
+          ]
+        }
+      },
+      "required": [
+        "orderID",
+        "marketAddress",
+        "ownerAddress",
+        "openOrdersAddress"
+      ]
+    },
+    "apiPostCancelOrderResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostOrderRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "payerAddress": {
+          "type": "string",
+          "required": [
+            "payerAddress"
+          ]
+        },
+        "market": {
+          "type": "string",
+          "required": [
+            "market"
+          ]
+        },
+        "side": {
+          "$ref": "#/definitions/apiSide"
+        },
+        "type": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrderType"
+          },
+          "required": [
+            "type"
+          ]
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "required": [
+            "amount"
+          ]
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "required": [
+            "price"
+          ]
+        },
+        "openOrdersAddress": {
+          "type": "string",
+          "description": "If left empty the Serum API will lookup the account which can be time consuming"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Client defined OrderID"
+        }
+      },
+      "required": [
+        "ownerAddress",
+        "payerAddress",
+        "market",
+        "type",
+        "amount",
+        "price"
+      ]
+    },
+    "apiPostOrderResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        },
+        "openOrdersAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostReplaceOrderRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "payerAddress": {
+          "type": "string",
+          "required": [
+            "payerAddress"
+          ]
+        },
+        "market": {
+          "type": "string",
+          "required": [
+            "market"
+          ]
+        },
+        "side": {
+          "$ref": "#/definitions/apiSide"
+        },
+        "type": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrderType"
+          },
+          "required": [
+            "type"
+          ]
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "required": [
+            "amount"
+          ]
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "required": [
+            "price"
+          ]
+        },
+        "openOrdersAddress": {
+          "type": "string",
+          "description": "If left empty the Serum API will lookup the account which can be time consuming",
+          "required": [
+            "openOrdersAddress"
+          ]
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "orderID": {
+          "type": "string",
+          "description": "Serum generated OrderID"
+        }
+      },
+      "required": [
+        "ownerAddress",
+        "payerAddress",
+        "market",
+        "type",
+        "amount",
+        "price",
+        "openOrdersAddress"
+      ]
+    },
+    "apiPostSettleRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "market": {
+          "type": "string",
+          "required": [
+            "market"
+          ]
+        },
+        "baseTokenWallet": {
+          "type": "string",
+          "required": [
+            "baseTokenWallet"
+          ]
+        },
+        "quoteTokenWallet": {
+          "type": "string",
+          "required": [
+            "quoteTokenWallet"
+          ]
+        },
+        "openOrdersAddress": {
+          "type": "string",
+          "description": "If left empty the Serum API will lookup the account which can be time consuming"
+        }
+      },
+      "required": [
+        "ownerAddress",
+        "market",
+        "baseTokenWallet",
+        "quoteTokenWallet"
+      ]
+    },
+    "apiPostSettleResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostSubmitBatchRequest": {
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPostSubmitRequestEntry"
+          }
+        },
+        "SubmitStrategy": {
+          "$ref": "#/definitions/apiSubmitStrategy"
+        }
+      }
+    },
+    "apiPostSubmitBatchResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPostSubmitBatchResponseEntry"
+          }
+        }
+      }
+    },
+    "apiPostSubmitBatchResponseEntry": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string"
+        },
+        "error": {
+          "type": "string"
+        },
+        "submitted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "apiPostSubmitRequest": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        },
+        "skipPreFlight": {
+          "type": "boolean"
+        }
+      }
+    },
+    "apiPostSubmitRequestEntry": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        },
+        "skipPreFlight": {
+          "type": "boolean"
+        }
+      }
+    },
+    "apiPostSubmitResponse": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string"
+        }
+      }
+    },
+    "apiProject": {
+      "type": "string",
+      "enum": [
+        "P_UNKNOWN",
+        "P_JUPITER",
+        "P_RAYDIUM",
+        "P_SERUM",
+        "P_ALL"
+      ],
+      "default": "P_UNKNOWN"
+    },
+    "apiProjectPool": {
+      "type": "object",
+      "properties": {
+        "pool": {
+          "type": "string"
+        },
+        "poolAddress": {
+          "type": "string"
+        },
+        "token1Reserves": {
+          "type": "string",
+          "format": "int64"
+        },
+        "token1MintAddress": {
+          "type": "string"
+        },
+        "token1MintSymbol": {
+          "type": "string"
+        },
+        "token2Reserves": {
+          "type": "string",
+          "format": "int64"
+        },
+        "token2MintAddress": {
+          "type": "string"
+        },
+        "token2MintSymbol": {
+          "type": "string"
+        }
+      }
+    },
+    "apiProjectPools": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "pools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiProjectPool"
+          }
+        }
+      }
+    },
+    "apiProjectQuote": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiQuoteRoute"
+          }
+        }
+      }
+    },
+    "apiQuoteRoute": {
+      "type": "object",
+      "properties": {
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiQuoteStep"
+          }
+        }
+      }
+    },
+    "apiQuoteStep": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiStepProject"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpactPercent": {
+          "$ref": "#/definitions/commonPriceImpactPercent"
+        },
+        "fee": {
+          "$ref": "#/definitions/commonFee"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "poolAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "apiRouteStep": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiStepProject"
+        }
+      }
+    },
+    "apiRouteTradeSwapRequest": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "ownerAddress": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRouteStep"
+          }
+        }
+      }
+    },
+    "apiSide": {
+      "type": "string",
+      "enum": [
+        "S_UNKNOWN",
+        "S_BID",
+        "S_ASK"
+      ],
+      "default": "S_UNKNOWN"
+    },
+    "apiStepProject": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "apiSubmitStrategy": {
+      "type": "string",
+      "enum": [
+        "P_UKNOWN",
+        "P_SUBMIT_ALL",
+        "P_ABORT_ON_FIRST_ERROR",
+        "P_WAIT_FOR_CONFIRMATION"
+      ],
+      "default": "P_UKNOWN"
+    },
+    "apiTicker": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketAddress": {
+          "type": "string"
+        },
+        "bid": {
+          "type": "number",
+          "format": "double"
+        },
+        "bidSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "ask": {
+          "type": "number",
+          "format": "double"
+        },
+        "askSize": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiTokenBalance": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "walletAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "unsettledAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "openOrdersAmount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiTokenPair": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiTokenPrice": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "tokenAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "buy": {
+          "type": "number",
+          "format": "double"
+        },
+        "buySize": {
+          "type": "number",
+          "format": "double"
+        },
+        "sell": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellSize": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiTrade": {
+      "type": "object",
+      "properties": {
+        "side": {
+          "$ref": "#/definitions/apiSide"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "fillPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "orderID": {
+          "type": "string"
+        },
+        "isMaker": {
+          "type": "boolean"
+        },
+        "address": {
+          "type": "string"
+        },
+        "feeOrRebate": {
+          "type": "number",
+          "format": "double"
+        },
+        "orderPrice": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiTradeSwapRequest": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "ownerAddress": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiTradeSwapResponse": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpact": {
+          "$ref": "#/definitions/commonPriceImpactPercent"
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonFee"
+          }
+        }
+      }
+    },
+    "apiTransactionMessage": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "isCleanup": {
+          "type": "boolean"
+        }
+      }
+    },
+    "apiUnsettledAccount": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string"
+        },
+        "baseToken": {
+          "$ref": "#/definitions/apiUnsettledAccountToken"
+        },
+        "quoteToken": {
+          "$ref": "#/definitions/apiUnsettledAccountToken"
+        }
+      }
+    },
+    "apiUnsettledAccountToken": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "commonFee": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "number",
+          "format": "float"
+        },
+        "mint": {
+          "type": "string"
+        },
+        "percent": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "commonInfinity": {
+      "type": "string",
+      "enum": [
+        "INF_NOT",
+        "INF_POSITIVE",
+        "INF_NEGATIVE"
+      ],
+      "default": "INF_NOT"
+    },
+    "commonPriceImpactPercent": {
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "number",
+          "format": "double"
+        },
+        "infinity": {
+          "$ref": "#/definitions/commonInfinity"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Auth Header": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "Auth Header": []
+    }
+  ]
+}

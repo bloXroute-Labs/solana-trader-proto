@@ -1,0 +1,22 @@
+syntax = "proto3";
+option go_package = "github.com/bloXroute-Labs/solana-trader-proto/common";
+
+package common;
+
+enum Infinity {
+  INF_NOT = 0;
+  INF_POSITIVE = 1;
+  INF_NEGATIVE = 2;
+}
+
+message PriceImpactPercent {
+  double percent = 1;
+  Infinity infinity = 2;
+}
+
+message Fee {
+  float amount = 1;
+  string mint = 2;
+  float percent = 3;
+}
+
