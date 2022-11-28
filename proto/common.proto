@@ -1,5 +1,5 @@
 syntax = "proto3";
-option go_package = "github.com/bloXroute-Labs/solana-trader-proto/proto/common";
+option go_package = "github.com/bloXroute-Labs/solana-trader-proto/common";
 
 package common;
 
