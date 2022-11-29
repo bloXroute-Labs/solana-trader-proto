@@ -2114,6 +2114,75 @@ export namespace GetRecentBlockHashResponse {
     }
 }
 
+export class Block extends jspb.Message { 
+    getSlot(): number;
+    setSlot(value: number): Block;
+    getHash(): string;
+    setHash(value: string): Block;
+    getTime(): number;
+    setTime(value: number): Block;
+    getHeight(): number;
+    setHeight(value: number): Block;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Block.AsObject;
+    static toObject(includeInstance: boolean, msg: Block): Block.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Block, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Block;
+    static deserializeBinaryFromReader(message: Block, reader: jspb.BinaryReader): Block;
+}
+
+export namespace Block {
+    export type AsObject = {
+        slot: number,
+        hash: string,
+        time: number,
+        height: number,
+    }
+}
+
+export class GetBlockStreamRequest extends jspb.Message { 
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetBlockStreamRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetBlockStreamRequest): GetBlockStreamRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetBlockStreamRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetBlockStreamRequest;
+    static deserializeBinaryFromReader(message: GetBlockStreamRequest, reader: jspb.BinaryReader): GetBlockStreamRequest;
+}
+
+export namespace GetBlockStreamRequest {
+    export type AsObject = {
+    }
+}
+
+export class GetBlockStreamResponse extends jspb.Message { 
+
+    hasBlock(): boolean;
+    clearBlock(): void;
+    getBlock(): Block | undefined;
+    setBlock(value?: Block): GetBlockStreamResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetBlockStreamResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetBlockStreamResponse): GetBlockStreamResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetBlockStreamResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetBlockStreamResponse;
+    static deserializeBinaryFromReader(message: GetBlockStreamResponse, reader: jspb.BinaryReader): GetBlockStreamResponse;
+}
+
+export namespace GetBlockStreamResponse {
+    export type AsObject = {
+        block?: Block.AsObject,
+    }
+}
+
 export class GetPoolsRequest extends jspb.Message { 
     clearProjectsList(): void;
     getProjectsList(): Array<Project>;

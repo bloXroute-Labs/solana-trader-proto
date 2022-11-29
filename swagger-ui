@@ -906,6 +906,26 @@
     }
   },
   "definitions": {
+    "apiBlock": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string",
+          "format": "int64"
+        },
+        "height": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
     "apiCandle": {
       "type": "object",
       "properties": {
@@ -963,6 +983,14 @@
           "items": {
             "$ref": "#/definitions/apiTokenBalance"
           }
+        }
+      }
+    },
+    "apiGetBlockStreamResponse": {
+      "type": "object",
+      "properties": {
+        "block": {
+          "$ref": "#/definitions/apiBlock"
         }
       }
     },
