@@ -793,8 +793,8 @@ var ApiService = exports.ApiService = {
     responseSerialize: serialize_api_GetOrderbookResponse,
     responseDeserialize: deserialize_api_GetOrderbookResponse,
   },
-  getMarketDepthStream: {
-    path: '/api.Api/GetMarketDepthStream',
+  getMarketDepth: {
+    path: '/api.Api/GetMarketDepth',
     requestStream: false,
     responseStream: true,
     requestType: api_pb.GetMarketDepthRequest,

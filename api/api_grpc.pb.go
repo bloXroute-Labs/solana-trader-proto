@@ -24,7 +24,7 @@ type ApiClient interface {
 	GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error)
 	GetKline(ctx context.Context, in *GetKlineRequest, opts ...grpc.CallOption) (*GetKlineResponse, error)
 	GetOrderbook(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error)
-	GetMarketDepthStream(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (Api_GetMarketDepthStreamClient, error)
+	GetMarketDepth(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (Api_GetMarketDepthClient, error)
 	GetTrades(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (*GetTradesResponse, error)
 	GetQuotes(ctx context.Context, in *GetQuotesRequest, opts ...grpc.CallOption) (*GetQuotesResponse, error)
 	// system API
@@ -123,12 +123,12 @@ func (c *apiClient) GetOrderbook(ctx context.Context, in *GetOrderbookRequest, o
 	return out, nil
 }
 
-func (c *apiClient) GetMarketDepthStream(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (Api_GetMarketDepthStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[0], "/api.Api/GetMarketDepthStream", opts...)
+func (c *apiClient) GetMarketDepth(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (Api_GetMarketDepthClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[0], "/api.Api/GetMarketDepth", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &apiGetMarketDepthStreamClient{stream}
+	x := &apiGetMarketDepthClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -138,16 +138,16 @@ func (c *apiClient) GetMarketDepthStream(ctx context.Context, in *GetMarketDepth
 	return x, nil
 }
 
-type Api_GetMarketDepthStreamClient interface {
+type Api_GetMarketDepthClient interface {
 	Recv() (*GetMarketDepthResponse, error)
 	grpc.ClientStream
 }
 
-type apiGetMarketDepthStreamClient struct {
+type apiGetMarketDepthClient struct {
 	grpc.ClientStream
 }
 
-func (x *apiGetMarketDepthStreamClient) Recv() (*GetMarketDepthResponse, error) {
+func (x *apiGetMarketDepthClient) Recv() (*GetMarketDepthResponse, error) {
 	m := new(GetMarketDepthResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -665,7 +665,7 @@ type ApiServer interface {
 	GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error)
 	GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error)
 	GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error)
-	GetMarketDepthStream(*GetMarketDepthRequest, Api_GetMarketDepthStreamServer) error
+	GetMarketDepth(*GetMarketDepthRequest, Api_GetMarketDepthServer) error
 	GetTrades(context.Context, *GetTradesRequest) (*GetTradesResponse, error)
 	GetQuotes(context.Context, *GetQuotesRequest) (*GetQuotesResponse, error)
 	// system API
@@ -725,8 +725,8 @@ func (UnimplementedApiServer) GetKline(context.Context, *GetKlineRequest) (*GetK
 func (UnimplementedApiServer) GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderbook not implemented")
 }
-func (UnimplementedApiServer) GetMarketDepthStream(*GetMarketDepthRequest, Api_GetMarketDepthStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetMarketDepthStream not implemented")
+func (UnimplementedApiServer) GetMarketDepth(*GetMarketDepthRequest, Api_GetMarketDepthServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetMarketDepth not implemented")
 }
 func (UnimplementedApiServer) GetTrades(context.Context, *GetTradesRequest) (*GetTradesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTrades not implemented")
@@ -939,24 +939,24 @@ func _Api_GetOrderbook_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetMarketDepthStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+func _Api_GetMarketDepth_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetMarketDepthRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(ApiServer).GetMarketDepthStream(m, &apiGetMarketDepthStreamServer{stream})
+	return srv.(ApiServer).GetMarketDepth(m, &apiGetMarketDepthServer{stream})
 }
 
-type Api_GetMarketDepthStreamServer interface {
+type Api_GetMarketDepthServer interface {
 	Send(*GetMarketDepthResponse) error
 	grpc.ServerStream
 }
 
-type apiGetMarketDepthStreamServer struct {
+type apiGetMarketDepthServer struct {
 	grpc.ServerStream
 }
 
-func (x *apiGetMarketDepthStreamServer) Send(m *GetMarketDepthResponse) error {
+func (x *apiGetMarketDepthServer) Send(m *GetMarketDepthResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -1644,8 +1644,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "GetMarketDepthStream",
-			Handler:       _Api_GetMarketDepthStream_Handler,
+			StreamName:    "GetMarketDepth",
+			Handler:       _Api_GetMarketDepth_Handler,
 			ServerStreams: true,
 		},
 		{
