@@ -50,7 +50,6 @@ type ApiClient interface {
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetTickersStream(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (Api_GetTickersStreamClient, error)
-	GetMarketDepthStream(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthStreamClient, error)
 	GetTradesStream(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (Api_GetTradesStreamClient, error)
 	GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error)
 	GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error)
@@ -366,40 +365,8 @@ func (x *apiGetTickersStreamClient) Recv() (*GetTickersStreamResponse, error) {
 	return m, nil
 }
 
-func (c *apiClient) GetMarketDepthStream(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[2], "/api.Api/GetMarketDepthStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetMarketDepthStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetMarketDepthStreamClient interface {
-	Recv() (*GetMarketDepthStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetMarketDepthStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetMarketDepthStreamClient) Recv() (*GetMarketDepthStreamResponse, error) {
-	m := new(GetMarketDepthStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *apiClient) GetTradesStream(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (Api_GetTradesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetTradesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[2], "/api.Api/GetTradesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -431,7 +398,7 @@ func (x *apiGetTradesStreamClient) Recv() (*GetTradesStreamResponse, error) {
 }
 
 func (c *apiClient) GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetOrderStatusStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetOrderStatusStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -463,7 +430,7 @@ func (x *apiGetOrderStatusStreamClient) Recv() (*GetOrderStatusStreamResponse, e
 }
 
 func (c *apiClient) GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetRecentBlockHashStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetRecentBlockHashStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -495,7 +462,7 @@ func (x *apiGetRecentBlockHashStreamClient) Recv() (*GetRecentBlockHashResponse,
 }
 
 func (c *apiClient) GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetQuotesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetQuotesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -527,7 +494,7 @@ func (x *apiGetQuotesStreamClient) Recv() (*GetQuotesStreamResponse, error) {
 }
 
 func (c *apiClient) GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetPoolReservesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetPoolReservesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -559,7 +526,7 @@ func (x *apiGetPoolReservesStreamClient) Recv() (*GetPoolReservesStreamResponse,
 }
 
 func (c *apiClient) GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetPricesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetPricesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -591,7 +558,7 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 }
 
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -658,7 +625,6 @@ type ApiServer interface {
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetTickersStream(*GetTickersRequest, Api_GetTickersStreamServer) error
-	GetMarketDepthStream(*GetMarketsRequest, Api_GetMarketDepthStreamServer) error
 	GetTradesStream(*GetTradesRequest, Api_GetTradesStreamServer) error
 	GetOrderStatusStream(*GetOrderStatusStreamRequest, Api_GetOrderStatusStreamServer) error
 	GetRecentBlockHashStream(*GetRecentBlockHashRequest, Api_GetRecentBlockHashStreamServer) error
@@ -756,9 +722,6 @@ func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_Get
 }
 func (UnimplementedApiServer) GetTickersStream(*GetTickersRequest, Api_GetTickersStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTickersStream not implemented")
-}
-func (UnimplementedApiServer) GetMarketDepthStream(*GetMarketsRequest, Api_GetMarketDepthStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetMarketDepthStream not implemented")
 }
 func (UnimplementedApiServer) GetTradesStream(*GetTradesRequest, Api_GetTradesStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTradesStream not implemented")
@@ -1304,27 +1267,6 @@ func (x *apiGetTickersStreamServer) Send(m *GetTickersStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Api_GetMarketDepthStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetMarketsRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetMarketDepthStream(m, &apiGetMarketDepthStreamServer{stream})
-}
-
-type Api_GetMarketDepthStreamServer interface {
-	Send(*GetMarketDepthStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetMarketDepthStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetMarketDepthStreamServer) Send(m *GetMarketDepthStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
 func _Api_GetTradesStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetTradesRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -1593,11 +1535,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetTickersStream",
 			Handler:       _Api_GetTickersStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetMarketDepthStream",
-			Handler:       _Api_GetMarketDepthStream_Handler,
 			ServerStreams: true,
 		},
 		{

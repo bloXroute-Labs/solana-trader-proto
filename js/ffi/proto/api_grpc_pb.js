@@ -54,17 +54,6 @@ function deserialize_api_GetKlineResponse(buffer_arg) {
   return api_pb.GetKlineResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_api_GetMarketDepthStreamResponse(arg) {
-  if (!(arg instanceof api_pb.GetMarketDepthStreamResponse)) {
-    throw new Error('Expected argument of type api.GetMarketDepthStreamResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetMarketDepthStreamResponse(buffer_arg) {
-  return api_pb.GetMarketDepthStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
 function serialize_api_GetMarketsRequest(arg) {
   if (!(arg instanceof api_pb.GetMarketsRequest)) {
     throw new Error('Expected argument of type api.GetMarketsRequest');
@@ -1005,17 +994,6 @@ getOrderbooksStream: {
     requestDeserialize: deserialize_api_GetTickersRequest,
     responseSerialize: serialize_api_GetTickersStreamResponse,
     responseDeserialize: deserialize_api_GetTickersStreamResponse,
-  },
-  getMarketDepthStream: {
-    path: '/api.Api/GetMarketDepthStream',
-    requestStream: false,
-    responseStream: true,
-    requestType: api_pb.GetMarketsRequest,
-    responseType: api_pb.GetMarketDepthStreamResponse,
-    requestSerialize: serialize_api_GetMarketsRequest,
-    requestDeserialize: deserialize_api_GetMarketsRequest,
-    responseSerialize: serialize_api_GetMarketDepthStreamResponse,
-    responseDeserialize: deserialize_api_GetMarketDepthStreamResponse,
   },
   getTradesStream: {
     path: '/api.Api/GetTradesStream',

@@ -300,6 +300,8 @@ export class GetOrderbookRequest extends jspb.Message {
     setLimit(value: number): GetOrderbookRequest;
     getProgram(): MarketProgram;
     setProgram(value: MarketProgram): GetOrderbookRequest;
+    getCoalesce(): boolean;
+    setCoalesce(value: boolean): GetOrderbookRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderbookRequest.AsObject;
@@ -316,6 +318,7 @@ export namespace GetOrderbookRequest {
         market: string,
         limit: number,
         program: MarketProgram,
+        coalesce: boolean,
     }
 }
 
@@ -328,6 +331,8 @@ export class GetOrderbooksRequest extends jspb.Message {
     setLimit(value: number): GetOrderbooksRequest;
     getProgram(): MarketProgram;
     setProgram(value: MarketProgram): GetOrderbooksRequest;
+    getCoalesce(): boolean;
+    setCoalesce(value: boolean): GetOrderbooksRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderbooksRequest.AsObject;
@@ -344,6 +349,7 @@ export namespace GetOrderbooksRequest {
         marketsList: Array<string>,
         limit: number,
         program: MarketProgram,
+        coalesce: boolean,
     }
 }
 
@@ -1605,91 +1611,6 @@ export namespace GetTickersStreamResponse {
     export type AsObject = {
         slot: number,
         ticker?: GetTickersResponse.AsObject,
-    }
-}
-
-export class GetMarketDepthRequest extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetMarketDepthRequest;
-    getDepth(): number;
-    setDepth(value: number): GetMarketDepthRequest;
-    getStep(): Step;
-    setStep(value: Step): GetMarketDepthRequest;
-    getProgram(): MarketProgram;
-    setProgram(value: MarketProgram): GetMarketDepthRequest;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetMarketDepthRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: GetMarketDepthRequest): GetMarketDepthRequest.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetMarketDepthRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetMarketDepthRequest;
-    static deserializeBinaryFromReader(message: GetMarketDepthRequest, reader: jspb.BinaryReader): GetMarketDepthRequest;
-}
-
-export namespace GetMarketDepthRequest {
-    export type AsObject = {
-        market: string,
-        depth: number,
-        step: Step,
-        program: MarketProgram,
-    }
-}
-
-export class GetMarketDepthStreamResponse extends jspb.Message { 
-    getSlot(): number;
-    setSlot(value: number): GetMarketDepthStreamResponse;
-
-    hasTick(): boolean;
-    clearTick(): void;
-    getTick(): MarketDepthTick | undefined;
-    setTick(value?: MarketDepthTick): GetMarketDepthStreamResponse;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetMarketDepthStreamResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetMarketDepthStreamResponse): GetMarketDepthStreamResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetMarketDepthStreamResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetMarketDepthStreamResponse;
-    static deserializeBinaryFromReader(message: GetMarketDepthStreamResponse, reader: jspb.BinaryReader): GetMarketDepthStreamResponse;
-}
-
-export namespace GetMarketDepthStreamResponse {
-    export type AsObject = {
-        slot: number,
-        tick?: MarketDepthTick.AsObject,
-    }
-}
-
-export class MarketDepthTick extends jspb.Message { 
-    getPrevslot(): number;
-    setPrevslot(value: number): MarketDepthTick;
-    clearAsksList(): void;
-    getAsksList(): Array<OrderbookItem>;
-    setAsksList(value: Array<OrderbookItem>): MarketDepthTick;
-    addAsks(value?: OrderbookItem, index?: number): OrderbookItem;
-    clearBidsList(): void;
-    getBidsList(): Array<OrderbookItem>;
-    setBidsList(value: Array<OrderbookItem>): MarketDepthTick;
-    addBids(value?: OrderbookItem, index?: number): OrderbookItem;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): MarketDepthTick.AsObject;
-    static toObject(includeInstance: boolean, msg: MarketDepthTick): MarketDepthTick.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: MarketDepthTick, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): MarketDepthTick;
-    static deserializeBinaryFromReader(message: MarketDepthTick, reader: jspb.BinaryReader): MarketDepthTick;
-}
-
-export namespace MarketDepthTick {
-    export type AsObject = {
-        prevslot: number,
-        asksList: Array<OrderbookItem.AsObject>,
-        bidsList: Array<OrderbookItem.AsObject>,
     }
 }
 

@@ -127,6 +127,12 @@
               "MP_OPENBOOK"
             ],
             "default": "MP_SERUM"
+          },
+          {
+            "name": "coalesce",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -966,18 +972,6 @@
         }
       }
     },
-    "apiGetMarketDepthStreamResponse": {
-      "type": "object",
-      "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "tick": {
-          "$ref": "#/definitions/apiMarketDepthTick"
-        }
-      }
-    },
     "apiGetMarketsResponse": {
       "type": "object",
       "properties": {
@@ -1381,27 +1375,6 @@
         },
         "program": {
           "$ref": "#/definitions/apiMarketProgram"
-        }
-      }
-    },
-    "apiMarketDepthTick": {
-      "type": "object",
-      "properties": {
-        "prevSlot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "asks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiOrderbookItem"
-          }
-        },
-        "bids": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiOrderbookItem"
-          }
         }
       }
     },

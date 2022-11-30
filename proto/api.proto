@@ -369,12 +369,6 @@ service Api {
     };
   }
 
-  rpc GetMarketDepthStream(GetMarketsRequest) returns (stream GetMarketDepthStreamResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Trade";
-    };
-  }
-
   rpc GetTradesStream(GetTradesRequest) returns (stream GetTradesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Trade";
@@ -496,12 +490,14 @@ message GetOrderbookRequest {
   string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   MarketProgram program = 3;
+  bool coalesce = 4;
 }
 
 message GetOrderbooksRequest {
   repeated string markets = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   MarketProgram program = 3;
+  bool coalesce = 4;
 }
 
 message GetOrderbookResponse {
@@ -816,29 +812,11 @@ message GetTickersStreamResponse {
   GetTickersResponse ticker = 2;
 }
 
-message GetMarketDepthRequest {
-  string market = 1 [(google.api.field_behavior) = REQUIRED];
-  int32 depth = 2 [(google.api.field_behavior) = REQUIRED];
-  Step step = 3;
-  MarketProgram program = 4;
-}
-
 enum Step {
   STEP0 = 0;
   STEP1 = 1;
   STEP2 = 2;
   STEP3 = 3;
-}
-
-message GetMarketDepthStreamResponse {
-  int64 slot = 1;
-  MarketDepthTick tick = 2;
-}
-
-message MarketDepthTick {
-  int64 prevSlot = 1;
-  repeated OrderbookItem asks = 2;
-  repeated OrderbookItem bids = 3;
 }
 
 message GetTradesStreamResponse {
