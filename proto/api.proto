@@ -119,7 +119,7 @@ service Api {
     };
   }
 
-  rpc GetMarketDepth(GetMarketDepthRequest) returns (stream GetMarketDepthResponse) {
+  rpc GetMarketDepth(GetMarketDepthRequest) returns (GetMarketDepthResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Trade";
     };

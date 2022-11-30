@@ -796,7 +796,7 @@ var ApiService = exports.ApiService = {
   getMarketDepth: {
     path: '/api.Api/GetMarketDepth',
     requestStream: false,
-    responseStream: true,
+    responseStream: false,
     requestType: api_pb.GetMarketDepthRequest,
     responseType: api_pb.GetMarketDepthResponse,
     requestSerialize: serialize_api_GetMarketDepthRequest,
