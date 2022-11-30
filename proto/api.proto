@@ -119,6 +119,12 @@ service Api {
     };
   }
 
+  rpc GetMarketDepthStream(GetMarketDepthRequest) returns (stream GetMarketDepthResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Trade";
+    };
+  }
+
   rpc GetTrades(GetTradesRequest) returns (GetTradesResponse) {
     option (google.api.method_visibility).restriction = "INTERNAL";
     option (google.api.http) = {
@@ -363,6 +369,12 @@ service Api {
     };
   }
 
+  rpc GetMarketDepthsStream(GetMarketDepthsRequest) returns (stream GetMarketDepthsStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Trade";
+    };
+  }
+
   rpc GetTickersStream(GetTickersRequest) returns (stream GetTickersStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Trade";
@@ -490,14 +502,12 @@ message GetOrderbookRequest {
   string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   MarketProgram program = 3;
-  bool coalesce = 4;
 }
 
 message GetOrderbooksRequest {
   repeated string markets = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   MarketProgram program = 3;
-  bool coalesce = 4;
 }
 
 message GetOrderbookResponse {
@@ -508,6 +518,31 @@ message GetOrderbookResponse {
 }
 
 message OrderbookItem {
+  double price = 1;
+  double size = 2;
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
+  uint64 clientOrderID = 4;
+  string ownerAddress = 5[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "OpenOrders address for current market"}];
+}
+message GetMarketDepthRequest {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  MarketProgram program = 3;
+}
+
+message GetMarketDepthsRequest {
+  repeated string markets = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  MarketProgram program = 3;
+}
+
+message GetMarketDepthResponse {
+  string market = 1;
+  string marketAddress = 2;
+  repeated MarketDepthItem bids = 3;
+  repeated MarketDepthItem asks = 4;
+}
+message MarketDepthItem {
   double price = 1;
   double size = 2;
 }
@@ -805,6 +840,11 @@ message GetUnsettledResponse {
 message GetOrderbooksStreamResponse {
   int64 slot = 1;
   GetOrderbookResponse orderbook = 2;
+}
+
+message GetMarketDepthsStreamResponse {
+  int64 slot = 1;
+  GetMarketDepthResponse Data = 2;
 }
 
 message GetTickersStreamResponse {

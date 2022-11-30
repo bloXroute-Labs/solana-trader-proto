@@ -127,12 +127,6 @@
               "MP_OPENBOOK"
             ],
             "default": "MP_SERUM"
-          },
-          {
-            "name": "coalesce",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "tags": [
@@ -972,6 +966,41 @@
         }
       }
     },
+    "apiGetMarketDepthResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketAddress": {
+          "type": "string"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMarketDepthItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMarketDepthItem"
+          }
+        }
+      }
+    },
+    "apiGetMarketDepthsStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Data": {
+          "$ref": "#/definitions/apiGetMarketDepthResponse"
+        }
+      }
+    },
     "apiGetMarketsResponse": {
       "type": "object",
       "properties": {
@@ -1378,6 +1407,19 @@
         }
       }
     },
+    "apiMarketDepthItem": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiMarketProgram": {
       "type": "string",
       "enum": [
@@ -1463,6 +1505,18 @@
         "size": {
           "type": "number",
           "format": "double"
+        },
+        "orderID": {
+          "type": "string",
+          "description": "Serum generated OrderID"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "ownerAddress": {
+          "type": "string",
+          "description": "OpenOrders address for current market"
         }
       }
     },

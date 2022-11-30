@@ -300,8 +300,6 @@ export class GetOrderbookRequest extends jspb.Message {
     setLimit(value: number): GetOrderbookRequest;
     getProgram(): MarketProgram;
     setProgram(value: MarketProgram): GetOrderbookRequest;
-    getCoalesce(): boolean;
-    setCoalesce(value: boolean): GetOrderbookRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderbookRequest.AsObject;
@@ -318,7 +316,6 @@ export namespace GetOrderbookRequest {
         market: string,
         limit: number,
         program: MarketProgram,
-        coalesce: boolean,
     }
 }
 
@@ -331,8 +328,6 @@ export class GetOrderbooksRequest extends jspb.Message {
     setLimit(value: number): GetOrderbooksRequest;
     getProgram(): MarketProgram;
     setProgram(value: MarketProgram): GetOrderbooksRequest;
-    getCoalesce(): boolean;
-    setCoalesce(value: boolean): GetOrderbooksRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderbooksRequest.AsObject;
@@ -349,7 +344,6 @@ export namespace GetOrderbooksRequest {
         marketsList: Array<string>,
         limit: number,
         program: MarketProgram,
-        coalesce: boolean,
     }
 }
 
@@ -391,6 +385,12 @@ export class OrderbookItem extends jspb.Message {
     setPrice(value: number): OrderbookItem;
     getSize(): number;
     setSize(value: number): OrderbookItem;
+    getOrderid(): string;
+    setOrderid(value: string): OrderbookItem;
+    getClientorderid(): number;
+    setClientorderid(value: number): OrderbookItem;
+    getOwneraddress(): string;
+    setOwneraddress(value: string): OrderbookItem;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): OrderbookItem.AsObject;
@@ -403,6 +403,119 @@ export class OrderbookItem extends jspb.Message {
 }
 
 export namespace OrderbookItem {
+    export type AsObject = {
+        price: number,
+        size: number,
+        orderid: string,
+        clientorderid: number,
+        owneraddress: string,
+    }
+}
+
+export class GetMarketDepthRequest extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetMarketDepthRequest;
+    getLimit(): number;
+    setLimit(value: number): GetMarketDepthRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetMarketDepthRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarketDepthRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarketDepthRequest): GetMarketDepthRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarketDepthRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarketDepthRequest;
+    static deserializeBinaryFromReader(message: GetMarketDepthRequest, reader: jspb.BinaryReader): GetMarketDepthRequest;
+}
+
+export namespace GetMarketDepthRequest {
+    export type AsObject = {
+        market: string,
+        limit: number,
+        program: MarketProgram,
+    }
+}
+
+export class GetMarketDepthsRequest extends jspb.Message { 
+    clearMarketsList(): void;
+    getMarketsList(): Array<string>;
+    setMarketsList(value: Array<string>): GetMarketDepthsRequest;
+    addMarkets(value: string, index?: number): string;
+    getLimit(): number;
+    setLimit(value: number): GetMarketDepthsRequest;
+    getProgram(): MarketProgram;
+    setProgram(value: MarketProgram): GetMarketDepthsRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarketDepthsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarketDepthsRequest): GetMarketDepthsRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarketDepthsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarketDepthsRequest;
+    static deserializeBinaryFromReader(message: GetMarketDepthsRequest, reader: jspb.BinaryReader): GetMarketDepthsRequest;
+}
+
+export namespace GetMarketDepthsRequest {
+    export type AsObject = {
+        marketsList: Array<string>,
+        limit: number,
+        program: MarketProgram,
+    }
+}
+
+export class GetMarketDepthResponse extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetMarketDepthResponse;
+    getMarketaddress(): string;
+    setMarketaddress(value: string): GetMarketDepthResponse;
+    clearBidsList(): void;
+    getBidsList(): Array<MarketDepthItem>;
+    setBidsList(value: Array<MarketDepthItem>): GetMarketDepthResponse;
+    addBids(value?: MarketDepthItem, index?: number): MarketDepthItem;
+    clearAsksList(): void;
+    getAsksList(): Array<MarketDepthItem>;
+    setAsksList(value: Array<MarketDepthItem>): GetMarketDepthResponse;
+    addAsks(value?: MarketDepthItem, index?: number): MarketDepthItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarketDepthResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarketDepthResponse): GetMarketDepthResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarketDepthResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarketDepthResponse;
+    static deserializeBinaryFromReader(message: GetMarketDepthResponse, reader: jspb.BinaryReader): GetMarketDepthResponse;
+}
+
+export namespace GetMarketDepthResponse {
+    export type AsObject = {
+        market: string,
+        marketaddress: string,
+        bidsList: Array<MarketDepthItem.AsObject>,
+        asksList: Array<MarketDepthItem.AsObject>,
+    }
+}
+
+export class MarketDepthItem extends jspb.Message { 
+    getPrice(): number;
+    setPrice(value: number): MarketDepthItem;
+    getSize(): number;
+    setSize(value: number): MarketDepthItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): MarketDepthItem.AsObject;
+    static toObject(includeInstance: boolean, msg: MarketDepthItem): MarketDepthItem.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: MarketDepthItem, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): MarketDepthItem;
+    static deserializeBinaryFromReader(message: MarketDepthItem, reader: jspb.BinaryReader): MarketDepthItem;
+}
+
+export namespace MarketDepthItem {
     export type AsObject = {
         price: number,
         size: number,
@@ -1585,6 +1698,32 @@ export namespace GetOrderbooksStreamResponse {
     export type AsObject = {
         slot: number,
         orderbook?: GetOrderbookResponse.AsObject,
+    }
+}
+
+export class GetMarketDepthsStreamResponse extends jspb.Message { 
+    getSlot(): number;
+    setSlot(value: number): GetMarketDepthsStreamResponse;
+
+    hasData(): boolean;
+    clearData(): void;
+    getData(): GetMarketDepthResponse | undefined;
+    setData(value?: GetMarketDepthResponse): GetMarketDepthsStreamResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarketDepthsStreamResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarketDepthsStreamResponse): GetMarketDepthsStreamResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarketDepthsStreamResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarketDepthsStreamResponse;
+    static deserializeBinaryFromReader(message: GetMarketDepthsStreamResponse, reader: jspb.BinaryReader): GetMarketDepthsStreamResponse;
+}
+
+export namespace GetMarketDepthsStreamResponse {
+    export type AsObject = {
+        slot: number,
+        data?: GetMarketDepthResponse.AsObject,
     }
 }
 
