@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+src/solana-trader-python-proto/__init__.py
+src/solana-trader-python-proto/api.py
+src/solana-trader-python-proto/common.py
+src/solana-trader-python-proto/google/__init__.py
+src/solana-trader-python-proto/google/api.py
+src/solana-trader-python-proto/grpc/__init__.py
+src/solana-trader-python-proto/grpc/gateway/__init__.py
+src/solana-trader-python-proto/grpc/gateway/protoc_gen_openapiv2/__init__.py
+src/solana-trader-python-proto/grpc/gateway/protoc_gen_openapiv2/options.py
+src/solana_trader_python_proto.egg-info/PKG-INFO
+src/solana_trader_python_proto.egg-info/SOURCES.txt
+src/solana_trader_python_proto.egg-info/dependency_links.txt
+src/solana_trader_python_proto.egg-info/top_level.txt
