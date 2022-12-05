@@ -33,6 +33,13 @@ proto-build-api-go:
 			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
 		protoc --go_out=../out --go_opt=paths=source_relative  --go-grpc_out=../out --go-grpc_opt=paths=source_relative api.proto
 
+proto-build-api-python:
+	protoc \
+		-I $(CURDIR)/proto \
+		--python_betterproto_out=$(CURDIR)/python/src/solana-trader-python-proto/ \
+		$(CURDIR)/proto/api.proto \
+		&& echo 'from .api import *' > $(CURDIR)/python/src/solana-trader-python-proto/__init__.py
+
 proto-build-common-go:
 	docker run -v $(CURDIR)/common:/go/protobuf/out \
 			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \

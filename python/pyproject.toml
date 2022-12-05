@@ -1,0 +1,21 @@
+[project]
+name = "solana-trader-python-proto"
+version = "0.0.5"
+description = "proto-generated files for solana-trader-api"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[tool.black]
+line-length = 80
+preview = true
+#exclude = "proto"
+
+[tool.pylint.main]
+# Ignore protobuf generated files
+#ignore = ["proto"]
