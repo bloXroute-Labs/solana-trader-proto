@@ -1,4 +1,4 @@
 .idea/
 dist
 build
-.egg-info
+src/bxsolana_trader_proto.egg-info
