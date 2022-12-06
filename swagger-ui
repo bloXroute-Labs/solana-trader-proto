@@ -123,14 +123,14 @@
             "required": false,
             "type": "string",
             "enum": [
-              "P_ALL",
               "P_UNKNOWN",
+              "P_ALL",
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
               "P_OPENBOOK"
             ],
-            "default": "P_ALL"
+            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
@@ -167,8 +167,8 @@
             "items": {
               "type": "string",
               "enum": [
-                "P_ALL",
                 "P_UNKNOWN",
+                "P_ALL",
                 "P_JUPITER",
                 "P_RAYDIUM",
                 "P_SERUM",
@@ -282,8 +282,8 @@
             "items": {
               "type": "string",
               "enum": [
-                "P_ALL",
                 "P_UNKNOWN",
+                "P_ALL",
                 "P_JUPITER",
                 "P_RAYDIUM",
                 "P_SERUM",
@@ -332,14 +332,14 @@
             "required": false,
             "type": "string",
             "enum": [
-              "P_ALL",
               "P_UNKNOWN",
+              "P_ALL",
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
               "P_OPENBOOK"
             ],
-            "default": "P_ALL"
+            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
@@ -554,14 +554,14 @@
             "required": false,
             "type": "string",
             "enum": [
-              "P_ALL",
               "P_UNKNOWN",
+              "P_ALL",
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
               "P_OPENBOOK"
             ],
-            "default": "P_ALL"
+            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
@@ -888,14 +888,14 @@
             "required": false,
             "type": "string",
             "enum": [
-              "P_ALL",
               "P_UNKNOWN",
+              "P_ALL",
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
               "P_OPENBOOK"
             ],
-            "default": "P_ALL"
+            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
@@ -1933,14 +1933,14 @@
     "apiProject": {
       "type": "string",
       "enum": [
-        "P_ALL",
         "P_UNKNOWN",
+        "P_ALL",
         "P_JUPITER",
         "P_RAYDIUM",
         "P_SERUM",
         "P_OPENBOOK"
       ],
-      "default": "P_ALL"
+      "default": "P_UNKNOWN"
     },
     "apiProjectPool": {
       "type": "object",

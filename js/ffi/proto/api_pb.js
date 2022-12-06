@@ -22418,8 +22418,8 @@ proto.api.Step = {
  * @enum {number}
  */
 proto.api.Project = {
-  P_ALL: 0,
-  P_UNKNOWN: 1,
+  P_UNKNOWN: 0,
+  P_ALL: 1,
   P_JUPITER: 2,
   P_RAYDIUM: 3,
   P_SERUM: 4,
