@@ -1,4 +1,4 @@
 .idea/
 dist
 build
-solana_trader_python_proto.egg-info
+.egg-info

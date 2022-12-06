@@ -1,1 +1,1 @@
-solana_trader_python_proto
+bxsolana_trader_proto
