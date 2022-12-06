@@ -1,0 +1,16 @@
+[project]
+name = "bxsolana-trader-proto"
+version = "0.0.2"
+description = "proto-generated files for solana-trader-api"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[tool.black]
+line-length = 80
+preview = true
