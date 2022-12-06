@@ -385,6 +385,10 @@ export class OrderbookItem extends jspb.Message {
     setPrice(value: number): OrderbookItem;
     getSize(): number;
     setSize(value: number): OrderbookItem;
+    getOrderid(): string;
+    setOrderid(value: string): OrderbookItem;
+    getOpenordersaccount(): string;
+    setOpenordersaccount(value: string): OrderbookItem;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): OrderbookItem.AsObject;
@@ -400,6 +404,8 @@ export namespace OrderbookItem {
     export type AsObject = {
         price: number,
         size: number,
+        orderid: string,
+        openordersaccount: string,
     }
 }
 

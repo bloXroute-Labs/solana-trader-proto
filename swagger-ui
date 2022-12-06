@@ -1490,6 +1490,12 @@
         "size": {
           "type": "number",
           "format": "double"
+        },
+        "orderID": {
+          "type": "string"
+        },
+        "openOrdersAccount": {
+          "type": "string"
         }
       }
     },

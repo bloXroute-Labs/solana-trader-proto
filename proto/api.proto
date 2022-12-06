@@ -507,13 +507,15 @@ message GetOrderbooksRequest {
 message GetOrderbookResponse {
   string market = 1;
   string marketAddress = 2;
-  repeated OrderbookItem bids = 3;
-  repeated OrderbookItem asks = 4;
+  repeated OrderbookItem bids = 5;
+  repeated OrderbookItem asks = 6;
 }
 
 message OrderbookItem {
   double price = 1;
   double size = 2;
+  string orderID = 3;
+  string openOrdersAccount = 4;
 }
 
 message GetTradesRequest {

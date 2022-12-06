@@ -4577,7 +4577,7 @@ proto.api.GetOrderbooksRequest.prototype.setProgram = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.api.GetOrderbookResponse.repeatedFields_ = [3,4];
+proto.api.GetOrderbookResponse.repeatedFields_ = [5,6];
 
 
 
@@ -4660,12 +4660,12 @@ proto.api.GetOrderbookResponse.deserializeBinaryFromReader = function(msg, reade
       var value = /** @type {string} */ (reader.readString());
       msg.setMarketaddress(value);
       break;
-    case 3:
+    case 5:
       var value = new proto.api.OrderbookItem;
       reader.readMessage(value,proto.api.OrderbookItem.deserializeBinaryFromReader);
       msg.addBids(value);
       break;
-    case 4:
+    case 6:
       var value = new proto.api.OrderbookItem;
       reader.readMessage(value,proto.api.OrderbookItem.deserializeBinaryFromReader);
       msg.addAsks(value);
@@ -4716,7 +4716,7 @@ proto.api.GetOrderbookResponse.serializeBinaryToWriter = function(message, write
   f = message.getBidsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      3,
+      5,
       f,
       proto.api.OrderbookItem.serializeBinaryToWriter
     );
@@ -4724,7 +4724,7 @@ proto.api.GetOrderbookResponse.serializeBinaryToWriter = function(message, write
   f = message.getAsksList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      4,
+      6,
       f,
       proto.api.OrderbookItem.serializeBinaryToWriter
     );
@@ -4769,12 +4769,12 @@ proto.api.GetOrderbookResponse.prototype.setMarketaddress = function(value) {
 
 
 /**
- * repeated OrderbookItem bids = 3;
+ * repeated OrderbookItem bids = 5;
  * @return {!Array<!proto.api.OrderbookItem>}
  */
 proto.api.GetOrderbookResponse.prototype.getBidsList = function() {
   return /** @type{!Array<!proto.api.OrderbookItem>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.OrderbookItem, 3));
+    jspb.Message.getRepeatedWrapperField(this, proto.api.OrderbookItem, 5));
 };
 
 
@@ -4783,7 +4783,7 @@ proto.api.GetOrderbookResponse.prototype.getBidsList = function() {
  * @return {!proto.api.GetOrderbookResponse} returns this
 */
 proto.api.GetOrderbookResponse.prototype.setBidsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+  return jspb.Message.setRepeatedWrapperField(this, 5, value);
 };
 
 
@@ -4793,7 +4793,7 @@ proto.api.GetOrderbookResponse.prototype.setBidsList = function(value) {
  * @return {!proto.api.OrderbookItem}
  */
 proto.api.GetOrderbookResponse.prototype.addBids = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.OrderbookItem, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.api.OrderbookItem, opt_index);
 };
 
 
@@ -4807,12 +4807,12 @@ proto.api.GetOrderbookResponse.prototype.clearBidsList = function() {
 
 
 /**
- * repeated OrderbookItem asks = 4;
+ * repeated OrderbookItem asks = 6;
  * @return {!Array<!proto.api.OrderbookItem>}
  */
 proto.api.GetOrderbookResponse.prototype.getAsksList = function() {
   return /** @type{!Array<!proto.api.OrderbookItem>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.OrderbookItem, 4));
+    jspb.Message.getRepeatedWrapperField(this, proto.api.OrderbookItem, 6));
 };
 
 
@@ -4821,7 +4821,7 @@ proto.api.GetOrderbookResponse.prototype.getAsksList = function() {
  * @return {!proto.api.GetOrderbookResponse} returns this
 */
 proto.api.GetOrderbookResponse.prototype.setAsksList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+  return jspb.Message.setRepeatedWrapperField(this, 6, value);
 };
 
 
@@ -4831,7 +4831,7 @@ proto.api.GetOrderbookResponse.prototype.setAsksList = function(value) {
  * @return {!proto.api.OrderbookItem}
  */
 proto.api.GetOrderbookResponse.prototype.addAsks = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.api.OrderbookItem, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 6, opt_value, proto.api.OrderbookItem, opt_index);
 };
 
 
@@ -4877,7 +4877,9 @@ proto.api.OrderbookItem.prototype.toObject = function(opt_includeInstance) {
 proto.api.OrderbookItem.toObject = function(includeInstance, msg) {
   var f, obj = {
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
-    size: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0)
+    size: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    orderid: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    openordersaccount: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -4922,6 +4924,14 @@ proto.api.OrderbookItem.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {number} */ (reader.readDouble());
       msg.setSize(value);
       break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOrderid(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOpenordersaccount(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -4965,6 +4975,20 @@ proto.api.OrderbookItem.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getOrderid();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getOpenordersaccount();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
 };
 
 
@@ -5001,6 +5025,42 @@ proto.api.OrderbookItem.prototype.getSize = function() {
  */
 proto.api.OrderbookItem.prototype.setSize = function(value) {
   return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional string orderID = 3;
+ * @return {string}
+ */
+proto.api.OrderbookItem.prototype.getOrderid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.OrderbookItem} returns this
+ */
+proto.api.OrderbookItem.prototype.setOrderid = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string openOrdersAccount = 4;
+ * @return {string}
+ */
+proto.api.OrderbookItem.prototype.getOpenordersaccount = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.OrderbookItem} returns this
+ */
+proto.api.OrderbookItem.prototype.setOpenordersaccount = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
