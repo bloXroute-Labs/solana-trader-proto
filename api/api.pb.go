@@ -380,31 +380,31 @@ func (Step) EnumDescriptor() ([]byte, []int) {
 type Project int32
 
 const (
-	Project_P_UNKNOWN  Project = 0
-	Project_P_JUPITER  Project = 1
-	Project_P_RAYDIUM  Project = 2
-	Project_P_SERUM    Project = 3
-	Project_P_OPENBOOK Project = 4
-	Project_P_ALL      Project = 5
+	Project_P_ALL      Project = 0
+	Project_P_UNKNOWN  Project = 1
+	Project_P_JUPITER  Project = 2
+	Project_P_RAYDIUM  Project = 3
+	Project_P_SERUM    Project = 4
+	Project_P_OPENBOOK Project = 5
 )
 
 // Enum value maps for Project.
 var (
 	Project_name = map[int32]string{
-		0: "P_UNKNOWN",
-		1: "P_JUPITER",
-		2: "P_RAYDIUM",
-		3: "P_SERUM",
-		4: "P_OPENBOOK",
-		5: "P_ALL",
+		0: "P_ALL",
+		1: "P_UNKNOWN",
+		2: "P_JUPITER",
+		3: "P_RAYDIUM",
+		4: "P_SERUM",
+		5: "P_OPENBOOK",
 	}
 	Project_value = map[string]int32{
-		"P_UNKNOWN":  0,
-		"P_JUPITER":  1,
-		"P_RAYDIUM":  2,
-		"P_SERUM":    3,
-		"P_OPENBOOK": 4,
-		"P_ALL":      5,
+		"P_ALL":      0,
+		"P_UNKNOWN":  1,
+		"P_JUPITER":  2,
+		"P_RAYDIUM":  3,
+		"P_SERUM":    4,
+		"P_OPENBOOK": 5,
 	}
 )
 
@@ -620,7 +620,7 @@ func (x *Market) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetTickersRequest struct {
@@ -675,7 +675,7 @@ func (x *GetTickersRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetTickersResponse struct {
@@ -817,7 +817,7 @@ func (x *Ticker) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetKlineRequest struct {
@@ -1133,7 +1133,7 @@ func (x *GetOrderbookRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetOrderbooksRequest struct {
@@ -1196,7 +1196,7 @@ func (x *GetOrderbooksRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetOrderbookResponse struct {
@@ -1385,7 +1385,7 @@ func (x *GetTradesRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetTradesResponse struct {
@@ -1912,7 +1912,7 @@ func (x *PostOrderRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type PostReplaceOrderRequest struct {
@@ -2039,7 +2039,7 @@ func (x *PostReplaceOrderRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type PostOrderResponse struct {
@@ -2181,7 +2181,7 @@ func (x *PostCancelOrderRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type PostCancelByClientOrderIDRequest struct {
@@ -2260,7 +2260,7 @@ func (x *PostCancelByClientOrderIDRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type PostCancelOrderResponse struct {
@@ -2378,7 +2378,7 @@ func (x *PostCancelAllRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type TransactionMessage struct {
@@ -2567,7 +2567,7 @@ func (x *PostSettleRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type PostSettleResponse struct {
@@ -2796,7 +2796,7 @@ func (x *GetOrdersRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetOrdersResponse struct {
@@ -3017,7 +3017,7 @@ func (x *GetOrderStatusStreamRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetOrderStatusStreamResponse struct {
@@ -3592,7 +3592,7 @@ func (x *GetOpenOrdersRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetOpenOrdersResponse struct {
@@ -3702,7 +3702,7 @@ func (x *GetOrderByIDRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetOrderByIDResponse struct {
@@ -3812,7 +3812,7 @@ func (x *GetUnsettledRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type UnsettledAccountToken struct {
@@ -4166,7 +4166,7 @@ func (x *GetMarketDepthRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetMarketDepthStreamResponse struct {
@@ -4561,7 +4561,7 @@ func (x *ProjectQuote) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 func (x *ProjectQuote) GetRoutes() []*QuoteRoute {
@@ -4620,7 +4620,7 @@ func (x *TradeSwapRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 func (x *TradeSwapRequest) GetOwnerAddress() string {
@@ -4704,7 +4704,7 @@ func (x *RouteTradeSwapRequest) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 func (x *RouteTradeSwapRequest) GetOwnerAddress() string {
@@ -4857,7 +4857,7 @@ func (x *TradeSwapResponse) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 func (x *TradeSwapResponse) GetTransactions() []*TransactionMessage {
@@ -5380,7 +5380,7 @@ func (x *ProjectPools) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 func (x *ProjectPools) GetPools() []*ProjectPool {
@@ -5695,7 +5695,7 @@ func (x *GetQuotesStreamUpdate) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetSwapsStreamRequest struct {
@@ -5879,7 +5879,7 @@ func (x *GetSwapsStreamUpdate) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 func (x *GetSwapsStreamUpdate) GetPoolAddress() string {
@@ -6180,7 +6180,7 @@ func (x *TokenPrice) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 func (x *TokenPrice) GetBuy() float64 {
@@ -6350,7 +6350,7 @@ func (x *PoolReserves) GetProject() Project {
 	if x != nil {
 		return x.Project
 	}
-	return Project_P_UNKNOWN
+	return Project_P_ALL
 }
 
 type GetPoolReservesStreamRequest struct {
@@ -7440,12 +7440,12 @@ var file_api_proto_rawDesc = []byte{
 	0x53, 0x74, 0x65, 0x70, 0x12, 0x09, 0x0a, 0x05, 0x53, 0x54, 0x45, 0x50, 0x30, 0x10, 0x00, 0x12,
 	0x09, 0x0a, 0x05, 0x53, 0x54, 0x45, 0x50, 0x31, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x53, 0x54,
 	0x45, 0x50, 0x32, 0x10, 0x02, 0x12, 0x09, 0x0a, 0x05, 0x53, 0x54, 0x45, 0x50, 0x33, 0x10, 0x03,
-	0x2a, 0x5e, 0x0a, 0x07, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x0d, 0x0a, 0x09, 0x50,
-	0x5f, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09, 0x50, 0x5f,
-	0x4a, 0x55, 0x50, 0x49, 0x54, 0x45, 0x52, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x50, 0x5f, 0x52,
-	0x41, 0x59, 0x44, 0x49, 0x55, 0x4d, 0x10, 0x02, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x5f, 0x53, 0x45,
-	0x52, 0x55, 0x4d, 0x10, 0x03, 0x12, 0x0e, 0x0a, 0x0a, 0x50, 0x5f, 0x4f, 0x50, 0x45, 0x4e, 0x42,
-	0x4f, 0x4f, 0x4b, 0x10, 0x04, 0x12, 0x09, 0x0a, 0x05, 0x50, 0x5f, 0x41, 0x4c, 0x4c, 0x10, 0x05,
+	0x2a, 0x5e, 0x0a, 0x07, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x12, 0x09, 0x0a, 0x05, 0x50,
+	0x5f, 0x41, 0x4c, 0x4c, 0x10, 0x00, 0x12, 0x0d, 0x0a, 0x09, 0x50, 0x5f, 0x55, 0x4e, 0x4b, 0x4e,
+	0x4f, 0x57, 0x4e, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x50, 0x5f, 0x4a, 0x55, 0x50, 0x49, 0x54,
+	0x45, 0x52, 0x10, 0x02, 0x12, 0x0d, 0x0a, 0x09, 0x50, 0x5f, 0x52, 0x41, 0x59, 0x44, 0x49, 0x55,
+	0x4d, 0x10, 0x03, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x5f, 0x53, 0x45, 0x52, 0x55, 0x4d, 0x10, 0x04,
+	0x12, 0x0e, 0x0a, 0x0a, 0x50, 0x5f, 0x4f, 0x50, 0x45, 0x4e, 0x42, 0x4f, 0x4f, 0x4b, 0x10, 0x05,
 	0x32, 0xbd, 0x31, 0x0a, 0x03, 0x41, 0x70, 0x69, 0x12, 0xaa, 0x01, 0x0a, 0x08, 0x47, 0x65, 0x74,
 	0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x14, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x47, 0x65, 0x74, 0x50,
 	0x72, 0x69, 0x63, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x15, 0x2e, 0x61, 0x70,

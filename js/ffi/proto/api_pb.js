@@ -22418,12 +22418,12 @@ proto.api.Step = {
  * @enum {number}
  */
 proto.api.Project = {
-  P_UNKNOWN: 0,
-  P_JUPITER: 1,
-  P_RAYDIUM: 2,
-  P_SERUM: 3,
-  P_OPENBOOK: 4,
-  P_ALL: 5
+  P_ALL: 0,
+  P_UNKNOWN: 1,
+  P_JUPITER: 2,
+  P_RAYDIUM: 3,
+  P_SERUM: 4,
+  P_OPENBOOK: 5
 };
 
 goog.object.extend(exports, proto.api);
