@@ -118,15 +118,19 @@
             "format": "int64"
           },
           {
-            "name": "program",
+            "name": "project",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
-              "MP_SERUM",
-              "MP_OPENBOOK"
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK"
             ],
-            "default": "MP_SERUM"
+            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
@@ -164,10 +168,11 @@
               "type": "string",
               "enum": [
                 "P_UNKNOWN",
+                "P_ALL",
                 "P_JUPITER",
                 "P_RAYDIUM",
                 "P_SERUM",
-                "P_ALL"
+                "P_OPENBOOK"
               ]
             },
             "collectionFormat": "multi"
@@ -278,10 +283,11 @@
               "type": "string",
               "enum": [
                 "P_UNKNOWN",
+                "P_ALL",
                 "P_JUPITER",
                 "P_RAYDIUM",
                 "P_SERUM",
-                "P_ALL"
+                "P_OPENBOOK"
               ]
             },
             "collectionFormat": "multi"
@@ -321,15 +327,19 @@
             "type": "string"
           },
           {
-            "name": "program",
+            "name": "project",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
-              "MP_SERUM",
-              "MP_OPENBOOK"
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK"
             ],
-            "default": "MP_SERUM"
+            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
@@ -539,15 +549,19 @@
             "type": "string"
           },
           {
-            "name": "program",
+            "name": "project",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
-              "MP_SERUM",
-              "MP_OPENBOOK"
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK"
             ],
-            "default": "MP_SERUM"
+            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
@@ -869,15 +883,19 @@
             "type": "string"
           },
           {
-            "name": "program",
+            "name": "project",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
-              "MP_SERUM",
-              "MP_OPENBOOK"
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK"
             ],
-            "default": "MP_SERUM"
+            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
@@ -1379,8 +1397,8 @@
           "type": "string",
           "format": "int64"
         },
-        "program": {
-          "$ref": "#/definitions/apiMarketProgram"
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       }
     },
@@ -1404,14 +1422,6 @@
           }
         }
       }
-    },
-    "apiMarketProgram": {
-      "type": "string",
-      "enum": [
-        "MP_SERUM",
-        "MP_OPENBOOK"
-      ],
-      "default": "MP_SERUM"
     },
     "apiMarketStatus": {
       "type": "string",
@@ -1537,8 +1547,8 @@
             "type": "string"
           }
         },
-        "program": {
-          "$ref": "#/definitions/apiMarketProgram"
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       },
       "required": [
@@ -1585,8 +1595,8 @@
             "openOrdersAddress"
           ]
         },
-        "program": {
-          "$ref": "#/definitions/apiMarketProgram"
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       },
       "required": [
@@ -1626,8 +1636,8 @@
             "openOrdersAddress"
           ]
         },
-        "program": {
-          "$ref": "#/definitions/apiMarketProgram"
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       },
       "required": [
@@ -1701,8 +1711,8 @@
           "format": "uint64",
           "description": "Client defined OrderID"
         },
-        "program": {
-          "$ref": "#/definitions/apiMarketProgram"
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       },
       "required": [
@@ -1787,8 +1797,8 @@
           "type": "string",
           "description": "Serum generated OrderID"
         },
-        "program": {
-          "$ref": "#/definitions/apiMarketProgram"
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       },
       "required": [
@@ -1832,8 +1842,8 @@
           "type": "string",
           "description": "If left empty the Serum API will lookup the account which can be time consuming"
         },
-        "program": {
-          "$ref": "#/definitions/apiMarketProgram"
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       },
       "required": [
@@ -1924,10 +1934,11 @@
       "type": "string",
       "enum": [
         "P_UNKNOWN",
+        "P_ALL",
         "P_JUPITER",
         "P_RAYDIUM",
         "P_SERUM",
-        "P_ALL"
+        "P_OPENBOOK"
       ],
       "default": "P_UNKNOWN"
     },
@@ -2156,8 +2167,8 @@
           "type": "number",
           "format": "double"
         },
-        "program": {
-          "$ref": "#/definitions/apiMarketProgram"
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       }
     },
