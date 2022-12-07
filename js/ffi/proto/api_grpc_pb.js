@@ -32,6 +32,28 @@ function deserialize_api_GetAccountBalanceResponse(buffer_arg) {
   return api_pb.GetAccountBalanceResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetBlockStreamRequest(arg) {
+  if (!(arg instanceof api_pb.GetBlockStreamRequest)) {
+    throw new Error('Expected argument of type api.GetBlockStreamRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetBlockStreamRequest(buffer_arg) {
+  return api_pb.GetBlockStreamRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetBlockStreamResponse(arg) {
+  if (!(arg instanceof api_pb.GetBlockStreamResponse)) {
+    throw new Error('Expected argument of type api.GetBlockStreamResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetBlockStreamResponse(buffer_arg) {
+  return api_pb.GetBlockStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetKlineRequest(arg) {
   if (!(arg instanceof api_pb.GetKlineRequest)) {
     throw new Error('Expected argument of type api.GetKlineRequest');
@@ -1093,6 +1115,17 @@ getOrderbooksStream: {
     requestDeserialize: deserialize_api_GetRecentBlockHashRequest,
     responseSerialize: serialize_api_GetRecentBlockHashResponse,
     responseDeserialize: deserialize_api_GetRecentBlockHashResponse,
+  },
+  getBlockStream: {
+    path: '/api.Api/GetBlockStream',
+    requestStream: false,
+    responseStream: true,
+    requestType: api_pb.GetBlockStreamRequest,
+    responseType: api_pb.GetBlockStreamResponse,
+    requestSerialize: serialize_api_GetBlockStreamRequest,
+    requestDeserialize: deserialize_api_GetBlockStreamRequest,
+    responseSerialize: serialize_api_GetBlockStreamResponse,
+    responseDeserialize: deserialize_api_GetBlockStreamResponse,
   },
   getQuotesStream: {
     path: '/api.Api/GetQuotesStream',

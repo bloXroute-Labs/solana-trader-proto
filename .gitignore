@@ -1,1 +1,4 @@
 .idea/
+python/dist
+python/build
+python/src/bxsolana_trader_proto.egg-info/
