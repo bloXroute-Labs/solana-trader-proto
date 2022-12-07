@@ -45,6 +45,7 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getTradesStream: IApiService_IGetTradesStream;
     getOrderStatusStream: IApiService_IGetOrderStatusStream;
     getRecentBlockHashStream: IApiService_IGetRecentBlockHashStream;
+    getBlockStream: IApiService_IGetBlockStream;
     getQuotesStream: IApiService_IGetQuotesStream;
     getPoolReservesStream: IApiService_IGetPoolReservesStream;
     getPricesStream: IApiService_IGetPricesStream;
@@ -339,6 +340,15 @@ interface IApiService_IGetRecentBlockHashStream extends grpc.MethodDefinition<ap
     responseSerialize: grpc.serialize<api_pb.GetRecentBlockHashResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetRecentBlockHashResponse>;
 }
+interface IApiService_IGetBlockStream extends grpc.MethodDefinition<api_pb.GetBlockStreamRequest, api_pb.GetBlockStreamResponse> {
+    path: "/api.Api/GetBlockStream";
+    requestStream: false;
+    responseStream: true;
+    requestSerialize: grpc.serialize<api_pb.GetBlockStreamRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetBlockStreamRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetBlockStreamResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetBlockStreamResponse>;
+}
 interface IApiService_IGetQuotesStream extends grpc.MethodDefinition<api_pb.GetQuotesStreamRequest, api_pb.GetQuotesStreamResponse> {
     path: "/api.Api/GetQuotesStream";
     requestStream: false;
@@ -411,6 +421,7 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getTradesStream: grpc.handleServerStreamingCall<api_pb.GetTradesRequest, api_pb.GetTradesStreamResponse>;
     getOrderStatusStream: grpc.handleServerStreamingCall<api_pb.GetOrderStatusStreamRequest, api_pb.GetOrderStatusStreamResponse>;
     getRecentBlockHashStream: grpc.handleServerStreamingCall<api_pb.GetRecentBlockHashRequest, api_pb.GetRecentBlockHashResponse>;
+    getBlockStream: grpc.handleServerStreamingCall<api_pb.GetBlockStreamRequest, api_pb.GetBlockStreamResponse>;
     getQuotesStream: grpc.handleServerStreamingCall<api_pb.GetQuotesStreamRequest, api_pb.GetQuotesStreamResponse>;
     getPoolReservesStream: grpc.handleServerStreamingCall<api_pb.GetPoolReservesStreamRequest, api_pb.GetPoolReservesStreamResponse>;
     getPricesStream: grpc.handleServerStreamingCall<api_pb.GetPricesStreamRequest, api_pb.GetPricesStreamResponse>;
@@ -508,6 +519,8 @@ export interface IApiClient {
     getOrderStatusStream(request: api_pb.GetOrderStatusStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderStatusStreamResponse>;
     getRecentBlockHashStream(request: api_pb.GetRecentBlockHashRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetRecentBlockHashResponse>;
     getRecentBlockHashStream(request: api_pb.GetRecentBlockHashRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetRecentBlockHashResponse>;
+    getBlockStream(request: api_pb.GetBlockStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetBlockStreamResponse>;
+    getBlockStream(request: api_pb.GetBlockStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetBlockStreamResponse>;
     getQuotesStream(request: api_pb.GetQuotesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetQuotesStreamResponse>;
     getQuotesStream(request: api_pb.GetQuotesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetQuotesStreamResponse>;
     getPoolReservesStream(request: api_pb.GetPoolReservesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPoolReservesStreamResponse>;
@@ -610,6 +623,8 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getOrderStatusStream(request: api_pb.GetOrderStatusStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderStatusStreamResponse>;
     public getRecentBlockHashStream(request: api_pb.GetRecentBlockHashRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetRecentBlockHashResponse>;
     public getRecentBlockHashStream(request: api_pb.GetRecentBlockHashRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetRecentBlockHashResponse>;
+    public getBlockStream(request: api_pb.GetBlockStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetBlockStreamResponse>;
+    public getBlockStream(request: api_pb.GetBlockStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetBlockStreamResponse>;
     public getQuotesStream(request: api_pb.GetQuotesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetQuotesStreamResponse>;
     public getQuotesStream(request: api_pb.GetQuotesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetQuotesStreamResponse>;
     public getPoolReservesStream(request: api_pb.GetPoolReservesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPoolReservesStreamResponse>;

@@ -393,6 +393,12 @@ service Api {
     };
   }
 
+  rpc GetBlockStream(GetBlockStreamRequest) returns (stream GetBlockStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
   rpc GetQuotesStream(GetQuotesStreamRequest) returns (stream GetQuotesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
@@ -934,11 +940,24 @@ message StepProject {
 }
 
 message GetRecentBlockHashRequest {
-
 }
 
 message GetRecentBlockHashResponse {
   string blockHash = 1;
+}
+
+message Block {
+  uint64 slot = 1;
+  string hash = 2;
+  int64 time = 3;
+  uint64 height = 4;
+}
+
+message GetBlockStreamRequest {
+}
+
+message GetBlockStreamResponse {
+  Block block = 1;
 }
 
 message GetPoolsRequest {
