@@ -16,11 +16,6 @@ class MarketStatus(betterproto.Enum):
     MS_ONLINE = 1
 
 
-class MarketProgram(betterproto.Enum):
-    MP_SERUM = 0
-    MP_OPENBOOK = 1
-
-
 class Side(betterproto.Enum):
     S_UNKNOWN = 0
     S_BID = 1
@@ -63,10 +58,11 @@ class Step(betterproto.Enum):
 
 class Project(betterproto.Enum):
     P_UNKNOWN = 0
-    P_JUPITER = 1
-    P_RAYDIUM = 2
-    P_SERUM = 3
-    P_ALL = 4
+    P_ALL = 1
+    P_JUPITER = 2
+    P_RAYDIUM = 3
+    P_SERUM = 4
+    P_OPENBOOK = 5
 
 
 @dataclass
@@ -90,13 +86,13 @@ class Market(betterproto.Message):
     quoted_mint: str = betterproto.string_field(5)
     base_decimals: int = betterproto.int64_field(6)
     quote_decimals: int = betterproto.int64_field(7)
-    program: "MarketProgram" = betterproto.enum_field(8)
+    project: "Project" = betterproto.enum_field(8)
 
 
 @dataclass
 class GetTickersRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
-    program: "MarketProgram" = betterproto.enum_field(2)
+    project: "Project" = betterproto.enum_field(2)
 
 
 @dataclass
@@ -112,7 +108,7 @@ class Ticker(betterproto.Message):
     bid_size: float = betterproto.double_field(4)
     ask: float = betterproto.double_field(5)
     ask_size: float = betterproto.double_field(6)
-    program: "MarketProgram" = betterproto.enum_field(7)
+    project: "Project" = betterproto.enum_field(7)
 
 
 @dataclass
@@ -148,14 +144,14 @@ class Candle(betterproto.Message):
 class GetOrderbookRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
-    program: "MarketProgram" = betterproto.enum_field(3)
+    project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
 class GetOrderbooksRequest(betterproto.Message):
     markets: List[str] = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
-    program: "MarketProgram" = betterproto.enum_field(3)
+    project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
@@ -176,7 +172,7 @@ class OrderbookItem(betterproto.Message):
 class GetTradesRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
-    program: "MarketProgram" = betterproto.enum_field(3)
+    project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
@@ -236,7 +232,7 @@ class PostOrderRequest(betterproto.Message):
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
     client_order_i_d: int = betterproto.uint64_field(9)
-    program: "MarketProgram" = betterproto.enum_field(10)
+    project: "Project" = betterproto.enum_field(10)
 
 
 @dataclass
@@ -251,7 +247,7 @@ class PostReplaceOrderRequest(betterproto.Message):
     open_orders_address: str = betterproto.string_field(8)
     client_order_i_d: int = betterproto.uint64_field(9)
     order_i_d: str = betterproto.string_field(10)
-    program: "MarketProgram" = betterproto.enum_field(11)
+    project: "Project" = betterproto.enum_field(11)
 
 
 @dataclass
@@ -267,7 +263,7 @@ class PostCancelOrderRequest(betterproto.Message):
     market_address: str = betterproto.string_field(3)
     owner_address: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
-    program: "MarketProgram" = betterproto.enum_field(6)
+    project: "Project" = betterproto.enum_field(6)
 
 
 @dataclass
@@ -276,7 +272,7 @@ class PostCancelByClientOrderIDRequest(betterproto.Message):
     market_address: str = betterproto.string_field(2)
     owner_address: str = betterproto.string_field(3)
     open_orders_address: str = betterproto.string_field(4)
-    program: "MarketProgram" = betterproto.enum_field(5)
+    project: "Project" = betterproto.enum_field(5)
 
 
 @dataclass
@@ -289,7 +285,7 @@ class PostCancelAllRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     owner_address: str = betterproto.string_field(2)
     open_orders_addresses: List[str] = betterproto.string_field(3)
-    program: "MarketProgram" = betterproto.enum_field(4)
+    project: "Project" = betterproto.enum_field(4)
 
 
 @dataclass
@@ -310,7 +306,7 @@ class PostSettleRequest(betterproto.Message):
     base_token_wallet: str = betterproto.string_field(3)
     quote_token_wallet: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
-    program: "MarketProgram" = betterproto.enum_field(6)
+    project: "Project" = betterproto.enum_field(6)
 
 
 @dataclass
@@ -336,7 +332,7 @@ class GetOrdersRequest(betterproto.Message):
     direction: "Direction" = betterproto.enum_field(7)
     address: str = betterproto.string_field(8)
     open_orders_address: str = betterproto.string_field(9)
-    program: "MarketProgram" = betterproto.enum_field(10)
+    project: "Project" = betterproto.enum_field(10)
 
 
 @dataclass
@@ -361,7 +357,7 @@ class Order(betterproto.Message):
 class GetOrderStatusStreamRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     owner_address: str = betterproto.string_field(2)
-    program: "MarketProgram" = betterproto.enum_field(3)
+    project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
@@ -425,7 +421,7 @@ class GetOpenOrdersRequest(betterproto.Message):
     limit: int = betterproto.uint32_field(2)
     address: str = betterproto.string_field(3)
     open_orders_address: str = betterproto.string_field(4)
-    program: "MarketProgram" = betterproto.enum_field(5)
+    project: "Project" = betterproto.enum_field(5)
 
 
 @dataclass
@@ -437,7 +433,7 @@ class GetOpenOrdersResponse(betterproto.Message):
 class GetOrderByIDRequest(betterproto.Message):
     order_i_d: str = betterproto.string_field(1)
     market: str = betterproto.string_field(2)
-    program: "MarketProgram" = betterproto.enum_field(3)
+    project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
@@ -449,7 +445,7 @@ class GetOrderByIDResponse(betterproto.Message):
 class GetUnsettledRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     owner_address: str = betterproto.string_field(2)
-    program: "MarketProgram" = betterproto.enum_field(3)
+    project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
@@ -488,7 +484,7 @@ class GetMarketDepthRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     depth: int = betterproto.int32_field(2)
     step: "Step" = betterproto.enum_field(3)
-    program: "MarketProgram" = betterproto.enum_field(4)
+    project: "Project" = betterproto.enum_field(4)
 
 
 @dataclass
@@ -611,6 +607,24 @@ class GetRecentBlockHashRequest(betterproto.Message):
 @dataclass
 class GetRecentBlockHashResponse(betterproto.Message):
     block_hash: str = betterproto.string_field(1)
+
+
+@dataclass
+class Block(betterproto.Message):
+    slot: int = betterproto.uint64_field(1)
+    hash: str = betterproto.string_field(2)
+    time: int = betterproto.int64_field(3)
+    height: int = betterproto.uint64_field(4)
+
+
+@dataclass
+class GetBlockStreamRequest(betterproto.Message):
+    pass
+
+
+@dataclass
+class GetBlockStreamResponse(betterproto.Message):
+    block: "Block" = betterproto.message_field(1)
 
 
 @dataclass
@@ -786,11 +800,11 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_tickers(
-        self, *, market: str = "", program: "MarketProgram" = 0
+        self, *, market: str = "", project: "Project" = 0
     ) -> GetTickersResponse:
         request = GetTickersRequest()
         request.market = market
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/GetTickers",
@@ -823,12 +837,12 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_orderbook(
-        self, *, market: str = "", limit: int = 0, program: "MarketProgram" = 0
+        self, *, market: str = "", limit: int = 0, project: "Project" = 0
     ) -> GetOrderbookResponse:
         request = GetOrderbookRequest()
         request.market = market
         request.limit = limit
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/GetOrderbook",
@@ -837,12 +851,12 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_trades(
-        self, *, market: str = "", limit: int = 0, program: "MarketProgram" = 0
+        self, *, market: str = "", limit: int = 0, project: "Project" = 0
     ) -> GetTradesResponse:
         request = GetTradesRequest()
         request.market = market
         request.limit = limit
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/GetTrades",
@@ -920,7 +934,7 @@ class ApiStub(betterproto.ServiceStub):
         price: float = 0,
         open_orders_address: str = "",
         client_order_i_d: int = 0,
-        program: "MarketProgram" = 0,
+        project: "Project" = 0,
     ) -> PostOrderResponse:
         """trade endpoints"""
 
@@ -934,7 +948,7 @@ class ApiStub(betterproto.ServiceStub):
         request.price = price
         request.open_orders_address = open_orders_address
         request.client_order_i_d = client_order_i_d
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/PostOrder",
@@ -984,7 +998,7 @@ class ApiStub(betterproto.ServiceStub):
         market_address: str = "",
         owner_address: str = "",
         open_orders_address: str = "",
-        program: "MarketProgram" = 0,
+        project: "Project" = 0,
     ) -> PostCancelOrderResponse:
         request = PostCancelOrderRequest()
         request.order_i_d = order_i_d
@@ -992,7 +1006,7 @@ class ApiStub(betterproto.ServiceStub):
         request.market_address = market_address
         request.owner_address = owner_address
         request.open_orders_address = open_orders_address
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/PostCancelOrder",
@@ -1007,14 +1021,14 @@ class ApiStub(betterproto.ServiceStub):
         market_address: str = "",
         owner_address: str = "",
         open_orders_address: str = "",
-        program: "MarketProgram" = 0,
+        project: "Project" = 0,
     ) -> PostCancelOrderResponse:
         request = PostCancelByClientOrderIDRequest()
         request.client_order_i_d = client_order_i_d
         request.market_address = market_address
         request.owner_address = owner_address
         request.open_orders_address = open_orders_address
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/PostCancelByClientOrderID",
@@ -1028,13 +1042,13 @@ class ApiStub(betterproto.ServiceStub):
         market: str = "",
         owner_address: str = "",
         open_orders_addresses: List[str] = [],
-        program: "MarketProgram" = 0,
+        project: "Project" = 0,
     ) -> PostCancelAllResponse:
         request = PostCancelAllRequest()
         request.market = market
         request.owner_address = owner_address
         request.open_orders_addresses = open_orders_addresses
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/PostCancelAll",
@@ -1054,7 +1068,7 @@ class ApiStub(betterproto.ServiceStub):
         price: float = 0,
         open_orders_address: str = "",
         client_order_i_d: int = 0,
-        program: "MarketProgram" = 0,
+        project: "Project" = 0,
     ) -> PostOrderResponse:
         request = PostOrderRequest()
         request.owner_address = owner_address
@@ -1066,7 +1080,7 @@ class ApiStub(betterproto.ServiceStub):
         request.price = price
         request.open_orders_address = open_orders_address
         request.client_order_i_d = client_order_i_d
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/PostReplaceByClientOrderID",
@@ -1087,7 +1101,7 @@ class ApiStub(betterproto.ServiceStub):
         open_orders_address: str = "",
         client_order_i_d: int = 0,
         order_i_d: str = "",
-        program: "MarketProgram" = 0,
+        project: "Project" = 0,
     ) -> PostOrderResponse:
         request = PostReplaceOrderRequest()
         request.owner_address = owner_address
@@ -1100,7 +1114,7 @@ class ApiStub(betterproto.ServiceStub):
         request.open_orders_address = open_orders_address
         request.client_order_i_d = client_order_i_d
         request.order_i_d = order_i_d
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/PostReplaceOrder",
@@ -1116,7 +1130,7 @@ class ApiStub(betterproto.ServiceStub):
         base_token_wallet: str = "",
         quote_token_wallet: str = "",
         open_orders_address: str = "",
-        program: "MarketProgram" = 0,
+        project: "Project" = 0,
     ) -> PostSettleResponse:
         request = PostSettleRequest()
         request.owner_address = owner_address
@@ -1124,7 +1138,7 @@ class ApiStub(betterproto.ServiceStub):
         request.base_token_wallet = base_token_wallet
         request.quote_token_wallet = quote_token_wallet
         request.open_orders_address = open_orders_address
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/PostSettle",
@@ -1168,7 +1182,7 @@ class ApiStub(betterproto.ServiceStub):
         direction: "Direction" = 0,
         address: str = "",
         open_orders_address: str = "",
-        program: "MarketProgram" = 0,
+        project: "Project" = 0,
     ) -> GetOrdersResponse:
         request = GetOrdersRequest()
         request.market = market
@@ -1181,7 +1195,7 @@ class ApiStub(betterproto.ServiceStub):
         request.direction = direction
         request.address = address
         request.open_orders_address = open_orders_address
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/GetOrders",
@@ -1196,14 +1210,14 @@ class ApiStub(betterproto.ServiceStub):
         limit: int = 0,
         address: str = "",
         open_orders_address: str = "",
-        program: "MarketProgram" = 0,
+        project: "Project" = 0,
     ) -> GetOpenOrdersResponse:
         request = GetOpenOrdersRequest()
         request.market = market
         request.limit = limit
         request.address = address
         request.open_orders_address = open_orders_address
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/GetOpenOrders",
@@ -1212,12 +1226,12 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_order_by_i_d(
-        self, *, order_i_d: str = "", market: str = "", program: "MarketProgram" = 0
+        self, *, order_i_d: str = "", market: str = "", project: "Project" = 0
     ) -> GetOrderByIDResponse:
         request = GetOrderByIDRequest()
         request.order_i_d = order_i_d
         request.market = market
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/GetOrderByID",
@@ -1226,12 +1240,12 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_unsettled(
-        self, *, market: str = "", owner_address: str = "", program: "MarketProgram" = 0
+        self, *, market: str = "", owner_address: str = "", project: "Project" = 0
     ) -> GetUnsettledResponse:
         request = GetUnsettledRequest()
         request.market = market
         request.owner_address = owner_address
-        request.program = program
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/GetUnsettled",
@@ -1259,14 +1273,14 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_orderbooks_stream(
-        self, *, markets: List[str] = [], limit: int = 0, program: "MarketProgram" = 0
+        self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
     ) -> AsyncGenerator[GetOrderbooksStreamResponse, None]:
         """streaming endpoints"""
 
         request = GetOrderbooksRequest()
         request.markets = markets
         request.limit = limit
-        request.program = program
+        request.project = project
 
         async for response in self._unary_stream(
             "/api.Api/GetOrderbooksStream",
@@ -1276,11 +1290,11 @@ class ApiStub(betterproto.ServiceStub):
             yield response
 
     async def get_tickers_stream(
-        self, *, market: str = "", program: "MarketProgram" = 0
+        self, *, market: str = "", project: "Project" = 0
     ) -> AsyncGenerator[GetTickersStreamResponse, None]:
         request = GetTickersRequest()
         request.market = market
-        request.program = program
+        request.project = project
 
         async for response in self._unary_stream(
             "/api.Api/GetTickersStream",
@@ -1302,12 +1316,12 @@ class ApiStub(betterproto.ServiceStub):
             yield response
 
     async def get_trades_stream(
-        self, *, market: str = "", limit: int = 0, program: "MarketProgram" = 0
+        self, *, market: str = "", limit: int = 0, project: "Project" = 0
     ) -> AsyncGenerator[GetTradesStreamResponse, None]:
         request = GetTradesRequest()
         request.market = market
         request.limit = limit
-        request.program = program
+        request.project = project
 
         async for response in self._unary_stream(
             "/api.Api/GetTradesStream",
@@ -1317,12 +1331,12 @@ class ApiStub(betterproto.ServiceStub):
             yield response
 
     async def get_order_status_stream(
-        self, *, market: str = "", owner_address: str = "", program: "MarketProgram" = 0
+        self, *, market: str = "", owner_address: str = "", project: "Project" = 0
     ) -> AsyncGenerator[GetOrderStatusStreamResponse, None]:
         request = GetOrderStatusStreamRequest()
         request.market = market
         request.owner_address = owner_address
-        request.program = program
+        request.project = project
 
         async for response in self._unary_stream(
             "/api.Api/GetOrderStatusStream",
@@ -1340,6 +1354,16 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetRecentBlockHashStream",
             request,
             GetRecentBlockHashResponse,
+        ):
+            yield response
+
+    async def get_block_stream(self) -> AsyncGenerator[GetBlockStreamResponse, None]:
+        request = GetBlockStreamRequest()
+
+        async for response in self._unary_stream(
+            "/api.Api/GetBlockStream",
+            request,
+            GetBlockStreamResponse,
         ):
             yield response
 
