@@ -2507,14 +2507,14 @@ export class GetSwapsStreamUpdate extends jspb.Message {
     setProject(value: Project): GetSwapsStreamUpdate;
     getPooladdress(): string;
     setPooladdress(value: string): GetSwapsStreamUpdate;
-    getBasetoken(): string;
-    setBasetoken(value: string): GetSwapsStreamUpdate;
-    getBasetokenaddress(): string;
-    setBasetokenaddress(value: string): GetSwapsStreamUpdate;
-    getQuotetoken(): string;
-    setQuotetoken(value: string): GetSwapsStreamUpdate;
-    getQuotetokenaddress(): string;
-    setQuotetokenaddress(value: string): GetSwapsStreamUpdate;
+    getIntoken(): string;
+    setIntoken(value: string): GetSwapsStreamUpdate;
+    getIntokenaddress(): string;
+    setIntokenaddress(value: string): GetSwapsStreamUpdate;
+    getOuttoken(): string;
+    setOuttoken(value: string): GetSwapsStreamUpdate;
+    getOuttokenaddress(): string;
+    setOuttokenaddress(value: string): GetSwapsStreamUpdate;
     getInamount(): number;
     setInamount(value: number): GetSwapsStreamUpdate;
     getOutamountmin(): number;
@@ -2543,10 +2543,10 @@ export namespace GetSwapsStreamUpdate {
         success: boolean,
         project: Project,
         pooladdress: string,
-        basetoken: string,
-        basetokenaddress: string,
-        quotetoken: string,
-        quotetokenaddress: string,
+        intoken: string,
+        intokenaddress: string,
+        outtoken: string,
+        outtokenaddress: string,
         inamount: number,
         outamountmin: number,
         sourceaccount: string,

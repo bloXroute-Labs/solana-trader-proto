@@ -21118,12 +21118,12 @@ proto.api.GetSwapsStreamUpdate.toObject = function(includeInstance, msg) {
     success: jspb.Message.getBooleanFieldWithDefault(msg, 1, false),
     project: jspb.Message.getFieldWithDefault(msg, 2, 0),
     pooladdress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    basetoken: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    basetokenaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    quotetoken: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    quotetokenaddress: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    inamount: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    outamountmin: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    intoken: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    intokenaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    outtokenaddress: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
     sourceaccount: jspb.Message.getFieldWithDefault(msg, 10, ""),
     destinationaccount: jspb.Message.getFieldWithDefault(msg, 11, ""),
     owneraccount: jspb.Message.getFieldWithDefault(msg, 12, ""),
@@ -21178,26 +21178,26 @@ proto.api.GetSwapsStreamUpdate.deserializeBinaryFromReader = function(msg, reade
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setBasetoken(value);
+      msg.setIntoken(value);
       break;
     case 5:
       var value = /** @type {string} */ (reader.readString());
-      msg.setBasetokenaddress(value);
+      msg.setIntokenaddress(value);
       break;
     case 6:
       var value = /** @type {string} */ (reader.readString());
-      msg.setQuotetoken(value);
+      msg.setOuttoken(value);
       break;
     case 7:
       var value = /** @type {string} */ (reader.readString());
-      msg.setQuotetokenaddress(value);
+      msg.setOuttokenaddress(value);
       break;
     case 8:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setInamount(value);
       break;
     case 9:
-      var value = /** @type {number} */ (reader.readUint64());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setOutamountmin(value);
       break;
     case 10:
@@ -21266,28 +21266,28 @@ proto.api.GetSwapsStreamUpdate.serializeBinaryToWriter = function(message, write
       f
     );
   }
-  f = message.getBasetoken();
+  f = message.getIntoken();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getBasetokenaddress();
+  f = message.getIntokenaddress();
   if (f.length > 0) {
     writer.writeString(
       5,
       f
     );
   }
-  f = message.getQuotetoken();
+  f = message.getOuttoken();
   if (f.length > 0) {
     writer.writeString(
       6,
       f
     );
   }
-  f = message.getQuotetokenaddress();
+  f = message.getOuttokenaddress();
   if (f.length > 0) {
     writer.writeString(
       7,
@@ -21295,15 +21295,15 @@ proto.api.GetSwapsStreamUpdate.serializeBinaryToWriter = function(message, write
     );
   }
   f = message.getInamount();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (f !== 0.0) {
+    writer.writeDouble(
       8,
       f
     );
   }
   f = message.getOutamountmin();
-  if (f !== 0) {
-    writer.writeUint64(
+  if (f !== 0.0) {
+    writer.writeDouble(
       9,
       f
     );
@@ -21394,10 +21394,10 @@ proto.api.GetSwapsStreamUpdate.prototype.setPooladdress = function(value) {
 
 
 /**
- * optional string baseToken = 4;
+ * optional string inToken = 4;
  * @return {string}
  */
-proto.api.GetSwapsStreamUpdate.prototype.getBasetoken = function() {
+proto.api.GetSwapsStreamUpdate.prototype.getIntoken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -21406,16 +21406,16 @@ proto.api.GetSwapsStreamUpdate.prototype.getBasetoken = function() {
  * @param {string} value
  * @return {!proto.api.GetSwapsStreamUpdate} returns this
  */
-proto.api.GetSwapsStreamUpdate.prototype.setBasetoken = function(value) {
+proto.api.GetSwapsStreamUpdate.prototype.setIntoken = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional string baseTokenAddress = 5;
+ * optional string inTokenAddress = 5;
  * @return {string}
  */
-proto.api.GetSwapsStreamUpdate.prototype.getBasetokenaddress = function() {
+proto.api.GetSwapsStreamUpdate.prototype.getIntokenaddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -21424,16 +21424,16 @@ proto.api.GetSwapsStreamUpdate.prototype.getBasetokenaddress = function() {
  * @param {string} value
  * @return {!proto.api.GetSwapsStreamUpdate} returns this
  */
-proto.api.GetSwapsStreamUpdate.prototype.setBasetokenaddress = function(value) {
+proto.api.GetSwapsStreamUpdate.prototype.setIntokenaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional string quoteToken = 6;
+ * optional string outToken = 6;
  * @return {string}
  */
-proto.api.GetSwapsStreamUpdate.prototype.getQuotetoken = function() {
+proto.api.GetSwapsStreamUpdate.prototype.getOuttoken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
@@ -21442,16 +21442,16 @@ proto.api.GetSwapsStreamUpdate.prototype.getQuotetoken = function() {
  * @param {string} value
  * @return {!proto.api.GetSwapsStreamUpdate} returns this
  */
-proto.api.GetSwapsStreamUpdate.prototype.setQuotetoken = function(value) {
+proto.api.GetSwapsStreamUpdate.prototype.setOuttoken = function(value) {
   return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
 /**
- * optional string quoteTokenAddress = 7;
+ * optional string outTokenAddress = 7;
  * @return {string}
  */
-proto.api.GetSwapsStreamUpdate.prototype.getQuotetokenaddress = function() {
+proto.api.GetSwapsStreamUpdate.prototype.getOuttokenaddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
@@ -21460,17 +21460,17 @@ proto.api.GetSwapsStreamUpdate.prototype.getQuotetokenaddress = function() {
  * @param {string} value
  * @return {!proto.api.GetSwapsStreamUpdate} returns this
  */
-proto.api.GetSwapsStreamUpdate.prototype.setQuotetokenaddress = function(value) {
+proto.api.GetSwapsStreamUpdate.prototype.setOuttokenaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
 /**
- * optional uint64 inAmount = 8;
+ * optional double inAmount = 8;
  * @return {number}
  */
 proto.api.GetSwapsStreamUpdate.prototype.getInamount = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
 };
 
 
@@ -21479,16 +21479,16 @@ proto.api.GetSwapsStreamUpdate.prototype.getInamount = function() {
  * @return {!proto.api.GetSwapsStreamUpdate} returns this
  */
 proto.api.GetSwapsStreamUpdate.prototype.setInamount = function(value) {
-  return jspb.Message.setProto3IntField(this, 8, value);
+  return jspb.Message.setProto3FloatField(this, 8, value);
 };
 
 
 /**
- * optional uint64 outAmountMin = 9;
+ * optional double outAmountMin = 9;
  * @return {number}
  */
 proto.api.GetSwapsStreamUpdate.prototype.getOutamountmin = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
 };
 
 
@@ -21497,7 +21497,7 @@ proto.api.GetSwapsStreamUpdate.prototype.getOutamountmin = function() {
  * @return {!proto.api.GetSwapsStreamUpdate} returns this
  */
 proto.api.GetSwapsStreamUpdate.prototype.setOutamountmin = function(value) {
-  return jspb.Message.setProto3IntField(this, 9, value);
+  return jspb.Message.setProto3FloatField(this, 9, value);
 };
 
 
