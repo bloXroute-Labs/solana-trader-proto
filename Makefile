@@ -11,7 +11,7 @@ all: clean proto
 clean:
 	rm -rf js api common
 
-proto: proto-build-api-go proto-build-common-go proto-build-api-js proto-build-swagger proto-build-gw
+proto: proto-build-api-go proto-build-common-go proto-build-api-js proto-build-swagger proto-build-gw proto-build-api-python
 
 proto-build-gw:
 	docker run -v $(CURDIR)/api:/go/protobuf/out \
