@@ -76,15 +76,48 @@ function deserialize_api_GetKlineResponse(buffer_arg) {
   return api_pb.GetKlineResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_api_GetMarketDepthStreamResponse(arg) {
-  if (!(arg instanceof api_pb.GetMarketDepthStreamResponse)) {
-    throw new Error('Expected argument of type api.GetMarketDepthStreamResponse');
+function serialize_api_GetMarketDepthRequest(arg) {
+  if (!(arg instanceof api_pb.GetMarketDepthRequest)) {
+    throw new Error('Expected argument of type api.GetMarketDepthRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_api_GetMarketDepthStreamResponse(buffer_arg) {
-  return api_pb.GetMarketDepthStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_api_GetMarketDepthRequest(buffer_arg) {
+  return api_pb.GetMarketDepthRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetMarketDepthResponse(arg) {
+  if (!(arg instanceof api_pb.GetMarketDepthResponse)) {
+    throw new Error('Expected argument of type api.GetMarketDepthResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMarketDepthResponse(buffer_arg) {
+  return api_pb.GetMarketDepthResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetMarketDepthsRequest(arg) {
+  if (!(arg instanceof api_pb.GetMarketDepthsRequest)) {
+    throw new Error('Expected argument of type api.GetMarketDepthsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMarketDepthsRequest(buffer_arg) {
+  return api_pb.GetMarketDepthsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetMarketDepthsStreamResponse(arg) {
+  if (!(arg instanceof api_pb.GetMarketDepthsStreamResponse)) {
+    throw new Error('Expected argument of type api.GetMarketDepthsStreamResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMarketDepthsStreamResponse(buffer_arg) {
+  return api_pb.GetMarketDepthsStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetMarketsRequest(arg) {
@@ -782,6 +815,17 @@ var ApiService = exports.ApiService = {
     responseSerialize: serialize_api_GetOrderbookResponse,
     responseDeserialize: deserialize_api_GetOrderbookResponse,
   },
+  getMarketDepth: {
+    path: '/api.Api/GetMarketDepth',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetMarketDepthRequest,
+    responseType: api_pb.GetMarketDepthResponse,
+    requestSerialize: serialize_api_GetMarketDepthRequest,
+    requestDeserialize: deserialize_api_GetMarketDepthRequest,
+    responseSerialize: serialize_api_GetMarketDepthResponse,
+    responseDeserialize: deserialize_api_GetMarketDepthResponse,
+  },
   getTrades: {
     path: '/api.Api/GetTrades',
     requestStream: false,
@@ -1017,6 +1061,17 @@ getOrderbooksStream: {
     responseSerialize: serialize_api_GetOrderbooksStreamResponse,
     responseDeserialize: deserialize_api_GetOrderbooksStreamResponse,
   },
+  getMarketDepthsStream: {
+    path: '/api.Api/GetMarketDepthsStream',
+    requestStream: false,
+    responseStream: true,
+    requestType: api_pb.GetMarketDepthsRequest,
+    responseType: api_pb.GetMarketDepthsStreamResponse,
+    requestSerialize: serialize_api_GetMarketDepthsRequest,
+    requestDeserialize: deserialize_api_GetMarketDepthsRequest,
+    responseSerialize: serialize_api_GetMarketDepthsStreamResponse,
+    responseDeserialize: deserialize_api_GetMarketDepthsStreamResponse,
+  },
   getTickersStream: {
     path: '/api.Api/GetTickersStream',
     requestStream: false,
@@ -1027,17 +1082,6 @@ getOrderbooksStream: {
     requestDeserialize: deserialize_api_GetTickersRequest,
     responseSerialize: serialize_api_GetTickersStreamResponse,
     responseDeserialize: deserialize_api_GetTickersStreamResponse,
-  },
-  getMarketDepthStream: {
-    path: '/api.Api/GetMarketDepthStream',
-    requestStream: false,
-    responseStream: true,
-    requestType: api_pb.GetMarketsRequest,
-    responseType: api_pb.GetMarketDepthStreamResponse,
-    requestSerialize: serialize_api_GetMarketsRequest,
-    requestDeserialize: deserialize_api_GetMarketsRequest,
-    responseSerialize: serialize_api_GetMarketDepthStreamResponse,
-    responseDeserialize: deserialize_api_GetMarketDepthStreamResponse,
   },
   getTradesStream: {
     path: '/api.Api/GetTradesStream',

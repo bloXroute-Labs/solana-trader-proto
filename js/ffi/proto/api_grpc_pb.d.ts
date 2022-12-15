@@ -19,6 +19,7 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getTickers: IApiService_IGetTickers;
     getKline: IApiService_IGetKline;
     getOrderbook: IApiService_IGetOrderbook;
+    getMarketDepth: IApiService_IGetMarketDepth;
     getTrades: IApiService_IGetTrades;
     getQuotes: IApiService_IGetQuotes;
     getServerTime: IApiService_IGetServerTime;
@@ -40,8 +41,8 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getUnsettled: IApiService_IGetUnsettled;
     postRouteTradeSwap: IApiService_IPostRouteTradeSwap;
     getOrderbooksStream: IApiService_IGetOrderbooksStream;
+    getMarketDepthsStream: IApiService_IGetMarketDepthsStream;
     getTickersStream: IApiService_IGetTickersStream;
-    getMarketDepthStream: IApiService_IGetMarketDepthStream;
     getTradesStream: IApiService_IGetTradesStream;
     getOrderStatusStream: IApiService_IGetOrderStatusStream;
     getRecentBlockHashStream: IApiService_IGetRecentBlockHashStream;
@@ -105,6 +106,15 @@ interface IApiService_IGetOrderbook extends grpc.MethodDefinition<api_pb.GetOrde
     requestDeserialize: grpc.deserialize<api_pb.GetOrderbookRequest>;
     responseSerialize: grpc.serialize<api_pb.GetOrderbookResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetOrderbookResponse>;
+}
+interface IApiService_IGetMarketDepth extends grpc.MethodDefinition<api_pb.GetMarketDepthRequest, api_pb.GetMarketDepthResponse> {
+    path: "/api.Api/GetMarketDepth";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetMarketDepthRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetMarketDepthRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetMarketDepthResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetMarketDepthResponse>;
 }
 interface IApiService_IGetTrades extends grpc.MethodDefinition<api_pb.GetTradesRequest, api_pb.GetTradesResponse> {
     path: "/api.Api/GetTrades";
@@ -295,6 +305,15 @@ interface IApiService_IGetOrderbooksStream extends grpc.MethodDefinition<api_pb.
     responseSerialize: grpc.serialize<api_pb.GetOrderbooksStreamResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetOrderbooksStreamResponse>;
 }
+interface IApiService_IGetMarketDepthsStream extends grpc.MethodDefinition<api_pb.GetMarketDepthsRequest, api_pb.GetMarketDepthsStreamResponse> {
+    path: "/api.Api/GetMarketDepthsStream";
+    requestStream: false;
+    responseStream: true;
+    requestSerialize: grpc.serialize<api_pb.GetMarketDepthsRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetMarketDepthsRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetMarketDepthsStreamResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetMarketDepthsStreamResponse>;
+}
 interface IApiService_IGetTickersStream extends grpc.MethodDefinition<api_pb.GetTickersRequest, api_pb.GetTickersStreamResponse> {
     path: "/api.Api/GetTickersStream";
     requestStream: false;
@@ -303,15 +322,6 @@ interface IApiService_IGetTickersStream extends grpc.MethodDefinition<api_pb.Get
     requestDeserialize: grpc.deserialize<api_pb.GetTickersRequest>;
     responseSerialize: grpc.serialize<api_pb.GetTickersStreamResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetTickersStreamResponse>;
-}
-interface IApiService_IGetMarketDepthStream extends grpc.MethodDefinition<api_pb.GetMarketsRequest, api_pb.GetMarketDepthStreamResponse> {
-    path: "/api.Api/GetMarketDepthStream";
-    requestStream: false;
-    responseStream: true;
-    requestSerialize: grpc.serialize<api_pb.GetMarketsRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetMarketsRequest>;
-    responseSerialize: grpc.serialize<api_pb.GetMarketDepthStreamResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.GetMarketDepthStreamResponse>;
 }
 interface IApiService_IGetTradesStream extends grpc.MethodDefinition<api_pb.GetTradesRequest, api_pb.GetTradesStreamResponse> {
     path: "/api.Api/GetTradesStream";
@@ -395,6 +405,7 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getTickers: grpc.handleUnaryCall<api_pb.GetTickersRequest, api_pb.GetTickersResponse>;
     getKline: grpc.handleUnaryCall<api_pb.GetKlineRequest, api_pb.GetKlineResponse>;
     getOrderbook: grpc.handleUnaryCall<api_pb.GetOrderbookRequest, api_pb.GetOrderbookResponse>;
+    getMarketDepth: grpc.handleUnaryCall<api_pb.GetMarketDepthRequest, api_pb.GetMarketDepthResponse>;
     getTrades: grpc.handleUnaryCall<api_pb.GetTradesRequest, api_pb.GetTradesResponse>;
     getQuotes: grpc.handleUnaryCall<api_pb.GetQuotesRequest, api_pb.GetQuotesResponse>;
     getServerTime: grpc.handleUnaryCall<api_pb.GetServerTimeRequest, api_pb.GetServerTimeResponse>;
@@ -416,8 +427,8 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getUnsettled: grpc.handleUnaryCall<api_pb.GetUnsettledRequest, api_pb.GetUnsettledResponse>;
     postRouteTradeSwap: grpc.handleUnaryCall<api_pb.RouteTradeSwapRequest, api_pb.TradeSwapResponse>;
     getOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetOrderbooksRequest, api_pb.GetOrderbooksStreamResponse>;
+    getMarketDepthsStream: grpc.handleServerStreamingCall<api_pb.GetMarketDepthsRequest, api_pb.GetMarketDepthsStreamResponse>;
     getTickersStream: grpc.handleServerStreamingCall<api_pb.GetTickersRequest, api_pb.GetTickersStreamResponse>;
-    getMarketDepthStream: grpc.handleServerStreamingCall<api_pb.GetMarketsRequest, api_pb.GetMarketDepthStreamResponse>;
     getTradesStream: grpc.handleServerStreamingCall<api_pb.GetTradesRequest, api_pb.GetTradesStreamResponse>;
     getOrderStatusStream: grpc.handleServerStreamingCall<api_pb.GetOrderStatusStreamRequest, api_pb.GetOrderStatusStreamResponse>;
     getRecentBlockHashStream: grpc.handleServerStreamingCall<api_pb.GetRecentBlockHashRequest, api_pb.GetRecentBlockHashResponse>;
@@ -447,6 +458,9 @@ export interface IApiClient {
     getOrderbook(request: api_pb.GetOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
     getOrderbook(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
     getOrderbook(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
+    getMarketDepth(request: api_pb.GetMarketDepthRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
+    getMarketDepth(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
+    getMarketDepth(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
     getTrades(request: api_pb.GetTradesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
     getTrades(request: api_pb.GetTradesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
     getTrades(request: api_pb.GetTradesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
@@ -509,10 +523,10 @@ export interface IApiClient {
     postRouteTradeSwap(request: api_pb.RouteTradeSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
     getOrderbooksStream(request: api_pb.GetOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     getOrderbooksStream(request: api_pb.GetOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
+    getMarketDepthsStream(request: api_pb.GetMarketDepthsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthsStreamResponse>;
+    getMarketDepthsStream(request: api_pb.GetMarketDepthsRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthsStreamResponse>;
     getTickersStream(request: api_pb.GetTickersRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetTickersStreamResponse>;
     getTickersStream(request: api_pb.GetTickersRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetTickersStreamResponse>;
-    getMarketDepthStream(request: api_pb.GetMarketsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthStreamResponse>;
-    getMarketDepthStream(request: api_pb.GetMarketsRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthStreamResponse>;
     getTradesStream(request: api_pb.GetTradesRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetTradesStreamResponse>;
     getTradesStream(request: api_pb.GetTradesRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetTradesStreamResponse>;
     getOrderStatusStream(request: api_pb.GetOrderStatusStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderStatusStreamResponse>;
@@ -551,6 +565,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getOrderbook(request: api_pb.GetOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getOrderbook(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getOrderbook(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
+    public getMarketDepth(request: api_pb.GetMarketDepthRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
+    public getMarketDepth(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
+    public getMarketDepth(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
     public getTrades(request: api_pb.GetTradesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
     public getTrades(request: api_pb.GetTradesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
     public getTrades(request: api_pb.GetTradesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTradesResponse) => void): grpc.ClientUnaryCall;
@@ -613,10 +630,10 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postRouteTradeSwap(request: api_pb.RouteTradeSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.TradeSwapResponse) => void): grpc.ClientUnaryCall;
     public getOrderbooksStream(request: api_pb.GetOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     public getOrderbooksStream(request: api_pb.GetOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
+    public getMarketDepthsStream(request: api_pb.GetMarketDepthsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthsStreamResponse>;
+    public getMarketDepthsStream(request: api_pb.GetMarketDepthsRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthsStreamResponse>;
     public getTickersStream(request: api_pb.GetTickersRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetTickersStreamResponse>;
     public getTickersStream(request: api_pb.GetTickersRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetTickersStreamResponse>;
-    public getMarketDepthStream(request: api_pb.GetMarketsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthStreamResponse>;
-    public getMarketDepthStream(request: api_pb.GetMarketsRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthStreamResponse>;
     public getTradesStream(request: api_pb.GetTradesRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetTradesStreamResponse>;
     public getTradesStream(request: api_pb.GetTradesRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetTradesStreamResponse>;
     public getOrderStatusStream(request: api_pb.GetOrderStatusStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderStatusStreamResponse>;

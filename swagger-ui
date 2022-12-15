@@ -1012,15 +1012,38 @@
         }
       }
     },
-    "apiGetMarketDepthStreamResponse": {
+    "apiGetMarketDepthResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketAddress": {
+          "type": "string"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMarketDepthItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMarketDepthItem"
+          }
+        }
+      }
+    },
+    "apiGetMarketDepthsStreamResponse": {
       "type": "object",
       "properties": {
         "slot": {
           "type": "string",
           "format": "int64"
         },
-        "tick": {
-          "$ref": "#/definitions/apiMarketDepthTick"
+        "Data": {
+          "$ref": "#/definitions/apiGetMarketDepthResponse"
         }
       }
     },
@@ -1430,24 +1453,16 @@
         }
       }
     },
-    "apiMarketDepthTick": {
+    "apiMarketDepthItem": {
       "type": "object",
       "properties": {
-        "prevSlot": {
-          "type": "string",
-          "format": "int64"
+        "price": {
+          "type": "number",
+          "format": "double"
         },
-        "asks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiOrderbookItem"
-          }
-        },
-        "bids": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiOrderbookItem"
-          }
+        "size": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -1528,6 +1543,18 @@
         "size": {
           "type": "number",
           "format": "double"
+        },
+        "orderID": {
+          "type": "string",
+          "description": "Serum generated OrderID"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "ownerAddress": {
+          "type": "string",
+          "description": "OpenOrders address for current market"
         }
       }
     },

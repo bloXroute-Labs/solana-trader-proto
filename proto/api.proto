@@ -119,6 +119,12 @@ service Api {
     };
   }
 
+  rpc GetMarketDepth(GetMarketDepthRequest) returns (GetMarketDepthResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Trade";
+    };
+  }
+
   rpc GetTrades(GetTradesRequest) returns (GetTradesResponse) {
     option (google.api.method_visibility).restriction = "INTERNAL";
     option (google.api.http) = {
@@ -363,13 +369,13 @@ service Api {
     };
   }
 
-  rpc GetTickersStream(GetTickersRequest) returns (stream GetTickersStreamResponse) {
+  rpc GetMarketDepthsStream(GetMarketDepthsRequest) returns (stream GetMarketDepthsStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Trade";
     };
   }
 
-  rpc GetMarketDepthStream(GetMarketsRequest) returns (stream GetMarketDepthStreamResponse) {
+  rpc GetTickersStream(GetTickersRequest) returns (stream GetTickersStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Trade";
     };
@@ -513,6 +519,32 @@ message GetOrderbookResponse {
 }
 
 message OrderbookItem {
+  double price = 1;
+  double size = 2;
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
+  uint64 clientOrderID = 4;
+  string ownerAddress = 5[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "OpenOrders address for current market"}];
+}
+
+message GetMarketDepthRequest {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
+}
+
+message GetMarketDepthsRequest {
+  repeated string markets = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
+}
+
+message GetMarketDepthResponse {
+  string market = 1;
+  string marketAddress = 2;
+  repeated MarketDepthItem bids = 3;
+  repeated MarketDepthItem asks = 4;
+}
+message MarketDepthItem {
   double price = 1;
   double size = 2;
 }
@@ -812,16 +844,14 @@ message GetOrderbooksStreamResponse {
   GetOrderbookResponse orderbook = 2;
 }
 
+message GetMarketDepthsStreamResponse {
+  int64 slot = 1;
+  GetMarketDepthResponse Data = 2;
+}
+
 message GetTickersStreamResponse {
   int64 slot = 1;
   GetTickersResponse ticker = 2;
-}
-
-message GetMarketDepthRequest {
-  string market = 1 [(google.api.field_behavior) = REQUIRED];
-  int32 depth = 2 [(google.api.field_behavior) = REQUIRED];
-  Step step = 3;
-  Project project = 4;
 }
 
 enum Step {
@@ -829,17 +859,6 @@ enum Step {
   STEP1 = 1;
   STEP2 = 2;
   STEP3 = 3;
-}
-
-message GetMarketDepthStreamResponse {
-  int64 slot = 1;
-  MarketDepthTick tick = 2;
-}
-
-message MarketDepthTick {
-  int64 prevSlot = 1;
-  repeated OrderbookItem asks = 2;
-  repeated OrderbookItem bids = 3;
 }
 
 message GetTradesStreamResponse {
