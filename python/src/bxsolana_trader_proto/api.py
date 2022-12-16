@@ -166,6 +166,37 @@ class GetOrderbookResponse(betterproto.Message):
 class OrderbookItem(betterproto.Message):
     price: float = betterproto.double_field(1)
     size: float = betterproto.double_field(2)
+    order_i_d: str = betterproto.string_field(3)
+    client_order_i_d: int = betterproto.uint64_field(4)
+    owner_address: str = betterproto.string_field(5)
+
+
+@dataclass
+class GetMarketDepthRequest(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetMarketDepthsRequest(betterproto.Message):
+    markets: List[str] = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetMarketDepthResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_address: str = betterproto.string_field(2)
+    bids: List["MarketDepthItem"] = betterproto.message_field(3)
+    asks: List["MarketDepthItem"] = betterproto.message_field(4)
+
+
+@dataclass
+class MarketDepthItem(betterproto.Message):
+    price: float = betterproto.double_field(1)
+    size: float = betterproto.double_field(2)
 
 
 @dataclass
@@ -474,30 +505,15 @@ class GetOrderbooksStreamResponse(betterproto.Message):
 
 
 @dataclass
+class GetMarketDepthsStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    data: "GetMarketDepthResponse" = betterproto.message_field(2)
+
+
+@dataclass
 class GetTickersStreamResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
     ticker: "GetTickersResponse" = betterproto.message_field(2)
-
-
-@dataclass
-class GetMarketDepthRequest(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    depth: int = betterproto.int32_field(2)
-    step: "Step" = betterproto.enum_field(3)
-    project: "Project" = betterproto.enum_field(4)
-
-
-@dataclass
-class GetMarketDepthStreamResponse(betterproto.Message):
-    slot: int = betterproto.int64_field(1)
-    tick: "MarketDepthTick" = betterproto.message_field(2)
-
-
-@dataclass
-class MarketDepthTick(betterproto.Message):
-    prev_slot: int = betterproto.int64_field(1)
-    asks: List["OrderbookItem"] = betterproto.message_field(2)
-    bids: List["OrderbookItem"] = betterproto.message_field(3)
 
 
 @dataclass
@@ -696,12 +712,12 @@ class GetSwapsStreamUpdate(betterproto.Message):
     success: bool = betterproto.bool_field(1)
     project: "Project" = betterproto.enum_field(2)
     pool_address: str = betterproto.string_field(3)
-    base_token: str = betterproto.string_field(4)
-    base_token_address: str = betterproto.string_field(5)
-    quote_token: str = betterproto.string_field(6)
-    quote_token_address: str = betterproto.string_field(7)
-    in_amount: int = betterproto.uint64_field(8)
-    out_amount_min: int = betterproto.uint64_field(9)
+    in_token: str = betterproto.string_field(4)
+    in_token_address: str = betterproto.string_field(5)
+    out_token: str = betterproto.string_field(6)
+    out_token_address: str = betterproto.string_field(7)
+    in_amount: float = betterproto.double_field(8)
+    out_amount_min: float = betterproto.double_field(9)
     source_account: str = betterproto.string_field(10)
     destination_account: str = betterproto.string_field(11)
     owner_account: str = betterproto.string_field(12)
@@ -848,6 +864,20 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetOrderbook",
             request,
             GetOrderbookResponse,
+        )
+
+    async def get_market_depth(
+        self, *, market: str = "", limit: int = 0, project: "Project" = 0
+    ) -> GetMarketDepthResponse:
+        request = GetMarketDepthRequest()
+        request.market = market
+        request.limit = limit
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetMarketDepth",
+            request,
+            GetMarketDepthResponse,
         )
 
     async def get_trades(
@@ -1289,6 +1319,21 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_market_depths_stream(
+        self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
+    ) -> AsyncGenerator[GetMarketDepthsStreamResponse, None]:
+        request = GetMarketDepthsRequest()
+        request.markets = markets
+        request.limit = limit
+        request.project = project
+
+        async for response in self._unary_stream(
+            "/api.Api/GetMarketDepthsStream",
+            request,
+            GetMarketDepthsStreamResponse,
+        ):
+            yield response
+
     async def get_tickers_stream(
         self, *, market: str = "", project: "Project" = 0
     ) -> AsyncGenerator[GetTickersStreamResponse, None]:
@@ -1300,18 +1345,6 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetTickersStream",
             request,
             GetTickersStreamResponse,
-        ):
-            yield response
-
-    async def get_market_depth_stream(
-        self,
-    ) -> AsyncGenerator[GetMarketDepthStreamResponse, None]:
-        request = GetMarketsRequest()
-
-        async for response in self._unary_stream(
-            "/api.Api/GetMarketDepthStream",
-            request,
-            GetMarketDepthStreamResponse,
         ):
             yield response
 

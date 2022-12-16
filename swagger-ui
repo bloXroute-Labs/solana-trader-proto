@@ -1328,25 +1328,25 @@
         "poolAddress": {
           "type": "string"
         },
-        "baseToken": {
+        "inToken": {
           "type": "string"
         },
-        "baseTokenAddress": {
+        "inTokenAddress": {
           "type": "string"
         },
-        "quoteToken": {
+        "outToken": {
           "type": "string"
         },
-        "quoteTokenAddress": {
+        "outTokenAddress": {
           "type": "string"
         },
         "inAmount": {
-          "type": "string",
-          "format": "uint64"
+          "type": "number",
+          "format": "double"
         },
         "outAmountMin": {
-          "type": "string",
-          "format": "uint64"
+          "type": "number",
+          "format": "double"
         },
         "sourceAccount": {
           "type": "string"
