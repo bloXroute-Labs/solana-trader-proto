@@ -120,8 +120,13 @@ service Api {
   }
 
   rpc GetMarketDepth(GetMarketDepthRequest) returns (GetMarketDepthResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/depth/{market}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Trade";
+      description: "Returns market's aggregated price data. Use limit param to reduce the number of price points returned";
+      summary: "Market depth";
+      tags: "Market";
     };
   }
 
