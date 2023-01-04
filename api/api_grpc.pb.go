@@ -60,6 +60,10 @@ type ApiClient interface {
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
+	//Drift requests
+	GetDriftOrderbook(ctx context.Context, in *GetDriftOrderbookRequest, opts ...grpc.CallOption) (*GetDriftOrderbookResponse, error)
+	// Drift streaming endpoints
+	GetDriftOrderbooksStream(ctx context.Context, in *GetDriftOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftOrderbooksStreamClient, error)
 }
 
 type apiClient struct {
@@ -665,6 +669,47 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 	return m, nil
 }
 
+func (c *apiClient) GetDriftOrderbook(ctx context.Context, in *GetDriftOrderbookRequest, opts ...grpc.CallOption) (*GetDriftOrderbookResponse, error) {
+	out := new(GetDriftOrderbookResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftOrderbook", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftOrderbooksStream(ctx context.Context, in *GetDriftOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftOrderbooksStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetDriftOrderbooksStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetDriftOrderbooksStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetDriftOrderbooksStreamClient interface {
+	Recv() (*GetDriftOrderbooksStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetDriftOrderbooksStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetDriftOrderbooksStreamClient) Recv() (*GetDriftOrderbooksStreamResponse, error) {
+	m := new(GetDriftOrderbooksStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // ApiServer is the server API for Api service.
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
@@ -711,6 +756,10 @@ type ApiServer interface {
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
+	//Drift requests
+	GetDriftOrderbook(context.Context, *GetDriftOrderbookRequest) (*GetDriftOrderbookResponse, error)
+	// Drift streaming endpoints
+	GetDriftOrderbooksStream(*GetDriftOrderbooksRequest, Api_GetDriftOrderbooksStreamServer) error
 	mustEmbedUnimplementedApiServer()
 }
 
@@ -831,6 +880,12 @@ func (UnimplementedApiServer) GetPricesStream(*GetPricesStreamRequest, Api_GetPr
 }
 func (UnimplementedApiServer) GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetSwapsStream not implemented")
+}
+func (UnimplementedApiServer) GetDriftOrderbook(context.Context, *GetDriftOrderbookRequest) (*GetDriftOrderbookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftOrderbook not implemented")
+}
+func (UnimplementedApiServer) GetDriftOrderbooksStream(*GetDriftOrderbooksRequest, Api_GetDriftOrderbooksStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetDriftOrderbooksStream not implemented")
 }
 func (UnimplementedApiServer) mustEmbedUnimplementedApiServer() {}
 
@@ -1562,6 +1617,45 @@ func (x *apiGetSwapsStreamServer) Send(m *GetSwapsStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetDriftOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftOrderbookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftOrderbook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftOrderbook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftOrderbook(ctx, req.(*GetDriftOrderbookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetDriftOrderbooksStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetDriftOrderbooksRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetDriftOrderbooksStream(m, &apiGetDriftOrderbooksStreamServer{stream})
+}
+
+type Api_GetDriftOrderbooksStreamServer interface {
+	Send(*GetDriftOrderbooksStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetDriftOrderbooksStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetDriftOrderbooksStreamServer) Send(m *GetDriftOrderbooksStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Api_ServiceDesc is the grpc.ServiceDesc for Api service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1677,6 +1771,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "PostRouteTradeSwap",
 			Handler:    _Api_PostRouteTradeSwap_Handler,
 		},
+		{
+			MethodName: "GetDriftOrderbook",
+			Handler:    _Api_GetDriftOrderbook_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -1732,6 +1830,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetSwapsStream",
 			Handler:       _Api_GetSwapsStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetDriftOrderbooksStream",
+			Handler:       _Api_GetDriftOrderbooksStream_Handler,
 			ServerStreams: true,
 		},
 	},

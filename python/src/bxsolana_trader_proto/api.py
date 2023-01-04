@@ -785,6 +785,40 @@ class GetPricesStreamResponse(betterproto.Message):
     price: "TokenPrice" = betterproto.message_field(2)
 
 
+@dataclass
+class GetDriftOrderbookRequest(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+
+
+@dataclass
+class GetDriftOrderbooksRequest(betterproto.Message):
+    markets: List[str] = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+
+
+@dataclass
+class GetDriftOrderbookResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_index: int = betterproto.int32_field(2)
+    bids: List["DriftOrderbookItem"] = betterproto.message_field(3)
+    asks: List["DriftOrderbookItem"] = betterproto.message_field(4)
+
+
+@dataclass
+class DriftOrderbookItem(betterproto.Message):
+    price: float = betterproto.double_field(1)
+    size: float = betterproto.double_field(2)
+    order_i_d: str = betterproto.string_field(3)
+    client_order_i_d: str = betterproto.string_field(4)
+
+
+@dataclass
+class GetDriftOrderbooksStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    orderbook: "GetOrderbookResponse" = betterproto.message_field(2)
+
+
 class ApiStub(betterproto.ServiceStub):
     async def get_price(self, *, tokens: List[str] = []) -> GetPriceResponse:
         request = GetPriceRequest()
@@ -1458,5 +1492,36 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetSwapsStream",
             request,
             GetSwapsStreamResponse,
+        ):
+            yield response
+
+    async def get_drift_orderbook(
+        self, *, market: str = "", limit: int = 0
+    ) -> GetDriftOrderbookResponse:
+        """Drift requests"""
+
+        request = GetDriftOrderbookRequest()
+        request.market = market
+        request.limit = limit
+
+        return await self._unary_unary(
+            "/api.Api/GetDriftOrderbook",
+            request,
+            GetDriftOrderbookResponse,
+        )
+
+    async def get_drift_orderbooks_stream(
+        self, *, markets: List[str] = [], limit: int = 0
+    ) -> AsyncGenerator[GetDriftOrderbooksStreamResponse, None]:
+        """Drift streaming endpoints"""
+
+        request = GetDriftOrderbooksRequest()
+        request.markets = markets
+        request.limit = limit
+
+        async for response in self._unary_stream(
+            "/api.Api/GetDriftOrderbooksStream",
+            request,
+            GetDriftOrderbooksStreamResponse,
         ):
             yield response

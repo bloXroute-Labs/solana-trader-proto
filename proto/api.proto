@@ -428,6 +428,25 @@ service Api {
       tags: "AMMs";
     };
   }
+
+  //Drift requests
+  rpc GetDriftOrderbook(GetDriftOrderbookRequest) returns (GetDriftOrderbookResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/drift/perp/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns drift contract's orderbook. Use limit param to reduce the number of bids/asks returned";
+      summary: "Perpetuals contract orderbook";
+      tags: ["Drift", "Orderbook"];
+    };
+  }
+
+  // Drift streaming endpoints
+  rpc GetDriftOrderbooksStream(GetDriftOrderbooksRequest) returns (stream GetDriftOrderbooksStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Drift";
+    };
+  }
 }
 
 message GetMarketsRequest {
@@ -1102,6 +1121,37 @@ message GetPricesStreamRequest {
 message GetPricesStreamResponse {
   int64 slot = 1;
   TokenPrice price = 2;
+}
+
+// Drift messages
+
+message GetDriftOrderbookRequest {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+}
+
+message GetDriftOrderbooksRequest {
+  repeated string markets = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+}
+
+message GetDriftOrderbookResponse {
+  string market = 1;
+  int32 marketIndex = 2;
+  repeated DriftOrderbookItem bids = 3;
+  repeated DriftOrderbookItem asks = 4;
+}
+
+message DriftOrderbookItem {
+  double price = 1;
+  double size = 2;
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Drift generated OrderID"}];
+  string clientOrderID = 4;
+}
+
+message GetDriftOrderbooksStreamResponse {
+  int64 slot = 1;
+  GetOrderbookResponse orderbook = 2;
 }
 
 

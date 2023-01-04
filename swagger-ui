@@ -58,6 +58,47 @@
         ]
       }
     },
+    "/api/v1/drift/perp/{market}": {
+      "get": {
+        "summary": "Perpetuals contract orderbook",
+        "description": "Returns drift contract's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetDriftOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDriftOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Drift",
+          "Orderbook"
+        ]
+      }
+    },
     "/api/v1/market/markets": {
       "get": {
         "summary": "Orderbook markets",
@@ -975,6 +1016,26 @@
       ],
       "default": "D_ASCENDING"
     },
+    "apiDriftOrderbookItem": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "orderID": {
+          "type": "string",
+          "description": "Drift generated OrderID"
+        },
+        "clientOrderID": {
+          "type": "string"
+        }
+      }
+    },
     "apiGetAccountBalanceResponse": {
       "type": "object",
       "properties": {
@@ -991,6 +1052,42 @@
       "properties": {
         "block": {
           "$ref": "#/definitions/apiBlock"
+        }
+      }
+    },
+    "apiGetDriftOrderbookResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDriftOrderbookItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDriftOrderbookItem"
+          }
+        }
+      }
+    },
+    "apiGetDriftOrderbooksStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orderbook": {
+          "$ref": "#/definitions/apiGetOrderbookResponse"
         }
       }
     },

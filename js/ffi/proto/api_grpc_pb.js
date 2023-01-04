@@ -54,6 +54,50 @@ function deserialize_api_GetBlockStreamResponse(buffer_arg) {
   return api_pb.GetBlockStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetDriftOrderbookRequest(arg) {
+  if (!(arg instanceof api_pb.GetDriftOrderbookRequest)) {
+    throw new Error('Expected argument of type api.GetDriftOrderbookRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftOrderbookRequest(buffer_arg) {
+  return api_pb.GetDriftOrderbookRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftOrderbookResponse(arg) {
+  if (!(arg instanceof api_pb.GetDriftOrderbookResponse)) {
+    throw new Error('Expected argument of type api.GetDriftOrderbookResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftOrderbookResponse(buffer_arg) {
+  return api_pb.GetDriftOrderbookResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftOrderbooksRequest(arg) {
+  if (!(arg instanceof api_pb.GetDriftOrderbooksRequest)) {
+    throw new Error('Expected argument of type api.GetDriftOrderbooksRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftOrderbooksRequest(buffer_arg) {
+  return api_pb.GetDriftOrderbooksRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftOrderbooksStreamResponse(arg) {
+  if (!(arg instanceof api_pb.GetDriftOrderbooksStreamResponse)) {
+    throw new Error('Expected argument of type api.GetDriftOrderbooksStreamResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftOrderbooksStreamResponse(buffer_arg) {
+  return api_pb.GetDriftOrderbooksStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetKlineRequest(arg) {
   if (!(arg instanceof api_pb.GetKlineRequest)) {
     throw new Error('Expected argument of type api.GetKlineRequest');
@@ -1170,6 +1214,30 @@ getOrderbooksStream: {
     requestDeserialize: deserialize_api_GetSwapsStreamRequest,
     responseSerialize: serialize_api_GetSwapsStreamResponse,
     responseDeserialize: deserialize_api_GetSwapsStreamResponse,
+  },
+  // Drift requests
+getDriftOrderbook: {
+    path: '/api.Api/GetDriftOrderbook',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetDriftOrderbookRequest,
+    responseType: api_pb.GetDriftOrderbookResponse,
+    requestSerialize: serialize_api_GetDriftOrderbookRequest,
+    requestDeserialize: deserialize_api_GetDriftOrderbookRequest,
+    responseSerialize: serialize_api_GetDriftOrderbookResponse,
+    responseDeserialize: deserialize_api_GetDriftOrderbookResponse,
+  },
+  // Drift streaming endpoints
+getDriftOrderbooksStream: {
+    path: '/api.Api/GetDriftOrderbooksStream',
+    requestStream: false,
+    responseStream: true,
+    requestType: api_pb.GetDriftOrderbooksRequest,
+    responseType: api_pb.GetDriftOrderbooksStreamResponse,
+    requestSerialize: serialize_api_GetDriftOrderbooksRequest,
+    requestDeserialize: deserialize_api_GetDriftOrderbooksRequest,
+    responseSerialize: serialize_api_GetDriftOrderbooksStreamResponse,
+    responseDeserialize: deserialize_api_GetDriftOrderbooksStreamResponse,
   },
 };
 

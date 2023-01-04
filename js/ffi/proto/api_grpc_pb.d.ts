@@ -51,6 +51,8 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getPoolReservesStream: IApiService_IGetPoolReservesStream;
     getPricesStream: IApiService_IGetPricesStream;
     getSwapsStream: IApiService_IGetSwapsStream;
+    getDriftOrderbook: IApiService_IGetDriftOrderbook;
+    getDriftOrderbooksStream: IApiService_IGetDriftOrderbooksStream;
 }
 
 interface IApiService_IGetPrice extends grpc.MethodDefinition<api_pb.GetPriceRequest, api_pb.GetPriceResponse> {
@@ -395,6 +397,24 @@ interface IApiService_IGetSwapsStream extends grpc.MethodDefinition<api_pb.GetSw
     responseSerialize: grpc.serialize<api_pb.GetSwapsStreamResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetSwapsStreamResponse>;
 }
+interface IApiService_IGetDriftOrderbook extends grpc.MethodDefinition<api_pb.GetDriftOrderbookRequest, api_pb.GetDriftOrderbookResponse> {
+    path: "/api.Api/GetDriftOrderbook";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetDriftOrderbookRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetDriftOrderbookRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetDriftOrderbookResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetDriftOrderbookResponse>;
+}
+interface IApiService_IGetDriftOrderbooksStream extends grpc.MethodDefinition<api_pb.GetDriftOrderbooksRequest, api_pb.GetDriftOrderbooksStreamResponse> {
+    path: "/api.Api/GetDriftOrderbooksStream";
+    requestStream: false;
+    responseStream: true;
+    requestSerialize: grpc.serialize<api_pb.GetDriftOrderbooksRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetDriftOrderbooksRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetDriftOrderbooksStreamResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetDriftOrderbooksStreamResponse>;
+}
 
 export const ApiService: IApiService;
 
@@ -437,6 +457,8 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getPoolReservesStream: grpc.handleServerStreamingCall<api_pb.GetPoolReservesStreamRequest, api_pb.GetPoolReservesStreamResponse>;
     getPricesStream: grpc.handleServerStreamingCall<api_pb.GetPricesStreamRequest, api_pb.GetPricesStreamResponse>;
     getSwapsStream: grpc.handleServerStreamingCall<api_pb.GetSwapsStreamRequest, api_pb.GetSwapsStreamResponse>;
+    getDriftOrderbook: grpc.handleUnaryCall<api_pb.GetDriftOrderbookRequest, api_pb.GetDriftOrderbookResponse>;
+    getDriftOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetDriftOrderbooksRequest, api_pb.GetDriftOrderbooksStreamResponse>;
 }
 
 export interface IApiClient {
@@ -543,6 +565,11 @@ export interface IApiClient {
     getPricesStream(request: api_pb.GetPricesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPricesStreamResponse>;
     getSwapsStream(request: api_pb.GetSwapsStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
     getSwapsStream(request: api_pb.GetSwapsStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
+    getDriftOrderbook(request: api_pb.GetDriftOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftOrderbookResponse) => void): grpc.ClientUnaryCall;
+    getDriftOrderbook(request: api_pb.GetDriftOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftOrderbookResponse) => void): grpc.ClientUnaryCall;
+    getDriftOrderbook(request: api_pb.GetDriftOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftOrderbookResponse) => void): grpc.ClientUnaryCall;
+    getDriftOrderbooksStream(request: api_pb.GetDriftOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetDriftOrderbooksStreamResponse>;
+    getDriftOrderbooksStream(request: api_pb.GetDriftOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetDriftOrderbooksStreamResponse>;
 }
 
 export class ApiClient extends grpc.Client implements IApiClient {
@@ -650,4 +677,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getPricesStream(request: api_pb.GetPricesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPricesStreamResponse>;
     public getSwapsStream(request: api_pb.GetSwapsStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
     public getSwapsStream(request: api_pb.GetSwapsStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
+    public getDriftOrderbook(request: api_pb.GetDriftOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftOrderbookResponse) => void): grpc.ClientUnaryCall;
+    public getDriftOrderbook(request: api_pb.GetDriftOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftOrderbookResponse) => void): grpc.ClientUnaryCall;
+    public getDriftOrderbook(request: api_pb.GetDriftOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftOrderbookResponse) => void): grpc.ClientUnaryCall;
+    public getDriftOrderbooksStream(request: api_pb.GetDriftOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetDriftOrderbooksStreamResponse>;
+    public getDriftOrderbooksStream(request: api_pb.GetDriftOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetDriftOrderbooksStreamResponse>;
 }

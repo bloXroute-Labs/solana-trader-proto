@@ -2800,6 +2800,142 @@ export namespace GetPricesStreamResponse {
     }
 }
 
+export class GetDriftOrderbookRequest extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetDriftOrderbookRequest;
+    getLimit(): number;
+    setLimit(value: number): GetDriftOrderbookRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftOrderbookRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftOrderbookRequest): GetDriftOrderbookRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftOrderbookRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftOrderbookRequest;
+    static deserializeBinaryFromReader(message: GetDriftOrderbookRequest, reader: jspb.BinaryReader): GetDriftOrderbookRequest;
+}
+
+export namespace GetDriftOrderbookRequest {
+    export type AsObject = {
+        market: string,
+        limit: number,
+    }
+}
+
+export class GetDriftOrderbooksRequest extends jspb.Message { 
+    clearMarketsList(): void;
+    getMarketsList(): Array<string>;
+    setMarketsList(value: Array<string>): GetDriftOrderbooksRequest;
+    addMarkets(value: string, index?: number): string;
+    getLimit(): number;
+    setLimit(value: number): GetDriftOrderbooksRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftOrderbooksRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftOrderbooksRequest): GetDriftOrderbooksRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftOrderbooksRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftOrderbooksRequest;
+    static deserializeBinaryFromReader(message: GetDriftOrderbooksRequest, reader: jspb.BinaryReader): GetDriftOrderbooksRequest;
+}
+
+export namespace GetDriftOrderbooksRequest {
+    export type AsObject = {
+        marketsList: Array<string>,
+        limit: number,
+    }
+}
+
+export class GetDriftOrderbookResponse extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetDriftOrderbookResponse;
+    getMarketindex(): number;
+    setMarketindex(value: number): GetDriftOrderbookResponse;
+    clearBidsList(): void;
+    getBidsList(): Array<DriftOrderbookItem>;
+    setBidsList(value: Array<DriftOrderbookItem>): GetDriftOrderbookResponse;
+    addBids(value?: DriftOrderbookItem, index?: number): DriftOrderbookItem;
+    clearAsksList(): void;
+    getAsksList(): Array<DriftOrderbookItem>;
+    setAsksList(value: Array<DriftOrderbookItem>): GetDriftOrderbookResponse;
+    addAsks(value?: DriftOrderbookItem, index?: number): DriftOrderbookItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftOrderbookResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftOrderbookResponse): GetDriftOrderbookResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftOrderbookResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftOrderbookResponse;
+    static deserializeBinaryFromReader(message: GetDriftOrderbookResponse, reader: jspb.BinaryReader): GetDriftOrderbookResponse;
+}
+
+export namespace GetDriftOrderbookResponse {
+    export type AsObject = {
+        market: string,
+        marketindex: number,
+        bidsList: Array<DriftOrderbookItem.AsObject>,
+        asksList: Array<DriftOrderbookItem.AsObject>,
+    }
+}
+
+export class DriftOrderbookItem extends jspb.Message { 
+    getPrice(): number;
+    setPrice(value: number): DriftOrderbookItem;
+    getSize(): number;
+    setSize(value: number): DriftOrderbookItem;
+    getOrderid(): string;
+    setOrderid(value: string): DriftOrderbookItem;
+    getClientorderid(): string;
+    setClientorderid(value: string): DriftOrderbookItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): DriftOrderbookItem.AsObject;
+    static toObject(includeInstance: boolean, msg: DriftOrderbookItem): DriftOrderbookItem.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: DriftOrderbookItem, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): DriftOrderbookItem;
+    static deserializeBinaryFromReader(message: DriftOrderbookItem, reader: jspb.BinaryReader): DriftOrderbookItem;
+}
+
+export namespace DriftOrderbookItem {
+    export type AsObject = {
+        price: number,
+        size: number,
+        orderid: string,
+        clientorderid: string,
+    }
+}
+
+export class GetDriftOrderbooksStreamResponse extends jspb.Message { 
+    getSlot(): number;
+    setSlot(value: number): GetDriftOrderbooksStreamResponse;
+
+    hasOrderbook(): boolean;
+    clearOrderbook(): void;
+    getOrderbook(): GetOrderbookResponse | undefined;
+    setOrderbook(value?: GetOrderbookResponse): GetDriftOrderbooksStreamResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftOrderbooksStreamResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftOrderbooksStreamResponse): GetDriftOrderbooksStreamResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftOrderbooksStreamResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftOrderbooksStreamResponse;
+    static deserializeBinaryFromReader(message: GetDriftOrderbooksStreamResponse, reader: jspb.BinaryReader): GetDriftOrderbooksStreamResponse;
+}
+
+export namespace GetDriftOrderbooksStreamResponse {
+    export type AsObject = {
+        slot: number,
+        orderbook?: GetOrderbookResponse.AsObject,
+    }
+}
+
 export enum MarketStatus {
     MS_UNKNOWN = 0,
     MS_ONLINE = 1,
