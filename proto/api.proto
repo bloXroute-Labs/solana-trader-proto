@@ -51,28 +51,6 @@ service Api {
     }
   };
 
-  rpc GetCurrentPerpPositions(GetCurrentPerpPositionsRequest)  returns (GetCurrentPerpPositionsResponse) {
-    option (google.api.http) = {
-      get: "/api/v1/trade/perp-positions"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns the list current perp positions";
-      summary: "PERP positions";
-      tags: ["Trade", "Universal"];
-    };
-  }
-
-  rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
-    option (google.api.http) = {
-      get: "/api/v1/trade/perp/order"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns the list of prices for specified tokens";
-      summary: "Token prices";
-      tags: ["Trade", "Orderbook"];
-    };
-  }
-  
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/price"
@@ -386,6 +364,29 @@ service Api {
       description: "Generates an unsigned transaction object for the AMM swap on the specified route";
       summary: "Unsigned AMM swap transaction along route";
       tags: ["Trade", "AMM"];
+    };
+  }
+
+  // perp endpoints
+  rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/perp/order"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for specified tokens";
+      summary: "Token prices";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc GetCurrentPerpPositions(GetCurrentPerpPositionsRequest)  returns (GetCurrentPerpPositionsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/perp-positions"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list current perp positions";
+      summary: "PERP positions";
+      tags: ["Trade", "Universal"];
     };
   }
 
