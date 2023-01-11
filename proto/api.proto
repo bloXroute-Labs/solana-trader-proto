@@ -667,8 +667,6 @@ enum Side {
 enum OrderType {
   OT_MARKET = 0;
   OT_LIMIT = 1; // MARKET and LIMIT are mutually exclusive
-  OT_IOC = 2; // immediate or cancel
-  OT_POST = 3;
 }
 
 message PostOrderResponse {
@@ -1148,13 +1146,13 @@ message GetPerpPositionsRequest {
   Project project = 1;
   string ownerAddress = 2;
   string accountAddress = 3;
-  repeated common.Contract contracts = 4;
+  repeated common.PerpContract contracts = 4;
 }
 
 message ClosePerpPositionsRequest {
   Project project = 1;
   string ownerAddress = 2;
-  repeated common.Contract contracts = 3;
+  repeated common.PerpContract contracts = 3;
 }
 
 message ClosePerpPositionsResponse {
@@ -1162,7 +1160,7 @@ message ClosePerpPositionsResponse {
 }
 
 message GetCurrentPerpPosition {
-  common.Contract contract = 1;
+  common.PerpContract contract = 1;
 
   double contractVolume = 2;
   double volumeAvailable = 3;
@@ -1189,14 +1187,14 @@ message PostPerpOrderRequest {
   Project project = 1;
   string ownerAddress = 2;
   string payerAddress = 3;
-  common.Contract contract = 4;
+  common.PerpContract contract = 4;
   string accountAddress = 5;
-  string positionSide = 6;
+  common.PerpPositionSide positionSide = 6;
   string slippage = 7;
-  string type = 8;
+  common.PerpOrderType type = 8;
   double amount = 9;
   double price = 10;
-  string clientOrderID = 11;
+  int64 clientOrderID = 11;
 }
 
 message PostPerpOrderResponse {

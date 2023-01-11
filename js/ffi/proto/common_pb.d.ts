@@ -55,7 +55,26 @@ export namespace Fee {
     }
 }
 
-export enum Contract {
+export enum OrderType {
+    OT_MARKET = 0,
+    OT_LIMIT = 1,
+    OT_IOC = 2,
+    OT_POST = 3,
+}
+
+export enum PerpOrderType {
+    POT_UNKNOWN = 0,
+    POT_MARKET = 1,
+    POT_LIMIT = 2,
+}
+
+export enum PerpPositionSide {
+    PS_UNKNOWN = 0,
+    PS_LONG = 1,
+    PS_SHORT = 2,
+}
+
+export enum PerpContract {
     ALL = 0,
     SOL_PERP = 1,
     ETH_PERP = 2,

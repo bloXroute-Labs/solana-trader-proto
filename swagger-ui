@@ -838,7 +838,13 @@
             "name": "positionSide",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "PS_UNKNOWN",
+              "PS_LONG",
+              "PS_SHORT"
+            ],
+            "default": "PS_UNKNOWN"
           },
           {
             "name": "slippage",
@@ -850,7 +856,13 @@
             "name": "type",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "POT_UNKNOWN",
+              "POT_MARKET",
+              "POT_LIMIT"
+            ],
+            "default": "POT_UNKNOWN"
           },
           {
             "name": "amount",
@@ -870,7 +882,8 @@
             "name": "clientOrderID",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -1319,7 +1332,7 @@
       "type": "object",
       "properties": {
         "contract": {
-          "$ref": "#/definitions/commonContract"
+          "$ref": "#/definitions/commonPerpContract"
         },
         "contractVolume": {
           "type": "number",
@@ -1908,9 +1921,7 @@
       "type": "string",
       "enum": [
         "OT_MARKET",
-        "OT_LIMIT",
-        "OT_IOC",
-        "OT_POST"
+        "OT_LIMIT"
       ],
       "default": "OT_MARKET"
     },
@@ -2814,16 +2825,6 @@
         }
       }
     },
-    "commonContract": {
-      "type": "string",
-      "enum": [
-        "ALL",
-        "SOL_PERP",
-        "ETH_PERP",
-        "BTC_PERP"
-      ],
-      "default": "ALL"
-    },
     "commonFee": {
       "type": "object",
       "properties": {
@@ -2848,6 +2849,35 @@
         "INF_NEGATIVE"
       ],
       "default": "INF_NOT"
+    },
+    "commonPerpContract": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "SOL_PERP",
+        "ETH_PERP",
+        "BTC_PERP"
+      ],
+      "default": "ALL"
+    },
+    "commonPerpOrderType": {
+      "type": "string",
+      "enum": [
+        "POT_UNKNOWN",
+        "POT_MARKET",
+        "POT_LIMIT"
+      ],
+      "default": "POT_UNKNOWN",
+      "title": "Drift types : limit, trigger_market, trigger_limit, market, oracle"
+    },
+    "commonPerpPositionSide": {
+      "type": "string",
+      "enum": [
+        "PS_UNKNOWN",
+        "PS_LONG",
+        "PS_SHORT"
+      ],
+      "default": "PS_UNKNOWN"
     },
     "commonPriceImpactPercent": {
       "type": "object",

@@ -25,8 +25,6 @@ class Side(betterproto.Enum):
 class OrderType(betterproto.Enum):
     OT_MARKET = 0
     OT_LIMIT = 1
-    OT_IOC = 2
-    OT_POST = 3
 
 
 class OrderStatus(betterproto.Enum):
@@ -791,14 +789,14 @@ class GetPerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
     account_address: str = betterproto.string_field(3)
-    contracts: List[common.Contract] = betterproto.enum_field(4)
+    contracts: List[common.PerpContract] = betterproto.enum_field(4)
 
 
 @dataclass
 class ClosePerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
-    contracts: List[common.Contract] = betterproto.enum_field(3)
+    contracts: List[common.PerpContract] = betterproto.enum_field(3)
 
 
 @dataclass
@@ -808,7 +806,7 @@ class ClosePerpPositionsResponse(betterproto.Message):
 
 @dataclass
 class GetCurrentPerpPosition(betterproto.Message):
-    contract: common.Contract = betterproto.enum_field(1)
+    contract: common.PerpContract = betterproto.enum_field(1)
     contract_volume: float = betterproto.double_field(2)
     volume_available: float = betterproto.double_field(3)
     volume_in_order: float = betterproto.double_field(4)
@@ -832,14 +830,14 @@ class PostPerpOrderRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
     payer_address: str = betterproto.string_field(3)
-    contract: common.Contract = betterproto.enum_field(4)
+    contract: common.PerpContract = betterproto.enum_field(4)
     account_address: str = betterproto.string_field(5)
-    position_side: str = betterproto.string_field(6)
+    position_side: common.PerpPositionSide = betterproto.enum_field(6)
     slippage: str = betterproto.string_field(7)
-    type: str = betterproto.string_field(8)
+    type: common.PerpOrderType = betterproto.enum_field(8)
     amount: float = betterproto.double_field(9)
     price: float = betterproto.double_field(10)
-    client_order_i_d: str = betterproto.string_field(11)
+    client_order_i_d: int = betterproto.int64_field(11)
 
 
 @dataclass
@@ -1371,14 +1369,14 @@ class ApiStub(betterproto.ServiceStub):
         project: "Project" = 0,
         owner_address: str = "",
         payer_address: str = "",
-        contract: common.Contract = 0,
+        contract: common.PerpContract = 0,
         account_address: str = "",
-        position_side: str = "",
+        position_side: common.PerpPositionSide = 0,
         slippage: str = "",
-        type: str = "",
+        type: common.PerpOrderType = 0,
         amount: float = 0,
         price: float = 0,
-        client_order_i_d: str = "",
+        client_order_i_d: int = 0,
     ) -> PostPerpOrderResponse:
         """perp endpoints"""
 
@@ -1407,7 +1405,7 @@ class ApiStub(betterproto.ServiceStub):
         project: "Project" = 0,
         owner_address: str = "",
         account_address: str = "",
-        contracts: List[common.Contract] = [],
+        contracts: List[common.PerpContract] = [],
     ) -> GetPerpPositionsResponse:
         request = GetPerpPositionsRequest()
         request.project = project
@@ -1426,7 +1424,7 @@ class ApiStub(betterproto.ServiceStub):
         *,
         project: "Project" = 0,
         owner_address: str = "",
-        contracts: List[common.Contract] = [],
+        contracts: List[common.PerpContract] = [],
     ) -> ClosePerpPositionsResponse:
         request = ClosePerpPositionsRequest()
         request.project = project

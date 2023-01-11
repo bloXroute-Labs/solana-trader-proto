@@ -2808,9 +2808,9 @@ export class GetPerpPositionsRequest extends jspb.Message {
     getAccountaddress(): string;
     setAccountaddress(value: string): GetPerpPositionsRequest;
     clearContractsList(): void;
-    getContractsList(): Array<common_pb.Contract>;
-    setContractsList(value: Array<common_pb.Contract>): GetPerpPositionsRequest;
-    addContracts(value: common_pb.Contract, index?: number): common_pb.Contract;
+    getContractsList(): Array<common_pb.PerpContract>;
+    setContractsList(value: Array<common_pb.PerpContract>): GetPerpPositionsRequest;
+    addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPerpPositionsRequest.AsObject;
@@ -2827,7 +2827,7 @@ export namespace GetPerpPositionsRequest {
         project: Project,
         owneraddress: string,
         accountaddress: string,
-        contractsList: Array<common_pb.Contract>,
+        contractsList: Array<common_pb.PerpContract>,
     }
 }
 
@@ -2837,9 +2837,9 @@ export class ClosePerpPositionsRequest extends jspb.Message {
     getOwneraddress(): string;
     setOwneraddress(value: string): ClosePerpPositionsRequest;
     clearContractsList(): void;
-    getContractsList(): Array<common_pb.Contract>;
-    setContractsList(value: Array<common_pb.Contract>): ClosePerpPositionsRequest;
-    addContracts(value: common_pb.Contract, index?: number): common_pb.Contract;
+    getContractsList(): Array<common_pb.PerpContract>;
+    setContractsList(value: Array<common_pb.PerpContract>): ClosePerpPositionsRequest;
+    addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ClosePerpPositionsRequest.AsObject;
@@ -2855,7 +2855,7 @@ export namespace ClosePerpPositionsRequest {
     export type AsObject = {
         project: Project,
         owneraddress: string,
-        contractsList: Array<common_pb.Contract>,
+        contractsList: Array<common_pb.PerpContract>,
     }
 }
 
@@ -2882,8 +2882,8 @@ export namespace ClosePerpPositionsResponse {
 }
 
 export class GetCurrentPerpPosition extends jspb.Message { 
-    getContract(): common_pb.Contract;
-    setContract(value: common_pb.Contract): GetCurrentPerpPosition;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): GetCurrentPerpPosition;
     getContractvolume(): number;
     setContractvolume(value: number): GetCurrentPerpPosition;
     getVolumeavailable(): number;
@@ -2915,7 +2915,7 @@ export class GetCurrentPerpPosition extends jspb.Message {
 
 export namespace GetCurrentPerpPosition {
     export type AsObject = {
-        contract: common_pb.Contract,
+        contract: common_pb.PerpContract,
         contractvolume: number,
         volumeavailable: number,
         volumeinorder: number,
@@ -2963,22 +2963,22 @@ export class PostPerpOrderRequest extends jspb.Message {
     setOwneraddress(value: string): PostPerpOrderRequest;
     getPayeraddress(): string;
     setPayeraddress(value: string): PostPerpOrderRequest;
-    getContract(): common_pb.Contract;
-    setContract(value: common_pb.Contract): PostPerpOrderRequest;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): PostPerpOrderRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): PostPerpOrderRequest;
-    getPositionside(): string;
-    setPositionside(value: string): PostPerpOrderRequest;
+    getPositionside(): common_pb.PerpPositionSide;
+    setPositionside(value: common_pb.PerpPositionSide): PostPerpOrderRequest;
     getSlippage(): string;
     setSlippage(value: string): PostPerpOrderRequest;
-    getType(): string;
-    setType(value: string): PostPerpOrderRequest;
+    getType(): common_pb.PerpOrderType;
+    setType(value: common_pb.PerpOrderType): PostPerpOrderRequest;
     getAmount(): number;
     setAmount(value: number): PostPerpOrderRequest;
     getPrice(): number;
     setPrice(value: number): PostPerpOrderRequest;
-    getClientorderid(): string;
-    setClientorderid(value: string): PostPerpOrderRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostPerpOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostPerpOrderRequest.AsObject;
@@ -2995,14 +2995,14 @@ export namespace PostPerpOrderRequest {
         project: Project,
         owneraddress: string,
         payeraddress: string,
-        contract: common_pb.Contract,
+        contract: common_pb.PerpContract,
         accountaddress: string,
-        positionside: string,
+        positionside: common_pb.PerpPositionSide,
         slippage: string,
-        type: string,
+        type: common_pb.PerpOrderType,
         amount: number,
         price: number,
-        clientorderid: string,
+        clientorderid: number,
     }
 }
 
@@ -3043,8 +3043,6 @@ export enum Side {
 export enum OrderType {
     OT_MARKET = 0,
     OT_LIMIT = 1,
-    OT_IOC = 2,
-    OT_POST = 3,
 }
 
 export enum OrderStatus {

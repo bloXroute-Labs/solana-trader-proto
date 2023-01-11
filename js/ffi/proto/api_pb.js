@@ -23642,7 +23642,7 @@ proto.api.GetPerpPositionsRequest.deserializeBinaryFromReader = function(msg, re
       msg.setAccountaddress(value);
       break;
     case 4:
-      var values = /** @type {!Array<!proto.common.Contract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
+      var values = /** @type {!Array<!proto.common.PerpContract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
       for (var i = 0; i < values.length; i++) {
         msg.addContracts(values[i]);
       }
@@ -23762,16 +23762,16 @@ proto.api.GetPerpPositionsRequest.prototype.setAccountaddress = function(value) 
 
 
 /**
- * repeated common.Contract contracts = 4;
- * @return {!Array<!proto.common.Contract>}
+ * repeated common.PerpContract contracts = 4;
+ * @return {!Array<!proto.common.PerpContract>}
  */
 proto.api.GetPerpPositionsRequest.prototype.getContractsList = function() {
-  return /** @type {!Array<!proto.common.Contract>} */ (jspb.Message.getRepeatedField(this, 4));
+  return /** @type {!Array<!proto.common.PerpContract>} */ (jspb.Message.getRepeatedField(this, 4));
 };
 
 
 /**
- * @param {!Array<!proto.common.Contract>} value
+ * @param {!Array<!proto.common.PerpContract>} value
  * @return {!proto.api.GetPerpPositionsRequest} returns this
  */
 proto.api.GetPerpPositionsRequest.prototype.setContractsList = function(value) {
@@ -23780,7 +23780,7 @@ proto.api.GetPerpPositionsRequest.prototype.setContractsList = function(value) {
 
 
 /**
- * @param {!proto.common.Contract} value
+ * @param {!proto.common.PerpContract} value
  * @param {number=} opt_index
  * @return {!proto.api.GetPerpPositionsRequest} returns this
  */
@@ -23885,7 +23885,7 @@ proto.api.ClosePerpPositionsRequest.deserializeBinaryFromReader = function(msg, 
       msg.setOwneraddress(value);
       break;
     case 3:
-      var values = /** @type {!Array<!proto.common.Contract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
+      var values = /** @type {!Array<!proto.common.PerpContract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
       for (var i = 0; i < values.length; i++) {
         msg.addContracts(values[i]);
       }
@@ -23980,16 +23980,16 @@ proto.api.ClosePerpPositionsRequest.prototype.setOwneraddress = function(value) 
 
 
 /**
- * repeated common.Contract contracts = 3;
- * @return {!Array<!proto.common.Contract>}
+ * repeated common.PerpContract contracts = 3;
+ * @return {!Array<!proto.common.PerpContract>}
  */
 proto.api.ClosePerpPositionsRequest.prototype.getContractsList = function() {
-  return /** @type {!Array<!proto.common.Contract>} */ (jspb.Message.getRepeatedField(this, 3));
+  return /** @type {!Array<!proto.common.PerpContract>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
 
 /**
- * @param {!Array<!proto.common.Contract>} value
+ * @param {!Array<!proto.common.PerpContract>} value
  * @return {!proto.api.ClosePerpPositionsRequest} returns this
  */
 proto.api.ClosePerpPositionsRequest.prototype.setContractsList = function(value) {
@@ -23998,7 +23998,7 @@ proto.api.ClosePerpPositionsRequest.prototype.setContractsList = function(value)
 
 
 /**
- * @param {!proto.common.Contract} value
+ * @param {!proto.common.PerpContract} value
  * @param {number=} opt_index
  * @return {!proto.api.ClosePerpPositionsRequest} returns this
  */
@@ -24251,7 +24251,7 @@ proto.api.GetCurrentPerpPosition.deserializeBinaryFromReader = function(msg, rea
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.common.Contract} */ (reader.readEnum());
+      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
       msg.setContract(value);
       break;
     case 2:
@@ -24393,16 +24393,16 @@ proto.api.GetCurrentPerpPosition.serializeBinaryToWriter = function(message, wri
 
 
 /**
- * optional common.Contract contract = 1;
- * @return {!proto.common.Contract}
+ * optional common.PerpContract contract = 1;
+ * @return {!proto.common.PerpContract}
  */
 proto.api.GetCurrentPerpPosition.prototype.getContract = function() {
-  return /** @type {!proto.common.Contract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.common.Contract} value
+ * @param {!proto.common.PerpContract} value
  * @return {!proto.api.GetCurrentPerpPosition} returns this
  */
 proto.api.GetCurrentPerpPosition.prototype.setContract = function(value) {
@@ -24829,12 +24829,12 @@ proto.api.PostPerpOrderRequest.toObject = function(includeInstance, msg) {
     payeraddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     contract: jspb.Message.getFieldWithDefault(msg, 4, 0),
     accountaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    positionside: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    positionside: jspb.Message.getFieldWithDefault(msg, 6, 0),
     slippage: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    type: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    type: jspb.Message.getFieldWithDefault(msg, 8, 0),
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 11, "")
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 11, 0)
   };
 
   if (includeInstance) {
@@ -24884,7 +24884,7 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setPayeraddress(value);
       break;
     case 4:
-      var value = /** @type {!proto.common.Contract} */ (reader.readEnum());
+      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
       msg.setContract(value);
       break;
     case 5:
@@ -24892,7 +24892,7 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setAccountaddress(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {!proto.common.PerpPositionSide} */ (reader.readEnum());
       msg.setPositionside(value);
       break;
     case 7:
@@ -24900,7 +24900,7 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setSlippage(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {!proto.common.PerpOrderType} */ (reader.readEnum());
       msg.setType(value);
       break;
     case 9:
@@ -24912,7 +24912,7 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setPrice(value);
       break;
     case 11:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setClientorderid(value);
       break;
     default:
@@ -24980,8 +24980,8 @@ proto.api.PostPerpOrderRequest.serializeBinaryToWriter = function(message, write
     );
   }
   f = message.getPositionside();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0.0) {
+    writer.writeEnum(
       6,
       f
     );
@@ -24994,8 +24994,8 @@ proto.api.PostPerpOrderRequest.serializeBinaryToWriter = function(message, write
     );
   }
   f = message.getType();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0.0) {
+    writer.writeEnum(
       8,
       f
     );
@@ -25015,8 +25015,8 @@ proto.api.PostPerpOrderRequest.serializeBinaryToWriter = function(message, write
     );
   }
   f = message.getClientorderid();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeInt64(
       11,
       f
     );
@@ -25079,16 +25079,16 @@ proto.api.PostPerpOrderRequest.prototype.setPayeraddress = function(value) {
 
 
 /**
- * optional common.Contract contract = 4;
- * @return {!proto.common.Contract}
+ * optional common.PerpContract contract = 4;
+ * @return {!proto.common.PerpContract}
  */
 proto.api.PostPerpOrderRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.Contract} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
 /**
- * @param {!proto.common.Contract} value
+ * @param {!proto.common.PerpContract} value
  * @return {!proto.api.PostPerpOrderRequest} returns this
  */
 proto.api.PostPerpOrderRequest.prototype.setContract = function(value) {
@@ -25115,20 +25115,20 @@ proto.api.PostPerpOrderRequest.prototype.setAccountaddress = function(value) {
 
 
 /**
- * optional string positionSide = 6;
- * @return {string}
+ * optional common.PerpPositionSide positionSide = 6;
+ * @return {!proto.common.PerpPositionSide}
  */
 proto.api.PostPerpOrderRequest.prototype.getPositionside = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+  return /** @type {!proto.common.PerpPositionSide} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {!proto.common.PerpPositionSide} value
  * @return {!proto.api.PostPerpOrderRequest} returns this
  */
 proto.api.PostPerpOrderRequest.prototype.setPositionside = function(value) {
-  return jspb.Message.setProto3StringField(this, 6, value);
+  return jspb.Message.setProto3EnumField(this, 6, value);
 };
 
 
@@ -25151,20 +25151,20 @@ proto.api.PostPerpOrderRequest.prototype.setSlippage = function(value) {
 
 
 /**
- * optional string type = 8;
- * @return {string}
+ * optional common.PerpOrderType type = 8;
+ * @return {!proto.common.PerpOrderType}
  */
 proto.api.PostPerpOrderRequest.prototype.getType = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+  return /** @type {!proto.common.PerpOrderType} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {!proto.common.PerpOrderType} value
  * @return {!proto.api.PostPerpOrderRequest} returns this
  */
 proto.api.PostPerpOrderRequest.prototype.setType = function(value) {
-  return jspb.Message.setProto3StringField(this, 8, value);
+  return jspb.Message.setProto3EnumField(this, 8, value);
 };
 
 
@@ -25205,20 +25205,20 @@ proto.api.PostPerpOrderRequest.prototype.setPrice = function(value) {
 
 
 /**
- * optional string clientOrderID = 11;
- * @return {string}
+ * optional int64 clientOrderID = 11;
+ * @return {number}
  */
 proto.api.PostPerpOrderRequest.prototype.getClientorderid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.api.PostPerpOrderRequest} returns this
  */
 proto.api.PostPerpOrderRequest.prototype.setClientorderid = function(value) {
-  return jspb.Message.setProto3StringField(this, 11, value);
+  return jspb.Message.setProto3IntField(this, 11, value);
 };
 
 
@@ -25404,9 +25404,7 @@ proto.api.Side = {
  */
 proto.api.OrderType = {
   OT_MARKET: 0,
-  OT_LIMIT: 1,
-  OT_IOC: 2,
-  OT_POST: 3
+  OT_LIMIT: 1
 };
 
 /**
