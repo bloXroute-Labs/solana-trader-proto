@@ -8,7 +8,6 @@ import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "common.proto";
-import "drift.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   security: {
@@ -52,24 +51,35 @@ service Api {
     }
   };
 
-  rpc DriftGetDriftCurrentPosition(drift.DriftGetCurrentPerpPositionsRequest)  returns (drift.DriftGetCurrentPerpPositionsResponse) {
+  rpc GetCurrentPerpPositions(GetCurrentPerpPositionsRequest)  returns (GetCurrentPerpPositionsResponse) {
     option (google.api.http) = {
-      get: "/api/v1/drift/perp-positions"
+      get: "/api/v1/trade/perp-positions"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list current perp positions";
       summary: "PERP positions";
-      tags: ["Market", "Universal"];
+      tags: ["Trade", "Universal"];
     };
   }
 
-  rpc DriftPostPerpOrder(drift.DriftPostPerpOrderRequest)  returns (drift.DriftPostPerpOrderResponse) {
+  rpc DriftPostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
     option (google.api.http) = {
-      get: "/api/v1/drift/perp-post-order"
+      get: "/api/v1/trade/perp/order"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list of prices for specified tokens";
       summary: "Token prices";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc DriftGetOrderbook(GetOrderbookRequest)  returns (GetOrderbookResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/orderbook"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns orderbook";
+      summary: "orderbook";
       tags: ["Market", "Universal"];
     };
   }
@@ -957,6 +967,7 @@ enum Project {
   P_RAYDIUM = 3;
   P_SERUM = 4;
   P_OPENBOOK = 5;
+  P_DRIFT = 6;
 }
 
 message QuoteRoute {
@@ -1130,6 +1141,64 @@ message GetPricesStreamRequest {
 message GetPricesStreamResponse {
   int64 slot = 1;
   TokenPrice price = 2;
+}
+
+
+enum Contract {
+  ALL = 0;
+  SOL_PERP = 1; // SOL-PERP
+  ETH_PERP = 2; // ETH-PERP
+  BTC_PERP = 3; // BTC-PERP
+}
+
+message GetCurrentPerpPositionsRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  string accountAddress = 3;
+  repeated Contract contracts = 4;
+}
+
+message GetCurrentPerpPosition {
+  Contract contract = 1;
+
+  double contractVolume = 2;
+  double volumeAvailable = 3;
+  double volumeInOrder = 4;
+
+  double positionMargin = 5;
+  string positionSide = 6; // long, short
+
+  double unrealizedPnL = 7;
+
+  double perpPrice = 8;
+  double indexPrice = 9;
+  double liquidationPrice = 10;
+}
+
+message GetCurrentPerpPositionsResponse {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+
+  repeated GetCurrentPerpPosition perpPositions = 3;
+}
+
+message PostPerpOrderRequest {
+
+  string ownerAddress = 1;
+  string payerAddress = 2;
+  Contract contract = 3;
+  string accountAddress = 4;
+  string positionSide = 5;
+  string slippage = 6;
+  string type = 7;
+  double amount = 8;
+  double price = 9;
+  string clientOrderId = 10;
+}
+
+message PostPerpOrderResponse {
+  string transaction = 1;
+  string accountAddress = 2;
 }
 
 
