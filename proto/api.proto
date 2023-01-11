@@ -1194,7 +1194,7 @@ message PostPerpOrderRequest {
   common.PerpOrderType type = 8;
   double amount = 9;
   double price = 10;
-  int64 clientOrderID = 11;
+  uint64 clientOrderID = 11;
 }
 
 message PostPerpOrderResponse {

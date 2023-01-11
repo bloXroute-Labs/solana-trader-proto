@@ -24912,7 +24912,7 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setPrice(value);
       break;
     case 11:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = /** @type {number} */ (reader.readUint64());
       msg.setClientorderid(value);
       break;
     default:
@@ -25016,7 +25016,7 @@ proto.api.PostPerpOrderRequest.serializeBinaryToWriter = function(message, write
   }
   f = message.getClientorderid();
   if (f !== 0) {
-    writer.writeInt64(
+    writer.writeUint64(
       11,
       f
     );
@@ -25205,7 +25205,7 @@ proto.api.PostPerpOrderRequest.prototype.setPrice = function(value) {
 
 
 /**
- * optional int64 clientOrderID = 11;
+ * optional uint64 clientOrderID = 11;
  * @return {number}
  */
 proto.api.PostPerpOrderRequest.prototype.getClientorderid = function() {

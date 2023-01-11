@@ -837,7 +837,7 @@ class PostPerpOrderRequest(betterproto.Message):
     type: common.PerpOrderType = betterproto.enum_field(8)
     amount: float = betterproto.double_field(9)
     price: float = betterproto.double_field(10)
-    client_order_i_d: int = betterproto.int64_field(11)
+    client_order_i_d: int = betterproto.uint64_field(11)
 
 
 @dataclass
