@@ -269,7 +269,7 @@ func (x *DriftOrderbookItem) GetClientOrderID() string {
 	return ""
 }
 
-type DriftGetCurrentPerpPositionsRequest struct {
+type DriftGetPerpPositionsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -279,8 +279,8 @@ type DriftGetCurrentPerpPositionsRequest struct {
 	Contracts      []DriftContract `protobuf:"varint,3,rep,packed,name=contracts,proto3,enum=drift.DriftContract" json:"contracts,omitempty"`
 }
 
-func (x *DriftGetCurrentPerpPositionsRequest) Reset() {
-	*x = DriftGetCurrentPerpPositionsRequest{}
+func (x *DriftGetPerpPositionsRequest) Reset() {
+	*x = DriftGetPerpPositionsRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_drift_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -288,13 +288,13 @@ func (x *DriftGetCurrentPerpPositionsRequest) Reset() {
 	}
 }
 
-func (x *DriftGetCurrentPerpPositionsRequest) String() string {
+func (x *DriftGetPerpPositionsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DriftGetCurrentPerpPositionsRequest) ProtoMessage() {}
+func (*DriftGetPerpPositionsRequest) ProtoMessage() {}
 
-func (x *DriftGetCurrentPerpPositionsRequest) ProtoReflect() protoreflect.Message {
+func (x *DriftGetPerpPositionsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_drift_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -306,26 +306,26 @@ func (x *DriftGetCurrentPerpPositionsRequest) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DriftGetCurrentPerpPositionsRequest.ProtoReflect.Descriptor instead.
-func (*DriftGetCurrentPerpPositionsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use DriftGetPerpPositionsRequest.ProtoReflect.Descriptor instead.
+func (*DriftGetPerpPositionsRequest) Descriptor() ([]byte, []int) {
 	return file_drift_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *DriftGetCurrentPerpPositionsRequest) GetOwnerAddress() string {
+func (x *DriftGetPerpPositionsRequest) GetOwnerAddress() string {
 	if x != nil {
 		return x.OwnerAddress
 	}
 	return ""
 }
 
-func (x *DriftGetCurrentPerpPositionsRequest) GetAccountAddress() string {
+func (x *DriftGetPerpPositionsRequest) GetAccountAddress() string {
 	if x != nil {
 		return x.AccountAddress
 	}
 	return ""
 }
 
-func (x *DriftGetCurrentPerpPositionsRequest) GetContracts() []DriftContract {
+func (x *DriftGetPerpPositionsRequest) GetContracts() []DriftContract {
 	if x != nil {
 		return x.Contracts
 	}
@@ -451,7 +451,7 @@ func (x *DriftGetCurrentPerpPosition) GetLiquidationPrice() float64 {
 	return 0
 }
 
-type DriftGetCurrentPerpPositionsResponse struct {
+type DriftGetPerpPositionsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -461,8 +461,8 @@ type DriftGetCurrentPerpPositionsResponse struct {
 	PerpPositions  []*DriftGetCurrentPerpPosition `protobuf:"bytes,3,rep,name=perpPositions,proto3" json:"perpPositions,omitempty"`
 }
 
-func (x *DriftGetCurrentPerpPositionsResponse) Reset() {
-	*x = DriftGetCurrentPerpPositionsResponse{}
+func (x *DriftGetPerpPositionsResponse) Reset() {
+	*x = DriftGetPerpPositionsResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_drift_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -470,13 +470,13 @@ func (x *DriftGetCurrentPerpPositionsResponse) Reset() {
 	}
 }
 
-func (x *DriftGetCurrentPerpPositionsResponse) String() string {
+func (x *DriftGetPerpPositionsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DriftGetCurrentPerpPositionsResponse) ProtoMessage() {}
+func (*DriftGetPerpPositionsResponse) ProtoMessage() {}
 
-func (x *DriftGetCurrentPerpPositionsResponse) ProtoReflect() protoreflect.Message {
+func (x *DriftGetPerpPositionsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_drift_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -488,26 +488,26 @@ func (x *DriftGetCurrentPerpPositionsResponse) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DriftGetCurrentPerpPositionsResponse.ProtoReflect.Descriptor instead.
-func (*DriftGetCurrentPerpPositionsResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use DriftGetPerpPositionsResponse.ProtoReflect.Descriptor instead.
+func (*DriftGetPerpPositionsResponse) Descriptor() ([]byte, []int) {
 	return file_drift_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *DriftGetCurrentPerpPositionsResponse) GetOwnerAddress() string {
+func (x *DriftGetPerpPositionsResponse) GetOwnerAddress() string {
 	if x != nil {
 		return x.OwnerAddress
 	}
 	return ""
 }
 
-func (x *DriftGetCurrentPerpPositionsResponse) GetAccountAddress() string {
+func (x *DriftGetPerpPositionsResponse) GetAccountAddress() string {
 	if x != nil {
 		return x.AccountAddress
 	}
 	return ""
 }
 
-func (x *DriftGetCurrentPerpPositionsResponse) GetPerpPositions() []*DriftGetCurrentPerpPosition {
+func (x *DriftGetPerpPositionsResponse) GetPerpPositions() []*DriftGetCurrentPerpPosition {
 	if x != nil {
 		return x.PerpPositions
 	}
@@ -824,18 +824,18 @@ var file_drift_proto_goTypes = []interface{}{
 	(*DriftGetOrderbookRequest)(nil),             // 1: drift.DriftGetOrderbookRequest
 	(*DriftGetOrderbookResponse)(nil),            // 2: drift.DriftGetOrderbookResponse
 	(*DriftOrderbookItem)(nil),                   // 3: drift.DriftOrderbookItem
-	(*DriftGetCurrentPerpPositionsRequest)(nil),  // 4: drift.DriftGetCurrentPerpPositionsRequest
+	(*DriftGetPerpPositionsRequest)(nil),  // 4: drift.DriftGetPerpPositionsRequest
 	(*DriftGetCurrentPerpPosition)(nil),          // 5: drift.DriftGetCurrentPerpPosition
-	(*DriftGetCurrentPerpPositionsResponse)(nil), // 6: drift.DriftGetCurrentPerpPositionsResponse
+	(*DriftGetPerpPositionsResponse)(nil), // 6: drift.DriftGetPerpPositionsResponse
 	(*DriftPostPerpOrderRequest)(nil),            // 7: drift.DriftPostPerpOrderRequest
 	(*DriftPostPerpOrderResponse)(nil),           // 8: drift.DriftPostPerpOrderResponse
 }
 var file_drift_proto_depIdxs = []int32{
 	3, // 0: drift.DriftGetOrderbookResponse.bids:type_name -> drift.DriftOrderbookItem
 	3, // 1: drift.DriftGetOrderbookResponse.asks:type_name -> drift.DriftOrderbookItem
-	0, // 2: drift.DriftGetCurrentPerpPositionsRequest.contracts:type_name -> drift.DriftContract
+	0, // 2: drift.DriftGetPerpPositionsRequest.contracts:type_name -> drift.DriftContract
 	0, // 3: drift.DriftGetCurrentPerpPosition.contract:type_name -> drift.DriftContract
-	5, // 4: drift.DriftGetCurrentPerpPositionsResponse.perpPositions:type_name -> drift.DriftGetCurrentPerpPosition
+	5, // 4: drift.DriftGetPerpPositionsResponse.perpPositions:type_name -> drift.DriftGetCurrentPerpPosition
 	0, // 5: drift.DriftPostPerpOrderRequest.contract:type_name -> drift.DriftContract
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
@@ -887,7 +887,7 @@ func file_drift_proto_init() {
 			}
 		}
 		file_drift_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DriftGetCurrentPerpPositionsRequest); i {
+			switch v := v.(*DriftGetPerpPositionsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -911,7 +911,7 @@ func file_drift_proto_init() {
 			}
 		}
 		file_drift_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DriftGetCurrentPerpPositionsResponse); i {
+			switch v := v.(*DriftGetPerpPositionsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
