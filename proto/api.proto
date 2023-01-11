@@ -1133,23 +1133,15 @@ message GetPricesStreamResponse {
   TokenPrice price = 2;
 }
 
-
-enum Contract {
-  ALL = 0;
-  SOL_PERP = 1; // SOL-PERP
-  ETH_PERP = 2; // ETH-PERP
-  BTC_PERP = 3; // BTC-PERP
-}
-
 message GetCurrentPerpPositionsRequest {
   Project project = 1;
   string ownerAddress = 2;
   string accountAddress = 3;
-  repeated Contract contracts = 4;
+  repeated common.Contract contracts = 4;
 }
 
 message GetCurrentPerpPosition {
-  Contract contract = 1;
+  common.Contract contract = 1;
 
   double contractVolume = 2;
   double volumeAvailable = 3;
@@ -1176,7 +1168,7 @@ message PostPerpOrderRequest {
   Project project = 1;
   string ownerAddress = 2;
   string payerAddress = 3;
-  Contract contract = 4;
+  common.Contract contract = 4;
   string accountAddress = 5;
   string positionSide = 6;
   string slippage = 7;

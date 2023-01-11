@@ -3,6 +3,13 @@ option go_package = "github.com/bloXroute-Labs/solana-trader-proto/common";
 
 package common;
 
+enum Contract {
+  ALL = 0;
+  SOL_PERP = 1; // SOL-PERP
+  ETH_PERP = 2; // ETH-PERP
+  BTC_PERP = 3; // BTC-PERP
+}
+
 enum Infinity {
   INF_NOT = 0;
   INF_POSITIVE = 1;

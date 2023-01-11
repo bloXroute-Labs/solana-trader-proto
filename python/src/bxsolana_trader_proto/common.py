@@ -6,6 +6,13 @@ from dataclasses import dataclass
 import betterproto
 
 
+class Contract(betterproto.Enum):
+    ALL = 0
+    SOL_PERP = 1
+    ETH_PERP = 2
+    BTC_PERP = 3
+
+
 class Infinity(betterproto.Enum):
     INF_NOT = 0
     INF_POSITIVE = 1

@@ -55,6 +55,13 @@ export namespace Fee {
     }
 }
 
+export enum Contract {
+    ALL = 0,
+    SOL_PERP = 1,
+    ETH_PERP = 2,
+    BTC_PERP = 3,
+}
+
 export enum Infinity {
     INF_NOT = 0,
     INF_POSITIVE = 1,

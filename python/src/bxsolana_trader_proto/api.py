@@ -66,13 +66,6 @@ class Project(betterproto.Enum):
     P_DRIFT = 6
 
 
-class Contract(betterproto.Enum):
-    ALL = 0
-    SOL_PERP = 1
-    ETH_PERP = 2
-    BTC_PERP = 3
-
-
 @dataclass
 class GetMarketsRequest(betterproto.Message):
     pass
@@ -798,12 +791,12 @@ class GetCurrentPerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
     account_address: str = betterproto.string_field(3)
-    contracts: List["Contract"] = betterproto.enum_field(4)
+    contracts: List[common.Contract] = betterproto.enum_field(4)
 
 
 @dataclass
 class GetCurrentPerpPosition(betterproto.Message):
-    contract: "Contract" = betterproto.enum_field(1)
+    contract: common.Contract = betterproto.enum_field(1)
     contract_volume: float = betterproto.double_field(2)
     volume_available: float = betterproto.double_field(3)
     volume_in_order: float = betterproto.double_field(4)
@@ -827,7 +820,7 @@ class PostPerpOrderRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
     payer_address: str = betterproto.string_field(3)
-    contract: "Contract" = betterproto.enum_field(4)
+    contract: common.Contract = betterproto.enum_field(4)
     account_address: str = betterproto.string_field(5)
     position_side: str = betterproto.string_field(6)
     slippage: str = betterproto.string_field(7)
@@ -1366,7 +1359,7 @@ class ApiStub(betterproto.ServiceStub):
         project: "Project" = 0,
         owner_address: str = "",
         payer_address: str = "",
-        contract: "Contract" = 0,
+        contract: common.Contract = 0,
         account_address: str = "",
         position_side: str = "",
         slippage: str = "",
@@ -1402,7 +1395,7 @@ class ApiStub(betterproto.ServiceStub):
         project: "Project" = 0,
         owner_address: str = "",
         account_address: str = "",
-        contracts: List["Contract"] = [],
+        contracts: List[common.Contract] = [],
     ) -> GetCurrentPerpPositionsResponse:
         request = GetCurrentPerpPositionsRequest()
         request.project = project

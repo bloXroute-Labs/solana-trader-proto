@@ -29,7 +29,6 @@ var common_pb = require('./common_pb.js');
 goog.object.extend(proto, common_pb);
 goog.exportSymbol('proto.api.Block', null, global);
 goog.exportSymbol('proto.api.Candle', null, global);
-goog.exportSymbol('proto.api.Contract', null, global);
 goog.exportSymbol('proto.api.Direction', null, global);
 goog.exportSymbol('proto.api.GetAccountBalanceRequest', null, global);
 goog.exportSymbol('proto.api.GetAccountBalanceResponse', null, global);
@@ -23599,7 +23598,7 @@ proto.api.GetCurrentPerpPositionsRequest.deserializeBinaryFromReader = function(
       msg.setAccountaddress(value);
       break;
     case 4:
-      var values = /** @type {!Array<!proto.api.Contract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
+      var values = /** @type {!Array<!proto.common.Contract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
       for (var i = 0; i < values.length; i++) {
         msg.addContracts(values[i]);
       }
@@ -23719,16 +23718,16 @@ proto.api.GetCurrentPerpPositionsRequest.prototype.setAccountaddress = function(
 
 
 /**
- * repeated Contract contracts = 4;
- * @return {!Array<!proto.api.Contract>}
+ * repeated common.Contract contracts = 4;
+ * @return {!Array<!proto.common.Contract>}
  */
 proto.api.GetCurrentPerpPositionsRequest.prototype.getContractsList = function() {
-  return /** @type {!Array<!proto.api.Contract>} */ (jspb.Message.getRepeatedField(this, 4));
+  return /** @type {!Array<!proto.common.Contract>} */ (jspb.Message.getRepeatedField(this, 4));
 };
 
 
 /**
- * @param {!Array<!proto.api.Contract>} value
+ * @param {!Array<!proto.common.Contract>} value
  * @return {!proto.api.GetCurrentPerpPositionsRequest} returns this
  */
 proto.api.GetCurrentPerpPositionsRequest.prototype.setContractsList = function(value) {
@@ -23737,7 +23736,7 @@ proto.api.GetCurrentPerpPositionsRequest.prototype.setContractsList = function(v
 
 
 /**
- * @param {!proto.api.Contract} value
+ * @param {!proto.common.Contract} value
  * @param {number=} opt_index
  * @return {!proto.api.GetCurrentPerpPositionsRequest} returns this
  */
@@ -23834,7 +23833,7 @@ proto.api.GetCurrentPerpPosition.deserializeBinaryFromReader = function(msg, rea
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.api.Contract} */ (reader.readEnum());
+      var value = /** @type {!proto.common.Contract} */ (reader.readEnum());
       msg.setContract(value);
       break;
     case 2:
@@ -23976,16 +23975,16 @@ proto.api.GetCurrentPerpPosition.serializeBinaryToWriter = function(message, wri
 
 
 /**
- * optional Contract contract = 1;
- * @return {!proto.api.Contract}
+ * optional common.Contract contract = 1;
+ * @return {!proto.common.Contract}
  */
 proto.api.GetCurrentPerpPosition.prototype.getContract = function() {
-  return /** @type {!proto.api.Contract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {!proto.common.Contract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.api.Contract} value
+ * @param {!proto.common.Contract} value
  * @return {!proto.api.GetCurrentPerpPosition} returns this
  */
 proto.api.GetCurrentPerpPosition.prototype.setContract = function(value) {
@@ -24467,7 +24466,7 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setPayeraddress(value);
       break;
     case 4:
-      var value = /** @type {!proto.api.Contract} */ (reader.readEnum());
+      var value = /** @type {!proto.common.Contract} */ (reader.readEnum());
       msg.setContract(value);
       break;
     case 5:
@@ -24662,16 +24661,16 @@ proto.api.PostPerpOrderRequest.prototype.setPayeraddress = function(value) {
 
 
 /**
- * optional Contract contract = 4;
- * @return {!proto.api.Contract}
+ * optional common.Contract contract = 4;
+ * @return {!proto.common.Contract}
  */
 proto.api.PostPerpOrderRequest.prototype.getContract = function() {
-  return /** @type {!proto.api.Contract} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.common.Contract} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
 /**
- * @param {!proto.api.Contract} value
+ * @param {!proto.common.Contract} value
  * @return {!proto.api.PostPerpOrderRequest} returns this
  */
 proto.api.PostPerpOrderRequest.prototype.setContract = function(value) {
@@ -25042,16 +25041,6 @@ proto.api.Project = {
   P_SERUM: 4,
   P_OPENBOOK: 5,
   P_DRIFT: 6
-};
-
-/**
- * @enum {number}
- */
-proto.api.Contract = {
-  ALL: 0,
-  SOL_PERP: 1,
-  ETH_PERP: 2,
-  BTC_PERP: 3
 };
 
 goog.object.extend(exports, proto.api);

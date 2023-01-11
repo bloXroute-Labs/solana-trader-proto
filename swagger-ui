@@ -1212,16 +1212,6 @@
         }
       }
     },
-    "apiContract": {
-      "type": "string",
-      "enum": [
-        "ALL",
-        "SOL_PERP",
-        "ETH_PERP",
-        "BTC_PERP"
-      ],
-      "default": "ALL"
-    },
     "apiDirection": {
       "type": "string",
       "enum": [
@@ -1253,7 +1243,7 @@
       "type": "object",
       "properties": {
         "contract": {
-          "$ref": "#/definitions/apiContract"
+          "$ref": "#/definitions/commonContract"
         },
         "contractVolume": {
           "type": "number",
@@ -2747,6 +2737,16 @@
           "format": "double"
         }
       }
+    },
+    "commonContract": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "SOL_PERP",
+        "ETH_PERP",
+        "BTC_PERP"
+      ],
+      "default": "ALL"
     },
     "commonFee": {
       "type": "object",
