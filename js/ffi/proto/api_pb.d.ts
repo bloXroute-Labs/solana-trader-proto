@@ -2907,6 +2907,8 @@ export namespace GetCurrentPerpPositionsResponse {
 }
 
 export class PostPerpOrderRequest extends jspb.Message { 
+    getProject(): Project;
+    setProject(value: Project): PostPerpOrderRequest;
     getOwneraddress(): string;
     setOwneraddress(value: string): PostPerpOrderRequest;
     getPayeraddress(): string;
@@ -2940,6 +2942,7 @@ export class PostPerpOrderRequest extends jspb.Message {
 
 export namespace PostPerpOrderRequest {
     export type AsObject = {
+        project: Project,
         owneraddress: string,
         payeraddress: string,
         contract: Contract,

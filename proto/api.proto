@@ -370,11 +370,11 @@ service Api {
   // perp endpoints
   rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/perp/order"
+      post: "/api/v1/trade/perp/order"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns the list of prices for specified tokens";
-      summary: "Token prices";
+      description: "post a perp order";
+      summary: "perp order";
       tags: ["Trade", "Orderbook"];
     };
   }
@@ -1173,17 +1173,17 @@ message GetCurrentPerpPositionsResponse {
 }
 
 message PostPerpOrderRequest {
-
-  string ownerAddress = 1;
-  string payerAddress = 2;
-  Contract contract = 3;
-  string accountAddress = 4;
-  string positionSide = 5;
-  string slippage = 6;
-  string type = 7;
-  double amount = 8;
-  double price = 9;
-  string clientOrderId = 10;
+  Project project = 1;
+  string ownerAddress = 2;
+  string payerAddress = 3;
+  Contract contract = 4;
+  string accountAddress = 5;
+  string positionSide = 6;
+  string slippage = 7;
+  string type = 8;
+  double amount = 9;
+  double price = 10;
+  string clientOrderId = 11;
 }
 
 message PostPerpOrderResponse {

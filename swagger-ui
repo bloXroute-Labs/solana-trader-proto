@@ -703,9 +703,9 @@
       }
     },
     "/api/v1/trade/perp/order": {
-      "get": {
-        "summary": "Token prices",
-        "description": "Returns the list of prices for specified tokens",
+      "post": {
+        "summary": "perp order",
+        "description": "post a perp order",
         "operationId": "Api_PostPerpOrder",
         "responses": {
           "200": {
@@ -722,6 +722,22 @@
           }
         },
         "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
           {
             "name": "ownerAddress",
             "in": "query",
