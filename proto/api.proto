@@ -367,6 +367,40 @@ service Api {
     };
   }
 
+  // perp endpoints
+  rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/perp/order"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "post a perp order";
+      summary: "perp order";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc GetPerpPositions(GetPerpPositionsRequest)  returns (GetPerpPositionsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/perp-positions"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list current perp positions";
+      summary: "PERP positions";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
+  rpc ClosePerpPositions(ClosePerpPositionsRequest)  returns (ClosePerpPositionsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/close-perp-positions"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "closes current perp positions";
+      summary: "PERP positions";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -934,6 +968,7 @@ enum Project {
   P_RAYDIUM = 3;
   P_SERUM = 4;
   P_OPENBOOK = 5;
+  P_DRIFT = 6;
 }
 
 message QuoteRoute {
@@ -1107,6 +1142,66 @@ message GetPricesStreamRequest {
 message GetPricesStreamResponse {
   int64 slot = 1;
   TokenPrice price = 2;
+}
+
+message GetPerpPositionsRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  string accountAddress = 3;
+  repeated common.Contract contracts = 4;
+}
+
+message ClosePerpPositionsRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  repeated common.Contract contracts = 3;
+}
+
+message ClosePerpPositionsResponse {
+  repeated string transactions = 1;
+}
+
+message GetCurrentPerpPosition {
+  common.Contract contract = 1;
+
+  double contractVolume = 2;
+  double volumeAvailable = 3;
+  double volumeInOrder = 4;
+
+  double positionMargin = 5;
+  string positionSide = 6; // long, short
+
+  double unrealizedPnL = 7;
+
+  double perpPrice = 8;
+  double indexPrice = 9;
+  double liquidationPrice = 10;
+}
+
+message GetPerpPositionsResponse {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+
+  repeated GetCurrentPerpPosition perpPositions = 3;
+}
+
+message PostPerpOrderRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  string payerAddress = 3;
+  common.Contract contract = 4;
+  string accountAddress = 5;
+  string positionSide = 6;
+  string slippage = 7;
+  string type = 8;
+  double amount = 9;
+  double price = 10;
+  string clientOrderId = 11;
+}
+
+message PostPerpOrderResponse {
+  string transaction = 1;
+  string accountAddress = 2;
 }
 
 

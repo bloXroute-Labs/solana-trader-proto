@@ -63,6 +63,7 @@ class Project(betterproto.Enum):
     P_RAYDIUM = 3
     P_SERUM = 4
     P_OPENBOOK = 5
+    P_DRIFT = 6
 
 
 @dataclass
@@ -785,6 +786,68 @@ class GetPricesStreamResponse(betterproto.Message):
     price: "TokenPrice" = betterproto.message_field(2)
 
 
+@dataclass
+class GetPerpPositionsRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    account_address: str = betterproto.string_field(3)
+    contracts: List[common.Contract] = betterproto.enum_field(4)
+
+
+@dataclass
+class ClosePerpPositionsRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    contracts: List[common.Contract] = betterproto.enum_field(3)
+
+
+@dataclass
+class ClosePerpPositionsResponse(betterproto.Message):
+    transactions: List[str] = betterproto.string_field(1)
+
+
+@dataclass
+class GetCurrentPerpPosition(betterproto.Message):
+    contract: common.Contract = betterproto.enum_field(1)
+    contract_volume: float = betterproto.double_field(2)
+    volume_available: float = betterproto.double_field(3)
+    volume_in_order: float = betterproto.double_field(4)
+    position_margin: float = betterproto.double_field(5)
+    position_side: str = betterproto.string_field(6)
+    unrealized_pn_l: float = betterproto.double_field(7)
+    perp_price: float = betterproto.double_field(8)
+    index_price: float = betterproto.double_field(9)
+    liquidation_price: float = betterproto.double_field(10)
+
+
+@dataclass
+class GetPerpPositionsResponse(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    perp_positions: List["GetCurrentPerpPosition"] = betterproto.message_field(3)
+
+
+@dataclass
+class PostPerpOrderRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    payer_address: str = betterproto.string_field(3)
+    contract: common.Contract = betterproto.enum_field(4)
+    account_address: str = betterproto.string_field(5)
+    position_side: str = betterproto.string_field(6)
+    slippage: str = betterproto.string_field(7)
+    type: str = betterproto.string_field(8)
+    amount: float = betterproto.double_field(9)
+    price: float = betterproto.double_field(10)
+    client_order_id: str = betterproto.string_field(11)
+
+
+@dataclass
+class PostPerpOrderResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+
+
 class ApiStub(betterproto.ServiceStub):
     async def get_price(self, *, tokens: List[str] = []) -> GetPriceResponse:
         request = GetPriceRequest()
@@ -1300,6 +1363,80 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostRouteTradeSwap",
             request,
             TradeSwapResponse,
+        )
+
+    async def post_perp_order(
+        self,
+        *,
+        project: "Project" = 0,
+        owner_address: str = "",
+        payer_address: str = "",
+        contract: common.Contract = 0,
+        account_address: str = "",
+        position_side: str = "",
+        slippage: str = "",
+        type: str = "",
+        amount: float = 0,
+        price: float = 0,
+        client_order_id: str = "",
+    ) -> PostPerpOrderResponse:
+        """perp endpoints"""
+
+        request = PostPerpOrderRequest()
+        request.project = project
+        request.owner_address = owner_address
+        request.payer_address = payer_address
+        request.contract = contract
+        request.account_address = account_address
+        request.position_side = position_side
+        request.slippage = slippage
+        request.type = type
+        request.amount = amount
+        request.price = price
+        request.client_order_id = client_order_id
+
+        return await self._unary_unary(
+            "/api.Api/PostPerpOrder",
+            request,
+            PostPerpOrderResponse,
+        )
+
+    async def get_perp_positions(
+        self,
+        *,
+        project: "Project" = 0,
+        owner_address: str = "",
+        account_address: str = "",
+        contracts: List[common.Contract] = [],
+    ) -> GetPerpPositionsResponse:
+        request = GetPerpPositionsRequest()
+        request.project = project
+        request.owner_address = owner_address
+        request.account_address = account_address
+        request.contracts = contracts
+
+        return await self._unary_unary(
+            "/api.Api/GetPerpPositions",
+            request,
+            GetPerpPositionsResponse,
+        )
+
+    async def close_perp_positions(
+        self,
+        *,
+        project: "Project" = 0,
+        owner_address: str = "",
+        contracts: List[common.Contract] = [],
+    ) -> ClosePerpPositionsResponse:
+        request = ClosePerpPositionsRequest()
+        request.project = project
+        request.owner_address = owner_address
+        request.contracts = contracts
+
+        return await self._unary_unary(
+            "/api.Api/ClosePerpPositions",
+            request,
+            ClosePerpPositionsResponse,
         )
 
     async def get_orderbooks_stream(

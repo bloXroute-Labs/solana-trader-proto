@@ -15,6 +15,7 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
+goog.exportSymbol('proto.common.Contract', null, global);
 goog.exportSymbol('proto.common.Fee', null, global);
 goog.exportSymbol('proto.common.Infinity', null, global);
 goog.exportSymbol('proto.common.PriceImpactPercent', null, global);
@@ -409,6 +410,16 @@ proto.common.Fee.prototype.setPercent = function(value) {
   return jspb.Message.setProto3FloatField(this, 3, value);
 };
 
+
+/**
+ * @enum {number}
+ */
+proto.common.Contract = {
+  ALL: 0,
+  SOL_PERP: 1,
+  ETH_PERP: 2,
+  BTC_PERP: 3
+};
 
 /**
  * @enum {number}
