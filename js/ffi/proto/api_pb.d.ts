@@ -2800,6 +2800,182 @@ export namespace GetPricesStreamResponse {
     }
 }
 
+export class GetCurrentPerpPositionsRequest extends jspb.Message { 
+    getProject(): Project;
+    setProject(value: Project): GetCurrentPerpPositionsRequest;
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetCurrentPerpPositionsRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): GetCurrentPerpPositionsRequest;
+    clearContractsList(): void;
+    getContractsList(): Array<Contract>;
+    setContractsList(value: Array<Contract>): GetCurrentPerpPositionsRequest;
+    addContracts(value: Contract, index?: number): Contract;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetCurrentPerpPositionsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetCurrentPerpPositionsRequest): GetCurrentPerpPositionsRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetCurrentPerpPositionsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetCurrentPerpPositionsRequest;
+    static deserializeBinaryFromReader(message: GetCurrentPerpPositionsRequest, reader: jspb.BinaryReader): GetCurrentPerpPositionsRequest;
+}
+
+export namespace GetCurrentPerpPositionsRequest {
+    export type AsObject = {
+        project: Project,
+        owneraddress: string,
+        accountaddress: string,
+        contractsList: Array<Contract>,
+    }
+}
+
+export class GetCurrentPerpPosition extends jspb.Message { 
+    getContract(): Contract;
+    setContract(value: Contract): GetCurrentPerpPosition;
+    getContractvolume(): number;
+    setContractvolume(value: number): GetCurrentPerpPosition;
+    getVolumeavailable(): number;
+    setVolumeavailable(value: number): GetCurrentPerpPosition;
+    getVolumeinorder(): number;
+    setVolumeinorder(value: number): GetCurrentPerpPosition;
+    getPositionmargin(): number;
+    setPositionmargin(value: number): GetCurrentPerpPosition;
+    getPositionside(): string;
+    setPositionside(value: string): GetCurrentPerpPosition;
+    getUnrealizedpnl(): number;
+    setUnrealizedpnl(value: number): GetCurrentPerpPosition;
+    getPerpprice(): number;
+    setPerpprice(value: number): GetCurrentPerpPosition;
+    getIndexprice(): number;
+    setIndexprice(value: number): GetCurrentPerpPosition;
+    getLiquidationprice(): number;
+    setLiquidationprice(value: number): GetCurrentPerpPosition;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetCurrentPerpPosition.AsObject;
+    static toObject(includeInstance: boolean, msg: GetCurrentPerpPosition): GetCurrentPerpPosition.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetCurrentPerpPosition, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetCurrentPerpPosition;
+    static deserializeBinaryFromReader(message: GetCurrentPerpPosition, reader: jspb.BinaryReader): GetCurrentPerpPosition;
+}
+
+export namespace GetCurrentPerpPosition {
+    export type AsObject = {
+        contract: Contract,
+        contractvolume: number,
+        volumeavailable: number,
+        volumeinorder: number,
+        positionmargin: number,
+        positionside: string,
+        unrealizedpnl: number,
+        perpprice: number,
+        indexprice: number,
+        liquidationprice: number,
+    }
+}
+
+export class GetCurrentPerpPositionsResponse extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetCurrentPerpPositionsResponse;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): GetCurrentPerpPositionsResponse;
+    clearPerppositionsList(): void;
+    getPerppositionsList(): Array<GetCurrentPerpPosition>;
+    setPerppositionsList(value: Array<GetCurrentPerpPosition>): GetCurrentPerpPositionsResponse;
+    addPerppositions(value?: GetCurrentPerpPosition, index?: number): GetCurrentPerpPosition;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetCurrentPerpPositionsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetCurrentPerpPositionsResponse): GetCurrentPerpPositionsResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetCurrentPerpPositionsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetCurrentPerpPositionsResponse;
+    static deserializeBinaryFromReader(message: GetCurrentPerpPositionsResponse, reader: jspb.BinaryReader): GetCurrentPerpPositionsResponse;
+}
+
+export namespace GetCurrentPerpPositionsResponse {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        perppositionsList: Array<GetCurrentPerpPosition.AsObject>,
+    }
+}
+
+export class PostPerpOrderRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostPerpOrderRequest;
+    getPayeraddress(): string;
+    setPayeraddress(value: string): PostPerpOrderRequest;
+    getContract(): Contract;
+    setContract(value: Contract): PostPerpOrderRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostPerpOrderRequest;
+    getPositionside(): string;
+    setPositionside(value: string): PostPerpOrderRequest;
+    getSlippage(): string;
+    setSlippage(value: string): PostPerpOrderRequest;
+    getType(): string;
+    setType(value: string): PostPerpOrderRequest;
+    getAmount(): number;
+    setAmount(value: number): PostPerpOrderRequest;
+    getPrice(): number;
+    setPrice(value: number): PostPerpOrderRequest;
+    getClientorderid(): string;
+    setClientorderid(value: string): PostPerpOrderRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostPerpOrderRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostPerpOrderRequest): PostPerpOrderRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostPerpOrderRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostPerpOrderRequest;
+    static deserializeBinaryFromReader(message: PostPerpOrderRequest, reader: jspb.BinaryReader): PostPerpOrderRequest;
+}
+
+export namespace PostPerpOrderRequest {
+    export type AsObject = {
+        owneraddress: string,
+        payeraddress: string,
+        contract: Contract,
+        accountaddress: string,
+        positionside: string,
+        slippage: string,
+        type: string,
+        amount: number,
+        price: number,
+        clientorderid: string,
+    }
+}
+
+export class PostPerpOrderResponse extends jspb.Message { 
+    getTransaction(): string;
+    setTransaction(value: string): PostPerpOrderResponse;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostPerpOrderResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostPerpOrderResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostPerpOrderResponse): PostPerpOrderResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostPerpOrderResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostPerpOrderResponse;
+    static deserializeBinaryFromReader(message: PostPerpOrderResponse, reader: jspb.BinaryReader): PostPerpOrderResponse;
+}
+
+export namespace PostPerpOrderResponse {
+    export type AsObject = {
+        transaction: string,
+        accountaddress: string,
+    }
+}
+
 export enum MarketStatus {
     MS_UNKNOWN = 0,
     MS_ONLINE = 1,
@@ -2852,4 +3028,12 @@ export enum Project {
     P_RAYDIUM = 3,
     P_SERUM = 4,
     P_OPENBOOK = 5,
+    P_DRIFT = 6,
+}
+
+export enum Contract {
+    ALL = 0,
+    SOL_PERP = 1,
+    ETH_PERP = 2,
+    BTC_PERP = 3,
 }

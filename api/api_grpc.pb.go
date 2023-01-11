@@ -48,6 +48,9 @@ type ApiClient interface {
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
+	// perp endpoints
+	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
+	GetCurrentPerpPositions(ctx context.Context, in *GetCurrentPerpPositionsRequest, opts ...grpc.CallOption) (*GetCurrentPerpPositionsResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -307,6 +310,24 @@ func (c *apiClient) GetUnsettled(ctx context.Context, in *GetUnsettledRequest, o
 func (c *apiClient) PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error) {
 	out := new(TradeSwapResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostRouteTradeSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error) {
+	out := new(PostPerpOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostPerpOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetCurrentPerpPositions(ctx context.Context, in *GetCurrentPerpPositionsRequest, opts ...grpc.CallOption) (*GetCurrentPerpPositionsResponse, error) {
+	out := new(GetCurrentPerpPositionsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetCurrentPerpPositions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -699,6 +720,9 @@ type ApiServer interface {
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
+	// perp endpoints
+	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
+	GetCurrentPerpPositions(context.Context, *GetCurrentPerpPositionsRequest) (*GetCurrentPerpPositionsResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -798,6 +822,12 @@ func (UnimplementedApiServer) GetUnsettled(context.Context, *GetUnsettledRequest
 }
 func (UnimplementedApiServer) PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRouteTradeSwap not implemented")
+}
+func (UnimplementedApiServer) PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostPerpOrder not implemented")
+}
+func (UnimplementedApiServer) GetCurrentPerpPositions(context.Context, *GetCurrentPerpPositionsRequest) (*GetCurrentPerpPositionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentPerpPositions not implemented")
 }
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
@@ -1331,6 +1361,42 @@ func _Api_PostRouteTradeSwap_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_PostPerpOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostPerpOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostPerpOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostPerpOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostPerpOrder(ctx, req.(*PostPerpOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetCurrentPerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCurrentPerpPositionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetCurrentPerpPositions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetCurrentPerpPositions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetCurrentPerpPositions(ctx, req.(*GetCurrentPerpPositionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetOrderbooksStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetOrderbooksRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -1676,6 +1742,14 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostRouteTradeSwap",
 			Handler:    _Api_PostRouteTradeSwap_Handler,
+		},
+		{
+			MethodName: "PostPerpOrder",
+			Handler:    _Api_PostPerpOrder_Handler,
+		},
+		{
+			MethodName: "GetCurrentPerpPositions",
+			Handler:    _Api_GetCurrentPerpPositions_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

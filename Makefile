@@ -11,7 +11,7 @@ all: clean proto
 clean:
 	rm -rf js api common drift
 
-proto: proto-build-api-go proto-build-common-go proto-build-drift-go proto-build-api-js proto-build-swagger proto-build-gw proto-build-api-python
+proto: proto-build-api-go proto-build-common-go proto-build-api-js proto-build-swagger proto-build-gw proto-build-api-python
 
 proto-build-gw:
 	docker run -v $(CURDIR)/api:/go/protobuf/out \
@@ -44,11 +44,6 @@ proto-build-common-go:
 	docker run -v $(CURDIR)/common:/go/protobuf/out \
 			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
 		protoc --go_out=../out --go_opt=paths=source_relative  --go-grpc_out=../out --go-grpc_opt=paths=source_relative common.proto
-
-proto-build-drift-go:
-	docker run -v $(CURDIR)/drift:/go/protobuf/out \
-			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
-		protoc --go_out=../out --go_opt=paths=source_relative  --go-grpc_out=../out --go-grpc_opt=paths=source_relative drift.proto
 
 proto-build-api-js:
 	docker run -v $(CURDIR)/js/ffi/proto:/home/node/out \

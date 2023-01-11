@@ -103,7 +103,8 @@
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
-              "P_OPENBOOK"
+              "P_OPENBOOK",
+              "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
           }
@@ -183,7 +184,8 @@
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
-              "P_OPENBOOK"
+              "P_OPENBOOK",
+              "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
           }
@@ -227,7 +229,8 @@
                 "P_JUPITER",
                 "P_RAYDIUM",
                 "P_SERUM",
-                "P_OPENBOOK"
+                "P_OPENBOOK",
+                "P_DRIFT"
               ]
             },
             "collectionFormat": "multi"
@@ -342,7 +345,8 @@
                 "P_JUPITER",
                 "P_RAYDIUM",
                 "P_SERUM",
-                "P_OPENBOOK"
+                "P_OPENBOOK",
+                "P_DRIFT"
               ]
             },
             "collectionFormat": "multi"
@@ -392,7 +396,8 @@
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
-              "P_OPENBOOK"
+              "P_OPENBOOK",
+              "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
           }
@@ -614,9 +619,177 @@
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
-              "P_OPENBOOK"
+              "P_OPENBOOK",
+              "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/perp-positions": {
+      "get": {
+        "summary": "PERP positions",
+        "description": "Returns the list current perp positions",
+        "operationId": "Api_GetCurrentPerpPositions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetCurrentPerpPositionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contracts",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ALL",
+                "SOL_PERP",
+                "ETH_PERP",
+                "BTC_PERP"
+              ]
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/order": {
+      "get": {
+        "summary": "Token prices",
+        "description": "Returns the list of prices for specified tokens",
+        "operationId": "Api_PostPerpOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostPerpOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "payerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contract",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP"
+            ],
+            "default": "ALL"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "positionSide",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "price",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "clientOrderId",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -948,7 +1121,8 @@
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
-              "P_OPENBOOK"
+              "P_OPENBOOK",
+              "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
           }
@@ -1022,6 +1196,16 @@
         }
       }
     },
+    "apiContract": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "SOL_PERP",
+        "ETH_PERP",
+        "BTC_PERP"
+      ],
+      "default": "ALL"
+    },
     "apiDirection": {
       "type": "string",
       "enum": [
@@ -1046,6 +1230,66 @@
       "properties": {
         "block": {
           "$ref": "#/definitions/apiBlock"
+        }
+      }
+    },
+    "apiGetCurrentPerpPosition": {
+      "type": "object",
+      "properties": {
+        "contract": {
+          "$ref": "#/definitions/apiContract"
+        },
+        "contractVolume": {
+          "type": "number",
+          "format": "double"
+        },
+        "volumeAvailable": {
+          "type": "number",
+          "format": "double"
+        },
+        "volumeInOrder": {
+          "type": "number",
+          "format": "double"
+        },
+        "positionMargin": {
+          "type": "number",
+          "format": "double"
+        },
+        "positionSide": {
+          "type": "string"
+        },
+        "unrealizedPnL": {
+          "type": "number",
+          "format": "double"
+        },
+        "perpPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "indexPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "liquidationPrice": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiGetCurrentPerpPositionsResponse": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "perpPositions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiGetCurrentPerpPosition"
+          }
         }
       }
     },
@@ -1845,6 +2089,17 @@
         }
       }
     },
+    "apiPostPerpOrderResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        }
+      }
+    },
     "apiPostReplaceOrderRequest": {
       "type": "object",
       "properties": {
@@ -2048,7 +2303,8 @@
         "P_JUPITER",
         "P_RAYDIUM",
         "P_SERUM",
-        "P_OPENBOOK"
+        "P_OPENBOOK",
+        "P_DRIFT"
       ],
       "default": "P_UNKNOWN"
     },
