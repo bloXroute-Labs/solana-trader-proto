@@ -8,6 +8,7 @@ import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "common.proto";
+import "drift.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   security: {
@@ -50,6 +51,28 @@ service Api {
       url: "https://bloxroute.gitbook.io/serum-api/about/welcome"
     }
   };
+
+  rpc DriftGetDriftCurrentPosition(drift.DriftGetCurrentPerpPositionsRequest)  returns (drift.DriftGetCurrentPerpPositionsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/drift/perp-positions"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list current perp positions";
+      summary: "PERP positions";
+      tags: ["Market", "Universal"];
+    };
+  }
+
+  rpc DriftPostPerpOrder(drift.DriftPostPerpOrderRequest)  returns (drift.DriftPostPerpOrderResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/drift/perp-post-order"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for specified tokens";
+      summary: "Token prices";
+      tags: ["Market", "Universal"];
+    };
+  }
 
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
     option (google.api.http) = {
