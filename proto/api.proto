@@ -62,7 +62,7 @@ service Api {
     };
   }
 
-  rpc DriftPostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
+  rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/perp/order"
     };
@@ -72,18 +72,7 @@ service Api {
       tags: ["Trade", "Orderbook"];
     };
   }
-
-  rpc DriftGetOrderbook(GetOrderbookRequest)  returns (GetOrderbookResponse) {
-    option (google.api.http) = {
-      get: "/api/v1/trade/orderbook"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns orderbook";
-      summary: "orderbook";
-      tags: ["Market", "Universal"];
-    };
-  }
-
+  
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/price"
