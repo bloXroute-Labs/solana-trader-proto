@@ -561,6 +561,71 @@
         ]
       }
     },
+    "/api/v1/trade/close-perp-positions": {
+      "get": {
+        "summary": "PERP positions",
+        "description": "closes current perp positions",
+        "operationId": "Api_DriftClosePerpPositions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiClosePerpPositionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contracts",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ALL",
+                "SOL_PERP",
+                "ETH_PERP",
+                "BTC_PERP"
+              ]
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
     "/api/v1/trade/openorders/{market}": {
       "get": {
         "summary": "List of user's open orders",
@@ -635,12 +700,12 @@
       "get": {
         "summary": "PERP positions",
         "description": "Returns the list current perp positions",
-        "operationId": "Api_GetCurrentPerpPositions",
+        "operationId": "Api_GetPerpPositions",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetCurrentPerpPositionsResponse"
+              "$ref": "#/definitions/apiGetPerpPositionsResponse"
             }
           },
           "default": {
@@ -1212,6 +1277,17 @@
         }
       }
     },
+    "apiClosePerpPositionsResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "apiDirection": {
       "type": "string",
       "enum": [
@@ -1279,23 +1355,6 @@
         "liquidationPrice": {
           "type": "number",
           "format": "double"
-        }
-      }
-    },
-    "apiGetCurrentPerpPositionsResponse": {
-      "type": "object",
-      "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
-        "accountAddress": {
-          "type": "string"
-        },
-        "perpPositions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiGetCurrentPerpPosition"
-          }
         }
       }
     },
@@ -1476,6 +1535,23 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiOrder"
+          }
+        }
+      }
+    },
+    "apiGetPerpPositionsResponse": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "perpPositions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiGetCurrentPerpPosition"
           }
         }
       }

@@ -50,7 +50,8 @@ type ApiClient interface {
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
 	// perp endpoints
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
-	GetCurrentPerpPositions(ctx context.Context, in *GetCurrentPerpPositionsRequest, opts ...grpc.CallOption) (*GetCurrentPerpPositionsResponse, error)
+	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
+	DriftClosePerpPositions(ctx context.Context, in *ClosePerpPositionsRequest, opts ...grpc.CallOption) (*ClosePerpPositionsResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -325,9 +326,18 @@ func (c *apiClient) PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest,
 	return out, nil
 }
 
-func (c *apiClient) GetCurrentPerpPositions(ctx context.Context, in *GetCurrentPerpPositionsRequest, opts ...grpc.CallOption) (*GetCurrentPerpPositionsResponse, error) {
-	out := new(GetCurrentPerpPositionsResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetCurrentPerpPositions", in, out, opts...)
+func (c *apiClient) GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error) {
+	out := new(GetPerpPositionsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPerpPositions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) DriftClosePerpPositions(ctx context.Context, in *ClosePerpPositionsRequest, opts ...grpc.CallOption) (*ClosePerpPositionsResponse, error) {
+	out := new(ClosePerpPositionsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/DriftClosePerpPositions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -722,7 +732,8 @@ type ApiServer interface {
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
 	// perp endpoints
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
-	GetCurrentPerpPositions(context.Context, *GetCurrentPerpPositionsRequest) (*GetCurrentPerpPositionsResponse, error)
+	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
+	DriftClosePerpPositions(context.Context, *ClosePerpPositionsRequest) (*ClosePerpPositionsResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -826,8 +837,11 @@ func (UnimplementedApiServer) PostRouteTradeSwap(context.Context, *RouteTradeSwa
 func (UnimplementedApiServer) PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostPerpOrder not implemented")
 }
-func (UnimplementedApiServer) GetCurrentPerpPositions(context.Context, *GetCurrentPerpPositionsRequest) (*GetCurrentPerpPositionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentPerpPositions not implemented")
+func (UnimplementedApiServer) GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPerpPositions not implemented")
+}
+func (UnimplementedApiServer) DriftClosePerpPositions(context.Context, *ClosePerpPositionsRequest) (*ClosePerpPositionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DriftClosePerpPositions not implemented")
 }
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
@@ -1379,20 +1393,38 @@ func _Api_PostPerpOrder_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetCurrentPerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCurrentPerpPositionsRequest)
+func _Api_GetPerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPerpPositionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).GetCurrentPerpPositions(ctx, in)
+		return srv.(ApiServer).GetPerpPositions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/GetCurrentPerpPositions",
+		FullMethod: "/api.Api/GetPerpPositions",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetCurrentPerpPositions(ctx, req.(*GetCurrentPerpPositionsRequest))
+		return srv.(ApiServer).GetPerpPositions(ctx, req.(*GetPerpPositionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_DriftClosePerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClosePerpPositionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).DriftClosePerpPositions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/DriftClosePerpPositions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).DriftClosePerpPositions(ctx, req.(*ClosePerpPositionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1748,8 +1780,12 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_PostPerpOrder_Handler,
 		},
 		{
-			MethodName: "GetCurrentPerpPositions",
-			Handler:    _Api_GetCurrentPerpPositions_Handler,
+			MethodName: "GetPerpPositions",
+			Handler:    _Api_GetPerpPositions_Handler,
+		},
+		{
+			MethodName: "DriftClosePerpPositions",
+			Handler:    _Api_DriftClosePerpPositions_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

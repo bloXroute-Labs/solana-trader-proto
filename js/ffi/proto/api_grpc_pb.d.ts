@@ -41,7 +41,8 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getUnsettled: IApiService_IGetUnsettled;
     postRouteTradeSwap: IApiService_IPostRouteTradeSwap;
     postPerpOrder: IApiService_IPostPerpOrder;
-    getCurrentPerpPositions: IApiService_IGetCurrentPerpPositions;
+    getPerpPositions: IApiService_IGetPerpPositions;
+    driftClosePerpPositions: IApiService_IDriftClosePerpPositions;
     getOrderbooksStream: IApiService_IGetOrderbooksStream;
     getMarketDepthsStream: IApiService_IGetMarketDepthsStream;
     getTickersStream: IApiService_IGetTickersStream;
@@ -307,14 +308,23 @@ interface IApiService_IPostPerpOrder extends grpc.MethodDefinition<api_pb.PostPe
     responseSerialize: grpc.serialize<api_pb.PostPerpOrderResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostPerpOrderResponse>;
 }
-interface IApiService_IGetCurrentPerpPositions extends grpc.MethodDefinition<api_pb.GetCurrentPerpPositionsRequest, api_pb.GetCurrentPerpPositionsResponse> {
-    path: "/api.Api/GetCurrentPerpPositions";
+interface IApiService_IGetPerpPositions extends grpc.MethodDefinition<api_pb.GetPerpPositionsRequest, api_pb.GetPerpPositionsResponse> {
+    path: "/api.Api/GetPerpPositions";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetCurrentPerpPositionsRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetCurrentPerpPositionsRequest>;
-    responseSerialize: grpc.serialize<api_pb.GetCurrentPerpPositionsResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.GetCurrentPerpPositionsResponse>;
+    requestSerialize: grpc.serialize<api_pb.GetPerpPositionsRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetPerpPositionsRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetPerpPositionsResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetPerpPositionsResponse>;
+}
+interface IApiService_IDriftClosePerpPositions extends grpc.MethodDefinition<api_pb.ClosePerpPositionsRequest, api_pb.ClosePerpPositionsResponse> {
+    path: "/api.Api/DriftClosePerpPositions";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.ClosePerpPositionsRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.ClosePerpPositionsRequest>;
+    responseSerialize: grpc.serialize<api_pb.ClosePerpPositionsResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.ClosePerpPositionsResponse>;
 }
 interface IApiService_IGetOrderbooksStream extends grpc.MethodDefinition<api_pb.GetOrderbooksRequest, api_pb.GetOrderbooksStreamResponse> {
     path: "/api.Api/GetOrderbooksStream";
@@ -447,7 +457,8 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getUnsettled: grpc.handleUnaryCall<api_pb.GetUnsettledRequest, api_pb.GetUnsettledResponse>;
     postRouteTradeSwap: grpc.handleUnaryCall<api_pb.RouteTradeSwapRequest, api_pb.TradeSwapResponse>;
     postPerpOrder: grpc.handleUnaryCall<api_pb.PostPerpOrderRequest, api_pb.PostPerpOrderResponse>;
-    getCurrentPerpPositions: grpc.handleUnaryCall<api_pb.GetCurrentPerpPositionsRequest, api_pb.GetCurrentPerpPositionsResponse>;
+    getPerpPositions: grpc.handleUnaryCall<api_pb.GetPerpPositionsRequest, api_pb.GetPerpPositionsResponse>;
+    driftClosePerpPositions: grpc.handleUnaryCall<api_pb.ClosePerpPositionsRequest, api_pb.ClosePerpPositionsResponse>;
     getOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetOrderbooksRequest, api_pb.GetOrderbooksStreamResponse>;
     getMarketDepthsStream: grpc.handleServerStreamingCall<api_pb.GetMarketDepthsRequest, api_pb.GetMarketDepthsStreamResponse>;
     getTickersStream: grpc.handleServerStreamingCall<api_pb.GetTickersRequest, api_pb.GetTickersStreamResponse>;
@@ -546,9 +557,12 @@ export interface IApiClient {
     postPerpOrder(request: api_pb.PostPerpOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostPerpOrderResponse) => void): grpc.ClientUnaryCall;
     postPerpOrder(request: api_pb.PostPerpOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostPerpOrderResponse) => void): grpc.ClientUnaryCall;
     postPerpOrder(request: api_pb.PostPerpOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostPerpOrderResponse) => void): grpc.ClientUnaryCall;
-    getCurrentPerpPositions(request: api_pb.GetCurrentPerpPositionsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetCurrentPerpPositionsResponse) => void): grpc.ClientUnaryCall;
-    getCurrentPerpPositions(request: api_pb.GetCurrentPerpPositionsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetCurrentPerpPositionsResponse) => void): grpc.ClientUnaryCall;
-    getCurrentPerpPositions(request: api_pb.GetCurrentPerpPositionsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetCurrentPerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    getPerpPositions(request: api_pb.GetPerpPositionsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    getPerpPositions(request: api_pb.GetPerpPositionsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    getPerpPositions(request: api_pb.GetPerpPositionsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    driftClosePerpPositions(request: api_pb.ClosePerpPositionsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.ClosePerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    driftClosePerpPositions(request: api_pb.ClosePerpPositionsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.ClosePerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    driftClosePerpPositions(request: api_pb.ClosePerpPositionsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.ClosePerpPositionsResponse) => void): grpc.ClientUnaryCall;
     getOrderbooksStream(request: api_pb.GetOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     getOrderbooksStream(request: api_pb.GetOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     getMarketDepthsStream(request: api_pb.GetMarketDepthsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthsStreamResponse>;
@@ -659,9 +673,12 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postPerpOrder(request: api_pb.PostPerpOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostPerpOrderResponse) => void): grpc.ClientUnaryCall;
     public postPerpOrder(request: api_pb.PostPerpOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostPerpOrderResponse) => void): grpc.ClientUnaryCall;
     public postPerpOrder(request: api_pb.PostPerpOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostPerpOrderResponse) => void): grpc.ClientUnaryCall;
-    public getCurrentPerpPositions(request: api_pb.GetCurrentPerpPositionsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetCurrentPerpPositionsResponse) => void): grpc.ClientUnaryCall;
-    public getCurrentPerpPositions(request: api_pb.GetCurrentPerpPositionsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetCurrentPerpPositionsResponse) => void): grpc.ClientUnaryCall;
-    public getCurrentPerpPositions(request: api_pb.GetCurrentPerpPositionsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetCurrentPerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    public getPerpPositions(request: api_pb.GetPerpPositionsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    public getPerpPositions(request: api_pb.GetPerpPositionsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    public getPerpPositions(request: api_pb.GetPerpPositionsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    public driftClosePerpPositions(request: api_pb.ClosePerpPositionsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.ClosePerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    public driftClosePerpPositions(request: api_pb.ClosePerpPositionsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.ClosePerpPositionsResponse) => void): grpc.ClientUnaryCall;
+    public driftClosePerpPositions(request: api_pb.ClosePerpPositionsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.ClosePerpPositionsResponse) => void): grpc.ClientUnaryCall;
     public getOrderbooksStream(request: api_pb.GetOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     public getOrderbooksStream(request: api_pb.GetOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     public getMarketDepthsStream(request: api_pb.GetMarketDepthsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthsStreamResponse>;

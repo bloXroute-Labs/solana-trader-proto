@@ -787,11 +787,23 @@ class GetPricesStreamResponse(betterproto.Message):
 
 
 @dataclass
-class GetCurrentPerpPositionsRequest(betterproto.Message):
+class GetPerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
     account_address: str = betterproto.string_field(3)
     contracts: List[common.Contract] = betterproto.enum_field(4)
+
+
+@dataclass
+class ClosePerpPositionsRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    contracts: List[common.Contract] = betterproto.enum_field(3)
+
+
+@dataclass
+class ClosePerpPositionsResponse(betterproto.Message):
+    transactions: List[str] = betterproto.string_field(1)
 
 
 @dataclass
@@ -809,7 +821,7 @@ class GetCurrentPerpPosition(betterproto.Message):
 
 
 @dataclass
-class GetCurrentPerpPositionsResponse(betterproto.Message):
+class GetPerpPositionsResponse(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
     perp_positions: List["GetCurrentPerpPosition"] = betterproto.message_field(3)
@@ -1389,24 +1401,42 @@ class ApiStub(betterproto.ServiceStub):
             PostPerpOrderResponse,
         )
 
-    async def get_current_perp_positions(
+    async def get_perp_positions(
         self,
         *,
         project: "Project" = 0,
         owner_address: str = "",
         account_address: str = "",
         contracts: List[common.Contract] = [],
-    ) -> GetCurrentPerpPositionsResponse:
-        request = GetCurrentPerpPositionsRequest()
+    ) -> GetPerpPositionsResponse:
+        request = GetPerpPositionsRequest()
         request.project = project
         request.owner_address = owner_address
         request.account_address = account_address
         request.contracts = contracts
 
         return await self._unary_unary(
-            "/api.Api/GetCurrentPerpPositions",
+            "/api.Api/GetPerpPositions",
             request,
-            GetCurrentPerpPositionsResponse,
+            GetPerpPositionsResponse,
+        )
+
+    async def drift_close_perp_positions(
+        self,
+        *,
+        project: "Project" = 0,
+        owner_address: str = "",
+        contracts: List[common.Contract] = [],
+    ) -> ClosePerpPositionsResponse:
+        request = ClosePerpPositionsRequest()
+        request.project = project
+        request.owner_address = owner_address
+        request.contracts = contracts
+
+        return await self._unary_unary(
+            "/api.Api/DriftClosePerpPositions",
+            request,
+            ClosePerpPositionsResponse,
         )
 
     async def get_orderbooks_stream(

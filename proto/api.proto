@@ -379,12 +379,23 @@ service Api {
     };
   }
 
-  rpc GetCurrentPerpPositions(GetCurrentPerpPositionsRequest)  returns (GetCurrentPerpPositionsResponse) {
+  rpc GetPerpPositions(GetPerpPositionsRequest)  returns (GetPerpPositionsResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/perp-positions"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list current perp positions";
+      summary: "PERP positions";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
+  rpc DriftClosePerpPositions(ClosePerpPositionsRequest)  returns (ClosePerpPositionsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/close-perp-positions"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "closes current perp positions";
       summary: "PERP positions";
       tags: ["Trade", "Universal"];
     };
@@ -1133,11 +1144,21 @@ message GetPricesStreamResponse {
   TokenPrice price = 2;
 }
 
-message GetCurrentPerpPositionsRequest {
+message GetPerpPositionsRequest {
   Project project = 1;
   string ownerAddress = 2;
   string accountAddress = 3;
   repeated common.Contract contracts = 4;
+}
+
+message ClosePerpPositionsRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  repeated common.Contract contracts = 3;
+}
+
+message ClosePerpPositionsResponse {
+  repeated string transactions = 1;
 }
 
 message GetCurrentPerpPosition {
@@ -1157,7 +1178,7 @@ message GetCurrentPerpPosition {
   double liquidationPrice = 10;
 }
 
-message GetCurrentPerpPositionsResponse {
+message GetPerpPositionsResponse {
   string ownerAddress = 1;
   string accountAddress = 2;
 
