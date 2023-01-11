@@ -1196,7 +1196,7 @@ message PostPerpOrderRequest {
   string type = 8;
   double amount = 9;
   double price = 10;
-  string clientOrderId = 11;
+  string clientOrderID = 11;
 }
 
 message PostPerpOrderResponse {

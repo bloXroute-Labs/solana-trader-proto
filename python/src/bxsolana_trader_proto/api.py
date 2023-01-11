@@ -839,7 +839,7 @@ class PostPerpOrderRequest(betterproto.Message):
     type: str = betterproto.string_field(8)
     amount: float = betterproto.double_field(9)
     price: float = betterproto.double_field(10)
-    client_order_id: str = betterproto.string_field(11)
+    client_order_i_d: str = betterproto.string_field(11)
 
 
 @dataclass
@@ -1378,7 +1378,7 @@ class ApiStub(betterproto.ServiceStub):
         type: str = "",
         amount: float = 0,
         price: float = 0,
-        client_order_id: str = "",
+        client_order_i_d: str = "",
     ) -> PostPerpOrderResponse:
         """perp endpoints"""
 
@@ -1393,7 +1393,7 @@ class ApiStub(betterproto.ServiceStub):
         request.type = type
         request.amount = amount
         request.price = price
-        request.client_order_id = client_order_id
+        request.client_order_i_d = client_order_i_d
 
         return await self._unary_unary(
             "/api.Api/PostPerpOrder",

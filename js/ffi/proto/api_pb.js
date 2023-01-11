@@ -25205,7 +25205,7 @@ proto.api.PostPerpOrderRequest.prototype.setPrice = function(value) {
 
 
 /**
- * optional string clientOrderId = 11;
+ * optional string clientOrderID = 11;
  * @return {string}
  */
 proto.api.PostPerpOrderRequest.prototype.getClientorderid = function() {

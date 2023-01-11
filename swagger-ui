@@ -867,7 +867,7 @@
             "format": "double"
           },
           {
-            "name": "clientOrderId",
+            "name": "clientOrderID",
             "in": "query",
             "required": false,
             "type": "string"
