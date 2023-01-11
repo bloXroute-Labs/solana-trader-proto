@@ -565,7 +565,7 @@
       "get": {
         "summary": "PERP positions",
         "description": "closes current perp positions",
-        "operationId": "Api_DriftClosePerpPositions",
+        "operationId": "Api_ClosePerpPositions",
         "responses": {
           "200": {
             "description": "A successful response.",

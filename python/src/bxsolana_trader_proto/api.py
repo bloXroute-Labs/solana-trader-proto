@@ -1421,7 +1421,7 @@ class ApiStub(betterproto.ServiceStub):
             GetPerpPositionsResponse,
         )
 
-    async def drift_close_perp_positions(
+    async def close_perp_positions(
         self,
         *,
         project: "Project" = 0,
@@ -1434,7 +1434,7 @@ class ApiStub(betterproto.ServiceStub):
         request.contracts = contracts
 
         return await self._unary_unary(
-            "/api.Api/DriftClosePerpPositions",
+            "/api.Api/ClosePerpPositions",
             request,
             ClosePerpPositionsResponse,
         )

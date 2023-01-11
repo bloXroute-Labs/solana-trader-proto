@@ -1138,8 +1138,8 @@ postPerpOrder: {
     responseSerialize: serialize_api_GetPerpPositionsResponse,
     responseDeserialize: deserialize_api_GetPerpPositionsResponse,
   },
-  driftClosePerpPositions: {
-    path: '/api.Api/DriftClosePerpPositions',
+  closePerpPositions: {
+    path: '/api.Api/ClosePerpPositions',
     requestStream: false,
     responseStream: false,
     requestType: api_pb.ClosePerpPositionsRequest,

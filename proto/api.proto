@@ -390,7 +390,7 @@ service Api {
     };
   }
 
-  rpc DriftClosePerpPositions(ClosePerpPositionsRequest)  returns (ClosePerpPositionsResponse) {
+  rpc ClosePerpPositions(ClosePerpPositionsRequest)  returns (ClosePerpPositionsResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/close-perp-positions"
     };
