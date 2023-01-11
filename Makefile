@@ -9,7 +9,7 @@ PB_JS_IMAGE_NAME=bloxroute/bdn-protobuf:v3.19.3-js
 all: clean proto
 
 clean:
-	rm -rf js api common drift
+	rm -rf js api common
 
 proto: proto-build-api-go proto-build-common-go proto-build-api-js proto-build-swagger proto-build-gw proto-build-api-python
 
