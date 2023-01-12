@@ -51,7 +51,7 @@ type ApiClient interface {
 	// perp endpoints
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
 	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
-	ClosePerpPositions(ctx context.Context, in *ClosePerpPositionsRequest, opts ...grpc.CallOption) (*ClosePerpPositionsResponse, error)
+	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -335,9 +335,9 @@ func (c *apiClient) GetPerpPositions(ctx context.Context, in *GetPerpPositionsRe
 	return out, nil
 }
 
-func (c *apiClient) ClosePerpPositions(ctx context.Context, in *ClosePerpPositionsRequest, opts ...grpc.CallOption) (*ClosePerpPositionsResponse, error) {
-	out := new(ClosePerpPositionsResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/ClosePerpPositions", in, out, opts...)
+func (c *apiClient) PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error) {
+	out := new(PostClosePerpPositionsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostClosePerpPositions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -733,7 +733,7 @@ type ApiServer interface {
 	// perp endpoints
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
 	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
-	ClosePerpPositions(context.Context, *ClosePerpPositionsRequest) (*ClosePerpPositionsResponse, error)
+	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -840,8 +840,8 @@ func (UnimplementedApiServer) PostPerpOrder(context.Context, *PostPerpOrderReque
 func (UnimplementedApiServer) GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPerpPositions not implemented")
 }
-func (UnimplementedApiServer) ClosePerpPositions(context.Context, *ClosePerpPositionsRequest) (*ClosePerpPositionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ClosePerpPositions not implemented")
+func (UnimplementedApiServer) PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostClosePerpPositions not implemented")
 }
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
@@ -1411,20 +1411,20 @@ func _Api_GetPerpPositions_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_ClosePerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ClosePerpPositionsRequest)
+func _Api_PostClosePerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostClosePerpPositionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).ClosePerpPositions(ctx, in)
+		return srv.(ApiServer).PostClosePerpPositions(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/ClosePerpPositions",
+		FullMethod: "/api.Api/PostClosePerpPositions",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).ClosePerpPositions(ctx, req.(*ClosePerpPositionsRequest))
+		return srv.(ApiServer).PostClosePerpPositions(ctx, req.(*PostClosePerpPositionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1784,8 +1784,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetPerpPositions_Handler,
 		},
 		{
-			MethodName: "ClosePerpPositions",
-			Handler:    _Api_ClosePerpPositions_Handler,
+			MethodName: "PostClosePerpPositions",
+			Handler:    _Api_PostClosePerpPositions_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

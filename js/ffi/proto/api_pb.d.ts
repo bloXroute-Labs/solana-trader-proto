@@ -2831,27 +2831,27 @@ export namespace GetPerpPositionsRequest {
     }
 }
 
-export class ClosePerpPositionsRequest extends jspb.Message { 
+export class PostClosePerpPositionsRequest extends jspb.Message { 
     getProject(): Project;
-    setProject(value: Project): ClosePerpPositionsRequest;
+    setProject(value: Project): PostClosePerpPositionsRequest;
     getOwneraddress(): string;
-    setOwneraddress(value: string): ClosePerpPositionsRequest;
+    setOwneraddress(value: string): PostClosePerpPositionsRequest;
     clearContractsList(): void;
     getContractsList(): Array<common_pb.PerpContract>;
-    setContractsList(value: Array<common_pb.PerpContract>): ClosePerpPositionsRequest;
+    setContractsList(value: Array<common_pb.PerpContract>): PostClosePerpPositionsRequest;
     addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): ClosePerpPositionsRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: ClosePerpPositionsRequest): ClosePerpPositionsRequest.AsObject;
+    toObject(includeInstance?: boolean): PostClosePerpPositionsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostClosePerpPositionsRequest): PostClosePerpPositionsRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: ClosePerpPositionsRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): ClosePerpPositionsRequest;
-    static deserializeBinaryFromReader(message: ClosePerpPositionsRequest, reader: jspb.BinaryReader): ClosePerpPositionsRequest;
+    static serializeBinaryToWriter(message: PostClosePerpPositionsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostClosePerpPositionsRequest;
+    static deserializeBinaryFromReader(message: PostClosePerpPositionsRequest, reader: jspb.BinaryReader): PostClosePerpPositionsRequest;
 }
 
-export namespace ClosePerpPositionsRequest {
+export namespace PostClosePerpPositionsRequest {
     export type AsObject = {
         project: Project,
         owneraddress: string,
@@ -2859,23 +2859,23 @@ export namespace ClosePerpPositionsRequest {
     }
 }
 
-export class ClosePerpPositionsResponse extends jspb.Message { 
+export class PostClosePerpPositionsResponse extends jspb.Message { 
     clearTransactionsList(): void;
     getTransactionsList(): Array<string>;
-    setTransactionsList(value: Array<string>): ClosePerpPositionsResponse;
+    setTransactionsList(value: Array<string>): PostClosePerpPositionsResponse;
     addTransactions(value: string, index?: number): string;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): ClosePerpPositionsResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: ClosePerpPositionsResponse): ClosePerpPositionsResponse.AsObject;
+    toObject(includeInstance?: boolean): PostClosePerpPositionsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostClosePerpPositionsResponse): PostClosePerpPositionsResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: ClosePerpPositionsResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): ClosePerpPositionsResponse;
-    static deserializeBinaryFromReader(message: ClosePerpPositionsResponse, reader: jspb.BinaryReader): ClosePerpPositionsResponse;
+    static serializeBinaryToWriter(message: PostClosePerpPositionsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostClosePerpPositionsResponse;
+    static deserializeBinaryFromReader(message: PostClosePerpPositionsResponse, reader: jspb.BinaryReader): PostClosePerpPositionsResponse;
 }
 
-export namespace ClosePerpPositionsResponse {
+export namespace PostClosePerpPositionsResponse {
     export type AsObject = {
         transactionsList: Array<string>,
     }

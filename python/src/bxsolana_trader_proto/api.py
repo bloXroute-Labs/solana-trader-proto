@@ -793,14 +793,14 @@ class GetPerpPositionsRequest(betterproto.Message):
 
 
 @dataclass
-class ClosePerpPositionsRequest(betterproto.Message):
+class PostClosePerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
     contracts: List[common.PerpContract] = betterproto.enum_field(3)
 
 
 @dataclass
-class ClosePerpPositionsResponse(betterproto.Message):
+class PostClosePerpPositionsResponse(betterproto.Message):
     transactions: List[str] = betterproto.string_field(1)
 
 
@@ -1419,22 +1419,22 @@ class ApiStub(betterproto.ServiceStub):
             GetPerpPositionsResponse,
         )
 
-    async def close_perp_positions(
+    async def post_close_perp_positions(
         self,
         *,
         project: "Project" = 0,
         owner_address: str = "",
         contracts: List[common.PerpContract] = [],
-    ) -> ClosePerpPositionsResponse:
-        request = ClosePerpPositionsRequest()
+    ) -> PostClosePerpPositionsResponse:
+        request = PostClosePerpPositionsRequest()
         request.project = project
         request.owner_address = owner_address
         request.contracts = contracts
 
         return await self._unary_unary(
-            "/api.Api/ClosePerpPositions",
+            "/api.Api/PostClosePerpPositions",
             request,
-            ClosePerpPositionsResponse,
+            PostClosePerpPositionsResponse,
         )
 
     async def get_orderbooks_stream(

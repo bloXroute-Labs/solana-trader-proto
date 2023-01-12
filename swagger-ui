@@ -565,12 +565,12 @@
       "get": {
         "summary": "PERP positions",
         "description": "closes current perp positions",
-        "operationId": "Api_ClosePerpPositions",
+        "operationId": "Api_PostClosePerpPositions",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiClosePerpPositionsResponse"
+              "$ref": "#/definitions/apiPostClosePerpPositionsResponse"
             }
           },
           "default": {
@@ -1287,17 +1287,6 @@
         "count": {
           "type": "number",
           "format": "double"
-        }
-      }
-    },
-    "apiClosePerpPositionsResponse": {
-      "type": "object",
-      "properties": {
-        "transactions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -2099,6 +2088,17 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostClosePerpPositionsResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

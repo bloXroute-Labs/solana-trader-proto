@@ -390,7 +390,7 @@ service Api {
     };
   }
 
-  rpc ClosePerpPositions(ClosePerpPositionsRequest)  returns (ClosePerpPositionsResponse) {
+  rpc PostClosePerpPositions(PostClosePerpPositionsRequest)  returns (PostClosePerpPositionsResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/close-perp-positions"
     };
@@ -1149,13 +1149,13 @@ message GetPerpPositionsRequest {
   repeated common.PerpContract contracts = 4;
 }
 
-message ClosePerpPositionsRequest {
+message PostClosePerpPositionsRequest {
   Project project = 1;
   string ownerAddress = 2;
   repeated common.PerpContract contracts = 3;
 }
 
-message ClosePerpPositionsResponse {
+message PostClosePerpPositionsResponse {
   repeated string transactions = 1;
 }
 
