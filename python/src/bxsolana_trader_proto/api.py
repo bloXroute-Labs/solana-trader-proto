@@ -780,7 +780,7 @@ class GetPricesStreamResponse(betterproto.Message):
 
 
 @dataclass
-class GetPerpPositionsRequest(betterproto.Message):
+class PerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
     account_address: str = betterproto.string_field(3)
@@ -788,7 +788,7 @@ class GetPerpPositionsRequest(betterproto.Message):
 
 
 @dataclass
-class GetPerpPositionsResponse(betterproto.Message):
+class PerpPositionsResponse(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
     perp_positions: List["GetPerpPosition"] = betterproto.message_field(3)
@@ -1401,8 +1401,8 @@ class ApiStub(betterproto.ServiceStub):
         owner_address: str = "",
         account_address: str = "",
         contracts: List[common.PerpContract] = [],
-    ) -> GetPerpPositionsResponse:
-        request = GetPerpPositionsRequest()
+    ) -> PerpPositionsResponse:
+        request = PerpPositionsRequest()
         request.project = project
         request.owner_address = owner_address
         request.account_address = account_address
@@ -1411,7 +1411,7 @@ class ApiStub(betterproto.ServiceStub):
         return await self._unary_unary(
             "/api.Api/GetPerpPositions",
             request,
-            GetPerpPositionsResponse,
+            PerpPositionsResponse,
         )
 
     async def post_close_perp_positions(

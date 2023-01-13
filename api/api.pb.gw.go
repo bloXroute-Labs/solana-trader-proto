@@ -1274,7 +1274,7 @@ var (
 )
 
 func request_Api_GetPerpPositions_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetPerpPositionsRequest
+	var protoReq PerpPositionsRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
@@ -1290,7 +1290,7 @@ func request_Api_GetPerpPositions_0(ctx context.Context, marshaler runtime.Marsh
 }
 
 func local_request_Api_GetPerpPositions_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetPerpPositionsRequest
+	var protoReq PerpPositionsRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
@@ -2026,7 +2026,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetPerpPositions", runtime.WithHTTPPathPattern("/api/v1/trade/perp-positions"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetPerpPositions", runtime.WithHTTPPathPattern("/api/v1/trade/perp/positions"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2050,7 +2050,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostClosePerpPositions", runtime.WithHTTPPathPattern("/api/v1/trade/close-perp-positions"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostClosePerpPositions", runtime.WithHTTPPathPattern("/api/v1/trade/perp/close-positions"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2701,7 +2701,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetPerpPositions", runtime.WithHTTPPathPattern("/api/v1/trade/perp-positions"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetPerpPositions", runtime.WithHTTPPathPattern("/api/v1/trade/perp/positions"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2722,7 +2722,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostClosePerpPositions", runtime.WithHTTPPathPattern("/api/v1/trade/close-perp-positions"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostClosePerpPositions", runtime.WithHTTPPathPattern("/api/v1/trade/perp/close-positions"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2798,9 +2798,9 @@ var (
 
 	pattern_Api_PostPerpOrder_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"api", "v1", "trade", "perp", "order"}, ""))
 
-	pattern_Api_GetPerpPositions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "trade", "perp-positions"}, ""))
+	pattern_Api_GetPerpPositions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"api", "v1", "trade", "perp", "positions"}, ""))
 
-	pattern_Api_PostClosePerpPositions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "trade", "close-perp-positions"}, ""))
+	pattern_Api_PostClosePerpPositions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"api", "v1", "trade", "perp", "close-positions"}, ""))
 )
 
 var (

@@ -375,13 +375,13 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "post a perp order";
       summary: "perp order";
-      tags: ["Trade", "Orderbook"];
+      tags: ["Trade", "Perp", "Orderbook"];
     };
   }
 
-  rpc GetPerpPositions(GetPerpPositionsRequest)  returns (GetPerpPositionsResponse) {
+  rpc GetPerpPositions(PerpPositionsRequest)  returns (PerpPositionsResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/perp-positions"
+      get: "/api/v1/trade/perp/positions"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list current perp positions";
@@ -392,7 +392,7 @@ service Api {
 
   rpc PostClosePerpPositions(PostClosePerpPositionsRequest)  returns (PostClosePerpPositionsResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/close-perp-positions"
+      get: "/api/v1/trade/perp/close-positions"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "closes current perp positions";
@@ -1137,14 +1137,14 @@ message GetPricesStreamResponse {
   TokenPrice price = 2;
 }
 
-message GetPerpPositionsRequest {
+message PerpPositionsRequest {
   Project project = 1;
   string ownerAddress = 2;
   string accountAddress = 3;
   repeated common.PerpContract contracts = 4;
 }
 
-message GetPerpPositionsResponse {
+message PerpPositionsResponse {
   string ownerAddress = 1;
   string accountAddress = 2;
 

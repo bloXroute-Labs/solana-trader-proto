@@ -561,72 +561,6 @@
         ]
       }
     },
-    "/api/v1/trade/close-perp-positions": {
-      "get": {
-        "summary": "PERP positions",
-        "description": "closes current perp positions",
-        "operationId": "Api_PostClosePerpPositions",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostClosePerpPositionsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "contracts",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "ALL",
-                "SOL_PERP",
-                "ETH_PERP",
-                "BTC_PERP"
-              ]
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "tags": [
-          "Trade",
-          "Perp",
-          "Orderbook"
-        ]
-      }
-    },
     "/api/v1/trade/openorders/{market}": {
       "get": {
         "summary": "List of user's open orders",
@@ -697,16 +631,16 @@
         ]
       }
     },
-    "/api/v1/trade/perp-positions": {
+    "/api/v1/trade/perp/close-positions": {
       "get": {
         "summary": "PERP positions",
-        "description": "Returns the list current perp positions",
-        "operationId": "Api_GetPerpPositions",
+        "description": "closes current perp positions",
+        "operationId": "Api_PostClosePerpPositions",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetPerpPositionsResponse"
+              "$ref": "#/definitions/apiPostClosePerpPositionsResponse"
             }
           },
           "default": {
@@ -735,12 +669,6 @@
           },
           {
             "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "accountAddress",
             "in": "query",
             "required": false,
             "type": "string"
@@ -890,6 +818,79 @@
         ],
         "tags": [
           "Trade",
+          "Perp",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/positions": {
+      "get": {
+        "summary": "PERP positions",
+        "description": "Returns the list current perp positions",
+        "operationId": "Api_GetPerpPositions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPerpPositionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contracts",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ALL",
+                "SOL_PERP",
+                "ETH_PERP",
+                "BTC_PERP"
+              ]
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Perp",
           "Orderbook"
         ]
       }
@@ -1543,23 +1544,6 @@
         }
       }
     },
-    "apiGetPerpPositionsResponse": {
-      "type": "object",
-      "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
-        "accountAddress": {
-          "type": "string"
-        },
-        "perpPositions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiGetPerpPosition"
-          }
-        }
-      }
-    },
     "apiGetPoolReservesStreamResponse": {
       "type": "object",
       "properties": {
@@ -1930,6 +1914,23 @@
         "ownerAddress": {
           "type": "string",
           "description": "OpenOrders address for current market"
+        }
+      }
+    },
+    "apiPerpPositionsResponse": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "perpPositions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiGetPerpPosition"
+          }
         }
       }
     },

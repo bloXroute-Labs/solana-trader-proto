@@ -2800,29 +2800,29 @@ export namespace GetPricesStreamResponse {
     }
 }
 
-export class GetPerpPositionsRequest extends jspb.Message { 
+export class PerpPositionsRequest extends jspb.Message { 
     getProject(): Project;
-    setProject(value: Project): GetPerpPositionsRequest;
+    setProject(value: Project): PerpPositionsRequest;
     getOwneraddress(): string;
-    setOwneraddress(value: string): GetPerpPositionsRequest;
+    setOwneraddress(value: string): PerpPositionsRequest;
     getAccountaddress(): string;
-    setAccountaddress(value: string): GetPerpPositionsRequest;
+    setAccountaddress(value: string): PerpPositionsRequest;
     clearContractsList(): void;
     getContractsList(): Array<common_pb.PerpContract>;
-    setContractsList(value: Array<common_pb.PerpContract>): GetPerpPositionsRequest;
+    setContractsList(value: Array<common_pb.PerpContract>): PerpPositionsRequest;
     addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetPerpPositionsRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: GetPerpPositionsRequest): GetPerpPositionsRequest.AsObject;
+    toObject(includeInstance?: boolean): PerpPositionsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PerpPositionsRequest): PerpPositionsRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetPerpPositionsRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetPerpPositionsRequest;
-    static deserializeBinaryFromReader(message: GetPerpPositionsRequest, reader: jspb.BinaryReader): GetPerpPositionsRequest;
+    static serializeBinaryToWriter(message: PerpPositionsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PerpPositionsRequest;
+    static deserializeBinaryFromReader(message: PerpPositionsRequest, reader: jspb.BinaryReader): PerpPositionsRequest;
 }
 
-export namespace GetPerpPositionsRequest {
+export namespace PerpPositionsRequest {
     export type AsObject = {
         project: Project,
         owneraddress: string,
@@ -2831,27 +2831,27 @@ export namespace GetPerpPositionsRequest {
     }
 }
 
-export class GetPerpPositionsResponse extends jspb.Message { 
+export class PerpPositionsResponse extends jspb.Message { 
     getOwneraddress(): string;
-    setOwneraddress(value: string): GetPerpPositionsResponse;
+    setOwneraddress(value: string): PerpPositionsResponse;
     getAccountaddress(): string;
-    setAccountaddress(value: string): GetPerpPositionsResponse;
+    setAccountaddress(value: string): PerpPositionsResponse;
     clearPerppositionsList(): void;
     getPerppositionsList(): Array<GetPerpPosition>;
-    setPerppositionsList(value: Array<GetPerpPosition>): GetPerpPositionsResponse;
+    setPerppositionsList(value: Array<GetPerpPosition>): PerpPositionsResponse;
     addPerppositions(value?: GetPerpPosition, index?: number): GetPerpPosition;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetPerpPositionsResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetPerpPositionsResponse): GetPerpPositionsResponse.AsObject;
+    toObject(includeInstance?: boolean): PerpPositionsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PerpPositionsResponse): PerpPositionsResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetPerpPositionsResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetPerpPositionsResponse;
-    static deserializeBinaryFromReader(message: GetPerpPositionsResponse, reader: jspb.BinaryReader): GetPerpPositionsResponse;
+    static serializeBinaryToWriter(message: PerpPositionsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PerpPositionsResponse;
+    static deserializeBinaryFromReader(message: PerpPositionsResponse, reader: jspb.BinaryReader): PerpPositionsResponse;
 }
 
-export namespace GetPerpPositionsResponse {
+export namespace PerpPositionsResponse {
     export type AsObject = {
         owneraddress: string,
         accountaddress: string,
