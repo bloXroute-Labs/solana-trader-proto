@@ -1274,7 +1274,7 @@ var (
 )
 
 func request_Api_GetPerpPositions_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PerpPositionsRequest
+	var protoReq GetPerpPositionsRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
@@ -1290,7 +1290,7 @@ func request_Api_GetPerpPositions_0(ctx context.Context, marshaler runtime.Marsh
 }
 
 func local_request_Api_GetPerpPositions_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PerpPositionsRequest
+	var protoReq GetPerpPositionsRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {

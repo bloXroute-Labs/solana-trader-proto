@@ -50,7 +50,7 @@ type ApiClient interface {
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
 	// perp endpoints
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
-	GetPerpPositions(ctx context.Context, in *PerpPositionsRequest, opts ...grpc.CallOption) (*PerpPositionsResponse, error)
+	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
@@ -326,8 +326,8 @@ func (c *apiClient) PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest,
 	return out, nil
 }
 
-func (c *apiClient) GetPerpPositions(ctx context.Context, in *PerpPositionsRequest, opts ...grpc.CallOption) (*PerpPositionsResponse, error) {
-	out := new(PerpPositionsResponse)
+func (c *apiClient) GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error) {
+	out := new(GetPerpPositionsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetPerpPositions", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -732,7 +732,7 @@ type ApiServer interface {
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
 	// perp endpoints
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
-	GetPerpPositions(context.Context, *PerpPositionsRequest) (*PerpPositionsResponse, error)
+	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
@@ -837,7 +837,7 @@ func (UnimplementedApiServer) PostRouteTradeSwap(context.Context, *RouteTradeSwa
 func (UnimplementedApiServer) PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostPerpOrder not implemented")
 }
-func (UnimplementedApiServer) GetPerpPositions(context.Context, *PerpPositionsRequest) (*PerpPositionsResponse, error) {
+func (UnimplementedApiServer) GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPerpPositions not implemented")
 }
 func (UnimplementedApiServer) PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error) {
@@ -1394,7 +1394,7 @@ func _Api_PostPerpOrder_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _Api_GetPerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PerpPositionsRequest)
+	in := new(GetPerpPositionsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1406,7 +1406,7 @@ func _Api_GetPerpPositions_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/api.Api/GetPerpPositions",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetPerpPositions(ctx, req.(*PerpPositionsRequest))
+		return srv.(ApiServer).GetPerpPositions(ctx, req.(*GetPerpPositionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

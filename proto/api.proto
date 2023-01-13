@@ -379,7 +379,7 @@ service Api {
     };
   }
 
-  rpc GetPerpPositions(PerpPositionsRequest)  returns (PerpPositionsResponse) {
+  rpc GetPerpPositions(GetPerpPositionsRequest)  returns (GetPerpPositionsResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/perp/positions"
     };
@@ -1137,18 +1137,18 @@ message GetPricesStreamResponse {
   TokenPrice price = 2;
 }
 
-message PerpPositionsRequest {
+message GetPerpPositionsRequest {
   Project project = 1;
   string ownerAddress = 2;
   string accountAddress = 3;
   repeated common.PerpContract contracts = 4;
 }
 
-message PerpPositionsResponse {
+message GetPerpPositionsResponse {
   string ownerAddress = 1;
   string accountAddress = 2;
 
-  repeated GetPerpPosition perpPositions = 3;
+  repeated PerpPosition perpPositions = 3;
 }
 
 message PostClosePerpPositionsRequest {
@@ -1161,7 +1161,7 @@ message PostClosePerpPositionsResponse {
   repeated string transactions = 1;
 }
 
-message GetPerpPosition {
+message PerpPosition {
   common.PerpContract contract = 1;
 
   double contractVolume = 2;
