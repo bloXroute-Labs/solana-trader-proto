@@ -820,15 +820,15 @@ func file_drift_proto_rawDescGZIP() []byte {
 var file_drift_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_drift_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_drift_proto_goTypes = []interface{}{
-	(DriftContract)(0),                           // 0: drift.DriftContract
-	(*DriftGetOrderbookRequest)(nil),             // 1: drift.DriftGetOrderbookRequest
-	(*DriftGetOrderbookResponse)(nil),            // 2: drift.DriftGetOrderbookResponse
-	(*DriftOrderbookItem)(nil),                   // 3: drift.DriftOrderbookItem
+	(DriftContract)(0),                    // 0: drift.DriftContract
+	(*DriftGetOrderbookRequest)(nil),      // 1: drift.DriftGetOrderbookRequest
+	(*DriftGetOrderbookResponse)(nil),     // 2: drift.DriftGetOrderbookResponse
+	(*DriftOrderbookItem)(nil),            // 3: drift.DriftOrderbookItem
 	(*DriftGetPerpPositionsRequest)(nil),  // 4: drift.DriftGetPerpPositionsRequest
-	(*DriftGetCurrentPerpPosition)(nil),          // 5: drift.DriftGetCurrentPerpPosition
+	(*DriftGetCurrentPerpPosition)(nil),   // 5: drift.DriftGetCurrentPerpPosition
 	(*DriftGetPerpPositionsResponse)(nil), // 6: drift.DriftGetPerpPositionsResponse
-	(*DriftPostPerpOrderRequest)(nil),            // 7: drift.DriftPostPerpOrderRequest
-	(*DriftPostPerpOrderResponse)(nil),           // 8: drift.DriftPostPerpOrderResponse
+	(*DriftPostPerpOrderRequest)(nil),     // 7: drift.DriftPostPerpOrderRequest
+	(*DriftPostPerpOrderResponse)(nil),    // 8: drift.DriftPostPerpOrderResponse
 }
 var file_drift_proto_depIdxs = []int32{
 	3, // 0: drift.DriftGetOrderbookResponse.bids:type_name -> drift.DriftOrderbookItem
