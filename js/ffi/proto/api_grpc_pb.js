@@ -274,6 +274,28 @@ function deserialize_api_GetOrdersResponse(buffer_arg) {
   return api_pb.GetOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetPerpPositionsRequest(arg) {
+  if (!(arg instanceof api_pb.GetPerpPositionsRequest)) {
+    throw new Error('Expected argument of type api.GetPerpPositionsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetPerpPositionsRequest(buffer_arg) {
+  return api_pb.GetPerpPositionsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetPerpPositionsResponse(arg) {
+  if (!(arg instanceof api_pb.GetPerpPositionsResponse)) {
+    throw new Error('Expected argument of type api.GetPerpPositionsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetPerpPositionsResponse(buffer_arg) {
+  return api_pb.GetPerpPositionsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetPoolReservesStreamRequest(arg) {
   if (!(arg instanceof api_pb.GetPoolReservesStreamRequest)) {
     throw new Error('Expected argument of type api.GetPoolReservesStreamRequest');
@@ -615,6 +637,28 @@ function deserialize_api_PostCancelOrderResponse(buffer_arg) {
   return api_pb.PostCancelOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostClosePerpPositionsRequest(arg) {
+  if (!(arg instanceof api_pb.PostClosePerpPositionsRequest)) {
+    throw new Error('Expected argument of type api.PostClosePerpPositionsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostClosePerpPositionsRequest(buffer_arg) {
+  return api_pb.PostClosePerpPositionsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostClosePerpPositionsResponse(arg) {
+  if (!(arg instanceof api_pb.PostClosePerpPositionsResponse)) {
+    throw new Error('Expected argument of type api.PostClosePerpPositionsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostClosePerpPositionsResponse(buffer_arg) {
+  return api_pb.PostClosePerpPositionsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostOrderRequest(arg) {
   if (!(arg instanceof api_pb.PostOrderRequest)) {
     throw new Error('Expected argument of type api.PostOrderRequest');
@@ -635,6 +679,28 @@ function serialize_api_PostOrderResponse(arg) {
 
 function deserialize_api_PostOrderResponse(buffer_arg) {
   return api_pb.PostOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostPerpOrderRequest(arg) {
+  if (!(arg instanceof api_pb.PostPerpOrderRequest)) {
+    throw new Error('Expected argument of type api.PostPerpOrderRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostPerpOrderRequest(buffer_arg) {
+  return api_pb.PostPerpOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostPerpOrderResponse(arg) {
+  if (!(arg instanceof api_pb.PostPerpOrderResponse)) {
+    throw new Error('Expected argument of type api.PostPerpOrderResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostPerpOrderResponse(buffer_arg) {
+  return api_pb.PostPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_PostReplaceOrderRequest(arg) {
@@ -1048,6 +1114,40 @@ postOrder: {
     requestDeserialize: deserialize_api_RouteTradeSwapRequest,
     responseSerialize: serialize_api_TradeSwapResponse,
     responseDeserialize: deserialize_api_TradeSwapResponse,
+  },
+  // perp endpoints
+postPerpOrder: {
+    path: '/api.Api/PostPerpOrder',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostPerpOrderRequest,
+    responseType: api_pb.PostPerpOrderResponse,
+    requestSerialize: serialize_api_PostPerpOrderRequest,
+    requestDeserialize: deserialize_api_PostPerpOrderRequest,
+    responseSerialize: serialize_api_PostPerpOrderResponse,
+    responseDeserialize: deserialize_api_PostPerpOrderResponse,
+  },
+  getPerpPositions: {
+    path: '/api.Api/GetPerpPositions',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetPerpPositionsRequest,
+    responseType: api_pb.GetPerpPositionsResponse,
+    requestSerialize: serialize_api_GetPerpPositionsRequest,
+    requestDeserialize: deserialize_api_GetPerpPositionsRequest,
+    responseSerialize: serialize_api_GetPerpPositionsResponse,
+    responseDeserialize: deserialize_api_GetPerpPositionsResponse,
+  },
+  postClosePerpPositions: {
+    path: '/api.Api/PostClosePerpPositions',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostClosePerpPositionsRequest,
+    responseType: api_pb.PostClosePerpPositionsResponse,
+    requestSerialize: serialize_api_PostClosePerpPositionsRequest,
+    requestDeserialize: deserialize_api_PostClosePerpPositionsRequest,
+    responseSerialize: serialize_api_PostClosePerpPositionsResponse,
+    responseDeserialize: deserialize_api_PostClosePerpPositionsResponse,
   },
   // streaming endpoints
 getOrderbooksStream: {
