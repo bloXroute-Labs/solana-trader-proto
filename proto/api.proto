@@ -386,7 +386,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list current perp positions";
       summary: "PERP positions";
-      tags: ["Trade", "Universal"];
+      tags: ["Trade", "Perp", "Orderbook"];
     };
   }
 
@@ -397,7 +397,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "closes current perp positions";
       summary: "PERP positions";
-      tags: ["Trade", "Universal"];
+      tags: ["Trade", "Perp", "Orderbook"];
     };
   }
 
@@ -636,7 +636,7 @@ message PostOrderRequest {
   string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
   string market = 3 [(google.api.field_behavior) = REQUIRED];
   Side side = 4 [(google.api.field_behavior) = REQUIRED];
-  repeated OrderType type = 5 [(google.api.field_behavior) = REQUIRED];
+  repeated common.OrderType type = 5 [(google.api.field_behavior) = REQUIRED];
   double amount = 6 [(google.api.field_behavior) = REQUIRED];
   double price = 7 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
@@ -649,7 +649,7 @@ message PostReplaceOrderRequest {
   string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
   string market = 3 [(google.api.field_behavior) = REQUIRED];
   Side side = 4 [(google.api.field_behavior) = REQUIRED];
-  repeated OrderType type = 5 [(google.api.field_behavior) = REQUIRED];
+  repeated common.OrderType type = 5 [(google.api.field_behavior) = REQUIRED];
   double amount = 6 [(google.api.field_behavior) = REQUIRED];
   double price = 7 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 8 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
@@ -662,11 +662,6 @@ enum Side {
   S_UNKNOWN = 0;
   S_BID = 1;
   S_ASK = 2;
-}
-
-enum OrderType {
-  OT_MARKET = 0;
-  OT_LIMIT = 1; // MARKET and LIMIT are mutually exclusive
 }
 
 message PostOrderResponse {
@@ -734,7 +729,7 @@ message GetOrdersRequest {
   string market = 1;
   OrderStatus status = 2;
   Side side = 3;
-  repeated OrderType types = 4;
+  repeated common.OrderType types = 4;
   google.protobuf.Timestamp from = 5;
   uint32 limit = 6;
   Direction direction = 7;
@@ -764,7 +759,7 @@ message Order {
   string orderID = 1;
   string market = 2;
   Side side = 3;
-  repeated OrderType types = 4;
+  repeated common.OrderType types = 4;
   double price = 5;
   double remainingSize = 6;
   google.protobuf.Timestamp createdAt = 7;
@@ -1149,6 +1144,13 @@ message GetPerpPositionsRequest {
   repeated common.PerpContract contracts = 4;
 }
 
+message GetPerpPositionsResponse {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+
+  repeated GetPerpPosition perpPositions = 3;
+}
+
 message PostClosePerpPositionsRequest {
   Project project = 1;
   string ownerAddress = 2;
@@ -1159,7 +1161,7 @@ message PostClosePerpPositionsResponse {
   repeated string transactions = 1;
 }
 
-message GetCurrentPerpPosition {
+message GetPerpPosition {
   common.PerpContract contract = 1;
 
   double contractVolume = 2;
@@ -1167,20 +1169,13 @@ message GetCurrentPerpPosition {
   double volumeInOrder = 4;
 
   double positionMargin = 5;
-  string positionSide = 6; // long, short
+  common.PerpPositionSide positionSide = 6;
 
   double unrealizedPnL = 7;
 
   double perpPrice = 8;
   double indexPrice = 9;
   double liquidationPrice = 10;
-}
-
-message GetPerpPositionsResponse {
-  string ownerAddress = 1;
-  string accountAddress = 2;
-
-  repeated GetCurrentPerpPosition perpPositions = 3;
 }
 
 message PostPerpOrderRequest {

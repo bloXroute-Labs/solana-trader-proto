@@ -732,9 +732,9 @@ export class PostOrderRequest extends jspb.Message {
     getSide(): Side;
     setSide(value: Side): PostOrderRequest;
     clearTypeList(): void;
-    getTypeList(): Array<OrderType>;
-    setTypeList(value: Array<OrderType>): PostOrderRequest;
-    addType(value: OrderType, index?: number): OrderType;
+    getTypeList(): Array<common_pb.OrderType>;
+    setTypeList(value: Array<common_pb.OrderType>): PostOrderRequest;
+    addType(value: common_pb.OrderType, index?: number): common_pb.OrderType;
     getAmount(): number;
     setAmount(value: number): PostOrderRequest;
     getPrice(): number;
@@ -762,7 +762,7 @@ export namespace PostOrderRequest {
         payeraddress: string,
         market: string,
         side: Side,
-        typeList: Array<OrderType>,
+        typeList: Array<common_pb.OrderType>,
         amount: number,
         price: number,
         openordersaddress: string,
@@ -781,9 +781,9 @@ export class PostReplaceOrderRequest extends jspb.Message {
     getSide(): Side;
     setSide(value: Side): PostReplaceOrderRequest;
     clearTypeList(): void;
-    getTypeList(): Array<OrderType>;
-    setTypeList(value: Array<OrderType>): PostReplaceOrderRequest;
-    addType(value: OrderType, index?: number): OrderType;
+    getTypeList(): Array<common_pb.OrderType>;
+    setTypeList(value: Array<common_pb.OrderType>): PostReplaceOrderRequest;
+    addType(value: common_pb.OrderType, index?: number): common_pb.OrderType;
     getAmount(): number;
     setAmount(value: number): PostReplaceOrderRequest;
     getPrice(): number;
@@ -813,7 +813,7 @@ export namespace PostReplaceOrderRequest {
         payeraddress: string,
         market: string,
         side: Side,
-        typeList: Array<OrderType>,
+        typeList: Array<common_pb.OrderType>,
         amount: number,
         price: number,
         openordersaddress: string,
@@ -1107,9 +1107,9 @@ export class GetOrdersRequest extends jspb.Message {
     getSide(): Side;
     setSide(value: Side): GetOrdersRequest;
     clearTypesList(): void;
-    getTypesList(): Array<OrderType>;
-    setTypesList(value: Array<OrderType>): GetOrdersRequest;
-    addTypes(value: OrderType, index?: number): OrderType;
+    getTypesList(): Array<common_pb.OrderType>;
+    setTypesList(value: Array<common_pb.OrderType>): GetOrdersRequest;
+    addTypes(value: common_pb.OrderType, index?: number): common_pb.OrderType;
 
     hasFrom(): boolean;
     clearFrom(): void;
@@ -1141,7 +1141,7 @@ export namespace GetOrdersRequest {
         market: string,
         status: OrderStatus,
         side: Side,
-        typesList: Array<OrderType>,
+        typesList: Array<common_pb.OrderType>,
         from?: google_protobuf_timestamp_pb.Timestamp.AsObject,
         limit: number,
         direction: Direction,
@@ -1181,9 +1181,9 @@ export class Order extends jspb.Message {
     getSide(): Side;
     setSide(value: Side): Order;
     clearTypesList(): void;
-    getTypesList(): Array<OrderType>;
-    setTypesList(value: Array<OrderType>): Order;
-    addTypes(value: OrderType, index?: number): OrderType;
+    getTypesList(): Array<common_pb.OrderType>;
+    setTypesList(value: Array<common_pb.OrderType>): Order;
+    addTypes(value: common_pb.OrderType, index?: number): common_pb.OrderType;
     getPrice(): number;
     setPrice(value: number): Order;
     getRemainingsize(): number;
@@ -1213,7 +1213,7 @@ export namespace Order {
         orderid: string,
         market: string,
         side: Side,
-        typesList: Array<OrderType>,
+        typesList: Array<common_pb.OrderType>,
         price: number,
         remainingsize: number,
         createdat?: google_protobuf_timestamp_pb.Timestamp.AsObject,
@@ -2831,6 +2831,34 @@ export namespace GetPerpPositionsRequest {
     }
 }
 
+export class GetPerpPositionsResponse extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetPerpPositionsResponse;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): GetPerpPositionsResponse;
+    clearPerppositionsList(): void;
+    getPerppositionsList(): Array<GetPerpPosition>;
+    setPerppositionsList(value: Array<GetPerpPosition>): GetPerpPositionsResponse;
+    addPerppositions(value?: GetPerpPosition, index?: number): GetPerpPosition;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetPerpPositionsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpPositionsResponse): GetPerpPositionsResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetPerpPositionsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpPositionsResponse;
+    static deserializeBinaryFromReader(message: GetPerpPositionsResponse, reader: jspb.BinaryReader): GetPerpPositionsResponse;
+}
+
+export namespace GetPerpPositionsResponse {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        perppositionsList: Array<GetPerpPosition.AsObject>,
+    }
+}
+
 export class PostClosePerpPositionsRequest extends jspb.Message { 
     getProject(): Project;
     setProject(value: Project): PostClosePerpPositionsRequest;
@@ -2881,78 +2909,50 @@ export namespace PostClosePerpPositionsResponse {
     }
 }
 
-export class GetCurrentPerpPosition extends jspb.Message { 
+export class GetPerpPosition extends jspb.Message { 
     getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): GetCurrentPerpPosition;
+    setContract(value: common_pb.PerpContract): GetPerpPosition;
     getContractvolume(): number;
-    setContractvolume(value: number): GetCurrentPerpPosition;
+    setContractvolume(value: number): GetPerpPosition;
     getVolumeavailable(): number;
-    setVolumeavailable(value: number): GetCurrentPerpPosition;
+    setVolumeavailable(value: number): GetPerpPosition;
     getVolumeinorder(): number;
-    setVolumeinorder(value: number): GetCurrentPerpPosition;
+    setVolumeinorder(value: number): GetPerpPosition;
     getPositionmargin(): number;
-    setPositionmargin(value: number): GetCurrentPerpPosition;
-    getPositionside(): string;
-    setPositionside(value: string): GetCurrentPerpPosition;
+    setPositionmargin(value: number): GetPerpPosition;
+    getPositionside(): common_pb.PerpPositionSide;
+    setPositionside(value: common_pb.PerpPositionSide): GetPerpPosition;
     getUnrealizedpnl(): number;
-    setUnrealizedpnl(value: number): GetCurrentPerpPosition;
+    setUnrealizedpnl(value: number): GetPerpPosition;
     getPerpprice(): number;
-    setPerpprice(value: number): GetCurrentPerpPosition;
+    setPerpprice(value: number): GetPerpPosition;
     getIndexprice(): number;
-    setIndexprice(value: number): GetCurrentPerpPosition;
+    setIndexprice(value: number): GetPerpPosition;
     getLiquidationprice(): number;
-    setLiquidationprice(value: number): GetCurrentPerpPosition;
+    setLiquidationprice(value: number): GetPerpPosition;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetCurrentPerpPosition.AsObject;
-    static toObject(includeInstance: boolean, msg: GetCurrentPerpPosition): GetCurrentPerpPosition.AsObject;
+    toObject(includeInstance?: boolean): GetPerpPosition.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpPosition): GetPerpPosition.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetCurrentPerpPosition, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetCurrentPerpPosition;
-    static deserializeBinaryFromReader(message: GetCurrentPerpPosition, reader: jspb.BinaryReader): GetCurrentPerpPosition;
+    static serializeBinaryToWriter(message: GetPerpPosition, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpPosition;
+    static deserializeBinaryFromReader(message: GetPerpPosition, reader: jspb.BinaryReader): GetPerpPosition;
 }
 
-export namespace GetCurrentPerpPosition {
+export namespace GetPerpPosition {
     export type AsObject = {
         contract: common_pb.PerpContract,
         contractvolume: number,
         volumeavailable: number,
         volumeinorder: number,
         positionmargin: number,
-        positionside: string,
+        positionside: common_pb.PerpPositionSide,
         unrealizedpnl: number,
         perpprice: number,
         indexprice: number,
         liquidationprice: number,
-    }
-}
-
-export class GetPerpPositionsResponse extends jspb.Message { 
-    getOwneraddress(): string;
-    setOwneraddress(value: string): GetPerpPositionsResponse;
-    getAccountaddress(): string;
-    setAccountaddress(value: string): GetPerpPositionsResponse;
-    clearPerppositionsList(): void;
-    getPerppositionsList(): Array<GetCurrentPerpPosition>;
-    setPerppositionsList(value: Array<GetCurrentPerpPosition>): GetPerpPositionsResponse;
-    addPerppositions(value?: GetCurrentPerpPosition, index?: number): GetCurrentPerpPosition;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetPerpPositionsResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetPerpPositionsResponse): GetPerpPositionsResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetPerpPositionsResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetPerpPositionsResponse;
-    static deserializeBinaryFromReader(message: GetPerpPositionsResponse, reader: jspb.BinaryReader): GetPerpPositionsResponse;
-}
-
-export namespace GetPerpPositionsResponse {
-    export type AsObject = {
-        owneraddress: string,
-        accountaddress: string,
-        perppositionsList: Array<GetCurrentPerpPosition.AsObject>,
     }
 }
 
@@ -3038,11 +3038,6 @@ export enum Side {
     S_UNKNOWN = 0,
     S_BID = 1,
     S_ASK = 2,
-}
-
-export enum OrderType {
-    OT_MARKET = 0,
-    OT_LIMIT = 1,
 }
 
 export enum OrderStatus {

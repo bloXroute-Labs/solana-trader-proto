@@ -22,11 +22,6 @@ class Side(betterproto.Enum):
     S_ASK = 2
 
 
-class OrderType(betterproto.Enum):
-    OT_MARKET = 0
-    OT_LIMIT = 1
-
-
 class OrderStatus(betterproto.Enum):
     OS_UNKNOWN = 0
     OS_OPEN = 1
@@ -257,7 +252,7 @@ class PostOrderRequest(betterproto.Message):
     payer_address: str = betterproto.string_field(2)
     market: str = betterproto.string_field(3)
     side: "Side" = betterproto.enum_field(4)
-    type: List["OrderType"] = betterproto.enum_field(5)
+    type: List[common.OrderType] = betterproto.enum_field(5)
     amount: float = betterproto.double_field(6)
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
@@ -271,7 +266,7 @@ class PostReplaceOrderRequest(betterproto.Message):
     payer_address: str = betterproto.string_field(2)
     market: str = betterproto.string_field(3)
     side: "Side" = betterproto.enum_field(4)
-    type: List["OrderType"] = betterproto.enum_field(5)
+    type: List[common.OrderType] = betterproto.enum_field(5)
     amount: float = betterproto.double_field(6)
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
@@ -356,7 +351,7 @@ class GetOrdersRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     status: "OrderStatus" = betterproto.enum_field(2)
     side: "Side" = betterproto.enum_field(3)
-    types: List["OrderType"] = betterproto.enum_field(4)
+    types: List[common.OrderType] = betterproto.enum_field(4)
     from_: datetime = betterproto.message_field(5)
     limit: int = betterproto.uint32_field(6)
     direction: "Direction" = betterproto.enum_field(7)
@@ -375,7 +370,7 @@ class Order(betterproto.Message):
     order_i_d: str = betterproto.string_field(1)
     market: str = betterproto.string_field(2)
     side: "Side" = betterproto.enum_field(3)
-    types: List["OrderType"] = betterproto.enum_field(4)
+    types: List[common.OrderType] = betterproto.enum_field(4)
     price: float = betterproto.double_field(5)
     remaining_size: float = betterproto.double_field(6)
     created_at: datetime = betterproto.message_field(7)
@@ -793,6 +788,13 @@ class GetPerpPositionsRequest(betterproto.Message):
 
 
 @dataclass
+class GetPerpPositionsResponse(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    perp_positions: List["GetPerpPosition"] = betterproto.message_field(3)
+
+
+@dataclass
 class PostClosePerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
@@ -805,24 +807,17 @@ class PostClosePerpPositionsResponse(betterproto.Message):
 
 
 @dataclass
-class GetCurrentPerpPosition(betterproto.Message):
+class GetPerpPosition(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(1)
     contract_volume: float = betterproto.double_field(2)
     volume_available: float = betterproto.double_field(3)
     volume_in_order: float = betterproto.double_field(4)
     position_margin: float = betterproto.double_field(5)
-    position_side: str = betterproto.string_field(6)
+    position_side: common.PerpPositionSide = betterproto.enum_field(6)
     unrealized_pn_l: float = betterproto.double_field(7)
     perp_price: float = betterproto.double_field(8)
     index_price: float = betterproto.double_field(9)
     liquidation_price: float = betterproto.double_field(10)
-
-
-@dataclass
-class GetPerpPositionsResponse(betterproto.Message):
-    owner_address: str = betterproto.string_field(1)
-    account_address: str = betterproto.string_field(2)
-    perp_positions: List["GetCurrentPerpPosition"] = betterproto.message_field(3)
 
 
 @dataclass
@@ -1020,7 +1015,7 @@ class ApiStub(betterproto.ServiceStub):
         payer_address: str = "",
         market: str = "",
         side: "Side" = 0,
-        type: List["OrderType"] = [],
+        type: List[common.OrderType] = [],
         amount: float = 0,
         price: float = 0,
         open_orders_address: str = "",
@@ -1154,7 +1149,7 @@ class ApiStub(betterproto.ServiceStub):
         payer_address: str = "",
         market: str = "",
         side: "Side" = 0,
-        type: List["OrderType"] = [],
+        type: List[common.OrderType] = [],
         amount: float = 0,
         price: float = 0,
         open_orders_address: str = "",
@@ -1186,7 +1181,7 @@ class ApiStub(betterproto.ServiceStub):
         payer_address: str = "",
         market: str = "",
         side: "Side" = 0,
-        type: List["OrderType"] = [],
+        type: List[common.OrderType] = [],
         amount: float = 0,
         price: float = 0,
         open_orders_address: str = "",
@@ -1267,7 +1262,7 @@ class ApiStub(betterproto.ServiceStub):
         market: str = "",
         status: "OrderStatus" = 0,
         side: "Side" = 0,
-        types: List["OrderType"] = [],
+        types: List[common.OrderType] = [],
         from_: Optional[datetime] = None,
         limit: int = 0,
         direction: "Direction" = 0,

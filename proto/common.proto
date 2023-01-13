@@ -9,6 +9,7 @@ enum OrderType {
   OT_IOC = 2; // immediate or cancel
   OT_POST = 3;
 }
+
 // Drift types : limit, trigger_market, trigger_limit, market, oracle
 enum PerpOrderType {
   POT_UNKNOWN = 0;

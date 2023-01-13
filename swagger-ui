@@ -622,7 +622,8 @@
         ],
         "tags": [
           "Trade",
-          "Universal"
+          "Perp",
+          "Orderbook"
         ]
       }
     },
@@ -763,7 +764,8 @@
         ],
         "tags": [
           "Trade",
-          "Universal"
+          "Perp",
+          "Orderbook"
         ]
       }
     },
@@ -1317,49 +1319,6 @@
         }
       }
     },
-    "apiGetCurrentPerpPosition": {
-      "type": "object",
-      "properties": {
-        "contract": {
-          "$ref": "#/definitions/commonPerpContract"
-        },
-        "contractVolume": {
-          "type": "number",
-          "format": "double"
-        },
-        "volumeAvailable": {
-          "type": "number",
-          "format": "double"
-        },
-        "volumeInOrder": {
-          "type": "number",
-          "format": "double"
-        },
-        "positionMargin": {
-          "type": "number",
-          "format": "double"
-        },
-        "positionSide": {
-          "type": "string"
-        },
-        "unrealizedPnL": {
-          "type": "number",
-          "format": "double"
-        },
-        "perpPrice": {
-          "type": "number",
-          "format": "double"
-        },
-        "indexPrice": {
-          "type": "number",
-          "format": "double"
-        },
-        "liquidationPrice": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
     "apiGetKlineResponse": {
       "type": "object",
       "properties": {
@@ -1541,6 +1500,49 @@
         }
       }
     },
+    "apiGetPerpPosition": {
+      "type": "object",
+      "properties": {
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "contractVolume": {
+          "type": "number",
+          "format": "double"
+        },
+        "volumeAvailable": {
+          "type": "number",
+          "format": "double"
+        },
+        "volumeInOrder": {
+          "type": "number",
+          "format": "double"
+        },
+        "positionMargin": {
+          "type": "number",
+          "format": "double"
+        },
+        "positionSide": {
+          "$ref": "#/definitions/commonPerpPositionSide"
+        },
+        "unrealizedPnL": {
+          "type": "number",
+          "format": "double"
+        },
+        "perpPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "indexPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "liquidationPrice": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiGetPerpPositionsResponse": {
       "type": "object",
       "properties": {
@@ -1553,7 +1555,7 @@
         "perpPositions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiGetCurrentPerpPosition"
+            "$ref": "#/definitions/apiGetPerpPosition"
           }
         }
       }
@@ -1872,7 +1874,7 @@
         "types": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiOrderType"
+            "$ref": "#/definitions/commonOrderType"
           }
         },
         "price": {
@@ -1905,14 +1907,6 @@
         "OS_FILLED"
       ],
       "default": "OS_UNKNOWN"
-    },
-    "apiOrderType": {
-      "type": "string",
-      "enum": [
-        "OT_MARKET",
-        "OT_LIMIT"
-      ],
-      "default": "OT_MARKET"
     },
     "apiOrderbookItem": {
       "type": "object",
@@ -2129,7 +2123,7 @@
         "type": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiOrderType"
+            "$ref": "#/definitions/commonOrderType"
           },
           "required": [
             "type"
@@ -2220,7 +2214,7 @@
         "type": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiOrderType"
+            "$ref": "#/definitions/commonOrderType"
           },
           "required": [
             "type"
@@ -2849,6 +2843,16 @@
         "INF_NEGATIVE"
       ],
       "default": "INF_NOT"
+    },
+    "commonOrderType": {
+      "type": "string",
+      "enum": [
+        "OT_MARKET",
+        "OT_LIMIT",
+        "OT_IOC",
+        "OT_POST"
+      ],
+      "default": "OT_MARKET"
     },
     "commonPerpContract": {
       "type": "string",
