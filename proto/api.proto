@@ -943,6 +943,8 @@ message RouteStep {
   double outAmount = 4;
   double outAmountMin = 5;
   StepProject project = 6;
+  // if poolAddress is defined, it determines the outToken
+  string poolAddress = 7;
 }
 
 message TradeSwapResponse{
