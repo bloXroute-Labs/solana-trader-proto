@@ -61,8 +61,8 @@
     "/api/v1/drift/perp/{market}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
-        "description": "Returns drift contract's orderbook. Use limit param to reduce the number of bids/asks returned",
-        "operationId": "Api_GetDriftOrderbook",
+        "description": "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetPerpOrderbook",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -110,7 +110,7 @@
           }
         ],
         "tags": [
-          "Drift",
+          "Perp",
           "Orderbook"
         ]
       }

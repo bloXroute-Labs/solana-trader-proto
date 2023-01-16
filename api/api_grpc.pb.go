@@ -52,7 +52,7 @@ type ApiClient interface {
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
 	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
-	GetDriftOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
+	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -349,9 +349,9 @@ func (c *apiClient) PostClosePerpPositions(ctx context.Context, in *PostClosePer
 	return out, nil
 }
 
-func (c *apiClient) GetDriftOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error) {
+func (c *apiClient) GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error) {
 	out := new(GetPerpOrderbookResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetDriftOrderbook", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPerpOrderbook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -844,7 +844,7 @@ type ApiServer interface {
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
 	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
-	GetDriftOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
+	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -958,8 +958,8 @@ func (UnimplementedApiServer) GetPerpPositions(context.Context, *GetPerpPosition
 func (UnimplementedApiServer) PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostClosePerpPositions not implemented")
 }
-func (UnimplementedApiServer) GetDriftOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDriftOrderbook not implemented")
+func (UnimplementedApiServer) GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPerpOrderbook not implemented")
 }
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
@@ -1556,20 +1556,20 @@ func _Api_PostClosePerpPositions_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetDriftOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Api_GetPerpOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetPerpOrderbookRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).GetDriftOrderbook(ctx, in)
+		return srv.(ApiServer).GetPerpOrderbook(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/GetDriftOrderbook",
+		FullMethod: "/api.Api/GetPerpOrderbook",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetDriftOrderbook(ctx, req.(*GetPerpOrderbookRequest))
+		return srv.(ApiServer).GetPerpOrderbook(ctx, req.(*GetPerpOrderbookRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1996,8 +1996,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_PostClosePerpPositions_Handler,
 		},
 		{
-			MethodName: "GetDriftOrderbook",
-			Handler:    _Api_GetDriftOrderbook_Handler,
+			MethodName: "GetPerpOrderbook",
+			Handler:    _Api_GetPerpOrderbook_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

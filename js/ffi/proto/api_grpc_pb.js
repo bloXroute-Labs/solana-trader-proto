@@ -1237,8 +1237,8 @@ postPerpOrder: {
     responseSerialize: serialize_api_PostClosePerpPositionsResponse,
     responseDeserialize: deserialize_api_PostClosePerpPositionsResponse,
   },
-  getDriftOrderbook: {
-    path: '/api.Api/GetDriftOrderbook',
+  getPerpOrderbook: {
+    path: '/api.Api/GetPerpOrderbook',
     requestStream: false,
     responseStream: false,
     requestType: api_pb.GetPerpOrderbookRequest,

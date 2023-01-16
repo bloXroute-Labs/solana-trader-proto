@@ -1515,7 +1515,7 @@ class ApiStub(betterproto.ServiceStub):
             PostClosePerpPositionsResponse,
         )
 
-    async def get_drift_orderbook(
+    async def get_perp_orderbook(
         self, *, market: str = "", limit: int = 0, project: "Project" = 0
     ) -> GetPerpOrderbookResponse:
         request = GetPerpOrderbookRequest()
@@ -1524,7 +1524,7 @@ class ApiStub(betterproto.ServiceStub):
         request.project = project
 
         return await self._unary_unary(
-            "/api.Api/GetDriftOrderbook",
+            "/api.Api/GetPerpOrderbook",
             request,
             GetPerpOrderbookResponse,
         )
