@@ -17014,7 +17014,8 @@ proto.api.RouteStep.toObject = function(includeInstance, msg) {
     outtoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
     outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
     outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    project: (f = msg.getProject()) && proto.api.StepProject.toObject(includeInstance, f)
+    project: (f = msg.getProject()) && proto.api.StepProject.toObject(includeInstance, f),
+    pooladdress: jspb.Message.getFieldWithDefault(msg, 7, "")
   };
 
   if (includeInstance) {
@@ -17075,6 +17076,10 @@ proto.api.RouteStep.deserializeBinaryFromReader = function(msg, reader) {
       var value = new proto.api.StepProject;
       reader.readMessage(value,proto.api.StepProject.deserializeBinaryFromReader);
       msg.setProject(value);
+      break;
+    case 7:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPooladdress(value);
       break;
     default:
       reader.skipField();
@@ -17146,6 +17151,13 @@ proto.api.RouteStep.serializeBinaryToWriter = function(message, writer) {
       6,
       f,
       proto.api.StepProject.serializeBinaryToWriter
+    );
+  }
+  f = message.getPooladdress();
+  if (f.length > 0) {
+    writer.writeString(
+      7,
+      f
     );
   }
 };
@@ -17275,6 +17287,24 @@ proto.api.RouteStep.prototype.clearProject = function() {
  */
 proto.api.RouteStep.prototype.hasProject = function() {
   return jspb.Message.getField(this, 6) != null;
+};
+
+
+/**
+ * optional string poolAddress = 7;
+ * @return {string}
+ */
+proto.api.RouteStep.prototype.getPooladdress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.RouteStep} returns this
+ */
+proto.api.RouteStep.prototype.setPooladdress = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
