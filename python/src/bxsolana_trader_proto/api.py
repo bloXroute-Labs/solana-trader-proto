@@ -22,13 +22,6 @@ class Side(betterproto.Enum):
     S_ASK = 2
 
 
-class OrderType(betterproto.Enum):
-    OT_MARKET = 0
-    OT_LIMIT = 1
-    OT_IOC = 2
-    OT_POST = 3
-
-
 class OrderStatus(betterproto.Enum):
     OS_UNKNOWN = 0
     OS_OPEN = 1
@@ -63,6 +56,7 @@ class Project(betterproto.Enum):
     P_RAYDIUM = 3
     P_SERUM = 4
     P_OPENBOOK = 5
+    P_DRIFT = 6
 
 
 @dataclass
@@ -258,7 +252,7 @@ class PostOrderRequest(betterproto.Message):
     payer_address: str = betterproto.string_field(2)
     market: str = betterproto.string_field(3)
     side: "Side" = betterproto.enum_field(4)
-    type: List["OrderType"] = betterproto.enum_field(5)
+    type: List[common.OrderType] = betterproto.enum_field(5)
     amount: float = betterproto.double_field(6)
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
@@ -272,7 +266,7 @@ class PostReplaceOrderRequest(betterproto.Message):
     payer_address: str = betterproto.string_field(2)
     market: str = betterproto.string_field(3)
     side: "Side" = betterproto.enum_field(4)
-    type: List["OrderType"] = betterproto.enum_field(5)
+    type: List[common.OrderType] = betterproto.enum_field(5)
     amount: float = betterproto.double_field(6)
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
@@ -357,7 +351,7 @@ class GetOrdersRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     status: "OrderStatus" = betterproto.enum_field(2)
     side: "Side" = betterproto.enum_field(3)
-    types: List["OrderType"] = betterproto.enum_field(4)
+    types: List[common.OrderType] = betterproto.enum_field(4)
     from_: datetime = betterproto.message_field(5)
     limit: int = betterproto.uint32_field(6)
     direction: "Direction" = betterproto.enum_field(7)
@@ -376,7 +370,7 @@ class Order(betterproto.Message):
     order_i_d: str = betterproto.string_field(1)
     market: str = betterproto.string_field(2)
     side: "Side" = betterproto.enum_field(3)
-    types: List["OrderType"] = betterproto.enum_field(4)
+    types: List[common.OrderType] = betterproto.enum_field(4)
     price: float = betterproto.double_field(5)
     remaining_size: float = betterproto.double_field(6)
     created_at: datetime = betterproto.message_field(7)
@@ -786,27 +780,31 @@ class GetPricesStreamResponse(betterproto.Message):
 
 
 @dataclass
-class GetDriftOrderbookRequest(betterproto.Message):
+class GetPerpOrderbookRequest(betterproto.Message):
+    """Drift messages"""
+
     market: str = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
+    project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
-class GetDriftOrderbooksRequest(betterproto.Message):
+class GetPerpOrderbooksRequest(betterproto.Message):
     markets: List[str] = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
+    project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
-class GetDriftOrderbookResponse(betterproto.Message):
+class GetPerpOrderbookResponse(betterproto.Message):
     market: str = betterproto.string_field(1)
     market_index: int = betterproto.int32_field(2)
-    bids: List["DriftOrderbookItem"] = betterproto.message_field(3)
-    asks: List["DriftOrderbookItem"] = betterproto.message_field(4)
+    bids: List["PerpOrderbookItem"] = betterproto.message_field(3)
+    asks: List["PerpOrderbookItem"] = betterproto.message_field(4)
 
 
 @dataclass
-class DriftOrderbookItem(betterproto.Message):
+class PerpOrderbookItem(betterproto.Message):
     price: float = betterproto.double_field(1)
     size: float = betterproto.double_field(2)
     order_i_d: str = betterproto.string_field(3)
@@ -814,9 +812,116 @@ class DriftOrderbookItem(betterproto.Message):
 
 
 @dataclass
-class GetDriftOrderbooksStreamResponse(betterproto.Message):
+class GetPerpOrderbooksStreamResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
     orderbook: "GetOrderbookResponse" = betterproto.message_field(2)
+
+
+@dataclass
+class GetPerpPositionsRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    account_address: str = betterproto.string_field(3)
+    contracts: List[common.PerpContract] = betterproto.enum_field(4)
+
+
+@dataclass
+class GetPerpPositionsResponse(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    perp_positions: List["PerpPosition"] = betterproto.message_field(3)
+
+
+@dataclass
+class PostClosePerpPositionsRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    contracts: List[common.PerpContract] = betterproto.enum_field(3)
+
+
+@dataclass
+class PostClosePerpPositionsResponse(betterproto.Message):
+    transactions: List[str] = betterproto.string_field(1)
+
+
+@dataclass
+class PerpPosition(betterproto.Message):
+    contract: common.PerpContract = betterproto.enum_field(1)
+    contract_volume: float = betterproto.double_field(2)
+    volume_available: float = betterproto.double_field(3)
+    volume_in_order: float = betterproto.double_field(4)
+    position_margin: float = betterproto.double_field(5)
+    position_side: common.PerpPositionSide = betterproto.enum_field(6)
+    unrealized_pn_l: float = betterproto.double_field(7)
+    perp_price: float = betterproto.double_field(8)
+    index_price: float = betterproto.double_field(9)
+    liquidation_price: float = betterproto.double_field(10)
+
+
+@dataclass
+class PostPerpOrderRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    payer_address: str = betterproto.string_field(3)
+    contract: common.PerpContract = betterproto.enum_field(4)
+    account_address: str = betterproto.string_field(5)
+    position_side: common.PerpPositionSide = betterproto.enum_field(6)
+    slippage: str = betterproto.string_field(7)
+    type: common.PerpOrderType = betterproto.enum_field(8)
+    amount: float = betterproto.double_field(9)
+    price: float = betterproto.double_field(10)
+    client_order_i_d: int = betterproto.uint64_field(11)
+
+
+@dataclass
+class PostPerpOrderResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+
+
+@dataclass
+class GetNewPerpOrdersStreamRequest(betterproto.Message):
+    markets: List[str] = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetNewPerpOrdersStreamResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_index: int = betterproto.int32_field(2)
+    side: common.PerpPositionSide = betterproto.enum_field(3)
+    type: common.PerpOrderType = betterproto.enum_field(4)
+    user_address: str = betterproto.string_field(5)
+    order_i_d: str = betterproto.string_field(6)
+    client_order_i_d: str = betterproto.string_field(7)
+    slot: str = betterproto.string_field(8)
+    price: float = betterproto.double_field(9)
+    trigger_price: float = betterproto.double_field(10)
+    base_amount: float = betterproto.double_field(11)
+    base_amount_filled: float = betterproto.double_field(12)
+    quote_amount: float = betterproto.double_field(13)
+    quote_amount_filled: float = betterproto.double_field(14)
+
+
+@dataclass
+class GetPerpTradesStreamRequest(betterproto.Message):
+    markets: List[str] = betterproto.string_field(1)
+    address: str = betterproto.string_field(2)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetPerpTradesStreamResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_index: int = betterproto.int32_field(2)
+    maker_position_side: common.PerpPositionSide = betterproto.enum_field(3)
+    filler_address: str = betterproto.string_field(4)
+    taker_address: str = betterproto.string_field(5)
+    taker_order_i_d: str = betterproto.string_field(6)
+    maker_address: str = betterproto.string_field(7)
+    maker_order_i_d: str = betterproto.string_field(8)
+    base_amount_filled: float = betterproto.double_field(9)
+    quote_amount_filled: float = betterproto.double_field(10)
 
 
 class ApiStub(betterproto.ServiceStub):
@@ -993,7 +1098,7 @@ class ApiStub(betterproto.ServiceStub):
         payer_address: str = "",
         market: str = "",
         side: "Side" = 0,
-        type: List["OrderType"] = [],
+        type: List[common.OrderType] = [],
         amount: float = 0,
         price: float = 0,
         open_orders_address: str = "",
@@ -1127,7 +1232,7 @@ class ApiStub(betterproto.ServiceStub):
         payer_address: str = "",
         market: str = "",
         side: "Side" = 0,
-        type: List["OrderType"] = [],
+        type: List[common.OrderType] = [],
         amount: float = 0,
         price: float = 0,
         open_orders_address: str = "",
@@ -1159,7 +1264,7 @@ class ApiStub(betterproto.ServiceStub):
         payer_address: str = "",
         market: str = "",
         side: "Side" = 0,
-        type: List["OrderType"] = [],
+        type: List[common.OrderType] = [],
         amount: float = 0,
         price: float = 0,
         open_orders_address: str = "",
@@ -1240,7 +1345,7 @@ class ApiStub(betterproto.ServiceStub):
         market: str = "",
         status: "OrderStatus" = 0,
         side: "Side" = 0,
-        types: List["OrderType"] = [],
+        types: List[common.OrderType] = [],
         from_: Optional[datetime] = None,
         limit: int = 0,
         direction: "Direction" = 0,
@@ -1334,6 +1439,94 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostRouteTradeSwap",
             request,
             TradeSwapResponse,
+        )
+
+    async def post_perp_order(
+        self,
+        *,
+        project: "Project" = 0,
+        owner_address: str = "",
+        payer_address: str = "",
+        contract: common.PerpContract = 0,
+        account_address: str = "",
+        position_side: common.PerpPositionSide = 0,
+        slippage: str = "",
+        type: common.PerpOrderType = 0,
+        amount: float = 0,
+        price: float = 0,
+        client_order_i_d: int = 0,
+    ) -> PostPerpOrderResponse:
+        """perp endpoints"""
+
+        request = PostPerpOrderRequest()
+        request.project = project
+        request.owner_address = owner_address
+        request.payer_address = payer_address
+        request.contract = contract
+        request.account_address = account_address
+        request.position_side = position_side
+        request.slippage = slippage
+        request.type = type
+        request.amount = amount
+        request.price = price
+        request.client_order_i_d = client_order_i_d
+
+        return await self._unary_unary(
+            "/api.Api/PostPerpOrder",
+            request,
+            PostPerpOrderResponse,
+        )
+
+    async def get_perp_positions(
+        self,
+        *,
+        project: "Project" = 0,
+        owner_address: str = "",
+        account_address: str = "",
+        contracts: List[common.PerpContract] = [],
+    ) -> GetPerpPositionsResponse:
+        request = GetPerpPositionsRequest()
+        request.project = project
+        request.owner_address = owner_address
+        request.account_address = account_address
+        request.contracts = contracts
+
+        return await self._unary_unary(
+            "/api.Api/GetPerpPositions",
+            request,
+            GetPerpPositionsResponse,
+        )
+
+    async def post_close_perp_positions(
+        self,
+        *,
+        project: "Project" = 0,
+        owner_address: str = "",
+        contracts: List[common.PerpContract] = [],
+    ) -> PostClosePerpPositionsResponse:
+        request = PostClosePerpPositionsRequest()
+        request.project = project
+        request.owner_address = owner_address
+        request.contracts = contracts
+
+        return await self._unary_unary(
+            "/api.Api/PostClosePerpPositions",
+            request,
+            PostClosePerpPositionsResponse,
+        )
+
+    async def get_drift_orderbook(
+        self, *, market: str = "", limit: int = 0, project: "Project" = 0
+    ) -> GetPerpOrderbookResponse:
+        request = GetPerpOrderbookRequest()
+        request.market = market
+        request.limit = limit
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetDriftOrderbook",
+            request,
+            GetPerpOrderbookResponse,
         )
 
     async def get_orderbooks_stream(
@@ -1495,33 +1688,48 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
-    async def get_drift_orderbook(
-        self, *, market: str = "", limit: int = 0
-    ) -> GetDriftOrderbookResponse:
-        """Drift requests"""
-
-        request = GetDriftOrderbookRequest()
-        request.market = market
-        request.limit = limit
-
-        return await self._unary_unary(
-            "/api.Api/GetDriftOrderbook",
-            request,
-            GetDriftOrderbookResponse,
-        )
-
-    async def get_drift_orderbooks_stream(
-        self, *, markets: List[str] = [], limit: int = 0
-    ) -> AsyncGenerator[GetDriftOrderbooksStreamResponse, None]:
+    async def get_perp_orderbooks_stream(
+        self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
+    ) -> AsyncGenerator[GetPerpOrderbooksStreamResponse, None]:
         """Drift streaming endpoints"""
 
-        request = GetDriftOrderbooksRequest()
+        request = GetPerpOrderbooksRequest()
         request.markets = markets
         request.limit = limit
+        request.project = project
 
         async for response in self._unary_stream(
-            "/api.Api/GetDriftOrderbooksStream",
+            "/api.Api/GetPerpOrderbooksStream",
             request,
-            GetDriftOrderbooksStreamResponse,
+            GetPerpOrderbooksStreamResponse,
+        ):
+            yield response
+
+    async def get_new_perp_orders_stream(
+        self, *, markets: List[str] = [], project: "Project" = 0
+    ) -> AsyncGenerator[GetNewPerpOrdersStreamResponse, None]:
+        request = GetNewPerpOrdersStreamRequest()
+        request.markets = markets
+        request.project = project
+
+        async for response in self._unary_stream(
+            "/api.Api/GetNewPerpOrdersStream",
+            request,
+            GetNewPerpOrdersStreamResponse,
+        ):
+            yield response
+
+    async def get_perp_trades_stream(
+        self, *, markets: List[str] = [], address: str = "", project: "Project" = 0
+    ) -> AsyncGenerator[GetPerpTradesStreamResponse, None]:
+        request = GetPerpTradesStreamRequest()
+        request.markets = markets
+        request.address = address
+        request.project = project
+
+        async for response in self._unary_stream(
+            "/api.Api/GetPerpTradesStream",
+            request,
+            GetPerpTradesStreamResponse,
         ):
             yield response

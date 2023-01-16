@@ -3,6 +3,35 @@ option go_package = "github.com/bloXroute-Labs/solana-trader-proto/common";
 
 package common;
 
+enum OrderType {
+  OT_MARKET = 0;
+  OT_LIMIT = 1; // MARKET and LIMIT are mutually exclusive
+  OT_IOC = 2; // immediate or cancel
+  OT_POST = 3;
+}
+
+// Drift types : limit, trigger_market, trigger_limit, market, oracle
+enum PerpOrderType {
+  POT_UNKNOWN = 0;
+  POT_MARKET = 1;
+  POT_LIMIT = 2;
+  POT_TRIGGER_MARKET = 3;
+  POT_TRIGGER_LIMIT = 4;
+}
+
+enum PerpPositionSide {
+  PS_UNKNOWN = 0;
+  PS_LONG = 1;
+  PS_SHORT = 2;
+}
+
+enum PerpContract {
+  ALL = 0;
+  SOL_PERP = 1; // SOL-PERP
+  ETH_PERP = 2; // ETH-PERP
+  BTC_PERP = 3; // BTC-PERP
+}
+
 enum Infinity {
   INF_NOT = 0;
   INF_POSITIVE = 1;

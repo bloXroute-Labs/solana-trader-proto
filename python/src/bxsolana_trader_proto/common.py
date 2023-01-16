@@ -6,6 +6,36 @@ from dataclasses import dataclass
 import betterproto
 
 
+class OrderType(betterproto.Enum):
+    OT_MARKET = 0
+    OT_LIMIT = 1
+    OT_IOC = 2
+    OT_POST = 3
+
+
+class PerpOrderType(betterproto.Enum):
+    """Drift types : limit, trigger_market, trigger_limit, market, oracle"""
+
+    POT_UNKNOWN = 0
+    POT_MARKET = 1
+    POT_LIMIT = 2
+    POT_TRIGGER_MARKET = 3
+    POT_TRIGGER_LIMIT = 4
+
+
+class PerpPositionSide(betterproto.Enum):
+    PS_UNKNOWN = 0
+    PS_LONG = 1
+    PS_SHORT = 2
+
+
+class PerpContract(betterproto.Enum):
+    ALL = 0
+    SOL_PERP = 1
+    ETH_PERP = 2
+    BTC_PERP = 3
+
+
 class Infinity(betterproto.Enum):
     INF_NOT = 0
     INF_POSITIVE = 1

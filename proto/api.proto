@@ -367,6 +367,51 @@ service Api {
     };
   }
 
+  // perp endpoints
+  rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/perp/order"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "post a perp order";
+      summary: "perp order";
+      tags: ["Trade", "Perp", "Orderbook"];
+    };
+  }
+
+  rpc GetPerpPositions(GetPerpPositionsRequest)  returns (GetPerpPositionsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/perp/positions"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list current perp positions";
+      summary: "PERP positions";
+      tags: ["Trade", "Perp", "Orderbook"];
+    };
+  }
+
+  rpc PostClosePerpPositions(PostClosePerpPositionsRequest)  returns (PostClosePerpPositionsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/perp/close-positions"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "closes current perp positions";
+      summary: "PERP positions";
+      tags: ["Trade", "Perp", "Orderbook"];
+    };
+  }
+
+  rpc GetDriftOrderbook(GetPerpOrderbookRequest) returns (GetPerpOrderbookResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/drift/perp/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns drift contract's orderbook. Use limit param to reduce the number of bids/asks returned";
+      summary: "Perpetuals contract orderbook";
+      tags: ["Drift", "Orderbook"];
+    };
+  }
+
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -434,20 +479,20 @@ service Api {
     };
   }
 
-  //Drift requests
-  rpc GetDriftOrderbook(GetDriftOrderbookRequest) returns (GetDriftOrderbookResponse) {
-    option (google.api.http) = {
-      get: "/api/v1/drift/perp/{market}"
-    };
+  // Drift streaming endpoints
+  rpc GetPerpOrderbooksStream(GetPerpOrderbooksRequest) returns (stream GetPerpOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns drift contract's orderbook. Use limit param to reduce the number of bids/asks returned";
-      summary: "Perpetuals contract orderbook";
-      tags: ["Drift", "Orderbook"];
+      tags: "Drift";
     };
   }
 
-  // Drift streaming endpoints
-  rpc GetDriftOrderbooksStream(GetDriftOrderbooksRequest) returns (stream GetDriftOrderbooksStreamResponse) {
+  rpc GetNewPerpOrdersStream(GetNewPerpOrdersStreamRequest) returns (stream GetNewPerpOrdersStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Drift";
+    };
+  }
+
+  rpc GetPerpTradesStream(GetPerpTradesStreamRequest) returns (stream GetPerpTradesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Drift";
     };
@@ -621,7 +666,7 @@ message PostOrderRequest {
   string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
   string market = 3 [(google.api.field_behavior) = REQUIRED];
   Side side = 4 [(google.api.field_behavior) = REQUIRED];
-  repeated OrderType type = 5 [(google.api.field_behavior) = REQUIRED];
+  repeated common.OrderType type = 5 [(google.api.field_behavior) = REQUIRED];
   double amount = 6 [(google.api.field_behavior) = REQUIRED];
   double price = 7 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
@@ -634,7 +679,7 @@ message PostReplaceOrderRequest {
   string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
   string market = 3 [(google.api.field_behavior) = REQUIRED];
   Side side = 4 [(google.api.field_behavior) = REQUIRED];
-  repeated OrderType type = 5 [(google.api.field_behavior) = REQUIRED];
+  repeated common.OrderType type = 5 [(google.api.field_behavior) = REQUIRED];
   double amount = 6 [(google.api.field_behavior) = REQUIRED];
   double price = 7 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 8 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
@@ -647,13 +692,6 @@ enum Side {
   S_UNKNOWN = 0;
   S_BID = 1;
   S_ASK = 2;
-}
-
-enum OrderType {
-  OT_MARKET = 0;
-  OT_LIMIT = 1; // MARKET and LIMIT are mutually exclusive
-  OT_IOC = 2; // immediate or cancel
-  OT_POST = 3;
 }
 
 message PostOrderResponse {
@@ -721,7 +759,7 @@ message GetOrdersRequest {
   string market = 1;
   OrderStatus status = 2;
   Side side = 3;
-  repeated OrderType types = 4;
+  repeated common.OrderType types = 4;
   google.protobuf.Timestamp from = 5;
   uint32 limit = 6;
   Direction direction = 7;
@@ -751,7 +789,7 @@ message Order {
   string orderID = 1;
   string market = 2;
   Side side = 3;
-  repeated OrderType types = 4;
+  repeated common.OrderType types = 4;
   double price = 5;
   double remainingSize = 6;
   google.protobuf.Timestamp createdAt = 7;
@@ -953,6 +991,7 @@ enum Project {
   P_RAYDIUM = 3;
   P_SERUM = 4;
   P_OPENBOOK = 5;
+  P_DRIFT = 6;
 }
 
 message QuoteRoute {
@@ -1129,34 +1168,136 @@ message GetPricesStreamResponse {
 }
 
 // Drift messages
-
-message GetDriftOrderbookRequest {
+message GetPerpOrderbookRequest {
   string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
 }
 
-message GetDriftOrderbooksRequest {
+message GetPerpOrderbooksRequest {
   repeated string markets = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
 }
 
-message GetDriftOrderbookResponse {
+message GetPerpOrderbookResponse {
   string market = 1;
   int32 marketIndex = 2;
-  repeated DriftOrderbookItem bids = 3;
-  repeated DriftOrderbookItem asks = 4;
+  repeated PerpOrderbookItem bids = 3;
+  repeated PerpOrderbookItem asks = 4;
 }
 
-message DriftOrderbookItem {
+message PerpOrderbookItem {
   double price = 1;
   double size = 2;
   string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Drift generated OrderID"}];
   string clientOrderID = 4;
 }
 
-message GetDriftOrderbooksStreamResponse {
+message GetPerpOrderbooksStreamResponse {
   int64 slot = 1;
   GetOrderbookResponse orderbook = 2;
+}
+
+message GetPerpPositionsRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  string accountAddress = 3;
+  repeated common.PerpContract contracts = 4;
+}
+
+message GetPerpPositionsResponse {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+
+  repeated PerpPosition perpPositions = 3;
+}
+
+message PostClosePerpPositionsRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  repeated common.PerpContract contracts = 3;
+}
+
+message PostClosePerpPositionsResponse {
+  repeated string transactions = 1;
+}
+
+message PerpPosition {
+  common.PerpContract contract = 1;
+
+  double contractVolume = 2;
+  double volumeAvailable = 3;
+  double volumeInOrder = 4;
+
+  double positionMargin = 5;
+  common.PerpPositionSide positionSide = 6;
+
+  double unrealizedPnL = 7;
+
+  double perpPrice = 8;
+  double indexPrice = 9;
+  double liquidationPrice = 10;
+}
+
+message PostPerpOrderRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  string payerAddress = 3;
+  common.PerpContract contract = 4;
+  string accountAddress = 5;
+  common.PerpPositionSide positionSide = 6;
+  string slippage = 7;
+  common.PerpOrderType type = 8;
+  double amount = 9;
+  double price = 10;
+  uint64 clientOrderID = 11;
+}
+
+message PostPerpOrderResponse {
+  string transaction = 1;
+  string accountAddress = 2;
+}
+
+message GetNewPerpOrdersStreamRequest {
+  repeated string markets = 1;
+  Project project = 3;
+}
+
+message GetNewPerpOrdersStreamResponse {
+  string market = 1;
+  int32 marketIndex = 2;
+  common.PerpPositionSide side = 3;
+  common.PerpOrderType type = 4;
+  string userAddress = 5;
+  string orderID = 6;
+  string clientOrderID = 7;
+  string slot = 8;
+  double price = 9;
+  double triggerPrice = 10;
+  double baseAmount = 11;
+  double baseAmountFilled = 12;
+  double quoteAmount = 13;
+  double quoteAmountFilled = 14;
+}
+
+message GetPerpTradesStreamRequest {
+  repeated string markets = 1;
+  string address = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "limit by user address"}];
+  Project project = 3;
+}
+
+message GetPerpTradesStreamResponse {
+  string market = 1;
+  int32 marketIndex = 2;
+  common.PerpPositionSide makerPositionSide = 3;
+  string fillerAddress = 4;
+  string takerAddress = 5;
+  string takerOrderID = 6;
+  string makerAddress = 7;
+  string makerOrderID = 8;
+  double baseAmountFilled = 9;
+  double quoteAmountFilled = 10;
 }
 
 

@@ -67,7 +67,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetDriftOrderbookResponse"
+              "$ref": "#/definitions/apiGetPerpOrderbookResponse"
             }
           },
           "default": {
@@ -91,6 +91,22 @@
             "required": false,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
@@ -144,7 +160,8 @@
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
-              "P_OPENBOOK"
+              "P_OPENBOOK",
+              "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
           }
@@ -224,7 +241,8 @@
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
-              "P_OPENBOOK"
+              "P_OPENBOOK",
+              "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
           }
@@ -268,7 +286,8 @@
                 "P_JUPITER",
                 "P_RAYDIUM",
                 "P_SERUM",
-                "P_OPENBOOK"
+                "P_OPENBOOK",
+                "P_DRIFT"
               ]
             },
             "collectionFormat": "multi"
@@ -383,7 +402,8 @@
                 "P_JUPITER",
                 "P_RAYDIUM",
                 "P_SERUM",
-                "P_OPENBOOK"
+                "P_OPENBOOK",
+                "P_DRIFT"
               ]
             },
             "collectionFormat": "multi"
@@ -433,7 +453,8 @@
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
-              "P_OPENBOOK"
+              "P_OPENBOOK",
+              "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
           }
@@ -655,13 +676,280 @@
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
-              "P_OPENBOOK"
+              "P_OPENBOOK",
+              "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
           }
         ],
         "tags": [
           "Trade",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/close-positions": {
+      "get": {
+        "summary": "PERP positions",
+        "description": "closes current perp positions",
+        "operationId": "Api_PostClosePerpPositions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostClosePerpPositionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contracts",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ALL",
+                "SOL_PERP",
+                "ETH_PERP",
+                "BTC_PERP"
+              ]
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Perp",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/order": {
+      "post": {
+        "summary": "perp order",
+        "description": "post a perp order",
+        "operationId": "Api_PostPerpOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostPerpOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "payerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contract",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP"
+            ],
+            "default": "ALL"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "positionSide",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PS_UNKNOWN",
+              "PS_LONG",
+              "PS_SHORT"
+            ],
+            "default": "PS_UNKNOWN"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "POT_UNKNOWN",
+              "POT_MARKET",
+              "POT_LIMIT",
+              "POT_TRIGGER_MARKET",
+              "POT_TRIGGER_LIMIT"
+            ],
+            "default": "POT_UNKNOWN"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "price",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "clientOrderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Perp",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/positions": {
+      "get": {
+        "summary": "PERP positions",
+        "description": "Returns the list current perp positions",
+        "operationId": "Api_GetPerpPositions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPerpPositionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contracts",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ALL",
+                "SOL_PERP",
+                "ETH_PERP",
+                "BTC_PERP"
+              ]
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Perp",
           "Orderbook"
         ]
       }
@@ -989,7 +1277,8 @@
               "P_JUPITER",
               "P_RAYDIUM",
               "P_SERUM",
-              "P_OPENBOOK"
+              "P_OPENBOOK",
+              "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
           }
@@ -1071,26 +1360,6 @@
       ],
       "default": "D_ASCENDING"
     },
-    "apiDriftOrderbookItem": {
-      "type": "object",
-      "properties": {
-        "price": {
-          "type": "number",
-          "format": "double"
-        },
-        "size": {
-          "type": "number",
-          "format": "double"
-        },
-        "orderID": {
-          "type": "string",
-          "description": "Drift generated OrderID"
-        },
-        "clientOrderID": {
-          "type": "string"
-        }
-      }
-    },
     "apiGetAccountBalanceResponse": {
       "type": "object",
       "properties": {
@@ -1107,42 +1376,6 @@
       "properties": {
         "block": {
           "$ref": "#/definitions/apiBlock"
-        }
-      }
-    },
-    "apiGetDriftOrderbookResponse": {
-      "type": "object",
-      "properties": {
-        "market": {
-          "type": "string"
-        },
-        "marketIndex": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "bids": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiDriftOrderbookItem"
-          }
-        },
-        "asks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiDriftOrderbookItem"
-          }
-        }
-      }
-    },
-    "apiGetDriftOrderbooksStreamResponse": {
-      "type": "object",
-      "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "orderbook": {
-          "$ref": "#/definitions/apiGetOrderbookResponse"
         }
       }
     },
@@ -1207,6 +1440,60 @@
           "additionalProperties": {
             "$ref": "#/definitions/apiMarket"
           }
+        }
+      }
+    },
+    "apiGetNewPerpOrdersStreamResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "side": {
+          "$ref": "#/definitions/commonPerpPositionSide"
+        },
+        "type": {
+          "$ref": "#/definitions/commonPerpOrderType"
+        },
+        "userAddress": {
+          "type": "string"
+        },
+        "orderID": {
+          "type": "string"
+        },
+        "clientOrderID": {
+          "type": "string"
+        },
+        "slot": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "triggerPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "baseAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "baseAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteAmountFilled": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -1324,6 +1611,97 @@
           "items": {
             "$ref": "#/definitions/apiOrder"
           }
+        }
+      }
+    },
+    "apiGetPerpOrderbookResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPerpOrderbookItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPerpOrderbookItem"
+          }
+        }
+      }
+    },
+    "apiGetPerpOrderbooksStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orderbook": {
+          "$ref": "#/definitions/apiGetOrderbookResponse"
+        }
+      }
+    },
+    "apiGetPerpPositionsResponse": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "perpPositions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPerpPosition"
+          }
+        }
+      }
+    },
+    "apiGetPerpTradesStreamResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "makerPositionSide": {
+          "$ref": "#/definitions/commonPerpPositionSide"
+        },
+        "fillerAddress": {
+          "type": "string"
+        },
+        "takerAddress": {
+          "type": "string"
+        },
+        "takerOrderID": {
+          "type": "string"
+        },
+        "makerAddress": {
+          "type": "string"
+        },
+        "makerOrderID": {
+          "type": "string"
+        },
+        "baseAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteAmountFilled": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -1641,7 +2019,7 @@
         "types": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiOrderType"
+            "$ref": "#/definitions/commonOrderType"
           }
         },
         "price": {
@@ -1675,16 +2053,6 @@
       ],
       "default": "OS_UNKNOWN"
     },
-    "apiOrderType": {
-      "type": "string",
-      "enum": [
-        "OT_MARKET",
-        "OT_LIMIT",
-        "OT_IOC",
-        "OT_POST"
-      ],
-      "default": "OT_MARKET"
-    },
     "apiOrderbookItem": {
       "type": "object",
       "properties": {
@@ -1707,6 +2075,69 @@
         "ownerAddress": {
           "type": "string",
           "description": "OpenOrders address for current market"
+        }
+      }
+    },
+    "apiPerpOrderbookItem": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "orderID": {
+          "type": "string",
+          "description": "Drift generated OrderID"
+        },
+        "clientOrderID": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPerpPosition": {
+      "type": "object",
+      "properties": {
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "contractVolume": {
+          "type": "number",
+          "format": "double"
+        },
+        "volumeAvailable": {
+          "type": "number",
+          "format": "double"
+        },
+        "volumeInOrder": {
+          "type": "number",
+          "format": "double"
+        },
+        "positionMargin": {
+          "type": "number",
+          "format": "double"
+        },
+        "positionSide": {
+          "$ref": "#/definitions/commonPerpPositionSide"
+        },
+        "unrealizedPnL": {
+          "type": "number",
+          "format": "double"
+        },
+        "perpPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "indexPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "liquidationPrice": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -1862,6 +2293,17 @@
         }
       }
     },
+    "apiPostClosePerpPositionsResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "apiPostOrderRequest": {
       "type": "object",
       "properties": {
@@ -1889,7 +2331,7 @@
         "type": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiOrderType"
+            "$ref": "#/definitions/commonOrderType"
           },
           "required": [
             "type"
@@ -1942,6 +2384,17 @@
         }
       }
     },
+    "apiPostPerpOrderResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        }
+      }
+    },
     "apiPostReplaceOrderRequest": {
       "type": "object",
       "properties": {
@@ -1969,7 +2422,7 @@
         "type": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiOrderType"
+            "$ref": "#/definitions/commonOrderType"
           },
           "required": [
             "type"
@@ -2145,7 +2598,8 @@
         "P_JUPITER",
         "P_RAYDIUM",
         "P_SERUM",
-        "P_OPENBOOK"
+        "P_OPENBOOK",
+        "P_DRIFT"
       ],
       "default": "P_UNKNOWN"
     },
@@ -2597,6 +3051,47 @@
         "INF_NEGATIVE"
       ],
       "default": "INF_NOT"
+    },
+    "commonOrderType": {
+      "type": "string",
+      "enum": [
+        "OT_MARKET",
+        "OT_LIMIT",
+        "OT_IOC",
+        "OT_POST"
+      ],
+      "default": "OT_MARKET"
+    },
+    "commonPerpContract": {
+      "type": "string",
+      "enum": [
+        "ALL",
+        "SOL_PERP",
+        "ETH_PERP",
+        "BTC_PERP"
+      ],
+      "default": "ALL"
+    },
+    "commonPerpOrderType": {
+      "type": "string",
+      "enum": [
+        "POT_UNKNOWN",
+        "POT_MARKET",
+        "POT_LIMIT",
+        "POT_TRIGGER_MARKET",
+        "POT_TRIGGER_LIMIT"
+      ],
+      "default": "POT_UNKNOWN",
+      "title": "Drift types : limit, trigger_market, trigger_limit, market, oracle"
+    },
+    "commonPerpPositionSide": {
+      "type": "string",
+      "enum": [
+        "PS_UNKNOWN",
+        "PS_LONG",
+        "PS_SHORT"
+      ],
+      "default": "PS_UNKNOWN"
     },
     "commonPriceImpactPercent": {
       "type": "object",
