@@ -2517,9 +2517,6 @@
         "outAmountMin": {
           "type": "number",
           "format": "double"
-        },
-        "poolAddress": {
-          "type": "string"
         }
       }
     },

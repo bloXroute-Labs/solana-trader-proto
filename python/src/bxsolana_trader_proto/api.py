@@ -600,7 +600,6 @@ class QuoteStep(betterproto.Message):
     price_impact_percent: common.PriceImpactPercent = betterproto.message_field(9)
     fee: common.Fee = betterproto.message_field(10)
     out_amount_min: float = betterproto.double_field(11)
-    pool_address: str = betterproto.string_field(12)
 
 
 @dataclass
