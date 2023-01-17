@@ -1196,7 +1196,7 @@ message PerpOrderbookItem {
 
 message GetPerpOrderbooksStreamResponse {
   int64 slot = 1;
-  GetOrderbookResponse orderbook = 2;
+  GetPerpOrderbookResponse orderbook = 2;
 }
 
 message GetPerpPositionsRequest {
