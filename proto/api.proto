@@ -983,7 +983,6 @@ message QuoteStep {
   common.PriceImpactPercent priceImpactPercent = 9;
   common.Fee fee = 10;
   double outAmountMin = 11;
-  string poolAddress = 12;
 }
 
 message StepProject {
