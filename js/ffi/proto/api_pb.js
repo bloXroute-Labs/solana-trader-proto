@@ -18122,8 +18122,7 @@ proto.api.QuoteStep.toObject = function(includeInstance, msg) {
     slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
     priceimpactpercent: (f = msg.getPriceimpactpercent()) && common_pb.PriceImpactPercent.toObject(includeInstance, f),
     fee: (f = msg.getFee()) && common_pb.Fee.toObject(includeInstance, f),
-    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0),
-    pooladdress: jspb.Message.getFieldWithDefault(msg, 12, "")
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0)
   };
 
   if (includeInstance) {
@@ -18206,10 +18205,6 @@ proto.api.QuoteStep.deserializeBinaryFromReader = function(msg, reader) {
     case 11:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setOutamountmin(value);
-      break;
-    case 12:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setPooladdress(value);
       break;
     default:
       reader.skipField();
@@ -18317,13 +18312,6 @@ proto.api.QuoteStep.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0.0) {
     writer.writeDouble(
       11,
-      f
-    );
-  }
-  f = message.getPooladdress();
-  if (f.length > 0) {
-    writer.writeString(
-      12,
       f
     );
   }
@@ -18582,24 +18570,6 @@ proto.api.QuoteStep.prototype.getOutamountmin = function() {
  */
 proto.api.QuoteStep.prototype.setOutamountmin = function(value) {
   return jspb.Message.setProto3FloatField(this, 11, value);
-};
-
-
-/**
- * optional string poolAddress = 12;
- * @return {string}
- */
-proto.api.QuoteStep.prototype.getPooladdress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 12, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.QuoteStep} returns this
- */
-proto.api.QuoteStep.prototype.setPooladdress = function(value) {
-  return jspb.Message.setProto3StringField(this, 12, value);
 };
 
 

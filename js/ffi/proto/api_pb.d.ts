@@ -2084,8 +2084,6 @@ export class QuoteStep extends jspb.Message {
     setFee(value?: common_pb.Fee): QuoteStep;
     getOutamountmin(): number;
     setOutamountmin(value: number): QuoteStep;
-    getPooladdress(): string;
-    setPooladdress(value: string): QuoteStep;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): QuoteStep.AsObject;
@@ -2110,7 +2108,6 @@ export namespace QuoteStep {
         priceimpactpercent?: common_pb.PriceImpactPercent.AsObject,
         fee?: common_pb.Fee.AsObject,
         outamountmin: number,
-        pooladdress: string,
     }
 }
 
