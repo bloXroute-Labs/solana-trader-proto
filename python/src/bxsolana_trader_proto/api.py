@@ -779,6 +779,44 @@ class GetPricesStreamResponse(betterproto.Message):
 
 
 @dataclass
+class GetPerpOrderbookRequest(betterproto.Message):
+    """Drift messages"""
+
+    market: str = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetPerpOrderbooksRequest(betterproto.Message):
+    markets: List[str] = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetPerpOrderbookResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_index: int = betterproto.int32_field(2)
+    bids: List["PerpOrderbookItem"] = betterproto.message_field(3)
+    asks: List["PerpOrderbookItem"] = betterproto.message_field(4)
+
+
+@dataclass
+class PerpOrderbookItem(betterproto.Message):
+    price: float = betterproto.double_field(1)
+    size: float = betterproto.double_field(2)
+    order_i_d: str = betterproto.string_field(3)
+    client_order_i_d: str = betterproto.string_field(4)
+
+
+@dataclass
+class GetPerpOrderbooksStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    orderbook: "GetPerpOrderbookResponse" = betterproto.message_field(2)
+
+
+@dataclass
 class GetPerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
@@ -838,6 +876,51 @@ class PostPerpOrderRequest(betterproto.Message):
 class PostPerpOrderResponse(betterproto.Message):
     transaction: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
+
+
+@dataclass
+class GetNewPerpOrdersStreamRequest(betterproto.Message):
+    markets: List[str] = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetNewPerpOrdersStreamResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_index: int = betterproto.int32_field(2)
+    side: common.PerpPositionSide = betterproto.enum_field(3)
+    type: common.PerpOrderType = betterproto.enum_field(4)
+    user_address: str = betterproto.string_field(5)
+    order_i_d: str = betterproto.string_field(6)
+    client_order_i_d: str = betterproto.string_field(7)
+    slot: str = betterproto.string_field(8)
+    price: float = betterproto.double_field(9)
+    trigger_price: float = betterproto.double_field(10)
+    base_amount: float = betterproto.double_field(11)
+    base_amount_filled: float = betterproto.double_field(12)
+    quote_amount: float = betterproto.double_field(13)
+    quote_amount_filled: float = betterproto.double_field(14)
+
+
+@dataclass
+class GetPerpTradesStreamRequest(betterproto.Message):
+    markets: List[str] = betterproto.string_field(1)
+    address: str = betterproto.string_field(2)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetPerpTradesStreamResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_index: int = betterproto.int32_field(2)
+    maker_position_side: common.PerpPositionSide = betterproto.enum_field(3)
+    filler_address: str = betterproto.string_field(4)
+    taker_address: str = betterproto.string_field(5)
+    taker_order_i_d: str = betterproto.string_field(6)
+    maker_address: str = betterproto.string_field(7)
+    maker_order_i_d: str = betterproto.string_field(8)
+    base_amount_filled: float = betterproto.double_field(9)
+    quote_amount_filled: float = betterproto.double_field(10)
 
 
 class ApiStub(betterproto.ServiceStub):
@@ -1431,6 +1514,20 @@ class ApiStub(betterproto.ServiceStub):
             PostClosePerpPositionsResponse,
         )
 
+    async def get_perp_orderbook(
+        self, *, market: str = "", limit: int = 0, project: "Project" = 0
+    ) -> GetPerpOrderbookResponse:
+        request = GetPerpOrderbookRequest()
+        request.market = market
+        request.limit = limit
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetPerpOrderbook",
+            request,
+            GetPerpOrderbookResponse,
+        )
+
     async def get_orderbooks_stream(
         self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
     ) -> AsyncGenerator[GetOrderbooksStreamResponse, None]:
@@ -1587,5 +1684,51 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetSwapsStream",
             request,
             GetSwapsStreamResponse,
+        ):
+            yield response
+
+    async def get_perp_orderbooks_stream(
+        self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
+    ) -> AsyncGenerator[GetPerpOrderbooksStreamResponse, None]:
+        """Drift streaming endpoints"""
+
+        request = GetPerpOrderbooksRequest()
+        request.markets = markets
+        request.limit = limit
+        request.project = project
+
+        async for response in self._unary_stream(
+            "/api.Api/GetPerpOrderbooksStream",
+            request,
+            GetPerpOrderbooksStreamResponse,
+        ):
+            yield response
+
+    async def get_new_perp_orders_stream(
+        self, *, markets: List[str] = [], project: "Project" = 0
+    ) -> AsyncGenerator[GetNewPerpOrdersStreamResponse, None]:
+        request = GetNewPerpOrdersStreamRequest()
+        request.markets = markets
+        request.project = project
+
+        async for response in self._unary_stream(
+            "/api.Api/GetNewPerpOrdersStream",
+            request,
+            GetNewPerpOrdersStreamResponse,
+        ):
+            yield response
+
+    async def get_perp_trades_stream(
+        self, *, markets: List[str] = [], address: str = "", project: "Project" = 0
+    ) -> AsyncGenerator[GetPerpTradesStreamResponse, None]:
+        request = GetPerpTradesStreamRequest()
+        request.markets = markets
+        request.address = address
+        request.project = project
+
+        async for response in self._unary_stream(
+            "/api.Api/GetPerpTradesStream",
+            request,
+            GetPerpTradesStreamResponse,
         ):
             yield response

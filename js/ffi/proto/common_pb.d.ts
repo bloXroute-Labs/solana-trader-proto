@@ -66,6 +66,8 @@ export enum PerpOrderType {
     POT_UNKNOWN = 0,
     POT_MARKET = 1,
     POT_LIMIT = 2,
+    POT_TRIGGER_MARKET = 3,
+    POT_TRIGGER_LIMIT = 4,
 }
 
 export enum PerpPositionSide {

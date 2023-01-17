@@ -52,6 +52,7 @@ type ApiClient interface {
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
 	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
+	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -64,6 +65,10 @@ type ApiClient interface {
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
+	// Drift streaming endpoints
+	GetPerpOrderbooksStream(ctx context.Context, in *GetPerpOrderbooksRequest, opts ...grpc.CallOption) (Api_GetPerpOrderbooksStreamClient, error)
+	GetNewPerpOrdersStream(ctx context.Context, in *GetNewPerpOrdersStreamRequest, opts ...grpc.CallOption) (Api_GetNewPerpOrdersStreamClient, error)
+	GetPerpTradesStream(ctx context.Context, in *GetPerpTradesStreamRequest, opts ...grpc.CallOption) (Api_GetPerpTradesStreamClient, error)
 }
 
 type apiClient struct {
@@ -338,6 +343,15 @@ func (c *apiClient) GetPerpPositions(ctx context.Context, in *GetPerpPositionsRe
 func (c *apiClient) PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error) {
 	out := new(PostClosePerpPositionsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostClosePerpPositions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error) {
+	out := new(GetPerpOrderbookResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPerpOrderbook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -696,6 +710,102 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 	return m, nil
 }
 
+func (c *apiClient) GetPerpOrderbooksStream(ctx context.Context, in *GetPerpOrderbooksRequest, opts ...grpc.CallOption) (Api_GetPerpOrderbooksStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetPerpOrderbooksStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPerpOrderbooksStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPerpOrderbooksStreamClient interface {
+	Recv() (*GetPerpOrderbooksStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPerpOrderbooksStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPerpOrderbooksStreamClient) Recv() (*GetPerpOrderbooksStreamResponse, error) {
+	m := new(GetPerpOrderbooksStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *apiClient) GetNewPerpOrdersStream(ctx context.Context, in *GetNewPerpOrdersStreamRequest, opts ...grpc.CallOption) (Api_GetNewPerpOrdersStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetNewPerpOrdersStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetNewPerpOrdersStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetNewPerpOrdersStreamClient interface {
+	Recv() (*GetNewPerpOrdersStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetNewPerpOrdersStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetNewPerpOrdersStreamClient) Recv() (*GetNewPerpOrdersStreamResponse, error) {
+	m := new(GetNewPerpOrdersStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *apiClient) GetPerpTradesStream(ctx context.Context, in *GetPerpTradesStreamRequest, opts ...grpc.CallOption) (Api_GetPerpTradesStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetPerpTradesStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPerpTradesStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPerpTradesStreamClient interface {
+	Recv() (*GetPerpTradesStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPerpTradesStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPerpTradesStreamClient) Recv() (*GetPerpTradesStreamResponse, error) {
+	m := new(GetPerpTradesStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // ApiServer is the server API for Api service.
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
@@ -734,6 +844,7 @@ type ApiServer interface {
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
 	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
+	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -746,6 +857,10 @@ type ApiServer interface {
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
+	// Drift streaming endpoints
+	GetPerpOrderbooksStream(*GetPerpOrderbooksRequest, Api_GetPerpOrderbooksStreamServer) error
+	GetNewPerpOrdersStream(*GetNewPerpOrdersStreamRequest, Api_GetNewPerpOrdersStreamServer) error
+	GetPerpTradesStream(*GetPerpTradesStreamRequest, Api_GetPerpTradesStreamServer) error
 	mustEmbedUnimplementedApiServer()
 }
 
@@ -843,6 +958,9 @@ func (UnimplementedApiServer) GetPerpPositions(context.Context, *GetPerpPosition
 func (UnimplementedApiServer) PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostClosePerpPositions not implemented")
 }
+func (UnimplementedApiServer) GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPerpOrderbook not implemented")
+}
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
 }
@@ -875,6 +993,15 @@ func (UnimplementedApiServer) GetPricesStream(*GetPricesStreamRequest, Api_GetPr
 }
 func (UnimplementedApiServer) GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetSwapsStream not implemented")
+}
+func (UnimplementedApiServer) GetPerpOrderbooksStream(*GetPerpOrderbooksRequest, Api_GetPerpOrderbooksStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPerpOrderbooksStream not implemented")
+}
+func (UnimplementedApiServer) GetNewPerpOrdersStream(*GetNewPerpOrdersStreamRequest, Api_GetNewPerpOrdersStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetNewPerpOrdersStream not implemented")
+}
+func (UnimplementedApiServer) GetPerpTradesStream(*GetPerpTradesStreamRequest, Api_GetPerpTradesStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPerpTradesStream not implemented")
 }
 func (UnimplementedApiServer) mustEmbedUnimplementedApiServer() {}
 
@@ -1429,6 +1556,24 @@ func _Api_PostClosePerpPositions_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetPerpOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPerpOrderbookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPerpOrderbook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPerpOrderbook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPerpOrderbook(ctx, req.(*GetPerpOrderbookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetOrderbooksStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetOrderbooksRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -1660,6 +1805,69 @@ func (x *apiGetSwapsStreamServer) Send(m *GetSwapsStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetPerpOrderbooksStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPerpOrderbooksRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPerpOrderbooksStream(m, &apiGetPerpOrderbooksStreamServer{stream})
+}
+
+type Api_GetPerpOrderbooksStreamServer interface {
+	Send(*GetPerpOrderbooksStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPerpOrderbooksStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPerpOrderbooksStreamServer) Send(m *GetPerpOrderbooksStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Api_GetNewPerpOrdersStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetNewPerpOrdersStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetNewPerpOrdersStream(m, &apiGetNewPerpOrdersStreamServer{stream})
+}
+
+type Api_GetNewPerpOrdersStreamServer interface {
+	Send(*GetNewPerpOrdersStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetNewPerpOrdersStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetNewPerpOrdersStreamServer) Send(m *GetNewPerpOrdersStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Api_GetPerpTradesStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPerpTradesStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPerpTradesStream(m, &apiGetPerpTradesStreamServer{stream})
+}
+
+type Api_GetPerpTradesStreamServer interface {
+	Send(*GetPerpTradesStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPerpTradesStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPerpTradesStreamServer) Send(m *GetPerpTradesStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Api_ServiceDesc is the grpc.ServiceDesc for Api service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1787,6 +1995,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "PostClosePerpPositions",
 			Handler:    _Api_PostClosePerpPositions_Handler,
 		},
+		{
+			MethodName: "GetPerpOrderbook",
+			Handler:    _Api_GetPerpOrderbook_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -1842,6 +2054,21 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetSwapsStream",
 			Handler:       _Api_GetSwapsStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPerpOrderbooksStream",
+			Handler:       _Api_GetPerpOrderbooksStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetNewPerpOrdersStream",
+			Handler:       _Api_GetNewPerpOrdersStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPerpTradesStream",
+			Handler:       _Api_GetPerpTradesStream_Handler,
 			ServerStreams: true,
 		},
 	},

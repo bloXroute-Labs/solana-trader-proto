@@ -2797,6 +2797,148 @@ export namespace GetPricesStreamResponse {
     }
 }
 
+export class GetPerpOrderbookRequest extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetPerpOrderbookRequest;
+    getLimit(): number;
+    setLimit(value: number): GetPerpOrderbookRequest;
+    getProject(): Project;
+    setProject(value: Project): GetPerpOrderbookRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetPerpOrderbookRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpOrderbookRequest): GetPerpOrderbookRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetPerpOrderbookRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpOrderbookRequest;
+    static deserializeBinaryFromReader(message: GetPerpOrderbookRequest, reader: jspb.BinaryReader): GetPerpOrderbookRequest;
+}
+
+export namespace GetPerpOrderbookRequest {
+    export type AsObject = {
+        market: string,
+        limit: number,
+        project: Project,
+    }
+}
+
+export class GetPerpOrderbooksRequest extends jspb.Message { 
+    clearMarketsList(): void;
+    getMarketsList(): Array<string>;
+    setMarketsList(value: Array<string>): GetPerpOrderbooksRequest;
+    addMarkets(value: string, index?: number): string;
+    getLimit(): number;
+    setLimit(value: number): GetPerpOrderbooksRequest;
+    getProject(): Project;
+    setProject(value: Project): GetPerpOrderbooksRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetPerpOrderbooksRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpOrderbooksRequest): GetPerpOrderbooksRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetPerpOrderbooksRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpOrderbooksRequest;
+    static deserializeBinaryFromReader(message: GetPerpOrderbooksRequest, reader: jspb.BinaryReader): GetPerpOrderbooksRequest;
+}
+
+export namespace GetPerpOrderbooksRequest {
+    export type AsObject = {
+        marketsList: Array<string>,
+        limit: number,
+        project: Project,
+    }
+}
+
+export class GetPerpOrderbookResponse extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetPerpOrderbookResponse;
+    getMarketindex(): number;
+    setMarketindex(value: number): GetPerpOrderbookResponse;
+    clearBidsList(): void;
+    getBidsList(): Array<PerpOrderbookItem>;
+    setBidsList(value: Array<PerpOrderbookItem>): GetPerpOrderbookResponse;
+    addBids(value?: PerpOrderbookItem, index?: number): PerpOrderbookItem;
+    clearAsksList(): void;
+    getAsksList(): Array<PerpOrderbookItem>;
+    setAsksList(value: Array<PerpOrderbookItem>): GetPerpOrderbookResponse;
+    addAsks(value?: PerpOrderbookItem, index?: number): PerpOrderbookItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetPerpOrderbookResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpOrderbookResponse): GetPerpOrderbookResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetPerpOrderbookResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpOrderbookResponse;
+    static deserializeBinaryFromReader(message: GetPerpOrderbookResponse, reader: jspb.BinaryReader): GetPerpOrderbookResponse;
+}
+
+export namespace GetPerpOrderbookResponse {
+    export type AsObject = {
+        market: string,
+        marketindex: number,
+        bidsList: Array<PerpOrderbookItem.AsObject>,
+        asksList: Array<PerpOrderbookItem.AsObject>,
+    }
+}
+
+export class PerpOrderbookItem extends jspb.Message { 
+    getPrice(): number;
+    setPrice(value: number): PerpOrderbookItem;
+    getSize(): number;
+    setSize(value: number): PerpOrderbookItem;
+    getOrderid(): string;
+    setOrderid(value: string): PerpOrderbookItem;
+    getClientorderid(): string;
+    setClientorderid(value: string): PerpOrderbookItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PerpOrderbookItem.AsObject;
+    static toObject(includeInstance: boolean, msg: PerpOrderbookItem): PerpOrderbookItem.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PerpOrderbookItem, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PerpOrderbookItem;
+    static deserializeBinaryFromReader(message: PerpOrderbookItem, reader: jspb.BinaryReader): PerpOrderbookItem;
+}
+
+export namespace PerpOrderbookItem {
+    export type AsObject = {
+        price: number,
+        size: number,
+        orderid: string,
+        clientorderid: string,
+    }
+}
+
+export class GetPerpOrderbooksStreamResponse extends jspb.Message { 
+    getSlot(): number;
+    setSlot(value: number): GetPerpOrderbooksStreamResponse;
+
+    hasOrderbook(): boolean;
+    clearOrderbook(): void;
+    getOrderbook(): GetPerpOrderbookResponse | undefined;
+    setOrderbook(value?: GetPerpOrderbookResponse): GetPerpOrderbooksStreamResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetPerpOrderbooksStreamResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpOrderbooksStreamResponse): GetPerpOrderbooksStreamResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetPerpOrderbooksStreamResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpOrderbooksStreamResponse;
+    static deserializeBinaryFromReader(message: GetPerpOrderbooksStreamResponse, reader: jspb.BinaryReader): GetPerpOrderbooksStreamResponse;
+}
+
+export namespace GetPerpOrderbooksStreamResponse {
+    export type AsObject = {
+        slot: number,
+        orderbook?: GetPerpOrderbookResponse.AsObject,
+    }
+}
+
 export class GetPerpPositionsRequest extends jspb.Message { 
     getProject(): Project;
     setProject(value: Project): GetPerpPositionsRequest;
@@ -3023,6 +3165,165 @@ export namespace PostPerpOrderResponse {
     export type AsObject = {
         transaction: string,
         accountaddress: string,
+    }
+}
+
+export class GetNewPerpOrdersStreamRequest extends jspb.Message { 
+    clearMarketsList(): void;
+    getMarketsList(): Array<string>;
+    setMarketsList(value: Array<string>): GetNewPerpOrdersStreamRequest;
+    addMarkets(value: string, index?: number): string;
+    getProject(): Project;
+    setProject(value: Project): GetNewPerpOrdersStreamRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetNewPerpOrdersStreamRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetNewPerpOrdersStreamRequest): GetNewPerpOrdersStreamRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetNewPerpOrdersStreamRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetNewPerpOrdersStreamRequest;
+    static deserializeBinaryFromReader(message: GetNewPerpOrdersStreamRequest, reader: jspb.BinaryReader): GetNewPerpOrdersStreamRequest;
+}
+
+export namespace GetNewPerpOrdersStreamRequest {
+    export type AsObject = {
+        marketsList: Array<string>,
+        project: Project,
+    }
+}
+
+export class GetNewPerpOrdersStreamResponse extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetNewPerpOrdersStreamResponse;
+    getMarketindex(): number;
+    setMarketindex(value: number): GetNewPerpOrdersStreamResponse;
+    getSide(): common_pb.PerpPositionSide;
+    setSide(value: common_pb.PerpPositionSide): GetNewPerpOrdersStreamResponse;
+    getType(): common_pb.PerpOrderType;
+    setType(value: common_pb.PerpOrderType): GetNewPerpOrdersStreamResponse;
+    getUseraddress(): string;
+    setUseraddress(value: string): GetNewPerpOrdersStreamResponse;
+    getOrderid(): string;
+    setOrderid(value: string): GetNewPerpOrdersStreamResponse;
+    getClientorderid(): string;
+    setClientorderid(value: string): GetNewPerpOrdersStreamResponse;
+    getSlot(): string;
+    setSlot(value: string): GetNewPerpOrdersStreamResponse;
+    getPrice(): number;
+    setPrice(value: number): GetNewPerpOrdersStreamResponse;
+    getTriggerprice(): number;
+    setTriggerprice(value: number): GetNewPerpOrdersStreamResponse;
+    getBaseamount(): number;
+    setBaseamount(value: number): GetNewPerpOrdersStreamResponse;
+    getBaseamountfilled(): number;
+    setBaseamountfilled(value: number): GetNewPerpOrdersStreamResponse;
+    getQuoteamount(): number;
+    setQuoteamount(value: number): GetNewPerpOrdersStreamResponse;
+    getQuoteamountfilled(): number;
+    setQuoteamountfilled(value: number): GetNewPerpOrdersStreamResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetNewPerpOrdersStreamResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetNewPerpOrdersStreamResponse): GetNewPerpOrdersStreamResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetNewPerpOrdersStreamResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetNewPerpOrdersStreamResponse;
+    static deserializeBinaryFromReader(message: GetNewPerpOrdersStreamResponse, reader: jspb.BinaryReader): GetNewPerpOrdersStreamResponse;
+}
+
+export namespace GetNewPerpOrdersStreamResponse {
+    export type AsObject = {
+        market: string,
+        marketindex: number,
+        side: common_pb.PerpPositionSide,
+        type: common_pb.PerpOrderType,
+        useraddress: string,
+        orderid: string,
+        clientorderid: string,
+        slot: string,
+        price: number,
+        triggerprice: number,
+        baseamount: number,
+        baseamountfilled: number,
+        quoteamount: number,
+        quoteamountfilled: number,
+    }
+}
+
+export class GetPerpTradesStreamRequest extends jspb.Message { 
+    clearMarketsList(): void;
+    getMarketsList(): Array<string>;
+    setMarketsList(value: Array<string>): GetPerpTradesStreamRequest;
+    addMarkets(value: string, index?: number): string;
+    getAddress(): string;
+    setAddress(value: string): GetPerpTradesStreamRequest;
+    getProject(): Project;
+    setProject(value: Project): GetPerpTradesStreamRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetPerpTradesStreamRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpTradesStreamRequest): GetPerpTradesStreamRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetPerpTradesStreamRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpTradesStreamRequest;
+    static deserializeBinaryFromReader(message: GetPerpTradesStreamRequest, reader: jspb.BinaryReader): GetPerpTradesStreamRequest;
+}
+
+export namespace GetPerpTradesStreamRequest {
+    export type AsObject = {
+        marketsList: Array<string>,
+        address: string,
+        project: Project,
+    }
+}
+
+export class GetPerpTradesStreamResponse extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetPerpTradesStreamResponse;
+    getMarketindex(): number;
+    setMarketindex(value: number): GetPerpTradesStreamResponse;
+    getMakerpositionside(): common_pb.PerpPositionSide;
+    setMakerpositionside(value: common_pb.PerpPositionSide): GetPerpTradesStreamResponse;
+    getFilleraddress(): string;
+    setFilleraddress(value: string): GetPerpTradesStreamResponse;
+    getTakeraddress(): string;
+    setTakeraddress(value: string): GetPerpTradesStreamResponse;
+    getTakerorderid(): string;
+    setTakerorderid(value: string): GetPerpTradesStreamResponse;
+    getMakeraddress(): string;
+    setMakeraddress(value: string): GetPerpTradesStreamResponse;
+    getMakerorderid(): string;
+    setMakerorderid(value: string): GetPerpTradesStreamResponse;
+    getBaseamountfilled(): number;
+    setBaseamountfilled(value: number): GetPerpTradesStreamResponse;
+    getQuoteamountfilled(): number;
+    setQuoteamountfilled(value: number): GetPerpTradesStreamResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetPerpTradesStreamResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpTradesStreamResponse): GetPerpTradesStreamResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetPerpTradesStreamResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpTradesStreamResponse;
+    static deserializeBinaryFromReader(message: GetPerpTradesStreamResponse, reader: jspb.BinaryReader): GetPerpTradesStreamResponse;
+}
+
+export namespace GetPerpTradesStreamResponse {
+    export type AsObject = {
+        market: string,
+        marketindex: number,
+        makerpositionside: common_pb.PerpPositionSide,
+        filleraddress: string,
+        takeraddress: string,
+        takerorderid: string,
+        makeraddress: string,
+        makerorderid: string,
+        baseamountfilled: number,
+        quoteamountfilled: number,
     }
 }
 

@@ -58,6 +58,63 @@
         ]
       }
     },
+    "/api/v1/drift/perp/{market}": {
+      "get": {
+        "summary": "Perpetuals contract orderbook",
+        "description": "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetPerpOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPerpOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Perp",
+          "Orderbook"
+        ]
+      }
+    },
     "/api/v1/market/depth/{market}": {
       "get": {
         "summary": "Market depth",
@@ -790,7 +847,9 @@
             "enum": [
               "POT_UNKNOWN",
               "POT_MARKET",
-              "POT_LIMIT"
+              "POT_LIMIT",
+              "POT_TRIGGER_MARKET",
+              "POT_TRIGGER_LIMIT"
             ],
             "default": "POT_UNKNOWN"
           },
@@ -1384,6 +1443,60 @@
         }
       }
     },
+    "apiGetNewPerpOrdersStreamResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "side": {
+          "$ref": "#/definitions/commonPerpPositionSide"
+        },
+        "type": {
+          "$ref": "#/definitions/commonPerpOrderType"
+        },
+        "userAddress": {
+          "type": "string"
+        },
+        "orderID": {
+          "type": "string"
+        },
+        "clientOrderID": {
+          "type": "string"
+        },
+        "slot": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "triggerPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "baseAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "baseAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteAmountFilled": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiGetOpenOrdersResponse": {
       "type": "object",
       "properties": {
@@ -1501,6 +1614,42 @@
         }
       }
     },
+    "apiGetPerpOrderbookResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPerpOrderbookItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPerpOrderbookItem"
+          }
+        }
+      }
+    },
+    "apiGetPerpOrderbooksStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orderbook": {
+          "$ref": "#/definitions/apiGetPerpOrderbookResponse"
+        }
+      }
+    },
     "apiGetPerpPositionsResponse": {
       "type": "object",
       "properties": {
@@ -1515,6 +1664,44 @@
           "items": {
             "$ref": "#/definitions/apiPerpPosition"
           }
+        }
+      }
+    },
+    "apiGetPerpTradesStreamResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "makerPositionSide": {
+          "$ref": "#/definitions/commonPerpPositionSide"
+        },
+        "fillerAddress": {
+          "type": "string"
+        },
+        "takerAddress": {
+          "type": "string"
+        },
+        "takerOrderID": {
+          "type": "string"
+        },
+        "makerAddress": {
+          "type": "string"
+        },
+        "makerOrderID": {
+          "type": "string"
+        },
+        "baseAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteAmountFilled": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -1888,6 +2075,26 @@
         "ownerAddress": {
           "type": "string",
           "description": "OpenOrders address for current market"
+        }
+      }
+    },
+    "apiPerpOrderbookItem": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "orderID": {
+          "type": "string",
+          "description": "Drift generated OrderID"
+        },
+        "clientOrderID": {
+          "type": "string"
         }
       }
     },
@@ -2867,7 +3074,9 @@
       "enum": [
         "POT_UNKNOWN",
         "POT_MARKET",
-        "POT_LIMIT"
+        "POT_LIMIT",
+        "POT_TRIGGER_MARKET",
+        "POT_TRIGGER_LIMIT"
       ],
       "default": "POT_UNKNOWN",
       "title": "Drift types : limit, trigger_market, trigger_limit, market, oracle"
