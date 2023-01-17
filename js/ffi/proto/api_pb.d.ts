@@ -2922,8 +2922,8 @@ export class GetPerpOrderbooksStreamResponse extends jspb.Message {
 
     hasOrderbook(): boolean;
     clearOrderbook(): void;
-    getOrderbook(): GetOrderbookResponse | undefined;
-    setOrderbook(value?: GetOrderbookResponse): GetPerpOrderbooksStreamResponse;
+    getOrderbook(): GetPerpOrderbookResponse | undefined;
+    setOrderbook(value?: GetPerpOrderbookResponse): GetPerpOrderbooksStreamResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPerpOrderbooksStreamResponse.AsObject;
@@ -2938,7 +2938,7 @@ export class GetPerpOrderbooksStreamResponse extends jspb.Message {
 export namespace GetPerpOrderbooksStreamResponse {
     export type AsObject = {
         slot: number,
-        orderbook?: GetOrderbookResponse.AsObject,
+        orderbook?: GetPerpOrderbookResponse.AsObject,
     }
 }
 

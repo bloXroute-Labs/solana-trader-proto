@@ -814,7 +814,7 @@ class PerpOrderbookItem(betterproto.Message):
 @dataclass
 class GetPerpOrderbooksStreamResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
-    orderbook: "GetOrderbookResponse" = betterproto.message_field(2)
+    orderbook: "GetPerpOrderbookResponse" = betterproto.message_field(2)
 
 
 @dataclass

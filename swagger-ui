@@ -1646,7 +1646,7 @@
           "format": "int64"
         },
         "orderbook": {
-          "$ref": "#/definitions/apiGetOrderbookResponse"
+          "$ref": "#/definitions/apiGetPerpOrderbookResponse"
         }
       }
     },

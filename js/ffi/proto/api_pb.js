@@ -24679,7 +24679,7 @@ proto.api.GetPerpOrderbooksStreamResponse.prototype.toObject = function(opt_incl
 proto.api.GetPerpOrderbooksStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    orderbook: (f = msg.getOrderbook()) && proto.api.GetOrderbookResponse.toObject(includeInstance, f)
+    orderbook: (f = msg.getOrderbook()) && proto.api.GetPerpOrderbookResponse.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -24721,8 +24721,8 @@ proto.api.GetPerpOrderbooksStreamResponse.deserializeBinaryFromReader = function
       msg.setSlot(value);
       break;
     case 2:
-      var value = new proto.api.GetOrderbookResponse;
-      reader.readMessage(value,proto.api.GetOrderbookResponse.deserializeBinaryFromReader);
+      var value = new proto.api.GetPerpOrderbookResponse;
+      reader.readMessage(value,proto.api.GetPerpOrderbookResponse.deserializeBinaryFromReader);
       msg.setOrderbook(value);
       break;
     default:
@@ -24766,7 +24766,7 @@ proto.api.GetPerpOrderbooksStreamResponse.serializeBinaryToWriter = function(mes
     writer.writeMessage(
       2,
       f,
-      proto.api.GetOrderbookResponse.serializeBinaryToWriter
+      proto.api.GetPerpOrderbookResponse.serializeBinaryToWriter
     );
   }
 };
@@ -24791,17 +24791,17 @@ proto.api.GetPerpOrderbooksStreamResponse.prototype.setSlot = function(value) {
 
 
 /**
- * optional GetOrderbookResponse orderbook = 2;
- * @return {?proto.api.GetOrderbookResponse}
+ * optional GetPerpOrderbookResponse orderbook = 2;
+ * @return {?proto.api.GetPerpOrderbookResponse}
  */
 proto.api.GetPerpOrderbooksStreamResponse.prototype.getOrderbook = function() {
-  return /** @type{?proto.api.GetOrderbookResponse} */ (
-    jspb.Message.getWrapperField(this, proto.api.GetOrderbookResponse, 2));
+  return /** @type{?proto.api.GetPerpOrderbookResponse} */ (
+    jspb.Message.getWrapperField(this, proto.api.GetPerpOrderbookResponse, 2));
 };
 
 
 /**
- * @param {?proto.api.GetOrderbookResponse|undefined} value
+ * @param {?proto.api.GetPerpOrderbookResponse|undefined} value
  * @return {!proto.api.GetPerpOrderbooksStreamResponse} returns this
 */
 proto.api.GetPerpOrderbooksStreamResponse.prototype.setOrderbook = function(value) {
