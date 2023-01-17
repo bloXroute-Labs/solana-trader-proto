@@ -186,6 +186,28 @@ function deserialize_api_GetOpenOrdersResponse(buffer_arg) {
   return api_pb.GetOpenOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetOpenPerpOrdersRequest(arg) {
+  if (!(arg instanceof api_pb.GetOpenPerpOrdersRequest)) {
+    throw new Error('Expected argument of type api.GetOpenPerpOrdersRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOpenPerpOrdersRequest(buffer_arg) {
+  return api_pb.GetOpenPerpOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetOpenPerpOrdersResponse(arg) {
+  if (!(arg instanceof api_pb.GetOpenPerpOrdersResponse)) {
+    throw new Error('Expected argument of type api.GetOpenPerpOrdersResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOpenPerpOrdersResponse(buffer_arg) {
+  return api_pb.GetOpenPerpOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetOrderByIDRequest(arg) {
   if (!(arg instanceof api_pb.GetOrderByIDRequest)) {
     throw new Error('Expected argument of type api.GetOrderByIDRequest');
@@ -1225,6 +1247,17 @@ postPerpOrder: {
     requestDeserialize: deserialize_api_GetPerpPositionsRequest,
     responseSerialize: serialize_api_GetPerpPositionsResponse,
     responseDeserialize: deserialize_api_GetPerpPositionsResponse,
+  },
+  getOpenPerpOrders: {
+    path: '/api.Api/GetOpenPerpOrders',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetOpenPerpOrdersRequest,
+    responseType: api_pb.GetOpenPerpOrdersResponse,
+    requestSerialize: serialize_api_GetOpenPerpOrdersRequest,
+    requestDeserialize: deserialize_api_GetOpenPerpOrdersRequest,
+    responseSerialize: serialize_api_GetOpenPerpOrdersResponse,
+    responseDeserialize: deserialize_api_GetOpenPerpOrdersResponse,
   },
   postClosePerpPositions: {
     path: '/api.Api/PostClosePerpPositions',

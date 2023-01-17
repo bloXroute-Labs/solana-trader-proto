@@ -817,6 +817,36 @@ class GetPerpOrderbooksStreamResponse(betterproto.Message):
 
 
 @dataclass
+class GetOpenPerpOrdersRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    account_address: str = betterproto.string_field(3)
+    contracts: List[common.PerpContract] = betterproto.enum_field(4)
+
+
+@dataclass
+class GetOpenPerpOrdersResponse(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    orders: List["PerpOrder"] = betterproto.message_field(3)
+
+
+@dataclass
+class PerpOrder(betterproto.Message):
+    order_i_d: int = betterproto.uint64_field(1)
+    client_order_i_d: int = betterproto.uint64_field(2)
+    account_address: str = betterproto.string_field(3)
+    contract: common.PerpContract = betterproto.enum_field(4)
+    position_side: common.PerpPositionSide = betterproto.enum_field(5)
+    types: str = betterproto.string_field(6)
+    unrealized_pn_l: float = betterproto.double_field(7)
+    price: float = betterproto.double_field(8)
+    size: float = betterproto.double_field(9)
+    remaining_size: float = betterproto.double_field(10)
+    status: str = betterproto.string_field(11)
+
+
+@dataclass
 class GetPerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
@@ -1494,6 +1524,26 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetPerpPositions",
             request,
             GetPerpPositionsResponse,
+        )
+
+    async def get_open_perp_orders(
+        self,
+        *,
+        project: "Project" = 0,
+        owner_address: str = "",
+        account_address: str = "",
+        contracts: List[common.PerpContract] = [],
+    ) -> GetOpenPerpOrdersResponse:
+        request = GetOpenPerpOrdersRequest()
+        request.project = project
+        request.owner_address = owner_address
+        request.account_address = account_address
+        request.contracts = contracts
+
+        return await self._unary_unary(
+            "/api.Api/GetOpenPerpOrders",
+            request,
+            GetOpenPerpOrdersResponse,
         )
 
     async def post_close_perp_positions(

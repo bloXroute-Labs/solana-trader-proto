@@ -390,6 +390,17 @@ service Api {
     };
   }
 
+  rpc GetOpenPerpOrders(GetOpenPerpOrdersRequest)  returns (GetOpenPerpOrdersResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/perp/open-orders"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list current open perp orders positions";
+      summary: "PERP order positions";
+      tags: ["Trade", "Perp", "Orderbook"];
+    };
+  }
+
   rpc PostClosePerpPositions(PostClosePerpPositionsRequest)  returns (PostClosePerpPositionsResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/perp/close-positions"
@@ -1196,6 +1207,37 @@ message PerpOrderbookItem {
 message GetPerpOrderbooksStreamResponse {
   int64 slot = 1;
   GetPerpOrderbookResponse orderbook = 2;
+}
+
+message GetOpenPerpOrdersRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  string accountAddress = 3;
+  repeated common.PerpContract contracts = 4;
+}
+
+message GetOpenPerpOrdersResponse {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+
+  repeated PerpOrder orders = 3;
+}
+
+message PerpOrder {
+  uint64 orderID = 1;
+  uint64 clientOrderID = 2;
+
+  string accountAddress = 3;
+  common.PerpContract contract = 4;
+  common.PerpPositionSide positionSide = 5;
+
+  string types = 6;
+  double unrealizedPnL = 7;
+
+  double price = 8;
+  double size = 9;
+  double remainingSize = 10;
+  string status = 11;
 }
 
 message GetPerpPositionsRequest {

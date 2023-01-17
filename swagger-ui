@@ -754,6 +754,78 @@
         ]
       }
     },
+    "/api/v1/trade/perp/open-orders": {
+      "get": {
+        "summary": "PERP order positions",
+        "description": "Returns the list current open perp orders positions",
+        "operationId": "Api_GetOpenPerpOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOpenPerpOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contracts",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ALL",
+                "SOL_PERP",
+                "ETH_PERP",
+                "BTC_PERP"
+              ]
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Perp",
+          "Orderbook"
+        ]
+      }
+    },
     "/api/v1/trade/perp/order": {
       "post": {
         "summary": "perp order",
@@ -1508,6 +1580,23 @@
         }
       }
     },
+    "apiGetOpenPerpOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPerpOrder"
+          }
+        }
+      }
+    },
     "apiGetOrderByIDResponse": {
       "type": "object",
       "properties": {
@@ -2075,6 +2164,50 @@
         "ownerAddress": {
           "type": "string",
           "description": "OpenOrders address for current market"
+        }
+      }
+    },
+    "apiPerpOrder": {
+      "type": "object",
+      "properties": {
+        "orderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "positionSide": {
+          "$ref": "#/definitions/commonPerpPositionSide"
+        },
+        "types": {
+          "type": "string"
+        },
+        "unrealizedPnL": {
+          "type": "number",
+          "format": "double"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "remainingSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string"
         }
       }
     },

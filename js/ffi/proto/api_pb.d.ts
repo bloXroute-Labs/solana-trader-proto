@@ -2939,6 +2939,115 @@ export namespace GetPerpOrderbooksStreamResponse {
     }
 }
 
+export class GetOpenPerpOrdersRequest extends jspb.Message { 
+    getProject(): Project;
+    setProject(value: Project): GetOpenPerpOrdersRequest;
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetOpenPerpOrdersRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): GetOpenPerpOrdersRequest;
+    clearContractsList(): void;
+    getContractsList(): Array<common_pb.PerpContract>;
+    setContractsList(value: Array<common_pb.PerpContract>): GetOpenPerpOrdersRequest;
+    addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetOpenPerpOrdersRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetOpenPerpOrdersRequest): GetOpenPerpOrdersRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetOpenPerpOrdersRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetOpenPerpOrdersRequest;
+    static deserializeBinaryFromReader(message: GetOpenPerpOrdersRequest, reader: jspb.BinaryReader): GetOpenPerpOrdersRequest;
+}
+
+export namespace GetOpenPerpOrdersRequest {
+    export type AsObject = {
+        project: Project,
+        owneraddress: string,
+        accountaddress: string,
+        contractsList: Array<common_pb.PerpContract>,
+    }
+}
+
+export class GetOpenPerpOrdersResponse extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetOpenPerpOrdersResponse;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): GetOpenPerpOrdersResponse;
+    clearOrdersList(): void;
+    getOrdersList(): Array<PerpOrder>;
+    setOrdersList(value: Array<PerpOrder>): GetOpenPerpOrdersResponse;
+    addOrders(value?: PerpOrder, index?: number): PerpOrder;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetOpenPerpOrdersResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetOpenPerpOrdersResponse): GetOpenPerpOrdersResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetOpenPerpOrdersResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetOpenPerpOrdersResponse;
+    static deserializeBinaryFromReader(message: GetOpenPerpOrdersResponse, reader: jspb.BinaryReader): GetOpenPerpOrdersResponse;
+}
+
+export namespace GetOpenPerpOrdersResponse {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        ordersList: Array<PerpOrder.AsObject>,
+    }
+}
+
+export class PerpOrder extends jspb.Message { 
+    getOrderid(): number;
+    setOrderid(value: number): PerpOrder;
+    getClientorderid(): number;
+    setClientorderid(value: number): PerpOrder;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PerpOrder;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): PerpOrder;
+    getPositionside(): common_pb.PerpPositionSide;
+    setPositionside(value: common_pb.PerpPositionSide): PerpOrder;
+    getTypes(): string;
+    setTypes(value: string): PerpOrder;
+    getUnrealizedpnl(): number;
+    setUnrealizedpnl(value: number): PerpOrder;
+    getPrice(): number;
+    setPrice(value: number): PerpOrder;
+    getSize(): number;
+    setSize(value: number): PerpOrder;
+    getRemainingsize(): number;
+    setRemainingsize(value: number): PerpOrder;
+    getStatus(): string;
+    setStatus(value: string): PerpOrder;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PerpOrder.AsObject;
+    static toObject(includeInstance: boolean, msg: PerpOrder): PerpOrder.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PerpOrder, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PerpOrder;
+    static deserializeBinaryFromReader(message: PerpOrder, reader: jspb.BinaryReader): PerpOrder;
+}
+
+export namespace PerpOrder {
+    export type AsObject = {
+        orderid: number,
+        clientorderid: number,
+        accountaddress: string,
+        contract: common_pb.PerpContract,
+        positionside: common_pb.PerpPositionSide,
+        types: string,
+        unrealizedpnl: number,
+        price: number,
+        size: number,
+        remainingsize: number,
+        status: string,
+    }
+}
+
 export class GetPerpPositionsRequest extends jspb.Message { 
     getProject(): Project;
     setProject(value: Project): GetPerpPositionsRequest;

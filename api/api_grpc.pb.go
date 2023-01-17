@@ -51,6 +51,7 @@ type ApiClient interface {
 	// perp endpoints
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
 	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
+	GetOpenPerpOrders(ctx context.Context, in *GetOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetOpenPerpOrdersResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
 	// streaming endpoints
@@ -334,6 +335,15 @@ func (c *apiClient) PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest,
 func (c *apiClient) GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error) {
 	out := new(GetPerpPositionsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetPerpPositions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetOpenPerpOrders(ctx context.Context, in *GetOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetOpenPerpOrdersResponse, error) {
+	out := new(GetOpenPerpOrdersResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetOpenPerpOrders", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -843,6 +853,7 @@ type ApiServer interface {
 	// perp endpoints
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
 	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
+	GetOpenPerpOrders(context.Context, *GetOpenPerpOrdersRequest) (*GetOpenPerpOrdersResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
 	// streaming endpoints
@@ -954,6 +965,9 @@ func (UnimplementedApiServer) PostPerpOrder(context.Context, *PostPerpOrderReque
 }
 func (UnimplementedApiServer) GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPerpPositions not implemented")
+}
+func (UnimplementedApiServer) GetOpenPerpOrders(context.Context, *GetOpenPerpOrdersRequest) (*GetOpenPerpOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOpenPerpOrders not implemented")
 }
 func (UnimplementedApiServer) PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostClosePerpPositions not implemented")
@@ -1538,6 +1552,24 @@ func _Api_GetPerpPositions_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetOpenPerpOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOpenPerpOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetOpenPerpOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetOpenPerpOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetOpenPerpOrders(ctx, req.(*GetOpenPerpOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_PostClosePerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostClosePerpPositionsRequest)
 	if err := dec(in); err != nil {
@@ -1990,6 +2022,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPerpPositions",
 			Handler:    _Api_GetPerpPositions_Handler,
+		},
+		{
+			MethodName: "GetOpenPerpOrders",
+			Handler:    _Api_GetOpenPerpOrders_Handler,
 		},
 		{
 			MethodName: "PostClosePerpPositions",
