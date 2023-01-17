@@ -567,8 +567,6 @@ class RouteStep(betterproto.Message):
     out_amount: float = betterproto.double_field(4)
     out_amount_min: float = betterproto.double_field(5)
     project: "StepProject" = betterproto.message_field(6)
-    # if poolAddress is defined, it determines the outToken
-    pool_address: str = betterproto.string_field(7)
 
 
 @dataclass

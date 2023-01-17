@@ -1957,8 +1957,6 @@ export class RouteStep extends jspb.Message {
     clearProject(): void;
     getProject(): StepProject | undefined;
     setProject(value?: StepProject): RouteStep;
-    getPooladdress(): string;
-    setPooladdress(value: string): RouteStep;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): RouteStep.AsObject;
@@ -1978,7 +1976,6 @@ export namespace RouteStep {
         outamount: number,
         outamountmin: number,
         project?: StepProject.AsObject,
-        pooladdress: string,
     }
 }
 

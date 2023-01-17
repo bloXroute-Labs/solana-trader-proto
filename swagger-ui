@@ -2543,10 +2543,6 @@
         },
         "project": {
           "$ref": "#/definitions/apiStepProject"
-        },
-        "poolAddress": {
-          "type": "string",
-          "title": "if poolAddress is defined, it determines the outToken"
         }
       }
     },
