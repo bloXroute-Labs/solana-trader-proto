@@ -794,7 +794,7 @@ class GetPerpOrderbooksRequest(betterproto.Message):
 
 @dataclass
 class GetOrCreateUserRequest(betterproto.Message):
-    owner_account_address: str = betterproto.string_field(1)
+    owner_address: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
 
 
@@ -1590,10 +1590,10 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_or_create_user(
-        self, *, owner_account_address: str = "", project: "Project" = 0
+        self, *, owner_address: str = "", project: "Project" = 0
     ) -> GetOrCreateUserResponse:
         request = GetOrCreateUserRequest()
-        request.owner_account_address = owner_account_address
+        request.owner_address = owner_address
         request.project = project
 
         return await self._unary_unary(

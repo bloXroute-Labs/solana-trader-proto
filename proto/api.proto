@@ -1202,7 +1202,7 @@ message GetPerpOrderbooksRequest {
 
 
 message GetOrCreateUserRequest {
-  string ownerAccountAddress = 1;
+  string ownerAddress = 1;
   Project project = 2;
 }
 

@@ -136,7 +136,7 @@
         },
         "parameters": [
           {
-            "name": "ownerAccountAddress",
+            "name": "ownerAddress",
             "in": "query",
             "required": false,
             "type": "string"

@@ -2852,8 +2852,8 @@ export namespace GetPerpOrderbooksRequest {
 }
 
 export class GetOrCreateUserRequest extends jspb.Message { 
-    getOwneraccountaddress(): string;
-    setOwneraccountaddress(value: string): GetOrCreateUserRequest;
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetOrCreateUserRequest;
     getProject(): Project;
     setProject(value: Project): GetOrCreateUserRequest;
 
@@ -2869,7 +2869,7 @@ export class GetOrCreateUserRequest extends jspb.Message {
 
 export namespace GetOrCreateUserRequest {
     export type AsObject = {
-        owneraccountaddress: string,
+        owneraddress: string,
         project: Project,
     }
 }

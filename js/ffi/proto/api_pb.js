@@ -24265,7 +24265,7 @@ proto.api.GetOrCreateUserRequest.prototype.toObject = function(opt_includeInstan
  */
 proto.api.GetOrCreateUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    owneraccountaddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     project: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -24305,7 +24305,7 @@ proto.api.GetOrCreateUserRequest.deserializeBinaryFromReader = function(msg, rea
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setOwneraccountaddress(value);
+      msg.setOwneraddress(value);
       break;
     case 2:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
@@ -24340,7 +24340,7 @@ proto.api.GetOrCreateUserRequest.prototype.serializeBinary = function() {
  */
 proto.api.GetOrCreateUserRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getOwneraccountaddress();
+  f = message.getOwneraddress();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -24358,10 +24358,10 @@ proto.api.GetOrCreateUserRequest.serializeBinaryToWriter = function(message, wri
 
 
 /**
- * optional string ownerAccountAddress = 1;
+ * optional string ownerAddress = 1;
  * @return {string}
  */
-proto.api.GetOrCreateUserRequest.prototype.getOwneraccountaddress = function() {
+proto.api.GetOrCreateUserRequest.prototype.getOwneraddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -24370,7 +24370,7 @@ proto.api.GetOrCreateUserRequest.prototype.getOwneraccountaddress = function() {
  * @param {string} value
  * @return {!proto.api.GetOrCreateUserRequest} returns this
  */
-proto.api.GetOrCreateUserRequest.prototype.setOwneraccountaddress = function(value) {
+proto.api.GetOrCreateUserRequest.prototype.setOwneraddress = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
