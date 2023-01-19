@@ -2851,6 +2851,55 @@ export namespace GetPerpOrderbooksRequest {
     }
 }
 
+export class GetOrCreateUserRequest extends jspb.Message { 
+    getOwneraccountaddress(): string;
+    setOwneraccountaddress(value: string): GetOrCreateUserRequest;
+    getProject(): Project;
+    setProject(value: Project): GetOrCreateUserRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetOrCreateUserRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetOrCreateUserRequest): GetOrCreateUserRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetOrCreateUserRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetOrCreateUserRequest;
+    static deserializeBinaryFromReader(message: GetOrCreateUserRequest, reader: jspb.BinaryReader): GetOrCreateUserRequest;
+}
+
+export namespace GetOrCreateUserRequest {
+    export type AsObject = {
+        owneraccountaddress: string,
+        project: Project,
+    }
+}
+
+export class GetOrCreateUserResponse extends jspb.Message { 
+    getUseraccountaddress(): string;
+    setUseraccountaddress(value: string): GetOrCreateUserResponse;
+    getTransaction(): string;
+    setTransaction(value: string): GetOrCreateUserResponse;
+    getProject(): Project;
+    setProject(value: Project): GetOrCreateUserResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetOrCreateUserResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetOrCreateUserResponse): GetOrCreateUserResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetOrCreateUserResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetOrCreateUserResponse;
+    static deserializeBinaryFromReader(message: GetOrCreateUserResponse, reader: jspb.BinaryReader): GetOrCreateUserResponse;
+}
+
+export namespace GetOrCreateUserResponse {
+    export type AsObject = {
+        useraccountaddress: string,
+        transaction: string,
+        project: Project,
+    }
+}
+
 export class GetPerpOrderbookResponse extends jspb.Message { 
     getMarket(): string;
     setMarket(value: string): GetPerpOrderbookResponse;

@@ -423,6 +423,17 @@ service Api {
     };
   }
 
+  rpc GetOrCreateUser(GetOrCreateUserRequest) returns (stream GetOrCreateUserResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/drift/user"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the userAddress or the partially signed txn signature to create a user on a platform";
+      summary: "get or creates the user on a platform";
+      tags: ["Perp"];
+    };
+  }
+
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -1177,7 +1188,6 @@ message GetPricesStreamResponse {
   TokenPrice price = 2;
 }
 
-// Drift messages
 message GetPerpOrderbookRequest {
   string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
@@ -1187,6 +1197,19 @@ message GetPerpOrderbookRequest {
 message GetPerpOrderbooksRequest {
   repeated string markets = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
+}
+
+
+message GetOrCreateUserRequest {
+  string ownerAccountAddress = 1;
+  Project project = 2;
+}
+
+message GetOrCreateUserResponse {
+  string userAccountAddress = 1;
+  string transaction = 2;
+
   Project project = 3;
 }
 

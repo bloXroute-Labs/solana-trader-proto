@@ -115,6 +115,63 @@
         ]
       }
     },
+    "/api/v1/drift/user": {
+      "post": {
+        "summary": "get or creates the user on a platform",
+        "description": "Returns the userAddress or the partially signed txn signature to create a user on a platform",
+        "operationId": "Api_GetOrCreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/apiGetOrCreateUserResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of apiGetOrCreateUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAccountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Perp"
+        ]
+      }
+    },
     "/api/v1/market/depth/{market}": {
       "get": {
         "summary": "Market depth",
@@ -1594,6 +1651,20 @@
           "items": {
             "$ref": "#/definitions/apiPerpOrder"
           }
+        }
+      }
+    },
+    "apiGetOrCreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "userAccountAddress": {
+          "type": "string"
+        },
+        "transaction": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       }
     },

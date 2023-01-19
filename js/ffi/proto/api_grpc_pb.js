@@ -208,6 +208,28 @@ function deserialize_api_GetOpenPerpOrdersResponse(buffer_arg) {
   return api_pb.GetOpenPerpOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetOrCreateUserRequest(arg) {
+  if (!(arg instanceof api_pb.GetOrCreateUserRequest)) {
+    throw new Error('Expected argument of type api.GetOrCreateUserRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOrCreateUserRequest(buffer_arg) {
+  return api_pb.GetOrCreateUserRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetOrCreateUserResponse(arg) {
+  if (!(arg instanceof api_pb.GetOrCreateUserResponse)) {
+    throw new Error('Expected argument of type api.GetOrCreateUserResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOrCreateUserResponse(buffer_arg) {
+  return api_pb.GetOrCreateUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetOrderByIDRequest(arg) {
   if (!(arg instanceof api_pb.GetOrderByIDRequest)) {
     throw new Error('Expected argument of type api.GetOrderByIDRequest');
@@ -1280,6 +1302,17 @@ postPerpOrder: {
     requestDeserialize: deserialize_api_GetPerpOrderbookRequest,
     responseSerialize: serialize_api_GetPerpOrderbookResponse,
     responseDeserialize: deserialize_api_GetPerpOrderbookResponse,
+  },
+  getOrCreateUser: {
+    path: '/api.Api/GetOrCreateUser',
+    requestStream: false,
+    responseStream: true,
+    requestType: api_pb.GetOrCreateUserRequest,
+    responseType: api_pb.GetOrCreateUserResponse,
+    requestSerialize: serialize_api_GetOrCreateUserRequest,
+    requestDeserialize: deserialize_api_GetOrCreateUserRequest,
+    responseSerialize: serialize_api_GetOrCreateUserResponse,
+    responseDeserialize: deserialize_api_GetOrCreateUserResponse,
   },
   // streaming endpoints
 getOrderbooksStream: {

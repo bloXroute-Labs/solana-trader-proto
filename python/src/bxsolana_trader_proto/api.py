@@ -780,8 +780,6 @@ class GetPricesStreamResponse(betterproto.Message):
 
 @dataclass
 class GetPerpOrderbookRequest(betterproto.Message):
-    """Drift messages"""
-
     market: str = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
@@ -791,6 +789,19 @@ class GetPerpOrderbookRequest(betterproto.Message):
 class GetPerpOrderbooksRequest(betterproto.Message):
     markets: List[str] = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetOrCreateUserRequest(betterproto.Message):
+    owner_account_address: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+
+
+@dataclass
+class GetOrCreateUserResponse(betterproto.Message):
+    user_account_address: str = betterproto.string_field(1)
+    transaction: str = betterproto.string_field(2)
     project: "Project" = betterproto.enum_field(3)
 
 
@@ -1577,6 +1588,20 @@ class ApiStub(betterproto.ServiceStub):
             request,
             GetPerpOrderbookResponse,
         )
+
+    async def get_or_create_user(
+        self, *, owner_account_address: str = "", project: "Project" = 0
+    ) -> AsyncGenerator[GetOrCreateUserResponse, None]:
+        request = GetOrCreateUserRequest()
+        request.owner_account_address = owner_account_address
+        request.project = project
+
+        async for response in self._unary_stream(
+            "/api.Api/GetOrCreateUser",
+            request,
+            GetOrCreateUserResponse,
+        ):
+            yield response
 
     async def get_orderbooks_stream(
         self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
