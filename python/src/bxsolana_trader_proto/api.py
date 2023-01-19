@@ -800,9 +800,34 @@ class GetOrCreateUserRequest(betterproto.Message):
 
 @dataclass
 class GetOrCreateUserResponse(betterproto.Message):
-    user_account_address: str = betterproto.string_field(1)
-    transaction: str = betterproto.string_field(2)
+    status: str = betterproto.string_field(1)
+    account_number: int = betterproto.int64_field(2)
+    transaction: str = betterproto.string_field(3)
+    project: "Project" = betterproto.enum_field(4)
+
+
+@dataclass
+class PostDepositCollateralRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    amount: float = betterproto.double_field(2)
     project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class PostDepositCollateralResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
+
+
+@dataclass
+class PostWithdrawCollateralRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    amount: float = betterproto.double_field(2)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class PostWithdrawCollateralResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
 
 
 @dataclass
@@ -1600,6 +1625,34 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetOrCreateUser",
             request,
             GetOrCreateUserResponse,
+        )
+
+    async def post_deposit_collateral(
+        self, *, owner_address: str = "", amount: float = 0, project: "Project" = 0
+    ) -> PostDepositCollateralRequest:
+        request = PostDepositCollateralRequest()
+        request.owner_address = owner_address
+        request.amount = amount
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/PostDepositCollateral",
+            request,
+            PostDepositCollateralRequest,
+        )
+
+    async def post_withdraw_collateral(
+        self, *, owner_address: str = "", amount: float = 0, project: "Project" = 0
+    ) -> PostWithdrawCollateralResponse:
+        request = PostWithdrawCollateralRequest()
+        request.owner_address = owner_address
+        request.amount = amount
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/PostWithdrawCollateral",
+            request,
+            PostWithdrawCollateralResponse,
         )
 
     async def get_orderbooks_stream(

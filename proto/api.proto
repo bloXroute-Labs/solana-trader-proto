@@ -434,6 +434,28 @@ service Api {
     };
   }
 
+  rpc PostDepositCollateral(PostDepositCollateralRequest) returns (PostDepositCollateralRequest) {
+    option (google.api.http) = {
+      post: "/api/v1/drift/collateral/deposit"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to deposit collateral";
+      summary: "posts collateral on a perp platform";
+      tags: ["Perp"];
+    };
+  }
+
+  rpc PostWithdrawCollateral(PostWithdrawCollateralRequest) returns (PostWithdrawCollateralResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/drift/collateral/withdraw"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to withdraw collateral";
+      summary: "withdraw collateral on a perp platform";
+      tags: ["Perp"];
+    };
+  }
+
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -1207,11 +1229,33 @@ message GetOrCreateUserRequest {
 }
 
 message GetOrCreateUserResponse {
-  string userAccountAddress = 1;
-  string transaction = 2;
+  string status = 1;
+  int64 accountNumber = 2;
+  string transaction = 3;
 
+  Project project = 4;
+}
+
+message PostDepositCollateralRequest {
+  string ownerAddress = 1;
+  double amount = 2;
   Project project = 3;
 }
+
+message PostDepositCollateralResponse {
+  string transaction = 1;
+}
+
+message PostWithdrawCollateralRequest {
+  string ownerAddress = 1;
+  double amount = 2;
+  Project project = 3;
+}
+
+message PostWithdrawCollateralResponse {
+  string transaction = 1;
+}
+
 
 message GetPerpOrderbookResponse {
   string market = 1;

@@ -58,6 +58,116 @@
         ]
       }
     },
+    "/api/v1/drift/collateral/deposit": {
+      "post": {
+        "summary": "posts collateral on a perp platform",
+        "description": "Returns a partially signed txn signature to deposit collateral",
+        "operationId": "Api_PostDepositCollateral",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostDepositCollateralRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Perp"
+        ]
+      }
+    },
+    "/api/v1/drift/collateral/withdraw": {
+      "post": {
+        "summary": "withdraw collateral on a perp platform",
+        "description": "Returns a partially signed txn signature to withdraw collateral",
+        "operationId": "Api_PostWithdrawCollateral",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostWithdrawCollateralResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Perp"
+        ]
+      }
+    },
     "/api/v1/drift/perp/{market}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
@@ -1648,8 +1758,12 @@
     "apiGetOrCreateUserResponse": {
       "type": "object",
       "properties": {
-        "userAccountAddress": {
+        "status": {
           "type": "string"
+        },
+        "accountNumber": {
+          "type": "string",
+          "format": "int64"
         },
         "transaction": {
           "type": "string"
@@ -2499,6 +2613,21 @@
         }
       }
     },
+    "apiPostDepositCollateralRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
     "apiPostOrderRequest": {
       "type": "object",
       "properties": {
@@ -2781,6 +2910,14 @@
       "type": "object",
       "properties": {
         "signature": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostWithdrawCollateralResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
           "type": "string"
         }
       }
