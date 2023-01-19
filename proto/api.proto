@@ -423,14 +423,14 @@ service Api {
     };
   }
 
-  rpc GetOrCreateUser(GetOrCreateUserRequest) returns (stream GetOrCreateUserResponse) {
+  rpc GetOrCreateUser(GetOrCreateUserRequest) returns (GetOrCreateUserResponse) {
     option (google.api.http) = {
       post: "/api/v1/drift/user"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the userAddress or the partially signed txn signature to create a user on a platform";
       summary: "get or creates the user on a platform";
-      tags: ["Perp"];
+      tags: ["Trade"];
     };
   }
 

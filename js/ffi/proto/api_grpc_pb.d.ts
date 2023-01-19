@@ -353,7 +353,7 @@ interface IApiService_IGetPerpOrderbook extends grpc.MethodDefinition<api_pb.Get
 interface IApiService_IGetOrCreateUser extends grpc.MethodDefinition<api_pb.GetOrCreateUserRequest, api_pb.GetOrCreateUserResponse> {
     path: "/api.Api/GetOrCreateUser";
     requestStream: false;
-    responseStream: true;
+    responseStream: false;
     requestSerialize: grpc.serialize<api_pb.GetOrCreateUserRequest>;
     requestDeserialize: grpc.deserialize<api_pb.GetOrCreateUserRequest>;
     responseSerialize: grpc.serialize<api_pb.GetOrCreateUserResponse>;
@@ -521,7 +521,7 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getOpenPerpOrders: grpc.handleUnaryCall<api_pb.GetOpenPerpOrdersRequest, api_pb.GetOpenPerpOrdersResponse>;
     postClosePerpPositions: grpc.handleUnaryCall<api_pb.PostClosePerpPositionsRequest, api_pb.PostClosePerpPositionsResponse>;
     getPerpOrderbook: grpc.handleUnaryCall<api_pb.GetPerpOrderbookRequest, api_pb.GetPerpOrderbookResponse>;
-    getOrCreateUser: grpc.handleServerStreamingCall<api_pb.GetOrCreateUserRequest, api_pb.GetOrCreateUserResponse>;
+    getOrCreateUser: grpc.handleUnaryCall<api_pb.GetOrCreateUserRequest, api_pb.GetOrCreateUserResponse>;
     getOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetOrderbooksRequest, api_pb.GetOrderbooksStreamResponse>;
     getMarketDepthsStream: grpc.handleServerStreamingCall<api_pb.GetMarketDepthsRequest, api_pb.GetMarketDepthsStreamResponse>;
     getTickersStream: grpc.handleServerStreamingCall<api_pb.GetTickersRequest, api_pb.GetTickersStreamResponse>;
@@ -635,8 +635,9 @@ export interface IApiClient {
     getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
     getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
     getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
-    getOrCreateUser(request: api_pb.GetOrCreateUserRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrCreateUserResponse>;
-    getOrCreateUser(request: api_pb.GetOrCreateUserRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrCreateUserResponse>;
+    getOrCreateUser(request: api_pb.GetOrCreateUserRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
+    getOrCreateUser(request: api_pb.GetOrCreateUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
+    getOrCreateUser(request: api_pb.GetOrCreateUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
     getOrderbooksStream(request: api_pb.GetOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     getOrderbooksStream(request: api_pb.GetOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     getMarketDepthsStream(request: api_pb.GetMarketDepthsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthsStreamResponse>;
@@ -765,8 +766,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
-    public getOrCreateUser(request: api_pb.GetOrCreateUserRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrCreateUserResponse>;
-    public getOrCreateUser(request: api_pb.GetOrCreateUserRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrCreateUserResponse>;
+    public getOrCreateUser(request: api_pb.GetOrCreateUserRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
+    public getOrCreateUser(request: api_pb.GetOrCreateUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
+    public getOrCreateUser(request: api_pb.GetOrCreateUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
     public getOrderbooksStream(request: api_pb.GetOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     public getOrderbooksStream(request: api_pb.GetOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     public getMarketDepthsStream(request: api_pb.GetMarketDepthsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthsStreamResponse>;

@@ -1591,17 +1591,16 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_or_create_user(
         self, *, owner_account_address: str = "", project: "Project" = 0
-    ) -> AsyncGenerator[GetOrCreateUserResponse, None]:
+    ) -> GetOrCreateUserResponse:
         request = GetOrCreateUserRequest()
         request.owner_account_address = owner_account_address
         request.project = project
 
-        async for response in self._unary_stream(
+        return await self._unary_unary(
             "/api.Api/GetOrCreateUser",
             request,
             GetOrCreateUserResponse,
-        ):
-            yield response
+        )
 
     async def get_orderbooks_stream(
         self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0

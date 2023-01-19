@@ -1306,7 +1306,7 @@ postPerpOrder: {
   getOrCreateUser: {
     path: '/api.Api/GetOrCreateUser',
     requestStream: false,
-    responseStream: true,
+    responseStream: false,
     requestType: api_pb.GetOrCreateUserRequest,
     responseType: api_pb.GetOrCreateUserResponse,
     requestSerialize: serialize_api_GetOrCreateUserRequest,

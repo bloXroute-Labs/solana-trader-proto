@@ -122,18 +122,9 @@
         "operationId": "Api_GetOrCreateUser",
         "responses": {
           "200": {
-            "description": "A successful response.(streaming responses)",
+            "description": "A successful response.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/apiGetOrCreateUserResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of apiGetOrCreateUserResponse"
+              "$ref": "#/definitions/apiGetOrCreateUserResponse"
             }
           },
           "default": {
@@ -168,7 +159,7 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Trade"
         ]
       }
     },
