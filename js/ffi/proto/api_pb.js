@@ -26550,7 +26550,7 @@ proto.api.PerpOrder.toObject = function(includeInstance, msg) {
     accountaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     contract: jspb.Message.getFieldWithDefault(msg, 4, 0),
     positionside: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    types: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    ordertype: jspb.Message.getFieldWithDefault(msg, 6, ""),
     unrealizedpnl: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
     size: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
@@ -26614,7 +26614,7 @@ proto.api.PerpOrder.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 6:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTypes(value);
+      msg.setOrdertype(value);
       break;
     case 7:
       var value = /** @type {number} */ (reader.readDouble());
@@ -26700,7 +26700,7 @@ proto.api.PerpOrder.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getTypes();
+  f = message.getOrdertype();
   if (f.length > 0) {
     writer.writeString(
       6,
@@ -26836,10 +26836,10 @@ proto.api.PerpOrder.prototype.setPositionside = function(value) {
 
 
 /**
- * optional string types = 6;
+ * optional string orderType = 6;
  * @return {string}
  */
-proto.api.PerpOrder.prototype.getTypes = function() {
+proto.api.PerpOrder.prototype.getOrdertype = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
@@ -26848,7 +26848,7 @@ proto.api.PerpOrder.prototype.getTypes = function() {
  * @param {string} value
  * @return {!proto.api.PerpOrder} returns this
  */
-proto.api.PerpOrder.prototype.setTypes = function(value) {
+proto.api.PerpOrder.prototype.setOrdertype = function(value) {
   return jspb.Message.setProto3StringField(this, 6, value);
 };
 

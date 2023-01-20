@@ -1298,7 +1298,7 @@ message PerpOrder {
   common.PerpContract contract = 4;
   common.PerpPositionSide positionSide = 5;
 
-  string types = 6;
+  string orderType = 6;
   double unrealizedPnL = 7;
 
   double price = 8;

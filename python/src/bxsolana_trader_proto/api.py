@@ -875,7 +875,7 @@ class PerpOrder(betterproto.Message):
     account_address: str = betterproto.string_field(3)
     contract: common.PerpContract = betterproto.enum_field(4)
     position_side: common.PerpPositionSide = betterproto.enum_field(5)
-    types: str = betterproto.string_field(6)
+    order_type: str = betterproto.string_field(6)
     unrealized_pn_l: float = betterproto.double_field(7)
     price: float = betterproto.double_field(8)
     size: float = betterproto.double_field(9)

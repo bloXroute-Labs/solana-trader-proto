@@ -2366,7 +2366,7 @@
         "positionSide": {
           "$ref": "#/definitions/commonPerpPositionSide"
         },
-        "types": {
+        "orderType": {
           "type": "string"
         },
         "unrealizedPnL": {

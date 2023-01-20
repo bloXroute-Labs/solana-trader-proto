@@ -3156,8 +3156,8 @@ export class PerpOrder extends jspb.Message {
     setContract(value: common_pb.PerpContract): PerpOrder;
     getPositionside(): common_pb.PerpPositionSide;
     setPositionside(value: common_pb.PerpPositionSide): PerpOrder;
-    getTypes(): string;
-    setTypes(value: string): PerpOrder;
+    getOrdertype(): string;
+    setOrdertype(value: string): PerpOrder;
     getUnrealizedpnl(): number;
     setUnrealizedpnl(value: number): PerpOrder;
     getPrice(): number;
@@ -3186,7 +3186,7 @@ export namespace PerpOrder {
         accountaddress: string,
         contract: common_pb.PerpContract,
         positionside: common_pb.PerpPositionSide,
-        types: string,
+        ordertype: string,
         unrealizedpnl: number,
         price: number,
         size: number,
