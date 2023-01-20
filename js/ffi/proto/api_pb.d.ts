@@ -2881,6 +2881,8 @@ export class GetOrCreateUserResponse extends jspb.Message {
     setAccountnumber(value: number): GetOrCreateUserResponse;
     getTransaction(): string;
     setTransaction(value: string): GetOrCreateUserResponse;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): GetOrCreateUserResponse;
     getProject(): Project;
     setProject(value: Project): GetOrCreateUserResponse;
 
@@ -2899,6 +2901,7 @@ export namespace GetOrCreateUserResponse {
         status: string,
         accountnumber: number,
         transaction: string,
+        accountaddress: string,
         project: Project,
     }
 }

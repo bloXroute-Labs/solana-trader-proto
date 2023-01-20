@@ -1232,8 +1232,8 @@ message GetOrCreateUserResponse {
   string status = 1;
   int64 accountNumber = 2;
   string transaction = 3;
-
-  Project project = 4;
+  string accountAddress = 4;
+  Project project = 5;
 }
 
 message PostDepositCollateralRequest {

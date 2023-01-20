@@ -1768,6 +1768,9 @@
         "transaction": {
           "type": "string"
         },
+        "accountAddress": {
+          "type": "string"
+        },
         "project": {
           "$ref": "#/definitions/apiProject"
         }

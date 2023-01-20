@@ -803,7 +803,8 @@ class GetOrCreateUserResponse(betterproto.Message):
     status: str = betterproto.string_field(1)
     account_number: int = betterproto.int64_field(2)
     transaction: str = betterproto.string_field(3)
-    project: "Project" = betterproto.enum_field(4)
+    account_address: str = betterproto.string_field(4)
+    project: "Project" = betterproto.enum_field(5)
 
 
 @dataclass

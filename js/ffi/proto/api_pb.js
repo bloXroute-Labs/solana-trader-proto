@@ -24516,7 +24516,8 @@ proto.api.GetOrCreateUserResponse.toObject = function(includeInstance, msg) {
     status: jspb.Message.getFieldWithDefault(msg, 1, ""),
     accountnumber: jspb.Message.getFieldWithDefault(msg, 2, 0),
     transaction: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    project: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -24566,6 +24567,10 @@ proto.api.GetOrCreateUserResponse.deserializeBinaryFromReader = function(msg, re
       msg.setTransaction(value);
       break;
     case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountaddress(value);
+      break;
+    case 5:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -24619,10 +24624,17 @@ proto.api.GetOrCreateUserResponse.serializeBinaryToWriter = function(message, wr
       f
     );
   }
+  f = message.getAccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      4,
+      5,
       f
     );
   }
@@ -24684,11 +24696,29 @@ proto.api.GetOrCreateUserResponse.prototype.setTransaction = function(value) {
 
 
 /**
- * optional Project project = 4;
+ * optional string accountAddress = 4;
+ * @return {string}
+ */
+proto.api.GetOrCreateUserResponse.prototype.getAccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetOrCreateUserResponse} returns this
+ */
+proto.api.GetOrCreateUserResponse.prototype.setAccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional Project project = 5;
  * @return {!proto.api.Project}
  */
 proto.api.GetOrCreateUserResponse.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
@@ -24697,7 +24727,7 @@ proto.api.GetOrCreateUserResponse.prototype.getProject = function() {
  * @return {!proto.api.GetOrCreateUserResponse} returns this
  */
 proto.api.GetOrCreateUserResponse.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
+  return jspb.Message.setProto3EnumField(this, 5, value);
 };
 
 
