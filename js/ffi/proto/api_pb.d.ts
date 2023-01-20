@@ -3150,8 +3150,6 @@ export class PerpOrder extends jspb.Message {
     setOrderid(value: number): PerpOrder;
     getClientorderid(): number;
     setClientorderid(value: number): PerpOrder;
-    getAccountaddress(): string;
-    setAccountaddress(value: string): PerpOrder;
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): PerpOrder;
     getPositionside(): common_pb.PerpPositionSide;
@@ -3183,7 +3181,6 @@ export namespace PerpOrder {
     export type AsObject = {
         orderid: number,
         clientorderid: number,
-        accountaddress: string,
         contract: common_pb.PerpContract,
         positionside: common_pb.PerpPositionSide,
         ordertype: string,

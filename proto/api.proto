@@ -1294,17 +1294,16 @@ message PerpOrder {
   uint64 orderID = 1;
   uint64 clientOrderID = 2;
 
-  string accountAddress = 3;
-  common.PerpContract contract = 4;
-  common.PerpPositionSide positionSide = 5;
+  common.PerpContract contract = 3;
+  common.PerpPositionSide positionSide = 4;
 
-  string orderType = 6;
-  double unrealizedPnL = 7;
+  string orderType = 5;
+  double unrealizedPnL = 6;
 
-  double price = 8;
-  double size = 9;
-  double remainingSize = 10;
-  string status = 11;
+  double price = 7;
+  double size = 8;
+  double remainingSize = 9;
+  string status = 10;
 }
 
 message GetPerpPositionsRequest {

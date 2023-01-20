@@ -2357,9 +2357,6 @@
           "type": "string",
           "format": "uint64"
         },
-        "accountAddress": {
-          "type": "string"
-        },
         "contract": {
           "$ref": "#/definitions/commonPerpContract"
         },

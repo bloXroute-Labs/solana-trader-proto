@@ -872,15 +872,14 @@ class GetOpenPerpOrdersResponse(betterproto.Message):
 class PerpOrder(betterproto.Message):
     order_i_d: int = betterproto.uint64_field(1)
     client_order_i_d: int = betterproto.uint64_field(2)
-    account_address: str = betterproto.string_field(3)
-    contract: common.PerpContract = betterproto.enum_field(4)
-    position_side: common.PerpPositionSide = betterproto.enum_field(5)
-    order_type: str = betterproto.string_field(6)
-    unrealized_pn_l: float = betterproto.double_field(7)
-    price: float = betterproto.double_field(8)
-    size: float = betterproto.double_field(9)
-    remaining_size: float = betterproto.double_field(10)
-    status: str = betterproto.string_field(11)
+    contract: common.PerpContract = betterproto.enum_field(3)
+    position_side: common.PerpPositionSide = betterproto.enum_field(4)
+    order_type: str = betterproto.string_field(5)
+    unrealized_pn_l: float = betterproto.double_field(6)
+    price: float = betterproto.double_field(7)
+    size: float = betterproto.double_field(8)
+    remaining_size: float = betterproto.double_field(9)
+    status: str = betterproto.string_field(10)
 
 
 @dataclass

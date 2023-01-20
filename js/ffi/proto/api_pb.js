@@ -26547,15 +26547,14 @@ proto.api.PerpOrder.toObject = function(includeInstance, msg) {
   var f, obj = {
     orderid: jspb.Message.getFieldWithDefault(msg, 1, 0),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    accountaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    contract: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    positionside: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    ordertype: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    unrealizedpnl: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
-    price: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
-    size: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
-    remainingsize: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
-    status: jspb.Message.getFieldWithDefault(msg, 11, "")
+    contract: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    positionside: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    ordertype: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    unrealizedpnl: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
+    size: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
+    remainingsize: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
+    status: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -26601,38 +26600,34 @@ proto.api.PerpOrder.deserializeBinaryFromReader = function(msg, reader) {
       msg.setClientorderid(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setAccountaddress(value);
-      break;
-    case 4:
       var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
       msg.setContract(value);
       break;
-    case 5:
+    case 4:
       var value = /** @type {!proto.common.PerpPositionSide} */ (reader.readEnum());
       msg.setPositionside(value);
       break;
-    case 6:
+    case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setOrdertype(value);
       break;
-    case 7:
+    case 6:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setUnrealizedpnl(value);
       break;
-    case 8:
+    case 7:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setPrice(value);
       break;
-    case 9:
+    case 8:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setSize(value);
       break;
-    case 10:
+    case 9:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setRemainingsize(value);
       break;
-    case 11:
+    case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setStatus(value);
       break;
@@ -26679,66 +26674,59 @@ proto.api.PerpOrder.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getAccountaddress();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
   f = message.getContract();
   if (f !== 0.0) {
     writer.writeEnum(
-      4,
+      3,
       f
     );
   }
   f = message.getPositionside();
   if (f !== 0.0) {
     writer.writeEnum(
-      5,
+      4,
       f
     );
   }
   f = message.getOrdertype();
   if (f.length > 0) {
     writer.writeString(
-      6,
+      5,
       f
     );
   }
   f = message.getUnrealizedpnl();
   if (f !== 0.0) {
     writer.writeDouble(
-      7,
+      6,
       f
     );
   }
   f = message.getPrice();
   if (f !== 0.0) {
     writer.writeDouble(
-      8,
+      7,
       f
     );
   }
   f = message.getSize();
   if (f !== 0.0) {
     writer.writeDouble(
-      9,
+      8,
       f
     );
   }
   f = message.getRemainingsize();
   if (f !== 0.0) {
     writer.writeDouble(
-      10,
+      9,
       f
     );
   }
   f = message.getStatus();
   if (f.length > 0) {
     writer.writeString(
-      11,
+      10,
       f
     );
   }
@@ -26782,29 +26770,11 @@ proto.api.PerpOrder.prototype.setClientorderid = function(value) {
 
 
 /**
- * optional string accountAddress = 3;
- * @return {string}
- */
-proto.api.PerpOrder.prototype.getAccountaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.PerpOrder} returns this
- */
-proto.api.PerpOrder.prototype.setAccountaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
-/**
- * optional common.PerpContract contract = 4;
+ * optional common.PerpContract contract = 3;
  * @return {!proto.common.PerpContract}
  */
 proto.api.PerpOrder.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
@@ -26813,16 +26783,16 @@ proto.api.PerpOrder.prototype.getContract = function() {
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
 /**
- * optional common.PerpPositionSide positionSide = 5;
+ * optional common.PerpPositionSide positionSide = 4;
  * @return {!proto.common.PerpPositionSide}
  */
 proto.api.PerpOrder.prototype.getPositionside = function() {
-  return /** @type {!proto.common.PerpPositionSide} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {!proto.common.PerpPositionSide} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
@@ -26831,16 +26801,16 @@ proto.api.PerpOrder.prototype.getPositionside = function() {
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setPositionside = function(value) {
-  return jspb.Message.setProto3EnumField(this, 5, value);
+  return jspb.Message.setProto3EnumField(this, 4, value);
 };
 
 
 /**
- * optional string orderType = 6;
+ * optional string orderType = 5;
  * @return {string}
  */
 proto.api.PerpOrder.prototype.getOrdertype = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
 
@@ -26849,16 +26819,16 @@ proto.api.PerpOrder.prototype.getOrdertype = function() {
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setOrdertype = function(value) {
-  return jspb.Message.setProto3StringField(this, 6, value);
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
 /**
- * optional double unrealizedPnL = 7;
+ * optional double unrealizedPnL = 6;
  * @return {number}
  */
 proto.api.PerpOrder.prototype.getUnrealizedpnl = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
 };
 
 
@@ -26867,16 +26837,16 @@ proto.api.PerpOrder.prototype.getUnrealizedpnl = function() {
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setUnrealizedpnl = function(value) {
-  return jspb.Message.setProto3FloatField(this, 7, value);
+  return jspb.Message.setProto3FloatField(this, 6, value);
 };
 
 
 /**
- * optional double price = 8;
+ * optional double price = 7;
  * @return {number}
  */
 proto.api.PerpOrder.prototype.getPrice = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
 };
 
 
@@ -26885,16 +26855,16 @@ proto.api.PerpOrder.prototype.getPrice = function() {
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setPrice = function(value) {
-  return jspb.Message.setProto3FloatField(this, 8, value);
+  return jspb.Message.setProto3FloatField(this, 7, value);
 };
 
 
 /**
- * optional double size = 9;
+ * optional double size = 8;
  * @return {number}
  */
 proto.api.PerpOrder.prototype.getSize = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
 };
 
 
@@ -26903,16 +26873,16 @@ proto.api.PerpOrder.prototype.getSize = function() {
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setSize = function(value) {
-  return jspb.Message.setProto3FloatField(this, 9, value);
+  return jspb.Message.setProto3FloatField(this, 8, value);
 };
 
 
 /**
- * optional double remainingSize = 10;
+ * optional double remainingSize = 9;
  * @return {number}
  */
 proto.api.PerpOrder.prototype.getRemainingsize = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 10, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
 };
 
 
@@ -26921,16 +26891,16 @@ proto.api.PerpOrder.prototype.getRemainingsize = function() {
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setRemainingsize = function(value) {
-  return jspb.Message.setProto3FloatField(this, 10, value);
+  return jspb.Message.setProto3FloatField(this, 9, value);
 };
 
 
 /**
- * optional string status = 11;
+ * optional string status = 10;
  * @return {string}
  */
 proto.api.PerpOrder.prototype.getStatus = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 11, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
 
@@ -26939,7 +26909,7 @@ proto.api.PerpOrder.prototype.getStatus = function() {
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setStatus = function(value) {
-  return jspb.Message.setProto3StringField(this, 11, value);
+  return jspb.Message.setProto3StringField(this, 10, value);
 };
 
 
