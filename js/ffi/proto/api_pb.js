@@ -26552,8 +26552,8 @@ proto.api.PerpOrder.toObject = function(includeInstance, msg) {
     ordertype: jspb.Message.getFieldWithDefault(msg, 5, ""),
     unrealizedpnl: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
-    size: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    remainingsize: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    size: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
+    remainingsize: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
     status: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
@@ -26620,11 +26620,11 @@ proto.api.PerpOrder.deserializeBinaryFromReader = function(msg, reader) {
       msg.setPrice(value);
       break;
     case 8:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setSize(value);
       break;
     case 9:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setRemainingsize(value);
       break;
     case 10:
@@ -26710,15 +26710,15 @@ proto.api.PerpOrder.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getSize();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0.0) {
+    writer.writeDouble(
       8,
       f
     );
   }
   f = message.getRemainingsize();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0.0) {
+    writer.writeDouble(
       9,
       f
     );
@@ -26860,38 +26860,38 @@ proto.api.PerpOrder.prototype.setPrice = function(value) {
 
 
 /**
- * optional string size = 8;
- * @return {string}
+ * optional double size = 8;
+ * @return {number}
  */
 proto.api.PerpOrder.prototype.getSize = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setSize = function(value) {
-  return jspb.Message.setProto3StringField(this, 8, value);
+  return jspb.Message.setProto3FloatField(this, 8, value);
 };
 
 
 /**
- * optional string remainingSize = 9;
- * @return {string}
+ * optional double remainingSize = 9;
+ * @return {number}
  */
 proto.api.PerpOrder.prototype.getRemainingsize = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setRemainingsize = function(value) {
-  return jspb.Message.setProto3StringField(this, 9, value);
+  return jspb.Message.setProto3FloatField(this, 9, value);
 };
 
 

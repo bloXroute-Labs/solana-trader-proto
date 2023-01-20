@@ -1301,8 +1301,8 @@ message PerpOrder {
   double unrealizedPnL = 6;
 
   double price = 7;
-  string size = 8;
-  string remainingSize = 9;
+  double size = 8;
+  double remainingSize = 9;
   string status = 10;
 }
 

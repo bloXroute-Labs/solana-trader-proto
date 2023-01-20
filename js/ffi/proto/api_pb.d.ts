@@ -3160,10 +3160,10 @@ export class PerpOrder extends jspb.Message {
     setUnrealizedpnl(value: number): PerpOrder;
     getPrice(): number;
     setPrice(value: number): PerpOrder;
-    getSize(): string;
-    setSize(value: string): PerpOrder;
-    getRemainingsize(): string;
-    setRemainingsize(value: string): PerpOrder;
+    getSize(): number;
+    setSize(value: number): PerpOrder;
+    getRemainingsize(): number;
+    setRemainingsize(value: number): PerpOrder;
     getStatus(): string;
     setStatus(value: string): PerpOrder;
 
@@ -3186,8 +3186,8 @@ export namespace PerpOrder {
         ordertype: string,
         unrealizedpnl: number,
         price: number,
-        size: string,
-        remainingsize: string,
+        size: number,
+        remainingsize: number,
         status: string,
     }
 }
