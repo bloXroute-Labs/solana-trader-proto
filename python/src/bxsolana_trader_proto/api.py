@@ -877,8 +877,8 @@ class PerpOrder(betterproto.Message):
     order_type: str = betterproto.string_field(5)
     unrealized_pn_l: float = betterproto.double_field(6)
     price: float = betterproto.double_field(7)
-    size: float = betterproto.double_field(8)
-    remaining_size: float = betterproto.double_field(9)
+    size: str = betterproto.string_field(8)
+    remaining_size: str = betterproto.string_field(9)
     status: str = betterproto.string_field(10)
 
 

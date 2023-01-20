@@ -2375,12 +2375,10 @@
           "format": "double"
         },
         "size": {
-          "type": "number",
-          "format": "double"
+          "type": "string"
         },
         "remainingSize": {
-          "type": "number",
-          "format": "double"
+          "type": "string"
         },
         "status": {
           "type": "string"
