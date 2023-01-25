@@ -45,6 +45,7 @@ type ApiClient interface {
 	PostSettle(ctx context.Context, in *PostSettleRequest, opts ...grpc.CallOption) (*PostSettleResponse, error)
 	PostTradeSwap(ctx context.Context, in *TradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
 	GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error)
+	GetMyOrders(ctx context.Context, in *GetMyOrdersRequest, opts ...grpc.CallOption) (*GetMyOrdersResponse, error)
 	GetOpenOrders(ctx context.Context, in *GetOpenOrdersRequest, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error)
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
@@ -290,6 +291,15 @@ func (c *apiClient) PostTradeSwap(ctx context.Context, in *TradeSwapRequest, opt
 func (c *apiClient) GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error) {
 	out := new(GetOrdersResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetMyOrders(ctx context.Context, in *GetMyOrdersRequest, opts ...grpc.CallOption) (*GetMyOrdersResponse, error) {
+	out := new(GetMyOrdersResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetMyOrders", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -847,6 +857,7 @@ type ApiServer interface {
 	PostSettle(context.Context, *PostSettleRequest) (*PostSettleResponse, error)
 	PostTradeSwap(context.Context, *TradeSwapRequest) (*TradeSwapResponse, error)
 	GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error)
+	GetMyOrders(context.Context, *GetMyOrdersRequest) (*GetMyOrdersResponse, error)
 	GetOpenOrders(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error)
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
@@ -950,6 +961,9 @@ func (UnimplementedApiServer) PostTradeSwap(context.Context, *TradeSwapRequest) 
 }
 func (UnimplementedApiServer) GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrders not implemented")
+}
+func (UnimplementedApiServer) GetMyOrders(context.Context, *GetMyOrdersRequest) (*GetMyOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMyOrders not implemented")
 }
 func (UnimplementedApiServer) GetOpenOrders(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOpenOrders not implemented")
@@ -1458,6 +1472,24 @@ func _Api_GetOrders_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetOrders(ctx, req.(*GetOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetMyOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMyOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetMyOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetMyOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetMyOrders(ctx, req.(*GetMyOrdersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2002,6 +2034,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOrders",
 			Handler:    _Api_GetOrders_Handler,
+		},
+		{
+			MethodName: "GetMyOrders",
+			Handler:    _Api_GetMyOrders_Handler,
 		},
 		{
 			MethodName: "GetOpenOrders",

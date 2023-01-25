@@ -332,6 +332,18 @@ service Api {
     };
   }
 
+  rpc GetMyOrders(GetMyOrdersRequest) returns (GetMyOrdersResponse) {
+    option (google.api.method_visibility).restriction = "INTERNAL";
+    option (google.api.http) = {
+      get: "/api/v1/trade/my/orders/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns all user's orders";
+      summary: "List of user's orders";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
   rpc GetOpenOrders(GetOpenOrdersRequest) returns (GetOpenOrdersResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/openorders/{market}"
@@ -598,6 +610,30 @@ message Candle {
   double amount = 7;
   double volume = 8;
   double count = 9;
+}
+
+message GetMyOrdersRequest {
+  string market = 1;
+  string orderID = 2;
+  string clientOrderID = 3;
+}
+
+message GetMyOrdersResponse {
+  google.protobuf.Timestamp Timestamp = 1;
+  string  Project = 2;
+  string  PoolAddress = 3;
+  string  Status = 4;
+  string  InTokenAddress = 5;
+  string  OutTokenAddress = 6;
+  string  InToken = 7;
+  string  OutToken = 8;
+  float  InAmount = 9;
+  float  OutAmountMin = 10;
+  float  OutAmount = 11;
+  string  SourceAccount = 12;
+  string  DestinationAccount = 13;
+  string  OwnerAccount = 14;
+  string  Signature = 15;
 }
 
 message GetOrderbookRequest {
