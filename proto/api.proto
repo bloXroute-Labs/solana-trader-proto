@@ -614,26 +614,26 @@ message Candle {
 
 message GetMyOrdersRequest {
   string market = 1;
-  string orderID = 2;
-  string clientOrderID = 3;
+  Project project = 2;
+  string orderID = 3;
+  string clientOrderID = 4;
 }
 
 message GetMyOrdersResponse {
-  google.protobuf.Timestamp Timestamp = 1;
-  string  Project = 2;
-  string  PoolAddress = 3;
-  string  Status = 4;
-  string  InTokenAddress = 5;
-  string  OutTokenAddress = 6;
-  string  InToken = 7;
-  string  OutToken = 8;
-  float  InAmount = 9;
-  float  OutAmountMin = 10;
-  float  OutAmount = 11;
-  string  SourceAccount = 12;
-  string  DestinationAccount = 13;
-  string  OwnerAccount = 14;
-  string  Signature = 15;
+  repeated MyOrder orders = 1;
+}
+
+message MyOrder {
+  google.protobuf.Timestamp  Timestamp = 1;
+  Project  Project = 2;
+  string  OwnerAddress = 3;
+  google.protobuf.Timestamp  Date = 4;
+  uint64  ClientOrderID = 5;
+  string  MarketAddress = 6;
+  string  ProgramOrderID = 7;
+  string  Side = 8;
+  double  Amount = 9;
+  double  Price = 10;
 }
 
 message GetOrderbookRequest {

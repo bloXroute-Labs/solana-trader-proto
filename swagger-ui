@@ -1496,54 +1496,11 @@
     "apiGetMyOrdersResponse": {
       "type": "object",
       "properties": {
-        "Timestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "Project": {
-          "type": "string"
-        },
-        "PoolAddress": {
-          "type": "string"
-        },
-        "Status": {
-          "type": "string"
-        },
-        "InTokenAddress": {
-          "type": "string"
-        },
-        "OutTokenAddress": {
-          "type": "string"
-        },
-        "InToken": {
-          "type": "string"
-        },
-        "OutToken": {
-          "type": "string"
-        },
-        "InAmount": {
-          "type": "number",
-          "format": "float"
-        },
-        "OutAmountMin": {
-          "type": "number",
-          "format": "float"
-        },
-        "OutAmount": {
-          "type": "number",
-          "format": "float"
-        },
-        "SourceAccount": {
-          "type": "string"
-        },
-        "DestinationAccount": {
-          "type": "string"
-        },
-        "OwnerAccount": {
-          "type": "string"
-        },
-        "Signature": {
-          "type": "string"
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMyOrder"
+          }
         }
       }
     },
@@ -2118,6 +2075,46 @@
         "MS_ONLINE"
       ],
       "default": "MS_UNKNOWN"
+    },
+    "apiMyOrder": {
+      "type": "object",
+      "properties": {
+        "Timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "OwnerAddress": {
+          "type": "string"
+        },
+        "Date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ClientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "MarketAddress": {
+          "type": "string"
+        },
+        "ProgramOrderID": {
+          "type": "string"
+        },
+        "Side": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "Price": {
+          "type": "number",
+          "format": "double"
+        }
+      }
     },
     "apiOrder": {
       "type": "object",

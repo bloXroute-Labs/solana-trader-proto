@@ -388,6 +388,8 @@ export namespace Candle {
 export class GetMyOrdersRequest extends jspb.Message { 
     getMarket(): string;
     setMarket(value: string): GetMyOrdersRequest;
+    getProject(): Project;
+    setProject(value: Project): GetMyOrdersRequest;
     getOrderid(): string;
     setOrderid(value: string): GetMyOrdersRequest;
     getClientorderid(): string;
@@ -406,45 +408,17 @@ export class GetMyOrdersRequest extends jspb.Message {
 export namespace GetMyOrdersRequest {
     export type AsObject = {
         market: string,
+        project: Project,
         orderid: string,
         clientorderid: string,
     }
 }
 
 export class GetMyOrdersResponse extends jspb.Message { 
-
-    hasTimestamp(): boolean;
-    clearTimestamp(): void;
-    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetMyOrdersResponse;
-    getProject(): string;
-    setProject(value: string): GetMyOrdersResponse;
-    getPooladdress(): string;
-    setPooladdress(value: string): GetMyOrdersResponse;
-    getStatus(): string;
-    setStatus(value: string): GetMyOrdersResponse;
-    getIntokenaddress(): string;
-    setIntokenaddress(value: string): GetMyOrdersResponse;
-    getOuttokenaddress(): string;
-    setOuttokenaddress(value: string): GetMyOrdersResponse;
-    getIntoken(): string;
-    setIntoken(value: string): GetMyOrdersResponse;
-    getOuttoken(): string;
-    setOuttoken(value: string): GetMyOrdersResponse;
-    getInamount(): number;
-    setInamount(value: number): GetMyOrdersResponse;
-    getOutamountmin(): number;
-    setOutamountmin(value: number): GetMyOrdersResponse;
-    getOutamount(): number;
-    setOutamount(value: number): GetMyOrdersResponse;
-    getSourceaccount(): string;
-    setSourceaccount(value: string): GetMyOrdersResponse;
-    getDestinationaccount(): string;
-    setDestinationaccount(value: string): GetMyOrdersResponse;
-    getOwneraccount(): string;
-    setOwneraccount(value: string): GetMyOrdersResponse;
-    getSignature(): string;
-    setSignature(value: string): GetMyOrdersResponse;
+    clearOrdersList(): void;
+    getOrdersList(): Array<MyOrder>;
+    setOrdersList(value: Array<MyOrder>): GetMyOrdersResponse;
+    addOrders(value?: MyOrder, index?: number): MyOrder;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetMyOrdersResponse.AsObject;
@@ -458,21 +432,60 @@ export class GetMyOrdersResponse extends jspb.Message {
 
 export namespace GetMyOrdersResponse {
     export type AsObject = {
+        ordersList: Array<MyOrder.AsObject>,
+    }
+}
+
+export class MyOrder extends jspb.Message { 
+
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): MyOrder;
+    getProject(): Project;
+    setProject(value: Project): MyOrder;
+    getOwneraddress(): string;
+    setOwneraddress(value: string): MyOrder;
+
+    hasDate(): boolean;
+    clearDate(): void;
+    getDate(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setDate(value?: google_protobuf_timestamp_pb.Timestamp): MyOrder;
+    getClientorderid(): number;
+    setClientorderid(value: number): MyOrder;
+    getMarketaddress(): string;
+    setMarketaddress(value: string): MyOrder;
+    getProgramorderid(): string;
+    setProgramorderid(value: string): MyOrder;
+    getSide(): string;
+    setSide(value: string): MyOrder;
+    getAmount(): number;
+    setAmount(value: number): MyOrder;
+    getPrice(): number;
+    setPrice(value: number): MyOrder;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): MyOrder.AsObject;
+    static toObject(includeInstance: boolean, msg: MyOrder): MyOrder.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: MyOrder, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): MyOrder;
+    static deserializeBinaryFromReader(message: MyOrder, reader: jspb.BinaryReader): MyOrder;
+}
+
+export namespace MyOrder {
+    export type AsObject = {
         timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-        project: string,
-        pooladdress: string,
-        status: string,
-        intokenaddress: string,
-        outtokenaddress: string,
-        intoken: string,
-        outtoken: string,
-        inamount: number,
-        outamountmin: number,
-        outamount: number,
-        sourceaccount: string,
-        destinationaccount: string,
-        owneraccount: string,
-        signature: string,
+        project: Project,
+        owneraddress: string,
+        date?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+        clientorderid: number,
+        marketaddress: string,
+        programorderid: string,
+        side: string,
+        amount: number,
+        price: number,
     }
 }
 
