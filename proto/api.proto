@@ -540,6 +540,7 @@ message Ticker {
   double ask = 5;
   double askSize = 6;
   Project project = 7;
+  google.protobuf.Timestamp ts = 8;
 }
 
 message GetKlineRequest {
