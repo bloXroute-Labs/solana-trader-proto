@@ -559,7 +559,7 @@ message GetTickersRequestV2 {
 }
 
 message GetTickersResponseV2 {
-  repeated Ticker tickers = 1;
+  repeated TickerV2 tickers = 1;
 }
 
 message TickerV2 {

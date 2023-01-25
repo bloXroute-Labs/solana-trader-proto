@@ -174,6 +174,98 @@ export namespace Ticker {
     }
 }
 
+export class GetTickersRequestV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetTickersRequestV2;
+    getProject(): Project;
+    setProject(value: Project): GetTickersRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTickersRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTickersRequestV2): GetTickersRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTickersRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTickersRequestV2;
+    static deserializeBinaryFromReader(message: GetTickersRequestV2, reader: jspb.BinaryReader): GetTickersRequestV2;
+}
+
+export namespace GetTickersRequestV2 {
+    export type AsObject = {
+        market: string,
+        project: Project,
+    }
+}
+
+export class GetTickersResponseV2 extends jspb.Message { 
+    clearTickersList(): void;
+    getTickersList(): Array<TickerV2>;
+    setTickersList(value: Array<TickerV2>): GetTickersResponseV2;
+    addTickers(value?: TickerV2, index?: number): TickerV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTickersResponseV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTickersResponseV2): GetTickersResponseV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTickersResponseV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTickersResponseV2;
+    static deserializeBinaryFromReader(message: GetTickersResponseV2, reader: jspb.BinaryReader): GetTickersResponseV2;
+}
+
+export namespace GetTickersResponseV2 {
+    export type AsObject = {
+        tickersList: Array<TickerV2.AsObject>,
+    }
+}
+
+export class TickerV2 extends jspb.Message { 
+
+    hasTs(): boolean;
+    clearTs(): void;
+    getTs(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTs(value?: google_protobuf_timestamp_pb.Timestamp): TickerV2;
+    getMarketaddress(): string;
+    setMarketaddress(value: string): TickerV2;
+    getProject(): Project;
+    setProject(value: Project): TickerV2;
+    getOpen(): number;
+    setOpen(value: number): TickerV2;
+    getClose(): number;
+    setClose(value: number): TickerV2;
+    getHigh(): number;
+    setHigh(value: number): TickerV2;
+    getLow(): number;
+    setLow(value: number): TickerV2;
+    getAmount(): number;
+    setAmount(value: number): TickerV2;
+    getVolume(): number;
+    setVolume(value: number): TickerV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): TickerV2.AsObject;
+    static toObject(includeInstance: boolean, msg: TickerV2): TickerV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: TickerV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TickerV2;
+    static deserializeBinaryFromReader(message: TickerV2, reader: jspb.BinaryReader): TickerV2;
+}
+
+export namespace TickerV2 {
+    export type AsObject = {
+        ts?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+        marketaddress: string,
+        project: Project,
+        open: number,
+        close: number,
+        high: number,
+        low: number,
+        amount: number,
+        volume: number,
+    }
+}
+
 export class GetKlineRequest extends jspb.Message { 
     getMarket(): string;
     setMarket(value: string): GetKlineRequest;

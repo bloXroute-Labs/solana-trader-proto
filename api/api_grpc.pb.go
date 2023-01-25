@@ -22,6 +22,7 @@ type ApiClient interface {
 	GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error)
 	GetPools(ctx context.Context, in *GetPoolsRequest, opts ...grpc.CallOption) (*GetPoolsResponse, error)
 	GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error)
+	GetTickersV2(ctx context.Context, in *GetTickersRequestV2, opts ...grpc.CallOption) (*GetTickersResponseV2, error)
 	GetKline(ctx context.Context, in *GetKlineRequest, opts ...grpc.CallOption) (*GetKlineResponse, error)
 	GetOrderbook(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error)
 	GetMarketDepth(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (*GetMarketDepthResponse, error)
@@ -109,6 +110,15 @@ func (c *apiClient) GetPools(ctx context.Context, in *GetPoolsRequest, opts ...g
 func (c *apiClient) GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error) {
 	out := new(GetTickersResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetTickers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetTickersV2(ctx context.Context, in *GetTickersRequestV2, opts ...grpc.CallOption) (*GetTickersResponseV2, error) {
+	out := new(GetTickersResponseV2)
+	err := c.cc.Invoke(ctx, "/api.Api/GetTickersV2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -814,6 +824,7 @@ type ApiServer interface {
 	GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error)
 	GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error)
 	GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error)
+	GetTickersV2(context.Context, *GetTickersRequestV2) (*GetTickersResponseV2, error)
 	GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error)
 	GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error)
 	GetMarketDepth(context.Context, *GetMarketDepthRequest) (*GetMarketDepthResponse, error)
@@ -879,6 +890,9 @@ func (UnimplementedApiServer) GetPools(context.Context, *GetPoolsRequest) (*GetP
 }
 func (UnimplementedApiServer) GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTickers not implemented")
+}
+func (UnimplementedApiServer) GetTickersV2(context.Context, *GetTickersRequestV2) (*GetTickersResponseV2, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTickersV2 not implemented")
 }
 func (UnimplementedApiServer) GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetKline not implemented")
@@ -1084,6 +1098,24 @@ func _Api_GetTickers_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetTickers(ctx, req.(*GetTickersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetTickersV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTickersRequestV2)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetTickersV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetTickersV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetTickersV2(ctx, req.(*GetTickersRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1890,6 +1922,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTickers",
 			Handler:    _Api_GetTickers_Handler,
+		},
+		{
+			MethodName: "GetTickersV2",
+			Handler:    _Api_GetTickersV2_Handler,
 		},
 		{
 			MethodName: "GetKline",

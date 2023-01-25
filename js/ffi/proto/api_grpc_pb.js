@@ -593,6 +593,17 @@ function deserialize_api_GetTickersRequest(buffer_arg) {
   return api_pb.GetTickersRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetTickersRequestV2(arg) {
+  if (!(arg instanceof api_pb.GetTickersRequestV2)) {
+    throw new Error('Expected argument of type api.GetTickersRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTickersRequestV2(buffer_arg) {
+  return api_pb.GetTickersRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetTickersResponse(arg) {
   if (!(arg instanceof api_pb.GetTickersResponse)) {
     throw new Error('Expected argument of type api.GetTickersResponse');
@@ -602,6 +613,17 @@ function serialize_api_GetTickersResponse(arg) {
 
 function deserialize_api_GetTickersResponse(buffer_arg) {
   return api_pb.GetTickersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetTickersResponseV2(arg) {
+  if (!(arg instanceof api_pb.GetTickersResponseV2)) {
+    throw new Error('Expected argument of type api.GetTickersResponseV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTickersResponseV2(buffer_arg) {
+  return api_pb.GetTickersResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetTickersStreamResponse(arg) {
@@ -946,6 +968,17 @@ var ApiService = exports.ApiService = {
     requestDeserialize: deserialize_api_GetTickersRequest,
     responseSerialize: serialize_api_GetTickersResponse,
     responseDeserialize: deserialize_api_GetTickersResponse,
+  },
+  getTickersV2: {
+    path: '/api.Api/GetTickersV2',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetTickersRequestV2,
+    responseType: api_pb.GetTickersResponseV2,
+    requestSerialize: serialize_api_GetTickersRequestV2,
+    requestDeserialize: deserialize_api_GetTickersRequestV2,
+    responseSerialize: serialize_api_GetTickersResponseV2,
+    responseDeserialize: deserialize_api_GetTickersResponseV2,
   },
   getKline: {
     path: '/api.Api/GetKline',

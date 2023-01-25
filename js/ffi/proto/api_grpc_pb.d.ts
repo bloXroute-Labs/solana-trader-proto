@@ -17,6 +17,7 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getMarkets: IApiService_IGetMarkets;
     getPools: IApiService_IGetPools;
     getTickers: IApiService_IGetTickers;
+    getTickersV2: IApiService_IGetTickersV2;
     getKline: IApiService_IGetKline;
     getOrderbook: IApiService_IGetOrderbook;
     getMarketDepth: IApiService_IGetMarketDepth;
@@ -95,6 +96,15 @@ interface IApiService_IGetTickers extends grpc.MethodDefinition<api_pb.GetTicker
     requestDeserialize: grpc.deserialize<api_pb.GetTickersRequest>;
     responseSerialize: grpc.serialize<api_pb.GetTickersResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetTickersResponse>;
+}
+interface IApiService_IGetTickersV2 extends grpc.MethodDefinition<api_pb.GetTickersRequestV2, api_pb.GetTickersResponseV2> {
+    path: "/api.Api/GetTickersV2";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetTickersRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.GetTickersRequestV2>;
+    responseSerialize: grpc.serialize<api_pb.GetTickersResponseV2>;
+    responseDeserialize: grpc.deserialize<api_pb.GetTickersResponseV2>;
 }
 interface IApiService_IGetKline extends grpc.MethodDefinition<api_pb.GetKlineRequest, api_pb.GetKlineResponse> {
     path: "/api.Api/GetKline";
@@ -473,6 +483,7 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getMarkets: grpc.handleUnaryCall<api_pb.GetMarketsRequest, api_pb.GetMarketsResponse>;
     getPools: grpc.handleUnaryCall<api_pb.GetPoolsRequest, api_pb.GetPoolsResponse>;
     getTickers: grpc.handleUnaryCall<api_pb.GetTickersRequest, api_pb.GetTickersResponse>;
+    getTickersV2: grpc.handleUnaryCall<api_pb.GetTickersRequestV2, api_pb.GetTickersResponseV2>;
     getKline: grpc.handleUnaryCall<api_pb.GetKlineRequest, api_pb.GetKlineResponse>;
     getOrderbook: grpc.handleUnaryCall<api_pb.GetOrderbookRequest, api_pb.GetOrderbookResponse>;
     getMarketDepth: grpc.handleUnaryCall<api_pb.GetMarketDepthRequest, api_pb.GetMarketDepthResponse>;
@@ -529,6 +540,9 @@ export interface IApiClient {
     getTickers(request: api_pb.GetTickersRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
     getTickers(request: api_pb.GetTickersRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
     getTickers(request: api_pb.GetTickersRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
+    getTickersV2(request: api_pb.GetTickersRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
+    getTickersV2(request: api_pb.GetTickersRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
+    getTickersV2(request: api_pb.GetTickersRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
     getKline(request: api_pb.GetKlineRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetKlineResponse) => void): grpc.ClientUnaryCall;
     getKline(request: api_pb.GetKlineRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetKlineResponse) => void): grpc.ClientUnaryCall;
     getKline(request: api_pb.GetKlineRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetKlineResponse) => void): grpc.ClientUnaryCall;
@@ -654,6 +668,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getTickers(request: api_pb.GetTickersRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
     public getTickers(request: api_pb.GetTickersRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
     public getTickers(request: api_pb.GetTickersRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
+    public getTickersV2(request: api_pb.GetTickersRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
+    public getTickersV2(request: api_pb.GetTickersRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
+    public getTickersV2(request: api_pb.GetTickersRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
     public getKline(request: api_pb.GetKlineRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetKlineResponse) => void): grpc.ClientUnaryCall;
     public getKline(request: api_pb.GetKlineRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetKlineResponse) => void): grpc.ClientUnaryCall;
     public getKline(request: api_pb.GetKlineRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetKlineResponse) => void): grpc.ClientUnaryCall;

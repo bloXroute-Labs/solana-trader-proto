@@ -1288,6 +1288,56 @@
           "Orderbook"
         ]
       }
+    },
+    "/api/v2/market/tickers/{market}": {
+      "get": {
+        "summary": "Orderbook tickers V2",
+        "description": "Returns updated ticker(s). To receive all tickers use empty string for {market} param value",
+        "operationId": "Api_GetTickersV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTickersResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "description": "Use empty string for all markets",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Market",
+          "Orderbook"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1899,6 +1949,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiTicker"
+          }
+        }
+      }
+    },
+    "apiGetTickersResponseV2": {
+      "type": "object",
+      "properties": {
+        "tickers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTickerV2"
           }
         }
       }
@@ -2827,6 +2888,45 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiTickerV2": {
+      "type": "object",
+      "properties": {
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "marketAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "open": {
+          "type": "number",
+          "format": "double"
+        },
+        "close": {
+          "type": "number",
+          "format": "double"
+        },
+        "high": {
+          "type": "number",
+          "format": "double"
+        },
+        "low": {
+          "type": "number",
+          "format": "double"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "volume": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
