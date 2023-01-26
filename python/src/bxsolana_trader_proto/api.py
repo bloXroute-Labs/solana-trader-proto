@@ -1636,7 +1636,7 @@ class ApiStub(betterproto.ServiceStub):
         amount: float = 0,
         project: "Project" = 0,
         contract: common.PerpContract = 0,
-    ) -> PostDepositCollateralRequest:
+    ) -> PostDepositCollateralResponse:
         request = PostDepositCollateralRequest()
         request.owner_address = owner_address
         request.amount = amount
@@ -1646,7 +1646,7 @@ class ApiStub(betterproto.ServiceStub):
         return await self._unary_unary(
             "/api.Api/PostDepositCollateral",
             request,
-            PostDepositCollateralRequest,
+            PostDepositCollateralResponse,
         )
 
     async def post_withdraw_collateral(

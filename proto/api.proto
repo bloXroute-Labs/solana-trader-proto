@@ -434,7 +434,7 @@ service Api {
     };
   }
 
-  rpc PostDepositCollateral(PostDepositCollateralRequest) returns (PostDepositCollateralRequest) {
+  rpc PostDepositCollateral(PostDepositCollateralRequest) returns (PostDepositCollateralResponse) {
     option (google.api.http) = {
       post: "/api/v1/drift/collateral/deposit"
     };

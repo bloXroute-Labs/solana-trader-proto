@@ -802,6 +802,17 @@ function deserialize_api_PostDepositCollateralRequest(buffer_arg) {
   return api_pb.PostDepositCollateralRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostDepositCollateralResponse(arg) {
+  if (!(arg instanceof api_pb.PostDepositCollateralResponse)) {
+    throw new Error('Expected argument of type api.PostDepositCollateralResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDepositCollateralResponse(buffer_arg) {
+  return api_pb.PostDepositCollateralResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostOrderRequest(arg) {
   if (!(arg instanceof api_pb.PostOrderRequest)) {
     throw new Error('Expected argument of type api.PostOrderRequest');
@@ -1352,11 +1363,11 @@ postPerpOrder: {
     requestStream: false,
     responseStream: false,
     requestType: api_pb.PostDepositCollateralRequest,
-    responseType: api_pb.PostDepositCollateralRequest,
+    responseType: api_pb.PostDepositCollateralResponse,
     requestSerialize: serialize_api_PostDepositCollateralRequest,
     requestDeserialize: deserialize_api_PostDepositCollateralRequest,
-    responseSerialize: serialize_api_PostDepositCollateralRequest,
-    responseDeserialize: deserialize_api_PostDepositCollateralRequest,
+    responseSerialize: serialize_api_PostDepositCollateralResponse,
+    responseDeserialize: deserialize_api_PostDepositCollateralResponse,
   },
   postWithdrawCollateral: {
     path: '/api.Api/PostWithdrawCollateral',

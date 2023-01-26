@@ -55,7 +55,7 @@ type ApiClient interface {
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
 	GetOrCreateUser(ctx context.Context, in *GetOrCreateUserRequest, opts ...grpc.CallOption) (*GetOrCreateUserResponse, error)
-	PostDepositCollateral(ctx context.Context, in *PostDepositCollateralRequest, opts ...grpc.CallOption) (*PostDepositCollateralRequest, error)
+	PostDepositCollateral(ctx context.Context, in *PostDepositCollateralRequest, opts ...grpc.CallOption) (*PostDepositCollateralResponse, error)
 	PostWithdrawCollateral(ctx context.Context, in *PostWithdrawCollateralRequest, opts ...grpc.CallOption) (*PostWithdrawCollateralResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
@@ -380,8 +380,8 @@ func (c *apiClient) GetOrCreateUser(ctx context.Context, in *GetOrCreateUserRequ
 	return out, nil
 }
 
-func (c *apiClient) PostDepositCollateral(ctx context.Context, in *PostDepositCollateralRequest, opts ...grpc.CallOption) (*PostDepositCollateralRequest, error) {
-	out := new(PostDepositCollateralRequest)
+func (c *apiClient) PostDepositCollateral(ctx context.Context, in *PostDepositCollateralRequest, opts ...grpc.CallOption) (*PostDepositCollateralResponse, error) {
+	out := new(PostDepositCollateralResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostDepositCollateral", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -887,7 +887,7 @@ type ApiServer interface {
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
 	GetOrCreateUser(context.Context, *GetOrCreateUserRequest) (*GetOrCreateUserResponse, error)
-	PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralRequest, error)
+	PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralResponse, error)
 	PostWithdrawCollateral(context.Context, *PostWithdrawCollateralRequest) (*PostWithdrawCollateralResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
@@ -1011,7 +1011,7 @@ func (UnimplementedApiServer) GetPerpOrderbook(context.Context, *GetPerpOrderboo
 func (UnimplementedApiServer) GetOrCreateUser(context.Context, *GetOrCreateUserRequest) (*GetOrCreateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrCreateUser not implemented")
 }
-func (UnimplementedApiServer) PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralRequest, error) {
+func (UnimplementedApiServer) PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostDepositCollateral not implemented")
 }
 func (UnimplementedApiServer) PostWithdrawCollateral(context.Context, *PostWithdrawCollateralRequest) (*PostWithdrawCollateralResponse, error) {

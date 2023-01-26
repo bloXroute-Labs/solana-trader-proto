@@ -67,7 +67,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostDepositCollateralRequest"
+              "$ref": "#/definitions/apiPostDepositCollateralResponse"
             }
           },
           "default": {
@@ -2639,21 +2639,11 @@
         }
       }
     },
-    "apiPostDepositCollateralRequest": {
+    "apiPostDepositCollateralResponse": {
       "type": "object",
       "properties": {
-        "ownerAddress": {
+        "transaction": {
           "type": "string"
-        },
-        "amount": {
-          "type": "number",
-          "format": "double"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
-        },
-        "contract": {
-          "$ref": "#/definitions/commonPerpContract"
         }
       }
     },
