@@ -1240,6 +1240,7 @@ message PostDepositCollateralRequest {
   string ownerAddress = 1;
   double amount = 2;
   Project project = 3;
+  common.PerpContract contract = 4;
 }
 
 message PostDepositCollateralResponse {
@@ -1250,6 +1251,7 @@ message PostWithdrawCollateralRequest {
   string ownerAddress = 1;
   double amount = 2;
   Project project = 3;
+  common.PerpContract contract = 4;
 }
 
 message PostWithdrawCollateralResponse {

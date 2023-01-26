@@ -24765,7 +24765,8 @@ proto.api.PostDepositCollateralRequest.toObject = function(includeInstance, msg)
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
-    project: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    project: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    contract: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -24814,6 +24815,10 @@ proto.api.PostDepositCollateralRequest.deserializeBinaryFromReader = function(ms
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
+    case 4:
+      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      msg.setContract(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -24861,6 +24866,13 @@ proto.api.PostDepositCollateralRequest.serializeBinaryToWriter = function(messag
   if (f !== 0.0) {
     writer.writeEnum(
       3,
+      f
+    );
+  }
+  f = message.getContract();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      4,
       f
     );
   }
@@ -24918,6 +24930,24 @@ proto.api.PostDepositCollateralRequest.prototype.getProject = function() {
  */
 proto.api.PostDepositCollateralRequest.prototype.setProject = function(value) {
   return jspb.Message.setProto3EnumField(this, 3, value);
+};
+
+
+/**
+ * optional common.PerpContract contract = 4;
+ * @return {!proto.common.PerpContract}
+ */
+proto.api.PostDepositCollateralRequest.prototype.getContract = function() {
+  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {!proto.common.PerpContract} value
+ * @return {!proto.api.PostDepositCollateralRequest} returns this
+ */
+proto.api.PostDepositCollateralRequest.prototype.setContract = function(value) {
+  return jspb.Message.setProto3EnumField(this, 4, value);
 };
 
 
@@ -25085,7 +25115,8 @@ proto.api.PostWithdrawCollateralRequest.toObject = function(includeInstance, msg
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
-    project: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    project: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    contract: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -25134,6 +25165,10 @@ proto.api.PostWithdrawCollateralRequest.deserializeBinaryFromReader = function(m
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
+    case 4:
+      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      msg.setContract(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -25181,6 +25216,13 @@ proto.api.PostWithdrawCollateralRequest.serializeBinaryToWriter = function(messa
   if (f !== 0.0) {
     writer.writeEnum(
       3,
+      f
+    );
+  }
+  f = message.getContract();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      4,
       f
     );
   }
@@ -25238,6 +25280,24 @@ proto.api.PostWithdrawCollateralRequest.prototype.getProject = function() {
  */
 proto.api.PostWithdrawCollateralRequest.prototype.setProject = function(value) {
   return jspb.Message.setProto3EnumField(this, 3, value);
+};
+
+
+/**
+ * optional common.PerpContract contract = 4;
+ * @return {!proto.common.PerpContract}
+ */
+proto.api.PostWithdrawCollateralRequest.prototype.getContract = function() {
+  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {!proto.common.PerpContract} value
+ * @return {!proto.api.PostWithdrawCollateralRequest} returns this
+ */
+proto.api.PostWithdrawCollateralRequest.prototype.setContract = function(value) {
+  return jspb.Message.setProto3EnumField(this, 4, value);
 };
 
 

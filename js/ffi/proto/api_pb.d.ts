@@ -2913,6 +2913,8 @@ export class PostDepositCollateralRequest extends jspb.Message {
     setAmount(value: number): PostDepositCollateralRequest;
     getProject(): Project;
     setProject(value: Project): PostDepositCollateralRequest;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): PostDepositCollateralRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostDepositCollateralRequest.AsObject;
@@ -2929,6 +2931,7 @@ export namespace PostDepositCollateralRequest {
         owneraddress: string,
         amount: number,
         project: Project,
+        contract: common_pb.PerpContract,
     }
 }
 
@@ -2959,6 +2962,8 @@ export class PostWithdrawCollateralRequest extends jspb.Message {
     setAmount(value: number): PostWithdrawCollateralRequest;
     getProject(): Project;
     setProject(value: Project): PostWithdrawCollateralRequest;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): PostWithdrawCollateralRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostWithdrawCollateralRequest.AsObject;
@@ -2975,6 +2980,7 @@ export namespace PostWithdrawCollateralRequest {
         owneraddress: string,
         amount: number,
         project: Project,
+        contract: common_pb.PerpContract,
     }
 }
 

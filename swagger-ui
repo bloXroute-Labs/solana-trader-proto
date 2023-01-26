@@ -106,6 +106,19 @@
               "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
+          },
+          {
+            "name": "contract",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP"
+            ],
+            "default": "ALL"
           }
         ],
         "tags": [
@@ -161,6 +174,19 @@
               "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
+          },
+          {
+            "name": "contract",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP"
+            ],
+            "default": "ALL"
           }
         ],
         "tags": [
@@ -2625,6 +2651,9 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
         }
       }
     },
