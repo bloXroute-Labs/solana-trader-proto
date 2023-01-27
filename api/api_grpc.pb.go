@@ -51,8 +51,13 @@ type ApiClient interface {
 	// perp endpoints
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
 	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
+	GetOpenPerpOrders(ctx context.Context, in *GetOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetOpenPerpOrdersResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
+	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
+	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	PostDepositCollateral(ctx context.Context, in *PostDepositCollateralRequest, opts ...grpc.CallOption) (*PostDepositCollateralResponse, error)
+	PostWithdrawCollateral(ctx context.Context, in *PostWithdrawCollateralRequest, opts ...grpc.CallOption) (*PostWithdrawCollateralResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -340,6 +345,15 @@ func (c *apiClient) GetPerpPositions(ctx context.Context, in *GetPerpPositionsRe
 	return out, nil
 }
 
+func (c *apiClient) GetOpenPerpOrders(ctx context.Context, in *GetOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetOpenPerpOrdersResponse, error) {
+	out := new(GetOpenPerpOrdersResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetOpenPerpOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error) {
 	out := new(PostClosePerpPositionsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostClosePerpPositions", in, out, opts...)
@@ -352,6 +366,42 @@ func (c *apiClient) PostClosePerpPositions(ctx context.Context, in *PostClosePer
 func (c *apiClient) GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error) {
 	out := new(GetPerpOrderbookResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetPerpOrderbook", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
+	out := new(CreateUserResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/CreateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
+	out := new(GetUserResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostDepositCollateral(ctx context.Context, in *PostDepositCollateralRequest, opts ...grpc.CallOption) (*PostDepositCollateralResponse, error) {
+	out := new(PostDepositCollateralResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostDepositCollateral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostWithdrawCollateral(ctx context.Context, in *PostWithdrawCollateralRequest, opts ...grpc.CallOption) (*PostWithdrawCollateralResponse, error) {
+	out := new(PostWithdrawCollateralResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostWithdrawCollateral", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -843,8 +893,13 @@ type ApiServer interface {
 	// perp endpoints
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
 	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
+	GetOpenPerpOrders(context.Context, *GetOpenPerpOrdersRequest) (*GetOpenPerpOrdersResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
+	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
+	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralResponse, error)
+	PostWithdrawCollateral(context.Context, *PostWithdrawCollateralRequest) (*PostWithdrawCollateralResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -955,11 +1010,26 @@ func (UnimplementedApiServer) PostPerpOrder(context.Context, *PostPerpOrderReque
 func (UnimplementedApiServer) GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPerpPositions not implemented")
 }
+func (UnimplementedApiServer) GetOpenPerpOrders(context.Context, *GetOpenPerpOrdersRequest) (*GetOpenPerpOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOpenPerpOrders not implemented")
+}
 func (UnimplementedApiServer) PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostClosePerpPositions not implemented")
 }
 func (UnimplementedApiServer) GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPerpOrderbook not implemented")
+}
+func (UnimplementedApiServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (UnimplementedApiServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedApiServer) PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostDepositCollateral not implemented")
+}
+func (UnimplementedApiServer) PostWithdrawCollateral(context.Context, *PostWithdrawCollateralRequest) (*PostWithdrawCollateralResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostWithdrawCollateral not implemented")
 }
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
@@ -1538,6 +1608,24 @@ func _Api_GetPerpPositions_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetOpenPerpOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOpenPerpOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetOpenPerpOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetOpenPerpOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetOpenPerpOrders(ctx, req.(*GetOpenPerpOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_PostClosePerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostClosePerpPositionsRequest)
 	if err := dec(in); err != nil {
@@ -1570,6 +1658,78 @@ func _Api_GetPerpOrderbook_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetPerpOrderbook(ctx, req.(*GetPerpOrderbookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).CreateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/CreateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).CreateUser(ctx, req.(*CreateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetUser(ctx, req.(*GetUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostDepositCollateral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostDepositCollateralRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostDepositCollateral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostDepositCollateral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostDepositCollateral(ctx, req.(*PostDepositCollateralRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostWithdrawCollateral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostWithdrawCollateralRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostWithdrawCollateral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostWithdrawCollateral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostWithdrawCollateral(ctx, req.(*PostWithdrawCollateralRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1992,12 +2152,32 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetPerpPositions_Handler,
 		},
 		{
+			MethodName: "GetOpenPerpOrders",
+			Handler:    _Api_GetOpenPerpOrders_Handler,
+		},
+		{
 			MethodName: "PostClosePerpPositions",
 			Handler:    _Api_PostClosePerpPositions_Handler,
 		},
 		{
 			MethodName: "GetPerpOrderbook",
 			Handler:    _Api_GetPerpOrderbook_Handler,
+		},
+		{
+			MethodName: "CreateUser",
+			Handler:    _Api_CreateUser_Handler,
+		},
+		{
+			MethodName: "GetUser",
+			Handler:    _Api_GetUser_Handler,
+		},
+		{
+			MethodName: "PostDepositCollateral",
+			Handler:    _Api_PostDepositCollateral_Handler,
+		},
+		{
+			MethodName: "PostWithdrawCollateral",
+			Handler:    _Api_PostWithdrawCollateral_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
