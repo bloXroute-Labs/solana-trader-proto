@@ -58,142 +58,6 @@
         ]
       }
     },
-    "/api/v1/drift/collateral/deposit": {
-      "post": {
-        "summary": "posts collateral on a perp platform",
-        "description": "Returns a partially signed txn signature to deposit collateral",
-        "operationId": "Api_PostDepositCollateral",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostDepositCollateralResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "amount",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP"
-            ],
-            "default": "ALL"
-          }
-        ],
-        "tags": [
-          "Perp"
-        ]
-      }
-    },
-    "/api/v1/drift/collateral/withdraw": {
-      "post": {
-        "summary": "withdraw collateral on a perp platform",
-        "description": "Returns a partially signed txn signature to withdraw collateral",
-        "operationId": "Api_PostWithdrawCollateral",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostWithdrawCollateralResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "amount",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP"
-            ],
-            "default": "ALL"
-          }
-        ],
-        "tags": [
-          "Perp"
-        ]
-      }
-    },
     "/api/v1/drift/perp/{market}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
@@ -252,15 +116,61 @@
       }
     },
     "/api/v1/drift/user": {
-      "post": {
-        "summary": "get or creates the user on a platform",
-        "description": "Returns the userAddress or the partially signed txn signature to create a user on a platform",
-        "operationId": "Api_GetOrCreateUser",
+      "get": {
+        "summary": "gets the user on a supported platform",
+        "description": "Returns the user info for an account on a supported platform",
+        "operationId": "Api_GetUser",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetOrCreateUserResponse"
+              "$ref": "#/definitions/apiGetUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Trade"
+        ]
+      },
+      "post": {
+        "summary": "creates a user profile on a supported platform",
+        "description": "Returns a partially signed txn signature to create a user on a supported platform",
+        "operationId": "Api_CreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiCreateUserResponse"
             }
           },
           "default": {
@@ -938,6 +848,142 @@
         ]
       }
     },
+    "/api/v1/trade/perp/collateral/deposit": {
+      "post": {
+        "summary": "posts collateral on a perp platform",
+        "description": "Returns a partially signed txn signature to deposit collateral",
+        "operationId": "Api_PostDepositCollateral",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostDepositCollateralResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "contract",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP"
+            ],
+            "default": "ALL"
+          }
+        ],
+        "tags": [
+          "Perp"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/collateral/withdraw": {
+      "post": {
+        "summary": "withdraw collateral on a perp platform",
+        "description": "Returns a partially signed txn signature to withdraw collateral",
+        "operationId": "Api_PostWithdrawCollateral",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostWithdrawCollateralResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "contract",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP"
+            ],
+            "default": "ALL"
+          }
+        ],
+        "tags": [
+          "Perp"
+        ]
+      }
+    },
     "/api/v1/trade/perp/open-orders": {
       "get": {
         "summary": "PERP order positions",
@@ -1608,6 +1654,17 @@
         }
       }
     },
+    "apiCreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
     "apiDirection": {
       "type": "string",
       "enum": [
@@ -1778,27 +1835,6 @@
           "items": {
             "$ref": "#/definitions/apiPerpOrder"
           }
-        }
-      }
-    },
-    "apiGetOrCreateUserResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string"
-        },
-        "accountNumber": {
-          "type": "string",
-          "format": "int64"
-        },
-        "transaction": {
-          "type": "string"
-        },
-        "accountAddress": {
-          "type": "string"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
         }
       }
     },
@@ -2243,6 +2279,24 @@
           "items": {
             "$ref": "#/definitions/apiUnsettledAccount"
           }
+        }
+      }
+    },
+    "apiGetUserResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "accountNumber": {
+          "type": "string",
+          "format": "int64"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       }
     },

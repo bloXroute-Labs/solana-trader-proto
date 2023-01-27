@@ -10,6 +10,28 @@ var google_api_visibility_pb = require('./google/api/visibility_pb.js');
 var protoc$gen$openapiv2_options_annotations_pb = require('./protoc-gen-openapiv2/options/annotations_pb.js');
 var common_pb = require('./common_pb.js');
 
+function serialize_api_CreateUserRequest(arg) {
+  if (!(arg instanceof api_pb.CreateUserRequest)) {
+    throw new Error('Expected argument of type api.CreateUserRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_CreateUserRequest(buffer_arg) {
+  return api_pb.CreateUserRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_CreateUserResponse(arg) {
+  if (!(arg instanceof api_pb.CreateUserResponse)) {
+    throw new Error('Expected argument of type api.CreateUserResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_CreateUserResponse(buffer_arg) {
+  return api_pb.CreateUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetAccountBalanceRequest(arg) {
   if (!(arg instanceof api_pb.GetAccountBalanceRequest)) {
     throw new Error('Expected argument of type api.GetAccountBalanceRequest');
@@ -206,28 +228,6 @@ function serialize_api_GetOpenPerpOrdersResponse(arg) {
 
 function deserialize_api_GetOpenPerpOrdersResponse(buffer_arg) {
   return api_pb.GetOpenPerpOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_api_GetOrCreateUserRequest(arg) {
-  if (!(arg instanceof api_pb.GetOrCreateUserRequest)) {
-    throw new Error('Expected argument of type api.GetOrCreateUserRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetOrCreateUserRequest(buffer_arg) {
-  return api_pb.GetOrCreateUserRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_api_GetOrCreateUserResponse(arg) {
-  if (!(arg instanceof api_pb.GetOrCreateUserResponse)) {
-    throw new Error('Expected argument of type api.GetOrCreateUserResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetOrCreateUserResponse(buffer_arg) {
-  return api_pb.GetOrCreateUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetOrderByIDRequest(arg) {
@@ -712,6 +712,28 @@ function serialize_api_GetUnsettledResponse(arg) {
 
 function deserialize_api_GetUnsettledResponse(buffer_arg) {
   return api_pb.GetUnsettledResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetUserRequest(arg) {
+  if (!(arg instanceof api_pb.GetUserRequest)) {
+    throw new Error('Expected argument of type api.GetUserRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetUserRequest(buffer_arg) {
+  return api_pb.GetUserRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetUserResponse(arg) {
+  if (!(arg instanceof api_pb.GetUserResponse)) {
+    throw new Error('Expected argument of type api.GetUserResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetUserResponse(buffer_arg) {
+  return api_pb.GetUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_PostCancelAllRequest(arg) {
@@ -1347,16 +1369,27 @@ postPerpOrder: {
     responseSerialize: serialize_api_GetPerpOrderbookResponse,
     responseDeserialize: deserialize_api_GetPerpOrderbookResponse,
   },
-  getOrCreateUser: {
-    path: '/api.Api/GetOrCreateUser',
+  createUser: {
+    path: '/api.Api/CreateUser',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetOrCreateUserRequest,
-    responseType: api_pb.GetOrCreateUserResponse,
-    requestSerialize: serialize_api_GetOrCreateUserRequest,
-    requestDeserialize: deserialize_api_GetOrCreateUserRequest,
-    responseSerialize: serialize_api_GetOrCreateUserResponse,
-    responseDeserialize: deserialize_api_GetOrCreateUserResponse,
+    requestType: api_pb.CreateUserRequest,
+    responseType: api_pb.CreateUserResponse,
+    requestSerialize: serialize_api_CreateUserRequest,
+    requestDeserialize: deserialize_api_CreateUserRequest,
+    responseSerialize: serialize_api_CreateUserResponse,
+    responseDeserialize: deserialize_api_CreateUserResponse,
+  },
+  getUser: {
+    path: '/api.Api/GetUser',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetUserRequest,
+    responseType: api_pb.GetUserResponse,
+    requestSerialize: serialize_api_GetUserRequest,
+    requestDeserialize: deserialize_api_GetUserRequest,
+    responseSerialize: serialize_api_GetUserResponse,
+    responseDeserialize: deserialize_api_GetUserResponse,
   },
   postDepositCollateral: {
     path: '/api.Api/PostDepositCollateral',

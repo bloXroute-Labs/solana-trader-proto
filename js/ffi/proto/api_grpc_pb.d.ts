@@ -45,7 +45,8 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getOpenPerpOrders: IApiService_IGetOpenPerpOrders;
     postClosePerpPositions: IApiService_IPostClosePerpPositions;
     getPerpOrderbook: IApiService_IGetPerpOrderbook;
-    getOrCreateUser: IApiService_IGetOrCreateUser;
+    createUser: IApiService_ICreateUser;
+    getUser: IApiService_IGetUser;
     postDepositCollateral: IApiService_IPostDepositCollateral;
     postWithdrawCollateral: IApiService_IPostWithdrawCollateral;
     getOrderbooksStream: IApiService_IGetOrderbooksStream;
@@ -352,14 +353,23 @@ interface IApiService_IGetPerpOrderbook extends grpc.MethodDefinition<api_pb.Get
     responseSerialize: grpc.serialize<api_pb.GetPerpOrderbookResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetPerpOrderbookResponse>;
 }
-interface IApiService_IGetOrCreateUser extends grpc.MethodDefinition<api_pb.GetOrCreateUserRequest, api_pb.GetOrCreateUserResponse> {
-    path: "/api.Api/GetOrCreateUser";
+interface IApiService_ICreateUser extends grpc.MethodDefinition<api_pb.CreateUserRequest, api_pb.CreateUserResponse> {
+    path: "/api.Api/CreateUser";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetOrCreateUserRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetOrCreateUserRequest>;
-    responseSerialize: grpc.serialize<api_pb.GetOrCreateUserResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.GetOrCreateUserResponse>;
+    requestSerialize: grpc.serialize<api_pb.CreateUserRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.CreateUserRequest>;
+    responseSerialize: grpc.serialize<api_pb.CreateUserResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.CreateUserResponse>;
+}
+interface IApiService_IGetUser extends grpc.MethodDefinition<api_pb.GetUserRequest, api_pb.GetUserResponse> {
+    path: "/api.Api/GetUser";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetUserRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetUserRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetUserResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetUserResponse>;
 }
 interface IApiService_IPostDepositCollateral extends grpc.MethodDefinition<api_pb.PostDepositCollateralRequest, api_pb.PostDepositCollateralResponse> {
     path: "/api.Api/PostDepositCollateral";
@@ -541,7 +551,8 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getOpenPerpOrders: grpc.handleUnaryCall<api_pb.GetOpenPerpOrdersRequest, api_pb.GetOpenPerpOrdersResponse>;
     postClosePerpPositions: grpc.handleUnaryCall<api_pb.PostClosePerpPositionsRequest, api_pb.PostClosePerpPositionsResponse>;
     getPerpOrderbook: grpc.handleUnaryCall<api_pb.GetPerpOrderbookRequest, api_pb.GetPerpOrderbookResponse>;
-    getOrCreateUser: grpc.handleUnaryCall<api_pb.GetOrCreateUserRequest, api_pb.GetOrCreateUserResponse>;
+    createUser: grpc.handleUnaryCall<api_pb.CreateUserRequest, api_pb.CreateUserResponse>;
+    getUser: grpc.handleUnaryCall<api_pb.GetUserRequest, api_pb.GetUserResponse>;
     postDepositCollateral: grpc.handleUnaryCall<api_pb.PostDepositCollateralRequest, api_pb.PostDepositCollateralResponse>;
     postWithdrawCollateral: grpc.handleUnaryCall<api_pb.PostWithdrawCollateralRequest, api_pb.PostWithdrawCollateralResponse>;
     getOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetOrderbooksRequest, api_pb.GetOrderbooksStreamResponse>;
@@ -657,9 +668,12 @@ export interface IApiClient {
     getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
     getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
     getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
-    getOrCreateUser(request: api_pb.GetOrCreateUserRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
-    getOrCreateUser(request: api_pb.GetOrCreateUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
-    getOrCreateUser(request: api_pb.GetOrCreateUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
+    createUser(request: api_pb.CreateUserRequest, callback: (error: grpc.ServiceError | null, response: api_pb.CreateUserResponse) => void): grpc.ClientUnaryCall;
+    createUser(request: api_pb.CreateUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.CreateUserResponse) => void): grpc.ClientUnaryCall;
+    createUser(request: api_pb.CreateUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.CreateUserResponse) => void): grpc.ClientUnaryCall;
+    getUser(request: api_pb.GetUserRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
+    getUser(request: api_pb.GetUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
+    getUser(request: api_pb.GetUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
     postDepositCollateral(request: api_pb.PostDepositCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
     postDepositCollateral(request: api_pb.PostDepositCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
     postDepositCollateral(request: api_pb.PostDepositCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
@@ -794,9 +808,12 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getPerpOrderbook(request: api_pb.GetPerpOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpOrderbookResponse) => void): grpc.ClientUnaryCall;
-    public getOrCreateUser(request: api_pb.GetOrCreateUserRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
-    public getOrCreateUser(request: api_pb.GetOrCreateUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
-    public getOrCreateUser(request: api_pb.GetOrCreateUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrCreateUserResponse) => void): grpc.ClientUnaryCall;
+    public createUser(request: api_pb.CreateUserRequest, callback: (error: grpc.ServiceError | null, response: api_pb.CreateUserResponse) => void): grpc.ClientUnaryCall;
+    public createUser(request: api_pb.CreateUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.CreateUserResponse) => void): grpc.ClientUnaryCall;
+    public createUser(request: api_pb.CreateUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.CreateUserResponse) => void): grpc.ClientUnaryCall;
+    public getUser(request: api_pb.GetUserRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
+    public getUser(request: api_pb.GetUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
+    public getUser(request: api_pb.GetUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
     public postDepositCollateral(request: api_pb.PostDepositCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
     public postDepositCollateral(request: api_pb.PostDepositCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
     public postDepositCollateral(request: api_pb.PostDepositCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;

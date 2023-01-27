@@ -793,18 +793,29 @@ class GetPerpOrderbooksRequest(betterproto.Message):
 
 
 @dataclass
-class GetOrCreateUserRequest(betterproto.Message):
+class GetUserRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
 
 
 @dataclass
-class GetOrCreateUserResponse(betterproto.Message):
+class GetUserResponse(betterproto.Message):
     status: str = betterproto.string_field(1)
     account_number: int = betterproto.int64_field(2)
-    transaction: str = betterproto.string_field(3)
-    account_address: str = betterproto.string_field(4)
-    project: "Project" = betterproto.enum_field(5)
+    account_address: str = betterproto.string_field(3)
+    project: "Project" = betterproto.enum_field(4)
+
+
+@dataclass
+class CreateUserRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+
+
+@dataclass
+class CreateUserResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
 
 
 @dataclass
@@ -1616,17 +1627,30 @@ class ApiStub(betterproto.ServiceStub):
             GetPerpOrderbookResponse,
         )
 
-    async def get_or_create_user(
+    async def create_user(
         self, *, owner_address: str = "", project: "Project" = 0
-    ) -> GetOrCreateUserResponse:
-        request = GetOrCreateUserRequest()
+    ) -> CreateUserResponse:
+        request = CreateUserRequest()
         request.owner_address = owner_address
         request.project = project
 
         return await self._unary_unary(
-            "/api.Api/GetOrCreateUser",
+            "/api.Api/CreateUser",
             request,
-            GetOrCreateUserResponse,
+            CreateUserResponse,
+        )
+
+    async def get_user(
+        self, *, owner_address: str = "", project: "Project" = 0
+    ) -> GetUserResponse:
+        request = GetUserRequest()
+        request.owner_address = owner_address
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetUser",
+            request,
+            GetUserResponse,
         )
 
     async def post_deposit_collateral(

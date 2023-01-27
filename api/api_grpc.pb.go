@@ -54,7 +54,8 @@ type ApiClient interface {
 	GetOpenPerpOrders(ctx context.Context, in *GetOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetOpenPerpOrdersResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
-	GetOrCreateUser(ctx context.Context, in *GetOrCreateUserRequest, opts ...grpc.CallOption) (*GetOrCreateUserResponse, error)
+	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
+	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	PostDepositCollateral(ctx context.Context, in *PostDepositCollateralRequest, opts ...grpc.CallOption) (*PostDepositCollateralResponse, error)
 	PostWithdrawCollateral(ctx context.Context, in *PostWithdrawCollateralRequest, opts ...grpc.CallOption) (*PostWithdrawCollateralResponse, error)
 	// streaming endpoints
@@ -371,9 +372,18 @@ func (c *apiClient) GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRe
 	return out, nil
 }
 
-func (c *apiClient) GetOrCreateUser(ctx context.Context, in *GetOrCreateUserRequest, opts ...grpc.CallOption) (*GetOrCreateUserResponse, error) {
-	out := new(GetOrCreateUserResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetOrCreateUser", in, out, opts...)
+func (c *apiClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
+	out := new(CreateUserResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/CreateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
+	out := new(GetUserResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -886,7 +896,8 @@ type ApiServer interface {
 	GetOpenPerpOrders(context.Context, *GetOpenPerpOrdersRequest) (*GetOpenPerpOrdersResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
-	GetOrCreateUser(context.Context, *GetOrCreateUserRequest) (*GetOrCreateUserResponse, error)
+	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
+	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralResponse, error)
 	PostWithdrawCollateral(context.Context, *PostWithdrawCollateralRequest) (*PostWithdrawCollateralResponse, error)
 	// streaming endpoints
@@ -1008,8 +1019,11 @@ func (UnimplementedApiServer) PostClosePerpPositions(context.Context, *PostClose
 func (UnimplementedApiServer) GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPerpOrderbook not implemented")
 }
-func (UnimplementedApiServer) GetOrCreateUser(context.Context, *GetOrCreateUserRequest) (*GetOrCreateUserResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOrCreateUser not implemented")
+func (UnimplementedApiServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (UnimplementedApiServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
 func (UnimplementedApiServer) PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostDepositCollateral not implemented")
@@ -1648,20 +1662,38 @@ func _Api_GetPerpOrderbook_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetOrCreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrCreateUserRequest)
+func _Api_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).GetOrCreateUser(ctx, in)
+		return srv.(ApiServer).CreateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/GetOrCreateUser",
+		FullMethod: "/api.Api/CreateUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOrCreateUser(ctx, req.(*GetOrCreateUserRequest))
+		return srv.(ApiServer).CreateUser(ctx, req.(*CreateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetUser(ctx, req.(*GetUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2132,8 +2164,12 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetPerpOrderbook_Handler,
 		},
 		{
-			MethodName: "GetOrCreateUser",
-			Handler:    _Api_GetOrCreateUser_Handler,
+			MethodName: "CreateUser",
+			Handler:    _Api_CreateUser_Handler,
+		},
+		{
+			MethodName: "GetUser",
+			Handler:    _Api_GetUser_Handler,
 		},
 		{
 			MethodName: "PostDepositCollateral",

@@ -423,20 +423,31 @@ service Api {
     };
   }
 
-  rpc GetOrCreateUser(GetOrCreateUserRequest) returns (GetOrCreateUserResponse) {
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
     option (google.api.http) = {
       post: "/api/v1/drift/user"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns the userAddress or the partially signed txn signature to create a user on a platform";
-      summary: "get or creates the user on a platform";
+      description: "Returns a partially signed txn signature to create a user on a supported platform";
+      summary: "creates a user profile on a supported platform";
+      tags: ["Trade"];
+    };
+  }
+
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/drift/user"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the user info for an account on a supported platform";
+      summary: "gets the user on a supported platform";
       tags: ["Trade"];
     };
   }
 
   rpc PostDepositCollateral(PostDepositCollateralRequest) returns (PostDepositCollateralResponse) {
     option (google.api.http) = {
-      post: "/api/v1/drift/collateral/deposit"
+      post: "/api/v1/trade/perp/collateral/deposit"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to deposit collateral";
@@ -447,7 +458,7 @@ service Api {
 
   rpc PostWithdrawCollateral(PostWithdrawCollateralRequest) returns (PostWithdrawCollateralResponse) {
     option (google.api.http) = {
-      post: "/api/v1/drift/collateral/withdraw"
+      post: "/api/v1/trade/perp/collateral/withdraw"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to withdraw collateral";
@@ -1223,17 +1234,26 @@ message GetPerpOrderbooksRequest {
 }
 
 
-message GetOrCreateUserRequest {
+message GetUserRequest {
   string ownerAddress = 1;
   Project project = 2;
 }
 
-message GetOrCreateUserResponse {
+message GetUserResponse {
   string status = 1;
   int64 accountNumber = 2;
-  string transaction = 3;
-  string accountAddress = 4;
-  Project project = 5;
+  string accountAddress = 3;
+  Project project = 4;
+}
+
+message CreateUserRequest {
+  string ownerAddress = 1;
+  Project project = 2;
+}
+
+message CreateUserResponse {
+  string transaction = 1;
+  Project project = 2;
 }
 
 message PostDepositCollateralRequest {
