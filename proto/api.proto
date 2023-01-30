@@ -401,20 +401,31 @@ service Api {
     };
   }
 
-  rpc PostClosePerpPositions(PostClosePerpPositionsRequest)  returns (PostClosePerpPositionsResponse) {
+  rpc PostCancelPerpOrder(PostCancelPerpOrderRequest) returns (PostCancelPerpOrderResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/perp/close-positions"
+      post: "/api/v1/trade/perp/cancel"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "closes current perp positions";
-      summary: "PERP positions";
+      description: "Returns a partially signed txn signature to cancel a perp order on a supported platform";
+      summary: "cancel a perp order on a supported platform";
+      tags: ["Trade", "Perp", "Orderbook"];
+    };
+  }
+
+  rpc PostClosePerpPositions(PostClosePerpPositionsRequest) returns (PostClosePerpPositionsResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/perp/close"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to close a perp position on a supported platform";
+      summary: "closes a perp position on a supported platform";
       tags: ["Trade", "Perp", "Orderbook"];
     };
   }
 
   rpc GetPerpOrderbook(GetPerpOrderbookRequest) returns (GetPerpOrderbookResponse) {
     option (google.api.http) = {
-      get: "/api/v1/drift/perp/{market}"
+      get: "/api/v1/trade/perp/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
@@ -423,9 +434,9 @@ service Api {
     };
   }
 
-  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+  rpc PostCreateUser(PostCreateUserRequest) returns (PostCreateUserResponse) {
     option (google.api.http) = {
-      post: "/api/v1/drift/user"
+      post: "/api/v1/trade/user"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to create a user on a supported platform";
@@ -436,7 +447,7 @@ service Api {
 
   rpc GetUser(GetUserRequest) returns (GetUserResponse) {
     option (google.api.http) = {
-      get: "/api/v1/drift/user"
+      get: "/api/v1/trade/user"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the user info for an account on a supported platform";
@@ -1276,14 +1287,24 @@ message GetUserResponse {
   Project project = 4;
 }
 
-message CreateUserRequest {
+message PostCreateUserRequest {
   string ownerAddress = 1;
   Project project = 2;
 }
 
-message CreateUserResponse {
+message PostCreateUserResponse {
   string transaction = 1;
   Project project = 2;
+}
+
+message PostCancelPerpOrderRequest {
+  string ownerAddress = 1;
+  Project project = 2;
+  common.PerpContract contract = 3;
+}
+
+message PostCancelPerpOrderResponse {
+  string transaction = 1;
 }
 
 message PostDepositCollateralRequest {

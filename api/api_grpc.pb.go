@@ -52,9 +52,10 @@ type ApiClient interface {
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
 	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
 	GetOpenPerpOrders(ctx context.Context, in *GetOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetOpenPerpOrdersResponse, error)
+	PostCancelPerpOrder(ctx context.Context, in *PostCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostCancelPerpOrderResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
-	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
+	PostCreateUser(ctx context.Context, in *PostCreateUserRequest, opts ...grpc.CallOption) (*PostCreateUserResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	PostDepositCollateral(ctx context.Context, in *PostDepositCollateralRequest, opts ...grpc.CallOption) (*PostDepositCollateralResponse, error)
 	PostWithdrawCollateral(ctx context.Context, in *PostWithdrawCollateralRequest, opts ...grpc.CallOption) (*PostWithdrawCollateralResponse, error)
@@ -354,6 +355,15 @@ func (c *apiClient) GetOpenPerpOrders(ctx context.Context, in *GetOpenPerpOrders
 	return out, nil
 }
 
+func (c *apiClient) PostCancelPerpOrder(ctx context.Context, in *PostCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostCancelPerpOrderResponse, error) {
+	out := new(PostCancelPerpOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostCancelPerpOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error) {
 	out := new(PostClosePerpPositionsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostClosePerpPositions", in, out, opts...)
@@ -372,9 +382,9 @@ func (c *apiClient) GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRe
 	return out, nil
 }
 
-func (c *apiClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
-	out := new(CreateUserResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/CreateUser", in, out, opts...)
+func (c *apiClient) PostCreateUser(ctx context.Context, in *PostCreateUserRequest, opts ...grpc.CallOption) (*PostCreateUserResponse, error) {
+	out := new(PostCreateUserResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostCreateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -894,9 +904,10 @@ type ApiServer interface {
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
 	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
 	GetOpenPerpOrders(context.Context, *GetOpenPerpOrdersRequest) (*GetOpenPerpOrdersResponse, error)
+	PostCancelPerpOrder(context.Context, *PostCancelPerpOrderRequest) (*PostCancelPerpOrderResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
-	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
+	PostCreateUser(context.Context, *PostCreateUserRequest) (*PostCreateUserResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralResponse, error)
 	PostWithdrawCollateral(context.Context, *PostWithdrawCollateralRequest) (*PostWithdrawCollateralResponse, error)
@@ -1013,14 +1024,17 @@ func (UnimplementedApiServer) GetPerpPositions(context.Context, *GetPerpPosition
 func (UnimplementedApiServer) GetOpenPerpOrders(context.Context, *GetOpenPerpOrdersRequest) (*GetOpenPerpOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOpenPerpOrders not implemented")
 }
+func (UnimplementedApiServer) PostCancelPerpOrder(context.Context, *PostCancelPerpOrderRequest) (*PostCancelPerpOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostCancelPerpOrder not implemented")
+}
 func (UnimplementedApiServer) PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostClosePerpPositions not implemented")
 }
 func (UnimplementedApiServer) GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPerpOrderbook not implemented")
 }
-func (UnimplementedApiServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+func (UnimplementedApiServer) PostCreateUser(context.Context, *PostCreateUserRequest) (*PostCreateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostCreateUser not implemented")
 }
 func (UnimplementedApiServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
@@ -1626,6 +1640,24 @@ func _Api_GetOpenPerpOrders_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_PostCancelPerpOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostCancelPerpOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostCancelPerpOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostCancelPerpOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostCancelPerpOrder(ctx, req.(*PostCancelPerpOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_PostClosePerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostClosePerpPositionsRequest)
 	if err := dec(in); err != nil {
@@ -1662,20 +1694,20 @@ func _Api_GetPerpOrderbook_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateUserRequest)
+func _Api_PostCreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostCreateUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).CreateUser(ctx, in)
+		return srv.(ApiServer).PostCreateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/CreateUser",
+		FullMethod: "/api.Api/PostCreateUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).CreateUser(ctx, req.(*CreateUserRequest))
+		return srv.(ApiServer).PostCreateUser(ctx, req.(*PostCreateUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2156,6 +2188,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetOpenPerpOrders_Handler,
 		},
 		{
+			MethodName: "PostCancelPerpOrder",
+			Handler:    _Api_PostCancelPerpOrder_Handler,
+		},
+		{
 			MethodName: "PostClosePerpPositions",
 			Handler:    _Api_PostClosePerpPositions_Handler,
 		},
@@ -2164,8 +2200,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetPerpOrderbook_Handler,
 		},
 		{
-			MethodName: "CreateUser",
-			Handler:    _Api_CreateUser_Handler,
+			MethodName: "PostCreateUser",
+			Handler:    _Api_PostCreateUser_Handler,
 		},
 		{
 			MethodName: "GetUser",
