@@ -817,6 +817,87 @@ class GetPerpOrderbooksStreamResponse(betterproto.Message):
 
 
 @dataclass
+class GetUserRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+
+
+@dataclass
+class GetUserResponse(betterproto.Message):
+    status: str = betterproto.string_field(1)
+    account_number: int = betterproto.int64_field(2)
+    account_address: str = betterproto.string_field(3)
+    project: "Project" = betterproto.enum_field(4)
+
+
+@dataclass
+class CreateUserRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+
+
+@dataclass
+class CreateUserResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+
+
+@dataclass
+class PostDepositCollateralRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    amount: float = betterproto.double_field(2)
+    project: "Project" = betterproto.enum_field(3)
+    contract: common.PerpContract = betterproto.enum_field(4)
+
+
+@dataclass
+class PostDepositCollateralResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
+
+
+@dataclass
+class PostWithdrawCollateralRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    amount: float = betterproto.double_field(2)
+    project: "Project" = betterproto.enum_field(3)
+    contract: common.PerpContract = betterproto.enum_field(4)
+
+
+@dataclass
+class PostWithdrawCollateralResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
+
+
+@dataclass
+class GetOpenPerpOrdersRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    account_address: str = betterproto.string_field(3)
+    contracts: List[common.PerpContract] = betterproto.enum_field(4)
+
+
+@dataclass
+class GetOpenPerpOrdersResponse(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    orders: List["PerpOrder"] = betterproto.message_field(3)
+
+
+@dataclass
+class PerpOrder(betterproto.Message):
+    order_i_d: int = betterproto.uint64_field(1)
+    client_order_i_d: int = betterproto.uint64_field(2)
+    contract: common.PerpContract = betterproto.enum_field(3)
+    position_side: common.PerpPositionSide = betterproto.enum_field(4)
+    order_type: str = betterproto.string_field(5)
+    unrealized_pn_l: float = betterproto.double_field(6)
+    price: float = betterproto.double_field(7)
+    size: float = betterproto.double_field(8)
+    remaining_size: float = betterproto.double_field(9)
+    status: str = betterproto.string_field(10)
+
+
+@dataclass
 class GetPerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
@@ -1496,6 +1577,26 @@ class ApiStub(betterproto.ServiceStub):
             GetPerpPositionsResponse,
         )
 
+    async def get_open_perp_orders(
+        self,
+        *,
+        project: "Project" = 0,
+        owner_address: str = "",
+        account_address: str = "",
+        contracts: List[common.PerpContract] = [],
+    ) -> GetOpenPerpOrdersResponse:
+        request = GetOpenPerpOrdersRequest()
+        request.project = project
+        request.owner_address = owner_address
+        request.account_address = account_address
+        request.contracts = contracts
+
+        return await self._unary_unary(
+            "/api.Api/GetOpenPerpOrders",
+            request,
+            GetOpenPerpOrdersResponse,
+        )
+
     async def post_close_perp_positions(
         self,
         *,
@@ -1526,6 +1627,72 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetPerpOrderbook",
             request,
             GetPerpOrderbookResponse,
+        )
+
+    async def create_user(
+        self, *, owner_address: str = "", project: "Project" = 0
+    ) -> CreateUserResponse:
+        request = CreateUserRequest()
+        request.owner_address = owner_address
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/CreateUser",
+            request,
+            CreateUserResponse,
+        )
+
+    async def get_user(
+        self, *, owner_address: str = "", project: "Project" = 0
+    ) -> GetUserResponse:
+        request = GetUserRequest()
+        request.owner_address = owner_address
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetUser",
+            request,
+            GetUserResponse,
+        )
+
+    async def post_deposit_collateral(
+        self,
+        *,
+        owner_address: str = "",
+        amount: float = 0,
+        project: "Project" = 0,
+        contract: common.PerpContract = 0,
+    ) -> PostDepositCollateralResponse:
+        request = PostDepositCollateralRequest()
+        request.owner_address = owner_address
+        request.amount = amount
+        request.project = project
+        request.contract = contract
+
+        return await self._unary_unary(
+            "/api.Api/PostDepositCollateral",
+            request,
+            PostDepositCollateralResponse,
+        )
+
+    async def post_withdraw_collateral(
+        self,
+        *,
+        owner_address: str = "",
+        amount: float = 0,
+        project: "Project" = 0,
+        contract: common.PerpContract = 0,
+    ) -> PostWithdrawCollateralResponse:
+        request = PostWithdrawCollateralRequest()
+        request.owner_address = owner_address
+        request.amount = amount
+        request.project = project
+        request.contract = contract
+
+        return await self._unary_unary(
+            "/api.Api/PostWithdrawCollateral",
+            request,
+            PostWithdrawCollateralResponse,
         )
 
     async def get_orderbooks_stream(

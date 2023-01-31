@@ -390,6 +390,17 @@ service Api {
     };
   }
 
+  rpc GetOpenPerpOrders(GetOpenPerpOrdersRequest)  returns (GetOpenPerpOrdersResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/perp/open-orders"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list current open perp orders positions";
+      summary: "PERP order positions";
+      tags: ["Trade", "Perp", "Orderbook"];
+    };
+  }
+
   rpc PostClosePerpPositions(PostClosePerpPositionsRequest)  returns (PostClosePerpPositionsResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/perp/close-positions"
@@ -409,6 +420,50 @@ service Api {
       description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
       summary: "Perpetuals contract orderbook";
       tags: ["Perp", "Orderbook"];
+    };
+  }
+
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/drift/user"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to create a user on a supported platform";
+      summary: "creates a user profile on a supported platform";
+      tags: ["Trade"];
+    };
+  }
+
+  rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/drift/user"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the user info for an account on a supported platform";
+      summary: "gets the user on a supported platform";
+      tags: ["Trade"];
+    };
+  }
+
+  rpc PostDepositCollateral(PostDepositCollateralRequest) returns (PostDepositCollateralResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/perp/collateral/deposit"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to deposit collateral";
+      summary: "posts collateral on a perp platform";
+      tags: ["Perp"];
+    };
+  }
+
+  rpc PostWithdrawCollateral(PostWithdrawCollateralRequest) returns (PostWithdrawCollateralResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/perp/collateral/withdraw"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to withdraw collateral";
+      summary: "withdraw collateral on a perp platform";
+      tags: ["Perp"];
     };
   }
 
@@ -1196,6 +1251,80 @@ message PerpOrderbookItem {
 message GetPerpOrderbooksStreamResponse {
   int64 slot = 1;
   GetPerpOrderbookResponse orderbook = 2;
+}
+
+message GetUserRequest {
+  string ownerAddress = 1;
+  Project project = 2;
+}
+
+message GetUserResponse {
+  string status = 1;
+  int64 accountNumber = 2;
+  string accountAddress = 3;
+  Project project = 4;
+}
+
+message CreateUserRequest {
+  string ownerAddress = 1;
+  Project project = 2;
+}
+
+message CreateUserResponse {
+  string transaction = 1;
+  Project project = 2;
+}
+
+message PostDepositCollateralRequest {
+  string ownerAddress = 1;
+  double amount = 2;
+  Project project = 3;
+  common.PerpContract contract = 4;
+}
+
+message PostDepositCollateralResponse {
+  string transaction = 1;
+}
+
+message PostWithdrawCollateralRequest {
+  string ownerAddress = 1;
+  double amount = 2;
+  Project project = 3;
+  common.PerpContract contract = 4;
+}
+
+message PostWithdrawCollateralResponse {
+  string transaction = 1;
+}
+
+message GetOpenPerpOrdersRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  string accountAddress = 3;
+  repeated common.PerpContract contracts = 4;
+}
+
+message GetOpenPerpOrdersResponse {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+
+  repeated PerpOrder orders = 3;
+}
+
+message PerpOrder {
+  uint64 orderID = 1;
+  uint64 clientOrderID = 2;
+
+  common.PerpContract contract = 3;
+  common.PerpPositionSide positionSide = 4;
+
+  string orderType = 5;
+  double unrealizedPnL = 6;
+
+  double price = 7;
+  double size = 8;
+  double remainingSize = 9;
+  string status = 10;
 }
 
 message GetPerpPositionsRequest {

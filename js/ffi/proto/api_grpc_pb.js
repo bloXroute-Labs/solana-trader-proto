@@ -10,6 +10,28 @@ var google_api_visibility_pb = require('./google/api/visibility_pb.js');
 var protoc$gen$openapiv2_options_annotations_pb = require('./protoc-gen-openapiv2/options/annotations_pb.js');
 var common_pb = require('./common_pb.js');
 
+function serialize_api_CreateUserRequest(arg) {
+  if (!(arg instanceof api_pb.CreateUserRequest)) {
+    throw new Error('Expected argument of type api.CreateUserRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_CreateUserRequest(buffer_arg) {
+  return api_pb.CreateUserRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_CreateUserResponse(arg) {
+  if (!(arg instanceof api_pb.CreateUserResponse)) {
+    throw new Error('Expected argument of type api.CreateUserResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_CreateUserResponse(buffer_arg) {
+  return api_pb.CreateUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetAccountBalanceRequest(arg) {
   if (!(arg instanceof api_pb.GetAccountBalanceRequest)) {
     throw new Error('Expected argument of type api.GetAccountBalanceRequest');
@@ -184,6 +206,28 @@ function serialize_api_GetOpenOrdersResponse(arg) {
 
 function deserialize_api_GetOpenOrdersResponse(buffer_arg) {
   return api_pb.GetOpenOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetOpenPerpOrdersRequest(arg) {
+  if (!(arg instanceof api_pb.GetOpenPerpOrdersRequest)) {
+    throw new Error('Expected argument of type api.GetOpenPerpOrdersRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOpenPerpOrdersRequest(buffer_arg) {
+  return api_pb.GetOpenPerpOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetOpenPerpOrdersResponse(arg) {
+  if (!(arg instanceof api_pb.GetOpenPerpOrdersResponse)) {
+    throw new Error('Expected argument of type api.GetOpenPerpOrdersResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOpenPerpOrdersResponse(buffer_arg) {
+  return api_pb.GetOpenPerpOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetOrderByIDRequest(arg) {
@@ -670,6 +714,28 @@ function deserialize_api_GetUnsettledResponse(buffer_arg) {
   return api_pb.GetUnsettledResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetUserRequest(arg) {
+  if (!(arg instanceof api_pb.GetUserRequest)) {
+    throw new Error('Expected argument of type api.GetUserRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetUserRequest(buffer_arg) {
+  return api_pb.GetUserRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetUserResponse(arg) {
+  if (!(arg instanceof api_pb.GetUserResponse)) {
+    throw new Error('Expected argument of type api.GetUserResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetUserResponse(buffer_arg) {
+  return api_pb.GetUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostCancelAllRequest(arg) {
   if (!(arg instanceof api_pb.PostCancelAllRequest)) {
     throw new Error('Expected argument of type api.PostCancelAllRequest');
@@ -745,6 +811,28 @@ function serialize_api_PostClosePerpPositionsResponse(arg) {
 
 function deserialize_api_PostClosePerpPositionsResponse(buffer_arg) {
   return api_pb.PostClosePerpPositionsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostDepositCollateralRequest(arg) {
+  if (!(arg instanceof api_pb.PostDepositCollateralRequest)) {
+    throw new Error('Expected argument of type api.PostDepositCollateralRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDepositCollateralRequest(buffer_arg) {
+  return api_pb.PostDepositCollateralRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostDepositCollateralResponse(arg) {
+  if (!(arg instanceof api_pb.PostDepositCollateralResponse)) {
+    throw new Error('Expected argument of type api.PostDepositCollateralResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDepositCollateralResponse(buffer_arg) {
+  return api_pb.PostDepositCollateralResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_PostOrderRequest(arg) {
@@ -866,6 +954,28 @@ function serialize_api_PostSubmitResponse(arg) {
 
 function deserialize_api_PostSubmitResponse(buffer_arg) {
   return api_pb.PostSubmitResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostWithdrawCollateralRequest(arg) {
+  if (!(arg instanceof api_pb.PostWithdrawCollateralRequest)) {
+    throw new Error('Expected argument of type api.PostWithdrawCollateralRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostWithdrawCollateralRequest(buffer_arg) {
+  return api_pb.PostWithdrawCollateralRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostWithdrawCollateralResponse(arg) {
+  if (!(arg instanceof api_pb.PostWithdrawCollateralResponse)) {
+    throw new Error('Expected argument of type api.PostWithdrawCollateralResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostWithdrawCollateralResponse(buffer_arg) {
+  return api_pb.PostWithdrawCollateralResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_RouteTradeSwapRequest(arg) {
@@ -1226,6 +1336,17 @@ postPerpOrder: {
     responseSerialize: serialize_api_GetPerpPositionsResponse,
     responseDeserialize: deserialize_api_GetPerpPositionsResponse,
   },
+  getOpenPerpOrders: {
+    path: '/api.Api/GetOpenPerpOrders',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetOpenPerpOrdersRequest,
+    responseType: api_pb.GetOpenPerpOrdersResponse,
+    requestSerialize: serialize_api_GetOpenPerpOrdersRequest,
+    requestDeserialize: deserialize_api_GetOpenPerpOrdersRequest,
+    responseSerialize: serialize_api_GetOpenPerpOrdersResponse,
+    responseDeserialize: deserialize_api_GetOpenPerpOrdersResponse,
+  },
   postClosePerpPositions: {
     path: '/api.Api/PostClosePerpPositions',
     requestStream: false,
@@ -1247,6 +1368,50 @@ postPerpOrder: {
     requestDeserialize: deserialize_api_GetPerpOrderbookRequest,
     responseSerialize: serialize_api_GetPerpOrderbookResponse,
     responseDeserialize: deserialize_api_GetPerpOrderbookResponse,
+  },
+  createUser: {
+    path: '/api.Api/CreateUser',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.CreateUserRequest,
+    responseType: api_pb.CreateUserResponse,
+    requestSerialize: serialize_api_CreateUserRequest,
+    requestDeserialize: deserialize_api_CreateUserRequest,
+    responseSerialize: serialize_api_CreateUserResponse,
+    responseDeserialize: deserialize_api_CreateUserResponse,
+  },
+  getUser: {
+    path: '/api.Api/GetUser',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetUserRequest,
+    responseType: api_pb.GetUserResponse,
+    requestSerialize: serialize_api_GetUserRequest,
+    requestDeserialize: deserialize_api_GetUserRequest,
+    responseSerialize: serialize_api_GetUserResponse,
+    responseDeserialize: deserialize_api_GetUserResponse,
+  },
+  postDepositCollateral: {
+    path: '/api.Api/PostDepositCollateral',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostDepositCollateralRequest,
+    responseType: api_pb.PostDepositCollateralResponse,
+    requestSerialize: serialize_api_PostDepositCollateralRequest,
+    requestDeserialize: deserialize_api_PostDepositCollateralRequest,
+    responseSerialize: serialize_api_PostDepositCollateralResponse,
+    responseDeserialize: deserialize_api_PostDepositCollateralResponse,
+  },
+  postWithdrawCollateral: {
+    path: '/api.Api/PostWithdrawCollateral',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostWithdrawCollateralRequest,
+    responseType: api_pb.PostWithdrawCollateralResponse,
+    requestSerialize: serialize_api_PostWithdrawCollateralRequest,
+    requestDeserialize: deserialize_api_PostWithdrawCollateralRequest,
+    responseSerialize: serialize_api_PostWithdrawCollateralResponse,
+    responseDeserialize: deserialize_api_PostWithdrawCollateralResponse,
   },
   // streaming endpoints
 getOrderbooksStream: {
