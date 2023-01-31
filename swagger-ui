@@ -2484,6 +2484,45 @@
         },
         "clientOrderID": {
           "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "orderType": {
+          "type": "string"
+        },
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reduceOnly": {
+          "type": "boolean"
+        },
+        "triggerPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "triggerCondition": {
+          "type": "string"
+        },
+        "postOnly": {
+          "type": "boolean"
+        },
+        "oraclePriceOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "auctionDuration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "auctionStartPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "auctionEndPrice": {
+          "type": "number",
+          "format": "double"
         }
       }
     },

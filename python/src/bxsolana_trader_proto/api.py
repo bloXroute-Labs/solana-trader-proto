@@ -808,6 +808,17 @@ class PerpOrderbookItem(betterproto.Message):
     size: float = betterproto.double_field(2)
     order_i_d: str = betterproto.string_field(3)
     client_order_i_d: str = betterproto.string_field(4)
+    status: str = betterproto.string_field(5)
+    order_type: str = betterproto.string_field(6)
+    slot: int = betterproto.int64_field(7)
+    reduce_only: bool = betterproto.bool_field(8)
+    trigger_price: float = betterproto.double_field(9)
+    trigger_condition: str = betterproto.string_field(10)
+    post_only: bool = betterproto.bool_field(11)
+    oracle_price_offset: float = betterproto.double_field(12)
+    auction_duration: int = betterproto.int32_field(13)
+    auction_start_price: float = betterproto.double_field(14)
+    auction_end_price: float = betterproto.double_field(15)
 
 
 @dataclass

@@ -24673,7 +24673,18 @@ proto.api.PerpOrderbookItem.toObject = function(includeInstance, msg) {
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
     size: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
     orderid: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 4, "")
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    status: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    ordertype: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    slot: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    reduceonly: jspb.Message.getBooleanFieldWithDefault(msg, 8, false),
+    triggerprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
+    triggercondition: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    postonly: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+    oraclepriceoffset: jspb.Message.getFloatingPointFieldWithDefault(msg, 12, 0.0),
+    auctionduration: jspb.Message.getFieldWithDefault(msg, 13, 0),
+    auctionstartprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 14, 0.0),
+    auctionendprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 15, 0.0)
   };
 
   if (includeInstance) {
@@ -24725,6 +24736,50 @@ proto.api.PerpOrderbookItem.deserializeBinaryFromReader = function(msg, reader) 
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setClientorderid(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setStatus(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOrdertype(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setSlot(value);
+      break;
+    case 8:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setReduceonly(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setTriggerprice(value);
+      break;
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTriggercondition(value);
+      break;
+    case 11:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setPostonly(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOraclepriceoffset(value);
+      break;
+    case 13:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setAuctionduration(value);
+      break;
+    case 14:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAuctionstartprice(value);
+      break;
+    case 15:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAuctionendprice(value);
       break;
     default:
       reader.skipField();
@@ -24780,6 +24835,83 @@ proto.api.PerpOrderbookItem.serializeBinaryToWriter = function(message, writer) 
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getStatus();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getOrdertype();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+  f = message.getSlot();
+  if (f !== 0) {
+    writer.writeInt64(
+      7,
+      f
+    );
+  }
+  f = message.getReduceonly();
+  if (f) {
+    writer.writeBool(
+      8,
+      f
+    );
+  }
+  f = message.getTriggerprice();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      9,
+      f
+    );
+  }
+  f = message.getTriggercondition();
+  if (f.length > 0) {
+    writer.writeString(
+      10,
+      f
+    );
+  }
+  f = message.getPostonly();
+  if (f) {
+    writer.writeBool(
+      11,
+      f
+    );
+  }
+  f = message.getOraclepriceoffset();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      12,
+      f
+    );
+  }
+  f = message.getAuctionduration();
+  if (f !== 0) {
+    writer.writeInt32(
+      13,
+      f
+    );
+  }
+  f = message.getAuctionstartprice();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      14,
+      f
+    );
+  }
+  f = message.getAuctionendprice();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      15,
       f
     );
   }
@@ -24855,6 +24987,204 @@ proto.api.PerpOrderbookItem.prototype.getClientorderid = function() {
  */
 proto.api.PerpOrderbookItem.prototype.setClientorderid = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string status = 5;
+ * @return {string}
+ */
+proto.api.PerpOrderbookItem.prototype.getStatus = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setStatus = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string orderType = 6;
+ * @return {string}
+ */
+proto.api.PerpOrderbookItem.prototype.getOrdertype = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setOrdertype = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional int64 slot = 7;
+ * @return {number}
+ */
+proto.api.PerpOrderbookItem.prototype.getSlot = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setSlot = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * optional bool reduceOnly = 8;
+ * @return {boolean}
+ */
+proto.api.PerpOrderbookItem.prototype.getReduceonly = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 8, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setReduceonly = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 8, value);
+};
+
+
+/**
+ * optional double triggerPrice = 9;
+ * @return {number}
+ */
+proto.api.PerpOrderbookItem.prototype.getTriggerprice = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setTriggerprice = function(value) {
+  return jspb.Message.setProto3FloatField(this, 9, value);
+};
+
+
+/**
+ * optional string triggerCondition = 10;
+ * @return {string}
+ */
+proto.api.PerpOrderbookItem.prototype.getTriggercondition = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setTriggercondition = function(value) {
+  return jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+/**
+ * optional bool postOnly = 11;
+ * @return {boolean}
+ */
+proto.api.PerpOrderbookItem.prototype.getPostonly = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setPostonly = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 11, value);
+};
+
+
+/**
+ * optional double oraclePriceOffset = 12;
+ * @return {number}
+ */
+proto.api.PerpOrderbookItem.prototype.getOraclepriceoffset = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 12, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setOraclepriceoffset = function(value) {
+  return jspb.Message.setProto3FloatField(this, 12, value);
+};
+
+
+/**
+ * optional int32 auctionDuration = 13;
+ * @return {number}
+ */
+proto.api.PerpOrderbookItem.prototype.getAuctionduration = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setAuctionduration = function(value) {
+  return jspb.Message.setProto3IntField(this, 13, value);
+};
+
+
+/**
+ * optional double auctionStartPrice = 14;
+ * @return {number}
+ */
+proto.api.PerpOrderbookItem.prototype.getAuctionstartprice = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 14, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setAuctionstartprice = function(value) {
+  return jspb.Message.setProto3FloatField(this, 14, value);
+};
+
+
+/**
+ * optional double auctionEndPrice = 15;
+ * @return {number}
+ */
+proto.api.PerpOrderbookItem.prototype.getAuctionendprice = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 15, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PerpOrderbookItem} returns this
+ */
+proto.api.PerpOrderbookItem.prototype.setAuctionendprice = function(value) {
+  return jspb.Message.setProto3FloatField(this, 15, value);
 };
 
 

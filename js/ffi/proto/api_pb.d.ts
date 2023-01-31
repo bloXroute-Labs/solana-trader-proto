@@ -2893,6 +2893,28 @@ export class PerpOrderbookItem extends jspb.Message {
     setOrderid(value: string): PerpOrderbookItem;
     getClientorderid(): string;
     setClientorderid(value: string): PerpOrderbookItem;
+    getStatus(): string;
+    setStatus(value: string): PerpOrderbookItem;
+    getOrdertype(): string;
+    setOrdertype(value: string): PerpOrderbookItem;
+    getSlot(): number;
+    setSlot(value: number): PerpOrderbookItem;
+    getReduceonly(): boolean;
+    setReduceonly(value: boolean): PerpOrderbookItem;
+    getTriggerprice(): number;
+    setTriggerprice(value: number): PerpOrderbookItem;
+    getTriggercondition(): string;
+    setTriggercondition(value: string): PerpOrderbookItem;
+    getPostonly(): boolean;
+    setPostonly(value: boolean): PerpOrderbookItem;
+    getOraclepriceoffset(): number;
+    setOraclepriceoffset(value: number): PerpOrderbookItem;
+    getAuctionduration(): number;
+    setAuctionduration(value: number): PerpOrderbookItem;
+    getAuctionstartprice(): number;
+    setAuctionstartprice(value: number): PerpOrderbookItem;
+    getAuctionendprice(): number;
+    setAuctionendprice(value: number): PerpOrderbookItem;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PerpOrderbookItem.AsObject;
@@ -2910,6 +2932,17 @@ export namespace PerpOrderbookItem {
         size: number,
         orderid: string,
         clientorderid: string,
+        status: string,
+        ordertype: string,
+        slot: number,
+        reduceonly: boolean,
+        triggerprice: number,
+        triggercondition: string,
+        postonly: boolean,
+        oraclepriceoffset: number,
+        auctionduration: number,
+        auctionstartprice: number,
+        auctionendprice: number,
     }
 }
 

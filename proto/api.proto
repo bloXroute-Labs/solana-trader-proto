@@ -1246,6 +1246,17 @@ message PerpOrderbookItem {
   double size = 2;
   string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Drift generated OrderID"}];
   string clientOrderID = 4;
+  string status = 5;
+  string orderType = 6;
+  int64 slot = 7;
+  bool reduceOnly = 8;
+  double triggerPrice = 9;
+  string triggerCondition = 10;
+  bool postOnly = 11;
+  double oraclePriceOffset = 12;
+  int32 auctionDuration = 13;
+  double auctionStartPrice  = 14;
+  double auctionEndPrice = 15;
 }
 
 message GetPerpOrderbooksStreamResponse {
