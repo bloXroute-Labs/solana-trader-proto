@@ -1221,6 +1221,7 @@ message GetPricesStreamResponse {
   TokenPrice price = 2;
 }
 
+// Drift messages
 message GetPerpOrderbookRequest {
   string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
@@ -1233,6 +1234,35 @@ message GetPerpOrderbooksRequest {
   Project project = 3;
 }
 
+message GetPerpOrderbookResponse {
+  string market = 1;
+  int32 marketIndex = 2;
+  repeated PerpOrderbookItem bids = 3;
+  repeated PerpOrderbookItem asks = 4;
+}
+
+message PerpOrderbookItem {
+  double price = 1;
+  double size = 2;
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Drift generated OrderID"}];
+  string clientOrderID = 4;
+  string status = 5;
+  string orderType = 6;
+  int64 slot = 7;
+  bool reduceOnly = 8;
+  double triggerPrice = 9;
+  string triggerCondition = 10;
+  bool postOnly = 11;
+  double oraclePriceOffset = 12;
+  int32 auctionDuration = 13;
+  double auctionStartPrice  = 14;
+  double auctionEndPrice = 15;
+}
+
+message GetPerpOrderbooksStreamResponse {
+  int64 slot = 1;
+  GetPerpOrderbookResponse orderbook = 2;
+}
 
 message GetUserRequest {
   string ownerAddress = 1;
@@ -1276,26 +1306,6 @@ message PostWithdrawCollateralRequest {
 
 message PostWithdrawCollateralResponse {
   string transaction = 1;
-}
-
-
-message GetPerpOrderbookResponse {
-  string market = 1;
-  int32 marketIndex = 2;
-  repeated PerpOrderbookItem bids = 3;
-  repeated PerpOrderbookItem asks = 4;
-}
-
-message PerpOrderbookItem {
-  double price = 1;
-  double size = 2;
-  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Drift generated OrderID"}];
-  string clientOrderID = 4;
-}
-
-message GetPerpOrderbooksStreamResponse {
-  int64 slot = 1;
-  GetPerpOrderbookResponse orderbook = 2;
 }
 
 message GetOpenPerpOrdersRequest {

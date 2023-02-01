@@ -2851,6 +2851,127 @@ export namespace GetPerpOrderbooksRequest {
     }
 }
 
+export class GetPerpOrderbookResponse extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetPerpOrderbookResponse;
+    getMarketindex(): number;
+    setMarketindex(value: number): GetPerpOrderbookResponse;
+    clearBidsList(): void;
+    getBidsList(): Array<PerpOrderbookItem>;
+    setBidsList(value: Array<PerpOrderbookItem>): GetPerpOrderbookResponse;
+    addBids(value?: PerpOrderbookItem, index?: number): PerpOrderbookItem;
+    clearAsksList(): void;
+    getAsksList(): Array<PerpOrderbookItem>;
+    setAsksList(value: Array<PerpOrderbookItem>): GetPerpOrderbookResponse;
+    addAsks(value?: PerpOrderbookItem, index?: number): PerpOrderbookItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetPerpOrderbookResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpOrderbookResponse): GetPerpOrderbookResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetPerpOrderbookResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpOrderbookResponse;
+    static deserializeBinaryFromReader(message: GetPerpOrderbookResponse, reader: jspb.BinaryReader): GetPerpOrderbookResponse;
+}
+
+export namespace GetPerpOrderbookResponse {
+    export type AsObject = {
+        market: string,
+        marketindex: number,
+        bidsList: Array<PerpOrderbookItem.AsObject>,
+        asksList: Array<PerpOrderbookItem.AsObject>,
+    }
+}
+
+export class PerpOrderbookItem extends jspb.Message { 
+    getPrice(): number;
+    setPrice(value: number): PerpOrderbookItem;
+    getSize(): number;
+    setSize(value: number): PerpOrderbookItem;
+    getOrderid(): string;
+    setOrderid(value: string): PerpOrderbookItem;
+    getClientorderid(): string;
+    setClientorderid(value: string): PerpOrderbookItem;
+    getStatus(): string;
+    setStatus(value: string): PerpOrderbookItem;
+    getOrdertype(): string;
+    setOrdertype(value: string): PerpOrderbookItem;
+    getSlot(): number;
+    setSlot(value: number): PerpOrderbookItem;
+    getReduceonly(): boolean;
+    setReduceonly(value: boolean): PerpOrderbookItem;
+    getTriggerprice(): number;
+    setTriggerprice(value: number): PerpOrderbookItem;
+    getTriggercondition(): string;
+    setTriggercondition(value: string): PerpOrderbookItem;
+    getPostonly(): boolean;
+    setPostonly(value: boolean): PerpOrderbookItem;
+    getOraclepriceoffset(): number;
+    setOraclepriceoffset(value: number): PerpOrderbookItem;
+    getAuctionduration(): number;
+    setAuctionduration(value: number): PerpOrderbookItem;
+    getAuctionstartprice(): number;
+    setAuctionstartprice(value: number): PerpOrderbookItem;
+    getAuctionendprice(): number;
+    setAuctionendprice(value: number): PerpOrderbookItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PerpOrderbookItem.AsObject;
+    static toObject(includeInstance: boolean, msg: PerpOrderbookItem): PerpOrderbookItem.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PerpOrderbookItem, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PerpOrderbookItem;
+    static deserializeBinaryFromReader(message: PerpOrderbookItem, reader: jspb.BinaryReader): PerpOrderbookItem;
+}
+
+export namespace PerpOrderbookItem {
+    export type AsObject = {
+        price: number,
+        size: number,
+        orderid: string,
+        clientorderid: string,
+        status: string,
+        ordertype: string,
+        slot: number,
+        reduceonly: boolean,
+        triggerprice: number,
+        triggercondition: string,
+        postonly: boolean,
+        oraclepriceoffset: number,
+        auctionduration: number,
+        auctionstartprice: number,
+        auctionendprice: number,
+    }
+}
+
+export class GetPerpOrderbooksStreamResponse extends jspb.Message { 
+    getSlot(): number;
+    setSlot(value: number): GetPerpOrderbooksStreamResponse;
+
+    hasOrderbook(): boolean;
+    clearOrderbook(): void;
+    getOrderbook(): GetPerpOrderbookResponse | undefined;
+    setOrderbook(value?: GetPerpOrderbookResponse): GetPerpOrderbooksStreamResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetPerpOrderbooksStreamResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpOrderbooksStreamResponse): GetPerpOrderbooksStreamResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetPerpOrderbooksStreamResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpOrderbooksStreamResponse;
+    static deserializeBinaryFromReader(message: GetPerpOrderbooksStreamResponse, reader: jspb.BinaryReader): GetPerpOrderbooksStreamResponse;
+}
+
+export namespace GetPerpOrderbooksStreamResponse {
+    export type AsObject = {
+        slot: number,
+        orderbook?: GetPerpOrderbookResponse.AsObject,
+    }
+}
+
 export class GetUserRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): GetUserRequest;
@@ -3044,94 +3165,6 @@ export class PostWithdrawCollateralResponse extends jspb.Message {
 export namespace PostWithdrawCollateralResponse {
     export type AsObject = {
         transaction: string,
-    }
-}
-
-export class GetPerpOrderbookResponse extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetPerpOrderbookResponse;
-    getMarketindex(): number;
-    setMarketindex(value: number): GetPerpOrderbookResponse;
-    clearBidsList(): void;
-    getBidsList(): Array<PerpOrderbookItem>;
-    setBidsList(value: Array<PerpOrderbookItem>): GetPerpOrderbookResponse;
-    addBids(value?: PerpOrderbookItem, index?: number): PerpOrderbookItem;
-    clearAsksList(): void;
-    getAsksList(): Array<PerpOrderbookItem>;
-    setAsksList(value: Array<PerpOrderbookItem>): GetPerpOrderbookResponse;
-    addAsks(value?: PerpOrderbookItem, index?: number): PerpOrderbookItem;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetPerpOrderbookResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetPerpOrderbookResponse): GetPerpOrderbookResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetPerpOrderbookResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetPerpOrderbookResponse;
-    static deserializeBinaryFromReader(message: GetPerpOrderbookResponse, reader: jspb.BinaryReader): GetPerpOrderbookResponse;
-}
-
-export namespace GetPerpOrderbookResponse {
-    export type AsObject = {
-        market: string,
-        marketindex: number,
-        bidsList: Array<PerpOrderbookItem.AsObject>,
-        asksList: Array<PerpOrderbookItem.AsObject>,
-    }
-}
-
-export class PerpOrderbookItem extends jspb.Message { 
-    getPrice(): number;
-    setPrice(value: number): PerpOrderbookItem;
-    getSize(): number;
-    setSize(value: number): PerpOrderbookItem;
-    getOrderid(): string;
-    setOrderid(value: string): PerpOrderbookItem;
-    getClientorderid(): string;
-    setClientorderid(value: string): PerpOrderbookItem;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PerpOrderbookItem.AsObject;
-    static toObject(includeInstance: boolean, msg: PerpOrderbookItem): PerpOrderbookItem.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PerpOrderbookItem, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PerpOrderbookItem;
-    static deserializeBinaryFromReader(message: PerpOrderbookItem, reader: jspb.BinaryReader): PerpOrderbookItem;
-}
-
-export namespace PerpOrderbookItem {
-    export type AsObject = {
-        price: number,
-        size: number,
-        orderid: string,
-        clientorderid: string,
-    }
-}
-
-export class GetPerpOrderbooksStreamResponse extends jspb.Message { 
-    getSlot(): number;
-    setSlot(value: number): GetPerpOrderbooksStreamResponse;
-
-    hasOrderbook(): boolean;
-    clearOrderbook(): void;
-    getOrderbook(): GetPerpOrderbookResponse | undefined;
-    setOrderbook(value?: GetPerpOrderbookResponse): GetPerpOrderbooksStreamResponse;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetPerpOrderbooksStreamResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetPerpOrderbooksStreamResponse): GetPerpOrderbooksStreamResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetPerpOrderbooksStreamResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetPerpOrderbooksStreamResponse;
-    static deserializeBinaryFromReader(message: GetPerpOrderbooksStreamResponse, reader: jspb.BinaryReader): GetPerpOrderbooksStreamResponse;
-}
-
-export namespace GetPerpOrderbooksStreamResponse {
-    export type AsObject = {
-        slot: number,
-        orderbook?: GetPerpOrderbookResponse.AsObject,
     }
 }
 
