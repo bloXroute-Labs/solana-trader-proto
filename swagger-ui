@@ -58,157 +58,6 @@
         ]
       }
     },
-    "/api/v1/drift/perp/{market}": {
-      "get": {
-        "summary": "Perpetuals contract orderbook",
-        "description": "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned",
-        "operationId": "Api_GetPerpOrderbook",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetPerpOrderbookResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "market",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "description": "Use 0 for no limits",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          }
-        ],
-        "tags": [
-          "Perp",
-          "Orderbook"
-        ]
-      }
-    },
-    "/api/v1/drift/user": {
-      "get": {
-        "summary": "gets the user on a supported platform",
-        "description": "Returns the user info for an account on a supported platform",
-        "operationId": "Api_GetUser",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetUserResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          }
-        ],
-        "tags": [
-          "Trade"
-        ]
-      },
-      "post": {
-        "summary": "creates a user profile on a supported platform",
-        "description": "Returns a partially signed txn signature to create a user on a supported platform",
-        "operationId": "Api_CreateUser",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiCreateUserResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          }
-        ],
-        "tags": [
-          "Trade"
-        ]
-      }
-    },
     "/api/v1/market/depth/{market}": {
       "get": {
         "summary": "Market depth",
@@ -782,10 +631,73 @@
         ]
       }
     },
-    "/api/v1/trade/perp/close-positions": {
-      "get": {
-        "summary": "PERP positions",
-        "description": "closes current perp positions",
+    "/api/v1/trade/perp/cancel": {
+      "post": {
+        "summary": "cancel a perp order on a supported platform",
+        "description": "Returns a partially signed txn signature to cancel a perp order on a supported platform",
+        "operationId": "Api_PostCancelPerpOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelPerpOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "contract",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP"
+            ],
+            "default": "ALL"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Perp",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/close": {
+      "post": {
+        "summary": "closes a perp position on a supported platform",
+        "description": "Returns a partially signed txn signature to close a perp position on a supported platform",
         "operationId": "Api_PostClosePerpPositions",
         "responses": {
           "200": {
@@ -1256,6 +1168,63 @@
         ]
       }
     },
+    "/api/v1/trade/perp/{market}": {
+      "get": {
+        "summary": "Perpetuals contract orderbook",
+        "description": "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetPerpOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPerpOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Perp",
+          "Orderbook"
+        ]
+      }
+    },
     "/api/v1/trade/place": {
       "post": {
         "summary": "Unsigned NewOrderV3 transaction",
@@ -1590,6 +1559,100 @@
           "Orderbook"
         ]
       }
+    },
+    "/api/v1/trade/user": {
+      "get": {
+        "summary": "gets the user on a supported platform",
+        "description": "Returns the user info for an account on a supported platform",
+        "operationId": "Api_GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Trade"
+        ]
+      },
+      "post": {
+        "summary": "creates a user profile on a supported platform",
+        "description": "Returns a partially signed txn signature to create a user on a supported platform",
+        "operationId": "Api_PostCreateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCreateUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Trade"
+        ]
+      }
     }
   },
   "definitions": {
@@ -1651,17 +1714,6 @@
         "count": {
           "type": "number",
           "format": "double"
-        }
-      }
-    },
-    "apiCreateUserResponse": {
-      "type": "object",
-      "properties": {
-        "transaction": {
-          "type": "string"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
         }
       }
     },
@@ -2721,6 +2773,14 @@
         }
       }
     },
+    "apiPostCancelPerpOrderResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string"
+        }
+      }
+    },
     "apiPostClosePerpPositionsResponse": {
       "type": "object",
       "properties": {
@@ -2729,6 +2789,17 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "apiPostCreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
         }
       }
     },

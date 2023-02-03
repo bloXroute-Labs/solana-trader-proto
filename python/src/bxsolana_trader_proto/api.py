@@ -842,15 +842,27 @@ class GetUserResponse(betterproto.Message):
 
 
 @dataclass
-class CreateUserRequest(betterproto.Message):
+class PostCreateUserRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
 
 
 @dataclass
-class CreateUserResponse(betterproto.Message):
+class PostCreateUserResponse(betterproto.Message):
     transaction: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
+
+
+@dataclass
+class PostCancelPerpOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+    contract: common.PerpContract = betterproto.enum_field(3)
+
+
+@dataclass
+class PostCancelPerpOrderResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
 
 
 @dataclass
@@ -1608,6 +1620,24 @@ class ApiStub(betterproto.ServiceStub):
             GetOpenPerpOrdersResponse,
         )
 
+    async def post_cancel_perp_order(
+        self,
+        *,
+        owner_address: str = "",
+        project: "Project" = 0,
+        contract: common.PerpContract = 0,
+    ) -> PostCancelPerpOrderResponse:
+        request = PostCancelPerpOrderRequest()
+        request.owner_address = owner_address
+        request.project = project
+        request.contract = contract
+
+        return await self._unary_unary(
+            "/api.Api/PostCancelPerpOrder",
+            request,
+            PostCancelPerpOrderResponse,
+        )
+
     async def post_close_perp_positions(
         self,
         *,
@@ -1640,17 +1670,17 @@ class ApiStub(betterproto.ServiceStub):
             GetPerpOrderbookResponse,
         )
 
-    async def create_user(
+    async def post_create_user(
         self, *, owner_address: str = "", project: "Project" = 0
-    ) -> CreateUserResponse:
-        request = CreateUserRequest()
+    ) -> PostCreateUserResponse:
+        request = PostCreateUserRequest()
         request.owner_address = owner_address
         request.project = project
 
         return await self._unary_unary(
-            "/api.Api/CreateUser",
+            "/api.Api/PostCreateUser",
             request,
-            CreateUserResponse,
+            PostCreateUserResponse,
         )
 
     async def get_user(
