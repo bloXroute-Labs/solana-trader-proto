@@ -1051,7 +1051,8 @@
             "name": "slippage",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "number",
+            "format": "double"
           },
           {
             "name": "type",

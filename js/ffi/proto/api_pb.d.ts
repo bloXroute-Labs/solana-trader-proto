@@ -3489,8 +3489,8 @@ export class PostPerpOrderRequest extends jspb.Message {
     setAccountaddress(value: string): PostPerpOrderRequest;
     getPositionside(): common_pb.PerpPositionSide;
     setPositionside(value: common_pb.PerpPositionSide): PostPerpOrderRequest;
-    getSlippage(): string;
-    setSlippage(value: string): PostPerpOrderRequest;
+    getSlippage(): number;
+    setSlippage(value: number): PostPerpOrderRequest;
     getType(): common_pb.PerpOrderType;
     setType(value: common_pb.PerpOrderType): PostPerpOrderRequest;
     getAmount(): number;
@@ -3518,7 +3518,7 @@ export namespace PostPerpOrderRequest {
         contract: common_pb.PerpContract,
         accountaddress: string,
         positionside: common_pb.PerpPositionSide,
-        slippage: string,
+        slippage: number,
         type: common_pb.PerpOrderType,
         amount: number,
         price: number,

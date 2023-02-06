@@ -29281,7 +29281,7 @@ proto.api.PostPerpOrderRequest.toObject = function(includeInstance, msg) {
     contract: jspb.Message.getFieldWithDefault(msg, 4, 0),
     accountaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
     positionside: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    slippage: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     type: jspb.Message.getFieldWithDefault(msg, 8, 0),
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
@@ -29347,7 +29347,7 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setPositionside(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setSlippage(value);
       break;
     case 8:
@@ -29438,8 +29438,8 @@ proto.api.PostPerpOrderRequest.serializeBinaryToWriter = function(message, write
     );
   }
   f = message.getSlippage();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0.0) {
+    writer.writeDouble(
       7,
       f
     );
@@ -29584,20 +29584,20 @@ proto.api.PostPerpOrderRequest.prototype.setPositionside = function(value) {
 
 
 /**
- * optional string slippage = 7;
- * @return {string}
+ * optional double slippage = 7;
+ * @return {number}
  */
 proto.api.PostPerpOrderRequest.prototype.getSlippage = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.api.PostPerpOrderRequest} returns this
  */
 proto.api.PostPerpOrderRequest.prototype.setSlippage = function(value) {
-  return jspb.Message.setProto3StringField(this, 7, value);
+  return jspb.Message.setProto3FloatField(this, 7, value);
 };
 
 

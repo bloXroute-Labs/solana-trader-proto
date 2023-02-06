@@ -969,7 +969,7 @@ class PostPerpOrderRequest(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(4)
     account_address: str = betterproto.string_field(5)
     position_side: common.PerpPositionSide = betterproto.enum_field(6)
-    slippage: str = betterproto.string_field(7)
+    slippage: float = betterproto.double_field(7)
     type: common.PerpOrderType = betterproto.enum_field(8)
     amount: float = betterproto.double_field(9)
     price: float = betterproto.double_field(10)
@@ -1553,7 +1553,7 @@ class ApiStub(betterproto.ServiceStub):
         contract: common.PerpContract = 0,
         account_address: str = "",
         position_side: common.PerpPositionSide = 0,
-        slippage: str = "",
+        slippage: float = 0,
         type: common.PerpOrderType = 0,
         amount: float = 0,
         price: float = 0,
