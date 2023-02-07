@@ -866,6 +866,20 @@ class PostCancelPerpOrdersResponse(betterproto.Message):
 
 
 @dataclass
+class PostCancelPerpOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+    contract: common.PerpContract = betterproto.enum_field(3)
+    client_order_i_d: int = betterproto.uint64_field(4)
+    order_i_d: int = betterproto.uint64_field(5)
+
+
+@dataclass
+class PostCancelPerpOrderResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
+
+
+@dataclass
 class PostDepositCollateralRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     amount: float = betterproto.double_field(2)
@@ -1636,6 +1650,28 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostCancelPerpOrders",
             request,
             PostCancelPerpOrdersResponse,
+        )
+
+    async def post_cancel_perp_order(
+        self,
+        *,
+        owner_address: str = "",
+        project: "Project" = 0,
+        contract: common.PerpContract = 0,
+        client_order_i_d: int = 0,
+        order_i_d: int = 0,
+    ) -> PostCancelPerpOrderResponse:
+        request = PostCancelPerpOrderRequest()
+        request.owner_address = owner_address
+        request.project = project
+        request.contract = contract
+        request.client_order_i_d = client_order_i_d
+        request.order_i_d = order_i_d
+
+        return await self._unary_unary(
+            "/api.Api/PostCancelPerpOrder",
+            request,
+            PostCancelPerpOrderResponse,
         )
 
     async def post_close_perp_positions(

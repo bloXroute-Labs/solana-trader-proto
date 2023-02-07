@@ -694,6 +694,83 @@
         ]
       }
     },
+    "/api/v1/trade/perp/cancelbyid": {
+      "post": {
+        "summary": "cancel perp order by id on a supported platform",
+        "description": "Returns a partially signed txn signature to cancel perp order either based on order id or client order id on a supported platform",
+        "operationId": "Api_PostCancelPerpOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelPerpOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "contract",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP"
+            ],
+            "default": "ALL"
+          },
+          {
+            "name": "clientOrderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "orderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Perp",
+          "Orderbook"
+        ]
+      }
+    },
     "/api/v1/trade/perp/close": {
       "post": {
         "summary": "closes a perp position on a supported platform",
@@ -2771,6 +2848,14 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostCancelPerpOrderResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string"
         }
       }
     },

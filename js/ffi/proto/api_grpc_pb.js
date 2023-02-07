@@ -769,6 +769,28 @@ function deserialize_api_PostCancelOrderResponse(buffer_arg) {
   return api_pb.PostCancelOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostCancelPerpOrderRequest(arg) {
+  if (!(arg instanceof api_pb.PostCancelPerpOrderRequest)) {
+    throw new Error('Expected argument of type api.PostCancelPerpOrderRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostCancelPerpOrderRequest(buffer_arg) {
+  return api_pb.PostCancelPerpOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostCancelPerpOrderResponse(arg) {
+  if (!(arg instanceof api_pb.PostCancelPerpOrderResponse)) {
+    throw new Error('Expected argument of type api.PostCancelPerpOrderResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostCancelPerpOrderResponse(buffer_arg) {
+  return api_pb.PostCancelPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostCancelPerpOrdersRequest(arg) {
   if (!(arg instanceof api_pb.PostCancelPerpOrdersRequest)) {
     throw new Error('Expected argument of type api.PostCancelPerpOrdersRequest');
@@ -1379,6 +1401,17 @@ postPerpOrder: {
     requestDeserialize: deserialize_api_PostCancelPerpOrdersRequest,
     responseSerialize: serialize_api_PostCancelPerpOrdersResponse,
     responseDeserialize: deserialize_api_PostCancelPerpOrdersResponse,
+  },
+  postCancelPerpOrder: {
+    path: '/api.Api/PostCancelPerpOrder',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostCancelPerpOrderRequest,
+    responseType: api_pb.PostCancelPerpOrderResponse,
+    requestSerialize: serialize_api_PostCancelPerpOrderRequest,
+    requestDeserialize: deserialize_api_PostCancelPerpOrderRequest,
+    responseSerialize: serialize_api_PostCancelPerpOrderResponse,
+    responseDeserialize: deserialize_api_PostCancelPerpOrderResponse,
   },
   postClosePerpPositions: {
     path: '/api.Api/PostClosePerpPositions',

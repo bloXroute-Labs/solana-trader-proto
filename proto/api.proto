@@ -412,6 +412,17 @@ service Api {
     };
   }
 
+  rpc PostCancelPerpOrder(PostCancelPerpOrderRequest) returns (PostCancelPerpOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/perp/cancelbyid"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to cancel perp order either based on order id or client order id on a supported platform";
+      summary: "cancel perp order by id on a supported platform";
+      tags: ["Trade", "Perp", "Orderbook"];
+    };
+  }
+
   rpc PostClosePerpPositions(PostClosePerpPositionsRequest) returns (PostClosePerpPositionsResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/close"
@@ -1304,6 +1315,19 @@ message PostCancelPerpOrdersRequest {
 }
 
 message PostCancelPerpOrdersResponse {
+  string transaction = 1;
+}
+
+
+message PostCancelPerpOrderRequest {
+  string ownerAddress = 1;
+  Project project = 2;
+  common.PerpContract contract = 3;
+  uint64 clientOrderID = 4;
+  uint64 orderID = 5;
+}
+
+message PostCancelPerpOrderResponse {
   string transaction = 1;
 }
 

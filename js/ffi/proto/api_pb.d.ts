@@ -3116,6 +3116,58 @@ export namespace PostCancelPerpOrdersResponse {
     }
 }
 
+export class PostCancelPerpOrderRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostCancelPerpOrderRequest;
+    getProject(): Project;
+    setProject(value: Project): PostCancelPerpOrderRequest;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): PostCancelPerpOrderRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostCancelPerpOrderRequest;
+    getOrderid(): number;
+    setOrderid(value: number): PostCancelPerpOrderRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostCancelPerpOrderRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelPerpOrderRequest): PostCancelPerpOrderRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostCancelPerpOrderRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelPerpOrderRequest;
+    static deserializeBinaryFromReader(message: PostCancelPerpOrderRequest, reader: jspb.BinaryReader): PostCancelPerpOrderRequest;
+}
+
+export namespace PostCancelPerpOrderRequest {
+    export type AsObject = {
+        owneraddress: string,
+        project: Project,
+        contract: common_pb.PerpContract,
+        clientorderid: number,
+        orderid: number,
+    }
+}
+
+export class PostCancelPerpOrderResponse extends jspb.Message { 
+    getTransaction(): string;
+    setTransaction(value: string): PostCancelPerpOrderResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostCancelPerpOrderResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelPerpOrderResponse): PostCancelPerpOrderResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostCancelPerpOrderResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelPerpOrderResponse;
+    static deserializeBinaryFromReader(message: PostCancelPerpOrderResponse, reader: jspb.BinaryReader): PostCancelPerpOrderResponse;
+}
+
+export namespace PostCancelPerpOrderResponse {
+    export type AsObject = {
+        transaction: string,
+    }
+}
+
 export class PostDepositCollateralRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): PostDepositCollateralRequest;
