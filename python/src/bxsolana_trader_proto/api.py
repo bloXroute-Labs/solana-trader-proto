@@ -854,14 +854,14 @@ class PostCreateUserResponse(betterproto.Message):
 
 
 @dataclass
-class PostCancelPerpOrderRequest(betterproto.Message):
+class PostCancelPerpOrdersRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
     contract: common.PerpContract = betterproto.enum_field(3)
 
 
 @dataclass
-class PostCancelPerpOrderResponse(betterproto.Message):
+class PostCancelPerpOrdersResponse(betterproto.Message):
     transaction: str = betterproto.string_field(1)
 
 
@@ -1620,22 +1620,22 @@ class ApiStub(betterproto.ServiceStub):
             GetOpenPerpOrdersResponse,
         )
 
-    async def post_cancel_perp_order(
+    async def post_cancel_perp_orders(
         self,
         *,
         owner_address: str = "",
         project: "Project" = 0,
         contract: common.PerpContract = 0,
-    ) -> PostCancelPerpOrderResponse:
-        request = PostCancelPerpOrderRequest()
+    ) -> PostCancelPerpOrdersResponse:
+        request = PostCancelPerpOrdersRequest()
         request.owner_address = owner_address
         request.project = project
         request.contract = contract
 
         return await self._unary_unary(
-            "/api.Api/PostCancelPerpOrder",
+            "/api.Api/PostCancelPerpOrders",
             request,
-            PostCancelPerpOrderResponse,
+            PostCancelPerpOrdersResponse,
         )
 
     async def post_close_perp_positions(

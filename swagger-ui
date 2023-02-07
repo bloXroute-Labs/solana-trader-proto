@@ -633,14 +633,14 @@
     },
     "/api/v1/trade/perp/cancel": {
       "post": {
-        "summary": "cancel a perp order on a supported platform",
-        "description": "Returns a partially signed txn signature to cancel a perp order on a supported platform",
-        "operationId": "Api_PostCancelPerpOrder",
+        "summary": "cancel perp orders on a supported platform",
+        "description": "Returns a partially signed txn signature to cancel perp orders on a supported platform",
+        "operationId": "Api_PostCancelPerpOrders",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostCancelPerpOrderResponse"
+              "$ref": "#/definitions/apiPostCancelPerpOrdersResponse"
             }
           },
           "default": {
@@ -2774,7 +2774,7 @@
         }
       }
     },
-    "apiPostCancelPerpOrderResponse": {
+    "apiPostCancelPerpOrdersResponse": {
       "type": "object",
       "properties": {
         "transaction": {

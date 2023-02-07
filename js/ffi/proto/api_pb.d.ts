@@ -3070,25 +3070,25 @@ export namespace PostCreateUserResponse {
     }
 }
 
-export class PostCancelPerpOrderRequest extends jspb.Message { 
+export class PostCancelPerpOrdersRequest extends jspb.Message { 
     getOwneraddress(): string;
-    setOwneraddress(value: string): PostCancelPerpOrderRequest;
+    setOwneraddress(value: string): PostCancelPerpOrdersRequest;
     getProject(): Project;
-    setProject(value: Project): PostCancelPerpOrderRequest;
+    setProject(value: Project): PostCancelPerpOrdersRequest;
     getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): PostCancelPerpOrderRequest;
+    setContract(value: common_pb.PerpContract): PostCancelPerpOrdersRequest;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostCancelPerpOrderRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: PostCancelPerpOrderRequest): PostCancelPerpOrderRequest.AsObject;
+    toObject(includeInstance?: boolean): PostCancelPerpOrdersRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelPerpOrdersRequest): PostCancelPerpOrdersRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostCancelPerpOrderRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostCancelPerpOrderRequest;
-    static deserializeBinaryFromReader(message: PostCancelPerpOrderRequest, reader: jspb.BinaryReader): PostCancelPerpOrderRequest;
+    static serializeBinaryToWriter(message: PostCancelPerpOrdersRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelPerpOrdersRequest;
+    static deserializeBinaryFromReader(message: PostCancelPerpOrdersRequest, reader: jspb.BinaryReader): PostCancelPerpOrdersRequest;
 }
 
-export namespace PostCancelPerpOrderRequest {
+export namespace PostCancelPerpOrdersRequest {
     export type AsObject = {
         owneraddress: string,
         project: Project,
@@ -3096,21 +3096,21 @@ export namespace PostCancelPerpOrderRequest {
     }
 }
 
-export class PostCancelPerpOrderResponse extends jspb.Message { 
+export class PostCancelPerpOrdersResponse extends jspb.Message { 
     getTransaction(): string;
-    setTransaction(value: string): PostCancelPerpOrderResponse;
+    setTransaction(value: string): PostCancelPerpOrdersResponse;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostCancelPerpOrderResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: PostCancelPerpOrderResponse): PostCancelPerpOrderResponse.AsObject;
+    toObject(includeInstance?: boolean): PostCancelPerpOrdersResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelPerpOrdersResponse): PostCancelPerpOrdersResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostCancelPerpOrderResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostCancelPerpOrderResponse;
-    static deserializeBinaryFromReader(message: PostCancelPerpOrderResponse, reader: jspb.BinaryReader): PostCancelPerpOrderResponse;
+    static serializeBinaryToWriter(message: PostCancelPerpOrdersResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelPerpOrdersResponse;
+    static deserializeBinaryFromReader(message: PostCancelPerpOrdersResponse, reader: jspb.BinaryReader): PostCancelPerpOrdersResponse;
 }
 
-export namespace PostCancelPerpOrderResponse {
+export namespace PostCancelPerpOrdersResponse {
     export type AsObject = {
         transaction: string,
     }

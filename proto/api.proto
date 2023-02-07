@@ -401,13 +401,13 @@ service Api {
     };
   }
 
-  rpc PostCancelPerpOrder(PostCancelPerpOrderRequest) returns (PostCancelPerpOrderResponse) {
+  rpc PostCancelPerpOrders(PostCancelPerpOrdersRequest) returns (PostCancelPerpOrdersResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/cancel"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns a partially signed txn signature to cancel a perp order on a supported platform";
-      summary: "cancel a perp order on a supported platform";
+      description: "Returns a partially signed txn signature to cancel perp orders on a supported platform";
+      summary: "cancel perp orders on a supported platform";
       tags: ["Trade", "Perp", "Orderbook"];
     };
   }
@@ -1297,13 +1297,13 @@ message PostCreateUserResponse {
   Project project = 2;
 }
 
-message PostCancelPerpOrderRequest {
+message PostCancelPerpOrdersRequest {
   string ownerAddress = 1;
   Project project = 2;
   common.PerpContract contract = 3;
 }
 
-message PostCancelPerpOrderResponse {
+message PostCancelPerpOrdersResponse {
   string transaction = 1;
 }
 
