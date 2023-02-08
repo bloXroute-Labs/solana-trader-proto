@@ -436,7 +436,7 @@ service Api {
 
   rpc GetPerpOrderbook(GetPerpOrderbookRequest) returns (GetPerpOrderbookResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/perp/{market}"
+      get: "/api/v1/trade/perp/orderbook/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
