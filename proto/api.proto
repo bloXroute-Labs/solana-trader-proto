@@ -188,6 +188,29 @@ service Api {
     };
   }
 
+  rpc GetOpenOrderAccount(GetOpenOrdersAccountRequest) returns (GetOpenOrdersAccountResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/account/open-orders"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Gets open orders account for a given wallet and market";
+      summary: "Open orders account";
+      tags: "Account";
+    };
+  }
+
+  rpc PostAcquireTokenAccounts(PostTokenAccountsRequest) returns (PostTokenAccountsResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/account/token-accounts"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Acquires or creates token accounts for a wallet";
+      summary: "Token Accounts";
+      tags: "Account";
+    };
+  }
+
   // trade endpoints
   rpc PostOrder(PostOrderRequest) returns (PostOrderResponse) {
     option (google.api.http) = {
@@ -717,6 +740,28 @@ message GetAccountBalanceRequest {
 
 message GetAccountBalanceResponse {
   repeated TokenBalance tokens = 1;
+}
+
+message PostTokenAccountsRequest {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message TokenAccountInfo {
+  string market = 1;
+  string tokenAccount = 2;
+}
+
+message PostTokenAccountsResponse {
+  repeated TokenAccountInfo tokenAccountInfos = 1;
+}
+
+message GetOpenOrdersAccountRequest {
+  string ownerAddress = 1;
+  string market = 2;
+}
+
+message GetOpenOrdersAccountResponse {
+  string account = 1;
 }
 
 message TokenBalance {
