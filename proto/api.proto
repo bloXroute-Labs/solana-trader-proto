@@ -371,6 +371,7 @@ service Api {
   rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/order"
+      body: "*",
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "post a perp order";
