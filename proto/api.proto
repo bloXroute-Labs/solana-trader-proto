@@ -404,6 +404,7 @@ service Api {
   rpc PostCancelPerpOrders(PostCancelPerpOrdersRequest) returns (PostCancelPerpOrdersResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/cancel"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to cancel perp orders on a supported platform";
@@ -415,6 +416,7 @@ service Api {
   rpc PostCancelPerpOrder(PostCancelPerpOrderRequest) returns (PostCancelPerpOrderResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/cancelbyid"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to cancel perp order either based on order id or client order id on a supported platform";
@@ -426,6 +428,7 @@ service Api {
   rpc PostClosePerpPositions(PostClosePerpPositionsRequest) returns (PostClosePerpPositionsResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/close"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to close a perp position on a supported platform";
@@ -448,6 +451,7 @@ service Api {
   rpc PostCreateUser(PostCreateUserRequest) returns (PostCreateUserResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/user"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to create a user on a supported platform";
@@ -470,6 +474,7 @@ service Api {
   rpc PostDepositCollateral(PostDepositCollateralRequest) returns (PostDepositCollateralResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/collateral/deposit"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to deposit collateral";
@@ -481,6 +486,7 @@ service Api {
   rpc PostWithdrawCollateral(PostWithdrawCollateralRequest) returns (PostWithdrawCollateralResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/collateral/withdraw"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to withdraw collateral";
@@ -1310,7 +1316,7 @@ message PostCreateUserResponse {
 
 message PostCancelPerpOrdersRequest {
   string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
-  Project project = 2 [(google.api.field_behavior) = REQUIRED];;
+  Project project = 2 [(google.api.field_behavior) = REQUIRED];
   common.PerpContract contract = 3 [(google.api.field_behavior) = REQUIRED];;
 }
 
