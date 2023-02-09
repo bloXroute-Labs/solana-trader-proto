@@ -1309,9 +1309,9 @@ message PostCreateUserResponse {
 }
 
 message PostCancelPerpOrdersRequest {
-  string ownerAddress = 1;
-  Project project = 2;
-  common.PerpContract contract = 3;
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+  Project project = 2 [(google.api.field_behavior) = REQUIRED];;
+  common.PerpContract contract = 3 [(google.api.field_behavior) = REQUIRED];;
 }
 
 message PostCancelPerpOrdersResponse {

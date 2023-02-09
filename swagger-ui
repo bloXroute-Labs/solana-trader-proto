@@ -654,7 +654,7 @@
           {
             "name": "ownerAddress",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string"
           },
           {
