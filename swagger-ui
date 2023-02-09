@@ -652,39 +652,12 @@
         },
         "parameters": [
           {
-            "name": "ownerAddress",
-            "in": "query",
+            "name": "body",
+            "in": "body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP"
-            ],
-            "default": "ALL"
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelPerpOrdersRequest"
+            }
           }
         ],
         "tags": [
@@ -715,53 +688,12 @@
         },
         "parameters": [
           {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP"
-            ],
-            "default": "ALL"
-          },
-          {
-            "name": "clientOrderID",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          },
-          {
-            "name": "orderID",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelPerpOrderRequest"
+            }
           }
         ],
         "tags": [
@@ -792,42 +724,12 @@
         },
         "parameters": [
           {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "contracts",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "ALL",
-                "SOL_PERP",
-                "ETH_PERP",
-                "BTC_PERP"
-              ]
-            },
-            "collectionFormat": "multi"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostClosePerpPositionsRequest"
+            }
           }
         ],
         "tags": [
@@ -858,46 +760,12 @@
         },
         "parameters": [
           {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "amount",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP"
-            ],
-            "default": "ALL"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostDepositCollateralRequest"
+            }
           }
         ],
         "tags": [
@@ -926,46 +794,12 @@
         },
         "parameters": [
           {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "amount",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP"
-            ],
-            "default": "ALL"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostWithdrawCollateralRequest"
+            }
           }
         ],
         "tags": [
@@ -1705,26 +1539,12 @@
         },
         "parameters": [
           {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCreateUserRequest"
+            }
           }
         ],
         "tags": [
@@ -2851,6 +2671,28 @@
         }
       }
     },
+    "apiPostCancelPerpOrderRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "orderID": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
     "apiPostCancelPerpOrderResponse": {
       "type": "object",
       "properties": {
@@ -2859,11 +2701,48 @@
         }
       }
     },
+    "apiPostCancelPerpOrdersRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        }
+      },
+      "required": [
+        "ownerAddress"
+      ]
+    },
     "apiPostCancelPerpOrdersResponse": {
       "type": "object",
       "properties": {
         "transaction": {
           "type": "string"
+        }
+      }
+    },
+    "apiPostClosePerpPositionsRequest": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "ownerAddress": {
+          "type": "string"
+        },
+        "contracts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonPerpContract"
+          }
         }
       }
     },
@@ -2878,6 +2757,17 @@
         }
       }
     },
+    "apiPostCreateUserRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
     "apiPostCreateUserResponse": {
       "type": "object",
       "properties": {
@@ -2886,6 +2776,24 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiPostDepositCollateralRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
         }
       }
     },
@@ -3180,6 +3088,24 @@
       "properties": {
         "signature": {
           "type": "string"
+        }
+      }
+    },
+    "apiPostWithdrawCollateralRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
         }
       }
     },
