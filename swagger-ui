@@ -3351,7 +3351,10 @@
         "symbol": {
           "type": "string"
         },
-        "address": {
+        "tokenAddress": {
+          "type": "string"
+        },
+        "payerAddress": {
           "type": "string"
         },
         "walletAmount": {
