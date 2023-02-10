@@ -721,10 +721,11 @@ message GetAccountBalanceResponse {
 
 message TokenBalance {
   string symbol = 1;
-  string address = 2;
-  double walletAmount = 3;
-  double unsettledAmount = 4;
-  double openOrdersAmount = 5;
+  string tokenAddress = 2;
+  string payerAddress = 3;
+  double walletAmount = 4;
+  double unsettledAmount = 5;
+  double openOrdersAmount = 6;
 }
 
 message PostOrderRequest {
