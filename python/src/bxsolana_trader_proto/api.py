@@ -240,8 +240,8 @@ class GetAccountBalanceResponse(betterproto.Message):
 @dataclass
 class TokenBalance(betterproto.Message):
     symbol: str = betterproto.string_field(1)
-    token_mint: str = betterproto.string_field(2)
-    token_account: str = betterproto.string_field(3)
+    token_address: str = betterproto.string_field(2)
+    payer_address: str = betterproto.string_field(3)
     wallet_amount: float = betterproto.double_field(4)
     unsettled_amount: float = betterproto.double_field(5)
     open_orders_amount: float = betterproto.double_field(6)

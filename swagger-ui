@@ -3351,10 +3351,10 @@
         "symbol": {
           "type": "string"
         },
-        "tokenMint": {
+        "tokenAddress": {
           "type": "string"
         },
-        "tokenAccount": {
+        "payerAddress": {
           "type": "string"
         },
         "walletAmount": {
