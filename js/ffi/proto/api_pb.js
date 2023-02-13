@@ -7923,8 +7923,8 @@ proto.api.TokenBalance.prototype.toObject = function(opt_includeInstance) {
 proto.api.TokenBalance.toObject = function(includeInstance, msg) {
   var f, obj = {
     symbol: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    tokenaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    payeraddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    tokenmint: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    tokenaccount: jspb.Message.getFieldWithDefault(msg, 3, ""),
     walletamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
     unsettledamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
     openordersamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0)
@@ -7970,11 +7970,11 @@ proto.api.TokenBalance.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTokenaddress(value);
+      msg.setTokenmint(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPayeraddress(value);
+      msg.setTokenaccount(value);
       break;
     case 4:
       var value = /** @type {number} */ (reader.readDouble());
@@ -8024,14 +8024,14 @@ proto.api.TokenBalance.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getTokenaddress();
+  f = message.getTokenmint();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getPayeraddress();
+  f = message.getTokenaccount();
   if (f.length > 0) {
     writer.writeString(
       3,
@@ -8081,10 +8081,10 @@ proto.api.TokenBalance.prototype.setSymbol = function(value) {
 
 
 /**
- * optional string tokenAddress = 2;
+ * optional string tokenMint = 2;
  * @return {string}
  */
-proto.api.TokenBalance.prototype.getTokenaddress = function() {
+proto.api.TokenBalance.prototype.getTokenmint = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -8093,16 +8093,16 @@ proto.api.TokenBalance.prototype.getTokenaddress = function() {
  * @param {string} value
  * @return {!proto.api.TokenBalance} returns this
  */
-proto.api.TokenBalance.prototype.setTokenaddress = function(value) {
+proto.api.TokenBalance.prototype.setTokenmint = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string payerAddress = 3;
+ * optional string tokenAccount = 3;
  * @return {string}
  */
-proto.api.TokenBalance.prototype.getPayeraddress = function() {
+proto.api.TokenBalance.prototype.getTokenaccount = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -8111,7 +8111,7 @@ proto.api.TokenBalance.prototype.getPayeraddress = function() {
  * @param {string} value
  * @return {!proto.api.TokenBalance} returns this
  */
-proto.api.TokenBalance.prototype.setPayeraddress = function(value) {
+proto.api.TokenBalance.prototype.setTokenaccount = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
