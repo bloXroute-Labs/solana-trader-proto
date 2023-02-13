@@ -721,8 +721,8 @@ message GetAccountBalanceResponse {
 
 message TokenBalance {
   string symbol = 1;
-  string tokenAddress = 2;
-  string payerAddress = 3;
+  string tokenMint = 2;
+  string tokenAccount = 3;
   double walletAmount = 4;
   double unsettledAmount = 5;
   double openOrdersAmount = 6;

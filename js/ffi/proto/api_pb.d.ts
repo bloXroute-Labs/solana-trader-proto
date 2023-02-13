@@ -693,8 +693,10 @@ export namespace GetAccountBalanceResponse {
 export class TokenBalance extends jspb.Message { 
     getSymbol(): string;
     setSymbol(value: string): TokenBalance;
-    getAddress(): string;
-    setAddress(value: string): TokenBalance;
+    getTokenmint(): string;
+    setTokenmint(value: string): TokenBalance;
+    getTokenaccount(): string;
+    setTokenaccount(value: string): TokenBalance;
     getWalletamount(): number;
     setWalletamount(value: number): TokenBalance;
     getUnsettledamount(): number;
@@ -715,7 +717,8 @@ export class TokenBalance extends jspb.Message {
 export namespace TokenBalance {
     export type AsObject = {
         symbol: string,
-        address: string,
+        tokenmint: string,
+        tokenaccount: string,
         walletamount: number,
         unsettledamount: number,
         openordersamount: number,

@@ -7923,10 +7923,11 @@ proto.api.TokenBalance.prototype.toObject = function(opt_includeInstance) {
 proto.api.TokenBalance.toObject = function(includeInstance, msg) {
   var f, obj = {
     symbol: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    address: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    walletamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
-    unsettledamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
-    openordersamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0)
+    tokenmint: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    tokenaccount: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    walletamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    unsettledamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    openordersamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0)
   };
 
   if (includeInstance) {
@@ -7969,17 +7970,21 @@ proto.api.TokenBalance.deserializeBinaryFromReader = function(msg, reader) {
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAddress(value);
+      msg.setTokenmint(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setWalletamount(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTokenaccount(value);
       break;
     case 4:
       var value = /** @type {number} */ (reader.readDouble());
-      msg.setUnsettledamount(value);
+      msg.setWalletamount(value);
       break;
     case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setUnsettledamount(value);
+      break;
+    case 6:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setOpenordersamount(value);
       break;
@@ -8019,31 +8024,38 @@ proto.api.TokenBalance.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getAddress();
+  f = message.getTokenmint();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getWalletamount();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  f = message.getTokenaccount();
+  if (f.length > 0) {
+    writer.writeString(
       3,
       f
     );
   }
-  f = message.getUnsettledamount();
+  f = message.getWalletamount();
   if (f !== 0.0) {
     writer.writeDouble(
       4,
       f
     );
   }
-  f = message.getOpenordersamount();
+  f = message.getUnsettledamount();
   if (f !== 0.0) {
     writer.writeDouble(
       5,
+      f
+    );
+  }
+  f = message.getOpenordersamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      6,
       f
     );
   }
@@ -8069,10 +8081,10 @@ proto.api.TokenBalance.prototype.setSymbol = function(value) {
 
 
 /**
- * optional string address = 2;
+ * optional string tokenMint = 2;
  * @return {string}
  */
-proto.api.TokenBalance.prototype.getAddress = function() {
+proto.api.TokenBalance.prototype.getTokenmint = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -8081,34 +8093,34 @@ proto.api.TokenBalance.prototype.getAddress = function() {
  * @param {string} value
  * @return {!proto.api.TokenBalance} returns this
  */
-proto.api.TokenBalance.prototype.setAddress = function(value) {
+proto.api.TokenBalance.prototype.setTokenmint = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional double walletAmount = 3;
+ * optional string tokenAccount = 3;
+ * @return {string}
+ */
+proto.api.TokenBalance.prototype.getTokenaccount = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.TokenBalance} returns this
+ */
+proto.api.TokenBalance.prototype.setTokenaccount = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional double walletAmount = 4;
  * @return {number}
  */
 proto.api.TokenBalance.prototype.getWalletamount = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.TokenBalance} returns this
- */
-proto.api.TokenBalance.prototype.setWalletamount = function(value) {
-  return jspb.Message.setProto3FloatField(this, 3, value);
-};
-
-
-/**
- * optional double unsettledAmount = 4;
- * @return {number}
- */
-proto.api.TokenBalance.prototype.getUnsettledamount = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
 };
 
@@ -8117,16 +8129,16 @@ proto.api.TokenBalance.prototype.getUnsettledamount = function() {
  * @param {number} value
  * @return {!proto.api.TokenBalance} returns this
  */
-proto.api.TokenBalance.prototype.setUnsettledamount = function(value) {
+proto.api.TokenBalance.prototype.setWalletamount = function(value) {
   return jspb.Message.setProto3FloatField(this, 4, value);
 };
 
 
 /**
- * optional double openOrdersAmount = 5;
+ * optional double unsettledAmount = 5;
  * @return {number}
  */
-proto.api.TokenBalance.prototype.getOpenordersamount = function() {
+proto.api.TokenBalance.prototype.getUnsettledamount = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
 };
 
@@ -8135,8 +8147,26 @@ proto.api.TokenBalance.prototype.getOpenordersamount = function() {
  * @param {number} value
  * @return {!proto.api.TokenBalance} returns this
  */
-proto.api.TokenBalance.prototype.setOpenordersamount = function(value) {
+proto.api.TokenBalance.prototype.setUnsettledamount = function(value) {
   return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * optional double openOrdersAmount = 6;
+ * @return {number}
+ */
+proto.api.TokenBalance.prototype.getOpenordersamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TokenBalance} returns this
+ */
+proto.api.TokenBalance.prototype.setOpenordersamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 6, value);
 };
 
 

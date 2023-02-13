@@ -3351,7 +3351,10 @@
         "symbol": {
           "type": "string"
         },
-        "address": {
+        "tokenMint": {
+          "type": "string"
+        },
+        "tokenAccount": {
           "type": "string"
         },
         "walletAmount": {
