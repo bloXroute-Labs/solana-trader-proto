@@ -633,8 +633,44 @@
     },
     "/api/v1/trade/perp/cancel": {
       "post": {
-        "summary": "cancel a perp order on a supported platform",
-        "description": "Returns a partially signed txn signature to cancel a perp order on a supported platform",
+        "summary": "cancel perp orders on a supported platform",
+        "description": "Returns a partially signed txn signature to cancel perp orders on a supported platform",
+        "operationId": "Api_PostCancelPerpOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelPerpOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelPerpOrdersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Perp",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/cancelbyid": {
+      "post": {
+        "summary": "cancel perp order by id on a supported platform",
+        "description": "Returns a partially signed txn signature to cancel perp order either based on order id or client order id on a supported platform",
         "operationId": "Api_PostCancelPerpOrder",
         "responses": {
           "200": {
@@ -652,39 +688,12 @@
         },
         "parameters": [
           {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP"
-            ],
-            "default": "ALL"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelPerpOrderRequest"
+            }
           }
         ],
         "tags": [
@@ -715,42 +724,12 @@
         },
         "parameters": [
           {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "contracts",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "ALL",
-                "SOL_PERP",
-                "ETH_PERP",
-                "BTC_PERP"
-              ]
-            },
-            "collectionFormat": "multi"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostClosePerpPositionsRequest"
+            }
           }
         ],
         "tags": [
@@ -781,46 +760,12 @@
         },
         "parameters": [
           {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "amount",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP"
-            ],
-            "default": "ALL"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostDepositCollateralRequest"
+            }
           }
         ],
         "tags": [
@@ -849,46 +794,12 @@
         },
         "parameters": [
           {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "amount",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP"
-            ],
-            "default": "ALL"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostWithdrawCollateralRequest"
+            }
           }
         ],
         "tags": [
@@ -989,6 +900,56 @@
         },
         "parameters": [
           {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostPerpOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Perp",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/orderbook/{market}": {
+      "get": {
+        "summary": "Perpetuals contract orderbook",
+        "description": "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetPerpOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPerpOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "name": "project",
             "in": "query",
             "required": false,
@@ -1003,94 +964,9 @@
               "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
-          },
-          {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "payerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP"
-            ],
-            "default": "ALL"
-          },
-          {
-            "name": "accountAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "positionSide",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "PS_UNKNOWN",
-              "PS_LONG",
-              "PS_SHORT"
-            ],
-            "default": "PS_UNKNOWN"
-          },
-          {
-            "name": "slippage",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "POT_UNKNOWN",
-              "POT_MARKET",
-              "POT_LIMIT",
-              "POT_TRIGGER_MARKET",
-              "POT_TRIGGER_LIMIT"
-            ],
-            "default": "POT_UNKNOWN"
-          },
-          {
-            "name": "amount",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "price",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          },
-          {
-            "name": "clientOrderID",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
           }
         ],
         "tags": [
-          "Trade",
           "Perp",
           "Orderbook"
         ]
@@ -1163,63 +1039,6 @@
         ],
         "tags": [
           "Trade",
-          "Perp",
-          "Orderbook"
-        ]
-      }
-    },
-    "/api/v1/trade/perp/{market}": {
-      "get": {
-        "summary": "Perpetuals contract orderbook",
-        "description": "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned",
-        "operationId": "Api_GetPerpOrderbook",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetPerpOrderbookResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "market",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "description": "Use 0 for no limits",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          }
-        ],
-        "tags": [
           "Perp",
           "Orderbook"
         ]
@@ -1627,26 +1446,12 @@
         },
         "parameters": [
           {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCreateUserRequest"
+            }
           }
         ],
         "tags": [
@@ -2773,11 +2578,78 @@
         }
       }
     },
+    "apiPostCancelPerpOrderRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "orderID": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
     "apiPostCancelPerpOrderResponse": {
       "type": "object",
       "properties": {
         "transaction": {
           "type": "string"
+        }
+      }
+    },
+    "apiPostCancelPerpOrdersRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        }
+      },
+      "required": [
+        "ownerAddress"
+      ]
+    },
+    "apiPostCancelPerpOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostClosePerpPositionsRequest": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "ownerAddress": {
+          "type": "string"
+        },
+        "contracts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonPerpContract"
+          }
         }
       }
     },
@@ -2792,6 +2664,17 @@
         }
       }
     },
+    "apiPostCreateUserRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
     "apiPostCreateUserResponse": {
       "type": "object",
       "properties": {
@@ -2800,6 +2683,24 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiPostDepositCollateralRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
         }
       }
     },
@@ -2888,6 +2789,48 @@
         },
         "openOrdersAddress": {
           "type": "string"
+        }
+      }
+    },
+    "apiPostPerpOrderRequest": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "ownerAddress": {
+          "type": "string"
+        },
+        "payerAddress": {
+          "type": "string"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "positionSide": {
+          "$ref": "#/definitions/commonPerpPositionSide"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "$ref": "#/definitions/commonPerpOrderType"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
@@ -3094,6 +3037,24 @@
       "properties": {
         "signature": {
           "type": "string"
+        }
+      }
+    },
+    "apiPostWithdrawCollateralRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
         }
       }
     },

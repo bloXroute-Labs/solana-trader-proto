@@ -854,10 +854,24 @@ class PostCreateUserResponse(betterproto.Message):
 
 
 @dataclass
+class PostCancelPerpOrdersRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+    contract: common.PerpContract = betterproto.enum_field(3)
+
+
+@dataclass
+class PostCancelPerpOrdersResponse(betterproto.Message):
+    transaction: str = betterproto.string_field(1)
+
+
+@dataclass
 class PostCancelPerpOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
     contract: common.PerpContract = betterproto.enum_field(3)
+    client_order_i_d: int = betterproto.uint64_field(4)
+    order_i_d: int = betterproto.uint64_field(5)
 
 
 @dataclass
@@ -969,7 +983,7 @@ class PostPerpOrderRequest(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(4)
     account_address: str = betterproto.string_field(5)
     position_side: common.PerpPositionSide = betterproto.enum_field(6)
-    slippage: str = betterproto.string_field(7)
+    slippage: float = betterproto.double_field(7)
     type: common.PerpOrderType = betterproto.enum_field(8)
     amount: float = betterproto.double_field(9)
     price: float = betterproto.double_field(10)
@@ -1553,7 +1567,7 @@ class ApiStub(betterproto.ServiceStub):
         contract: common.PerpContract = 0,
         account_address: str = "",
         position_side: common.PerpPositionSide = 0,
-        slippage: str = "",
+        slippage: float = 0,
         type: common.PerpOrderType = 0,
         amount: float = 0,
         price: float = 0,
@@ -1620,17 +1634,39 @@ class ApiStub(betterproto.ServiceStub):
             GetOpenPerpOrdersResponse,
         )
 
+    async def post_cancel_perp_orders(
+        self,
+        *,
+        owner_address: str = "",
+        project: "Project" = 0,
+        contract: common.PerpContract = 0,
+    ) -> PostCancelPerpOrdersResponse:
+        request = PostCancelPerpOrdersRequest()
+        request.owner_address = owner_address
+        request.project = project
+        request.contract = contract
+
+        return await self._unary_unary(
+            "/api.Api/PostCancelPerpOrders",
+            request,
+            PostCancelPerpOrdersResponse,
+        )
+
     async def post_cancel_perp_order(
         self,
         *,
         owner_address: str = "",
         project: "Project" = 0,
         contract: common.PerpContract = 0,
+        client_order_i_d: int = 0,
+        order_i_d: int = 0,
     ) -> PostCancelPerpOrderResponse:
         request = PostCancelPerpOrderRequest()
         request.owner_address = owner_address
         request.project = project
         request.contract = contract
+        request.client_order_i_d = client_order_i_d
+        request.order_i_d = order_i_d
 
         return await self._unary_unary(
             "/api.Api/PostCancelPerpOrder",

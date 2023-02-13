@@ -52,6 +52,7 @@ type ApiClient interface {
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
 	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
 	GetOpenPerpOrders(ctx context.Context, in *GetOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetOpenPerpOrdersResponse, error)
+	PostCancelPerpOrders(ctx context.Context, in *PostCancelPerpOrdersRequest, opts ...grpc.CallOption) (*PostCancelPerpOrdersResponse, error)
 	PostCancelPerpOrder(ctx context.Context, in *PostCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostCancelPerpOrderResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
@@ -349,6 +350,15 @@ func (c *apiClient) GetPerpPositions(ctx context.Context, in *GetPerpPositionsRe
 func (c *apiClient) GetOpenPerpOrders(ctx context.Context, in *GetOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetOpenPerpOrdersResponse, error) {
 	out := new(GetOpenPerpOrdersResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetOpenPerpOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostCancelPerpOrders(ctx context.Context, in *PostCancelPerpOrdersRequest, opts ...grpc.CallOption) (*PostCancelPerpOrdersResponse, error) {
+	out := new(PostCancelPerpOrdersResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostCancelPerpOrders", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -904,6 +914,7 @@ type ApiServer interface {
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
 	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
 	GetOpenPerpOrders(context.Context, *GetOpenPerpOrdersRequest) (*GetOpenPerpOrdersResponse, error)
+	PostCancelPerpOrders(context.Context, *PostCancelPerpOrdersRequest) (*PostCancelPerpOrdersResponse, error)
 	PostCancelPerpOrder(context.Context, *PostCancelPerpOrderRequest) (*PostCancelPerpOrderResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
@@ -1023,6 +1034,9 @@ func (UnimplementedApiServer) GetPerpPositions(context.Context, *GetPerpPosition
 }
 func (UnimplementedApiServer) GetOpenPerpOrders(context.Context, *GetOpenPerpOrdersRequest) (*GetOpenPerpOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOpenPerpOrders not implemented")
+}
+func (UnimplementedApiServer) PostCancelPerpOrders(context.Context, *PostCancelPerpOrdersRequest) (*PostCancelPerpOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostCancelPerpOrders not implemented")
 }
 func (UnimplementedApiServer) PostCancelPerpOrder(context.Context, *PostCancelPerpOrderRequest) (*PostCancelPerpOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostCancelPerpOrder not implemented")
@@ -1640,6 +1654,24 @@ func _Api_GetOpenPerpOrders_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_PostCancelPerpOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostCancelPerpOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostCancelPerpOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostCancelPerpOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostCancelPerpOrders(ctx, req.(*PostCancelPerpOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_PostCancelPerpOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostCancelPerpOrderRequest)
 	if err := dec(in); err != nil {
@@ -2186,6 +2218,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOpenPerpOrders",
 			Handler:    _Api_GetOpenPerpOrders_Handler,
+		},
+		{
+			MethodName: "PostCancelPerpOrders",
+			Handler:    _Api_PostCancelPerpOrders_Handler,
 		},
 		{
 			MethodName: "PostCancelPerpOrder",

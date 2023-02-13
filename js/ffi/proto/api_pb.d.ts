@@ -3070,6 +3070,52 @@ export namespace PostCreateUserResponse {
     }
 }
 
+export class PostCancelPerpOrdersRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostCancelPerpOrdersRequest;
+    getProject(): Project;
+    setProject(value: Project): PostCancelPerpOrdersRequest;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): PostCancelPerpOrdersRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostCancelPerpOrdersRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelPerpOrdersRequest): PostCancelPerpOrdersRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostCancelPerpOrdersRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelPerpOrdersRequest;
+    static deserializeBinaryFromReader(message: PostCancelPerpOrdersRequest, reader: jspb.BinaryReader): PostCancelPerpOrdersRequest;
+}
+
+export namespace PostCancelPerpOrdersRequest {
+    export type AsObject = {
+        owneraddress: string,
+        project: Project,
+        contract: common_pb.PerpContract,
+    }
+}
+
+export class PostCancelPerpOrdersResponse extends jspb.Message { 
+    getTransaction(): string;
+    setTransaction(value: string): PostCancelPerpOrdersResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostCancelPerpOrdersResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelPerpOrdersResponse): PostCancelPerpOrdersResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostCancelPerpOrdersResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelPerpOrdersResponse;
+    static deserializeBinaryFromReader(message: PostCancelPerpOrdersResponse, reader: jspb.BinaryReader): PostCancelPerpOrdersResponse;
+}
+
+export namespace PostCancelPerpOrdersResponse {
+    export type AsObject = {
+        transaction: string,
+    }
+}
+
 export class PostCancelPerpOrderRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): PostCancelPerpOrderRequest;
@@ -3077,6 +3123,10 @@ export class PostCancelPerpOrderRequest extends jspb.Message {
     setProject(value: Project): PostCancelPerpOrderRequest;
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): PostCancelPerpOrderRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostCancelPerpOrderRequest;
+    getOrderid(): number;
+    setOrderid(value: number): PostCancelPerpOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelPerpOrderRequest.AsObject;
@@ -3093,6 +3143,8 @@ export namespace PostCancelPerpOrderRequest {
         owneraddress: string,
         project: Project,
         contract: common_pb.PerpContract,
+        clientorderid: number,
+        orderid: number,
     }
 }
 
@@ -3489,8 +3541,8 @@ export class PostPerpOrderRequest extends jspb.Message {
     setAccountaddress(value: string): PostPerpOrderRequest;
     getPositionside(): common_pb.PerpPositionSide;
     setPositionside(value: common_pb.PerpPositionSide): PostPerpOrderRequest;
-    getSlippage(): string;
-    setSlippage(value: string): PostPerpOrderRequest;
+    getSlippage(): number;
+    setSlippage(value: number): PostPerpOrderRequest;
     getType(): common_pb.PerpOrderType;
     setType(value: common_pb.PerpOrderType): PostPerpOrderRequest;
     getAmount(): number;
@@ -3518,7 +3570,7 @@ export namespace PostPerpOrderRequest {
         contract: common_pb.PerpContract,
         accountaddress: string,
         positionside: common_pb.PerpPositionSide,
-        slippage: string,
+        slippage: number,
         type: common_pb.PerpOrderType,
         amount: number,
         price: number,
