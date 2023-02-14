@@ -3354,10 +3354,7 @@
         "tokenMint": {
           "type": "string"
         },
-        "tokenAccount": {
-          "type": "string"
-        },
-        "walletAmount": {
+        "settledAmount": {
           "type": "number",
           "format": "double"
         },

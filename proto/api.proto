@@ -722,10 +722,24 @@ message GetAccountBalanceResponse {
 message TokenBalance {
   string symbol = 1;
   string tokenMint = 2;
+  double settledAmount = 3;
+  double unsettledAmount = 4;
+  double openOrdersAmount = 5;
+}
+
+message GetTokenAccountsRequest {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetTokenAccountsResponse {
+  repeated TokenAccount accounts = 1;
+}
+
+message TokenAccount {
+  string symbol = 1;
+  string tokenMint = 2;
   string tokenAccount = 3;
-  double walletAmount = 4;
-  double unsettledAmount = 5;
-  double openOrdersAmount = 6;
+  string settledAmount = 4;
 }
 
 message PostOrderRequest {
