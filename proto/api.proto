@@ -382,6 +382,7 @@ service Api {
   rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/order"
+      body: "*",
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "post a perp order";
@@ -412,13 +413,26 @@ service Api {
     };
   }
 
-  rpc PostCancelPerpOrder(PostCancelPerpOrderRequest) returns (PostCancelPerpOrderResponse) {
+  rpc PostCancelPerpOrders(PostCancelPerpOrdersRequest) returns (PostCancelPerpOrdersResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/cancel"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns a partially signed txn signature to cancel a perp order on a supported platform";
-      summary: "cancel a perp order on a supported platform";
+      description: "Returns a partially signed txn signature to cancel perp orders on a supported platform";
+      summary: "cancel perp orders on a supported platform";
+      tags: ["Trade", "Perp", "Orderbook"];
+    };
+  }
+
+  rpc PostCancelPerpOrder(PostCancelPerpOrderRequest) returns (PostCancelPerpOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/perp/cancelbyid"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to cancel perp order either based on order id or client order id on a supported platform";
+      summary: "cancel perp order by id on a supported platform";
       tags: ["Trade", "Perp", "Orderbook"];
     };
   }
@@ -426,6 +440,7 @@ service Api {
   rpc PostClosePerpPositions(PostClosePerpPositionsRequest) returns (PostClosePerpPositionsResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/close"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to close a perp position on a supported platform";
@@ -436,7 +451,7 @@ service Api {
 
   rpc GetPerpOrderbook(GetPerpOrderbookRequest) returns (GetPerpOrderbookResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/perp/{market}"
+      get: "/api/v1/trade/perp/orderbook/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
@@ -448,6 +463,7 @@ service Api {
   rpc PostCreateUser(PostCreateUserRequest) returns (PostCreateUserResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/user"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to create a user on a supported platform";
@@ -470,6 +486,7 @@ service Api {
   rpc PostDepositCollateral(PostDepositCollateralRequest) returns (PostDepositCollateralResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/collateral/deposit"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to deposit collateral";
@@ -481,6 +498,7 @@ service Api {
   rpc PostWithdrawCollateral(PostWithdrawCollateralRequest) returns (PostWithdrawCollateralResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/collateral/withdraw"
+      body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to withdraw collateral";
@@ -1323,10 +1341,23 @@ message PostCreateUserResponse {
   Project project = 2;
 }
 
+message PostCancelPerpOrdersRequest {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+  Project project = 2 [(google.api.field_behavior) = REQUIRED];
+  common.PerpContract contract = 3 [(google.api.field_behavior) = REQUIRED];;
+}
+
+message PostCancelPerpOrdersResponse {
+  string transaction = 1;
+}
+
+
 message PostCancelPerpOrderRequest {
   string ownerAddress = 1;
   Project project = 2;
   common.PerpContract contract = 3;
+  uint64 clientOrderID = 4;
+  uint64 orderID = 5;
 }
 
 message PostCancelPerpOrderResponse {
@@ -1433,7 +1464,7 @@ message PostPerpOrderRequest {
   common.PerpContract contract = 4;
   string accountAddress = 5;
   common.PerpPositionSide positionSide = 6;
-  string slippage = 7;
+  double slippage = 7;
   common.PerpOrderType type = 8;
   double amount = 9;
   double price = 10;

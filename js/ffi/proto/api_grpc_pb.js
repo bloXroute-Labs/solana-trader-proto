@@ -813,6 +813,28 @@ function deserialize_api_PostCancelPerpOrderResponse(buffer_arg) {
   return api_pb.PostCancelPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostCancelPerpOrdersRequest(arg) {
+  if (!(arg instanceof api_pb.PostCancelPerpOrdersRequest)) {
+    throw new Error('Expected argument of type api.PostCancelPerpOrdersRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostCancelPerpOrdersRequest(buffer_arg) {
+  return api_pb.PostCancelPerpOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostCancelPerpOrdersResponse(arg) {
+  if (!(arg instanceof api_pb.PostCancelPerpOrdersResponse)) {
+    throw new Error('Expected argument of type api.PostCancelPerpOrdersResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostCancelPerpOrdersResponse(buffer_arg) {
+  return api_pb.PostCancelPerpOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostClosePerpPositionsRequest(arg) {
   if (!(arg instanceof api_pb.PostClosePerpPositionsRequest)) {
     throw new Error('Expected argument of type api.PostClosePerpPositionsRequest');
@@ -1401,6 +1423,17 @@ postPerpOrder: {
     requestDeserialize: deserialize_api_GetOpenPerpOrdersRequest,
     responseSerialize: serialize_api_GetOpenPerpOrdersResponse,
     responseDeserialize: deserialize_api_GetOpenPerpOrdersResponse,
+  },
+  postCancelPerpOrders: {
+    path: '/api.Api/PostCancelPerpOrders',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostCancelPerpOrdersRequest,
+    responseType: api_pb.PostCancelPerpOrdersResponse,
+    requestSerialize: serialize_api_PostCancelPerpOrdersRequest,
+    requestDeserialize: deserialize_api_PostCancelPerpOrdersRequest,
+    responseSerialize: serialize_api_PostCancelPerpOrdersResponse,
+    responseDeserialize: deserialize_api_PostCancelPerpOrdersResponse,
   },
   postCancelPerpOrder: {
     path: '/api.Api/PostCancelPerpOrder',
