@@ -3401,7 +3401,8 @@
           "type": "string"
         },
         "settledAmount": {
-          "type": "string"
+          "type": "number",
+          "format": "double"
         }
       }
     },

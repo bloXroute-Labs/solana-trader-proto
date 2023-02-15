@@ -8531,7 +8531,7 @@ proto.api.TokenAccount.toObject = function(includeInstance, msg) {
     symbol: jspb.Message.getFieldWithDefault(msg, 1, ""),
     tokenmint: jspb.Message.getFieldWithDefault(msg, 2, ""),
     tokenaccount: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    settledamount: jspb.Message.getFieldWithDefault(msg, 4, "")
+    settledamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
   };
 
   if (includeInstance) {
@@ -8581,7 +8581,7 @@ proto.api.TokenAccount.deserializeBinaryFromReader = function(msg, reader) {
       msg.setTokenaccount(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setSettledamount(value);
       break;
     default:
@@ -8635,8 +8635,8 @@ proto.api.TokenAccount.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getSettledamount();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0.0) {
+    writer.writeDouble(
       4,
       f
     );
@@ -8699,20 +8699,20 @@ proto.api.TokenAccount.prototype.setTokenaccount = function(value) {
 
 
 /**
- * optional string settledAmount = 4;
- * @return {string}
+ * optional double settledAmount = 4;
+ * @return {number}
  */
 proto.api.TokenAccount.prototype.getSettledamount = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.api.TokenAccount} returns this
  */
 proto.api.TokenAccount.prototype.setSettledamount = function(value) {
-  return jspb.Message.setProto3StringField(this, 4, value);
+  return jspb.Message.setProto3FloatField(this, 4, value);
 };
 
 

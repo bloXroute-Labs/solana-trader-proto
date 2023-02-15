@@ -771,8 +771,8 @@ export class TokenAccount extends jspb.Message {
     setTokenmint(value: string): TokenAccount;
     getTokenaccount(): string;
     setTokenaccount(value: string): TokenAccount;
-    getSettledamount(): string;
-    setSettledamount(value: string): TokenAccount;
+    getSettledamount(): number;
+    setSettledamount(value: number): TokenAccount;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): TokenAccount.AsObject;
@@ -789,7 +789,7 @@ export namespace TokenAccount {
         symbol: string,
         tokenmint: string,
         tokenaccount: string,
-        settledamount: string,
+        settledamount: number,
     }
 }
 
