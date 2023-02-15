@@ -750,7 +750,7 @@ message TokenAccount {
   string symbol = 1;
   string tokenMint = 2;
   string tokenAccount = 3;
-  double settledAmount = 4;
+  double amount = 4;
 }
 
 message PostOrderRequest {

@@ -3400,7 +3400,7 @@
         "tokenAccount": {
           "type": "string"
         },
-        "settledAmount": {
+        "amount": {
           "type": "number",
           "format": "double"
         }

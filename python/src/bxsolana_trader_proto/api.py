@@ -261,7 +261,7 @@ class TokenAccount(betterproto.Message):
     symbol: str = betterproto.string_field(1)
     token_mint: str = betterproto.string_field(2)
     token_account: str = betterproto.string_field(3)
-    settled_amount: float = betterproto.double_field(4)
+    amount: float = betterproto.double_field(4)
 
 
 @dataclass
