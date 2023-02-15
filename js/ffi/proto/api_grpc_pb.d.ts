@@ -25,6 +25,7 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getServerTime: IApiService_IGetServerTime;
     getRecentBlockHash: IApiService_IGetRecentBlockHash;
     getAccountBalance: IApiService_IGetAccountBalance;
+    getTokenAccounts: IApiService_IGetTokenAccounts;
     postOrder: IApiService_IPostOrder;
     postSubmit: IApiService_IPostSubmit;
     postSubmitBatch: IApiService_IPostSubmitBatch;
@@ -173,6 +174,15 @@ interface IApiService_IGetAccountBalance extends grpc.MethodDefinition<api_pb.Ge
     requestDeserialize: grpc.deserialize<api_pb.GetAccountBalanceRequest>;
     responseSerialize: grpc.serialize<api_pb.GetAccountBalanceResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetAccountBalanceResponse>;
+}
+interface IApiService_IGetTokenAccounts extends grpc.MethodDefinition<api_pb.GetTokenAccountsRequest, api_pb.GetTokenAccountsResponse> {
+    path: "/api.Api/GetTokenAccounts";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetTokenAccountsRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetTokenAccountsRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetTokenAccountsResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetTokenAccountsResponse>;
 }
 interface IApiService_IPostOrder extends grpc.MethodDefinition<api_pb.PostOrderRequest, api_pb.PostOrderResponse> {
     path: "/api.Api/PostOrder";
@@ -541,6 +551,7 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getServerTime: grpc.handleUnaryCall<api_pb.GetServerTimeRequest, api_pb.GetServerTimeResponse>;
     getRecentBlockHash: grpc.handleUnaryCall<api_pb.GetRecentBlockHashRequest, api_pb.GetRecentBlockHashResponse>;
     getAccountBalance: grpc.handleUnaryCall<api_pb.GetAccountBalanceRequest, api_pb.GetAccountBalanceResponse>;
+    getTokenAccounts: grpc.handleUnaryCall<api_pb.GetTokenAccountsRequest, api_pb.GetTokenAccountsResponse>;
     postOrder: grpc.handleUnaryCall<api_pb.PostOrderRequest, api_pb.PostOrderResponse>;
     postSubmit: grpc.handleUnaryCall<api_pb.PostSubmitRequest, api_pb.PostSubmitResponse>;
     postSubmitBatch: grpc.handleUnaryCall<api_pb.PostSubmitBatchRequest, api_pb.PostSubmitBatchResponse>;
@@ -619,6 +630,9 @@ export interface IApiClient {
     getAccountBalance(request: api_pb.GetAccountBalanceRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetAccountBalanceResponse) => void): grpc.ClientUnaryCall;
     getAccountBalance(request: api_pb.GetAccountBalanceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetAccountBalanceResponse) => void): grpc.ClientUnaryCall;
     getAccountBalance(request: api_pb.GetAccountBalanceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetAccountBalanceResponse) => void): grpc.ClientUnaryCall;
+    getTokenAccounts(request: api_pb.GetTokenAccountsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenAccountsResponse) => void): grpc.ClientUnaryCall;
+    getTokenAccounts(request: api_pb.GetTokenAccountsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenAccountsResponse) => void): grpc.ClientUnaryCall;
+    getTokenAccounts(request: api_pb.GetTokenAccountsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenAccountsResponse) => void): grpc.ClientUnaryCall;
     postOrder(request: api_pb.PostOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     postOrder(request: api_pb.PostOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     postOrder(request: api_pb.PostOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
@@ -762,6 +776,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getAccountBalance(request: api_pb.GetAccountBalanceRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetAccountBalanceResponse) => void): grpc.ClientUnaryCall;
     public getAccountBalance(request: api_pb.GetAccountBalanceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetAccountBalanceResponse) => void): grpc.ClientUnaryCall;
     public getAccountBalance(request: api_pb.GetAccountBalanceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetAccountBalanceResponse) => void): grpc.ClientUnaryCall;
+    public getTokenAccounts(request: api_pb.GetTokenAccountsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenAccountsResponse) => void): grpc.ClientUnaryCall;
+    public getTokenAccounts(request: api_pb.GetTokenAccountsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenAccountsResponse) => void): grpc.ClientUnaryCall;
+    public getTokenAccounts(request: api_pb.GetTokenAccountsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenAccountsResponse) => void): grpc.ClientUnaryCall;
     public postOrder(request: api_pb.PostOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     public postOrder(request: api_pb.PostOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     public postOrder(request: api_pb.PostOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;

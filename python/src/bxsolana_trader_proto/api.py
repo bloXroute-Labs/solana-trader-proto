@@ -1212,6 +1212,18 @@ class ApiStub(betterproto.ServiceStub):
             GetAccountBalanceResponse,
         )
 
+    async def get_token_accounts(
+        self, *, owner_address: str = ""
+    ) -> GetTokenAccountsResponse:
+        request = GetTokenAccountsRequest()
+        request.owner_address = owner_address
+
+        return await self._unary_unary(
+            "/api.Api/GetTokenAccounts",
+            request,
+            GetTokenAccountsResponse,
+        )
+
     async def post_order(
         self,
         *,

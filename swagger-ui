@@ -28,14 +28,46 @@
   "paths": {
     "/api/v1/account/balance": {
       "get": {
-        "summary": "Account balances markets",
-        "description": "Returns the all balances for a wallet",
+        "summary": "Token balances",
+        "description": "Returns the all token balances for a wallet",
         "operationId": "Api_GetAccountBalance",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/apiGetAccountBalanceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Account"
+        ]
+      }
+    },
+    "/api/v1/account/token-accounts": {
+      "get": {
+        "summary": "Token accounts with balances",
+        "description": "Returns the all token accounts with their balances for a wallet",
+        "operationId": "Api_GetTokenAccounts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTokenAccountsResponse"
             }
           },
           "default": {
@@ -2297,6 +2329,17 @@
         }
       }
     },
+    "apiGetTokenAccountsResponse": {
+      "type": "object",
+      "properties": {
+        "accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTokenAccount"
+          }
+        }
+      }
+    },
     "apiGetTradesResponse": {
       "type": "object",
       "properties": {
@@ -3342,6 +3385,23 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiTokenAccount": {
+      "type": "object",
+      "properties": {
+        "symbol": {
+          "type": "string"
+        },
+        "tokenMint": {
+          "type": "string"
+        },
+        "tokenAccount": {
+          "type": "string"
+        },
+        "settledAmount": {
+          "type": "string"
         }
       }
     },

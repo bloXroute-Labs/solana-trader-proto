@@ -182,8 +182,19 @@ service Api {
       get: "/api/v1/account/balance"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns the all balances for a wallet";
-      summary: "Account balances markets";
+      description: "Returns the all token balances for a wallet";
+      summary: "Token balances";
+      tags: "Account";
+    };
+  }
+
+  rpc GetTokenAccounts(GetTokenAccountsRequest) returns (GetTokenAccountsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/account/token-accounts"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the all token accounts with their balances for a wallet";
+      summary: "Token accounts with balances";
       tags: "Account";
     };
   }

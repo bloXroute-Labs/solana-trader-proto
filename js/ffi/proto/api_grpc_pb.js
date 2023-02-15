@@ -637,6 +637,28 @@ function deserialize_api_GetTickersStreamResponse(buffer_arg) {
   return api_pb.GetTickersStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetTokenAccountsRequest(arg) {
+  if (!(arg instanceof api_pb.GetTokenAccountsRequest)) {
+    throw new Error('Expected argument of type api.GetTokenAccountsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTokenAccountsRequest(buffer_arg) {
+  return api_pb.GetTokenAccountsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetTokenAccountsResponse(arg) {
+  if (!(arg instanceof api_pb.GetTokenAccountsResponse)) {
+    throw new Error('Expected argument of type api.GetTokenAccountsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTokenAccountsResponse(buffer_arg) {
+  return api_pb.GetTokenAccountsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetTradesRequest(arg) {
   if (!(arg instanceof api_pb.GetTradesRequest)) {
     throw new Error('Expected argument of type api.GetTradesRequest');
@@ -1168,6 +1190,17 @@ getAccountBalance: {
     requestDeserialize: deserialize_api_GetAccountBalanceRequest,
     responseSerialize: serialize_api_GetAccountBalanceResponse,
     responseDeserialize: deserialize_api_GetAccountBalanceResponse,
+  },
+  getTokenAccounts: {
+    path: '/api.Api/GetTokenAccounts',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetTokenAccountsRequest,
+    responseType: api_pb.GetTokenAccountsResponse,
+    requestSerialize: serialize_api_GetTokenAccountsRequest,
+    requestDeserialize: deserialize_api_GetTokenAccountsRequest,
+    responseSerialize: serialize_api_GetTokenAccountsResponse,
+    responseDeserialize: deserialize_api_GetTokenAccountsResponse,
   },
   // trade endpoints
 postOrder: {
