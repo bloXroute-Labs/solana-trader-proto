@@ -182,8 +182,19 @@ service Api {
       get: "/api/v1/account/balance"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns the all balances for a wallet";
-      summary: "Account balances markets";
+      description: "Returns the all token balances for a wallet";
+      summary: "Token balances";
+      tags: "Account";
+    };
+  }
+
+  rpc GetTokenAccounts(GetTokenAccountsRequest) returns (GetTokenAccountsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/account/token-accounts"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the all token accounts with their balances for a wallet";
+      summary: "Token accounts with balances";
       tags: "Account";
     };
   }
@@ -739,10 +750,25 @@ message GetAccountBalanceResponse {
 
 message TokenBalance {
   string symbol = 1;
-  string address = 2;
-  double walletAmount = 3;
+  string tokenMint = 2;
+  double settledAmount = 3;
   double unsettledAmount = 4;
   double openOrdersAmount = 5;
+}
+
+message GetTokenAccountsRequest {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetTokenAccountsResponse {
+  repeated TokenAccount accounts = 1;
+}
+
+message TokenAccount {
+  string symbol = 1;
+  string tokenMint = 2;
+  string tokenAccount = 3;
+  double amount = 4;
 }
 
 message PostOrderRequest {

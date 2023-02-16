@@ -693,10 +693,10 @@ export namespace GetAccountBalanceResponse {
 export class TokenBalance extends jspb.Message { 
     getSymbol(): string;
     setSymbol(value: string): TokenBalance;
-    getAddress(): string;
-    setAddress(value: string): TokenBalance;
-    getWalletamount(): number;
-    setWalletamount(value: number): TokenBalance;
+    getTokenmint(): string;
+    setTokenmint(value: string): TokenBalance;
+    getSettledamount(): number;
+    setSettledamount(value: number): TokenBalance;
     getUnsettledamount(): number;
     setUnsettledamount(value: number): TokenBalance;
     getOpenordersamount(): number;
@@ -715,10 +715,81 @@ export class TokenBalance extends jspb.Message {
 export namespace TokenBalance {
     export type AsObject = {
         symbol: string,
-        address: string,
-        walletamount: number,
+        tokenmint: string,
+        settledamount: number,
         unsettledamount: number,
         openordersamount: number,
+    }
+}
+
+export class GetTokenAccountsRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetTokenAccountsRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTokenAccountsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTokenAccountsRequest): GetTokenAccountsRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTokenAccountsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTokenAccountsRequest;
+    static deserializeBinaryFromReader(message: GetTokenAccountsRequest, reader: jspb.BinaryReader): GetTokenAccountsRequest;
+}
+
+export namespace GetTokenAccountsRequest {
+    export type AsObject = {
+        owneraddress: string,
+    }
+}
+
+export class GetTokenAccountsResponse extends jspb.Message { 
+    clearAccountsList(): void;
+    getAccountsList(): Array<TokenAccount>;
+    setAccountsList(value: Array<TokenAccount>): GetTokenAccountsResponse;
+    addAccounts(value?: TokenAccount, index?: number): TokenAccount;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTokenAccountsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTokenAccountsResponse): GetTokenAccountsResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTokenAccountsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTokenAccountsResponse;
+    static deserializeBinaryFromReader(message: GetTokenAccountsResponse, reader: jspb.BinaryReader): GetTokenAccountsResponse;
+}
+
+export namespace GetTokenAccountsResponse {
+    export type AsObject = {
+        accountsList: Array<TokenAccount.AsObject>,
+    }
+}
+
+export class TokenAccount extends jspb.Message { 
+    getSymbol(): string;
+    setSymbol(value: string): TokenAccount;
+    getTokenmint(): string;
+    setTokenmint(value: string): TokenAccount;
+    getTokenaccount(): string;
+    setTokenaccount(value: string): TokenAccount;
+    getAmount(): number;
+    setAmount(value: number): TokenAccount;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): TokenAccount.AsObject;
+    static toObject(includeInstance: boolean, msg: TokenAccount): TokenAccount.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: TokenAccount, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TokenAccount;
+    static deserializeBinaryFromReader(message: TokenAccount, reader: jspb.BinaryReader): TokenAccount;
+}
+
+export namespace TokenAccount {
+    export type AsObject = {
+        symbol: string,
+        tokenmint: string,
+        tokenaccount: string,
+        amount: number,
     }
 }
 

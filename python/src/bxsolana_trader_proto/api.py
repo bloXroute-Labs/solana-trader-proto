@@ -240,10 +240,28 @@ class GetAccountBalanceResponse(betterproto.Message):
 @dataclass
 class TokenBalance(betterproto.Message):
     symbol: str = betterproto.string_field(1)
-    address: str = betterproto.string_field(2)
-    wallet_amount: float = betterproto.double_field(3)
+    token_mint: str = betterproto.string_field(2)
+    settled_amount: float = betterproto.double_field(3)
     unsettled_amount: float = betterproto.double_field(4)
     open_orders_amount: float = betterproto.double_field(5)
+
+
+@dataclass
+class GetTokenAccountsRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+
+
+@dataclass
+class GetTokenAccountsResponse(betterproto.Message):
+    accounts: List["TokenAccount"] = betterproto.message_field(1)
+
+
+@dataclass
+class TokenAccount(betterproto.Message):
+    symbol: str = betterproto.string_field(1)
+    token_mint: str = betterproto.string_field(2)
+    token_account: str = betterproto.string_field(3)
+    amount: float = betterproto.double_field(4)
 
 
 @dataclass
@@ -1206,6 +1224,18 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetAccountBalance",
             request,
             GetAccountBalanceResponse,
+        )
+
+    async def get_token_accounts(
+        self, *, owner_address: str = ""
+    ) -> GetTokenAccountsResponse:
+        request = GetTokenAccountsRequest()
+        request.owner_address = owner_address
+
+        return await self._unary_unary(
+            "/api.Api/GetTokenAccounts",
+            request,
+            GetTokenAccountsResponse,
         )
 
     async def post_order(
