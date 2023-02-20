@@ -1634,7 +1634,7 @@ getOrderbooksStream: {
     responseSerialize: serialize_api_GetSwapsStreamResponse,
     responseDeserialize: deserialize_api_GetSwapsStreamResponse,
   },
-  // Drift streaming endpoints
+  // Perp streaming endpoints
 getPerpOrderbooksStream: {
     path: '/api.Api/GetPerpOrderbooksStream',
     requestStream: false,
