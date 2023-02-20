@@ -73,7 +73,7 @@ type ApiClient interface {
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
-	// Drift streaming endpoints
+	// Perp streaming endpoints
 	GetPerpOrderbooksStream(ctx context.Context, in *GetPerpOrderbooksRequest, opts ...grpc.CallOption) (Api_GetPerpOrderbooksStreamClient, error)
 	GetNewPerpOrdersStream(ctx context.Context, in *GetNewPerpOrdersStreamRequest, opts ...grpc.CallOption) (Api_GetNewPerpOrdersStreamClient, error)
 	GetPerpTradesStream(ctx context.Context, in *GetPerpTradesStreamRequest, opts ...grpc.CallOption) (Api_GetPerpTradesStreamClient, error)
@@ -945,7 +945,7 @@ type ApiServer interface {
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
-	// Drift streaming endpoints
+	// Perp streaming endpoints
 	GetPerpOrderbooksStream(*GetPerpOrderbooksRequest, Api_GetPerpOrderbooksStreamServer) error
 	GetNewPerpOrdersStream(*GetNewPerpOrdersStreamRequest, Api_GetNewPerpOrdersStreamServer) error
 	GetPerpTradesStream(*GetPerpTradesStreamRequest, Api_GetPerpTradesStreamServer) error

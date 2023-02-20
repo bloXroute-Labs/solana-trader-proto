@@ -1964,7 +1964,7 @@ class ApiStub(betterproto.ServiceStub):
     async def get_perp_orderbooks_stream(
         self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
     ) -> AsyncGenerator[GetPerpOrderbooksStreamResponse, None]:
-        """Drift streaming endpoints"""
+        """Perp streaming endpoints"""
 
         request = GetPerpOrderbooksRequest()
         request.markets = markets

@@ -2514,7 +2514,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetPerpOrderbook", runtime.WithHTTPPathPattern("/api/v1/trade/perp/orderbook/{market}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetPerpOrderbook", runtime.WithHTTPPathPattern("/api/v1/market/perp/orderbook/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3387,7 +3387,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetPerpOrderbook", runtime.WithHTTPPathPattern("/api/v1/trade/perp/orderbook/{market}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetPerpOrderbook", runtime.WithHTTPPathPattern("/api/v1/market/perp/orderbook/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3559,7 +3559,7 @@ var (
 
 	pattern_Api_PostClosePerpPositions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"api", "v1", "trade", "perp", "close"}, ""))
 
-	pattern_Api_GetPerpOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"api", "v1", "trade", "perp", "orderbook", "market"}, ""))
+	pattern_Api_GetPerpOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 2}, []string{"api", "v1", "market", "perp", "orderbook"}, ""))
 
 	pattern_Api_PostCreateUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "trade", "user"}, ""))
 
