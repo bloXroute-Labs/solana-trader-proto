@@ -451,12 +451,12 @@ service Api {
 
   rpc GetPerpOrderbook(GetPerpOrderbookRequest) returns (GetPerpOrderbookResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/perp/orderbook/{market}"
+      get: "/api/v1/market/perp/orderbook/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
       summary: "Perpetuals contract orderbook";
-      tags: ["Perp", "Orderbook"];
+      tags: ["Perp", "Orderbook", "Market"];
     };
   }
 
@@ -574,22 +574,22 @@ service Api {
     };
   }
 
-  // Drift streaming endpoints
+  // Perp streaming endpoints
   rpc GetPerpOrderbooksStream(GetPerpOrderbooksRequest) returns (stream GetPerpOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Drift";
+      tags: "Perp";
     };
   }
 
   rpc GetNewPerpOrdersStream(GetNewPerpOrdersStreamRequest) returns (stream GetNewPerpOrdersStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Drift";
+      tags: "Perp";
     };
   }
 
   rpc GetPerpTradesStream(GetPerpTradesStreamRequest) returns (stream GetPerpTradesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Drift";
+      tags: "Perp";
     };
   }
 }
@@ -1299,7 +1299,7 @@ message GetPerpOrderbookResponse {
 message PerpOrderbookItem {
   double price = 1;
   double size = 2;
-  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Drift generated OrderID"}];
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "platform generated OrderID"}];
   string clientOrderID = 4;
   string status = 5;
   string orderType = 6;
