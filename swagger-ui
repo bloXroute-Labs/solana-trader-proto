@@ -3024,7 +3024,7 @@
             "$ref": "#/definitions/apiPostSubmitRequestEntry"
           }
         },
-        "SubmitStrategy": {
+        "submitStrategy": {
           "$ref": "#/definitions/apiSubmitStrategy"
         }
       }
