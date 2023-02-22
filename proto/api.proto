@@ -1473,7 +1473,6 @@ message PostPerpOrderRequest {
 
 message PostPerpOrderResponse {
   string transaction = 1;
-  string accountAddress = 2;
 }
 
 message GetNewPerpOrdersStreamRequest {
