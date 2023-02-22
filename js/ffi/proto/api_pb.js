@@ -14029,7 +14029,7 @@ proto.api.PostSubmitBatchRequest.prototype.clearEntriesList = function() {
 
 
 /**
- * optional SubmitStrategy SubmitStrategy = 2;
+ * optional SubmitStrategy submitStrategy = 2;
  * @return {!proto.api.SubmitStrategy}
  */
 proto.api.PostSubmitBatchRequest.prototype.getSubmitstrategy = function() {
