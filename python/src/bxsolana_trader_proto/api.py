@@ -898,28 +898,18 @@ class PostCancelPerpOrderResponse(betterproto.Message):
 
 
 @dataclass
-class PostDepositCollateralRequest(betterproto.Message):
+class PostManageCollateralRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    amount: float = betterproto.double_field(2)
-    project: "Project" = betterproto.enum_field(3)
-    contract: common.PerpContract = betterproto.enum_field(4)
+    account_address: str = betterproto.string_field(2)
+    amount: float = betterproto.double_field(3)
+    project: "Project" = betterproto.enum_field(4)
+    contract: common.PerpContract = betterproto.enum_field(5)
+    type: common.PerpCollateralType = betterproto.enum_field(6)
+    token: common.PerpCollateralToken = betterproto.enum_field(7)
 
 
 @dataclass
-class PostDepositCollateralResponse(betterproto.Message):
-    transaction: str = betterproto.string_field(1)
-
-
-@dataclass
-class PostWithdrawCollateralRequest(betterproto.Message):
-    owner_address: str = betterproto.string_field(1)
-    amount: float = betterproto.double_field(2)
-    project: "Project" = betterproto.enum_field(3)
-    contract: common.PerpContract = betterproto.enum_field(4)
-
-
-@dataclass
-class PostWithdrawCollateralResponse(betterproto.Message):
+class PostManageCollateralResponse(betterproto.Message):
     transaction: str = betterproto.string_field(1)
 
 
@@ -1027,8 +1017,8 @@ class GetNewPerpOrdersStreamResponse(betterproto.Message):
     side: common.PerpPositionSide = betterproto.enum_field(3)
     type: common.PerpOrderType = betterproto.enum_field(4)
     user_address: str = betterproto.string_field(5)
-    order_i_d: int = betterproto.uint64_field(6)
-    client_order_i_d: int = betterproto.uint64_field(7)
+    order_i_d: str = betterproto.string_field(6)
+    client_order_i_d: str = betterproto.string_field(7)
     slot: str = betterproto.string_field(8)
     price: float = betterproto.double_field(9)
     trigger_price: float = betterproto.double_field(10)
@@ -1762,44 +1752,30 @@ class ApiStub(betterproto.ServiceStub):
             GetUserResponse,
         )
 
-    async def post_deposit_collateral(
+    async def post_manage_collateral(
         self,
         *,
         owner_address: str = "",
+        account_address: str = "",
         amount: float = 0,
         project: "Project" = 0,
         contract: common.PerpContract = 0,
-    ) -> PostDepositCollateralResponse:
-        request = PostDepositCollateralRequest()
+        type: common.PerpCollateralType = 0,
+        token: common.PerpCollateralToken = 0,
+    ) -> PostManageCollateralResponse:
+        request = PostManageCollateralRequest()
         request.owner_address = owner_address
+        request.account_address = account_address
         request.amount = amount
         request.project = project
         request.contract = contract
+        request.type = type
+        request.token = token
 
         return await self._unary_unary(
-            "/api.Api/PostDepositCollateral",
+            "/api.Api/PostManageCollateral",
             request,
-            PostDepositCollateralResponse,
-        )
-
-    async def post_withdraw_collateral(
-        self,
-        *,
-        owner_address: str = "",
-        amount: float = 0,
-        project: "Project" = 0,
-        contract: common.PerpContract = 0,
-    ) -> PostWithdrawCollateralResponse:
-        request = PostWithdrawCollateralRequest()
-        request.owner_address = owner_address
-        request.amount = amount
-        request.project = project
-        request.contract = contract
-
-        return await self._unary_unary(
-            "/api.Api/PostWithdrawCollateral",
-            request,
-            PostWithdrawCollateralResponse,
+            PostManageCollateralResponse,
         )
 
     async def get_orderbooks_stream(

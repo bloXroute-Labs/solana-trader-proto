@@ -829,16 +829,16 @@
         ]
       }
     },
-    "/api/v1/trade/perp/collateral/deposit": {
+    "/api/v1/trade/perp/managecollateral": {
       "post": {
         "summary": "posts collateral on a perp platform",
-        "description": "Returns a partially signed txn signature to deposit collateral",
-        "operationId": "Api_PostDepositCollateral",
+        "description": "Returns a partially signed txn signature to manage collateral",
+        "operationId": "Api_PostManageCollateral",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostDepositCollateralResponse"
+              "$ref": "#/definitions/apiPostManageCollateralResponse"
             }
           },
           "default": {
@@ -854,41 +854,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostDepositCollateralRequest"
-            }
-          }
-        ],
-        "tags": [
-          "Perp"
-        ]
-      }
-    },
-    "/api/v1/trade/perp/collateral/withdraw": {
-      "post": {
-        "summary": "withdraw collateral on a perp platform",
-        "description": "Returns a partially signed txn signature to withdraw collateral",
-        "operationId": "Api_PostWithdrawCollateral",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostWithdrawCollateralResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiPostWithdrawCollateralRequest"
+              "$ref": "#/definitions/apiPostManageCollateralRequest"
             }
           }
         ],
@@ -1666,12 +1632,10 @@
           "type": "string"
         },
         "orderID": {
-          "type": "string",
-          "format": "uint64"
+          "type": "string"
         },
         "clientOrderID": {
-          "type": "string",
-          "format": "uint64"
+          "type": "string"
         },
         "slot": {
           "type": "string"
@@ -2732,10 +2696,13 @@
         }
       }
     },
-    "apiPostDepositCollateralRequest": {
+    "apiPostManageCollateralRequest": {
       "type": "object",
       "properties": {
         "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
           "type": "string"
         },
         "amount": {
@@ -2747,10 +2714,16 @@
         },
         "contract": {
           "$ref": "#/definitions/commonPerpContract"
+        },
+        "type": {
+          "$ref": "#/definitions/commonPerpCollateralType"
+        },
+        "token": {
+          "$ref": "#/definitions/commonPerpCollateralToken"
         }
       }
     },
-    "apiPostDepositCollateralResponse": {
+    "apiPostManageCollateralResponse": {
       "type": "object",
       "properties": {
         "transaction": {
@@ -3082,32 +3055,6 @@
       "type": "object",
       "properties": {
         "signature": {
-          "type": "string"
-        }
-      }
-    },
-    "apiPostWithdrawCollateralRequest": {
-      "type": "object",
-      "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
-        "amount": {
-          "type": "number",
-          "format": "double"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
-        },
-        "contract": {
-          "$ref": "#/definitions/commonPerpContract"
-        }
-      }
-    },
-    "apiPostWithdrawCollateralResponse": {
-      "type": "object",
-      "properties": {
-        "transaction": {
           "type": "string"
         }
       }
@@ -3598,6 +3545,22 @@
         "OT_POST"
       ],
       "default": "OT_MARKET"
+    },
+    "commonPerpCollateralToken": {
+      "type": "string",
+      "enum": [
+        "PCTK_USDC",
+        "PCTK_SOL"
+      ],
+      "default": "PCTK_USDC"
+    },
+    "commonPerpCollateralType": {
+      "type": "string",
+      "enum": [
+        "PCT_DEPOSIT",
+        "PCT_WITHDRAWAL"
+      ],
+      "default": "PCT_DEPOSIT"
     },
     "commonPerpContract": {
       "type": "string",

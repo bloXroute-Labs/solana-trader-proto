@@ -36,6 +36,16 @@ class PerpContract(betterproto.Enum):
     BTC_PERP = 3
 
 
+class PerpCollateralType(betterproto.Enum):
+    PCT_DEPOSIT = 0
+    PCT_WITHDRAWAL = 1
+
+
+class PerpCollateralToken(betterproto.Enum):
+    PCTK_USDC = 0
+    PCTK_SOL = 1
+
+
 class Infinity(betterproto.Enum):
     INF_NOT = 0
     INF_POSITIVE = 1
