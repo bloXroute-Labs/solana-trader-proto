@@ -3148,6 +3148,8 @@ export class PostCancelPerpOrdersRequest extends jspb.Message {
     setProject(value: Project): PostCancelPerpOrdersRequest;
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): PostCancelPerpOrdersRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostCancelPerpOrdersRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelPerpOrdersRequest.AsObject;
@@ -3164,6 +3166,7 @@ export namespace PostCancelPerpOrdersRequest {
         owneraddress: string,
         project: Project,
         contract: common_pb.PerpContract,
+        accountaddress: string,
     }
 }
 
@@ -3198,6 +3201,8 @@ export class PostCancelPerpOrderRequest extends jspb.Message {
     setClientorderid(value: number): PostCancelPerpOrderRequest;
     getOrderid(): number;
     setOrderid(value: number): PostCancelPerpOrderRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostCancelPerpOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelPerpOrderRequest.AsObject;
@@ -3216,6 +3221,7 @@ export namespace PostCancelPerpOrderRequest {
         contract: common_pb.PerpContract,
         clientorderid: number,
         orderid: number,
+        accountaddress: string,
     }
 }
 

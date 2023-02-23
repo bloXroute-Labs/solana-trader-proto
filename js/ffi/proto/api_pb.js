@@ -26723,7 +26723,8 @@ proto.api.PostCancelPerpOrdersRequest.toObject = function(includeInstance, msg) 
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     project: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    contract: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    contract: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -26772,6 +26773,10 @@ proto.api.PostCancelPerpOrdersRequest.deserializeBinaryFromReader = function(msg
       var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
       msg.setContract(value);
       break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountaddress(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -26819,6 +26824,13 @@ proto.api.PostCancelPerpOrdersRequest.serializeBinaryToWriter = function(message
   if (f !== 0.0) {
     writer.writeEnum(
       3,
+      f
+    );
+  }
+  f = message.getAccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
       f
     );
   }
@@ -26876,6 +26888,24 @@ proto.api.PostCancelPerpOrdersRequest.prototype.getContract = function() {
  */
 proto.api.PostCancelPerpOrdersRequest.prototype.setContract = function(value) {
   return jspb.Message.setProto3EnumField(this, 3, value);
+};
+
+
+/**
+ * optional string accountAddress = 4;
+ * @return {string}
+ */
+proto.api.PostCancelPerpOrdersRequest.prototype.getAccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCancelPerpOrdersRequest} returns this
+ */
+proto.api.PostCancelPerpOrdersRequest.prototype.setAccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -27045,7 +27075,8 @@ proto.api.PostCancelPerpOrderRequest.toObject = function(includeInstance, msg) {
     project: jspb.Message.getFieldWithDefault(msg, 2, 0),
     contract: jspb.Message.getFieldWithDefault(msg, 3, 0),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    orderid: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    orderid: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -27101,6 +27132,10 @@ proto.api.PostCancelPerpOrderRequest.deserializeBinaryFromReader = function(msg,
     case 5:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setOrderid(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountaddress(value);
       break;
     default:
       reader.skipField();
@@ -27163,6 +27198,13 @@ proto.api.PostCancelPerpOrderRequest.serializeBinaryToWriter = function(message,
   if (f !== 0) {
     writer.writeUint64(
       5,
+      f
+    );
+  }
+  f = message.getAccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
       f
     );
   }
@@ -27256,6 +27298,24 @@ proto.api.PostCancelPerpOrderRequest.prototype.getOrderid = function() {
  */
 proto.api.PostCancelPerpOrderRequest.prototype.setOrderid = function(value) {
   return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional string accountAddress = 6;
+ * @return {string}
+ */
+proto.api.PostCancelPerpOrderRequest.prototype.getAccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCancelPerpOrderRequest} returns this
+ */
+proto.api.PostCancelPerpOrderRequest.prototype.setAccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 

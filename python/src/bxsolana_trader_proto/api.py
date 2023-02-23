@@ -876,6 +876,7 @@ class PostCancelPerpOrdersRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
     contract: common.PerpContract = betterproto.enum_field(3)
+    account_address: str = betterproto.string_field(4)
 
 
 @dataclass
@@ -890,6 +891,7 @@ class PostCancelPerpOrderRequest(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(3)
     client_order_i_d: int = betterproto.uint64_field(4)
     order_i_d: int = betterproto.uint64_field(5)
+    account_address: str = betterproto.string_field(6)
 
 
 @dataclass
@@ -1660,11 +1662,13 @@ class ApiStub(betterproto.ServiceStub):
         owner_address: str = "",
         project: "Project" = 0,
         contract: common.PerpContract = 0,
+        account_address: str = "",
     ) -> PostCancelPerpOrdersResponse:
         request = PostCancelPerpOrdersRequest()
         request.owner_address = owner_address
         request.project = project
         request.contract = contract
+        request.account_address = account_address
 
         return await self._unary_unary(
             "/api.Api/PostCancelPerpOrders",
@@ -1680,6 +1684,7 @@ class ApiStub(betterproto.ServiceStub):
         contract: common.PerpContract = 0,
         client_order_i_d: int = 0,
         order_i_d: int = 0,
+        account_address: str = "",
     ) -> PostCancelPerpOrderResponse:
         request = PostCancelPerpOrderRequest()
         request.owner_address = owner_address
@@ -1687,6 +1692,7 @@ class ApiStub(betterproto.ServiceStub):
         request.contract = contract
         request.client_order_i_d = client_order_i_d
         request.order_i_d = order_i_d
+        request.account_address = account_address
 
         return await self._unary_unary(
             "/api.Api/PostCancelPerpOrder",

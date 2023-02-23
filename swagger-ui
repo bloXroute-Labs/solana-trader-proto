@@ -2607,6 +2607,9 @@
         "orderID": {
           "type": "string",
           "format": "uint64"
+        },
+        "accountAddress": {
+          "type": "string"
         }
       }
     },
@@ -2622,21 +2625,18 @@
       "type": "object",
       "properties": {
         "ownerAddress": {
-          "type": "string",
-          "required": [
-            "ownerAddress"
-          ]
+          "type": "string"
         },
         "project": {
           "$ref": "#/definitions/apiProject"
         },
         "contract": {
           "$ref": "#/definitions/commonPerpContract"
+        },
+        "accountAddress": {
+          "type": "string"
         }
-      },
-      "required": [
-        "ownerAddress"
-      ]
+      }
     },
     "apiPostCancelPerpOrdersResponse": {
       "type": "object",
