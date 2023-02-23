@@ -31056,8 +31056,8 @@ proto.api.GetNewPerpOrdersStreamResponse.toObject = function(includeInstance, ms
     side: jspb.Message.getFieldWithDefault(msg, 3, 0),
     type: jspb.Message.getFieldWithDefault(msg, 4, 0),
     useraddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    orderid: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    orderid: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 7, 0),
     slot: jspb.Message.getFieldWithDefault(msg, 8, ""),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
     triggerprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
@@ -31122,11 +31122,11 @@ proto.api.GetNewPerpOrdersStreamResponse.deserializeBinaryFromReader = function(
       msg.setUseraddress(value);
       break;
     case 6:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readUint64());
       msg.setOrderid(value);
       break;
     case 7:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {number} */ (reader.readUint64());
       msg.setClientorderid(value);
       break;
     case 8:
@@ -31222,15 +31222,15 @@ proto.api.GetNewPerpOrdersStreamResponse.serializeBinaryToWriter = function(mess
     );
   }
   f = message.getOrderid();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeUint64(
       6,
       f
     );
   }
   f = message.getClientorderid();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0) {
+    writer.writeUint64(
       7,
       f
     );
@@ -31378,38 +31378,38 @@ proto.api.GetNewPerpOrdersStreamResponse.prototype.setUseraddress = function(val
 
 
 /**
- * optional string orderID = 6;
- * @return {string}
+ * optional uint64 orderID = 6;
+ * @return {number}
  */
 proto.api.GetNewPerpOrdersStreamResponse.prototype.getOrderid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
  */
 proto.api.GetNewPerpOrdersStreamResponse.prototype.setOrderid = function(value) {
-  return jspb.Message.setProto3StringField(this, 6, value);
+  return jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
 /**
- * optional string clientOrderID = 7;
- * @return {string}
+ * optional uint64 clientOrderID = 7;
+ * @return {number}
  */
 proto.api.GetNewPerpOrdersStreamResponse.prototype.getClientorderid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
  */
 proto.api.GetNewPerpOrdersStreamResponse.prototype.setClientorderid = function(value) {
-  return jspb.Message.setProto3StringField(this, 7, value);
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 

@@ -1487,8 +1487,8 @@ message GetNewPerpOrdersStreamResponse {
   common.PerpPositionSide side = 3;
   common.PerpOrderType type = 4;
   string userAddress = 5;
-  string orderID = 6;
-  string clientOrderID = 7;
+  uint64 orderID = 6;
+  uint64 clientOrderID = 7;
   string slot = 8;
   double price = 9;
   double triggerPrice = 10;

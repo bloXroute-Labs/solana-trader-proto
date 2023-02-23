@@ -3708,10 +3708,10 @@ export class GetNewPerpOrdersStreamResponse extends jspb.Message {
     setType(value: common_pb.PerpOrderType): GetNewPerpOrdersStreamResponse;
     getUseraddress(): string;
     setUseraddress(value: string): GetNewPerpOrdersStreamResponse;
-    getOrderid(): string;
-    setOrderid(value: string): GetNewPerpOrdersStreamResponse;
-    getClientorderid(): string;
-    setClientorderid(value: string): GetNewPerpOrdersStreamResponse;
+    getOrderid(): number;
+    setOrderid(value: number): GetNewPerpOrdersStreamResponse;
+    getClientorderid(): number;
+    setClientorderid(value: number): GetNewPerpOrdersStreamResponse;
     getSlot(): string;
     setSlot(value: string): GetNewPerpOrdersStreamResponse;
     getPrice(): number;
@@ -3744,8 +3744,8 @@ export namespace GetNewPerpOrdersStreamResponse {
         side: common_pb.PerpPositionSide,
         type: common_pb.PerpOrderType,
         useraddress: string,
-        orderid: string,
-        clientorderid: string,
+        orderid: number,
+        clientorderid: number,
         slot: string,
         price: number,
         triggerprice: number,
