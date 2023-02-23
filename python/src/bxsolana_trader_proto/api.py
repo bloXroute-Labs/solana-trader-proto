@@ -1003,7 +1003,6 @@ class PostPerpOrderRequest(betterproto.Message):
 @dataclass
 class PostPerpOrderResponse(betterproto.Message):
     transaction: str = betterproto.string_field(1)
-    account_address: str = betterproto.string_field(2)
 
 
 @dataclass

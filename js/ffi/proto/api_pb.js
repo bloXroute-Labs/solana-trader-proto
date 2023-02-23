@@ -30461,8 +30461,7 @@ proto.api.PostPerpOrderResponse.prototype.toObject = function(opt_includeInstanc
  */
 proto.api.PostPerpOrderResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    transaction: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, "")
+    transaction: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -30503,10 +30502,6 @@ proto.api.PostPerpOrderResponse.deserializeBinaryFromReader = function(msg, read
       var value = /** @type {string} */ (reader.readString());
       msg.setTransaction(value);
       break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setAccountaddress(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -30543,13 +30538,6 @@ proto.api.PostPerpOrderResponse.serializeBinaryToWriter = function(message, writ
       f
     );
   }
-  f = message.getAccountaddress();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
 };
 
 
@@ -30568,24 +30556,6 @@ proto.api.PostPerpOrderResponse.prototype.getTransaction = function() {
  */
 proto.api.PostPerpOrderResponse.prototype.setTransaction = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional string accountAddress = 2;
- * @return {string}
- */
-proto.api.PostPerpOrderResponse.prototype.getAccountaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.PostPerpOrderResponse} returns this
- */
-proto.api.PostPerpOrderResponse.prototype.setAccountaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

@@ -3618,8 +3618,6 @@ export namespace PostPerpOrderRequest {
 export class PostPerpOrderResponse extends jspb.Message { 
     getTransaction(): string;
     setTransaction(value: string): PostPerpOrderResponse;
-    getAccountaddress(): string;
-    setAccountaddress(value: string): PostPerpOrderResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostPerpOrderResponse.AsObject;
@@ -3634,7 +3632,6 @@ export class PostPerpOrderResponse extends jspb.Message {
 export namespace PostPerpOrderResponse {
     export type AsObject = {
         transaction: string,
-        accountaddress: string,
     }
 }
 

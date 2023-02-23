@@ -2858,9 +2858,6 @@
       "properties": {
         "transaction": {
           "type": "string"
-        },
-        "accountAddress": {
-          "type": "string"
         }
       }
     },
