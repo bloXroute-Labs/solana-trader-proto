@@ -3148,6 +3148,8 @@ export class PostCancelPerpOrdersRequest extends jspb.Message {
     setProject(value: Project): PostCancelPerpOrdersRequest;
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): PostCancelPerpOrdersRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostCancelPerpOrdersRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelPerpOrdersRequest.AsObject;
@@ -3164,6 +3166,7 @@ export namespace PostCancelPerpOrdersRequest {
         owneraddress: string,
         project: Project,
         contract: common_pb.PerpContract,
+        accountaddress: string,
     }
 }
 
@@ -3198,6 +3201,8 @@ export class PostCancelPerpOrderRequest extends jspb.Message {
     setClientorderid(value: number): PostCancelPerpOrderRequest;
     getOrderid(): number;
     setOrderid(value: number): PostCancelPerpOrderRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostCancelPerpOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelPerpOrderRequest.AsObject;
@@ -3216,6 +3221,7 @@ export namespace PostCancelPerpOrderRequest {
         contract: common_pb.PerpContract,
         clientorderid: number,
         orderid: number,
+        accountaddress: string,
     }
 }
 
@@ -3239,99 +3245,56 @@ export namespace PostCancelPerpOrderResponse {
     }
 }
 
-export class PostDepositCollateralRequest extends jspb.Message { 
+export class PostManageCollateralRequest extends jspb.Message { 
     getOwneraddress(): string;
-    setOwneraddress(value: string): PostDepositCollateralRequest;
+    setOwneraddress(value: string): PostManageCollateralRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostManageCollateralRequest;
     getAmount(): number;
-    setAmount(value: number): PostDepositCollateralRequest;
+    setAmount(value: number): PostManageCollateralRequest;
     getProject(): Project;
-    setProject(value: Project): PostDepositCollateralRequest;
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): PostDepositCollateralRequest;
+    setProject(value: Project): PostManageCollateralRequest;
+    getType(): common_pb.PerpCollateralType;
+    setType(value: common_pb.PerpCollateralType): PostManageCollateralRequest;
+    getToken(): common_pb.PerpCollateralToken;
+    setToken(value: common_pb.PerpCollateralToken): PostManageCollateralRequest;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostDepositCollateralRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: PostDepositCollateralRequest): PostDepositCollateralRequest.AsObject;
+    toObject(includeInstance?: boolean): PostManageCollateralRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostManageCollateralRequest): PostManageCollateralRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostDepositCollateralRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostDepositCollateralRequest;
-    static deserializeBinaryFromReader(message: PostDepositCollateralRequest, reader: jspb.BinaryReader): PostDepositCollateralRequest;
+    static serializeBinaryToWriter(message: PostManageCollateralRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostManageCollateralRequest;
+    static deserializeBinaryFromReader(message: PostManageCollateralRequest, reader: jspb.BinaryReader): PostManageCollateralRequest;
 }
 
-export namespace PostDepositCollateralRequest {
+export namespace PostManageCollateralRequest {
     export type AsObject = {
         owneraddress: string,
+        accountaddress: string,
         amount: number,
         project: Project,
-        contract: common_pb.PerpContract,
+        type: common_pb.PerpCollateralType,
+        token: common_pb.PerpCollateralToken,
     }
 }
 
-export class PostDepositCollateralResponse extends jspb.Message { 
+export class PostManageCollateralResponse extends jspb.Message { 
     getTransaction(): string;
-    setTransaction(value: string): PostDepositCollateralResponse;
+    setTransaction(value: string): PostManageCollateralResponse;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostDepositCollateralResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: PostDepositCollateralResponse): PostDepositCollateralResponse.AsObject;
+    toObject(includeInstance?: boolean): PostManageCollateralResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostManageCollateralResponse): PostManageCollateralResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostDepositCollateralResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostDepositCollateralResponse;
-    static deserializeBinaryFromReader(message: PostDepositCollateralResponse, reader: jspb.BinaryReader): PostDepositCollateralResponse;
+    static serializeBinaryToWriter(message: PostManageCollateralResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostManageCollateralResponse;
+    static deserializeBinaryFromReader(message: PostManageCollateralResponse, reader: jspb.BinaryReader): PostManageCollateralResponse;
 }
 
-export namespace PostDepositCollateralResponse {
-    export type AsObject = {
-        transaction: string,
-    }
-}
-
-export class PostWithdrawCollateralRequest extends jspb.Message { 
-    getOwneraddress(): string;
-    setOwneraddress(value: string): PostWithdrawCollateralRequest;
-    getAmount(): number;
-    setAmount(value: number): PostWithdrawCollateralRequest;
-    getProject(): Project;
-    setProject(value: Project): PostWithdrawCollateralRequest;
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): PostWithdrawCollateralRequest;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostWithdrawCollateralRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: PostWithdrawCollateralRequest): PostWithdrawCollateralRequest.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostWithdrawCollateralRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostWithdrawCollateralRequest;
-    static deserializeBinaryFromReader(message: PostWithdrawCollateralRequest, reader: jspb.BinaryReader): PostWithdrawCollateralRequest;
-}
-
-export namespace PostWithdrawCollateralRequest {
-    export type AsObject = {
-        owneraddress: string,
-        amount: number,
-        project: Project,
-        contract: common_pb.PerpContract,
-    }
-}
-
-export class PostWithdrawCollateralResponse extends jspb.Message { 
-    getTransaction(): string;
-    setTransaction(value: string): PostWithdrawCollateralResponse;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostWithdrawCollateralResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: PostWithdrawCollateralResponse): PostWithdrawCollateralResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostWithdrawCollateralResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostWithdrawCollateralResponse;
-    static deserializeBinaryFromReader(message: PostWithdrawCollateralResponse, reader: jspb.BinaryReader): PostWithdrawCollateralResponse;
-}
-
-export namespace PostWithdrawCollateralResponse {
+export namespace PostManageCollateralResponse {
     export type AsObject = {
         transaction: string,
     }
@@ -3652,8 +3615,6 @@ export namespace PostPerpOrderRequest {
 export class PostPerpOrderResponse extends jspb.Message { 
     getTransaction(): string;
     setTransaction(value: string): PostPerpOrderResponse;
-    getAccountaddress(): string;
-    setAccountaddress(value: string): PostPerpOrderResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostPerpOrderResponse.AsObject;
@@ -3668,7 +3629,6 @@ export class PostPerpOrderResponse extends jspb.Message {
 export namespace PostPerpOrderResponse {
     export type AsObject = {
         transaction: string,
-        accountaddress: string,
     }
 }
 

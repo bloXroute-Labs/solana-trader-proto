@@ -483,26 +483,14 @@ service Api {
     };
   }
 
-  rpc PostDepositCollateral(PostDepositCollateralRequest) returns (PostDepositCollateralResponse) {
+  rpc PostManageCollateral(PostManageCollateralRequest) returns (PostManageCollateralResponse) {
     option (google.api.http) = {
-      post: "/api/v1/trade/perp/collateral/deposit"
+      post: "/api/v1/trade/perp/managecollateral"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns a partially signed txn signature to deposit collateral";
+      description: "Returns a partially signed txn signature to manage collateral";
       summary: "posts collateral on a perp platform";
-      tags: ["Perp"];
-    };
-  }
-
-  rpc PostWithdrawCollateral(PostWithdrawCollateralRequest) returns (PostWithdrawCollateralResponse) {
-    option (google.api.http) = {
-      post: "/api/v1/trade/perp/collateral/withdraw"
-      body: "*"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns a partially signed txn signature to withdraw collateral";
-      summary: "withdraw collateral on a perp platform";
       tags: ["Perp"];
     };
   }
@@ -1342,15 +1330,15 @@ message PostCreateUserResponse {
 }
 
 message PostCancelPerpOrdersRequest {
-  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+  string ownerAddress = 1;
   Project project = 2 [(google.api.field_behavior) = REQUIRED];
-  common.PerpContract contract = 3 [(google.api.field_behavior) = REQUIRED];;
+  common.PerpContract contract = 3 [(google.api.field_behavior) = REQUIRED];
+  string accountAddress = 4;
 }
 
 message PostCancelPerpOrdersResponse {
   string transaction = 1;
 }
-
 
 message PostCancelPerpOrderRequest {
   string ownerAddress = 1;
@@ -1358,31 +1346,23 @@ message PostCancelPerpOrderRequest {
   common.PerpContract contract = 3;
   uint64 clientOrderID = 4;
   uint64 orderID = 5;
+  string accountAddress = 6;
 }
 
 message PostCancelPerpOrderResponse {
   string transaction = 1;
 }
 
-message PostDepositCollateralRequest {
+message PostManageCollateralRequest {
   string ownerAddress = 1;
-  double amount = 2;
-  Project project = 3;
-  common.PerpContract contract = 4;
+  string accountAddress = 2;
+  double amount = 3;
+  Project project = 4;
+  common.PerpCollateralType type = 5;
+  common.PerpCollateralToken token = 6;
 }
 
-message PostDepositCollateralResponse {
-  string transaction = 1;
-}
-
-message PostWithdrawCollateralRequest {
-  string ownerAddress = 1;
-  double amount = 2;
-  Project project = 3;
-  common.PerpContract contract = 4;
-}
-
-message PostWithdrawCollateralResponse {
+message PostManageCollateralResponse {
   string transaction = 1;
 }
 
@@ -1473,7 +1453,6 @@ message PostPerpOrderRequest {
 
 message PostPerpOrderResponse {
   string transaction = 1;
-  string accountAddress = 2;
 }
 
 message GetNewPerpOrdersStreamRequest {

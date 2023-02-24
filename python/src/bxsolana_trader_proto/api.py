@@ -876,6 +876,7 @@ class PostCancelPerpOrdersRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
     contract: common.PerpContract = betterproto.enum_field(3)
+    account_address: str = betterproto.string_field(4)
 
 
 @dataclass
@@ -890,6 +891,7 @@ class PostCancelPerpOrderRequest(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(3)
     client_order_i_d: int = betterproto.uint64_field(4)
     order_i_d: int = betterproto.uint64_field(5)
+    account_address: str = betterproto.string_field(6)
 
 
 @dataclass
@@ -898,28 +900,17 @@ class PostCancelPerpOrderResponse(betterproto.Message):
 
 
 @dataclass
-class PostDepositCollateralRequest(betterproto.Message):
+class PostManageCollateralRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    amount: float = betterproto.double_field(2)
-    project: "Project" = betterproto.enum_field(3)
-    contract: common.PerpContract = betterproto.enum_field(4)
+    account_address: str = betterproto.string_field(2)
+    amount: float = betterproto.double_field(3)
+    project: "Project" = betterproto.enum_field(4)
+    type: common.PerpCollateralType = betterproto.enum_field(5)
+    token: common.PerpCollateralToken = betterproto.enum_field(6)
 
 
 @dataclass
-class PostDepositCollateralResponse(betterproto.Message):
-    transaction: str = betterproto.string_field(1)
-
-
-@dataclass
-class PostWithdrawCollateralRequest(betterproto.Message):
-    owner_address: str = betterproto.string_field(1)
-    amount: float = betterproto.double_field(2)
-    project: "Project" = betterproto.enum_field(3)
-    contract: common.PerpContract = betterproto.enum_field(4)
-
-
-@dataclass
-class PostWithdrawCollateralResponse(betterproto.Message):
+class PostManageCollateralResponse(betterproto.Message):
     transaction: str = betterproto.string_field(1)
 
 
@@ -1011,7 +1002,6 @@ class PostPerpOrderRequest(betterproto.Message):
 @dataclass
 class PostPerpOrderResponse(betterproto.Message):
     transaction: str = betterproto.string_field(1)
-    account_address: str = betterproto.string_field(2)
 
 
 @dataclass
@@ -1670,11 +1660,13 @@ class ApiStub(betterproto.ServiceStub):
         owner_address: str = "",
         project: "Project" = 0,
         contract: common.PerpContract = 0,
+        account_address: str = "",
     ) -> PostCancelPerpOrdersResponse:
         request = PostCancelPerpOrdersRequest()
         request.owner_address = owner_address
         request.project = project
         request.contract = contract
+        request.account_address = account_address
 
         return await self._unary_unary(
             "/api.Api/PostCancelPerpOrders",
@@ -1690,6 +1682,7 @@ class ApiStub(betterproto.ServiceStub):
         contract: common.PerpContract = 0,
         client_order_i_d: int = 0,
         order_i_d: int = 0,
+        account_address: str = "",
     ) -> PostCancelPerpOrderResponse:
         request = PostCancelPerpOrderRequest()
         request.owner_address = owner_address
@@ -1697,6 +1690,7 @@ class ApiStub(betterproto.ServiceStub):
         request.contract = contract
         request.client_order_i_d = client_order_i_d
         request.order_i_d = order_i_d
+        request.account_address = account_address
 
         return await self._unary_unary(
             "/api.Api/PostCancelPerpOrder",
@@ -1762,44 +1756,28 @@ class ApiStub(betterproto.ServiceStub):
             GetUserResponse,
         )
 
-    async def post_deposit_collateral(
+    async def post_manage_collateral(
         self,
         *,
         owner_address: str = "",
+        account_address: str = "",
         amount: float = 0,
         project: "Project" = 0,
-        contract: common.PerpContract = 0,
-    ) -> PostDepositCollateralResponse:
-        request = PostDepositCollateralRequest()
+        type: common.PerpCollateralType = 0,
+        token: common.PerpCollateralToken = 0,
+    ) -> PostManageCollateralResponse:
+        request = PostManageCollateralRequest()
         request.owner_address = owner_address
+        request.account_address = account_address
         request.amount = amount
         request.project = project
-        request.contract = contract
+        request.type = type
+        request.token = token
 
         return await self._unary_unary(
-            "/api.Api/PostDepositCollateral",
+            "/api.Api/PostManageCollateral",
             request,
-            PostDepositCollateralResponse,
-        )
-
-    async def post_withdraw_collateral(
-        self,
-        *,
-        owner_address: str = "",
-        amount: float = 0,
-        project: "Project" = 0,
-        contract: common.PerpContract = 0,
-    ) -> PostWithdrawCollateralResponse:
-        request = PostWithdrawCollateralRequest()
-        request.owner_address = owner_address
-        request.amount = amount
-        request.project = project
-        request.contract = contract
-
-        return await self._unary_unary(
-            "/api.Api/PostWithdrawCollateral",
-            request,
-            PostWithdrawCollateralResponse,
+            PostManageCollateralResponse,
         )
 
     async def get_orderbooks_stream(

@@ -59,8 +59,7 @@ type ApiClient interface {
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
 	PostCreateUser(ctx context.Context, in *PostCreateUserRequest, opts ...grpc.CallOption) (*PostCreateUserResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
-	PostDepositCollateral(ctx context.Context, in *PostDepositCollateralRequest, opts ...grpc.CallOption) (*PostDepositCollateralResponse, error)
-	PostWithdrawCollateral(ctx context.Context, in *PostWithdrawCollateralRequest, opts ...grpc.CallOption) (*PostWithdrawCollateralResponse, error)
+	PostManageCollateral(ctx context.Context, in *PostManageCollateralRequest, opts ...grpc.CallOption) (*PostManageCollateralResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -420,18 +419,9 @@ func (c *apiClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grp
 	return out, nil
 }
 
-func (c *apiClient) PostDepositCollateral(ctx context.Context, in *PostDepositCollateralRequest, opts ...grpc.CallOption) (*PostDepositCollateralResponse, error) {
-	out := new(PostDepositCollateralResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostDepositCollateral", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostWithdrawCollateral(ctx context.Context, in *PostWithdrawCollateralRequest, opts ...grpc.CallOption) (*PostWithdrawCollateralResponse, error) {
-	out := new(PostWithdrawCollateralResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostWithdrawCollateral", in, out, opts...)
+func (c *apiClient) PostManageCollateral(ctx context.Context, in *PostManageCollateralRequest, opts ...grpc.CallOption) (*PostManageCollateralResponse, error) {
+	out := new(PostManageCollateralResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostManageCollateral", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -931,8 +921,7 @@ type ApiServer interface {
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
 	PostCreateUser(context.Context, *PostCreateUserRequest) (*PostCreateUserResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
-	PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralResponse, error)
-	PostWithdrawCollateral(context.Context, *PostWithdrawCollateralRequest) (*PostWithdrawCollateralResponse, error)
+	PostManageCollateral(context.Context, *PostManageCollateralRequest) (*PostManageCollateralResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -1067,11 +1056,8 @@ func (UnimplementedApiServer) PostCreateUser(context.Context, *PostCreateUserReq
 func (UnimplementedApiServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedApiServer) PostDepositCollateral(context.Context, *PostDepositCollateralRequest) (*PostDepositCollateralResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostDepositCollateral not implemented")
-}
-func (UnimplementedApiServer) PostWithdrawCollateral(context.Context, *PostWithdrawCollateralRequest) (*PostWithdrawCollateralResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostWithdrawCollateral not implemented")
+func (UnimplementedApiServer) PostManageCollateral(context.Context, *PostManageCollateralRequest) (*PostManageCollateralResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostManageCollateral not implemented")
 }
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
@@ -1794,38 +1780,20 @@ func _Api_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_PostDepositCollateral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostDepositCollateralRequest)
+func _Api_PostManageCollateral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostManageCollateralRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).PostDepositCollateral(ctx, in)
+		return srv.(ApiServer).PostManageCollateral(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/PostDepositCollateral",
+		FullMethod: "/api.Api/PostManageCollateral",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostDepositCollateral(ctx, req.(*PostDepositCollateralRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostWithdrawCollateral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostWithdrawCollateralRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostWithdrawCollateral(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostWithdrawCollateral",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostWithdrawCollateral(ctx, req.(*PostWithdrawCollateralRequest))
+		return srv.(ApiServer).PostManageCollateral(ctx, req.(*PostManageCollateralRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2280,12 +2248,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetUser_Handler,
 		},
 		{
-			MethodName: "PostDepositCollateral",
-			Handler:    _Api_PostDepositCollateral_Handler,
-		},
-		{
-			MethodName: "PostWithdrawCollateral",
-			Handler:    _Api_PostWithdrawCollateral_Handler,
+			MethodName: "PostManageCollateral",
+			Handler:    _Api_PostManageCollateral_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

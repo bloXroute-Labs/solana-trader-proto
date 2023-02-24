@@ -50,8 +50,7 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getPerpOrderbook: IApiService_IGetPerpOrderbook;
     postCreateUser: IApiService_IPostCreateUser;
     getUser: IApiService_IGetUser;
-    postDepositCollateral: IApiService_IPostDepositCollateral;
-    postWithdrawCollateral: IApiService_IPostWithdrawCollateral;
+    postManageCollateral: IApiService_IPostManageCollateral;
     getOrderbooksStream: IApiService_IGetOrderbooksStream;
     getMarketDepthsStream: IApiService_IGetMarketDepthsStream;
     getTickersStream: IApiService_IGetTickersStream;
@@ -401,23 +400,14 @@ interface IApiService_IGetUser extends grpc.MethodDefinition<api_pb.GetUserReque
     responseSerialize: grpc.serialize<api_pb.GetUserResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetUserResponse>;
 }
-interface IApiService_IPostDepositCollateral extends grpc.MethodDefinition<api_pb.PostDepositCollateralRequest, api_pb.PostDepositCollateralResponse> {
-    path: "/api.Api/PostDepositCollateral";
+interface IApiService_IPostManageCollateral extends grpc.MethodDefinition<api_pb.PostManageCollateralRequest, api_pb.PostManageCollateralResponse> {
+    path: "/api.Api/PostManageCollateral";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.PostDepositCollateralRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.PostDepositCollateralRequest>;
-    responseSerialize: grpc.serialize<api_pb.PostDepositCollateralResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.PostDepositCollateralResponse>;
-}
-interface IApiService_IPostWithdrawCollateral extends grpc.MethodDefinition<api_pb.PostWithdrawCollateralRequest, api_pb.PostWithdrawCollateralResponse> {
-    path: "/api.Api/PostWithdrawCollateral";
-    requestStream: false;
-    responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.PostWithdrawCollateralRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.PostWithdrawCollateralRequest>;
-    responseSerialize: grpc.serialize<api_pb.PostWithdrawCollateralResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.PostWithdrawCollateralResponse>;
+    requestSerialize: grpc.serialize<api_pb.PostManageCollateralRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostManageCollateralRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostManageCollateralResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostManageCollateralResponse>;
 }
 interface IApiService_IGetOrderbooksStream extends grpc.MethodDefinition<api_pb.GetOrderbooksRequest, api_pb.GetOrderbooksStreamResponse> {
     path: "/api.Api/GetOrderbooksStream";
@@ -586,8 +576,7 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getPerpOrderbook: grpc.handleUnaryCall<api_pb.GetPerpOrderbookRequest, api_pb.GetPerpOrderbookResponse>;
     postCreateUser: grpc.handleUnaryCall<api_pb.PostCreateUserRequest, api_pb.PostCreateUserResponse>;
     getUser: grpc.handleUnaryCall<api_pb.GetUserRequest, api_pb.GetUserResponse>;
-    postDepositCollateral: grpc.handleUnaryCall<api_pb.PostDepositCollateralRequest, api_pb.PostDepositCollateralResponse>;
-    postWithdrawCollateral: grpc.handleUnaryCall<api_pb.PostWithdrawCollateralRequest, api_pb.PostWithdrawCollateralResponse>;
+    postManageCollateral: grpc.handleUnaryCall<api_pb.PostManageCollateralRequest, api_pb.PostManageCollateralResponse>;
     getOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetOrderbooksRequest, api_pb.GetOrderbooksStreamResponse>;
     getMarketDepthsStream: grpc.handleServerStreamingCall<api_pb.GetMarketDepthsRequest, api_pb.GetMarketDepthsStreamResponse>;
     getTickersStream: grpc.handleServerStreamingCall<api_pb.GetTickersRequest, api_pb.GetTickersStreamResponse>;
@@ -716,12 +705,9 @@ export interface IApiClient {
     getUser(request: api_pb.GetUserRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
     getUser(request: api_pb.GetUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
     getUser(request: api_pb.GetUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
-    postDepositCollateral(request: api_pb.PostDepositCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
-    postDepositCollateral(request: api_pb.PostDepositCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
-    postDepositCollateral(request: api_pb.PostDepositCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
-    postWithdrawCollateral(request: api_pb.PostWithdrawCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostWithdrawCollateralResponse) => void): grpc.ClientUnaryCall;
-    postWithdrawCollateral(request: api_pb.PostWithdrawCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostWithdrawCollateralResponse) => void): grpc.ClientUnaryCall;
-    postWithdrawCollateral(request: api_pb.PostWithdrawCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostWithdrawCollateralResponse) => void): grpc.ClientUnaryCall;
+    postManageCollateral(request: api_pb.PostManageCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostManageCollateralResponse) => void): grpc.ClientUnaryCall;
+    postManageCollateral(request: api_pb.PostManageCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostManageCollateralResponse) => void): grpc.ClientUnaryCall;
+    postManageCollateral(request: api_pb.PostManageCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostManageCollateralResponse) => void): grpc.ClientUnaryCall;
     getOrderbooksStream(request: api_pb.GetOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     getOrderbooksStream(request: api_pb.GetOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     getMarketDepthsStream(request: api_pb.GetMarketDepthsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthsStreamResponse>;
@@ -865,12 +851,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getUser(request: api_pb.GetUserRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
     public getUser(request: api_pb.GetUserRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
     public getUser(request: api_pb.GetUserRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetUserResponse) => void): grpc.ClientUnaryCall;
-    public postDepositCollateral(request: api_pb.PostDepositCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
-    public postDepositCollateral(request: api_pb.PostDepositCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
-    public postDepositCollateral(request: api_pb.PostDepositCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDepositCollateralResponse) => void): grpc.ClientUnaryCall;
-    public postWithdrawCollateral(request: api_pb.PostWithdrawCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostWithdrawCollateralResponse) => void): grpc.ClientUnaryCall;
-    public postWithdrawCollateral(request: api_pb.PostWithdrawCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostWithdrawCollateralResponse) => void): grpc.ClientUnaryCall;
-    public postWithdrawCollateral(request: api_pb.PostWithdrawCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostWithdrawCollateralResponse) => void): grpc.ClientUnaryCall;
+    public postManageCollateral(request: api_pb.PostManageCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostManageCollateralResponse) => void): grpc.ClientUnaryCall;
+    public postManageCollateral(request: api_pb.PostManageCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostManageCollateralResponse) => void): grpc.ClientUnaryCall;
+    public postManageCollateral(request: api_pb.PostManageCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostManageCollateralResponse) => void): grpc.ClientUnaryCall;
     public getOrderbooksStream(request: api_pb.GetOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     public getOrderbooksStream(request: api_pb.GetOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetOrderbooksStreamResponse>;
     public getMarketDepthsStream(request: api_pb.GetMarketDepthsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetMarketDepthsStreamResponse>;

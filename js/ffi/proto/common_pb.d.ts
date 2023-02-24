@@ -83,6 +83,16 @@ export enum PerpContract {
     BTC_PERP = 3,
 }
 
+export enum PerpCollateralType {
+    PCT_DEPOSIT = 0,
+    PCT_WITHDRAWAL = 1,
+}
+
+export enum PerpCollateralToken {
+    PCTK_USDC = 0,
+    PCTK_SOL = 1,
+}
+
 export enum Infinity {
     INF_NOT = 0,
     INF_POSITIVE = 1,

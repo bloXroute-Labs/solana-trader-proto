@@ -18,6 +18,8 @@ var global = Function('return this')();
 goog.exportSymbol('proto.common.Fee', null, global);
 goog.exportSymbol('proto.common.Infinity', null, global);
 goog.exportSymbol('proto.common.OrderType', null, global);
+goog.exportSymbol('proto.common.PerpCollateralToken', null, global);
+goog.exportSymbol('proto.common.PerpCollateralType', null, global);
 goog.exportSymbol('proto.common.PerpContract', null, global);
 goog.exportSymbol('proto.common.PerpOrderType', null, global);
 goog.exportSymbol('proto.common.PerpPositionSide', null, global);
@@ -452,6 +454,22 @@ proto.common.PerpContract = {
   SOL_PERP: 1,
   ETH_PERP: 2,
   BTC_PERP: 3
+};
+
+/**
+ * @enum {number}
+ */
+proto.common.PerpCollateralType = {
+  PCT_DEPOSIT: 0,
+  PCT_WITHDRAWAL: 1
+};
+
+/**
+ * @enum {number}
+ */
+proto.common.PerpCollateralToken = {
+  PCTK_USDC: 0,
+  PCTK_SOL: 1
 };
 
 /**
