@@ -905,9 +905,8 @@ class PostManageCollateralRequest(betterproto.Message):
     account_address: str = betterproto.string_field(2)
     amount: float = betterproto.double_field(3)
     project: "Project" = betterproto.enum_field(4)
-    contract: common.PerpContract = betterproto.enum_field(5)
-    type: common.PerpCollateralType = betterproto.enum_field(6)
-    token: common.PerpCollateralToken = betterproto.enum_field(7)
+    type: common.PerpCollateralType = betterproto.enum_field(5)
+    token: common.PerpCollateralToken = betterproto.enum_field(6)
 
 
 @dataclass
@@ -1764,7 +1763,6 @@ class ApiStub(betterproto.ServiceStub):
         account_address: str = "",
         amount: float = 0,
         project: "Project" = 0,
-        contract: common.PerpContract = 0,
         type: common.PerpCollateralType = 0,
         token: common.PerpCollateralToken = 0,
     ) -> PostManageCollateralResponse:
@@ -1773,7 +1771,6 @@ class ApiStub(betterproto.ServiceStub):
         request.account_address = account_address
         request.amount = amount
         request.project = project
-        request.contract = contract
         request.type = type
         request.token = token
 

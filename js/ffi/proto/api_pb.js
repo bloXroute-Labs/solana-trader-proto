@@ -27485,9 +27485,8 @@ proto.api.PostManageCollateralRequest.toObject = function(includeInstance, msg) 
     accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
     project: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    contract: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    type: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    token: jspb.Message.getFieldWithDefault(msg, 7, 0)
+    type: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    token: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -27541,14 +27540,10 @@ proto.api.PostManageCollateralRequest.deserializeBinaryFromReader = function(msg
       msg.setProject(value);
       break;
     case 5:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
-      msg.setContract(value);
-      break;
-    case 6:
       var value = /** @type {!proto.common.PerpCollateralType} */ (reader.readEnum());
       msg.setType(value);
       break;
-    case 7:
+    case 6:
       var value = /** @type {!proto.common.PerpCollateralToken} */ (reader.readEnum());
       msg.setToken(value);
       break;
@@ -27609,24 +27604,17 @@ proto.api.PostManageCollateralRequest.serializeBinaryToWriter = function(message
       f
     );
   }
-  f = message.getContract();
+  f = message.getType();
   if (f !== 0.0) {
     writer.writeEnum(
       5,
       f
     );
   }
-  f = message.getType();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      6,
-      f
-    );
-  }
   f = message.getToken();
   if (f !== 0.0) {
     writer.writeEnum(
-      7,
+      6,
       f
     );
   }
@@ -27706,29 +27694,11 @@ proto.api.PostManageCollateralRequest.prototype.setProject = function(value) {
 
 
 /**
- * optional common.PerpContract contract = 5;
- * @return {!proto.common.PerpContract}
- */
-proto.api.PostManageCollateralRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
-};
-
-
-/**
- * @param {!proto.common.PerpContract} value
- * @return {!proto.api.PostManageCollateralRequest} returns this
- */
-proto.api.PostManageCollateralRequest.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 5, value);
-};
-
-
-/**
- * optional common.PerpCollateralType type = 6;
+ * optional common.PerpCollateralType type = 5;
  * @return {!proto.common.PerpCollateralType}
  */
 proto.api.PostManageCollateralRequest.prototype.getType = function() {
-  return /** @type {!proto.common.PerpCollateralType} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {!proto.common.PerpCollateralType} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
@@ -27737,16 +27707,16 @@ proto.api.PostManageCollateralRequest.prototype.getType = function() {
  * @return {!proto.api.PostManageCollateralRequest} returns this
  */
 proto.api.PostManageCollateralRequest.prototype.setType = function(value) {
-  return jspb.Message.setProto3EnumField(this, 6, value);
+  return jspb.Message.setProto3EnumField(this, 5, value);
 };
 
 
 /**
- * optional common.PerpCollateralToken token = 7;
+ * optional common.PerpCollateralToken token = 6;
  * @return {!proto.common.PerpCollateralToken}
  */
 proto.api.PostManageCollateralRequest.prototype.getToken = function() {
-  return /** @type {!proto.common.PerpCollateralToken} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+  return /** @type {!proto.common.PerpCollateralToken} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
@@ -27755,7 +27725,7 @@ proto.api.PostManageCollateralRequest.prototype.getToken = function() {
  * @return {!proto.api.PostManageCollateralRequest} returns this
  */
 proto.api.PostManageCollateralRequest.prototype.setToken = function(value) {
-  return jspb.Message.setProto3EnumField(this, 7, value);
+  return jspb.Message.setProto3EnumField(this, 6, value);
 };
 
 

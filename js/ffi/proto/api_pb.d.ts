@@ -3254,8 +3254,6 @@ export class PostManageCollateralRequest extends jspb.Message {
     setAmount(value: number): PostManageCollateralRequest;
     getProject(): Project;
     setProject(value: Project): PostManageCollateralRequest;
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): PostManageCollateralRequest;
     getType(): common_pb.PerpCollateralType;
     setType(value: common_pb.PerpCollateralType): PostManageCollateralRequest;
     getToken(): common_pb.PerpCollateralToken;
@@ -3277,7 +3275,6 @@ export namespace PostManageCollateralRequest {
         accountaddress: string,
         amount: number,
         project: Project,
-        contract: common_pb.PerpContract,
         type: common_pb.PerpCollateralType,
         token: common_pb.PerpCollateralToken,
     }

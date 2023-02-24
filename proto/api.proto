@@ -1358,9 +1358,8 @@ message PostManageCollateralRequest {
   string accountAddress = 2;
   double amount = 3;
   Project project = 4;
-  common.PerpContract contract = 5;
-  common.PerpCollateralType type = 6;
-  common.PerpCollateralToken token = 7;
+  common.PerpCollateralType type = 5;
+  common.PerpCollateralToken token = 6;
 }
 
 message PostManageCollateralResponse {

@@ -2712,9 +2712,6 @@
         "project": {
           "$ref": "#/definitions/apiProject"
         },
-        "contract": {
-          "$ref": "#/definitions/commonPerpContract"
-        },
         "type": {
           "$ref": "#/definitions/commonPerpCollateralType"
         },
