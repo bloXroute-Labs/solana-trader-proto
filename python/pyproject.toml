@@ -1,6 +1,6 @@
 [project]
 name = "bxsolana-trader-proto"
-version = "0.0.8"
+version = "0.0.10"
 description = "proto-generated files for solana-trader-api"
 
 [build-system]

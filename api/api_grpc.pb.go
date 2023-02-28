@@ -60,6 +60,12 @@ type ApiClient interface {
 	PostCreateUser(ctx context.Context, in *PostCreateUserRequest, opts ...grpc.CallOption) (*PostCreateUserResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	PostManageCollateral(ctx context.Context, in *PostManageCollateralRequest, opts ...grpc.CallOption) (*PostManageCollateralResponse, error)
+	PostSettlePNL(ctx context.Context, in *PostSettlePNLRequest, opts ...grpc.CallOption) (*PostSettlePNLResponse, error)
+	PostSettlePNLs(ctx context.Context, in *PostSettlePNLsRequest, opts ...grpc.CallOption) (*PostSettlePNLsResponse, error)
+	GetAssets(ctx context.Context, in *GetAssetsRequest, opts ...grpc.CallOption) (*GetAssetsResponse, error)
+	GetPerpContracts(ctx context.Context, in *GetPerpContractsRequest, opts ...grpc.CallOption) (*GetPerpContractsResponse, error)
+	PostLiquidatePerp(ctx context.Context, in *PostLiquidatePerpRequest, opts ...grpc.CallOption) (*PostLiquidatePerpResponse, error)
+	GetOpenPerpOrder(ctx context.Context, in *GetOpenPerpOrderRequest, opts ...grpc.CallOption) (*GetOpenPerpOrderResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -422,6 +428,60 @@ func (c *apiClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grp
 func (c *apiClient) PostManageCollateral(ctx context.Context, in *PostManageCollateralRequest, opts ...grpc.CallOption) (*PostManageCollateralResponse, error) {
 	out := new(PostManageCollateralResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostManageCollateral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostSettlePNL(ctx context.Context, in *PostSettlePNLRequest, opts ...grpc.CallOption) (*PostSettlePNLResponse, error) {
+	out := new(PostSettlePNLResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostSettlePNL", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostSettlePNLs(ctx context.Context, in *PostSettlePNLsRequest, opts ...grpc.CallOption) (*PostSettlePNLsResponse, error) {
+	out := new(PostSettlePNLsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostSettlePNLs", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetAssets(ctx context.Context, in *GetAssetsRequest, opts ...grpc.CallOption) (*GetAssetsResponse, error) {
+	out := new(GetAssetsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetAssets", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetPerpContracts(ctx context.Context, in *GetPerpContractsRequest, opts ...grpc.CallOption) (*GetPerpContractsResponse, error) {
+	out := new(GetPerpContractsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPerpContracts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostLiquidatePerp(ctx context.Context, in *PostLiquidatePerpRequest, opts ...grpc.CallOption) (*PostLiquidatePerpResponse, error) {
+	out := new(PostLiquidatePerpResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostLiquidatePerp", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetOpenPerpOrder(ctx context.Context, in *GetOpenPerpOrderRequest, opts ...grpc.CallOption) (*GetOpenPerpOrderResponse, error) {
+	out := new(GetOpenPerpOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetOpenPerpOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -922,6 +982,12 @@ type ApiServer interface {
 	PostCreateUser(context.Context, *PostCreateUserRequest) (*PostCreateUserResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	PostManageCollateral(context.Context, *PostManageCollateralRequest) (*PostManageCollateralResponse, error)
+	PostSettlePNL(context.Context, *PostSettlePNLRequest) (*PostSettlePNLResponse, error)
+	PostSettlePNLs(context.Context, *PostSettlePNLsRequest) (*PostSettlePNLsResponse, error)
+	GetAssets(context.Context, *GetAssetsRequest) (*GetAssetsResponse, error)
+	GetPerpContracts(context.Context, *GetPerpContractsRequest) (*GetPerpContractsResponse, error)
+	PostLiquidatePerp(context.Context, *PostLiquidatePerpRequest) (*PostLiquidatePerpResponse, error)
+	GetOpenPerpOrder(context.Context, *GetOpenPerpOrderRequest) (*GetOpenPerpOrderResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -1058,6 +1124,24 @@ func (UnimplementedApiServer) GetUser(context.Context, *GetUserRequest) (*GetUse
 }
 func (UnimplementedApiServer) PostManageCollateral(context.Context, *PostManageCollateralRequest) (*PostManageCollateralResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostManageCollateral not implemented")
+}
+func (UnimplementedApiServer) PostSettlePNL(context.Context, *PostSettlePNLRequest) (*PostSettlePNLResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostSettlePNL not implemented")
+}
+func (UnimplementedApiServer) PostSettlePNLs(context.Context, *PostSettlePNLsRequest) (*PostSettlePNLsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostSettlePNLs not implemented")
+}
+func (UnimplementedApiServer) GetAssets(context.Context, *GetAssetsRequest) (*GetAssetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAssets not implemented")
+}
+func (UnimplementedApiServer) GetPerpContracts(context.Context, *GetPerpContractsRequest) (*GetPerpContractsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPerpContracts not implemented")
+}
+func (UnimplementedApiServer) PostLiquidatePerp(context.Context, *PostLiquidatePerpRequest) (*PostLiquidatePerpResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostLiquidatePerp not implemented")
+}
+func (UnimplementedApiServer) GetOpenPerpOrder(context.Context, *GetOpenPerpOrderRequest) (*GetOpenPerpOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOpenPerpOrder not implemented")
 }
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
@@ -1798,6 +1882,114 @@ func _Api_PostManageCollateral_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_PostSettlePNL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostSettlePNLRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostSettlePNL(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostSettlePNL",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostSettlePNL(ctx, req.(*PostSettlePNLRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostSettlePNLs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostSettlePNLsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostSettlePNLs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostSettlePNLs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostSettlePNLs(ctx, req.(*PostSettlePNLsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetAssets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAssetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetAssets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetAssets",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetAssets(ctx, req.(*GetAssetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetPerpContracts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPerpContractsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPerpContracts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPerpContracts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPerpContracts(ctx, req.(*GetPerpContractsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostLiquidatePerp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostLiquidatePerpRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostLiquidatePerp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostLiquidatePerp",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostLiquidatePerp(ctx, req.(*PostLiquidatePerpRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetOpenPerpOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOpenPerpOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetOpenPerpOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetOpenPerpOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetOpenPerpOrder(ctx, req.(*GetOpenPerpOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetOrderbooksStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetOrderbooksRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2250,6 +2442,30 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostManageCollateral",
 			Handler:    _Api_PostManageCollateral_Handler,
+		},
+		{
+			MethodName: "PostSettlePNL",
+			Handler:    _Api_PostSettlePNL_Handler,
+		},
+		{
+			MethodName: "PostSettlePNLs",
+			Handler:    _Api_PostSettlePNLs_Handler,
+		},
+		{
+			MethodName: "GetAssets",
+			Handler:    _Api_GetAssets_Handler,
+		},
+		{
+			MethodName: "GetPerpContracts",
+			Handler:    _Api_GetPerpContracts_Handler,
+		},
+		{
+			MethodName: "PostLiquidatePerp",
+			Handler:    _Api_PostLiquidatePerp_Handler,
+		},
+		{
+			MethodName: "GetOpenPerpOrder",
+			Handler:    _Api_GetOpenPerpOrder_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
