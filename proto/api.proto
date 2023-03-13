@@ -1628,11 +1628,12 @@ message GetPerpContractsRequest {
 message ContractInfo {
   common.PerpContract contract = 1;
   string contractAddress = 2;
-  double openInterest = 3;
-  double fundingRate = 4;
-  double minSize = 5;
-  double perpPrice = 6;
-  double indexPrice = 7;
+  double openLongInterest = 3;
+  double openShortInterest = 4;
+  double fundingRate = 5;
+  double minSize = 6;
+  double perpPrice = 7;
+  double indexPrice = 8;
 }
 
 message GetPerpContractsResponse {
