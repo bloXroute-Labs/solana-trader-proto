@@ -495,6 +495,75 @@ service Api {
     };
   }
 
+  rpc PostSettlePNL(PostSettlePNLRequest) returns (PostSettlePNLResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/perp/settle-pnl"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to settle pnl";
+      summary: "settle pnl on a perp platform";
+      tags: ["Perp"];
+    };
+  }
+
+  rpc PostSettlePNLs(PostSettlePNLsRequest) returns (PostSettlePNLsResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/perp/settle-pnls"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to settle pnls";
+      summary: "settle pnls on a perp platform";
+      tags: ["Perp"];
+    };
+  }
+
+  rpc GetAssets(GetAssetsRequest) returns (GetAssetsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/perp/assets"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns details of assets a user has";
+      summary: "details of assets a user has";
+      tags: ["Perp"];
+    };
+  }
+
+  rpc GetPerpContracts(GetPerpContractsRequest) returns (GetPerpContractsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/perp/contracts"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns details of available perp contracts";
+      summary: "details of available perp contracts";
+      tags: ["Perp"];
+    };
+  }
+
+  rpc PostLiquidatePerp(PostLiquidatePerpRequest) returns (PostLiquidatePerpResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/perp/liquidate"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to liquidate perp positions";
+      summary: "liquidate perp positions";
+      tags: ["Perp"];
+    };
+  }
+
+  rpc GetOpenPerpOrder(GetOpenPerpOrderRequest)  returns (GetOpenPerpOrderResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/perp/open-order-by-id"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the detail of an open perp order";
+      summary: "PERP order";
+      tags: ["Trade", "Perp", "Orderbook"];
+    };
+  }
+  
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -1325,7 +1394,7 @@ message PostCreateUserRequest {
 }
 
 message PostCreateUserResponse {
-  string transaction = 1;
+  TransactionMessage transaction = 1;
   Project project = 2;
 }
 
@@ -1337,7 +1406,7 @@ message PostCancelPerpOrdersRequest {
 }
 
 message PostCancelPerpOrdersResponse {
-  string transaction = 1;
+  TransactionMessage transaction = 1;
 }
 
 message PostCancelPerpOrderRequest {
@@ -1350,7 +1419,7 @@ message PostCancelPerpOrderRequest {
 }
 
 message PostCancelPerpOrderResponse {
-  string transaction = 1;
+  TransactionMessage transaction = 1;
 }
 
 message PostManageCollateralRequest {
@@ -1363,7 +1432,7 @@ message PostManageCollateralRequest {
 }
 
 message PostManageCollateralResponse {
-  string transaction = 1;
+  TransactionMessage transaction = 1;
 }
 
 message GetOpenPerpOrdersRequest {
@@ -1417,7 +1486,7 @@ message PostClosePerpPositionsRequest {
 }
 
 message PostClosePerpPositionsResponse {
-  repeated string transactions = 1;
+  repeated TransactionMessage transactions = 1;
 }
 
 message PerpPosition {
@@ -1432,7 +1501,7 @@ message PerpPosition {
 
   double unrealizedPnL = 7;
 
-  double perpPrice = 8;
+  double notionalValue = 8;
   double indexPrice = 9;
   double liquidationPrice = 10;
 }
@@ -1452,7 +1521,7 @@ message PostPerpOrderRequest {
 }
 
 message PostPerpOrderResponse {
-  string transaction = 1;
+  TransactionMessage transaction = 1;
 }
 
 message GetNewPerpOrdersStreamRequest {
@@ -1496,4 +1565,94 @@ message GetPerpTradesStreamResponse {
   double quoteAmountFilled = 10;
 }
 
+
+message PostSettlePNLRequest {
+  string ownerAddress = 1;
+  string settleeAccountAddress = 2;
+  common.PerpContract contract = 3;
+  Project project = 4;
+}
+
+message PostSettlePNLResponse {
+  TransactionMessage transaction = 1;
+}
+
+message GetAssetsRequest {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  common.PerpContract contract = 3;
+  Project project = 4;
+}
+
+message Asset {
+  string valuationAsset = 1;
+  double balance = 2;
+  double valuation = 3;
+}
+
+message GetAssetsResponse {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  repeated Asset assets = 3;
+}
+
+
+message PostSettlePNLsRequest {
+  string ownerAddress = 1;
+  repeated string settleeAccountAddresses = 2;
+  common.PerpContract contract = 3;
+  Project project = 4;
+}
+
+message PostSettlePNLsResponse {
+  repeated TransactionMessage transactions = 1;
+}
+
+message PostLiquidatePerpRequest {
+  string ownerAddress = 1;
+  string settleeAccountAddress = 2;
+  common.PerpContract contract = 3;
+  double amount = 4;
+  Project project = 5;
+}
+
+message PostLiquidatePerpResponse {
+  TransactionMessage transaction = 1;
+}
+
+message GetPerpContractsRequest {
+  repeated common.PerpContract contracts = 1;
+  Project project = 2;
+}
+
+message ContractInfo {
+  common.PerpContract contract = 1;
+  string contractAddress = 2;
+  double openLongInterest = 3;
+  double openShortInterest = 4;
+  double fundingRate = 5;
+  double minSize = 6;
+  double perpPrice = 7;
+  double indexPrice = 8;
+}
+
+message GetPerpContractsResponse {
+  repeated ContractInfo contracts = 1;
+}
+
+message GetOpenPerpOrderRequest {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  common.PerpContract contract = 3;
+  uint64 orderID = 4;
+  uint64 clientOrderID = 5;
+  Project project = 6;
+}
+
+message GetOpenPerpOrderResponse {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+
+  PerpOrder order = 3;
+}
 

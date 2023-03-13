@@ -867,7 +867,7 @@ class PostCreateUserRequest(betterproto.Message):
 
 @dataclass
 class PostCreateUserResponse(betterproto.Message):
-    transaction: str = betterproto.string_field(1)
+    transaction: "TransactionMessage" = betterproto.message_field(1)
     project: "Project" = betterproto.enum_field(2)
 
 
@@ -881,7 +881,7 @@ class PostCancelPerpOrdersRequest(betterproto.Message):
 
 @dataclass
 class PostCancelPerpOrdersResponse(betterproto.Message):
-    transaction: str = betterproto.string_field(1)
+    transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
 @dataclass
@@ -896,7 +896,7 @@ class PostCancelPerpOrderRequest(betterproto.Message):
 
 @dataclass
 class PostCancelPerpOrderResponse(betterproto.Message):
-    transaction: str = betterproto.string_field(1)
+    transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
 @dataclass
@@ -911,7 +911,7 @@ class PostManageCollateralRequest(betterproto.Message):
 
 @dataclass
 class PostManageCollateralResponse(betterproto.Message):
-    transaction: str = betterproto.string_field(1)
+    transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
 @dataclass
@@ -967,7 +967,7 @@ class PostClosePerpPositionsRequest(betterproto.Message):
 
 @dataclass
 class PostClosePerpPositionsResponse(betterproto.Message):
-    transactions: List[str] = betterproto.string_field(1)
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
 
 
 @dataclass
@@ -979,7 +979,7 @@ class PerpPosition(betterproto.Message):
     position_margin: float = betterproto.double_field(5)
     position_side: common.PerpPositionSide = betterproto.enum_field(6)
     unrealized_pn_l: float = betterproto.double_field(7)
-    perp_price: float = betterproto.double_field(8)
+    notional_value: float = betterproto.double_field(8)
     index_price: float = betterproto.double_field(9)
     liquidation_price: float = betterproto.double_field(10)
 
@@ -1001,7 +1001,7 @@ class PostPerpOrderRequest(betterproto.Message):
 
 @dataclass
 class PostPerpOrderResponse(betterproto.Message):
-    transaction: str = betterproto.string_field(1)
+    transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
 @dataclass
@@ -1047,6 +1047,108 @@ class GetPerpTradesStreamResponse(betterproto.Message):
     maker_order_i_d: str = betterproto.string_field(8)
     base_amount_filled: float = betterproto.double_field(9)
     quote_amount_filled: float = betterproto.double_field(10)
+
+
+@dataclass
+class PostSettlePNLRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    settlee_account_address: str = betterproto.string_field(2)
+    contract: common.PerpContract = betterproto.enum_field(3)
+    project: "Project" = betterproto.enum_field(4)
+
+
+@dataclass
+class PostSettlePNLResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass
+class GetAssetsRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    contract: common.PerpContract = betterproto.enum_field(3)
+    project: "Project" = betterproto.enum_field(4)
+
+
+@dataclass
+class Asset(betterproto.Message):
+    valuation_asset: str = betterproto.string_field(1)
+    balance: float = betterproto.double_field(2)
+    valuation: float = betterproto.double_field(3)
+
+
+@dataclass
+class GetAssetsResponse(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    assets: List["Asset"] = betterproto.message_field(3)
+
+
+@dataclass
+class PostSettlePNLsRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    settlee_account_addresses: List[str] = betterproto.string_field(2)
+    contract: common.PerpContract = betterproto.enum_field(3)
+    project: "Project" = betterproto.enum_field(4)
+
+
+@dataclass
+class PostSettlePNLsResponse(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+
+
+@dataclass
+class PostLiquidatePerpRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    settlee_account_address: str = betterproto.string_field(2)
+    contract: common.PerpContract = betterproto.enum_field(3)
+    amount: float = betterproto.double_field(4)
+    project: "Project" = betterproto.enum_field(5)
+
+
+@dataclass
+class PostLiquidatePerpResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass
+class GetPerpContractsRequest(betterproto.Message):
+    contracts: List[common.PerpContract] = betterproto.enum_field(1)
+    project: "Project" = betterproto.enum_field(2)
+
+
+@dataclass
+class ContractInfo(betterproto.Message):
+    contract: common.PerpContract = betterproto.enum_field(1)
+    contract_address: str = betterproto.string_field(2)
+    open_long_interest: float = betterproto.double_field(3)
+    open_short_interest: float = betterproto.double_field(4)
+    funding_rate: float = betterproto.double_field(5)
+    min_size: float = betterproto.double_field(6)
+    perp_price: float = betterproto.double_field(7)
+    index_price: float = betterproto.double_field(8)
+
+
+@dataclass
+class GetPerpContractsResponse(betterproto.Message):
+    contracts: List["ContractInfo"] = betterproto.message_field(1)
+
+
+@dataclass
+class GetOpenPerpOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    contract: common.PerpContract = betterproto.enum_field(3)
+    order_i_d: int = betterproto.uint64_field(4)
+    client_order_i_d: int = betterproto.uint64_field(5)
+    project: "Project" = betterproto.enum_field(6)
+
+
+@dataclass
+class GetOpenPerpOrderResponse(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    order: "PerpOrder" = betterproto.message_field(3)
 
 
 class ApiStub(betterproto.ServiceStub):
@@ -1778,6 +1880,125 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostManageCollateral",
             request,
             PostManageCollateralResponse,
+        )
+
+    async def post_settle_p_n_l(
+        self,
+        *,
+        owner_address: str = "",
+        settlee_account_address: str = "",
+        contract: common.PerpContract = 0,
+        project: "Project" = 0,
+    ) -> PostSettlePNLResponse:
+        request = PostSettlePNLRequest()
+        request.owner_address = owner_address
+        request.settlee_account_address = settlee_account_address
+        request.contract = contract
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/PostSettlePNL",
+            request,
+            PostSettlePNLResponse,
+        )
+
+    async def post_settle_p_n_ls(
+        self,
+        *,
+        owner_address: str = "",
+        settlee_account_addresses: List[str] = [],
+        contract: common.PerpContract = 0,
+        project: "Project" = 0,
+    ) -> PostSettlePNLsResponse:
+        request = PostSettlePNLsRequest()
+        request.owner_address = owner_address
+        request.settlee_account_addresses = settlee_account_addresses
+        request.contract = contract
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/PostSettlePNLs",
+            request,
+            PostSettlePNLsResponse,
+        )
+
+    async def get_assets(
+        self,
+        *,
+        owner_address: str = "",
+        account_address: str = "",
+        contract: common.PerpContract = 0,
+        project: "Project" = 0,
+    ) -> GetAssetsResponse:
+        request = GetAssetsRequest()
+        request.owner_address = owner_address
+        request.account_address = account_address
+        request.contract = contract
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetAssets",
+            request,
+            GetAssetsResponse,
+        )
+
+    async def get_perp_contracts(
+        self, *, contracts: List[common.PerpContract] = [], project: "Project" = 0
+    ) -> GetPerpContractsResponse:
+        request = GetPerpContractsRequest()
+        request.contracts = contracts
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetPerpContracts",
+            request,
+            GetPerpContractsResponse,
+        )
+
+    async def post_liquidate_perp(
+        self,
+        *,
+        owner_address: str = "",
+        settlee_account_address: str = "",
+        contract: common.PerpContract = 0,
+        amount: float = 0,
+        project: "Project" = 0,
+    ) -> PostLiquidatePerpResponse:
+        request = PostLiquidatePerpRequest()
+        request.owner_address = owner_address
+        request.settlee_account_address = settlee_account_address
+        request.contract = contract
+        request.amount = amount
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/PostLiquidatePerp",
+            request,
+            PostLiquidatePerpResponse,
+        )
+
+    async def get_open_perp_order(
+        self,
+        *,
+        owner_address: str = "",
+        account_address: str = "",
+        contract: common.PerpContract = 0,
+        order_i_d: int = 0,
+        client_order_i_d: int = 0,
+        project: "Project" = 0,
+    ) -> GetOpenPerpOrderResponse:
+        request = GetOpenPerpOrderRequest()
+        request.owner_address = owner_address
+        request.account_address = account_address
+        request.contract = contract
+        request.order_i_d = order_i_d
+        request.client_order_i_d = client_order_i_d
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetOpenPerpOrder",
+            request,
+            GetOpenPerpOrderResponse,
         )
 
     async def get_orderbooks_stream(

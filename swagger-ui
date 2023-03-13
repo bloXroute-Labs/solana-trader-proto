@@ -721,6 +721,74 @@
         ]
       }
     },
+    "/api/v1/trade/perp/assets": {
+      "get": {
+        "summary": "details of assets a user has",
+        "description": "Returns details of assets a user has",
+        "operationId": "Api_GetAssets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetAssetsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contract",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP",
+              "APT_PERP"
+            ],
+            "default": "ALL"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Perp"
+        ]
+      }
+    },
     "/api/v1/trade/perp/cancel": {
       "post": {
         "summary": "cancel perp orders on a supported platform",
@@ -829,6 +897,99 @@
         ]
       }
     },
+    "/api/v1/trade/perp/contracts": {
+      "get": {
+        "summary": "details of available perp contracts",
+        "description": "Returns details of available perp contracts",
+        "operationId": "Api_GetPerpContracts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPerpContractsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "contracts",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ALL",
+                "SOL_PERP",
+                "ETH_PERP",
+                "BTC_PERP",
+                "APT_PERP"
+              ]
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Perp"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/liquidate": {
+      "post": {
+        "summary": "liquidate perp positions",
+        "description": "Returns a partially signed txn signature to liquidate perp positions",
+        "operationId": "Api_PostLiquidatePerp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostLiquidatePerpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostLiquidatePerpRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Perp"
+        ]
+      }
+    },
     "/api/v1/trade/perp/managecollateral": {
       "post": {
         "summary": "posts collateral on a perp platform",
@@ -860,6 +1021,90 @@
         ],
         "tags": [
           "Perp"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/open-order-by-id": {
+      "get": {
+        "summary": "PERP order",
+        "description": "Returns the detail of an open perp order",
+        "operationId": "Api_GetOpenPerpOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOpenPerpOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "contract",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP",
+              "APT_PERP"
+            ],
+            "default": "ALL"
+          },
+          {
+            "name": "orderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "clientOrderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Perp",
+          "Orderbook"
         ]
       }
     },
@@ -922,7 +1167,8 @@
                 "ALL",
                 "SOL_PERP",
                 "ETH_PERP",
-                "BTC_PERP"
+                "BTC_PERP",
+                "APT_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -1030,7 +1276,8 @@
                 "ALL",
                 "SOL_PERP",
                 "ETH_PERP",
-                "BTC_PERP"
+                "BTC_PERP",
+                "APT_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -1040,6 +1287,74 @@
           "Trade",
           "Perp",
           "Orderbook"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/settle-pnl": {
+      "post": {
+        "summary": "settle pnl on a perp platform",
+        "description": "Returns a partially signed txn signature to settle pnl",
+        "operationId": "Api_PostSettlePNL",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSettlePNLResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSettlePNLRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Perp"
+        ]
+      }
+    },
+    "/api/v1/trade/perp/settle-pnls": {
+      "post": {
+        "summary": "settle pnls on a perp platform",
+        "description": "Returns a partially signed txn signature to settle pnls",
+        "operationId": "Api_PostSettlePNLs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSettlePNLsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSettlePNLsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Perp"
         ]
       }
     },
@@ -1460,6 +1775,22 @@
     }
   },
   "definitions": {
+    "apiAsset": {
+      "type": "object",
+      "properties": {
+        "valuationAsset": {
+          "type": "string"
+        },
+        "balance": {
+          "type": "number",
+          "format": "double"
+        },
+        "valuation": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiBlock": {
       "type": "object",
       "properties": {
@@ -1521,6 +1852,41 @@
         }
       }
     },
+    "apiContractInfo": {
+      "type": "object",
+      "properties": {
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "contractAddress": {
+          "type": "string"
+        },
+        "openLongInterest": {
+          "type": "number",
+          "format": "double"
+        },
+        "openShortInterest": {
+          "type": "number",
+          "format": "double"
+        },
+        "fundingRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "minSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "perpPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "indexPrice": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiDirection": {
       "type": "string",
       "enum": [
@@ -1536,6 +1902,23 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiTokenBalance"
+          }
+        }
+      }
+    },
+    "apiGetAssetsResponse": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAsset"
           }
         }
       }
@@ -1677,6 +2060,20 @@
         }
       }
     },
+    "apiGetOpenPerpOrderResponse": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "order": {
+          "$ref": "#/definitions/apiPerpOrder"
+        }
+      }
+    },
     "apiGetOpenPerpOrdersResponse": {
       "type": "object",
       "properties": {
@@ -1796,6 +2193,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiOrder"
+          }
+        }
+      }
+    },
+    "apiGetPerpContractsResponse": {
+      "type": "object",
+      "properties": {
+        "contracts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiContractInfo"
           }
         }
       }
@@ -2422,7 +2830,7 @@
           "type": "number",
           "format": "double"
         },
-        "perpPrice": {
+        "notionalValue": {
           "type": "number",
           "format": "double"
         },
@@ -2617,7 +3025,7 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "type": "string"
+          "$ref": "#/definitions/apiTransactionMessage"
         }
       }
     },
@@ -2642,7 +3050,7 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "type": "string"
+          "$ref": "#/definitions/apiTransactionMessage"
         }
       }
     },
@@ -2669,7 +3077,7 @@
         "transactions": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/apiTransactionMessage"
           }
         }
       }
@@ -2689,10 +3097,39 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "type": "string"
+          "$ref": "#/definitions/apiTransactionMessage"
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiPostLiquidatePerpRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "settleeAccountAddress": {
+          "type": "string"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiPostLiquidatePerpResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
         }
       }
     },
@@ -2724,7 +3161,7 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "type": "string"
+          "$ref": "#/definitions/apiTransactionMessage"
         }
       }
     },
@@ -2854,7 +3291,7 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "type": "string"
+          "$ref": "#/definitions/apiTransactionMessage"
         }
       }
     },
@@ -2933,6 +3370,62 @@
         "price",
         "openOrdersAddress"
       ]
+    },
+    "apiPostSettlePNLRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "settleeAccountAddress": {
+          "type": "string"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiPostSettlePNLResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostSettlePNLsRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "settleeAccountAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiPostSettlePNLsResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        }
+      }
     },
     "apiPostSettleRequest": {
       "type": "object",
@@ -3562,7 +4055,8 @@
         "ALL",
         "SOL_PERP",
         "ETH_PERP",
-        "BTC_PERP"
+        "BTC_PERP",
+        "APT_PERP"
       ],
       "default": "ALL"
     },

@@ -32,6 +32,28 @@ function deserialize_api_GetAccountBalanceResponse(buffer_arg) {
   return api_pb.GetAccountBalanceResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetAssetsRequest(arg) {
+  if (!(arg instanceof api_pb.GetAssetsRequest)) {
+    throw new Error('Expected argument of type api.GetAssetsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetAssetsRequest(buffer_arg) {
+  return api_pb.GetAssetsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetAssetsResponse(arg) {
+  if (!(arg instanceof api_pb.GetAssetsResponse)) {
+    throw new Error('Expected argument of type api.GetAssetsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetAssetsResponse(buffer_arg) {
+  return api_pb.GetAssetsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetBlockStreamRequest(arg) {
   if (!(arg instanceof api_pb.GetBlockStreamRequest)) {
     throw new Error('Expected argument of type api.GetBlockStreamRequest');
@@ -186,6 +208,28 @@ function deserialize_api_GetOpenOrdersResponse(buffer_arg) {
   return api_pb.GetOpenOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetOpenPerpOrderRequest(arg) {
+  if (!(arg instanceof api_pb.GetOpenPerpOrderRequest)) {
+    throw new Error('Expected argument of type api.GetOpenPerpOrderRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOpenPerpOrderRequest(buffer_arg) {
+  return api_pb.GetOpenPerpOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetOpenPerpOrderResponse(arg) {
+  if (!(arg instanceof api_pb.GetOpenPerpOrderResponse)) {
+    throw new Error('Expected argument of type api.GetOpenPerpOrderResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOpenPerpOrderResponse(buffer_arg) {
+  return api_pb.GetOpenPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetOpenPerpOrdersRequest(arg) {
   if (!(arg instanceof api_pb.GetOpenPerpOrdersRequest)) {
     throw new Error('Expected argument of type api.GetOpenPerpOrdersRequest');
@@ -316,6 +360,28 @@ function serialize_api_GetOrdersResponse(arg) {
 
 function deserialize_api_GetOrdersResponse(buffer_arg) {
   return api_pb.GetOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetPerpContractsRequest(arg) {
+  if (!(arg instanceof api_pb.GetPerpContractsRequest)) {
+    throw new Error('Expected argument of type api.GetPerpContractsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetPerpContractsRequest(buffer_arg) {
+  return api_pb.GetPerpContractsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetPerpContractsResponse(arg) {
+  if (!(arg instanceof api_pb.GetPerpContractsResponse)) {
+    throw new Error('Expected argument of type api.GetPerpContractsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetPerpContractsResponse(buffer_arg) {
+  return api_pb.GetPerpContractsResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetPerpOrderbookRequest(arg) {
@@ -879,6 +945,28 @@ function deserialize_api_PostCreateUserResponse(buffer_arg) {
   return api_pb.PostCreateUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostLiquidatePerpRequest(arg) {
+  if (!(arg instanceof api_pb.PostLiquidatePerpRequest)) {
+    throw new Error('Expected argument of type api.PostLiquidatePerpRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostLiquidatePerpRequest(buffer_arg) {
+  return api_pb.PostLiquidatePerpRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostLiquidatePerpResponse(arg) {
+  if (!(arg instanceof api_pb.PostLiquidatePerpResponse)) {
+    throw new Error('Expected argument of type api.PostLiquidatePerpResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostLiquidatePerpResponse(buffer_arg) {
+  return api_pb.PostLiquidatePerpResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostManageCollateralRequest(arg) {
   if (!(arg instanceof api_pb.PostManageCollateralRequest)) {
     throw new Error('Expected argument of type api.PostManageCollateralRequest');
@@ -954,6 +1042,50 @@ function serialize_api_PostReplaceOrderRequest(arg) {
 
 function deserialize_api_PostReplaceOrderRequest(buffer_arg) {
   return api_pb.PostReplaceOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostSettlePNLRequest(arg) {
+  if (!(arg instanceof api_pb.PostSettlePNLRequest)) {
+    throw new Error('Expected argument of type api.PostSettlePNLRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostSettlePNLRequest(buffer_arg) {
+  return api_pb.PostSettlePNLRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostSettlePNLResponse(arg) {
+  if (!(arg instanceof api_pb.PostSettlePNLResponse)) {
+    throw new Error('Expected argument of type api.PostSettlePNLResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostSettlePNLResponse(buffer_arg) {
+  return api_pb.PostSettlePNLResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostSettlePNLsRequest(arg) {
+  if (!(arg instanceof api_pb.PostSettlePNLsRequest)) {
+    throw new Error('Expected argument of type api.PostSettlePNLsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostSettlePNLsRequest(buffer_arg) {
+  return api_pb.PostSettlePNLsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostSettlePNLsResponse(arg) {
+  if (!(arg instanceof api_pb.PostSettlePNLsResponse)) {
+    throw new Error('Expected argument of type api.PostSettlePNLsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostSettlePNLsResponse(buffer_arg) {
+  return api_pb.PostSettlePNLsResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_PostSettleRequest(arg) {
@@ -1478,6 +1610,72 @@ postPerpOrder: {
     requestDeserialize: deserialize_api_PostManageCollateralRequest,
     responseSerialize: serialize_api_PostManageCollateralResponse,
     responseDeserialize: deserialize_api_PostManageCollateralResponse,
+  },
+  postSettlePNL: {
+    path: '/api.Api/PostSettlePNL',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostSettlePNLRequest,
+    responseType: api_pb.PostSettlePNLResponse,
+    requestSerialize: serialize_api_PostSettlePNLRequest,
+    requestDeserialize: deserialize_api_PostSettlePNLRequest,
+    responseSerialize: serialize_api_PostSettlePNLResponse,
+    responseDeserialize: deserialize_api_PostSettlePNLResponse,
+  },
+  postSettlePNLs: {
+    path: '/api.Api/PostSettlePNLs',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostSettlePNLsRequest,
+    responseType: api_pb.PostSettlePNLsResponse,
+    requestSerialize: serialize_api_PostSettlePNLsRequest,
+    requestDeserialize: deserialize_api_PostSettlePNLsRequest,
+    responseSerialize: serialize_api_PostSettlePNLsResponse,
+    responseDeserialize: deserialize_api_PostSettlePNLsResponse,
+  },
+  getAssets: {
+    path: '/api.Api/GetAssets',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetAssetsRequest,
+    responseType: api_pb.GetAssetsResponse,
+    requestSerialize: serialize_api_GetAssetsRequest,
+    requestDeserialize: deserialize_api_GetAssetsRequest,
+    responseSerialize: serialize_api_GetAssetsResponse,
+    responseDeserialize: deserialize_api_GetAssetsResponse,
+  },
+  getPerpContracts: {
+    path: '/api.Api/GetPerpContracts',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetPerpContractsRequest,
+    responseType: api_pb.GetPerpContractsResponse,
+    requestSerialize: serialize_api_GetPerpContractsRequest,
+    requestDeserialize: deserialize_api_GetPerpContractsRequest,
+    responseSerialize: serialize_api_GetPerpContractsResponse,
+    responseDeserialize: deserialize_api_GetPerpContractsResponse,
+  },
+  postLiquidatePerp: {
+    path: '/api.Api/PostLiquidatePerp',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostLiquidatePerpRequest,
+    responseType: api_pb.PostLiquidatePerpResponse,
+    requestSerialize: serialize_api_PostLiquidatePerpRequest,
+    requestDeserialize: deserialize_api_PostLiquidatePerpRequest,
+    responseSerialize: serialize_api_PostLiquidatePerpResponse,
+    responseDeserialize: deserialize_api_PostLiquidatePerpResponse,
+  },
+  getOpenPerpOrder: {
+    path: '/api.Api/GetOpenPerpOrder',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetOpenPerpOrderRequest,
+    responseType: api_pb.GetOpenPerpOrderResponse,
+    requestSerialize: serialize_api_GetOpenPerpOrderRequest,
+    requestDeserialize: deserialize_api_GetOpenPerpOrderRequest,
+    responseSerialize: serialize_api_GetOpenPerpOrderResponse,
+    responseDeserialize: deserialize_api_GetOpenPerpOrderResponse,
   },
   // streaming endpoints
 getOrderbooksStream: {

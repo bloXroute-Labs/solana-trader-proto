@@ -453,7 +453,8 @@ proto.common.PerpContract = {
   ALL: 0,
   SOL_PERP: 1,
   ETH_PERP: 2,
-  BTC_PERP: 3
+  BTC_PERP: 3,
+  APT_PERP: 4
 };
 
 /**
