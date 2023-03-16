@@ -152,6 +152,25 @@ export class Ticker extends jspb.Message {
     getProject(): Project;
     setProject(value: Project): Ticker;
 
+    hasTs(): boolean;
+    clearTs(): void;
+    getTs(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTs(value?: google_protobuf_timestamp_pb.Timestamp): Ticker;
+    getOpen(): number;
+    setOpen(value: number): Ticker;
+    getClose(): number;
+    setClose(value: number): Ticker;
+    getLow(): number;
+    setLow(value: number): Ticker;
+    getHigh(): number;
+    setHigh(value: number): Ticker;
+    getAmount(): number;
+    setAmount(value: number): Ticker;
+    getVolume(): number;
+    setVolume(value: number): Ticker;
+    getCount(): number;
+    setCount(value: number): Ticker;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Ticker.AsObject;
     static toObject(includeInstance: boolean, msg: Ticker): Ticker.AsObject;
@@ -171,6 +190,14 @@ export namespace Ticker {
         ask: number,
         asksize: number,
         project: Project,
+        ts?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+        open: number,
+        close: number,
+        low: number,
+        high: number,
+        amount: number,
+        volume: number,
+        count: number,
     }
 }
 
@@ -1224,9 +1251,9 @@ export namespace GetOrdersRequest {
 
 export class GetOrdersResponse extends jspb.Message { 
     clearOrdersList(): void;
-    getOrdersList(): Array<Order>;
-    setOrdersList(value: Array<Order>): GetOrdersResponse;
-    addOrders(value?: Order, index?: number): Order;
+    getOrdersList(): Array<HistoricalOrder>;
+    setOrdersList(value: Array<HistoricalOrder>): GetOrdersResponse;
+    addOrders(value?: HistoricalOrder, index?: number): HistoricalOrder;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrdersResponse.AsObject;
@@ -1240,7 +1267,7 @@ export class GetOrdersResponse extends jspb.Message {
 
 export namespace GetOrdersResponse {
     export type AsObject = {
-        ordersList: Array<Order.AsObject>,
+        ordersList: Array<HistoricalOrder.AsObject>,
     }
 }
 
@@ -1286,6 +1313,58 @@ export namespace Order {
         side: Side,
         typesList: Array<common_pb.OrderType>,
         price: number,
+        remainingsize: number,
+        createdat?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+        clientorderid: string,
+        openorderaccount: string,
+    }
+}
+
+export class HistoricalOrder extends jspb.Message { 
+    getOrderid(): string;
+    setOrderid(value: string): HistoricalOrder;
+    getMarket(): string;
+    setMarket(value: string): HistoricalOrder;
+    getSide(): Side;
+    setSide(value: Side): HistoricalOrder;
+    clearTypesList(): void;
+    getTypesList(): Array<common_pb.OrderType>;
+    setTypesList(value: Array<common_pb.OrderType>): HistoricalOrder;
+    addTypes(value: common_pb.OrderType, index?: number): common_pb.OrderType;
+    getPrice(): number;
+    setPrice(value: number): HistoricalOrder;
+    getSize(): number;
+    setSize(value: number): HistoricalOrder;
+    getRemainingsize(): number;
+    setRemainingsize(value: number): HistoricalOrder;
+
+    hasCreatedat(): boolean;
+    clearCreatedat(): void;
+    getCreatedat(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setCreatedat(value?: google_protobuf_timestamp_pb.Timestamp): HistoricalOrder;
+    getClientorderid(): string;
+    setClientorderid(value: string): HistoricalOrder;
+    getOpenorderaccount(): string;
+    setOpenorderaccount(value: string): HistoricalOrder;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): HistoricalOrder.AsObject;
+    static toObject(includeInstance: boolean, msg: HistoricalOrder): HistoricalOrder.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: HistoricalOrder, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): HistoricalOrder;
+    static deserializeBinaryFromReader(message: HistoricalOrder, reader: jspb.BinaryReader): HistoricalOrder;
+}
+
+export namespace HistoricalOrder {
+    export type AsObject = {
+        orderid: string,
+        market: string,
+        side: Side,
+        typesList: Array<common_pb.OrderType>,
+        price: number,
+        size: number,
         remainingsize: number,
         createdat?: google_protobuf_timestamp_pb.Timestamp.AsObject,
         clientorderid: string,

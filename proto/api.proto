@@ -321,7 +321,6 @@ service Api {
   }
 
   rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse) {
-    option (google.api.method_visibility).restriction = "INTERNAL";
     option (google.api.http) = {
       get: "/api/v1/trade/orders/{market}"
     };
@@ -692,6 +691,14 @@ message Ticker {
   double ask = 5;
   double askSize = 6;
   Project project = 7;
+  google.protobuf.Timestamp ts = 8;
+  double open = 9;
+  double close = 10;
+  double low = 11;
+  double high = 12;
+  double amount = 13;
+  double volume = 14;
+  double count = 15;
 }
 
 message GetKlineRequest {
@@ -949,7 +956,7 @@ enum Direction {
 }
 
 message GetOrdersResponse {
-  repeated Order orders = 1;
+  repeated HistoricalOrder orders = 1;
 }
 
 message Order {
@@ -962,6 +969,20 @@ message Order {
   google.protobuf.Timestamp createdAt = 7;
   string clientOrderID = 8;
   string openOrderAccount = 9;
+}
+
+message HistoricalOrder {
+  string orderID = 1;
+  string market = 2;
+  Side side = 3;
+  repeated common.OrderType types = 4;
+  double price = 5;
+  double size = 6;
+  double remainingSize = 7;
+  google.protobuf.Timestamp createdAt = 8;
+  string clientOrderID = 9;
+  string openOrderAccount = 10;
+
 }
 
 message GetOrderStatusStreamRequest {

@@ -721,6 +721,134 @@
         ]
       }
     },
+    "/api/v1/trade/orders/{market}": {
+      "get": {
+        "summary": "List of user's orders",
+        "description": "Returns all user's orders",
+        "operationId": "Api_GetOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "OS_UNKNOWN",
+              "OS_OPEN",
+              "OS_PARTIAL_FILL",
+              "OS_CANCELLED",
+              "OS_FILLED"
+            ],
+            "default": "OS_UNKNOWN"
+          },
+          {
+            "name": "side",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "S_UNKNOWN",
+              "S_BID",
+              "S_ASK"
+            ],
+            "default": "S_UNKNOWN"
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "OT_MARKET",
+                "OT_LIMIT",
+                "OT_IOC",
+                "OT_POST"
+              ]
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "D_ASCENDING",
+              "D_DESCENDING"
+            ],
+            "default": "D_ASCENDING"
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "openOrdersAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Orderbook"
+        ]
+      }
+    },
     "/api/v1/trade/perp/assets": {
       "get": {
         "summary": "details of assets a user has",
@@ -2192,7 +2320,7 @@
         "orders": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiOrder"
+            "$ref": "#/definitions/apiHistoricalOrder"
           }
         }
       }
@@ -2572,6 +2700,48 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiHistoricalOrder": {
+      "type": "object",
+      "properties": {
+        "orderID": {
+          "type": "string"
+        },
+        "market": {
+          "type": "string"
+        },
+        "side": {
+          "$ref": "#/definitions/apiSide"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonOrderType"
+          }
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "remainingSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "clientOrderID": {
+          "type": "string"
+        },
+        "openOrderAccount": {
+          "type": "string"
         }
       }
     },
@@ -3783,6 +3953,38 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        },
+        "ts": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "open": {
+          "type": "number",
+          "format": "double"
+        },
+        "close": {
+          "type": "number",
+          "format": "double"
+        },
+        "low": {
+          "type": "number",
+          "format": "double"
+        },
+        "high": {
+          "type": "number",
+          "format": "double"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "volume": {
+          "type": "number",
+          "format": "double"
+        },
+        "count": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
