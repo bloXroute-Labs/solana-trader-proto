@@ -1377,14 +1377,19 @@ message GetPerpOrderbooksStreamResponse {
 
 message GetUserRequest {
   string ownerAddress = 1;
-  Project project = 2;
+  string accountAddress = 2;
+  Project project = 3;
 }
 
 message GetUserResponse {
+  repeated UserDetail userAccounts = 1;
+  Project project = 2;
+}
+
+message UserDetail {
   string status = 1;
-  int64 accountNumber = 2;
+  uint64 subAccountId = 2;
   string accountAddress = 3;
-  Project project = 4;
 }
 
 message PostCreateUserRequest {
@@ -1405,7 +1410,7 @@ message PostCancelPerpOrdersRequest {
 }
 
 message PostCancelPerpOrdersResponse {
-  TransactionMessage transaction = 1;
+  repeated TransactionMessage transactions = 1;
 }
 
 message PostCancelPerpOrderRequest {
@@ -1443,9 +1448,7 @@ message GetOpenPerpOrdersRequest {
 
 message GetOpenPerpOrdersResponse {
   string ownerAddress = 1;
-  string accountAddress = 2;
-
-  repeated PerpOrder orders = 3;
+  repeated PerpOrder orders = 2;
 }
 
 message PerpOrder {
@@ -1456,12 +1459,14 @@ message PerpOrder {
   common.PerpPositionSide positionSide = 4;
 
   string orderType = 5;
-  double unrealizedPnL = 6;
 
-  double price = 7;
-  double size = 8;
-  double remainingSize = 9;
-  string status = 10;
+  double price = 6;
+  double size = 7;
+  double remainingSize = 8;
+  string status = 9;
+
+  string accountAddress = 10;
+  uint64 subAccountID = 11;
 }
 
 message GetPerpPositionsRequest {
@@ -1481,7 +1486,8 @@ message GetPerpPositionsResponse {
 message PostClosePerpPositionsRequest {
   Project project = 1;
   string ownerAddress = 2;
-  repeated common.PerpContract contracts = 3;
+  string accountAddress = 3;
+  repeated common.PerpContract contracts = 4;
 }
 
 message PostClosePerpPositionsResponse {
@@ -1490,19 +1496,18 @@ message PostClosePerpPositionsResponse {
 
 message PerpPosition {
   common.PerpContract contract = 1;
+  double volumeAvailable = 2;
+  double volumeInOrder = 3;
 
-  double contractVolume = 2;
-  double volumeAvailable = 3;
-  double volumeInOrder = 4;
+  double positionMargin = 4;
+  common.PerpPositionSide positionSide = 5;
 
-  double positionMargin = 5;
-  common.PerpPositionSide positionSide = 6;
+  double notionalValue = 6;
+  double indexPrice = 7;
+  double liquidationPrice = 8;
 
-  double unrealizedPnL = 7;
-
-  double notionalValue = 8;
-  double indexPrice = 9;
-  double liquidationPrice = 10;
+  string accountAddress = 9;
+  int64 subAccountID = 10;
 }
 
 message PostPerpOrderRequest {
@@ -1585,6 +1590,9 @@ message Asset {
   string valuationAsset = 1;
   double balance = 2;
   double valuation = 3;
+
+  string accountAddress = 4;
+  int64 subAccountID = 5;
 }
 
 message GetAssetsResponse {
@@ -1648,8 +1656,7 @@ message GetOpenPerpOrderRequest {
 
 message GetOpenPerpOrderResponse {
   string ownerAddress = 1;
-  string accountAddress = 2;
 
-  PerpOrder order = 3;
+  PerpOrder order = 2;
 }
 

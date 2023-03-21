@@ -800,24 +800,23 @@ class GetPricesStreamResponse(betterproto.Message):
 class GetPerpOrderbookRequest(betterproto.Message):
     """Drift messages"""
 
-    market: str = betterproto.string_field(1)
+    contract: common.PerpContract = betterproto.enum_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
 class GetPerpOrderbooksRequest(betterproto.Message):
-    markets: List[str] = betterproto.string_field(1)
+    contracts: List[common.PerpContract] = betterproto.enum_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
 class GetPerpOrderbookResponse(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    market_index: int = betterproto.int32_field(2)
-    bids: List["PerpOrderbookItem"] = betterproto.message_field(3)
-    asks: List["PerpOrderbookItem"] = betterproto.message_field(4)
+    contract: common.PerpContract = betterproto.enum_field(1)
+    bids: List["PerpOrderbookItem"] = betterproto.message_field(2)
+    asks: List["PerpOrderbookItem"] = betterproto.message_field(3)
 
 
 @dataclass
@@ -848,15 +847,21 @@ class GetPerpOrderbooksStreamResponse(betterproto.Message):
 @dataclass
 class GetUserRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    project: "Project" = betterproto.enum_field(2)
+    account_address: str = betterproto.string_field(2)
+    project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
 class GetUserResponse(betterproto.Message):
+    user_accounts: List["UserDetail"] = betterproto.message_field(1)
+    project: "Project" = betterproto.enum_field(2)
+
+
+@dataclass
+class UserDetail(betterproto.Message):
     status: str = betterproto.string_field(1)
-    account_number: int = betterproto.int64_field(2)
+    sub_account_id: int = betterproto.uint64_field(2)
     account_address: str = betterproto.string_field(3)
-    project: "Project" = betterproto.enum_field(4)
 
 
 @dataclass
@@ -881,7 +886,7 @@ class PostCancelPerpOrdersRequest(betterproto.Message):
 
 @dataclass
 class PostCancelPerpOrdersResponse(betterproto.Message):
-    transaction: "TransactionMessage" = betterproto.message_field(1)
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
 
 
 @dataclass
@@ -925,8 +930,7 @@ class GetOpenPerpOrdersRequest(betterproto.Message):
 @dataclass
 class GetOpenPerpOrdersResponse(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    account_address: str = betterproto.string_field(2)
-    orders: List["PerpOrder"] = betterproto.message_field(3)
+    orders: List["PerpOrder"] = betterproto.message_field(2)
 
 
 @dataclass
@@ -936,11 +940,12 @@ class PerpOrder(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(3)
     position_side: common.PerpPositionSide = betterproto.enum_field(4)
     order_type: str = betterproto.string_field(5)
-    unrealized_pn_l: float = betterproto.double_field(6)
-    price: float = betterproto.double_field(7)
-    size: float = betterproto.double_field(8)
-    remaining_size: float = betterproto.double_field(9)
-    status: str = betterproto.string_field(10)
+    price: float = betterproto.double_field(6)
+    size: float = betterproto.double_field(7)
+    remaining_size: float = betterproto.double_field(8)
+    status: str = betterproto.string_field(9)
+    account_address: str = betterproto.string_field(10)
+    sub_account_i_d: int = betterproto.uint64_field(11)
 
 
 @dataclass
@@ -962,7 +967,8 @@ class GetPerpPositionsResponse(betterproto.Message):
 class PostClosePerpPositionsRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
-    contracts: List[common.PerpContract] = betterproto.enum_field(3)
+    account_address: str = betterproto.string_field(3)
+    contracts: List[common.PerpContract] = betterproto.enum_field(4)
 
 
 @dataclass
@@ -973,15 +979,15 @@ class PostClosePerpPositionsResponse(betterproto.Message):
 @dataclass
 class PerpPosition(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(1)
-    contract_volume: float = betterproto.double_field(2)
-    volume_available: float = betterproto.double_field(3)
-    volume_in_order: float = betterproto.double_field(4)
-    position_margin: float = betterproto.double_field(5)
-    position_side: common.PerpPositionSide = betterproto.enum_field(6)
-    unrealized_pn_l: float = betterproto.double_field(7)
-    notional_value: float = betterproto.double_field(8)
-    index_price: float = betterproto.double_field(9)
-    liquidation_price: float = betterproto.double_field(10)
+    volume_available: float = betterproto.double_field(2)
+    volume_in_order: float = betterproto.double_field(3)
+    position_margin: float = betterproto.double_field(4)
+    position_side: common.PerpPositionSide = betterproto.enum_field(5)
+    notional_value: float = betterproto.double_field(6)
+    index_price: float = betterproto.double_field(7)
+    liquidation_price: float = betterproto.double_field(8)
+    account_address: str = betterproto.string_field(9)
+    sub_account_i_d: int = betterproto.int64_field(10)
 
 
 @dataclass
@@ -1012,41 +1018,39 @@ class GetNewPerpOrdersStreamRequest(betterproto.Message):
 
 @dataclass
 class GetNewPerpOrdersStreamResponse(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    market_index: int = betterproto.int32_field(2)
-    side: common.PerpPositionSide = betterproto.enum_field(3)
-    type: common.PerpOrderType = betterproto.enum_field(4)
-    user_address: str = betterproto.string_field(5)
-    order_i_d: str = betterproto.string_field(6)
-    client_order_i_d: str = betterproto.string_field(7)
-    slot: str = betterproto.string_field(8)
-    price: float = betterproto.double_field(9)
-    trigger_price: float = betterproto.double_field(10)
-    base_amount: float = betterproto.double_field(11)
-    base_amount_filled: float = betterproto.double_field(12)
-    quote_amount: float = betterproto.double_field(13)
-    quote_amount_filled: float = betterproto.double_field(14)
+    contract: common.PerpContract = betterproto.enum_field(1)
+    side: common.PerpPositionSide = betterproto.enum_field(2)
+    type: common.PerpOrderType = betterproto.enum_field(3)
+    user_address: str = betterproto.string_field(4)
+    order_i_d: str = betterproto.string_field(5)
+    client_order_i_d: str = betterproto.string_field(6)
+    slot: str = betterproto.string_field(7)
+    price: float = betterproto.double_field(8)
+    trigger_price: float = betterproto.double_field(9)
+    base_amount: float = betterproto.double_field(10)
+    base_amount_filled: float = betterproto.double_field(11)
+    quote_amount: float = betterproto.double_field(12)
+    quote_amount_filled: float = betterproto.double_field(13)
 
 
 @dataclass
 class GetPerpTradesStreamRequest(betterproto.Message):
-    markets: List[str] = betterproto.string_field(1)
+    contract: common.PerpContract = betterproto.enum_field(1)
     address: str = betterproto.string_field(2)
     project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
 class GetPerpTradesStreamResponse(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    market_index: int = betterproto.int32_field(2)
-    maker_position_side: common.PerpPositionSide = betterproto.enum_field(3)
-    filler_address: str = betterproto.string_field(4)
-    taker_address: str = betterproto.string_field(5)
-    taker_order_i_d: str = betterproto.string_field(6)
-    maker_address: str = betterproto.string_field(7)
-    maker_order_i_d: str = betterproto.string_field(8)
-    base_amount_filled: float = betterproto.double_field(9)
-    quote_amount_filled: float = betterproto.double_field(10)
+    contract: common.PerpContract = betterproto.enum_field(1)
+    maker_position_side: common.PerpPositionSide = betterproto.enum_field(2)
+    filler_address: str = betterproto.string_field(3)
+    taker_address: str = betterproto.string_field(4)
+    taker_order_i_d: str = betterproto.string_field(5)
+    maker_address: str = betterproto.string_field(6)
+    maker_order_i_d: str = betterproto.string_field(7)
+    base_amount_filled: float = betterproto.double_field(8)
+    quote_amount_filled: float = betterproto.double_field(9)
 
 
 @dataclass
@@ -1075,6 +1079,8 @@ class Asset(betterproto.Message):
     valuation_asset: str = betterproto.string_field(1)
     balance: float = betterproto.double_field(2)
     valuation: float = betterproto.double_field(3)
+    account_address: str = betterproto.string_field(4)
+    sub_account_i_d: int = betterproto.int64_field(5)
 
 
 @dataclass
@@ -1147,8 +1153,7 @@ class GetOpenPerpOrderRequest(betterproto.Message):
 @dataclass
 class GetOpenPerpOrderResponse(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    account_address: str = betterproto.string_field(2)
-    order: "PerpOrder" = betterproto.message_field(3)
+    order: "PerpOrder" = betterproto.message_field(2)
 
 
 class ApiStub(betterproto.ServiceStub):
@@ -1805,11 +1810,13 @@ class ApiStub(betterproto.ServiceStub):
         *,
         project: "Project" = 0,
         owner_address: str = "",
+        account_address: str = "",
         contracts: List[common.PerpContract] = [],
     ) -> PostClosePerpPositionsResponse:
         request = PostClosePerpPositionsRequest()
         request.project = project
         request.owner_address = owner_address
+        request.account_address = account_address
         request.contracts = contracts
 
         return await self._unary_unary(
@@ -1819,10 +1826,14 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_perp_orderbook(
-        self, *, market: str = "", limit: int = 0, project: "Project" = 0
+        self,
+        *,
+        contract: common.PerpContract = 0,
+        limit: int = 0,
+        project: "Project" = 0,
     ) -> GetPerpOrderbookResponse:
         request = GetPerpOrderbookRequest()
-        request.market = market
+        request.contract = contract
         request.limit = limit
         request.project = project
 
@@ -1846,10 +1857,15 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_user(
-        self, *, owner_address: str = "", project: "Project" = 0
+        self,
+        *,
+        owner_address: str = "",
+        account_address: str = "",
+        project: "Project" = 0,
     ) -> GetUserResponse:
         request = GetUserRequest()
         request.owner_address = owner_address
+        request.account_address = account_address
         request.project = project
 
         return await self._unary_unary(
@@ -2161,12 +2177,16 @@ class ApiStub(betterproto.ServiceStub):
             yield response
 
     async def get_perp_orderbooks_stream(
-        self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
+        self,
+        *,
+        contracts: List[common.PerpContract] = [],
+        limit: int = 0,
+        project: "Project" = 0,
     ) -> AsyncGenerator[GetPerpOrderbooksStreamResponse, None]:
         """Perp streaming endpoints"""
 
         request = GetPerpOrderbooksRequest()
-        request.markets = markets
+        request.contracts = contracts
         request.limit = limit
         request.project = project
 
@@ -2192,10 +2212,14 @@ class ApiStub(betterproto.ServiceStub):
             yield response
 
     async def get_perp_trades_stream(
-        self, *, markets: List[str] = [], address: str = "", project: "Project" = 0
+        self,
+        *,
+        contract: common.PerpContract = 0,
+        address: str = "",
+        project: "Project" = 0,
     ) -> AsyncGenerator[GetPerpTradesStreamResponse, None]:
         request = GetPerpTradesStreamRequest()
-        request.markets = markets
+        request.contract = contract
         request.address = address
         request.project = project
 

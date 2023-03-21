@@ -3043,6 +3043,8 @@ export namespace GetPerpOrderbooksStreamResponse {
 export class GetUserRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): GetUserRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): GetUserRequest;
     getProject(): Project;
     setProject(value: Project): GetUserRequest;
 
@@ -3059,17 +3061,16 @@ export class GetUserRequest extends jspb.Message {
 export namespace GetUserRequest {
     export type AsObject = {
         owneraddress: string,
+        accountaddress: string,
         project: Project,
     }
 }
 
 export class GetUserResponse extends jspb.Message { 
-    getStatus(): string;
-    setStatus(value: string): GetUserResponse;
-    getAccountnumber(): number;
-    setAccountnumber(value: number): GetUserResponse;
-    getAccountaddress(): string;
-    setAccountaddress(value: string): GetUserResponse;
+    clearUseraccountsList(): void;
+    getUseraccountsList(): Array<UserDetail>;
+    setUseraccountsList(value: Array<UserDetail>): GetUserResponse;
+    addUseraccounts(value?: UserDetail, index?: number): UserDetail;
     getProject(): Project;
     setProject(value: Project): GetUserResponse;
 
@@ -3085,10 +3086,34 @@ export class GetUserResponse extends jspb.Message {
 
 export namespace GetUserResponse {
     export type AsObject = {
-        status: string,
-        accountnumber: number,
-        accountaddress: string,
+        useraccountsList: Array<UserDetail.AsObject>,
         project: Project,
+    }
+}
+
+export class UserDetail extends jspb.Message { 
+    getStatus(): string;
+    setStatus(value: string): UserDetail;
+    getSubaccountid(): number;
+    setSubaccountid(value: number): UserDetail;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): UserDetail;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): UserDetail.AsObject;
+    static toObject(includeInstance: boolean, msg: UserDetail): UserDetail.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: UserDetail, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): UserDetail;
+    static deserializeBinaryFromReader(message: UserDetail, reader: jspb.BinaryReader): UserDetail;
+}
+
+export namespace UserDetail {
+    export type AsObject = {
+        status: string,
+        subaccountid: number,
+        accountaddress: string,
     }
 }
 
@@ -3171,11 +3196,10 @@ export namespace PostCancelPerpOrdersRequest {
 }
 
 export class PostCancelPerpOrdersResponse extends jspb.Message { 
-
-    hasTransaction(): boolean;
-    clearTransaction(): void;
-    getTransaction(): TransactionMessage | undefined;
-    setTransaction(value?: TransactionMessage): PostCancelPerpOrdersResponse;
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostCancelPerpOrdersResponse;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelPerpOrdersResponse.AsObject;
@@ -3189,7 +3213,7 @@ export class PostCancelPerpOrdersResponse extends jspb.Message {
 
 export namespace PostCancelPerpOrdersResponse {
     export type AsObject = {
-        transaction?: TransactionMessage.AsObject,
+        transactionsList: Array<TransactionMessage.AsObject>,
     }
 }
 
@@ -3343,8 +3367,6 @@ export namespace GetOpenPerpOrdersRequest {
 export class GetOpenPerpOrdersResponse extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): GetOpenPerpOrdersResponse;
-    getAccountaddress(): string;
-    setAccountaddress(value: string): GetOpenPerpOrdersResponse;
     clearOrdersList(): void;
     getOrdersList(): Array<PerpOrder>;
     setOrdersList(value: Array<PerpOrder>): GetOpenPerpOrdersResponse;
@@ -3363,7 +3385,6 @@ export class GetOpenPerpOrdersResponse extends jspb.Message {
 export namespace GetOpenPerpOrdersResponse {
     export type AsObject = {
         owneraddress: string,
-        accountaddress: string,
         ordersList: Array<PerpOrder.AsObject>,
     }
 }
@@ -3379,8 +3400,6 @@ export class PerpOrder extends jspb.Message {
     setPositionside(value: common_pb.PerpPositionSide): PerpOrder;
     getOrdertype(): string;
     setOrdertype(value: string): PerpOrder;
-    getUnrealizedpnl(): number;
-    setUnrealizedpnl(value: number): PerpOrder;
     getPrice(): number;
     setPrice(value: number): PerpOrder;
     getSize(): number;
@@ -3389,6 +3408,10 @@ export class PerpOrder extends jspb.Message {
     setRemainingsize(value: number): PerpOrder;
     getStatus(): string;
     setStatus(value: string): PerpOrder;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PerpOrder;
+    getSubaccountid(): number;
+    setSubaccountid(value: number): PerpOrder;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PerpOrder.AsObject;
@@ -3407,11 +3430,12 @@ export namespace PerpOrder {
         contract: common_pb.PerpContract,
         positionside: common_pb.PerpPositionSide,
         ordertype: string,
-        unrealizedpnl: number,
         price: number,
         size: number,
         remainingsize: number,
         status: string,
+        accountaddress: string,
+        subaccountid: number,
     }
 }
 
@@ -3479,6 +3503,8 @@ export class PostClosePerpPositionsRequest extends jspb.Message {
     setProject(value: Project): PostClosePerpPositionsRequest;
     getOwneraddress(): string;
     setOwneraddress(value: string): PostClosePerpPositionsRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostClosePerpPositionsRequest;
     clearContractsList(): void;
     getContractsList(): Array<common_pb.PerpContract>;
     setContractsList(value: Array<common_pb.PerpContract>): PostClosePerpPositionsRequest;
@@ -3498,6 +3524,7 @@ export namespace PostClosePerpPositionsRequest {
     export type AsObject = {
         project: Project,
         owneraddress: string,
+        accountaddress: string,
         contractsList: Array<common_pb.PerpContract>,
     }
 }
@@ -3527,8 +3554,6 @@ export namespace PostClosePerpPositionsResponse {
 export class PerpPosition extends jspb.Message { 
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): PerpPosition;
-    getContractvolume(): number;
-    setContractvolume(value: number): PerpPosition;
     getVolumeavailable(): number;
     setVolumeavailable(value: number): PerpPosition;
     getVolumeinorder(): number;
@@ -3537,14 +3562,16 @@ export class PerpPosition extends jspb.Message {
     setPositionmargin(value: number): PerpPosition;
     getPositionside(): common_pb.PerpPositionSide;
     setPositionside(value: common_pb.PerpPositionSide): PerpPosition;
-    getUnrealizedpnl(): number;
-    setUnrealizedpnl(value: number): PerpPosition;
     getNotionalvalue(): number;
     setNotionalvalue(value: number): PerpPosition;
     getIndexprice(): number;
     setIndexprice(value: number): PerpPosition;
     getLiquidationprice(): number;
     setLiquidationprice(value: number): PerpPosition;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PerpPosition;
+    getSubaccountid(): number;
+    setSubaccountid(value: number): PerpPosition;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PerpPosition.AsObject;
@@ -3559,15 +3586,15 @@ export class PerpPosition extends jspb.Message {
 export namespace PerpPosition {
     export type AsObject = {
         contract: common_pb.PerpContract,
-        contractvolume: number,
         volumeavailable: number,
         volumeinorder: number,
         positionmargin: number,
         positionside: common_pb.PerpPositionSide,
-        unrealizedpnl: number,
         notionalvalue: number,
         indexprice: number,
         liquidationprice: number,
+        accountaddress: string,
+        subaccountid: number,
     }
 }
 
@@ -3883,6 +3910,10 @@ export class Asset extends jspb.Message {
     setBalance(value: number): Asset;
     getValuation(): number;
     setValuation(value: number): Asset;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): Asset;
+    getSubaccountid(): number;
+    setSubaccountid(value: number): Asset;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Asset.AsObject;
@@ -3899,6 +3930,8 @@ export namespace Asset {
         valuationasset: string,
         balance: number,
         valuation: number,
+        accountaddress: string,
+        subaccountid: number,
     }
 }
 
@@ -4164,8 +4197,6 @@ export namespace GetOpenPerpOrderRequest {
 export class GetOpenPerpOrderResponse extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): GetOpenPerpOrderResponse;
-    getAccountaddress(): string;
-    setAccountaddress(value: string): GetOpenPerpOrderResponse;
 
     hasOrder(): boolean;
     clearOrder(): void;
@@ -4185,7 +4216,6 @@ export class GetOpenPerpOrderResponse extends jspb.Message {
 export namespace GetOpenPerpOrderResponse {
     export type AsObject = {
         owneraddress: string,
-        accountaddress: string,
         order?: PerpOrder.AsObject,
     }
 }
