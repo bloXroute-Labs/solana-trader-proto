@@ -2869,8 +2869,8 @@ export namespace GetPricesStreamResponse {
 }
 
 export class GetPerpOrderbookRequest extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetPerpOrderbookRequest;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): GetPerpOrderbookRequest;
     getLimit(): number;
     setLimit(value: number): GetPerpOrderbookRequest;
     getProject(): Project;
@@ -2888,17 +2888,17 @@ export class GetPerpOrderbookRequest extends jspb.Message {
 
 export namespace GetPerpOrderbookRequest {
     export type AsObject = {
-        market: string,
+        contract: common_pb.PerpContract,
         limit: number,
         project: Project,
     }
 }
 
 export class GetPerpOrderbooksRequest extends jspb.Message { 
-    clearMarketsList(): void;
-    getMarketsList(): Array<string>;
-    setMarketsList(value: Array<string>): GetPerpOrderbooksRequest;
-    addMarkets(value: string, index?: number): string;
+    clearContractsList(): void;
+    getContractsList(): Array<common_pb.PerpContract>;
+    setContractsList(value: Array<common_pb.PerpContract>): GetPerpOrderbooksRequest;
+    addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
     getLimit(): number;
     setLimit(value: number): GetPerpOrderbooksRequest;
     getProject(): Project;
@@ -2916,7 +2916,7 @@ export class GetPerpOrderbooksRequest extends jspb.Message {
 
 export namespace GetPerpOrderbooksRequest {
     export type AsObject = {
-        marketsList: Array<string>,
+        contractsList: Array<common_pb.PerpContract>,
         limit: number,
         project: Project,
     }
@@ -3673,8 +3673,8 @@ export namespace GetNewPerpOrdersStreamRequest {
 }
 
 export class GetNewPerpOrdersStreamResponse extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetNewPerpOrdersStreamResponse;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): GetNewPerpOrdersStreamResponse;
     getMarketindex(): number;
     setMarketindex(value: number): GetNewPerpOrdersStreamResponse;
     getSide(): common_pb.PerpPositionSide;
@@ -3714,7 +3714,7 @@ export class GetNewPerpOrdersStreamResponse extends jspb.Message {
 
 export namespace GetNewPerpOrdersStreamResponse {
     export type AsObject = {
-        market: string,
+        contract: common_pb.PerpContract,
         marketindex: number,
         side: common_pb.PerpPositionSide,
         type: common_pb.PerpOrderType,
@@ -3732,10 +3732,8 @@ export namespace GetNewPerpOrdersStreamResponse {
 }
 
 export class GetPerpTradesStreamRequest extends jspb.Message { 
-    clearMarketsList(): void;
-    getMarketsList(): Array<string>;
-    setMarketsList(value: Array<string>): GetPerpTradesStreamRequest;
-    addMarkets(value: string, index?: number): string;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): GetPerpTradesStreamRequest;
     getAddress(): string;
     setAddress(value: string): GetPerpTradesStreamRequest;
     getProject(): Project;
@@ -3753,15 +3751,15 @@ export class GetPerpTradesStreamRequest extends jspb.Message {
 
 export namespace GetPerpTradesStreamRequest {
     export type AsObject = {
-        marketsList: Array<string>,
+        contract: common_pb.PerpContract,
         address: string,
         project: Project,
     }
 }
 
 export class GetPerpTradesStreamResponse extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetPerpTradesStreamResponse;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): GetPerpTradesStreamResponse;
     getMarketindex(): number;
     setMarketindex(value: number): GetPerpTradesStreamResponse;
     getMakerpositionside(): common_pb.PerpPositionSide;
@@ -3793,7 +3791,7 @@ export class GetPerpTradesStreamResponse extends jspb.Message {
 
 export namespace GetPerpTradesStreamResponse {
     export type AsObject = {
-        market: string,
+        contract: common_pb.PerpContract,
         marketindex: number,
         makerpositionside: common_pb.PerpPositionSide,
         filleraddress: string,

@@ -2811,7 +2811,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.GetPerpTradesStreamRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetPerpTradesStreamRequest.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.api.GetPerpTradesStreamRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -24919,7 +24919,7 @@ proto.api.GetPerpOrderbookRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.api.GetPerpOrderbookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    contract: jspb.Message.getFieldWithDefault(msg, 1, 0),
     limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
     project: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
@@ -24959,8 +24959,8 @@ proto.api.GetPerpOrderbookRequest.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
+      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      msg.setContract(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readUint32());
@@ -24999,9 +24999,9 @@ proto.api.GetPerpOrderbookRequest.prototype.serializeBinary = function() {
  */
 proto.api.GetPerpOrderbookRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarket();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getContract();
+  if (f !== 0.0) {
+    writer.writeEnum(
       1,
       f
     );
@@ -25024,20 +25024,20 @@ proto.api.GetPerpOrderbookRequest.serializeBinaryToWriter = function(message, wr
 
 
 /**
- * optional string market = 1;
- * @return {string}
+ * optional common.PerpContract contract = 1;
+ * @return {!proto.common.PerpContract}
  */
-proto.api.GetPerpOrderbookRequest.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.api.GetPerpOrderbookRequest.prototype.getContract = function() {
+  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {!proto.common.PerpContract} value
  * @return {!proto.api.GetPerpOrderbookRequest} returns this
  */
-proto.api.GetPerpOrderbookRequest.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+proto.api.GetPerpOrderbookRequest.prototype.setContract = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
@@ -25116,7 +25116,7 @@ proto.api.GetPerpOrderbooksRequest.prototype.toObject = function(opt_includeInst
  */
 proto.api.GetPerpOrderbooksRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    marketsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+    contractsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
     limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
     project: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
@@ -25156,8 +25156,10 @@ proto.api.GetPerpOrderbooksRequest.deserializeBinaryFromReader = function(msg, r
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.addMarkets(value);
+      var values = /** @type {!Array<!proto.common.PerpContract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addContracts(values[i]);
+      }
       break;
     case 2:
       var value = /** @type {number} */ (reader.readUint32());
@@ -25196,9 +25198,9 @@ proto.api.GetPerpOrderbooksRequest.prototype.serializeBinary = function() {
  */
 proto.api.GetPerpOrderbooksRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarketsList();
+  f = message.getContractsList();
   if (f.length > 0) {
-    writer.writeRepeatedString(
+    writer.writePackedEnum(
       1,
       f
     );
@@ -25221,29 +25223,29 @@ proto.api.GetPerpOrderbooksRequest.serializeBinaryToWriter = function(message, w
 
 
 /**
- * repeated string markets = 1;
- * @return {!Array<string>}
+ * repeated common.PerpContract contracts = 1;
+ * @return {!Array<!proto.common.PerpContract>}
  */
-proto.api.GetPerpOrderbooksRequest.prototype.getMarketsList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
+proto.api.GetPerpOrderbooksRequest.prototype.getContractsList = function() {
+  return /** @type {!Array<!proto.common.PerpContract>} */ (jspb.Message.getRepeatedField(this, 1));
 };
 
 
 /**
- * @param {!Array<string>} value
+ * @param {!Array<!proto.common.PerpContract>} value
  * @return {!proto.api.GetPerpOrderbooksRequest} returns this
  */
-proto.api.GetPerpOrderbooksRequest.prototype.setMarketsList = function(value) {
+proto.api.GetPerpOrderbooksRequest.prototype.setContractsList = function(value) {
   return jspb.Message.setField(this, 1, value || []);
 };
 
 
 /**
- * @param {string} value
+ * @param {!proto.common.PerpContract} value
  * @param {number=} opt_index
  * @return {!proto.api.GetPerpOrderbooksRequest} returns this
  */
-proto.api.GetPerpOrderbooksRequest.prototype.addMarkets = function(value, opt_index) {
+proto.api.GetPerpOrderbooksRequest.prototype.addContracts = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
@@ -25252,8 +25254,8 @@ proto.api.GetPerpOrderbooksRequest.prototype.addMarkets = function(value, opt_in
  * Clears the list making it empty but non-null.
  * @return {!proto.api.GetPerpOrderbooksRequest} returns this
  */
-proto.api.GetPerpOrderbooksRequest.prototype.clearMarketsList = function() {
-  return this.setMarketsList([]);
+proto.api.GetPerpOrderbooksRequest.prototype.clearContractsList = function() {
+  return this.setContractsList([]);
 };
 
 
@@ -31164,7 +31166,7 @@ proto.api.GetNewPerpOrdersStreamResponse.prototype.toObject = function(opt_inclu
  */
 proto.api.GetNewPerpOrdersStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    contract: jspb.Message.getFieldWithDefault(msg, 1, 0),
     marketindex: jspb.Message.getFieldWithDefault(msg, 2, 0),
     side: jspb.Message.getFieldWithDefault(msg, 3, 0),
     type: jspb.Message.getFieldWithDefault(msg, 4, 0),
@@ -31215,8 +31217,8 @@ proto.api.GetNewPerpOrdersStreamResponse.deserializeBinaryFromReader = function(
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
+      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      msg.setContract(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt32());
@@ -31299,9 +31301,9 @@ proto.api.GetNewPerpOrdersStreamResponse.prototype.serializeBinary = function() 
  */
 proto.api.GetNewPerpOrdersStreamResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarket();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getContract();
+  if (f !== 0.0) {
+    writer.writeEnum(
       1,
       f
     );
@@ -31401,20 +31403,20 @@ proto.api.GetNewPerpOrdersStreamResponse.serializeBinaryToWriter = function(mess
 
 
 /**
- * optional string market = 1;
- * @return {string}
+ * optional common.PerpContract contract = 1;
+ * @return {!proto.common.PerpContract}
  */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.api.GetNewPerpOrdersStreamResponse.prototype.getContract = function() {
+  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {!proto.common.PerpContract} value
  * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
  */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+proto.api.GetNewPerpOrdersStreamResponse.prototype.setContract = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
@@ -31653,13 +31655,6 @@ proto.api.GetNewPerpOrdersStreamResponse.prototype.setQuoteamountfilled = functi
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.api.GetPerpTradesStreamRequest.repeatedFields_ = [1];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -31691,7 +31686,7 @@ proto.api.GetPerpTradesStreamRequest.prototype.toObject = function(opt_includeIn
  */
 proto.api.GetPerpTradesStreamRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    marketsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+    contract: jspb.Message.getFieldWithDefault(msg, 1, 0),
     address: jspb.Message.getFieldWithDefault(msg, 2, ""),
     project: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
@@ -31731,8 +31726,8 @@ proto.api.GetPerpTradesStreamRequest.deserializeBinaryFromReader = function(msg,
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.addMarkets(value);
+      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      msg.setContract(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
@@ -31771,9 +31766,9 @@ proto.api.GetPerpTradesStreamRequest.prototype.serializeBinary = function() {
  */
 proto.api.GetPerpTradesStreamRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarketsList();
-  if (f.length > 0) {
-    writer.writeRepeatedString(
+  f = message.getContract();
+  if (f !== 0.0) {
+    writer.writeEnum(
       1,
       f
     );
@@ -31796,39 +31791,20 @@ proto.api.GetPerpTradesStreamRequest.serializeBinaryToWriter = function(message,
 
 
 /**
- * repeated string markets = 1;
- * @return {!Array<string>}
+ * optional common.PerpContract contract = 1;
+ * @return {!proto.common.PerpContract}
  */
-proto.api.GetPerpTradesStreamRequest.prototype.getMarketsList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
+proto.api.GetPerpTradesStreamRequest.prototype.getContract = function() {
+  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!Array<string>} value
+ * @param {!proto.common.PerpContract} value
  * @return {!proto.api.GetPerpTradesStreamRequest} returns this
  */
-proto.api.GetPerpTradesStreamRequest.prototype.setMarketsList = function(value) {
-  return jspb.Message.setField(this, 1, value || []);
-};
-
-
-/**
- * @param {string} value
- * @param {number=} opt_index
- * @return {!proto.api.GetPerpTradesStreamRequest} returns this
- */
-proto.api.GetPerpTradesStreamRequest.prototype.addMarkets = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.api.GetPerpTradesStreamRequest} returns this
- */
-proto.api.GetPerpTradesStreamRequest.prototype.clearMarketsList = function() {
-  return this.setMarketsList([]);
+proto.api.GetPerpTradesStreamRequest.prototype.setContract = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 
@@ -31900,7 +31876,7 @@ proto.api.GetPerpTradesStreamResponse.prototype.toObject = function(opt_includeI
  */
 proto.api.GetPerpTradesStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    contract: jspb.Message.getFieldWithDefault(msg, 1, 0),
     marketindex: jspb.Message.getFieldWithDefault(msg, 2, 0),
     makerpositionside: jspb.Message.getFieldWithDefault(msg, 3, 0),
     filleraddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
@@ -31947,8 +31923,8 @@ proto.api.GetPerpTradesStreamResponse.deserializeBinaryFromReader = function(msg
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
+      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      msg.setContract(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt32());
@@ -32015,9 +31991,9 @@ proto.api.GetPerpTradesStreamResponse.prototype.serializeBinary = function() {
  */
 proto.api.GetPerpTradesStreamResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarket();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getContract();
+  if (f !== 0.0) {
+    writer.writeEnum(
       1,
       f
     );
@@ -32089,20 +32065,20 @@ proto.api.GetPerpTradesStreamResponse.serializeBinaryToWriter = function(message
 
 
 /**
- * optional string market = 1;
- * @return {string}
+ * optional common.PerpContract contract = 1;
+ * @return {!proto.common.PerpContract}
  */
-proto.api.GetPerpTradesStreamResponse.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.api.GetPerpTradesStreamResponse.prototype.getContract = function() {
+  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {!proto.common.PerpContract} value
  * @return {!proto.api.GetPerpTradesStreamResponse} returns this
  */
-proto.api.GetPerpTradesStreamResponse.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+proto.api.GetPerpTradesStreamResponse.prototype.setContract = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 

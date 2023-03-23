@@ -1335,13 +1335,13 @@ message GetPricesStreamResponse {
 
 // Drift messages
 message GetPerpOrderbookRequest {
-  string market = 1;
+  common.PerpContract contract = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
 }
 
 message GetPerpOrderbooksRequest {
-  repeated string markets = 1;
+  repeated common.PerpContract contracts = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
 }
@@ -1530,7 +1530,7 @@ message GetNewPerpOrdersStreamRequest {
 }
 
 message GetNewPerpOrdersStreamResponse {
-  string market = 1;
+  common.PerpContract contract = 1;
   int32 marketIndex = 2;
   common.PerpPositionSide side = 3;
   common.PerpOrderType type = 4;
@@ -1547,13 +1547,13 @@ message GetNewPerpOrdersStreamResponse {
 }
 
 message GetPerpTradesStreamRequest {
-  repeated string markets = 1;
+  common.PerpContract contract = 1;
   string address = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "limit by user address"}];
   Project project = 3;
 }
 
 message GetPerpTradesStreamResponse {
-  string market = 1;
+  common.PerpContract contract = 1;
   int32 marketIndex = 2;
   common.PerpPositionSide makerPositionSide = 3;
   string fillerAddress = 4;
