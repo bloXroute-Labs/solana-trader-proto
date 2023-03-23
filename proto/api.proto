@@ -1347,10 +1347,9 @@ message GetPerpOrderbooksRequest {
 }
 
 message GetPerpOrderbookResponse {
-  string market = 1;
-  int32 marketIndex = 2;
-  repeated PerpOrderbookItem bids = 3;
-  repeated PerpOrderbookItem asks = 4;
+  common.PerpContract contract = 1;
+  repeated PerpOrderbookItem bids = 2;
+  repeated PerpOrderbookItem asks = 3;
 }
 
 message PerpOrderbookItem {
@@ -1531,19 +1530,18 @@ message GetNewPerpOrdersStreamRequest {
 
 message GetNewPerpOrdersStreamResponse {
   common.PerpContract contract = 1;
-  int32 marketIndex = 2;
-  common.PerpPositionSide side = 3;
-  common.PerpOrderType type = 4;
-  string userAddress = 5;
-  string orderID = 6;
-  string clientOrderID = 7;
-  string slot = 8;
-  double price = 9;
-  double triggerPrice = 10;
-  double baseAmount = 11;
-  double baseAmountFilled = 12;
-  double quoteAmount = 13;
-  double quoteAmountFilled = 14;
+  common.PerpPositionSide side = 2;
+  common.PerpOrderType type = 3;
+  string userAddress = 4;
+  string orderID = 5;
+  string clientOrderID = 6;
+  string slot = 7;
+  double price = 8;
+  double triggerPrice = 9;
+  double baseAmount = 10;
+  double baseAmountFilled = 11;
+  double quoteAmount = 12;
+  double quoteAmountFilled = 13;
 }
 
 message GetPerpTradesStreamRequest {
@@ -1554,15 +1552,14 @@ message GetPerpTradesStreamRequest {
 
 message GetPerpTradesStreamResponse {
   common.PerpContract contract = 1;
-  int32 marketIndex = 2;
-  common.PerpPositionSide makerPositionSide = 3;
-  string fillerAddress = 4;
-  string takerAddress = 5;
-  string takerOrderID = 6;
-  string makerAddress = 7;
-  string makerOrderID = 8;
-  double baseAmountFilled = 9;
-  double quoteAmountFilled = 10;
+  common.PerpPositionSide makerPositionSide = 2;
+  string fillerAddress = 3;
+  string takerAddress = 4;
+  string takerOrderID = 5;
+  string makerAddress = 6;
+  string makerOrderID = 7;
+  double baseAmountFilled = 8;
+  double quoteAmountFilled = 9;
 }
 
 

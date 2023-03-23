@@ -2923,10 +2923,8 @@ export namespace GetPerpOrderbooksRequest {
 }
 
 export class GetPerpOrderbookResponse extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetPerpOrderbookResponse;
-    getMarketindex(): number;
-    setMarketindex(value: number): GetPerpOrderbookResponse;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): GetPerpOrderbookResponse;
     clearBidsList(): void;
     getBidsList(): Array<PerpOrderbookItem>;
     setBidsList(value: Array<PerpOrderbookItem>): GetPerpOrderbookResponse;
@@ -2948,8 +2946,7 @@ export class GetPerpOrderbookResponse extends jspb.Message {
 
 export namespace GetPerpOrderbookResponse {
     export type AsObject = {
-        market: string,
-        marketindex: number,
+        contract: common_pb.PerpContract,
         bidsList: Array<PerpOrderbookItem.AsObject>,
         asksList: Array<PerpOrderbookItem.AsObject>,
     }
@@ -3675,8 +3672,6 @@ export namespace GetNewPerpOrdersStreamRequest {
 export class GetNewPerpOrdersStreamResponse extends jspb.Message { 
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): GetNewPerpOrdersStreamResponse;
-    getMarketindex(): number;
-    setMarketindex(value: number): GetNewPerpOrdersStreamResponse;
     getSide(): common_pb.PerpPositionSide;
     setSide(value: common_pb.PerpPositionSide): GetNewPerpOrdersStreamResponse;
     getType(): common_pb.PerpOrderType;
@@ -3715,7 +3710,6 @@ export class GetNewPerpOrdersStreamResponse extends jspb.Message {
 export namespace GetNewPerpOrdersStreamResponse {
     export type AsObject = {
         contract: common_pb.PerpContract,
-        marketindex: number,
         side: common_pb.PerpPositionSide,
         type: common_pb.PerpOrderType,
         useraddress: string,
@@ -3760,8 +3754,6 @@ export namespace GetPerpTradesStreamRequest {
 export class GetPerpTradesStreamResponse extends jspb.Message { 
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): GetPerpTradesStreamResponse;
-    getMarketindex(): number;
-    setMarketindex(value: number): GetPerpTradesStreamResponse;
     getMakerpositionside(): common_pb.PerpPositionSide;
     setMakerpositionside(value: common_pb.PerpPositionSide): GetPerpTradesStreamResponse;
     getFilleraddress(): string;
@@ -3792,7 +3784,6 @@ export class GetPerpTradesStreamResponse extends jspb.Message {
 export namespace GetPerpTradesStreamResponse {
     export type AsObject = {
         contract: common_pb.PerpContract,
-        marketindex: number,
         makerpositionside: common_pb.PerpPositionSide,
         filleraddress: string,
         takeraddress: string,
