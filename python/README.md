@@ -1,4 +1,3 @@
-
 # Solana-Trader-Python-Proto package
 
 # publishing solana-trader-python-proto package

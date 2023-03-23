@@ -228,7 +228,7 @@
         ]
       }
     },
-    "/api/v1/market/perp/orderbook/{market}": {
+    "/api/v1/market/perp/orderbook/{contract}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
         "description": "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned",
@@ -249,10 +249,17 @@
         },
         "parameters": [
           {
-            "name": "market",
+            "name": "contract",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP",
+              "APT_PERP"
+            ]
           },
           {
             "name": "limit",
@@ -1998,12 +2005,8 @@
     "apiGetNewPerpOrdersStreamResponse": {
       "type": "object",
       "properties": {
-        "market": {
-          "type": "string"
-        },
-        "marketIndex": {
-          "type": "integer",
-          "format": "int32"
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
         },
         "side": {
           "$ref": "#/definitions/commonPerpPositionSide"
@@ -2211,12 +2214,8 @@
     "apiGetPerpOrderbookResponse": {
       "type": "object",
       "properties": {
-        "market": {
-          "type": "string"
-        },
-        "marketIndex": {
-          "type": "integer",
-          "format": "int32"
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
         },
         "bids": {
           "type": "array",
@@ -2264,12 +2263,8 @@
     "apiGetPerpTradesStreamResponse": {
       "type": "object",
       "properties": {
-        "market": {
-          "type": "string"
-        },
-        "marketIndex": {
-          "type": "integer",
-          "format": "int32"
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
         },
         "makerPositionSide": {
           "$ref": "#/definitions/commonPerpPositionSide"
