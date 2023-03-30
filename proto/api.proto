@@ -1427,12 +1427,11 @@ message PostCancelPerpOrderResponse {
 }
 
 message PostManageCollateralRequest {
-  string ownerAddress = 1;
-  string accountAddress = 2;
-  double amount = 3;
-  Project project = 4;
-  common.PerpCollateralType type = 5;
-  common.PerpCollateralToken token = 6;
+  string accountAddress = 1;
+  double amount = 2;
+  Project project = 3;
+  common.PerpCollateralType type = 4;
+  common.PerpCollateralToken token = 5;
 }
 
 message PostManageCollateralResponse {
@@ -1478,9 +1477,8 @@ message GetPerpPositionsRequest {
 
 message GetPerpPositionsResponse {
   string ownerAddress = 1;
-  string accountAddress = 2;
 
-  repeated PerpPosition perpPositions = 3;
+  repeated PerpPosition perpPositions = 2;
 }
 
 message PostClosePerpPositionsRequest {
@@ -1582,8 +1580,7 @@ message PostSettlePNLResponse {
 message GetAssetsRequest {
   string ownerAddress = 1;
   string accountAddress = 2;
-  common.PerpContract contract = 3;
-  Project project = 4;
+  Project project = 3;
 }
 
 message Asset {

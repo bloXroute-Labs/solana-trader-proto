@@ -906,12 +906,11 @@ class PostCancelPerpOrderResponse(betterproto.Message):
 
 @dataclass
 class PostManageCollateralRequest(betterproto.Message):
-    owner_address: str = betterproto.string_field(1)
-    account_address: str = betterproto.string_field(2)
-    amount: float = betterproto.double_field(3)
-    project: "Project" = betterproto.enum_field(4)
-    type: common.PerpCollateralType = betterproto.enum_field(5)
-    token: common.PerpCollateralToken = betterproto.enum_field(6)
+    account_address: str = betterproto.string_field(1)
+    amount: float = betterproto.double_field(2)
+    project: "Project" = betterproto.enum_field(3)
+    type: common.PerpCollateralType = betterproto.enum_field(4)
+    token: common.PerpCollateralToken = betterproto.enum_field(5)
 
 
 @dataclass
@@ -959,8 +958,7 @@ class GetPerpPositionsRequest(betterproto.Message):
 @dataclass
 class GetPerpPositionsResponse(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    account_address: str = betterproto.string_field(2)
-    perp_positions: List["PerpPosition"] = betterproto.message_field(3)
+    perp_positions: List["PerpPosition"] = betterproto.message_field(2)
 
 
 @dataclass
@@ -1070,8 +1068,7 @@ class PostSettlePNLResponse(betterproto.Message):
 class GetAssetsRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
-    contract: common.PerpContract = betterproto.enum_field(3)
-    project: "Project" = betterproto.enum_field(4)
+    project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
@@ -1877,7 +1874,6 @@ class ApiStub(betterproto.ServiceStub):
     async def post_manage_collateral(
         self,
         *,
-        owner_address: str = "",
         account_address: str = "",
         amount: float = 0,
         project: "Project" = 0,
@@ -1885,7 +1881,6 @@ class ApiStub(betterproto.ServiceStub):
         token: common.PerpCollateralToken = 0,
     ) -> PostManageCollateralResponse:
         request = PostManageCollateralRequest()
-        request.owner_address = owner_address
         request.account_address = account_address
         request.amount = amount
         request.project = project
@@ -1943,13 +1938,11 @@ class ApiStub(betterproto.ServiceStub):
         *,
         owner_address: str = "",
         account_address: str = "",
-        contract: common.PerpContract = 0,
         project: "Project" = 0,
     ) -> GetAssetsResponse:
         request = GetAssetsRequest()
         request.owner_address = owner_address
         request.account_address = account_address
-        request.contract = contract
         request.project = project
 
         return await self._unary_unary(
