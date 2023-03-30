@@ -3276,8 +3276,6 @@ export namespace PostCancelPerpOrderResponse {
 }
 
 export class PostManageCollateralRequest extends jspb.Message { 
-    getOwneraddress(): string;
-    setOwneraddress(value: string): PostManageCollateralRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): PostManageCollateralRequest;
     getAmount(): number;
@@ -3301,7 +3299,6 @@ export class PostManageCollateralRequest extends jspb.Message {
 
 export namespace PostManageCollateralRequest {
     export type AsObject = {
-        owneraddress: string,
         accountaddress: string,
         amount: number,
         project: Project,
@@ -3473,8 +3470,6 @@ export namespace GetPerpPositionsRequest {
 export class GetPerpPositionsResponse extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): GetPerpPositionsResponse;
-    getAccountaddress(): string;
-    setAccountaddress(value: string): GetPerpPositionsResponse;
     clearPerppositionsList(): void;
     getPerppositionsList(): Array<PerpPosition>;
     setPerppositionsList(value: Array<PerpPosition>): GetPerpPositionsResponse;
@@ -3493,7 +3488,6 @@ export class GetPerpPositionsResponse extends jspb.Message {
 export namespace GetPerpPositionsResponse {
     export type AsObject = {
         owneraddress: string,
-        accountaddress: string,
         perppositionsList: Array<PerpPosition.AsObject>,
     }
 }
@@ -3879,8 +3873,6 @@ export class GetAssetsRequest extends jspb.Message {
     setOwneraddress(value: string): GetAssetsRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): GetAssetsRequest;
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): GetAssetsRequest;
     getProject(): Project;
     setProject(value: Project): GetAssetsRequest;
 
@@ -3898,7 +3890,6 @@ export namespace GetAssetsRequest {
     export type AsObject = {
         owneraddress: string,
         accountaddress: string,
-        contract: common_pb.PerpContract,
         project: Project,
     }
 }

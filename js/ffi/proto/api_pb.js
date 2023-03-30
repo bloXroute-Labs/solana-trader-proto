@@ -28045,12 +28045,11 @@ proto.api.PostManageCollateralRequest.prototype.toObject = function(opt_includeI
  */
 proto.api.PostManageCollateralRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
-    project: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    type: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    token: jspb.Message.getFieldWithDefault(msg, 6, 0)
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    project: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    type: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    token: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -28089,25 +28088,21 @@ proto.api.PostManageCollateralRequest.deserializeBinaryFromReader = function(msg
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setOwneraddress(value);
-      break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
       msg.setAccountaddress(value);
       break;
-    case 3:
+    case 2:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setAmount(value);
       break;
-    case 4:
+    case 3:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
-    case 5:
+    case 4:
       var value = /** @type {!proto.common.PerpCollateralType} */ (reader.readEnum());
       msg.setType(value);
       break;
-    case 6:
+    case 5:
       var value = /** @type {!proto.common.PerpCollateralToken} */ (reader.readEnum());
       msg.setToken(value);
       break;
@@ -28140,45 +28135,38 @@ proto.api.PostManageCollateralRequest.prototype.serializeBinary = function() {
  */
 proto.api.PostManageCollateralRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getOwneraddress();
+  f = message.getAccountaddress();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getAccountaddress();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
   f = message.getAmount();
   if (f !== 0.0) {
     writer.writeDouble(
-      3,
+      2,
       f
     );
   }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      4,
+      3,
       f
     );
   }
   f = message.getType();
   if (f !== 0.0) {
     writer.writeEnum(
-      5,
+      4,
       f
     );
   }
   f = message.getToken();
   if (f !== 0.0) {
     writer.writeEnum(
-      6,
+      5,
       f
     );
   }
@@ -28186,10 +28174,10 @@ proto.api.PostManageCollateralRequest.serializeBinaryToWriter = function(message
 
 
 /**
- * optional string ownerAddress = 1;
+ * optional string accountAddress = 1;
  * @return {string}
  */
-proto.api.PostManageCollateralRequest.prototype.getOwneraddress = function() {
+proto.api.PostManageCollateralRequest.prototype.getAccountaddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -28198,35 +28186,17 @@ proto.api.PostManageCollateralRequest.prototype.getOwneraddress = function() {
  * @param {string} value
  * @return {!proto.api.PostManageCollateralRequest} returns this
  */
-proto.api.PostManageCollateralRequest.prototype.setOwneraddress = function(value) {
+proto.api.PostManageCollateralRequest.prototype.setAccountaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string accountAddress = 2;
- * @return {string}
- */
-proto.api.PostManageCollateralRequest.prototype.getAccountaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.PostManageCollateralRequest} returns this
- */
-proto.api.PostManageCollateralRequest.prototype.setAccountaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional double amount = 3;
+ * optional double amount = 2;
  * @return {number}
  */
 proto.api.PostManageCollateralRequest.prototype.getAmount = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
 };
 
 
@@ -28235,16 +28205,16 @@ proto.api.PostManageCollateralRequest.prototype.getAmount = function() {
  * @return {!proto.api.PostManageCollateralRequest} returns this
  */
 proto.api.PostManageCollateralRequest.prototype.setAmount = function(value) {
-  return jspb.Message.setProto3FloatField(this, 3, value);
+  return jspb.Message.setProto3FloatField(this, 2, value);
 };
 
 
 /**
- * optional Project project = 4;
+ * optional Project project = 3;
  * @return {!proto.api.Project}
  */
 proto.api.PostManageCollateralRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
@@ -28253,16 +28223,16 @@ proto.api.PostManageCollateralRequest.prototype.getProject = function() {
  * @return {!proto.api.PostManageCollateralRequest} returns this
  */
 proto.api.PostManageCollateralRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 
 /**
- * optional common.PerpCollateralType type = 5;
+ * optional common.PerpCollateralType type = 4;
  * @return {!proto.common.PerpCollateralType}
  */
 proto.api.PostManageCollateralRequest.prototype.getType = function() {
-  return /** @type {!proto.common.PerpCollateralType} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {!proto.common.PerpCollateralType} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
@@ -28271,16 +28241,16 @@ proto.api.PostManageCollateralRequest.prototype.getType = function() {
  * @return {!proto.api.PostManageCollateralRequest} returns this
  */
 proto.api.PostManageCollateralRequest.prototype.setType = function(value) {
-  return jspb.Message.setProto3EnumField(this, 5, value);
+  return jspb.Message.setProto3EnumField(this, 4, value);
 };
 
 
 /**
- * optional common.PerpCollateralToken token = 6;
+ * optional common.PerpCollateralToken token = 5;
  * @return {!proto.common.PerpCollateralToken}
  */
 proto.api.PostManageCollateralRequest.prototype.getToken = function() {
-  return /** @type {!proto.common.PerpCollateralToken} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {!proto.common.PerpCollateralToken} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
@@ -28289,7 +28259,7 @@ proto.api.PostManageCollateralRequest.prototype.getToken = function() {
  * @return {!proto.api.PostManageCollateralRequest} returns this
  */
 proto.api.PostManageCollateralRequest.prototype.setToken = function(value) {
-  return jspb.Message.setProto3EnumField(this, 6, value);
+  return jspb.Message.setProto3EnumField(this, 5, value);
 };
 
 
@@ -29566,7 +29536,7 @@ proto.api.GetPerpPositionsRequest.prototype.clearContractsList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.api.GetPerpPositionsResponse.repeatedFields_ = [3];
+proto.api.GetPerpPositionsResponse.repeatedFields_ = [2];
 
 
 
@@ -29600,7 +29570,6 @@ proto.api.GetPerpPositionsResponse.prototype.toObject = function(opt_includeInst
 proto.api.GetPerpPositionsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     perppositionsList: jspb.Message.toObjectList(msg.getPerppositionsList(),
     proto.api.PerpPosition.toObject, includeInstance)
   };
@@ -29644,10 +29613,6 @@ proto.api.GetPerpPositionsResponse.deserializeBinaryFromReader = function(msg, r
       msg.setOwneraddress(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setAccountaddress(value);
-      break;
-    case 3:
       var value = new proto.api.PerpPosition;
       reader.readMessage(value,proto.api.PerpPosition.deserializeBinaryFromReader);
       msg.addPerppositions(value);
@@ -29688,17 +29653,10 @@ proto.api.GetPerpPositionsResponse.serializeBinaryToWriter = function(message, w
       f
     );
   }
-  f = message.getAccountaddress();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
   f = message.getPerppositionsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      3,
+      2,
       f,
       proto.api.PerpPosition.serializeBinaryToWriter
     );
@@ -29725,30 +29683,12 @@ proto.api.GetPerpPositionsResponse.prototype.setOwneraddress = function(value) {
 
 
 /**
- * optional string accountAddress = 2;
- * @return {string}
- */
-proto.api.GetPerpPositionsResponse.prototype.getAccountaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetPerpPositionsResponse} returns this
- */
-proto.api.GetPerpPositionsResponse.prototype.setAccountaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * repeated PerpPosition perpPositions = 3;
+ * repeated PerpPosition perpPositions = 2;
  * @return {!Array<!proto.api.PerpPosition>}
  */
 proto.api.GetPerpPositionsResponse.prototype.getPerppositionsList = function() {
   return /** @type{!Array<!proto.api.PerpPosition>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.PerpPosition, 3));
+    jspb.Message.getRepeatedWrapperField(this, proto.api.PerpPosition, 2));
 };
 
 
@@ -29757,7 +29697,7 @@ proto.api.GetPerpPositionsResponse.prototype.getPerppositionsList = function() {
  * @return {!proto.api.GetPerpPositionsResponse} returns this
 */
 proto.api.GetPerpPositionsResponse.prototype.setPerppositionsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
@@ -29767,7 +29707,7 @@ proto.api.GetPerpPositionsResponse.prototype.setPerppositionsList = function(val
  * @return {!proto.api.PerpPosition}
  */
 proto.api.GetPerpPositionsResponse.prototype.addPerppositions = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.PerpPosition, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.PerpPosition, opt_index);
 };
 
 
@@ -32810,8 +32750,7 @@ proto.api.GetAssetsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    contract: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    project: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    project: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
   if (includeInstance) {
@@ -32857,10 +32796,6 @@ proto.api.GetAssetsRequest.deserializeBinaryFromReader = function(msg, reader) {
       msg.setAccountaddress(value);
       break;
     case 3:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
-      msg.setContract(value);
-      break;
-    case 4:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -32907,17 +32842,10 @@ proto.api.GetAssetsRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getContract();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      3,
-      f
-    );
-  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      4,
+      3,
       f
     );
   }
@@ -32961,29 +32889,11 @@ proto.api.GetAssetsRequest.prototype.setAccountaddress = function(value) {
 
 
 /**
- * optional common.PerpContract contract = 3;
- * @return {!proto.common.PerpContract}
- */
-proto.api.GetAssetsRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
-};
-
-
-/**
- * @param {!proto.common.PerpContract} value
- * @return {!proto.api.GetAssetsRequest} returns this
- */
-proto.api.GetAssetsRequest.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
-};
-
-
-/**
- * optional Project project = 4;
+ * optional Project project = 3;
  * @return {!proto.api.Project}
  */
 proto.api.GetAssetsRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
@@ -32992,7 +32902,7 @@ proto.api.GetAssetsRequest.prototype.getProject = function() {
  * @return {!proto.api.GetAssetsRequest} returns this
  */
 proto.api.GetAssetsRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
+  return jspb.Message.setProto3EnumField(this, 3, value);
 };
 
 

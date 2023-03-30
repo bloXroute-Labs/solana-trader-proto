@@ -761,20 +761,6 @@
             "type": "string"
           },
           {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP",
-              "APT_PERP"
-            ],
-            "default": "ALL"
-          },
-          {
             "name": "project",
             "in": "query",
             "required": false,
@@ -2256,9 +2242,6 @@
         "ownerAddress": {
           "type": "string"
         },
-        "accountAddress": {
-          "type": "string"
-        },
         "perpPositions": {
           "type": "array",
           "items": {
@@ -3142,9 +3125,6 @@
     "apiPostManageCollateralRequest": {
       "type": "object",
       "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
         "accountAddress": {
           "type": "string"
         },
