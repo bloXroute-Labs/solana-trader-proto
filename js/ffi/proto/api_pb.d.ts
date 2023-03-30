@@ -3929,8 +3929,6 @@ export namespace Asset {
 export class GetAssetsResponse extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): GetAssetsResponse;
-    getAccountaddress(): string;
-    setAccountaddress(value: string): GetAssetsResponse;
     clearAssetsList(): void;
     getAssetsList(): Array<Asset>;
     setAssetsList(value: Array<Asset>): GetAssetsResponse;
@@ -3949,7 +3947,6 @@ export class GetAssetsResponse extends jspb.Message {
 export namespace GetAssetsResponse {
     export type AsObject = {
         owneraddress: string,
-        accountaddress: string,
         assetsList: Array<Asset.AsObject>,
     }
 }

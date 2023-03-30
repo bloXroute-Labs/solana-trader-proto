@@ -1594,10 +1594,8 @@ message Asset {
 
 message GetAssetsResponse {
   string ownerAddress = 1;
-  string accountAddress = 2;
-  repeated Asset assets = 3;
+  repeated Asset assets = 2;
 }
-
 
 message PostSettlePNLsRequest {
   string ownerAddress = 1;
