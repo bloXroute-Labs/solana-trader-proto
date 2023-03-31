@@ -1083,8 +1083,7 @@ class Asset(betterproto.Message):
 @dataclass
 class GetAssetsResponse(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    account_address: str = betterproto.string_field(2)
-    assets: List["Asset"] = betterproto.message_field(3)
+    assets: List["Asset"] = betterproto.message_field(2)
 
 
 @dataclass

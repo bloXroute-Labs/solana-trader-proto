@@ -33162,7 +33162,7 @@ proto.api.Asset.prototype.setSubaccountid = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.api.GetAssetsResponse.repeatedFields_ = [3];
+proto.api.GetAssetsResponse.repeatedFields_ = [2];
 
 
 
@@ -33196,7 +33196,6 @@ proto.api.GetAssetsResponse.prototype.toObject = function(opt_includeInstance) {
 proto.api.GetAssetsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     assetsList: jspb.Message.toObjectList(msg.getAssetsList(),
     proto.api.Asset.toObject, includeInstance)
   };
@@ -33240,10 +33239,6 @@ proto.api.GetAssetsResponse.deserializeBinaryFromReader = function(msg, reader) 
       msg.setOwneraddress(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setAccountaddress(value);
-      break;
-    case 3:
       var value = new proto.api.Asset;
       reader.readMessage(value,proto.api.Asset.deserializeBinaryFromReader);
       msg.addAssets(value);
@@ -33284,17 +33279,10 @@ proto.api.GetAssetsResponse.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
-  f = message.getAccountaddress();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
   f = message.getAssetsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      3,
+      2,
       f,
       proto.api.Asset.serializeBinaryToWriter
     );
@@ -33321,30 +33309,12 @@ proto.api.GetAssetsResponse.prototype.setOwneraddress = function(value) {
 
 
 /**
- * optional string accountAddress = 2;
- * @return {string}
- */
-proto.api.GetAssetsResponse.prototype.getAccountaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetAssetsResponse} returns this
- */
-proto.api.GetAssetsResponse.prototype.setAccountaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * repeated Asset assets = 3;
+ * repeated Asset assets = 2;
  * @return {!Array<!proto.api.Asset>}
  */
 proto.api.GetAssetsResponse.prototype.getAssetsList = function() {
   return /** @type{!Array<!proto.api.Asset>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.Asset, 3));
+    jspb.Message.getRepeatedWrapperField(this, proto.api.Asset, 2));
 };
 
 
@@ -33353,7 +33323,7 @@ proto.api.GetAssetsResponse.prototype.getAssetsList = function() {
  * @return {!proto.api.GetAssetsResponse} returns this
 */
 proto.api.GetAssetsResponse.prototype.setAssetsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
@@ -33363,7 +33333,7 @@ proto.api.GetAssetsResponse.prototype.setAssetsList = function(value) {
  * @return {!proto.api.Asset}
  */
 proto.api.GetAssetsResponse.prototype.addAssets = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.Asset, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.Asset, opt_index);
 };
 
 

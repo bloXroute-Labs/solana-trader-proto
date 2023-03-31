@@ -1918,9 +1918,6 @@
         "ownerAddress": {
           "type": "string"
         },
-        "accountAddress": {
-          "type": "string"
-        },
         "assets": {
           "type": "array",
           "items": {
