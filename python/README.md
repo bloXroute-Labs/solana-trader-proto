@@ -5,8 +5,7 @@
 
     upgrade the version in pyproject.toml
     cd python
-    rm -rf dist/
-    python3 -m build
+    rm -rf dist/ && python3 -m build
 
     you can install package locally before uploading it to the pypi
     pip install dist/bxsolana-trader-proto-0.0.10.tar.gz
