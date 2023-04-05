@@ -1555,10 +1555,10 @@ message GetPerpTradesStreamRequest {
 
 message GetPerpTradesStreamResponse {
   int64 slot = 1;
-  PerpTradeResponse trade = 2;
+  GetPerpTradesResponse trade = 2;
 }
 
-message PerpTradeResponse {
+message GetPerpTradesResponse {
   common.PerpContract contract = 1;
   double indexPrice = 2;
   int64 marketIndex = 3;
