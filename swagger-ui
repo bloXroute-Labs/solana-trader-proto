@@ -2250,107 +2250,12 @@
     "apiGetPerpTradesStreamResponse": {
       "type": "object",
       "properties": {
-        "contract": {
-          "$ref": "#/definitions/commonPerpContract"
-        },
-        "indexPrice": {
-          "type": "number",
-          "format": "double"
-        },
         "slot": {
           "type": "string",
           "format": "int64"
         },
-        "marketIndex": {
-          "type": "string",
-          "format": "int64"
-        },
-        "filler": {
-          "type": "string"
-        },
-        "fillerReward": {
-          "type": "number",
-          "format": "double"
-        },
-        "fillRecordId": {
-          "type": "number",
-          "format": "double"
-        },
-        "baseAssetAmountFilled": {
-          "type": "number",
-          "format": "double"
-        },
-        "quoteAssetAmountFilled": {
-          "type": "number",
-          "format": "double"
-        },
-        "takerFee": {
-          "type": "number",
-          "format": "double"
-        },
-        "makerFee": {
-          "type": "number",
-          "format": "double"
-        },
-        "referrerReward": {
-          "type": "number",
-          "format": "double"
-        },
-        "quoteAssetAmountSurplus": {
-          "type": "number",
-          "format": "double"
-        },
-        "spotFulfillmentMethodFee": {
-          "type": "number",
-          "format": "double"
-        },
-        "taker": {
-          "type": "string"
-        },
-        "takerOrderId": {
-          "type": "number",
-          "format": "double"
-        },
-        "takerOrderDirection": {
-          "type": "string"
-        },
-        "takerOrderBaseAssetAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "takerOrderCumulativeBaseAssetAmountFilled": {
-          "type": "number",
-          "format": "double"
-        },
-        "takerOrderCumulativeQuoteAssetAmountFilled": {
-          "type": "number",
-          "format": "double"
-        },
-        "maker": {
-          "type": "string"
-        },
-        "makerOrderId": {
-          "type": "number",
-          "format": "double"
-        },
-        "makerOrderDirection": {
-          "type": "string"
-        },
-        "makerOrderBaseAssetAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "makerOrderCumulativeBaseAssetAmountFilled": {
-          "type": "number",
-          "format": "double"
-        },
-        "makerOrderCumulativeQuoteAssetAmountFilled": {
-          "type": "number",
-          "format": "double"
-        },
-        "oraclePrice": {
-          "type": "number",
-          "format": "double"
+        "trade": {
+          "$ref": "#/definitions/apiPerpTradeResponse"
         }
       }
     },
@@ -2894,6 +2799,109 @@
         "subAccountID": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "apiPerpTradeResponse": {
+      "type": "object",
+      "properties": {
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "indexPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "marketIndex": {
+          "type": "string",
+          "format": "int64"
+        },
+        "filler": {
+          "type": "string"
+        },
+        "fillerReward": {
+          "type": "number",
+          "format": "double"
+        },
+        "fillRecordId": {
+          "type": "number",
+          "format": "double"
+        },
+        "baseAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "takerFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "makerFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "referrerReward": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteAssetAmountSurplus": {
+          "type": "number",
+          "format": "double"
+        },
+        "spotFulfillmentMethodFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "taker": {
+          "type": "string"
+        },
+        "takerOrderId": {
+          "type": "number",
+          "format": "double"
+        },
+        "takerOrderDirection": {
+          "type": "string"
+        },
+        "takerOrderBaseAssetAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "takerOrderCumulativeBaseAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "takerOrderCumulativeQuoteAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "maker": {
+          "type": "string"
+        },
+        "makerOrderId": {
+          "type": "number",
+          "format": "double"
+        },
+        "makerOrderDirection": {
+          "type": "string"
+        },
+        "makerOrderBaseAssetAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "makerOrderCumulativeBaseAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "makerOrderCumulativeQuoteAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "oraclePrice": {
+          "type": "number",
+          "format": "double"
         }
       }
     },

@@ -1040,41 +1040,46 @@ class GetPerpTradesStreamRequest(betterproto.Message):
 
 @dataclass
 class GetPerpTradesStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    trade: "PerpTradeResponse" = betterproto.message_field(2)
+
+
+@dataclass
+class PerpTradeResponse(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(1)
     index_price: float = betterproto.double_field(2)
-    slot: int = betterproto.int64_field(3)
-    market_index: int = betterproto.int64_field(4)
-    filler: str = betterproto.string_field(5)
-    filler_reward: float = betterproto.double_field(6)
-    fill_record_id: float = betterproto.double_field(7)
-    base_asset_amount_filled: float = betterproto.double_field(8)
-    quote_asset_amount_filled: float = betterproto.double_field(9)
-    taker_fee: float = betterproto.double_field(10)
-    maker_fee: float = betterproto.double_field(11)
-    referrer_reward: float = betterproto.double_field(12)
-    quote_asset_amount_surplus: float = betterproto.double_field(13)
-    spot_fulfillment_method_fee: float = betterproto.double_field(14)
-    taker: str = betterproto.string_field(15)
-    taker_order_id: float = betterproto.double_field(16)
-    taker_order_direction: str = betterproto.string_field(17)
-    taker_order_base_asset_amount: float = betterproto.double_field(18)
+    market_index: int = betterproto.int64_field(3)
+    filler: str = betterproto.string_field(4)
+    filler_reward: float = betterproto.double_field(5)
+    fill_record_id: float = betterproto.double_field(6)
+    base_asset_amount_filled: float = betterproto.double_field(7)
+    quote_asset_amount_filled: float = betterproto.double_field(8)
+    taker_fee: float = betterproto.double_field(9)
+    maker_fee: float = betterproto.double_field(10)
+    referrer_reward: float = betterproto.double_field(11)
+    quote_asset_amount_surplus: float = betterproto.double_field(12)
+    spot_fulfillment_method_fee: float = betterproto.double_field(13)
+    taker: str = betterproto.string_field(14)
+    taker_order_id: float = betterproto.double_field(15)
+    taker_order_direction: str = betterproto.string_field(16)
+    taker_order_base_asset_amount: float = betterproto.double_field(17)
     taker_order_cumulative_base_asset_amount_filled: float = betterproto.double_field(
-        19
+        18
     )
     taker_order_cumulative_quote_asset_amount_filled: float = betterproto.double_field(
-        20
+        19
     )
-    maker: str = betterproto.string_field(21)
-    maker_order_id: float = betterproto.double_field(22)
-    maker_order_direction: str = betterproto.string_field(23)
-    maker_order_base_asset_amount: float = betterproto.double_field(24)
+    maker: str = betterproto.string_field(20)
+    maker_order_id: float = betterproto.double_field(21)
+    maker_order_direction: str = betterproto.string_field(22)
+    maker_order_base_asset_amount: float = betterproto.double_field(23)
     maker_order_cumulative_base_asset_amount_filled: float = betterproto.double_field(
-        25
+        24
     )
     maker_order_cumulative_quote_asset_amount_filled: float = betterproto.double_field(
-        26
+        25
     )
-    oracle_price: float = betterproto.double_field(27)
+    oracle_price: float = betterproto.double_field(26)
 
 
 @dataclass

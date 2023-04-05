@@ -1554,33 +1554,37 @@ message GetPerpTradesStreamRequest {
 }
 
 message GetPerpTradesStreamResponse {
+  int64 slot = 1;
+  PerpTradeResponse trade = 2;
+}
+
+message PerpTradeResponse {
   common.PerpContract contract = 1;
   double indexPrice = 2;
-  int64 slot = 3;
-  int64 marketIndex = 4;
-  string filler = 5;
-  double fillerReward = 6;
-  double fillRecordId = 7;
-  double baseAssetAmountFilled = 8;
-  double quoteAssetAmountFilled = 9;
-  double takerFee = 10;
-  double makerFee = 11;
-  double referrerReward = 12;
-  double quoteAssetAmountSurplus = 13;
-  double spotFulfillmentMethodFee = 14;
-  string taker = 15;
-  double takerOrderId = 16;
-  string takerOrderDirection = 17;
-  double takerOrderBaseAssetAmount = 18;
-  double takerOrderCumulativeBaseAssetAmountFilled = 19;
-  double takerOrderCumulativeQuoteAssetAmountFilled = 20;
-  string maker = 21;
-  double makerOrderId = 22;
-  string makerOrderDirection = 23;
-  double makerOrderBaseAssetAmount = 24;
-  double makerOrderCumulativeBaseAssetAmountFilled = 25;
-  double makerOrderCumulativeQuoteAssetAmountFilled = 26;
-  double oraclePrice = 27;
+  int64 marketIndex = 3;
+  string filler = 4;
+  double fillerReward = 5;
+  double fillRecordId = 6;
+  double baseAssetAmountFilled = 7;
+  double quoteAssetAmountFilled = 8;
+  double takerFee = 9;
+  double makerFee = 10;
+  double referrerReward = 11;
+  double quoteAssetAmountSurplus = 12;
+  double spotFulfillmentMethodFee = 13;
+  string taker = 14;
+  double takerOrderId = 15;
+  string takerOrderDirection = 16;
+  double takerOrderBaseAssetAmount = 17;
+  double takerOrderCumulativeBaseAssetAmountFilled = 18;
+  double takerOrderCumulativeQuoteAssetAmountFilled = 19;
+  string maker = 20;
+  double makerOrderId = 21;
+  string makerOrderDirection = 22;
+  double makerOrderBaseAssetAmount = 23;
+  double makerOrderCumulativeBaseAssetAmountFilled = 24;
+  double makerOrderCumulativeQuoteAssetAmountFilled = 25;
+  double oraclePrice = 26;
 }
 
 
