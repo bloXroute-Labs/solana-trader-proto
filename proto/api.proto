@@ -1548,8 +1548,8 @@ message GetNewPerpOrdersStreamResponse {
 }
 
 message GetPerpTradesStreamRequest {
-  common.PerpContract contract = 1;
-  string address = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "limit by user address"}];
+  repeated common.PerpContract contracts = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
 }
 

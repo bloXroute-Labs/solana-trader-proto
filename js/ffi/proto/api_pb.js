@@ -2833,7 +2833,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.GetPerpTradesStreamRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetPerpTradesStreamRequest.repeatedFields_, null);
 };
 goog.inherits(proto.api.GetPerpTradesStreamRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -31786,6 +31786,13 @@ proto.api.GetNewPerpOrdersStreamResponse.prototype.setQuoteamountfilled = functi
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetPerpTradesStreamRequest.repeatedFields_ = [1];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -31817,8 +31824,8 @@ proto.api.GetPerpTradesStreamRequest.prototype.toObject = function(opt_includeIn
  */
 proto.api.GetPerpTradesStreamRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    contract: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    address: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    contractsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+    limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
     project: jspb.Message.getFieldWithDefault(msg, 3, 0)
   };
 
@@ -31857,12 +31864,14 @@ proto.api.GetPerpTradesStreamRequest.deserializeBinaryFromReader = function(msg,
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
-      msg.setContract(value);
+      var values = /** @type {!Array<!proto.common.PerpContract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
+      for (var i = 0; i < values.length; i++) {
+        msg.addContracts(values[i]);
+      }
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setAddress(value);
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setLimit(value);
       break;
     case 3:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
@@ -31897,16 +31906,16 @@ proto.api.GetPerpTradesStreamRequest.prototype.serializeBinary = function() {
  */
 proto.api.GetPerpTradesStreamRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getContract();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  f = message.getContractsList();
+  if (f.length > 0) {
+    writer.writePackedEnum(
       1,
       f
     );
   }
-  f = message.getAddress();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getLimit();
+  if (f !== 0) {
+    writer.writeUint32(
       2,
       f
     );
@@ -31922,38 +31931,57 @@ proto.api.GetPerpTradesStreamRequest.serializeBinaryToWriter = function(message,
 
 
 /**
- * optional common.PerpContract contract = 1;
- * @return {!proto.common.PerpContract}
+ * repeated common.PerpContract contracts = 1;
+ * @return {!Array<!proto.common.PerpContract>}
  */
-proto.api.GetPerpTradesStreamRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.api.GetPerpTradesStreamRequest.prototype.getContractsList = function() {
+  return /** @type {!Array<!proto.common.PerpContract>} */ (jspb.Message.getRepeatedField(this, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.common.PerpContract>} value
+ * @return {!proto.api.GetPerpTradesStreamRequest} returns this
+ */
+proto.api.GetPerpTradesStreamRequest.prototype.setContractsList = function(value) {
+  return jspb.Message.setField(this, 1, value || []);
 };
 
 
 /**
  * @param {!proto.common.PerpContract} value
+ * @param {number=} opt_index
  * @return {!proto.api.GetPerpTradesStreamRequest} returns this
  */
-proto.api.GetPerpTradesStreamRequest.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 1, value);
+proto.api.GetPerpTradesStreamRequest.prototype.addContracts = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
 };
 
 
 /**
- * optional string address = 2;
- * @return {string}
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetPerpTradesStreamRequest} returns this
  */
-proto.api.GetPerpTradesStreamRequest.prototype.getAddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+proto.api.GetPerpTradesStreamRequest.prototype.clearContractsList = function() {
+  return this.setContractsList([]);
 };
 
 
 /**
- * @param {string} value
+ * optional uint32 limit = 2;
+ * @return {number}
+ */
+proto.api.GetPerpTradesStreamRequest.prototype.getLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {number} value
  * @return {!proto.api.GetPerpTradesStreamRequest} returns this
  */
-proto.api.GetPerpTradesStreamRequest.prototype.setAddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+proto.api.GetPerpTradesStreamRequest.prototype.setLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 2, value);
 };
 
 

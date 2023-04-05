@@ -3747,10 +3747,12 @@ export namespace GetNewPerpOrdersStreamResponse {
 }
 
 export class GetPerpTradesStreamRequest extends jspb.Message { 
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): GetPerpTradesStreamRequest;
-    getAddress(): string;
-    setAddress(value: string): GetPerpTradesStreamRequest;
+    clearContractsList(): void;
+    getContractsList(): Array<common_pb.PerpContract>;
+    setContractsList(value: Array<common_pb.PerpContract>): GetPerpTradesStreamRequest;
+    addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
+    getLimit(): number;
+    setLimit(value: number): GetPerpTradesStreamRequest;
     getProject(): Project;
     setProject(value: Project): GetPerpTradesStreamRequest;
 
@@ -3766,8 +3768,8 @@ export class GetPerpTradesStreamRequest extends jspb.Message {
 
 export namespace GetPerpTradesStreamRequest {
     export type AsObject = {
-        contract: common_pb.PerpContract,
-        address: string,
+        contractsList: Array<common_pb.PerpContract>,
+        limit: number,
         project: Project,
     }
 }

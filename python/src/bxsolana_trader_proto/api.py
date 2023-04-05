@@ -1033,8 +1033,8 @@ class GetNewPerpOrdersStreamResponse(betterproto.Message):
 
 @dataclass
 class GetPerpTradesStreamRequest(betterproto.Message):
-    contract: common.PerpContract = betterproto.enum_field(1)
-    address: str = betterproto.string_field(2)
+    contracts: List[common.PerpContract] = betterproto.enum_field(1)
+    limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
 
 
@@ -2206,13 +2206,13 @@ class ApiStub(betterproto.ServiceStub):
     async def get_perp_trades_stream(
         self,
         *,
-        contract: common.PerpContract = 0,
-        address: str = "",
+        contracts: List[common.PerpContract] = [],
+        limit: int = 0,
         project: "Project" = 0,
     ) -> AsyncGenerator[GetPerpTradesStreamResponse, None]:
         request = GetPerpTradesStreamRequest()
-        request.contract = contract
-        request.address = address
+        request.contracts = contracts
+        request.limit = limit
         request.project = project
 
         async for response in self._unary_stream(
