@@ -1555,14 +1555,32 @@ message GetPerpTradesStreamRequest {
 
 message GetPerpTradesStreamResponse {
   common.PerpContract contract = 1;
-  common.PerpPositionSide makerPositionSide = 2;
-  string fillerAddress = 3;
-  string takerAddress = 4;
-  string takerOrderID = 5;
-  string makerAddress = 6;
-  string makerOrderID = 7;
-  double baseAmountFilled = 8;
-  double quoteAmountFilled = 9;
+  double indexPrice = 2;
+  int64 slot = 3;
+  int64 marketIndex = 4;
+  string filler = 5;
+  double fillerReward = 6;
+  double fillRecordId = 7;
+  double baseAssetAmountFilled = 8;
+  double quoteAssetAmountFilled = 9;
+  double takerFee = 10;
+  double makerFee = 11;
+  double referrerReward = 12;
+  double quoteAssetAmountSurplus = 13;
+  double spotFulfillmentMethodFee = 14;
+  string taker = 15;
+  double takerOrderId = 16;
+  string takerOrderDirection = 17;
+  double takerOrderBaseAssetAmount = 18;
+  double takerOrderCumulativeBaseAssetAmountFilled = 19;
+  double takerOrderCumulativeQuoteAssetAmountFilled = 20;
+  string maker = 21;
+  double makerOrderId = 22;
+  string makerOrderDirection = 23;
+  double makerOrderBaseAssetAmount = 24;
+  double makerOrderCumulativeBaseAssetAmountFilled = 25;
+  double makerOrderCumulativeQuoteAssetAmountFilled = 26;
+  double oraclePrice = 27;
 }
 
 

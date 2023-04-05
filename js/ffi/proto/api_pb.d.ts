@@ -3777,22 +3777,58 @@ export namespace GetPerpTradesStreamRequest {
 export class GetPerpTradesStreamResponse extends jspb.Message { 
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): GetPerpTradesStreamResponse;
-    getMakerpositionside(): common_pb.PerpPositionSide;
-    setMakerpositionside(value: common_pb.PerpPositionSide): GetPerpTradesStreamResponse;
-    getFilleraddress(): string;
-    setFilleraddress(value: string): GetPerpTradesStreamResponse;
-    getTakeraddress(): string;
-    setTakeraddress(value: string): GetPerpTradesStreamResponse;
-    getTakerorderid(): string;
-    setTakerorderid(value: string): GetPerpTradesStreamResponse;
-    getMakeraddress(): string;
-    setMakeraddress(value: string): GetPerpTradesStreamResponse;
-    getMakerorderid(): string;
-    setMakerorderid(value: string): GetPerpTradesStreamResponse;
-    getBaseamountfilled(): number;
-    setBaseamountfilled(value: number): GetPerpTradesStreamResponse;
-    getQuoteamountfilled(): number;
-    setQuoteamountfilled(value: number): GetPerpTradesStreamResponse;
+    getIndexprice(): number;
+    setIndexprice(value: number): GetPerpTradesStreamResponse;
+    getSlot(): number;
+    setSlot(value: number): GetPerpTradesStreamResponse;
+    getMarketindex(): number;
+    setMarketindex(value: number): GetPerpTradesStreamResponse;
+    getFiller(): string;
+    setFiller(value: string): GetPerpTradesStreamResponse;
+    getFillerreward(): number;
+    setFillerreward(value: number): GetPerpTradesStreamResponse;
+    getFillrecordid(): number;
+    setFillrecordid(value: number): GetPerpTradesStreamResponse;
+    getBaseassetamountfilled(): number;
+    setBaseassetamountfilled(value: number): GetPerpTradesStreamResponse;
+    getQuoteassetamountfilled(): number;
+    setQuoteassetamountfilled(value: number): GetPerpTradesStreamResponse;
+    getTakerfee(): number;
+    setTakerfee(value: number): GetPerpTradesStreamResponse;
+    getMakerfee(): number;
+    setMakerfee(value: number): GetPerpTradesStreamResponse;
+    getReferrerreward(): number;
+    setReferrerreward(value: number): GetPerpTradesStreamResponse;
+    getQuoteassetamountsurplus(): number;
+    setQuoteassetamountsurplus(value: number): GetPerpTradesStreamResponse;
+    getSpotfulfillmentmethodfee(): number;
+    setSpotfulfillmentmethodfee(value: number): GetPerpTradesStreamResponse;
+    getTaker(): string;
+    setTaker(value: string): GetPerpTradesStreamResponse;
+    getTakerorderid(): number;
+    setTakerorderid(value: number): GetPerpTradesStreamResponse;
+    getTakerorderdirection(): string;
+    setTakerorderdirection(value: string): GetPerpTradesStreamResponse;
+    getTakerorderbaseassetamount(): number;
+    setTakerorderbaseassetamount(value: number): GetPerpTradesStreamResponse;
+    getTakerordercumulativebaseassetamountfilled(): number;
+    setTakerordercumulativebaseassetamountfilled(value: number): GetPerpTradesStreamResponse;
+    getTakerordercumulativequoteassetamountfilled(): number;
+    setTakerordercumulativequoteassetamountfilled(value: number): GetPerpTradesStreamResponse;
+    getMaker(): string;
+    setMaker(value: string): GetPerpTradesStreamResponse;
+    getMakerorderid(): number;
+    setMakerorderid(value: number): GetPerpTradesStreamResponse;
+    getMakerorderdirection(): string;
+    setMakerorderdirection(value: string): GetPerpTradesStreamResponse;
+    getMakerorderbaseassetamount(): number;
+    setMakerorderbaseassetamount(value: number): GetPerpTradesStreamResponse;
+    getMakerordercumulativebaseassetamountfilled(): number;
+    setMakerordercumulativebaseassetamountfilled(value: number): GetPerpTradesStreamResponse;
+    getMakerordercumulativequoteassetamountfilled(): number;
+    setMakerordercumulativequoteassetamountfilled(value: number): GetPerpTradesStreamResponse;
+    getOracleprice(): number;
+    setOracleprice(value: number): GetPerpTradesStreamResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPerpTradesStreamResponse.AsObject;
@@ -3807,14 +3843,32 @@ export class GetPerpTradesStreamResponse extends jspb.Message {
 export namespace GetPerpTradesStreamResponse {
     export type AsObject = {
         contract: common_pb.PerpContract,
-        makerpositionside: common_pb.PerpPositionSide,
-        filleraddress: string,
-        takeraddress: string,
-        takerorderid: string,
-        makeraddress: string,
-        makerorderid: string,
-        baseamountfilled: number,
-        quoteamountfilled: number,
+        indexprice: number,
+        slot: number,
+        marketindex: number,
+        filler: string,
+        fillerreward: number,
+        fillrecordid: number,
+        baseassetamountfilled: number,
+        quoteassetamountfilled: number,
+        takerfee: number,
+        makerfee: number,
+        referrerreward: number,
+        quoteassetamountsurplus: number,
+        spotfulfillmentmethodfee: number,
+        taker: string,
+        takerorderid: number,
+        takerorderdirection: string,
+        takerorderbaseassetamount: number,
+        takerordercumulativebaseassetamountfilled: number,
+        takerordercumulativequoteassetamountfilled: number,
+        maker: string,
+        makerorderid: number,
+        makerorderdirection: string,
+        makerorderbaseassetamount: number,
+        makerordercumulativebaseassetamountfilled: number,
+        makerordercumulativequoteassetamountfilled: number,
+        oracleprice: number,
     }
 }
 
