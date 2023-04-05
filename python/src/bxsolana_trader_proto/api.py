@@ -1041,11 +1041,11 @@ class GetPerpTradesStreamRequest(betterproto.Message):
 @dataclass
 class GetPerpTradesStreamResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
-    trade: "PerpTradeResponse" = betterproto.message_field(2)
+    trade: "GetPerpTradesResponse" = betterproto.message_field(2)
 
 
 @dataclass
-class PerpTradeResponse(betterproto.Message):
+class GetPerpTradesResponse(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(1)
     index_price: float = betterproto.double_field(2)
     market_index: int = betterproto.int64_field(3)
