@@ -1079,7 +1079,6 @@ class GetPerpTradesResponse(betterproto.Message):
     maker_order_cumulative_quote_asset_amount_filled: float = betterproto.double_field(
         25
     )
-    oracle_price: float = betterproto.double_field(26)
 
 
 @dataclass

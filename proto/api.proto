@@ -1584,7 +1584,6 @@ message GetPerpTradesResponse {
   double makerOrderBaseAssetAmount = 23;
   double makerOrderCumulativeBaseAssetAmountFilled = 24;
   double makerOrderCumulativeQuoteAssetAmountFilled = 25;
-  double oraclePrice = 26;
 }
 
 

@@ -2343,10 +2343,6 @@
         "makerOrderCumulativeQuoteAssetAmountFilled": {
           "type": "number",
           "format": "double"
-        },
-        "oraclePrice": {
-          "type": "number",
-          "format": "double"
         }
       }
     },

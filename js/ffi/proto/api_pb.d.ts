@@ -3851,8 +3851,6 @@ export class GetPerpTradesResponse extends jspb.Message {
     setMakerordercumulativebaseassetamountfilled(value: number): GetPerpTradesResponse;
     getMakerordercumulativequoteassetamountfilled(): number;
     setMakerordercumulativequoteassetamountfilled(value: number): GetPerpTradesResponse;
-    getOracleprice(): number;
-    setOracleprice(value: number): GetPerpTradesResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPerpTradesResponse.AsObject;
@@ -3891,7 +3889,6 @@ export namespace GetPerpTradesResponse {
         makerorderbaseassetamount: number,
         makerordercumulativebaseassetamountfilled: number,
         makerordercumulativequoteassetamountfilled: number,
-        oracleprice: number,
     }
 }
 

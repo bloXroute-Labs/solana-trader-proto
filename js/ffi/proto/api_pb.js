@@ -32262,8 +32262,7 @@ proto.api.GetPerpTradesResponse.toObject = function(includeInstance, msg) {
     makerorderdirection: jspb.Message.getFieldWithDefault(msg, 22, ""),
     makerorderbaseassetamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 23, 0.0),
     makerordercumulativebaseassetamountfilled: jspb.Message.getFloatingPointFieldWithDefault(msg, 24, 0.0),
-    makerordercumulativequoteassetamountfilled: jspb.Message.getFloatingPointFieldWithDefault(msg, 25, 0.0),
-    oracleprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 26, 0.0)
+    makerordercumulativequoteassetamountfilled: jspb.Message.getFloatingPointFieldWithDefault(msg, 25, 0.0)
   };
 
   if (includeInstance) {
@@ -32399,10 +32398,6 @@ proto.api.GetPerpTradesResponse.deserializeBinaryFromReader = function(msg, read
     case 25:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setMakerordercumulativequoteassetamountfilled(value);
-      break;
-    case 26:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setOracleprice(value);
       break;
     default:
       reader.skipField();
@@ -32605,13 +32600,6 @@ proto.api.GetPerpTradesResponse.serializeBinaryToWriter = function(message, writ
   if (f !== 0.0) {
     writer.writeDouble(
       25,
-      f
-    );
-  }
-  f = message.getOracleprice();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      26,
       f
     );
   }
@@ -33065,24 +33053,6 @@ proto.api.GetPerpTradesResponse.prototype.getMakerordercumulativequoteassetamoun
  */
 proto.api.GetPerpTradesResponse.prototype.setMakerordercumulativequoteassetamountfilled = function(value) {
   return jspb.Message.setProto3FloatField(this, 25, value);
-};
-
-
-/**
- * optional double oraclePrice = 26;
- * @return {number}
- */
-proto.api.GetPerpTradesResponse.prototype.getOracleprice = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 26, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetPerpTradesResponse} returns this
- */
-proto.api.GetPerpTradesResponse.prototype.setOracleprice = function(value) {
-  return jspb.Message.setProto3FloatField(this, 26, value);
 };
 
 
