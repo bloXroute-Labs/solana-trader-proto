@@ -32213,7 +32213,7 @@ proto.api.GetPerpTradesResponse.toObject = function(includeInstance, msg) {
     marketindex: jspb.Message.getFieldWithDefault(msg, 3, 0),
     filler: jspb.Message.getFieldWithDefault(msg, 4, ""),
     fillerreward: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    fillrecordid: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    fillrecordid: jspb.Message.getFieldWithDefault(msg, 6, 0),
     baseassetamountfilled: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     quoteassetamountfilled: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
     takerfee: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
@@ -32222,13 +32222,13 @@ proto.api.GetPerpTradesResponse.toObject = function(includeInstance, msg) {
     quoteassetamountsurplus: jspb.Message.getFloatingPointFieldWithDefault(msg, 12, 0.0),
     spotfulfillmentmethodfee: jspb.Message.getFloatingPointFieldWithDefault(msg, 13, 0.0),
     taker: jspb.Message.getFieldWithDefault(msg, 14, ""),
-    takerorderid: jspb.Message.getFloatingPointFieldWithDefault(msg, 15, 0.0),
+    takerorderid: jspb.Message.getFieldWithDefault(msg, 15, 0),
     takerorderdirection: jspb.Message.getFieldWithDefault(msg, 16, ""),
     takerorderbaseassetamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 17, 0.0),
     takerordercumulativebaseassetamountfilled: jspb.Message.getFloatingPointFieldWithDefault(msg, 18, 0.0),
     takerordercumulativequoteassetamountfilled: jspb.Message.getFloatingPointFieldWithDefault(msg, 19, 0.0),
     maker: jspb.Message.getFieldWithDefault(msg, 20, ""),
-    makerorderid: jspb.Message.getFloatingPointFieldWithDefault(msg, 21, 0.0),
+    makerorderid: jspb.Message.getFieldWithDefault(msg, 21, 0),
     makerorderdirection: jspb.Message.getFieldWithDefault(msg, 22, ""),
     makerorderbaseassetamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 23, 0.0),
     makerordercumulativebaseassetamountfilled: jspb.Message.getFloatingPointFieldWithDefault(msg, 24, 0.0),
@@ -32290,7 +32290,7 @@ proto.api.GetPerpTradesResponse.deserializeBinaryFromReader = function(msg, read
       msg.setFillerreward(value);
       break;
     case 6:
-      var value = /** @type {number} */ (reader.readDouble());
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setFillrecordid(value);
       break;
     case 7:
@@ -32326,7 +32326,7 @@ proto.api.GetPerpTradesResponse.deserializeBinaryFromReader = function(msg, read
       msg.setTaker(value);
       break;
     case 15:
-      var value = /** @type {number} */ (reader.readDouble());
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setTakerorderid(value);
       break;
     case 16:
@@ -32350,7 +32350,7 @@ proto.api.GetPerpTradesResponse.deserializeBinaryFromReader = function(msg, read
       msg.setMaker(value);
       break;
     case 21:
-      var value = /** @type {number} */ (reader.readDouble());
+      var value = /** @type {number} */ (reader.readInt64());
       msg.setMakerorderid(value);
       break;
     case 22:
@@ -32434,8 +32434,8 @@ proto.api.GetPerpTradesResponse.serializeBinaryToWriter = function(message, writ
     );
   }
   f = message.getFillrecordid();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  if (f !== 0) {
+    writer.writeInt64(
       6,
       f
     );
@@ -32497,8 +32497,8 @@ proto.api.GetPerpTradesResponse.serializeBinaryToWriter = function(message, writ
     );
   }
   f = message.getTakerorderid();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  if (f !== 0) {
+    writer.writeInt64(
       15,
       f
     );
@@ -32539,8 +32539,8 @@ proto.api.GetPerpTradesResponse.serializeBinaryToWriter = function(message, writ
     );
   }
   f = message.getMakerorderid();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  if (f !== 0) {
+    writer.writeInt64(
       21,
       f
     );
@@ -32667,11 +32667,11 @@ proto.api.GetPerpTradesResponse.prototype.setFillerreward = function(value) {
 
 
 /**
- * optional double fillRecordId = 6;
+ * optional int64 fillRecordId = 6;
  * @return {number}
  */
 proto.api.GetPerpTradesResponse.prototype.getFillrecordid = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
@@ -32680,7 +32680,7 @@ proto.api.GetPerpTradesResponse.prototype.getFillrecordid = function() {
  * @return {!proto.api.GetPerpTradesResponse} returns this
  */
 proto.api.GetPerpTradesResponse.prototype.setFillrecordid = function(value) {
-  return jspb.Message.setProto3FloatField(this, 6, value);
+  return jspb.Message.setProto3IntField(this, 6, value);
 };
 
 
@@ -32829,11 +32829,11 @@ proto.api.GetPerpTradesResponse.prototype.setTaker = function(value) {
 
 
 /**
- * optional double takerOrderId = 15;
+ * optional int64 takerOrderId = 15;
  * @return {number}
  */
 proto.api.GetPerpTradesResponse.prototype.getTakerorderid = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 15, 0.0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 15, 0));
 };
 
 
@@ -32842,7 +32842,7 @@ proto.api.GetPerpTradesResponse.prototype.getTakerorderid = function() {
  * @return {!proto.api.GetPerpTradesResponse} returns this
  */
 proto.api.GetPerpTradesResponse.prototype.setTakerorderid = function(value) {
-  return jspb.Message.setProto3FloatField(this, 15, value);
+  return jspb.Message.setProto3IntField(this, 15, value);
 };
 
 
@@ -32937,11 +32937,11 @@ proto.api.GetPerpTradesResponse.prototype.setMaker = function(value) {
 
 
 /**
- * optional double makerOrderId = 21;
+ * optional int64 makerOrderId = 21;
  * @return {number}
  */
 proto.api.GetPerpTradesResponse.prototype.getMakerorderid = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 21, 0.0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 21, 0));
 };
 
 
@@ -32950,7 +32950,7 @@ proto.api.GetPerpTradesResponse.prototype.getMakerorderid = function() {
  * @return {!proto.api.GetPerpTradesResponse} returns this
  */
 proto.api.GetPerpTradesResponse.prototype.setMakerorderid = function(value) {
-  return jspb.Message.setProto3FloatField(this, 21, value);
+  return jspb.Message.setProto3IntField(this, 21, value);
 };
 
 

@@ -2269,8 +2269,8 @@
           "format": "double"
         },
         "fillRecordId": {
-          "type": "number",
-          "format": "double"
+          "type": "string",
+          "format": "int64"
         },
         "baseAssetAmountFilled": {
           "type": "number",
@@ -2304,8 +2304,8 @@
           "type": "string"
         },
         "takerOrderId": {
-          "type": "number",
-          "format": "double"
+          "type": "string",
+          "format": "int64"
         },
         "takerOrderDirection": {
           "type": "string"
@@ -2326,8 +2326,8 @@
           "type": "string"
         },
         "makerOrderId": {
-          "type": "number",
-          "format": "double"
+          "type": "string",
+          "format": "int64"
         },
         "makerOrderDirection": {
           "type": "string"
