@@ -1549,8 +1549,7 @@ message GetNewPerpOrdersStreamResponse {
 
 message GetPerpTradesStreamRequest {
   repeated common.PerpContract contracts = 1;
-  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
-  Project project = 3;
+  Project project = 2;
 }
 
 message GetPerpTradesStreamResponse {

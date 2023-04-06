@@ -3751,8 +3751,6 @@ export class GetPerpTradesStreamRequest extends jspb.Message {
     getContractsList(): Array<common_pb.PerpContract>;
     setContractsList(value: Array<common_pb.PerpContract>): GetPerpTradesStreamRequest;
     addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
-    getLimit(): number;
-    setLimit(value: number): GetPerpTradesStreamRequest;
     getProject(): Project;
     setProject(value: Project): GetPerpTradesStreamRequest;
 
@@ -3769,7 +3767,6 @@ export class GetPerpTradesStreamRequest extends jspb.Message {
 export namespace GetPerpTradesStreamRequest {
     export type AsObject = {
         contractsList: Array<common_pb.PerpContract>,
-        limit: number,
         project: Project,
     }
 }

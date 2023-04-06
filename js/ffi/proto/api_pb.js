@@ -31847,8 +31847,7 @@ proto.api.GetPerpTradesStreamRequest.prototype.toObject = function(opt_includeIn
 proto.api.GetPerpTradesStreamRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     contractsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    project: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    project: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
   if (includeInstance) {
@@ -31892,10 +31891,6 @@ proto.api.GetPerpTradesStreamRequest.deserializeBinaryFromReader = function(msg,
       }
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setLimit(value);
-      break;
-    case 3:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -31935,17 +31930,10 @@ proto.api.GetPerpTradesStreamRequest.serializeBinaryToWriter = function(message,
       f
     );
   }
-  f = message.getLimit();
-  if (f !== 0) {
-    writer.writeUint32(
-      2,
-      f
-    );
-  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      3,
+      2,
       f
     );
   }
@@ -31990,29 +31978,11 @@ proto.api.GetPerpTradesStreamRequest.prototype.clearContractsList = function() {
 
 
 /**
- * optional uint32 limit = 2;
- * @return {number}
- */
-proto.api.GetPerpTradesStreamRequest.prototype.getLimit = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetPerpTradesStreamRequest} returns this
- */
-proto.api.GetPerpTradesStreamRequest.prototype.setLimit = function(value) {
-  return jspb.Message.setProto3IntField(this, 2, value);
-};
-
-
-/**
- * optional Project project = 3;
+ * optional Project project = 2;
  * @return {!proto.api.Project}
  */
 proto.api.GetPerpTradesStreamRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
@@ -32021,7 +31991,7 @@ proto.api.GetPerpTradesStreamRequest.prototype.getProject = function() {
  * @return {!proto.api.GetPerpTradesStreamRequest} returns this
  */
 proto.api.GetPerpTradesStreamRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
+  return jspb.Message.setProto3EnumField(this, 2, value);
 };
 
 
