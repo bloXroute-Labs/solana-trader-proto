@@ -1563,7 +1563,7 @@ message GetPerpTradesResponse {
   int64 marketIndex = 3;
   string filler = 4;
   double fillerReward = 5;
-  double fillRecordId = 6;
+  int64 fillRecordId = 6;
   double baseAssetAmountFilled = 7;
   double quoteAssetAmountFilled = 8;
   double takerFee = 9;
@@ -1572,13 +1572,13 @@ message GetPerpTradesResponse {
   double quoteAssetAmountSurplus = 12;
   double spotFulfillmentMethodFee = 13;
   string taker = 14;
-  double takerOrderId = 15;
+  int64 takerOrderId = 15;
   string takerOrderDirection = 16;
   double takerOrderBaseAssetAmount = 17;
   double takerOrderCumulativeBaseAssetAmountFilled = 18;
   double takerOrderCumulativeQuoteAssetAmountFilled = 19;
   string maker = 20;
-  double makerOrderId = 21;
+  int64 makerOrderId = 21;
   string makerOrderDirection = 22;
   double makerOrderBaseAssetAmount = 23;
   double makerOrderCumulativeBaseAssetAmountFilled = 24;
