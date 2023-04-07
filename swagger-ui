@@ -3214,6 +3214,9 @@
         },
         "token": {
           "$ref": "#/definitions/commonPerpCollateralToken"
+        },
+        "toAccountAddress": {
+          "type": "string"
         }
       }
     },
@@ -4120,7 +4123,8 @@
       "type": "string",
       "enum": [
         "PCT_DEPOSIT",
-        "PCT_WITHDRAWAL"
+        "PCT_WITHDRAWAL",
+        "PCT_TRANSFER"
       ],
       "default": "PCT_DEPOSIT"
     },

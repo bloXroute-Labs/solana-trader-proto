@@ -911,6 +911,7 @@ class PostManageCollateralRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(3)
     type: common.PerpCollateralType = betterproto.enum_field(4)
     token: common.PerpCollateralToken = betterproto.enum_field(5)
+    to_account_address: str = betterproto.string_field(6)
 
 
 @dataclass
@@ -1907,6 +1908,7 @@ class ApiStub(betterproto.ServiceStub):
         project: "Project" = 0,
         type: common.PerpCollateralType = 0,
         token: common.PerpCollateralToken = 0,
+        to_account_address: str = "",
     ) -> PostManageCollateralResponse:
         request = PostManageCollateralRequest()
         request.account_address = account_address
@@ -1914,6 +1916,7 @@ class ApiStub(betterproto.ServiceStub):
         request.project = project
         request.type = type
         request.token = token
+        request.to_account_address = to_account_address
 
         return await self._unary_unary(
             "/api.Api/PostManageCollateral",

@@ -3286,6 +3286,8 @@ export class PostManageCollateralRequest extends jspb.Message {
     setType(value: common_pb.PerpCollateralType): PostManageCollateralRequest;
     getToken(): common_pb.PerpCollateralToken;
     setToken(value: common_pb.PerpCollateralToken): PostManageCollateralRequest;
+    getToaccountaddress(): string;
+    setToaccountaddress(value: string): PostManageCollateralRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostManageCollateralRequest.AsObject;
@@ -3304,6 +3306,7 @@ export namespace PostManageCollateralRequest {
         project: Project,
         type: common_pb.PerpCollateralType,
         token: common_pb.PerpCollateralToken,
+        toaccountaddress: string,
     }
 }
 

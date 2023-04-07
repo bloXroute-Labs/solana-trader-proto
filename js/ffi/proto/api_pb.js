@@ -28071,7 +28071,8 @@ proto.api.PostManageCollateralRequest.toObject = function(includeInstance, msg) 
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
     project: jspb.Message.getFieldWithDefault(msg, 3, 0),
     type: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    token: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    token: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    toaccountaddress: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -28127,6 +28128,10 @@ proto.api.PostManageCollateralRequest.deserializeBinaryFromReader = function(msg
     case 5:
       var value = /** @type {!proto.common.PerpCollateralToken} */ (reader.readEnum());
       msg.setToken(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setToaccountaddress(value);
       break;
     default:
       reader.skipField();
@@ -28189,6 +28194,13 @@ proto.api.PostManageCollateralRequest.serializeBinaryToWriter = function(message
   if (f !== 0.0) {
     writer.writeEnum(
       5,
+      f
+    );
+  }
+  f = message.getToaccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
       f
     );
   }
@@ -28282,6 +28294,24 @@ proto.api.PostManageCollateralRequest.prototype.getToken = function() {
  */
 proto.api.PostManageCollateralRequest.prototype.setToken = function(value) {
   return jspb.Message.setProto3EnumField(this, 5, value);
+};
+
+
+/**
+ * optional string toAccountAddress = 6;
+ * @return {string}
+ */
+proto.api.PostManageCollateralRequest.prototype.getToaccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostManageCollateralRequest} returns this
+ */
+proto.api.PostManageCollateralRequest.prototype.setToaccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
