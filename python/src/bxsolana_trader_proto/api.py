@@ -1158,6 +1158,7 @@ class ContractInfo(betterproto.Message):
     min_size: float = betterproto.double_field(6)
     perp_price: float = betterproto.double_field(7)
     index_price: float = betterproto.double_field(8)
+    open_interest: float = betterproto.double_field(9)
 
 
 @dataclass

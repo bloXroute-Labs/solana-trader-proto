@@ -1654,6 +1654,7 @@ message ContractInfo {
   double minSize = 6;
   double perpPrice = 7;
   double indexPrice = 8;
+  double openInterest = 9;
 }
 
 message GetPerpContractsResponse {

@@ -4172,6 +4172,8 @@ export class ContractInfo extends jspb.Message {
     setPerpprice(value: number): ContractInfo;
     getIndexprice(): number;
     setIndexprice(value: number): ContractInfo;
+    getOpeninterest(): number;
+    setOpeninterest(value: number): ContractInfo;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ContractInfo.AsObject;
@@ -4193,6 +4195,7 @@ export namespace ContractInfo {
         minsize: number,
         perpprice: number,
         indexprice: number,
+        openinterest: number,
     }
 }
 

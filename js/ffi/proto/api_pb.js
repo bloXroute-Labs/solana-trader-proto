@@ -35033,7 +35033,8 @@ proto.api.ContractInfo.toObject = function(includeInstance, msg) {
     fundingrate: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
     minsize: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
     perpprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
-    indexprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0)
+    indexprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
+    openinterest: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0)
   };
 
   if (includeInstance) {
@@ -35101,6 +35102,10 @@ proto.api.ContractInfo.deserializeBinaryFromReader = function(msg, reader) {
     case 8:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setIndexprice(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOpeninterest(value);
       break;
     default:
       reader.skipField();
@@ -35184,6 +35189,13 @@ proto.api.ContractInfo.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0.0) {
     writer.writeDouble(
       8,
+      f
+    );
+  }
+  f = message.getOpeninterest();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      9,
       f
     );
   }
@@ -35331,6 +35343,24 @@ proto.api.ContractInfo.prototype.getIndexprice = function() {
  */
 proto.api.ContractInfo.prototype.setIndexprice = function(value) {
   return jspb.Message.setProto3FloatField(this, 8, value);
+};
+
+
+/**
+ * optional double openInterest = 9;
+ * @return {number}
+ */
+proto.api.ContractInfo.prototype.getOpeninterest = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.ContractInfo} returns this
+ */
+proto.api.ContractInfo.prototype.setOpeninterest = function(value) {
+  return jspb.Message.setProto3FloatField(this, 9, value);
 };
 
 

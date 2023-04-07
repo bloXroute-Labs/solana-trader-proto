@@ -1874,6 +1874,10 @@
         "indexPrice": {
           "type": "number",
           "format": "double"
+        },
+        "openInterest": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
