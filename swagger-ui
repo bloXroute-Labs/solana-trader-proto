@@ -228,6 +228,49 @@
         ]
       }
     },
+    "/api/v1/market/perp/contracts": {
+      "get": {
+        "summary": "details of available perp contracts",
+        "description": "Returns details of available perp contracts",
+        "operationId": "Api_GetPerpContracts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPerpContractsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Perp",
+          "Market"
+        ]
+      }
+    },
     "/api/v1/market/perp/orderbook/{contract}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
@@ -887,65 +930,6 @@
           "Trade",
           "Perp",
           "Orderbook"
-        ]
-      }
-    },
-    "/api/v1/trade/perp/contracts": {
-      "get": {
-        "summary": "details of available perp contracts",
-        "description": "Returns details of available perp contracts",
-        "operationId": "Api_GetPerpContracts",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetPerpContractsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "contracts",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "ALL",
-                "SOL_PERP",
-                "ETH_PERP",
-                "BTC_PERP",
-                "APT_PERP"
-              ]
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          }
-        ],
-        "tags": [
-          "Perp"
         ]
       }
     },

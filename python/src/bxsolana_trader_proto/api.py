@@ -1145,8 +1145,7 @@ class PostLiquidatePerpResponse(betterproto.Message):
 
 @dataclass
 class GetPerpContractsRequest(betterproto.Message):
-    contracts: List[common.PerpContract] = betterproto.enum_field(1)
-    project: "Project" = betterproto.enum_field(2)
+    project: "Project" = betterproto.enum_field(1)
 
 
 @dataclass
@@ -1983,10 +1982,9 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_perp_contracts(
-        self, *, contracts: List[common.PerpContract] = [], project: "Project" = 0
+        self, *, project: "Project" = 0
     ) -> GetPerpContractsResponse:
         request = GetPerpContractsRequest()
-        request.contracts = contracts
         request.project = project
 
         return await self._unary_unary(

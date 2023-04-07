@@ -3086,7 +3086,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.GetPerpContractsRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetPerpContractsRequest.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.api.GetPerpContractsRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -34865,13 +34865,6 @@ proto.api.PostLiquidatePerpResponse.prototype.hasTransaction = function() {
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.api.GetPerpContractsRequest.repeatedFields_ = [1];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -34903,8 +34896,7 @@ proto.api.GetPerpContractsRequest.prototype.toObject = function(opt_includeInsta
  */
 proto.api.GetPerpContractsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    contractsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    project: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    project: jspb.Message.getFieldWithDefault(msg, 1, 0)
   };
 
   if (includeInstance) {
@@ -34942,12 +34934,6 @@ proto.api.GetPerpContractsRequest.deserializeBinaryFromReader = function(msg, re
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var values = /** @type {!Array<!proto.common.PerpContract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addContracts(values[i]);
-      }
-      break;
-    case 2:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -34980,66 +34966,22 @@ proto.api.GetPerpContractsRequest.prototype.serializeBinary = function() {
  */
 proto.api.GetPerpContractsRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getContractsList();
-  if (f.length > 0) {
-    writer.writePackedEnum(
+  f = message.getProject();
+  if (f !== 0.0) {
+    writer.writeEnum(
       1,
       f
     );
   }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      2,
-      f
-    );
-  }
 };
 
 
 /**
- * repeated common.PerpContract contracts = 1;
- * @return {!Array<!proto.common.PerpContract>}
- */
-proto.api.GetPerpContractsRequest.prototype.getContractsList = function() {
-  return /** @type {!Array<!proto.common.PerpContract>} */ (jspb.Message.getRepeatedField(this, 1));
-};
-
-
-/**
- * @param {!Array<!proto.common.PerpContract>} value
- * @return {!proto.api.GetPerpContractsRequest} returns this
- */
-proto.api.GetPerpContractsRequest.prototype.setContractsList = function(value) {
-  return jspb.Message.setField(this, 1, value || []);
-};
-
-
-/**
- * @param {!proto.common.PerpContract} value
- * @param {number=} opt_index
- * @return {!proto.api.GetPerpContractsRequest} returns this
- */
-proto.api.GetPerpContractsRequest.prototype.addContracts = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.api.GetPerpContractsRequest} returns this
- */
-proto.api.GetPerpContractsRequest.prototype.clearContractsList = function() {
-  return this.setContractsList([]);
-};
-
-
-/**
- * optional Project project = 2;
+ * optional Project project = 1;
  * @return {!proto.api.Project}
  */
 proto.api.GetPerpContractsRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
@@ -35048,7 +34990,7 @@ proto.api.GetPerpContractsRequest.prototype.getProject = function() {
  * @return {!proto.api.GetPerpContractsRequest} returns this
  */
 proto.api.GetPerpContractsRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
+  return jspb.Message.setProto3EnumField(this, 1, value);
 };
 
 

@@ -4136,10 +4136,6 @@ export namespace PostLiquidatePerpResponse {
 }
 
 export class GetPerpContractsRequest extends jspb.Message { 
-    clearContractsList(): void;
-    getContractsList(): Array<common_pb.PerpContract>;
-    setContractsList(value: Array<common_pb.PerpContract>): GetPerpContractsRequest;
-    addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
     getProject(): Project;
     setProject(value: Project): GetPerpContractsRequest;
 
@@ -4155,7 +4151,6 @@ export class GetPerpContractsRequest extends jspb.Message {
 
 export namespace GetPerpContractsRequest {
     export type AsObject = {
-        contractsList: Array<common_pb.PerpContract>,
         project: Project,
     }
 }

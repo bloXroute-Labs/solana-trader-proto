@@ -532,12 +532,12 @@ service Api {
 
   rpc GetPerpContracts(GetPerpContractsRequest) returns (GetPerpContractsResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/perp/contracts"
+      get: "/api/v1/market/perp/contracts"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns details of available perp contracts";
       summary: "details of available perp contracts";
-      tags: ["Perp"];
+      tags: ["Perp", "Market"];
     };
   }
 
@@ -1642,8 +1642,7 @@ message PostLiquidatePerpResponse {
 }
 
 message GetPerpContractsRequest {
-  repeated common.PerpContract contracts = 1;
-  Project project = 2;
+  Project project = 1;
 }
 
 message ContractInfo {
