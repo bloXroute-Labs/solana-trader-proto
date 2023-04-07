@@ -32697,7 +32697,7 @@ proto.api.GetPerpTradesResponse.prototype.setFillerreward = function(value) {
 
 
 /**
- * optional int64 fillRecordId = 6;
+ * optional int64 fillRecordID = 6;
  * @return {number}
  */
 proto.api.GetPerpTradesResponse.prototype.getFillrecordid = function() {
@@ -32859,7 +32859,7 @@ proto.api.GetPerpTradesResponse.prototype.setTaker = function(value) {
 
 
 /**
- * optional int64 takerOrderId = 15;
+ * optional int64 takerOrderID = 15;
  * @return {number}
  */
 proto.api.GetPerpTradesResponse.prototype.getTakerorderid = function() {
@@ -32967,7 +32967,7 @@ proto.api.GetPerpTradesResponse.prototype.setMaker = function(value) {
 
 
 /**
- * optional int64 makerOrderId = 21;
+ * optional int64 makerOrderID = 21;
  * @return {number}
  */
 proto.api.GetPerpTradesResponse.prototype.getMakerorderid = function() {

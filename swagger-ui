@@ -2268,7 +2268,7 @@
           "type": "number",
           "format": "double"
         },
-        "fillRecordId": {
+        "fillRecordID": {
           "type": "string",
           "format": "int64"
         },
@@ -2303,7 +2303,7 @@
         "taker": {
           "type": "string"
         },
-        "takerOrderId": {
+        "takerOrderID": {
           "type": "string",
           "format": "int64"
         },
@@ -2325,7 +2325,7 @@
         "maker": {
           "type": "string"
         },
-        "makerOrderId": {
+        "makerOrderID": {
           "type": "string",
           "format": "int64"
         },

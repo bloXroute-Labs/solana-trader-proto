@@ -1051,7 +1051,7 @@ class GetPerpTradesResponse(betterproto.Message):
     market_index: int = betterproto.int64_field(3)
     filler: str = betterproto.string_field(4)
     filler_reward: float = betterproto.double_field(5)
-    fill_record_id: int = betterproto.int64_field(6)
+    fill_record_i_d: int = betterproto.int64_field(6)
     base_asset_amount_filled: float = betterproto.double_field(7)
     quote_asset_amount_filled: float = betterproto.double_field(8)
     taker_fee: float = betterproto.double_field(9)
@@ -1060,7 +1060,7 @@ class GetPerpTradesResponse(betterproto.Message):
     quote_asset_amount_surplus: float = betterproto.double_field(12)
     spot_fulfillment_method_fee: float = betterproto.double_field(13)
     taker: str = betterproto.string_field(14)
-    taker_order_id: int = betterproto.int64_field(15)
+    taker_order_i_d: int = betterproto.int64_field(15)
     taker_order_direction: str = betterproto.string_field(16)
     taker_order_base_asset_amount: float = betterproto.double_field(17)
     taker_order_cumulative_base_asset_amount_filled: float = betterproto.double_field(
@@ -1070,7 +1070,7 @@ class GetPerpTradesResponse(betterproto.Message):
         19
     )
     maker: str = betterproto.string_field(20)
-    maker_order_id: int = betterproto.int64_field(21)
+    maker_order_i_d: int = betterproto.int64_field(21)
     maker_order_direction: str = betterproto.string_field(22)
     maker_order_base_asset_amount: float = betterproto.double_field(23)
     maker_order_cumulative_base_asset_amount_filled: float = betterproto.double_field(
