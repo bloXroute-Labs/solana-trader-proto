@@ -1432,6 +1432,7 @@ message PostManageCollateralRequest {
   Project project = 3;
   common.PerpCollateralType type = 4;
   common.PerpCollateralToken token = 5;
+  string toAccountAddress = 6;
 }
 
 message PostManageCollateralResponse {
