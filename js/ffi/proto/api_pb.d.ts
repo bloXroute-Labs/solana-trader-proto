@@ -3286,6 +3286,8 @@ export class PostManageCollateralRequest extends jspb.Message {
     setType(value: common_pb.PerpCollateralType): PostManageCollateralRequest;
     getToken(): common_pb.PerpCollateralToken;
     setToken(value: common_pb.PerpCollateralToken): PostManageCollateralRequest;
+    getToaccountaddress(): string;
+    setToaccountaddress(value: string): PostManageCollateralRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostManageCollateralRequest.AsObject;
@@ -3304,6 +3306,7 @@ export namespace PostManageCollateralRequest {
         project: Project,
         type: common_pb.PerpCollateralType,
         token: common_pb.PerpCollateralToken,
+        toaccountaddress: string,
     }
 }
 
@@ -3747,10 +3750,10 @@ export namespace GetNewPerpOrdersStreamResponse {
 }
 
 export class GetPerpTradesStreamRequest extends jspb.Message { 
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): GetPerpTradesStreamRequest;
-    getAddress(): string;
-    setAddress(value: string): GetPerpTradesStreamRequest;
+    clearContractsList(): void;
+    getContractsList(): Array<common_pb.PerpContract>;
+    setContractsList(value: Array<common_pb.PerpContract>): GetPerpTradesStreamRequest;
+    addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
     getProject(): Project;
     setProject(value: Project): GetPerpTradesStreamRequest;
 
@@ -3766,31 +3769,19 @@ export class GetPerpTradesStreamRequest extends jspb.Message {
 
 export namespace GetPerpTradesStreamRequest {
     export type AsObject = {
-        contract: common_pb.PerpContract,
-        address: string,
+        contractsList: Array<common_pb.PerpContract>,
         project: Project,
     }
 }
 
 export class GetPerpTradesStreamResponse extends jspb.Message { 
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): GetPerpTradesStreamResponse;
-    getMakerpositionside(): common_pb.PerpPositionSide;
-    setMakerpositionside(value: common_pb.PerpPositionSide): GetPerpTradesStreamResponse;
-    getFilleraddress(): string;
-    setFilleraddress(value: string): GetPerpTradesStreamResponse;
-    getTakeraddress(): string;
-    setTakeraddress(value: string): GetPerpTradesStreamResponse;
-    getTakerorderid(): string;
-    setTakerorderid(value: string): GetPerpTradesStreamResponse;
-    getMakeraddress(): string;
-    setMakeraddress(value: string): GetPerpTradesStreamResponse;
-    getMakerorderid(): string;
-    setMakerorderid(value: string): GetPerpTradesStreamResponse;
-    getBaseamountfilled(): number;
-    setBaseamountfilled(value: number): GetPerpTradesStreamResponse;
-    getQuoteamountfilled(): number;
-    setQuoteamountfilled(value: number): GetPerpTradesStreamResponse;
+    getSlot(): number;
+    setSlot(value: number): GetPerpTradesStreamResponse;
+
+    hasTrade(): boolean;
+    clearTrade(): void;
+    getTrade(): GetPerpTradesResponse | undefined;
+    setTrade(value?: GetPerpTradesResponse): GetPerpTradesStreamResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPerpTradesStreamResponse.AsObject;
@@ -3804,15 +3795,100 @@ export class GetPerpTradesStreamResponse extends jspb.Message {
 
 export namespace GetPerpTradesStreamResponse {
     export type AsObject = {
+        slot: number,
+        trade?: GetPerpTradesResponse.AsObject,
+    }
+}
+
+export class GetPerpTradesResponse extends jspb.Message { 
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): GetPerpTradesResponse;
+    getIndexprice(): number;
+    setIndexprice(value: number): GetPerpTradesResponse;
+    getMarketindex(): number;
+    setMarketindex(value: number): GetPerpTradesResponse;
+    getFiller(): string;
+    setFiller(value: string): GetPerpTradesResponse;
+    getFillerreward(): number;
+    setFillerreward(value: number): GetPerpTradesResponse;
+    getFillrecordid(): number;
+    setFillrecordid(value: number): GetPerpTradesResponse;
+    getBaseassetamountfilled(): number;
+    setBaseassetamountfilled(value: number): GetPerpTradesResponse;
+    getQuoteassetamountfilled(): number;
+    setQuoteassetamountfilled(value: number): GetPerpTradesResponse;
+    getTakerfee(): number;
+    setTakerfee(value: number): GetPerpTradesResponse;
+    getMakerfee(): number;
+    setMakerfee(value: number): GetPerpTradesResponse;
+    getReferrerreward(): number;
+    setReferrerreward(value: number): GetPerpTradesResponse;
+    getQuoteassetamountsurplus(): number;
+    setQuoteassetamountsurplus(value: number): GetPerpTradesResponse;
+    getSpotfulfillmentmethodfee(): number;
+    setSpotfulfillmentmethodfee(value: number): GetPerpTradesResponse;
+    getTaker(): string;
+    setTaker(value: string): GetPerpTradesResponse;
+    getTakerorderid(): number;
+    setTakerorderid(value: number): GetPerpTradesResponse;
+    getTakerorderdirection(): string;
+    setTakerorderdirection(value: string): GetPerpTradesResponse;
+    getTakerorderbaseassetamount(): number;
+    setTakerorderbaseassetamount(value: number): GetPerpTradesResponse;
+    getTakerordercumulativebaseassetamountfilled(): number;
+    setTakerordercumulativebaseassetamountfilled(value: number): GetPerpTradesResponse;
+    getTakerordercumulativequoteassetamountfilled(): number;
+    setTakerordercumulativequoteassetamountfilled(value: number): GetPerpTradesResponse;
+    getMaker(): string;
+    setMaker(value: string): GetPerpTradesResponse;
+    getMakerorderid(): number;
+    setMakerorderid(value: number): GetPerpTradesResponse;
+    getMakerorderdirection(): string;
+    setMakerorderdirection(value: string): GetPerpTradesResponse;
+    getMakerorderbaseassetamount(): number;
+    setMakerorderbaseassetamount(value: number): GetPerpTradesResponse;
+    getMakerordercumulativebaseassetamountfilled(): number;
+    setMakerordercumulativebaseassetamountfilled(value: number): GetPerpTradesResponse;
+    getMakerordercumulativequoteassetamountfilled(): number;
+    setMakerordercumulativequoteassetamountfilled(value: number): GetPerpTradesResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetPerpTradesResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetPerpTradesResponse): GetPerpTradesResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetPerpTradesResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetPerpTradesResponse;
+    static deserializeBinaryFromReader(message: GetPerpTradesResponse, reader: jspb.BinaryReader): GetPerpTradesResponse;
+}
+
+export namespace GetPerpTradesResponse {
+    export type AsObject = {
         contract: common_pb.PerpContract,
-        makerpositionside: common_pb.PerpPositionSide,
-        filleraddress: string,
-        takeraddress: string,
-        takerorderid: string,
-        makeraddress: string,
-        makerorderid: string,
-        baseamountfilled: number,
-        quoteamountfilled: number,
+        indexprice: number,
+        marketindex: number,
+        filler: string,
+        fillerreward: number,
+        fillrecordid: number,
+        baseassetamountfilled: number,
+        quoteassetamountfilled: number,
+        takerfee: number,
+        makerfee: number,
+        referrerreward: number,
+        quoteassetamountsurplus: number,
+        spotfulfillmentmethodfee: number,
+        taker: string,
+        takerorderid: number,
+        takerorderdirection: string,
+        takerorderbaseassetamount: number,
+        takerordercumulativebaseassetamountfilled: number,
+        takerordercumulativequoteassetamountfilled: number,
+        maker: string,
+        makerorderid: number,
+        makerorderdirection: string,
+        makerorderbaseassetamount: number,
+        makerordercumulativebaseassetamountfilled: number,
+        makerordercumulativequoteassetamountfilled: number,
     }
 }
 
@@ -4060,10 +4136,6 @@ export namespace PostLiquidatePerpResponse {
 }
 
 export class GetPerpContractsRequest extends jspb.Message { 
-    clearContractsList(): void;
-    getContractsList(): Array<common_pb.PerpContract>;
-    setContractsList(value: Array<common_pb.PerpContract>): GetPerpContractsRequest;
-    addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
     getProject(): Project;
     setProject(value: Project): GetPerpContractsRequest;
 
@@ -4079,7 +4151,6 @@ export class GetPerpContractsRequest extends jspb.Message {
 
 export namespace GetPerpContractsRequest {
     export type AsObject = {
-        contractsList: Array<common_pb.PerpContract>,
         project: Project,
     }
 }
@@ -4101,6 +4172,8 @@ export class ContractInfo extends jspb.Message {
     setPerpprice(value: number): ContractInfo;
     getIndexprice(): number;
     setIndexprice(value: number): ContractInfo;
+    getOpeninterest(): number;
+    setOpeninterest(value: number): ContractInfo;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ContractInfo.AsObject;
@@ -4122,6 +4195,7 @@ export namespace ContractInfo {
         minsize: number,
         perpprice: number,
         indexprice: number,
+        openinterest: number,
     }
 }
 

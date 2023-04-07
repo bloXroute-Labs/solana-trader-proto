@@ -30,7 +30,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   };
   info: {
     title: "Trader API";
-    version: "1.1";
+    version: "1.6";
     description: "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.";
     contact: {
       name: "bloXroute Labs Trader API Documentation";
@@ -491,7 +491,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to manage collateral";
       summary: "posts collateral on a perp platform";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -503,7 +503,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to settle pnl";
       summary: "settle pnl on a perp platform";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -515,7 +515,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to settle pnls";
       summary: "settle pnls on a perp platform";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -526,18 +526,18 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns details of assets a user has";
       summary: "details of assets a user has";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
   rpc GetPerpContracts(GetPerpContractsRequest) returns (GetPerpContractsResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/perp/contracts"
+      get: "/api/v1/market/perp/contracts"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns details of available perp contracts";
       summary: "details of available perp contracts";
-      tags: ["Perp"];
+      tags: ["Perp", "Market"];
     };
   }
 
@@ -549,7 +549,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to liquidate perp positions";
       summary: "liquidate perp positions";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -1432,6 +1432,7 @@ message PostManageCollateralRequest {
   Project project = 3;
   common.PerpCollateralType type = 4;
   common.PerpCollateralToken token = 5;
+  string toAccountAddress = 6;
 }
 
 message PostManageCollateralResponse {
@@ -1548,21 +1549,41 @@ message GetNewPerpOrdersStreamResponse {
 }
 
 message GetPerpTradesStreamRequest {
-  common.PerpContract contract = 1;
-  string address = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "limit by user address"}];
-  Project project = 3;
+  repeated common.PerpContract contracts = 1;
+  Project project = 2;
 }
 
 message GetPerpTradesStreamResponse {
+  int64 slot = 1;
+  GetPerpTradesResponse trade = 2;
+}
+
+message GetPerpTradesResponse {
   common.PerpContract contract = 1;
-  common.PerpPositionSide makerPositionSide = 2;
-  string fillerAddress = 3;
-  string takerAddress = 4;
-  string takerOrderID = 5;
-  string makerAddress = 6;
-  string makerOrderID = 7;
-  double baseAmountFilled = 8;
-  double quoteAmountFilled = 9;
+  double indexPrice = 2;
+  int64 marketIndex = 3;
+  string filler = 4;
+  double fillerReward = 5;
+  int64 fillRecordID = 6;
+  double baseAssetAmountFilled = 7;
+  double quoteAssetAmountFilled = 8;
+  double takerFee = 9;
+  double makerFee = 10;
+  double referrerReward = 11;
+  double quoteAssetAmountSurplus = 12;
+  double spotFulfillmentMethodFee = 13;
+  string taker = 14;
+  int64 takerOrderID = 15;
+  string takerOrderDirection = 16;
+  double takerOrderBaseAssetAmount = 17;
+  double takerOrderCumulativeBaseAssetAmountFilled = 18;
+  double takerOrderCumulativeQuoteAssetAmountFilled = 19;
+  string maker = 20;
+  int64 makerOrderID = 21;
+  string makerOrderDirection = 22;
+  double makerOrderBaseAssetAmount = 23;
+  double makerOrderCumulativeBaseAssetAmountFilled = 24;
+  double makerOrderCumulativeQuoteAssetAmountFilled = 25;
 }
 
 
@@ -1621,8 +1642,7 @@ message PostLiquidatePerpResponse {
 }
 
 message GetPerpContractsRequest {
-  repeated common.PerpContract contracts = 1;
-  Project project = 2;
+  Project project = 1;
 }
 
 message ContractInfo {
@@ -1634,6 +1654,7 @@ message ContractInfo {
   double minSize = 6;
   double perpPrice = 7;
   double indexPrice = 8;
+  double openInterest = 9;
 }
 
 message GetPerpContractsResponse {

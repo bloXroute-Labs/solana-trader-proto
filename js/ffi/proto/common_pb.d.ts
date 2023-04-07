@@ -87,6 +87,7 @@ export enum PerpContract {
 export enum PerpCollateralType {
     PCT_DEPOSIT = 0,
     PCT_WITHDRAWAL = 1,
+    PCT_TRANSFER = 2,
 }
 
 export enum PerpCollateralToken {

@@ -40,6 +40,7 @@ class PerpContract(betterproto.Enum):
 class PerpCollateralType(betterproto.Enum):
     PCT_DEPOSIT = 0
     PCT_WITHDRAWAL = 1
+    PCT_TRANSFER = 2
 
 
 class PerpCollateralToken(betterproto.Enum):

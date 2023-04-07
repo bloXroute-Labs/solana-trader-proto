@@ -911,6 +911,7 @@ class PostManageCollateralRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(3)
     type: common.PerpCollateralType = betterproto.enum_field(4)
     token: common.PerpCollateralToken = betterproto.enum_field(5)
+    to_account_address: str = betterproto.string_field(6)
 
 
 @dataclass
@@ -1033,22 +1034,51 @@ class GetNewPerpOrdersStreamResponse(betterproto.Message):
 
 @dataclass
 class GetPerpTradesStreamRequest(betterproto.Message):
-    contract: common.PerpContract = betterproto.enum_field(1)
-    address: str = betterproto.string_field(2)
-    project: "Project" = betterproto.enum_field(3)
+    contracts: List[common.PerpContract] = betterproto.enum_field(1)
+    project: "Project" = betterproto.enum_field(2)
 
 
 @dataclass
 class GetPerpTradesStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    trade: "GetPerpTradesResponse" = betterproto.message_field(2)
+
+
+@dataclass
+class GetPerpTradesResponse(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(1)
-    maker_position_side: common.PerpPositionSide = betterproto.enum_field(2)
-    filler_address: str = betterproto.string_field(3)
-    taker_address: str = betterproto.string_field(4)
-    taker_order_i_d: str = betterproto.string_field(5)
-    maker_address: str = betterproto.string_field(6)
-    maker_order_i_d: str = betterproto.string_field(7)
-    base_amount_filled: float = betterproto.double_field(8)
-    quote_amount_filled: float = betterproto.double_field(9)
+    index_price: float = betterproto.double_field(2)
+    market_index: int = betterproto.int64_field(3)
+    filler: str = betterproto.string_field(4)
+    filler_reward: float = betterproto.double_field(5)
+    fill_record_i_d: int = betterproto.int64_field(6)
+    base_asset_amount_filled: float = betterproto.double_field(7)
+    quote_asset_amount_filled: float = betterproto.double_field(8)
+    taker_fee: float = betterproto.double_field(9)
+    maker_fee: float = betterproto.double_field(10)
+    referrer_reward: float = betterproto.double_field(11)
+    quote_asset_amount_surplus: float = betterproto.double_field(12)
+    spot_fulfillment_method_fee: float = betterproto.double_field(13)
+    taker: str = betterproto.string_field(14)
+    taker_order_i_d: int = betterproto.int64_field(15)
+    taker_order_direction: str = betterproto.string_field(16)
+    taker_order_base_asset_amount: float = betterproto.double_field(17)
+    taker_order_cumulative_base_asset_amount_filled: float = betterproto.double_field(
+        18
+    )
+    taker_order_cumulative_quote_asset_amount_filled: float = betterproto.double_field(
+        19
+    )
+    maker: str = betterproto.string_field(20)
+    maker_order_i_d: int = betterproto.int64_field(21)
+    maker_order_direction: str = betterproto.string_field(22)
+    maker_order_base_asset_amount: float = betterproto.double_field(23)
+    maker_order_cumulative_base_asset_amount_filled: float = betterproto.double_field(
+        24
+    )
+    maker_order_cumulative_quote_asset_amount_filled: float = betterproto.double_field(
+        25
+    )
 
 
 @dataclass
@@ -1115,8 +1145,7 @@ class PostLiquidatePerpResponse(betterproto.Message):
 
 @dataclass
 class GetPerpContractsRequest(betterproto.Message):
-    contracts: List[common.PerpContract] = betterproto.enum_field(1)
-    project: "Project" = betterproto.enum_field(2)
+    project: "Project" = betterproto.enum_field(1)
 
 
 @dataclass
@@ -1129,6 +1158,7 @@ class ContractInfo(betterproto.Message):
     min_size: float = betterproto.double_field(6)
     perp_price: float = betterproto.double_field(7)
     index_price: float = betterproto.double_field(8)
+    open_interest: float = betterproto.double_field(9)
 
 
 @dataclass
@@ -1878,6 +1908,7 @@ class ApiStub(betterproto.ServiceStub):
         project: "Project" = 0,
         type: common.PerpCollateralType = 0,
         token: common.PerpCollateralToken = 0,
+        to_account_address: str = "",
     ) -> PostManageCollateralResponse:
         request = PostManageCollateralRequest()
         request.account_address = account_address
@@ -1885,6 +1916,7 @@ class ApiStub(betterproto.ServiceStub):
         request.project = project
         request.type = type
         request.token = token
+        request.to_account_address = to_account_address
 
         return await self._unary_unary(
             "/api.Api/PostManageCollateral",
@@ -1951,10 +1983,9 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_perp_contracts(
-        self, *, contracts: List[common.PerpContract] = [], project: "Project" = 0
+        self, *, project: "Project" = 0
     ) -> GetPerpContractsResponse:
         request = GetPerpContractsRequest()
-        request.contracts = contracts
         request.project = project
 
         return await self._unary_unary(
@@ -2204,15 +2235,10 @@ class ApiStub(betterproto.ServiceStub):
             yield response
 
     async def get_perp_trades_stream(
-        self,
-        *,
-        contract: common.PerpContract = 0,
-        address: str = "",
-        project: "Project" = 0,
+        self, *, contracts: List[common.PerpContract] = [], project: "Project" = 0
     ) -> AsyncGenerator[GetPerpTradesStreamResponse, None]:
         request = GetPerpTradesStreamRequest()
-        request.contract = contract
-        request.address = address
+        request.contracts = contracts
         request.project = project
 
         async for response in self._unary_stream(

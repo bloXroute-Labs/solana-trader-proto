@@ -36,6 +36,7 @@ enum PerpContract {
 enum PerpCollateralType {
   PCT_DEPOSIT = 0;
   PCT_WITHDRAWAL = 1;
+  PCT_TRANSFER = 2;
 }
 
 enum PerpCollateralToken {
