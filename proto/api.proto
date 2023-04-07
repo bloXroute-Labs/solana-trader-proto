@@ -30,7 +30,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   };
   info: {
     title: "Trader API";
-    version: "1.1";
+    version: "1.6";
     description: "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.";
     contact: {
       name: "bloXroute Labs Trader API Documentation";
@@ -491,7 +491,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to manage collateral";
       summary: "posts collateral on a perp platform";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -503,7 +503,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to settle pnl";
       summary: "settle pnl on a perp platform";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -515,7 +515,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to settle pnls";
       summary: "settle pnls on a perp platform";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -526,7 +526,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns details of assets a user has";
       summary: "details of assets a user has";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -549,7 +549,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to liquidate perp positions";
       summary: "liquidate perp positions";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
