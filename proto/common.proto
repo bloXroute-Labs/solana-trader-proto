@@ -31,6 +31,7 @@ enum PerpContract {
   ETH_PERP = 2; // ETH-PERP
   BTC_PERP = 3; // BTC-PERP
   APT_PERP = 4; // APT-PERP
+  BONK_PERP = 5; // BONK-PERP
 }
 
 enum PerpCollateralType {

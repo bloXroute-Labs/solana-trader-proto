@@ -35,6 +35,7 @@ class PerpContract(betterproto.Enum):
     ETH_PERP = 2
     BTC_PERP = 3
     APT_PERP = 4
+    BONK_PERP = 5
 
 
 class PerpCollateralType(betterproto.Enum):
