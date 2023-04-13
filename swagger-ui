@@ -3,7 +3,7 @@
   "info": {
     "title": "Trader API",
     "description": "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.",
-    "version": "1.1",
+    "version": "1.6",
     "contact": {
       "name": "bloXroute Labs Trader API Documentation",
       "url": "https://docs.bloxroute.com/solana/trader-api",
@@ -301,7 +301,10 @@
               "SOL_PERP",
               "ETH_PERP",
               "BTC_PERP",
-              "APT_PERP"
+              "APT_PERP",
+              "BONK_PERP",
+              "MATIC_PERP",
+              "ARB_PERP"
             ]
           },
           {
@@ -821,7 +824,8 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Perp",
+          "Trade"
         ]
       }
     },
@@ -963,7 +967,8 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Perp",
+          "Trade"
         ]
       }
     },
@@ -997,7 +1002,8 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Perp",
+          "Trade"
         ]
       }
     },
@@ -1043,7 +1049,10 @@
               "SOL_PERP",
               "ETH_PERP",
               "BTC_PERP",
-              "APT_PERP"
+              "APT_PERP",
+              "BONK_PERP",
+              "MATIC_PERP",
+              "ARB_PERP"
             ],
             "default": "ALL"
           },
@@ -1145,7 +1154,10 @@
                 "SOL_PERP",
                 "ETH_PERP",
                 "BTC_PERP",
-                "APT_PERP"
+                "APT_PERP",
+                "BONK_PERP",
+                "MATIC_PERP",
+                "ARB_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -1254,7 +1266,10 @@
                 "SOL_PERP",
                 "ETH_PERP",
                 "BTC_PERP",
-                "APT_PERP"
+                "APT_PERP",
+                "BONK_PERP",
+                "MATIC_PERP",
+                "ARB_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -1297,7 +1312,8 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Perp",
+          "Trade"
         ]
       }
     },
@@ -1331,7 +1347,8 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Perp",
+          "Trade"
         ]
       }
     },
@@ -4123,7 +4140,10 @@
         "SOL_PERP",
         "ETH_PERP",
         "BTC_PERP",
-        "APT_PERP"
+        "APT_PERP",
+        "BONK_PERP",
+        "MATIC_PERP",
+        "ARB_PERP"
       ],
       "default": "ALL"
     },
