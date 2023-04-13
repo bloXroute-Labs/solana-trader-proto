@@ -302,7 +302,9 @@
               "ETH_PERP",
               "BTC_PERP",
               "APT_PERP",
-              "BONK_PERP"
+              "BONK_PERP",
+              "MATIC_PERP",
+              "ARB_PERP"
             ]
           },
           {
@@ -1048,7 +1050,9 @@
               "ETH_PERP",
               "BTC_PERP",
               "APT_PERP",
-              "BONK_PERP"
+              "BONK_PERP",
+              "MATIC_PERP",
+              "ARB_PERP"
             ],
             "default": "ALL"
           },
@@ -1151,7 +1155,9 @@
                 "ETH_PERP",
                 "BTC_PERP",
                 "APT_PERP",
-                "BONK_PERP"
+                "BONK_PERP",
+                "MATIC_PERP",
+                "ARB_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -1261,7 +1267,9 @@
                 "ETH_PERP",
                 "BTC_PERP",
                 "APT_PERP",
-                "BONK_PERP"
+                "BONK_PERP",
+                "MATIC_PERP",
+                "ARB_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -4133,7 +4141,9 @@
         "ETH_PERP",
         "BTC_PERP",
         "APT_PERP",
-        "BONK_PERP"
+        "BONK_PERP",
+        "MATIC_PERP",
+        "ARB_PERP"
       ],
       "default": "ALL"
     },
