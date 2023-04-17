@@ -1467,6 +1467,7 @@ message PerpOrder {
 
   string accountAddress = 10;
   uint64 subAccountID = 11;
+  bool postOnly = 12;
 }
 
 message GetPerpPositionsRequest {
@@ -1521,6 +1522,7 @@ message PostPerpOrderRequest {
   double amount = 9;
   double price = 10;
   uint64 clientOrderID = 11;
+  common.PostOnlyParams postOnly = 12;
 }
 
 message PostPerpOrderResponse {
