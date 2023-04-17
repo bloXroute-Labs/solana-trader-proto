@@ -28946,7 +28946,8 @@ proto.api.PerpOrder.toObject = function(includeInstance, msg) {
     remainingsize: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
     status: jspb.Message.getFieldWithDefault(msg, 9, ""),
     accountaddress: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    subaccountid: jspb.Message.getFieldWithDefault(msg, 11, 0)
+    subaccountid: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    postonly: jspb.Message.getBooleanFieldWithDefault(msg, 12, false)
   };
 
   if (includeInstance) {
@@ -29026,6 +29027,10 @@ proto.api.PerpOrder.deserializeBinaryFromReader = function(msg, reader) {
     case 11:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setSubaccountid(value);
+      break;
+    case 12:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setPostonly(value);
       break;
     default:
       reader.skipField();
@@ -29130,6 +29135,13 @@ proto.api.PerpOrder.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint64(
       11,
+      f
+    );
+  }
+  f = message.getPostonly();
+  if (f) {
+    writer.writeBool(
+      12,
       f
     );
   }
@@ -29331,6 +29343,24 @@ proto.api.PerpOrder.prototype.getSubaccountid = function() {
  */
 proto.api.PerpOrder.prototype.setSubaccountid = function(value) {
   return jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional bool postOnly = 12;
+ * @return {boolean}
+ */
+proto.api.PerpOrder.prototype.getPostonly = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 12, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.api.PerpOrder} returns this
+ */
+proto.api.PerpOrder.prototype.setPostonly = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 12, value);
 };
 
 
@@ -30622,7 +30652,8 @@ proto.api.PostPerpOrderRequest.toObject = function(includeInstance, msg) {
     type: jspb.Message.getFieldWithDefault(msg, 8, 0),
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 11, 0)
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    postonly: jspb.Message.getFieldWithDefault(msg, 12, 0)
   };
 
   if (includeInstance) {
@@ -30702,6 +30733,10 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
     case 11:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setClientorderid(value);
+      break;
+    case 12:
+      var value = /** @type {!proto.common.PostOnlyParams} */ (reader.readEnum());
+      msg.setPostonly(value);
       break;
     default:
       reader.skipField();
@@ -30806,6 +30841,13 @@ proto.api.PostPerpOrderRequest.serializeBinaryToWriter = function(message, write
   if (f !== 0) {
     writer.writeUint64(
       11,
+      f
+    );
+  }
+  f = message.getPostonly();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      12,
       f
     );
   }
@@ -31007,6 +31049,24 @@ proto.api.PostPerpOrderRequest.prototype.getClientorderid = function() {
  */
 proto.api.PostPerpOrderRequest.prototype.setClientorderid = function(value) {
   return jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional common.PostOnlyParams postOnly = 12;
+ * @return {!proto.common.PostOnlyParams}
+ */
+proto.api.PostPerpOrderRequest.prototype.getPostonly = function() {
+  return /** @type {!proto.common.PostOnlyParams} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {!proto.common.PostOnlyParams} value
+ * @return {!proto.api.PostPerpOrderRequest} returns this
+ */
+proto.api.PostPerpOrderRequest.prototype.setPostonly = function(value) {
+  return jspb.Message.setProto3EnumField(this, 12, value);
 };
 
 

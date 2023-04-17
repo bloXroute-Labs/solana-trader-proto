@@ -76,6 +76,12 @@ export enum PerpPositionSide {
     PS_SHORT = 2,
 }
 
+export enum PostOnlyParams {
+    PO_NONE = 0,
+    PO_MUST_POST_ONLY = 1,
+    PO_TRY_POST_ONLY = 2,
+}
+
 export enum PerpContract {
     ALL = 0,
     SOL_PERP = 1,

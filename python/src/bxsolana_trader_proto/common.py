@@ -29,6 +29,12 @@ class PerpPositionSide(betterproto.Enum):
     PS_SHORT = 2
 
 
+class PostOnlyParams(betterproto.Enum):
+    PO_NONE = 0
+    PO_MUST_POST_ONLY = 1
+    PO_TRY_POST_ONLY = 2
+
+
 class PerpContract(betterproto.Enum):
     ALL = 0
     SOL_PERP = 1
