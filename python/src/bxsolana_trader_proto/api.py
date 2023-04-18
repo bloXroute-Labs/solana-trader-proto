@@ -946,6 +946,7 @@ class PerpOrder(betterproto.Message):
     status: str = betterproto.string_field(9)
     account_address: str = betterproto.string_field(10)
     sub_account_i_d: int = betterproto.uint64_field(11)
+    post_only: bool = betterproto.bool_field(12)
 
 
 @dataclass
@@ -1002,6 +1003,7 @@ class PostPerpOrderRequest(betterproto.Message):
     amount: float = betterproto.double_field(9)
     price: float = betterproto.double_field(10)
     client_order_i_d: int = betterproto.uint64_field(11)
+    post_only: common.PostOnlyParams = betterproto.enum_field(12)
 
 
 @dataclass
@@ -1725,6 +1727,7 @@ class ApiStub(betterproto.ServiceStub):
         amount: float = 0,
         price: float = 0,
         client_order_i_d: int = 0,
+        post_only: common.PostOnlyParams = 0,
     ) -> PostPerpOrderResponse:
         """perp endpoints"""
 
@@ -1740,6 +1743,7 @@ class ApiStub(betterproto.ServiceStub):
         request.amount = amount
         request.price = price
         request.client_order_i_d = client_order_i_d
+        request.post_only = post_only
 
         return await self._unary_unary(
             "/api.Api/PostPerpOrder",
