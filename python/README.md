@@ -1,4 +1,3 @@
-
 # Solana-Trader-Python-Proto package
 
 # publishing solana-trader-python-proto package
@@ -6,11 +5,10 @@
 
     upgrade the version in pyproject.toml
     cd python
-    rm -rf dist/
-    python3 -m build
+    rm -rf dist/ && python3 -m build
 
     you can install package locally before uploading it to the pypi
-    pip install dist/bxsolana-trader-proto-0.0.10.tar.gz
+    pip install dist/bxsolana-trader-proto-0.0.17.tar.gz
 
     python3 -m twine upload --repository pypi dist/*
 

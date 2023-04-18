@@ -30,7 +30,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   };
   info: {
     title: "Trader API";
-    version: "1.1";
+    version: "1.6";
     description: "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.";
     contact: {
       name: "bloXroute Labs Trader API Documentation";
@@ -450,7 +450,7 @@ service Api {
 
   rpc GetPerpOrderbook(GetPerpOrderbookRequest) returns (GetPerpOrderbookResponse) {
     option (google.api.http) = {
-      get: "/api/v1/market/perp/orderbook/{market}"
+      get: "/api/v1/market/perp/orderbook/{contract}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
@@ -490,7 +490,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to manage collateral";
       summary: "posts collateral on a perp platform";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -502,7 +502,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to settle pnl";
       summary: "settle pnl on a perp platform";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -514,7 +514,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to settle pnls";
       summary: "settle pnls on a perp platform";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -525,18 +525,18 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns details of assets a user has";
       summary: "details of assets a user has";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
   rpc GetPerpContracts(GetPerpContractsRequest) returns (GetPerpContractsResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/perp/contracts"
+      get: "/api/v1/market/perp/contracts"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns details of available perp contracts";
       summary: "details of available perp contracts";
-      tags: ["Perp"];
+      tags: ["Perp", "Market"];
     };
   }
 
@@ -548,7 +548,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to liquidate perp positions";
       summary: "liquidate perp positions";
-      tags: ["Perp"];
+      tags: ["Perp", "Trade"];
     };
   }
 
@@ -1356,22 +1356,21 @@ message GetPricesStreamResponse {
 
 // Drift messages
 message GetPerpOrderbookRequest {
-  string market = 1;
+  common.PerpContract contract = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
 }
 
 message GetPerpOrderbooksRequest {
-  repeated string markets = 1;
+  repeated common.PerpContract contracts = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
 }
 
 message GetPerpOrderbookResponse {
-  string market = 1;
-  int32 marketIndex = 2;
-  repeated PerpOrderbookItem bids = 3;
-  repeated PerpOrderbookItem asks = 4;
+  common.PerpContract contract = 1;
+  repeated PerpOrderbookItem bids = 2;
+  repeated PerpOrderbookItem asks = 3;
 }
 
 message PerpOrderbookItem {
@@ -1399,14 +1398,19 @@ message GetPerpOrderbooksStreamResponse {
 
 message GetUserRequest {
   string ownerAddress = 1;
-  Project project = 2;
+  string accountAddress = 2;
+  Project project = 3;
 }
 
 message GetUserResponse {
+  repeated UserDetail userAccounts = 1;
+  Project project = 2;
+}
+
+message UserDetail {
   string status = 1;
-  int64 accountNumber = 2;
+  uint64 subAccountId = 2;
   string accountAddress = 3;
-  Project project = 4;
 }
 
 message PostCreateUserRequest {
@@ -1427,7 +1431,7 @@ message PostCancelPerpOrdersRequest {
 }
 
 message PostCancelPerpOrdersResponse {
-  TransactionMessage transaction = 1;
+  repeated TransactionMessage transactions = 1;
 }
 
 message PostCancelPerpOrderRequest {
@@ -1444,12 +1448,12 @@ message PostCancelPerpOrderResponse {
 }
 
 message PostManageCollateralRequest {
-  string ownerAddress = 1;
-  string accountAddress = 2;
-  double amount = 3;
-  Project project = 4;
-  common.PerpCollateralType type = 5;
-  common.PerpCollateralToken token = 6;
+  string accountAddress = 1;
+  double amount = 2;
+  Project project = 3;
+  common.PerpCollateralType type = 4;
+  common.PerpCollateralToken token = 5;
+  string toAccountAddress = 6;
 }
 
 message PostManageCollateralResponse {
@@ -1465,9 +1469,7 @@ message GetOpenPerpOrdersRequest {
 
 message GetOpenPerpOrdersResponse {
   string ownerAddress = 1;
-  string accountAddress = 2;
-
-  repeated PerpOrder orders = 3;
+  repeated PerpOrder orders = 2;
 }
 
 message PerpOrder {
@@ -1478,12 +1480,14 @@ message PerpOrder {
   common.PerpPositionSide positionSide = 4;
 
   string orderType = 5;
-  double unrealizedPnL = 6;
 
-  double price = 7;
-  double size = 8;
-  double remainingSize = 9;
-  string status = 10;
+  double price = 6;
+  double size = 7;
+  double remainingSize = 8;
+  string status = 9;
+
+  string accountAddress = 10;
+  uint64 subAccountID = 11;
 }
 
 message GetPerpPositionsRequest {
@@ -1495,15 +1499,15 @@ message GetPerpPositionsRequest {
 
 message GetPerpPositionsResponse {
   string ownerAddress = 1;
-  string accountAddress = 2;
 
-  repeated PerpPosition perpPositions = 3;
+  repeated PerpPosition perpPositions = 2;
 }
 
 message PostClosePerpPositionsRequest {
   Project project = 1;
   string ownerAddress = 2;
-  repeated common.PerpContract contracts = 3;
+  string accountAddress = 3;
+  repeated common.PerpContract contracts = 4;
 }
 
 message PostClosePerpPositionsResponse {
@@ -1512,19 +1516,18 @@ message PostClosePerpPositionsResponse {
 
 message PerpPosition {
   common.PerpContract contract = 1;
+  double volumeAvailable = 2;
+  double volumeInOrder = 3;
 
-  double contractVolume = 2;
-  double volumeAvailable = 3;
-  double volumeInOrder = 4;
+  double positionMargin = 4;
+  common.PerpPositionSide positionSide = 5;
 
-  double positionMargin = 5;
-  common.PerpPositionSide positionSide = 6;
+  double notionalValue = 6;
+  double indexPrice = 7;
+  double liquidationPrice = 8;
 
-  double unrealizedPnL = 7;
-
-  double notionalValue = 8;
-  double indexPrice = 9;
-  double liquidationPrice = 10;
+  string accountAddress = 9;
+  int64 subAccountID = 10;
 }
 
 message PostPerpOrderRequest {
@@ -1551,39 +1554,57 @@ message GetNewPerpOrdersStreamRequest {
 }
 
 message GetNewPerpOrdersStreamResponse {
-  string market = 1;
-  int32 marketIndex = 2;
-  common.PerpPositionSide side = 3;
-  common.PerpOrderType type = 4;
-  string userAddress = 5;
-  string orderID = 6;
-  string clientOrderID = 7;
-  string slot = 8;
-  double price = 9;
-  double triggerPrice = 10;
-  double baseAmount = 11;
-  double baseAmountFilled = 12;
-  double quoteAmount = 13;
-  double quoteAmountFilled = 14;
+  common.PerpContract contract = 1;
+  common.PerpPositionSide side = 2;
+  common.PerpOrderType type = 3;
+  string userAddress = 4;
+  string orderID = 5;
+  string clientOrderID = 6;
+  string slot = 7;
+  double price = 8;
+  double triggerPrice = 9;
+  double baseAmount = 10;
+  double baseAmountFilled = 11;
+  double quoteAmount = 12;
+  double quoteAmountFilled = 13;
 }
 
 message GetPerpTradesStreamRequest {
-  repeated string markets = 1;
-  string address = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "limit by user address"}];
-  Project project = 3;
+  repeated common.PerpContract contracts = 1;
+  Project project = 2;
 }
 
 message GetPerpTradesStreamResponse {
-  string market = 1;
-  int32 marketIndex = 2;
-  common.PerpPositionSide makerPositionSide = 3;
-  string fillerAddress = 4;
-  string takerAddress = 5;
-  string takerOrderID = 6;
-  string makerAddress = 7;
-  string makerOrderID = 8;
-  double baseAmountFilled = 9;
-  double quoteAmountFilled = 10;
+  int64 slot = 1;
+  GetPerpTradesResponse trade = 2;
+}
+
+message GetPerpTradesResponse {
+  common.PerpContract contract = 1;
+  double indexPrice = 2;
+  int64 marketIndex = 3;
+  string filler = 4;
+  double fillerReward = 5;
+  int64 fillRecordID = 6;
+  double baseAssetAmountFilled = 7;
+  double quoteAssetAmountFilled = 8;
+  double takerFee = 9;
+  double makerFee = 10;
+  double referrerReward = 11;
+  double quoteAssetAmountSurplus = 12;
+  double spotFulfillmentMethodFee = 13;
+  string taker = 14;
+  int64 takerOrderID = 15;
+  string takerOrderDirection = 16;
+  double takerOrderBaseAssetAmount = 17;
+  double takerOrderCumulativeBaseAssetAmountFilled = 18;
+  double takerOrderCumulativeQuoteAssetAmountFilled = 19;
+  string maker = 20;
+  int64 makerOrderID = 21;
+  string makerOrderDirection = 22;
+  double makerOrderBaseAssetAmount = 23;
+  double makerOrderCumulativeBaseAssetAmountFilled = 24;
+  double makerOrderCumulativeQuoteAssetAmountFilled = 25;
 }
 
 
@@ -1601,22 +1622,22 @@ message PostSettlePNLResponse {
 message GetAssetsRequest {
   string ownerAddress = 1;
   string accountAddress = 2;
-  common.PerpContract contract = 3;
-  Project project = 4;
+  Project project = 3;
 }
 
 message Asset {
   string valuationAsset = 1;
   double balance = 2;
   double valuation = 3;
+
+  string accountAddress = 4;
+  int64 subAccountID = 5;
 }
 
 message GetAssetsResponse {
   string ownerAddress = 1;
-  string accountAddress = 2;
-  repeated Asset assets = 3;
+  repeated Asset assets = 2;
 }
-
 
 message PostSettlePNLsRequest {
   string ownerAddress = 1;
@@ -1642,8 +1663,7 @@ message PostLiquidatePerpResponse {
 }
 
 message GetPerpContractsRequest {
-  repeated common.PerpContract contracts = 1;
-  Project project = 2;
+  Project project = 1;
 }
 
 message ContractInfo {
@@ -1655,6 +1675,7 @@ message ContractInfo {
   double minSize = 6;
   double perpPrice = 7;
   double indexPrice = 8;
+  double openInterest = 9;
 }
 
 message GetPerpContractsResponse {
@@ -1672,8 +1693,7 @@ message GetOpenPerpOrderRequest {
 
 message GetOpenPerpOrderResponse {
   string ownerAddress = 1;
-  string accountAddress = 2;
 
-  PerpOrder order = 3;
+  PerpOrder order = 2;
 }
 

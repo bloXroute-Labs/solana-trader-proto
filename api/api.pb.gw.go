@@ -13,6 +13,7 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/bloXroute-Labs/solana-trader-proto/common"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/utilities"
 	"google.golang.org/grpc"
@@ -1478,7 +1479,7 @@ func local_request_Api_PostClosePerpPositions_0(ctx context.Context, marshaler r
 }
 
 var (
-	filter_Api_GetPerpOrderbook_0 = &utilities.DoubleArray{Encoding: map[string]int{"market": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_Api_GetPerpOrderbook_0 = &utilities.DoubleArray{Encoding: map[string]int{"contract": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Api_GetPerpOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1487,20 +1488,23 @@ func request_Api_GetPerpOrderbook_0(ctx context.Context, marshaler runtime.Marsh
 
 	var (
 		val string
+		e   int32
 		ok  bool
 		err error
 		_   = err
 	)
 
-	val, ok = pathParams["market"]
+	val, ok = pathParams["contract"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "market")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "contract")
 	}
 
-	protoReq.Market, err = runtime.String(val)
+	e, err = runtime.Enum(val, common.PerpContract_value)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "market", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "contract", err)
 	}
+
+	protoReq.Contract = common.PerpContract(e)
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -1520,20 +1524,23 @@ func local_request_Api_GetPerpOrderbook_0(ctx context.Context, marshaler runtime
 
 	var (
 		val string
+		e   int32
 		ok  bool
 		err error
 		_   = err
 	)
 
-	val, ok = pathParams["market"]
+	val, ok = pathParams["contract"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "market")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "contract")
 	}
 
-	protoReq.Market, err = runtime.String(val)
+	e, err = runtime.Enum(val, common.PerpContract_value)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "market", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "contract", err)
 	}
+
+	protoReq.Contract = common.PerpContract(e)
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -2690,7 +2697,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetPerpOrderbook", runtime.WithHTTPPathPattern("/api/v1/market/perp/orderbook/{market}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetPerpOrderbook", runtime.WithHTTPPathPattern("/api/v1/market/perp/orderbook/{contract}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2858,7 +2865,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetPerpContracts", runtime.WithHTTPPathPattern("/api/v1/trade/perp/contracts"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetPerpContracts", runtime.WithHTTPPathPattern("/api/v1/market/perp/contracts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3683,7 +3690,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetPerpOrderbook", runtime.WithHTTPPathPattern("/api/v1/market/perp/orderbook/{market}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetPerpOrderbook", runtime.WithHTTPPathPattern("/api/v1/market/perp/orderbook/{contract}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3830,7 +3837,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetPerpContracts", runtime.WithHTTPPathPattern("/api/v1/trade/perp/contracts"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetPerpContracts", runtime.WithHTTPPathPattern("/api/v1/market/perp/contracts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3960,7 +3967,7 @@ var (
 
 	pattern_Api_PostClosePerpPositions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"api", "v1", "trade", "perp", "close"}, ""))
 
-	pattern_Api_GetPerpOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 2}, []string{"api", "v1", "market", "perp", "orderbook"}, ""))
+	pattern_Api_GetPerpOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"api", "v1", "market", "perp", "orderbook", "contract"}, ""))
 
 	pattern_Api_PostCreateUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "trade", "user"}, ""))
 
@@ -3974,7 +3981,7 @@ var (
 
 	pattern_Api_GetAssets_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"api", "v1", "trade", "perp", "assets"}, ""))
 
-	pattern_Api_GetPerpContracts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"api", "v1", "trade", "perp", "contracts"}, ""))
+	pattern_Api_GetPerpContracts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"api", "v1", "market", "perp", "contracts"}, ""))
 
 	pattern_Api_PostLiquidatePerp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"api", "v1", "trade", "perp", "liquidate"}, ""))
 

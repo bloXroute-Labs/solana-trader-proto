@@ -3,7 +3,7 @@
   "info": {
     "title": "Trader API",
     "description": "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.",
-    "version": "1.1",
+    "version": "1.6",
     "contact": {
       "name": "bloXroute Labs Trader API Documentation",
       "url": "https://docs.bloxroute.com/solana/trader-api",
@@ -228,7 +228,50 @@
         ]
       }
     },
-    "/api/v1/market/perp/orderbook/{market}": {
+    "/api/v1/market/perp/contracts": {
+      "get": {
+        "summary": "details of available perp contracts",
+        "description": "Returns details of available perp contracts",
+        "operationId": "Api_GetPerpContracts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPerpContractsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Perp",
+          "Market"
+        ]
+      }
+    },
+    "/api/v1/market/perp/orderbook/{contract}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
         "description": "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned",
@@ -249,10 +292,20 @@
         },
         "parameters": [
           {
-            "name": "market",
+            "name": "contract",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "ALL",
+              "SOL_PERP",
+              "ETH_PERP",
+              "BTC_PERP",
+              "APT_PERP",
+              "BONK_PERP",
+              "MATIC_PERP",
+              "ARB_PERP"
+            ]
           },
           {
             "name": "limit",
@@ -882,20 +935,6 @@
             "type": "string"
           },
           {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP",
-              "APT_PERP"
-            ],
-            "default": "ALL"
-          },
-          {
             "name": "project",
             "in": "query",
             "required": false,
@@ -913,7 +952,8 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Perp",
+          "Trade"
         ]
       }
     },
@@ -1025,65 +1065,6 @@
         ]
       }
     },
-    "/api/v1/trade/perp/contracts": {
-      "get": {
-        "summary": "details of available perp contracts",
-        "description": "Returns details of available perp contracts",
-        "operationId": "Api_GetPerpContracts",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetPerpContractsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "contracts",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "ALL",
-                "SOL_PERP",
-                "ETH_PERP",
-                "BTC_PERP",
-                "APT_PERP"
-              ]
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          }
-        ],
-        "tags": [
-          "Perp"
-        ]
-      }
-    },
     "/api/v1/trade/perp/liquidate": {
       "post": {
         "summary": "liquidate perp positions",
@@ -1114,7 +1095,8 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Perp",
+          "Trade"
         ]
       }
     },
@@ -1148,7 +1130,8 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Perp",
+          "Trade"
         ]
       }
     },
@@ -1194,7 +1177,10 @@
               "SOL_PERP",
               "ETH_PERP",
               "BTC_PERP",
-              "APT_PERP"
+              "APT_PERP",
+              "BONK_PERP",
+              "MATIC_PERP",
+              "ARB_PERP"
             ],
             "default": "ALL"
           },
@@ -1296,7 +1282,10 @@
                 "SOL_PERP",
                 "ETH_PERP",
                 "BTC_PERP",
-                "APT_PERP"
+                "APT_PERP",
+                "BONK_PERP",
+                "MATIC_PERP",
+                "ARB_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -1405,7 +1394,10 @@
                 "SOL_PERP",
                 "ETH_PERP",
                 "BTC_PERP",
-                "APT_PERP"
+                "APT_PERP",
+                "BONK_PERP",
+                "MATIC_PERP",
+                "ARB_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -1448,7 +1440,8 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Perp",
+          "Trade"
         ]
       }
     },
@@ -1482,7 +1475,8 @@
           }
         ],
         "tags": [
-          "Perp"
+          "Perp",
+          "Trade"
         ]
       }
     },
@@ -1848,6 +1842,12 @@
             "type": "string"
           },
           {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "project",
             "in": "query",
             "required": false,
@@ -1916,6 +1916,13 @@
         "valuation": {
           "type": "number",
           "format": "double"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "subAccountID": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -2012,6 +2019,10 @@
         "indexPrice": {
           "type": "number",
           "format": "double"
+        },
+        "openInterest": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -2038,9 +2049,6 @@
       "type": "object",
       "properties": {
         "ownerAddress": {
-          "type": "string"
-        },
-        "accountAddress": {
           "type": "string"
         },
         "assets": {
@@ -2126,12 +2134,8 @@
     "apiGetNewPerpOrdersStreamResponse": {
       "type": "object",
       "properties": {
-        "market": {
-          "type": "string"
-        },
-        "marketIndex": {
-          "type": "integer",
-          "format": "int32"
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
         },
         "side": {
           "$ref": "#/definitions/commonPerpPositionSide"
@@ -2194,9 +2198,6 @@
         "ownerAddress": {
           "type": "string"
         },
-        "accountAddress": {
-          "type": "string"
-        },
         "order": {
           "$ref": "#/definitions/apiPerpOrder"
         }
@@ -2206,9 +2207,6 @@
       "type": "object",
       "properties": {
         "ownerAddress": {
-          "type": "string"
-        },
-        "accountAddress": {
           "type": "string"
         },
         "orders": {
@@ -2339,12 +2337,8 @@
     "apiGetPerpOrderbookResponse": {
       "type": "object",
       "properties": {
-        "market": {
-          "type": "string"
-        },
-        "marketIndex": {
-          "type": "integer",
-          "format": "int32"
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
         },
         "bids": {
           "type": "array",
@@ -2378,9 +2372,6 @@
         "ownerAddress": {
           "type": "string"
         },
-        "accountAddress": {
-          "type": "string"
-        },
         "perpPositions": {
           "type": "array",
           "items": {
@@ -2389,41 +2380,114 @@
         }
       }
     },
-    "apiGetPerpTradesStreamResponse": {
+    "apiGetPerpTradesResponse": {
       "type": "object",
       "properties": {
-        "market": {
-          "type": "string"
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "indexPrice": {
+          "type": "number",
+          "format": "double"
         },
         "marketIndex": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string",
+          "format": "int64"
         },
-        "makerPositionSide": {
-          "$ref": "#/definitions/commonPerpPositionSide"
-        },
-        "fillerAddress": {
+        "filler": {
           "type": "string"
         },
-        "takerAddress": {
+        "fillerReward": {
+          "type": "number",
+          "format": "double"
+        },
+        "fillRecordID": {
+          "type": "string",
+          "format": "int64"
+        },
+        "baseAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "takerFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "makerFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "referrerReward": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteAssetAmountSurplus": {
+          "type": "number",
+          "format": "double"
+        },
+        "spotFulfillmentMethodFee": {
+          "type": "number",
+          "format": "double"
+        },
+        "taker": {
           "type": "string"
         },
         "takerOrderID": {
+          "type": "string",
+          "format": "int64"
+        },
+        "takerOrderDirection": {
           "type": "string"
         },
-        "makerAddress": {
+        "takerOrderBaseAssetAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "takerOrderCumulativeBaseAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "takerOrderCumulativeQuoteAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        },
+        "maker": {
           "type": "string"
         },
         "makerOrderID": {
+          "type": "string",
+          "format": "int64"
+        },
+        "makerOrderDirection": {
           "type": "string"
         },
-        "baseAmountFilled": {
+        "makerOrderBaseAssetAmount": {
           "type": "number",
           "format": "double"
         },
-        "quoteAmountFilled": {
+        "makerOrderCumulativeBaseAssetAmountFilled": {
           "type": "number",
           "format": "double"
+        },
+        "makerOrderCumulativeQuoteAssetAmountFilled": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiGetPerpTradesStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "trade": {
+          "$ref": "#/definitions/apiGetPerpTradesResponse"
         }
       }
     },
@@ -2688,15 +2752,11 @@
     "apiGetUserResponse": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
-        },
-        "accountNumber": {
-          "type": "string",
-          "format": "int64"
-        },
-        "accountAddress": {
-          "type": "string"
+        "userAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiUserDetail"
+          }
         },
         "project": {
           "$ref": "#/definitions/apiProject"
@@ -2891,10 +2951,6 @@
         "orderType": {
           "type": "string"
         },
-        "unrealizedPnL": {
-          "type": "number",
-          "format": "double"
-        },
         "price": {
           "type": "number",
           "format": "double"
@@ -2909,6 +2965,13 @@
         },
         "status": {
           "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "subAccountID": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
@@ -2977,10 +3040,6 @@
         "contract": {
           "$ref": "#/definitions/commonPerpContract"
         },
-        "contractVolume": {
-          "type": "number",
-          "format": "double"
-        },
         "volumeAvailable": {
           "type": "number",
           "format": "double"
@@ -2996,10 +3055,6 @@
         "positionSide": {
           "$ref": "#/definitions/commonPerpPositionSide"
         },
-        "unrealizedPnL": {
-          "type": "number",
-          "format": "double"
-        },
         "notionalValue": {
           "type": "number",
           "format": "double"
@@ -3011,6 +3066,13 @@
         "liquidationPrice": {
           "type": "number",
           "format": "double"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "subAccountID": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
@@ -3219,8 +3281,11 @@
     "apiPostCancelPerpOrdersResponse": {
       "type": "object",
       "properties": {
-        "transaction": {
-          "$ref": "#/definitions/apiTransactionMessage"
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
         }
       }
     },
@@ -3231,6 +3296,9 @@
           "$ref": "#/definitions/apiProject"
         },
         "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
           "type": "string"
         },
         "contracts": {
@@ -3306,9 +3374,6 @@
     "apiPostManageCollateralRequest": {
       "type": "object",
       "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
         "accountAddress": {
           "type": "string"
         },
@@ -3324,6 +3389,9 @@
         },
         "token": {
           "$ref": "#/definitions/commonPerpCollateralToken"
+        },
+        "toAccountAddress": {
+          "type": "string"
         }
       }
     },
@@ -4200,6 +4268,21 @@
         }
       }
     },
+    "apiUserDetail": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "subAccountId": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "accountAddress": {
+          "type": "string"
+        }
+      }
+    },
     "commonFee": {
       "type": "object",
       "properties": {
@@ -4247,7 +4330,8 @@
       "type": "string",
       "enum": [
         "PCT_DEPOSIT",
-        "PCT_WITHDRAWAL"
+        "PCT_WITHDRAWAL",
+        "PCT_TRANSFER"
       ],
       "default": "PCT_DEPOSIT"
     },
@@ -4258,7 +4342,10 @@
         "SOL_PERP",
         "ETH_PERP",
         "BTC_PERP",
-        "APT_PERP"
+        "APT_PERP",
+        "BONK_PERP",
+        "MATIC_PERP",
+        "ARB_PERP"
       ],
       "default": "ALL"
     },

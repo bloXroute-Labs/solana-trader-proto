@@ -82,11 +82,15 @@ export enum PerpContract {
     ETH_PERP = 2,
     BTC_PERP = 3,
     APT_PERP = 4,
+    BONK_PERP = 5,
+    MATIC_PERP = 6,
+    ARB_PERP = 7,
 }
 
 export enum PerpCollateralType {
     PCT_DEPOSIT = 0,
     PCT_WITHDRAWAL = 1,
+    PCT_TRANSFER = 2,
 }
 
 export enum PerpCollateralToken {
