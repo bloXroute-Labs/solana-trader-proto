@@ -1578,6 +1578,17 @@ postPerpOrder: {
     responseSerialize: serialize_api_GetPerpOrderbookResponse,
     responseDeserialize: deserialize_api_GetPerpOrderbookResponse,
   },
+  getDriftSpotOrderbook: {
+    path: '/api.Api/GetDriftSpotOrderbook',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetPerpOrderbookRequest,
+    responseType: api_pb.GetPerpOrderbookResponse,
+    requestSerialize: serialize_api_GetPerpOrderbookRequest,
+    requestDeserialize: deserialize_api_GetPerpOrderbookRequest,
+    responseSerialize: serialize_api_GetPerpOrderbookResponse,
+    responseDeserialize: deserialize_api_GetPerpOrderbookResponse,
+  },
   postCreateUser: {
     path: '/api.Api/PostCreateUser',
     requestStream: false,

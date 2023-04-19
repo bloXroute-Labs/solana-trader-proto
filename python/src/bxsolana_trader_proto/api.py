@@ -845,6 +845,52 @@ class GetPerpOrderbooksStreamResponse(betterproto.Message):
 
 
 @dataclass
+class GetDriftSpotOrderbookRequest(betterproto.Message):
+    contract: common.SpotContract = betterproto.enum_field(1)
+    limit: int = betterproto.uint32_field(2)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetDriftSpotOrderbooksRequest(betterproto.Message):
+    contracts: List[common.SpotContract] = betterproto.enum_field(1)
+    limit: int = betterproto.uint32_field(2)
+    project: "Project" = betterproto.enum_field(3)
+
+
+@dataclass
+class GetDriftSpotOrderbookResponse(betterproto.Message):
+    contract: common.SpotContract = betterproto.enum_field(1)
+    bids: List["DriftSpotOrderbookItem"] = betterproto.message_field(2)
+    asks: List["DriftSpotOrderbookItem"] = betterproto.message_field(3)
+
+
+@dataclass
+class DriftSpotOrderbookItem(betterproto.Message):
+    price: float = betterproto.double_field(1)
+    size: float = betterproto.double_field(2)
+    order_i_d: str = betterproto.string_field(3)
+    client_order_i_d: str = betterproto.string_field(4)
+    status: str = betterproto.string_field(5)
+    order_type: str = betterproto.string_field(6)
+    slot: int = betterproto.int64_field(7)
+    reduce_only: bool = betterproto.bool_field(8)
+    trigger_price: float = betterproto.double_field(9)
+    trigger_condition: str = betterproto.string_field(10)
+    post_only: bool = betterproto.bool_field(11)
+    oracle_price_offset: float = betterproto.double_field(12)
+    auction_duration: int = betterproto.int32_field(13)
+    auction_start_price: float = betterproto.double_field(14)
+    auction_end_price: float = betterproto.double_field(15)
+
+
+@dataclass
+class GetDriftSpotOrderbooksStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    orderbook: "GetDriftSpotOrderbookResponse" = betterproto.message_field(2)
+
+
+@dataclass
 class GetUserRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
@@ -1869,6 +1915,24 @@ class ApiStub(betterproto.ServiceStub):
 
         return await self._unary_unary(
             "/api.Api/GetPerpOrderbook",
+            request,
+            GetPerpOrderbookResponse,
+        )
+
+    async def get_drift_spot_orderbook(
+        self,
+        *,
+        contract: common.PerpContract = 0,
+        limit: int = 0,
+        project: "Project" = 0,
+    ) -> GetPerpOrderbookResponse:
+        request = GetPerpOrderbookRequest()
+        request.contract = contract
+        request.limit = limit
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetDriftSpotOrderbook",
             request,
             GetPerpOrderbookResponse,
         )

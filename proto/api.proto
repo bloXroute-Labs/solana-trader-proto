@@ -460,6 +460,17 @@ service Api {
     };
   }
 
+  rpc GetDriftSpotOrderbook(GetPerpOrderbookRequest) returns (GetPerpOrderbookResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/driftspot/orderbook/{contract}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
+      summary: "Perpetuals contract orderbook";
+      tags: ["Perp", "Orderbook", "Market"];
+    };
+  }
+
   rpc PostCreateUser(PostCreateUserRequest) returns (PostCreateUserResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/user"
@@ -1374,6 +1385,50 @@ message GetPerpOrderbooksStreamResponse {
   int64 slot = 1;
   GetPerpOrderbookResponse orderbook = 2;
 }
+
+// SPOT
+
+message GetDriftSpotOrderbookRequest {
+  common.SpotContract contract = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
+}
+
+message GetDriftSpotOrderbooksRequest {
+  repeated common.SpotContract contracts = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
+}
+
+message GetDriftSpotOrderbookResponse {
+  common.SpotContract contract = 1;
+  repeated DriftSpotOrderbookItem bids = 2;
+  repeated DriftSpotOrderbookItem asks = 3;
+}
+
+message DriftSpotOrderbookItem {
+  double price = 1;
+  double size = 2;
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "platform generated OrderID"}];
+  string clientOrderID = 4;
+  string status = 5;
+  string orderType = 6;
+  int64 slot = 7;
+  bool reduceOnly = 8;
+  double triggerPrice = 9;
+  string triggerCondition = 10;
+  bool postOnly = 11;
+  double oraclePriceOffset = 12;
+  int32 auctionDuration = 13;
+  double auctionStartPrice  = 14;
+  double auctionEndPrice = 15;
+}
+
+message GetDriftSpotOrderbooksStreamResponse {
+  int64 slot = 1;
+  GetDriftSpotOrderbookResponse orderbook = 2;
+}
+
 
 message GetUserRequest {
   string ownerAddress = 1;

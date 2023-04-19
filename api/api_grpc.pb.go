@@ -57,6 +57,7 @@ type ApiClient interface {
 	PostCancelPerpOrder(ctx context.Context, in *PostCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostCancelPerpOrderResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
+	GetDriftSpotOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
 	PostCreateUser(ctx context.Context, in *PostCreateUserRequest, opts ...grpc.CallOption) (*PostCreateUserResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	PostManageCollateral(ctx context.Context, in *PostManageCollateralRequest, opts ...grpc.CallOption) (*PostManageCollateralResponse, error)
@@ -401,6 +402,15 @@ func (c *apiClient) PostClosePerpPositions(ctx context.Context, in *PostClosePer
 func (c *apiClient) GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error) {
 	out := new(GetPerpOrderbookResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetPerpOrderbook", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftSpotOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error) {
+	out := new(GetPerpOrderbookResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftSpotOrderbook", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -979,6 +989,7 @@ type ApiServer interface {
 	PostCancelPerpOrder(context.Context, *PostCancelPerpOrderRequest) (*PostCancelPerpOrderResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
+	GetDriftSpotOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
 	PostCreateUser(context.Context, *PostCreateUserRequest) (*PostCreateUserResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	PostManageCollateral(context.Context, *PostManageCollateralRequest) (*PostManageCollateralResponse, error)
@@ -1115,6 +1126,9 @@ func (UnimplementedApiServer) PostClosePerpPositions(context.Context, *PostClose
 }
 func (UnimplementedApiServer) GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPerpOrderbook not implemented")
+}
+func (UnimplementedApiServer) GetDriftSpotOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftSpotOrderbook not implemented")
 }
 func (UnimplementedApiServer) PostCreateUser(context.Context, *PostCreateUserRequest) (*PostCreateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostCreateUser not implemented")
@@ -1828,6 +1842,24 @@ func _Api_GetPerpOrderbook_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetDriftSpotOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPerpOrderbookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftSpotOrderbook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftSpotOrderbook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftSpotOrderbook(ctx, req.(*GetPerpOrderbookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_PostCreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostCreateUserRequest)
 	if err := dec(in); err != nil {
@@ -2430,6 +2462,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPerpOrderbook",
 			Handler:    _Api_GetPerpOrderbook_Handler,
+		},
+		{
+			MethodName: "GetDriftSpotOrderbook",
+			Handler:    _Api_GetDriftSpotOrderbook_Handler,
 		},
 		{
 			MethodName: "PostCreateUser",

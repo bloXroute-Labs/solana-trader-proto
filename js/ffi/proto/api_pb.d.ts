@@ -3040,6 +3040,178 @@ export namespace GetPerpOrderbooksStreamResponse {
     }
 }
 
+export class GetDriftSpotOrderbookRequest extends jspb.Message { 
+    getContract(): common_pb.SpotContract;
+    setContract(value: common_pb.SpotContract): GetDriftSpotOrderbookRequest;
+    getLimit(): number;
+    setLimit(value: number): GetDriftSpotOrderbookRequest;
+    getProject(): Project;
+    setProject(value: Project): GetDriftSpotOrderbookRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftSpotOrderbookRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftSpotOrderbookRequest): GetDriftSpotOrderbookRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftSpotOrderbookRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftSpotOrderbookRequest;
+    static deserializeBinaryFromReader(message: GetDriftSpotOrderbookRequest, reader: jspb.BinaryReader): GetDriftSpotOrderbookRequest;
+}
+
+export namespace GetDriftSpotOrderbookRequest {
+    export type AsObject = {
+        contract: common_pb.SpotContract,
+        limit: number,
+        project: Project,
+    }
+}
+
+export class GetDriftSpotOrderbooksRequest extends jspb.Message { 
+    clearContractsList(): void;
+    getContractsList(): Array<common_pb.SpotContract>;
+    setContractsList(value: Array<common_pb.SpotContract>): GetDriftSpotOrderbooksRequest;
+    addContracts(value: common_pb.SpotContract, index?: number): common_pb.SpotContract;
+    getLimit(): number;
+    setLimit(value: number): GetDriftSpotOrderbooksRequest;
+    getProject(): Project;
+    setProject(value: Project): GetDriftSpotOrderbooksRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftSpotOrderbooksRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftSpotOrderbooksRequest): GetDriftSpotOrderbooksRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftSpotOrderbooksRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftSpotOrderbooksRequest;
+    static deserializeBinaryFromReader(message: GetDriftSpotOrderbooksRequest, reader: jspb.BinaryReader): GetDriftSpotOrderbooksRequest;
+}
+
+export namespace GetDriftSpotOrderbooksRequest {
+    export type AsObject = {
+        contractsList: Array<common_pb.SpotContract>,
+        limit: number,
+        project: Project,
+    }
+}
+
+export class GetDriftSpotOrderbookResponse extends jspb.Message { 
+    getContract(): common_pb.SpotContract;
+    setContract(value: common_pb.SpotContract): GetDriftSpotOrderbookResponse;
+    clearBidsList(): void;
+    getBidsList(): Array<DriftSpotOrderbookItem>;
+    setBidsList(value: Array<DriftSpotOrderbookItem>): GetDriftSpotOrderbookResponse;
+    addBids(value?: DriftSpotOrderbookItem, index?: number): DriftSpotOrderbookItem;
+    clearAsksList(): void;
+    getAsksList(): Array<DriftSpotOrderbookItem>;
+    setAsksList(value: Array<DriftSpotOrderbookItem>): GetDriftSpotOrderbookResponse;
+    addAsks(value?: DriftSpotOrderbookItem, index?: number): DriftSpotOrderbookItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftSpotOrderbookResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftSpotOrderbookResponse): GetDriftSpotOrderbookResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftSpotOrderbookResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftSpotOrderbookResponse;
+    static deserializeBinaryFromReader(message: GetDriftSpotOrderbookResponse, reader: jspb.BinaryReader): GetDriftSpotOrderbookResponse;
+}
+
+export namespace GetDriftSpotOrderbookResponse {
+    export type AsObject = {
+        contract: common_pb.SpotContract,
+        bidsList: Array<DriftSpotOrderbookItem.AsObject>,
+        asksList: Array<DriftSpotOrderbookItem.AsObject>,
+    }
+}
+
+export class DriftSpotOrderbookItem extends jspb.Message { 
+    getPrice(): number;
+    setPrice(value: number): DriftSpotOrderbookItem;
+    getSize(): number;
+    setSize(value: number): DriftSpotOrderbookItem;
+    getOrderid(): string;
+    setOrderid(value: string): DriftSpotOrderbookItem;
+    getClientorderid(): string;
+    setClientorderid(value: string): DriftSpotOrderbookItem;
+    getStatus(): string;
+    setStatus(value: string): DriftSpotOrderbookItem;
+    getOrdertype(): string;
+    setOrdertype(value: string): DriftSpotOrderbookItem;
+    getSlot(): number;
+    setSlot(value: number): DriftSpotOrderbookItem;
+    getReduceonly(): boolean;
+    setReduceonly(value: boolean): DriftSpotOrderbookItem;
+    getTriggerprice(): number;
+    setTriggerprice(value: number): DriftSpotOrderbookItem;
+    getTriggercondition(): string;
+    setTriggercondition(value: string): DriftSpotOrderbookItem;
+    getPostonly(): boolean;
+    setPostonly(value: boolean): DriftSpotOrderbookItem;
+    getOraclepriceoffset(): number;
+    setOraclepriceoffset(value: number): DriftSpotOrderbookItem;
+    getAuctionduration(): number;
+    setAuctionduration(value: number): DriftSpotOrderbookItem;
+    getAuctionstartprice(): number;
+    setAuctionstartprice(value: number): DriftSpotOrderbookItem;
+    getAuctionendprice(): number;
+    setAuctionendprice(value: number): DriftSpotOrderbookItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): DriftSpotOrderbookItem.AsObject;
+    static toObject(includeInstance: boolean, msg: DriftSpotOrderbookItem): DriftSpotOrderbookItem.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: DriftSpotOrderbookItem, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): DriftSpotOrderbookItem;
+    static deserializeBinaryFromReader(message: DriftSpotOrderbookItem, reader: jspb.BinaryReader): DriftSpotOrderbookItem;
+}
+
+export namespace DriftSpotOrderbookItem {
+    export type AsObject = {
+        price: number,
+        size: number,
+        orderid: string,
+        clientorderid: string,
+        status: string,
+        ordertype: string,
+        slot: number,
+        reduceonly: boolean,
+        triggerprice: number,
+        triggercondition: string,
+        postonly: boolean,
+        oraclepriceoffset: number,
+        auctionduration: number,
+        auctionstartprice: number,
+        auctionendprice: number,
+    }
+}
+
+export class GetDriftSpotOrderbooksStreamResponse extends jspb.Message { 
+    getSlot(): number;
+    setSlot(value: number): GetDriftSpotOrderbooksStreamResponse;
+
+    hasOrderbook(): boolean;
+    clearOrderbook(): void;
+    getOrderbook(): GetDriftSpotOrderbookResponse | undefined;
+    setOrderbook(value?: GetDriftSpotOrderbookResponse): GetDriftSpotOrderbooksStreamResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftSpotOrderbooksStreamResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftSpotOrderbooksStreamResponse): GetDriftSpotOrderbooksStreamResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftSpotOrderbooksStreamResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftSpotOrderbooksStreamResponse;
+    static deserializeBinaryFromReader(message: GetDriftSpotOrderbooksStreamResponse, reader: jspb.BinaryReader): GetDriftSpotOrderbooksStreamResponse;
+}
+
+export namespace GetDriftSpotOrderbooksStreamResponse {
+    export type AsObject = {
+        slot: number,
+        orderbook?: GetDriftSpotOrderbookResponse.AsObject,
+    }
+}
+
 export class GetUserRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): GetUserRequest;

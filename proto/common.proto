@@ -31,6 +31,12 @@ enum PostOnlyParams {
   PO_TRY_POST_ONLY = 2;
 }
 
+enum SpotContract {
+  ALL_SPOTS = 0;
+  SOL_SPOT = 1;   // SOL_SPOT
+  USDC_SPOT = 2;  // USDC_SPOT
+}
+
 enum PerpContract {
   ALL = 0;
   SOL_PERP = 1;   // SOL-PERP

@@ -82,6 +82,12 @@ export enum PostOnlyParams {
     PO_TRY_POST_ONLY = 2,
 }
 
+export enum SpotContract {
+    ALL_SPOTS = 0,
+    SOL_SPOT = 1,
+    USDC_SPOT = 2,
+}
+
 export enum PerpContract {
     ALL = 0,
     SOL_PERP = 1,
