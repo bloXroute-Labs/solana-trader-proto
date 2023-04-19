@@ -81,6 +81,7 @@ type ApiClient interface {
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
 	// Perp streaming endpoints
 	GetPerpOrderbooksStream(ctx context.Context, in *GetPerpOrderbooksRequest, opts ...grpc.CallOption) (Api_GetPerpOrderbooksStreamClient, error)
+	GetDriftSpotOrderbooksStream(ctx context.Context, in *GetDriftSpotOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftSpotOrderbooksStreamClient, error)
 	GetNewPerpOrdersStream(ctx context.Context, in *GetNewPerpOrdersStreamRequest, opts ...grpc.CallOption) (Api_GetNewPerpOrdersStreamClient, error)
 	GetPerpTradesStream(ctx context.Context, in *GetPerpTradesStreamRequest, opts ...grpc.CallOption) (Api_GetPerpTradesStreamClient, error)
 }
@@ -882,8 +883,40 @@ func (x *apiGetPerpOrderbooksStreamClient) Recv() (*GetPerpOrderbooksStreamRespo
 	return m, nil
 }
 
+func (c *apiClient) GetDriftSpotOrderbooksStream(ctx context.Context, in *GetDriftSpotOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftSpotOrderbooksStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetDriftSpotOrderbooksStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetDriftSpotOrderbooksStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetDriftSpotOrderbooksStreamClient interface {
+	Recv() (*GetDriftSpotOrderbooksStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetDriftSpotOrderbooksStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetDriftSpotOrderbooksStreamClient) Recv() (*GetDriftSpotOrderbooksStreamResponse, error) {
+	m := new(GetDriftSpotOrderbooksStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetNewPerpOrdersStream(ctx context.Context, in *GetNewPerpOrdersStreamRequest, opts ...grpc.CallOption) (Api_GetNewPerpOrdersStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetNewPerpOrdersStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetNewPerpOrdersStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -915,7 +948,7 @@ func (x *apiGetNewPerpOrdersStreamClient) Recv() (*GetNewPerpOrdersStreamRespons
 }
 
 func (c *apiClient) GetPerpTradesStream(ctx context.Context, in *GetPerpTradesStreamRequest, opts ...grpc.CallOption) (Api_GetPerpTradesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetPerpTradesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetPerpTradesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1013,6 +1046,7 @@ type ApiServer interface {
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
 	// Perp streaming endpoints
 	GetPerpOrderbooksStream(*GetPerpOrderbooksRequest, Api_GetPerpOrderbooksStreamServer) error
+	GetDriftSpotOrderbooksStream(*GetDriftSpotOrderbooksRequest, Api_GetDriftSpotOrderbooksStreamServer) error
 	GetNewPerpOrdersStream(*GetNewPerpOrdersStreamRequest, Api_GetNewPerpOrdersStreamServer) error
 	GetPerpTradesStream(*GetPerpTradesStreamRequest, Api_GetPerpTradesStreamServer) error
 	mustEmbedUnimplementedApiServer()
@@ -1192,6 +1226,9 @@ func (UnimplementedApiServer) GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwap
 }
 func (UnimplementedApiServer) GetPerpOrderbooksStream(*GetPerpOrderbooksRequest, Api_GetPerpOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPerpOrderbooksStream not implemented")
+}
+func (UnimplementedApiServer) GetDriftSpotOrderbooksStream(*GetDriftSpotOrderbooksRequest, Api_GetDriftSpotOrderbooksStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetDriftSpotOrderbooksStream not implemented")
 }
 func (UnimplementedApiServer) GetNewPerpOrdersStream(*GetNewPerpOrdersStreamRequest, Api_GetNewPerpOrdersStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetNewPerpOrdersStream not implemented")
@@ -2274,6 +2311,27 @@ func (x *apiGetPerpOrderbooksStreamServer) Send(m *GetPerpOrderbooksStreamRespon
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetDriftSpotOrderbooksStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetDriftSpotOrderbooksRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetDriftSpotOrderbooksStream(m, &apiGetDriftSpotOrderbooksStreamServer{stream})
+}
+
+type Api_GetDriftSpotOrderbooksStreamServer interface {
+	Send(*GetDriftSpotOrderbooksStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetDriftSpotOrderbooksStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetDriftSpotOrderbooksStreamServer) Send(m *GetDriftSpotOrderbooksStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetNewPerpOrdersStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetNewPerpOrdersStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2563,6 +2621,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetPerpOrderbooksStream",
 			Handler:       _Api_GetPerpOrderbooksStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetDriftSpotOrderbooksStream",
+			Handler:       _Api_GetDriftSpotOrderbooksStream_Handler,
 			ServerStreams: true,
 		},
 		{

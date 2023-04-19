@@ -2288,6 +2288,25 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_drift_spot_orderbooks_stream(
+        self,
+        *,
+        contracts: List[common.SpotContract] = [],
+        limit: int = 0,
+        project: "Project" = 0,
+    ) -> AsyncGenerator[GetDriftSpotOrderbooksStreamResponse, None]:
+        request = GetDriftSpotOrderbooksRequest()
+        request.contracts = contracts
+        request.limit = limit
+        request.project = project
+
+        async for response in self._unary_stream(
+            "/api.Api/GetDriftSpotOrderbooksStream",
+            request,
+            GetDriftSpotOrderbooksStreamResponse,
+        ):
+            yield response
+
     async def get_new_perp_orders_stream(
         self, *, markets: List[str] = [], project: "Project" = 0
     ) -> AsyncGenerator[GetNewPerpOrdersStreamResponse, None]:

@@ -76,6 +76,28 @@ function deserialize_api_GetBlockStreamResponse(buffer_arg) {
   return api_pb.GetBlockStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetDriftSpotOrderbooksRequest(arg) {
+  if (!(arg instanceof api_pb.GetDriftSpotOrderbooksRequest)) {
+    throw new Error('Expected argument of type api.GetDriftSpotOrderbooksRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftSpotOrderbooksRequest(buffer_arg) {
+  return api_pb.GetDriftSpotOrderbooksRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftSpotOrderbooksStreamResponse(arg) {
+  if (!(arg instanceof api_pb.GetDriftSpotOrderbooksStreamResponse)) {
+    throw new Error('Expected argument of type api.GetDriftSpotOrderbooksStreamResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftSpotOrderbooksStreamResponse(buffer_arg) {
+  return api_pb.GetDriftSpotOrderbooksStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetKlineRequest(arg) {
   if (!(arg instanceof api_pb.GetKlineRequest)) {
     throw new Error('Expected argument of type api.GetKlineRequest');
@@ -1821,6 +1843,17 @@ getPerpOrderbooksStream: {
     requestDeserialize: deserialize_api_GetPerpOrderbooksRequest,
     responseSerialize: serialize_api_GetPerpOrderbooksStreamResponse,
     responseDeserialize: deserialize_api_GetPerpOrderbooksStreamResponse,
+  },
+  getDriftSpotOrderbooksStream: {
+    path: '/api.Api/GetDriftSpotOrderbooksStream',
+    requestStream: false,
+    responseStream: true,
+    requestType: api_pb.GetDriftSpotOrderbooksRequest,
+    responseType: api_pb.GetDriftSpotOrderbooksStreamResponse,
+    requestSerialize: serialize_api_GetDriftSpotOrderbooksRequest,
+    requestDeserialize: deserialize_api_GetDriftSpotOrderbooksRequest,
+    responseSerialize: serialize_api_GetDriftSpotOrderbooksStreamResponse,
+    responseDeserialize: deserialize_api_GetDriftSpotOrderbooksStreamResponse,
   },
   getNewPerpOrdersStream: {
     path: '/api.Api/GetNewPerpOrdersStream',

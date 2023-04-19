@@ -649,6 +649,12 @@ service Api {
     };
   }
 
+  rpc GetDriftSpotOrderbooksStream(GetDriftSpotOrderbooksRequest) returns (stream GetDriftSpotOrderbooksStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Perp";
+    };
+  }
+
   rpc GetNewPerpOrdersStream(GetNewPerpOrdersStreamRequest) returns (stream GetNewPerpOrdersStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Perp";

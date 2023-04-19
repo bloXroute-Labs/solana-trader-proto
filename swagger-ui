@@ -1974,6 +1974,65 @@
       ],
       "default": "D_ASCENDING"
     },
+    "apiDriftSpotOrderbookItem": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "orderID": {
+          "type": "string",
+          "description": "platform generated OrderID"
+        },
+        "clientOrderID": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "orderType": {
+          "type": "string"
+        },
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reduceOnly": {
+          "type": "boolean"
+        },
+        "triggerPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "triggerCondition": {
+          "type": "string"
+        },
+        "postOnly": {
+          "type": "boolean"
+        },
+        "oraclePriceOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "auctionDuration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "auctionStartPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "auctionEndPrice": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiGetAccountBalanceResponse": {
       "type": "object",
       "properties": {
@@ -2004,6 +2063,38 @@
       "properties": {
         "block": {
           "$ref": "#/definitions/apiBlock"
+        }
+      }
+    },
+    "apiGetDriftSpotOrderbookResponse": {
+      "type": "object",
+      "properties": {
+        "contract": {
+          "$ref": "#/definitions/commonSpotContract"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDriftSpotOrderbookItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDriftSpotOrderbookItem"
+          }
+        }
+      }
+    },
+    "apiGetDriftSpotOrderbooksStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orderbook": {
+          "$ref": "#/definitions/apiGetDriftSpotOrderbookResponse"
         }
       }
     },
@@ -4262,6 +4353,15 @@
           "$ref": "#/definitions/commonInfinity"
         }
       }
+    },
+    "commonSpotContract": {
+      "type": "string",
+      "enum": [
+        "ALL_SPOTS",
+        "SOL_SPOT",
+        "USDC_SPOT"
+      ],
+      "default": "ALL_SPOTS"
     },
     "protobufAny": {
       "type": "object",
