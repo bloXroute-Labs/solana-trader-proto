@@ -1559,7 +1559,7 @@ var (
 )
 
 func request_Api_GetDriftSpotOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetPerpOrderbookRequest
+	var protoReq GetDriftSpotOrderbookRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -1575,12 +1575,12 @@ func request_Api_GetDriftSpotOrderbook_0(ctx context.Context, marshaler runtime.
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "contract")
 	}
 
-	e, err = runtime.Enum(val, common.PerpContract_value)
+	e, err = runtime.Enum(val, common.SpotContract_value)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "contract", err)
 	}
 
-	protoReq.Contract = common.PerpContract(e)
+	protoReq.Contract = common.SpotContract(e)
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -1595,7 +1595,7 @@ func request_Api_GetDriftSpotOrderbook_0(ctx context.Context, marshaler runtime.
 }
 
 func local_request_Api_GetDriftSpotOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetPerpOrderbookRequest
+	var protoReq GetDriftSpotOrderbookRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -1611,12 +1611,12 @@ func local_request_Api_GetDriftSpotOrderbook_0(ctx context.Context, marshaler ru
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "contract")
 	}
 
-	e, err = runtime.Enum(val, common.PerpContract_value)
+	e, err = runtime.Enum(val, common.SpotContract_value)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "contract", err)
 	}
 
-	protoReq.Contract = common.PerpContract(e)
+	protoReq.Contract = common.SpotContract(e)
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)

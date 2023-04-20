@@ -76,6 +76,28 @@ function deserialize_api_GetBlockStreamResponse(buffer_arg) {
   return api_pb.GetBlockStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetDriftSpotOrderbookRequest(arg) {
+  if (!(arg instanceof api_pb.GetDriftSpotOrderbookRequest)) {
+    throw new Error('Expected argument of type api.GetDriftSpotOrderbookRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftSpotOrderbookRequest(buffer_arg) {
+  return api_pb.GetDriftSpotOrderbookRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftSpotOrderbookResponse(arg) {
+  if (!(arg instanceof api_pb.GetDriftSpotOrderbookResponse)) {
+    throw new Error('Expected argument of type api.GetDriftSpotOrderbookResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftSpotOrderbookResponse(buffer_arg) {
+  return api_pb.GetDriftSpotOrderbookResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetDriftSpotOrderbooksRequest(arg) {
   if (!(arg instanceof api_pb.GetDriftSpotOrderbooksRequest)) {
     throw new Error('Expected argument of type api.GetDriftSpotOrderbooksRequest');
@@ -1604,12 +1626,12 @@ postPerpOrder: {
     path: '/api.Api/GetDriftSpotOrderbook',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetPerpOrderbookRequest,
-    responseType: api_pb.GetPerpOrderbookResponse,
-    requestSerialize: serialize_api_GetPerpOrderbookRequest,
-    requestDeserialize: deserialize_api_GetPerpOrderbookRequest,
-    responseSerialize: serialize_api_GetPerpOrderbookResponse,
-    responseDeserialize: deserialize_api_GetPerpOrderbookResponse,
+    requestType: api_pb.GetDriftSpotOrderbookRequest,
+    responseType: api_pb.GetDriftSpotOrderbookResponse,
+    requestSerialize: serialize_api_GetDriftSpotOrderbookRequest,
+    requestDeserialize: deserialize_api_GetDriftSpotOrderbookRequest,
+    responseSerialize: serialize_api_GetDriftSpotOrderbookResponse,
+    responseDeserialize: deserialize_api_GetDriftSpotOrderbookResponse,
   },
   postCreateUser: {
     path: '/api.Api/PostCreateUser',

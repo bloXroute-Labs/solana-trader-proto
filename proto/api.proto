@@ -460,14 +460,14 @@ service Api {
     };
   }
 
-  rpc GetDriftSpotOrderbook(GetPerpOrderbookRequest) returns (GetPerpOrderbookResponse) {
+  rpc GetDriftSpotOrderbook(GetDriftSpotOrderbookRequest) returns (GetDriftSpotOrderbookResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/driftspot/orderbook/{contract}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
-      summary: "Perpetuals contract orderbook";
-      tags: ["Perp", "Orderbook", "Market"];
+      description: "Returns spot contract's orderbook. Use limit param to reduce the number of bids/asks returned";
+      summary: "Spot contract orderbook";
+      tags: ["Spot", "Orderbook", "Market"];
     };
   }
 

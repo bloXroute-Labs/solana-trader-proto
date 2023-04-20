@@ -148,14 +148,14 @@
     },
     "/api/v1/market/driftspot/orderbook/{contract}": {
       "get": {
-        "summary": "Perpetuals contract orderbook",
-        "description": "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "summary": "Spot contract orderbook",
+        "description": "Returns spot contract's orderbook. Use limit param to reduce the number of bids/asks returned",
         "operationId": "Api_GetDriftSpotOrderbook",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetPerpOrderbookResponse"
+              "$ref": "#/definitions/apiGetDriftSpotOrderbookResponse"
             }
           },
           "default": {
@@ -172,14 +172,9 @@
             "required": true,
             "type": "string",
             "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP",
-              "APT_PERP",
-              "BONK_PERP",
-              "MATIC_PERP",
-              "ARB_PERP"
+              "ALL_SPOTS",
+              "SOL_SPOT",
+              "USDC_SPOT"
             ]
           },
           {
@@ -208,7 +203,7 @@
           }
         ],
         "tags": [
-          "Perp",
+          "Spot",
           "Orderbook",
           "Market"
         ]

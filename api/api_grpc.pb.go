@@ -57,7 +57,7 @@ type ApiClient interface {
 	PostCancelPerpOrder(ctx context.Context, in *PostCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostCancelPerpOrderResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
-	GetDriftSpotOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
+	GetDriftSpotOrderbook(ctx context.Context, in *GetDriftSpotOrderbookRequest, opts ...grpc.CallOption) (*GetDriftSpotOrderbookResponse, error)
 	PostCreateUser(ctx context.Context, in *PostCreateUserRequest, opts ...grpc.CallOption) (*PostCreateUserResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	PostManageCollateral(ctx context.Context, in *PostManageCollateralRequest, opts ...grpc.CallOption) (*PostManageCollateralResponse, error)
@@ -409,8 +409,8 @@ func (c *apiClient) GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRe
 	return out, nil
 }
 
-func (c *apiClient) GetDriftSpotOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error) {
-	out := new(GetPerpOrderbookResponse)
+func (c *apiClient) GetDriftSpotOrderbook(ctx context.Context, in *GetDriftSpotOrderbookRequest, opts ...grpc.CallOption) (*GetDriftSpotOrderbookResponse, error) {
+	out := new(GetDriftSpotOrderbookResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetDriftSpotOrderbook", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1022,7 +1022,7 @@ type ApiServer interface {
 	PostCancelPerpOrder(context.Context, *PostCancelPerpOrderRequest) (*PostCancelPerpOrderResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
-	GetDriftSpotOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
+	GetDriftSpotOrderbook(context.Context, *GetDriftSpotOrderbookRequest) (*GetDriftSpotOrderbookResponse, error)
 	PostCreateUser(context.Context, *PostCreateUserRequest) (*PostCreateUserResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	PostManageCollateral(context.Context, *PostManageCollateralRequest) (*PostManageCollateralResponse, error)
@@ -1161,7 +1161,7 @@ func (UnimplementedApiServer) PostClosePerpPositions(context.Context, *PostClose
 func (UnimplementedApiServer) GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPerpOrderbook not implemented")
 }
-func (UnimplementedApiServer) GetDriftSpotOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error) {
+func (UnimplementedApiServer) GetDriftSpotOrderbook(context.Context, *GetDriftSpotOrderbookRequest) (*GetDriftSpotOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDriftSpotOrderbook not implemented")
 }
 func (UnimplementedApiServer) PostCreateUser(context.Context, *PostCreateUserRequest) (*PostCreateUserResponse, error) {
@@ -1880,7 +1880,7 @@ func _Api_GetPerpOrderbook_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _Api_GetDriftSpotOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPerpOrderbookRequest)
+	in := new(GetDriftSpotOrderbookRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1892,7 +1892,7 @@ func _Api_GetDriftSpotOrderbook_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: "/api.Api/GetDriftSpotOrderbook",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetDriftSpotOrderbook(ctx, req.(*GetPerpOrderbookRequest))
+		return srv.(ApiServer).GetDriftSpotOrderbook(ctx, req.(*GetDriftSpotOrderbookRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

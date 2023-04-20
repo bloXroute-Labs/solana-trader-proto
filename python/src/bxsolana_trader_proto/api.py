@@ -1922,11 +1922,11 @@ class ApiStub(betterproto.ServiceStub):
     async def get_drift_spot_orderbook(
         self,
         *,
-        contract: common.PerpContract = 0,
+        contract: common.SpotContract = 0,
         limit: int = 0,
         project: "Project" = 0,
-    ) -> GetPerpOrderbookResponse:
-        request = GetPerpOrderbookRequest()
+    ) -> GetDriftSpotOrderbookResponse:
+        request = GetDriftSpotOrderbookRequest()
         request.contract = contract
         request.limit = limit
         request.project = project
@@ -1934,7 +1934,7 @@ class ApiStub(betterproto.ServiceStub):
         return await self._unary_unary(
             "/api.Api/GetDriftSpotOrderbook",
             request,
-            GetPerpOrderbookResponse,
+            GetDriftSpotOrderbookResponse,
         )
 
     async def post_create_user(
