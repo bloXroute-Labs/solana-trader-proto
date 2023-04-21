@@ -49,6 +49,8 @@ type ApiClient interface {
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
+	// Drift Spot
+	PostSpotOrder(ctx context.Context, in *PostDriftSpotOrderRequest, opts ...grpc.CallOption) (*PostDriftSpotOrderResponse, error)
 	// perp endpoints
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
 	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
@@ -340,6 +342,15 @@ func (c *apiClient) GetUnsettled(ctx context.Context, in *GetUnsettledRequest, o
 func (c *apiClient) PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error) {
 	out := new(TradeSwapResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostRouteTradeSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostSpotOrder(ctx context.Context, in *PostDriftSpotOrderRequest, opts ...grpc.CallOption) (*PostDriftSpotOrderResponse, error) {
+	out := new(PostDriftSpotOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostSpotOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1014,6 +1025,8 @@ type ApiServer interface {
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
+	// Drift Spot
+	PostSpotOrder(context.Context, *PostDriftSpotOrderRequest) (*PostDriftSpotOrderResponse, error)
 	// perp endpoints
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
 	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
@@ -1139,6 +1152,9 @@ func (UnimplementedApiServer) GetUnsettled(context.Context, *GetUnsettledRequest
 }
 func (UnimplementedApiServer) PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRouteTradeSwap not implemented")
+}
+func (UnimplementedApiServer) PostSpotOrder(context.Context, *PostDriftSpotOrderRequest) (*PostDriftSpotOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostSpotOrder not implemented")
 }
 func (UnimplementedApiServer) PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostPerpOrder not implemented")
@@ -1749,6 +1765,24 @@ func _Api_PostRouteTradeSwap_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostRouteTradeSwap(ctx, req.(*RouteTradeSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostSpotOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostDriftSpotOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostSpotOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostSpotOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostSpotOrder(ctx, req.(*PostDriftSpotOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2492,6 +2526,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostRouteTradeSwap",
 			Handler:    _Api_PostRouteTradeSwap_Handler,
+		},
+		{
+			MethodName: "PostSpotOrder",
+			Handler:    _Api_PostSpotOrder_Handler,
 		},
 		{
 			MethodName: "PostPerpOrder",

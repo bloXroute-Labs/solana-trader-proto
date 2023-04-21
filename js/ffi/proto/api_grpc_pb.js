@@ -989,6 +989,28 @@ function deserialize_api_PostCreateUserResponse(buffer_arg) {
   return api_pb.PostCreateUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostDriftSpotOrderRequest(arg) {
+  if (!(arg instanceof api_pb.PostDriftSpotOrderRequest)) {
+    throw new Error('Expected argument of type api.PostDriftSpotOrderRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDriftSpotOrderRequest(buffer_arg) {
+  return api_pb.PostDriftSpotOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostDriftSpotOrderResponse(arg) {
+  if (!(arg instanceof api_pb.PostDriftSpotOrderResponse)) {
+    throw new Error('Expected argument of type api.PostDriftSpotOrderResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDriftSpotOrderResponse(buffer_arg) {
+  return api_pb.PostDriftSpotOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostLiquidatePerpRequest(arg) {
   if (!(arg instanceof api_pb.PostLiquidatePerpRequest)) {
     throw new Error('Expected argument of type api.PostLiquidatePerpRequest');
@@ -1543,6 +1565,18 @@ postOrder: {
     requestDeserialize: deserialize_api_RouteTradeSwapRequest,
     responseSerialize: serialize_api_TradeSwapResponse,
     responseDeserialize: deserialize_api_TradeSwapResponse,
+  },
+  // Drift Spot
+postSpotOrder: {
+    path: '/api.Api/PostSpotOrder',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostDriftSpotOrderRequest,
+    responseType: api_pb.PostDriftSpotOrderResponse,
+    requestSerialize: serialize_api_PostDriftSpotOrderRequest,
+    requestDeserialize: deserialize_api_PostDriftSpotOrderRequest,
+    responseSerialize: serialize_api_PostDriftSpotOrderResponse,
+    responseDeserialize: deserialize_api_PostDriftSpotOrderResponse,
   },
   // perp endpoints
 postPerpOrder: {

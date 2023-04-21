@@ -13,7 +13,7 @@ class OrderType(betterproto.Enum):
     OT_POST = 3
 
 
-class PerpOrderType(betterproto.Enum):
+class DriftOrderType(betterproto.Enum):
     """Drift types : limit, trigger_market, trigger_limit, market, oracle"""
 
     POT_UNKNOWN = 0

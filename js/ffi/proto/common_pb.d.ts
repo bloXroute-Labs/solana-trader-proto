@@ -62,7 +62,7 @@ export enum OrderType {
     OT_POST = 3,
 }
 
-export enum PerpOrderType {
+export enum DriftOrderType {
     POT_UNKNOWN = 0,
     POT_MARKET = 1,
     POT_LIMIT = 2,

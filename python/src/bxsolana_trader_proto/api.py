@@ -1045,7 +1045,7 @@ class PostPerpOrderRequest(betterproto.Message):
     account_address: str = betterproto.string_field(5)
     position_side: common.PerpPositionSide = betterproto.enum_field(6)
     slippage: float = betterproto.double_field(7)
-    type: common.PerpOrderType = betterproto.enum_field(8)
+    type: common.DriftOrderType = betterproto.enum_field(8)
     amount: float = betterproto.double_field(9)
     price: float = betterproto.double_field(10)
     client_order_i_d: int = betterproto.uint64_field(11)
@@ -1054,6 +1054,26 @@ class PostPerpOrderRequest(betterproto.Message):
 
 @dataclass
 class PostPerpOrderResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass
+class PostDriftSpotOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    payer_address: str = betterproto.string_field(2)
+    contract: common.PerpContract = betterproto.enum_field(3)
+    account_address: str = betterproto.string_field(4)
+    position_side: common.PerpPositionSide = betterproto.enum_field(5)
+    slippage: float = betterproto.double_field(6)
+    type: common.DriftOrderType = betterproto.enum_field(7)
+    amount: float = betterproto.double_field(8)
+    price: float = betterproto.double_field(9)
+    client_order_i_d: int = betterproto.uint64_field(10)
+    post_only: common.PostOnlyParams = betterproto.enum_field(11)
+
+
+@dataclass
+class PostDriftSpotOrderResponse(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
@@ -1067,7 +1087,7 @@ class GetNewPerpOrdersStreamRequest(betterproto.Message):
 class GetNewPerpOrdersStreamResponse(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(1)
     side: common.PerpPositionSide = betterproto.enum_field(2)
-    type: common.PerpOrderType = betterproto.enum_field(3)
+    type: common.DriftOrderType = betterproto.enum_field(3)
     user_address: str = betterproto.string_field(4)
     order_i_d: str = betterproto.string_field(5)
     client_order_i_d: str = betterproto.string_field(6)
@@ -1759,6 +1779,42 @@ class ApiStub(betterproto.ServiceStub):
             TradeSwapResponse,
         )
 
+    async def post_spot_order(
+        self,
+        *,
+        owner_address: str = "",
+        payer_address: str = "",
+        contract: common.PerpContract = 0,
+        account_address: str = "",
+        position_side: common.PerpPositionSide = 0,
+        slippage: float = 0,
+        type: common.DriftOrderType = 0,
+        amount: float = 0,
+        price: float = 0,
+        client_order_i_d: int = 0,
+        post_only: common.PostOnlyParams = 0,
+    ) -> PostDriftSpotOrderResponse:
+        """Drift Spot"""
+
+        request = PostDriftSpotOrderRequest()
+        request.owner_address = owner_address
+        request.payer_address = payer_address
+        request.contract = contract
+        request.account_address = account_address
+        request.position_side = position_side
+        request.slippage = slippage
+        request.type = type
+        request.amount = amount
+        request.price = price
+        request.client_order_i_d = client_order_i_d
+        request.post_only = post_only
+
+        return await self._unary_unary(
+            "/api.Api/PostSpotOrder",
+            request,
+            PostDriftSpotOrderResponse,
+        )
+
     async def post_perp_order(
         self,
         *,
@@ -1769,7 +1825,7 @@ class ApiStub(betterproto.ServiceStub):
         account_address: str = "",
         position_side: common.PerpPositionSide = 0,
         slippage: float = 0,
-        type: common.PerpOrderType = 0,
+        type: common.DriftOrderType = 0,
         amount: float = 0,
         price: float = 0,
         client_order_i_d: int = 0,

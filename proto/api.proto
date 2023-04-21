@@ -378,6 +378,20 @@ service Api {
     };
   }
 
+  // Drift Spot
+  rpc PostSpotOrder(PostDriftSpotOrderRequest)  returns (PostDriftSpotOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/driftspot/order"
+      body: "*",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "post a drift spot order";
+      summary: "drift spot order";
+      tags: ["Trade", "Spot", "Orderbook"];
+    };
+  }
+
+
   // perp endpoints
   rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
     option (google.api.http) = {
@@ -1579,7 +1593,7 @@ message PostPerpOrderRequest {
   string accountAddress = 5;
   common.PerpPositionSide positionSide = 6;
   double slippage = 7;
-  common.PerpOrderType type = 8;
+  common.DriftOrderType type = 8;
   double amount = 9;
   double price = 10;
   uint64 clientOrderID = 11;
@@ -1587,6 +1601,24 @@ message PostPerpOrderRequest {
 }
 
 message PostPerpOrderResponse {
+  TransactionMessage transaction = 1;
+}
+
+message PostDriftSpotOrderRequest {
+  string ownerAddress = 1;
+  string payerAddress = 2;
+  common.PerpContract contract = 3;
+  string accountAddress = 4;
+  common.PerpPositionSide positionSide = 5;
+  double slippage = 6;
+  common.DriftOrderType type = 7;
+  double amount = 8;
+  double price = 9;
+  uint64 clientOrderID = 10;
+  common.PostOnlyParams postOnly = 11;
+}
+
+message PostDriftSpotOrderResponse {
   TransactionMessage transaction = 1;
 }
 
@@ -1598,7 +1630,7 @@ message GetNewPerpOrdersStreamRequest {
 message GetNewPerpOrdersStreamResponse {
   common.PerpContract contract = 1;
   common.PerpPositionSide side = 2;
-  common.PerpOrderType type = 3;
+  common.DriftOrderType type = 3;
   string userAddress = 4;
   string orderID = 5;
   string clientOrderID = 6;

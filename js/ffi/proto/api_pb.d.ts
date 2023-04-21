@@ -3785,8 +3785,8 @@ export class PostPerpOrderRequest extends jspb.Message {
     setPositionside(value: common_pb.PerpPositionSide): PostPerpOrderRequest;
     getSlippage(): number;
     setSlippage(value: number): PostPerpOrderRequest;
-    getType(): common_pb.PerpOrderType;
-    setType(value: common_pb.PerpOrderType): PostPerpOrderRequest;
+    getType(): common_pb.DriftOrderType;
+    setType(value: common_pb.DriftOrderType): PostPerpOrderRequest;
     getAmount(): number;
     setAmount(value: number): PostPerpOrderRequest;
     getPrice(): number;
@@ -3815,7 +3815,7 @@ export namespace PostPerpOrderRequest {
         accountaddress: string,
         positionside: common_pb.PerpPositionSide,
         slippage: number,
-        type: common_pb.PerpOrderType,
+        type: common_pb.DriftOrderType,
         amount: number,
         price: number,
         clientorderid: number,
@@ -3841,6 +3841,79 @@ export class PostPerpOrderResponse extends jspb.Message {
 }
 
 export namespace PostPerpOrderResponse {
+    export type AsObject = {
+        transaction?: TransactionMessage.AsObject,
+    }
+}
+
+export class PostDriftSpotOrderRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostDriftSpotOrderRequest;
+    getPayeraddress(): string;
+    setPayeraddress(value: string): PostDriftSpotOrderRequest;
+    getContract(): common_pb.PerpContract;
+    setContract(value: common_pb.PerpContract): PostDriftSpotOrderRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostDriftSpotOrderRequest;
+    getPositionside(): common_pb.PerpPositionSide;
+    setPositionside(value: common_pb.PerpPositionSide): PostDriftSpotOrderRequest;
+    getSlippage(): number;
+    setSlippage(value: number): PostDriftSpotOrderRequest;
+    getType(): common_pb.DriftOrderType;
+    setType(value: common_pb.DriftOrderType): PostDriftSpotOrderRequest;
+    getAmount(): number;
+    setAmount(value: number): PostDriftSpotOrderRequest;
+    getPrice(): number;
+    setPrice(value: number): PostDriftSpotOrderRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostDriftSpotOrderRequest;
+    getPostonly(): common_pb.PostOnlyParams;
+    setPostonly(value: common_pb.PostOnlyParams): PostDriftSpotOrderRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftSpotOrderRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftSpotOrderRequest): PostDriftSpotOrderRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftSpotOrderRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftSpotOrderRequest;
+    static deserializeBinaryFromReader(message: PostDriftSpotOrderRequest, reader: jspb.BinaryReader): PostDriftSpotOrderRequest;
+}
+
+export namespace PostDriftSpotOrderRequest {
+    export type AsObject = {
+        owneraddress: string,
+        payeraddress: string,
+        contract: common_pb.PerpContract,
+        accountaddress: string,
+        positionside: common_pb.PerpPositionSide,
+        slippage: number,
+        type: common_pb.DriftOrderType,
+        amount: number,
+        price: number,
+        clientorderid: number,
+        postonly: common_pb.PostOnlyParams,
+    }
+}
+
+export class PostDriftSpotOrderResponse extends jspb.Message { 
+
+    hasTransaction(): boolean;
+    clearTransaction(): void;
+    getTransaction(): TransactionMessage | undefined;
+    setTransaction(value?: TransactionMessage): PostDriftSpotOrderResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftSpotOrderResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftSpotOrderResponse): PostDriftSpotOrderResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftSpotOrderResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftSpotOrderResponse;
+    static deserializeBinaryFromReader(message: PostDriftSpotOrderResponse, reader: jspb.BinaryReader): PostDriftSpotOrderResponse;
+}
+
+export namespace PostDriftSpotOrderResponse {
     export type AsObject = {
         transaction?: TransactionMessage.AsObject,
     }
@@ -3876,8 +3949,8 @@ export class GetNewPerpOrdersStreamResponse extends jspb.Message {
     setContract(value: common_pb.PerpContract): GetNewPerpOrdersStreamResponse;
     getSide(): common_pb.PerpPositionSide;
     setSide(value: common_pb.PerpPositionSide): GetNewPerpOrdersStreamResponse;
-    getType(): common_pb.PerpOrderType;
-    setType(value: common_pb.PerpOrderType): GetNewPerpOrdersStreamResponse;
+    getType(): common_pb.DriftOrderType;
+    setType(value: common_pb.DriftOrderType): GetNewPerpOrdersStreamResponse;
     getUseraddress(): string;
     setUseraddress(value: string): GetNewPerpOrdersStreamResponse;
     getOrderid(): string;
@@ -3913,7 +3986,7 @@ export namespace GetNewPerpOrdersStreamResponse {
     export type AsObject = {
         contract: common_pb.PerpContract,
         side: common_pb.PerpPositionSide,
-        type: common_pb.PerpOrderType,
+        type: common_pb.DriftOrderType,
         useraddress: string,
         orderid: string,
         clientorderid: string,

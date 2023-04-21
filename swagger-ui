@@ -767,6 +767,42 @@
         ]
       }
     },
+    "/api/v1/trade/driftspot/order": {
+      "post": {
+        "summary": "drift spot order",
+        "description": "post a drift spot order",
+        "operationId": "Api_PostSpotOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftSpotOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftSpotOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Spot",
+          "Orderbook"
+        ]
+      }
+    },
     "/api/v1/trade/openorders/{market}": {
       "get": {
         "summary": "List of user's open orders",
@@ -2167,7 +2203,7 @@
           "$ref": "#/definitions/commonPerpPositionSide"
         },
         "type": {
-          "$ref": "#/definitions/commonPerpOrderType"
+          "$ref": "#/definitions/commonDriftOrderType"
         },
         "userAddress": {
           "type": "string"
@@ -3329,6 +3365,56 @@
         }
       }
     },
+    "apiPostDriftSpotOrderRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "payerAddress": {
+          "type": "string"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "positionSide": {
+          "$ref": "#/definitions/commonPerpPositionSide"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "$ref": "#/definitions/commonDriftOrderType"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "postOnly": {
+          "$ref": "#/definitions/commonPostOnlyParams"
+        }
+      }
+    },
+    "apiPostDriftSpotOrderResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
     "apiPostLiquidatePerpRequest": {
       "type": "object",
       "properties": {
@@ -3496,7 +3582,7 @@
           "format": "double"
         },
         "type": {
-          "$ref": "#/definitions/commonPerpOrderType"
+          "$ref": "#/definitions/commonDriftOrderType"
         },
         "amount": {
           "type": "number",
@@ -4241,6 +4327,18 @@
         }
       }
     },
+    "commonDriftOrderType": {
+      "type": "string",
+      "enum": [
+        "POT_UNKNOWN",
+        "POT_MARKET",
+        "POT_LIMIT",
+        "POT_TRIGGER_MARKET",
+        "POT_TRIGGER_LIMIT"
+      ],
+      "default": "POT_UNKNOWN",
+      "title": "Drift types : limit, trigger_market, trigger_limit, market, oracle"
+    },
     "commonFee": {
       "type": "object",
       "properties": {
@@ -4306,18 +4404,6 @@
         "ARB_PERP"
       ],
       "default": "ALL"
-    },
-    "commonPerpOrderType": {
-      "type": "string",
-      "enum": [
-        "POT_UNKNOWN",
-        "POT_MARKET",
-        "POT_LIMIT",
-        "POT_TRIGGER_MARKET",
-        "POT_TRIGGER_LIMIT"
-      ],
-      "default": "POT_UNKNOWN",
-      "title": "Drift types : limit, trigger_market, trigger_limit, market, oracle"
     },
     "commonPerpPositionSide": {
       "type": "string",
