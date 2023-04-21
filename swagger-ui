@@ -90,6 +90,69 @@
         ]
       }
     },
+    "/api/v1/market/Margin/orderbook/{contract}": {
+      "get": {
+        "summary": "Spot contract orderbook",
+        "description": "Returns spot contract's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetMarginOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetMarginOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "contract",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ALL_SPOTS",
+              "SOL_SPOT",
+              "USDC_SPOT"
+            ]
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Spot",
+          "Orderbook",
+          "Market"
+        ]
+      }
+    },
     "/api/v1/market/depth/{market}": {
       "get": {
         "summary": "Market depth",
@@ -146,16 +209,16 @@
         ]
       }
     },
-    "/api/v1/market/driftspot/orderbook/{contract}": {
+    "/api/v1/market/margin/contracts": {
       "get": {
-        "summary": "Spot contract orderbook",
-        "description": "Returns spot contract's orderbook. Use limit param to reduce the number of bids/asks returned",
-        "operationId": "Api_GetDriftSpotOrderbook",
+        "summary": "details of available perp contracts",
+        "description": "Returns details of available perp contracts",
+        "operationId": "Api_GetMarginContracts",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetDriftSpotOrderbookResponse"
+              "$ref": "#/definitions/apiGetMarginContractsResponse"
             }
           },
           "default": {
@@ -166,25 +229,6 @@
           }
         },
         "parameters": [
-          {
-            "name": "contract",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "ALL_SPOTS",
-              "SOL_SPOT",
-              "USDC_SPOT"
-            ]
-          },
-          {
-            "name": "limit",
-            "description": "Use 0 for no limits",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
           {
             "name": "project",
             "in": "query",
@@ -203,8 +247,7 @@
           }
         ],
         "tags": [
-          "Spot",
-          "Orderbook",
+          "Perp",
           "Market"
         ]
       }
@@ -767,16 +810,16 @@
         ]
       }
     },
-    "/api/v1/trade/driftspot/order": {
+    "/api/v1/trade/margin/order": {
       "post": {
         "summary": "drift spot order",
-        "description": "post a drift spot order",
-        "operationId": "Api_PostDriftSpotOrder",
+        "description": "post a spot margin order",
+        "operationId": "Api_PostMarginOrder",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostDriftSpotOrderResponse"
+              "$ref": "#/definitions/apiPostMarginOrderResponse"
             }
           },
           "default": {
@@ -792,7 +835,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostDriftSpotOrderRequest"
+              "$ref": "#/definitions/apiPostMarginOrderRequest"
             }
           }
         ],
@@ -2005,65 +2048,6 @@
       ],
       "default": "D_ASCENDING"
     },
-    "apiDriftSpotOrderbookItem": {
-      "type": "object",
-      "properties": {
-        "price": {
-          "type": "number",
-          "format": "double"
-        },
-        "size": {
-          "type": "number",
-          "format": "double"
-        },
-        "orderID": {
-          "type": "string",
-          "description": "platform generated OrderID"
-        },
-        "clientOrderID": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "orderType": {
-          "type": "string"
-        },
-        "slot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "reduceOnly": {
-          "type": "boolean"
-        },
-        "triggerPrice": {
-          "type": "number",
-          "format": "double"
-        },
-        "triggerCondition": {
-          "type": "string"
-        },
-        "postOnly": {
-          "type": "boolean"
-        },
-        "oraclePriceOffset": {
-          "type": "number",
-          "format": "double"
-        },
-        "auctionDuration": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "auctionStartPrice": {
-          "type": "number",
-          "format": "double"
-        },
-        "auctionEndPrice": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
     "apiGetAccountBalanceResponse": {
       "type": "object",
       "properties": {
@@ -2097,38 +2081,6 @@
         }
       }
     },
-    "apiGetDriftSpotOrderbookResponse": {
-      "type": "object",
-      "properties": {
-        "contract": {
-          "$ref": "#/definitions/commonSpotContract"
-        },
-        "bids": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiDriftSpotOrderbookItem"
-          }
-        },
-        "asks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiDriftSpotOrderbookItem"
-          }
-        }
-      }
-    },
-    "apiGetDriftSpotOrderbooksStreamResponse": {
-      "type": "object",
-      "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "orderbook": {
-          "$ref": "#/definitions/apiGetDriftSpotOrderbookResponse"
-        }
-      }
-    },
     "apiGetKlineResponse": {
       "type": "object",
       "properties": {
@@ -2144,6 +2096,49 @@
           "items": {
             "$ref": "#/definitions/apiCandle"
           }
+        }
+      }
+    },
+    "apiGetMarginContractsResponse": {
+      "type": "object",
+      "properties": {
+        "contracts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMarginContractInfo"
+          }
+        }
+      }
+    },
+    "apiGetMarginOrderbookResponse": {
+      "type": "object",
+      "properties": {
+        "contract": {
+          "$ref": "#/definitions/commonSpotContract"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMarginOrderbookItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMarginOrderbookItem"
+          }
+        }
+      }
+    },
+    "apiGetMarginOrderbooksStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orderbook": {
+          "$ref": "#/definitions/apiGetMarginOrderbookResponse"
         }
       }
     },
@@ -2825,6 +2820,104 @@
         }
       }
     },
+    "apiMarginContractInfo": {
+      "type": "object",
+      "properties": {
+        "contract": {
+          "$ref": "#/definitions/commonSpotContract"
+        },
+        "contractAddress": {
+          "type": "string"
+        },
+        "openLongInterest": {
+          "type": "number",
+          "format": "double"
+        },
+        "openShortInterest": {
+          "type": "number",
+          "format": "double"
+        },
+        "fundingRate": {
+          "type": "number",
+          "format": "double"
+        },
+        "minSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "perpPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "indexPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "openInterest": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiMarginOrderbookItem": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "orderID": {
+          "type": "string",
+          "description": "platform generated OrderID"
+        },
+        "clientOrderID": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "orderType": {
+          "type": "string"
+        },
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reduceOnly": {
+          "type": "boolean"
+        },
+        "triggerPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "triggerCondition": {
+          "type": "string"
+        },
+        "postOnly": {
+          "type": "boolean"
+        },
+        "oraclePriceOffset": {
+          "type": "number",
+          "format": "double"
+        },
+        "auctionDuration": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "auctionStartPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "auctionEndPrice": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiMarket": {
       "type": "object",
       "properties": {
@@ -3365,56 +3458,6 @@
         }
       }
     },
-    "apiPostDriftSpotOrderRequest": {
-      "type": "object",
-      "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
-        "payerAddress": {
-          "type": "string"
-        },
-        "contract": {
-          "$ref": "#/definitions/commonPerpContract"
-        },
-        "accountAddress": {
-          "type": "string"
-        },
-        "positionSide": {
-          "$ref": "#/definitions/commonPositionSide"
-        },
-        "slippage": {
-          "type": "number",
-          "format": "double"
-        },
-        "type": {
-          "$ref": "#/definitions/commonDriftOrderType"
-        },
-        "amount": {
-          "type": "number",
-          "format": "double"
-        },
-        "price": {
-          "type": "number",
-          "format": "double"
-        },
-        "clientOrderID": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "postOnly": {
-          "$ref": "#/definitions/commonPostOnlyParams"
-        }
-      }
-    },
-    "apiPostDriftSpotOrderResponse": {
-      "type": "object",
-      "properties": {
-        "transaction": {
-          "$ref": "#/definitions/apiTransactionMessage"
-        }
-      }
-    },
     "apiPostLiquidatePerpRequest": {
       "type": "object",
       "properties": {
@@ -3469,6 +3512,56 @@
       }
     },
     "apiPostManageCollateralResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostMarginOrderRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "payerAddress": {
+          "type": "string"
+        },
+        "contract": {
+          "$ref": "#/definitions/commonPerpContract"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "positionSide": {
+          "$ref": "#/definitions/commonPositionSide"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "$ref": "#/definitions/commonDriftOrderType"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "postOnly": {
+          "$ref": "#/definitions/commonPostOnlyParams"
+        }
+      }
+    },
+    "apiPostMarginOrderResponse": {
       "type": "object",
       "properties": {
         "transaction": {

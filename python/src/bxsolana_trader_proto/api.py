@@ -845,28 +845,28 @@ class GetPerpOrderbooksStreamResponse(betterproto.Message):
 
 
 @dataclass
-class GetDriftSpotOrderbookRequest(betterproto.Message):
+class GetMarginOrderbookRequest(betterproto.Message):
     contract: common.SpotContract = betterproto.enum_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
-class GetDriftSpotOrderbooksRequest(betterproto.Message):
+class GetMarginOrderbooksRequest(betterproto.Message):
     contracts: List[common.SpotContract] = betterproto.enum_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
-class GetDriftSpotOrderbookResponse(betterproto.Message):
+class GetMarginOrderbookResponse(betterproto.Message):
     contract: common.SpotContract = betterproto.enum_field(1)
-    bids: List["DriftSpotOrderbookItem"] = betterproto.message_field(2)
-    asks: List["DriftSpotOrderbookItem"] = betterproto.message_field(3)
+    bids: List["MarginOrderbookItem"] = betterproto.message_field(2)
+    asks: List["MarginOrderbookItem"] = betterproto.message_field(3)
 
 
 @dataclass
-class DriftSpotOrderbookItem(betterproto.Message):
+class MarginOrderbookItem(betterproto.Message):
     price: float = betterproto.double_field(1)
     size: float = betterproto.double_field(2)
     order_i_d: str = betterproto.string_field(3)
@@ -885,9 +885,9 @@ class DriftSpotOrderbookItem(betterproto.Message):
 
 
 @dataclass
-class GetDriftSpotOrderbooksStreamResponse(betterproto.Message):
+class GetMarginOrderbooksStreamResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
-    orderbook: "GetDriftSpotOrderbookResponse" = betterproto.message_field(2)
+    orderbook: "GetMarginOrderbookResponse" = betterproto.message_field(2)
 
 
 @dataclass
@@ -1058,7 +1058,7 @@ class PostPerpOrderResponse(betterproto.Message):
 
 
 @dataclass
-class PostDriftSpotOrderRequest(betterproto.Message):
+class PostMarginOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     payer_address: str = betterproto.string_field(2)
     contract: common.PerpContract = betterproto.enum_field(3)
@@ -1073,7 +1073,7 @@ class PostDriftSpotOrderRequest(betterproto.Message):
 
 
 @dataclass
-class PostDriftSpotOrderResponse(betterproto.Message):
+class PostMarginOrderResponse(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
@@ -1232,6 +1232,29 @@ class ContractInfo(betterproto.Message):
 @dataclass
 class GetPerpContractsResponse(betterproto.Message):
     contracts: List["ContractInfo"] = betterproto.message_field(1)
+
+
+@dataclass
+class GetMarginContractsRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+
+
+@dataclass
+class MarginContractInfo(betterproto.Message):
+    contract: common.SpotContract = betterproto.enum_field(1)
+    contract_address: str = betterproto.string_field(2)
+    open_long_interest: float = betterproto.double_field(3)
+    open_short_interest: float = betterproto.double_field(4)
+    funding_rate: float = betterproto.double_field(5)
+    min_size: float = betterproto.double_field(6)
+    perp_price: float = betterproto.double_field(7)
+    index_price: float = betterproto.double_field(8)
+    open_interest: float = betterproto.double_field(9)
+
+
+@dataclass
+class GetMarginContractsResponse(betterproto.Message):
+    contracts: List["MarginContractInfo"] = betterproto.message_field(1)
 
 
 @dataclass
@@ -1779,7 +1802,7 @@ class ApiStub(betterproto.ServiceStub):
             TradeSwapResponse,
         )
 
-    async def post_drift_spot_order(
+    async def post_margin_order(
         self,
         *,
         owner_address: str = "",
@@ -1793,10 +1816,10 @@ class ApiStub(betterproto.ServiceStub):
         price: float = 0,
         client_order_i_d: int = 0,
         post_only: common.PostOnlyParams = 0,
-    ) -> PostDriftSpotOrderResponse:
+    ) -> PostMarginOrderResponse:
         """Drift Spot"""
 
-        request = PostDriftSpotOrderRequest()
+        request = PostMarginOrderRequest()
         request.owner_address = owner_address
         request.payer_address = payer_address
         request.contract = contract
@@ -1810,9 +1833,9 @@ class ApiStub(betterproto.ServiceStub):
         request.post_only = post_only
 
         return await self._unary_unary(
-            "/api.Api/PostDriftSpotOrder",
+            "/api.Api/PostMarginOrder",
             request,
-            PostDriftSpotOrderResponse,
+            PostMarginOrderResponse,
         )
 
     async def post_perp_order(
@@ -1975,22 +1998,22 @@ class ApiStub(betterproto.ServiceStub):
             GetPerpOrderbookResponse,
         )
 
-    async def get_drift_spot_orderbook(
+    async def get_margin_orderbook(
         self,
         *,
         contract: common.SpotContract = 0,
         limit: int = 0,
         project: "Project" = 0,
-    ) -> GetDriftSpotOrderbookResponse:
-        request = GetDriftSpotOrderbookRequest()
+    ) -> GetMarginOrderbookResponse:
+        request = GetMarginOrderbookRequest()
         request.contract = contract
         request.limit = limit
         request.project = project
 
         return await self._unary_unary(
-            "/api.Api/GetDriftSpotOrderbook",
+            "/api.Api/GetMarginOrderbook",
             request,
-            GetDriftSpotOrderbookResponse,
+            GetMarginOrderbookResponse,
         )
 
     async def post_create_user(
@@ -2116,6 +2139,18 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetPerpContracts",
             request,
             GetPerpContractsResponse,
+        )
+
+    async def get_margin_contracts(
+        self, *, project: "Project" = 0
+    ) -> GetMarginContractsResponse:
+        request = GetMarginContractsRequest()
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetMarginContracts",
+            request,
+            GetMarginContractsResponse,
         )
 
     async def post_liquidate_perp(
@@ -2344,22 +2379,22 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
-    async def get_drift_spot_orderbooks_stream(
+    async def get_margin_orderbooks_stream(
         self,
         *,
         contracts: List[common.SpotContract] = [],
         limit: int = 0,
         project: "Project" = 0,
-    ) -> AsyncGenerator[GetDriftSpotOrderbooksStreamResponse, None]:
-        request = GetDriftSpotOrderbooksRequest()
+    ) -> AsyncGenerator[GetMarginOrderbooksStreamResponse, None]:
+        request = GetMarginOrderbooksRequest()
         request.contracts = contracts
         request.limit = limit
         request.project = project
 
         async for response in self._unary_stream(
-            "/api.Api/GetDriftSpotOrderbooksStream",
+            "/api.Api/GetMarginOrderbooksStream",
             request,
-            GetDriftSpotOrderbooksStreamResponse,
+            GetMarginOrderbooksStreamResponse,
         ):
             yield response
 

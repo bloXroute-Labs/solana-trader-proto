@@ -379,13 +379,13 @@ service Api {
   }
 
   // Drift Spot
-  rpc PostDriftSpotOrder(PostDriftSpotOrderRequest)  returns (PostDriftSpotOrderResponse) {
+  rpc PostMarginOrder(PostMarginOrderRequest)  returns (PostMarginOrderResponse) {
     option (google.api.http) = {
-      post: "/api/v1/trade/driftspot/order"
+      post: "/api/v1/trade/margin/order"
       body: "*",
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "post a drift spot order";
+      description: "post a spot margin order";
       summary: "drift spot order";
       tags: ["Trade", "Spot", "Orderbook"];
     };
@@ -474,9 +474,9 @@ service Api {
     };
   }
 
-  rpc GetDriftSpotOrderbook(GetDriftSpotOrderbookRequest) returns (GetDriftSpotOrderbookResponse) {
+  rpc GetMarginOrderbook(GetMarginOrderbookRequest) returns (GetMarginOrderbookResponse) {
     option (google.api.http) = {
-      get: "/api/v1/market/driftspot/orderbook/{contract}"
+      get: "/api/v1/market/Margin/orderbook/{contract}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns spot contract's orderbook. Use limit param to reduce the number of bids/asks returned";
@@ -558,6 +558,17 @@ service Api {
   rpc GetPerpContracts(GetPerpContractsRequest) returns (GetPerpContractsResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/perp/contracts"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns details of available perp contracts";
+      summary: "details of available perp contracts";
+      tags: ["Perp", "Market"];
+    };
+  }
+
+  rpc GetMarginContracts(GetMarginContractsRequest) returns (GetMarginContractsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/margin/contracts"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns details of available perp contracts";
@@ -663,7 +674,7 @@ service Api {
     };
   }
 
-  rpc GetDriftSpotOrderbooksStream(GetDriftSpotOrderbooksRequest) returns (stream GetDriftSpotOrderbooksStreamResponse) {
+  rpc GetMarginOrderbooksStream(GetMarginOrderbooksRequest) returns (stream GetMarginOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Perp";
     };
@@ -1408,25 +1419,25 @@ message GetPerpOrderbooksStreamResponse {
 
 // SPOT
 
-message GetDriftSpotOrderbookRequest {
+message GetMarginOrderbookRequest {
   common.SpotContract contract = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
 }
 
-message GetDriftSpotOrderbooksRequest {
+message GetMarginOrderbooksRequest {
   repeated common.SpotContract contracts = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
 }
 
-message GetDriftSpotOrderbookResponse {
+message GetMarginOrderbookResponse {
   common.SpotContract contract = 1;
-  repeated DriftSpotOrderbookItem bids = 2;
-  repeated DriftSpotOrderbookItem asks = 3;
+  repeated MarginOrderbookItem bids = 2;
+  repeated MarginOrderbookItem asks = 3;
 }
 
-message DriftSpotOrderbookItem {
+message MarginOrderbookItem {
   double price = 1;
   double size = 2;
   string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "platform generated OrderID"}];
@@ -1444,9 +1455,9 @@ message DriftSpotOrderbookItem {
   double auctionEndPrice = 15;
 }
 
-message GetDriftSpotOrderbooksStreamResponse {
+message GetMarginOrderbooksStreamResponse {
   int64 slot = 1;
-  GetDriftSpotOrderbookResponse orderbook = 2;
+  GetMarginOrderbookResponse orderbook = 2;
 }
 
 
@@ -1604,7 +1615,7 @@ message PostPerpOrderResponse {
   TransactionMessage transaction = 1;
 }
 
-message PostDriftSpotOrderRequest {
+message PostMarginOrderRequest {
   string ownerAddress = 1;
   string payerAddress = 2;
   common.PerpContract contract = 3;
@@ -1618,7 +1629,7 @@ message PostDriftSpotOrderRequest {
   common.PostOnlyParams postOnly = 11;
 }
 
-message PostDriftSpotOrderResponse {
+message PostMarginOrderResponse {
   TransactionMessage transaction = 1;
 }
 
@@ -1754,6 +1765,26 @@ message ContractInfo {
 
 message GetPerpContractsResponse {
   repeated ContractInfo contracts = 1;
+}
+
+message GetMarginContractsRequest {
+  Project project = 1;
+}
+
+message MarginContractInfo {
+  common.SpotContract contract = 1;
+  string contractAddress = 2;
+  double openLongInterest = 3;
+  double openShortInterest = 4;
+  double fundingRate = 5;
+  double minSize = 6;
+  double perpPrice = 7;
+  double indexPrice = 8;
+  double openInterest = 9;
+}
+
+message GetMarginContractsResponse {
+  repeated MarginContractInfo contracts = 1;
 }
 
 message GetOpenPerpOrderRequest {

@@ -3040,25 +3040,25 @@ export namespace GetPerpOrderbooksStreamResponse {
     }
 }
 
-export class GetDriftSpotOrderbookRequest extends jspb.Message { 
+export class GetMarginOrderbookRequest extends jspb.Message { 
     getContract(): common_pb.SpotContract;
-    setContract(value: common_pb.SpotContract): GetDriftSpotOrderbookRequest;
+    setContract(value: common_pb.SpotContract): GetMarginOrderbookRequest;
     getLimit(): number;
-    setLimit(value: number): GetDriftSpotOrderbookRequest;
+    setLimit(value: number): GetMarginOrderbookRequest;
     getProject(): Project;
-    setProject(value: Project): GetDriftSpotOrderbookRequest;
+    setProject(value: Project): GetMarginOrderbookRequest;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetDriftSpotOrderbookRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: GetDriftSpotOrderbookRequest): GetDriftSpotOrderbookRequest.AsObject;
+    toObject(includeInstance?: boolean): GetMarginOrderbookRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarginOrderbookRequest): GetMarginOrderbookRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetDriftSpotOrderbookRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetDriftSpotOrderbookRequest;
-    static deserializeBinaryFromReader(message: GetDriftSpotOrderbookRequest, reader: jspb.BinaryReader): GetDriftSpotOrderbookRequest;
+    static serializeBinaryToWriter(message: GetMarginOrderbookRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarginOrderbookRequest;
+    static deserializeBinaryFromReader(message: GetMarginOrderbookRequest, reader: jspb.BinaryReader): GetMarginOrderbookRequest;
 }
 
-export namespace GetDriftSpotOrderbookRequest {
+export namespace GetMarginOrderbookRequest {
     export type AsObject = {
         contract: common_pb.SpotContract,
         limit: number,
@@ -3066,27 +3066,27 @@ export namespace GetDriftSpotOrderbookRequest {
     }
 }
 
-export class GetDriftSpotOrderbooksRequest extends jspb.Message { 
+export class GetMarginOrderbooksRequest extends jspb.Message { 
     clearContractsList(): void;
     getContractsList(): Array<common_pb.SpotContract>;
-    setContractsList(value: Array<common_pb.SpotContract>): GetDriftSpotOrderbooksRequest;
+    setContractsList(value: Array<common_pb.SpotContract>): GetMarginOrderbooksRequest;
     addContracts(value: common_pb.SpotContract, index?: number): common_pb.SpotContract;
     getLimit(): number;
-    setLimit(value: number): GetDriftSpotOrderbooksRequest;
+    setLimit(value: number): GetMarginOrderbooksRequest;
     getProject(): Project;
-    setProject(value: Project): GetDriftSpotOrderbooksRequest;
+    setProject(value: Project): GetMarginOrderbooksRequest;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetDriftSpotOrderbooksRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: GetDriftSpotOrderbooksRequest): GetDriftSpotOrderbooksRequest.AsObject;
+    toObject(includeInstance?: boolean): GetMarginOrderbooksRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarginOrderbooksRequest): GetMarginOrderbooksRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetDriftSpotOrderbooksRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetDriftSpotOrderbooksRequest;
-    static deserializeBinaryFromReader(message: GetDriftSpotOrderbooksRequest, reader: jspb.BinaryReader): GetDriftSpotOrderbooksRequest;
+    static serializeBinaryToWriter(message: GetMarginOrderbooksRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarginOrderbooksRequest;
+    static deserializeBinaryFromReader(message: GetMarginOrderbooksRequest, reader: jspb.BinaryReader): GetMarginOrderbooksRequest;
 }
 
-export namespace GetDriftSpotOrderbooksRequest {
+export namespace GetMarginOrderbooksRequest {
     export type AsObject = {
         contractsList: Array<common_pb.SpotContract>,
         limit: number,
@@ -3094,79 +3094,79 @@ export namespace GetDriftSpotOrderbooksRequest {
     }
 }
 
-export class GetDriftSpotOrderbookResponse extends jspb.Message { 
+export class GetMarginOrderbookResponse extends jspb.Message { 
     getContract(): common_pb.SpotContract;
-    setContract(value: common_pb.SpotContract): GetDriftSpotOrderbookResponse;
+    setContract(value: common_pb.SpotContract): GetMarginOrderbookResponse;
     clearBidsList(): void;
-    getBidsList(): Array<DriftSpotOrderbookItem>;
-    setBidsList(value: Array<DriftSpotOrderbookItem>): GetDriftSpotOrderbookResponse;
-    addBids(value?: DriftSpotOrderbookItem, index?: number): DriftSpotOrderbookItem;
+    getBidsList(): Array<MarginOrderbookItem>;
+    setBidsList(value: Array<MarginOrderbookItem>): GetMarginOrderbookResponse;
+    addBids(value?: MarginOrderbookItem, index?: number): MarginOrderbookItem;
     clearAsksList(): void;
-    getAsksList(): Array<DriftSpotOrderbookItem>;
-    setAsksList(value: Array<DriftSpotOrderbookItem>): GetDriftSpotOrderbookResponse;
-    addAsks(value?: DriftSpotOrderbookItem, index?: number): DriftSpotOrderbookItem;
+    getAsksList(): Array<MarginOrderbookItem>;
+    setAsksList(value: Array<MarginOrderbookItem>): GetMarginOrderbookResponse;
+    addAsks(value?: MarginOrderbookItem, index?: number): MarginOrderbookItem;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetDriftSpotOrderbookResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetDriftSpotOrderbookResponse): GetDriftSpotOrderbookResponse.AsObject;
+    toObject(includeInstance?: boolean): GetMarginOrderbookResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarginOrderbookResponse): GetMarginOrderbookResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetDriftSpotOrderbookResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetDriftSpotOrderbookResponse;
-    static deserializeBinaryFromReader(message: GetDriftSpotOrderbookResponse, reader: jspb.BinaryReader): GetDriftSpotOrderbookResponse;
+    static serializeBinaryToWriter(message: GetMarginOrderbookResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarginOrderbookResponse;
+    static deserializeBinaryFromReader(message: GetMarginOrderbookResponse, reader: jspb.BinaryReader): GetMarginOrderbookResponse;
 }
 
-export namespace GetDriftSpotOrderbookResponse {
+export namespace GetMarginOrderbookResponse {
     export type AsObject = {
         contract: common_pb.SpotContract,
-        bidsList: Array<DriftSpotOrderbookItem.AsObject>,
-        asksList: Array<DriftSpotOrderbookItem.AsObject>,
+        bidsList: Array<MarginOrderbookItem.AsObject>,
+        asksList: Array<MarginOrderbookItem.AsObject>,
     }
 }
 
-export class DriftSpotOrderbookItem extends jspb.Message { 
+export class MarginOrderbookItem extends jspb.Message { 
     getPrice(): number;
-    setPrice(value: number): DriftSpotOrderbookItem;
+    setPrice(value: number): MarginOrderbookItem;
     getSize(): number;
-    setSize(value: number): DriftSpotOrderbookItem;
+    setSize(value: number): MarginOrderbookItem;
     getOrderid(): string;
-    setOrderid(value: string): DriftSpotOrderbookItem;
+    setOrderid(value: string): MarginOrderbookItem;
     getClientorderid(): string;
-    setClientorderid(value: string): DriftSpotOrderbookItem;
+    setClientorderid(value: string): MarginOrderbookItem;
     getStatus(): string;
-    setStatus(value: string): DriftSpotOrderbookItem;
+    setStatus(value: string): MarginOrderbookItem;
     getOrdertype(): string;
-    setOrdertype(value: string): DriftSpotOrderbookItem;
+    setOrdertype(value: string): MarginOrderbookItem;
     getSlot(): number;
-    setSlot(value: number): DriftSpotOrderbookItem;
+    setSlot(value: number): MarginOrderbookItem;
     getReduceonly(): boolean;
-    setReduceonly(value: boolean): DriftSpotOrderbookItem;
+    setReduceonly(value: boolean): MarginOrderbookItem;
     getTriggerprice(): number;
-    setTriggerprice(value: number): DriftSpotOrderbookItem;
+    setTriggerprice(value: number): MarginOrderbookItem;
     getTriggercondition(): string;
-    setTriggercondition(value: string): DriftSpotOrderbookItem;
+    setTriggercondition(value: string): MarginOrderbookItem;
     getPostonly(): boolean;
-    setPostonly(value: boolean): DriftSpotOrderbookItem;
+    setPostonly(value: boolean): MarginOrderbookItem;
     getOraclepriceoffset(): number;
-    setOraclepriceoffset(value: number): DriftSpotOrderbookItem;
+    setOraclepriceoffset(value: number): MarginOrderbookItem;
     getAuctionduration(): number;
-    setAuctionduration(value: number): DriftSpotOrderbookItem;
+    setAuctionduration(value: number): MarginOrderbookItem;
     getAuctionstartprice(): number;
-    setAuctionstartprice(value: number): DriftSpotOrderbookItem;
+    setAuctionstartprice(value: number): MarginOrderbookItem;
     getAuctionendprice(): number;
-    setAuctionendprice(value: number): DriftSpotOrderbookItem;
+    setAuctionendprice(value: number): MarginOrderbookItem;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): DriftSpotOrderbookItem.AsObject;
-    static toObject(includeInstance: boolean, msg: DriftSpotOrderbookItem): DriftSpotOrderbookItem.AsObject;
+    toObject(includeInstance?: boolean): MarginOrderbookItem.AsObject;
+    static toObject(includeInstance: boolean, msg: MarginOrderbookItem): MarginOrderbookItem.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: DriftSpotOrderbookItem, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): DriftSpotOrderbookItem;
-    static deserializeBinaryFromReader(message: DriftSpotOrderbookItem, reader: jspb.BinaryReader): DriftSpotOrderbookItem;
+    static serializeBinaryToWriter(message: MarginOrderbookItem, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): MarginOrderbookItem;
+    static deserializeBinaryFromReader(message: MarginOrderbookItem, reader: jspb.BinaryReader): MarginOrderbookItem;
 }
 
-export namespace DriftSpotOrderbookItem {
+export namespace MarginOrderbookItem {
     export type AsObject = {
         price: number,
         size: number,
@@ -3186,29 +3186,29 @@ export namespace DriftSpotOrderbookItem {
     }
 }
 
-export class GetDriftSpotOrderbooksStreamResponse extends jspb.Message { 
+export class GetMarginOrderbooksStreamResponse extends jspb.Message { 
     getSlot(): number;
-    setSlot(value: number): GetDriftSpotOrderbooksStreamResponse;
+    setSlot(value: number): GetMarginOrderbooksStreamResponse;
 
     hasOrderbook(): boolean;
     clearOrderbook(): void;
-    getOrderbook(): GetDriftSpotOrderbookResponse | undefined;
-    setOrderbook(value?: GetDriftSpotOrderbookResponse): GetDriftSpotOrderbooksStreamResponse;
+    getOrderbook(): GetMarginOrderbookResponse | undefined;
+    setOrderbook(value?: GetMarginOrderbookResponse): GetMarginOrderbooksStreamResponse;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetDriftSpotOrderbooksStreamResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetDriftSpotOrderbooksStreamResponse): GetDriftSpotOrderbooksStreamResponse.AsObject;
+    toObject(includeInstance?: boolean): GetMarginOrderbooksStreamResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarginOrderbooksStreamResponse): GetMarginOrderbooksStreamResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetDriftSpotOrderbooksStreamResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetDriftSpotOrderbooksStreamResponse;
-    static deserializeBinaryFromReader(message: GetDriftSpotOrderbooksStreamResponse, reader: jspb.BinaryReader): GetDriftSpotOrderbooksStreamResponse;
+    static serializeBinaryToWriter(message: GetMarginOrderbooksStreamResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarginOrderbooksStreamResponse;
+    static deserializeBinaryFromReader(message: GetMarginOrderbooksStreamResponse, reader: jspb.BinaryReader): GetMarginOrderbooksStreamResponse;
 }
 
-export namespace GetDriftSpotOrderbooksStreamResponse {
+export namespace GetMarginOrderbooksStreamResponse {
     export type AsObject = {
         slot: number,
-        orderbook?: GetDriftSpotOrderbookResponse.AsObject,
+        orderbook?: GetMarginOrderbookResponse.AsObject,
     }
 }
 
@@ -3846,41 +3846,41 @@ export namespace PostPerpOrderResponse {
     }
 }
 
-export class PostDriftSpotOrderRequest extends jspb.Message { 
+export class PostMarginOrderRequest extends jspb.Message { 
     getOwneraddress(): string;
-    setOwneraddress(value: string): PostDriftSpotOrderRequest;
+    setOwneraddress(value: string): PostMarginOrderRequest;
     getPayeraddress(): string;
-    setPayeraddress(value: string): PostDriftSpotOrderRequest;
+    setPayeraddress(value: string): PostMarginOrderRequest;
     getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): PostDriftSpotOrderRequest;
+    setContract(value: common_pb.PerpContract): PostMarginOrderRequest;
     getAccountaddress(): string;
-    setAccountaddress(value: string): PostDriftSpotOrderRequest;
+    setAccountaddress(value: string): PostMarginOrderRequest;
     getPositionside(): common_pb.PositionSide;
-    setPositionside(value: common_pb.PositionSide): PostDriftSpotOrderRequest;
+    setPositionside(value: common_pb.PositionSide): PostMarginOrderRequest;
     getSlippage(): number;
-    setSlippage(value: number): PostDriftSpotOrderRequest;
+    setSlippage(value: number): PostMarginOrderRequest;
     getType(): common_pb.DriftOrderType;
-    setType(value: common_pb.DriftOrderType): PostDriftSpotOrderRequest;
+    setType(value: common_pb.DriftOrderType): PostMarginOrderRequest;
     getAmount(): number;
-    setAmount(value: number): PostDriftSpotOrderRequest;
+    setAmount(value: number): PostMarginOrderRequest;
     getPrice(): number;
-    setPrice(value: number): PostDriftSpotOrderRequest;
+    setPrice(value: number): PostMarginOrderRequest;
     getClientorderid(): number;
-    setClientorderid(value: number): PostDriftSpotOrderRequest;
+    setClientorderid(value: number): PostMarginOrderRequest;
     getPostonly(): common_pb.PostOnlyParams;
-    setPostonly(value: common_pb.PostOnlyParams): PostDriftSpotOrderRequest;
+    setPostonly(value: common_pb.PostOnlyParams): PostMarginOrderRequest;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostDriftSpotOrderRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: PostDriftSpotOrderRequest): PostDriftSpotOrderRequest.AsObject;
+    toObject(includeInstance?: boolean): PostMarginOrderRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostMarginOrderRequest): PostMarginOrderRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostDriftSpotOrderRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostDriftSpotOrderRequest;
-    static deserializeBinaryFromReader(message: PostDriftSpotOrderRequest, reader: jspb.BinaryReader): PostDriftSpotOrderRequest;
+    static serializeBinaryToWriter(message: PostMarginOrderRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostMarginOrderRequest;
+    static deserializeBinaryFromReader(message: PostMarginOrderRequest, reader: jspb.BinaryReader): PostMarginOrderRequest;
 }
 
-export namespace PostDriftSpotOrderRequest {
+export namespace PostMarginOrderRequest {
     export type AsObject = {
         owneraddress: string,
         payeraddress: string,
@@ -3896,24 +3896,24 @@ export namespace PostDriftSpotOrderRequest {
     }
 }
 
-export class PostDriftSpotOrderResponse extends jspb.Message { 
+export class PostMarginOrderResponse extends jspb.Message { 
 
     hasTransaction(): boolean;
     clearTransaction(): void;
     getTransaction(): TransactionMessage | undefined;
-    setTransaction(value?: TransactionMessage): PostDriftSpotOrderResponse;
+    setTransaction(value?: TransactionMessage): PostMarginOrderResponse;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostDriftSpotOrderResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: PostDriftSpotOrderResponse): PostDriftSpotOrderResponse.AsObject;
+    toObject(includeInstance?: boolean): PostMarginOrderResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostMarginOrderResponse): PostMarginOrderResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostDriftSpotOrderResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostDriftSpotOrderResponse;
-    static deserializeBinaryFromReader(message: PostDriftSpotOrderResponse, reader: jspb.BinaryReader): PostDriftSpotOrderResponse;
+    static serializeBinaryToWriter(message: PostMarginOrderResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostMarginOrderResponse;
+    static deserializeBinaryFromReader(message: PostMarginOrderResponse, reader: jspb.BinaryReader): PostMarginOrderResponse;
 }
 
-export namespace PostDriftSpotOrderResponse {
+export namespace PostMarginOrderResponse {
     export type AsObject = {
         transaction?: TransactionMessage.AsObject,
     }
@@ -4469,6 +4469,92 @@ export class GetPerpContractsResponse extends jspb.Message {
 export namespace GetPerpContractsResponse {
     export type AsObject = {
         contractsList: Array<ContractInfo.AsObject>,
+    }
+}
+
+export class GetMarginContractsRequest extends jspb.Message { 
+    getProject(): Project;
+    setProject(value: Project): GetMarginContractsRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarginContractsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarginContractsRequest): GetMarginContractsRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarginContractsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarginContractsRequest;
+    static deserializeBinaryFromReader(message: GetMarginContractsRequest, reader: jspb.BinaryReader): GetMarginContractsRequest;
+}
+
+export namespace GetMarginContractsRequest {
+    export type AsObject = {
+        project: Project,
+    }
+}
+
+export class MarginContractInfo extends jspb.Message { 
+    getContract(): common_pb.SpotContract;
+    setContract(value: common_pb.SpotContract): MarginContractInfo;
+    getContractaddress(): string;
+    setContractaddress(value: string): MarginContractInfo;
+    getOpenlonginterest(): number;
+    setOpenlonginterest(value: number): MarginContractInfo;
+    getOpenshortinterest(): number;
+    setOpenshortinterest(value: number): MarginContractInfo;
+    getFundingrate(): number;
+    setFundingrate(value: number): MarginContractInfo;
+    getMinsize(): number;
+    setMinsize(value: number): MarginContractInfo;
+    getPerpprice(): number;
+    setPerpprice(value: number): MarginContractInfo;
+    getIndexprice(): number;
+    setIndexprice(value: number): MarginContractInfo;
+    getOpeninterest(): number;
+    setOpeninterest(value: number): MarginContractInfo;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): MarginContractInfo.AsObject;
+    static toObject(includeInstance: boolean, msg: MarginContractInfo): MarginContractInfo.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: MarginContractInfo, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): MarginContractInfo;
+    static deserializeBinaryFromReader(message: MarginContractInfo, reader: jspb.BinaryReader): MarginContractInfo;
+}
+
+export namespace MarginContractInfo {
+    export type AsObject = {
+        contract: common_pb.SpotContract,
+        contractaddress: string,
+        openlonginterest: number,
+        openshortinterest: number,
+        fundingrate: number,
+        minsize: number,
+        perpprice: number,
+        indexprice: number,
+        openinterest: number,
+    }
+}
+
+export class GetMarginContractsResponse extends jspb.Message { 
+    clearContractsList(): void;
+    getContractsList(): Array<MarginContractInfo>;
+    setContractsList(value: Array<MarginContractInfo>): GetMarginContractsResponse;
+    addContracts(value?: MarginContractInfo, index?: number): MarginContractInfo;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarginContractsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarginContractsResponse): GetMarginContractsResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarginContractsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarginContractsResponse;
+    static deserializeBinaryFromReader(message: GetMarginContractsResponse, reader: jspb.BinaryReader): GetMarginContractsResponse;
+}
+
+export namespace GetMarginContractsResponse {
+    export type AsObject = {
+        contractsList: Array<MarginContractInfo.AsObject>,
     }
 }
 
