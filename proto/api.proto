@@ -379,7 +379,7 @@ service Api {
   }
 
   // Drift Spot
-  rpc PostSpotOrder(PostDriftSpotOrderRequest)  returns (PostDriftSpotOrderResponse) {
+  rpc PostDriftSpotOrder(PostDriftSpotOrderRequest)  returns (PostDriftSpotOrderResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/driftspot/order"
       body: "*",

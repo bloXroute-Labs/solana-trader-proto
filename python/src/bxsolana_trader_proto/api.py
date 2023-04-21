@@ -1779,7 +1779,7 @@ class ApiStub(betterproto.ServiceStub):
             TradeSwapResponse,
         )
 
-    async def post_spot_order(
+    async def post_drift_spot_order(
         self,
         *,
         owner_address: str = "",
@@ -1810,7 +1810,7 @@ class ApiStub(betterproto.ServiceStub):
         request.post_only = post_only
 
         return await self._unary_unary(
-            "/api.Api/PostSpotOrder",
+            "/api.Api/PostDriftSpotOrder",
             request,
             PostDriftSpotOrderResponse,
         )

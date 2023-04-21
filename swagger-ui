@@ -771,7 +771,7 @@
       "post": {
         "summary": "drift spot order",
         "description": "post a drift spot order",
-        "operationId": "Api_PostSpotOrder",
+        "operationId": "Api_PostDriftSpotOrder",
         "responses": {
           "200": {
             "description": "A successful response.",

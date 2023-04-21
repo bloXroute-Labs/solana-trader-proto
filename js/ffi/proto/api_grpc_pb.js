@@ -1567,8 +1567,8 @@ postOrder: {
     responseDeserialize: deserialize_api_TradeSwapResponse,
   },
   // Drift Spot
-postSpotOrder: {
-    path: '/api.Api/PostSpotOrder',
+postDriftSpotOrder: {
+    path: '/api.Api/PostDriftSpotOrder',
     requestStream: false,
     responseStream: false,
     requestType: api_pb.PostDriftSpotOrderRequest,
