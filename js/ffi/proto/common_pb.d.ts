@@ -70,7 +70,7 @@ export enum DriftOrderType {
     POT_TRIGGER_LIMIT = 4,
 }
 
-export enum PerpPositionSide {
+export enum PositionSide {
     PS_UNKNOWN = 0,
     PS_LONG = 1,
     PS_SHORT = 2,

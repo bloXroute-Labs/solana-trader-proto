@@ -23,7 +23,7 @@ class DriftOrderType(betterproto.Enum):
     POT_TRIGGER_LIMIT = 4
 
 
-class PerpPositionSide(betterproto.Enum):
+class PositionSide(betterproto.Enum):
     PS_UNKNOWN = 0
     PS_LONG = 1
     PS_SHORT = 2

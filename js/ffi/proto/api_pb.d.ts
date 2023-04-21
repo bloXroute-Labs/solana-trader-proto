@@ -3568,8 +3568,8 @@ export class PerpOrder extends jspb.Message {
     setClientorderid(value: number): PerpOrder;
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): PerpOrder;
-    getPositionside(): common_pb.PerpPositionSide;
-    setPositionside(value: common_pb.PerpPositionSide): PerpOrder;
+    getPositionside(): common_pb.PositionSide;
+    setPositionside(value: common_pb.PositionSide): PerpOrder;
     getOrdertype(): string;
     setOrdertype(value: string): PerpOrder;
     getPrice(): number;
@@ -3602,7 +3602,7 @@ export namespace PerpOrder {
         orderid: number,
         clientorderid: number,
         contract: common_pb.PerpContract,
-        positionside: common_pb.PerpPositionSide,
+        positionside: common_pb.PositionSide,
         ordertype: string,
         price: number,
         size: number,
@@ -3732,8 +3732,8 @@ export class PerpPosition extends jspb.Message {
     setVolumeinorder(value: number): PerpPosition;
     getPositionmargin(): number;
     setPositionmargin(value: number): PerpPosition;
-    getPositionside(): common_pb.PerpPositionSide;
-    setPositionside(value: common_pb.PerpPositionSide): PerpPosition;
+    getPositionside(): common_pb.PositionSide;
+    setPositionside(value: common_pb.PositionSide): PerpPosition;
     getNotionalvalue(): number;
     setNotionalvalue(value: number): PerpPosition;
     getIndexprice(): number;
@@ -3761,7 +3761,7 @@ export namespace PerpPosition {
         volumeavailable: number,
         volumeinorder: number,
         positionmargin: number,
-        positionside: common_pb.PerpPositionSide,
+        positionside: common_pb.PositionSide,
         notionalvalue: number,
         indexprice: number,
         liquidationprice: number,
@@ -3781,8 +3781,8 @@ export class PostPerpOrderRequest extends jspb.Message {
     setContract(value: common_pb.PerpContract): PostPerpOrderRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): PostPerpOrderRequest;
-    getPositionside(): common_pb.PerpPositionSide;
-    setPositionside(value: common_pb.PerpPositionSide): PostPerpOrderRequest;
+    getPositionside(): common_pb.PositionSide;
+    setPositionside(value: common_pb.PositionSide): PostPerpOrderRequest;
     getSlippage(): number;
     setSlippage(value: number): PostPerpOrderRequest;
     getType(): common_pb.DriftOrderType;
@@ -3813,7 +3813,7 @@ export namespace PostPerpOrderRequest {
         payeraddress: string,
         contract: common_pb.PerpContract,
         accountaddress: string,
-        positionside: common_pb.PerpPositionSide,
+        positionside: common_pb.PositionSide,
         slippage: number,
         type: common_pb.DriftOrderType,
         amount: number,
@@ -3855,8 +3855,8 @@ export class PostDriftSpotOrderRequest extends jspb.Message {
     setContract(value: common_pb.PerpContract): PostDriftSpotOrderRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): PostDriftSpotOrderRequest;
-    getPositionside(): common_pb.PerpPositionSide;
-    setPositionside(value: common_pb.PerpPositionSide): PostDriftSpotOrderRequest;
+    getPositionside(): common_pb.PositionSide;
+    setPositionside(value: common_pb.PositionSide): PostDriftSpotOrderRequest;
     getSlippage(): number;
     setSlippage(value: number): PostDriftSpotOrderRequest;
     getType(): common_pb.DriftOrderType;
@@ -3886,7 +3886,7 @@ export namespace PostDriftSpotOrderRequest {
         payeraddress: string,
         contract: common_pb.PerpContract,
         accountaddress: string,
-        positionside: common_pb.PerpPositionSide,
+        positionside: common_pb.PositionSide,
         slippage: number,
         type: common_pb.DriftOrderType,
         amount: number,
@@ -3947,8 +3947,8 @@ export namespace GetNewPerpOrdersStreamRequest {
 export class GetNewPerpOrdersStreamResponse extends jspb.Message { 
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): GetNewPerpOrdersStreamResponse;
-    getSide(): common_pb.PerpPositionSide;
-    setSide(value: common_pb.PerpPositionSide): GetNewPerpOrdersStreamResponse;
+    getSide(): common_pb.PositionSide;
+    setSide(value: common_pb.PositionSide): GetNewPerpOrdersStreamResponse;
     getType(): common_pb.DriftOrderType;
     setType(value: common_pb.DriftOrderType): GetNewPerpOrdersStreamResponse;
     getUseraddress(): string;
@@ -3985,7 +3985,7 @@ export class GetNewPerpOrdersStreamResponse extends jspb.Message {
 export namespace GetNewPerpOrdersStreamResponse {
     export type AsObject = {
         contract: common_pb.PerpContract,
-        side: common_pb.PerpPositionSide,
+        side: common_pb.PositionSide,
         type: common_pb.DriftOrderType,
         useraddress: string,
         orderid: string,

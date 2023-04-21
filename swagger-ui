@@ -2200,7 +2200,7 @@
           "$ref": "#/definitions/commonPerpContract"
         },
         "side": {
-          "$ref": "#/definitions/commonPerpPositionSide"
+          "$ref": "#/definitions/commonPositionSide"
         },
         "type": {
           "$ref": "#/definitions/commonDriftOrderType"
@@ -2966,7 +2966,7 @@
           "$ref": "#/definitions/commonPerpContract"
         },
         "positionSide": {
-          "$ref": "#/definitions/commonPerpPositionSide"
+          "$ref": "#/definitions/commonPositionSide"
         },
         "orderType": {
           "type": "string"
@@ -3076,7 +3076,7 @@
           "format": "double"
         },
         "positionSide": {
-          "$ref": "#/definitions/commonPerpPositionSide"
+          "$ref": "#/definitions/commonPositionSide"
         },
         "notionalValue": {
           "type": "number",
@@ -3381,7 +3381,7 @@
           "type": "string"
         },
         "positionSide": {
-          "$ref": "#/definitions/commonPerpPositionSide"
+          "$ref": "#/definitions/commonPositionSide"
         },
         "slippage": {
           "type": "number",
@@ -3575,7 +3575,7 @@
           "type": "string"
         },
         "positionSide": {
-          "$ref": "#/definitions/commonPerpPositionSide"
+          "$ref": "#/definitions/commonPositionSide"
         },
         "slippage": {
           "type": "number",
@@ -4405,7 +4405,7 @@
       ],
       "default": "ALL"
     },
-    "commonPerpPositionSide": {
+    "commonPositionSide": {
       "type": "string",
       "enum": [
         "PS_UNKNOWN",

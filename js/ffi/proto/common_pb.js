@@ -22,7 +22,7 @@ goog.exportSymbol('proto.common.OrderType', null, global);
 goog.exportSymbol('proto.common.PerpCollateralToken', null, global);
 goog.exportSymbol('proto.common.PerpCollateralType', null, global);
 goog.exportSymbol('proto.common.PerpContract', null, global);
-goog.exportSymbol('proto.common.PerpPositionSide', null, global);
+goog.exportSymbol('proto.common.PositionSide', null, global);
 goog.exportSymbol('proto.common.PostOnlyParams', null, global);
 goog.exportSymbol('proto.common.PriceImpactPercent', null, global);
 goog.exportSymbol('proto.common.SpotContract', null, global);
@@ -442,7 +442,7 @@ proto.common.DriftOrderType = {
 /**
  * @enum {number}
  */
-proto.common.PerpPositionSide = {
+proto.common.PositionSide = {
   PS_UNKNOWN: 0,
   PS_LONG: 1,
   PS_SHORT: 2
