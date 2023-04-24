@@ -3847,6 +3847,8 @@ export namespace PostPerpOrderResponse {
 }
 
 export class PostMarginOrderRequest extends jspb.Message { 
+    getProject(): Project;
+    setProject(value: Project): PostMarginOrderRequest;
     getOwneraddress(): string;
     setOwneraddress(value: string): PostMarginOrderRequest;
     getPayeraddress(): string;
@@ -3882,6 +3884,7 @@ export class PostMarginOrderRequest extends jspb.Message {
 
 export namespace PostMarginOrderRequest {
     export type AsObject = {
+        project: Project,
         owneraddress: string,
         payeraddress: string,
         contract: common_pb.SpotContract,

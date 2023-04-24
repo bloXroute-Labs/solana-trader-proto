@@ -1615,17 +1615,18 @@ message PostPerpOrderResponse {
 }
 
 message PostMarginOrderRequest {
-  string ownerAddress = 1;
-  string payerAddress = 2;
-  common.SpotContract contract = 3;
-  string accountAddress = 4;
-  common.PositionSide positionSide = 5;
-  double slippage = 6;
-  common.DriftOrderType type = 7;
-  double amount = 8;
-  double price = 9;
-  uint64 clientOrderID = 10;
-  common.PostOnlyParams postOnly = 11;
+  Project project = 1;
+  string ownerAddress = 2;
+  string payerAddress = 3;
+  common.SpotContract contract = 4;
+  string accountAddress = 5;
+  common.PositionSide positionSide = 6;
+  double slippage = 7;
+  common.DriftOrderType type = 8;
+  double amount = 9;
+  double price = 10;
+  uint64 clientOrderID = 11;
+  common.PostOnlyParams postOnly = 12;
 }
 
 message PostMarginOrderResponse {

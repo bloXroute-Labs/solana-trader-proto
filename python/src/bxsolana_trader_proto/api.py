@@ -1061,17 +1061,18 @@ class PostPerpOrderResponse(betterproto.Message):
 
 @dataclass
 class PostMarginOrderRequest(betterproto.Message):
-    owner_address: str = betterproto.string_field(1)
-    payer_address: str = betterproto.string_field(2)
-    contract: common.SpotContract = betterproto.enum_field(3)
-    account_address: str = betterproto.string_field(4)
-    position_side: common.PositionSide = betterproto.enum_field(5)
-    slippage: float = betterproto.double_field(6)
-    type: common.DriftOrderType = betterproto.enum_field(7)
-    amount: float = betterproto.double_field(8)
-    price: float = betterproto.double_field(9)
-    client_order_i_d: int = betterproto.uint64_field(10)
-    post_only: common.PostOnlyParams = betterproto.enum_field(11)
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    payer_address: str = betterproto.string_field(3)
+    contract: common.SpotContract = betterproto.enum_field(4)
+    account_address: str = betterproto.string_field(5)
+    position_side: common.PositionSide = betterproto.enum_field(6)
+    slippage: float = betterproto.double_field(7)
+    type: common.DriftOrderType = betterproto.enum_field(8)
+    amount: float = betterproto.double_field(9)
+    price: float = betterproto.double_field(10)
+    client_order_i_d: int = betterproto.uint64_field(11)
+    post_only: common.PostOnlyParams = betterproto.enum_field(12)
 
 
 @dataclass
@@ -1839,6 +1840,7 @@ class ApiStub(betterproto.ServiceStub):
     async def post_margin_order(
         self,
         *,
+        project: "Project" = 0,
         owner_address: str = "",
         payer_address: str = "",
         contract: common.SpotContract = 0,
@@ -1854,6 +1856,7 @@ class ApiStub(betterproto.ServiceStub):
         """Drift Margin"""
 
         request = PostMarginOrderRequest()
+        request.project = project
         request.owner_address = owner_address
         request.payer_address = payer_address
         request.contract = contract

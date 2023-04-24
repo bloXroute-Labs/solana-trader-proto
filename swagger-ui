@@ -3642,6 +3642,9 @@
     "apiPostMarginOrderRequest": {
       "type": "object",
       "properties": {
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
         "ownerAddress": {
           "type": "string"
         },
