@@ -3491,6 +3491,8 @@ export class PerpOrder extends jspb.Message {
     setAccountaddress(value: string): PerpOrder;
     getSubaccountid(): number;
     setSubaccountid(value: number): PerpOrder;
+    getPostonly(): boolean;
+    setPostonly(value: boolean): PerpOrder;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PerpOrder.AsObject;
@@ -3515,6 +3517,7 @@ export namespace PerpOrder {
         status: string,
         accountaddress: string,
         subaccountid: number,
+        postonly: boolean,
     }
 }
 
@@ -3697,6 +3700,8 @@ export class PostPerpOrderRequest extends jspb.Message {
     setPrice(value: number): PostPerpOrderRequest;
     getClientorderid(): number;
     setClientorderid(value: number): PostPerpOrderRequest;
+    getPostonly(): common_pb.PostOnlyParams;
+    setPostonly(value: common_pb.PostOnlyParams): PostPerpOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostPerpOrderRequest.AsObject;
@@ -3721,6 +3726,7 @@ export namespace PostPerpOrderRequest {
         amount: number,
         price: number,
         clientorderid: number,
+        postonly: common_pb.PostOnlyParams,
     }
 }
 

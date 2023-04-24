@@ -2972,6 +2972,9 @@
         "subAccountID": {
           "type": "string",
           "format": "uint64"
+        },
+        "postOnly": {
+          "type": "boolean"
         }
       }
     },
@@ -3522,6 +3525,9 @@
         "clientOrderID": {
           "type": "string",
           "format": "uint64"
+        },
+        "postOnly": {
+          "$ref": "#/definitions/commonPostOnlyParams"
         }
       }
     },
@@ -4369,6 +4375,15 @@
         "PS_SHORT"
       ],
       "default": "PS_UNKNOWN"
+    },
+    "commonPostOnlyParams": {
+      "type": "string",
+      "enum": [
+        "PO_NONE",
+        "PO_MUST_POST_ONLY",
+        "PO_TRY_POST_ONLY"
+      ],
+      "default": "PO_NONE"
     },
     "commonPriceImpactPercent": {
       "type": "object",
