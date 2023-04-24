@@ -4497,20 +4497,84 @@ export class MarginContractInfo extends jspb.Message {
     setContract(value: common_pb.SpotContract): MarginContractInfo;
     getContractaddress(): string;
     setContractaddress(value: string): MarginContractInfo;
-    getOpenlonginterest(): number;
-    setOpenlonginterest(value: number): MarginContractInfo;
-    getOpenshortinterest(): number;
-    setOpenshortinterest(value: number): MarginContractInfo;
-    getFundingrate(): number;
-    setFundingrate(value: number): MarginContractInfo;
-    getMinsize(): number;
-    setMinsize(value: number): MarginContractInfo;
-    getPerpprice(): number;
-    setPerpprice(value: number): MarginContractInfo;
-    getIndexprice(): number;
-    setIndexprice(value: number): MarginContractInfo;
-    getOpeninterest(): number;
-    setOpeninterest(value: number): MarginContractInfo;
+    getStatus(): string;
+    setStatus(value: string): MarginContractInfo;
+    getAssettier(): string;
+    setAssettier(value: string): MarginContractInfo;
+    getMarketindex(): number;
+    setMarketindex(value: number): MarginContractInfo;
+    getPubkey(): string;
+    setPubkey(value: string): MarginContractInfo;
+    getMint(): string;
+    setMint(value: string): MarginContractInfo;
+    getVault(): string;
+    setVault(value: string): MarginContractInfo;
+    getOracle(): string;
+    setOracle(value: string): MarginContractInfo;
+    getOraclesource(): string;
+    setOraclesource(value: string): MarginContractInfo;
+    getIfliquidationfee(): number;
+    setIfliquidationfee(value: number): MarginContractInfo;
+    getDecimals(): number;
+    setDecimals(value: number): MarginContractInfo;
+    getOptimalutilization(): number;
+    setOptimalutilization(value: number): MarginContractInfo;
+    getOptimalborrowrate(): number;
+    setOptimalborrowrate(value: number): MarginContractInfo;
+    getMaxborrowrate(): number;
+    setMaxborrowrate(value: number): MarginContractInfo;
+    getCumulativedepositinterest(): number;
+    setCumulativedepositinterest(value: number): MarginContractInfo;
+    getCumulativeborrowinterest(): number;
+    setCumulativeborrowinterest(value: number): MarginContractInfo;
+    getTotalsocialloss(): number;
+    setTotalsocialloss(value: number): MarginContractInfo;
+    getTotalquotesocialloss(): number;
+    setTotalquotesocialloss(value: number): MarginContractInfo;
+    getDepositbalance(): number;
+    setDepositbalance(value: number): MarginContractInfo;
+    getBorrowbalance(): number;
+    setBorrowbalance(value: number): MarginContractInfo;
+    getMaxtokendeposits(): number;
+    setMaxtokendeposits(value: number): MarginContractInfo;
+    getLastinterestts(): number;
+    setLastinterestts(value: number): MarginContractInfo;
+    getLasttwapts(): number;
+    setLasttwapts(value: number): MarginContractInfo;
+    getInitialassetweight(): number;
+    setInitialassetweight(value: number): MarginContractInfo;
+    getMaintenanceassetweight(): number;
+    setMaintenanceassetweight(value: number): MarginContractInfo;
+    getInitialliabilityweight(): number;
+    setInitialliabilityweight(value: number): MarginContractInfo;
+    getMaintenanceliabilityweight(): number;
+    setMaintenanceliabilityweight(value: number): MarginContractInfo;
+    getLiquidatorfee(): number;
+    setLiquidatorfee(value: number): MarginContractInfo;
+    getImffactor(): number;
+    setImffactor(value: number): MarginContractInfo;
+    getWithdrawguardthreshold(): number;
+    setWithdrawguardthreshold(value: number): MarginContractInfo;
+    getDeposittokentwap(): number;
+    setDeposittokentwap(value: number): MarginContractInfo;
+    getBorrowtokentwap(): number;
+    setBorrowtokentwap(value: number): MarginContractInfo;
+    getUtilizationtwap(): number;
+    setUtilizationtwap(value: number): MarginContractInfo;
+    getNextdepositrecordid(): number;
+    setNextdepositrecordid(value: number): MarginContractInfo;
+    getOrderstepsize(): number;
+    setOrderstepsize(value: number): MarginContractInfo;
+    getOrderticksize(): number;
+    setOrderticksize(value: number): MarginContractInfo;
+    getNextfillrecordid(): number;
+    setNextfillrecordid(value: number): MarginContractInfo;
+    getSpotfeepool(): number;
+    setSpotfeepool(value: number): MarginContractInfo;
+    getTotalspotfee(): number;
+    setTotalspotfee(value: number): MarginContractInfo;
+    getOrdersenabled(): boolean;
+    setOrdersenabled(value: boolean): MarginContractInfo;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): MarginContractInfo.AsObject;
@@ -4526,13 +4590,45 @@ export namespace MarginContractInfo {
     export type AsObject = {
         contract: common_pb.SpotContract,
         contractaddress: string,
-        openlonginterest: number,
-        openshortinterest: number,
-        fundingrate: number,
-        minsize: number,
-        perpprice: number,
-        indexprice: number,
-        openinterest: number,
+        status: string,
+        assettier: string,
+        marketindex: number,
+        pubkey: string,
+        mint: string,
+        vault: string,
+        oracle: string,
+        oraclesource: string,
+        ifliquidationfee: number,
+        decimals: number,
+        optimalutilization: number,
+        optimalborrowrate: number,
+        maxborrowrate: number,
+        cumulativedepositinterest: number,
+        cumulativeborrowinterest: number,
+        totalsocialloss: number,
+        totalquotesocialloss: number,
+        depositbalance: number,
+        borrowbalance: number,
+        maxtokendeposits: number,
+        lastinterestts: number,
+        lasttwapts: number,
+        initialassetweight: number,
+        maintenanceassetweight: number,
+        initialliabilityweight: number,
+        maintenanceliabilityweight: number,
+        liquidatorfee: number,
+        imffactor: number,
+        withdrawguardthreshold: number,
+        deposittokentwap: number,
+        borrowtokentwap: number,
+        utilizationtwap: number,
+        nextdepositrecordid: number,
+        orderstepsize: number,
+        orderticksize: number,
+        nextfillrecordid: number,
+        spotfeepool: number,
+        totalspotfee: number,
+        ordersenabled: boolean,
     }
 }
 

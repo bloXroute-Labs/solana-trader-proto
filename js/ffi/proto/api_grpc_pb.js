@@ -1588,7 +1588,7 @@ postOrder: {
     responseSerialize: serialize_api_TradeSwapResponse,
     responseDeserialize: deserialize_api_TradeSwapResponse,
   },
-  // Drift Spot
+  // Drift Margin
 postMarginOrder: {
     path: '/api.Api/PostMarginOrder',
     requestStream: false,

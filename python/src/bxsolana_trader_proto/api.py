@@ -846,6 +846,8 @@ class GetPerpOrderbooksStreamResponse(betterproto.Message):
 
 @dataclass
 class GetMarginOrderbookRequest(betterproto.Message):
+    """Margin"""
+
     contract: common.SpotContract = betterproto.enum_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
@@ -1243,13 +1245,45 @@ class GetMarginContractsRequest(betterproto.Message):
 class MarginContractInfo(betterproto.Message):
     contract: common.SpotContract = betterproto.enum_field(1)
     contract_address: str = betterproto.string_field(2)
-    open_long_interest: float = betterproto.double_field(3)
-    open_short_interest: float = betterproto.double_field(4)
-    funding_rate: float = betterproto.double_field(5)
-    min_size: float = betterproto.double_field(6)
-    perp_price: float = betterproto.double_field(7)
-    index_price: float = betterproto.double_field(8)
-    open_interest: float = betterproto.double_field(9)
+    status: str = betterproto.string_field(3)
+    asset_tier: str = betterproto.string_field(4)
+    market_index: int = betterproto.uint64_field(5)
+    pubkey: str = betterproto.string_field(6)
+    mint: str = betterproto.string_field(7)
+    vault: str = betterproto.string_field(8)
+    oracle: str = betterproto.string_field(9)
+    oracle_source: str = betterproto.string_field(10)
+    if_liquidation_fee: float = betterproto.double_field(11)
+    decimals: int = betterproto.uint64_field(12)
+    optimal_utilization: int = betterproto.uint64_field(13)
+    optimal_borrow_rate: int = betterproto.uint64_field(14)
+    max_borrow_rate: int = betterproto.uint64_field(15)
+    cumulative_deposit_interest: float = betterproto.float_field(16)
+    cumulative_borrow_interest: float = betterproto.float_field(17)
+    total_social_loss: float = betterproto.float_field(18)
+    total_quote_social_loss: float = betterproto.float_field(19)
+    deposit_balance: float = betterproto.float_field(20)
+    borrow_balance: float = betterproto.float_field(21)
+    max_token_deposits: float = betterproto.float_field(22)
+    last_interest_ts: float = betterproto.float_field(23)
+    last_twap_ts: float = betterproto.float_field(24)
+    initial_asset_weight: int = betterproto.uint64_field(25)
+    maintenance_asset_weight: int = betterproto.uint64_field(26)
+    initial_liability_weight: int = betterproto.uint64_field(27)
+    maintenance_liability_weight: int = betterproto.uint64_field(28)
+    liquidator_fee: int = betterproto.uint64_field(29)
+    imf_factor: int = betterproto.uint64_field(30)
+    withdraw_guard_threshold: float = betterproto.float_field(31)
+    deposit_token_twap: float = betterproto.float_field(32)
+    borrow_token_twap: float = betterproto.float_field(33)
+    utilization_twap: float = betterproto.float_field(34)
+    next_deposit_record_id: float = betterproto.float_field(35)
+    order_step_size: float = betterproto.float_field(36)
+    order_tick_size: float = betterproto.float_field(37)
+    next_fill_record_id: float = betterproto.float_field(38)
+    spot_fee_pool: float = betterproto.float_field(39)
+    total_spot_fee: float = betterproto.float_field(40)
+    orders_enabled: bool = betterproto.bool_field(41)
 
 
 @dataclass
@@ -1817,7 +1851,7 @@ class ApiStub(betterproto.ServiceStub):
         client_order_i_d: int = 0,
         post_only: common.PostOnlyParams = 0,
     ) -> PostMarginOrderResponse:
-        """Drift Spot"""
+        """Drift Margin"""
 
         request = PostMarginOrderRequest()
         request.owner_address = owner_address

@@ -49,7 +49,7 @@ type ApiClient interface {
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
-	// Drift Spot
+	// Drift Margin
 	PostMarginOrder(ctx context.Context, in *PostMarginOrderRequest, opts ...grpc.CallOption) (*PostMarginOrderResponse, error)
 	// perp endpoints
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
@@ -1035,7 +1035,7 @@ type ApiServer interface {
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
-	// Drift Spot
+	// Drift Margin
 	PostMarginOrder(context.Context, *PostMarginOrderRequest) (*PostMarginOrderResponse, error)
 	// perp endpoints
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)

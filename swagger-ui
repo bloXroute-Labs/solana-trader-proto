@@ -92,8 +92,8 @@
     },
     "/api/v1/market/Margin/orderbook/{contract}": {
       "get": {
-        "summary": "Spot contract orderbook",
-        "description": "Returns spot contract's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "summary": "margin contract orderbook",
+        "description": "Returns margin contract's orderbook. Use limit param to reduce the number of bids/asks returned",
         "operationId": "Api_GetMarginOrderbook",
         "responses": {
           "200": {
@@ -147,7 +147,7 @@
           }
         ],
         "tags": [
-          "Spot",
+          "Margin",
           "Orderbook",
           "Market"
         ]
@@ -812,8 +812,8 @@
     },
     "/api/v1/trade/margin/order": {
       "post": {
-        "summary": "drift spot order",
-        "description": "post a spot margin order",
+        "summary": "drift margin order",
+        "description": "post a margin order",
         "operationId": "Api_PostMarginOrder",
         "responses": {
           "200": {
@@ -841,7 +841,7 @@
         ],
         "tags": [
           "Trade",
-          "Spot",
+          "Margin",
           "Orderbook"
         ]
       }
@@ -2829,33 +2829,153 @@
         "contractAddress": {
           "type": "string"
         },
-        "openLongInterest": {
+        "status": {
+          "type": "string"
+        },
+        "assetTier": {
+          "type": "string"
+        },
+        "marketIndex": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "pubkey": {
+          "type": "string"
+        },
+        "mint": {
+          "type": "string"
+        },
+        "vault": {
+          "type": "string"
+        },
+        "oracle": {
+          "type": "string"
+        },
+        "oracleSource": {
+          "type": "string"
+        },
+        "ifLiquidationFee": {
           "type": "number",
           "format": "double"
         },
-        "openShortInterest": {
-          "type": "number",
-          "format": "double"
+        "decimals": {
+          "type": "string",
+          "format": "uint64"
         },
-        "fundingRate": {
-          "type": "number",
-          "format": "double"
+        "optimalUtilization": {
+          "type": "string",
+          "format": "uint64"
         },
-        "minSize": {
-          "type": "number",
-          "format": "double"
+        "optimalBorrowRate": {
+          "type": "string",
+          "format": "uint64"
         },
-        "perpPrice": {
-          "type": "number",
-          "format": "double"
+        "maxBorrowRate": {
+          "type": "string",
+          "format": "uint64"
         },
-        "indexPrice": {
+        "cumulativeDepositInterest": {
           "type": "number",
-          "format": "double"
+          "format": "float"
         },
-        "openInterest": {
+        "cumulativeBorrowInterest": {
           "type": "number",
-          "format": "double"
+          "format": "float"
+        },
+        "totalSocialLoss": {
+          "type": "number",
+          "format": "float"
+        },
+        "totalQuoteSocialLoss": {
+          "type": "number",
+          "format": "float"
+        },
+        "depositBalance": {
+          "type": "number",
+          "format": "float"
+        },
+        "borrowBalance": {
+          "type": "number",
+          "format": "float"
+        },
+        "maxTokenDeposits": {
+          "type": "number",
+          "format": "float"
+        },
+        "lastInterestTs": {
+          "type": "number",
+          "format": "float"
+        },
+        "lastTwapTs": {
+          "type": "number",
+          "format": "float"
+        },
+        "initialAssetWeight": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "maintenanceAssetWeight": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "initialLiabilityWeight": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "maintenanceLiabilityWeight": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "liquidatorFee": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "imfFactor": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "withdrawGuardThreshold": {
+          "type": "number",
+          "format": "float"
+        },
+        "depositTokenTwap": {
+          "type": "number",
+          "format": "float"
+        },
+        "borrowTokenTwap": {
+          "type": "number",
+          "format": "float"
+        },
+        "utilizationTwap": {
+          "type": "number",
+          "format": "float"
+        },
+        "nextDepositRecordId": {
+          "type": "number",
+          "format": "float"
+        },
+        "orderStepSize": {
+          "type": "number",
+          "format": "float"
+        },
+        "orderTickSize": {
+          "type": "number",
+          "format": "float"
+        },
+        "nextFillRecordId": {
+          "type": "number",
+          "format": "float"
+        },
+        "spotFeePool": {
+          "type": "number",
+          "format": "float"
+        },
+        "totalSpotFee": {
+          "type": "number",
+          "format": "float"
+        },
+        "ordersEnabled": {
+          "type": "boolean"
         }
       }
     },

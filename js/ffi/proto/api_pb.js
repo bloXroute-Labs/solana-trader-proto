@@ -37931,13 +37931,45 @@ proto.api.MarginContractInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
     contract: jspb.Message.getFieldWithDefault(msg, 1, 0),
     contractaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    openlonginterest: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
-    openshortinterest: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
-    fundingrate: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    minsize: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
-    perpprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
-    indexprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
-    openinterest: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0)
+    status: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    assettier: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    marketindex: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    pubkey: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    mint: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    vault: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    oracle: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    oraclesource: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    ifliquidationfee: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0),
+    decimals: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    optimalutilization: jspb.Message.getFieldWithDefault(msg, 13, 0),
+    optimalborrowrate: jspb.Message.getFieldWithDefault(msg, 14, 0),
+    maxborrowrate: jspb.Message.getFieldWithDefault(msg, 15, 0),
+    cumulativedepositinterest: jspb.Message.getFloatingPointFieldWithDefault(msg, 16, 0.0),
+    cumulativeborrowinterest: jspb.Message.getFloatingPointFieldWithDefault(msg, 17, 0.0),
+    totalsocialloss: jspb.Message.getFloatingPointFieldWithDefault(msg, 18, 0.0),
+    totalquotesocialloss: jspb.Message.getFloatingPointFieldWithDefault(msg, 19, 0.0),
+    depositbalance: jspb.Message.getFloatingPointFieldWithDefault(msg, 20, 0.0),
+    borrowbalance: jspb.Message.getFloatingPointFieldWithDefault(msg, 21, 0.0),
+    maxtokendeposits: jspb.Message.getFloatingPointFieldWithDefault(msg, 22, 0.0),
+    lastinterestts: jspb.Message.getFloatingPointFieldWithDefault(msg, 23, 0.0),
+    lasttwapts: jspb.Message.getFloatingPointFieldWithDefault(msg, 24, 0.0),
+    initialassetweight: jspb.Message.getFieldWithDefault(msg, 25, 0),
+    maintenanceassetweight: jspb.Message.getFieldWithDefault(msg, 26, 0),
+    initialliabilityweight: jspb.Message.getFieldWithDefault(msg, 27, 0),
+    maintenanceliabilityweight: jspb.Message.getFieldWithDefault(msg, 28, 0),
+    liquidatorfee: jspb.Message.getFieldWithDefault(msg, 29, 0),
+    imffactor: jspb.Message.getFieldWithDefault(msg, 30, 0),
+    withdrawguardthreshold: jspb.Message.getFloatingPointFieldWithDefault(msg, 31, 0.0),
+    deposittokentwap: jspb.Message.getFloatingPointFieldWithDefault(msg, 32, 0.0),
+    borrowtokentwap: jspb.Message.getFloatingPointFieldWithDefault(msg, 33, 0.0),
+    utilizationtwap: jspb.Message.getFloatingPointFieldWithDefault(msg, 34, 0.0),
+    nextdepositrecordid: jspb.Message.getFloatingPointFieldWithDefault(msg, 35, 0.0),
+    orderstepsize: jspb.Message.getFloatingPointFieldWithDefault(msg, 36, 0.0),
+    orderticksize: jspb.Message.getFloatingPointFieldWithDefault(msg, 37, 0.0),
+    nextfillrecordid: jspb.Message.getFloatingPointFieldWithDefault(msg, 38, 0.0),
+    spotfeepool: jspb.Message.getFloatingPointFieldWithDefault(msg, 39, 0.0),
+    totalspotfee: jspb.Message.getFloatingPointFieldWithDefault(msg, 40, 0.0),
+    ordersenabled: jspb.Message.getBooleanFieldWithDefault(msg, 41, false)
   };
 
   if (includeInstance) {
@@ -37983,32 +38015,160 @@ proto.api.MarginContractInfo.deserializeBinaryFromReader = function(msg, reader)
       msg.setContractaddress(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setOpenlonginterest(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setStatus(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setOpenshortinterest(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAssettier(value);
       break;
     case 5:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setFundingrate(value);
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setMarketindex(value);
       break;
     case 6:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setMinsize(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPubkey(value);
       break;
     case 7:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setPerpprice(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMint(value);
       break;
     case 8:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setIndexprice(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setVault(value);
       break;
     case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOracle(value);
+      break;
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOraclesource(value);
+      break;
+    case 11:
       var value = /** @type {number} */ (reader.readDouble());
-      msg.setOpeninterest(value);
+      msg.setIfliquidationfee(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setDecimals(value);
+      break;
+    case 13:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setOptimalutilization(value);
+      break;
+    case 14:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setOptimalborrowrate(value);
+      break;
+    case 15:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setMaxborrowrate(value);
+      break;
+    case 16:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setCumulativedepositinterest(value);
+      break;
+    case 17:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setCumulativeborrowinterest(value);
+      break;
+    case 18:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setTotalsocialloss(value);
+      break;
+    case 19:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setTotalquotesocialloss(value);
+      break;
+    case 20:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setDepositbalance(value);
+      break;
+    case 21:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setBorrowbalance(value);
+      break;
+    case 22:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setMaxtokendeposits(value);
+      break;
+    case 23:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setLastinterestts(value);
+      break;
+    case 24:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setLasttwapts(value);
+      break;
+    case 25:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setInitialassetweight(value);
+      break;
+    case 26:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setMaintenanceassetweight(value);
+      break;
+    case 27:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setInitialliabilityweight(value);
+      break;
+    case 28:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setMaintenanceliabilityweight(value);
+      break;
+    case 29:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setLiquidatorfee(value);
+      break;
+    case 30:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setImffactor(value);
+      break;
+    case 31:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setWithdrawguardthreshold(value);
+      break;
+    case 32:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setDeposittokentwap(value);
+      break;
+    case 33:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setBorrowtokentwap(value);
+      break;
+    case 34:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setUtilizationtwap(value);
+      break;
+    case 35:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setNextdepositrecordid(value);
+      break;
+    case 36:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setOrderstepsize(value);
+      break;
+    case 37:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setOrderticksize(value);
+      break;
+    case 38:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setNextfillrecordid(value);
+      break;
+    case 39:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setSpotfeepool(value);
+      break;
+    case 40:
+      var value = /** @type {number} */ (reader.readFloat());
+      msg.setTotalspotfee(value);
+      break;
+    case 41:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setOrdersenabled(value);
       break;
     default:
       reader.skipField();
@@ -38053,52 +38213,276 @@ proto.api.MarginContractInfo.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getOpenlonginterest();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  f = message.getStatus();
+  if (f.length > 0) {
+    writer.writeString(
       3,
       f
     );
   }
-  f = message.getOpenshortinterest();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  f = message.getAssettier();
+  if (f.length > 0) {
+    writer.writeString(
       4,
       f
     );
   }
-  f = message.getFundingrate();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  f = message.getMarketindex();
+  if (f !== 0) {
+    writer.writeUint64(
       5,
       f
     );
   }
-  f = message.getMinsize();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  f = message.getPubkey();
+  if (f.length > 0) {
+    writer.writeString(
       6,
       f
     );
   }
-  f = message.getPerpprice();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  f = message.getMint();
+  if (f.length > 0) {
+    writer.writeString(
       7,
       f
     );
   }
-  f = message.getIndexprice();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  f = message.getVault();
+  if (f.length > 0) {
+    writer.writeString(
       8,
       f
     );
   }
-  f = message.getOpeninterest();
+  f = message.getOracle();
+  if (f.length > 0) {
+    writer.writeString(
+      9,
+      f
+    );
+  }
+  f = message.getOraclesource();
+  if (f.length > 0) {
+    writer.writeString(
+      10,
+      f
+    );
+  }
+  f = message.getIfliquidationfee();
   if (f !== 0.0) {
     writer.writeDouble(
-      9,
+      11,
+      f
+    );
+  }
+  f = message.getDecimals();
+  if (f !== 0) {
+    writer.writeUint64(
+      12,
+      f
+    );
+  }
+  f = message.getOptimalutilization();
+  if (f !== 0) {
+    writer.writeUint64(
+      13,
+      f
+    );
+  }
+  f = message.getOptimalborrowrate();
+  if (f !== 0) {
+    writer.writeUint64(
+      14,
+      f
+    );
+  }
+  f = message.getMaxborrowrate();
+  if (f !== 0) {
+    writer.writeUint64(
+      15,
+      f
+    );
+  }
+  f = message.getCumulativedepositinterest();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      16,
+      f
+    );
+  }
+  f = message.getCumulativeborrowinterest();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      17,
+      f
+    );
+  }
+  f = message.getTotalsocialloss();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      18,
+      f
+    );
+  }
+  f = message.getTotalquotesocialloss();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      19,
+      f
+    );
+  }
+  f = message.getDepositbalance();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      20,
+      f
+    );
+  }
+  f = message.getBorrowbalance();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      21,
+      f
+    );
+  }
+  f = message.getMaxtokendeposits();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      22,
+      f
+    );
+  }
+  f = message.getLastinterestts();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      23,
+      f
+    );
+  }
+  f = message.getLasttwapts();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      24,
+      f
+    );
+  }
+  f = message.getInitialassetweight();
+  if (f !== 0) {
+    writer.writeUint64(
+      25,
+      f
+    );
+  }
+  f = message.getMaintenanceassetweight();
+  if (f !== 0) {
+    writer.writeUint64(
+      26,
+      f
+    );
+  }
+  f = message.getInitialliabilityweight();
+  if (f !== 0) {
+    writer.writeUint64(
+      27,
+      f
+    );
+  }
+  f = message.getMaintenanceliabilityweight();
+  if (f !== 0) {
+    writer.writeUint64(
+      28,
+      f
+    );
+  }
+  f = message.getLiquidatorfee();
+  if (f !== 0) {
+    writer.writeUint64(
+      29,
+      f
+    );
+  }
+  f = message.getImffactor();
+  if (f !== 0) {
+    writer.writeUint64(
+      30,
+      f
+    );
+  }
+  f = message.getWithdrawguardthreshold();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      31,
+      f
+    );
+  }
+  f = message.getDeposittokentwap();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      32,
+      f
+    );
+  }
+  f = message.getBorrowtokentwap();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      33,
+      f
+    );
+  }
+  f = message.getUtilizationtwap();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      34,
+      f
+    );
+  }
+  f = message.getNextdepositrecordid();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      35,
+      f
+    );
+  }
+  f = message.getOrderstepsize();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      36,
+      f
+    );
+  }
+  f = message.getOrderticksize();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      37,
+      f
+    );
+  }
+  f = message.getNextfillrecordid();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      38,
+      f
+    );
+  }
+  f = message.getSpotfeepool();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      39,
+      f
+    );
+  }
+  f = message.getTotalspotfee();
+  if (f !== 0.0) {
+    writer.writeFloat(
+      40,
+      f
+    );
+  }
+  f = message.getOrdersenabled();
+  if (f) {
+    writer.writeBool(
+      41,
       f
     );
   }
@@ -38142,11 +38526,47 @@ proto.api.MarginContractInfo.prototype.setContractaddress = function(value) {
 
 
 /**
- * optional double openLongInterest = 3;
+ * optional string status = 3;
+ * @return {string}
+ */
+proto.api.MarginContractInfo.prototype.getStatus = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setStatus = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string assetTier = 4;
+ * @return {string}
+ */
+proto.api.MarginContractInfo.prototype.getAssettier = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setAssettier = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional uint64 marketIndex = 5;
  * @return {number}
  */
-proto.api.MarginContractInfo.prototype.getOpenlonginterest = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+proto.api.MarginContractInfo.prototype.getMarketindex = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
@@ -38154,17 +38574,107 @@ proto.api.MarginContractInfo.prototype.getOpenlonginterest = function() {
  * @param {number} value
  * @return {!proto.api.MarginContractInfo} returns this
  */
-proto.api.MarginContractInfo.prototype.setOpenlonginterest = function(value) {
-  return jspb.Message.setProto3FloatField(this, 3, value);
+proto.api.MarginContractInfo.prototype.setMarketindex = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
 /**
- * optional double openShortInterest = 4;
+ * optional string pubkey = 6;
+ * @return {string}
+ */
+proto.api.MarginContractInfo.prototype.getPubkey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setPubkey = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+/**
+ * optional string mint = 7;
+ * @return {string}
+ */
+proto.api.MarginContractInfo.prototype.getMint = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setMint = function(value) {
+  return jspb.Message.setProto3StringField(this, 7, value);
+};
+
+
+/**
+ * optional string vault = 8;
+ * @return {string}
+ */
+proto.api.MarginContractInfo.prototype.getVault = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setVault = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional string oracle = 9;
+ * @return {string}
+ */
+proto.api.MarginContractInfo.prototype.getOracle = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setOracle = function(value) {
+  return jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
+/**
+ * optional string oracleSource = 10;
+ * @return {string}
+ */
+proto.api.MarginContractInfo.prototype.getOraclesource = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setOraclesource = function(value) {
+  return jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+/**
+ * optional double ifLiquidationFee = 11;
  * @return {number}
  */
-proto.api.MarginContractInfo.prototype.getOpenshortinterest = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+proto.api.MarginContractInfo.prototype.getIfliquidationfee = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 11, 0.0));
 };
 
 
@@ -38172,17 +38682,17 @@ proto.api.MarginContractInfo.prototype.getOpenshortinterest = function() {
  * @param {number} value
  * @return {!proto.api.MarginContractInfo} returns this
  */
-proto.api.MarginContractInfo.prototype.setOpenshortinterest = function(value) {
-  return jspb.Message.setProto3FloatField(this, 4, value);
+proto.api.MarginContractInfo.prototype.setIfliquidationfee = function(value) {
+  return jspb.Message.setProto3FloatField(this, 11, value);
 };
 
 
 /**
- * optional double fundingRate = 5;
+ * optional uint64 decimals = 12;
  * @return {number}
  */
-proto.api.MarginContractInfo.prototype.getFundingrate = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+proto.api.MarginContractInfo.prototype.getDecimals = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
 };
 
 
@@ -38190,17 +38700,17 @@ proto.api.MarginContractInfo.prototype.getFundingrate = function() {
  * @param {number} value
  * @return {!proto.api.MarginContractInfo} returns this
  */
-proto.api.MarginContractInfo.prototype.setFundingrate = function(value) {
-  return jspb.Message.setProto3FloatField(this, 5, value);
+proto.api.MarginContractInfo.prototype.setDecimals = function(value) {
+  return jspb.Message.setProto3IntField(this, 12, value);
 };
 
 
 /**
- * optional double minSize = 6;
+ * optional uint64 optimalUtilization = 13;
  * @return {number}
  */
-proto.api.MarginContractInfo.prototype.getMinsize = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+proto.api.MarginContractInfo.prototype.getOptimalutilization = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
 };
 
 
@@ -38208,17 +38718,17 @@ proto.api.MarginContractInfo.prototype.getMinsize = function() {
  * @param {number} value
  * @return {!proto.api.MarginContractInfo} returns this
  */
-proto.api.MarginContractInfo.prototype.setMinsize = function(value) {
-  return jspb.Message.setProto3FloatField(this, 6, value);
+proto.api.MarginContractInfo.prototype.setOptimalutilization = function(value) {
+  return jspb.Message.setProto3IntField(this, 13, value);
 };
 
 
 /**
- * optional double perpPrice = 7;
+ * optional uint64 optimalBorrowRate = 14;
  * @return {number}
  */
-proto.api.MarginContractInfo.prototype.getPerpprice = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
+proto.api.MarginContractInfo.prototype.getOptimalborrowrate = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 14, 0));
 };
 
 
@@ -38226,17 +38736,17 @@ proto.api.MarginContractInfo.prototype.getPerpprice = function() {
  * @param {number} value
  * @return {!proto.api.MarginContractInfo} returns this
  */
-proto.api.MarginContractInfo.prototype.setPerpprice = function(value) {
-  return jspb.Message.setProto3FloatField(this, 7, value);
+proto.api.MarginContractInfo.prototype.setOptimalborrowrate = function(value) {
+  return jspb.Message.setProto3IntField(this, 14, value);
 };
 
 
 /**
- * optional double indexPrice = 8;
+ * optional uint64 maxBorrowRate = 15;
  * @return {number}
  */
-proto.api.MarginContractInfo.prototype.getIndexprice = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
+proto.api.MarginContractInfo.prototype.getMaxborrowrate = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 15, 0));
 };
 
 
@@ -38244,17 +38754,17 @@ proto.api.MarginContractInfo.prototype.getIndexprice = function() {
  * @param {number} value
  * @return {!proto.api.MarginContractInfo} returns this
  */
-proto.api.MarginContractInfo.prototype.setIndexprice = function(value) {
-  return jspb.Message.setProto3FloatField(this, 8, value);
+proto.api.MarginContractInfo.prototype.setMaxborrowrate = function(value) {
+  return jspb.Message.setProto3IntField(this, 15, value);
 };
 
 
 /**
- * optional double openInterest = 9;
+ * optional float cumulativeDepositInterest = 16;
  * @return {number}
  */
-proto.api.MarginContractInfo.prototype.getOpeninterest = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
+proto.api.MarginContractInfo.prototype.getCumulativedepositinterest = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 16, 0.0));
 };
 
 
@@ -38262,8 +38772,458 @@ proto.api.MarginContractInfo.prototype.getOpeninterest = function() {
  * @param {number} value
  * @return {!proto.api.MarginContractInfo} returns this
  */
-proto.api.MarginContractInfo.prototype.setOpeninterest = function(value) {
-  return jspb.Message.setProto3FloatField(this, 9, value);
+proto.api.MarginContractInfo.prototype.setCumulativedepositinterest = function(value) {
+  return jspb.Message.setProto3FloatField(this, 16, value);
+};
+
+
+/**
+ * optional float cumulativeBorrowInterest = 17;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getCumulativeborrowinterest = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 17, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setCumulativeborrowinterest = function(value) {
+  return jspb.Message.setProto3FloatField(this, 17, value);
+};
+
+
+/**
+ * optional float totalSocialLoss = 18;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getTotalsocialloss = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 18, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setTotalsocialloss = function(value) {
+  return jspb.Message.setProto3FloatField(this, 18, value);
+};
+
+
+/**
+ * optional float totalQuoteSocialLoss = 19;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getTotalquotesocialloss = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 19, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setTotalquotesocialloss = function(value) {
+  return jspb.Message.setProto3FloatField(this, 19, value);
+};
+
+
+/**
+ * optional float depositBalance = 20;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getDepositbalance = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 20, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setDepositbalance = function(value) {
+  return jspb.Message.setProto3FloatField(this, 20, value);
+};
+
+
+/**
+ * optional float borrowBalance = 21;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getBorrowbalance = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 21, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setBorrowbalance = function(value) {
+  return jspb.Message.setProto3FloatField(this, 21, value);
+};
+
+
+/**
+ * optional float maxTokenDeposits = 22;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getMaxtokendeposits = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 22, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setMaxtokendeposits = function(value) {
+  return jspb.Message.setProto3FloatField(this, 22, value);
+};
+
+
+/**
+ * optional float lastInterestTs = 23;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getLastinterestts = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 23, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setLastinterestts = function(value) {
+  return jspb.Message.setProto3FloatField(this, 23, value);
+};
+
+
+/**
+ * optional float lastTwapTs = 24;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getLasttwapts = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 24, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setLasttwapts = function(value) {
+  return jspb.Message.setProto3FloatField(this, 24, value);
+};
+
+
+/**
+ * optional uint64 initialAssetWeight = 25;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getInitialassetweight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 25, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setInitialassetweight = function(value) {
+  return jspb.Message.setProto3IntField(this, 25, value);
+};
+
+
+/**
+ * optional uint64 maintenanceAssetWeight = 26;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getMaintenanceassetweight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 26, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setMaintenanceassetweight = function(value) {
+  return jspb.Message.setProto3IntField(this, 26, value);
+};
+
+
+/**
+ * optional uint64 initialLiabilityWeight = 27;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getInitialliabilityweight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 27, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setInitialliabilityweight = function(value) {
+  return jspb.Message.setProto3IntField(this, 27, value);
+};
+
+
+/**
+ * optional uint64 maintenanceLiabilityWeight = 28;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getMaintenanceliabilityweight = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 28, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setMaintenanceliabilityweight = function(value) {
+  return jspb.Message.setProto3IntField(this, 28, value);
+};
+
+
+/**
+ * optional uint64 liquidatorFee = 29;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getLiquidatorfee = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 29, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setLiquidatorfee = function(value) {
+  return jspb.Message.setProto3IntField(this, 29, value);
+};
+
+
+/**
+ * optional uint64 imfFactor = 30;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getImffactor = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 30, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setImffactor = function(value) {
+  return jspb.Message.setProto3IntField(this, 30, value);
+};
+
+
+/**
+ * optional float withdrawGuardThreshold = 31;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getWithdrawguardthreshold = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 31, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setWithdrawguardthreshold = function(value) {
+  return jspb.Message.setProto3FloatField(this, 31, value);
+};
+
+
+/**
+ * optional float depositTokenTwap = 32;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getDeposittokentwap = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 32, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setDeposittokentwap = function(value) {
+  return jspb.Message.setProto3FloatField(this, 32, value);
+};
+
+
+/**
+ * optional float borrowTokenTwap = 33;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getBorrowtokentwap = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 33, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setBorrowtokentwap = function(value) {
+  return jspb.Message.setProto3FloatField(this, 33, value);
+};
+
+
+/**
+ * optional float utilizationTwap = 34;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getUtilizationtwap = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 34, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setUtilizationtwap = function(value) {
+  return jspb.Message.setProto3FloatField(this, 34, value);
+};
+
+
+/**
+ * optional float nextDepositRecordId = 35;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getNextdepositrecordid = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 35, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setNextdepositrecordid = function(value) {
+  return jspb.Message.setProto3FloatField(this, 35, value);
+};
+
+
+/**
+ * optional float orderStepSize = 36;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getOrderstepsize = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 36, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setOrderstepsize = function(value) {
+  return jspb.Message.setProto3FloatField(this, 36, value);
+};
+
+
+/**
+ * optional float orderTickSize = 37;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getOrderticksize = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 37, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setOrderticksize = function(value) {
+  return jspb.Message.setProto3FloatField(this, 37, value);
+};
+
+
+/**
+ * optional float nextFillRecordId = 38;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getNextfillrecordid = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 38, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setNextfillrecordid = function(value) {
+  return jspb.Message.setProto3FloatField(this, 38, value);
+};
+
+
+/**
+ * optional float spotFeePool = 39;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getSpotfeepool = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 39, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setSpotfeepool = function(value) {
+  return jspb.Message.setProto3FloatField(this, 39, value);
+};
+
+
+/**
+ * optional float totalSpotFee = 40;
+ * @return {number}
+ */
+proto.api.MarginContractInfo.prototype.getTotalspotfee = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 40, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setTotalspotfee = function(value) {
+  return jspb.Message.setProto3FloatField(this, 40, value);
+};
+
+
+/**
+ * optional bool ordersEnabled = 41;
+ * @return {boolean}
+ */
+proto.api.MarginContractInfo.prototype.getOrdersenabled = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 41, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.api.MarginContractInfo} returns this
+ */
+proto.api.MarginContractInfo.prototype.setOrdersenabled = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 41, value);
 };
 
 
