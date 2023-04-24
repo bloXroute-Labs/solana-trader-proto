@@ -1618,7 +1618,7 @@ message PostPerpOrderResponse {
 message PostMarginOrderRequest {
   string ownerAddress = 1;
   string payerAddress = 2;
-  common.PerpContract contract = 3;
+  common.SpotContract contract = 3;
   string accountAddress = 4;
   common.PositionSide positionSide = 5;
   double slippage = 6;

@@ -32911,7 +32911,7 @@ proto.api.PostMarginOrderRequest.deserializeBinaryFromReader = function(msg, rea
       msg.setPayeraddress(value);
       break;
     case 3:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      var value = /** @type {!proto.common.SpotContract} */ (reader.readEnum());
       msg.setContract(value);
       break;
     case 4:
@@ -33092,16 +33092,16 @@ proto.api.PostMarginOrderRequest.prototype.setPayeraddress = function(value) {
 
 
 /**
- * optional common.PerpContract contract = 3;
- * @return {!proto.common.PerpContract}
+ * optional common.SpotContract contract = 3;
+ * @return {!proto.common.SpotContract}
  */
 proto.api.PostMarginOrderRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {!proto.common.SpotContract} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
 /**
- * @param {!proto.common.PerpContract} value
+ * @param {!proto.common.SpotContract} value
  * @return {!proto.api.PostMarginOrderRequest} returns this
  */
 proto.api.PostMarginOrderRequest.prototype.setContract = function(value) {

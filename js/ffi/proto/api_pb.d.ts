@@ -3851,8 +3851,8 @@ export class PostMarginOrderRequest extends jspb.Message {
     setOwneraddress(value: string): PostMarginOrderRequest;
     getPayeraddress(): string;
     setPayeraddress(value: string): PostMarginOrderRequest;
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): PostMarginOrderRequest;
+    getContract(): common_pb.SpotContract;
+    setContract(value: common_pb.SpotContract): PostMarginOrderRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): PostMarginOrderRequest;
     getPositionside(): common_pb.PositionSide;
@@ -3884,7 +3884,7 @@ export namespace PostMarginOrderRequest {
     export type AsObject = {
         owneraddress: string,
         payeraddress: string,
-        contract: common_pb.PerpContract,
+        contract: common_pb.SpotContract,
         accountaddress: string,
         positionside: common_pb.PositionSide,
         slippage: number,

@@ -3529,7 +3529,7 @@
           "type": "string"
         },
         "contract": {
-          "$ref": "#/definitions/commonPerpContract"
+          "$ref": "#/definitions/commonSpotContract"
         },
         "accountAddress": {
           "type": "string"

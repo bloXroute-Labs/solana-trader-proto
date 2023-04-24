@@ -1061,7 +1061,7 @@ class PostPerpOrderResponse(betterproto.Message):
 class PostMarginOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     payer_address: str = betterproto.string_field(2)
-    contract: common.PerpContract = betterproto.enum_field(3)
+    contract: common.SpotContract = betterproto.enum_field(3)
     account_address: str = betterproto.string_field(4)
     position_side: common.PositionSide = betterproto.enum_field(5)
     slippage: float = betterproto.double_field(6)
@@ -1807,7 +1807,7 @@ class ApiStub(betterproto.ServiceStub):
         *,
         owner_address: str = "",
         payer_address: str = "",
-        contract: common.PerpContract = 0,
+        contract: common.SpotContract = 0,
         account_address: str = "",
         position_side: common.PositionSide = 0,
         slippage: float = 0,
