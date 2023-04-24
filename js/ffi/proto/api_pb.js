@@ -26605,7 +26605,7 @@ proto.api.GetMarginOrderbookRequest.deserializeBinaryFromReader = function(msg, 
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.common.SpotContract} */ (reader.readEnum());
+      var value = /** @type {!proto.common.MarginContract} */ (reader.readEnum());
       msg.setContract(value);
       break;
     case 2:
@@ -26670,16 +26670,16 @@ proto.api.GetMarginOrderbookRequest.serializeBinaryToWriter = function(message, 
 
 
 /**
- * optional common.SpotContract contract = 1;
- * @return {!proto.common.SpotContract}
+ * optional common.MarginContract contract = 1;
+ * @return {!proto.common.MarginContract}
  */
 proto.api.GetMarginOrderbookRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.SpotContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {!proto.common.MarginContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.common.SpotContract} value
+ * @param {!proto.common.MarginContract} value
  * @return {!proto.api.GetMarginOrderbookRequest} returns this
  */
 proto.api.GetMarginOrderbookRequest.prototype.setContract = function(value) {
@@ -26802,7 +26802,7 @@ proto.api.GetMarginOrderbooksRequest.deserializeBinaryFromReader = function(msg,
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var values = /** @type {!Array<!proto.common.SpotContract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
+      var values = /** @type {!Array<!proto.common.MarginContract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
       for (var i = 0; i < values.length; i++) {
         msg.addContracts(values[i]);
       }
@@ -26869,16 +26869,16 @@ proto.api.GetMarginOrderbooksRequest.serializeBinaryToWriter = function(message,
 
 
 /**
- * repeated common.SpotContract contracts = 1;
- * @return {!Array<!proto.common.SpotContract>}
+ * repeated common.MarginContract contracts = 1;
+ * @return {!Array<!proto.common.MarginContract>}
  */
 proto.api.GetMarginOrderbooksRequest.prototype.getContractsList = function() {
-  return /** @type {!Array<!proto.common.SpotContract>} */ (jspb.Message.getRepeatedField(this, 1));
+  return /** @type {!Array<!proto.common.MarginContract>} */ (jspb.Message.getRepeatedField(this, 1));
 };
 
 
 /**
- * @param {!Array<!proto.common.SpotContract>} value
+ * @param {!Array<!proto.common.MarginContract>} value
  * @return {!proto.api.GetMarginOrderbooksRequest} returns this
  */
 proto.api.GetMarginOrderbooksRequest.prototype.setContractsList = function(value) {
@@ -26887,7 +26887,7 @@ proto.api.GetMarginOrderbooksRequest.prototype.setContractsList = function(value
 
 
 /**
- * @param {!proto.common.SpotContract} value
+ * @param {!proto.common.MarginContract} value
  * @param {number=} opt_index
  * @return {!proto.api.GetMarginOrderbooksRequest} returns this
  */
@@ -27022,7 +27022,7 @@ proto.api.GetMarginOrderbookResponse.deserializeBinaryFromReader = function(msg,
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.common.SpotContract} */ (reader.readEnum());
+      var value = /** @type {!proto.common.MarginContract} */ (reader.readEnum());
       msg.setContract(value);
       break;
     case 2:
@@ -27091,16 +27091,16 @@ proto.api.GetMarginOrderbookResponse.serializeBinaryToWriter = function(message,
 
 
 /**
- * optional common.SpotContract contract = 1;
- * @return {!proto.common.SpotContract}
+ * optional common.MarginContract contract = 1;
+ * @return {!proto.common.MarginContract}
  */
 proto.api.GetMarginOrderbookResponse.prototype.getContract = function() {
-  return /** @type {!proto.common.SpotContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {!proto.common.MarginContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.common.SpotContract} value
+ * @param {!proto.common.MarginContract} value
  * @return {!proto.api.GetMarginOrderbookResponse} returns this
  */
 proto.api.GetMarginOrderbookResponse.prototype.setContract = function(value) {
@@ -32916,7 +32916,7 @@ proto.api.PostMarginOrderRequest.deserializeBinaryFromReader = function(msg, rea
       msg.setPayeraddress(value);
       break;
     case 4:
-      var value = /** @type {!proto.common.SpotContract} */ (reader.readEnum());
+      var value = /** @type {!proto.common.MarginContract} */ (reader.readEnum());
       msg.setContract(value);
       break;
     case 5:
@@ -33122,16 +33122,16 @@ proto.api.PostMarginOrderRequest.prototype.setPayeraddress = function(value) {
 
 
 /**
- * optional common.SpotContract contract = 4;
- * @return {!proto.common.SpotContract}
+ * optional common.MarginContract contract = 4;
+ * @return {!proto.common.MarginContract}
  */
 proto.api.PostMarginOrderRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.SpotContract} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.common.MarginContract} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
 /**
- * @param {!proto.common.SpotContract} value
+ * @param {!proto.common.MarginContract} value
  * @return {!proto.api.PostMarginOrderRequest} returns this
  */
 proto.api.PostMarginOrderRequest.prototype.setContract = function(value) {
@@ -38037,7 +38037,7 @@ proto.api.MarginContractInfo.deserializeBinaryFromReader = function(msg, reader)
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.common.SpotContract} */ (reader.readEnum());
+      var value = /** @type {!proto.common.MarginContract} */ (reader.readEnum());
       msg.setContract(value);
       break;
     case 2:
@@ -38520,16 +38520,16 @@ proto.api.MarginContractInfo.serializeBinaryToWriter = function(message, writer)
 
 
 /**
- * optional common.SpotContract contract = 1;
- * @return {!proto.common.SpotContract}
+ * optional common.MarginContract contract = 1;
+ * @return {!proto.common.MarginContract}
  */
 proto.api.MarginContractInfo.prototype.getContract = function() {
-  return /** @type {!proto.common.SpotContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {!proto.common.MarginContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /**
- * @param {!proto.common.SpotContract} value
+ * @param {!proto.common.MarginContract} value
  * @return {!proto.api.MarginContractInfo} returns this
  */
 proto.api.MarginContractInfo.prototype.setContract = function(value) {

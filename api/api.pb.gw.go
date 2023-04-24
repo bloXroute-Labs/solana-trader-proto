@@ -1609,12 +1609,12 @@ func request_Api_GetMarginOrderbook_0(ctx context.Context, marshaler runtime.Mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "contract")
 	}
 
-	e, err = runtime.Enum(val, common.SpotContract_value)
+	e, err = runtime.Enum(val, common.MarginContract_value)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "contract", err)
 	}
 
-	protoReq.Contract = common.SpotContract(e)
+	protoReq.Contract = common.MarginContract(e)
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -1645,12 +1645,12 @@ func local_request_Api_GetMarginOrderbook_0(ctx context.Context, marshaler runti
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "contract")
 	}
 
-	e, err = runtime.Enum(val, common.SpotContract_value)
+	e, err = runtime.Enum(val, common.MarginContract_value)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "contract", err)
 	}
 
-	protoReq.Contract = common.SpotContract(e)
+	protoReq.Contract = common.MarginContract(e)
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)

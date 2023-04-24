@@ -2114,7 +2114,7 @@
       "type": "object",
       "properties": {
         "contract": {
-          "$ref": "#/definitions/commonSpotContract"
+          "$ref": "#/definitions/commonMarginContract"
         },
         "bids": {
           "type": "array",
@@ -2824,7 +2824,7 @@
       "type": "object",
       "properties": {
         "contract": {
-          "$ref": "#/definitions/commonSpotContract"
+          "$ref": "#/definitions/commonMarginContract"
         },
         "contractAddress": {
           "type": "string"
@@ -3652,7 +3652,7 @@
           "type": "string"
         },
         "contract": {
-          "$ref": "#/definitions/commonSpotContract"
+          "$ref": "#/definitions/commonMarginContract"
         },
         "accountAddress": {
           "type": "string"
@@ -4580,6 +4580,15 @@
       ],
       "default": "INF_NOT"
     },
+    "commonMarginContract": {
+      "type": "string",
+      "enum": [
+        "ALL_SPOTS",
+        "SOL_SPOT",
+        "USDC_SPOT"
+      ],
+      "default": "ALL_SPOTS"
+    },
     "commonOrderType": {
       "type": "string",
       "enum": [
@@ -4650,15 +4659,6 @@
           "$ref": "#/definitions/commonInfinity"
         }
       }
-    },
-    "commonSpotContract": {
-      "type": "string",
-      "enum": [
-        "ALL_SPOTS",
-        "SOL_SPOT",
-        "USDC_SPOT"
-      ],
-      "default": "ALL_SPOTS"
     },
     "protobufAny": {
       "type": "object",

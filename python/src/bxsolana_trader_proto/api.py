@@ -848,21 +848,21 @@ class GetPerpOrderbooksStreamResponse(betterproto.Message):
 class GetMarginOrderbookRequest(betterproto.Message):
     """Margin"""
 
-    contract: common.SpotContract = betterproto.enum_field(1)
+    contract: common.MarginContract = betterproto.enum_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
 class GetMarginOrderbooksRequest(betterproto.Message):
-    contracts: List[common.SpotContract] = betterproto.enum_field(1)
+    contracts: List[common.MarginContract] = betterproto.enum_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
 
 
 @dataclass
 class GetMarginOrderbookResponse(betterproto.Message):
-    contract: common.SpotContract = betterproto.enum_field(1)
+    contract: common.MarginContract = betterproto.enum_field(1)
     bids: List["MarginOrderbookItem"] = betterproto.message_field(2)
     asks: List["MarginOrderbookItem"] = betterproto.message_field(3)
 
@@ -1064,7 +1064,7 @@ class PostMarginOrderRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
     payer_address: str = betterproto.string_field(3)
-    contract: common.SpotContract = betterproto.enum_field(4)
+    contract: common.MarginContract = betterproto.enum_field(4)
     account_address: str = betterproto.string_field(5)
     position_side: common.PositionSide = betterproto.enum_field(6)
     slippage: float = betterproto.double_field(7)
@@ -1244,7 +1244,7 @@ class GetMarginContractsRequest(betterproto.Message):
 
 @dataclass
 class MarginContractInfo(betterproto.Message):
-    contract: common.SpotContract = betterproto.enum_field(1)
+    contract: common.MarginContract = betterproto.enum_field(1)
     contract_address: str = betterproto.string_field(2)
     status: str = betterproto.string_field(3)
     asset_tier: str = betterproto.string_field(4)
@@ -1843,7 +1843,7 @@ class ApiStub(betterproto.ServiceStub):
         project: "Project" = 0,
         owner_address: str = "",
         payer_address: str = "",
-        contract: common.SpotContract = 0,
+        contract: common.MarginContract = 0,
         account_address: str = "",
         position_side: common.PositionSide = 0,
         slippage: float = 0,
@@ -2038,7 +2038,7 @@ class ApiStub(betterproto.ServiceStub):
     async def get_margin_orderbook(
         self,
         *,
-        contract: common.SpotContract = 0,
+        contract: common.MarginContract = 0,
         limit: int = 0,
         project: "Project" = 0,
     ) -> GetMarginOrderbookResponse:
@@ -2419,7 +2419,7 @@ class ApiStub(betterproto.ServiceStub):
     async def get_margin_orderbooks_stream(
         self,
         *,
-        contracts: List[common.SpotContract] = [],
+        contracts: List[common.MarginContract] = [],
         limit: int = 0,
         project: "Project" = 0,
     ) -> AsyncGenerator[GetMarginOrderbooksStreamResponse, None]:

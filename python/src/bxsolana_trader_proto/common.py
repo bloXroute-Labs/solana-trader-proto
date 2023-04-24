@@ -35,7 +35,7 @@ class PostOnlyParams(betterproto.Enum):
     PO_TRY_POST_ONLY = 2
 
 
-class SpotContract(betterproto.Enum):
+class MarginContract(betterproto.Enum):
     ALL_SPOTS = 0
     SOL_SPOT = 1
     USDC_SPOT = 2
