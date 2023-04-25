@@ -386,7 +386,7 @@ service Api {
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "post a margin order";
-      summary: "drift margin order";
+      summary: "margin order";
       tags: ["Trade", "Margin", "Orderbook"];
     };
   }
@@ -573,7 +573,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns details of available perp contracts";
       summary: "details of available perp contracts";
-      tags: ["Perp", "Market"];
+      tags: ["Margin", "Market"];
     };
   }
 
