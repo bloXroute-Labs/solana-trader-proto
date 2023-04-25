@@ -476,7 +476,7 @@ service Api {
 
   rpc GetMarginOrderbook(GetMarginOrderbookRequest) returns (GetMarginOrderbookResponse) {
     option (google.api.http) = {
-      get: "/api/v1/market/Margin/orderbook/{contract}"
+      get: "/api/v1/market/margin/orderbook/{contract}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns margin contract's orderbook. Use limit param to reduce the number of bids/asks returned";
