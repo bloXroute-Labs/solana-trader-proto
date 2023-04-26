@@ -37958,7 +37958,7 @@ proto.api.MarginContractInfo.prototype.toObject = function(opt_includeInstance) 
 proto.api.MarginContractInfo.toObject = function(includeInstance, msg) {
   var f, obj = {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    contractaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    marketaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     status: jspb.Message.getFieldWithDefault(msg, 3, ""),
     assettier: jspb.Message.getFieldWithDefault(msg, 4, ""),
     marketindex: jspb.Message.getFieldWithDefault(msg, 5, 0),
@@ -38040,7 +38040,7 @@ proto.api.MarginContractInfo.deserializeBinaryFromReader = function(msg, reader)
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setContractaddress(value);
+      msg.setMarketaddress(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
@@ -38234,7 +38234,7 @@ proto.api.MarginContractInfo.serializeBinaryToWriter = function(message, writer)
       f
     );
   }
-  f = message.getContractaddress();
+  f = message.getMarketaddress();
   if (f.length > 0) {
     writer.writeString(
       2,
@@ -38536,10 +38536,10 @@ proto.api.MarginContractInfo.prototype.setMarket = function(value) {
 
 
 /**
- * optional string contractAddress = 2;
+ * optional string marketAddress = 2;
  * @return {string}
  */
-proto.api.MarginContractInfo.prototype.getContractaddress = function() {
+proto.api.MarginContractInfo.prototype.getMarketaddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -38548,7 +38548,7 @@ proto.api.MarginContractInfo.prototype.getContractaddress = function() {
  * @param {string} value
  * @return {!proto.api.MarginContractInfo} returns this
  */
-proto.api.MarginContractInfo.prototype.setContractaddress = function(value) {
+proto.api.MarginContractInfo.prototype.setMarketaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 

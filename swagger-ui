@@ -2821,7 +2821,7 @@
         "market": {
           "type": "string"
         },
-        "contractAddress": {
+        "marketAddress": {
           "type": "string"
         },
         "status": {

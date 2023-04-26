@@ -4498,8 +4498,8 @@ export namespace GetMarginContractsRequest {
 export class MarginContractInfo extends jspb.Message { 
     getMarket(): string;
     setMarket(value: string): MarginContractInfo;
-    getContractaddress(): string;
-    setContractaddress(value: string): MarginContractInfo;
+    getMarketaddress(): string;
+    setMarketaddress(value: string): MarginContractInfo;
     getStatus(): string;
     setStatus(value: string): MarginContractInfo;
     getAssettier(): string;
@@ -4592,7 +4592,7 @@ export class MarginContractInfo extends jspb.Message {
 export namespace MarginContractInfo {
     export type AsObject = {
         market: string,
-        contractaddress: string,
+        marketaddress: string,
         status: string,
         assettier: string,
         marketindex: number,

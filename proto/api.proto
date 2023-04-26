@@ -1773,7 +1773,7 @@ message GetMarginContractsRequest {
 
 message MarginContractInfo {
   string market = 1;
-  string contractAddress = 2;
+  string marketAddress = 2;
   string status = 3;
   string assetTier = 4;
   uint64 marketIndex = 5;

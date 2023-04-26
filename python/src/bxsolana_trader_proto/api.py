@@ -1245,7 +1245,7 @@ class GetMarginContractsRequest(betterproto.Message):
 @dataclass
 class MarginContractInfo(betterproto.Message):
     market: str = betterproto.string_field(1)
-    contract_address: str = betterproto.string_field(2)
+    market_address: str = betterproto.string_field(2)
     status: str = betterproto.string_field(3)
     asset_tier: str = betterproto.string_field(4)
     market_index: int = betterproto.uint64_field(5)
