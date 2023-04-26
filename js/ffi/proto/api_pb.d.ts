@@ -3041,8 +3041,8 @@ export namespace GetPerpOrderbooksStreamResponse {
 }
 
 export class GetMarginOrderbookRequest extends jspb.Message { 
-    getContract(): common_pb.MarginContract;
-    setContract(value: common_pb.MarginContract): GetMarginOrderbookRequest;
+    getMarket(): string;
+    setMarket(value: string): GetMarginOrderbookRequest;
     getLimit(): number;
     setLimit(value: number): GetMarginOrderbookRequest;
     getProject(): Project;
@@ -3060,17 +3060,17 @@ export class GetMarginOrderbookRequest extends jspb.Message {
 
 export namespace GetMarginOrderbookRequest {
     export type AsObject = {
-        contract: common_pb.MarginContract,
+        market: string,
         limit: number,
         project: Project,
     }
 }
 
 export class GetMarginOrderbooksRequest extends jspb.Message { 
-    clearContractsList(): void;
-    getContractsList(): Array<common_pb.MarginContract>;
-    setContractsList(value: Array<common_pb.MarginContract>): GetMarginOrderbooksRequest;
-    addContracts(value: common_pb.MarginContract, index?: number): common_pb.MarginContract;
+    clearMarketsList(): void;
+    getMarketsList(): Array<string>;
+    setMarketsList(value: Array<string>): GetMarginOrderbooksRequest;
+    addMarkets(value: string, index?: number): string;
     getLimit(): number;
     setLimit(value: number): GetMarginOrderbooksRequest;
     getProject(): Project;
@@ -3088,15 +3088,15 @@ export class GetMarginOrderbooksRequest extends jspb.Message {
 
 export namespace GetMarginOrderbooksRequest {
     export type AsObject = {
-        contractsList: Array<common_pb.MarginContract>,
+        marketsList: Array<string>,
         limit: number,
         project: Project,
     }
 }
 
 export class GetMarginOrderbookResponse extends jspb.Message { 
-    getContract(): common_pb.MarginContract;
-    setContract(value: common_pb.MarginContract): GetMarginOrderbookResponse;
+    getMarket(): string;
+    setMarket(value: string): GetMarginOrderbookResponse;
     clearBidsList(): void;
     getBidsList(): Array<MarginOrderbookItem>;
     setBidsList(value: Array<MarginOrderbookItem>): GetMarginOrderbookResponse;
@@ -3118,7 +3118,7 @@ export class GetMarginOrderbookResponse extends jspb.Message {
 
 export namespace GetMarginOrderbookResponse {
     export type AsObject = {
-        contract: common_pb.MarginContract,
+        market: string,
         bidsList: Array<MarginOrderbookItem.AsObject>,
         asksList: Array<MarginOrderbookItem.AsObject>,
     }
@@ -3853,8 +3853,8 @@ export class PostMarginOrderRequest extends jspb.Message {
     setOwneraddress(value: string): PostMarginOrderRequest;
     getPayeraddress(): string;
     setPayeraddress(value: string): PostMarginOrderRequest;
-    getContract(): common_pb.MarginContract;
-    setContract(value: common_pb.MarginContract): PostMarginOrderRequest;
+    getMarket(): string;
+    setMarket(value: string): PostMarginOrderRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): PostMarginOrderRequest;
     getPositionside(): common_pb.PositionSide;
@@ -3887,7 +3887,7 @@ export namespace PostMarginOrderRequest {
         project: Project,
         owneraddress: string,
         payeraddress: string,
-        contract: common_pb.MarginContract,
+        market: string,
         accountaddress: string,
         positionside: common_pb.PositionSide,
         slippage: number,
@@ -4496,8 +4496,8 @@ export namespace GetMarginContractsRequest {
 }
 
 export class MarginContractInfo extends jspb.Message { 
-    getContract(): common_pb.MarginContract;
-    setContract(value: common_pb.MarginContract): MarginContractInfo;
+    getMarket(): string;
+    setMarket(value: string): MarginContractInfo;
     getContractaddress(): string;
     setContractaddress(value: string): MarginContractInfo;
     getStatus(): string;
@@ -4591,7 +4591,7 @@ export class MarginContractInfo extends jspb.Message {
 
 export namespace MarginContractInfo {
     export type AsObject = {
-        contract: common_pb.MarginContract,
+        market: string,
         contractaddress: string,
         status: string,
         assettier: string,

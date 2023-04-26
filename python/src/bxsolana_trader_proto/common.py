@@ -36,6 +36,8 @@ class PostOnlyParams(betterproto.Enum):
 
 
 class MarginContract(betterproto.Enum):
+    """don't use this in api.proto"""
+
     ALL_SPOTS = 0
     SOL_SPOT = 1
     USDC_SPOT = 2

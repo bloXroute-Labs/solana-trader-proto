@@ -90,69 +90,6 @@
         ]
       }
     },
-    "/api/v1/market/Margin/orderbook/{contract}": {
-      "get": {
-        "summary": "margin contract orderbook",
-        "description": "Returns margin contract's orderbook. Use limit param to reduce the number of bids/asks returned",
-        "operationId": "Api_GetMarginOrderbook",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetMarginOrderbookResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "contract",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "ALL_SPOTS",
-              "SOL_SPOT",
-              "USDC_SPOT"
-            ]
-          },
-          {
-            "name": "limit",
-            "description": "Use 0 for no limits",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          }
-        ],
-        "tags": [
-          "Margin",
-          "Orderbook",
-          "Market"
-        ]
-      }
-    },
     "/api/v1/market/depth/{market}": {
       "get": {
         "summary": "Market depth",
@@ -247,7 +184,65 @@
           }
         ],
         "tags": [
-          "Perp",
+          "Margin",
+          "Market"
+        ]
+      }
+    },
+    "/api/v1/market/margin/orderbook/{market}": {
+      "get": {
+        "summary": "margin contract orderbook",
+        "description": "Returns margin contract's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetMarginOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetMarginOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Margin",
+          "Orderbook",
           "Market"
         ]
       }
@@ -812,7 +807,7 @@
     },
     "/api/v1/trade/margin/order": {
       "post": {
-        "summary": "drift margin order",
+        "summary": "margin order",
         "description": "post a margin order",
         "operationId": "Api_PostMarginOrder",
         "responses": {
@@ -2113,8 +2108,8 @@
     "apiGetMarginOrderbookResponse": {
       "type": "object",
       "properties": {
-        "contract": {
-          "$ref": "#/definitions/commonMarginContract"
+        "market": {
+          "type": "string"
         },
         "bids": {
           "type": "array",
@@ -2823,8 +2818,8 @@
     "apiMarginContractInfo": {
       "type": "object",
       "properties": {
-        "contract": {
-          "$ref": "#/definitions/commonMarginContract"
+        "market": {
+          "type": "string"
         },
         "contractAddress": {
           "type": "string"
@@ -3651,8 +3646,8 @@
         "payerAddress": {
           "type": "string"
         },
-        "contract": {
-          "$ref": "#/definitions/commonMarginContract"
+        "market": {
+          "type": "string"
         },
         "accountAddress": {
           "type": "string"
@@ -4579,15 +4574,6 @@
         "INF_NEGATIVE"
       ],
       "default": "INF_NOT"
-    },
-    "commonMarginContract": {
-      "type": "string",
-      "enum": [
-        "ALL_SPOTS",
-        "SOL_SPOT",
-        "USDC_SPOT"
-      ],
-      "default": "ALL_SPOTS"
     },
     "commonOrderType": {
       "type": "string",

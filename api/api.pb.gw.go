@@ -1589,7 +1589,7 @@ func local_request_Api_GetPerpOrderbook_0(ctx context.Context, marshaler runtime
 }
 
 var (
-	filter_Api_GetMarginOrderbook_0 = &utilities.DoubleArray{Encoding: map[string]int{"contract": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+	filter_Api_GetMarginOrderbook_0 = &utilities.DoubleArray{Encoding: map[string]int{"market": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Api_GetMarginOrderbook_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1598,23 +1598,20 @@ func request_Api_GetMarginOrderbook_0(ctx context.Context, marshaler runtime.Mar
 
 	var (
 		val string
-		e   int32
 		ok  bool
 		err error
 		_   = err
 	)
 
-	val, ok = pathParams["contract"]
+	val, ok = pathParams["market"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "contract")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "market")
 	}
 
-	e, err = runtime.Enum(val, common.MarginContract_value)
+	protoReq.Market, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "contract", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "market", err)
 	}
-
-	protoReq.Contract = common.MarginContract(e)
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -1634,23 +1631,20 @@ func local_request_Api_GetMarginOrderbook_0(ctx context.Context, marshaler runti
 
 	var (
 		val string
-		e   int32
 		ok  bool
 		err error
 		_   = err
 	)
 
-	val, ok = pathParams["contract"]
+	val, ok = pathParams["market"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "contract")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "market")
 	}
 
-	e, err = runtime.Enum(val, common.MarginContract_value)
+	protoReq.Market, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "contract", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "market", err)
 	}
-
-	protoReq.Contract = common.MarginContract(e)
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -2891,7 +2885,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetMarginOrderbook", runtime.WithHTTPPathPattern("/api/v1/market/Margin/orderbook/{contract}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetMarginOrderbook", runtime.WithHTTPPathPattern("/api/v1/market/margin/orderbook/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3950,7 +3944,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetMarginOrderbook", runtime.WithHTTPPathPattern("/api/v1/market/Margin/orderbook/{contract}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetMarginOrderbook", runtime.WithHTTPPathPattern("/api/v1/market/margin/orderbook/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4252,7 +4246,7 @@ var (
 
 	pattern_Api_GetPerpOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"api", "v1", "market", "perp", "orderbook", "contract"}, ""))
 
-	pattern_Api_GetMarginOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"api", "v1", "market", "Margin", "orderbook", "contract"}, ""))
+	pattern_Api_GetMarginOrderbook_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 2}, []string{"api", "v1", "market", "margin", "orderbook"}, ""))
 
 	pattern_Api_PostCreateUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "trade", "user"}, ""))
 

@@ -226,6 +226,7 @@ func (PostOnlyParams) EnumDescriptor() ([]byte, []int) {
 	return file_common_proto_rawDescGZIP(), []int{3}
 }
 
+// don't use this in api.proto
 type MarginContract int32
 
 const (

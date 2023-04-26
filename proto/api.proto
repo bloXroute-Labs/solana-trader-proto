@@ -476,7 +476,7 @@ service Api {
 
   rpc GetMarginOrderbook(GetMarginOrderbookRequest) returns (GetMarginOrderbookResponse) {
     option (google.api.http) = {
-      get: "/api/v1/market/margin/orderbook/{contract}"
+      get: "/api/v1/market/margin/orderbook/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns margin contract's orderbook. Use limit param to reduce the number of bids/asks returned";
@@ -1419,19 +1419,19 @@ message GetPerpOrderbooksStreamResponse {
 
 // Margin
 message GetMarginOrderbookRequest {
-  common.MarginContract contract = 1;
+  string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
 }
 
 message GetMarginOrderbooksRequest {
-  repeated common.MarginContract contracts = 1;
+  repeated string markets = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
 }
 
 message GetMarginOrderbookResponse {
-  common.MarginContract contract = 1;
+  string market = 1;
   repeated MarginOrderbookItem bids = 2;
   repeated MarginOrderbookItem asks = 3;
 }
@@ -1618,7 +1618,7 @@ message PostMarginOrderRequest {
   Project project = 1;
   string ownerAddress = 2;
   string payerAddress = 3;
-  common.MarginContract contract = 4;
+  string market = 4;
   string accountAddress = 5;
   common.PositionSide positionSide = 6;
   double slippage = 7;
@@ -1772,7 +1772,7 @@ message GetMarginContractsRequest {
 }
 
 message MarginContractInfo {
-  common.MarginContract contract = 1;
+  string market = 1;
   string contractAddress = 2;
   string status = 3;
   string assetTier = 4;
