@@ -405,7 +405,9 @@
               "APT_PERP",
               "BONK_PERP",
               "MATIC_PERP",
-              "ARB_PERP"
+              "ARB_PERP",
+              "DOGE_PERP",
+              "BNB_PERP"
             ]
           },
           {
@@ -1189,7 +1191,9 @@
               "APT_PERP",
               "BONK_PERP",
               "MATIC_PERP",
-              "ARB_PERP"
+              "ARB_PERP",
+              "DOGE_PERP",
+              "BNB_PERP"
             ],
             "default": "ALL"
           },
@@ -1294,7 +1298,9 @@
                 "APT_PERP",
                 "BONK_PERP",
                 "MATIC_PERP",
-                "ARB_PERP"
+                "ARB_PERP",
+                "DOGE_PERP",
+                "BNB_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -1406,7 +1412,9 @@
                 "APT_PERP",
                 "BONK_PERP",
                 "MATIC_PERP",
-                "ARB_PERP"
+                "ARB_PERP",
+                "DOGE_PERP",
+                "BNB_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -4622,7 +4630,9 @@
         "APT_PERP",
         "BONK_PERP",
         "MATIC_PERP",
-        "ARB_PERP"
+        "ARB_PERP",
+        "DOGE_PERP",
+        "BNB_PERP"
       ],
       "default": "ALL"
     },

@@ -52,6 +52,8 @@ class PerpContract(betterproto.Enum):
     BONK_PERP = 5
     MATIC_PERP = 6
     ARB_PERP = 7
+    DOGE_PERP = 8
+    BNB_PERP = 9
 
 
 class PerpCollateralType(betterproto.Enum):

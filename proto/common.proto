@@ -40,13 +40,15 @@ enum MarginContract {
 
 enum PerpContract {
   ALL = 0;
-  SOL_PERP = 1;   // SOL-PERP
-  ETH_PERP = 2;   // ETH-PERP
-  BTC_PERP = 3;   // BTC-PERP
-  APT_PERP = 4;   // APT-PERP
-  BONK_PERP = 5;  // 1MBONK-PERP
-  MATIC_PERP = 6; // MATIC-PERP
-  ARB_PERP = 7;   // ARB-PERP
+  SOL_PERP = 1;    // SOL-PERP
+  ETH_PERP = 2;    // ETH-PERP
+  BTC_PERP = 3;    // BTC-PERP
+  APT_PERP = 4;    // APT-PERP
+  BONK_PERP = 5;   // 1MBONK-PERP
+  MATIC_PERP = 6;  // MATIC-PERP
+  ARB_PERP = 7;    // ARB-PERP
+  DOGE_PERP = 8;   // DOGE-PERP
+  BNB_PERP = 9;    // DOGE-PERP
 }
 
 enum PerpCollateralType {

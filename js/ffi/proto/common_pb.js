@@ -477,7 +477,9 @@ proto.common.PerpContract = {
   APT_PERP: 4,
   BONK_PERP: 5,
   MATIC_PERP: 6,
-  ARB_PERP: 7
+  ARB_PERP: 7,
+  DOGE_PERP: 8,
+  BNB_PERP: 9
 };
 
 /**
