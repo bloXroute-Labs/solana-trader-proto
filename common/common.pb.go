@@ -230,9 +230,9 @@ func (PostOnlyParams) EnumDescriptor() ([]byte, []int) {
 type MarginContract int32
 
 const (
-	MarginContract_ALL_SPOTS MarginContract = 0
-	MarginContract_SOL_SPOT  MarginContract = 1 // SOL_SPOT
-	MarginContract_USDC_SPOT MarginContract = 2 // USDC_SPOT
+	MarginContract_ALL_SPOTS MarginContract = 0 // ALL
+	MarginContract_SOL_SPOT  MarginContract = 1 // SOL
+	MarginContract_USDC_SPOT MarginContract = 2 // USDC
 )
 
 // Enum value maps for MarginContract.

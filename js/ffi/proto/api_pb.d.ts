@@ -3294,6 +3294,12 @@ export class PostCreateUserRequest extends jspb.Message {
     setOwneraddress(value: string): PostCreateUserRequest;
     getProject(): Project;
     setProject(value: Project): PostCreateUserRequest;
+    getAction(): string;
+    setAction(value: string): PostCreateUserRequest;
+    getSubaccountid(): number;
+    setSubaccountid(value: number): PostCreateUserRequest;
+    getAccountname(): string;
+    setAccountname(value: string): PostCreateUserRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCreateUserRequest.AsObject;
@@ -3309,6 +3315,9 @@ export namespace PostCreateUserRequest {
     export type AsObject = {
         owneraddress: string,
         project: Project,
+        action: string,
+        subaccountid: number,
+        accountname: string,
     }
 }
 

@@ -1480,6 +1480,9 @@ message UserDetail {
 message PostCreateUserRequest {
   string ownerAddress = 1;
   Project project = 2;
+  string action = 3; // CREATE , DELETE
+  uint64 subAccountID = 4;
+  string accountName = 5;
 }
 
 message PostCreateUserResponse {

@@ -916,6 +916,9 @@ class UserDetail(betterproto.Message):
 class PostCreateUserRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
+    action: str = betterproto.string_field(3)
+    sub_account_i_d: int = betterproto.uint64_field(4)
+    account_name: str = betterproto.string_field(5)
 
 
 @dataclass
@@ -2050,11 +2053,20 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def post_create_user(
-        self, *, owner_address: str = "", project: "Project" = 0
+        self,
+        *,
+        owner_address: str = "",
+        project: "Project" = 0,
+        action: str = "",
+        sub_account_i_d: int = 0,
+        account_name: str = "",
     ) -> PostCreateUserResponse:
         request = PostCreateUserRequest()
         request.owner_address = owner_address
         request.project = project
+        request.action = action
+        request.sub_account_i_d = sub_account_i_d
+        request.account_name = account_name
 
         return await self._unary_unary(
             "/api.Api/PostCreateUser",

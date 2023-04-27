@@ -3559,6 +3559,16 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        },
+        "action": {
+          "type": "string"
+        },
+        "subAccountID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "accountName": {
+          "type": "string"
         }
       }
     },

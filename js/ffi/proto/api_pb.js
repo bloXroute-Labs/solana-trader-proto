@@ -28516,7 +28516,10 @@ proto.api.PostCreateUserRequest.prototype.toObject = function(opt_includeInstanc
 proto.api.PostCreateUserRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    project: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    action: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    subaccountid: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    accountname: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -28561,6 +28564,18 @@ proto.api.PostCreateUserRequest.deserializeBinaryFromReader = function(msg, read
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAction(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setSubaccountid(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountname(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -28604,6 +28619,27 @@ proto.api.PostCreateUserRequest.serializeBinaryToWriter = function(message, writ
       f
     );
   }
+  f = message.getAction();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getSubaccountid();
+  if (f !== 0) {
+    writer.writeUint64(
+      4,
+      f
+    );
+  }
+  f = message.getAccountname();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
 };
 
 
@@ -28640,6 +28676,60 @@ proto.api.PostCreateUserRequest.prototype.getProject = function() {
  */
 proto.api.PostCreateUserRequest.prototype.setProject = function(value) {
   return jspb.Message.setProto3EnumField(this, 2, value);
+};
+
+
+/**
+ * optional string action = 3;
+ * @return {string}
+ */
+proto.api.PostCreateUserRequest.prototype.getAction = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCreateUserRequest} returns this
+ */
+proto.api.PostCreateUserRequest.prototype.setAction = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional uint64 subAccountID = 4;
+ * @return {number}
+ */
+proto.api.PostCreateUserRequest.prototype.getSubaccountid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCreateUserRequest} returns this
+ */
+proto.api.PostCreateUserRequest.prototype.setSubaccountid = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional string accountName = 5;
+ * @return {string}
+ */
+proto.api.PostCreateUserRequest.prototype.getAccountname = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCreateUserRequest} returns this
+ */
+proto.api.PostCreateUserRequest.prototype.setAccountname = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
