@@ -3432,7 +3432,7 @@ proto.api.GetMarketsRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.api.GetMarketsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-
+    metadata: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
   };
 
   if (includeInstance) {
@@ -3469,6 +3469,10 @@ proto.api.GetMarketsRequest.deserializeBinaryFromReader = function(msg, reader) 
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setMetadata(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -3498,6 +3502,31 @@ proto.api.GetMarketsRequest.prototype.serializeBinary = function() {
  */
 proto.api.GetMarketsRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getMetadata();
+  if (f) {
+    writer.writeBool(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional bool metadata = 1;
+ * @return {boolean}
+ */
+proto.api.GetMarketsRequest.prototype.getMetadata = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 1, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.api.GetMarketsRequest} returns this
+ */
+proto.api.GetMarketsRequest.prototype.setMetadata = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 1, value);
 };
 
 
@@ -32409,7 +32438,7 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setSlippage(value);
       break;
     case 8:
-      var value = /** @type {!proto.common.OrderType} */ (reader.readEnum());
+      var value = /** @type {!proto.common.PerpOrderType} */ (reader.readEnum());
       msg.setType(value);
       break;
     case 9:
@@ -32671,16 +32700,16 @@ proto.api.PostPerpOrderRequest.prototype.setSlippage = function(value) {
 
 
 /**
- * optional common.OrderType type = 8;
- * @return {!proto.common.OrderType}
+ * optional common.PerpOrderType type = 8;
+ * @return {!proto.common.PerpOrderType}
  */
 proto.api.PostPerpOrderRequest.prototype.getType = function() {
-  return /** @type {!proto.common.OrderType} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+  return /** @type {!proto.common.PerpOrderType} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
 /**
- * @param {!proto.common.OrderType} value
+ * @param {!proto.common.PerpOrderType} value
  * @return {!proto.api.PostPerpOrderRequest} returns this
  */
 proto.api.PostPerpOrderRequest.prototype.setType = function(value) {

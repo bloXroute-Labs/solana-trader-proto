@@ -694,7 +694,7 @@ service Api {
 }
 
 message GetMarketsRequest {
-
+  bool metadata = 1;
 }
 
 message GetMarketsResponse {

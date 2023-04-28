@@ -12,6 +12,8 @@ import * as protoc_gen_openapiv2_options_annotations_pb from "./protoc-gen-opena
 import * as common_pb from "./common_pb";
 
 export class GetMarketsRequest extends jspb.Message { 
+    getMetadata(): boolean;
+    setMetadata(value: boolean): GetMarketsRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetMarketsRequest.AsObject;
@@ -25,6 +27,7 @@ export class GetMarketsRequest extends jspb.Message {
 
 export namespace GetMarketsRequest {
     export type AsObject = {
+        metadata: boolean,
     }
 }
 
@@ -3794,8 +3797,8 @@ export class PostPerpOrderRequest extends jspb.Message {
     setPositionside(value: common_pb.PerpPositionSide): PostPerpOrderRequest;
     getSlippage(): number;
     setSlippage(value: number): PostPerpOrderRequest;
-    getType(): common_pb.OrderType;
-    setType(value: common_pb.OrderType): PostPerpOrderRequest;
+    getType(): common_pb.PerpOrderType;
+    setType(value: common_pb.PerpOrderType): PostPerpOrderRequest;
     getAmount(): number;
     setAmount(value: number): PostPerpOrderRequest;
     getPrice(): number;
@@ -3824,7 +3827,7 @@ export namespace PostPerpOrderRequest {
         accountaddress: string,
         positionside: common_pb.PerpPositionSide,
         slippage: number,
-        type: common_pb.OrderType,
+        type: common_pb.PerpOrderType,
         amount: number,
         price: number,
         clientorderid: number,

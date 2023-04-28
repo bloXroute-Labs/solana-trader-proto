@@ -61,7 +61,7 @@ class Project(betterproto.Enum):
 
 @dataclass
 class GetMarketsRequest(betterproto.Message):
-    pass
+    metadata: bool = betterproto.bool_field(1)
 
 
 @dataclass
@@ -1050,7 +1050,7 @@ class PostPerpOrderRequest(betterproto.Message):
     account_address: str = betterproto.string_field(5)
     position_side: common.PerpPositionSide = betterproto.enum_field(6)
     slippage: float = betterproto.double_field(7)
-    type: common.OrderType = betterproto.enum_field(8)
+    type: common.PerpOrderType = betterproto.enum_field(8)
     amount: float = betterproto.double_field(9)
     price: float = betterproto.double_field(10)
     client_order_i_d: int = betterproto.uint64_field(11)
@@ -1322,8 +1322,9 @@ class ApiStub(betterproto.ServiceStub):
             GetPriceResponse,
         )
 
-    async def get_markets(self) -> GetMarketsResponse:
+    async def get_markets(self, *, metadata: bool = False) -> GetMarketsResponse:
         request = GetMarketsRequest()
+        request.metadata = metadata
 
         return await self._unary_unary(
             "/api.Api/GetMarkets",
@@ -1888,7 +1889,7 @@ class ApiStub(betterproto.ServiceStub):
         account_address: str = "",
         position_side: common.PerpPositionSide = 0,
         slippage: float = 0,
-        type: common.OrderType = 0,
+        type: common.PerpOrderType = 0,
         amount: float = 0,
         price: float = 0,
         client_order_i_d: int = 0,

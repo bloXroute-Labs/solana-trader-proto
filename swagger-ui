@@ -266,6 +266,14 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
         "tags": [
           "Market",
           "Orderbook"
@@ -3811,7 +3819,7 @@
           "format": "double"
         },
         "type": {
-          "$ref": "#/definitions/commonOrderType"
+          "$ref": "#/definitions/commonPerpOrderType"
         },
         "amount": {
           "type": "number",
