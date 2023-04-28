@@ -3794,8 +3794,8 @@ export class PostPerpOrderRequest extends jspb.Message {
     setPositionside(value: common_pb.PositionSide): PostPerpOrderRequest;
     getSlippage(): number;
     setSlippage(value: number): PostPerpOrderRequest;
-    getType(): common_pb.DriftOrderType;
-    setType(value: common_pb.DriftOrderType): PostPerpOrderRequest;
+    getType(): common_pb.OrderType;
+    setType(value: common_pb.OrderType): PostPerpOrderRequest;
     getAmount(): number;
     setAmount(value: number): PostPerpOrderRequest;
     getPrice(): number;
@@ -3824,7 +3824,7 @@ export namespace PostPerpOrderRequest {
         accountaddress: string,
         positionside: common_pb.PositionSide,
         slippage: number,
-        type: common_pb.DriftOrderType,
+        type: common_pb.OrderType,
         amount: number,
         price: number,
         clientorderid: number,
@@ -3870,8 +3870,8 @@ export class PostMarginOrderRequest extends jspb.Message {
     setPositionside(value: common_pb.PositionSide): PostMarginOrderRequest;
     getSlippage(): number;
     setSlippage(value: number): PostMarginOrderRequest;
-    getType(): common_pb.DriftOrderType;
-    setType(value: common_pb.DriftOrderType): PostMarginOrderRequest;
+    getType(): string;
+    setType(value: string): PostMarginOrderRequest;
     getAmount(): number;
     setAmount(value: number): PostMarginOrderRequest;
     getPrice(): number;
@@ -3900,7 +3900,7 @@ export namespace PostMarginOrderRequest {
         accountaddress: string,
         positionside: common_pb.PositionSide,
         slippage: number,
-        type: common_pb.DriftOrderType,
+        type: string,
         amount: number,
         price: number,
         clientorderid: number,
@@ -3961,8 +3961,8 @@ export class GetNewPerpOrdersStreamResponse extends jspb.Message {
     setContract(value: common_pb.PerpContract): GetNewPerpOrdersStreamResponse;
     getSide(): common_pb.PositionSide;
     setSide(value: common_pb.PositionSide): GetNewPerpOrdersStreamResponse;
-    getType(): common_pb.DriftOrderType;
-    setType(value: common_pb.DriftOrderType): GetNewPerpOrdersStreamResponse;
+    getType(): common_pb.PerpOrderType;
+    setType(value: common_pb.PerpOrderType): GetNewPerpOrdersStreamResponse;
     getUseraddress(): string;
     setUseraddress(value: string): GetNewPerpOrdersStreamResponse;
     getOrderid(): string;
@@ -3998,7 +3998,7 @@ export namespace GetNewPerpOrdersStreamResponse {
     export type AsObject = {
         contract: common_pb.PerpContract,
         side: common_pb.PositionSide,
-        type: common_pb.DriftOrderType,
+        type: common_pb.PerpOrderType,
         useraddress: string,
         orderid: string,
         clientorderid: string,

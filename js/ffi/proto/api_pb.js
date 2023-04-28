@@ -32409,7 +32409,7 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setSlippage(value);
       break;
     case 8:
-      var value = /** @type {!proto.common.DriftOrderType} */ (reader.readEnum());
+      var value = /** @type {!proto.common.OrderType} */ (reader.readEnum());
       msg.setType(value);
       break;
     case 9:
@@ -32671,16 +32671,16 @@ proto.api.PostPerpOrderRequest.prototype.setSlippage = function(value) {
 
 
 /**
- * optional common.DriftOrderType type = 8;
- * @return {!proto.common.DriftOrderType}
+ * optional common.OrderType type = 8;
+ * @return {!proto.common.OrderType}
  */
 proto.api.PostPerpOrderRequest.prototype.getType = function() {
-  return /** @type {!proto.common.DriftOrderType} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+  return /** @type {!proto.common.OrderType} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
 /**
- * @param {!proto.common.DriftOrderType} value
+ * @param {!proto.common.OrderType} value
  * @return {!proto.api.PostPerpOrderRequest} returns this
  */
 proto.api.PostPerpOrderRequest.prototype.setType = function(value) {
@@ -32950,7 +32950,7 @@ proto.api.PostMarginOrderRequest.toObject = function(includeInstance, msg) {
     accountaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
     positionside: jspb.Message.getFieldWithDefault(msg, 6, 0),
     slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
-    type: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    type: jspb.Message.getFieldWithDefault(msg, 8, ""),
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 11, 0),
@@ -33020,7 +33020,7 @@ proto.api.PostMarginOrderRequest.deserializeBinaryFromReader = function(msg, rea
       msg.setSlippage(value);
       break;
     case 8:
-      var value = /** @type {!proto.common.DriftOrderType} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setType(value);
       break;
     case 9:
@@ -33118,8 +33118,8 @@ proto.api.PostMarginOrderRequest.serializeBinaryToWriter = function(message, wri
     );
   }
   f = message.getType();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       8,
       f
     );
@@ -33282,20 +33282,20 @@ proto.api.PostMarginOrderRequest.prototype.setSlippage = function(value) {
 
 
 /**
- * optional common.DriftOrderType type = 8;
- * @return {!proto.common.DriftOrderType}
+ * optional string type = 8;
+ * @return {string}
  */
 proto.api.PostMarginOrderRequest.prototype.getType = function() {
-  return /** @type {!proto.common.DriftOrderType} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
 };
 
 
 /**
- * @param {!proto.common.DriftOrderType} value
+ * @param {string} value
  * @return {!proto.api.PostMarginOrderRequest} returns this
  */
 proto.api.PostMarginOrderRequest.prototype.setType = function(value) {
-  return jspb.Message.setProto3EnumField(this, 8, value);
+  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
@@ -33798,7 +33798,7 @@ proto.api.GetNewPerpOrdersStreamResponse.deserializeBinaryFromReader = function(
       msg.setSide(value);
       break;
     case 3:
-      var value = /** @type {!proto.common.DriftOrderType} */ (reader.readEnum());
+      var value = /** @type {!proto.common.PerpOrderType} */ (reader.readEnum());
       msg.setType(value);
       break;
     case 4:
@@ -34001,16 +34001,16 @@ proto.api.GetNewPerpOrdersStreamResponse.prototype.setSide = function(value) {
 
 
 /**
- * optional common.DriftOrderType type = 3;
- * @return {!proto.common.DriftOrderType}
+ * optional common.PerpOrderType type = 3;
+ * @return {!proto.common.PerpOrderType}
  */
 proto.api.GetNewPerpOrdersStreamResponse.prototype.getType = function() {
-  return /** @type {!proto.common.DriftOrderType} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {!proto.common.PerpOrderType} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
 /**
- * @param {!proto.common.DriftOrderType} value
+ * @param {!proto.common.PerpOrderType} value
  * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
  */
 proto.api.GetNewPerpOrdersStreamResponse.prototype.setType = function(value) {

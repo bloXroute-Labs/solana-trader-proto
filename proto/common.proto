@@ -10,8 +10,8 @@ enum OrderType {
   OT_POST = 3;
 }
 
-// Drift types : limit, trigger_market, trigger_limit, market, oracle
-enum DriftOrderType {
+// perp types : limit, trigger_market, trigger_limit, market, oracle
+enum PerpOrderType {
   POT_UNKNOWN = 0;
   POT_MARKET = 1;
   POT_LIMIT = 2;

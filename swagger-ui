@@ -2201,7 +2201,7 @@
           "$ref": "#/definitions/commonPositionSide"
         },
         "type": {
-          "$ref": "#/definitions/commonDriftOrderType"
+          "$ref": "#/definitions/commonPerpOrderType"
         },
         "userAddress": {
           "type": "string"
@@ -3678,7 +3678,7 @@
           "format": "double"
         },
         "type": {
-          "$ref": "#/definitions/commonDriftOrderType"
+          "type": "string"
         },
         "amount": {
           "type": "number",
@@ -3811,7 +3811,7 @@
           "format": "double"
         },
         "type": {
-          "$ref": "#/definitions/commonDriftOrderType"
+          "$ref": "#/definitions/commonOrderType"
         },
         "amount": {
           "type": "number",
@@ -4556,18 +4556,6 @@
         }
       }
     },
-    "commonDriftOrderType": {
-      "type": "string",
-      "enum": [
-        "POT_UNKNOWN",
-        "POT_MARKET",
-        "POT_LIMIT",
-        "POT_TRIGGER_MARKET",
-        "POT_TRIGGER_LIMIT"
-      ],
-      "default": "POT_UNKNOWN",
-      "title": "Drift types : limit, trigger_market, trigger_limit, market, oracle"
-    },
     "commonFee": {
       "type": "object",
       "properties": {
@@ -4635,6 +4623,18 @@
         "BNB_PERP"
       ],
       "default": "ALL"
+    },
+    "commonPerpOrderType": {
+      "type": "string",
+      "enum": [
+        "POT_UNKNOWN",
+        "POT_MARKET",
+        "POT_LIMIT",
+        "POT_TRIGGER_MARKET",
+        "POT_TRIGGER_LIMIT"
+      ],
+      "default": "POT_UNKNOWN",
+      "title": "perp types : limit, trigger_market, trigger_limit, market, oracle"
     },
     "commonPositionSide": {
       "type": "string",

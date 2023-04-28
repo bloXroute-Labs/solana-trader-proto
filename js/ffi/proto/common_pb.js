@@ -15,7 +15,6 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
-goog.exportSymbol('proto.common.DriftOrderType', null, global);
 goog.exportSymbol('proto.common.Fee', null, global);
 goog.exportSymbol('proto.common.Infinity', null, global);
 goog.exportSymbol('proto.common.MarginContract', null, global);
@@ -23,6 +22,7 @@ goog.exportSymbol('proto.common.OrderType', null, global);
 goog.exportSymbol('proto.common.PerpCollateralToken', null, global);
 goog.exportSymbol('proto.common.PerpCollateralType', null, global);
 goog.exportSymbol('proto.common.PerpContract', null, global);
+goog.exportSymbol('proto.common.PerpOrderType', null, global);
 goog.exportSymbol('proto.common.PositionSide', null, global);
 goog.exportSymbol('proto.common.PostOnlyParams', null, global);
 goog.exportSymbol('proto.common.PriceImpactPercent', null, global);
@@ -431,7 +431,7 @@ proto.common.OrderType = {
 /**
  * @enum {number}
  */
-proto.common.DriftOrderType = {
+proto.common.PerpOrderType = {
   POT_UNKNOWN: 0,
   POT_MARKET: 1,
   POT_LIMIT: 2,

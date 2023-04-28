@@ -1606,7 +1606,7 @@ message PostPerpOrderRequest {
   string accountAddress = 5;
   common.PositionSide positionSide = 6;
   double slippage = 7;
-  common.DriftOrderType type = 8;
+  common.OrderType type = 8;
   double amount = 9;
   double price = 10;
   uint64 clientOrderID = 11;
@@ -1625,7 +1625,7 @@ message PostMarginOrderRequest {
   string accountAddress = 5;
   common.PositionSide positionSide = 6;
   double slippage = 7;
-  common.DriftOrderType type = 8;
+  string type = 8;
   double amount = 9;
   double price = 10;
   uint64 clientOrderID = 11;
@@ -1644,7 +1644,7 @@ message GetNewPerpOrdersStreamRequest {
 message GetNewPerpOrdersStreamResponse {
   common.PerpContract contract = 1;
   common.PositionSide side = 2;
-  common.DriftOrderType type = 3;
+  common.PerpOrderType type = 3;
   string userAddress = 4;
   string orderID = 5;
   string clientOrderID = 6;

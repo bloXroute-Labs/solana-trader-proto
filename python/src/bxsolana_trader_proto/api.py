@@ -1050,7 +1050,7 @@ class PostPerpOrderRequest(betterproto.Message):
     account_address: str = betterproto.string_field(5)
     position_side: common.PositionSide = betterproto.enum_field(6)
     slippage: float = betterproto.double_field(7)
-    type: common.DriftOrderType = betterproto.enum_field(8)
+    type: common.OrderType = betterproto.enum_field(8)
     amount: float = betterproto.double_field(9)
     price: float = betterproto.double_field(10)
     client_order_i_d: int = betterproto.uint64_field(11)
@@ -1071,7 +1071,7 @@ class PostMarginOrderRequest(betterproto.Message):
     account_address: str = betterproto.string_field(5)
     position_side: common.PositionSide = betterproto.enum_field(6)
     slippage: float = betterproto.double_field(7)
-    type: common.DriftOrderType = betterproto.enum_field(8)
+    type: str = betterproto.string_field(8)
     amount: float = betterproto.double_field(9)
     price: float = betterproto.double_field(10)
     client_order_i_d: int = betterproto.uint64_field(11)
@@ -1093,7 +1093,7 @@ class GetNewPerpOrdersStreamRequest(betterproto.Message):
 class GetNewPerpOrdersStreamResponse(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(1)
     side: common.PositionSide = betterproto.enum_field(2)
-    type: common.DriftOrderType = betterproto.enum_field(3)
+    type: common.PerpOrderType = betterproto.enum_field(3)
     user_address: str = betterproto.string_field(4)
     order_i_d: str = betterproto.string_field(5)
     client_order_i_d: str = betterproto.string_field(6)
@@ -1850,7 +1850,7 @@ class ApiStub(betterproto.ServiceStub):
         account_address: str = "",
         position_side: common.PositionSide = 0,
         slippage: float = 0,
-        type: common.DriftOrderType = 0,
+        type: str = "",
         amount: float = 0,
         price: float = 0,
         client_order_i_d: int = 0,
@@ -1888,7 +1888,7 @@ class ApiStub(betterproto.ServiceStub):
         account_address: str = "",
         position_side: common.PositionSide = 0,
         slippage: float = 0,
-        type: common.DriftOrderType = 0,
+        type: common.OrderType = 0,
         amount: float = 0,
         price: float = 0,
         client_order_i_d: int = 0,
