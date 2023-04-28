@@ -1606,7 +1606,7 @@ message PostPerpOrderRequest {
   string accountAddress = 5;
   common.PerpPositionSide positionSide = 6;
   double slippage = 7;
-  common.OrderType type = 8;
+  common.PerpOrderType type = 8;
   double amount = 9;
   double price = 10;
   uint64 clientOrderID = 11;
