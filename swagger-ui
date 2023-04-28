@@ -2198,7 +2198,7 @@
           "$ref": "#/definitions/commonPerpContract"
         },
         "side": {
-          "$ref": "#/definitions/commonPositionSide"
+          "$ref": "#/definitions/commonPerpPositionSide"
         },
         "type": {
           "$ref": "#/definitions/commonPerpOrderType"
@@ -3182,7 +3182,7 @@
           "$ref": "#/definitions/commonPerpContract"
         },
         "positionSide": {
-          "$ref": "#/definitions/commonPositionSide"
+          "$ref": "#/definitions/commonPerpPositionSide"
         },
         "orderType": {
           "type": "string"
@@ -3292,7 +3292,7 @@
           "format": "double"
         },
         "positionSide": {
-          "$ref": "#/definitions/commonPositionSide"
+          "$ref": "#/definitions/commonPerpPositionSide"
         },
         "notionalValue": {
           "type": "number",
@@ -3671,7 +3671,7 @@
           "type": "string"
         },
         "positionSide": {
-          "$ref": "#/definitions/commonPositionSide"
+          "type": "string"
         },
         "slippage": {
           "type": "number",
@@ -3804,7 +3804,7 @@
           "type": "string"
         },
         "positionSide": {
-          "$ref": "#/definitions/commonPositionSide"
+          "$ref": "#/definitions/commonPerpPositionSide"
         },
         "slippage": {
           "type": "number",
@@ -4636,7 +4636,7 @@
       "default": "POT_UNKNOWN",
       "title": "perp types : limit, trigger_market, trigger_limit, market, oracle"
     },
-    "commonPositionSide": {
+    "commonPerpPositionSide": {
       "type": "string",
       "enum": [
         "PS_UNKNOWN",

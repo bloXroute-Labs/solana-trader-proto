@@ -23,7 +23,7 @@ class PerpOrderType(betterproto.Enum):
     POT_TRIGGER_LIMIT = 4
 
 
-class PositionSide(betterproto.Enum):
+class PerpPositionSide(betterproto.Enum):
     PS_UNKNOWN = 0
     PS_LONG = 1
     PS_SHORT = 2

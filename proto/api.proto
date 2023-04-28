@@ -1544,7 +1544,7 @@ message PerpOrder {
   uint64 clientOrderID = 2;
 
   common.PerpContract contract = 3;
-  common.PositionSide positionSide = 4;
+  common.PerpPositionSide positionSide = 4;
 
   string orderType = 5;
 
@@ -1588,7 +1588,7 @@ message PerpPosition {
   double volumeInOrder = 3;
 
   double positionMargin = 4;
-  common.PositionSide positionSide = 5;
+  common.PerpPositionSide positionSide = 5;
 
   double notionalValue = 6;
   double indexPrice = 7;
@@ -1604,7 +1604,7 @@ message PostPerpOrderRequest {
   string payerAddress = 3;
   common.PerpContract contract = 4;
   string accountAddress = 5;
-  common.PositionSide positionSide = 6;
+  common.PerpPositionSide positionSide = 6;
   double slippage = 7;
   common.OrderType type = 8;
   double amount = 9;
@@ -1623,7 +1623,7 @@ message PostMarginOrderRequest {
   string payerAddress = 3;
   string market = 4;
   string accountAddress = 5;
-  common.PositionSide positionSide = 6;
+  string positionSide = 6;
   double slippage = 7;
   string type = 8;
   double amount = 9;
@@ -1643,7 +1643,7 @@ message GetNewPerpOrdersStreamRequest {
 
 message GetNewPerpOrdersStreamResponse {
   common.PerpContract contract = 1;
-  common.PositionSide side = 2;
+  common.PerpPositionSide side = 2;
   common.PerpOrderType type = 3;
   string userAddress = 4;
   string orderID = 5;

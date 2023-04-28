@@ -70,7 +70,7 @@ export enum PerpOrderType {
     POT_TRIGGER_LIMIT = 4,
 }
 
-export enum PositionSide {
+export enum PerpPositionSide {
     PS_UNKNOWN = 0,
     PS_LONG = 1,
     PS_SHORT = 2,

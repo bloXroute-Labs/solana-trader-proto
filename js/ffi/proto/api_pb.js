@@ -30687,7 +30687,7 @@ proto.api.PerpOrder.deserializeBinaryFromReader = function(msg, reader) {
       msg.setContract(value);
       break;
     case 4:
-      var value = /** @type {!proto.common.PositionSide} */ (reader.readEnum());
+      var value = /** @type {!proto.common.PerpPositionSide} */ (reader.readEnum());
       msg.setPositionside(value);
       break;
     case 5:
@@ -30893,16 +30893,16 @@ proto.api.PerpOrder.prototype.setContract = function(value) {
 
 
 /**
- * optional common.PositionSide positionSide = 4;
- * @return {!proto.common.PositionSide}
+ * optional common.PerpPositionSide positionSide = 4;
+ * @return {!proto.common.PerpPositionSide}
  */
 proto.api.PerpOrder.prototype.getPositionside = function() {
-  return /** @type {!proto.common.PositionSide} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.common.PerpPositionSide} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
 /**
- * @param {!proto.common.PositionSide} value
+ * @param {!proto.common.PerpPositionSide} value
  * @return {!proto.api.PerpOrder} returns this
  */
 proto.api.PerpOrder.prototype.setPositionside = function(value) {
@@ -31995,7 +31995,7 @@ proto.api.PerpPosition.deserializeBinaryFromReader = function(msg, reader) {
       msg.setPositionmargin(value);
       break;
     case 5:
-      var value = /** @type {!proto.common.PositionSide} */ (reader.readEnum());
+      var value = /** @type {!proto.common.PerpPositionSide} */ (reader.readEnum());
       msg.setPositionside(value);
       break;
     case 6:
@@ -32193,16 +32193,16 @@ proto.api.PerpPosition.prototype.setPositionmargin = function(value) {
 
 
 /**
- * optional common.PositionSide positionSide = 5;
- * @return {!proto.common.PositionSide}
+ * optional common.PerpPositionSide positionSide = 5;
+ * @return {!proto.common.PerpPositionSide}
  */
 proto.api.PerpPosition.prototype.getPositionside = function() {
-  return /** @type {!proto.common.PositionSide} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {!proto.common.PerpPositionSide} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
 /**
- * @param {!proto.common.PositionSide} value
+ * @param {!proto.common.PerpPositionSide} value
  * @return {!proto.api.PerpPosition} returns this
  */
 proto.api.PerpPosition.prototype.setPositionside = function(value) {
@@ -32401,7 +32401,7 @@ proto.api.PostPerpOrderRequest.deserializeBinaryFromReader = function(msg, reade
       msg.setAccountaddress(value);
       break;
     case 6:
-      var value = /** @type {!proto.common.PositionSide} */ (reader.readEnum());
+      var value = /** @type {!proto.common.PerpPositionSide} */ (reader.readEnum());
       msg.setPositionside(value);
       break;
     case 7:
@@ -32635,16 +32635,16 @@ proto.api.PostPerpOrderRequest.prototype.setAccountaddress = function(value) {
 
 
 /**
- * optional common.PositionSide positionSide = 6;
- * @return {!proto.common.PositionSide}
+ * optional common.PerpPositionSide positionSide = 6;
+ * @return {!proto.common.PerpPositionSide}
  */
 proto.api.PostPerpOrderRequest.prototype.getPositionside = function() {
-  return /** @type {!proto.common.PositionSide} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {!proto.common.PerpPositionSide} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
 /**
- * @param {!proto.common.PositionSide} value
+ * @param {!proto.common.PerpPositionSide} value
  * @return {!proto.api.PostPerpOrderRequest} returns this
  */
 proto.api.PostPerpOrderRequest.prototype.setPositionside = function(value) {
@@ -32948,7 +32948,7 @@ proto.api.PostMarginOrderRequest.toObject = function(includeInstance, msg) {
     payeraddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     market: jspb.Message.getFieldWithDefault(msg, 4, ""),
     accountaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    positionside: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    positionside: jspb.Message.getFieldWithDefault(msg, 6, ""),
     slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     type: jspb.Message.getFieldWithDefault(msg, 8, ""),
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
@@ -33012,7 +33012,7 @@ proto.api.PostMarginOrderRequest.deserializeBinaryFromReader = function(msg, rea
       msg.setAccountaddress(value);
       break;
     case 6:
-      var value = /** @type {!proto.common.PositionSide} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setPositionside(value);
       break;
     case 7:
@@ -33104,8 +33104,8 @@ proto.api.PostMarginOrderRequest.serializeBinaryToWriter = function(message, wri
     );
   }
   f = message.getPositionside();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       6,
       f
     );
@@ -33246,20 +33246,20 @@ proto.api.PostMarginOrderRequest.prototype.setAccountaddress = function(value) {
 
 
 /**
- * optional common.PositionSide positionSide = 6;
- * @return {!proto.common.PositionSide}
+ * optional string positionSide = 6;
+ * @return {string}
  */
 proto.api.PostMarginOrderRequest.prototype.getPositionside = function() {
-  return /** @type {!proto.common.PositionSide} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
 /**
- * @param {!proto.common.PositionSide} value
+ * @param {string} value
  * @return {!proto.api.PostMarginOrderRequest} returns this
  */
 proto.api.PostMarginOrderRequest.prototype.setPositionside = function(value) {
-  return jspb.Message.setProto3EnumField(this, 6, value);
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
@@ -33794,7 +33794,7 @@ proto.api.GetNewPerpOrdersStreamResponse.deserializeBinaryFromReader = function(
       msg.setContract(value);
       break;
     case 2:
-      var value = /** @type {!proto.common.PositionSide} */ (reader.readEnum());
+      var value = /** @type {!proto.common.PerpPositionSide} */ (reader.readEnum());
       msg.setSide(value);
       break;
     case 3:
@@ -33983,16 +33983,16 @@ proto.api.GetNewPerpOrdersStreamResponse.prototype.setContract = function(value)
 
 
 /**
- * optional common.PositionSide side = 2;
- * @return {!proto.common.PositionSide}
+ * optional common.PerpPositionSide side = 2;
+ * @return {!proto.common.PerpPositionSide}
  */
 proto.api.GetNewPerpOrdersStreamResponse.prototype.getSide = function() {
-  return /** @type {!proto.common.PositionSide} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {!proto.common.PerpPositionSide} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
 /**
- * @param {!proto.common.PositionSide} value
+ * @param {!proto.common.PerpPositionSide} value
  * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
  */
 proto.api.GetNewPerpOrdersStreamResponse.prototype.setSide = function(value) {

@@ -989,7 +989,7 @@ class PerpOrder(betterproto.Message):
     order_i_d: int = betterproto.uint64_field(1)
     client_order_i_d: int = betterproto.uint64_field(2)
     contract: common.PerpContract = betterproto.enum_field(3)
-    position_side: common.PositionSide = betterproto.enum_field(4)
+    position_side: common.PerpPositionSide = betterproto.enum_field(4)
     order_type: str = betterproto.string_field(5)
     price: float = betterproto.double_field(6)
     size: float = betterproto.double_field(7)
@@ -1033,7 +1033,7 @@ class PerpPosition(betterproto.Message):
     volume_available: float = betterproto.double_field(2)
     volume_in_order: float = betterproto.double_field(3)
     position_margin: float = betterproto.double_field(4)
-    position_side: common.PositionSide = betterproto.enum_field(5)
+    position_side: common.PerpPositionSide = betterproto.enum_field(5)
     notional_value: float = betterproto.double_field(6)
     index_price: float = betterproto.double_field(7)
     liquidation_price: float = betterproto.double_field(8)
@@ -1048,7 +1048,7 @@ class PostPerpOrderRequest(betterproto.Message):
     payer_address: str = betterproto.string_field(3)
     contract: common.PerpContract = betterproto.enum_field(4)
     account_address: str = betterproto.string_field(5)
-    position_side: common.PositionSide = betterproto.enum_field(6)
+    position_side: common.PerpPositionSide = betterproto.enum_field(6)
     slippage: float = betterproto.double_field(7)
     type: common.OrderType = betterproto.enum_field(8)
     amount: float = betterproto.double_field(9)
@@ -1069,7 +1069,7 @@ class PostMarginOrderRequest(betterproto.Message):
     payer_address: str = betterproto.string_field(3)
     market: str = betterproto.string_field(4)
     account_address: str = betterproto.string_field(5)
-    position_side: common.PositionSide = betterproto.enum_field(6)
+    position_side: str = betterproto.string_field(6)
     slippage: float = betterproto.double_field(7)
     type: str = betterproto.string_field(8)
     amount: float = betterproto.double_field(9)
@@ -1092,7 +1092,7 @@ class GetNewPerpOrdersStreamRequest(betterproto.Message):
 @dataclass
 class GetNewPerpOrdersStreamResponse(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(1)
-    side: common.PositionSide = betterproto.enum_field(2)
+    side: common.PerpPositionSide = betterproto.enum_field(2)
     type: common.PerpOrderType = betterproto.enum_field(3)
     user_address: str = betterproto.string_field(4)
     order_i_d: str = betterproto.string_field(5)
@@ -1848,7 +1848,7 @@ class ApiStub(betterproto.ServiceStub):
         payer_address: str = "",
         market: str = "",
         account_address: str = "",
-        position_side: common.PositionSide = 0,
+        position_side: str = "",
         slippage: float = 0,
         type: str = "",
         amount: float = 0,
@@ -1886,7 +1886,7 @@ class ApiStub(betterproto.ServiceStub):
         payer_address: str = "",
         contract: common.PerpContract = 0,
         account_address: str = "",
-        position_side: common.PositionSide = 0,
+        position_side: common.PerpPositionSide = 0,
         slippage: float = 0,
         type: common.OrderType = 0,
         amount: float = 0,
