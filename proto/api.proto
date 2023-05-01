@@ -746,8 +746,8 @@ message Market {
 }
 
 enum MarketStatus {
-  MS_UNKNOWN = 0;
-  MS_ONLINE = 1;
+  MS_UNKNOWN = 0; // unknown
+  MS_ONLINE = 1; // online
 }
 
 message GetTickersRequest {
