@@ -3894,8 +3894,7 @@ proto.api.GetMarketsResponseV2.prototype.toObject = function(opt_includeInstance
  */
 proto.api.GetMarketsResponseV2.toObject = function(includeInstance, msg) {
   var f, obj = {
-    marketsMap: (f = msg.getMarketsMap()) ? f.toObject(includeInstance, proto.api.MarketV2.toObject) : [],
-    metadata: (f = msg.getMetadata()) && google_protobuf_struct_pb.Struct.toObject(includeInstance, f)
+    marketsMap: (f = msg.getMarketsMap()) ? f.toObject(includeInstance, proto.api.MarketV2.toObject) : []
   };
 
   if (includeInstance) {
@@ -3938,11 +3937,6 @@ proto.api.GetMarketsResponseV2.deserializeBinaryFromReader = function(msg, reade
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.api.MarketV2.deserializeBinaryFromReader, "", new proto.api.MarketV2());
          });
       break;
-    case 2:
-      var value = new google_protobuf_struct_pb.Struct;
-      reader.readMessage(value,google_protobuf_struct_pb.Struct.deserializeBinaryFromReader);
-      msg.setMetadata(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -3976,14 +3970,6 @@ proto.api.GetMarketsResponseV2.serializeBinaryToWriter = function(message, write
   if (f && f.getLength() > 0) {
     f.serializeBinary(1, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.MarketV2.serializeBinaryToWriter);
   }
-  f = message.getMetadata();
-  if (f != null) {
-    writer.writeMessage(
-      2,
-      f,
-      google_protobuf_struct_pb.Struct.serializeBinaryToWriter
-    );
-  }
 };
 
 
@@ -4007,43 +3993,6 @@ proto.api.GetMarketsResponseV2.prototype.getMarketsMap = function(opt_noLazyCrea
 proto.api.GetMarketsResponseV2.prototype.clearMarketsMap = function() {
   this.getMarketsMap().clear();
   return this;};
-
-
-/**
- * optional google.protobuf.Struct metadata = 2;
- * @return {?proto.google.protobuf.Struct}
- */
-proto.api.GetMarketsResponseV2.prototype.getMetadata = function() {
-  return /** @type{?proto.google.protobuf.Struct} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_struct_pb.Struct, 2));
-};
-
-
-/**
- * @param {?proto.google.protobuf.Struct|undefined} value
- * @return {!proto.api.GetMarketsResponseV2} returns this
-*/
-proto.api.GetMarketsResponseV2.prototype.setMetadata = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.api.GetMarketsResponseV2} returns this
- */
-proto.api.GetMarketsResponseV2.prototype.clearMetadata = function() {
-  return this.setMetadata(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.api.GetMarketsResponseV2.prototype.hasMetadata = function() {
-  return jspb.Message.getField(this, 2) != null;
-};
 
 
 
@@ -4085,7 +4034,8 @@ proto.api.MarketV2.toObject = function(includeInstance, msg) {
     quotedmint: jspb.Message.getFieldWithDefault(msg, 5, ""),
     basedecimals: jspb.Message.getFieldWithDefault(msg, 6, 0),
     quotedecimals: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    project: jspb.Message.getFieldWithDefault(msg, 8, 0)
+    metadata: (f = msg.getMetadata()) && google_protobuf_struct_pb.Struct.toObject(includeInstance, f),
+    project: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {
@@ -4151,6 +4101,11 @@ proto.api.MarketV2.deserializeBinaryFromReader = function(msg, reader) {
       msg.setQuotedecimals(value);
       break;
     case 8:
+      var value = new google_protobuf_struct_pb.Struct;
+      reader.readMessage(value,google_protobuf_struct_pb.Struct.deserializeBinaryFromReader);
+      msg.setMetadata(value);
+      break;
+    case 9:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -4232,10 +4187,18 @@ proto.api.MarketV2.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getMetadata();
+  if (f != null) {
+    writer.writeMessage(
+      8,
+      f,
+      google_protobuf_struct_pb.Struct.serializeBinaryToWriter
+    );
+  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      8,
+      9,
       f
     );
   }
@@ -4369,11 +4332,48 @@ proto.api.MarketV2.prototype.setQuotedecimals = function(value) {
 
 
 /**
- * optional Project project = 8;
+ * optional google.protobuf.Struct metadata = 8;
+ * @return {?proto.google.protobuf.Struct}
+ */
+proto.api.MarketV2.prototype.getMetadata = function() {
+  return /** @type{?proto.google.protobuf.Struct} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_struct_pb.Struct, 8));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Struct|undefined} value
+ * @return {!proto.api.MarketV2} returns this
+*/
+proto.api.MarketV2.prototype.setMetadata = function(value) {
+  return jspb.Message.setWrapperField(this, 8, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.MarketV2} returns this
+ */
+proto.api.MarketV2.prototype.clearMetadata = function() {
+  return this.setMetadata(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.MarketV2.prototype.hasMetadata = function() {
+  return jspb.Message.getField(this, 8) != null;
+};
+
+
+/**
+ * optional Project project = 9;
  * @return {!proto.api.Project}
  */
 proto.api.MarketV2.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
 };
 
 
@@ -4382,7 +4382,7 @@ proto.api.MarketV2.prototype.getProject = function() {
  * @return {!proto.api.MarketV2} returns this
  */
 proto.api.MarketV2.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 8, value);
+  return jspb.Message.setProto3EnumField(this, 9, value);
 };
 
 

@@ -720,7 +720,6 @@ message GetMarketsResponse {
 
 message GetMarketsResponseV2 {
   map<string, MarketV2> markets = 1;
-  google.protobuf.Struct metadata = 2;
 }
 
 message MarketV2 {
@@ -731,7 +730,8 @@ message MarketV2 {
   string quotedMint = 5;
   int64 baseDecimals = 6;
   int64 quoteDecimals = 7;
-  Project project = 8;
+  google.protobuf.Struct metadata = 8;
+  Project project = 9;
 }
 
 message Market {

@@ -83,7 +83,6 @@ class GetMarketsResponseV2(betterproto.Message):
     markets: Dict[str, "MarketV2"] = betterproto.map_field(
         1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
-    metadata: protobuf.Struct = betterproto.message_field(2)
 
 
 @dataclass
@@ -95,7 +94,8 @@ class MarketV2(betterproto.Message):
     quoted_mint: str = betterproto.string_field(5)
     base_decimals: int = betterproto.int64_field(6)
     quote_decimals: int = betterproto.int64_field(7)
-    project: "Project" = betterproto.enum_field(8)
+    metadata: protobuf.Struct = betterproto.message_field(8)
+    project: "Project" = betterproto.enum_field(9)
 
 
 @dataclass

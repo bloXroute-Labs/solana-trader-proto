@@ -79,11 +79,6 @@ export class GetMarketsResponseV2 extends jspb.Message {
     getMarketsMap(): jspb.Map<string, MarketV2>;
     clearMarketsMap(): void;
 
-    hasMetadata(): boolean;
-    clearMetadata(): void;
-    getMetadata(): google_protobuf_struct_pb.Struct | undefined;
-    setMetadata(value?: google_protobuf_struct_pb.Struct): GetMarketsResponseV2;
-
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetMarketsResponseV2.AsObject;
     static toObject(includeInstance: boolean, msg: GetMarketsResponseV2): GetMarketsResponseV2.AsObject;
@@ -98,7 +93,6 @@ export namespace GetMarketsResponseV2 {
     export type AsObject = {
 
         marketsMap: Array<[string, MarketV2.AsObject]>,
-        metadata?: google_protobuf_struct_pb.Struct.AsObject,
     }
 }
 
@@ -117,6 +111,11 @@ export class MarketV2 extends jspb.Message {
     setBasedecimals(value: number): MarketV2;
     getQuotedecimals(): number;
     setQuotedecimals(value: number): MarketV2;
+
+    hasMetadata(): boolean;
+    clearMetadata(): void;
+    getMetadata(): google_protobuf_struct_pb.Struct | undefined;
+    setMetadata(value?: google_protobuf_struct_pb.Struct): MarketV2;
     getProject(): Project;
     setProject(value: Project): MarketV2;
 
@@ -139,6 +138,7 @@ export namespace MarketV2 {
         quotedmint: string,
         basedecimals: number,
         quotedecimals: number,
+        metadata?: google_protobuf_struct_pb.Struct.AsObject,
         project: Project,
     }
 }

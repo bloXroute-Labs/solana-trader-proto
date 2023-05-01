@@ -2248,9 +2248,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/apiMarketV2"
           }
-        },
-        "metadata": {
-          "type": "object"
         }
       }
     },
@@ -3181,6 +3178,9 @@
         "quoteDecimals": {
           "type": "string",
           "format": "int64"
+        },
+        "metadata": {
+          "type": "object"
         },
         "project": {
           "$ref": "#/definitions/apiProject"
