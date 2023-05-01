@@ -579,17 +579,6 @@ service Api {
     };
   }
 
-  rpc GetMarginContracts(GetMarginContractsRequest) returns (GetMarginContractsResponse) {
-    option (google.api.http) = {
-      get: "/api/v1/market/margin/contracts"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns details of available perp contracts";
-      summary: "details of available perp contracts";
-      tags: ["Margin", "Market"];
-    };
-  }
-
   rpc PostLiquidatePerp(PostLiquidatePerpRequest) returns (PostLiquidatePerpResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/liquidate"
@@ -1801,58 +1790,6 @@ message ContractInfo {
 
 message GetPerpContractsResponse {
   repeated ContractInfo contracts = 1;
-}
-
-message GetMarginContractsRequest {
-  Project project = 1;
-}
-
-message MarginContractInfo {
-  string market = 1;
-  string marketAddress = 2;
-  string status = 3;
-  string assetTier = 4;
-  uint64 marketIndex = 5;
-  string pubkey = 6;
-  string mint = 7;
-  string vault = 8;
-  string oracle = 9;
-  string oracleSource = 10;
-  double ifLiquidationFee = 11;
-  uint64 decimals = 12;
-  uint64 optimalUtilization = 13;
-  uint64 optimalBorrowRate = 14;
-  uint64 maxBorrowRate = 15;
-  float cumulativeDepositInterest = 16;
-  float cumulativeBorrowInterest = 17;
-  float totalSocialLoss = 18;
-  float totalQuoteSocialLoss = 19;
-  float depositBalance = 20;
-  float borrowBalance = 21;
-  float maxTokenDeposits = 22;
-  float lastInterestTs = 23;
-  float lastTwapTs = 24;
-  uint64 initialAssetWeight = 25;
-  uint64 maintenanceAssetWeight = 26;
-  uint64 initialLiabilityWeight = 27;
-  uint64 maintenanceLiabilityWeight = 28;
-  uint64 liquidatorFee = 29;
-  uint64 imfFactor = 30;
-  float withdrawGuardThreshold= 31;
-  float depositTokenTwap = 32;
-  float borrowTokenTwap = 33;
-  float utilizationTwap= 34;
-  float nextDepositRecordId = 35;
-  float orderStepSize = 36;
-  float orderTickSize = 37;
-  float nextFillRecordId = 38;
-  float spotFeePool = 39;
-  float totalSpotFee = 40;
-  bool ordersEnabled = 41;
-}
-
-message GetMarginContractsResponse {
-  repeated MarginContractInfo contracts = 1;
 }
 
 message GetOpenPerpOrderRequest {
