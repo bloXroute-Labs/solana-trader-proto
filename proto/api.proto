@@ -131,18 +131,7 @@ service Api {
       tags: ["Market", "Orderbook"];
     };
   }
-
-  rpc GetOrderbookV2(GetOrderbookRequest) returns (GetOrderbookResponse) {
-    option (google.api.http) = {
-      get: "/api/v2/spot/orderbooks/{market}"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned";
-      summary: "Market orderbook";
-      tags: ["Market", "Orderbook"];
-    };
-  }
-
+  
   rpc GetMarketDepth(GetMarketDepthRequest) returns (GetMarketDepthResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/depth/{market}"

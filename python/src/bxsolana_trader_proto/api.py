@@ -1338,26 +1338,6 @@ class ApiStub(betterproto.ServiceStub):
             GetOrderbookResponse,
         )
 
-    async def get_orderbook_v2(
-        self,
-        *,
-        market: str = "",
-        limit: int = 0,
-        project: "Project" = 0,
-        metadata: bool = False,
-    ) -> GetOrderbookResponse:
-        request = GetOrderbookRequest()
-        request.market = market
-        request.limit = limit
-        request.project = project
-        request.metadata = metadata
-
-        return await self._unary_unary(
-            "/api.Api/GetOrderbookV2",
-            request,
-            GetOrderbookResponse,
-        )
-
     async def get_market_depth(
         self, *, market: str = "", limit: int = 0, project: "Project" = 0
     ) -> GetMarketDepthResponse:

@@ -25,7 +25,6 @@ type ApiClient interface {
 	GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error)
 	GetKline(ctx context.Context, in *GetKlineRequest, opts ...grpc.CallOption) (*GetKlineResponse, error)
 	GetOrderbook(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error)
-	GetOrderbookV2(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error)
 	GetMarketDepth(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (*GetMarketDepthResponse, error)
 	GetTrades(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (*GetTradesResponse, error)
 	GetQuotes(ctx context.Context, in *GetQuotesRequest, opts ...grpc.CallOption) (*GetQuotesResponse, error)
@@ -153,15 +152,6 @@ func (c *apiClient) GetKline(ctx context.Context, in *GetKlineRequest, opts ...g
 func (c *apiClient) GetOrderbook(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error) {
 	out := new(GetOrderbookResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetOrderbook", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetOrderbookV2(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error) {
-	out := new(GetOrderbookResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetOrderbookV2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -978,7 +968,6 @@ type ApiServer interface {
 	GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error)
 	GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error)
 	GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error)
-	GetOrderbookV2(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error)
 	GetMarketDepth(context.Context, *GetMarketDepthRequest) (*GetMarketDepthResponse, error)
 	GetTrades(context.Context, *GetTradesRequest) (*GetTradesResponse, error)
 	GetQuotes(context.Context, *GetQuotesRequest) (*GetQuotesResponse, error)
@@ -1066,9 +1055,6 @@ func (UnimplementedApiServer) GetKline(context.Context, *GetKlineRequest) (*GetK
 }
 func (UnimplementedApiServer) GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderbook not implemented")
-}
-func (UnimplementedApiServer) GetOrderbookV2(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOrderbookV2 not implemented")
 }
 func (UnimplementedApiServer) GetMarketDepth(context.Context, *GetMarketDepthRequest) (*GetMarketDepthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMarketDepth not implemented")
@@ -1364,24 +1350,6 @@ func _Api_GetOrderbook_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetOrderbook(ctx, req.(*GetOrderbookRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetOrderbookV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrderbookRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetOrderbookV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetOrderbookV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOrderbookV2(ctx, req.(*GetOrderbookRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2416,10 +2384,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOrderbook",
 			Handler:    _Api_GetOrderbook_Handler,
-		},
-		{
-			MethodName: "GetOrderbookV2",
-			Handler:    _Api_GetOrderbookV2_Handler,
 		},
 		{
 			MethodName: "GetMarketDepth",

@@ -1311,17 +1311,6 @@ var ApiService = exports.ApiService = {
     responseSerialize: serialize_api_GetOrderbookResponse,
     responseDeserialize: deserialize_api_GetOrderbookResponse,
   },
-  getOrderbookV2: {
-    path: '/api.Api/GetOrderbookV2',
-    requestStream: false,
-    responseStream: false,
-    requestType: api_pb.GetOrderbookRequest,
-    responseType: api_pb.GetOrderbookResponse,
-    requestSerialize: serialize_api_GetOrderbookRequest,
-    requestDeserialize: deserialize_api_GetOrderbookRequest,
-    responseSerialize: serialize_api_GetOrderbookResponse,
-    responseDeserialize: deserialize_api_GetOrderbookResponse,
-  },
   getMarketDepth: {
     path: '/api.Api/GetMarketDepth',
     requestStream: false,

@@ -21,7 +21,6 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getTickers: IApiService_IGetTickers;
     getKline: IApiService_IGetKline;
     getOrderbook: IApiService_IGetOrderbook;
-    getOrderbookV2: IApiService_IGetOrderbookV2;
     getMarketDepth: IApiService_IGetMarketDepth;
     getTrades: IApiService_IGetTrades;
     getQuotes: IApiService_IGetQuotes;
@@ -133,15 +132,6 @@ interface IApiService_IGetKline extends grpc.MethodDefinition<api_pb.GetKlineReq
 }
 interface IApiService_IGetOrderbook extends grpc.MethodDefinition<api_pb.GetOrderbookRequest, api_pb.GetOrderbookResponse> {
     path: "/api.Api/GetOrderbook";
-    requestStream: false;
-    responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetOrderbookRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetOrderbookRequest>;
-    responseSerialize: grpc.serialize<api_pb.GetOrderbookResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.GetOrderbookResponse>;
-}
-interface IApiService_IGetOrderbookV2 extends grpc.MethodDefinition<api_pb.GetOrderbookRequest, api_pb.GetOrderbookResponse> {
-    path: "/api.Api/GetOrderbookV2";
     requestStream: false;
     responseStream: false;
     requestSerialize: grpc.serialize<api_pb.GetOrderbookRequest>;
@@ -637,7 +627,6 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getTickers: grpc.handleUnaryCall<api_pb.GetTickersRequest, api_pb.GetTickersResponse>;
     getKline: grpc.handleUnaryCall<api_pb.GetKlineRequest, api_pb.GetKlineResponse>;
     getOrderbook: grpc.handleUnaryCall<api_pb.GetOrderbookRequest, api_pb.GetOrderbookResponse>;
-    getOrderbookV2: grpc.handleUnaryCall<api_pb.GetOrderbookRequest, api_pb.GetOrderbookResponse>;
     getMarketDepth: grpc.handleUnaryCall<api_pb.GetMarketDepthRequest, api_pb.GetMarketDepthResponse>;
     getTrades: grpc.handleUnaryCall<api_pb.GetTradesRequest, api_pb.GetTradesResponse>;
     getQuotes: grpc.handleUnaryCall<api_pb.GetQuotesRequest, api_pb.GetQuotesResponse>;
@@ -715,9 +704,6 @@ export interface IApiClient {
     getOrderbook(request: api_pb.GetOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
     getOrderbook(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
     getOrderbook(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    getOrderbookV2(request: api_pb.GetOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    getOrderbookV2(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    getOrderbookV2(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
     getMarketDepth(request: api_pb.GetMarketDepthRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
     getMarketDepth(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
     getMarketDepth(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
@@ -888,9 +874,6 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getOrderbook(request: api_pb.GetOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getOrderbook(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getOrderbook(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    public getOrderbookV2(request: api_pb.GetOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    public getOrderbookV2(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    public getOrderbookV2(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getMarketDepth(request: api_pb.GetMarketDepthRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
     public getMarketDepth(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
     public getMarketDepth(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
