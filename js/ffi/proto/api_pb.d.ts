@@ -5,6 +5,7 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
+import * as google_protobuf_struct_pb from "google-protobuf/google/protobuf/struct_pb";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 import * as google_api_field_behavior_pb from "./google/api/field_behavior_pb";
 import * as google_api_visibility_pb from "./google/api/visibility_pb";
@@ -12,8 +13,6 @@ import * as protoc_gen_openapiv2_options_annotations_pb from "./protoc-gen-opena
 import * as common_pb from "./common_pb";
 
 export class GetMarketsRequest extends jspb.Message { 
-    getMetadata(): boolean;
-    setMetadata(value: boolean): GetMarketsRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetMarketsRequest.AsObject;
@@ -26,6 +25,25 @@ export class GetMarketsRequest extends jspb.Message {
 }
 
 export namespace GetMarketsRequest {
+    export type AsObject = {
+    }
+}
+
+export class GetMarketsRequestV2 extends jspb.Message { 
+    getMetadata(): boolean;
+    setMetadata(value: boolean): GetMarketsRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarketsRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarketsRequestV2): GetMarketsRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarketsRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarketsRequestV2;
+    static deserializeBinaryFromReader(message: GetMarketsRequestV2, reader: jspb.BinaryReader): GetMarketsRequestV2;
+}
+
+export namespace GetMarketsRequestV2 {
     export type AsObject = {
         metadata: boolean,
     }
@@ -50,6 +68,75 @@ export namespace GetMarketsResponse {
     export type AsObject = {
 
         marketsMap: Array<[string, Market.AsObject]>,
+    }
+}
+
+export class GetMarketsResponseV2 extends jspb.Message { 
+
+    getMarketsMap(): jspb.Map<string, MarketV2>;
+    clearMarketsMap(): void;
+
+    hasMetadata(): boolean;
+    clearMetadata(): void;
+    getMetadata(): google_protobuf_struct_pb.Struct | undefined;
+    setMetadata(value?: google_protobuf_struct_pb.Struct): GetMarketsResponseV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarketsResponseV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarketsResponseV2): GetMarketsResponseV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarketsResponseV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarketsResponseV2;
+    static deserializeBinaryFromReader(message: GetMarketsResponseV2, reader: jspb.BinaryReader): GetMarketsResponseV2;
+}
+
+export namespace GetMarketsResponseV2 {
+    export type AsObject = {
+
+        marketsMap: Array<[string, MarketV2.AsObject]>,
+        metadata?: google_protobuf_struct_pb.Struct.AsObject,
+    }
+}
+
+export class MarketV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): MarketV2;
+    getStatus(): string;
+    setStatus(value: string): MarketV2;
+    getAddress(): string;
+    setAddress(value: string): MarketV2;
+    getBasemint(): string;
+    setBasemint(value: string): MarketV2;
+    getQuotedmint(): string;
+    setQuotedmint(value: string): MarketV2;
+    getBasedecimals(): number;
+    setBasedecimals(value: number): MarketV2;
+    getQuotedecimals(): number;
+    setQuotedecimals(value: number): MarketV2;
+    getProject(): Project;
+    setProject(value: Project): MarketV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): MarketV2.AsObject;
+    static toObject(includeInstance: boolean, msg: MarketV2): MarketV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: MarketV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): MarketV2;
+    static deserializeBinaryFromReader(message: MarketV2, reader: jspb.BinaryReader): MarketV2;
+}
+
+export namespace MarketV2 {
+    export type AsObject = {
+        market: string,
+        status: string,
+        address: string,
+        basemint: string,
+        quotedmint: string,
+        basedecimals: number,
+        quotedecimals: number,
+        project: Project,
     }
 }
 

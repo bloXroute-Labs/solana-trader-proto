@@ -6,6 +6,7 @@
 
 import * as grpc from "@grpc/grpc-js";
 import * as api_pb from "./api_pb";
+import * as google_protobuf_struct_pb from "google-protobuf/google/protobuf/struct_pb";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 import * as google_api_field_behavior_pb from "./google/api/field_behavior_pb";
 import * as google_api_visibility_pb from "./google/api/visibility_pb";
@@ -15,6 +16,7 @@ import * as common_pb from "./common_pb";
 interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     getPrice: IApiService_IGetPrice;
     getMarkets: IApiService_IGetMarkets;
+    getMarketsV2: IApiService_IGetMarketsV2;
     getPools: IApiService_IGetPools;
     getTickers: IApiService_IGetTickers;
     getKline: IApiService_IGetKline;
@@ -94,6 +96,15 @@ interface IApiService_IGetMarkets extends grpc.MethodDefinition<api_pb.GetMarket
     requestDeserialize: grpc.deserialize<api_pb.GetMarketsRequest>;
     responseSerialize: grpc.serialize<api_pb.GetMarketsResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetMarketsResponse>;
+}
+interface IApiService_IGetMarketsV2 extends grpc.MethodDefinition<api_pb.GetMarketsRequestV2, api_pb.GetMarketsResponseV2> {
+    path: "/api.Api/GetMarketsV2";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetMarketsRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.GetMarketsRequestV2>;
+    responseSerialize: grpc.serialize<api_pb.GetMarketsResponseV2>;
+    responseDeserialize: grpc.deserialize<api_pb.GetMarketsResponseV2>;
 }
 interface IApiService_IGetPools extends grpc.MethodDefinition<api_pb.GetPoolsRequest, api_pb.GetPoolsResponse> {
     path: "/api.Api/GetPools";
@@ -641,6 +652,7 @@ export const ApiService: IApiService;
 export interface IApiServer extends grpc.UntypedServiceImplementation {
     getPrice: grpc.handleUnaryCall<api_pb.GetPriceRequest, api_pb.GetPriceResponse>;
     getMarkets: grpc.handleUnaryCall<api_pb.GetMarketsRequest, api_pb.GetMarketsResponse>;
+    getMarketsV2: grpc.handleUnaryCall<api_pb.GetMarketsRequestV2, api_pb.GetMarketsResponseV2>;
     getPools: grpc.handleUnaryCall<api_pb.GetPoolsRequest, api_pb.GetPoolsResponse>;
     getTickers: grpc.handleUnaryCall<api_pb.GetTickersRequest, api_pb.GetTickersResponse>;
     getKline: grpc.handleUnaryCall<api_pb.GetKlineRequest, api_pb.GetKlineResponse>;
@@ -710,6 +722,9 @@ export interface IApiClient {
     getMarkets(request: api_pb.GetMarketsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
     getMarkets(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
     getMarkets(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
+    getMarketsV2(request: api_pb.GetMarketsRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
+    getMarketsV2(request: api_pb.GetMarketsRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
+    getMarketsV2(request: api_pb.GetMarketsRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
     getPools(request: api_pb.GetPoolsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPoolsResponse) => void): grpc.ClientUnaryCall;
     getPools(request: api_pb.GetPoolsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPoolsResponse) => void): grpc.ClientUnaryCall;
     getPools(request: api_pb.GetPoolsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPoolsResponse) => void): grpc.ClientUnaryCall;
@@ -885,6 +900,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getMarkets(request: api_pb.GetMarketsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
     public getMarkets(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
     public getMarkets(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
+    public getMarketsV2(request: api_pb.GetMarketsRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
+    public getMarketsV2(request: api_pb.GetMarketsRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
+    public getMarketsV2(request: api_pb.GetMarketsRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
     public getPools(request: api_pb.GetPoolsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPoolsResponse) => void): grpc.ClientUnaryCall;
     public getPools(request: api_pb.GetPoolsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPoolsResponse) => void): grpc.ClientUnaryCall;
     public getPools(request: api_pb.GetPoolsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPoolsResponse) => void): grpc.ClientUnaryCall;

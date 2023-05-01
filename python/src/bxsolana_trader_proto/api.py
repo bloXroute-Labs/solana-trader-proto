@@ -9,6 +9,7 @@ import betterproto
 import grpclib
 
 from . import common
+from .google import protobuf
 
 
 class MarketStatus(betterproto.Enum):
@@ -61,6 +62,11 @@ class Project(betterproto.Enum):
 
 @dataclass
 class GetMarketsRequest(betterproto.Message):
+    pass
+
+
+@dataclass
+class GetMarketsRequestV2(betterproto.Message):
     metadata: bool = betterproto.bool_field(1)
 
 
@@ -69,6 +75,26 @@ class GetMarketsResponse(betterproto.Message):
     markets: Dict[str, "Market"] = betterproto.map_field(
         1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
+
+
+@dataclass
+class GetMarketsResponseV2(betterproto.Message):
+    markets: Dict[str, "MarketV2"] = betterproto.map_field(
+        1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+    metadata: protobuf.Struct = betterproto.message_field(2)
+
+
+@dataclass
+class MarketV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    status: str = betterproto.string_field(2)
+    address: str = betterproto.string_field(3)
+    base_mint: str = betterproto.string_field(4)
+    quoted_mint: str = betterproto.string_field(5)
+    base_decimals: int = betterproto.int64_field(6)
+    quote_decimals: int = betterproto.int64_field(7)
+    project: "Project" = betterproto.enum_field(8)
 
 
 @dataclass
@@ -1322,14 +1348,23 @@ class ApiStub(betterproto.ServiceStub):
             GetPriceResponse,
         )
 
-    async def get_markets(self, *, metadata: bool = False) -> GetMarketsResponse:
+    async def get_markets(self) -> GetMarketsResponse:
         request = GetMarketsRequest()
-        request.metadata = metadata
 
         return await self._unary_unary(
             "/api.Api/GetMarkets",
             request,
             GetMarketsResponse,
+        )
+
+    async def get_markets_v2(self, *, metadata: bool = False) -> GetMarketsResponseV2:
+        request = GetMarketsRequestV2()
+        request.metadata = metadata
+
+        return await self._unary_unary(
+            "/api.Api/GetMarketsV2",
+            request,
+            GetMarketsResponseV2,
         )
 
     async def get_pools(self, *, projects: List["Project"] = []) -> GetPoolsResponse:

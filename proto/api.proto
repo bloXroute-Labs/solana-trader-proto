@@ -3,6 +3,7 @@ package api;
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/api";
 
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
@@ -65,6 +66,18 @@ service Api {
   rpc GetMarkets(GetMarketsRequest) returns (GetMarketsResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/markets"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of orderbook markets";
+      summary: "Orderbook markets";
+      tags: ["Market", "Orderbook"];
+    };
+  }
+
+  rpc GetMarketsV2(GetMarketsRequestV2) returns (GetMarketsResponseV2) {
+    option (google.api.http) = {
+      get: "/api/v2/market/markets"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -694,11 +707,30 @@ service Api {
 }
 
 message GetMarketsRequest {
+}
+
+message GetMarketsRequestV2 {
   bool metadata = 1;
 }
 
 message GetMarketsResponse {
   map<string, Market> markets = 1;
+}
+
+message GetMarketsResponseV2 {
+  map<string, MarketV2> markets = 1;
+  google.protobuf.Struct metadata = 2;
+}
+
+message MarketV2 {
+  string market = 1;
+  string status = 2;
+  string address = 3;
+  string baseMint = 4;
+  string quotedMint = 5;
+  int64 baseDecimals = 6;
+  int64 quoteDecimals = 7;
+  Project project = 8;
 }
 
 message Market {

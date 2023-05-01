@@ -4,6 +4,7 @@
 var grpc = require('@grpc/grpc-js');
 var api_pb = require('./api_pb.js');
 var google_api_annotations_pb = require('./google/api/annotations_pb.js');
+var google_protobuf_struct_pb = require('google-protobuf/google/protobuf/struct_pb.js');
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 var google_api_field_behavior_pb = require('./google/api/field_behavior_pb.js');
 var google_api_visibility_pb = require('./google/api/visibility_pb.js');
@@ -219,6 +220,17 @@ function deserialize_api_GetMarketsRequest(buffer_arg) {
   return api_pb.GetMarketsRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetMarketsRequestV2(arg) {
+  if (!(arg instanceof api_pb.GetMarketsRequestV2)) {
+    throw new Error('Expected argument of type api.GetMarketsRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMarketsRequestV2(buffer_arg) {
+  return api_pb.GetMarketsRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetMarketsResponse(arg) {
   if (!(arg instanceof api_pb.GetMarketsResponse)) {
     throw new Error('Expected argument of type api.GetMarketsResponse');
@@ -228,6 +240,17 @@ function serialize_api_GetMarketsResponse(arg) {
 
 function deserialize_api_GetMarketsResponse(buffer_arg) {
   return api_pb.GetMarketsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetMarketsResponseV2(arg) {
+  if (!(arg instanceof api_pb.GetMarketsResponseV2)) {
+    throw new Error('Expected argument of type api.GetMarketsResponseV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMarketsResponseV2(buffer_arg) {
+  return api_pb.GetMarketsResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetNewPerpOrdersStreamRequest(arg) {
@@ -1298,6 +1321,17 @@ var ApiService = exports.ApiService = {
     requestDeserialize: deserialize_api_GetMarketsRequest,
     responseSerialize: serialize_api_GetMarketsResponse,
     responseDeserialize: deserialize_api_GetMarketsResponse,
+  },
+  getMarketsV2: {
+    path: '/api.Api/GetMarketsV2',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetMarketsRequestV2,
+    responseType: api_pb.GetMarketsResponseV2,
+    requestSerialize: serialize_api_GetMarketsRequestV2,
+    requestDeserialize: deserialize_api_GetMarketsRequestV2,
+    responseSerialize: serialize_api_GetMarketsResponseV2,
+    responseDeserialize: deserialize_api_GetMarketsResponseV2,
   },
   getPools: {
     path: '/api.Api/GetPools',
