@@ -67,7 +67,8 @@ class GetMarketsRequest(betterproto.Message):
 
 @dataclass
 class GetMarketsRequestV2(betterproto.Message):
-    metadata: bool = betterproto.bool_field(1)
+    project: "Project" = betterproto.enum_field(1)
+    metadata: bool = betterproto.bool_field(2)
 
 
 @dataclass
@@ -1357,8 +1358,11 @@ class ApiStub(betterproto.ServiceStub):
             GetMarketsResponse,
         )
 
-    async def get_markets_v2(self, *, metadata: bool = False) -> GetMarketsResponseV2:
+    async def get_markets_v2(
+        self, *, project: "Project" = 0, metadata: bool = False
+    ) -> GetMarketsResponseV2:
         request = GetMarketsRequestV2()
+        request.project = project
         request.metadata = metadata
 
         return await self._unary_unary(

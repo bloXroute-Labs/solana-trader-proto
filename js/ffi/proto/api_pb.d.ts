@@ -30,6 +30,8 @@ export namespace GetMarketsRequest {
 }
 
 export class GetMarketsRequestV2 extends jspb.Message { 
+    getProject(): Project;
+    setProject(value: Project): GetMarketsRequestV2;
     getMetadata(): boolean;
     setMetadata(value: boolean): GetMarketsRequestV2;
 
@@ -45,6 +47,7 @@ export class GetMarketsRequestV2 extends jspb.Message {
 
 export namespace GetMarketsRequestV2 {
     export type AsObject = {
+        project: Project,
         metadata: boolean,
     }
 }

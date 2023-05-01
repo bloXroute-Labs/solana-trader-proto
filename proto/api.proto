@@ -710,7 +710,8 @@ message GetMarketsRequest {
 }
 
 message GetMarketsRequestV2 {
-  bool metadata = 1;
+  Project project = 1;
+  bool metadata = 2;
 }
 
 message GetMarketsResponse {

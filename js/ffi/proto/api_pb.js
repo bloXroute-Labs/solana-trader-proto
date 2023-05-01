@@ -3601,7 +3601,8 @@ proto.api.GetMarketsRequestV2.prototype.toObject = function(opt_includeInstance)
  */
 proto.api.GetMarketsRequestV2.toObject = function(includeInstance, msg) {
   var f, obj = {
-    metadata: jspb.Message.getBooleanFieldWithDefault(msg, 1, false)
+    project: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    metadata: jspb.Message.getBooleanFieldWithDefault(msg, 2, false)
   };
 
   if (includeInstance) {
@@ -3639,6 +3640,10 @@ proto.api.GetMarketsRequestV2.deserializeBinaryFromReader = function(msg, reader
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
+      msg.setProject(value);
+      break;
+    case 2:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setMetadata(value);
       break;
@@ -3671,10 +3676,17 @@ proto.api.GetMarketsRequestV2.prototype.serializeBinary = function() {
  */
 proto.api.GetMarketsRequestV2.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getProject();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      1,
+      f
+    );
+  }
   f = message.getMetadata();
   if (f) {
     writer.writeBool(
-      1,
+      2,
       f
     );
   }
@@ -3682,11 +3694,29 @@ proto.api.GetMarketsRequestV2.serializeBinaryToWriter = function(message, writer
 
 
 /**
- * optional bool metadata = 1;
+ * optional Project project = 1;
+ * @return {!proto.api.Project}
+ */
+proto.api.GetMarketsRequestV2.prototype.getProject = function() {
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/**
+ * @param {!proto.api.Project} value
+ * @return {!proto.api.GetMarketsRequestV2} returns this
+ */
+proto.api.GetMarketsRequestV2.prototype.setProject = function(value) {
+  return jspb.Message.setProto3EnumField(this, 1, value);
+};
+
+
+/**
+ * optional bool metadata = 2;
  * @return {boolean}
  */
 proto.api.GetMarketsRequestV2.prototype.getMetadata = function() {
-  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 1, false));
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 2, false));
 };
 
 
@@ -3695,7 +3725,7 @@ proto.api.GetMarketsRequestV2.prototype.getMetadata = function() {
  * @return {!proto.api.GetMarketsRequestV2} returns this
  */
 proto.api.GetMarketsRequestV2.prototype.setMetadata = function(value) {
-  return jspb.Message.setProto3BooleanField(this, 1, value);
+  return jspb.Message.setProto3BooleanField(this, 2, value);
 };
 
 
