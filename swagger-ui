@@ -146,64 +146,6 @@
         ]
       }
     },
-    "/api/v1/market/margin/orderbook/{market}": {
-      "get": {
-        "summary": "margin contract orderbook",
-        "description": "Returns margin contract's orderbook. Use limit param to reduce the number of bids/asks returned",
-        "operationId": "Api_GetMarginOrderbook",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetMarginOrderbookResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "market",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "description": "Use 0 for no limits",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          }
-        ],
-        "tags": [
-          "Margin",
-          "Orderbook",
-          "Market"
-        ]
-      }
-    },
     "/api/v1/market/markets": {
       "get": {
         "summary": "Orderbook markets",
@@ -278,6 +220,12 @@
               "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -1875,7 +1823,7 @@
         ]
       }
     },
-    "/api/v2/market/markets": {
+    "/api/v2/spot/markets": {
       "get": {
         "summary": "Orderbook markets",
         "description": "Returns the list of orderbook markets",
@@ -1895,6 +1843,69 @@
           }
         },
         "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "Market",
+          "Orderbook"
+        ]
+      }
+    },
+    "/api/v2/spot/orderbooks/{market}": {
+      "get": {
+        "summary": "Market orderbook",
+        "description": "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetOrderbookV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "name": "project",
             "in": "query",
@@ -2105,38 +2116,6 @@
           "items": {
             "$ref": "#/definitions/apiCandle"
           }
-        }
-      }
-    },
-    "apiGetMarginOrderbookResponse": {
-      "type": "object",
-      "properties": {
-        "market": {
-          "type": "string"
-        },
-        "bids": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiMarginOrderbookItem"
-          }
-        },
-        "asks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiMarginOrderbookItem"
-          }
-        }
-      }
-    },
-    "apiGetMarginOrderbooksStreamResponse": {
-      "type": "object",
-      "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "orderbook": {
-          "$ref": "#/definitions/apiGetMarginOrderbookResponse"
         }
       }
     },
@@ -2829,65 +2808,6 @@
         }
       }
     },
-    "apiMarginOrderbookItem": {
-      "type": "object",
-      "properties": {
-        "price": {
-          "type": "number",
-          "format": "double"
-        },
-        "size": {
-          "type": "number",
-          "format": "double"
-        },
-        "orderID": {
-          "type": "string",
-          "description": "platform generated OrderID"
-        },
-        "clientOrderID": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "orderType": {
-          "type": "string"
-        },
-        "slot": {
-          "type": "string",
-          "format": "int64"
-        },
-        "reduceOnly": {
-          "type": "boolean"
-        },
-        "triggerPrice": {
-          "type": "number",
-          "format": "double"
-        },
-        "triggerCondition": {
-          "type": "string"
-        },
-        "postOnly": {
-          "type": "boolean"
-        },
-        "oraclePriceOffset": {
-          "type": "number",
-          "format": "double"
-        },
-        "auctionDuration": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "auctionStartPrice": {
-          "type": "number",
-          "format": "double"
-        },
-        "auctionEndPrice": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
     "apiMarket": {
       "type": "object",
       "properties": {
@@ -3045,6 +2965,9 @@
         "ownerAddress": {
           "type": "string",
           "description": "OpenOrders address for current market"
+        },
+        "metadata": {
+          "type": "object"
         }
       }
     },

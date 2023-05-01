@@ -77,7 +77,7 @@ service Api {
 
   rpc GetMarketsV2(GetMarketsRequestV2) returns (GetMarketsResponseV2) {
     option (google.api.http) = {
-      get: "/api/v2/market/markets"
+      get: "/api/v2/spot/markets"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -124,6 +124,17 @@ service Api {
   rpc GetOrderbook(GetOrderbookRequest) returns (GetOrderbookResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/orderbooks/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned";
+      summary: "Market orderbook";
+      tags: ["Market", "Orderbook"];
+    };
+  }
+
+  rpc GetOrderbookV2(GetOrderbookRequest) returns (GetOrderbookResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/spot/orderbooks/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned";
@@ -487,17 +498,6 @@ service Api {
     };
   }
 
-  rpc GetMarginOrderbook(GetMarginOrderbookRequest) returns (GetMarginOrderbookResponse) {
-    option (google.api.http) = {
-      get: "/api/v1/market/margin/orderbook/{market}"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns margin contract's orderbook. Use limit param to reduce the number of bids/asks returned";
-      summary: "margin contract orderbook";
-      tags: ["Margin", "Orderbook", "Market"];
-    };
-  }
-
   rpc PostCreateUser(PostCreateUserRequest) returns (PostCreateUserResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/user"
@@ -675,13 +675,7 @@ service Api {
       tags: "Perp";
     };
   }
-
-  rpc GetMarginOrderbooksStream(GetMarginOrderbooksRequest) returns (stream GetMarginOrderbooksStreamResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "Perp";
-    };
-  }
-
+  
   rpc GetNewPerpOrdersStream(GetNewPerpOrdersStreamRequest) returns (stream GetNewPerpOrdersStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Perp";
@@ -788,6 +782,7 @@ message GetOrderbookRequest {
   string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
+  bool metadata = 4;
 }
 
 message GetOrderbooksRequest {
@@ -809,6 +804,7 @@ message OrderbookItem {
   string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
   uint64 clientOrderID = 4;
   string ownerAddress = 5[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "OpenOrders address for current market"}];
+  google.protobuf.Struct metadata = 6;
 }
 
 message GetMarketDepthRequest {
@@ -1438,49 +1434,6 @@ message GetPerpOrderbooksStreamResponse {
   int64 slot = 1;
   GetPerpOrderbookResponse orderbook = 2;
 }
-
-// Margin
-message GetMarginOrderbookRequest {
-  string market = 1;
-  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
-  Project project = 3;
-}
-
-message GetMarginOrderbooksRequest {
-  repeated string markets = 1;
-  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
-  Project project = 3;
-}
-
-message GetMarginOrderbookResponse {
-  string market = 1;
-  repeated MarginOrderbookItem bids = 2;
-  repeated MarginOrderbookItem asks = 3;
-}
-
-message MarginOrderbookItem {
-  double price = 1;
-  double size = 2;
-  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "platform generated OrderID"}];
-  string clientOrderID = 4;
-  string status = 5;
-  string orderType = 6;
-  int64 slot = 7;
-  bool reduceOnly = 8;
-  double triggerPrice = 9;
-  string triggerCondition = 10;
-  bool postOnly = 11;
-  double oraclePriceOffset = 12;
-  int32 auctionDuration = 13;
-  double auctionStartPrice  = 14;
-  double auctionEndPrice = 15;
-}
-
-message GetMarginOrderbooksStreamResponse {
-  int64 slot = 1;
-  GetMarginOrderbookResponse orderbook = 2;
-}
-
 
 message GetUserRequest {
   string ownerAddress = 1;

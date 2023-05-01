@@ -393,6 +393,8 @@ export class GetOrderbookRequest extends jspb.Message {
     setLimit(value: number): GetOrderbookRequest;
     getProject(): Project;
     setProject(value: Project): GetOrderbookRequest;
+    getMetadata(): boolean;
+    setMetadata(value: boolean): GetOrderbookRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderbookRequest.AsObject;
@@ -409,6 +411,7 @@ export namespace GetOrderbookRequest {
         market: string,
         limit: number,
         project: Project,
+        metadata: boolean,
     }
 }
 
@@ -485,6 +488,11 @@ export class OrderbookItem extends jspb.Message {
     getOwneraddress(): string;
     setOwneraddress(value: string): OrderbookItem;
 
+    hasMetadata(): boolean;
+    clearMetadata(): void;
+    getMetadata(): google_protobuf_struct_pb.Struct | undefined;
+    setMetadata(value?: google_protobuf_struct_pb.Struct): OrderbookItem;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): OrderbookItem.AsObject;
     static toObject(includeInstance: boolean, msg: OrderbookItem): OrderbookItem.AsObject;
@@ -502,6 +510,7 @@ export namespace OrderbookItem {
         orderid: string,
         clientorderid: number,
         owneraddress: string,
+        metadata?: google_protobuf_struct_pb.Struct.AsObject,
     }
 }
 
@@ -3130,178 +3139,6 @@ export namespace GetPerpOrderbooksStreamResponse {
     export type AsObject = {
         slot: number,
         orderbook?: GetPerpOrderbookResponse.AsObject,
-    }
-}
-
-export class GetMarginOrderbookRequest extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetMarginOrderbookRequest;
-    getLimit(): number;
-    setLimit(value: number): GetMarginOrderbookRequest;
-    getProject(): Project;
-    setProject(value: Project): GetMarginOrderbookRequest;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetMarginOrderbookRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: GetMarginOrderbookRequest): GetMarginOrderbookRequest.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetMarginOrderbookRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetMarginOrderbookRequest;
-    static deserializeBinaryFromReader(message: GetMarginOrderbookRequest, reader: jspb.BinaryReader): GetMarginOrderbookRequest;
-}
-
-export namespace GetMarginOrderbookRequest {
-    export type AsObject = {
-        market: string,
-        limit: number,
-        project: Project,
-    }
-}
-
-export class GetMarginOrderbooksRequest extends jspb.Message { 
-    clearMarketsList(): void;
-    getMarketsList(): Array<string>;
-    setMarketsList(value: Array<string>): GetMarginOrderbooksRequest;
-    addMarkets(value: string, index?: number): string;
-    getLimit(): number;
-    setLimit(value: number): GetMarginOrderbooksRequest;
-    getProject(): Project;
-    setProject(value: Project): GetMarginOrderbooksRequest;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetMarginOrderbooksRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: GetMarginOrderbooksRequest): GetMarginOrderbooksRequest.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetMarginOrderbooksRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetMarginOrderbooksRequest;
-    static deserializeBinaryFromReader(message: GetMarginOrderbooksRequest, reader: jspb.BinaryReader): GetMarginOrderbooksRequest;
-}
-
-export namespace GetMarginOrderbooksRequest {
-    export type AsObject = {
-        marketsList: Array<string>,
-        limit: number,
-        project: Project,
-    }
-}
-
-export class GetMarginOrderbookResponse extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetMarginOrderbookResponse;
-    clearBidsList(): void;
-    getBidsList(): Array<MarginOrderbookItem>;
-    setBidsList(value: Array<MarginOrderbookItem>): GetMarginOrderbookResponse;
-    addBids(value?: MarginOrderbookItem, index?: number): MarginOrderbookItem;
-    clearAsksList(): void;
-    getAsksList(): Array<MarginOrderbookItem>;
-    setAsksList(value: Array<MarginOrderbookItem>): GetMarginOrderbookResponse;
-    addAsks(value?: MarginOrderbookItem, index?: number): MarginOrderbookItem;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetMarginOrderbookResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetMarginOrderbookResponse): GetMarginOrderbookResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetMarginOrderbookResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetMarginOrderbookResponse;
-    static deserializeBinaryFromReader(message: GetMarginOrderbookResponse, reader: jspb.BinaryReader): GetMarginOrderbookResponse;
-}
-
-export namespace GetMarginOrderbookResponse {
-    export type AsObject = {
-        market: string,
-        bidsList: Array<MarginOrderbookItem.AsObject>,
-        asksList: Array<MarginOrderbookItem.AsObject>,
-    }
-}
-
-export class MarginOrderbookItem extends jspb.Message { 
-    getPrice(): number;
-    setPrice(value: number): MarginOrderbookItem;
-    getSize(): number;
-    setSize(value: number): MarginOrderbookItem;
-    getOrderid(): string;
-    setOrderid(value: string): MarginOrderbookItem;
-    getClientorderid(): string;
-    setClientorderid(value: string): MarginOrderbookItem;
-    getStatus(): string;
-    setStatus(value: string): MarginOrderbookItem;
-    getOrdertype(): string;
-    setOrdertype(value: string): MarginOrderbookItem;
-    getSlot(): number;
-    setSlot(value: number): MarginOrderbookItem;
-    getReduceonly(): boolean;
-    setReduceonly(value: boolean): MarginOrderbookItem;
-    getTriggerprice(): number;
-    setTriggerprice(value: number): MarginOrderbookItem;
-    getTriggercondition(): string;
-    setTriggercondition(value: string): MarginOrderbookItem;
-    getPostonly(): boolean;
-    setPostonly(value: boolean): MarginOrderbookItem;
-    getOraclepriceoffset(): number;
-    setOraclepriceoffset(value: number): MarginOrderbookItem;
-    getAuctionduration(): number;
-    setAuctionduration(value: number): MarginOrderbookItem;
-    getAuctionstartprice(): number;
-    setAuctionstartprice(value: number): MarginOrderbookItem;
-    getAuctionendprice(): number;
-    setAuctionendprice(value: number): MarginOrderbookItem;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): MarginOrderbookItem.AsObject;
-    static toObject(includeInstance: boolean, msg: MarginOrderbookItem): MarginOrderbookItem.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: MarginOrderbookItem, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): MarginOrderbookItem;
-    static deserializeBinaryFromReader(message: MarginOrderbookItem, reader: jspb.BinaryReader): MarginOrderbookItem;
-}
-
-export namespace MarginOrderbookItem {
-    export type AsObject = {
-        price: number,
-        size: number,
-        orderid: string,
-        clientorderid: string,
-        status: string,
-        ordertype: string,
-        slot: number,
-        reduceonly: boolean,
-        triggerprice: number,
-        triggercondition: string,
-        postonly: boolean,
-        oraclepriceoffset: number,
-        auctionduration: number,
-        auctionstartprice: number,
-        auctionendprice: number,
-    }
-}
-
-export class GetMarginOrderbooksStreamResponse extends jspb.Message { 
-    getSlot(): number;
-    setSlot(value: number): GetMarginOrderbooksStreamResponse;
-
-    hasOrderbook(): boolean;
-    clearOrderbook(): void;
-    getOrderbook(): GetMarginOrderbookResponse | undefined;
-    setOrderbook(value?: GetMarginOrderbookResponse): GetMarginOrderbooksStreamResponse;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetMarginOrderbooksStreamResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetMarginOrderbooksStreamResponse): GetMarginOrderbooksStreamResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetMarginOrderbooksStreamResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetMarginOrderbooksStreamResponse;
-    static deserializeBinaryFromReader(message: GetMarginOrderbooksStreamResponse, reader: jspb.BinaryReader): GetMarginOrderbooksStreamResponse;
-}
-
-export namespace GetMarginOrderbooksStreamResponse {
-    export type AsObject = {
-        slot: number,
-        orderbook?: GetMarginOrderbookResponse.AsObject,
     }
 }
 

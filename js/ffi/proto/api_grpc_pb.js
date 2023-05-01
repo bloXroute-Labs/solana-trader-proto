@@ -99,50 +99,6 @@ function deserialize_api_GetKlineResponse(buffer_arg) {
   return api_pb.GetKlineResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_api_GetMarginOrderbookRequest(arg) {
-  if (!(arg instanceof api_pb.GetMarginOrderbookRequest)) {
-    throw new Error('Expected argument of type api.GetMarginOrderbookRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetMarginOrderbookRequest(buffer_arg) {
-  return api_pb.GetMarginOrderbookRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_api_GetMarginOrderbookResponse(arg) {
-  if (!(arg instanceof api_pb.GetMarginOrderbookResponse)) {
-    throw new Error('Expected argument of type api.GetMarginOrderbookResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetMarginOrderbookResponse(buffer_arg) {
-  return api_pb.GetMarginOrderbookResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_api_GetMarginOrderbooksRequest(arg) {
-  if (!(arg instanceof api_pb.GetMarginOrderbooksRequest)) {
-    throw new Error('Expected argument of type api.GetMarginOrderbooksRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetMarginOrderbooksRequest(buffer_arg) {
-  return api_pb.GetMarginOrderbooksRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_api_GetMarginOrderbooksStreamResponse(arg) {
-  if (!(arg instanceof api_pb.GetMarginOrderbooksStreamResponse)) {
-    throw new Error('Expected argument of type api.GetMarginOrderbooksStreamResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetMarginOrderbooksStreamResponse(buffer_arg) {
-  return api_pb.GetMarginOrderbooksStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
 function serialize_api_GetMarketDepthRequest(arg) {
   if (!(arg instanceof api_pb.GetMarketDepthRequest)) {
     throw new Error('Expected argument of type api.GetMarketDepthRequest');
@@ -1355,6 +1311,17 @@ var ApiService = exports.ApiService = {
     responseSerialize: serialize_api_GetOrderbookResponse,
     responseDeserialize: deserialize_api_GetOrderbookResponse,
   },
+  getOrderbookV2: {
+    path: '/api.Api/GetOrderbookV2',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetOrderbookRequest,
+    responseType: api_pb.GetOrderbookResponse,
+    requestSerialize: serialize_api_GetOrderbookRequest,
+    requestDeserialize: deserialize_api_GetOrderbookRequest,
+    responseSerialize: serialize_api_GetOrderbookResponse,
+    responseDeserialize: deserialize_api_GetOrderbookResponse,
+  },
   getMarketDepth: {
     path: '/api.Api/GetMarketDepth',
     requestStream: false,
@@ -1690,17 +1657,6 @@ postPerpOrder: {
     responseSerialize: serialize_api_GetPerpOrderbookResponse,
     responseDeserialize: deserialize_api_GetPerpOrderbookResponse,
   },
-  getMarginOrderbook: {
-    path: '/api.Api/GetMarginOrderbook',
-    requestStream: false,
-    responseStream: false,
-    requestType: api_pb.GetMarginOrderbookRequest,
-    responseType: api_pb.GetMarginOrderbookResponse,
-    requestSerialize: serialize_api_GetMarginOrderbookRequest,
-    requestDeserialize: deserialize_api_GetMarginOrderbookRequest,
-    responseSerialize: serialize_api_GetMarginOrderbookResponse,
-    responseDeserialize: deserialize_api_GetMarginOrderbookResponse,
-  },
   postCreateUser: {
     path: '/api.Api/PostCreateUser',
     requestStream: false,
@@ -1933,17 +1889,6 @@ getPerpOrderbooksStream: {
     requestDeserialize: deserialize_api_GetPerpOrderbooksRequest,
     responseSerialize: serialize_api_GetPerpOrderbooksStreamResponse,
     responseDeserialize: deserialize_api_GetPerpOrderbooksStreamResponse,
-  },
-  getMarginOrderbooksStream: {
-    path: '/api.Api/GetMarginOrderbooksStream',
-    requestStream: false,
-    responseStream: true,
-    requestType: api_pb.GetMarginOrderbooksRequest,
-    responseType: api_pb.GetMarginOrderbooksStreamResponse,
-    requestSerialize: serialize_api_GetMarginOrderbooksRequest,
-    requestDeserialize: deserialize_api_GetMarginOrderbooksRequest,
-    responseSerialize: serialize_api_GetMarginOrderbooksStreamResponse,
-    responseDeserialize: deserialize_api_GetMarginOrderbooksStreamResponse,
   },
   getNewPerpOrdersStream: {
     path: '/api.Api/GetNewPerpOrdersStream',

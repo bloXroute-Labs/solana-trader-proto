@@ -166,6 +166,7 @@ class GetOrderbookRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
+    metadata: bool = betterproto.bool_field(4)
 
 
 @dataclass
@@ -190,6 +191,7 @@ class OrderbookItem(betterproto.Message):
     order_i_d: str = betterproto.string_field(3)
     client_order_i_d: int = betterproto.uint64_field(4)
     owner_address: str = betterproto.string_field(5)
+    metadata: protobuf.Struct = betterproto.message_field(6)
 
 
 @dataclass
@@ -872,54 +874,6 @@ class GetPerpOrderbooksStreamResponse(betterproto.Message):
 
 
 @dataclass
-class GetMarginOrderbookRequest(betterproto.Message):
-    """Margin"""
-
-    market: str = betterproto.string_field(1)
-    limit: int = betterproto.uint32_field(2)
-    project: "Project" = betterproto.enum_field(3)
-
-
-@dataclass
-class GetMarginOrderbooksRequest(betterproto.Message):
-    markets: List[str] = betterproto.string_field(1)
-    limit: int = betterproto.uint32_field(2)
-    project: "Project" = betterproto.enum_field(3)
-
-
-@dataclass
-class GetMarginOrderbookResponse(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    bids: List["MarginOrderbookItem"] = betterproto.message_field(2)
-    asks: List["MarginOrderbookItem"] = betterproto.message_field(3)
-
-
-@dataclass
-class MarginOrderbookItem(betterproto.Message):
-    price: float = betterproto.double_field(1)
-    size: float = betterproto.double_field(2)
-    order_i_d: str = betterproto.string_field(3)
-    client_order_i_d: str = betterproto.string_field(4)
-    status: str = betterproto.string_field(5)
-    order_type: str = betterproto.string_field(6)
-    slot: int = betterproto.int64_field(7)
-    reduce_only: bool = betterproto.bool_field(8)
-    trigger_price: float = betterproto.double_field(9)
-    trigger_condition: str = betterproto.string_field(10)
-    post_only: bool = betterproto.bool_field(11)
-    oracle_price_offset: float = betterproto.double_field(12)
-    auction_duration: int = betterproto.int32_field(13)
-    auction_start_price: float = betterproto.double_field(14)
-    auction_end_price: float = betterproto.double_field(15)
-
-
-@dataclass
-class GetMarginOrderbooksStreamResponse(betterproto.Message):
-    slot: int = betterproto.int64_field(1)
-    orderbook: "GetMarginOrderbookResponse" = betterproto.message_field(2)
-
-
-@dataclass
 class GetUserRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
@@ -1364,15 +1318,41 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_orderbook(
-        self, *, market: str = "", limit: int = 0, project: "Project" = 0
+        self,
+        *,
+        market: str = "",
+        limit: int = 0,
+        project: "Project" = 0,
+        metadata: bool = False,
     ) -> GetOrderbookResponse:
         request = GetOrderbookRequest()
         request.market = market
         request.limit = limit
         request.project = project
+        request.metadata = metadata
 
         return await self._unary_unary(
             "/api.Api/GetOrderbook",
+            request,
+            GetOrderbookResponse,
+        )
+
+    async def get_orderbook_v2(
+        self,
+        *,
+        market: str = "",
+        limit: int = 0,
+        project: "Project" = 0,
+        metadata: bool = False,
+    ) -> GetOrderbookResponse:
+        request = GetOrderbookRequest()
+        request.market = market
+        request.limit = limit
+        request.project = project
+        request.metadata = metadata
+
+        return await self._unary_unary(
+            "/api.Api/GetOrderbookV2",
             request,
             GetOrderbookResponse,
         )
@@ -2023,20 +2003,6 @@ class ApiStub(betterproto.ServiceStub):
             GetPerpOrderbookResponse,
         )
 
-    async def get_margin_orderbook(
-        self, *, market: str = "", limit: int = 0, project: "Project" = 0
-    ) -> GetMarginOrderbookResponse:
-        request = GetMarginOrderbookRequest()
-        request.market = market
-        request.limit = limit
-        request.project = project
-
-        return await self._unary_unary(
-            "/api.Api/GetMarginOrderbook",
-            request,
-            GetMarginOrderbookResponse,
-        )
-
     async def post_create_user(
         self,
         *,
@@ -2394,21 +2360,6 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetPerpOrderbooksStream",
             request,
             GetPerpOrderbooksStreamResponse,
-        ):
-            yield response
-
-    async def get_margin_orderbooks_stream(
-        self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
-    ) -> AsyncGenerator[GetMarginOrderbooksStreamResponse, None]:
-        request = GetMarginOrderbooksRequest()
-        request.markets = markets
-        request.limit = limit
-        request.project = project
-
-        async for response in self._unary_stream(
-            "/api.Api/GetMarginOrderbooksStream",
-            request,
-            GetMarginOrderbooksStreamResponse,
         ):
             yield response
 
