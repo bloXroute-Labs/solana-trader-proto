@@ -424,6 +424,8 @@ export class GetOrderbooksRequest extends jspb.Message {
     setLimit(value: number): GetOrderbooksRequest;
     getProject(): Project;
     setProject(value: Project): GetOrderbooksRequest;
+    getMetadata(): boolean;
+    setMetadata(value: boolean): GetOrderbooksRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderbooksRequest.AsObject;
@@ -440,6 +442,7 @@ export namespace GetOrderbooksRequest {
         marketsList: Array<string>,
         limit: number,
         project: Project,
+        metadata: boolean,
     }
 }
 

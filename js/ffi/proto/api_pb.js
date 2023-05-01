@@ -6386,7 +6386,8 @@ proto.api.GetOrderbooksRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     marketsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
     limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    project: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    project: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    metadata: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
   };
 
   if (includeInstance) {
@@ -6435,6 +6436,10 @@ proto.api.GetOrderbooksRequest.deserializeBinaryFromReader = function(msg, reade
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
+    case 4:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setMetadata(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -6482,6 +6487,13 @@ proto.api.GetOrderbooksRequest.serializeBinaryToWriter = function(message, write
   if (f !== 0.0) {
     writer.writeEnum(
       3,
+      f
+    );
+  }
+  f = message.getMetadata();
+  if (f) {
+    writer.writeBool(
+      4,
       f
     );
   }
@@ -6558,6 +6570,24 @@ proto.api.GetOrderbooksRequest.prototype.getProject = function() {
  */
 proto.api.GetOrderbooksRequest.prototype.setProject = function(value) {
   return jspb.Message.setProto3EnumField(this, 3, value);
+};
+
+
+/**
+ * optional bool metadata = 4;
+ * @return {boolean}
+ */
+proto.api.GetOrderbooksRequest.prototype.getMetadata = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 4, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.api.GetOrderbooksRequest} returns this
+ */
+proto.api.GetOrderbooksRequest.prototype.setMetadata = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 4, value);
 };
 
 

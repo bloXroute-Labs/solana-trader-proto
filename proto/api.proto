@@ -675,7 +675,7 @@ service Api {
       tags: "Perp";
     };
   }
-  
+
   rpc GetNewPerpOrdersStream(GetNewPerpOrdersStreamRequest) returns (stream GetNewPerpOrdersStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Perp";
@@ -789,6 +789,7 @@ message GetOrderbooksRequest {
   repeated string markets = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   Project project = 3;
+  bool metadata = 4;
 }
 
 message GetOrderbookResponse {

@@ -174,6 +174,7 @@ class GetOrderbooksRequest(betterproto.Message):
     markets: List[str] = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
+    metadata: bool = betterproto.bool_field(4)
 
 
 @dataclass
@@ -2184,7 +2185,12 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_orderbooks_stream(
-        self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
+        self,
+        *,
+        markets: List[str] = [],
+        limit: int = 0,
+        project: "Project" = 0,
+        metadata: bool = False,
     ) -> AsyncGenerator[GetOrderbooksStreamResponse, None]:
         """streaming endpoints"""
 
@@ -2192,6 +2198,7 @@ class ApiStub(betterproto.ServiceStub):
         request.markets = markets
         request.limit = limit
         request.project = project
+        request.metadata = metadata
 
         async for response in self._unary_stream(
             "/api.Api/GetOrderbooksStream",
