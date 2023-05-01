@@ -99,28 +99,6 @@ function deserialize_api_GetKlineResponse(buffer_arg) {
   return api_pb.GetKlineResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_api_GetMarginContractsRequest(arg) {
-  if (!(arg instanceof api_pb.GetMarginContractsRequest)) {
-    throw new Error('Expected argument of type api.GetMarginContractsRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetMarginContractsRequest(buffer_arg) {
-  return api_pb.GetMarginContractsRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_api_GetMarginContractsResponse(arg) {
-  if (!(arg instanceof api_pb.GetMarginContractsResponse)) {
-    throw new Error('Expected argument of type api.GetMarginContractsResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetMarginContractsResponse(buffer_arg) {
-  return api_pb.GetMarginContractsResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
 function serialize_api_GetMarginOrderbookRequest(arg) {
   if (!(arg instanceof api_pb.GetMarginOrderbookRequest)) {
     throw new Error('Expected argument of type api.GetMarginOrderbookRequest');
@@ -1799,17 +1777,6 @@ postPerpOrder: {
     requestDeserialize: deserialize_api_GetPerpContractsRequest,
     responseSerialize: serialize_api_GetPerpContractsResponse,
     responseDeserialize: deserialize_api_GetPerpContractsResponse,
-  },
-  getMarginContracts: {
-    path: '/api.Api/GetMarginContracts',
-    requestStream: false,
-    responseStream: false,
-    requestType: api_pb.GetMarginContractsRequest,
-    responseType: api_pb.GetMarginContractsResponse,
-    requestSerialize: serialize_api_GetMarginContractsRequest,
-    requestDeserialize: deserialize_api_GetMarginContractsRequest,
-    responseSerialize: serialize_api_GetMarginContractsResponse,
-    responseDeserialize: deserialize_api_GetMarginContractsResponse,
   },
   postLiquidatePerp: {
     path: '/api.Api/PostLiquidatePerp',

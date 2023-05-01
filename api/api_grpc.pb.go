@@ -68,7 +68,6 @@ type ApiClient interface {
 	PostSettlePNLs(ctx context.Context, in *PostSettlePNLsRequest, opts ...grpc.CallOption) (*PostSettlePNLsResponse, error)
 	GetAssets(ctx context.Context, in *GetAssetsRequest, opts ...grpc.CallOption) (*GetAssetsResponse, error)
 	GetPerpContracts(ctx context.Context, in *GetPerpContractsRequest, opts ...grpc.CallOption) (*GetPerpContractsResponse, error)
-	GetMarginContracts(ctx context.Context, in *GetMarginContractsRequest, opts ...grpc.CallOption) (*GetMarginContractsResponse, error)
 	PostLiquidatePerp(ctx context.Context, in *PostLiquidatePerpRequest, opts ...grpc.CallOption) (*PostLiquidatePerpResponse, error)
 	GetOpenPerpOrder(ctx context.Context, in *GetOpenPerpOrderRequest, opts ...grpc.CallOption) (*GetOpenPerpOrderResponse, error)
 	// streaming endpoints
@@ -497,15 +496,6 @@ func (c *apiClient) GetAssets(ctx context.Context, in *GetAssetsRequest, opts ..
 func (c *apiClient) GetPerpContracts(ctx context.Context, in *GetPerpContractsRequest, opts ...grpc.CallOption) (*GetPerpContractsResponse, error) {
 	out := new(GetPerpContractsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetPerpContracts", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetMarginContracts(ctx context.Context, in *GetMarginContractsRequest, opts ...grpc.CallOption) (*GetMarginContractsResponse, error) {
-	out := new(GetMarginContractsResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetMarginContracts", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1064,7 +1054,6 @@ type ApiServer interface {
 	PostSettlePNLs(context.Context, *PostSettlePNLsRequest) (*PostSettlePNLsResponse, error)
 	GetAssets(context.Context, *GetAssetsRequest) (*GetAssetsResponse, error)
 	GetPerpContracts(context.Context, *GetPerpContractsRequest) (*GetPerpContractsResponse, error)
-	GetMarginContracts(context.Context, *GetMarginContractsRequest) (*GetMarginContractsResponse, error)
 	PostLiquidatePerp(context.Context, *PostLiquidatePerpRequest) (*PostLiquidatePerpResponse, error)
 	GetOpenPerpOrder(context.Context, *GetOpenPerpOrderRequest) (*GetOpenPerpOrderResponse, error)
 	// streaming endpoints
@@ -1225,9 +1214,6 @@ func (UnimplementedApiServer) GetAssets(context.Context, *GetAssetsRequest) (*Ge
 }
 func (UnimplementedApiServer) GetPerpContracts(context.Context, *GetPerpContractsRequest) (*GetPerpContractsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPerpContracts not implemented")
-}
-func (UnimplementedApiServer) GetMarginContracts(context.Context, *GetMarginContractsRequest) (*GetMarginContractsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMarginContracts not implemented")
 }
 func (UnimplementedApiServer) PostLiquidatePerp(context.Context, *PostLiquidatePerpRequest) (*PostLiquidatePerpResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostLiquidatePerp not implemented")
@@ -2103,24 +2089,6 @@ func _Api_GetPerpContracts_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetMarginContracts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMarginContractsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetMarginContracts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetMarginContracts",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetMarginContracts(ctx, req.(*GetMarginContractsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Api_PostLiquidatePerp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostLiquidatePerpRequest)
 	if err := dec(in); err != nil {
@@ -2658,10 +2626,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPerpContracts",
 			Handler:    _Api_GetPerpContracts_Handler,
-		},
-		{
-			MethodName: "GetMarginContracts",
-			Handler:    _Api_GetMarginContracts_Handler,
 		},
 		{
 			MethodName: "PostLiquidatePerp",

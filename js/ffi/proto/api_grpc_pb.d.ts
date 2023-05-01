@@ -59,7 +59,6 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     postSettlePNLs: IApiService_IPostSettlePNLs;
     getAssets: IApiService_IGetAssets;
     getPerpContracts: IApiService_IGetPerpContracts;
-    getMarginContracts: IApiService_IGetMarginContracts;
     postLiquidatePerp: IApiService_IPostLiquidatePerp;
     getOpenPerpOrder: IApiService_IGetOpenPerpOrder;
     getOrderbooksStream: IApiService_IGetOrderbooksStream;
@@ -484,15 +483,6 @@ interface IApiService_IGetPerpContracts extends grpc.MethodDefinition<api_pb.Get
     responseSerialize: grpc.serialize<api_pb.GetPerpContractsResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetPerpContractsResponse>;
 }
-interface IApiService_IGetMarginContracts extends grpc.MethodDefinition<api_pb.GetMarginContractsRequest, api_pb.GetMarginContractsResponse> {
-    path: "/api.Api/GetMarginContracts";
-    requestStream: false;
-    responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetMarginContractsRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetMarginContractsRequest>;
-    responseSerialize: grpc.serialize<api_pb.GetMarginContractsResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.GetMarginContractsResponse>;
-}
 interface IApiService_IPostLiquidatePerp extends grpc.MethodDefinition<api_pb.PostLiquidatePerpRequest, api_pb.PostLiquidatePerpResponse> {
     path: "/api.Api/PostLiquidatePerp";
     requestStream: false;
@@ -695,7 +685,6 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     postSettlePNLs: grpc.handleUnaryCall<api_pb.PostSettlePNLsRequest, api_pb.PostSettlePNLsResponse>;
     getAssets: grpc.handleUnaryCall<api_pb.GetAssetsRequest, api_pb.GetAssetsResponse>;
     getPerpContracts: grpc.handleUnaryCall<api_pb.GetPerpContractsRequest, api_pb.GetPerpContractsResponse>;
-    getMarginContracts: grpc.handleUnaryCall<api_pb.GetMarginContractsRequest, api_pb.GetMarginContractsResponse>;
     postLiquidatePerp: grpc.handleUnaryCall<api_pb.PostLiquidatePerpRequest, api_pb.PostLiquidatePerpResponse>;
     getOpenPerpOrder: grpc.handleUnaryCall<api_pb.GetOpenPerpOrderRequest, api_pb.GetOpenPerpOrderResponse>;
     getOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetOrderbooksRequest, api_pb.GetOrderbooksStreamResponse>;
@@ -851,9 +840,6 @@ export interface IApiClient {
     getPerpContracts(request: api_pb.GetPerpContractsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpContractsResponse) => void): grpc.ClientUnaryCall;
     getPerpContracts(request: api_pb.GetPerpContractsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpContractsResponse) => void): grpc.ClientUnaryCall;
     getPerpContracts(request: api_pb.GetPerpContractsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpContractsResponse) => void): grpc.ClientUnaryCall;
-    getMarginContracts(request: api_pb.GetMarginContractsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarginContractsResponse) => void): grpc.ClientUnaryCall;
-    getMarginContracts(request: api_pb.GetMarginContractsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarginContractsResponse) => void): grpc.ClientUnaryCall;
-    getMarginContracts(request: api_pb.GetMarginContractsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarginContractsResponse) => void): grpc.ClientUnaryCall;
     postLiquidatePerp(request: api_pb.PostLiquidatePerpRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostLiquidatePerpResponse) => void): grpc.ClientUnaryCall;
     postLiquidatePerp(request: api_pb.PostLiquidatePerpRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostLiquidatePerpResponse) => void): grpc.ClientUnaryCall;
     postLiquidatePerp(request: api_pb.PostLiquidatePerpRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostLiquidatePerpResponse) => void): grpc.ClientUnaryCall;
@@ -1029,9 +1015,6 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getPerpContracts(request: api_pb.GetPerpContractsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpContractsResponse) => void): grpc.ClientUnaryCall;
     public getPerpContracts(request: api_pb.GetPerpContractsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpContractsResponse) => void): grpc.ClientUnaryCall;
     public getPerpContracts(request: api_pb.GetPerpContractsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPerpContractsResponse) => void): grpc.ClientUnaryCall;
-    public getMarginContracts(request: api_pb.GetMarginContractsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarginContractsResponse) => void): grpc.ClientUnaryCall;
-    public getMarginContracts(request: api_pb.GetMarginContractsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarginContractsResponse) => void): grpc.ClientUnaryCall;
-    public getMarginContracts(request: api_pb.GetMarginContractsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarginContractsResponse) => void): grpc.ClientUnaryCall;
     public postLiquidatePerp(request: api_pb.PostLiquidatePerpRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostLiquidatePerpResponse) => void): grpc.ClientUnaryCall;
     public postLiquidatePerp(request: api_pb.PostLiquidatePerpRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostLiquidatePerpResponse) => void): grpc.ClientUnaryCall;
     public postLiquidatePerp(request: api_pb.PostLiquidatePerpRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostLiquidatePerpResponse) => void): grpc.ClientUnaryCall;
