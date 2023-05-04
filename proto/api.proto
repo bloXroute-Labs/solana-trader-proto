@@ -697,62 +697,6 @@ service Api {
   }
 }
 
-// Drift V2
-message GetDriftMarginOrderbooksRequest {
-  repeated string markets = 1;
-  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
-  bool metadata = 3;
-}
-
-message GetDriftMarginOrderbooksStreamResponse {
-  int64 slot = 1;
-  GetDriftMarginOrderbookResponse orderbook = 2;
-}
-
-message GetDriftMarginOrderbookRequest {
-  string market = 1;
-  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
-  bool metadata = 3;
-}
-
-message GetDriftMarginOrderbookResponse {
-  string market = 1;
-  string marketAddress = 2;
-  repeated DriftMarginOrderbookItem bids = 3;
-  repeated DriftMarginOrderbookItem asks = 4;
-}
-
-message DriftMarginOrderbookItem {
-  double price = 1;
-  double size = 2;
-  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
-  uint64 clientOrderID = 4;
-  string ownerAddress = 5[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "OpenOrders address for current market"}];
-  google.protobuf.Struct metadata = 6;
-}
-
-
-message GetDriftMarketsRequest {
-  bool metadata = 1;
-}
-
-message GetDriftMarketsResponse {
-  map<string, DriftMarket> markets = 1;
-}
-
-message DriftMarket {
-  string market = 1;
-  string status = 2;
-  string address = 3;
-  string baseMint = 4;
-  string quotedMint = 5;
-  int64 baseDecimals = 6;
-  int64 quoteDecimals = 7;
-  google.protobuf.Struct metadata = 8;
-}
-
-// end of Drift V2
-
 message GetMarketsRequest {
 }
 
@@ -1801,3 +1745,58 @@ message GetOpenPerpOrderResponse {
   PerpOrder order = 2;
 }
 
+// Drift V2
+message GetDriftMarginOrderbooksRequest {
+  repeated string markets = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  bool metadata = 3;
+}
+
+message GetDriftMarginOrderbooksStreamResponse {
+  int64 slot = 1;
+  GetDriftMarginOrderbookResponse orderbook = 2;
+}
+
+message GetDriftMarginOrderbookRequest {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  bool metadata = 3;
+}
+
+message GetDriftMarginOrderbookResponse {
+  string market = 1;
+  string marketAddress = 2;
+  repeated DriftMarginOrderbookItem bids = 3;
+  repeated DriftMarginOrderbookItem asks = 4;
+}
+
+message DriftMarginOrderbookItem {
+  double price = 1;
+  double size = 2;
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
+  uint64 clientOrderID = 4;
+  string ownerAddress = 5[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "OpenOrders address for current market"}];
+  google.protobuf.Struct metadata = 6;
+}
+
+
+message GetDriftMarketsRequest {
+  bool metadata = 1;
+}
+
+message GetDriftMarketsResponse {
+  map<string, DriftMarket> markets = 1;
+}
+
+message DriftMarket {
+  string market = 1;
+  string status = 2;
+  string address = 3;
+  string baseMint = 4;
+  string quotedMint = 5;
+  int64 baseDecimals = 6;
+  int64 quoteDecimals = 7;
+  google.protobuf.Struct metadata = 8;
+}
+
+// end of Drift V2
