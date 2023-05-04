@@ -18,9 +18,13 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
+	// Drift V2
+	GetDriftMarkets(ctx context.Context, in *GetDriftMarketsRequest, opts ...grpc.CallOption) (*GetDriftMarketsResponse, error)
+	PostDriftMarginOrder(ctx context.Context, in *PostDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostDriftMarginOrderResponse, error)
+	GetDriftMarginOrderbook(ctx context.Context, in *GetDriftMarginOrderbookRequest, opts ...grpc.CallOption) (*GetDriftMarginOrderbookResponse, error)
+	GetDriftMarginOrderbooksStream(ctx context.Context, in *GetDriftMarginOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftMarginOrderbooksStreamClient, error)
 	GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error)
 	GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error)
-	GetMarketsV2(ctx context.Context, in *GetMarketsRequestV2, opts ...grpc.CallOption) (*GetMarketsResponseV2, error)
 	GetPools(ctx context.Context, in *GetPoolsRequest, opts ...grpc.CallOption) (*GetPoolsResponse, error)
 	GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error)
 	GetKline(ctx context.Context, in *GetKlineRequest, opts ...grpc.CallOption) (*GetKlineResponse, error)
@@ -50,8 +54,6 @@ type ApiClient interface {
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
-	// Drift Margin
-	PostMarginOrder(ctx context.Context, in *PostMarginOrderRequest, opts ...grpc.CallOption) (*PostMarginOrderResponse, error)
 	// perp endpoints
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
 	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
@@ -95,6 +97,65 @@ func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 	return &apiClient{cc}
 }
 
+func (c *apiClient) GetDriftMarkets(ctx context.Context, in *GetDriftMarketsRequest, opts ...grpc.CallOption) (*GetDriftMarketsResponse, error) {
+	out := new(GetDriftMarketsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftMarkets", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostDriftMarginOrder(ctx context.Context, in *PostDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostDriftMarginOrderResponse, error) {
+	out := new(PostDriftMarginOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostDriftMarginOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftMarginOrderbook(ctx context.Context, in *GetDriftMarginOrderbookRequest, opts ...grpc.CallOption) (*GetDriftMarginOrderbookResponse, error) {
+	out := new(GetDriftMarginOrderbookResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftMarginOrderbook", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftMarginOrderbooksStream(ctx context.Context, in *GetDriftMarginOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftMarginOrderbooksStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[0], "/api.Api/GetDriftMarginOrderbooksStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetDriftMarginOrderbooksStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetDriftMarginOrderbooksStreamClient interface {
+	Recv() (*GetDriftMarginOrderbooksStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetDriftMarginOrderbooksStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetDriftMarginOrderbooksStreamClient) Recv() (*GetDriftMarginOrderbooksStreamResponse, error) {
+	m := new(GetDriftMarginOrderbooksStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error) {
 	out := new(GetPriceResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetPrice", in, out, opts...)
@@ -107,15 +168,6 @@ func (c *apiClient) GetPrice(ctx context.Context, in *GetPriceRequest, opts ...g
 func (c *apiClient) GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error) {
 	out := new(GetMarketsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetMarkets", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetMarketsV2(ctx context.Context, in *GetMarketsRequestV2, opts ...grpc.CallOption) (*GetMarketsResponseV2, error) {
-	out := new(GetMarketsResponseV2)
-	err := c.cc.Invoke(ctx, "/api.Api/GetMarketsV2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -356,15 +408,6 @@ func (c *apiClient) PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRe
 	return out, nil
 }
 
-func (c *apiClient) PostMarginOrder(ctx context.Context, in *PostMarginOrderRequest, opts ...grpc.CallOption) (*PostMarginOrderResponse, error) {
-	out := new(PostMarginOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostMarginOrder", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *apiClient) PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error) {
 	out := new(PostPerpOrderResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostPerpOrder", in, out, opts...)
@@ -510,7 +553,7 @@ func (c *apiClient) GetOpenPerpOrder(ctx context.Context, in *GetOpenPerpOrderRe
 }
 
 func (c *apiClient) GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[0], "/api.Api/GetOrderbooksStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[1], "/api.Api/GetOrderbooksStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -542,7 +585,7 @@ func (x *apiGetOrderbooksStreamClient) Recv() (*GetOrderbooksStreamResponse, err
 }
 
 func (c *apiClient) GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[1], "/api.Api/GetMarketDepthsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[2], "/api.Api/GetMarketDepthsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -574,7 +617,7 @@ func (x *apiGetMarketDepthsStreamClient) Recv() (*GetMarketDepthsStreamResponse,
 }
 
 func (c *apiClient) GetTickersStream(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (Api_GetTickersStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[2], "/api.Api/GetTickersStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetTickersStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -606,7 +649,7 @@ func (x *apiGetTickersStreamClient) Recv() (*GetTickersStreamResponse, error) {
 }
 
 func (c *apiClient) GetTradesStream(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (Api_GetTradesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetTradesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetTradesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -638,7 +681,7 @@ func (x *apiGetTradesStreamClient) Recv() (*GetTradesStreamResponse, error) {
 }
 
 func (c *apiClient) GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetOrderStatusStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetOrderStatusStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -670,7 +713,7 @@ func (x *apiGetOrderStatusStreamClient) Recv() (*GetOrderStatusStreamResponse, e
 }
 
 func (c *apiClient) GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetRecentBlockHashStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetRecentBlockHashStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -702,7 +745,7 @@ func (x *apiGetRecentBlockHashStreamClient) Recv() (*GetRecentBlockHashResponse,
 }
 
 func (c *apiClient) GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetBlockStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetBlockStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -734,7 +777,7 @@ func (x *apiGetBlockStreamClient) Recv() (*GetBlockStreamResponse, error) {
 }
 
 func (c *apiClient) GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetQuotesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetQuotesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -766,7 +809,7 @@ func (x *apiGetQuotesStreamClient) Recv() (*GetQuotesStreamResponse, error) {
 }
 
 func (c *apiClient) GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetPoolReservesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetPoolReservesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -798,7 +841,7 @@ func (x *apiGetPoolReservesStreamClient) Recv() (*GetPoolReservesStreamResponse,
 }
 
 func (c *apiClient) GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetPricesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPricesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -830,7 +873,7 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 }
 
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -862,7 +905,7 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 }
 
 func (c *apiClient) GetPerpOrderbooksStream(ctx context.Context, in *GetPerpOrderbooksRequest, opts ...grpc.CallOption) (Api_GetPerpOrderbooksStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetPerpOrderbooksStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetPerpOrderbooksStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -894,7 +937,7 @@ func (x *apiGetPerpOrderbooksStreamClient) Recv() (*GetPerpOrderbooksStreamRespo
 }
 
 func (c *apiClient) GetNewPerpOrdersStream(ctx context.Context, in *GetNewPerpOrdersStreamRequest, opts ...grpc.CallOption) (Api_GetNewPerpOrdersStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetNewPerpOrdersStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetNewPerpOrdersStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -926,7 +969,7 @@ func (x *apiGetNewPerpOrdersStreamClient) Recv() (*GetNewPerpOrdersStreamRespons
 }
 
 func (c *apiClient) GetPerpTradesStream(ctx context.Context, in *GetPerpTradesStreamRequest, opts ...grpc.CallOption) (Api_GetPerpTradesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetPerpTradesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetPerpTradesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -961,9 +1004,13 @@ func (x *apiGetPerpTradesStreamClient) Recv() (*GetPerpTradesStreamResponse, err
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
 type ApiServer interface {
+	// Drift V2
+	GetDriftMarkets(context.Context, *GetDriftMarketsRequest) (*GetDriftMarketsResponse, error)
+	PostDriftMarginOrder(context.Context, *PostDriftMarginOrderRequest) (*PostDriftMarginOrderResponse, error)
+	GetDriftMarginOrderbook(context.Context, *GetDriftMarginOrderbookRequest) (*GetDriftMarginOrderbookResponse, error)
+	GetDriftMarginOrderbooksStream(*GetDriftMarginOrderbooksRequest, Api_GetDriftMarginOrderbooksStreamServer) error
 	GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error)
 	GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error)
-	GetMarketsV2(context.Context, *GetMarketsRequestV2) (*GetMarketsResponseV2, error)
 	GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error)
 	GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error)
 	GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error)
@@ -993,8 +1040,6 @@ type ApiServer interface {
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
-	// Drift Margin
-	PostMarginOrder(context.Context, *PostMarginOrderRequest) (*PostMarginOrderResponse, error)
 	// perp endpoints
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
 	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
@@ -1035,14 +1080,23 @@ type ApiServer interface {
 type UnimplementedApiServer struct {
 }
 
+func (UnimplementedApiServer) GetDriftMarkets(context.Context, *GetDriftMarketsRequest) (*GetDriftMarketsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftMarkets not implemented")
+}
+func (UnimplementedApiServer) PostDriftMarginOrder(context.Context, *PostDriftMarginOrderRequest) (*PostDriftMarginOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostDriftMarginOrder not implemented")
+}
+func (UnimplementedApiServer) GetDriftMarginOrderbook(context.Context, *GetDriftMarginOrderbookRequest) (*GetDriftMarginOrderbookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftMarginOrderbook not implemented")
+}
+func (UnimplementedApiServer) GetDriftMarginOrderbooksStream(*GetDriftMarginOrderbooksRequest, Api_GetDriftMarginOrderbooksStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetDriftMarginOrderbooksStream not implemented")
+}
 func (UnimplementedApiServer) GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPrice not implemented")
 }
 func (UnimplementedApiServer) GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMarkets not implemented")
-}
-func (UnimplementedApiServer) GetMarketsV2(context.Context, *GetMarketsRequestV2) (*GetMarketsResponseV2, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMarketsV2 not implemented")
 }
 func (UnimplementedApiServer) GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPools not implemented")
@@ -1121,9 +1175,6 @@ func (UnimplementedApiServer) GetUnsettled(context.Context, *GetUnsettledRequest
 }
 func (UnimplementedApiServer) PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRouteTradeSwap not implemented")
-}
-func (UnimplementedApiServer) PostMarginOrder(context.Context, *PostMarginOrderRequest) (*PostMarginOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostMarginOrder not implemented")
 }
 func (UnimplementedApiServer) PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostPerpOrder not implemented")
@@ -1228,6 +1279,81 @@ func RegisterApiServer(s grpc.ServiceRegistrar, srv ApiServer) {
 	s.RegisterService(&Api_ServiceDesc, srv)
 }
 
+func _Api_GetDriftMarkets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftMarketsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftMarkets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftMarkets",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftMarkets(ctx, req.(*GetDriftMarketsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostDriftMarginOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostDriftMarginOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostDriftMarginOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostDriftMarginOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostDriftMarginOrder(ctx, req.(*PostDriftMarginOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetDriftMarginOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftMarginOrderbookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftMarginOrderbook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftMarginOrderbook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftMarginOrderbook(ctx, req.(*GetDriftMarginOrderbookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetDriftMarginOrderbooksStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetDriftMarginOrderbooksRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetDriftMarginOrderbooksStream(m, &apiGetDriftMarginOrderbooksStreamServer{stream})
+}
+
+type Api_GetDriftMarginOrderbooksStreamServer interface {
+	Send(*GetDriftMarginOrderbooksStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetDriftMarginOrderbooksStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetDriftMarginOrderbooksStreamServer) Send(m *GetDriftMarginOrderbooksStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetPriceRequest)
 	if err := dec(in); err != nil {
@@ -1260,24 +1386,6 @@ func _Api_GetMarkets_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetMarkets(ctx, req.(*GetMarketsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetMarketsV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMarketsRequestV2)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetMarketsV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetMarketsV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetMarketsV2(ctx, req.(*GetMarketsRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1746,24 +1854,6 @@ func _Api_PostRouteTradeSwap_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostRouteTradeSwap(ctx, req.(*RouteTradeSwapRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostMarginOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostMarginOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostMarginOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostMarginOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostMarginOrder(ctx, req.(*PostMarginOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2358,16 +2448,24 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ApiServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "GetDriftMarkets",
+			Handler:    _Api_GetDriftMarkets_Handler,
+		},
+		{
+			MethodName: "PostDriftMarginOrder",
+			Handler:    _Api_PostDriftMarginOrder_Handler,
+		},
+		{
+			MethodName: "GetDriftMarginOrderbook",
+			Handler:    _Api_GetDriftMarginOrderbook_Handler,
+		},
+		{
 			MethodName: "GetPrice",
 			Handler:    _Api_GetPrice_Handler,
 		},
 		{
 			MethodName: "GetMarkets",
 			Handler:    _Api_GetMarkets_Handler,
-		},
-		{
-			MethodName: "GetMarketsV2",
-			Handler:    _Api_GetMarketsV2_Handler,
 		},
 		{
 			MethodName: "GetPools",
@@ -2474,10 +2572,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_PostRouteTradeSwap_Handler,
 		},
 		{
-			MethodName: "PostMarginOrder",
-			Handler:    _Api_PostMarginOrder_Handler,
-		},
-		{
 			MethodName: "PostPerpOrder",
 			Handler:    _Api_PostPerpOrder_Handler,
 		},
@@ -2543,6 +2637,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetDriftMarginOrderbooksStream",
+			Handler:       _Api_GetDriftMarginOrderbooksStream_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "GetOrderbooksStream",
 			Handler:       _Api_GetOrderbooksStream_Handler,

@@ -61,32 +61,59 @@ class Project(betterproto.Enum):
 
 
 @dataclass
-class GetMarketsRequest(betterproto.Message):
-    pass
+class GetDriftMarginOrderbooksRequest(betterproto.Message):
+    """Drift V2"""
+
+    markets: List[str] = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+    metadata: bool = betterproto.bool_field(3)
 
 
 @dataclass
-class GetMarketsRequestV2(betterproto.Message):
-    project: "Project" = betterproto.enum_field(1)
-    metadata: bool = betterproto.bool_field(2)
+class GetDriftMarginOrderbooksStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    orderbook: "GetDriftMarginOrderbookResponse" = betterproto.message_field(2)
 
 
 @dataclass
-class GetMarketsResponse(betterproto.Message):
-    markets: Dict[str, "Market"] = betterproto.map_field(
+class GetDriftMarginOrderbookRequest(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+    metadata: bool = betterproto.bool_field(3)
+
+
+@dataclass
+class GetDriftMarginOrderbookResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_address: str = betterproto.string_field(2)
+    bids: List["DriftMarginOrderbookItem"] = betterproto.message_field(3)
+    asks: List["DriftMarginOrderbookItem"] = betterproto.message_field(4)
+
+
+@dataclass
+class DriftMarginOrderbookItem(betterproto.Message):
+    price: float = betterproto.double_field(1)
+    size: float = betterproto.double_field(2)
+    order_i_d: str = betterproto.string_field(3)
+    client_order_i_d: int = betterproto.uint64_field(4)
+    owner_address: str = betterproto.string_field(5)
+    metadata: protobuf.Struct = betterproto.message_field(6)
+
+
+@dataclass
+class GetDriftMarketsRequest(betterproto.Message):
+    metadata: bool = betterproto.bool_field(1)
+
+
+@dataclass
+class GetDriftMarketsResponse(betterproto.Message):
+    markets: Dict[str, "DriftMarket"] = betterproto.map_field(
         1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
 
 
 @dataclass
-class GetMarketsResponseV2(betterproto.Message):
-    markets: Dict[str, "MarketV2"] = betterproto.map_field(
-        1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
-    )
-
-
-@dataclass
-class MarketV2(betterproto.Message):
+class DriftMarket(betterproto.Message):
     market: str = betterproto.string_field(1)
     status: str = betterproto.string_field(2)
     address: str = betterproto.string_field(3)
@@ -95,7 +122,18 @@ class MarketV2(betterproto.Message):
     base_decimals: int = betterproto.int64_field(6)
     quote_decimals: int = betterproto.int64_field(7)
     metadata: protobuf.Struct = betterproto.message_field(8)
-    project: "Project" = betterproto.enum_field(9)
+
+
+@dataclass
+class GetMarketsRequest(betterproto.Message):
+    pass
+
+
+@dataclass
+class GetMarketsResponse(betterproto.Message):
+    markets: Dict[str, "Market"] = betterproto.map_field(
+        1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
 
 
 @dataclass
@@ -174,7 +212,6 @@ class GetOrderbooksRequest(betterproto.Message):
     markets: List[str] = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
-    metadata: bool = betterproto.bool_field(4)
 
 
 @dataclass
@@ -192,7 +229,6 @@ class OrderbookItem(betterproto.Message):
     order_i_d: str = betterproto.string_field(3)
     client_order_i_d: int = betterproto.uint64_field(4)
     owner_address: str = betterproto.string_field(5)
-    metadata: protobuf.Struct = betterproto.message_field(6)
 
 
 @dataclass
@@ -1045,23 +1081,22 @@ class PostPerpOrderResponse(betterproto.Message):
 
 
 @dataclass
-class PostMarginOrderRequest(betterproto.Message):
-    project: "Project" = betterproto.enum_field(1)
-    owner_address: str = betterproto.string_field(2)
-    payer_address: str = betterproto.string_field(3)
-    market: str = betterproto.string_field(4)
-    account_address: str = betterproto.string_field(5)
-    position_side: str = betterproto.string_field(6)
-    slippage: float = betterproto.double_field(7)
-    type: str = betterproto.string_field(8)
-    amount: float = betterproto.double_field(9)
-    price: float = betterproto.double_field(10)
-    client_order_i_d: int = betterproto.uint64_field(11)
-    post_only: common.PostOnlyParams = betterproto.enum_field(12)
+class PostDriftMarginOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    payer_address: str = betterproto.string_field(2)
+    market: str = betterproto.string_field(3)
+    account_address: str = betterproto.string_field(4)
+    position_side: str = betterproto.string_field(5)
+    slippage: float = betterproto.double_field(6)
+    type: str = betterproto.string_field(7)
+    amount: float = betterproto.double_field(8)
+    price: float = betterproto.double_field(9)
+    client_order_i_d: int = betterproto.uint64_field(10)
+    post_only: common.PostOnlyParams = betterproto.enum_field(11)
 
 
 @dataclass
-class PostMarginOrderResponse(betterproto.Message):
+class PostDriftMarginOrderResponse(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
@@ -1239,6 +1274,83 @@ class GetOpenPerpOrderResponse(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def get_drift_markets(
+        self, *, metadata: bool = False
+    ) -> GetDriftMarketsResponse:
+        """Drift V2"""
+
+        request = GetDriftMarketsRequest()
+        request.metadata = metadata
+
+        return await self._unary_unary(
+            "/api.Api/GetDriftMarkets",
+            request,
+            GetDriftMarketsResponse,
+        )
+
+    async def post_drift_margin_order(
+        self,
+        *,
+        owner_address: str = "",
+        payer_address: str = "",
+        market: str = "",
+        account_address: str = "",
+        position_side: str = "",
+        slippage: float = 0,
+        type: str = "",
+        amount: float = 0,
+        price: float = 0,
+        client_order_i_d: int = 0,
+        post_only: common.PostOnlyParams = 0,
+    ) -> PostDriftMarginOrderResponse:
+        request = PostDriftMarginOrderRequest()
+        request.owner_address = owner_address
+        request.payer_address = payer_address
+        request.market = market
+        request.account_address = account_address
+        request.position_side = position_side
+        request.slippage = slippage
+        request.type = type
+        request.amount = amount
+        request.price = price
+        request.client_order_i_d = client_order_i_d
+        request.post_only = post_only
+
+        return await self._unary_unary(
+            "/api.Api/PostDriftMarginOrder",
+            request,
+            PostDriftMarginOrderResponse,
+        )
+
+    async def get_drift_margin_orderbook(
+        self, *, market: str = "", limit: int = 0, metadata: bool = False
+    ) -> GetDriftMarginOrderbookResponse:
+        request = GetDriftMarginOrderbookRequest()
+        request.market = market
+        request.limit = limit
+        request.metadata = metadata
+
+        return await self._unary_unary(
+            "/api.Api/GetDriftMarginOrderbook",
+            request,
+            GetDriftMarginOrderbookResponse,
+        )
+
+    async def get_drift_margin_orderbooks_stream(
+        self, *, markets: List[str] = [], limit: int = 0, metadata: bool = False
+    ) -> AsyncGenerator[GetDriftMarginOrderbooksStreamResponse, None]:
+        request = GetDriftMarginOrderbooksRequest()
+        request.markets = markets
+        request.limit = limit
+        request.metadata = metadata
+
+        async for response in self._unary_stream(
+            "/api.Api/GetDriftMarginOrderbooksStream",
+            request,
+            GetDriftMarginOrderbooksStreamResponse,
+        ):
+            yield response
+
     async def get_price(self, *, tokens: List[str] = []) -> GetPriceResponse:
         request = GetPriceRequest()
         request.tokens = tokens
@@ -1256,19 +1368,6 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetMarkets",
             request,
             GetMarketsResponse,
-        )
-
-    async def get_markets_v2(
-        self, *, project: "Project" = 0, metadata: bool = False
-    ) -> GetMarketsResponseV2:
-        request = GetMarketsRequestV2()
-        request.project = project
-        request.metadata = metadata
-
-        return await self._unary_unary(
-            "/api.Api/GetMarketsV2",
-            request,
-            GetMarketsResponseV2,
         )
 
     async def get_pools(self, *, projects: List["Project"] = []) -> GetPoolsResponse:
@@ -1786,44 +1885,6 @@ class ApiStub(betterproto.ServiceStub):
             TradeSwapResponse,
         )
 
-    async def post_margin_order(
-        self,
-        *,
-        project: "Project" = 0,
-        owner_address: str = "",
-        payer_address: str = "",
-        market: str = "",
-        account_address: str = "",
-        position_side: str = "",
-        slippage: float = 0,
-        type: str = "",
-        amount: float = 0,
-        price: float = 0,
-        client_order_i_d: int = 0,
-        post_only: common.PostOnlyParams = 0,
-    ) -> PostMarginOrderResponse:
-        """Drift Margin"""
-
-        request = PostMarginOrderRequest()
-        request.project = project
-        request.owner_address = owner_address
-        request.payer_address = payer_address
-        request.market = market
-        request.account_address = account_address
-        request.position_side = position_side
-        request.slippage = slippage
-        request.type = type
-        request.amount = amount
-        request.price = price
-        request.client_order_i_d = client_order_i_d
-        request.post_only = post_only
-
-        return await self._unary_unary(
-            "/api.Api/PostMarginOrder",
-            request,
-            PostMarginOrderResponse,
-        )
-
     async def post_perp_order(
         self,
         *,
@@ -2165,12 +2226,7 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_orderbooks_stream(
-        self,
-        *,
-        markets: List[str] = [],
-        limit: int = 0,
-        project: "Project" = 0,
-        metadata: bool = False,
+        self, *, markets: List[str] = [], limit: int = 0, project: "Project" = 0
     ) -> AsyncGenerator[GetOrderbooksStreamResponse, None]:
         """streaming endpoints"""
 
@@ -2178,7 +2234,6 @@ class ApiStub(betterproto.ServiceStub):
         request.markets = markets
         request.limit = limit
         request.project = project
-        request.metadata = metadata
 
         async for response in self._unary_stream(
             "/api.Api/GetOrderbooksStream",
