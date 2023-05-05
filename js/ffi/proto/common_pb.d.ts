@@ -82,6 +82,12 @@ export enum PostOnlyParams {
     PO_TRY_POST_ONLY = 2,
 }
 
+export enum MarginContract {
+    ALL_SPOTS = 0,
+    SOL_SPOT = 1,
+    USDC_SPOT = 2,
+}
+
 export enum PerpContract {
     ALL = 0,
     SOL_PERP = 1,
@@ -91,6 +97,8 @@ export enum PerpContract {
     BONK_PERP = 5,
     MATIC_PERP = 6,
     ARB_PERP = 7,
+    DOGE_PERP = 8,
+    BNB_PERP = 9,
 }
 
 export enum PerpCollateralType {

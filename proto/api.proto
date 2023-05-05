@@ -3,6 +3,7 @@ package api;
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/api";
 
 import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
@@ -50,6 +51,49 @@ service Api {
       url: "https://bloxroute.gitbook.io/serum-api/about/welcome"
     }
   };
+
+  // Drift V2
+  rpc GetDriftMarkets(GetDriftMarketsRequest) returns (GetDriftMarketsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/drift/markets"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of orderbook markets";
+      summary: "drift orderbook markets";
+      tags: ["v2", "Market", "Orderbook"];
+    };
+  }
+
+  rpc PostDriftMarginOrder(PostDriftMarginOrderRequest)  returns (PostDriftMarginOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/drift/margin-place"
+      body: "*",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Places a margin order on drift platform";
+      summary: "margin order";
+      tags: ["v2", "Trade", "Margin"];
+    };
+  }
+
+  rpc GetDriftMarginOrderbook(GetDriftMarginOrderbookRequest) returns (GetDriftMarginOrderbookResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/drift/margin-orderbooks/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
+      summary: "Perpetuals contract orderbook";
+      tags: ["Perp", "Orderbook", "Market"];
+    };
+  }
+
+  rpc GetDriftMarginOrderbooksStream(GetDriftMarginOrderbooksRequest) returns (stream GetDriftMarginOrderbooksStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["v2", "Margin", "Orderbook"];
+    };
+  }
+  // end of Drift V2
 
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
     option (google.api.http) = {
@@ -118,7 +162,7 @@ service Api {
       tags: ["Market", "Orderbook"];
     };
   }
-
+  
   rpc GetMarketDepth(GetMarketDepthRequest) returns (GetMarketDepthResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/depth/{market}"
@@ -377,6 +421,8 @@ service Api {
       tags: ["Trade", "AMM"];
     };
   }
+
+  // Drift V1 endpoints
 
   // perp endpoints
   rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
@@ -652,7 +698,6 @@ service Api {
 }
 
 message GetMarketsRequest {
-
 }
 
 message GetMarketsResponse {
@@ -671,8 +716,8 @@ message Market {
 }
 
 enum MarketStatus {
-  MS_UNKNOWN = 0;
-  MS_ONLINE = 1;
+  MS_UNKNOWN = 0; // unknown
+  MS_ONLINE = 1; // online
 }
 
 message GetTickersRequest {
@@ -1395,6 +1440,9 @@ message UserDetail {
 message PostCreateUserRequest {
   string ownerAddress = 1;
   Project project = 2;
+  string action = 3; // CREATE , DELETE
+  uint64 subAccountID = 4;
+  string accountName = 5;
 }
 
 message PostCreateUserResponse {
@@ -1526,6 +1574,24 @@ message PostPerpOrderRequest {
 }
 
 message PostPerpOrderResponse {
+  TransactionMessage transaction = 1;
+}
+
+message PostDriftMarginOrderRequest {
+  string ownerAddress = 1;
+  string payerAddress = 2;
+  string market = 3;
+  string accountAddress = 4;
+  string positionSide = 5;
+  double slippage = 6;
+  string type = 7;
+  double amount = 8;
+  double price = 9;
+  uint64 clientOrderID = 10;
+  common.PostOnlyParams postOnly = 11;
+}
+
+message PostDriftMarginOrderResponse {
   TransactionMessage transaction = 1;
 }
 
@@ -1678,3 +1744,58 @@ message GetOpenPerpOrderResponse {
   PerpOrder order = 2;
 }
 
+// Drift V2
+message GetDriftMarginOrderbooksRequest {
+  repeated string markets = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  bool metadata = 3;
+}
+
+message GetDriftMarginOrderbooksStreamResponse {
+  int64 slot = 1;
+  GetDriftMarginOrderbookResponse orderbook = 2;
+}
+
+message GetDriftMarginOrderbookRequest {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  bool metadata = 3;
+}
+
+message GetDriftMarginOrderbookResponse {
+  string market = 1;
+  string marketAddress = 2;
+  repeated DriftMarginOrderbookItem bids = 3;
+  repeated DriftMarginOrderbookItem asks = 4;
+}
+
+message DriftMarginOrderbookItem {
+  double price = 1;
+  double size = 2;
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
+  uint64 clientOrderID = 4;
+  string ownerAddress = 5[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "OpenOrders address for current market"}];
+  google.protobuf.Struct metadata = 6;
+}
+
+
+message GetDriftMarketsRequest {
+  bool metadata = 1;
+}
+
+message GetDriftMarketsResponse {
+  map<string, DriftMarket> markets = 1;
+}
+
+message DriftMarket {
+  string market = 1;
+  string status = 2;
+  string address = 3;
+  string baseMint = 4;
+  string quotedMint = 5;
+  int64 baseDecimals = 6;
+  int64 quoteDecimals = 7;
+  google.protobuf.Struct metadata = 8;
+}
+
+// end of Drift V2

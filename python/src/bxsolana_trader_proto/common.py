@@ -14,7 +14,7 @@ class OrderType(betterproto.Enum):
 
 
 class PerpOrderType(betterproto.Enum):
-    """Drift types : limit, trigger_market, trigger_limit, market, oracle"""
+    """perp types : limit, trigger_market, trigger_limit, market, oracle"""
 
     POT_UNKNOWN = 0
     POT_MARKET = 1
@@ -35,6 +35,14 @@ class PostOnlyParams(betterproto.Enum):
     PO_TRY_POST_ONLY = 2
 
 
+class MarginContract(betterproto.Enum):
+    """don't use this in api.proto"""
+
+    ALL_SPOTS = 0
+    SOL_SPOT = 1
+    USDC_SPOT = 2
+
+
 class PerpContract(betterproto.Enum):
     ALL = 0
     SOL_PERP = 1
@@ -44,6 +52,8 @@ class PerpContract(betterproto.Enum):
     BONK_PERP = 5
     MATIC_PERP = 6
     ARB_PERP = 7
+    DOGE_PERP = 8
+    BNB_PERP = 9
 
 
 class PerpCollateralType(betterproto.Enum):

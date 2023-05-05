@@ -10,7 +10,7 @@ enum OrderType {
   OT_POST = 3;
 }
 
-// Drift types : limit, trigger_market, trigger_limit, market, oracle
+// perp types : limit, trigger_market, trigger_limit, market, oracle
 enum PerpOrderType {
   POT_UNKNOWN = 0;
   POT_MARKET = 1;
@@ -31,15 +31,24 @@ enum PostOnlyParams {
   PO_TRY_POST_ONLY = 2;
 }
 
+// don't use this in api.proto
+enum MarginContract {
+  ALL_SPOTS = 0;  // ALL
+  SOL_SPOT = 1;   // SOL
+  USDC_SPOT = 2;  // USDC
+}
+
 enum PerpContract {
   ALL = 0;
-  SOL_PERP = 1;   // SOL-PERP
-  ETH_PERP = 2;   // ETH-PERP
-  BTC_PERP = 3;   // BTC-PERP
-  APT_PERP = 4;   // APT-PERP
-  BONK_PERP = 5;  // 1MBONK-PERP
-  MATIC_PERP = 6; // MATIC-PERP
-  ARB_PERP = 7;   // ARB-PERP
+  SOL_PERP = 1;    // SOL-PERP
+  ETH_PERP = 2;    // ETH-PERP
+  BTC_PERP = 3;    // BTC-PERP
+  APT_PERP = 4;    // APT-PERP
+  BONK_PERP = 5;   // 1MBONK-PERP
+  MATIC_PERP = 6;  // MATIC-PERP
+  ARB_PERP = 7;    // ARB-PERP
+  DOGE_PERP = 8;   // DOGE-PERP
+  BNB_PERP = 9;    // DOGE-PERP
 }
 
 enum PerpCollateralType {
