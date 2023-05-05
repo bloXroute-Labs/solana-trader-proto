@@ -61,70 +61,6 @@ class Project(betterproto.Enum):
 
 
 @dataclass
-class GetDriftMarginOrderbooksRequest(betterproto.Message):
-    """Drift V2"""
-
-    markets: List[str] = betterproto.string_field(1)
-    limit: int = betterproto.uint32_field(2)
-    metadata: bool = betterproto.bool_field(3)
-
-
-@dataclass
-class GetDriftMarginOrderbooksStreamResponse(betterproto.Message):
-    slot: int = betterproto.int64_field(1)
-    orderbook: "GetDriftMarginOrderbookResponse" = betterproto.message_field(2)
-
-
-@dataclass
-class GetDriftMarginOrderbookRequest(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    limit: int = betterproto.uint32_field(2)
-    metadata: bool = betterproto.bool_field(3)
-
-
-@dataclass
-class GetDriftMarginOrderbookResponse(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    market_address: str = betterproto.string_field(2)
-    bids: List["DriftMarginOrderbookItem"] = betterproto.message_field(3)
-    asks: List["DriftMarginOrderbookItem"] = betterproto.message_field(4)
-
-
-@dataclass
-class DriftMarginOrderbookItem(betterproto.Message):
-    price: float = betterproto.double_field(1)
-    size: float = betterproto.double_field(2)
-    order_i_d: str = betterproto.string_field(3)
-    client_order_i_d: int = betterproto.uint64_field(4)
-    owner_address: str = betterproto.string_field(5)
-    metadata: protobuf.Struct = betterproto.message_field(6)
-
-
-@dataclass
-class GetDriftMarketsRequest(betterproto.Message):
-    metadata: bool = betterproto.bool_field(1)
-
-
-@dataclass
-class GetDriftMarketsResponse(betterproto.Message):
-    markets: Dict[str, "DriftMarket"] = betterproto.map_field(
-        1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
-    )
-
-
-@dataclass
-class DriftMarket(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    status: str = betterproto.string_field(2)
-    address: str = betterproto.string_field(3)
-    base_mint: str = betterproto.string_field(4)
-    quoted_mint: str = betterproto.string_field(5)
-    base_decimals: int = betterproto.int64_field(6)
-    quote_decimals: int = betterproto.int64_field(7)
-    metadata: protobuf.Struct = betterproto.message_field(8)
-
-
-@dataclass
 class GetMarketsRequest(betterproto.Message):
     pass
 
@@ -204,7 +140,6 @@ class GetOrderbookRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
-    metadata: bool = betterproto.bool_field(4)
 
 
 @dataclass
@@ -1273,6 +1208,70 @@ class GetOpenPerpOrderResponse(betterproto.Message):
     order: "PerpOrder" = betterproto.message_field(2)
 
 
+@dataclass
+class GetDriftMarginOrderbooksRequest(betterproto.Message):
+    """Drift V2"""
+
+    markets: List[str] = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+    metadata: bool = betterproto.bool_field(3)
+
+
+@dataclass
+class GetDriftMarginOrderbooksStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    orderbook: "GetDriftMarginOrderbookResponse" = betterproto.message_field(2)
+
+
+@dataclass
+class GetDriftMarginOrderbookRequest(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+    metadata: bool = betterproto.bool_field(3)
+
+
+@dataclass
+class GetDriftMarginOrderbookResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_address: str = betterproto.string_field(2)
+    bids: List["DriftMarginOrderbookItem"] = betterproto.message_field(3)
+    asks: List["DriftMarginOrderbookItem"] = betterproto.message_field(4)
+
+
+@dataclass
+class DriftMarginOrderbookItem(betterproto.Message):
+    price: float = betterproto.double_field(1)
+    size: float = betterproto.double_field(2)
+    order_i_d: str = betterproto.string_field(3)
+    client_order_i_d: int = betterproto.uint64_field(4)
+    owner_address: str = betterproto.string_field(5)
+    metadata: protobuf.Struct = betterproto.message_field(6)
+
+
+@dataclass
+class GetDriftMarketsRequest(betterproto.Message):
+    metadata: bool = betterproto.bool_field(1)
+
+
+@dataclass
+class GetDriftMarketsResponse(betterproto.Message):
+    markets: Dict[str, "DriftMarket"] = betterproto.map_field(
+        1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+
+
+@dataclass
+class DriftMarket(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    status: str = betterproto.string_field(2)
+    address: str = betterproto.string_field(3)
+    base_mint: str = betterproto.string_field(4)
+    quoted_mint: str = betterproto.string_field(5)
+    base_decimals: int = betterproto.int64_field(6)
+    quote_decimals: int = betterproto.int64_field(7)
+    metadata: protobuf.Struct = betterproto.message_field(8)
+
+
 class ApiStub(betterproto.ServiceStub):
     async def get_drift_markets(
         self, *, metadata: bool = False
@@ -1418,18 +1417,12 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_orderbook(
-        self,
-        *,
-        market: str = "",
-        limit: int = 0,
-        project: "Project" = 0,
-        metadata: bool = False,
+        self, *, market: str = "", limit: int = 0, project: "Project" = 0
     ) -> GetOrderbookResponse:
         request = GetOrderbookRequest()
         request.market = market
         request.limit = limit
         request.project = project
-        request.metadata = metadata
 
         return await self._unary_unary(
             "/api.Api/GetOrderbook",

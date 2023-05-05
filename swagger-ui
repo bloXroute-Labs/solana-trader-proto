@@ -220,12 +220,6 @@
               "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
-          },
-          {
-            "name": "metadata",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "tags": [
