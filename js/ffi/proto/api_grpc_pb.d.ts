@@ -16,6 +16,7 @@ import * as common_pb from "./common_pb";
 interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     getDriftMarkets: IApiService_IGetDriftMarkets;
     postDriftMarginOrder: IApiService_IPostDriftMarginOrder;
+    driftEnableMarginTrading: IApiService_IDriftEnableMarginTrading;
     getDriftMarginOrderbook: IApiService_IGetDriftMarginOrderbook;
     getDriftMarginOrderbooksStream: IApiService_IGetDriftMarginOrderbooksStream;
     getPrice: IApiService_IGetPrice;
@@ -95,6 +96,15 @@ interface IApiService_IPostDriftMarginOrder extends grpc.MethodDefinition<api_pb
     requestDeserialize: grpc.deserialize<api_pb.PostDriftMarginOrderRequest>;
     responseSerialize: grpc.serialize<api_pb.PostDriftMarginOrderResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostDriftMarginOrderResponse>;
+}
+interface IApiService_IDriftEnableMarginTrading extends grpc.MethodDefinition<api_pb.DriftEnableMarginTradingRequest, api_pb.DriftEnableMarginTradingResponse> {
+    path: "/api.Api/DriftEnableMarginTrading";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.DriftEnableMarginTradingRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.DriftEnableMarginTradingRequest>;
+    responseSerialize: grpc.serialize<api_pb.DriftEnableMarginTradingResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.DriftEnableMarginTradingResponse>;
 }
 interface IApiService_IGetDriftMarginOrderbook extends grpc.MethodDefinition<api_pb.GetDriftMarginOrderbookRequest, api_pb.GetDriftMarginOrderbookResponse> {
     path: "/api.Api/GetDriftMarginOrderbook";
@@ -642,6 +652,7 @@ export const ApiService: IApiService;
 export interface IApiServer extends grpc.UntypedServiceImplementation {
     getDriftMarkets: grpc.handleUnaryCall<api_pb.GetDriftMarketsRequest, api_pb.GetDriftMarketsResponse>;
     postDriftMarginOrder: grpc.handleUnaryCall<api_pb.PostDriftMarginOrderRequest, api_pb.PostDriftMarginOrderResponse>;
+    driftEnableMarginTrading: grpc.handleUnaryCall<api_pb.DriftEnableMarginTradingRequest, api_pb.DriftEnableMarginTradingResponse>;
     getDriftMarginOrderbook: grpc.handleUnaryCall<api_pb.GetDriftMarginOrderbookRequest, api_pb.GetDriftMarginOrderbookResponse>;
     getDriftMarginOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetDriftMarginOrderbooksRequest, api_pb.GetDriftMarginOrderbooksStreamResponse>;
     getPrice: grpc.handleUnaryCall<api_pb.GetPriceRequest, api_pb.GetPriceResponse>;
@@ -711,6 +722,9 @@ export interface IApiClient {
     postDriftMarginOrder(request: api_pb.PostDriftMarginOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
     postDriftMarginOrder(request: api_pb.PostDriftMarginOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
     postDriftMarginOrder(request: api_pb.PostDriftMarginOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
+    driftEnableMarginTrading(request: api_pb.DriftEnableMarginTradingRequest, callback: (error: grpc.ServiceError | null, response: api_pb.DriftEnableMarginTradingResponse) => void): grpc.ClientUnaryCall;
+    driftEnableMarginTrading(request: api_pb.DriftEnableMarginTradingRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.DriftEnableMarginTradingResponse) => void): grpc.ClientUnaryCall;
+    driftEnableMarginTrading(request: api_pb.DriftEnableMarginTradingRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.DriftEnableMarginTradingResponse) => void): grpc.ClientUnaryCall;
     getDriftMarginOrderbook(request: api_pb.GetDriftMarginOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftMarginOrderbookResponse) => void): grpc.ClientUnaryCall;
     getDriftMarginOrderbook(request: api_pb.GetDriftMarginOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftMarginOrderbookResponse) => void): grpc.ClientUnaryCall;
     getDriftMarginOrderbook(request: api_pb.GetDriftMarginOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftMarginOrderbookResponse) => void): grpc.ClientUnaryCall;
@@ -886,6 +900,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postDriftMarginOrder(request: api_pb.PostDriftMarginOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
     public postDriftMarginOrder(request: api_pb.PostDriftMarginOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
     public postDriftMarginOrder(request: api_pb.PostDriftMarginOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
+    public driftEnableMarginTrading(request: api_pb.DriftEnableMarginTradingRequest, callback: (error: grpc.ServiceError | null, response: api_pb.DriftEnableMarginTradingResponse) => void): grpc.ClientUnaryCall;
+    public driftEnableMarginTrading(request: api_pb.DriftEnableMarginTradingRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.DriftEnableMarginTradingResponse) => void): grpc.ClientUnaryCall;
+    public driftEnableMarginTrading(request: api_pb.DriftEnableMarginTradingRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.DriftEnableMarginTradingResponse) => void): grpc.ClientUnaryCall;
     public getDriftMarginOrderbook(request: api_pb.GetDriftMarginOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftMarginOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getDriftMarginOrderbook(request: api_pb.GetDriftMarginOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftMarginOrderbookResponse) => void): grpc.ClientUnaryCall;
     public getDriftMarginOrderbook(request: api_pb.GetDriftMarginOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetDriftMarginOrderbookResponse) => void): grpc.ClientUnaryCall;

@@ -1036,6 +1036,18 @@ class PostDriftMarginOrderResponse(betterproto.Message):
 
 
 @dataclass
+class DriftEnableMarginTradingRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    enable_margin: bool = betterproto.bool_field(3)
+
+
+@dataclass
+class DriftEnableMarginTradingResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass
 class GetNewPerpOrdersStreamRequest(betterproto.Message):
     markets: List[str] = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(3)
@@ -1319,6 +1331,24 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostDriftMarginOrder",
             request,
             PostDriftMarginOrderResponse,
+        )
+
+    async def drift_enable_margin_trading(
+        self,
+        *,
+        owner_address: str = "",
+        account_address: str = "",
+        enable_margin: bool = False,
+    ) -> DriftEnableMarginTradingResponse:
+        request = DriftEnableMarginTradingRequest()
+        request.owner_address = owner_address
+        request.account_address = account_address
+        request.enable_margin = enable_margin
+
+        return await self._unary_unary(
+            "/api.Api/DriftEnableMarginTrading",
+            request,
+            DriftEnableMarginTradingResponse,
         )
 
     async def get_drift_margin_orderbook(

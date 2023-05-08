@@ -77,6 +77,18 @@ service Api {
     };
   }
 
+  rpc DriftEnableMarginTrading(DriftEnableMarginTradingRequest)  returns (DriftEnableMarginTradingResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/drift/enable-margin"
+      body: "*",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Enables a margin trading on drift platform";
+      summary: "margin order";
+      tags: ["v2", "Trade", "Margin"];
+    };
+  }
+
   rpc GetDriftMarginOrderbook(GetDriftMarginOrderbookRequest) returns (GetDriftMarginOrderbookResponse) {
     option (google.api.http) = {
       get: "/api/v2/drift/margin-orderbooks/{market}"
@@ -84,7 +96,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
       summary: "Perpetuals contract orderbook";
-      tags: ["Perp", "Orderbook", "Market"];
+      tags: ["v2", "Orderbook", "Market"];
     };
   }
 
@@ -1595,6 +1607,16 @@ message PostDriftMarginOrderResponse {
   TransactionMessage transaction = 1;
 }
 
+message DriftEnableMarginTradingRequest {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  bool enableMargin = 3;
+}
+
+message DriftEnableMarginTradingResponse {
+  TransactionMessage transaction = 1;
+}
+
 message GetNewPerpOrdersStreamRequest {
   repeated string markets = 1;
   Project project = 3;
@@ -1772,12 +1794,11 @@ message GetDriftMarginOrderbookResponse {
 message DriftMarginOrderbookItem {
   double price = 1;
   double size = 2;
-  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Drift generated OrderID"}];
   uint64 clientOrderID = 4;
-  string ownerAddress = 5[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "OpenOrders address for current market"}];
+  string ownerAddress = 5;
   google.protobuf.Struct metadata = 6;
 }
-
 
 message GetDriftMarketsRequest {
   bool metadata = 1;

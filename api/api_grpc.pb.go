@@ -21,6 +21,7 @@ type ApiClient interface {
 	// Drift V2
 	GetDriftMarkets(ctx context.Context, in *GetDriftMarketsRequest, opts ...grpc.CallOption) (*GetDriftMarketsResponse, error)
 	PostDriftMarginOrder(ctx context.Context, in *PostDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostDriftMarginOrderResponse, error)
+	DriftEnableMarginTrading(ctx context.Context, in *DriftEnableMarginTradingRequest, opts ...grpc.CallOption) (*DriftEnableMarginTradingResponse, error)
 	GetDriftMarginOrderbook(ctx context.Context, in *GetDriftMarginOrderbookRequest, opts ...grpc.CallOption) (*GetDriftMarginOrderbookResponse, error)
 	GetDriftMarginOrderbooksStream(ctx context.Context, in *GetDriftMarginOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftMarginOrderbooksStreamClient, error)
 	GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error)
@@ -109,6 +110,15 @@ func (c *apiClient) GetDriftMarkets(ctx context.Context, in *GetDriftMarketsRequ
 func (c *apiClient) PostDriftMarginOrder(ctx context.Context, in *PostDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostDriftMarginOrderResponse, error) {
 	out := new(PostDriftMarginOrderResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostDriftMarginOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) DriftEnableMarginTrading(ctx context.Context, in *DriftEnableMarginTradingRequest, opts ...grpc.CallOption) (*DriftEnableMarginTradingResponse, error) {
+	out := new(DriftEnableMarginTradingResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/DriftEnableMarginTrading", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1007,6 +1017,7 @@ type ApiServer interface {
 	// Drift V2
 	GetDriftMarkets(context.Context, *GetDriftMarketsRequest) (*GetDriftMarketsResponse, error)
 	PostDriftMarginOrder(context.Context, *PostDriftMarginOrderRequest) (*PostDriftMarginOrderResponse, error)
+	DriftEnableMarginTrading(context.Context, *DriftEnableMarginTradingRequest) (*DriftEnableMarginTradingResponse, error)
 	GetDriftMarginOrderbook(context.Context, *GetDriftMarginOrderbookRequest) (*GetDriftMarginOrderbookResponse, error)
 	GetDriftMarginOrderbooksStream(*GetDriftMarginOrderbooksRequest, Api_GetDriftMarginOrderbooksStreamServer) error
 	GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error)
@@ -1085,6 +1096,9 @@ func (UnimplementedApiServer) GetDriftMarkets(context.Context, *GetDriftMarketsR
 }
 func (UnimplementedApiServer) PostDriftMarginOrder(context.Context, *PostDriftMarginOrderRequest) (*PostDriftMarginOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostDriftMarginOrder not implemented")
+}
+func (UnimplementedApiServer) DriftEnableMarginTrading(context.Context, *DriftEnableMarginTradingRequest) (*DriftEnableMarginTradingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DriftEnableMarginTrading not implemented")
 }
 func (UnimplementedApiServer) GetDriftMarginOrderbook(context.Context, *GetDriftMarginOrderbookRequest) (*GetDriftMarginOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDriftMarginOrderbook not implemented")
@@ -1311,6 +1325,24 @@ func _Api_PostDriftMarginOrder_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostDriftMarginOrder(ctx, req.(*PostDriftMarginOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_DriftEnableMarginTrading_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DriftEnableMarginTradingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).DriftEnableMarginTrading(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/DriftEnableMarginTrading",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).DriftEnableMarginTrading(ctx, req.(*DriftEnableMarginTradingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2454,6 +2486,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostDriftMarginOrder",
 			Handler:    _Api_PostDriftMarginOrder_Handler,
+		},
+		{
+			MethodName: "DriftEnableMarginTrading",
+			Handler:    _Api_DriftEnableMarginTrading_Handler,
 		},
 		{
 			MethodName: "GetDriftMarginOrderbook",

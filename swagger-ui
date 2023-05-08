@@ -1781,6 +1781,42 @@
         ]
       }
     },
+    "/api/v2/drift/enable-margin": {
+      "post": {
+        "summary": "margin order",
+        "description": "Enables a margin trading on drift platform",
+        "operationId": "Api_DriftEnableMarginTrading",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiDriftEnableMarginTradingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiDriftEnableMarginTradingRequest"
+            }
+          }
+        ],
+        "tags": [
+          "v2",
+          "Trade",
+          "Margin"
+        ]
+      }
+    },
     "/api/v2/drift/margin-orderbooks/{market}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
@@ -1823,7 +1859,7 @@
           }
         ],
         "tags": [
-          "Perp",
+          "v2",
           "Orderbook",
           "Market"
         ]
@@ -2032,6 +2068,28 @@
       ],
       "default": "D_ASCENDING"
     },
+    "apiDriftEnableMarginTradingRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "enableMargin": {
+          "type": "boolean"
+        }
+      }
+    },
+    "apiDriftEnableMarginTradingResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
     "apiDriftMarginOrderbookItem": {
       "type": "object",
       "properties": {
@@ -2045,15 +2103,14 @@
         },
         "orderID": {
           "type": "string",
-          "description": "Serum generated OrderID"
+          "description": "Drift generated OrderID"
         },
         "clientOrderID": {
           "type": "string",
           "format": "uint64"
         },
         "ownerAddress": {
-          "type": "string",
-          "description": "OpenOrders address for current market"
+          "type": "string"
         },
         "metadata": {
           "type": "object"

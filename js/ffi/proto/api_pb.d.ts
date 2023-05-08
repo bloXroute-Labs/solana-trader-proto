@@ -3757,6 +3757,55 @@ export namespace PostDriftMarginOrderResponse {
     }
 }
 
+export class DriftEnableMarginTradingRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): DriftEnableMarginTradingRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): DriftEnableMarginTradingRequest;
+    getEnablemargin(): boolean;
+    setEnablemargin(value: boolean): DriftEnableMarginTradingRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): DriftEnableMarginTradingRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: DriftEnableMarginTradingRequest): DriftEnableMarginTradingRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: DriftEnableMarginTradingRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): DriftEnableMarginTradingRequest;
+    static deserializeBinaryFromReader(message: DriftEnableMarginTradingRequest, reader: jspb.BinaryReader): DriftEnableMarginTradingRequest;
+}
+
+export namespace DriftEnableMarginTradingRequest {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        enablemargin: boolean,
+    }
+}
+
+export class DriftEnableMarginTradingResponse extends jspb.Message { 
+
+    hasTransaction(): boolean;
+    clearTransaction(): void;
+    getTransaction(): TransactionMessage | undefined;
+    setTransaction(value?: TransactionMessage): DriftEnableMarginTradingResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): DriftEnableMarginTradingResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: DriftEnableMarginTradingResponse): DriftEnableMarginTradingResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: DriftEnableMarginTradingResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): DriftEnableMarginTradingResponse;
+    static deserializeBinaryFromReader(message: DriftEnableMarginTradingResponse, reader: jspb.BinaryReader): DriftEnableMarginTradingResponse;
+}
+
+export namespace DriftEnableMarginTradingResponse {
+    export type AsObject = {
+        transaction?: TransactionMessage.AsObject,
+    }
+}
+
 export class GetNewPerpOrdersStreamRequest extends jspb.Message { 
     clearMarketsList(): void;
     getMarketsList(): Array<string>;
