@@ -1293,9 +1293,8 @@ class GetDriftMarketDepthStreamResponse(betterproto.Message):
 @dataclass
 class GetDriftMarketDepthResponse(betterproto.Message):
     market: str = betterproto.string_field(1)
-    market_address: str = betterproto.string_field(2)
-    bids: List["DriftMarketDepthItem"] = betterproto.message_field(3)
-    asks: List["DriftMarketDepthItem"] = betterproto.message_field(4)
+    bids: List["DriftMarketDepthItem"] = betterproto.message_field(2)
+    asks: List["DriftMarketDepthItem"] = betterproto.message_field(3)
 
 
 @dataclass

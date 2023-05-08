@@ -39366,7 +39366,7 @@ proto.api.GetDriftMarketDepthStreamResponse.prototype.hasData = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.api.GetDriftMarketDepthResponse.repeatedFields_ = [3,4];
+proto.api.GetDriftMarketDepthResponse.repeatedFields_ = [2,3];
 
 
 
@@ -39400,7 +39400,6 @@ proto.api.GetDriftMarketDepthResponse.prototype.toObject = function(opt_includeI
 proto.api.GetDriftMarketDepthResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    marketaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     bidsList: jspb.Message.toObjectList(msg.getBidsList(),
     proto.api.DriftMarketDepthItem.toObject, includeInstance),
     asksList: jspb.Message.toObjectList(msg.getAsksList(),
@@ -39446,15 +39445,11 @@ proto.api.GetDriftMarketDepthResponse.deserializeBinaryFromReader = function(msg
       msg.setMarket(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarketaddress(value);
-      break;
-    case 3:
       var value = new proto.api.DriftMarketDepthItem;
       reader.readMessage(value,proto.api.DriftMarketDepthItem.deserializeBinaryFromReader);
       msg.addBids(value);
       break;
-    case 4:
+    case 3:
       var value = new proto.api.DriftMarketDepthItem;
       reader.readMessage(value,proto.api.DriftMarketDepthItem.deserializeBinaryFromReader);
       msg.addAsks(value);
@@ -39495,17 +39490,10 @@ proto.api.GetDriftMarketDepthResponse.serializeBinaryToWriter = function(message
       f
     );
   }
-  f = message.getMarketaddress();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
   f = message.getBidsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      3,
+      2,
       f,
       proto.api.DriftMarketDepthItem.serializeBinaryToWriter
     );
@@ -39513,7 +39501,7 @@ proto.api.GetDriftMarketDepthResponse.serializeBinaryToWriter = function(message
   f = message.getAsksList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      4,
+      3,
       f,
       proto.api.DriftMarketDepthItem.serializeBinaryToWriter
     );
@@ -39540,30 +39528,12 @@ proto.api.GetDriftMarketDepthResponse.prototype.setMarket = function(value) {
 
 
 /**
- * optional string marketAddress = 2;
- * @return {string}
- */
-proto.api.GetDriftMarketDepthResponse.prototype.getMarketaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetDriftMarketDepthResponse} returns this
- */
-proto.api.GetDriftMarketDepthResponse.prototype.setMarketaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * repeated DriftMarketDepthItem bids = 3;
+ * repeated DriftMarketDepthItem bids = 2;
  * @return {!Array<!proto.api.DriftMarketDepthItem>}
  */
 proto.api.GetDriftMarketDepthResponse.prototype.getBidsList = function() {
   return /** @type{!Array<!proto.api.DriftMarketDepthItem>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.DriftMarketDepthItem, 3));
+    jspb.Message.getRepeatedWrapperField(this, proto.api.DriftMarketDepthItem, 2));
 };
 
 
@@ -39572,7 +39542,7 @@ proto.api.GetDriftMarketDepthResponse.prototype.getBidsList = function() {
  * @return {!proto.api.GetDriftMarketDepthResponse} returns this
 */
 proto.api.GetDriftMarketDepthResponse.prototype.setBidsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
@@ -39582,7 +39552,7 @@ proto.api.GetDriftMarketDepthResponse.prototype.setBidsList = function(value) {
  * @return {!proto.api.DriftMarketDepthItem}
  */
 proto.api.GetDriftMarketDepthResponse.prototype.addBids = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.DriftMarketDepthItem, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.DriftMarketDepthItem, opt_index);
 };
 
 
@@ -39596,12 +39566,12 @@ proto.api.GetDriftMarketDepthResponse.prototype.clearBidsList = function() {
 
 
 /**
- * repeated DriftMarketDepthItem asks = 4;
+ * repeated DriftMarketDepthItem asks = 3;
  * @return {!Array<!proto.api.DriftMarketDepthItem>}
  */
 proto.api.GetDriftMarketDepthResponse.prototype.getAsksList = function() {
   return /** @type{!Array<!proto.api.DriftMarketDepthItem>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.DriftMarketDepthItem, 4));
+    jspb.Message.getRepeatedWrapperField(this, proto.api.DriftMarketDepthItem, 3));
 };
 
 
@@ -39610,7 +39580,7 @@ proto.api.GetDriftMarketDepthResponse.prototype.getAsksList = function() {
  * @return {!proto.api.GetDriftMarketDepthResponse} returns this
 */
 proto.api.GetDriftMarketDepthResponse.prototype.setAsksList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
 };
 
 
@@ -39620,7 +39590,7 @@ proto.api.GetDriftMarketDepthResponse.prototype.setAsksList = function(value) {
  * @return {!proto.api.DriftMarketDepthItem}
  */
 proto.api.GetDriftMarketDepthResponse.prototype.addAsks = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.api.DriftMarketDepthItem, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.DriftMarketDepthItem, opt_index);
 };
 
 

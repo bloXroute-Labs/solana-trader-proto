@@ -1832,9 +1832,8 @@ message GetDriftMarketDepthStreamResponse {
 
 message GetDriftMarketDepthResponse {
   string market = 1;
-  string marketAddress = 2;
-  repeated DriftMarketDepthItem bids = 3;
-  repeated DriftMarketDepthItem asks = 4;
+  repeated DriftMarketDepthItem bids = 2;
+  repeated DriftMarketDepthItem asks = 3;
 }
 
 message DriftMarketDepthItem {
