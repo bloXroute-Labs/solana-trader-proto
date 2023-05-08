@@ -1865,7 +1865,7 @@
         ]
       }
     },
-    "/api/v2/drift/market-depth/{market}": {
+    "/api/v2/drift/market-depth/{contract}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
         "description": "Returns Drift contract's market depth data. Use limit param to reduce the number of bids/asks's data points returned",
@@ -1874,7 +1874,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetDriftMarginOrderbookResponse"
+              "$ref": "#/definitions/apiGetDriftMarketDepthResponse"
             }
           },
           "default": {
@@ -1886,7 +1886,7 @@
         },
         "parameters": [
           {
-            "name": "market",
+            "name": "contract",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1898,12 +1898,6 @@
             "required": false,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "metadata",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "tags": [
@@ -2138,6 +2132,19 @@
         }
       }
     },
+    "apiDriftMarketDepthItem": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiGetAccountBalanceResponse": {
       "type": "object",
       "properties": {
@@ -2203,6 +2210,38 @@
         },
         "orderbook": {
           "$ref": "#/definitions/apiGetDriftMarginOrderbookResponse"
+        }
+      }
+    },
+    "apiGetDriftMarketDepthResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDriftMarketDepthItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDriftMarketDepthItem"
+          }
+        }
+      }
+    },
+    "apiGetDriftMarketDepthStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Data": {
+          "$ref": "#/definitions/apiGetDriftMarketDepthResponse"
         }
       }
     },

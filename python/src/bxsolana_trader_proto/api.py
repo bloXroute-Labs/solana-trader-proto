@@ -1367,17 +1367,16 @@ class ApiStub(betterproto.ServiceStub):
         )
 
     async def get_drift_market_depth(
-        self, *, market: str = "", limit: int = 0, metadata: bool = False
-    ) -> GetDriftMarginOrderbookResponse:
-        request = GetDriftMarginOrderbookRequest()
-        request.market = market
+        self, *, contract: str = "", limit: int = 0
+    ) -> GetDriftMarketDepthResponse:
+        request = GetDriftMarketDepthRequest()
+        request.contract = contract
         request.limit = limit
-        request.metadata = metadata
 
         return await self._unary_unary(
             "/api.Api/GetDriftMarketDepth",
             request,
-            GetDriftMarginOrderbookResponse,
+            GetDriftMarketDepthResponse,
         )
 
     async def get_drift_margin_orderbooks_stream(
@@ -1396,17 +1395,16 @@ class ApiStub(betterproto.ServiceStub):
             yield response
 
     async def get_drift_market_depths_stream(
-        self, *, markets: List[str] = [], limit: int = 0, metadata: bool = False
-    ) -> AsyncGenerator[GetDriftMarginOrderbooksStreamResponse, None]:
-        request = GetDriftMarginOrderbooksRequest()
-        request.markets = markets
+        self, *, contracts: List[str] = [], limit: int = 0
+    ) -> AsyncGenerator[GetDriftMarketDepthStreamResponse, None]:
+        request = GetDriftMarketDepthsStreamRequest()
+        request.contracts = contracts
         request.limit = limit
-        request.metadata = metadata
 
         async for response in self._unary_stream(
             "/api.Api/GetDriftMarketDepthsStream",
             request,
-            GetDriftMarginOrderbooksStreamResponse,
+            GetDriftMarketDepthStreamResponse,
         ):
             yield response
 
