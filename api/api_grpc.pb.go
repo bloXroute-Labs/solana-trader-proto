@@ -22,9 +22,9 @@ type ApiClient interface {
 	GetDriftMarkets(ctx context.Context, in *GetDriftMarketsRequest, opts ...grpc.CallOption) (*GetDriftMarketsResponse, error)
 	PostDriftMarginOrder(ctx context.Context, in *PostDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostDriftMarginOrderResponse, error)
 	GetDriftMarginOrderbook(ctx context.Context, in *GetDriftMarginOrderbookRequest, opts ...grpc.CallOption) (*GetDriftMarginOrderbookResponse, error)
-	GetDriftMarketDepth(ctx context.Context, in *GetDriftMarginOrderbookRequest, opts ...grpc.CallOption) (*GetDriftMarginOrderbookResponse, error)
+	GetDriftMarketDepth(ctx context.Context, in *GetDriftMarketDepthRequest, opts ...grpc.CallOption) (*GetDriftMarketDepthResponse, error)
 	GetDriftMarginOrderbooksStream(ctx context.Context, in *GetDriftMarginOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftMarginOrderbooksStreamClient, error)
-	GetDriftMarketDepthsStream(ctx context.Context, in *GetDriftMarginOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftMarketDepthsStreamClient, error)
+	GetDriftMarketDepthsStream(ctx context.Context, in *GetDriftMarketDepthsStreamRequest, opts ...grpc.CallOption) (Api_GetDriftMarketDepthsStreamClient, error)
 	GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error)
 	GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error)
 	GetPools(ctx context.Context, in *GetPoolsRequest, opts ...grpc.CallOption) (*GetPoolsResponse, error)
@@ -126,8 +126,8 @@ func (c *apiClient) GetDriftMarginOrderbook(ctx context.Context, in *GetDriftMar
 	return out, nil
 }
 
-func (c *apiClient) GetDriftMarketDepth(ctx context.Context, in *GetDriftMarginOrderbookRequest, opts ...grpc.CallOption) (*GetDriftMarginOrderbookResponse, error) {
-	out := new(GetDriftMarginOrderbookResponse)
+func (c *apiClient) GetDriftMarketDepth(ctx context.Context, in *GetDriftMarketDepthRequest, opts ...grpc.CallOption) (*GetDriftMarketDepthResponse, error) {
+	out := new(GetDriftMarketDepthResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetDriftMarketDepth", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -167,7 +167,7 @@ func (x *apiGetDriftMarginOrderbooksStreamClient) Recv() (*GetDriftMarginOrderbo
 	return m, nil
 }
 
-func (c *apiClient) GetDriftMarketDepthsStream(ctx context.Context, in *GetDriftMarginOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftMarketDepthsStreamClient, error) {
+func (c *apiClient) GetDriftMarketDepthsStream(ctx context.Context, in *GetDriftMarketDepthsStreamRequest, opts ...grpc.CallOption) (Api_GetDriftMarketDepthsStreamClient, error) {
 	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[1], "/api.Api/GetDriftMarketDepthsStream", opts...)
 	if err != nil {
 		return nil, err
@@ -183,7 +183,7 @@ func (c *apiClient) GetDriftMarketDepthsStream(ctx context.Context, in *GetDrift
 }
 
 type Api_GetDriftMarketDepthsStreamClient interface {
-	Recv() (*GetDriftMarginOrderbooksStreamResponse, error)
+	Recv() (*GetDriftMarketDepthStreamResponse, error)
 	grpc.ClientStream
 }
 
@@ -191,8 +191,8 @@ type apiGetDriftMarketDepthsStreamClient struct {
 	grpc.ClientStream
 }
 
-func (x *apiGetDriftMarketDepthsStreamClient) Recv() (*GetDriftMarginOrderbooksStreamResponse, error) {
-	m := new(GetDriftMarginOrderbooksStreamResponse)
+func (x *apiGetDriftMarketDepthsStreamClient) Recv() (*GetDriftMarketDepthStreamResponse, error) {
+	m := new(GetDriftMarketDepthStreamResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -1051,9 +1051,9 @@ type ApiServer interface {
 	GetDriftMarkets(context.Context, *GetDriftMarketsRequest) (*GetDriftMarketsResponse, error)
 	PostDriftMarginOrder(context.Context, *PostDriftMarginOrderRequest) (*PostDriftMarginOrderResponse, error)
 	GetDriftMarginOrderbook(context.Context, *GetDriftMarginOrderbookRequest) (*GetDriftMarginOrderbookResponse, error)
-	GetDriftMarketDepth(context.Context, *GetDriftMarginOrderbookRequest) (*GetDriftMarginOrderbookResponse, error)
+	GetDriftMarketDepth(context.Context, *GetDriftMarketDepthRequest) (*GetDriftMarketDepthResponse, error)
 	GetDriftMarginOrderbooksStream(*GetDriftMarginOrderbooksRequest, Api_GetDriftMarginOrderbooksStreamServer) error
-	GetDriftMarketDepthsStream(*GetDriftMarginOrderbooksRequest, Api_GetDriftMarketDepthsStreamServer) error
+	GetDriftMarketDepthsStream(*GetDriftMarketDepthsStreamRequest, Api_GetDriftMarketDepthsStreamServer) error
 	GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error)
 	GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error)
 	GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error)
@@ -1134,13 +1134,13 @@ func (UnimplementedApiServer) PostDriftMarginOrder(context.Context, *PostDriftMa
 func (UnimplementedApiServer) GetDriftMarginOrderbook(context.Context, *GetDriftMarginOrderbookRequest) (*GetDriftMarginOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDriftMarginOrderbook not implemented")
 }
-func (UnimplementedApiServer) GetDriftMarketDepth(context.Context, *GetDriftMarginOrderbookRequest) (*GetDriftMarginOrderbookResponse, error) {
+func (UnimplementedApiServer) GetDriftMarketDepth(context.Context, *GetDriftMarketDepthRequest) (*GetDriftMarketDepthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDriftMarketDepth not implemented")
 }
 func (UnimplementedApiServer) GetDriftMarginOrderbooksStream(*GetDriftMarginOrderbooksRequest, Api_GetDriftMarginOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetDriftMarginOrderbooksStream not implemented")
 }
-func (UnimplementedApiServer) GetDriftMarketDepthsStream(*GetDriftMarginOrderbooksRequest, Api_GetDriftMarketDepthsStreamServer) error {
+func (UnimplementedApiServer) GetDriftMarketDepthsStream(*GetDriftMarketDepthsStreamRequest, Api_GetDriftMarketDepthsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetDriftMarketDepthsStream not implemented")
 }
 func (UnimplementedApiServer) GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error) {
@@ -1385,7 +1385,7 @@ func _Api_GetDriftMarginOrderbook_Handler(srv interface{}, ctx context.Context, 
 }
 
 func _Api_GetDriftMarketDepth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDriftMarginOrderbookRequest)
+	in := new(GetDriftMarketDepthRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1397,7 +1397,7 @@ func _Api_GetDriftMarketDepth_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: "/api.Api/GetDriftMarketDepth",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetDriftMarketDepth(ctx, req.(*GetDriftMarginOrderbookRequest))
+		return srv.(ApiServer).GetDriftMarketDepth(ctx, req.(*GetDriftMarketDepthRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1424,7 +1424,7 @@ func (x *apiGetDriftMarginOrderbooksStreamServer) Send(m *GetDriftMarginOrderboo
 }
 
 func _Api_GetDriftMarketDepthsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetDriftMarginOrderbooksRequest)
+	m := new(GetDriftMarketDepthsStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
@@ -1432,7 +1432,7 @@ func _Api_GetDriftMarketDepthsStream_Handler(srv interface{}, stream grpc.Server
 }
 
 type Api_GetDriftMarketDepthsStreamServer interface {
-	Send(*GetDriftMarginOrderbooksStreamResponse) error
+	Send(*GetDriftMarketDepthStreamResponse) error
 	grpc.ServerStream
 }
 
@@ -1440,7 +1440,7 @@ type apiGetDriftMarketDepthsStreamServer struct {
 	grpc.ServerStream
 }
 
-func (x *apiGetDriftMarketDepthsStreamServer) Send(m *GetDriftMarginOrderbooksStreamResponse) error {
+func (x *apiGetDriftMarketDepthsStreamServer) Send(m *GetDriftMarketDepthStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 

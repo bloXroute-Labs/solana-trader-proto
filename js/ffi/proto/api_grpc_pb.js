@@ -121,6 +121,50 @@ function deserialize_api_GetDriftMarginOrderbooksStreamResponse(buffer_arg) {
   return api_pb.GetDriftMarginOrderbooksStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetDriftMarketDepthRequest(arg) {
+  if (!(arg instanceof api_pb.GetDriftMarketDepthRequest)) {
+    throw new Error('Expected argument of type api.GetDriftMarketDepthRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftMarketDepthRequest(buffer_arg) {
+  return api_pb.GetDriftMarketDepthRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftMarketDepthResponse(arg) {
+  if (!(arg instanceof api_pb.GetDriftMarketDepthResponse)) {
+    throw new Error('Expected argument of type api.GetDriftMarketDepthResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftMarketDepthResponse(buffer_arg) {
+  return api_pb.GetDriftMarketDepthResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftMarketDepthStreamResponse(arg) {
+  if (!(arg instanceof api_pb.GetDriftMarketDepthStreamResponse)) {
+    throw new Error('Expected argument of type api.GetDriftMarketDepthStreamResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftMarketDepthStreamResponse(buffer_arg) {
+  return api_pb.GetDriftMarketDepthStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftMarketDepthsStreamRequest(arg) {
+  if (!(arg instanceof api_pb.GetDriftMarketDepthsStreamRequest)) {
+    throw new Error('Expected argument of type api.GetDriftMarketDepthsStreamRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftMarketDepthsStreamRequest(buffer_arg) {
+  return api_pb.GetDriftMarketDepthsStreamRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetDriftMarketsRequest(arg) {
   if (!(arg instanceof api_pb.GetDriftMarketsRequest)) {
     throw new Error('Expected argument of type api.GetDriftMarketsRequest');
@@ -1316,12 +1360,12 @@ getDriftMarkets: {
     path: '/api.Api/GetDriftMarketDepth',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetDriftMarginOrderbookRequest,
-    responseType: api_pb.GetDriftMarginOrderbookResponse,
-    requestSerialize: serialize_api_GetDriftMarginOrderbookRequest,
-    requestDeserialize: deserialize_api_GetDriftMarginOrderbookRequest,
-    responseSerialize: serialize_api_GetDriftMarginOrderbookResponse,
-    responseDeserialize: deserialize_api_GetDriftMarginOrderbookResponse,
+    requestType: api_pb.GetDriftMarketDepthRequest,
+    responseType: api_pb.GetDriftMarketDepthResponse,
+    requestSerialize: serialize_api_GetDriftMarketDepthRequest,
+    requestDeserialize: deserialize_api_GetDriftMarketDepthRequest,
+    responseSerialize: serialize_api_GetDriftMarketDepthResponse,
+    responseDeserialize: deserialize_api_GetDriftMarketDepthResponse,
   },
   getDriftMarginOrderbooksStream: {
     path: '/api.Api/GetDriftMarginOrderbooksStream',
@@ -1338,12 +1382,12 @@ getDriftMarkets: {
     path: '/api.Api/GetDriftMarketDepthsStream',
     requestStream: false,
     responseStream: true,
-    requestType: api_pb.GetDriftMarginOrderbooksRequest,
-    responseType: api_pb.GetDriftMarginOrderbooksStreamResponse,
-    requestSerialize: serialize_api_GetDriftMarginOrderbooksRequest,
-    requestDeserialize: deserialize_api_GetDriftMarginOrderbooksRequest,
-    responseSerialize: serialize_api_GetDriftMarginOrderbooksStreamResponse,
-    responseDeserialize: deserialize_api_GetDriftMarginOrderbooksStreamResponse,
+    requestType: api_pb.GetDriftMarketDepthsStreamRequest,
+    responseType: api_pb.GetDriftMarketDepthStreamResponse,
+    requestSerialize: serialize_api_GetDriftMarketDepthsStreamRequest,
+    requestDeserialize: deserialize_api_GetDriftMarketDepthsStreamRequest,
+    responseSerialize: serialize_api_GetDriftMarketDepthStreamResponse,
+    responseDeserialize: deserialize_api_GetDriftMarketDepthStreamResponse,
   },
   getPrice: {
     path: '/api.Api/GetPrice',
