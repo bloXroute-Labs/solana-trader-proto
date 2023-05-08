@@ -1865,6 +1865,53 @@
         ]
       }
     },
+    "/api/v2/drift/market-depth/{market}": {
+      "get": {
+        "summary": "Perpetuals contract orderbook",
+        "description": "Returns Drift contract's market depth data. Use limit param to reduce the number of bids/asks's data points returned",
+        "operationId": "Api_GetDriftMarketDepth",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDriftMarginOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "v2",
+          "Drift"
+        ]
+      }
+    },
     "/api/v2/drift/markets": {
       "get": {
         "summary": "drift orderbook markets",
