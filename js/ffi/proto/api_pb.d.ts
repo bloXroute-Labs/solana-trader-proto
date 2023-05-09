@@ -4608,6 +4608,133 @@ export namespace DriftMarket {
     }
 }
 
+export class GetDriftMarketDepthRequest extends jspb.Message { 
+    getContract(): string;
+    setContract(value: string): GetDriftMarketDepthRequest;
+    getLimit(): number;
+    setLimit(value: number): GetDriftMarketDepthRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftMarketDepthRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftMarketDepthRequest): GetDriftMarketDepthRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftMarketDepthRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftMarketDepthRequest;
+    static deserializeBinaryFromReader(message: GetDriftMarketDepthRequest, reader: jspb.BinaryReader): GetDriftMarketDepthRequest;
+}
+
+export namespace GetDriftMarketDepthRequest {
+    export type AsObject = {
+        contract: string,
+        limit: number,
+    }
+}
+
+export class GetDriftMarketDepthsStreamRequest extends jspb.Message { 
+    clearContractsList(): void;
+    getContractsList(): Array<string>;
+    setContractsList(value: Array<string>): GetDriftMarketDepthsStreamRequest;
+    addContracts(value: string, index?: number): string;
+    getLimit(): number;
+    setLimit(value: number): GetDriftMarketDepthsStreamRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftMarketDepthsStreamRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftMarketDepthsStreamRequest): GetDriftMarketDepthsStreamRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftMarketDepthsStreamRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftMarketDepthsStreamRequest;
+    static deserializeBinaryFromReader(message: GetDriftMarketDepthsStreamRequest, reader: jspb.BinaryReader): GetDriftMarketDepthsStreamRequest;
+}
+
+export namespace GetDriftMarketDepthsStreamRequest {
+    export type AsObject = {
+        contractsList: Array<string>,
+        limit: number,
+    }
+}
+
+export class GetDriftMarketDepthStreamResponse extends jspb.Message { 
+    getSlot(): number;
+    setSlot(value: number): GetDriftMarketDepthStreamResponse;
+
+    hasData(): boolean;
+    clearData(): void;
+    getData(): GetDriftMarketDepthResponse | undefined;
+    setData(value?: GetDriftMarketDepthResponse): GetDriftMarketDepthStreamResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftMarketDepthStreamResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftMarketDepthStreamResponse): GetDriftMarketDepthStreamResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftMarketDepthStreamResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftMarketDepthStreamResponse;
+    static deserializeBinaryFromReader(message: GetDriftMarketDepthStreamResponse, reader: jspb.BinaryReader): GetDriftMarketDepthStreamResponse;
+}
+
+export namespace GetDriftMarketDepthStreamResponse {
+    export type AsObject = {
+        slot: number,
+        data?: GetDriftMarketDepthResponse.AsObject,
+    }
+}
+
+export class GetDriftMarketDepthResponse extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetDriftMarketDepthResponse;
+    clearBidsList(): void;
+    getBidsList(): Array<DriftMarketDepthItem>;
+    setBidsList(value: Array<DriftMarketDepthItem>): GetDriftMarketDepthResponse;
+    addBids(value?: DriftMarketDepthItem, index?: number): DriftMarketDepthItem;
+    clearAsksList(): void;
+    getAsksList(): Array<DriftMarketDepthItem>;
+    setAsksList(value: Array<DriftMarketDepthItem>): GetDriftMarketDepthResponse;
+    addAsks(value?: DriftMarketDepthItem, index?: number): DriftMarketDepthItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftMarketDepthResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftMarketDepthResponse): GetDriftMarketDepthResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftMarketDepthResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftMarketDepthResponse;
+    static deserializeBinaryFromReader(message: GetDriftMarketDepthResponse, reader: jspb.BinaryReader): GetDriftMarketDepthResponse;
+}
+
+export namespace GetDriftMarketDepthResponse {
+    export type AsObject = {
+        market: string,
+        bidsList: Array<DriftMarketDepthItem.AsObject>,
+        asksList: Array<DriftMarketDepthItem.AsObject>,
+    }
+}
+
+export class DriftMarketDepthItem extends jspb.Message { 
+    getPrice(): number;
+    setPrice(value: number): DriftMarketDepthItem;
+    getSize(): number;
+    setSize(value: number): DriftMarketDepthItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): DriftMarketDepthItem.AsObject;
+    static toObject(includeInstance: boolean, msg: DriftMarketDepthItem): DriftMarketDepthItem.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: DriftMarketDepthItem, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): DriftMarketDepthItem;
+    static deserializeBinaryFromReader(message: DriftMarketDepthItem, reader: jspb.BinaryReader): DriftMarketDepthItem;
+}
+
+export namespace DriftMarketDepthItem {
+    export type AsObject = {
+        price: number,
+        size: number,
+    }
+}
+
 export enum MarketStatus {
     MS_UNKNOWN = 0,
     MS_ONLINE = 1,

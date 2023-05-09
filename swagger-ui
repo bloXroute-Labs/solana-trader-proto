@@ -1865,6 +1865,47 @@
         ]
       }
     },
+    "/api/v2/drift/market-depth/{contract}": {
+      "get": {
+        "summary": "Perpetuals contract orderbook",
+        "description": "Returns Drift contract's market depth data. Use limit param to reduce the number of bids/asks's data points returned",
+        "operationId": "Api_GetDriftMarketDepth",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDriftMarketDepthResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "contract",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "v2",
+          "Drift"
+        ]
+      }
+    },
     "/api/v2/drift/markets": {
       "get": {
         "summary": "drift orderbook markets",
@@ -2091,6 +2132,19 @@
         }
       }
     },
+    "apiDriftMarketDepthItem": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiGetAccountBalanceResponse": {
       "type": "object",
       "properties": {
@@ -2156,6 +2210,38 @@
         },
         "orderbook": {
           "$ref": "#/definitions/apiGetDriftMarginOrderbookResponse"
+        }
+      }
+    },
+    "apiGetDriftMarketDepthResponse": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDriftMarketDepthItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDriftMarketDepthItem"
+          }
+        }
+      }
+    },
+    "apiGetDriftMarketDepthStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Data": {
+          "$ref": "#/definitions/apiGetDriftMarketDepthResponse"
         }
       }
     },

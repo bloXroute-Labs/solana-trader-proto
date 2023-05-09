@@ -1272,6 +1272,37 @@ class DriftMarket(betterproto.Message):
     metadata: protobuf.Struct = betterproto.message_field(8)
 
 
+@dataclass
+class GetDriftMarketDepthRequest(betterproto.Message):
+    contract: str = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+
+
+@dataclass
+class GetDriftMarketDepthsStreamRequest(betterproto.Message):
+    contracts: List[str] = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+
+
+@dataclass
+class GetDriftMarketDepthStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    data: "GetDriftMarketDepthResponse" = betterproto.message_field(2)
+
+
+@dataclass
+class GetDriftMarketDepthResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    bids: List["DriftMarketDepthItem"] = betterproto.message_field(2)
+    asks: List["DriftMarketDepthItem"] = betterproto.message_field(3)
+
+
+@dataclass
+class DriftMarketDepthItem(betterproto.Message):
+    price: float = betterproto.double_field(1)
+    size: float = betterproto.double_field(2)
+
+
 class ApiStub(betterproto.ServiceStub):
     async def get_drift_markets(
         self, *, metadata: bool = False
@@ -1335,6 +1366,19 @@ class ApiStub(betterproto.ServiceStub):
             GetDriftMarginOrderbookResponse,
         )
 
+    async def get_drift_market_depth(
+        self, *, contract: str = "", limit: int = 0
+    ) -> GetDriftMarketDepthResponse:
+        request = GetDriftMarketDepthRequest()
+        request.contract = contract
+        request.limit = limit
+
+        return await self._unary_unary(
+            "/api.Api/GetDriftMarketDepth",
+            request,
+            GetDriftMarketDepthResponse,
+        )
+
     async def get_drift_margin_orderbooks_stream(
         self, *, markets: List[str] = [], limit: int = 0, metadata: bool = False
     ) -> AsyncGenerator[GetDriftMarginOrderbooksStreamResponse, None]:
@@ -1347,6 +1391,20 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetDriftMarginOrderbooksStream",
             request,
             GetDriftMarginOrderbooksStreamResponse,
+        ):
+            yield response
+
+    async def get_drift_market_depths_stream(
+        self, *, contracts: List[str] = [], limit: int = 0
+    ) -> AsyncGenerator[GetDriftMarketDepthStreamResponse, None]:
+        request = GetDriftMarketDepthsStreamRequest()
+        request.contracts = contracts
+        request.limit = limit
+
+        async for response in self._unary_stream(
+            "/api.Api/GetDriftMarketDepthsStream",
+            request,
+            GetDriftMarketDepthStreamResponse,
         ):
             yield response
 

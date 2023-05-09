@@ -88,9 +88,26 @@ service Api {
     };
   }
 
+  rpc GetDriftMarketDepth(GetDriftMarketDepthRequest) returns (GetDriftMarketDepthResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/drift/market-depth/{contract}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns Drift contract's market depth data. Use limit param to reduce the number of bids/asks's data points returned";
+      summary: "Perpetuals contract orderbook";
+      tags: ["v2", "Drift"];
+    };
+  }
+
   rpc GetDriftMarginOrderbooksStream(GetDriftMarginOrderbooksRequest) returns (stream GetDriftMarginOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["v2", "Margin", "Orderbook"];
+    };
+  }
+
+  rpc GetDriftMarketDepthsStream(GetDriftMarketDepthsStreamRequest) returns (stream GetDriftMarketDepthStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["v2", "Drift"];
     };
   }
   // end of Drift V2
@@ -1798,4 +1815,29 @@ message DriftMarket {
   google.protobuf.Struct metadata = 8;
 }
 
+message GetDriftMarketDepthRequest {
+  string contract = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+}
+
+message GetDriftMarketDepthsStreamRequest {
+  repeated string contracts = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+}
+
+message GetDriftMarketDepthStreamResponse {
+  int64 slot = 1;
+  GetDriftMarketDepthResponse Data = 2;
+}
+
+message GetDriftMarketDepthResponse {
+  string market = 1;
+  repeated DriftMarketDepthItem bids = 2;
+  repeated DriftMarketDepthItem asks = 3;
+}
+
+message DriftMarketDepthItem {
+  double price = 1;
+  double size = 2;
+}
 // end of Drift V2
