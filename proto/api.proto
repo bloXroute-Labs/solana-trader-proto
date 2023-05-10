@@ -77,6 +77,18 @@ service Api {
     };
   }
 
+  rpc PostDriftEnableMarginTrading(PostDriftEnableMarginTradingRequest)  returns (PostDriftEnableMarginTradingResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/drift/enable-margin"
+      body: "*",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Enables a margin trading on drift platform";
+      summary: "margin order";
+      tags: ["v2", "Trade", "Margin"];
+    };
+  }
+
   rpc GetDriftMarginOrderbook(GetDriftMarginOrderbookRequest) returns (GetDriftMarginOrderbookResponse) {
     option (google.api.http) = {
       get: "/api/v2/drift/margin-orderbooks/{market}"
@@ -84,7 +96,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
       summary: "Perpetuals contract orderbook";
-      tags: ["Perp", "Orderbook", "Market"];
+      tags: ["v2", "Orderbook", "Market"];
     };
   }
 
@@ -1452,6 +1464,7 @@ message UserDetail {
   string status = 1;
   uint64 subAccountId = 2;
   string accountAddress = 3;
+  string accountName = 4;
 }
 
 message PostCreateUserRequest {
@@ -1596,19 +1609,28 @@ message PostPerpOrderResponse {
 
 message PostDriftMarginOrderRequest {
   string ownerAddress = 1;
-  string payerAddress = 2;
+  string accountAddress = 2;
   string market = 3;
-  string accountAddress = 4;
-  string positionSide = 5;
-  double slippage = 6;
-  string type = 7;
-  double amount = 8;
-  double price = 9;
-  uint64 clientOrderID = 10;
-  common.PostOnlyParams postOnly = 11;
+  string positionSide = 4;
+  double slippage = 5;
+  string type = 6;
+  double amount = 7;
+  double price = 8;
+  uint64 clientOrderID = 9;
+  common.PostOnlyParams postOnly = 10;
 }
 
 message PostDriftMarginOrderResponse {
+  TransactionMessage transaction = 1;
+}
+
+message PostDriftEnableMarginTradingRequest {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  bool enableMargin = 3;
+}
+
+message PostDriftEnableMarginTradingResponse {
   TransactionMessage transaction = 1;
 }
 
@@ -1733,13 +1755,11 @@ message GetPerpContractsRequest {
 message ContractInfo {
   common.PerpContract contract = 1;
   string contractAddress = 2;
-  double openLongInterest = 3;
-  double openShortInterest = 4;
-  double fundingRate = 5;
-  double minSize = 6;
-  double perpPrice = 7;
-  double indexPrice = 8;
-  double openInterest = 9;
+  double fundingRate = 3;
+  double minSize = 4;
+  double perpPrice = 5;
+  double indexPrice = 6;
+  double openInterest = 7;
 }
 
 message GetPerpContractsResponse {
@@ -1789,12 +1809,11 @@ message GetDriftMarginOrderbookResponse {
 message DriftMarginOrderbookItem {
   double price = 1;
   double size = 2;
-  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Drift generated OrderID"}];
   uint64 clientOrderID = 4;
-  string ownerAddress = 5[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "OpenOrders address for current market"}];
+  string ownerAddress = 5;
   google.protobuf.Struct metadata = 6;
 }
-
 
 message GetDriftMarketsRequest {
   bool metadata = 1;

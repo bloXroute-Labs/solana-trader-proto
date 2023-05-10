@@ -1781,6 +1781,42 @@
         ]
       }
     },
+    "/api/v2/drift/enable-margin": {
+      "post": {
+        "summary": "margin order",
+        "description": "Enables a margin trading on drift platform",
+        "operationId": "Api_PostDriftEnableMarginTrading",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftEnableMarginTradingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftEnableMarginTradingRequest"
+            }
+          }
+        ],
+        "tags": [
+          "v2",
+          "Trade",
+          "Margin"
+        ]
+      }
+    },
     "/api/v2/drift/margin-orderbooks/{market}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
@@ -1823,7 +1859,7 @@
           }
         ],
         "tags": [
-          "Perp",
+          "v2",
           "Orderbook",
           "Market"
         ]
@@ -2035,14 +2071,6 @@
         "contractAddress": {
           "type": "string"
         },
-        "openLongInterest": {
-          "type": "number",
-          "format": "double"
-        },
-        "openShortInterest": {
-          "type": "number",
-          "format": "double"
-        },
         "fundingRate": {
           "type": "number",
           "format": "double"
@@ -2086,15 +2114,14 @@
         },
         "orderID": {
           "type": "string",
-          "description": "Serum generated OrderID"
+          "description": "Drift generated OrderID"
         },
         "clientOrderID": {
           "type": "string",
           "format": "uint64"
         },
         "ownerAddress": {
-          "type": "string",
-          "description": "OpenOrders address for current market"
+          "type": "string"
         },
         "metadata": {
           "type": "object"
@@ -3502,19 +3529,38 @@
         }
       }
     },
+    "apiPostDriftEnableMarginTradingRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "enableMargin": {
+          "type": "boolean"
+        }
+      }
+    },
+    "apiPostDriftEnableMarginTradingResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
     "apiPostDriftMarginOrderRequest": {
       "type": "object",
       "properties": {
         "ownerAddress": {
           "type": "string"
         },
-        "payerAddress": {
+        "accountAddress": {
           "type": "string"
         },
         "market": {
-          "type": "string"
-        },
-        "accountAddress": {
           "type": "string"
         },
         "positionSide": {
@@ -4460,6 +4506,9 @@
           "format": "uint64"
         },
         "accountAddress": {
+          "type": "string"
+        },
+        "accountName": {
           "type": "string"
         }
       }

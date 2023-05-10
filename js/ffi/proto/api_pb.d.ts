@@ -3099,6 +3099,8 @@ export class UserDetail extends jspb.Message {
     setSubaccountid(value: number): UserDetail;
     getAccountaddress(): string;
     setAccountaddress(value: string): UserDetail;
+    getAccountname(): string;
+    setAccountname(value: string): UserDetail;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): UserDetail.AsObject;
@@ -3115,6 +3117,7 @@ export namespace UserDetail {
         status: string,
         subaccountid: number,
         accountaddress: string,
+        accountname: string,
     }
 }
 
@@ -3687,12 +3690,10 @@ export namespace PostPerpOrderResponse {
 export class PostDriftMarginOrderRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): PostDriftMarginOrderRequest;
-    getPayeraddress(): string;
-    setPayeraddress(value: string): PostDriftMarginOrderRequest;
-    getMarket(): string;
-    setMarket(value: string): PostDriftMarginOrderRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): PostDriftMarginOrderRequest;
+    getMarket(): string;
+    setMarket(value: string): PostDriftMarginOrderRequest;
     getPositionside(): string;
     setPositionside(value: string): PostDriftMarginOrderRequest;
     getSlippage(): number;
@@ -3721,9 +3722,8 @@ export class PostDriftMarginOrderRequest extends jspb.Message {
 export namespace PostDriftMarginOrderRequest {
     export type AsObject = {
         owneraddress: string,
-        payeraddress: string,
-        market: string,
         accountaddress: string,
+        market: string,
         positionside: string,
         slippage: number,
         type: string,
@@ -3752,6 +3752,55 @@ export class PostDriftMarginOrderResponse extends jspb.Message {
 }
 
 export namespace PostDriftMarginOrderResponse {
+    export type AsObject = {
+        transaction?: TransactionMessage.AsObject,
+    }
+}
+
+export class PostDriftEnableMarginTradingRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostDriftEnableMarginTradingRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostDriftEnableMarginTradingRequest;
+    getEnablemargin(): boolean;
+    setEnablemargin(value: boolean): PostDriftEnableMarginTradingRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftEnableMarginTradingRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftEnableMarginTradingRequest): PostDriftEnableMarginTradingRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftEnableMarginTradingRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftEnableMarginTradingRequest;
+    static deserializeBinaryFromReader(message: PostDriftEnableMarginTradingRequest, reader: jspb.BinaryReader): PostDriftEnableMarginTradingRequest;
+}
+
+export namespace PostDriftEnableMarginTradingRequest {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        enablemargin: boolean,
+    }
+}
+
+export class PostDriftEnableMarginTradingResponse extends jspb.Message { 
+
+    hasTransaction(): boolean;
+    clearTransaction(): void;
+    getTransaction(): TransactionMessage | undefined;
+    setTransaction(value?: TransactionMessage): PostDriftEnableMarginTradingResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftEnableMarginTradingResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftEnableMarginTradingResponse): PostDriftEnableMarginTradingResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftEnableMarginTradingResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftEnableMarginTradingResponse;
+    static deserializeBinaryFromReader(message: PostDriftEnableMarginTradingResponse, reader: jspb.BinaryReader): PostDriftEnableMarginTradingResponse;
+}
+
+export namespace PostDriftEnableMarginTradingResponse {
     export type AsObject = {
         transaction?: TransactionMessage.AsObject,
     }
@@ -4249,10 +4298,6 @@ export class ContractInfo extends jspb.Message {
     setContract(value: common_pb.PerpContract): ContractInfo;
     getContractaddress(): string;
     setContractaddress(value: string): ContractInfo;
-    getOpenlonginterest(): number;
-    setOpenlonginterest(value: number): ContractInfo;
-    getOpenshortinterest(): number;
-    setOpenshortinterest(value: number): ContractInfo;
     getFundingrate(): number;
     setFundingrate(value: number): ContractInfo;
     getMinsize(): number;
@@ -4278,8 +4323,6 @@ export namespace ContractInfo {
     export type AsObject = {
         contract: common_pb.PerpContract,
         contractaddress: string,
-        openlonginterest: number,
-        openshortinterest: number,
         fundingrate: number,
         minsize: number,
         perpprice: number,

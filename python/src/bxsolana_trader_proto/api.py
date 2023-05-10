@@ -863,6 +863,7 @@ class UserDetail(betterproto.Message):
     status: str = betterproto.string_field(1)
     sub_account_id: int = betterproto.uint64_field(2)
     account_address: str = betterproto.string_field(3)
+    account_name: str = betterproto.string_field(4)
 
 
 @dataclass
@@ -1018,20 +1019,31 @@ class PostPerpOrderResponse(betterproto.Message):
 @dataclass
 class PostDriftMarginOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    payer_address: str = betterproto.string_field(2)
+    account_address: str = betterproto.string_field(2)
     market: str = betterproto.string_field(3)
-    account_address: str = betterproto.string_field(4)
-    position_side: str = betterproto.string_field(5)
-    slippage: float = betterproto.double_field(6)
-    type: str = betterproto.string_field(7)
-    amount: float = betterproto.double_field(8)
-    price: float = betterproto.double_field(9)
-    client_order_i_d: int = betterproto.uint64_field(10)
-    post_only: common.PostOnlyParams = betterproto.enum_field(11)
+    position_side: str = betterproto.string_field(4)
+    slippage: float = betterproto.double_field(5)
+    type: str = betterproto.string_field(6)
+    amount: float = betterproto.double_field(7)
+    price: float = betterproto.double_field(8)
+    client_order_i_d: int = betterproto.uint64_field(9)
+    post_only: common.PostOnlyParams = betterproto.enum_field(10)
 
 
 @dataclass
 class PostDriftMarginOrderResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass
+class PostDriftEnableMarginTradingRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    enable_margin: bool = betterproto.bool_field(3)
+
+
+@dataclass
+class PostDriftEnableMarginTradingResponse(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
@@ -1178,13 +1190,11 @@ class GetPerpContractsRequest(betterproto.Message):
 class ContractInfo(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(1)
     contract_address: str = betterproto.string_field(2)
-    open_long_interest: float = betterproto.double_field(3)
-    open_short_interest: float = betterproto.double_field(4)
-    funding_rate: float = betterproto.double_field(5)
-    min_size: float = betterproto.double_field(6)
-    perp_price: float = betterproto.double_field(7)
-    index_price: float = betterproto.double_field(8)
-    open_interest: float = betterproto.double_field(9)
+    funding_rate: float = betterproto.double_field(3)
+    min_size: float = betterproto.double_field(4)
+    perp_price: float = betterproto.double_field(5)
+    index_price: float = betterproto.double_field(6)
+    open_interest: float = betterproto.double_field(7)
 
 
 @dataclass
@@ -1322,9 +1332,8 @@ class ApiStub(betterproto.ServiceStub):
         self,
         *,
         owner_address: str = "",
-        payer_address: str = "",
-        market: str = "",
         account_address: str = "",
+        market: str = "",
         position_side: str = "",
         slippage: float = 0,
         type: str = "",
@@ -1335,9 +1344,8 @@ class ApiStub(betterproto.ServiceStub):
     ) -> PostDriftMarginOrderResponse:
         request = PostDriftMarginOrderRequest()
         request.owner_address = owner_address
-        request.payer_address = payer_address
-        request.market = market
         request.account_address = account_address
+        request.market = market
         request.position_side = position_side
         request.slippage = slippage
         request.type = type
@@ -1350,6 +1358,24 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostDriftMarginOrder",
             request,
             PostDriftMarginOrderResponse,
+        )
+
+    async def post_drift_enable_margin_trading(
+        self,
+        *,
+        owner_address: str = "",
+        account_address: str = "",
+        enable_margin: bool = False,
+    ) -> PostDriftEnableMarginTradingResponse:
+        request = PostDriftEnableMarginTradingRequest()
+        request.owner_address = owner_address
+        request.account_address = account_address
+        request.enable_margin = enable_margin
+
+        return await self._unary_unary(
+            "/api.Api/PostDriftEnableMarginTrading",
+            request,
+            PostDriftEnableMarginTradingResponse,
         )
 
     async def get_drift_margin_orderbook(

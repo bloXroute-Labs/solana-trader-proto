@@ -1056,6 +1056,28 @@ function deserialize_api_PostCreateUserResponse(buffer_arg) {
   return api_pb.PostCreateUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostDriftEnableMarginTradingRequest(arg) {
+  if (!(arg instanceof api_pb.PostDriftEnableMarginTradingRequest)) {
+    throw new Error('Expected argument of type api.PostDriftEnableMarginTradingRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDriftEnableMarginTradingRequest(buffer_arg) {
+  return api_pb.PostDriftEnableMarginTradingRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostDriftEnableMarginTradingResponse(arg) {
+  if (!(arg instanceof api_pb.PostDriftEnableMarginTradingResponse)) {
+    throw new Error('Expected argument of type api.PostDriftEnableMarginTradingResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDriftEnableMarginTradingResponse(buffer_arg) {
+  return api_pb.PostDriftEnableMarginTradingResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostDriftMarginOrderRequest(arg) {
   if (!(arg instanceof api_pb.PostDriftMarginOrderRequest)) {
     throw new Error('Expected argument of type api.PostDriftMarginOrderRequest');
@@ -1344,6 +1366,17 @@ getDriftMarkets: {
     requestDeserialize: deserialize_api_PostDriftMarginOrderRequest,
     responseSerialize: serialize_api_PostDriftMarginOrderResponse,
     responseDeserialize: deserialize_api_PostDriftMarginOrderResponse,
+  },
+  postDriftEnableMarginTrading: {
+    path: '/api.Api/PostDriftEnableMarginTrading',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostDriftEnableMarginTradingRequest,
+    responseType: api_pb.PostDriftEnableMarginTradingResponse,
+    requestSerialize: serialize_api_PostDriftEnableMarginTradingRequest,
+    requestDeserialize: deserialize_api_PostDriftEnableMarginTradingRequest,
+    responseSerialize: serialize_api_PostDriftEnableMarginTradingResponse,
+    responseDeserialize: deserialize_api_PostDriftEnableMarginTradingResponse,
   },
   getDriftMarginOrderbook: {
     path: '/api.Api/GetDriftMarginOrderbook',
