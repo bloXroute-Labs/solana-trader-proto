@@ -4298,10 +4298,6 @@ export class ContractInfo extends jspb.Message {
     setContract(value: common_pb.PerpContract): ContractInfo;
     getContractaddress(): string;
     setContractaddress(value: string): ContractInfo;
-    getOpenlonginterest(): number;
-    setOpenlonginterest(value: number): ContractInfo;
-    getOpenshortinterest(): number;
-    setOpenshortinterest(value: number): ContractInfo;
     getFundingrate(): number;
     setFundingrate(value: number): ContractInfo;
     getMinsize(): number;
@@ -4327,8 +4323,6 @@ export namespace ContractInfo {
     export type AsObject = {
         contract: common_pb.PerpContract,
         contractaddress: string,
-        openlonginterest: number,
-        openshortinterest: number,
         fundingrate: number,
         minsize: number,
         perpprice: number,

@@ -1755,13 +1755,11 @@ message GetPerpContractsRequest {
 message ContractInfo {
   common.PerpContract contract = 1;
   string contractAddress = 2;
-  double openLongInterest = 3;
-  double openShortInterest = 4;
-  double fundingRate = 5;
-  double minSize = 6;
-  double perpPrice = 7;
-  double indexPrice = 8;
-  double openInterest = 9;
+  double fundingRate = 3;
+  double minSize = 4;
+  double perpPrice = 5;
+  double indexPrice = 6;
+  double openInterest = 7;
 }
 
 message GetPerpContractsResponse {

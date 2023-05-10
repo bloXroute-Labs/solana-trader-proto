@@ -1190,13 +1190,11 @@ class GetPerpContractsRequest(betterproto.Message):
 class ContractInfo(betterproto.Message):
     contract: common.PerpContract = betterproto.enum_field(1)
     contract_address: str = betterproto.string_field(2)
-    open_long_interest: float = betterproto.double_field(3)
-    open_short_interest: float = betterproto.double_field(4)
-    funding_rate: float = betterproto.double_field(5)
-    min_size: float = betterproto.double_field(6)
-    perp_price: float = betterproto.double_field(7)
-    index_price: float = betterproto.double_field(8)
-    open_interest: float = betterproto.double_field(9)
+    funding_rate: float = betterproto.double_field(3)
+    min_size: float = betterproto.double_field(4)
+    perp_price: float = betterproto.double_field(5)
+    index_price: float = betterproto.double_field(6)
+    open_interest: float = betterproto.double_field(7)
 
 
 @dataclass

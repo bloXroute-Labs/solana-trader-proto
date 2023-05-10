@@ -2071,14 +2071,6 @@
         "contractAddress": {
           "type": "string"
         },
-        "openLongInterest": {
-          "type": "number",
-          "format": "double"
-        },
-        "openShortInterest": {
-          "type": "number",
-          "format": "double"
-        },
         "fundingRate": {
           "type": "number",
           "format": "double"
