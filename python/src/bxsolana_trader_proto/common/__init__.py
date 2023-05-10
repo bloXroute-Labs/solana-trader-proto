@@ -73,13 +73,13 @@ class Infinity(betterproto.Enum):
     INF_NEGATIVE = 2
 
 
-@dataclass
+@dataclass(eq=False, repr=False)
 class PriceImpactPercent(betterproto.Message):
     percent: float = betterproto.double_field(1)
     infinity: "Infinity" = betterproto.enum_field(2)
 
 
-@dataclass
+@dataclass(eq=False, repr=False)
 class Fee(betterproto.Message):
     amount: float = betterproto.float_field(1)
     mint: str = betterproto.string_field(2)
