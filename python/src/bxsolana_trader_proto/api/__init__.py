@@ -1743,6 +1743,7 @@ class ApiStub(betterproto.ServiceStub):
     async def post_cancel_by_client_order_id(
         self,
         *,
+        post_cancel_by_client_order_id_request: "PostCancelByClientOrderIdRequest",
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
@@ -1878,6 +1879,7 @@ class ApiStub(betterproto.ServiceStub):
     async def get_order_by_id(
         self,
         *,
+        get_order_by_id_request: "GetOrderByIdRequest",
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
@@ -2098,6 +2100,7 @@ class ApiStub(betterproto.ServiceStub):
     async def post_settle_pnl(
         self,
         *,
+        post_settle_pnl_request: "PostSettlePnlRequest",
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
@@ -2114,6 +2117,7 @@ class ApiStub(betterproto.ServiceStub):
     async def post_settle_pn_ls(
         self,
         *,
+        post_settle_pn_ls_request: "PostSettlePnlRequest",
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
