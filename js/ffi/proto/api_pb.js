@@ -38270,7 +38270,7 @@ proto.api.DriftMarginOrderbookItem.toObject = function(includeInstance, msg) {
     orderid: jspb.Message.getFieldWithDefault(msg, 3, ""),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 4, 0),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    metadata: (f = msg.getMetadata()) && google_protobuf_struct_pb.Struct.toObject(includeInstance, f)
+    metadataMap: (f = msg.getMetadataMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {
@@ -38328,9 +38328,10 @@ proto.api.DriftMarginOrderbookItem.deserializeBinaryFromReader = function(msg, r
       msg.setOwneraddress(value);
       break;
     case 6:
-      var value = new google_protobuf_struct_pb.Struct;
-      reader.readMessage(value,google_protobuf_struct_pb.Struct.deserializeBinaryFromReader);
-      msg.setMetadata(value);
+      var value = msg.getMetadataMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString, null, "", "");
+         });
       break;
     default:
       reader.skipField();
@@ -38396,13 +38397,9 @@ proto.api.DriftMarginOrderbookItem.serializeBinaryToWriter = function(message, w
       f
     );
   }
-  f = message.getMetadata();
-  if (f != null) {
-    writer.writeMessage(
-      6,
-      f,
-      google_protobuf_struct_pb.Struct.serializeBinaryToWriter
-    );
+  f = message.getMetadataMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(6, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeString);
   }
 };
 
@@ -38498,40 +38495,25 @@ proto.api.DriftMarginOrderbookItem.prototype.setOwneraddress = function(value) {
 
 
 /**
- * optional google.protobuf.Struct metadata = 6;
- * @return {?proto.google.protobuf.Struct}
+ * map<string, string> metadata = 6;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,string>}
  */
-proto.api.DriftMarginOrderbookItem.prototype.getMetadata = function() {
-  return /** @type{?proto.google.protobuf.Struct} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_struct_pb.Struct, 6));
+proto.api.DriftMarginOrderbookItem.prototype.getMetadataMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,string>} */ (
+      jspb.Message.getMapField(this, 6, opt_noLazyCreate,
+      null));
 };
 
 
 /**
- * @param {?proto.google.protobuf.Struct|undefined} value
- * @return {!proto.api.DriftMarginOrderbookItem} returns this
-*/
-proto.api.DriftMarginOrderbookItem.prototype.setMetadata = function(value) {
-  return jspb.Message.setWrapperField(this, 6, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
+ * Clears values from the map. The map will be non-null.
  * @return {!proto.api.DriftMarginOrderbookItem} returns this
  */
-proto.api.DriftMarginOrderbookItem.prototype.clearMetadata = function() {
-  return this.setMetadata(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.api.DriftMarginOrderbookItem.prototype.hasMetadata = function() {
-  return jspb.Message.getField(this, 6) != null;
-};
+proto.api.DriftMarginOrderbookItem.prototype.clearMetadataMap = function() {
+  this.getMetadataMap().clear();
+  return this;};
 
 
 
@@ -38836,7 +38818,7 @@ proto.api.DriftMarket.toObject = function(includeInstance, msg) {
     quotedmint: jspb.Message.getFieldWithDefault(msg, 5, ""),
     basedecimals: jspb.Message.getFieldWithDefault(msg, 6, 0),
     quotedecimals: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    metadata: (f = msg.getMetadata()) && google_protobuf_struct_pb.Struct.toObject(includeInstance, f)
+    metadataMap: (f = msg.getMetadataMap()) ? f.toObject(includeInstance, undefined) : []
   };
 
   if (includeInstance) {
@@ -38902,9 +38884,10 @@ proto.api.DriftMarket.deserializeBinaryFromReader = function(msg, reader) {
       msg.setQuotedecimals(value);
       break;
     case 8:
-      var value = new google_protobuf_struct_pb.Struct;
-      reader.readMessage(value,google_protobuf_struct_pb.Struct.deserializeBinaryFromReader);
-      msg.setMetadata(value);
+      var value = msg.getMetadataMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readString, null, "", "");
+         });
       break;
     default:
       reader.skipField();
@@ -38984,13 +38967,9 @@ proto.api.DriftMarket.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getMetadata();
-  if (f != null) {
-    writer.writeMessage(
-      8,
-      f,
-      google_protobuf_struct_pb.Struct.serializeBinaryToWriter
-    );
+  f = message.getMetadataMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(8, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeString);
   }
 };
 
@@ -39122,40 +39101,25 @@ proto.api.DriftMarket.prototype.setQuotedecimals = function(value) {
 
 
 /**
- * optional google.protobuf.Struct metadata = 8;
- * @return {?proto.google.protobuf.Struct}
+ * map<string, string> metadata = 8;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,string>}
  */
-proto.api.DriftMarket.prototype.getMetadata = function() {
-  return /** @type{?proto.google.protobuf.Struct} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_struct_pb.Struct, 8));
+proto.api.DriftMarket.prototype.getMetadataMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,string>} */ (
+      jspb.Message.getMapField(this, 8, opt_noLazyCreate,
+      null));
 };
 
 
 /**
- * @param {?proto.google.protobuf.Struct|undefined} value
- * @return {!proto.api.DriftMarket} returns this
-*/
-proto.api.DriftMarket.prototype.setMetadata = function(value) {
-  return jspb.Message.setWrapperField(this, 8, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
+ * Clears values from the map. The map will be non-null.
  * @return {!proto.api.DriftMarket} returns this
  */
-proto.api.DriftMarket.prototype.clearMetadata = function() {
-  return this.setMetadata(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.api.DriftMarket.prototype.hasMetadata = function() {
-  return jspb.Message.getField(this, 8) != null;
-};
+proto.api.DriftMarket.prototype.clearMetadataMap = function() {
+  this.getMetadataMap().clear();
+  return this;};
 
 
 

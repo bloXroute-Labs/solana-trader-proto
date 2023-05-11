@@ -4539,10 +4539,8 @@ export class DriftMarginOrderbookItem extends jspb.Message {
     getOwneraddress(): string;
     setOwneraddress(value: string): DriftMarginOrderbookItem;
 
-    hasMetadata(): boolean;
-    clearMetadata(): void;
-    getMetadata(): google_protobuf_struct_pb.Struct | undefined;
-    setMetadata(value?: google_protobuf_struct_pb.Struct): DriftMarginOrderbookItem;
+    getMetadataMap(): jspb.Map<string, string>;
+    clearMetadataMap(): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): DriftMarginOrderbookItem.AsObject;
@@ -4561,7 +4559,8 @@ export namespace DriftMarginOrderbookItem {
         orderid: string,
         clientorderid: number,
         owneraddress: string,
-        metadata?: google_protobuf_struct_pb.Struct.AsObject,
+
+        metadataMap: Array<[string, string]>,
     }
 }
 
@@ -4623,10 +4622,8 @@ export class DriftMarket extends jspb.Message {
     getQuotedecimals(): number;
     setQuotedecimals(value: number): DriftMarket;
 
-    hasMetadata(): boolean;
-    clearMetadata(): void;
-    getMetadata(): google_protobuf_struct_pb.Struct | undefined;
-    setMetadata(value?: google_protobuf_struct_pb.Struct): DriftMarket;
+    getMetadataMap(): jspb.Map<string, string>;
+    clearMetadataMap(): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): DriftMarket.AsObject;
@@ -4647,7 +4644,8 @@ export namespace DriftMarket {
         quotedmint: string,
         basedecimals: number,
         quotedecimals: number,
-        metadata?: google_protobuf_struct_pb.Struct.AsObject,
+
+        metadataMap: Array<[string, string]>,
     }
 }
 
