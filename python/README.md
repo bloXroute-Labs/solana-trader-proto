@@ -17,7 +17,7 @@
     async def post_settle_pn_ls(
         self,
         *,
-        post_settle_pn_ls_request: "PostSettlePnlRequest",
+        post_settle_pn_ls_request: "PostSettlePnLsRequest",
 
     async def post_settle_pnl(
         self,

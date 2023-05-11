@@ -2117,7 +2117,7 @@ class ApiStub(betterproto.ServiceStub):
     async def post_settle_pn_ls(
         self,
         *,
-        post_settle_pn_ls_request: "PostSettlePnlRequest",
+        post_settle_pn_ls_request: "PostSettlePnLsRequest",
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
