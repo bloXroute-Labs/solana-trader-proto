@@ -1812,7 +1812,7 @@ message DriftMarginOrderbookItem {
   string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Drift generated OrderID"}];
   uint64 clientOrderID = 4;
   string ownerAddress = 5;
-  google.protobuf.Struct metadata = 6;
+  map<string, string> metadata = 6;
 }
 
 message GetDriftMarketsRequest {
@@ -1831,7 +1831,7 @@ message DriftMarket {
   string quotedMint = 5;
   int64 baseDecimals = 6;
   int64 quoteDecimals = 7;
-  google.protobuf.Struct metadata = 8;
+  map<string, string> metadata = 8;
 }
 
 message GetDriftMarketDepthRequest {
