@@ -1011,16 +1011,15 @@ class PerpPosition(betterproto.Message):
 class PostPerpOrderRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
-    payer_address: str = betterproto.string_field(3)
-    contract: "_common__.PerpContract" = betterproto.enum_field(4)
-    account_address: str = betterproto.string_field(5)
-    position_side: "_common__.PerpPositionSide" = betterproto.enum_field(6)
-    slippage: float = betterproto.double_field(7)
-    type: "_common__.PerpOrderType" = betterproto.enum_field(8)
-    amount: float = betterproto.double_field(9)
-    price: float = betterproto.double_field(10)
-    client_order_id: int = betterproto.uint64_field(11)
-    post_only: "_common__.PostOnlyParams" = betterproto.enum_field(12)
+    contract: "_common__.PerpContract" = betterproto.enum_field(3)
+    account_address: str = betterproto.string_field(4)
+    position_side: "_common__.PerpPositionSide" = betterproto.enum_field(5)
+    slippage: float = betterproto.double_field(6)
+    type: "_common__.PerpOrderType" = betterproto.enum_field(7)
+    amount: float = betterproto.double_field(8)
+    price: float = betterproto.double_field(9)
+    client_order_id: int = betterproto.uint64_field(10)
+    post_only: "_common__.PostOnlyParams" = betterproto.enum_field(11)
 
 
 @dataclass(eq=False, repr=False)
@@ -1743,7 +1742,6 @@ class ApiStub(betterproto.ServiceStub):
     async def post_cancel_by_client_order_id(
         self,
         *,
-        post_cancel_by_client_order_id_request: "PostCancelByClientOrderIdRequest",
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
@@ -1879,7 +1877,6 @@ class ApiStub(betterproto.ServiceStub):
     async def get_order_by_id(
         self,
         *,
-        get_order_by_id_request: "GetOrderByIdRequest",
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
@@ -2100,7 +2097,6 @@ class ApiStub(betterproto.ServiceStub):
     async def post_settle_pnl(
         self,
         *,
-        post_settle_pnl_request: "PostSettlePnlRequest",
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
@@ -2117,7 +2113,6 @@ class ApiStub(betterproto.ServiceStub):
     async def post_settle_pn_ls(
         self,
         *,
-        post_settle_pn_ls_request: "PostSettlePnLsRequest",
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None

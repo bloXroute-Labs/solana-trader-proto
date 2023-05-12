@@ -1591,16 +1591,15 @@ message PerpPosition {
 message PostPerpOrderRequest {
   Project project = 1;
   string ownerAddress = 2;
-  string payerAddress = 3;
-  common.PerpContract contract = 4;
-  string accountAddress = 5;
-  common.PerpPositionSide positionSide = 6;
-  double slippage = 7;
-  common.PerpOrderType type = 8;
-  double amount = 9;
-  double price = 10;
-  uint64 clientOrderID = 11;
-  common.PostOnlyParams postOnly = 12;
+  common.PerpContract contract = 3;
+  string accountAddress = 4;
+  common.PerpPositionSide positionSide = 5;
+  double slippage = 6;
+  common.PerpOrderType type = 7;
+  double amount = 8;
+  double price = 9;
+  uint64 clientOrderID = 10;
+  common.PostOnlyParams postOnly = 11;
 }
 
 message PostPerpOrderResponse {

@@ -3616,8 +3616,6 @@ export class PostPerpOrderRequest extends jspb.Message {
     setProject(value: Project): PostPerpOrderRequest;
     getOwneraddress(): string;
     setOwneraddress(value: string): PostPerpOrderRequest;
-    getPayeraddress(): string;
-    setPayeraddress(value: string): PostPerpOrderRequest;
     getContract(): common_pb.PerpContract;
     setContract(value: common_pb.PerpContract): PostPerpOrderRequest;
     getAccountaddress(): string;
@@ -3651,7 +3649,6 @@ export namespace PostPerpOrderRequest {
     export type AsObject = {
         project: Project,
         owneraddress: string,
-        payeraddress: string,
         contract: common_pb.PerpContract,
         accountaddress: string,
         positionside: common_pb.PerpPositionSide,
