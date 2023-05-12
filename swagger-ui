@@ -3754,9 +3754,6 @@
         "ownerAddress": {
           "type": "string"
         },
-        "payerAddress": {
-          "type": "string"
-        },
         "contract": {
           "$ref": "#/definitions/commonPerpContract"
         },
