@@ -672,6 +672,7 @@ class GetBlockStreamResponse(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetPoolsRequest(betterproto.Message):
     projects: List["Project"] = betterproto.enum_field(1)
+    pair_or_address: str = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -797,6 +798,7 @@ class PoolReserves(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetPoolReservesStreamRequest(betterproto.Message):
     projects: List["Project"] = betterproto.enum_field(1)
+    pair_or_address: str = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)

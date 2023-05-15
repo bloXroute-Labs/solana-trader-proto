@@ -21065,7 +21065,8 @@ proto.api.GetPoolsRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.api.GetPoolsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    projectsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+    projectsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+    pairoraddress: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -21108,6 +21109,10 @@ proto.api.GetPoolsRequest.deserializeBinaryFromReader = function(msg, reader) {
         msg.addProjects(values[i]);
       }
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPairoraddress(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -21141,6 +21146,13 @@ proto.api.GetPoolsRequest.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writePackedEnum(
       1,
+      f
+    );
+  }
+  f = message.getPairoraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
       f
     );
   }
@@ -21181,6 +21193,24 @@ proto.api.GetPoolsRequest.prototype.addProjects = function(value, opt_index) {
  */
 proto.api.GetPoolsRequest.prototype.clearProjectsList = function() {
   return this.setProjectsList([]);
+};
+
+
+/**
+ * optional string pairOrAddress = 2;
+ * @return {string}
+ */
+proto.api.GetPoolsRequest.prototype.getPairoraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetPoolsRequest} returns this
+ */
+proto.api.GetPoolsRequest.prototype.setPairoraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -24800,7 +24830,8 @@ proto.api.GetPoolReservesStreamRequest.prototype.toObject = function(opt_include
  */
 proto.api.GetPoolReservesStreamRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    projectsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+    projectsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
+    pairoraddress: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -24843,6 +24874,10 @@ proto.api.GetPoolReservesStreamRequest.deserializeBinaryFromReader = function(ms
         msg.addProjects(values[i]);
       }
       break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPairoraddress(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -24876,6 +24911,13 @@ proto.api.GetPoolReservesStreamRequest.serializeBinaryToWriter = function(messag
   if (f.length > 0) {
     writer.writePackedEnum(
       1,
+      f
+    );
+  }
+  f = message.getPairoraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
       f
     );
   }
@@ -24916,6 +24958,24 @@ proto.api.GetPoolReservesStreamRequest.prototype.addProjects = function(value, o
  */
 proto.api.GetPoolReservesStreamRequest.prototype.clearProjectsList = function() {
   return this.setProjectsList([]);
+};
+
+
+/**
+ * optional string pairOrAddress = 2;
+ * @return {string}
+ */
+proto.api.GetPoolReservesStreamRequest.prototype.getPairoraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetPoolReservesStreamRequest} returns this
+ */
+proto.api.GetPoolReservesStreamRequest.prototype.setPairoraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
