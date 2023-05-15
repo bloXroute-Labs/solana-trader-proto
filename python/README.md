@@ -2,7 +2,7 @@
 
 # fixing compilation issues in latest proto generated files
 
-    fix the 3rd arguments in methods below
+    fix the 3rd arguments in methods below in src/bxsolana_trader_proto/api/___init___.py
     
     async def post_cancel_by_client_order_id(
         self,
@@ -34,7 +34,9 @@
     you can install package locally before uploading it to the pypi
     pip install dist/bxsolana-trader-proto-0.0.25.tar.gz
 
+    (Don't forget to fix the proto compilation issues before building and releasing)
     python3 -m twine upload --repository pypi dist/*
+
 
 
 #issues
