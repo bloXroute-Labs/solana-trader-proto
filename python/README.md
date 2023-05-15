@@ -1,30 +1,17 @@
-# Solana-Trader-Python-Proto package
+# solana-trader-proto-python package
 
-# fixing compilation issues in latest proto generated files
+## Running
 
-    fix the 3rd arguments in methods below in src/bxsolana_trader_proto/api/___init___.py
-    
-    async def post_cancel_by_client_order_id(
-        self,
-        *,
-        post_cancel_by_client_order_id_request: "PostCancelByClientOrderIdRequest",
+Install dependencies:
+```
+$ pip install -r requirements.txt
+```
 
-    async def get_order_by_id(
-        self,
-        *,
-        get_order_by_id_request: "GetOrderByIdRequest",
+You should probably create a separate `virtualenv` for this, since this project
+relies on a specific version of `betterproto`.
 
-    async def post_settle_pn_ls(
-        self,
-        *,
-        post_settle_pn_ls_request: "PostSettlePnLsRequest",
+## Publishing
 
-    async def post_settle_pnl(
-        self,
-        *,
-        post_settle_pnl_request: "PostSettlePnlRequest",
-
-# publishing solana-trader-python-proto package
     python3 -m pip install --user --upgrade twine
 
     upgrade the version in pyproject.toml
@@ -38,7 +25,7 @@
     python3 -m twine upload --repository pypi dist/*
 
 
+## Issues
 
-#issues
-    if you encounter any issues related to the above python3 commands reffer to this page for steps to setup your local machine 
+    if you encounter any issues related to the above python3 commands refer to this page for steps to setup your local machine 
     [https://packaging.python.org/en/latest/tutorials/packaging-projects/](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
