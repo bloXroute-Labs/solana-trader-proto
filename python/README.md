@@ -32,9 +32,9 @@
     rm -rf dist/ && python3 -m build
 
     you can install package locally before uploading it to the pypi
-    pip install dist/bxsolana-trader-proto-0.0.25.tar.gz
+    pip install dist/bxsolana-trader-proto-0.0.26.tar.gz
 
-    (Don't forget to fix the proto compilation issues before building and releasing)
+    (Don't forget to fix the proto compilation issues before releasing)
     python3 -m twine upload --repository pypi dist/*
 
 
