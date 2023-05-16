@@ -1535,7 +1535,7 @@ message GetDriftOpenMarginOrdersRequest {
 
 message GetDriftOpenMarginOrdersResponse {
   string ownerAddress = 1;
-  repeated PerpOrder orders = 2;
+  repeated DriftMarginOrder orders = 2;
 }
 
 message GetOpenPerpOrdersRequest {

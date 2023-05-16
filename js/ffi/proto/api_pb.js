@@ -29283,7 +29283,7 @@ proto.api.GetDriftOpenMarginOrdersResponse.toObject = function(includeInstance, 
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     ordersList: jspb.Message.toObjectList(msg.getOrdersList(),
-    proto.api.PerpOrder.toObject, includeInstance)
+    proto.api.DriftMarginOrder.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -29325,8 +29325,8 @@ proto.api.GetDriftOpenMarginOrdersResponse.deserializeBinaryFromReader = functio
       msg.setOwneraddress(value);
       break;
     case 2:
-      var value = new proto.api.PerpOrder;
-      reader.readMessage(value,proto.api.PerpOrder.deserializeBinaryFromReader);
+      var value = new proto.api.DriftMarginOrder;
+      reader.readMessage(value,proto.api.DriftMarginOrder.deserializeBinaryFromReader);
       msg.addOrders(value);
       break;
     default:
@@ -29370,7 +29370,7 @@ proto.api.GetDriftOpenMarginOrdersResponse.serializeBinaryToWriter = function(me
     writer.writeRepeatedMessage(
       2,
       f,
-      proto.api.PerpOrder.serializeBinaryToWriter
+      proto.api.DriftMarginOrder.serializeBinaryToWriter
     );
   }
 };
@@ -29395,17 +29395,17 @@ proto.api.GetDriftOpenMarginOrdersResponse.prototype.setOwneraddress = function(
 
 
 /**
- * repeated PerpOrder orders = 2;
- * @return {!Array<!proto.api.PerpOrder>}
+ * repeated DriftMarginOrder orders = 2;
+ * @return {!Array<!proto.api.DriftMarginOrder>}
  */
 proto.api.GetDriftOpenMarginOrdersResponse.prototype.getOrdersList = function() {
-  return /** @type{!Array<!proto.api.PerpOrder>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.PerpOrder, 2));
+  return /** @type{!Array<!proto.api.DriftMarginOrder>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.DriftMarginOrder, 2));
 };
 
 
 /**
- * @param {!Array<!proto.api.PerpOrder>} value
+ * @param {!Array<!proto.api.DriftMarginOrder>} value
  * @return {!proto.api.GetDriftOpenMarginOrdersResponse} returns this
 */
 proto.api.GetDriftOpenMarginOrdersResponse.prototype.setOrdersList = function(value) {
@@ -29414,12 +29414,12 @@ proto.api.GetDriftOpenMarginOrdersResponse.prototype.setOrdersList = function(va
 
 
 /**
- * @param {!proto.api.PerpOrder=} opt_value
+ * @param {!proto.api.DriftMarginOrder=} opt_value
  * @param {number=} opt_index
- * @return {!proto.api.PerpOrder}
+ * @return {!proto.api.DriftMarginOrder}
  */
 proto.api.GetDriftOpenMarginOrdersResponse.prototype.addOrders = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.PerpOrder, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.DriftMarginOrder, opt_index);
 };
 
 

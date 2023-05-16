@@ -3377,9 +3377,9 @@ export class GetDriftOpenMarginOrdersResponse extends jspb.Message {
     getOwneraddress(): string;
     setOwneraddress(value: string): GetDriftOpenMarginOrdersResponse;
     clearOrdersList(): void;
-    getOrdersList(): Array<PerpOrder>;
-    setOrdersList(value: Array<PerpOrder>): GetDriftOpenMarginOrdersResponse;
-    addOrders(value?: PerpOrder, index?: number): PerpOrder;
+    getOrdersList(): Array<DriftMarginOrder>;
+    setOrdersList(value: Array<DriftMarginOrder>): GetDriftOpenMarginOrdersResponse;
+    addOrders(value?: DriftMarginOrder, index?: number): DriftMarginOrder;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetDriftOpenMarginOrdersResponse.AsObject;
@@ -3394,7 +3394,7 @@ export class GetDriftOpenMarginOrdersResponse extends jspb.Message {
 export namespace GetDriftOpenMarginOrdersResponse {
     export type AsObject = {
         owneraddress: string,
-        ordersList: Array<PerpOrder.AsObject>,
+        ordersList: Array<DriftMarginOrder.AsObject>,
     }
 }
 

@@ -946,7 +946,7 @@ class GetDriftOpenMarginOrdersRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetDriftOpenMarginOrdersResponse(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    orders: List["PerpOrder"] = betterproto.message_field(2)
+    orders: List["DriftMarginOrder"] = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)
