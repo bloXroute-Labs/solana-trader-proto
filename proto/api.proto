@@ -1284,6 +1284,7 @@ message GetBlockStreamResponse {
 
 message GetPoolsRequest {
   repeated Project projects = 1;
+  string pairOrAddress = 2;
 }
 
 message GetPoolsResponse {
@@ -1395,6 +1396,7 @@ message PoolReserves {
 
 message GetPoolReservesStreamRequest {
   repeated Project projects = 1;
+  string pairOrAddress = 2;
 }
 
 message GetPricesStreamRequest {

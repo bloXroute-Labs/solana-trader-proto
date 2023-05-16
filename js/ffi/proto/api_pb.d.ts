@@ -2317,6 +2317,8 @@ export class GetPoolsRequest extends jspb.Message {
     getProjectsList(): Array<Project>;
     setProjectsList(value: Array<Project>): GetPoolsRequest;
     addProjects(value: Project, index?: number): Project;
+    getPairoraddress(): string;
+    setPairoraddress(value: string): GetPoolsRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPoolsRequest.AsObject;
@@ -2331,6 +2333,7 @@ export class GetPoolsRequest extends jspb.Message {
 export namespace GetPoolsRequest {
     export type AsObject = {
         projectsList: Array<Project>,
+        pairoraddress: string,
     }
 }
 
@@ -2799,6 +2802,8 @@ export class GetPoolReservesStreamRequest extends jspb.Message {
     getProjectsList(): Array<Project>;
     setProjectsList(value: Array<Project>): GetPoolReservesStreamRequest;
     addProjects(value: Project, index?: number): Project;
+    getPairoraddress(): string;
+    setPairoraddress(value: string): GetPoolReservesStreamRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPoolReservesStreamRequest.AsObject;
@@ -2813,6 +2818,7 @@ export class GetPoolReservesStreamRequest extends jspb.Message {
 export namespace GetPoolReservesStreamRequest {
     export type AsObject = {
         projectsList: Array<Project>,
+        pairoraddress: string,
     }
 }
 
