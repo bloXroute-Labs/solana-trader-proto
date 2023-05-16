@@ -1817,6 +1817,56 @@
         ]
       }
     },
+    "/api/v2/drift/margin-open-orders": {
+      "get": {
+        "summary": "PERP order",
+        "description": "Returns the detail of all open margin orders",
+        "operationId": "Api_GetDriftOpenMarginOrders",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDriftOpenMarginOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "markets",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "v2",
+          "Trade",
+          "Margin"
+        ]
+      }
+    },
     "/api/v2/drift/margin-orderbooks/{market}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
@@ -2101,6 +2151,53 @@
       ],
       "default": "D_ASCENDING"
     },
+    "apiDriftMarginOrder": {
+      "type": "object",
+      "properties": {
+        "orderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "market": {
+          "type": "string"
+        },
+        "positionSide": {
+          "type": "string"
+        },
+        "orderType": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "remainingSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "status": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "subAccountID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "postOnly": {
+          "type": "boolean"
+        }
+      }
+    },
     "apiDriftMarginOrderbookItem": {
       "type": "object",
       "properties": {
@@ -2289,6 +2386,20 @@
         }
       }
     },
+    "apiGetDriftOpenMarginOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPerpOrder"
+          }
+        }
+      }
+    },
     "apiGetKlineResponse": {
       "type": "object",
       "properties": {
@@ -2434,7 +2545,7 @@
         "orders": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiPerpOrder"
+            "$ref": "#/definitions/apiDriftMarginOrder"
           }
         }
       }

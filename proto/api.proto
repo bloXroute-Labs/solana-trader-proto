@@ -3,7 +3,6 @@ package api;
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/api";
 
 import "google/api/annotations.proto";
-import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
@@ -53,6 +52,17 @@ service Api {
   };
 
   // Drift V2
+  rpc GetDriftOpenMarginOrders(GetDriftOpenMarginOrdersRequest)  returns (GetDriftOpenMarginOrdersResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/drift/margin-open-orders"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the detail of all open margin orders";
+      summary: "PERP order";
+      tags: ["v2", "Trade", "Margin"];
+    };
+  }
+
   rpc GetDriftMarkets(GetDriftMarketsRequest) returns (GetDriftMarketsResponse) {
     option (google.api.http) = {
       get: "/api/v2/drift/markets"
@@ -638,7 +648,7 @@ service Api {
       tags: ["Trade", "Perp", "Orderbook"];
     };
   }
-  
+
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -1517,6 +1527,17 @@ message PostManageCollateralResponse {
   TransactionMessage transaction = 1;
 }
 
+message GetDriftOpenMarginOrdersRequest {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  repeated string markets = 3;
+}
+
+message GetDriftOpenMarginOrdersResponse {
+  string ownerAddress = 1;
+  repeated PerpOrder orders = 2;
+}
+
 message GetOpenPerpOrdersRequest {
   Project project = 1;
   string ownerAddress = 2;
@@ -1526,7 +1547,26 @@ message GetOpenPerpOrdersRequest {
 
 message GetOpenPerpOrdersResponse {
   string ownerAddress = 1;
-  repeated PerpOrder orders = 2;
+  repeated DriftMarginOrder orders = 2;
+}
+
+message DriftMarginOrder {
+  uint64 orderID = 1;
+  uint64 clientOrderID = 2;
+
+  string market = 3;
+  string positionSide = 4;
+
+  string orderType = 5;
+
+  double price = 6;
+  double size = 7;
+  double remainingSize = 8;
+  string status = 9;
+
+  string accountAddress = 10;
+  uint64 subAccountID = 11;
+  bool postOnly = 12;
 }
 
 message PerpOrder {
