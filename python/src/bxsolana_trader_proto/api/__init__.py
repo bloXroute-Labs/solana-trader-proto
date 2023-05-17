@@ -950,20 +950,6 @@ class GetDriftOpenMarginOrdersResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class GetOpenPerpOrdersRequest(betterproto.Message):
-    project: "Project" = betterproto.enum_field(1)
-    owner_address: str = betterproto.string_field(2)
-    account_address: str = betterproto.string_field(3)
-    contracts: List["_common__.PerpContract"] = betterproto.enum_field(4)
-
-
-@dataclass(eq=False, repr=False)
-class GetOpenPerpOrdersResponse(betterproto.Message):
-    owner_address: str = betterproto.string_field(1)
-    orders: List["DriftMarginOrder"] = betterproto.message_field(2)
-
-
-@dataclass(eq=False, repr=False)
 class DriftMarginOrder(betterproto.Message):
     order_id: int = betterproto.uint64_field(1)
     client_order_id: int = betterproto.uint64_field(2)
@@ -977,6 +963,20 @@ class DriftMarginOrder(betterproto.Message):
     account_address: str = betterproto.string_field(10)
     sub_account_id: int = betterproto.uint64_field(11)
     post_only: bool = betterproto.bool_field(12)
+
+
+@dataclass(eq=False, repr=False)
+class GetOpenPerpOrdersRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    account_address: str = betterproto.string_field(3)
+    contracts: List["_common__.PerpContract"] = betterproto.enum_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetOpenPerpOrdersResponse(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    orders: List["PerpOrder"] = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)

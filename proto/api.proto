@@ -1538,18 +1538,6 @@ message GetDriftOpenMarginOrdersResponse {
   repeated DriftMarginOrder orders = 2;
 }
 
-message GetOpenPerpOrdersRequest {
-  Project project = 1;
-  string ownerAddress = 2;
-  string accountAddress = 3;
-  repeated common.PerpContract contracts = 4;
-}
-
-message GetOpenPerpOrdersResponse {
-  string ownerAddress = 1;
-  repeated DriftMarginOrder orders = 2;
-}
-
 message DriftMarginOrder {
   uint64 orderID = 1;
   uint64 clientOrderID = 2;
@@ -1567,6 +1555,18 @@ message DriftMarginOrder {
   string accountAddress = 10;
   uint64 subAccountID = 11;
   bool postOnly = 12;
+}
+
+message GetOpenPerpOrdersRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  string accountAddress = 3;
+  repeated common.PerpContract contracts = 4;
+}
+
+message GetOpenPerpOrdersResponse {
+  string ownerAddress = 1;
+  repeated PerpOrder orders = 2;
 }
 
 message PerpOrder {

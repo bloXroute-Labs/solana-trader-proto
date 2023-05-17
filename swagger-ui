@@ -2545,7 +2545,7 @@
         "orders": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiDriftMarginOrder"
+            "$ref": "#/definitions/apiPerpOrder"
           }
         }
       }
