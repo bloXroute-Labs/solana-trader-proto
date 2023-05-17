@@ -306,7 +306,9 @@
               "MATIC_PERP",
               "ARB_PERP",
               "DOGE_PERP",
-              "BNB_PERP"
+              "BNB_PERP",
+              "SUI_PERP",
+              "PEPE_PERP"
             ]
           },
           {
@@ -1056,7 +1058,9 @@
               "MATIC_PERP",
               "ARB_PERP",
               "DOGE_PERP",
-              "BNB_PERP"
+              "BNB_PERP",
+              "SUI_PERP",
+              "PEPE_PERP"
             ],
             "default": "ALL"
           },
@@ -1163,7 +1167,9 @@
                 "MATIC_PERP",
                 "ARB_PERP",
                 "DOGE_PERP",
-                "BNB_PERP"
+                "BNB_PERP",
+                "SUI_PERP",
+                "PEPE_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -1277,7 +1283,9 @@
                 "MATIC_PERP",
                 "ARB_PERP",
                 "DOGE_PERP",
-                "BNB_PERP"
+                "BNB_PERP",
+                "SUI_PERP",
+                "PEPE_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -4691,7 +4699,9 @@
         "MATIC_PERP",
         "ARB_PERP",
         "DOGE_PERP",
-        "BNB_PERP"
+        "BNB_PERP",
+        "SUI_PERP",
+        "PEPE_PERP"
       ],
       "default": "ALL"
     },
