@@ -967,6 +967,28 @@ function deserialize_api_PostCancelByClientOrderIDRequest(buffer_arg) {
   return api_pb.PostCancelByClientOrderIDRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostCancelDriftMarginOrdersRequest(arg) {
+  if (!(arg instanceof api_pb.PostCancelDriftMarginOrdersRequest)) {
+    throw new Error('Expected argument of type api.PostCancelDriftMarginOrdersRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostCancelDriftMarginOrdersRequest(buffer_arg) {
+  return api_pb.PostCancelDriftMarginOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostCancelDriftMarginOrdersResponse(arg) {
+  if (!(arg instanceof api_pb.PostCancelDriftMarginOrdersResponse)) {
+    throw new Error('Expected argument of type api.PostCancelDriftMarginOrdersResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostCancelDriftMarginOrdersResponse(buffer_arg) {
+  return api_pb.PostCancelDriftMarginOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostCancelOrderRequest(arg) {
   if (!(arg instanceof api_pb.PostCancelOrderRequest)) {
     throw new Error('Expected argument of type api.PostCancelOrderRequest');
@@ -1366,7 +1388,18 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 var ApiService = exports.ApiService = {
   // Drift V2
-getDriftOpenMarginOrders: {
+postCancelDriftMarginOrders: {
+    path: '/api.Api/PostCancelDriftMarginOrders',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostCancelDriftMarginOrdersRequest,
+    responseType: api_pb.PostCancelDriftMarginOrdersResponse,
+    requestSerialize: serialize_api_PostCancelDriftMarginOrdersRequest,
+    requestDeserialize: deserialize_api_PostCancelDriftMarginOrdersRequest,
+    responseSerialize: serialize_api_PostCancelDriftMarginOrdersResponse,
+    responseDeserialize: deserialize_api_PostCancelDriftMarginOrdersResponse,
+  },
+  getDriftOpenMarginOrders: {
     path: '/api.Api/GetDriftOpenMarginOrders',
     requestStream: false,
     responseStream: false,
