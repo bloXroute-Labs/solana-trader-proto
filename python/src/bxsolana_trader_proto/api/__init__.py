@@ -910,7 +910,8 @@ class PostCancelPerpOrdersResponse(betterproto.Message):
 class PostCancelDriftMarginOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
-    market: str = betterproto.string_field(3)
+    client_order_id: int = betterproto.uint64_field(3)
+    order_id: int = betterproto.uint64_field(4)
 
 
 @dataclass(eq=False, repr=False)

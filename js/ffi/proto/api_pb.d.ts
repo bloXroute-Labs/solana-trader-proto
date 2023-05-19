@@ -3234,8 +3234,10 @@ export class PostCancelDriftMarginOrderRequest extends jspb.Message {
     setOwneraddress(value: string): PostCancelDriftMarginOrderRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): PostCancelDriftMarginOrderRequest;
-    getMarket(): string;
-    setMarket(value: string): PostCancelDriftMarginOrderRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostCancelDriftMarginOrderRequest;
+    getOrderid(): number;
+    setOrderid(value: number): PostCancelDriftMarginOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelDriftMarginOrderRequest.AsObject;
@@ -3251,7 +3253,8 @@ export namespace PostCancelDriftMarginOrderRequest {
     export type AsObject = {
         owneraddress: string,
         accountaddress: string,
-        market: string,
+        clientorderid: number,
+        orderid: number,
     }
 }
 

@@ -28242,7 +28242,8 @@ proto.api.PostCancelDriftMarginOrderRequest.toObject = function(includeInstance,
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    market: jspb.Message.getFieldWithDefault(msg, 3, "")
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    orderid: jspb.Message.getFieldWithDefault(msg, 4, 0)
   };
 
   if (includeInstance) {
@@ -28288,8 +28289,12 @@ proto.api.PostCancelDriftMarginOrderRequest.deserializeBinaryFromReader = functi
       msg.setAccountaddress(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setClientorderid(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setOrderid(value);
       break;
     default:
       reader.skipField();
@@ -28334,10 +28339,17 @@ proto.api.PostCancelDriftMarginOrderRequest.serializeBinaryToWriter = function(m
       f
     );
   }
-  f = message.getMarket();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getClientorderid();
+  if (f !== 0) {
+    writer.writeUint64(
       3,
+      f
+    );
+  }
+  f = message.getOrderid();
+  if (f !== 0) {
+    writer.writeUint64(
+      4,
       f
     );
   }
@@ -28381,20 +28393,38 @@ proto.api.PostCancelDriftMarginOrderRequest.prototype.setAccountaddress = functi
 
 
 /**
- * optional string market = 3;
- * @return {string}
+ * optional uint64 clientOrderID = 3;
+ * @return {number}
  */
-proto.api.PostCancelDriftMarginOrderRequest.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+proto.api.PostCancelDriftMarginOrderRequest.prototype.getClientorderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {number} value
  * @return {!proto.api.PostCancelDriftMarginOrderRequest} returns this
  */
-proto.api.PostCancelDriftMarginOrderRequest.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+proto.api.PostCancelDriftMarginOrderRequest.prototype.setClientorderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional uint64 orderID = 4;
+ * @return {number}
+ */
+proto.api.PostCancelDriftMarginOrderRequest.prototype.getOrderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelDriftMarginOrderRequest} returns this
+ */
+proto.api.PostCancelDriftMarginOrderRequest.prototype.setOrderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 

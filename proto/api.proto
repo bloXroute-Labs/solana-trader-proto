@@ -1516,7 +1516,8 @@ message PostCancelPerpOrdersResponse {
 message PostCancelDriftMarginOrderRequest {
   string ownerAddress = 1;
   string accountAddress = 2;
-  string market = 3 [(google.api.field_behavior) = REQUIRED];
+  uint64 clientOrderID = 3;
+  uint64 orderID = 4;
 }
 
 message PostCancelDriftMarginOrderResponse {

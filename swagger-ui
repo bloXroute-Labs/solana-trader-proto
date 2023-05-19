@@ -3526,16 +3526,15 @@
         "accountAddress": {
           "type": "string"
         },
-        "market": {
+        "clientOrderID": {
           "type": "string",
-          "required": [
-            "market"
-          ]
+          "format": "uint64"
+        },
+        "orderID": {
+          "type": "string",
+          "format": "uint64"
         }
-      },
-      "required": [
-        "market"
-      ]
+      }
     },
     "apiPostCancelDriftMarginOrderResponse": {
       "type": "object",
