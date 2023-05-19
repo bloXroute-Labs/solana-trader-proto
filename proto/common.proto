@@ -48,7 +48,9 @@ enum PerpContract {
   MATIC_PERP = 6;  // MATIC-PERP
   ARB_PERP = 7;    // ARB-PERP
   DOGE_PERP = 8;   // DOGE-PERP
-  BNB_PERP = 9;    // DOGE-PERP
+  BNB_PERP = 9;    // BNB-PERP
+  SUI_PERP = 10;    // SUI-PERP
+  PEPE_PERP = 11;    // PEPE-PERP
 }
 
 enum PerpCollateralType {

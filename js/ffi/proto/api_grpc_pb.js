@@ -4,7 +4,6 @@
 var grpc = require('@grpc/grpc-js');
 var api_pb = require('./api_pb.js');
 var google_api_annotations_pb = require('./google/api/annotations_pb.js');
-var google_protobuf_struct_pb = require('google-protobuf/google/protobuf/struct_pb.js');
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 var google_api_field_behavior_pb = require('./google/api/field_behavior_pb.js');
 var google_api_visibility_pb = require('./google/api/visibility_pb.js');
@@ -185,6 +184,28 @@ function serialize_api_GetDriftMarketsResponse(arg) {
 
 function deserialize_api_GetDriftMarketsResponse(buffer_arg) {
   return api_pb.GetDriftMarketsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftOpenMarginOrdersRequest(arg) {
+  if (!(arg instanceof api_pb.GetDriftOpenMarginOrdersRequest)) {
+    throw new Error('Expected argument of type api.GetDriftOpenMarginOrdersRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftOpenMarginOrdersRequest(buffer_arg) {
+  return api_pb.GetDriftOpenMarginOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftOpenMarginOrdersResponse(arg) {
+  if (!(arg instanceof api_pb.GetDriftOpenMarginOrdersResponse)) {
+    throw new Error('Expected argument of type api.GetDriftOpenMarginOrdersResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftOpenMarginOrdersResponse(buffer_arg) {
+  return api_pb.GetDriftOpenMarginOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetKlineRequest(arg) {
@@ -946,6 +967,28 @@ function deserialize_api_PostCancelByClientOrderIDRequest(buffer_arg) {
   return api_pb.PostCancelByClientOrderIDRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostCancelDriftMarginOrderRequest(arg) {
+  if (!(arg instanceof api_pb.PostCancelDriftMarginOrderRequest)) {
+    throw new Error('Expected argument of type api.PostCancelDriftMarginOrderRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostCancelDriftMarginOrderRequest(buffer_arg) {
+  return api_pb.PostCancelDriftMarginOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostCancelDriftMarginOrderResponse(arg) {
+  if (!(arg instanceof api_pb.PostCancelDriftMarginOrderResponse)) {
+    throw new Error('Expected argument of type api.PostCancelDriftMarginOrderResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostCancelDriftMarginOrderResponse(buffer_arg) {
+  return api_pb.PostCancelDriftMarginOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostCancelOrderRequest(arg) {
   if (!(arg instanceof api_pb.PostCancelOrderRequest)) {
     throw new Error('Expected argument of type api.PostCancelOrderRequest');
@@ -1345,7 +1388,29 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 var ApiService = exports.ApiService = {
   // Drift V2
-getDriftMarkets: {
+postCancelDriftMarginOrder: {
+    path: '/api.Api/PostCancelDriftMarginOrder',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostCancelDriftMarginOrderRequest,
+    responseType: api_pb.PostCancelDriftMarginOrderResponse,
+    requestSerialize: serialize_api_PostCancelDriftMarginOrderRequest,
+    requestDeserialize: deserialize_api_PostCancelDriftMarginOrderRequest,
+    responseSerialize: serialize_api_PostCancelDriftMarginOrderResponse,
+    responseDeserialize: deserialize_api_PostCancelDriftMarginOrderResponse,
+  },
+  getDriftOpenMarginOrders: {
+    path: '/api.Api/GetDriftOpenMarginOrders',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetDriftOpenMarginOrdersRequest,
+    responseType: api_pb.GetDriftOpenMarginOrdersResponse,
+    requestSerialize: serialize_api_GetDriftOpenMarginOrdersRequest,
+    requestDeserialize: deserialize_api_GetDriftOpenMarginOrdersRequest,
+    responseSerialize: serialize_api_GetDriftOpenMarginOrdersResponse,
+    responseDeserialize: deserialize_api_GetDriftOpenMarginOrdersResponse,
+  },
+  getDriftMarkets: {
     path: '/api.Api/GetDriftMarkets',
     requestStream: false,
     responseStream: false,

@@ -5,7 +5,6 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
-import * as google_protobuf_struct_pb from "google-protobuf/google/protobuf/struct_pb";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 import * as google_api_field_behavior_pb from "./google/api/field_behavior_pb";
 import * as google_api_visibility_pb from "./google/api/visibility_pb";
@@ -3236,6 +3235,57 @@ export namespace PostCancelPerpOrdersResponse {
     }
 }
 
+export class PostCancelDriftMarginOrderRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostCancelDriftMarginOrderRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostCancelDriftMarginOrderRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostCancelDriftMarginOrderRequest;
+    getOrderid(): number;
+    setOrderid(value: number): PostCancelDriftMarginOrderRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostCancelDriftMarginOrderRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelDriftMarginOrderRequest): PostCancelDriftMarginOrderRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostCancelDriftMarginOrderRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelDriftMarginOrderRequest;
+    static deserializeBinaryFromReader(message: PostCancelDriftMarginOrderRequest, reader: jspb.BinaryReader): PostCancelDriftMarginOrderRequest;
+}
+
+export namespace PostCancelDriftMarginOrderRequest {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        clientorderid: number,
+        orderid: number,
+    }
+}
+
+export class PostCancelDriftMarginOrderResponse extends jspb.Message { 
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostCancelDriftMarginOrderResponse;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostCancelDriftMarginOrderResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelDriftMarginOrderResponse): PostCancelDriftMarginOrderResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostCancelDriftMarginOrderResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelDriftMarginOrderResponse;
+    static deserializeBinaryFromReader(message: PostCancelDriftMarginOrderResponse, reader: jspb.BinaryReader): PostCancelDriftMarginOrderResponse;
+}
+
+export namespace PostCancelDriftMarginOrderResponse {
+    export type AsObject = {
+        transactionsList: Array<TransactionMessage.AsObject>,
+    }
+}
+
 export class PostCancelPerpOrderRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): PostCancelPerpOrderRequest;
@@ -3349,6 +3399,112 @@ export class PostManageCollateralResponse extends jspb.Message {
 export namespace PostManageCollateralResponse {
     export type AsObject = {
         transaction?: TransactionMessage.AsObject,
+    }
+}
+
+export class GetDriftOpenMarginOrdersRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetDriftOpenMarginOrdersRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): GetDriftOpenMarginOrdersRequest;
+    clearMarketsList(): void;
+    getMarketsList(): Array<string>;
+    setMarketsList(value: Array<string>): GetDriftOpenMarginOrdersRequest;
+    addMarkets(value: string, index?: number): string;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftOpenMarginOrdersRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftOpenMarginOrdersRequest): GetDriftOpenMarginOrdersRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftOpenMarginOrdersRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftOpenMarginOrdersRequest;
+    static deserializeBinaryFromReader(message: GetDriftOpenMarginOrdersRequest, reader: jspb.BinaryReader): GetDriftOpenMarginOrdersRequest;
+}
+
+export namespace GetDriftOpenMarginOrdersRequest {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        marketsList: Array<string>,
+    }
+}
+
+export class GetDriftOpenMarginOrdersResponse extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetDriftOpenMarginOrdersResponse;
+    clearOrdersList(): void;
+    getOrdersList(): Array<DriftMarginOrder>;
+    setOrdersList(value: Array<DriftMarginOrder>): GetDriftOpenMarginOrdersResponse;
+    addOrders(value?: DriftMarginOrder, index?: number): DriftMarginOrder;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftOpenMarginOrdersResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftOpenMarginOrdersResponse): GetDriftOpenMarginOrdersResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftOpenMarginOrdersResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftOpenMarginOrdersResponse;
+    static deserializeBinaryFromReader(message: GetDriftOpenMarginOrdersResponse, reader: jspb.BinaryReader): GetDriftOpenMarginOrdersResponse;
+}
+
+export namespace GetDriftOpenMarginOrdersResponse {
+    export type AsObject = {
+        owneraddress: string,
+        ordersList: Array<DriftMarginOrder.AsObject>,
+    }
+}
+
+export class DriftMarginOrder extends jspb.Message { 
+    getOrderid(): number;
+    setOrderid(value: number): DriftMarginOrder;
+    getClientorderid(): number;
+    setClientorderid(value: number): DriftMarginOrder;
+    getMarket(): string;
+    setMarket(value: string): DriftMarginOrder;
+    getPositionside(): string;
+    setPositionside(value: string): DriftMarginOrder;
+    getOrdertype(): string;
+    setOrdertype(value: string): DriftMarginOrder;
+    getPrice(): number;
+    setPrice(value: number): DriftMarginOrder;
+    getSize(): number;
+    setSize(value: number): DriftMarginOrder;
+    getRemainingsize(): number;
+    setRemainingsize(value: number): DriftMarginOrder;
+    getStatus(): string;
+    setStatus(value: string): DriftMarginOrder;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): DriftMarginOrder;
+    getSubaccountid(): number;
+    setSubaccountid(value: number): DriftMarginOrder;
+    getPostonly(): boolean;
+    setPostonly(value: boolean): DriftMarginOrder;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): DriftMarginOrder.AsObject;
+    static toObject(includeInstance: boolean, msg: DriftMarginOrder): DriftMarginOrder.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: DriftMarginOrder, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): DriftMarginOrder;
+    static deserializeBinaryFromReader(message: DriftMarginOrder, reader: jspb.BinaryReader): DriftMarginOrder;
+}
+
+export namespace DriftMarginOrder {
+    export type AsObject = {
+        orderid: number,
+        clientorderid: number,
+        market: string,
+        positionside: string,
+        ordertype: string,
+        price: number,
+        size: number,
+        remainingsize: number,
+        status: string,
+        accountaddress: string,
+        subaccountid: number,
+        postonly: boolean,
     }
 }
 
