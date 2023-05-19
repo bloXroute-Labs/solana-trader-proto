@@ -99,6 +99,8 @@ export enum PerpContract {
     ARB_PERP = 7,
     DOGE_PERP = 8,
     BNB_PERP = 9,
+    SUI_PERP = 10,
+    PEPE_PERP = 11,
 }
 
 export enum PerpCollateralType {
