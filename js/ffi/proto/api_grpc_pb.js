@@ -967,26 +967,26 @@ function deserialize_api_PostCancelByClientOrderIDRequest(buffer_arg) {
   return api_pb.PostCancelByClientOrderIDRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_api_PostCancelDriftMarginOrdersRequest(arg) {
-  if (!(arg instanceof api_pb.PostCancelDriftMarginOrdersRequest)) {
-    throw new Error('Expected argument of type api.PostCancelDriftMarginOrdersRequest');
+function serialize_api_PostCancelDriftMarginOrderRequest(arg) {
+  if (!(arg instanceof api_pb.PostCancelDriftMarginOrderRequest)) {
+    throw new Error('Expected argument of type api.PostCancelDriftMarginOrderRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_api_PostCancelDriftMarginOrdersRequest(buffer_arg) {
-  return api_pb.PostCancelDriftMarginOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_api_PostCancelDriftMarginOrderRequest(buffer_arg) {
+  return api_pb.PostCancelDriftMarginOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_api_PostCancelDriftMarginOrdersResponse(arg) {
-  if (!(arg instanceof api_pb.PostCancelDriftMarginOrdersResponse)) {
-    throw new Error('Expected argument of type api.PostCancelDriftMarginOrdersResponse');
+function serialize_api_PostCancelDriftMarginOrderResponse(arg) {
+  if (!(arg instanceof api_pb.PostCancelDriftMarginOrderResponse)) {
+    throw new Error('Expected argument of type api.PostCancelDriftMarginOrderResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_api_PostCancelDriftMarginOrdersResponse(buffer_arg) {
-  return api_pb.PostCancelDriftMarginOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_api_PostCancelDriftMarginOrderResponse(buffer_arg) {
+  return api_pb.PostCancelDriftMarginOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_PostCancelOrderRequest(arg) {
@@ -1388,16 +1388,16 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 var ApiService = exports.ApiService = {
   // Drift V2
-postCancelDriftMarginOrders: {
-    path: '/api.Api/PostCancelDriftMarginOrders',
+postCancelDriftMarginOrder: {
+    path: '/api.Api/PostCancelDriftMarginOrder',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.PostCancelDriftMarginOrdersRequest,
-    responseType: api_pb.PostCancelDriftMarginOrdersResponse,
-    requestSerialize: serialize_api_PostCancelDriftMarginOrdersRequest,
-    requestDeserialize: deserialize_api_PostCancelDriftMarginOrdersRequest,
-    responseSerialize: serialize_api_PostCancelDriftMarginOrdersResponse,
-    responseDeserialize: deserialize_api_PostCancelDriftMarginOrdersResponse,
+    requestType: api_pb.PostCancelDriftMarginOrderRequest,
+    responseType: api_pb.PostCancelDriftMarginOrderResponse,
+    requestSerialize: serialize_api_PostCancelDriftMarginOrderRequest,
+    requestDeserialize: deserialize_api_PostCancelDriftMarginOrderRequest,
+    responseSerialize: serialize_api_PostCancelDriftMarginOrderResponse,
+    responseDeserialize: deserialize_api_PostCancelDriftMarginOrderResponse,
   },
   getDriftOpenMarginOrders: {
     path: '/api.Api/GetDriftOpenMarginOrders',

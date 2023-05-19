@@ -52,7 +52,7 @@ service Api {
   };
 
   // Drift V2
-  rpc PostCancelDriftMarginOrders(PostCancelDriftMarginOrdersRequest) returns (PostCancelDriftMarginOrdersResponse) {
+  rpc PostCancelDriftMarginOrder(PostCancelDriftMarginOrderRequest) returns (PostCancelDriftMarginOrderResponse) {
     option (google.api.http) = {
       post: "/api/v2/drift/margin-cancel"
       body: "*"
@@ -1513,13 +1513,13 @@ message PostCancelPerpOrdersResponse {
   repeated TransactionMessage transactions = 1;
 }
 
-message PostCancelDriftMarginOrdersRequest {
+message PostCancelDriftMarginOrderRequest {
   string ownerAddress = 1;
   string accountAddress = 2;
   string market = 3 [(google.api.field_behavior) = REQUIRED];
 }
 
-message PostCancelDriftMarginOrdersResponse {
+message PostCancelDriftMarginOrderResponse {
   repeated TransactionMessage transactions = 1;
 }
 

@@ -19,7 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
 	// Drift V2
-	PostCancelDriftMarginOrders(ctx context.Context, in *PostCancelDriftMarginOrdersRequest, opts ...grpc.CallOption) (*PostCancelDriftMarginOrdersResponse, error)
+	PostCancelDriftMarginOrder(ctx context.Context, in *PostCancelDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostCancelDriftMarginOrderResponse, error)
 	GetDriftOpenMarginOrders(ctx context.Context, in *GetDriftOpenMarginOrdersRequest, opts ...grpc.CallOption) (*GetDriftOpenMarginOrdersResponse, error)
 	GetDriftMarkets(ctx context.Context, in *GetDriftMarketsRequest, opts ...grpc.CallOption) (*GetDriftMarketsResponse, error)
 	PostDriftMarginOrder(ctx context.Context, in *PostDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostDriftMarginOrderResponse, error)
@@ -102,9 +102,9 @@ func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 	return &apiClient{cc}
 }
 
-func (c *apiClient) PostCancelDriftMarginOrders(ctx context.Context, in *PostCancelDriftMarginOrdersRequest, opts ...grpc.CallOption) (*PostCancelDriftMarginOrdersResponse, error) {
-	out := new(PostCancelDriftMarginOrdersResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostCancelDriftMarginOrders", in, out, opts...)
+func (c *apiClient) PostCancelDriftMarginOrder(ctx context.Context, in *PostCancelDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostCancelDriftMarginOrderResponse, error) {
+	out := new(PostCancelDriftMarginOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostCancelDriftMarginOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1078,7 +1078,7 @@ func (x *apiGetPerpTradesStreamClient) Recv() (*GetPerpTradesStreamResponse, err
 // for forward compatibility
 type ApiServer interface {
 	// Drift V2
-	PostCancelDriftMarginOrders(context.Context, *PostCancelDriftMarginOrdersRequest) (*PostCancelDriftMarginOrdersResponse, error)
+	PostCancelDriftMarginOrder(context.Context, *PostCancelDriftMarginOrderRequest) (*PostCancelDriftMarginOrderResponse, error)
 	GetDriftOpenMarginOrders(context.Context, *GetDriftOpenMarginOrdersRequest) (*GetDriftOpenMarginOrdersResponse, error)
 	GetDriftMarkets(context.Context, *GetDriftMarketsRequest) (*GetDriftMarketsResponse, error)
 	PostDriftMarginOrder(context.Context, *PostDriftMarginOrderRequest) (*PostDriftMarginOrderResponse, error)
@@ -1158,8 +1158,8 @@ type ApiServer interface {
 type UnimplementedApiServer struct {
 }
 
-func (UnimplementedApiServer) PostCancelDriftMarginOrders(context.Context, *PostCancelDriftMarginOrdersRequest) (*PostCancelDriftMarginOrdersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostCancelDriftMarginOrders not implemented")
+func (UnimplementedApiServer) PostCancelDriftMarginOrder(context.Context, *PostCancelDriftMarginOrderRequest) (*PostCancelDriftMarginOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostCancelDriftMarginOrder not implemented")
 }
 func (UnimplementedApiServer) GetDriftOpenMarginOrders(context.Context, *GetDriftOpenMarginOrdersRequest) (*GetDriftOpenMarginOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDriftOpenMarginOrders not implemented")
@@ -1372,20 +1372,20 @@ func RegisterApiServer(s grpc.ServiceRegistrar, srv ApiServer) {
 	s.RegisterService(&Api_ServiceDesc, srv)
 }
 
-func _Api_PostCancelDriftMarginOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCancelDriftMarginOrdersRequest)
+func _Api_PostCancelDriftMarginOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostCancelDriftMarginOrderRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).PostCancelDriftMarginOrders(ctx, in)
+		return srv.(ApiServer).PostCancelDriftMarginOrder(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/PostCancelDriftMarginOrders",
+		FullMethod: "/api.Api/PostCancelDriftMarginOrder",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostCancelDriftMarginOrders(ctx, req.(*PostCancelDriftMarginOrdersRequest))
+		return srv.(ApiServer).PostCancelDriftMarginOrder(ctx, req.(*PostCancelDriftMarginOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2634,8 +2634,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ApiServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "PostCancelDriftMarginOrders",
-			Handler:    _Api_PostCancelDriftMarginOrders_Handler,
+			MethodName: "PostCancelDriftMarginOrder",
+			Handler:    _Api_PostCancelDriftMarginOrder_Handler,
 		},
 		{
 			MethodName: "GetDriftOpenMarginOrders",

@@ -1829,12 +1829,12 @@
       "post": {
         "summary": "cancel Drift margin orders",
         "description": "Returns a partially signed txn signature to cancel Drift margin orders",
-        "operationId": "Api_PostCancelDriftMarginOrders",
+        "operationId": "Api_PostCancelDriftMarginOrder",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostCancelDriftMarginOrdersResponse"
+              "$ref": "#/definitions/apiPostCancelDriftMarginOrderResponse"
             }
           },
           "default": {
@@ -1850,7 +1850,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostCancelDriftMarginOrdersRequest"
+              "$ref": "#/definitions/apiPostCancelDriftMarginOrderRequest"
             }
           }
         ],
@@ -3517,7 +3517,7 @@
         "openOrdersAddress"
       ]
     },
-    "apiPostCancelDriftMarginOrdersRequest": {
+    "apiPostCancelDriftMarginOrderRequest": {
       "type": "object",
       "properties": {
         "ownerAddress": {
@@ -3537,7 +3537,7 @@
         "market"
       ]
     },
-    "apiPostCancelDriftMarginOrdersResponse": {
+    "apiPostCancelDriftMarginOrderResponse": {
       "type": "object",
       "properties": {
         "transactions": {

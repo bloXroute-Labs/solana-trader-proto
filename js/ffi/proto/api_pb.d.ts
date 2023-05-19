@@ -3229,25 +3229,25 @@ export namespace PostCancelPerpOrdersResponse {
     }
 }
 
-export class PostCancelDriftMarginOrdersRequest extends jspb.Message { 
+export class PostCancelDriftMarginOrderRequest extends jspb.Message { 
     getOwneraddress(): string;
-    setOwneraddress(value: string): PostCancelDriftMarginOrdersRequest;
+    setOwneraddress(value: string): PostCancelDriftMarginOrderRequest;
     getAccountaddress(): string;
-    setAccountaddress(value: string): PostCancelDriftMarginOrdersRequest;
+    setAccountaddress(value: string): PostCancelDriftMarginOrderRequest;
     getMarket(): string;
-    setMarket(value: string): PostCancelDriftMarginOrdersRequest;
+    setMarket(value: string): PostCancelDriftMarginOrderRequest;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostCancelDriftMarginOrdersRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: PostCancelDriftMarginOrdersRequest): PostCancelDriftMarginOrdersRequest.AsObject;
+    toObject(includeInstance?: boolean): PostCancelDriftMarginOrderRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelDriftMarginOrderRequest): PostCancelDriftMarginOrderRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostCancelDriftMarginOrdersRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostCancelDriftMarginOrdersRequest;
-    static deserializeBinaryFromReader(message: PostCancelDriftMarginOrdersRequest, reader: jspb.BinaryReader): PostCancelDriftMarginOrdersRequest;
+    static serializeBinaryToWriter(message: PostCancelDriftMarginOrderRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelDriftMarginOrderRequest;
+    static deserializeBinaryFromReader(message: PostCancelDriftMarginOrderRequest, reader: jspb.BinaryReader): PostCancelDriftMarginOrderRequest;
 }
 
-export namespace PostCancelDriftMarginOrdersRequest {
+export namespace PostCancelDriftMarginOrderRequest {
     export type AsObject = {
         owneraddress: string,
         accountaddress: string,
@@ -3255,23 +3255,23 @@ export namespace PostCancelDriftMarginOrdersRequest {
     }
 }
 
-export class PostCancelDriftMarginOrdersResponse extends jspb.Message { 
+export class PostCancelDriftMarginOrderResponse extends jspb.Message { 
     clearTransactionsList(): void;
     getTransactionsList(): Array<TransactionMessage>;
-    setTransactionsList(value: Array<TransactionMessage>): PostCancelDriftMarginOrdersResponse;
+    setTransactionsList(value: Array<TransactionMessage>): PostCancelDriftMarginOrderResponse;
     addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostCancelDriftMarginOrdersResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: PostCancelDriftMarginOrdersResponse): PostCancelDriftMarginOrdersResponse.AsObject;
+    toObject(includeInstance?: boolean): PostCancelDriftMarginOrderResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelDriftMarginOrderResponse): PostCancelDriftMarginOrderResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostCancelDriftMarginOrdersResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostCancelDriftMarginOrdersResponse;
-    static deserializeBinaryFromReader(message: PostCancelDriftMarginOrdersResponse, reader: jspb.BinaryReader): PostCancelDriftMarginOrdersResponse;
+    static serializeBinaryToWriter(message: PostCancelDriftMarginOrderResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelDriftMarginOrderResponse;
+    static deserializeBinaryFromReader(message: PostCancelDriftMarginOrderResponse, reader: jspb.BinaryReader): PostCancelDriftMarginOrderResponse;
 }
 
-export namespace PostCancelDriftMarginOrdersResponse {
+export namespace PostCancelDriftMarginOrderResponse {
     export type AsObject = {
         transactionsList: Array<TransactionMessage.AsObject>,
     }
