@@ -2075,6 +2075,42 @@
           "Orderbook"
         ]
       }
+    },
+    "/api/v2/drift/modify-order": {
+      "post": {
+        "summary": "modify Drift order",
+        "description": "post a modify order tx on Drift platform",
+        "operationId": "Api_PostModifyDriftOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostModifyDriftOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostModifyDriftOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "v2",
+          "Trade",
+          "Market"
+        ]
+      }
     }
   },
   "definitions": {
@@ -3849,6 +3885,43 @@
       }
     },
     "apiPostManageCollateralResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostModifyDriftOrderRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "orderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "newPositionSide": {
+          "type": "string"
+        },
+        "postOnly": {
+          "type": "string"
+        },
+        "newBaseAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "newLimitPrice": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostModifyDriftOrderResponse": {
       "type": "object",
       "properties": {
         "transaction": {

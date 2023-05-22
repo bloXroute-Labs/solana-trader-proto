@@ -1187,6 +1187,28 @@ function deserialize_api_PostManageCollateralResponse(buffer_arg) {
   return api_pb.PostManageCollateralResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostModifyDriftOrderRequest(arg) {
+  if (!(arg instanceof api_pb.PostModifyDriftOrderRequest)) {
+    throw new Error('Expected argument of type api.PostModifyDriftOrderRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostModifyDriftOrderRequest(buffer_arg) {
+  return api_pb.PostModifyDriftOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostModifyDriftOrderResponse(arg) {
+  if (!(arg instanceof api_pb.PostModifyDriftOrderResponse)) {
+    throw new Error('Expected argument of type api.PostModifyDriftOrderResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostModifyDriftOrderResponse(buffer_arg) {
+  return api_pb.PostModifyDriftOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostOrderRequest(arg) {
   if (!(arg instanceof api_pb.PostOrderRequest)) {
     throw new Error('Expected argument of type api.PostOrderRequest');
@@ -1388,7 +1410,18 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 var ApiService = exports.ApiService = {
   // Drift V2
-postCancelDriftMarginOrder: {
+postModifyDriftOrder: {
+    path: '/api.Api/PostModifyDriftOrder',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostModifyDriftOrderRequest,
+    responseType: api_pb.PostModifyDriftOrderResponse,
+    requestSerialize: serialize_api_PostModifyDriftOrderRequest,
+    requestDeserialize: deserialize_api_PostModifyDriftOrderRequest,
+    responseSerialize: serialize_api_PostModifyDriftOrderResponse,
+    responseDeserialize: deserialize_api_PostModifyDriftOrderResponse,
+  },
+  postCancelDriftMarginOrder: {
     path: '/api.Api/PostCancelDriftMarginOrder',
     requestStream: false,
     responseStream: false,

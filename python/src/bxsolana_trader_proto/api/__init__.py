@@ -922,6 +922,22 @@ class PostCancelDriftMarginOrderResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostModifyDriftOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    order_id: int = betterproto.uint64_field(3)
+    new_position_side: str = betterproto.string_field(4)
+    post_only: str = betterproto.string_field(5)
+    new_base_amount: float = betterproto.double_field(6)
+    new_limit_price: float = betterproto.double_field(7)
+
+
+@dataclass(eq=False, repr=False)
+class PostModifyDriftOrderResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostCancelPerpOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
@@ -1373,6 +1389,23 @@ class DriftMarketDepthItem(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def post_modify_drift_order(
+        self,
+        post_modify_drift_order_request: "PostModifyDriftOrderRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostModifyDriftOrderResponse":
+        return await self._unary_unary(
+            "/api.Api/PostModifyDriftOrder",
+            post_modify_drift_order_request,
+            PostModifyDriftOrderResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def post_cancel_drift_margin_order(
         self,
         post_cancel_drift_margin_order_request: "PostCancelDriftMarginOrderRequest",
@@ -2526,6 +2559,11 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+    async def post_modify_drift_order(
+        self, post_modify_drift_order_request: "PostModifyDriftOrderRequest"
+    ) -> "PostModifyDriftOrderResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_cancel_drift_margin_order(
         self,
         post_cancel_drift_margin_order_request: "PostCancelDriftMarginOrderRequest",
@@ -2853,6 +2891,14 @@ class ApiBase(ServiceBase):
         self, get_perp_trades_stream_request: "GetPerpTradesStreamRequest"
     ) -> AsyncIterator["GetPerpTradesStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def __rpc_post_modify_drift_order(
+        self,
+        stream: "grpclib.server.Stream[PostModifyDriftOrderRequest, PostModifyDriftOrderResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_modify_drift_order(request)
+        await stream.send_message(response)
 
     async def __rpc_post_cancel_drift_margin_order(
         self,
@@ -3420,6 +3466,12 @@ class ApiBase(ServiceBase):
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
+            "/api.Api/PostModifyDriftOrder": grpclib.const.Handler(
+                self.__rpc_post_modify_drift_order,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostModifyDriftOrderRequest,
+                PostModifyDriftOrderResponse,
+            ),
             "/api.Api/PostCancelDriftMarginOrder": grpclib.const.Handler(
                 self.__rpc_post_cancel_drift_margin_order,
                 grpclib.const.Cardinality.UNARY_UNARY,

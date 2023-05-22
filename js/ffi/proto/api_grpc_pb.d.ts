@@ -13,6 +13,7 @@ import * as protoc_gen_openapiv2_options_annotations_pb from "./protoc-gen-opena
 import * as common_pb from "./common_pb";
 
 interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
+    postModifyDriftOrder: IApiService_IPostModifyDriftOrder;
     postCancelDriftMarginOrder: IApiService_IPostCancelDriftMarginOrder;
     getDriftOpenMarginOrders: IApiService_IGetDriftOpenMarginOrders;
     getDriftMarkets: IApiService_IGetDriftMarkets;
@@ -82,6 +83,15 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getPerpTradesStream: IApiService_IGetPerpTradesStream;
 }
 
+interface IApiService_IPostModifyDriftOrder extends grpc.MethodDefinition<api_pb.PostModifyDriftOrderRequest, api_pb.PostModifyDriftOrderResponse> {
+    path: "/api.Api/PostModifyDriftOrder";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostModifyDriftOrderRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostModifyDriftOrderRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostModifyDriftOrderResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostModifyDriftOrderResponse>;
+}
 interface IApiService_IPostCancelDriftMarginOrder extends grpc.MethodDefinition<api_pb.PostCancelDriftMarginOrderRequest, api_pb.PostCancelDriftMarginOrderResponse> {
     path: "/api.Api/PostCancelDriftMarginOrder";
     requestStream: false;
@@ -689,6 +699,7 @@ interface IApiService_IGetPerpTradesStream extends grpc.MethodDefinition<api_pb.
 export const ApiService: IApiService;
 
 export interface IApiServer extends grpc.UntypedServiceImplementation {
+    postModifyDriftOrder: grpc.handleUnaryCall<api_pb.PostModifyDriftOrderRequest, api_pb.PostModifyDriftOrderResponse>;
     postCancelDriftMarginOrder: grpc.handleUnaryCall<api_pb.PostCancelDriftMarginOrderRequest, api_pb.PostCancelDriftMarginOrderResponse>;
     getDriftOpenMarginOrders: grpc.handleUnaryCall<api_pb.GetDriftOpenMarginOrdersRequest, api_pb.GetDriftOpenMarginOrdersResponse>;
     getDriftMarkets: grpc.handleUnaryCall<api_pb.GetDriftMarketsRequest, api_pb.GetDriftMarketsResponse>;
@@ -759,6 +770,9 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
 }
 
 export interface IApiClient {
+    postModifyDriftOrder(request: api_pb.PostModifyDriftOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostModifyDriftOrderResponse) => void): grpc.ClientUnaryCall;
+    postModifyDriftOrder(request: api_pb.PostModifyDriftOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostModifyDriftOrderResponse) => void): grpc.ClientUnaryCall;
+    postModifyDriftOrder(request: api_pb.PostModifyDriftOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostModifyDriftOrderResponse) => void): grpc.ClientUnaryCall;
     postCancelDriftMarginOrder(request: api_pb.PostCancelDriftMarginOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
     postCancelDriftMarginOrder(request: api_pb.PostCancelDriftMarginOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
     postCancelDriftMarginOrder(request: api_pb.PostCancelDriftMarginOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
@@ -948,6 +962,9 @@ export interface IApiClient {
 
 export class ApiClient extends grpc.Client implements IApiClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: Partial<grpc.ClientOptions>);
+    public postModifyDriftOrder(request: api_pb.PostModifyDriftOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostModifyDriftOrderResponse) => void): grpc.ClientUnaryCall;
+    public postModifyDriftOrder(request: api_pb.PostModifyDriftOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostModifyDriftOrderResponse) => void): grpc.ClientUnaryCall;
+    public postModifyDriftOrder(request: api_pb.PostModifyDriftOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostModifyDriftOrderResponse) => void): grpc.ClientUnaryCall;
     public postCancelDriftMarginOrder(request: api_pb.PostCancelDriftMarginOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
     public postCancelDriftMarginOrder(request: api_pb.PostCancelDriftMarginOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
     public postCancelDriftMarginOrder(request: api_pb.PostCancelDriftMarginOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelDriftMarginOrderResponse) => void): grpc.ClientUnaryCall;
