@@ -52,6 +52,18 @@ service Api {
   };
 
   // Drift V2
+  rpc PostModifyDriftOrder(PostModifyDriftOrderRequest)  returns (PostModifyDriftOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/drift/modify-order"
+      body: "*",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "post a modify order tx on Drift platform";
+      summary: "modify Drift order";
+      tags: ["v2", "Trade", "Market"];
+    };
+  }
+
   rpc PostCancelDriftMarginOrder(PostCancelDriftMarginOrderRequest) returns (PostCancelDriftMarginOrderResponse) {
     option (google.api.http) = {
       post: "/api/v2/drift/margin-cancel"
@@ -1524,6 +1536,20 @@ message PostCancelDriftMarginOrderRequest {
 
 message PostCancelDriftMarginOrderResponse {
   repeated TransactionMessage transactions = 1;
+}
+
+message PostModifyDriftOrderRequest {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  uint64 orderID = 3;
+  string newPositionSide = 4;
+  string postOnly = 5;
+  double newBaseAmount = 6;
+  double newLimitPrice = 7;
+}
+
+message PostModifyDriftOrderResponse {
+  TransactionMessage transaction = 1;
 }
 
 message PostCancelPerpOrderRequest {

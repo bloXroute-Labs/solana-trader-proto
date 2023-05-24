@@ -3286,6 +3286,67 @@ export namespace PostCancelDriftMarginOrderResponse {
     }
 }
 
+export class PostModifyDriftOrderRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostModifyDriftOrderRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostModifyDriftOrderRequest;
+    getOrderid(): number;
+    setOrderid(value: number): PostModifyDriftOrderRequest;
+    getNewpositionside(): string;
+    setNewpositionside(value: string): PostModifyDriftOrderRequest;
+    getPostonly(): string;
+    setPostonly(value: string): PostModifyDriftOrderRequest;
+    getNewbaseamount(): number;
+    setNewbaseamount(value: number): PostModifyDriftOrderRequest;
+    getNewlimitprice(): number;
+    setNewlimitprice(value: number): PostModifyDriftOrderRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostModifyDriftOrderRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostModifyDriftOrderRequest): PostModifyDriftOrderRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostModifyDriftOrderRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostModifyDriftOrderRequest;
+    static deserializeBinaryFromReader(message: PostModifyDriftOrderRequest, reader: jspb.BinaryReader): PostModifyDriftOrderRequest;
+}
+
+export namespace PostModifyDriftOrderRequest {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        orderid: number,
+        newpositionside: string,
+        postonly: string,
+        newbaseamount: number,
+        newlimitprice: number,
+    }
+}
+
+export class PostModifyDriftOrderResponse extends jspb.Message { 
+
+    hasTransaction(): boolean;
+    clearTransaction(): void;
+    getTransaction(): TransactionMessage | undefined;
+    setTransaction(value?: TransactionMessage): PostModifyDriftOrderResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostModifyDriftOrderResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostModifyDriftOrderResponse): PostModifyDriftOrderResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostModifyDriftOrderResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostModifyDriftOrderResponse;
+    static deserializeBinaryFromReader(message: PostModifyDriftOrderResponse, reader: jspb.BinaryReader): PostModifyDriftOrderResponse;
+}
+
+export namespace PostModifyDriftOrderResponse {
+    export type AsObject = {
+        transaction?: TransactionMessage.AsObject,
+    }
+}
+
 export class PostCancelPerpOrderRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): PostCancelPerpOrderRequest;
