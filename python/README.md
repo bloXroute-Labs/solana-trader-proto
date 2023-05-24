@@ -27,7 +27,7 @@ upgrade the version in pyproject.toml
 you can install package locally before uploading it to the pypi
 
 ```shell
-    pip install dist/bxsolana-trader-proto-0.0.28.2.tar.gz
+    pip install dist/bxsolana-trader-proto-0.0.29.tar.gz
 ```
 
     (Don't forget to fix the proto compilation issues before releasing)
