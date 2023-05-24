@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
 	// Drift V2
+	PostCancelDriftMarginOrders(ctx context.Context, in *PostCancelDriftMarginOrdersRequest, opts ...grpc.CallOption) (*PostCancelDriftMarginOrdersResponse, error)
 	GetDriftMarkets(ctx context.Context, in *GetDriftMarketsRequest, opts ...grpc.CallOption) (*GetDriftMarketsResponse, error)
 	PostDriftMarginOrder(ctx context.Context, in *PostDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostDriftMarginOrderResponse, error)
 	PostDriftEnableMarginTrading(ctx context.Context, in *PostDriftEnableMarginTradingRequest, opts ...grpc.CallOption) (*PostDriftEnableMarginTradingResponse, error)
@@ -98,6 +99,15 @@ type apiClient struct {
 
 func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 	return &apiClient{cc}
+}
+
+func (c *apiClient) PostCancelDriftMarginOrders(ctx context.Context, in *PostCancelDriftMarginOrdersRequest, opts ...grpc.CallOption) (*PostCancelDriftMarginOrdersResponse, error) {
+	out := new(PostCancelDriftMarginOrdersResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostCancelDriftMarginOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *apiClient) GetDriftMarkets(ctx context.Context, in *GetDriftMarketsRequest, opts ...grpc.CallOption) (*GetDriftMarketsResponse, error) {
@@ -1058,6 +1068,7 @@ func (x *apiGetPerpTradesStreamClient) Recv() (*GetPerpTradesStreamResponse, err
 // for forward compatibility
 type ApiServer interface {
 	// Drift V2
+	PostCancelDriftMarginOrders(context.Context, *PostCancelDriftMarginOrdersRequest) (*PostCancelDriftMarginOrdersResponse, error)
 	GetDriftMarkets(context.Context, *GetDriftMarketsRequest) (*GetDriftMarketsResponse, error)
 	PostDriftMarginOrder(context.Context, *PostDriftMarginOrderRequest) (*PostDriftMarginOrderResponse, error)
 	PostDriftEnableMarginTrading(context.Context, *PostDriftEnableMarginTradingRequest) (*PostDriftEnableMarginTradingResponse, error)
@@ -1136,6 +1147,9 @@ type ApiServer interface {
 type UnimplementedApiServer struct {
 }
 
+func (UnimplementedApiServer) PostCancelDriftMarginOrders(context.Context, *PostCancelDriftMarginOrdersRequest) (*PostCancelDriftMarginOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostCancelDriftMarginOrders not implemented")
+}
 func (UnimplementedApiServer) GetDriftMarkets(context.Context, *GetDriftMarketsRequest) (*GetDriftMarketsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDriftMarkets not implemented")
 }
@@ -1342,6 +1356,24 @@ type UnsafeApiServer interface {
 
 func RegisterApiServer(s grpc.ServiceRegistrar, srv ApiServer) {
 	s.RegisterService(&Api_ServiceDesc, srv)
+}
+
+func _Api_PostCancelDriftMarginOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostCancelDriftMarginOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostCancelDriftMarginOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostCancelDriftMarginOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostCancelDriftMarginOrders(ctx, req.(*PostCancelDriftMarginOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_GetDriftMarkets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2569,6 +2601,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.Api",
 	HandlerType: (*ApiServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "PostCancelDriftMarginOrders",
+			Handler:    _Api_PostCancelDriftMarginOrders_Handler,
+		},
 		{
 			MethodName: "GetDriftMarkets",
 			Handler:    _Api_GetDriftMarkets_Handler,

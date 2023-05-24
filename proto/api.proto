@@ -53,6 +53,18 @@ service Api {
   };
 
   // Drift V2
+  rpc PostCancelDriftMarginOrders(PostCancelDriftMarginOrdersRequest) returns (PostCancelDriftMarginOrdersResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/drift/margin-cancel"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to cancel Drift margin orders";
+      summary: "cancel Drift margin orders";
+      tags: ["v2", "Trade", "Market"];
+    };
+  }
+
   rpc GetDriftMarkets(GetDriftMarketsRequest) returns (GetDriftMarketsResponse) {
     option (google.api.http) = {
       get: "/api/v2/drift/markets"
@@ -1488,6 +1500,16 @@ message PostCancelPerpOrdersRequest {
 }
 
 message PostCancelPerpOrdersResponse {
+  repeated TransactionMessage transactions = 1;
+}
+
+message PostCancelDriftMarginOrdersRequest {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  string market = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+message PostCancelDriftMarginOrdersResponse {
   repeated TransactionMessage transactions = 1;
 }
 
