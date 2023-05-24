@@ -3,8 +3,8 @@
 ## Running
 
 Install dependencies:
-```
-$ pip install -r requirements.txt
+```shell
+pip install -r requirements.txt
 ```
 
 You should probably create a separate `virtualenv` for this, since this project
@@ -12,14 +12,23 @@ relies on a specific version of `betterproto`.
 
 ## Publishing
 
+```shell
     python3 -m pip install --user --upgrade twine
+```
 
-    upgrade the version in pyproject.toml
+upgrade the version in pyproject.toml
+
+```shell
+    make proto
     cd python
-    rm -rf dist/ && python3 -m build
+    rm -rf dist/ && python3 -m build 
+```
 
-    you can install package locally before uploading it to the pypi
-    pip install dist/bxsolana-trader-proto-0.0.26.tar.gz
+you can install package locally before uploading it to the pypi
+
+```shell
+    pip install dist/bxsolana-trader-proto-0.0.28.2.tar.gz
+```
 
     (Don't forget to fix the proto compilation issues before releasing)
     python3 -m twine upload --repository pypi dist/*
