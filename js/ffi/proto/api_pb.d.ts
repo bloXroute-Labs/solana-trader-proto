@@ -4944,8 +4944,8 @@ export namespace GetDriftMarketDepthStreamResponse {
 }
 
 export class GetDriftMarketDepthResponse extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetDriftMarketDepthResponse;
+    getContract(): string;
+    setContract(value: string): GetDriftMarketDepthResponse;
     clearBidsList(): void;
     getBidsList(): Array<DriftMarketDepthItem>;
     setBidsList(value: Array<DriftMarketDepthItem>): GetDriftMarketDepthResponse;
@@ -4967,7 +4967,7 @@ export class GetDriftMarketDepthResponse extends jspb.Message {
 
 export namespace GetDriftMarketDepthResponse {
     export type AsObject = {
-        market: string,
+        contract: string,
         bidsList: Array<DriftMarketDepthItem.AsObject>,
         asksList: Array<DriftMarketDepthItem.AsObject>,
     }

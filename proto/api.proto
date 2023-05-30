@@ -1940,7 +1940,7 @@ message GetDriftMarketDepthStreamResponse {
 }
 
 message GetDriftMarketDepthResponse {
-  string market = 1;
+  string contract = 1;
   repeated DriftMarketDepthItem bids = 2;
   repeated DriftMarketDepthItem asks = 3;
 }
