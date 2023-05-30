@@ -41577,7 +41577,7 @@ proto.api.GetDriftMarketDepthResponse.prototype.toObject = function(opt_includeI
  */
 proto.api.GetDriftMarketDepthResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    contract: jspb.Message.getFieldWithDefault(msg, 1, ""),
     bidsList: jspb.Message.toObjectList(msg.getBidsList(),
     proto.api.DriftMarketDepthItem.toObject, includeInstance),
     asksList: jspb.Message.toObjectList(msg.getAsksList(),
@@ -41620,7 +41620,7 @@ proto.api.GetDriftMarketDepthResponse.deserializeBinaryFromReader = function(msg
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
+      msg.setContract(value);
       break;
     case 2:
       var value = new proto.api.DriftMarketDepthItem;
@@ -41661,7 +41661,7 @@ proto.api.GetDriftMarketDepthResponse.prototype.serializeBinary = function() {
  */
 proto.api.GetDriftMarketDepthResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarket();
+  f = message.getContract();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -41688,10 +41688,10 @@ proto.api.GetDriftMarketDepthResponse.serializeBinaryToWriter = function(message
 
 
 /**
- * optional string market = 1;
+ * optional string contract = 1;
  * @return {string}
  */
-proto.api.GetDriftMarketDepthResponse.prototype.getMarket = function() {
+proto.api.GetDriftMarketDepthResponse.prototype.getContract = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -41700,7 +41700,7 @@ proto.api.GetDriftMarketDepthResponse.prototype.getMarket = function() {
  * @param {string} value
  * @return {!proto.api.GetDriftMarketDepthResponse} returns this
  */
-proto.api.GetDriftMarketDepthResponse.prototype.setMarket = function(value) {
+proto.api.GetDriftMarketDepthResponse.prototype.setContract = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 

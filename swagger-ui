@@ -2432,7 +2432,7 @@
     "apiGetDriftMarketDepthResponse": {
       "type": "object",
       "properties": {
-        "market": {
+        "contract": {
           "type": "string"
         },
         "bids": {
