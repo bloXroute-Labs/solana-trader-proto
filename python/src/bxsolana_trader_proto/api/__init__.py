@@ -1323,15 +1323,15 @@ class DriftPerpOrder(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostDriftCancelPerpOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    contract: str = betterproto.string_field(2)
+    account_address: str = betterproto.string_field(2)
+    contract: str = betterproto.string_field(3)
     client_order_id: int = betterproto.uint64_field(4)
     order_id: int = betterproto.uint64_field(5)
-    account_address: str = betterproto.string_field(6)
 
 
 @dataclass(eq=False, repr=False)
 class PostDriftCancelPerpOrderResponse(betterproto.Message):
-    transaction: "TransactionMessage" = betterproto.message_field(1)
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)

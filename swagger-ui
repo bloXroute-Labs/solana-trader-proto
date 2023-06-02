@@ -4024,6 +4024,9 @@
         "ownerAddress": {
           "type": "string"
         },
+        "accountAddress": {
+          "type": "string"
+        },
         "contract": {
           "type": "string"
         },
@@ -4034,17 +4037,17 @@
         "orderID": {
           "type": "string",
           "format": "uint64"
-        },
-        "accountAddress": {
-          "type": "string"
         }
       }
     },
     "apiPostDriftCancelPerpOrderResponse": {
       "type": "object",
       "properties": {
-        "transaction": {
-          "$ref": "#/definitions/apiTransactionMessage"
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
         }
       }
     },

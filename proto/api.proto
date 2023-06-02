@@ -1942,14 +1942,14 @@ message DriftPerpOrder {
 
 message PostDriftCancelPerpOrderRequest {
   string ownerAddress = 1;
-  string contract = 2;
+  string accountAddress = 2;
+  string contract = 3;
   uint64 clientOrderID = 4;
   uint64 orderID = 5;
-  string accountAddress = 6;
 }
 
 message PostDriftCancelPerpOrderResponse {
-  TransactionMessage transaction = 1;
+  repeated TransactionMessage transactions = 1;
 }
 
 

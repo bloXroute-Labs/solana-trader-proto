@@ -3538,7 +3538,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.PostDriftCancelPerpOrderResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostDriftCancelPerpOrderResponse.repeatedFields_, null);
 };
 goog.inherits(proto.api.PostDriftCancelPerpOrderResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -40337,10 +40337,10 @@ proto.api.PostDriftCancelPerpOrderRequest.prototype.toObject = function(opt_incl
 proto.api.PostDriftCancelPerpOrderRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    contract: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    contract: jspb.Message.getFieldWithDefault(msg, 3, ""),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    orderid: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    accountaddress: jspb.Message.getFieldWithDefault(msg, 6, "")
+    orderid: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -40383,6 +40383,10 @@ proto.api.PostDriftCancelPerpOrderRequest.deserializeBinaryFromReader = function
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
+      msg.setAccountaddress(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
       msg.setContract(value);
       break;
     case 4:
@@ -40392,10 +40396,6 @@ proto.api.PostDriftCancelPerpOrderRequest.deserializeBinaryFromReader = function
     case 5:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setOrderid(value);
-      break;
-    case 6:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setAccountaddress(value);
       break;
     default:
       reader.skipField();
@@ -40433,10 +40433,17 @@ proto.api.PostDriftCancelPerpOrderRequest.serializeBinaryToWriter = function(mes
       f
     );
   }
-  f = message.getContract();
+  f = message.getAccountaddress();
   if (f.length > 0) {
     writer.writeString(
       2,
+      f
+    );
+  }
+  f = message.getContract();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
       f
     );
   }
@@ -40451,13 +40458,6 @@ proto.api.PostDriftCancelPerpOrderRequest.serializeBinaryToWriter = function(mes
   if (f !== 0) {
     writer.writeUint64(
       5,
-      f
-    );
-  }
-  f = message.getAccountaddress();
-  if (f.length > 0) {
-    writer.writeString(
-      6,
       f
     );
   }
@@ -40483,10 +40483,10 @@ proto.api.PostDriftCancelPerpOrderRequest.prototype.setOwneraddress = function(v
 
 
 /**
- * optional string contract = 2;
+ * optional string accountAddress = 2;
  * @return {string}
  */
-proto.api.PostDriftCancelPerpOrderRequest.prototype.getContract = function() {
+proto.api.PostDriftCancelPerpOrderRequest.prototype.getAccountaddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -40495,8 +40495,26 @@ proto.api.PostDriftCancelPerpOrderRequest.prototype.getContract = function() {
  * @param {string} value
  * @return {!proto.api.PostDriftCancelPerpOrderRequest} returns this
  */
-proto.api.PostDriftCancelPerpOrderRequest.prototype.setContract = function(value) {
+proto.api.PostDriftCancelPerpOrderRequest.prototype.setAccountaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string contract = 3;
+ * @return {string}
+ */
+proto.api.PostDriftCancelPerpOrderRequest.prototype.getContract = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostDriftCancelPerpOrderRequest} returns this
+ */
+proto.api.PostDriftCancelPerpOrderRequest.prototype.setContract = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -40536,24 +40554,13 @@ proto.api.PostDriftCancelPerpOrderRequest.prototype.setOrderid = function(value)
 };
 
 
-/**
- * optional string accountAddress = 6;
- * @return {string}
- */
-proto.api.PostDriftCancelPerpOrderRequest.prototype.getAccountaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
-};
-
 
 /**
- * @param {string} value
- * @return {!proto.api.PostDriftCancelPerpOrderRequest} returns this
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
  */
-proto.api.PostDriftCancelPerpOrderRequest.prototype.setAccountaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 6, value);
-};
-
-
+proto.api.PostDriftCancelPerpOrderResponse.repeatedFields_ = [1];
 
 
 
@@ -40586,7 +40593,8 @@ proto.api.PostDriftCancelPerpOrderResponse.prototype.toObject = function(opt_inc
  */
 proto.api.PostDriftCancelPerpOrderResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    transaction: (f = msg.getTransaction()) && proto.api.TransactionMessage.toObject(includeInstance, f)
+    transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
+    proto.api.TransactionMessage.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -40626,7 +40634,7 @@ proto.api.PostDriftCancelPerpOrderResponse.deserializeBinaryFromReader = functio
     case 1:
       var value = new proto.api.TransactionMessage;
       reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
-      msg.setTransaction(value);
+      msg.addTransactions(value);
       break;
     default:
       reader.skipField();
@@ -40657,9 +40665,9 @@ proto.api.PostDriftCancelPerpOrderResponse.prototype.serializeBinary = function(
  */
 proto.api.PostDriftCancelPerpOrderResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getTransaction();
-  if (f != null) {
-    writer.writeMessage(
+  f = message.getTransactionsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
       1,
       f,
       proto.api.TransactionMessage.serializeBinaryToWriter
@@ -40669,39 +40677,40 @@ proto.api.PostDriftCancelPerpOrderResponse.serializeBinaryToWriter = function(me
 
 
 /**
- * optional TransactionMessage transaction = 1;
- * @return {?proto.api.TransactionMessage}
+ * repeated TransactionMessage transactions = 1;
+ * @return {!Array<!proto.api.TransactionMessage>}
  */
-proto.api.PostDriftCancelPerpOrderResponse.prototype.getTransaction = function() {
-  return /** @type{?proto.api.TransactionMessage} */ (
-    jspb.Message.getWrapperField(this, proto.api.TransactionMessage, 1));
+proto.api.PostDriftCancelPerpOrderResponse.prototype.getTransactionsList = function() {
+  return /** @type{!Array<!proto.api.TransactionMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TransactionMessage, 1));
 };
 
 
 /**
- * @param {?proto.api.TransactionMessage|undefined} value
+ * @param {!Array<!proto.api.TransactionMessage>} value
  * @return {!proto.api.PostDriftCancelPerpOrderResponse} returns this
 */
-proto.api.PostDriftCancelPerpOrderResponse.prototype.setTransaction = function(value) {
-  return jspb.Message.setWrapperField(this, 1, value);
+proto.api.PostDriftCancelPerpOrderResponse.prototype.setTransactionsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
 };
 
 
 /**
- * Clears the message field making it undefined.
+ * @param {!proto.api.TransactionMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TransactionMessage}
+ */
+proto.api.PostDriftCancelPerpOrderResponse.prototype.addTransactions = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TransactionMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
  * @return {!proto.api.PostDriftCancelPerpOrderResponse} returns this
  */
-proto.api.PostDriftCancelPerpOrderResponse.prototype.clearTransaction = function() {
-  return this.setTransaction(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.api.PostDriftCancelPerpOrderResponse.prototype.hasTransaction = function() {
-  return jspb.Message.getField(this, 1) != null;
+proto.api.PostDriftCancelPerpOrderResponse.prototype.clearTransactionsList = function() {
+  return this.setTransactionsList([]);
 };
 
 

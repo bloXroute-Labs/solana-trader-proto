@@ -4743,14 +4743,14 @@ export namespace DriftPerpOrder {
 export class PostDriftCancelPerpOrderRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): PostDriftCancelPerpOrderRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostDriftCancelPerpOrderRequest;
     getContract(): string;
     setContract(value: string): PostDriftCancelPerpOrderRequest;
     getClientorderid(): number;
     setClientorderid(value: number): PostDriftCancelPerpOrderRequest;
     getOrderid(): number;
     setOrderid(value: number): PostDriftCancelPerpOrderRequest;
-    getAccountaddress(): string;
-    setAccountaddress(value: string): PostDriftCancelPerpOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostDriftCancelPerpOrderRequest.AsObject;
@@ -4765,19 +4765,18 @@ export class PostDriftCancelPerpOrderRequest extends jspb.Message {
 export namespace PostDriftCancelPerpOrderRequest {
     export type AsObject = {
         owneraddress: string,
+        accountaddress: string,
         contract: string,
         clientorderid: number,
         orderid: number,
-        accountaddress: string,
     }
 }
 
 export class PostDriftCancelPerpOrderResponse extends jspb.Message { 
-
-    hasTransaction(): boolean;
-    clearTransaction(): void;
-    getTransaction(): TransactionMessage | undefined;
-    setTransaction(value?: TransactionMessage): PostDriftCancelPerpOrderResponse;
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostDriftCancelPerpOrderResponse;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostDriftCancelPerpOrderResponse.AsObject;
@@ -4791,7 +4790,7 @@ export class PostDriftCancelPerpOrderResponse extends jspb.Message {
 
 export namespace PostDriftCancelPerpOrderResponse {
     export type AsObject = {
-        transaction?: TransactionMessage.AsObject,
+        transactionsList: Array<TransactionMessage.AsObject>,
     }
 }
 
