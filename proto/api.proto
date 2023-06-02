@@ -1911,10 +1911,9 @@ message GetOpenPerpOrderResponse {
 // Drift V2
 
 message GetDriftPerpOpenOrdersRequest {
-  Project project = 1;
-  string ownerAddress = 2;
-  string accountAddress = 3;
-  repeated common.PerpContract contracts = 4;
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  repeated string contracts = 3;
 }
 
 message GetDriftPerpOpenOrdersResponse {

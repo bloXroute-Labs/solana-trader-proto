@@ -39444,7 +39444,7 @@ proto.api.GetOpenPerpOrderResponse.prototype.hasOrder = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.api.GetDriftPerpOpenOrdersRequest.repeatedFields_ = [4];
+proto.api.GetDriftPerpOpenOrdersRequest.repeatedFields_ = [3];
 
 
 
@@ -39477,10 +39477,9 @@ proto.api.GetDriftPerpOpenOrdersRequest.prototype.toObject = function(opt_includ
  */
 proto.api.GetDriftPerpOpenOrdersRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    project: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    accountaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    contractsList: (f = jspb.Message.getRepeatedField(msg, 4)) == null ? undefined : f
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    contractsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -39518,22 +39517,16 @@ proto.api.GetDriftPerpOpenOrdersRequest.deserializeBinaryFromReader = function(m
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
-      break;
-    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setOwneraddress(value);
       break;
-    case 3:
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setAccountaddress(value);
       break;
-    case 4:
-      var values = /** @type {!Array<!proto.common.PerpContract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addContracts(values[i]);
-      }
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addContracts(value);
       break;
     default:
       reader.skipField();
@@ -39564,31 +39557,24 @@ proto.api.GetDriftPerpOpenOrdersRequest.prototype.serializeBinary = function() {
  */
 proto.api.GetDriftPerpOpenOrdersRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      1,
-      f
-    );
-  }
   f = message.getOwneraddress();
   if (f.length > 0) {
     writer.writeString(
-      2,
+      1,
       f
     );
   }
   f = message.getAccountaddress();
   if (f.length > 0) {
     writer.writeString(
-      3,
+      2,
       f
     );
   }
   f = message.getContractsList();
   if (f.length > 0) {
-    writer.writePackedEnum(
-      4,
+    writer.writeRepeatedString(
+      3,
       f
     );
   }
@@ -39596,29 +39582,11 @@ proto.api.GetDriftPerpOpenOrdersRequest.serializeBinaryToWriter = function(messa
 
 
 /**
- * optional Project project = 1;
- * @return {!proto.api.Project}
- */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.GetDriftPerpOpenOrdersRequest} returns this
- */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 1, value);
-};
-
-
-/**
- * optional string ownerAddress = 2;
+ * optional string ownerAddress = 1;
  * @return {string}
  */
 proto.api.GetDriftPerpOpenOrdersRequest.prototype.getOwneraddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
@@ -39627,16 +39595,16 @@ proto.api.GetDriftPerpOpenOrdersRequest.prototype.getOwneraddress = function() {
  * @return {!proto.api.GetDriftPerpOpenOrdersRequest} returns this
  */
 proto.api.GetDriftPerpOpenOrdersRequest.prototype.setOwneraddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string accountAddress = 3;
+ * optional string accountAddress = 2;
  * @return {string}
  */
 proto.api.GetDriftPerpOpenOrdersRequest.prototype.getAccountaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -39645,35 +39613,35 @@ proto.api.GetDriftPerpOpenOrdersRequest.prototype.getAccountaddress = function()
  * @return {!proto.api.GetDriftPerpOpenOrdersRequest} returns this
  */
 proto.api.GetDriftPerpOpenOrdersRequest.prototype.setAccountaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * repeated common.PerpContract contracts = 4;
- * @return {!Array<!proto.common.PerpContract>}
+ * repeated string contracts = 3;
+ * @return {!Array<string>}
  */
 proto.api.GetDriftPerpOpenOrdersRequest.prototype.getContractsList = function() {
-  return /** @type {!Array<!proto.common.PerpContract>} */ (jspb.Message.getRepeatedField(this, 4));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
 
 /**
- * @param {!Array<!proto.common.PerpContract>} value
+ * @param {!Array<string>} value
  * @return {!proto.api.GetDriftPerpOpenOrdersRequest} returns this
  */
 proto.api.GetDriftPerpOpenOrdersRequest.prototype.setContractsList = function(value) {
-  return jspb.Message.setField(this, 4, value || []);
+  return jspb.Message.setField(this, 3, value || []);
 };
 
 
 /**
- * @param {!proto.common.PerpContract} value
+ * @param {string} value
  * @param {number=} opt_index
  * @return {!proto.api.GetDriftPerpOpenOrdersRequest} returns this
  */
 proto.api.GetDriftPerpOpenOrdersRequest.prototype.addContracts = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 4, value, opt_index);
+  return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
 

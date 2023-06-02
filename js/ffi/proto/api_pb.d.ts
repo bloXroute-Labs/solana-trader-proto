@@ -4635,16 +4635,14 @@ export namespace GetOpenPerpOrderResponse {
 }
 
 export class GetDriftPerpOpenOrdersRequest extends jspb.Message { 
-    getProject(): Project;
-    setProject(value: Project): GetDriftPerpOpenOrdersRequest;
     getOwneraddress(): string;
     setOwneraddress(value: string): GetDriftPerpOpenOrdersRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): GetDriftPerpOpenOrdersRequest;
     clearContractsList(): void;
-    getContractsList(): Array<common_pb.PerpContract>;
-    setContractsList(value: Array<common_pb.PerpContract>): GetDriftPerpOpenOrdersRequest;
-    addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
+    getContractsList(): Array<string>;
+    setContractsList(value: Array<string>): GetDriftPerpOpenOrdersRequest;
+    addContracts(value: string, index?: number): string;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetDriftPerpOpenOrdersRequest.AsObject;
@@ -4658,10 +4656,9 @@ export class GetDriftPerpOpenOrdersRequest extends jspb.Message {
 
 export namespace GetDriftPerpOpenOrdersRequest {
     export type AsObject = {
-        project: Project,
         owneraddress: string,
         accountaddress: string,
-        contractsList: Array<common_pb.PerpContract>,
+        contractsList: Array<string>,
     }
 }
 

@@ -1293,10 +1293,9 @@ class GetOpenPerpOrderResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetDriftPerpOpenOrdersRequest(betterproto.Message):
-    project: "Project" = betterproto.enum_field(1)
-    owner_address: str = betterproto.string_field(2)
-    account_address: str = betterproto.string_field(3)
-    contracts: List["_common__.PerpContract"] = betterproto.enum_field(4)
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    contracts: List[str] = betterproto.string_field(3)
 
 
 @dataclass(eq=False, repr=False)
