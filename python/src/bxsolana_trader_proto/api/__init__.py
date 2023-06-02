@@ -1292,9 +1292,78 @@ class GetOpenPerpOrderResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class GetDriftMarginOrderbooksRequest(betterproto.Message):
-    """Drift V2"""
+class GetDriftPerpOpenOrdersRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
+    owner_address: str = betterproto.string_field(2)
+    account_address: str = betterproto.string_field(3)
+    contracts: List["_common__.PerpContract"] = betterproto.enum_field(4)
 
+
+@dataclass(eq=False, repr=False)
+class GetDriftPerpOpenOrdersResponse(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    orders: List["DriftPerpOrder"] = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class DriftPerpOrder(betterproto.Message):
+    order_id: int = betterproto.uint64_field(1)
+    client_order_id: int = betterproto.uint64_field(2)
+    contract: str = betterproto.string_field(3)
+    position_side: str = betterproto.string_field(4)
+    order_type: str = betterproto.string_field(5)
+    price: float = betterproto.double_field(6)
+    size: float = betterproto.double_field(7)
+    remaining_size: float = betterproto.double_field(8)
+    status: str = betterproto.string_field(9)
+    account_address: str = betterproto.string_field(10)
+    sub_account_id: int = betterproto.uint64_field(11)
+    post_only: bool = betterproto.bool_field(12)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftCancelPerpOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    contract: str = betterproto.string_field(2)
+    client_order_id: int = betterproto.uint64_field(4)
+    order_id: int = betterproto.uint64_field(5)
+    account_address: str = betterproto.string_field(6)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftCancelPerpOrderResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftPerpPositionsRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    contracts: List[str] = betterproto.string_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftPerpPositionsResponse(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    perp_positions: List["DriftPerpPosition"] = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class DriftPerpPosition(betterproto.Message):
+    contract: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    sub_account_id: int = betterproto.int64_field(3)
+    volume_available: float = betterproto.double_field(4)
+    volume_in_order: float = betterproto.double_field(5)
+    position_margin: float = betterproto.double_field(6)
+    position_side: str = betterproto.string_field(7)
+    notional_value: float = betterproto.double_field(8)
+    index_price: float = betterproto.double_field(9)
+    liquidation_price: float = betterproto.double_field(10)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftMarginOrderbooksRequest(betterproto.Message):
     markets: List[str] = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
     metadata: bool = betterproto.bool_field(3)
@@ -1391,6 +1460,57 @@ class DriftMarketDepthItem(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def get_drift_perp_positions(
+        self,
+        get_drift_perp_positions_request: "GetDriftPerpPositionsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetDriftPerpPositionsResponse":
+        return await self._unary_unary(
+            "/api.Api/GetDriftPerpPositions",
+            get_drift_perp_positions_request,
+            GetDriftPerpPositionsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_drift_perp_open_orders(
+        self,
+        get_drift_perp_open_orders_request: "GetDriftPerpOpenOrdersRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetDriftPerpOpenOrdersResponse":
+        return await self._unary_unary(
+            "/api.Api/GetDriftPerpOpenOrders",
+            get_drift_perp_open_orders_request,
+            GetDriftPerpOpenOrdersResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_drift_cancel_perp_order(
+        self,
+        post_drift_cancel_perp_order_request: "PostDriftCancelPerpOrderRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostDriftCancelPerpOrderResponse":
+        return await self._unary_unary(
+            "/api.Api/PostDriftCancelPerpOrder",
+            post_drift_cancel_perp_order_request,
+            PostDriftCancelPerpOrderResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def post_modify_drift_order(
         self,
         post_modify_drift_order_request: "PostModifyDriftOrderRequest",
@@ -2565,6 +2685,21 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+    async def get_drift_perp_positions(
+        self, get_drift_perp_positions_request: "GetDriftPerpPositionsRequest"
+    ) -> "GetDriftPerpPositionsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_drift_perp_open_orders(
+        self, get_drift_perp_open_orders_request: "GetDriftPerpOpenOrdersRequest"
+    ) -> "GetDriftPerpOpenOrdersResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_drift_cancel_perp_order(
+        self, post_drift_cancel_perp_order_request: "PostDriftCancelPerpOrderRequest"
+    ) -> "PostDriftCancelPerpOrderResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_modify_drift_order(
         self, post_modify_drift_order_request: "PostModifyDriftOrderRequest"
     ) -> "PostModifyDriftOrderResponse":
@@ -2921,6 +3056,30 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetPerpTradesStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPerpTradesStreamResponse()
+
+    async def __rpc_get_drift_perp_positions(
+        self,
+        stream: "grpclib.server.Stream[GetDriftPerpPositionsRequest, GetDriftPerpPositionsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_drift_perp_positions(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_drift_perp_open_orders(
+        self,
+        stream: "grpclib.server.Stream[GetDriftPerpOpenOrdersRequest, GetDriftPerpOpenOrdersResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_drift_perp_open_orders(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_drift_cancel_perp_order(
+        self,
+        stream: "grpclib.server.Stream[PostDriftCancelPerpOrderRequest, PostDriftCancelPerpOrderResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_drift_cancel_perp_order(request)
+        await stream.send_message(response)
 
     async def __rpc_post_modify_drift_order(
         self,
@@ -3496,6 +3655,24 @@ class ApiBase(ServiceBase):
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
+            "/api.Api/GetDriftPerpPositions": grpclib.const.Handler(
+                self.__rpc_get_drift_perp_positions,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetDriftPerpPositionsRequest,
+                GetDriftPerpPositionsResponse,
+            ),
+            "/api.Api/GetDriftPerpOpenOrders": grpclib.const.Handler(
+                self.__rpc_get_drift_perp_open_orders,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetDriftPerpOpenOrdersRequest,
+                GetDriftPerpOpenOrdersResponse,
+            ),
+            "/api.Api/PostDriftCancelPerpOrder": grpclib.const.Handler(
+                self.__rpc_post_drift_cancel_perp_order,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostDriftCancelPerpOrderRequest,
+                PostDriftCancelPerpOrderResponse,
+            ),
             "/api.Api/PostModifyDriftOrder": grpclib.const.Handler(
                 self.__rpc_post_modify_drift_order,
                 grpclib.const.Cardinality.UNARY_UNARY,

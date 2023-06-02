@@ -208,6 +208,50 @@ function deserialize_api_GetDriftOpenMarginOrdersResponse(buffer_arg) {
   return api_pb.GetDriftOpenMarginOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetDriftPerpOpenOrdersRequest(arg) {
+  if (!(arg instanceof api_pb.GetDriftPerpOpenOrdersRequest)) {
+    throw new Error('Expected argument of type api.GetDriftPerpOpenOrdersRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftPerpOpenOrdersRequest(buffer_arg) {
+  return api_pb.GetDriftPerpOpenOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftPerpOpenOrdersResponse(arg) {
+  if (!(arg instanceof api_pb.GetDriftPerpOpenOrdersResponse)) {
+    throw new Error('Expected argument of type api.GetDriftPerpOpenOrdersResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftPerpOpenOrdersResponse(buffer_arg) {
+  return api_pb.GetDriftPerpOpenOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftPerpPositionsRequest(arg) {
+  if (!(arg instanceof api_pb.GetDriftPerpPositionsRequest)) {
+    throw new Error('Expected argument of type api.GetDriftPerpPositionsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftPerpPositionsRequest(buffer_arg) {
+  return api_pb.GetDriftPerpPositionsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftPerpPositionsResponse(arg) {
+  if (!(arg instanceof api_pb.GetDriftPerpPositionsResponse)) {
+    throw new Error('Expected argument of type api.GetDriftPerpPositionsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftPerpPositionsResponse(buffer_arg) {
+  return api_pb.GetDriftPerpPositionsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetKlineRequest(arg) {
   if (!(arg instanceof api_pb.GetKlineRequest)) {
     throw new Error('Expected argument of type api.GetKlineRequest');
@@ -1099,6 +1143,28 @@ function deserialize_api_PostCreateUserResponse(buffer_arg) {
   return api_pb.PostCreateUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostDriftCancelPerpOrderRequest(arg) {
+  if (!(arg instanceof api_pb.PostDriftCancelPerpOrderRequest)) {
+    throw new Error('Expected argument of type api.PostDriftCancelPerpOrderRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDriftCancelPerpOrderRequest(buffer_arg) {
+  return api_pb.PostDriftCancelPerpOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostDriftCancelPerpOrderResponse(arg) {
+  if (!(arg instanceof api_pb.PostDriftCancelPerpOrderResponse)) {
+    throw new Error('Expected argument of type api.PostDriftCancelPerpOrderResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDriftCancelPerpOrderResponse(buffer_arg) {
+  return api_pb.PostDriftCancelPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostDriftEnableMarginTradingRequest(arg) {
   if (!(arg instanceof api_pb.PostDriftEnableMarginTradingRequest)) {
     throw new Error('Expected argument of type api.PostDriftEnableMarginTradingRequest');
@@ -1410,7 +1476,41 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 var ApiService = exports.ApiService = {
   // Drift V2
-postModifyDriftOrder: {
+//
+getDriftPerpPositions: {
+    path: '/api.Api/GetDriftPerpPositions',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetDriftPerpPositionsRequest,
+    responseType: api_pb.GetDriftPerpPositionsResponse,
+    requestSerialize: serialize_api_GetDriftPerpPositionsRequest,
+    requestDeserialize: deserialize_api_GetDriftPerpPositionsRequest,
+    responseSerialize: serialize_api_GetDriftPerpPositionsResponse,
+    responseDeserialize: deserialize_api_GetDriftPerpPositionsResponse,
+  },
+  getDriftPerpOpenOrders: {
+    path: '/api.Api/GetDriftPerpOpenOrders',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetDriftPerpOpenOrdersRequest,
+    responseType: api_pb.GetDriftPerpOpenOrdersResponse,
+    requestSerialize: serialize_api_GetDriftPerpOpenOrdersRequest,
+    requestDeserialize: deserialize_api_GetDriftPerpOpenOrdersRequest,
+    responseSerialize: serialize_api_GetDriftPerpOpenOrdersResponse,
+    responseDeserialize: deserialize_api_GetDriftPerpOpenOrdersResponse,
+  },
+  postDriftCancelPerpOrder: {
+    path: '/api.Api/PostDriftCancelPerpOrder',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostDriftCancelPerpOrderRequest,
+    responseType: api_pb.PostDriftCancelPerpOrderResponse,
+    requestSerialize: serialize_api_PostDriftCancelPerpOrderRequest,
+    requestDeserialize: deserialize_api_PostDriftCancelPerpOrderRequest,
+    responseSerialize: serialize_api_PostDriftCancelPerpOrderResponse,
+    responseDeserialize: deserialize_api_PostDriftCancelPerpOrderResponse,
+  },
+  postModifyDriftOrder: {
     path: '/api.Api/PostModifyDriftOrder',
     requestStream: false,
     responseStream: false,
@@ -1520,7 +1620,9 @@ postModifyDriftOrder: {
     responseSerialize: serialize_api_GetDriftMarketDepthStreamResponse,
     responseDeserialize: deserialize_api_GetDriftMarketDepthStreamResponse,
   },
-  getPrice: {
+  // end of Drift V2
+//
+getPrice: {
     path: '/api.Api/GetPrice',
     requestStream: false,
     responseStream: false,
@@ -1834,6 +1936,7 @@ postOrder: {
   // Drift V1 endpoints
 //
 // perp endpoints
+// migrated to v2
 postPerpOrder: {
     path: '/api.Api/PostPerpOrder',
     requestStream: false,
@@ -1845,7 +1948,8 @@ postPerpOrder: {
     responseSerialize: serialize_api_PostPerpOrderResponse,
     responseDeserialize: deserialize_api_PostPerpOrderResponse,
   },
-  getPerpPositions: {
+  // migrated to v2
+getPerpPositions: {
     path: '/api.Api/GetPerpPositions',
     requestStream: false,
     responseStream: false,
@@ -1856,7 +1960,8 @@ postPerpOrder: {
     responseSerialize: serialize_api_GetPerpPositionsResponse,
     responseDeserialize: deserialize_api_GetPerpPositionsResponse,
   },
-  getOpenPerpOrders: {
+  // migrated to v2
+getOpenPerpOrders: {
     path: '/api.Api/GetOpenPerpOrders',
     requestStream: false,
     responseStream: false,
@@ -1867,7 +1972,8 @@ postPerpOrder: {
     responseSerialize: serialize_api_GetOpenPerpOrdersResponse,
     responseDeserialize: deserialize_api_GetOpenPerpOrdersResponse,
   },
-  postCancelPerpOrders: {
+  // migrated to v2
+postCancelPerpOrders: {
     path: '/api.Api/PostCancelPerpOrders',
     requestStream: false,
     responseStream: false,
@@ -1878,7 +1984,8 @@ postPerpOrder: {
     responseSerialize: serialize_api_PostCancelPerpOrdersResponse,
     responseDeserialize: deserialize_api_PostCancelPerpOrdersResponse,
   },
-  postCancelPerpOrder: {
+  // migrated to v2
+postCancelPerpOrder: {
     path: '/api.Api/PostCancelPerpOrder',
     requestStream: false,
     responseStream: false,
