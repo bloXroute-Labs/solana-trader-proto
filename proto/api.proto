@@ -572,6 +572,8 @@ message GetTickersRequestV2 {
 
 message GetTickersResponseV2 {
   repeated TickerV2 tickers = 1;
+  double highPriceLastDay = 2;
+  double lowPriceLastDay = 3;
 }
 
 message TickerV2 {

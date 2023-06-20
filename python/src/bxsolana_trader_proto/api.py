@@ -106,6 +106,32 @@ class Ticker(betterproto.Message):
 
 
 @dataclass
+class GetTickersRequestV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+
+
+@dataclass
+class GetTickersResponseV2(betterproto.Message):
+    tickers: List["TickerV2"] = betterproto.message_field(1)
+    high_price_last_day: float = betterproto.double_field(2)
+    low_price_last_day: float = betterproto.double_field(3)
+
+
+@dataclass
+class TickerV2(betterproto.Message):
+    ts: datetime = betterproto.message_field(1)
+    market_address: str = betterproto.string_field(3)
+    project: "Project" = betterproto.enum_field(4)
+    open: float = betterproto.double_field(5)
+    close: float = betterproto.double_field(6)
+    high: float = betterproto.double_field(7)
+    low: float = betterproto.double_field(8)
+    amount: float = betterproto.double_field(9)
+    volume: float = betterproto.double_field(10)
+
+
+@dataclass
 class GetKlineRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     from_: datetime = betterproto.message_field(2)
@@ -132,6 +158,33 @@ class Candle(betterproto.Message):
     amount: float = betterproto.double_field(7)
     volume: float = betterproto.double_field(8)
     count: float = betterproto.double_field(9)
+
+
+@dataclass
+class GetMyOrdersRequest(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+    order_i_d: str = betterproto.string_field(3)
+    client_order_i_d: str = betterproto.string_field(4)
+
+
+@dataclass
+class GetMyOrdersResponse(betterproto.Message):
+    orders: List["MyOrder"] = betterproto.message_field(1)
+
+
+@dataclass
+class MyOrder(betterproto.Message):
+    timestamp: datetime = betterproto.message_field(1)
+    project: "Project" = betterproto.enum_field(2)
+    owner_address: str = betterproto.string_field(3)
+    date: datetime = betterproto.message_field(4)
+    client_order_i_d: int = betterproto.uint64_field(5)
+    market_address: str = betterproto.string_field(6)
+    program_order_i_d: str = betterproto.string_field(7)
+    side: str = betterproto.string_field(8)
+    amount: float = betterproto.double_field(9)
+    price: float = betterproto.double_field(10)
 
 
 @dataclass
@@ -966,6 +1019,19 @@ class ApiStub(betterproto.ServiceStub):
             GetTickersResponse,
         )
 
+    async def get_tickers_v2(
+        self, *, market: str = "", project: "Project" = 0
+    ) -> GetTickersResponseV2:
+        request = GetTickersRequestV2()
+        request.market = market
+        request.project = project
+
+        return await self._unary_unary(
+            "/api.Api/GetTickersV2",
+            request,
+            GetTickersResponseV2,
+        )
+
     async def get_kline(
         self,
         *,
@@ -1369,6 +1435,26 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetOrders",
             request,
             GetOrdersResponse,
+        )
+
+    async def get_my_orders(
+        self,
+        *,
+        market: str = "",
+        project: "Project" = 0,
+        order_i_d: str = "",
+        client_order_i_d: str = "",
+    ) -> GetMyOrdersResponse:
+        request = GetMyOrdersRequest()
+        request.market = market
+        request.project = project
+        request.order_i_d = order_i_d
+        request.client_order_i_d = client_order_i_d
+
+        return await self._unary_unary(
+            "/api.Api/GetMyOrders",
+            request,
+            GetMyOrdersResponse,
         )
 
     async def get_open_orders(
