@@ -1972,6 +1972,14 @@
           "items": {
             "$ref": "#/definitions/apiTickerV2"
           }
+        },
+        "highPriceLastDay": {
+          "type": "number",
+          "format": "double"
+        },
+        "lowPriceLastDay": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
