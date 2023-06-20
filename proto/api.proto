@@ -594,6 +594,7 @@ message GetKlineRequest {
   google.protobuf.Timestamp to = 3;
   string resolution = 4; // indicates a duration: e.g. 1d, 4h, 1h, 30m, 15m, 1m
   uint32 limit = 5;
+  Project project = 6;
 }
 
 message GetKlineResponse {

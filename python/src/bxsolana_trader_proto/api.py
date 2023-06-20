@@ -138,6 +138,7 @@ class GetKlineRequest(betterproto.Message):
     to: datetime = betterproto.message_field(3)
     resolution: str = betterproto.string_field(4)
     limit: int = betterproto.uint32_field(5)
+    project: "Project" = betterproto.enum_field(6)
 
 
 @dataclass
@@ -1040,6 +1041,7 @@ class ApiStub(betterproto.ServiceStub):
         to: Optional[datetime] = None,
         resolution: str = "",
         limit: int = 0,
+        project: "Project" = 0,
     ) -> GetKlineResponse:
         request = GetKlineRequest()
         request.market = market
@@ -1049,6 +1051,7 @@ class ApiStub(betterproto.ServiceStub):
             request.to = to
         request.resolution = resolution
         request.limit = limit
+        request.project = project
 
         return await self._unary_unary(
             "/api.Api/GetKline",

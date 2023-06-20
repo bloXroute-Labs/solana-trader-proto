@@ -289,6 +289,8 @@ export class GetKlineRequest extends jspb.Message {
     setResolution(value: string): GetKlineRequest;
     getLimit(): number;
     setLimit(value: number): GetKlineRequest;
+    getProject(): Project;
+    setProject(value: Project): GetKlineRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetKlineRequest.AsObject;
@@ -307,6 +309,7 @@ export namespace GetKlineRequest {
         to?: google_protobuf_timestamp_pb.Timestamp.AsObject,
         resolution: string,
         limit: number,
+        project: Project,
     }
 }
 

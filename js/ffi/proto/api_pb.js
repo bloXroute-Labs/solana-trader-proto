@@ -4619,7 +4619,8 @@ proto.api.GetKlineRequest.toObject = function(includeInstance, msg) {
     from: (f = msg.getFrom()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     to: (f = msg.getTo()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     resolution: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    limit: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    limit: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    project: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -4677,6 +4678,10 @@ proto.api.GetKlineRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 5:
       var value = /** @type {number} */ (reader.readUint32());
       msg.setLimit(value);
+      break;
+    case 6:
+      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
+      msg.setProject(value);
       break;
     default:
       reader.skipField();
@@ -4741,6 +4746,13 @@ proto.api.GetKlineRequest.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint32(
       5,
+      f
+    );
+  }
+  f = message.getProject();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      6,
       f
     );
   }
@@ -4872,6 +4884,24 @@ proto.api.GetKlineRequest.prototype.getLimit = function() {
  */
 proto.api.GetKlineRequest.prototype.setLimit = function(value) {
   return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional Project project = 6;
+ * @return {!proto.api.Project}
+ */
+proto.api.GetKlineRequest.prototype.getProject = function() {
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {!proto.api.Project} value
+ * @return {!proto.api.GetKlineRequest} returns this
+ */
+proto.api.GetKlineRequest.prototype.setProject = function(value) {
+  return jspb.Message.setProto3EnumField(this, 6, value);
 };
 
 
