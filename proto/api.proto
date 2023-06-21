@@ -1910,15 +1910,24 @@ message GetOpenPerpOrderResponse {
 
 // Drift V2
 
+message Context {
+  uint64 slot = 1;
+}
+
 message GetDriftPerpOpenOrdersRequest {
   string ownerAddress = 1;
   string accountAddress = 2;
   repeated string contracts = 3;
 }
 
-message GetDriftPerpOpenOrdersResponse {
+message GetDriftPerpOpenOrdersValue {
   string ownerAddress = 1;
   repeated DriftPerpOrder orders = 2;
+}
+
+message GetDriftPerpOpenOrdersResponse {
+  Context context = 1;
+  GetDriftPerpOpenOrdersValue data = 2;
 }
 
 message DriftPerpOrder {
@@ -1948,10 +1957,14 @@ message PostDriftCancelPerpOrderRequest {
   uint64 orderID = 5;
 }
 
-message PostDriftCancelPerpOrderResponse {
+message PostDriftCancelPerpOrderValue {
   repeated TransactionMessage transactions = 1;
 }
 
+message PostDriftCancelPerpOrderResponse {
+  Context context = 1;
+  PostDriftCancelPerpOrderValue data = 2;
+}
 
 message GetDriftPerpPositionsRequest {
   string ownerAddress = 1;
@@ -1959,12 +1972,15 @@ message GetDriftPerpPositionsRequest {
   repeated string contracts = 3;
 }
 
-message GetDriftPerpPositionsResponse {
+message GetDriftPerpPositionsValue {
   string ownerAddress = 1;
-
   repeated DriftPerpPosition perpPositions = 2;
 }
 
+message GetDriftPerpPositionsResponse {
+  Context context = 1;
+  GetDriftPerpPositionsValue data = 2;
+}
 
 message DriftPerpPosition {
   string contract = 1;
@@ -1981,7 +1997,6 @@ message DriftPerpPosition {
   double liquidationPrice = 10;
 }
 
-
 message GetDriftMarginOrderbooksRequest {
   repeated string markets = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
@@ -1989,7 +2004,7 @@ message GetDriftMarginOrderbooksRequest {
 }
 
 message GetDriftMarginOrderbooksStreamResponse {
-  int64 slot = 1;
+  Context context = 1;
   GetDriftMarginOrderbookResponse orderbook = 2;
 }
 
@@ -1999,11 +2014,16 @@ message GetDriftMarginOrderbookRequest {
   bool metadata = 3;
 }
 
-message GetDriftMarginOrderbookResponse {
+message GetDriftMarginOrderbookValue {
   string market = 1;
   string marketAddress = 2;
   repeated DriftMarginOrderbookItem bids = 3;
   repeated DriftMarginOrderbookItem asks = 4;
+}
+
+message GetDriftMarginOrderbookResponse {
+  Context context = 1;
+  GetDriftMarginOrderbookValue data = 2;
 }
 
 message DriftMarginOrderbookItem {
@@ -2019,8 +2039,13 @@ message GetDriftMarketsRequest {
   bool metadata = 1;
 }
 
-message GetDriftMarketsResponse {
+message GetDriftMarketsValue {
   map<string, DriftMarket> markets = 1;
+}
+
+message GetDriftMarketsResponse {
+  Context context = 1;
+  GetDriftMarketsValue data = 2;
 }
 
 message DriftMarket {
@@ -2045,18 +2070,23 @@ message GetDriftMarketDepthsStreamRequest {
 }
 
 message GetDriftMarketDepthStreamResponse {
-  int64 slot = 1;
-  GetDriftMarketDepthResponse Data = 2;
-}
-
-message GetDriftMarketDepthResponse {
-  string contract = 1;
-  repeated DriftMarketDepthItem bids = 2;
-  repeated DriftMarketDepthItem asks = 3;
+  Context context = 1;
+  GetDriftMarketDepthResponse data = 2;
 }
 
 message DriftMarketDepthItem {
   double price = 1;
   double size = 2;
+}
+
+message GetDriftMarketDepthValue {
+  string contract = 1;
+  repeated DriftMarketDepthItem bids = 2;
+  repeated DriftMarketDepthItem asks = 3;
+}
+
+message GetDriftMarketDepthResponse {
+  Context context = 1;
+  GetDriftMarketDepthValue data = 2;
 }
 // end of Drift V2
