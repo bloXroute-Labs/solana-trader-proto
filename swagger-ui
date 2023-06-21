@@ -2337,6 +2337,15 @@
         }
       }
     },
+    "apiContext": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
     "apiContractInfo": {
       "type": "object",
       "properties": {
@@ -2625,6 +2634,17 @@
     "apiGetDriftMarginOrderbookResponse": {
       "type": "object",
       "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "data": {
+          "$ref": "#/definitions/apiGetDriftMarginOrderbookValue"
+        }
+      }
+    },
+    "apiGetDriftMarginOrderbookValue": {
+      "type": "object",
+      "properties": {
         "market": {
           "type": "string"
         },
@@ -2648,9 +2668,8 @@
     "apiGetDriftMarginOrderbooksStreamResponse": {
       "type": "object",
       "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
+        "context": {
+          "$ref": "#/definitions/apiContext"
         },
         "orderbook": {
           "$ref": "#/definitions/apiGetDriftMarginOrderbookResponse"
@@ -2658,6 +2677,28 @@
       }
     },
     "apiGetDriftMarketDepthResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "data": {
+          "$ref": "#/definitions/apiGetDriftMarketDepthValue"
+        }
+      }
+    },
+    "apiGetDriftMarketDepthStreamResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "data": {
+          "$ref": "#/definitions/apiGetDriftMarketDepthResponse"
+        }
+      }
+    },
+    "apiGetDriftMarketDepthValue": {
       "type": "object",
       "properties": {
         "contract": {
@@ -2677,19 +2718,18 @@
         }
       }
     },
-    "apiGetDriftMarketDepthStreamResponse": {
+    "apiGetDriftMarketsResponse": {
       "type": "object",
       "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
+        "context": {
+          "$ref": "#/definitions/apiContext"
         },
-        "Data": {
-          "$ref": "#/definitions/apiGetDriftMarketDepthResponse"
+        "data": {
+          "$ref": "#/definitions/apiGetDriftMarketsValue"
         }
       }
     },
-    "apiGetDriftMarketsResponse": {
+    "apiGetDriftMarketsValue": {
       "type": "object",
       "properties": {
         "markets": {
@@ -2717,6 +2757,17 @@
     "apiGetDriftPerpOpenOrdersResponse": {
       "type": "object",
       "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "data": {
+          "$ref": "#/definitions/apiGetDriftPerpOpenOrdersValue"
+        }
+      }
+    },
+    "apiGetDriftPerpOpenOrdersValue": {
+      "type": "object",
+      "properties": {
         "ownerAddress": {
           "type": "string"
         },
@@ -2729,6 +2780,17 @@
       }
     },
     "apiGetDriftPerpPositionsResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "data": {
+          "$ref": "#/definitions/apiGetDriftPerpPositionsValue"
+        }
+      }
+    },
+    "apiGetDriftPerpPositionsValue": {
       "type": "object",
       "properties": {
         "ownerAddress": {
@@ -4041,6 +4103,17 @@
       }
     },
     "apiPostDriftCancelPerpOrderResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "data": {
+          "$ref": "#/definitions/apiPostDriftCancelPerpOrderValue"
+        }
+      }
+    },
+    "apiPostDriftCancelPerpOrderValue": {
       "type": "object",
       "properties": {
         "transactions": {

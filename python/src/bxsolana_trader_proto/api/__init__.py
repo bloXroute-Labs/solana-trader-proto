@@ -1292,6 +1292,11 @@ class GetOpenPerpOrderResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class Context(betterproto.Message):
+    slot: int = betterproto.uint64_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class GetDriftPerpOpenOrdersRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
@@ -1299,9 +1304,15 @@ class GetDriftPerpOpenOrdersRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class GetDriftPerpOpenOrdersResponse(betterproto.Message):
+class GetDriftPerpOpenOrdersValue(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     orders: List["DriftPerpOrder"] = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftPerpOpenOrdersResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    data: "GetDriftPerpOpenOrdersValue" = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -1330,8 +1341,14 @@ class PostDriftCancelPerpOrderRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class PostDriftCancelPerpOrderResponse(betterproto.Message):
+class PostDriftCancelPerpOrderValue(betterproto.Message):
     transactions: List["TransactionMessage"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftCancelPerpOrderResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    data: "PostDriftCancelPerpOrderValue" = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -1342,9 +1359,15 @@ class GetDriftPerpPositionsRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class GetDriftPerpPositionsResponse(betterproto.Message):
+class GetDriftPerpPositionsValue(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     perp_positions: List["DriftPerpPosition"] = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftPerpPositionsResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    data: "GetDriftPerpPositionsValue" = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -1370,7 +1393,7 @@ class GetDriftMarginOrderbooksRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetDriftMarginOrderbooksStreamResponse(betterproto.Message):
-    slot: int = betterproto.int64_field(1)
+    context: "Context" = betterproto.message_field(1)
     orderbook: "GetDriftMarginOrderbookResponse" = betterproto.message_field(2)
 
 
@@ -1382,11 +1405,17 @@ class GetDriftMarginOrderbookRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class GetDriftMarginOrderbookResponse(betterproto.Message):
+class GetDriftMarginOrderbookValue(betterproto.Message):
     market: str = betterproto.string_field(1)
     market_address: str = betterproto.string_field(2)
     bids: List["DriftMarginOrderbookItem"] = betterproto.message_field(3)
     asks: List["DriftMarginOrderbookItem"] = betterproto.message_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftMarginOrderbookResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    data: "GetDriftMarginOrderbookValue" = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -1407,10 +1436,16 @@ class GetDriftMarketsRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class GetDriftMarketsResponse(betterproto.Message):
+class GetDriftMarketsValue(betterproto.Message):
     markets: Dict[str, "DriftMarket"] = betterproto.map_field(
         1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftMarketsResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    data: "GetDriftMarketsValue" = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -1441,21 +1476,27 @@ class GetDriftMarketDepthsStreamRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetDriftMarketDepthStreamResponse(betterproto.Message):
-    slot: int = betterproto.int64_field(1)
+    context: "Context" = betterproto.message_field(1)
     data: "GetDriftMarketDepthResponse" = betterproto.message_field(2)
-
-
-@dataclass(eq=False, repr=False)
-class GetDriftMarketDepthResponse(betterproto.Message):
-    contract: str = betterproto.string_field(1)
-    bids: List["DriftMarketDepthItem"] = betterproto.message_field(2)
-    asks: List["DriftMarketDepthItem"] = betterproto.message_field(3)
 
 
 @dataclass(eq=False, repr=False)
 class DriftMarketDepthItem(betterproto.Message):
     price: float = betterproto.double_field(1)
     size: float = betterproto.double_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftMarketDepthValue(betterproto.Message):
+    contract: str = betterproto.string_field(1)
+    bids: List["DriftMarketDepthItem"] = betterproto.message_field(2)
+    asks: List["DriftMarketDepthItem"] = betterproto.message_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftMarketDepthResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    data: "GetDriftMarketDepthValue" = betterproto.message_field(2)
 
 
 class ApiStub(betterproto.ServiceStub):
