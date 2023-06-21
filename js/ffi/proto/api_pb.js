@@ -4014,9 +4014,7 @@ proto.api.GetTickersResponseV2.prototype.toObject = function(opt_includeInstance
 proto.api.GetTickersResponseV2.toObject = function(includeInstance, msg) {
   var f, obj = {
     tickersList: jspb.Message.toObjectList(msg.getTickersList(),
-    proto.api.TickerV2.toObject, includeInstance),
-    highpricelastday: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
-    lowpricelastday: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0)
+    proto.api.TickerV2.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -4058,14 +4056,6 @@ proto.api.GetTickersResponseV2.deserializeBinaryFromReader = function(msg, reade
       reader.readMessage(value,proto.api.TickerV2.deserializeBinaryFromReader);
       msg.addTickers(value);
       break;
-    case 2:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setHighpricelastday(value);
-      break;
-    case 3:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setLowpricelastday(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -4101,20 +4091,6 @@ proto.api.GetTickersResponseV2.serializeBinaryToWriter = function(message, write
       1,
       f,
       proto.api.TickerV2.serializeBinaryToWriter
-    );
-  }
-  f = message.getHighpricelastday();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      2,
-      f
-    );
-  }
-  f = message.getLowpricelastday();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      3,
-      f
     );
   }
 };
@@ -4155,42 +4131,6 @@ proto.api.GetTickersResponseV2.prototype.addTickers = function(opt_value, opt_in
  */
 proto.api.GetTickersResponseV2.prototype.clearTickersList = function() {
   return this.setTickersList([]);
-};
-
-
-/**
- * optional double highPriceLastDay = 2;
- * @return {number}
- */
-proto.api.GetTickersResponseV2.prototype.getHighpricelastday = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetTickersResponseV2} returns this
- */
-proto.api.GetTickersResponseV2.prototype.setHighpricelastday = function(value) {
-  return jspb.Message.setProto3FloatField(this, 2, value);
-};
-
-
-/**
- * optional double lowPriceLastDay = 3;
- * @return {number}
- */
-proto.api.GetTickersResponseV2.prototype.getLowpricelastday = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetTickersResponseV2} returns this
- */
-proto.api.GetTickersResponseV2.prototype.setLowpricelastday = function(value) {
-  return jspb.Message.setProto3FloatField(this, 3, value);
 };
 
 

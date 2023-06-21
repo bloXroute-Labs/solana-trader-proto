@@ -2,7 +2,7 @@
 # sources: api.proto
 # plugin: python-betterproto
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import AsyncGenerator, Dict, List, Optional
 
 import betterproto
@@ -114,8 +114,6 @@ class GetTickersRequestV2(betterproto.Message):
 @dataclass
 class GetTickersResponseV2(betterproto.Message):
     tickers: List["TickerV2"] = betterproto.message_field(1)
-    high_price_last_day: float = betterproto.double_field(2)
-    low_price_last_day: float = betterproto.double_field(3)
 
 
 @dataclass
@@ -136,7 +134,7 @@ class GetKlineRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     from_: datetime = betterproto.message_field(2)
     to: datetime = betterproto.message_field(3)
-    resolution: str = betterproto.string_field(4)
+    resolution: timedelta = betterproto.message_field(4)
     limit: int = betterproto.uint32_field(5)
     project: "Project" = betterproto.enum_field(6)
 
@@ -1039,7 +1037,7 @@ class ApiStub(betterproto.ServiceStub):
         market: str = "",
         from_: Optional[datetime] = None,
         to: Optional[datetime] = None,
-        resolution: str = "",
+        resolution: Optional[timedelta] = None,
         limit: int = 0,
         project: "Project" = 0,
     ) -> GetKlineResponse:
@@ -1049,7 +1047,8 @@ class ApiStub(betterproto.ServiceStub):
             request.from_ = from_
         if to is not None:
             request.to = to
-        request.resolution = resolution
+        if resolution is not None:
+            request.resolution = resolution
         request.limit = limit
         request.project = project
 

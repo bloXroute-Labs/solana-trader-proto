@@ -203,10 +203,6 @@ export class GetTickersResponseV2 extends jspb.Message {
     getTickersList(): Array<TickerV2>;
     setTickersList(value: Array<TickerV2>): GetTickersResponseV2;
     addTickers(value?: TickerV2, index?: number): TickerV2;
-    getHighpricelastday(): number;
-    setHighpricelastday(value: number): GetTickersResponseV2;
-    getLowpricelastday(): number;
-    setLowpricelastday(value: number): GetTickersResponseV2;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTickersResponseV2.AsObject;
@@ -221,8 +217,6 @@ export class GetTickersResponseV2 extends jspb.Message {
 export namespace GetTickersResponseV2 {
     export type AsObject = {
         tickersList: Array<TickerV2.AsObject>,
-        highpricelastday: number,
-        lowpricelastday: number,
     }
 }
 
