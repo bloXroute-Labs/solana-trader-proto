@@ -19,6 +19,8 @@ var google_api_annotations_pb = require('./google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.object.extend(proto, google_protobuf_timestamp_pb);
+var google_protobuf_duration_pb = require('google-protobuf/google/protobuf/duration_pb.js');
+goog.object.extend(proto, google_protobuf_duration_pb);
 var google_api_field_behavior_pb = require('./google/api/field_behavior_pb.js');
 goog.object.extend(proto, google_api_field_behavior_pb);
 var google_api_visibility_pb = require('./google/api/visibility_pb.js');
@@ -4618,7 +4620,7 @@ proto.api.GetKlineRequest.toObject = function(includeInstance, msg) {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
     from: (f = msg.getFrom()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     to: (f = msg.getTo()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    resolution: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    resolution: (f = msg.getResolution()) && google_protobuf_duration_pb.Duration.toObject(includeInstance, f),
     limit: jspb.Message.getFieldWithDefault(msg, 5, 0),
     project: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
@@ -4672,7 +4674,8 @@ proto.api.GetKlineRequest.deserializeBinaryFromReader = function(msg, reader) {
       msg.setTo(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = new google_protobuf_duration_pb.Duration;
+      reader.readMessage(value,google_protobuf_duration_pb.Duration.deserializeBinaryFromReader);
       msg.setResolution(value);
       break;
     case 5:
@@ -4736,10 +4739,11 @@ proto.api.GetKlineRequest.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getResolution();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f != null) {
+    writer.writeMessage(
       4,
-      f
+      f,
+      google_protobuf_duration_pb.Duration.serializeBinaryToWriter
     );
   }
   f = message.getLimit();
@@ -4852,20 +4856,39 @@ proto.api.GetKlineRequest.prototype.hasTo = function() {
 
 
 /**
- * optional string resolution = 4;
- * @return {string}
+ * optional google.protobuf.Duration resolution = 4;
+ * @return {?proto.google.protobuf.Duration}
  */
 proto.api.GetKlineRequest.prototype.getResolution = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+  return /** @type{?proto.google.protobuf.Duration} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_duration_pb.Duration, 4));
 };
 
 
 /**
- * @param {string} value
+ * @param {?proto.google.protobuf.Duration|undefined} value
+ * @return {!proto.api.GetKlineRequest} returns this
+*/
+proto.api.GetKlineRequest.prototype.setResolution = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
  * @return {!proto.api.GetKlineRequest} returns this
  */
-proto.api.GetKlineRequest.prototype.setResolution = function(value) {
-  return jspb.Message.setProto3StringField(this, 4, value);
+proto.api.GetKlineRequest.prototype.clearResolution = function() {
+  return this.setResolution(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetKlineRequest.prototype.hasResolution = function() {
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
