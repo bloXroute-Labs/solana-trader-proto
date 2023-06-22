@@ -52,6 +52,41 @@ service Api {
   };
 
   // Drift V2
+
+  rpc GetDriftPerpPositions(GetDriftPerpPositionsRequest)  returns (GetDriftPerpPositionsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/drift/perp-positions"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list current Drift perp positions";
+      summary: "Drift perp positions";
+      tags: ["v2", "Trade", "Perp", "Orderbook"];
+    };
+  }
+
+  rpc GetDriftPerpOpenOrders(GetDriftPerpOpenOrdersRequest)  returns (GetDriftPerpOpenOrdersResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/drift/perp-open-orders"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list current open perp orders on Drift";
+      summary: "Drift open perp order";
+      tags: ["v2", "Trade", "Perp", "Orderbook"];
+    };
+  }
+
+  rpc PostDriftCancelPerpOrder(PostDriftCancelPerpOrderRequest) returns (PostDriftCancelPerpOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/drift/perp-cancel"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns a partially signed txn signature to cancel perp orders on Drift";
+      summary: "cancel perp orders on Drift";
+      tags: ["v2", "Trade", "Perp", "Orderbook"];
+    };
+  }
+
   rpc PostModifyDriftOrder(PostModifyDriftOrderRequest)  returns (PostModifyDriftOrderResponse) {
     option (google.api.http) = {
       post: "/api/v2/drift/modify-order"
@@ -156,6 +191,7 @@ service Api {
       tags: ["v2", "Drift"];
     };
   }
+
   // end of Drift V2
 
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
@@ -488,6 +524,7 @@ service Api {
   // Drift V1 endpoints
 
   // perp endpoints
+  // migrated to v2
   rpc PostPerpOrder(PostPerpOrderRequest)  returns (PostPerpOrderResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/order"
@@ -499,7 +536,7 @@ service Api {
       tags: ["Trade", "Perp", "Orderbook"];
     };
   }
-
+  // migrated to v2
   rpc GetPerpPositions(GetPerpPositionsRequest)  returns (GetPerpPositionsResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/perp/positions"
@@ -510,7 +547,7 @@ service Api {
       tags: ["Trade", "Perp", "Orderbook"];
     };
   }
-
+  // migrated to v2
   rpc GetOpenPerpOrders(GetOpenPerpOrdersRequest)  returns (GetOpenPerpOrdersResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/perp/open-orders"
@@ -521,7 +558,7 @@ service Api {
       tags: ["Trade", "Perp", "Orderbook"];
     };
   }
-
+  // migrated to v2
   rpc PostCancelPerpOrders(PostCancelPerpOrdersRequest) returns (PostCancelPerpOrdersResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/cancel"
@@ -533,7 +570,7 @@ service Api {
       tags: ["Trade", "Perp", "Orderbook"];
     };
   }
-
+  // migrated to v2
   rpc PostCancelPerpOrder(PostCancelPerpOrderRequest) returns (PostCancelPerpOrderResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/cancelbyid"
@@ -1872,6 +1909,94 @@ message GetOpenPerpOrderResponse {
 }
 
 // Drift V2
+
+message Context {
+  uint64 slot = 1;
+}
+
+message GetDriftPerpOpenOrdersRequest {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  repeated string contracts = 3;
+}
+
+message GetDriftPerpOpenOrdersValue {
+  string ownerAddress = 1;
+  repeated DriftPerpOrder orders = 2;
+}
+
+message GetDriftPerpOpenOrdersResponse {
+  Context context = 1;
+  GetDriftPerpOpenOrdersValue data = 2;
+}
+
+message DriftPerpOrder {
+  uint64 orderID = 1;
+  uint64 clientOrderID = 2;
+
+  string contract = 3;
+  string positionSide = 4;
+
+  string orderType = 5;
+
+  double price = 6;
+  double size = 7;
+  double remainingSize = 8;
+  string status = 9;
+
+  string accountAddress = 10;
+  uint64 subAccountID = 11;
+  bool postOnly = 12;
+}
+
+message PostDriftCancelPerpOrderRequest {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  string contract = 3;
+  uint64 clientOrderID = 4;
+  uint64 orderID = 5;
+}
+
+message PostDriftCancelPerpOrderValue {
+  repeated TransactionMessage transactions = 1;
+}
+
+message PostDriftCancelPerpOrderResponse {
+  Context context = 1;
+  PostDriftCancelPerpOrderValue data = 2;
+}
+
+message GetDriftPerpPositionsRequest {
+  string ownerAddress = 1;
+  string accountAddress = 2;
+  repeated string contracts = 3;
+}
+
+message GetDriftPerpPositionsValue {
+  string ownerAddress = 1;
+  repeated DriftPerpPosition perpPositions = 2;
+}
+
+message GetDriftPerpPositionsResponse {
+  Context context = 1;
+  GetDriftPerpPositionsValue data = 2;
+}
+
+message DriftPerpPosition {
+  string contract = 1;
+  string accountAddress = 2;
+  int64 subAccountID = 3;
+  double volumeAvailable = 4;
+  double volumeInOrder = 5;
+
+  double positionMargin = 6;
+  string positionSide = 7;
+
+  double notionalValue = 8;
+  double indexPrice = 9;
+  double liquidationPrice = 10;
+}
+
 message GetDriftMarginOrderbooksRequest {
   repeated string markets = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
@@ -1879,7 +2004,7 @@ message GetDriftMarginOrderbooksRequest {
 }
 
 message GetDriftMarginOrderbooksStreamResponse {
-  int64 slot = 1;
+  Context context = 1;
   GetDriftMarginOrderbookResponse orderbook = 2;
 }
 
@@ -1889,11 +2014,16 @@ message GetDriftMarginOrderbookRequest {
   bool metadata = 3;
 }
 
-message GetDriftMarginOrderbookResponse {
+message GetDriftMarginOrderbookValue {
   string market = 1;
   string marketAddress = 2;
   repeated DriftMarginOrderbookItem bids = 3;
   repeated DriftMarginOrderbookItem asks = 4;
+}
+
+message GetDriftMarginOrderbookResponse {
+  Context context = 1;
+  GetDriftMarginOrderbookValue data = 2;
 }
 
 message DriftMarginOrderbookItem {
@@ -1909,8 +2039,13 @@ message GetDriftMarketsRequest {
   bool metadata = 1;
 }
 
-message GetDriftMarketsResponse {
+message GetDriftMarketsValue {
   map<string, DriftMarket> markets = 1;
+}
+
+message GetDriftMarketsResponse {
+  Context context = 1;
+  GetDriftMarketsValue data = 2;
 }
 
 message DriftMarket {
@@ -1935,18 +2070,23 @@ message GetDriftMarketDepthsStreamRequest {
 }
 
 message GetDriftMarketDepthStreamResponse {
-  int64 slot = 1;
-  GetDriftMarketDepthResponse Data = 2;
-}
-
-message GetDriftMarketDepthResponse {
-  string contract = 1;
-  repeated DriftMarketDepthItem bids = 2;
-  repeated DriftMarketDepthItem asks = 3;
+  Context context = 1;
+  GetDriftMarketDepthResponse data = 2;
 }
 
 message DriftMarketDepthItem {
   double price = 1;
   double size = 2;
+}
+
+message GetDriftMarketDepthValue {
+  string contract = 1;
+  repeated DriftMarketDepthItem bids = 2;
+  repeated DriftMarketDepthItem asks = 3;
+}
+
+message GetDriftMarketDepthResponse {
+  Context context = 1;
+  GetDriftMarketDepthValue data = 2;
 }
 // end of Drift V2

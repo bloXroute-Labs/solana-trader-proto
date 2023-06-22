@@ -4634,6 +4634,373 @@ export namespace GetOpenPerpOrderResponse {
     }
 }
 
+export class Context extends jspb.Message { 
+    getSlot(): number;
+    setSlot(value: number): Context;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Context.AsObject;
+    static toObject(includeInstance: boolean, msg: Context): Context.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Context, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Context;
+    static deserializeBinaryFromReader(message: Context, reader: jspb.BinaryReader): Context;
+}
+
+export namespace Context {
+    export type AsObject = {
+        slot: number,
+    }
+}
+
+export class GetDriftPerpOpenOrdersRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetDriftPerpOpenOrdersRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): GetDriftPerpOpenOrdersRequest;
+    clearContractsList(): void;
+    getContractsList(): Array<string>;
+    setContractsList(value: Array<string>): GetDriftPerpOpenOrdersRequest;
+    addContracts(value: string, index?: number): string;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftPerpOpenOrdersRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftPerpOpenOrdersRequest): GetDriftPerpOpenOrdersRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftPerpOpenOrdersRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftPerpOpenOrdersRequest;
+    static deserializeBinaryFromReader(message: GetDriftPerpOpenOrdersRequest, reader: jspb.BinaryReader): GetDriftPerpOpenOrdersRequest;
+}
+
+export namespace GetDriftPerpOpenOrdersRequest {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        contractsList: Array<string>,
+    }
+}
+
+export class GetDriftPerpOpenOrdersValue extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetDriftPerpOpenOrdersValue;
+    clearOrdersList(): void;
+    getOrdersList(): Array<DriftPerpOrder>;
+    setOrdersList(value: Array<DriftPerpOrder>): GetDriftPerpOpenOrdersValue;
+    addOrders(value?: DriftPerpOrder, index?: number): DriftPerpOrder;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftPerpOpenOrdersValue.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftPerpOpenOrdersValue): GetDriftPerpOpenOrdersValue.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftPerpOpenOrdersValue, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftPerpOpenOrdersValue;
+    static deserializeBinaryFromReader(message: GetDriftPerpOpenOrdersValue, reader: jspb.BinaryReader): GetDriftPerpOpenOrdersValue;
+}
+
+export namespace GetDriftPerpOpenOrdersValue {
+    export type AsObject = {
+        owneraddress: string,
+        ordersList: Array<DriftPerpOrder.AsObject>,
+    }
+}
+
+export class GetDriftPerpOpenOrdersResponse extends jspb.Message { 
+
+    hasContext(): boolean;
+    clearContext(): void;
+    getContext(): Context | undefined;
+    setContext(value?: Context): GetDriftPerpOpenOrdersResponse;
+
+    hasData(): boolean;
+    clearData(): void;
+    getData(): GetDriftPerpOpenOrdersValue | undefined;
+    setData(value?: GetDriftPerpOpenOrdersValue): GetDriftPerpOpenOrdersResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftPerpOpenOrdersResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftPerpOpenOrdersResponse): GetDriftPerpOpenOrdersResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftPerpOpenOrdersResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftPerpOpenOrdersResponse;
+    static deserializeBinaryFromReader(message: GetDriftPerpOpenOrdersResponse, reader: jspb.BinaryReader): GetDriftPerpOpenOrdersResponse;
+}
+
+export namespace GetDriftPerpOpenOrdersResponse {
+    export type AsObject = {
+        context?: Context.AsObject,
+        data?: GetDriftPerpOpenOrdersValue.AsObject,
+    }
+}
+
+export class DriftPerpOrder extends jspb.Message { 
+    getOrderid(): number;
+    setOrderid(value: number): DriftPerpOrder;
+    getClientorderid(): number;
+    setClientorderid(value: number): DriftPerpOrder;
+    getContract(): string;
+    setContract(value: string): DriftPerpOrder;
+    getPositionside(): string;
+    setPositionside(value: string): DriftPerpOrder;
+    getOrdertype(): string;
+    setOrdertype(value: string): DriftPerpOrder;
+    getPrice(): number;
+    setPrice(value: number): DriftPerpOrder;
+    getSize(): number;
+    setSize(value: number): DriftPerpOrder;
+    getRemainingsize(): number;
+    setRemainingsize(value: number): DriftPerpOrder;
+    getStatus(): string;
+    setStatus(value: string): DriftPerpOrder;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): DriftPerpOrder;
+    getSubaccountid(): number;
+    setSubaccountid(value: number): DriftPerpOrder;
+    getPostonly(): boolean;
+    setPostonly(value: boolean): DriftPerpOrder;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): DriftPerpOrder.AsObject;
+    static toObject(includeInstance: boolean, msg: DriftPerpOrder): DriftPerpOrder.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: DriftPerpOrder, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): DriftPerpOrder;
+    static deserializeBinaryFromReader(message: DriftPerpOrder, reader: jspb.BinaryReader): DriftPerpOrder;
+}
+
+export namespace DriftPerpOrder {
+    export type AsObject = {
+        orderid: number,
+        clientorderid: number,
+        contract: string,
+        positionside: string,
+        ordertype: string,
+        price: number,
+        size: number,
+        remainingsize: number,
+        status: string,
+        accountaddress: string,
+        subaccountid: number,
+        postonly: boolean,
+    }
+}
+
+export class PostDriftCancelPerpOrderRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostDriftCancelPerpOrderRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostDriftCancelPerpOrderRequest;
+    getContract(): string;
+    setContract(value: string): PostDriftCancelPerpOrderRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostDriftCancelPerpOrderRequest;
+    getOrderid(): number;
+    setOrderid(value: number): PostDriftCancelPerpOrderRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftCancelPerpOrderRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftCancelPerpOrderRequest): PostDriftCancelPerpOrderRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftCancelPerpOrderRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftCancelPerpOrderRequest;
+    static deserializeBinaryFromReader(message: PostDriftCancelPerpOrderRequest, reader: jspb.BinaryReader): PostDriftCancelPerpOrderRequest;
+}
+
+export namespace PostDriftCancelPerpOrderRequest {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        contract: string,
+        clientorderid: number,
+        orderid: number,
+    }
+}
+
+export class PostDriftCancelPerpOrderValue extends jspb.Message { 
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostDriftCancelPerpOrderValue;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftCancelPerpOrderValue.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftCancelPerpOrderValue): PostDriftCancelPerpOrderValue.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftCancelPerpOrderValue, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftCancelPerpOrderValue;
+    static deserializeBinaryFromReader(message: PostDriftCancelPerpOrderValue, reader: jspb.BinaryReader): PostDriftCancelPerpOrderValue;
+}
+
+export namespace PostDriftCancelPerpOrderValue {
+    export type AsObject = {
+        transactionsList: Array<TransactionMessage.AsObject>,
+    }
+}
+
+export class PostDriftCancelPerpOrderResponse extends jspb.Message { 
+
+    hasContext(): boolean;
+    clearContext(): void;
+    getContext(): Context | undefined;
+    setContext(value?: Context): PostDriftCancelPerpOrderResponse;
+
+    hasData(): boolean;
+    clearData(): void;
+    getData(): PostDriftCancelPerpOrderValue | undefined;
+    setData(value?: PostDriftCancelPerpOrderValue): PostDriftCancelPerpOrderResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftCancelPerpOrderResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftCancelPerpOrderResponse): PostDriftCancelPerpOrderResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftCancelPerpOrderResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftCancelPerpOrderResponse;
+    static deserializeBinaryFromReader(message: PostDriftCancelPerpOrderResponse, reader: jspb.BinaryReader): PostDriftCancelPerpOrderResponse;
+}
+
+export namespace PostDriftCancelPerpOrderResponse {
+    export type AsObject = {
+        context?: Context.AsObject,
+        data?: PostDriftCancelPerpOrderValue.AsObject,
+    }
+}
+
+export class GetDriftPerpPositionsRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetDriftPerpPositionsRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): GetDriftPerpPositionsRequest;
+    clearContractsList(): void;
+    getContractsList(): Array<string>;
+    setContractsList(value: Array<string>): GetDriftPerpPositionsRequest;
+    addContracts(value: string, index?: number): string;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftPerpPositionsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftPerpPositionsRequest): GetDriftPerpPositionsRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftPerpPositionsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftPerpPositionsRequest;
+    static deserializeBinaryFromReader(message: GetDriftPerpPositionsRequest, reader: jspb.BinaryReader): GetDriftPerpPositionsRequest;
+}
+
+export namespace GetDriftPerpPositionsRequest {
+    export type AsObject = {
+        owneraddress: string,
+        accountaddress: string,
+        contractsList: Array<string>,
+    }
+}
+
+export class GetDriftPerpPositionsValue extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetDriftPerpPositionsValue;
+    clearPerppositionsList(): void;
+    getPerppositionsList(): Array<DriftPerpPosition>;
+    setPerppositionsList(value: Array<DriftPerpPosition>): GetDriftPerpPositionsValue;
+    addPerppositions(value?: DriftPerpPosition, index?: number): DriftPerpPosition;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftPerpPositionsValue.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftPerpPositionsValue): GetDriftPerpPositionsValue.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftPerpPositionsValue, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftPerpPositionsValue;
+    static deserializeBinaryFromReader(message: GetDriftPerpPositionsValue, reader: jspb.BinaryReader): GetDriftPerpPositionsValue;
+}
+
+export namespace GetDriftPerpPositionsValue {
+    export type AsObject = {
+        owneraddress: string,
+        perppositionsList: Array<DriftPerpPosition.AsObject>,
+    }
+}
+
+export class GetDriftPerpPositionsResponse extends jspb.Message { 
+
+    hasContext(): boolean;
+    clearContext(): void;
+    getContext(): Context | undefined;
+    setContext(value?: Context): GetDriftPerpPositionsResponse;
+
+    hasData(): boolean;
+    clearData(): void;
+    getData(): GetDriftPerpPositionsValue | undefined;
+    setData(value?: GetDriftPerpPositionsValue): GetDriftPerpPositionsResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftPerpPositionsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftPerpPositionsResponse): GetDriftPerpPositionsResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftPerpPositionsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftPerpPositionsResponse;
+    static deserializeBinaryFromReader(message: GetDriftPerpPositionsResponse, reader: jspb.BinaryReader): GetDriftPerpPositionsResponse;
+}
+
+export namespace GetDriftPerpPositionsResponse {
+    export type AsObject = {
+        context?: Context.AsObject,
+        data?: GetDriftPerpPositionsValue.AsObject,
+    }
+}
+
+export class DriftPerpPosition extends jspb.Message { 
+    getContract(): string;
+    setContract(value: string): DriftPerpPosition;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): DriftPerpPosition;
+    getSubaccountid(): number;
+    setSubaccountid(value: number): DriftPerpPosition;
+    getVolumeavailable(): number;
+    setVolumeavailable(value: number): DriftPerpPosition;
+    getVolumeinorder(): number;
+    setVolumeinorder(value: number): DriftPerpPosition;
+    getPositionmargin(): number;
+    setPositionmargin(value: number): DriftPerpPosition;
+    getPositionside(): string;
+    setPositionside(value: string): DriftPerpPosition;
+    getNotionalvalue(): number;
+    setNotionalvalue(value: number): DriftPerpPosition;
+    getIndexprice(): number;
+    setIndexprice(value: number): DriftPerpPosition;
+    getLiquidationprice(): number;
+    setLiquidationprice(value: number): DriftPerpPosition;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): DriftPerpPosition.AsObject;
+    static toObject(includeInstance: boolean, msg: DriftPerpPosition): DriftPerpPosition.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: DriftPerpPosition, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): DriftPerpPosition;
+    static deserializeBinaryFromReader(message: DriftPerpPosition, reader: jspb.BinaryReader): DriftPerpPosition;
+}
+
+export namespace DriftPerpPosition {
+    export type AsObject = {
+        contract: string,
+        accountaddress: string,
+        subaccountid: number,
+        volumeavailable: number,
+        volumeinorder: number,
+        positionmargin: number,
+        positionside: string,
+        notionalvalue: number,
+        indexprice: number,
+        liquidationprice: number,
+    }
+}
+
 export class GetDriftMarginOrderbooksRequest extends jspb.Message { 
     clearMarketsList(): void;
     getMarketsList(): Array<string>;
@@ -4663,8 +5030,11 @@ export namespace GetDriftMarginOrderbooksRequest {
 }
 
 export class GetDriftMarginOrderbooksStreamResponse extends jspb.Message { 
-    getSlot(): number;
-    setSlot(value: number): GetDriftMarginOrderbooksStreamResponse;
+
+    hasContext(): boolean;
+    clearContext(): void;
+    getContext(): Context | undefined;
+    setContext(value?: Context): GetDriftMarginOrderbooksStreamResponse;
 
     hasOrderbook(): boolean;
     clearOrderbook(): void;
@@ -4683,7 +5053,7 @@ export class GetDriftMarginOrderbooksStreamResponse extends jspb.Message {
 
 export namespace GetDriftMarginOrderbooksStreamResponse {
     export type AsObject = {
-        slot: number,
+        context?: Context.AsObject,
         orderbook?: GetDriftMarginOrderbookResponse.AsObject,
     }
 }
@@ -4714,19 +5084,50 @@ export namespace GetDriftMarginOrderbookRequest {
     }
 }
 
-export class GetDriftMarginOrderbookResponse extends jspb.Message { 
+export class GetDriftMarginOrderbookValue extends jspb.Message { 
     getMarket(): string;
-    setMarket(value: string): GetDriftMarginOrderbookResponse;
+    setMarket(value: string): GetDriftMarginOrderbookValue;
     getMarketaddress(): string;
-    setMarketaddress(value: string): GetDriftMarginOrderbookResponse;
+    setMarketaddress(value: string): GetDriftMarginOrderbookValue;
     clearBidsList(): void;
     getBidsList(): Array<DriftMarginOrderbookItem>;
-    setBidsList(value: Array<DriftMarginOrderbookItem>): GetDriftMarginOrderbookResponse;
+    setBidsList(value: Array<DriftMarginOrderbookItem>): GetDriftMarginOrderbookValue;
     addBids(value?: DriftMarginOrderbookItem, index?: number): DriftMarginOrderbookItem;
     clearAsksList(): void;
     getAsksList(): Array<DriftMarginOrderbookItem>;
-    setAsksList(value: Array<DriftMarginOrderbookItem>): GetDriftMarginOrderbookResponse;
+    setAsksList(value: Array<DriftMarginOrderbookItem>): GetDriftMarginOrderbookValue;
     addAsks(value?: DriftMarginOrderbookItem, index?: number): DriftMarginOrderbookItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftMarginOrderbookValue.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftMarginOrderbookValue): GetDriftMarginOrderbookValue.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftMarginOrderbookValue, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftMarginOrderbookValue;
+    static deserializeBinaryFromReader(message: GetDriftMarginOrderbookValue, reader: jspb.BinaryReader): GetDriftMarginOrderbookValue;
+}
+
+export namespace GetDriftMarginOrderbookValue {
+    export type AsObject = {
+        market: string,
+        marketaddress: string,
+        bidsList: Array<DriftMarginOrderbookItem.AsObject>,
+        asksList: Array<DriftMarginOrderbookItem.AsObject>,
+    }
+}
+
+export class GetDriftMarginOrderbookResponse extends jspb.Message { 
+
+    hasContext(): boolean;
+    clearContext(): void;
+    getContext(): Context | undefined;
+    setContext(value?: Context): GetDriftMarginOrderbookResponse;
+
+    hasData(): boolean;
+    clearData(): void;
+    getData(): GetDriftMarginOrderbookValue | undefined;
+    setData(value?: GetDriftMarginOrderbookValue): GetDriftMarginOrderbookResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetDriftMarginOrderbookResponse.AsObject;
@@ -4740,10 +5141,8 @@ export class GetDriftMarginOrderbookResponse extends jspb.Message {
 
 export namespace GetDriftMarginOrderbookResponse {
     export type AsObject = {
-        market: string,
-        marketaddress: string,
-        bidsList: Array<DriftMarginOrderbookItem.AsObject>,
-        asksList: Array<DriftMarginOrderbookItem.AsObject>,
+        context?: Context.AsObject,
+        data?: GetDriftMarginOrderbookValue.AsObject,
     }
 }
 
@@ -4804,10 +5203,39 @@ export namespace GetDriftMarketsRequest {
     }
 }
 
-export class GetDriftMarketsResponse extends jspb.Message { 
+export class GetDriftMarketsValue extends jspb.Message { 
 
     getMarketsMap(): jspb.Map<string, DriftMarket>;
     clearMarketsMap(): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftMarketsValue.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftMarketsValue): GetDriftMarketsValue.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftMarketsValue, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftMarketsValue;
+    static deserializeBinaryFromReader(message: GetDriftMarketsValue, reader: jspb.BinaryReader): GetDriftMarketsValue;
+}
+
+export namespace GetDriftMarketsValue {
+    export type AsObject = {
+
+        marketsMap: Array<[string, DriftMarket.AsObject]>,
+    }
+}
+
+export class GetDriftMarketsResponse extends jspb.Message { 
+
+    hasContext(): boolean;
+    clearContext(): void;
+    getContext(): Context | undefined;
+    setContext(value?: Context): GetDriftMarketsResponse;
+
+    hasData(): boolean;
+    clearData(): void;
+    getData(): GetDriftMarketsValue | undefined;
+    setData(value?: GetDriftMarketsValue): GetDriftMarketsResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetDriftMarketsResponse.AsObject;
@@ -4821,8 +5249,8 @@ export class GetDriftMarketsResponse extends jspb.Message {
 
 export namespace GetDriftMarketsResponse {
     export type AsObject = {
-
-        marketsMap: Array<[string, DriftMarket.AsObject]>,
+        context?: Context.AsObject,
+        data?: GetDriftMarketsValue.AsObject,
     }
 }
 
@@ -4918,8 +5346,11 @@ export namespace GetDriftMarketDepthsStreamRequest {
 }
 
 export class GetDriftMarketDepthStreamResponse extends jspb.Message { 
-    getSlot(): number;
-    setSlot(value: number): GetDriftMarketDepthStreamResponse;
+
+    hasContext(): boolean;
+    clearContext(): void;
+    getContext(): Context | undefined;
+    setContext(value?: Context): GetDriftMarketDepthStreamResponse;
 
     hasData(): boolean;
     clearData(): void;
@@ -4938,38 +5369,8 @@ export class GetDriftMarketDepthStreamResponse extends jspb.Message {
 
 export namespace GetDriftMarketDepthStreamResponse {
     export type AsObject = {
-        slot: number,
+        context?: Context.AsObject,
         data?: GetDriftMarketDepthResponse.AsObject,
-    }
-}
-
-export class GetDriftMarketDepthResponse extends jspb.Message { 
-    getContract(): string;
-    setContract(value: string): GetDriftMarketDepthResponse;
-    clearBidsList(): void;
-    getBidsList(): Array<DriftMarketDepthItem>;
-    setBidsList(value: Array<DriftMarketDepthItem>): GetDriftMarketDepthResponse;
-    addBids(value?: DriftMarketDepthItem, index?: number): DriftMarketDepthItem;
-    clearAsksList(): void;
-    getAsksList(): Array<DriftMarketDepthItem>;
-    setAsksList(value: Array<DriftMarketDepthItem>): GetDriftMarketDepthResponse;
-    addAsks(value?: DriftMarketDepthItem, index?: number): DriftMarketDepthItem;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetDriftMarketDepthResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetDriftMarketDepthResponse): GetDriftMarketDepthResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetDriftMarketDepthResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetDriftMarketDepthResponse;
-    static deserializeBinaryFromReader(message: GetDriftMarketDepthResponse, reader: jspb.BinaryReader): GetDriftMarketDepthResponse;
-}
-
-export namespace GetDriftMarketDepthResponse {
-    export type AsObject = {
-        contract: string,
-        bidsList: Array<DriftMarketDepthItem.AsObject>,
-        asksList: Array<DriftMarketDepthItem.AsObject>,
     }
 }
 
@@ -4993,6 +5394,65 @@ export namespace DriftMarketDepthItem {
     export type AsObject = {
         price: number,
         size: number,
+    }
+}
+
+export class GetDriftMarketDepthValue extends jspb.Message { 
+    getContract(): string;
+    setContract(value: string): GetDriftMarketDepthValue;
+    clearBidsList(): void;
+    getBidsList(): Array<DriftMarketDepthItem>;
+    setBidsList(value: Array<DriftMarketDepthItem>): GetDriftMarketDepthValue;
+    addBids(value?: DriftMarketDepthItem, index?: number): DriftMarketDepthItem;
+    clearAsksList(): void;
+    getAsksList(): Array<DriftMarketDepthItem>;
+    setAsksList(value: Array<DriftMarketDepthItem>): GetDriftMarketDepthValue;
+    addAsks(value?: DriftMarketDepthItem, index?: number): DriftMarketDepthItem;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftMarketDepthValue.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftMarketDepthValue): GetDriftMarketDepthValue.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftMarketDepthValue, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftMarketDepthValue;
+    static deserializeBinaryFromReader(message: GetDriftMarketDepthValue, reader: jspb.BinaryReader): GetDriftMarketDepthValue;
+}
+
+export namespace GetDriftMarketDepthValue {
+    export type AsObject = {
+        contract: string,
+        bidsList: Array<DriftMarketDepthItem.AsObject>,
+        asksList: Array<DriftMarketDepthItem.AsObject>,
+    }
+}
+
+export class GetDriftMarketDepthResponse extends jspb.Message { 
+
+    hasContext(): boolean;
+    clearContext(): void;
+    getContext(): Context | undefined;
+    setContext(value?: Context): GetDriftMarketDepthResponse;
+
+    hasData(): boolean;
+    clearData(): void;
+    getData(): GetDriftMarketDepthValue | undefined;
+    setData(value?: GetDriftMarketDepthValue): GetDriftMarketDepthResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetDriftMarketDepthResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftMarketDepthResponse): GetDriftMarketDepthResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetDriftMarketDepthResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftMarketDepthResponse;
+    static deserializeBinaryFromReader(message: GetDriftMarketDepthResponse, reader: jspb.BinaryReader): GetDriftMarketDepthResponse;
+}
+
+export namespace GetDriftMarketDepthResponse {
+    export type AsObject = {
+        context?: Context.AsObject,
+        data?: GetDriftMarketDepthValue.AsObject,
     }
 }
 

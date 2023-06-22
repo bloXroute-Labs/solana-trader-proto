@@ -18,7 +18,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
-	// Drift V2
+	GetDriftPerpPositions(ctx context.Context, in *GetDriftPerpPositionsRequest, opts ...grpc.CallOption) (*GetDriftPerpPositionsResponse, error)
+	GetDriftPerpOpenOrders(ctx context.Context, in *GetDriftPerpOpenOrdersRequest, opts ...grpc.CallOption) (*GetDriftPerpOpenOrdersResponse, error)
+	PostDriftCancelPerpOrder(ctx context.Context, in *PostDriftCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostDriftCancelPerpOrderResponse, error)
 	PostModifyDriftOrder(ctx context.Context, in *PostModifyDriftOrderRequest, opts ...grpc.CallOption) (*PostModifyDriftOrderResponse, error)
 	PostCancelDriftMarginOrder(ctx context.Context, in *PostCancelDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostCancelDriftMarginOrderResponse, error)
 	GetDriftOpenMarginOrders(ctx context.Context, in *GetDriftOpenMarginOrdersRequest, opts ...grpc.CallOption) (*GetDriftOpenMarginOrdersResponse, error)
@@ -61,10 +63,15 @@ type ApiClient interface {
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
 	// perp endpoints
+	// migrated to v2
 	PostPerpOrder(ctx context.Context, in *PostPerpOrderRequest, opts ...grpc.CallOption) (*PostPerpOrderResponse, error)
+	// migrated to v2
 	GetPerpPositions(ctx context.Context, in *GetPerpPositionsRequest, opts ...grpc.CallOption) (*GetPerpPositionsResponse, error)
+	// migrated to v2
 	GetOpenPerpOrders(ctx context.Context, in *GetOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetOpenPerpOrdersResponse, error)
+	// migrated to v2
 	PostCancelPerpOrders(ctx context.Context, in *PostCancelPerpOrdersRequest, opts ...grpc.CallOption) (*PostCancelPerpOrdersResponse, error)
+	// migrated to v2
 	PostCancelPerpOrder(ctx context.Context, in *PostCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostCancelPerpOrderResponse, error)
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
@@ -101,6 +108,33 @@ type apiClient struct {
 
 func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 	return &apiClient{cc}
+}
+
+func (c *apiClient) GetDriftPerpPositions(ctx context.Context, in *GetDriftPerpPositionsRequest, opts ...grpc.CallOption) (*GetDriftPerpPositionsResponse, error) {
+	out := new(GetDriftPerpPositionsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftPerpPositions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftPerpOpenOrders(ctx context.Context, in *GetDriftPerpOpenOrdersRequest, opts ...grpc.CallOption) (*GetDriftPerpOpenOrdersResponse, error) {
+	out := new(GetDriftPerpOpenOrdersResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftPerpOpenOrders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostDriftCancelPerpOrder(ctx context.Context, in *PostDriftCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostDriftCancelPerpOrderResponse, error) {
+	out := new(PostDriftCancelPerpOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostDriftCancelPerpOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *apiClient) PostModifyDriftOrder(ctx context.Context, in *PostModifyDriftOrderRequest, opts ...grpc.CallOption) (*PostModifyDriftOrderResponse, error) {
@@ -1087,7 +1121,9 @@ func (x *apiGetPerpTradesStreamClient) Recv() (*GetPerpTradesStreamResponse, err
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
 type ApiServer interface {
-	// Drift V2
+	GetDriftPerpPositions(context.Context, *GetDriftPerpPositionsRequest) (*GetDriftPerpPositionsResponse, error)
+	GetDriftPerpOpenOrders(context.Context, *GetDriftPerpOpenOrdersRequest) (*GetDriftPerpOpenOrdersResponse, error)
+	PostDriftCancelPerpOrder(context.Context, *PostDriftCancelPerpOrderRequest) (*PostDriftCancelPerpOrderResponse, error)
 	PostModifyDriftOrder(context.Context, *PostModifyDriftOrderRequest) (*PostModifyDriftOrderResponse, error)
 	PostCancelDriftMarginOrder(context.Context, *PostCancelDriftMarginOrderRequest) (*PostCancelDriftMarginOrderResponse, error)
 	GetDriftOpenMarginOrders(context.Context, *GetDriftOpenMarginOrdersRequest) (*GetDriftOpenMarginOrdersResponse, error)
@@ -1130,10 +1166,15 @@ type ApiServer interface {
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
 	// perp endpoints
+	// migrated to v2
 	PostPerpOrder(context.Context, *PostPerpOrderRequest) (*PostPerpOrderResponse, error)
+	// migrated to v2
 	GetPerpPositions(context.Context, *GetPerpPositionsRequest) (*GetPerpPositionsResponse, error)
+	// migrated to v2
 	GetOpenPerpOrders(context.Context, *GetOpenPerpOrdersRequest) (*GetOpenPerpOrdersResponse, error)
+	// migrated to v2
 	PostCancelPerpOrders(context.Context, *PostCancelPerpOrdersRequest) (*PostCancelPerpOrdersResponse, error)
+	// migrated to v2
 	PostCancelPerpOrder(context.Context, *PostCancelPerpOrderRequest) (*PostCancelPerpOrderResponse, error)
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
@@ -1169,6 +1210,15 @@ type ApiServer interface {
 type UnimplementedApiServer struct {
 }
 
+func (UnimplementedApiServer) GetDriftPerpPositions(context.Context, *GetDriftPerpPositionsRequest) (*GetDriftPerpPositionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftPerpPositions not implemented")
+}
+func (UnimplementedApiServer) GetDriftPerpOpenOrders(context.Context, *GetDriftPerpOpenOrdersRequest) (*GetDriftPerpOpenOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftPerpOpenOrders not implemented")
+}
+func (UnimplementedApiServer) PostDriftCancelPerpOrder(context.Context, *PostDriftCancelPerpOrderRequest) (*PostDriftCancelPerpOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostDriftCancelPerpOrder not implemented")
+}
 func (UnimplementedApiServer) PostModifyDriftOrder(context.Context, *PostModifyDriftOrderRequest) (*PostModifyDriftOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostModifyDriftOrder not implemented")
 }
@@ -1384,6 +1434,60 @@ type UnsafeApiServer interface {
 
 func RegisterApiServer(s grpc.ServiceRegistrar, srv ApiServer) {
 	s.RegisterService(&Api_ServiceDesc, srv)
+}
+
+func _Api_GetDriftPerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftPerpPositionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftPerpPositions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftPerpPositions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftPerpPositions(ctx, req.(*GetDriftPerpPositionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetDriftPerpOpenOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftPerpOpenOrdersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftPerpOpenOrders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftPerpOpenOrders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftPerpOpenOrders(ctx, req.(*GetDriftPerpOpenOrdersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostDriftCancelPerpOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostDriftCancelPerpOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostDriftCancelPerpOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostDriftCancelPerpOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostDriftCancelPerpOrder(ctx, req.(*PostDriftCancelPerpOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_PostModifyDriftOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2665,6 +2769,18 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.Api",
 	HandlerType: (*ApiServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetDriftPerpPositions",
+			Handler:    _Api_GetDriftPerpPositions_Handler,
+		},
+		{
+			MethodName: "GetDriftPerpOpenOrders",
+			Handler:    _Api_GetDriftPerpOpenOrders_Handler,
+		},
+		{
+			MethodName: "PostDriftCancelPerpOrder",
+			Handler:    _Api_PostDriftCancelPerpOrder_Handler,
+		},
 		{
 			MethodName: "PostModifyDriftOrder",
 			Handler:    _Api_PostModifyDriftOrder_Handler,
