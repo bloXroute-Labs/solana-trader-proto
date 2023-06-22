@@ -17,6 +17,7 @@ var global = Function('return this')();
 
 goog.exportSymbol('proto.common.Fee', null, global);
 goog.exportSymbol('proto.common.Infinity', null, global);
+goog.exportSymbol('proto.common.MarginContract', null, global);
 goog.exportSymbol('proto.common.OrderType', null, global);
 goog.exportSymbol('proto.common.PerpCollateralToken', null, global);
 goog.exportSymbol('proto.common.PerpCollateralType', null, global);
@@ -459,6 +460,15 @@ proto.common.PostOnlyParams = {
 /**
  * @enum {number}
  */
+proto.common.MarginContract = {
+  ALL_SPOTS: 0,
+  SOL_SPOT: 1,
+  USDC_SPOT: 2
+};
+
+/**
+ * @enum {number}
+ */
 proto.common.PerpContract = {
   ALL: 0,
   SOL_PERP: 1,
@@ -467,7 +477,11 @@ proto.common.PerpContract = {
   APT_PERP: 4,
   BONK_PERP: 5,
   MATIC_PERP: 6,
-  ARB_PERP: 7
+  ARB_PERP: 7,
+  DOGE_PERP: 8,
+  BNB_PERP: 9,
+  SUI_PERP: 10,
+  PEPE_PERP: 11
 };
 
 /**
