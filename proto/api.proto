@@ -572,19 +572,10 @@ message GetTickersRequestV2 {
 }
 
 message GetTickersResponseV2 {
-  repeated TickerV2 tickers = 1;
-}
-
-message TickerV2 {
-  google.protobuf.Timestamp ts = 1;
-  string marketAddress = 3;
+  string market = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  map<string, Candle> tickers = 3;
   Project project = 4;
-  double open = 5;
-  double close = 6;
-  double high = 7;
-  double low = 8;
-  double amount = 9;
-  double volume = 10;
 }
 
 message GetKlineRequest {
@@ -599,7 +590,8 @@ message GetKlineRequest {
 message GetKlineResponse {
   string market = 1;
   google.protobuf.Timestamp timestamp = 2;
-  repeated Candle candles = 3;
+  map<string, Candles> candles = 3;
+  Project project = 4;
 }
 
 message Candle {
@@ -612,6 +604,10 @@ message Candle {
   double amount = 7;
   double volume = 8;
   double count = 9;
+}
+
+message Candles {
+  repeated Candles candles = 1;
 }
 
 message GetMyOrdersRequest {
