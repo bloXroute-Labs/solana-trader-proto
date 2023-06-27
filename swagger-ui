@@ -1372,6 +1372,12 @@
           "type": "string",
           "format": "date-time"
         },
+        "marketAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
         "open": {
           "type": "number",
           "format": "double"
@@ -1408,7 +1414,7 @@
         "candles": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiCandles"
+            "$ref": "#/definitions/apiCandle"
           }
         }
       }
@@ -1443,21 +1449,11 @@
     "apiGetKlineResponse": {
       "type": "object",
       "properties": {
-        "market": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
         "candles": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/apiCandles"
           }
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
         }
       }
     },
@@ -1981,21 +1977,11 @@
     "apiGetTickersResponseV2": {
       "type": "object",
       "properties": {
-        "market": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
         "tickers": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/apiCandle"
           }
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
         }
       }
     },
