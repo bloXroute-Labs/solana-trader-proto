@@ -113,12 +113,9 @@ class GetTickersRequestV2(betterproto.Message):
 
 @dataclass
 class GetTickersResponseV2(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    timestamp: datetime = betterproto.message_field(2)
     tickers: Dict[str, "Candle"] = betterproto.map_field(
         3, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
-    project: "Project" = betterproto.enum_field(4)
 
 
 @dataclass
@@ -133,30 +130,29 @@ class GetKlineRequest(betterproto.Message):
 
 @dataclass
 class GetKlineResponse(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    timestamp: datetime = betterproto.message_field(2)
     candles: Dict[str, "Candles"] = betterproto.map_field(
         3, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
-    project: "Project" = betterproto.enum_field(4)
 
 
 @dataclass
 class Candle(betterproto.Message):
     start_time: datetime = betterproto.message_field(1)
     update_time: datetime = betterproto.message_field(2)
-    open: float = betterproto.double_field(3)
-    close: float = betterproto.double_field(4)
-    low: float = betterproto.double_field(5)
-    high: float = betterproto.double_field(6)
-    amount: float = betterproto.double_field(7)
-    volume: float = betterproto.double_field(8)
-    count: float = betterproto.double_field(9)
+    market_address: str = betterproto.string_field(3)
+    project: "Project" = betterproto.enum_field(4)
+    open: float = betterproto.double_field(5)
+    close: float = betterproto.double_field(6)
+    low: float = betterproto.double_field(7)
+    high: float = betterproto.double_field(8)
+    amount: float = betterproto.double_field(9)
+    volume: float = betterproto.double_field(10)
+    count: float = betterproto.double_field(11)
 
 
 @dataclass
 class Candles(betterproto.Message):
-    candles: List["Candles"] = betterproto.message_field(1)
+    candles: List["Candle"] = betterproto.message_field(1)
 
 
 @dataclass

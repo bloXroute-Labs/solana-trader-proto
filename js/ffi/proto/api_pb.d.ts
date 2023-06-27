@@ -199,18 +199,9 @@ export namespace GetTickersRequestV2 {
 }
 
 export class GetTickersResponseV2 extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetTickersResponseV2;
-
-    hasTimestamp(): boolean;
-    clearTimestamp(): void;
-    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetTickersResponseV2;
 
     getTickersMap(): jspb.Map<string, Candle>;
     clearTickersMap(): void;
-    getProject(): Project;
-    setProject(value: Project): GetTickersResponseV2;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTickersResponseV2.AsObject;
@@ -224,11 +215,8 @@ export class GetTickersResponseV2 extends jspb.Message {
 
 export namespace GetTickersResponseV2 {
     export type AsObject = {
-        market: string,
-        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
 
         tickersMap: Array<[string, Candle.AsObject]>,
-        project: Project,
     }
 }
 
@@ -277,18 +265,9 @@ export namespace GetKlineRequest {
 }
 
 export class GetKlineResponse extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetKlineResponse;
-
-    hasTimestamp(): boolean;
-    clearTimestamp(): void;
-    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetKlineResponse;
 
     getCandlesMap(): jspb.Map<string, Candles>;
     clearCandlesMap(): void;
-    getProject(): Project;
-    setProject(value: Project): GetKlineResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetKlineResponse.AsObject;
@@ -302,11 +281,8 @@ export class GetKlineResponse extends jspb.Message {
 
 export namespace GetKlineResponse {
     export type AsObject = {
-        market: string,
-        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
 
         candlesMap: Array<[string, Candles.AsObject]>,
-        project: Project,
     }
 }
 
@@ -321,6 +297,10 @@ export class Candle extends jspb.Message {
     clearUpdatetime(): void;
     getUpdatetime(): google_protobuf_timestamp_pb.Timestamp | undefined;
     setUpdatetime(value?: google_protobuf_timestamp_pb.Timestamp): Candle;
+    getMarketaddress(): string;
+    setMarketaddress(value: string): Candle;
+    getProject(): Project;
+    setProject(value: Project): Candle;
     getOpen(): number;
     setOpen(value: number): Candle;
     getClose(): number;
@@ -350,6 +330,8 @@ export namespace Candle {
     export type AsObject = {
         starttime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
         updatetime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+        marketaddress: string,
+        project: Project,
         open: number,
         close: number,
         low: number,
@@ -362,9 +344,9 @@ export namespace Candle {
 
 export class Candles extends jspb.Message { 
     clearCandlesList(): void;
-    getCandlesList(): Array<Candles>;
-    setCandlesList(value: Array<Candles>): Candles;
-    addCandles(value?: Candles, index?: number): Candles;
+    getCandlesList(): Array<Candle>;
+    setCandlesList(value: Array<Candle>): Candles;
+    addCandles(value?: Candle, index?: number): Candle;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Candles.AsObject;
@@ -378,7 +360,7 @@ export class Candles extends jspb.Message {
 
 export namespace Candles {
     export type AsObject = {
-        candlesList: Array<Candles.AsObject>,
+        candlesList: Array<Candle.AsObject>,
     }
 }
 

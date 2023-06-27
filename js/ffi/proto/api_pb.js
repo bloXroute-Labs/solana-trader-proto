@@ -4006,10 +4006,7 @@ proto.api.GetTickersResponseV2.prototype.toObject = function(opt_includeInstance
  */
 proto.api.GetTickersResponseV2.toObject = function(includeInstance, msg) {
   var f, obj = {
-    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    tickersMap: (f = msg.getTickersMap()) ? f.toObject(includeInstance, proto.api.Candle.toObject) : [],
-    project: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    tickersMap: (f = msg.getTickersMap()) ? f.toObject(includeInstance, proto.api.Candle.toObject) : []
   };
 
   if (includeInstance) {
@@ -4046,24 +4043,11 @@ proto.api.GetTickersResponseV2.deserializeBinaryFromReader = function(msg, reade
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
-      break;
-    case 2:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setTimestamp(value);
-      break;
     case 3:
       var value = msg.getTickersMap();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.api.Candle.deserializeBinaryFromReader, "", new proto.api.Candle());
          });
-      break;
-    case 4:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
       break;
     default:
       reader.skipField();
@@ -4094,87 +4078,10 @@ proto.api.GetTickersResponseV2.prototype.serializeBinary = function() {
  */
 proto.api.GetTickersResponseV2.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarket();
-  if (f.length > 0) {
-    writer.writeString(
-      1,
-      f
-    );
-  }
-  f = message.getTimestamp();
-  if (f != null) {
-    writer.writeMessage(
-      2,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
-    );
-  }
   f = message.getTickersMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.Candle.serializeBinaryToWriter);
   }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      4,
-      f
-    );
-  }
-};
-
-
-/**
- * optional string market = 1;
- * @return {string}
- */
-proto.api.GetTickersResponseV2.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetTickersResponseV2} returns this
- */
-proto.api.GetTickersResponseV2.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional google.protobuf.Timestamp timestamp = 2;
- * @return {?proto.google.protobuf.Timestamp}
- */
-proto.api.GetTickersResponseV2.prototype.getTimestamp = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
-};
-
-
-/**
- * @param {?proto.google.protobuf.Timestamp|undefined} value
- * @return {!proto.api.GetTickersResponseV2} returns this
-*/
-proto.api.GetTickersResponseV2.prototype.setTimestamp = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.api.GetTickersResponseV2} returns this
- */
-proto.api.GetTickersResponseV2.prototype.clearTimestamp = function() {
-  return this.setTimestamp(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.api.GetTickersResponseV2.prototype.hasTimestamp = function() {
-  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -4198,24 +4105,6 @@ proto.api.GetTickersResponseV2.prototype.getTickersMap = function(opt_noLazyCrea
 proto.api.GetTickersResponseV2.prototype.clearTickersMap = function() {
   this.getTickersMap().clear();
   return this;};
-
-
-/**
- * optional Project project = 4;
- * @return {!proto.api.Project}
- */
-proto.api.GetTickersResponseV2.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.GetTickersResponseV2} returns this
- */
-proto.api.GetTickersResponseV2.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
-};
 
 
 
@@ -4593,10 +4482,7 @@ proto.api.GetKlineResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.api.GetKlineResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    candlesMap: (f = msg.getCandlesMap()) ? f.toObject(includeInstance, proto.api.Candles.toObject) : [],
-    project: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    candlesMap: (f = msg.getCandlesMap()) ? f.toObject(includeInstance, proto.api.Candles.toObject) : []
   };
 
   if (includeInstance) {
@@ -4633,24 +4519,11 @@ proto.api.GetKlineResponse.deserializeBinaryFromReader = function(msg, reader) {
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
-      break;
-    case 2:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setTimestamp(value);
-      break;
     case 3:
       var value = msg.getCandlesMap();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.api.Candles.deserializeBinaryFromReader, "", new proto.api.Candles());
          });
-      break;
-    case 4:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
       break;
     default:
       reader.skipField();
@@ -4681,87 +4554,10 @@ proto.api.GetKlineResponse.prototype.serializeBinary = function() {
  */
 proto.api.GetKlineResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarket();
-  if (f.length > 0) {
-    writer.writeString(
-      1,
-      f
-    );
-  }
-  f = message.getTimestamp();
-  if (f != null) {
-    writer.writeMessage(
-      2,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
-    );
-  }
   f = message.getCandlesMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.Candles.serializeBinaryToWriter);
   }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      4,
-      f
-    );
-  }
-};
-
-
-/**
- * optional string market = 1;
- * @return {string}
- */
-proto.api.GetKlineResponse.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetKlineResponse} returns this
- */
-proto.api.GetKlineResponse.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional google.protobuf.Timestamp timestamp = 2;
- * @return {?proto.google.protobuf.Timestamp}
- */
-proto.api.GetKlineResponse.prototype.getTimestamp = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
-};
-
-
-/**
- * @param {?proto.google.protobuf.Timestamp|undefined} value
- * @return {!proto.api.GetKlineResponse} returns this
-*/
-proto.api.GetKlineResponse.prototype.setTimestamp = function(value) {
-  return jspb.Message.setWrapperField(this, 2, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.api.GetKlineResponse} returns this
- */
-proto.api.GetKlineResponse.prototype.clearTimestamp = function() {
-  return this.setTimestamp(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.api.GetKlineResponse.prototype.hasTimestamp = function() {
-  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -4785,24 +4581,6 @@ proto.api.GetKlineResponse.prototype.getCandlesMap = function(opt_noLazyCreate) 
 proto.api.GetKlineResponse.prototype.clearCandlesMap = function() {
   this.getCandlesMap().clear();
   return this;};
-
-
-/**
- * optional Project project = 4;
- * @return {!proto.api.Project}
- */
-proto.api.GetKlineResponse.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.GetKlineResponse} returns this
- */
-proto.api.GetKlineResponse.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
-};
 
 
 
@@ -4839,13 +4617,15 @@ proto.api.Candle.toObject = function(includeInstance, msg) {
   var f, obj = {
     starttime: (f = msg.getStarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatetime: (f = msg.getUpdatetime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    open: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
-    close: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
-    low: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    high: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
-    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
-    volume: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
-    count: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0)
+    marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    project: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    open: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    close: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    low: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
+    high: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
+    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
+    volume: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
+    count: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0)
   };
 
   if (includeInstance) {
@@ -4893,30 +4673,38 @@ proto.api.Candle.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUpdatetime(value);
       break;
     case 3:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setOpen(value);
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarketaddress(value);
       break;
     case 4:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setClose(value);
+      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
+      msg.setProject(value);
       break;
     case 5:
       var value = /** @type {number} */ (reader.readDouble());
-      msg.setLow(value);
+      msg.setOpen(value);
       break;
     case 6:
       var value = /** @type {number} */ (reader.readDouble());
-      msg.setHigh(value);
+      msg.setClose(value);
       break;
     case 7:
       var value = /** @type {number} */ (reader.readDouble());
-      msg.setAmount(value);
+      msg.setLow(value);
       break;
     case 8:
       var value = /** @type {number} */ (reader.readDouble());
-      msg.setVolume(value);
+      msg.setHigh(value);
       break;
     case 9:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAmount(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setVolume(value);
+      break;
+    case 11:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setCount(value);
       break;
@@ -4965,52 +4753,66 @@ proto.api.Candle.serializeBinaryToWriter = function(message, writer) {
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
-  f = message.getOpen();
-  if (f !== 0.0) {
-    writer.writeDouble(
+  f = message.getMarketaddress();
+  if (f.length > 0) {
+    writer.writeString(
       3,
       f
     );
   }
-  f = message.getClose();
+  f = message.getProject();
   if (f !== 0.0) {
-    writer.writeDouble(
+    writer.writeEnum(
       4,
       f
     );
   }
-  f = message.getLow();
+  f = message.getOpen();
   if (f !== 0.0) {
     writer.writeDouble(
       5,
       f
     );
   }
-  f = message.getHigh();
+  f = message.getClose();
   if (f !== 0.0) {
     writer.writeDouble(
       6,
       f
     );
   }
-  f = message.getAmount();
+  f = message.getLow();
   if (f !== 0.0) {
     writer.writeDouble(
       7,
       f
     );
   }
-  f = message.getVolume();
+  f = message.getHigh();
   if (f !== 0.0) {
     writer.writeDouble(
       8,
       f
     );
   }
-  f = message.getCount();
+  f = message.getAmount();
   if (f !== 0.0) {
     writer.writeDouble(
       9,
+      f
+    );
+  }
+  f = message.getVolume();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      10,
+      f
+    );
+  }
+  f = message.getCount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      11,
       f
     );
   }
@@ -5092,46 +4894,46 @@ proto.api.Candle.prototype.hasUpdatetime = function() {
 
 
 /**
- * optional double open = 3;
+ * optional string marketAddress = 3;
+ * @return {string}
+ */
+proto.api.Candle.prototype.getMarketaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.Candle} returns this
+ */
+proto.api.Candle.prototype.setMarketaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional Project project = 4;
+ * @return {!proto.api.Project}
+ */
+proto.api.Candle.prototype.getProject = function() {
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {!proto.api.Project} value
+ * @return {!proto.api.Candle} returns this
+ */
+proto.api.Candle.prototype.setProject = function(value) {
+  return jspb.Message.setProto3EnumField(this, 4, value);
+};
+
+
+/**
+ * optional double open = 5;
  * @return {number}
  */
 proto.api.Candle.prototype.getOpen = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.Candle} returns this
- */
-proto.api.Candle.prototype.setOpen = function(value) {
-  return jspb.Message.setProto3FloatField(this, 3, value);
-};
-
-
-/**
- * optional double close = 4;
- * @return {number}
- */
-proto.api.Candle.prototype.getClose = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.Candle} returns this
- */
-proto.api.Candle.prototype.setClose = function(value) {
-  return jspb.Message.setProto3FloatField(this, 4, value);
-};
-
-
-/**
- * optional double low = 5;
- * @return {number}
- */
-proto.api.Candle.prototype.getLow = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
 };
 
@@ -5140,16 +4942,16 @@ proto.api.Candle.prototype.getLow = function() {
  * @param {number} value
  * @return {!proto.api.Candle} returns this
  */
-proto.api.Candle.prototype.setLow = function(value) {
+proto.api.Candle.prototype.setOpen = function(value) {
   return jspb.Message.setProto3FloatField(this, 5, value);
 };
 
 
 /**
- * optional double high = 6;
+ * optional double close = 6;
  * @return {number}
  */
-proto.api.Candle.prototype.getHigh = function() {
+proto.api.Candle.prototype.getClose = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
 };
 
@@ -5158,16 +4960,16 @@ proto.api.Candle.prototype.getHigh = function() {
  * @param {number} value
  * @return {!proto.api.Candle} returns this
  */
-proto.api.Candle.prototype.setHigh = function(value) {
+proto.api.Candle.prototype.setClose = function(value) {
   return jspb.Message.setProto3FloatField(this, 6, value);
 };
 
 
 /**
- * optional double amount = 7;
+ * optional double low = 7;
  * @return {number}
  */
-proto.api.Candle.prototype.getAmount = function() {
+proto.api.Candle.prototype.getLow = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
 };
 
@@ -5176,16 +4978,16 @@ proto.api.Candle.prototype.getAmount = function() {
  * @param {number} value
  * @return {!proto.api.Candle} returns this
  */
-proto.api.Candle.prototype.setAmount = function(value) {
+proto.api.Candle.prototype.setLow = function(value) {
   return jspb.Message.setProto3FloatField(this, 7, value);
 };
 
 
 /**
- * optional double volume = 8;
+ * optional double high = 8;
  * @return {number}
  */
-proto.api.Candle.prototype.getVolume = function() {
+proto.api.Candle.prototype.getHigh = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
 };
 
@@ -5194,16 +4996,16 @@ proto.api.Candle.prototype.getVolume = function() {
  * @param {number} value
  * @return {!proto.api.Candle} returns this
  */
-proto.api.Candle.prototype.setVolume = function(value) {
+proto.api.Candle.prototype.setHigh = function(value) {
   return jspb.Message.setProto3FloatField(this, 8, value);
 };
 
 
 /**
- * optional double count = 9;
+ * optional double amount = 9;
  * @return {number}
  */
-proto.api.Candle.prototype.getCount = function() {
+proto.api.Candle.prototype.getAmount = function() {
   return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
 };
 
@@ -5212,8 +5014,44 @@ proto.api.Candle.prototype.getCount = function() {
  * @param {number} value
  * @return {!proto.api.Candle} returns this
  */
-proto.api.Candle.prototype.setCount = function(value) {
+proto.api.Candle.prototype.setAmount = function(value) {
   return jspb.Message.setProto3FloatField(this, 9, value);
+};
+
+
+/**
+ * optional double volume = 10;
+ * @return {number}
+ */
+proto.api.Candle.prototype.getVolume = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 10, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.Candle} returns this
+ */
+proto.api.Candle.prototype.setVolume = function(value) {
+  return jspb.Message.setProto3FloatField(this, 10, value);
+};
+
+
+/**
+ * optional double count = 11;
+ * @return {number}
+ */
+proto.api.Candle.prototype.getCount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 11, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.Candle} returns this
+ */
+proto.api.Candle.prototype.setCount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 11, value);
 };
 
 
@@ -5257,7 +5095,7 @@ proto.api.Candles.prototype.toObject = function(opt_includeInstance) {
 proto.api.Candles.toObject = function(includeInstance, msg) {
   var f, obj = {
     candlesList: jspb.Message.toObjectList(msg.getCandlesList(),
-    proto.api.Candles.toObject, includeInstance)
+    proto.api.Candle.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -5295,8 +5133,8 @@ proto.api.Candles.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.api.Candles;
-      reader.readMessage(value,proto.api.Candles.deserializeBinaryFromReader);
+      var value = new proto.api.Candle;
+      reader.readMessage(value,proto.api.Candle.deserializeBinaryFromReader);
       msg.addCandles(value);
       break;
     default:
@@ -5333,24 +5171,24 @@ proto.api.Candles.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       1,
       f,
-      proto.api.Candles.serializeBinaryToWriter
+      proto.api.Candle.serializeBinaryToWriter
     );
   }
 };
 
 
 /**
- * repeated Candles candles = 1;
- * @return {!Array<!proto.api.Candles>}
+ * repeated Candle candles = 1;
+ * @return {!Array<!proto.api.Candle>}
  */
 proto.api.Candles.prototype.getCandlesList = function() {
-  return /** @type{!Array<!proto.api.Candles>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.Candles, 1));
+  return /** @type{!Array<!proto.api.Candle>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.Candle, 1));
 };
 
 
 /**
- * @param {!Array<!proto.api.Candles>} value
+ * @param {!Array<!proto.api.Candle>} value
  * @return {!proto.api.Candles} returns this
 */
 proto.api.Candles.prototype.setCandlesList = function(value) {
@@ -5359,12 +5197,12 @@ proto.api.Candles.prototype.setCandlesList = function(value) {
 
 
 /**
- * @param {!proto.api.Candles=} opt_value
+ * @param {!proto.api.Candle=} opt_value
  * @param {number=} opt_index
- * @return {!proto.api.Candles}
+ * @return {!proto.api.Candle}
  */
 proto.api.Candles.prototype.addCandles = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.Candles, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.Candle, opt_index);
 };
 
 
