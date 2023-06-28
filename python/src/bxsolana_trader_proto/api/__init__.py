@@ -872,7 +872,6 @@ class GetUserRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetUserResponse(betterproto.Message):
     user_accounts: List["UserDetail"] = betterproto.message_field(1)
-    project: "Project" = betterproto.enum_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -895,7 +894,6 @@ class PostCreateUserRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostCreateUserResponse(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
-    project: "Project" = betterproto.enum_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -956,6 +954,57 @@ class PostCancelPerpOrderResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostCreateDriftUserRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    action: str = betterproto.string_field(2)
+    sub_account_id: int = betterproto.uint64_field(3)
+    account_name: str = betterproto.string_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class PostCreateDriftUserResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftUserRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftUserResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    user_accounts: List["UserDetail"] = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class PostCloseDriftPerpPositionsRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    contracts: List["_common__.PerpContract"] = betterproto.enum_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class PostCloseDriftPerpPositionsResponse(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftPerpOrderbookRequest(betterproto.Message):
+    contract: "_common__.PerpContract" = betterproto.enum_field(1)
+    limit: int = betterproto.uint32_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftPerpOrderbookResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    contract: "_common__.PerpContract" = betterproto.enum_field(2)
+    bids: List["PerpOrderbookItem"] = betterproto.message_field(3)
+    asks: List["PerpOrderbookItem"] = betterproto.message_field(4)
+
+
+@dataclass(eq=False, repr=False)
 class PostManageCollateralRequest(betterproto.Message):
     account_address: str = betterproto.string_field(1)
     amount: float = betterproto.double_field(2)
@@ -979,8 +1028,9 @@ class GetDriftOpenMarginOrdersRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetDriftOpenMarginOrdersResponse(betterproto.Message):
-    owner_address: str = betterproto.string_field(1)
-    orders: List["DriftMarginOrder"] = betterproto.message_field(2)
+    context: "Context" = betterproto.message_field(1)
+    owner_address: str = betterproto.string_field(2)
+    orders: List["DriftMarginOrder"] = betterproto.message_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -1122,29 +1172,6 @@ class PostDriftEnableMarginTradingResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class GetNewPerpOrdersStreamRequest(betterproto.Message):
-    markets: List[str] = betterproto.string_field(1)
-    project: "Project" = betterproto.enum_field(3)
-
-
-@dataclass(eq=False, repr=False)
-class GetNewPerpOrdersStreamResponse(betterproto.Message):
-    contract: "_common__.PerpContract" = betterproto.enum_field(1)
-    side: "_common__.PerpPositionSide" = betterproto.enum_field(2)
-    type: "_common__.PerpOrderType" = betterproto.enum_field(3)
-    user_address: str = betterproto.string_field(4)
-    order_id: str = betterproto.string_field(5)
-    client_order_id: str = betterproto.string_field(6)
-    slot: str = betterproto.string_field(7)
-    price: float = betterproto.double_field(8)
-    trigger_price: float = betterproto.double_field(9)
-    base_amount: float = betterproto.double_field(10)
-    base_amount_filled: float = betterproto.double_field(11)
-    quote_amount: float = betterproto.double_field(12)
-    quote_amount_filled: float = betterproto.double_field(13)
-
-
-@dataclass(eq=False, repr=False)
 class GetPerpTradesStreamRequest(betterproto.Message):
     contracts: List["_common__.PerpContract"] = betterproto.enum_field(1)
     project: "Project" = betterproto.enum_field(2)
@@ -1152,7 +1179,7 @@ class GetPerpTradesStreamRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetPerpTradesStreamResponse(betterproto.Message):
-    slot: int = betterproto.int64_field(1)
+    context: "Context" = betterproto.message_field(1)
     trade: "GetPerpTradesResponse" = betterproto.message_field(2)
 
 
@@ -1280,10 +1307,9 @@ class GetPerpContractsResponse(betterproto.Message):
 class GetOpenPerpOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
-    contract: "_common__.PerpContract" = betterproto.enum_field(3)
-    order_id: int = betterproto.uint64_field(4)
-    client_order_id: int = betterproto.uint64_field(5)
-    project: "Project" = betterproto.enum_field(6)
+    order_id: int = betterproto.uint64_field(3)
+    client_order_id: int = betterproto.uint64_field(4)
+    project: "Project" = betterproto.enum_field(5)
 
 
 @dataclass(eq=False, repr=False)
@@ -1293,7 +1319,114 @@ class GetOpenPerpOrderResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetDriftOpenMarginOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    order_id: int = betterproto.uint64_field(3)
+    client_order_id: int = betterproto.uint64_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftOpenMarginOrderResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    owner_address: str = betterproto.string_field(2)
+    order: "DriftMarginOrder" = betterproto.message_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftOpenPerpOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+    order_id: int = betterproto.uint64_field(3)
+    client_order_id: int = betterproto.uint64_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftOpenPerpOrderResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    owner_address: str = betterproto.string_field(2)
+    order: "PerpOrder" = betterproto.message_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftManageCollateralRequest(betterproto.Message):
+    account_address: str = betterproto.string_field(1)
+    amount: float = betterproto.double_field(2)
+    type: "_common__.PerpCollateralType" = betterproto.enum_field(3)
+    token: "_common__.PerpCollateralToken" = betterproto.enum_field(4)
+    to_account_address: str = betterproto.string_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftManageCollateralResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftPerpContractsRequest(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftPerpContractsResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    contracts: List["ContractInfo"] = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftSettlePnlRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    settlee_account_address: str = betterproto.string_field(2)
+    contract: "_common__.PerpContract" = betterproto.enum_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftSettlePnlResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftAssetsRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    account_address: str = betterproto.string_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetDriftAssetsResponse(betterproto.Message):
+    context: "Context" = betterproto.message_field(1)
+    owner_address: str = betterproto.string_field(2)
+    assets: List["Asset"] = betterproto.message_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftSettlePnLsRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    settlee_account_addresses: List[str] = betterproto.string_field(2)
+    contract: "_common__.PerpContract" = betterproto.enum_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftSettlePnLsResponse(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class PostLiquidateDriftPerpRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    settlee_account_address: str = betterproto.string_field(2)
+    contract: "_common__.PerpContract" = betterproto.enum_field(3)
+    amount: float = betterproto.double_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class PostLiquidateDriftPerpResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class Context(betterproto.Message):
+    """Drift V2"""
+
     slot: int = betterproto.uint64_field(1)
 
 
@@ -1501,6 +1634,210 @@ class GetDriftMarketDepthResponse(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def post_close_drift_perp_positions(
+        self,
+        post_close_drift_perp_positions_request: "PostCloseDriftPerpPositionsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostCloseDriftPerpPositionsResponse":
+        return await self._unary_unary(
+            "/api.Api/PostCloseDriftPerpPositions",
+            post_close_drift_perp_positions_request,
+            PostCloseDriftPerpPositionsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_drift_perp_orderbook(
+        self,
+        get_drift_perp_orderbook_request: "GetDriftPerpOrderbookRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetDriftPerpOrderbookResponse":
+        return await self._unary_unary(
+            "/api.Api/GetDriftPerpOrderbook",
+            get_drift_perp_orderbook_request,
+            GetDriftPerpOrderbookResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_create_drift_user(
+        self,
+        post_create_drift_user_request: "PostCreateDriftUserRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostCreateDriftUserResponse":
+        return await self._unary_unary(
+            "/api.Api/PostCreateDriftUser",
+            post_create_drift_user_request,
+            PostCreateDriftUserResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_drift_user(
+        self,
+        get_drift_user_request: "GetDriftUserRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetDriftUserResponse":
+        return await self._unary_unary(
+            "/api.Api/GetDriftUser",
+            get_drift_user_request,
+            GetDriftUserResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_drift_manage_collateral(
+        self,
+        post_drift_manage_collateral_request: "PostDriftManageCollateralRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostDriftManageCollateralResponse":
+        return await self._unary_unary(
+            "/api.Api/PostDriftManageCollateral",
+            post_drift_manage_collateral_request,
+            PostDriftManageCollateralResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_drift_settle_pnl(
+        self,
+        post_drift_settle_pnl_request: "PostDriftSettlePnlRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostDriftSettlePnlResponse":
+        return await self._unary_unary(
+            "/api.Api/PostDriftSettlePNL",
+            post_drift_settle_pnl_request,
+            PostDriftSettlePnlResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_drift_settle_pn_ls(
+        self,
+        post_drift_settle_pn_ls_request: "PostDriftSettlePnLsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostDriftSettlePnLsResponse":
+        return await self._unary_unary(
+            "/api.Api/PostDriftSettlePNLs",
+            post_drift_settle_pn_ls_request,
+            PostDriftSettlePnLsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_drift_assets(
+        self,
+        get_drift_assets_request: "GetDriftAssetsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetDriftAssetsResponse":
+        return await self._unary_unary(
+            "/api.Api/GetDriftAssets",
+            get_drift_assets_request,
+            GetDriftAssetsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_drift_perp_contracts(
+        self,
+        get_drift_perp_contracts_request: "GetDriftPerpContractsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetDriftPerpContractsResponse":
+        return await self._unary_unary(
+            "/api.Api/GetDriftPerpContracts",
+            get_drift_perp_contracts_request,
+            GetDriftPerpContractsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_liquidate_drift_perp(
+        self,
+        post_liquidate_drift_perp_request: "PostLiquidateDriftPerpRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostLiquidateDriftPerpResponse":
+        return await self._unary_unary(
+            "/api.Api/PostLiquidateDriftPerp",
+            post_liquidate_drift_perp_request,
+            PostLiquidateDriftPerpResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_drift_open_perp_order(
+        self,
+        get_drift_open_perp_order_request: "GetDriftOpenPerpOrderRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetDriftOpenPerpOrderResponse":
+        return await self._unary_unary(
+            "/api.Api/GetDriftOpenPerpOrder",
+            get_drift_open_perp_order_request,
+            GetDriftOpenPerpOrderResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_drift_open_margin_order(
+        self,
+        get_drift_open_margin_order_request: "GetDriftOpenMarginOrderRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetDriftOpenMarginOrderResponse":
+        return await self._unary_unary(
+            "/api.Api/GetDriftOpenMarginOrder",
+            get_drift_open_margin_order_request,
+            GetDriftOpenMarginOrderResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_drift_perp_positions(
         self,
         get_drift_perp_positions_request: "GetDriftPerpPositionsRequest",
@@ -2688,24 +3025,6 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
-    async def get_new_perp_orders_stream(
-        self,
-        get_new_perp_orders_stream_request: "GetNewPerpOrdersStreamRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> AsyncIterator["GetNewPerpOrdersStreamResponse"]:
-        async for response in self._unary_stream(
-            "/api.Api/GetNewPerpOrdersStream",
-            get_new_perp_orders_stream_request,
-            GetNewPerpOrdersStreamResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        ):
-            yield response
-
     async def get_perp_trades_stream(
         self,
         get_perp_trades_stream_request: "GetPerpTradesStreamRequest",
@@ -2726,6 +3045,67 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+    async def post_close_drift_perp_positions(
+        self,
+        post_close_drift_perp_positions_request: "PostCloseDriftPerpPositionsRequest",
+    ) -> "PostCloseDriftPerpPositionsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_drift_perp_orderbook(
+        self, get_drift_perp_orderbook_request: "GetDriftPerpOrderbookRequest"
+    ) -> "GetDriftPerpOrderbookResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_create_drift_user(
+        self, post_create_drift_user_request: "PostCreateDriftUserRequest"
+    ) -> "PostCreateDriftUserResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_drift_user(
+        self, get_drift_user_request: "GetDriftUserRequest"
+    ) -> "GetDriftUserResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_drift_manage_collateral(
+        self, post_drift_manage_collateral_request: "PostDriftManageCollateralRequest"
+    ) -> "PostDriftManageCollateralResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_drift_settle_pnl(
+        self, post_drift_settle_pnl_request: "PostDriftSettlePnlRequest"
+    ) -> "PostDriftSettlePnlResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_drift_settle_pn_ls(
+        self, post_drift_settle_pn_ls_request: "PostDriftSettlePnLsRequest"
+    ) -> "PostDriftSettlePnLsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_drift_assets(
+        self, get_drift_assets_request: "GetDriftAssetsRequest"
+    ) -> "GetDriftAssetsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_drift_perp_contracts(
+        self, get_drift_perp_contracts_request: "GetDriftPerpContractsRequest"
+    ) -> "GetDriftPerpContractsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_liquidate_drift_perp(
+        self, post_liquidate_drift_perp_request: "PostLiquidateDriftPerpRequest"
+    ) -> "PostLiquidateDriftPerpResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_drift_open_perp_order(
+        self, get_drift_open_perp_order_request: "GetDriftOpenPerpOrderRequest"
+    ) -> "GetDriftOpenPerpOrderResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_drift_open_margin_order(
+        self, get_drift_open_margin_order_request: "GetDriftOpenMarginOrderRequest"
+    ) -> "GetDriftOpenMarginOrderResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_drift_perp_positions(
         self, get_drift_perp_positions_request: "GetDriftPerpPositionsRequest"
     ) -> "GetDriftPerpPositionsResponse":
@@ -3086,17 +3466,106 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPerpOrderbooksStreamResponse()
 
-    async def get_new_perp_orders_stream(
-        self, get_new_perp_orders_stream_request: "GetNewPerpOrdersStreamRequest"
-    ) -> AsyncIterator["GetNewPerpOrdersStreamResponse"]:
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-        yield GetNewPerpOrdersStreamResponse()
-
     async def get_perp_trades_stream(
         self, get_perp_trades_stream_request: "GetPerpTradesStreamRequest"
     ) -> AsyncIterator["GetPerpTradesStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPerpTradesStreamResponse()
+
+    async def __rpc_post_close_drift_perp_positions(
+        self,
+        stream: "grpclib.server.Stream[PostCloseDriftPerpPositionsRequest, PostCloseDriftPerpPositionsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_close_drift_perp_positions(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_drift_perp_orderbook(
+        self,
+        stream: "grpclib.server.Stream[GetDriftPerpOrderbookRequest, GetDriftPerpOrderbookResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_drift_perp_orderbook(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_create_drift_user(
+        self,
+        stream: "grpclib.server.Stream[PostCreateDriftUserRequest, PostCreateDriftUserResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_create_drift_user(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_drift_user(
+        self, stream: "grpclib.server.Stream[GetDriftUserRequest, GetDriftUserResponse]"
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_drift_user(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_drift_manage_collateral(
+        self,
+        stream: "grpclib.server.Stream[PostDriftManageCollateralRequest, PostDriftManageCollateralResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_drift_manage_collateral(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_drift_settle_pnl(
+        self,
+        stream: "grpclib.server.Stream[PostDriftSettlePnlRequest, PostDriftSettlePnlResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_drift_settle_pnl(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_drift_settle_pn_ls(
+        self,
+        stream: "grpclib.server.Stream[PostDriftSettlePnLsRequest, PostDriftSettlePnLsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_drift_settle_pn_ls(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_drift_assets(
+        self,
+        stream: "grpclib.server.Stream[GetDriftAssetsRequest, GetDriftAssetsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_drift_assets(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_drift_perp_contracts(
+        self,
+        stream: "grpclib.server.Stream[GetDriftPerpContractsRequest, GetDriftPerpContractsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_drift_perp_contracts(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_liquidate_drift_perp(
+        self,
+        stream: "grpclib.server.Stream[PostLiquidateDriftPerpRequest, PostLiquidateDriftPerpResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_liquidate_drift_perp(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_drift_open_perp_order(
+        self,
+        stream: "grpclib.server.Stream[GetDriftOpenPerpOrderRequest, GetDriftOpenPerpOrderResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_drift_open_perp_order(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_drift_open_margin_order(
+        self,
+        stream: "grpclib.server.Stream[GetDriftOpenMarginOrderRequest, GetDriftOpenMarginOrderResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_drift_open_margin_order(request)
+        await stream.send_message(response)
 
     async def __rpc_get_drift_perp_positions(
         self,
@@ -3672,17 +4141,6 @@ class ApiBase(ServiceBase):
             request,
         )
 
-    async def __rpc_get_new_perp_orders_stream(
-        self,
-        stream: "grpclib.server.Stream[GetNewPerpOrdersStreamRequest, GetNewPerpOrdersStreamResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        await self._call_rpc_handler_server_stream(
-            self.get_new_perp_orders_stream,
-            stream,
-            request,
-        )
-
     async def __rpc_get_perp_trades_stream(
         self,
         stream: "grpclib.server.Stream[GetPerpTradesStreamRequest, GetPerpTradesStreamResponse]",
@@ -3696,6 +4154,78 @@ class ApiBase(ServiceBase):
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
+            "/api.Api/PostCloseDriftPerpPositions": grpclib.const.Handler(
+                self.__rpc_post_close_drift_perp_positions,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostCloseDriftPerpPositionsRequest,
+                PostCloseDriftPerpPositionsResponse,
+            ),
+            "/api.Api/GetDriftPerpOrderbook": grpclib.const.Handler(
+                self.__rpc_get_drift_perp_orderbook,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetDriftPerpOrderbookRequest,
+                GetDriftPerpOrderbookResponse,
+            ),
+            "/api.Api/PostCreateDriftUser": grpclib.const.Handler(
+                self.__rpc_post_create_drift_user,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostCreateDriftUserRequest,
+                PostCreateDriftUserResponse,
+            ),
+            "/api.Api/GetDriftUser": grpclib.const.Handler(
+                self.__rpc_get_drift_user,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetDriftUserRequest,
+                GetDriftUserResponse,
+            ),
+            "/api.Api/PostDriftManageCollateral": grpclib.const.Handler(
+                self.__rpc_post_drift_manage_collateral,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostDriftManageCollateralRequest,
+                PostDriftManageCollateralResponse,
+            ),
+            "/api.Api/PostDriftSettlePNL": grpclib.const.Handler(
+                self.__rpc_post_drift_settle_pnl,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostDriftSettlePnlRequest,
+                PostDriftSettlePnlResponse,
+            ),
+            "/api.Api/PostDriftSettlePNLs": grpclib.const.Handler(
+                self.__rpc_post_drift_settle_pn_ls,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostDriftSettlePnLsRequest,
+                PostDriftSettlePnLsResponse,
+            ),
+            "/api.Api/GetDriftAssets": grpclib.const.Handler(
+                self.__rpc_get_drift_assets,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetDriftAssetsRequest,
+                GetDriftAssetsResponse,
+            ),
+            "/api.Api/GetDriftPerpContracts": grpclib.const.Handler(
+                self.__rpc_get_drift_perp_contracts,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetDriftPerpContractsRequest,
+                GetDriftPerpContractsResponse,
+            ),
+            "/api.Api/PostLiquidateDriftPerp": grpclib.const.Handler(
+                self.__rpc_post_liquidate_drift_perp,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostLiquidateDriftPerpRequest,
+                PostLiquidateDriftPerpResponse,
+            ),
+            "/api.Api/GetDriftOpenPerpOrder": grpclib.const.Handler(
+                self.__rpc_get_drift_open_perp_order,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetDriftOpenPerpOrderRequest,
+                GetDriftOpenPerpOrderResponse,
+            ),
+            "/api.Api/GetDriftOpenMarginOrder": grpclib.const.Handler(
+                self.__rpc_get_drift_open_margin_order,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetDriftOpenMarginOrderRequest,
+                GetDriftOpenMarginOrderResponse,
+            ),
             "/api.Api/GetDriftPerpPositions": grpclib.const.Handler(
                 self.__rpc_get_drift_perp_positions,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -4109,12 +4639,6 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetPerpOrderbooksRequest,
                 GetPerpOrderbooksStreamResponse,
-            ),
-            "/api.Api/GetNewPerpOrdersStream": grpclib.const.Handler(
-                self.__rpc_get_new_perp_orders_stream,
-                grpclib.const.Cardinality.UNARY_STREAM,
-                GetNewPerpOrdersStreamRequest,
-                GetNewPerpOrdersStreamResponse,
             ),
             "/api.Api/GetPerpTradesStream": grpclib.const.Handler(
                 self.__rpc_get_perp_trades_stream,

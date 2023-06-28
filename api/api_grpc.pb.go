@@ -18,6 +18,18 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
+	PostCloseDriftPerpPositions(ctx context.Context, in *PostCloseDriftPerpPositionsRequest, opts ...grpc.CallOption) (*PostCloseDriftPerpPositionsResponse, error)
+	GetDriftPerpOrderbook(ctx context.Context, in *GetDriftPerpOrderbookRequest, opts ...grpc.CallOption) (*GetDriftPerpOrderbookResponse, error)
+	PostCreateDriftUser(ctx context.Context, in *PostCreateDriftUserRequest, opts ...grpc.CallOption) (*PostCreateDriftUserResponse, error)
+	GetDriftUser(ctx context.Context, in *GetDriftUserRequest, opts ...grpc.CallOption) (*GetDriftUserResponse, error)
+	PostDriftManageCollateral(ctx context.Context, in *PostDriftManageCollateralRequest, opts ...grpc.CallOption) (*PostDriftManageCollateralResponse, error)
+	PostDriftSettlePNL(ctx context.Context, in *PostDriftSettlePNLRequest, opts ...grpc.CallOption) (*PostDriftSettlePNLResponse, error)
+	PostDriftSettlePNLs(ctx context.Context, in *PostDriftSettlePNLsRequest, opts ...grpc.CallOption) (*PostDriftSettlePNLsResponse, error)
+	GetDriftAssets(ctx context.Context, in *GetDriftAssetsRequest, opts ...grpc.CallOption) (*GetDriftAssetsResponse, error)
+	GetDriftPerpContracts(ctx context.Context, in *GetDriftPerpContractsRequest, opts ...grpc.CallOption) (*GetDriftPerpContractsResponse, error)
+	PostLiquidateDriftPerp(ctx context.Context, in *PostLiquidateDriftPerpRequest, opts ...grpc.CallOption) (*PostLiquidateDriftPerpResponse, error)
+	GetDriftOpenPerpOrder(ctx context.Context, in *GetDriftOpenPerpOrderRequest, opts ...grpc.CallOption) (*GetDriftOpenPerpOrderResponse, error)
+	GetDriftOpenMarginOrder(ctx context.Context, in *GetDriftOpenMarginOrderRequest, opts ...grpc.CallOption) (*GetDriftOpenMarginOrderResponse, error)
 	GetDriftPerpPositions(ctx context.Context, in *GetDriftPerpPositionsRequest, opts ...grpc.CallOption) (*GetDriftPerpPositionsResponse, error)
 	GetDriftPerpOpenOrders(ctx context.Context, in *GetDriftPerpOpenOrdersRequest, opts ...grpc.CallOption) (*GetDriftPerpOpenOrdersResponse, error)
 	PostDriftCancelPerpOrder(ctx context.Context, in *PostDriftCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostDriftCancelPerpOrderResponse, error)
@@ -98,7 +110,6 @@ type ApiClient interface {
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
 	// Perp streaming endpoints
 	GetPerpOrderbooksStream(ctx context.Context, in *GetPerpOrderbooksRequest, opts ...grpc.CallOption) (Api_GetPerpOrderbooksStreamClient, error)
-	GetNewPerpOrdersStream(ctx context.Context, in *GetNewPerpOrdersStreamRequest, opts ...grpc.CallOption) (Api_GetNewPerpOrdersStreamClient, error)
 	GetPerpTradesStream(ctx context.Context, in *GetPerpTradesStreamRequest, opts ...grpc.CallOption) (Api_GetPerpTradesStreamClient, error)
 }
 
@@ -108,6 +119,114 @@ type apiClient struct {
 
 func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 	return &apiClient{cc}
+}
+
+func (c *apiClient) PostCloseDriftPerpPositions(ctx context.Context, in *PostCloseDriftPerpPositionsRequest, opts ...grpc.CallOption) (*PostCloseDriftPerpPositionsResponse, error) {
+	out := new(PostCloseDriftPerpPositionsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostCloseDriftPerpPositions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftPerpOrderbook(ctx context.Context, in *GetDriftPerpOrderbookRequest, opts ...grpc.CallOption) (*GetDriftPerpOrderbookResponse, error) {
+	out := new(GetDriftPerpOrderbookResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftPerpOrderbook", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostCreateDriftUser(ctx context.Context, in *PostCreateDriftUserRequest, opts ...grpc.CallOption) (*PostCreateDriftUserResponse, error) {
+	out := new(PostCreateDriftUserResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostCreateDriftUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftUser(ctx context.Context, in *GetDriftUserRequest, opts ...grpc.CallOption) (*GetDriftUserResponse, error) {
+	out := new(GetDriftUserResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostDriftManageCollateral(ctx context.Context, in *PostDriftManageCollateralRequest, opts ...grpc.CallOption) (*PostDriftManageCollateralResponse, error) {
+	out := new(PostDriftManageCollateralResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostDriftManageCollateral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostDriftSettlePNL(ctx context.Context, in *PostDriftSettlePNLRequest, opts ...grpc.CallOption) (*PostDriftSettlePNLResponse, error) {
+	out := new(PostDriftSettlePNLResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostDriftSettlePNL", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostDriftSettlePNLs(ctx context.Context, in *PostDriftSettlePNLsRequest, opts ...grpc.CallOption) (*PostDriftSettlePNLsResponse, error) {
+	out := new(PostDriftSettlePNLsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostDriftSettlePNLs", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftAssets(ctx context.Context, in *GetDriftAssetsRequest, opts ...grpc.CallOption) (*GetDriftAssetsResponse, error) {
+	out := new(GetDriftAssetsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftAssets", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftPerpContracts(ctx context.Context, in *GetDriftPerpContractsRequest, opts ...grpc.CallOption) (*GetDriftPerpContractsResponse, error) {
+	out := new(GetDriftPerpContractsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftPerpContracts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostLiquidateDriftPerp(ctx context.Context, in *PostLiquidateDriftPerpRequest, opts ...grpc.CallOption) (*PostLiquidateDriftPerpResponse, error) {
+	out := new(PostLiquidateDriftPerpResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostLiquidateDriftPerp", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftOpenPerpOrder(ctx context.Context, in *GetDriftOpenPerpOrderRequest, opts ...grpc.CallOption) (*GetDriftOpenPerpOrderResponse, error) {
+	out := new(GetDriftOpenPerpOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftOpenPerpOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetDriftOpenMarginOrder(ctx context.Context, in *GetDriftOpenMarginOrderRequest, opts ...grpc.CallOption) (*GetDriftOpenMarginOrderResponse, error) {
+	out := new(GetDriftOpenMarginOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftOpenMarginOrder", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *apiClient) GetDriftPerpPositions(ctx context.Context, in *GetDriftPerpPositionsRequest, opts ...grpc.CallOption) (*GetDriftPerpPositionsResponse, error) {
@@ -1053,40 +1172,8 @@ func (x *apiGetPerpOrderbooksStreamClient) Recv() (*GetPerpOrderbooksStreamRespo
 	return m, nil
 }
 
-func (c *apiClient) GetNewPerpOrdersStream(ctx context.Context, in *GetNewPerpOrdersStreamRequest, opts ...grpc.CallOption) (Api_GetNewPerpOrdersStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetNewPerpOrdersStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetNewPerpOrdersStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetNewPerpOrdersStreamClient interface {
-	Recv() (*GetNewPerpOrdersStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetNewPerpOrdersStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetNewPerpOrdersStreamClient) Recv() (*GetNewPerpOrdersStreamResponse, error) {
-	m := new(GetNewPerpOrdersStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *apiClient) GetPerpTradesStream(ctx context.Context, in *GetPerpTradesStreamRequest, opts ...grpc.CallOption) (Api_GetPerpTradesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[15], "/api.Api/GetPerpTradesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetPerpTradesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1121,6 +1208,18 @@ func (x *apiGetPerpTradesStreamClient) Recv() (*GetPerpTradesStreamResponse, err
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
 type ApiServer interface {
+	PostCloseDriftPerpPositions(context.Context, *PostCloseDriftPerpPositionsRequest) (*PostCloseDriftPerpPositionsResponse, error)
+	GetDriftPerpOrderbook(context.Context, *GetDriftPerpOrderbookRequest) (*GetDriftPerpOrderbookResponse, error)
+	PostCreateDriftUser(context.Context, *PostCreateDriftUserRequest) (*PostCreateDriftUserResponse, error)
+	GetDriftUser(context.Context, *GetDriftUserRequest) (*GetDriftUserResponse, error)
+	PostDriftManageCollateral(context.Context, *PostDriftManageCollateralRequest) (*PostDriftManageCollateralResponse, error)
+	PostDriftSettlePNL(context.Context, *PostDriftSettlePNLRequest) (*PostDriftSettlePNLResponse, error)
+	PostDriftSettlePNLs(context.Context, *PostDriftSettlePNLsRequest) (*PostDriftSettlePNLsResponse, error)
+	GetDriftAssets(context.Context, *GetDriftAssetsRequest) (*GetDriftAssetsResponse, error)
+	GetDriftPerpContracts(context.Context, *GetDriftPerpContractsRequest) (*GetDriftPerpContractsResponse, error)
+	PostLiquidateDriftPerp(context.Context, *PostLiquidateDriftPerpRequest) (*PostLiquidateDriftPerpResponse, error)
+	GetDriftOpenPerpOrder(context.Context, *GetDriftOpenPerpOrderRequest) (*GetDriftOpenPerpOrderResponse, error)
+	GetDriftOpenMarginOrder(context.Context, *GetDriftOpenMarginOrderRequest) (*GetDriftOpenMarginOrderResponse, error)
 	GetDriftPerpPositions(context.Context, *GetDriftPerpPositionsRequest) (*GetDriftPerpPositionsResponse, error)
 	GetDriftPerpOpenOrders(context.Context, *GetDriftPerpOpenOrdersRequest) (*GetDriftPerpOpenOrdersResponse, error)
 	PostDriftCancelPerpOrder(context.Context, *PostDriftCancelPerpOrderRequest) (*PostDriftCancelPerpOrderResponse, error)
@@ -1201,7 +1300,6 @@ type ApiServer interface {
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
 	// Perp streaming endpoints
 	GetPerpOrderbooksStream(*GetPerpOrderbooksRequest, Api_GetPerpOrderbooksStreamServer) error
-	GetNewPerpOrdersStream(*GetNewPerpOrdersStreamRequest, Api_GetNewPerpOrdersStreamServer) error
 	GetPerpTradesStream(*GetPerpTradesStreamRequest, Api_GetPerpTradesStreamServer) error
 	mustEmbedUnimplementedApiServer()
 }
@@ -1210,6 +1308,42 @@ type ApiServer interface {
 type UnimplementedApiServer struct {
 }
 
+func (UnimplementedApiServer) PostCloseDriftPerpPositions(context.Context, *PostCloseDriftPerpPositionsRequest) (*PostCloseDriftPerpPositionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostCloseDriftPerpPositions not implemented")
+}
+func (UnimplementedApiServer) GetDriftPerpOrderbook(context.Context, *GetDriftPerpOrderbookRequest) (*GetDriftPerpOrderbookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftPerpOrderbook not implemented")
+}
+func (UnimplementedApiServer) PostCreateDriftUser(context.Context, *PostCreateDriftUserRequest) (*PostCreateDriftUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostCreateDriftUser not implemented")
+}
+func (UnimplementedApiServer) GetDriftUser(context.Context, *GetDriftUserRequest) (*GetDriftUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftUser not implemented")
+}
+func (UnimplementedApiServer) PostDriftManageCollateral(context.Context, *PostDriftManageCollateralRequest) (*PostDriftManageCollateralResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostDriftManageCollateral not implemented")
+}
+func (UnimplementedApiServer) PostDriftSettlePNL(context.Context, *PostDriftSettlePNLRequest) (*PostDriftSettlePNLResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostDriftSettlePNL not implemented")
+}
+func (UnimplementedApiServer) PostDriftSettlePNLs(context.Context, *PostDriftSettlePNLsRequest) (*PostDriftSettlePNLsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostDriftSettlePNLs not implemented")
+}
+func (UnimplementedApiServer) GetDriftAssets(context.Context, *GetDriftAssetsRequest) (*GetDriftAssetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftAssets not implemented")
+}
+func (UnimplementedApiServer) GetDriftPerpContracts(context.Context, *GetDriftPerpContractsRequest) (*GetDriftPerpContractsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftPerpContracts not implemented")
+}
+func (UnimplementedApiServer) PostLiquidateDriftPerp(context.Context, *PostLiquidateDriftPerpRequest) (*PostLiquidateDriftPerpResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostLiquidateDriftPerp not implemented")
+}
+func (UnimplementedApiServer) GetDriftOpenPerpOrder(context.Context, *GetDriftOpenPerpOrderRequest) (*GetDriftOpenPerpOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftOpenPerpOrder not implemented")
+}
+func (UnimplementedApiServer) GetDriftOpenMarginOrder(context.Context, *GetDriftOpenMarginOrderRequest) (*GetDriftOpenMarginOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftOpenMarginOrder not implemented")
+}
 func (UnimplementedApiServer) GetDriftPerpPositions(context.Context, *GetDriftPerpPositionsRequest) (*GetDriftPerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDriftPerpPositions not implemented")
 }
@@ -1417,9 +1551,6 @@ func (UnimplementedApiServer) GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwap
 func (UnimplementedApiServer) GetPerpOrderbooksStream(*GetPerpOrderbooksRequest, Api_GetPerpOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPerpOrderbooksStream not implemented")
 }
-func (UnimplementedApiServer) GetNewPerpOrdersStream(*GetNewPerpOrdersStreamRequest, Api_GetNewPerpOrdersStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetNewPerpOrdersStream not implemented")
-}
 func (UnimplementedApiServer) GetPerpTradesStream(*GetPerpTradesStreamRequest, Api_GetPerpTradesStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPerpTradesStream not implemented")
 }
@@ -1434,6 +1565,222 @@ type UnsafeApiServer interface {
 
 func RegisterApiServer(s grpc.ServiceRegistrar, srv ApiServer) {
 	s.RegisterService(&Api_ServiceDesc, srv)
+}
+
+func _Api_PostCloseDriftPerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostCloseDriftPerpPositionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostCloseDriftPerpPositions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostCloseDriftPerpPositions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostCloseDriftPerpPositions(ctx, req.(*PostCloseDriftPerpPositionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetDriftPerpOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftPerpOrderbookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftPerpOrderbook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftPerpOrderbook",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftPerpOrderbook(ctx, req.(*GetDriftPerpOrderbookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostCreateDriftUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostCreateDriftUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostCreateDriftUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostCreateDriftUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostCreateDriftUser(ctx, req.(*PostCreateDriftUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetDriftUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftUser(ctx, req.(*GetDriftUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostDriftManageCollateral_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostDriftManageCollateralRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostDriftManageCollateral(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostDriftManageCollateral",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostDriftManageCollateral(ctx, req.(*PostDriftManageCollateralRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostDriftSettlePNL_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostDriftSettlePNLRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostDriftSettlePNL(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostDriftSettlePNL",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostDriftSettlePNL(ctx, req.(*PostDriftSettlePNLRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostDriftSettlePNLs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostDriftSettlePNLsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostDriftSettlePNLs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostDriftSettlePNLs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostDriftSettlePNLs(ctx, req.(*PostDriftSettlePNLsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetDriftAssets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftAssetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftAssets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftAssets",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftAssets(ctx, req.(*GetDriftAssetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetDriftPerpContracts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftPerpContractsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftPerpContracts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftPerpContracts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftPerpContracts(ctx, req.(*GetDriftPerpContractsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostLiquidateDriftPerp_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostLiquidateDriftPerpRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostLiquidateDriftPerp(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostLiquidateDriftPerp",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostLiquidateDriftPerp(ctx, req.(*PostLiquidateDriftPerpRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetDriftOpenPerpOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftOpenPerpOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftOpenPerpOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftOpenPerpOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftOpenPerpOrder(ctx, req.(*GetDriftOpenPerpOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetDriftOpenMarginOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftOpenMarginOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetDriftOpenMarginOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetDriftOpenMarginOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetDriftOpenMarginOrder(ctx, req.(*GetDriftOpenMarginOrderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_GetDriftPerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2720,27 +3067,6 @@ func (x *apiGetPerpOrderbooksStreamServer) Send(m *GetPerpOrderbooksStreamRespon
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Api_GetNewPerpOrdersStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetNewPerpOrdersStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetNewPerpOrdersStream(m, &apiGetNewPerpOrdersStreamServer{stream})
-}
-
-type Api_GetNewPerpOrdersStreamServer interface {
-	Send(*GetNewPerpOrdersStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetNewPerpOrdersStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetNewPerpOrdersStreamServer) Send(m *GetNewPerpOrdersStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
 func _Api_GetPerpTradesStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetPerpTradesStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2769,6 +3095,54 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.Api",
 	HandlerType: (*ApiServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "PostCloseDriftPerpPositions",
+			Handler:    _Api_PostCloseDriftPerpPositions_Handler,
+		},
+		{
+			MethodName: "GetDriftPerpOrderbook",
+			Handler:    _Api_GetDriftPerpOrderbook_Handler,
+		},
+		{
+			MethodName: "PostCreateDriftUser",
+			Handler:    _Api_PostCreateDriftUser_Handler,
+		},
+		{
+			MethodName: "GetDriftUser",
+			Handler:    _Api_GetDriftUser_Handler,
+		},
+		{
+			MethodName: "PostDriftManageCollateral",
+			Handler:    _Api_PostDriftManageCollateral_Handler,
+		},
+		{
+			MethodName: "PostDriftSettlePNL",
+			Handler:    _Api_PostDriftSettlePNL_Handler,
+		},
+		{
+			MethodName: "PostDriftSettlePNLs",
+			Handler:    _Api_PostDriftSettlePNLs_Handler,
+		},
+		{
+			MethodName: "GetDriftAssets",
+			Handler:    _Api_GetDriftAssets_Handler,
+		},
+		{
+			MethodName: "GetDriftPerpContracts",
+			Handler:    _Api_GetDriftPerpContracts_Handler,
+		},
+		{
+			MethodName: "PostLiquidateDriftPerp",
+			Handler:    _Api_PostLiquidateDriftPerp_Handler,
+		},
+		{
+			MethodName: "GetDriftOpenPerpOrder",
+			Handler:    _Api_GetDriftOpenPerpOrder_Handler,
+		},
+		{
+			MethodName: "GetDriftOpenMarginOrder",
+			Handler:    _Api_GetDriftOpenMarginOrder_Handler,
+		},
 		{
 			MethodName: "GetDriftPerpPositions",
 			Handler:    _Api_GetDriftPerpPositions_Handler,
@@ -3059,11 +3433,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetPerpOrderbooksStream",
 			Handler:       _Api_GetPerpOrderbooksStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetNewPerpOrdersStream",
-			Handler:       _Api_GetNewPerpOrdersStream_Handler,
 			ServerStreams: true,
 		},
 		{
