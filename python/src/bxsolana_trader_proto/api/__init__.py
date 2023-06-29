@@ -590,6 +590,7 @@ class RouteTradeSwapRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
     steps: List["RouteStep"] = betterproto.message_field(3)
+    slippage: float = betterproto.double_field(4)
 
 
 @dataclass(eq=False, repr=False)

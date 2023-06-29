@@ -1993,6 +1993,8 @@ export class RouteTradeSwapRequest extends jspb.Message {
     getStepsList(): Array<RouteStep>;
     setStepsList(value: Array<RouteStep>): RouteTradeSwapRequest;
     addSteps(value?: RouteStep, index?: number): RouteStep;
+    getSlippage(): number;
+    setSlippage(value: number): RouteTradeSwapRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): RouteTradeSwapRequest.AsObject;
@@ -2009,6 +2011,7 @@ export namespace RouteTradeSwapRequest {
         project: Project,
         owneraddress: string,
         stepsList: Array<RouteStep.AsObject>,
+        slippage: number,
     }
 }
 

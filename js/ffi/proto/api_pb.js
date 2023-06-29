@@ -19069,7 +19069,8 @@ proto.api.RouteTradeSwapRequest.toObject = function(includeInstance, msg) {
     project: jspb.Message.getFieldWithDefault(msg, 1, 0),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     stepsList: jspb.Message.toObjectList(msg.getStepsList(),
-    proto.api.RouteStep.toObject, includeInstance)
+    proto.api.RouteStep.toObject, includeInstance),
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
   };
 
   if (includeInstance) {
@@ -19118,6 +19119,10 @@ proto.api.RouteTradeSwapRequest.deserializeBinaryFromReader = function(msg, read
       var value = new proto.api.RouteStep;
       reader.readMessage(value,proto.api.RouteStep.deserializeBinaryFromReader);
       msg.addSteps(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSlippage(value);
       break;
     default:
       reader.skipField();
@@ -19168,6 +19173,13 @@ proto.api.RouteTradeSwapRequest.serializeBinaryToWriter = function(message, writ
       3,
       f,
       proto.api.RouteStep.serializeBinaryToWriter
+    );
+  }
+  f = message.getSlippage();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
     );
   }
 };
@@ -19244,6 +19256,24 @@ proto.api.RouteTradeSwapRequest.prototype.addSteps = function(opt_value, opt_ind
  */
 proto.api.RouteTradeSwapRequest.prototype.clearStepsList = function() {
   return this.setStepsList([]);
+};
+
+
+/**
+ * optional double slippage = 4;
+ * @return {number}
+ */
+proto.api.RouteTradeSwapRequest.prototype.getSlippage = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RouteTradeSwapRequest} returns this
+ */
+proto.api.RouteTradeSwapRequest.prototype.setSlippage = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
 };
 
 

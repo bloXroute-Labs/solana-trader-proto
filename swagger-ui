@@ -4849,6 +4849,10 @@
           "items": {
             "$ref": "#/definitions/apiRouteStep"
           }
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
