@@ -1345,7 +1345,7 @@ class GetDriftOpenPerpOrderRequest(betterproto.Message):
 class GetDriftOpenPerpOrderResponse(betterproto.Message):
     context: "Context" = betterproto.message_field(1)
     owner_address: str = betterproto.string_field(2)
-    order: "PerpOrder" = betterproto.message_field(3)
+    order: "DriftPerpOrder" = betterproto.message_field(3)
 
 
 @dataclass(eq=False, repr=False)

@@ -2082,7 +2082,7 @@ message GetDriftOpenPerpOrderRequest {
 message GetDriftOpenPerpOrderResponse {
   Context context = 1;
   string ownerAddress = 2;
-  PerpOrder order = 3;
+  DriftPerpOrder order = 3;
 }
 
 message PostDriftManageCollateralRequest {

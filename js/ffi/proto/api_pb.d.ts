@@ -4869,8 +4869,8 @@ export class GetDriftOpenPerpOrderResponse extends jspb.Message {
 
     hasOrder(): boolean;
     clearOrder(): void;
-    getOrder(): PerpOrder | undefined;
-    setOrder(value?: PerpOrder): GetDriftOpenPerpOrderResponse;
+    getOrder(): DriftPerpOrder | undefined;
+    setOrder(value?: DriftPerpOrder): GetDriftOpenPerpOrderResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetDriftOpenPerpOrderResponse.AsObject;
@@ -4886,7 +4886,7 @@ export namespace GetDriftOpenPerpOrderResponse {
     export type AsObject = {
         context?: Context.AsObject,
         owneraddress: string,
-        order?: PerpOrder.AsObject,
+        order?: DriftPerpOrder.AsObject,
     }
 }
 

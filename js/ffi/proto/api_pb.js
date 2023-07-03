@@ -41692,7 +41692,7 @@ proto.api.GetDriftOpenPerpOrderResponse.toObject = function(includeInstance, msg
   var f, obj = {
     context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    order: (f = msg.getOrder()) && proto.api.PerpOrder.toObject(includeInstance, f)
+    order: (f = msg.getOrder()) && proto.api.DriftPerpOrder.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -41739,8 +41739,8 @@ proto.api.GetDriftOpenPerpOrderResponse.deserializeBinaryFromReader = function(m
       msg.setOwneraddress(value);
       break;
     case 3:
-      var value = new proto.api.PerpOrder;
-      reader.readMessage(value,proto.api.PerpOrder.deserializeBinaryFromReader);
+      var value = new proto.api.DriftPerpOrder;
+      reader.readMessage(value,proto.api.DriftPerpOrder.deserializeBinaryFromReader);
       msg.setOrder(value);
       break;
     default:
@@ -41792,7 +41792,7 @@ proto.api.GetDriftOpenPerpOrderResponse.serializeBinaryToWriter = function(messa
     writer.writeMessage(
       3,
       f,
-      proto.api.PerpOrder.serializeBinaryToWriter
+      proto.api.DriftPerpOrder.serializeBinaryToWriter
     );
   }
 };
@@ -41854,17 +41854,17 @@ proto.api.GetDriftOpenPerpOrderResponse.prototype.setOwneraddress = function(val
 
 
 /**
- * optional PerpOrder order = 3;
- * @return {?proto.api.PerpOrder}
+ * optional DriftPerpOrder order = 3;
+ * @return {?proto.api.DriftPerpOrder}
  */
 proto.api.GetDriftOpenPerpOrderResponse.prototype.getOrder = function() {
-  return /** @type{?proto.api.PerpOrder} */ (
-    jspb.Message.getWrapperField(this, proto.api.PerpOrder, 3));
+  return /** @type{?proto.api.DriftPerpOrder} */ (
+    jspb.Message.getWrapperField(this, proto.api.DriftPerpOrder, 3));
 };
 
 
 /**
- * @param {?proto.api.PerpOrder|undefined} value
+ * @param {?proto.api.DriftPerpOrder|undefined} value
  * @return {!proto.api.GetDriftOpenPerpOrderResponse} returns this
 */
 proto.api.GetDriftOpenPerpOrderResponse.prototype.setOrder = function(value) {
