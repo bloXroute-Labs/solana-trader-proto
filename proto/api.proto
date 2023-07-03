@@ -52,7 +52,6 @@ service Api {
   };
 
   // Drift V2
-
   rpc PostCloseDriftPerpPositions(PostCloseDriftPerpPositionsRequest) returns (PostCloseDriftPerpPositionsResponse) {
     option (google.api.http) = {
       post: "/api/v2/drift/perp/close"
@@ -61,7 +60,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to close a perp position on Drift";
       summary: "closes a perp position on Drift";
-      tags: ["Trade", "Perp", "Orderbook"];
+      tags: ["Drift V2", "Trade"];
     };
   }
 
@@ -72,7 +71,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns perp contract's orderbook on Drift. Use limit param to reduce the number of bids/asks returned";
       summary: "Perpetuals contract orderbook on Drift";
-      tags: ["v2", "Perp", "Orderbook", "Market"];
+      tags: ["Drift V2", "Drift Market"];
     };
   }
 
@@ -84,7 +83,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to create a user on Drift";
       summary: "creates a user profile on Drift";
-      tags: ["v2", "Trade"];
+      tags: ["Drift V2", "Trade"];
     };
   }
 
@@ -95,7 +94,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the user info for an account on Drift";
       summary: "gets the user on Drift";
-      tags: ["v2", "Trade"];
+      tags: ["Drift V2", "Trade"];
     };
   }
 
@@ -107,7 +106,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to manage collateral on Drift";
       summary: "posts collateral on Drift";
-      tags: ["v2", "Trade"];
+      tags: ["Drift V2", "Trade"];
     };
   }
 
@@ -119,7 +118,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to settle pnl on Drift";
       summary: "settle pnl on Drift";
-      tags: ["v2", "Perp", "Trade"];
+      tags: ["Drift V2", "Perp", "Trade"];
     };
   }
 
@@ -131,7 +130,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to settle pnls on Drift";
       summary: "settle pnls on Drift";
-      tags: ["v2", "Perp", "Trade"];
+      tags: ["Drift V2", "Perp", "Trade"];
     };
   }
 
@@ -142,7 +141,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns details of assets a user has on Drift";
       summary: "details of assets a user on Drift";
-      tags: ["v2", "Perp", "Trade"];
+      tags: ["Drift V2", "Perp", "Trade"];
     };
   }
 
@@ -153,7 +152,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns details of available perp contracts on Drift";
       summary: "details of available perp contracts on Drift";
-      tags: ["v2", "Perp", "Market"];
+      tags: ["Drift V2", "Perp", "Market"];
     };
   }
 
@@ -165,7 +164,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to liquidate perp positions on Drift";
       summary: "liquidate perp positions";
-      tags: ["v2", "Perp", "Trade"];
+      tags: ["Drift V2", "Perp", "Trade"];
     };
   }
 
@@ -176,7 +175,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the detail of an open perp order either by ID or ClientOrderID";
       summary: "PERP order";
-      tags: ["v2", "Trade", "Perp", "Orderbook"];
+      tags: ["Drift V2", "Trade", "Perp", "Orderbook"];
     };
   }
 
@@ -187,7 +186,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the detail of an open margin order either by ID or ClientOrderID";
       summary: "Margin open order";
-      tags: ["v2", "Trade", "Margin"];
+      tags: ["Drift V2", "Trade", "Margin"];
     };
   }
 
@@ -198,7 +197,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list current Drift perp positions";
       summary: "Drift perp positions";
-      tags: ["v2", "Trade", "Perp", "Orderbook"];
+      tags: ["Drift V2", "Trade", "Perp", "Orderbook"];
     };
   }
 
@@ -209,7 +208,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list current open perp orders on Drift";
       summary: "Drift open perp order";
-      tags: ["v2", "Trade", "Perp", "Orderbook"];
+      tags: ["Drift V2", "Trade", "Perp", "Orderbook"];
     };
   }
 
@@ -221,7 +220,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to cancel perp orders on Drift";
       summary: "cancel perp orders on Drift";
-      tags: ["v2", "Trade", "Perp", "Orderbook"];
+      tags: ["Drift V2", "Trade", "Perp", "Orderbook"];
     };
   }
 
@@ -233,7 +232,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "post a modify order tx on Drift";
       summary: "modify Drift order";
-      tags: ["v2", "Trade", "Market"];
+      tags: ["Drift V2", "Trade", "Market"];
     };
   }
 
@@ -245,7 +244,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns a partially signed txn signature to cancel Drift margin orders";
       summary: "cancel Drift margin orders";
-      tags: ["v2", "Trade", "Market"];
+      tags: ["Drift V2", "Trade", "Market"];
     };
   }
 
@@ -256,7 +255,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the detail of all open margin orders";
       summary: "Margin open order";
-      tags: ["v2", "Trade", "Margin"];
+      tags: ["Drift V2", "Trade", "Margin"];
     };
   }
 
@@ -268,7 +267,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list of orderbook markets";
       summary: "drift orderbook markets";
-      tags: ["v2", "Market", "Orderbook"];
+      tags: ["Drift V2", "Market", "Orderbook"];
     };
   }
 
@@ -280,7 +279,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Places a margin order on Drift";
       summary: "margin order";
-      tags: ["v2", "Trade", "Margin"];
+      tags: ["Drift V2", "Trade", "Margin"];
     };
   }
 
@@ -292,7 +291,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Enables a margin trading on Drift";
       summary: "margin order";
-      tags: ["v2", "Trade", "Margin"];
+      tags: ["Drift V2", "Trade", "Margin"];
     };
   }
 
@@ -303,7 +302,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned";
       summary: "Perpetuals contract orderbook";
-      tags: ["v2", "Orderbook", "Margin", "Market"];
+      tags: ["Drift V2", "Orderbook", "Margin", "Market"];
     };
   }
 
@@ -314,22 +313,21 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns Drift contract's market depth data. Use limit param to reduce the number of bids/asks's data points returned";
       summary: "Perpetuals contract orderbook";
-      tags: ["v2", "Drift", "Perp"];
+      tags: ["Drift V2", "Drift", "Perp"];
     };
   }
 
   rpc GetDriftMarginOrderbooksStream(GetDriftMarginOrderbooksRequest) returns (stream GetDriftMarginOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["v2", "Margin", "Orderbook"];
+      tags: ["Drift V2", "Margin", "Orderbook"];
     };
   }
 
   rpc GetDriftMarketDepthsStream(GetDriftMarketDepthsStreamRequest) returns (stream GetDriftMarketDepthStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["v2", "Drift"];
+      tags: ["Drift V2"];
     };
   }
-
   // end of Drift V2
 
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
@@ -720,7 +718,7 @@ service Api {
       tags: ["Trade", "Perp", "Orderbook"];
     };
   }
-
+  // migrated to v2
   rpc PostClosePerpPositions(PostClosePerpPositionsRequest) returns (PostClosePerpPositionsResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/close"
@@ -732,7 +730,7 @@ service Api {
       tags: ["Trade", "Perp", "Orderbook"];
     };
   }
-
+  // migrated to v2
   rpc GetPerpOrderbook(GetPerpOrderbookRequest) returns (GetPerpOrderbookResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/perp/orderbook/{contract}"
@@ -743,7 +741,7 @@ service Api {
       tags: ["Perp", "Orderbook", "Market"];
     };
   }
-
+  // migrated to v2
   rpc PostCreateUser(PostCreateUserRequest) returns (PostCreateUserResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/user"
@@ -755,7 +753,7 @@ service Api {
       tags: ["Trade"];
     };
   }
-
+  // migrated to v2
   rpc GetUser(GetUserRequest) returns (GetUserResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/user"
@@ -766,7 +764,7 @@ service Api {
       tags: ["Trade"];
     };
   }
-
+  // migrated to v2
   rpc PostManageCollateral(PostManageCollateralRequest) returns (PostManageCollateralResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/managecollateral"
@@ -778,7 +776,7 @@ service Api {
       tags: ["Perp", "Trade"];
     };
   }
-
+  // migrated to v2
   rpc PostSettlePNL(PostSettlePNLRequest) returns (PostSettlePNLResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/settle-pnl"
@@ -790,7 +788,7 @@ service Api {
       tags: ["Perp", "Trade"];
     };
   }
-
+  // migrated to v2
   rpc PostSettlePNLs(PostSettlePNLsRequest) returns (PostSettlePNLsResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/settle-pnls"
@@ -802,7 +800,7 @@ service Api {
       tags: ["Perp", "Trade"];
     };
   }
-
+  // migrated to v2
   rpc GetAssets(GetAssetsRequest) returns (GetAssetsResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/perp/assets"
@@ -813,7 +811,7 @@ service Api {
       tags: ["Perp", "Trade"];
     };
   }
-
+  // migrated to v2
   rpc GetPerpContracts(GetPerpContractsRequest) returns (GetPerpContractsResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/perp/contracts"
@@ -824,7 +822,7 @@ service Api {
       tags: ["Perp", "Market"];
     };
   }
-
+  // migrated to v2
   rpc PostLiquidatePerp(PostLiquidatePerpRequest) returns (PostLiquidatePerpResponse) {
     option (google.api.http) = {
       post: "/api/v1/trade/perp/liquidate"
@@ -836,7 +834,7 @@ service Api {
       tags: ["Perp", "Trade"];
     };
   }
-
+  // migrated to v2
   rpc GetOpenPerpOrder(GetOpenPerpOrderRequest)  returns (GetOpenPerpOrderResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/perp/open-order-by-id"
