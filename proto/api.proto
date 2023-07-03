@@ -194,6 +194,125 @@ service Api {
 
   // end of Drift V2
 
+  //Openbook V2
+
+  rpc GetMarketsV2(GetMarketsRequest) returns (GetMarketsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/market/markets"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of orderbook markets";
+      summary: "Orderbook markets";
+      tags: ["Market V2", "Openbook V2"];
+    };
+  }
+
+  rpc GetTickersV2(GetTickersRequest) returns (GetTickersResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/market/tickers/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns updated ticker(s). To receive all tickers use empty string for {market} param value";
+      summary: "Orderbook tickers";
+      tags: ["Market V2", "Openbook V2"];
+    };
+  }
+
+  rpc GetOrderbookV2(GetOrderbookRequest) returns (GetOrderbookResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/market/orderbook/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned";
+      summary: "Market orderbook";
+      tags: ["Market V2", "Openbook V2"];
+    };
+  }
+
+  rpc GetMarketDepthV2(GetMarketDepthRequest) returns (GetMarketDepthResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/market/depth/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns market's aggregated price data. Use limit param to reduce the number of price points returned";
+      summary: "Market depth";
+      tags: ["Market V2", "Openbook V2"];
+    };
+  }
+
+  rpc PostOrderV2(PostOrderRequest) returns (PostOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/trade/place"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a NewOrderV3 unsigned transaction object";
+      summary: "Unsigned NewOrderV3 transaction";
+      tags: ["Trade V2", "Openbook V2"];
+    };
+  }
+
+  rpc PostCancelOrderV2(PostCancelOrderRequest) returns (PostCancelOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/trade/cancel"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a CancelOrder unsigned transaction object";
+      summary: "Unsigned CancelOrder transaction";
+      tags: ["Trade V2", "Openbook V2"];
+    };
+  }
+
+  rpc PostReplaceOrderV2(PostReplaceOrderRequest) returns (PostOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/trade/replace"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a ReplaceOrder unsigned transaction object";
+      summary: "Unsigned ReplaceOrder transaction";
+      tags: ["Trade V2", "Openbook V2"];
+    };
+  }
+
+  rpc PostSettleV2(PostSettleRequest) returns (PostSettleResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/trade/settle"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a SettleFunds unsigned transaction object";
+      summary: "Unsigned SettleFunds transaction";
+      tags: ["Trade V2", "Openbook V2"];
+    };
+  }
+
+  rpc GetOpenOrdersV2(GetOpenOrdersRequest) returns (GetOpenOrdersResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/trade/open-orders/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of open orders per user per market";
+      summary: "List of user's open orders";
+      tags: ["Trade V2", "Openbook V2"];
+    };
+  }
+
+  rpc GetUnsettledV2(GetUnsettledRequest) returns (GetUnsettledResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/trade/unsettled/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the unsettled amounts of user in a market";
+      summary: "Unsettled amounts";
+      tags: ["Trade V2", "Openbook V2"];
+    };
+  }
+
+  //end o Openbook V2
+
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/price"
@@ -1018,6 +1137,8 @@ message PostCancelOrderRequest {
   string ownerAddress = 4 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
   Project project = 6;
+  uint64 clientOrderID = 7[(google.api.field_behavior) = OPTIONAL];
+  string market = 8[(google.api.field_behavior) = OPTIONAL];
 }
 
 message PostCancelByClientOrderIDRequest {
@@ -1174,7 +1295,9 @@ message GetOpenOrdersRequest {
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   string address = 3 [(google.api.field_behavior) = OPTIONAL];
   string openOrdersAddress = 4 [(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming, Setting both address and openOrdersAddress is invalid, openOrdersAddress is preferred."}];
-  Project project = 5;
+  Project project = 5[(google.api.field_behavior) = OPTIONAL];
+  string orderID = 6 [(google.api.field_behavior) = OPTIONAL];
+  uint64 clientOrderID = 7[(google.api.field_behavior) = OPTIONAL];
 }
 
 message GetOpenOrdersResponse {
