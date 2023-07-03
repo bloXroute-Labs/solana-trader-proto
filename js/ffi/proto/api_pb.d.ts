@@ -933,6 +933,10 @@ export class PostCancelOrderRequest extends jspb.Message {
     setOpenordersaddress(value: string): PostCancelOrderRequest;
     getProject(): Project;
     setProject(value: Project): PostCancelOrderRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostCancelOrderRequest;
+    getMarket(): string;
+    setMarket(value: string): PostCancelOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelOrderRequest.AsObject;
@@ -952,6 +956,8 @@ export namespace PostCancelOrderRequest {
         owneraddress: string,
         openordersaddress: string,
         project: Project,
+        clientorderid: number,
+        market: string,
     }
 }
 
@@ -1548,6 +1554,10 @@ export class GetOpenOrdersRequest extends jspb.Message {
     setOpenordersaddress(value: string): GetOpenOrdersRequest;
     getProject(): Project;
     setProject(value: Project): GetOpenOrdersRequest;
+    getOrderid(): string;
+    setOrderid(value: string): GetOpenOrdersRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): GetOpenOrdersRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOpenOrdersRequest.AsObject;
@@ -1566,6 +1576,8 @@ export namespace GetOpenOrdersRequest {
         address: string,
         openordersaddress: string,
         project: Project,
+        orderid: string,
+        clientorderid: number,
     }
 }
 

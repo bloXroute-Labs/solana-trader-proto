@@ -776,6 +776,19 @@
               "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
+          },
+          {
+            "name": "orderID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "clientOrderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -2248,6 +2261,473 @@
           "Trade",
           "Perp",
           "Orderbook"
+        ]
+      }
+    },
+    "/api/v2/market/depth/{market}": {
+      "get": {
+        "summary": "Market depth",
+        "description": "Returns market's aggregated price data. Use limit param to reduce the number of price points returned",
+        "operationId": "Api_GetMarketDepthV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetMarketDepthResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Market V2",
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/market/markets": {
+      "get": {
+        "summary": "Orderbook markets",
+        "description": "Returns the list of orderbook markets",
+        "operationId": "Api_GetMarketsV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetMarketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Market V2",
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/market/orderbook/{market}": {
+      "get": {
+        "summary": "Market orderbook",
+        "description": "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetOrderbookV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Market V2",
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/market/tickers/{market}": {
+      "get": {
+        "summary": "Orderbook tickers",
+        "description": "Returns updated ticker(s). To receive all tickers use empty string for {market} param value",
+        "operationId": "Api_GetTickersV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTickersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "description": "Use empty string for all markets",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Market V2",
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/trade/cancel": {
+      "post": {
+        "summary": "Unsigned CancelOrder transaction",
+        "description": "Generates a CancelOrder unsigned transaction object",
+        "operationId": "Api_PostCancelOrderV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade V2",
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/trade/open-orders/{market}": {
+      "get": {
+        "summary": "List of user's open orders",
+        "description": "Returns the list of open orders per user per market",
+        "operationId": "Api_GetOpenOrdersV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOpenOrdersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "openOrdersAddress",
+            "description": "If left empty the Serum API will lookup the account which can be time consuming, Setting both address and openOrdersAddress is invalid, openOrdersAddress is preferred.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
+            "name": "orderID",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "clientOrderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "Trade V2",
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/trade/place": {
+      "post": {
+        "summary": "Unsigned NewOrderV3 transaction",
+        "description": "Generates a NewOrderV3 unsigned transaction object",
+        "operationId": "Api_PostOrderV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade V2",
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/trade/replace": {
+      "post": {
+        "summary": "Unsigned ReplaceOrder transaction",
+        "description": "Generates a ReplaceOrder unsigned transaction object",
+        "operationId": "Api_PostReplaceOrderV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostReplaceOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade V2",
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/trade/settle": {
+      "post": {
+        "summary": "Unsigned SettleFunds transaction",
+        "description": "Generates a SettleFunds unsigned transaction object",
+        "operationId": "Api_PostSettleV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSettleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSettleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade V2",
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/trade/unsettled/{market}": {
+      "get": {
+        "summary": "Unsettled amounts",
+        "description": "Returns the unsettled amounts of user in a market",
+        "operationId": "Api_GetUnsettledV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetUnsettledResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Trade V2",
+          "Openbook V2"
         ]
       }
     }
@@ -3939,6 +4419,13 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "market": {
+          "type": "string"
         }
       },
       "required": [
