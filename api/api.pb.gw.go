@@ -487,7 +487,7 @@ func local_request_Api_GetDriftMarketDepth_0(ctx context.Context, marshaler runt
 }
 
 func request_Api_GetMarketsV2_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMarketsRequest
+	var protoReq GetMarketsRequestV2
 	var metadata runtime.ServerMetadata
 
 	msg, err := client.GetMarketsV2(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -496,7 +496,7 @@ func request_Api_GetMarketsV2_0(ctx context.Context, marshaler runtime.Marshaler
 }
 
 func local_request_Api_GetMarketsV2_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMarketsRequest
+	var protoReq GetMarketsRequestV2
 	var metadata runtime.ServerMetadata
 
 	msg, err := server.GetMarketsV2(ctx, &protoReq)
@@ -504,12 +504,8 @@ func local_request_Api_GetMarketsV2_0(ctx context.Context, marshaler runtime.Mar
 
 }
 
-var (
-	filter_Api_GetTickersV2_0 = &utilities.DoubleArray{Encoding: map[string]int{"market": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
-)
-
 func request_Api_GetTickersV2_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetTickersRequest
+	var protoReq GetTickersRequestV2
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -527,13 +523,6 @@ func request_Api_GetTickersV2_0(ctx context.Context, marshaler runtime.Marshaler
 	protoReq.Market, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "market", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Api_GetTickersV2_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.GetTickersV2(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -542,7 +531,7 @@ func request_Api_GetTickersV2_0(ctx context.Context, marshaler runtime.Marshaler
 }
 
 func local_request_Api_GetTickersV2_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetTickersRequest
+	var protoReq GetTickersRequestV2
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -560,13 +549,6 @@ func local_request_Api_GetTickersV2_0(ctx context.Context, marshaler runtime.Mar
 	protoReq.Market, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "market", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Api_GetTickersV2_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := server.GetTickersV2(ctx, &protoReq)
@@ -579,7 +561,7 @@ var (
 )
 
 func request_Api_GetOrderbookV2_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetOrderbookRequest
+	var protoReq GetOrderbookRequestV2
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -612,7 +594,7 @@ func request_Api_GetOrderbookV2_0(ctx context.Context, marshaler runtime.Marshal
 }
 
 func local_request_Api_GetOrderbookV2_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetOrderbookRequest
+	var protoReq GetOrderbookRequestV2
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -649,7 +631,7 @@ var (
 )
 
 func request_Api_GetMarketDepthV2_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMarketDepthRequest
+	var protoReq GetMarketDepthRequestV2
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -682,7 +664,7 @@ func request_Api_GetMarketDepthV2_0(ctx context.Context, marshaler runtime.Marsh
 }
 
 func local_request_Api_GetMarketDepthV2_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMarketDepthRequest
+	var protoReq GetMarketDepthRequestV2
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -715,7 +697,7 @@ func local_request_Api_GetMarketDepthV2_0(ctx context.Context, marshaler runtime
 }
 
 func request_Api_PostOrderV2_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostOrderRequest
+	var protoReq PostOrderRequestV2
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -732,7 +714,7 @@ func request_Api_PostOrderV2_0(ctx context.Context, marshaler runtime.Marshaler,
 }
 
 func local_request_Api_PostOrderV2_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostOrderRequest
+	var protoReq PostOrderRequestV2
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -749,7 +731,7 @@ func local_request_Api_PostOrderV2_0(ctx context.Context, marshaler runtime.Mars
 }
 
 func request_Api_PostCancelOrderV2_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostCancelOrderRequest
+	var protoReq PostCancelOrderRequestV2
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -766,7 +748,7 @@ func request_Api_PostCancelOrderV2_0(ctx context.Context, marshaler runtime.Mars
 }
 
 func local_request_Api_PostCancelOrderV2_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostCancelOrderRequest
+	var protoReq PostCancelOrderRequestV2
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -783,7 +765,7 @@ func local_request_Api_PostCancelOrderV2_0(ctx context.Context, marshaler runtim
 }
 
 func request_Api_PostReplaceOrderV2_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostReplaceOrderRequest
+	var protoReq PostReplaceOrderRequestV2
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -800,7 +782,7 @@ func request_Api_PostReplaceOrderV2_0(ctx context.Context, marshaler runtime.Mar
 }
 
 func local_request_Api_PostReplaceOrderV2_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostReplaceOrderRequest
+	var protoReq PostReplaceOrderRequestV2
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -817,7 +799,7 @@ func local_request_Api_PostReplaceOrderV2_0(ctx context.Context, marshaler runti
 }
 
 func request_Api_PostSettleV2_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostSettleRequest
+	var protoReq PostSettleRequestV2
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -834,7 +816,7 @@ func request_Api_PostSettleV2_0(ctx context.Context, marshaler runtime.Marshaler
 }
 
 func local_request_Api_PostSettleV2_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostSettleRequest
+	var protoReq PostSettleRequestV2
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -855,7 +837,7 @@ var (
 )
 
 func request_Api_GetOpenOrdersV2_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetOpenOrdersRequest
+	var protoReq GetOpenOrdersRequestV2
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -888,7 +870,7 @@ func request_Api_GetOpenOrdersV2_0(ctx context.Context, marshaler runtime.Marsha
 }
 
 func local_request_Api_GetOpenOrdersV2_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetOpenOrdersRequest
+	var protoReq GetOpenOrdersRequestV2
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -925,7 +907,7 @@ var (
 )
 
 func request_Api_GetUnsettledV2_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetUnsettledRequest
+	var protoReq GetUnsettledRequestV2
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -958,7 +940,7 @@ func request_Api_GetUnsettledV2_0(ctx context.Context, marshaler runtime.Marshal
 }
 
 func local_request_Api_GetUnsettledV2_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetUnsettledRequest
+	var protoReq GetUnsettledRequestV2
 	var metadata runtime.ServerMetadata
 
 	var (

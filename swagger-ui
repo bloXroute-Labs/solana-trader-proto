@@ -2273,7 +2273,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetMarketDepthResponse"
+              "$ref": "#/definitions/apiGetMarketDepthResponseV2"
             }
           },
           "default": {
@@ -2297,26 +2297,9 @@
             "required": false,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
-          "Market V2",
           "Openbook V2"
         ]
       }
@@ -2330,7 +2313,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetMarketsResponse"
+              "$ref": "#/definitions/apiGetMarketsResponseV2"
             }
           },
           "default": {
@@ -2341,7 +2324,6 @@
           }
         },
         "tags": [
-          "Market V2",
           "Openbook V2"
         ]
       }
@@ -2355,7 +2337,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetOrderbookResponse"
+              "$ref": "#/definitions/apiGetOrderbookResponseV2"
             }
           },
           "default": {
@@ -2379,26 +2361,9 @@
             "required": false,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
-          "Market V2",
           "Openbook V2"
         ]
       }
@@ -2412,7 +2377,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetTickersResponse"
+              "$ref": "#/definitions/apiGetTickersResponseV2"
             }
           },
           "default": {
@@ -2429,26 +2394,9 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
-          "Market V2",
           "Openbook V2"
         ]
       }
@@ -2478,12 +2426,11 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostCancelOrderRequest"
+              "$ref": "#/definitions/apiPostCancelOrderRequestV2"
             }
           }
         ],
         "tags": [
-          "Trade V2",
           "Openbook V2"
         ]
       }
@@ -2536,22 +2483,6 @@
             "type": "string"
           },
           {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
-          },
-          {
             "name": "orderID",
             "in": "query",
             "required": false,
@@ -2566,7 +2497,6 @@
           }
         ],
         "tags": [
-          "Trade V2",
           "Openbook V2"
         ]
       }
@@ -2596,12 +2526,11 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostOrderRequest"
+              "$ref": "#/definitions/apiPostOrderRequestV2"
             }
           }
         ],
         "tags": [
-          "Trade V2",
           "Openbook V2"
         ]
       }
@@ -2631,12 +2560,11 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostReplaceOrderRequest"
+              "$ref": "#/definitions/apiPostReplaceOrderRequestV2"
             }
           }
         ],
         "tags": [
-          "Trade V2",
           "Openbook V2"
         ]
       }
@@ -2666,12 +2594,11 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostSettleRequest"
+              "$ref": "#/definitions/apiPostSettleRequestV2"
             }
           }
         ],
         "tags": [
-          "Trade V2",
           "Openbook V2"
         ]
       }
@@ -2707,26 +2634,9 @@
             "in": "query",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "P_UNKNOWN",
-              "P_ALL",
-              "P_JUPITER",
-              "P_RAYDIUM",
-              "P_SERUM",
-              "P_OPENBOOK",
-              "P_DRIFT"
-            ],
-            "default": "P_UNKNOWN"
           }
         ],
         "tags": [
-          "Trade V2",
           "Openbook V2"
         ]
       }
@@ -3325,6 +3235,29 @@
         }
       }
     },
+    "apiGetMarketDepthResponseV2": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketAddress": {
+          "type": "string"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMarketDepthItemV2"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMarketDepthItemV2"
+          }
+        }
+      }
+    },
     "apiGetMarketDepthsStreamResponse": {
       "type": "object",
       "properties": {
@@ -3344,6 +3277,17 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/apiMarket"
+          }
+        }
+      }
+    },
+    "apiGetMarketsResponseV2": {
+      "type": "object",
+      "properties": {
+        "markets": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiMarketV2"
           }
         }
       }
@@ -3513,6 +3457,29 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiOrderbookItem"
+          }
+        }
+      }
+    },
+    "apiGetOrderbookResponseV2": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketAddress": {
+          "type": "string"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrderbookItemV2"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrderbookItemV2"
           }
         }
       }
@@ -3906,6 +3873,17 @@
         }
       }
     },
+    "apiGetTickersResponseV2": {
+      "type": "object",
+      "properties": {
+        "tickers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTickerV2"
+          }
+        }
+      }
+    },
     "apiGetTickersStreamResponse": {
       "type": "object",
       "properties": {
@@ -4024,6 +4002,19 @@
         }
       }
     },
+    "apiMarketDepthItemV2": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiMarketStatus": {
       "type": "string",
       "enum": [
@@ -4031,6 +4022,31 @@
         "MS_ONLINE"
       ],
       "default": "MS_UNKNOWN"
+    },
+    "apiMarketV2": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "baseMint": {
+          "type": "string"
+        },
+        "quotedMint": {
+          "type": "string"
+        },
+        "baseDecimals": {
+          "type": "string",
+          "format": "int64"
+        },
+        "quoteDecimals": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
     },
     "apiOrder": {
       "type": "object",
@@ -4082,6 +4098,31 @@
       "default": "OS_UNKNOWN"
     },
     "apiOrderbookItem": {
+      "type": "object",
+      "properties": {
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "size": {
+          "type": "number",
+          "format": "double"
+        },
+        "orderID": {
+          "type": "string",
+          "description": "Serum generated OrderID"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "ownerAddress": {
+          "type": "string",
+          "description": "OpenOrders address for current market"
+        }
+      }
+    },
+    "apiOrderbookItemV2": {
       "type": "object",
       "properties": {
         "price": {
@@ -4430,6 +4471,47 @@
       },
       "required": [
         "orderID",
+        "marketAddress",
+        "ownerAddress",
+        "openOrdersAddress"
+      ]
+    },
+    "apiPostCancelOrderRequestV2": {
+      "type": "object",
+      "properties": {
+        "orderID": {
+          "type": "string"
+        },
+        "side": {
+          "$ref": "#/definitions/apiSide"
+        },
+        "marketAddress": {
+          "type": "string",
+          "required": [
+            "marketAddress"
+          ]
+        },
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "openOrdersAddress": {
+          "type": "string",
+          "required": [
+            "openOrdersAddress"
+          ]
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "market": {
+          "type": "string"
+        }
+      },
+      "required": [
         "marketAddress",
         "ownerAddress",
         "openOrdersAddress"
@@ -4847,6 +4929,72 @@
         "price"
       ]
     },
+    "apiPostOrderRequestV2": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "payerAddress": {
+          "type": "string",
+          "required": [
+            "payerAddress"
+          ]
+        },
+        "market": {
+          "type": "string",
+          "required": [
+            "market"
+          ]
+        },
+        "side": {
+          "$ref": "#/definitions/apiSide"
+        },
+        "type": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonOrderType"
+          },
+          "required": [
+            "type"
+          ]
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "required": [
+            "amount"
+          ]
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "required": [
+            "price"
+          ]
+        },
+        "openOrdersAddress": {
+          "type": "string",
+          "description": "If left empty the Serum API will lookup the account which can be time consuming"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Client defined OrderID"
+        }
+      },
+      "required": [
+        "ownerAddress",
+        "payerAddress",
+        "market",
+        "type",
+        "amount",
+        "price"
+      ]
+    },
     "apiPostOrderResponse": {
       "type": "object",
       "properties": {
@@ -4984,6 +5132,80 @@
         "openOrdersAddress"
       ]
     },
+    "apiPostReplaceOrderRequestV2": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "payerAddress": {
+          "type": "string",
+          "required": [
+            "payerAddress"
+          ]
+        },
+        "market": {
+          "type": "string",
+          "required": [
+            "market"
+          ]
+        },
+        "side": {
+          "$ref": "#/definitions/apiSide"
+        },
+        "type": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonOrderType"
+          },
+          "required": [
+            "type"
+          ]
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "required": [
+            "amount"
+          ]
+        },
+        "price": {
+          "type": "number",
+          "format": "double",
+          "required": [
+            "price"
+          ]
+        },
+        "openOrdersAddress": {
+          "type": "string",
+          "description": "If left empty the Serum API will lookup the account which can be time consuming",
+          "required": [
+            "openOrdersAddress"
+          ]
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Client defined OrderID"
+        },
+        "orderID": {
+          "type": "string",
+          "description": "Openbook generated OrderID"
+        }
+      },
+      "required": [
+        "ownerAddress",
+        "payerAddress",
+        "market",
+        "type",
+        "amount",
+        "price",
+        "openOrdersAddress"
+      ]
+    },
     "apiPostSettlePNLRequest": {
       "type": "object",
       "properties": {
@@ -5073,6 +5295,45 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        }
+      },
+      "required": [
+        "ownerAddress",
+        "market",
+        "baseTokenWallet",
+        "quoteTokenWallet"
+      ]
+    },
+    "apiPostSettleRequestV2": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string",
+          "required": [
+            "ownerAddress"
+          ]
+        },
+        "market": {
+          "type": "string",
+          "required": [
+            "market"
+          ]
+        },
+        "baseTokenWallet": {
+          "type": "string",
+          "required": [
+            "baseTokenWallet"
+          ]
+        },
+        "quoteTokenWallet": {
+          "type": "string",
+          "required": [
+            "quoteTokenWallet"
+          ]
+        },
+        "openOrdersAddress": {
+          "type": "string",
+          "description": "If left empty the Serum API will lookup the account which can be time consuming"
         }
       },
       "required": [
@@ -5400,6 +5661,33 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiTickerV2": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketAddress": {
+          "type": "string"
+        },
+        "bid": {
+          "type": "number",
+          "format": "double"
+        },
+        "bidSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "ask": {
+          "type": "number",
+          "format": "double"
+        },
+        "askSize": {
+          "type": "number",
+          "format": "double"
         }
       }
     },

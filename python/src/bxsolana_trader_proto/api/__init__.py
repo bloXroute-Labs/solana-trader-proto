@@ -1504,6 +1504,156 @@ class GetDriftMarketDepthResponse(betterproto.Message):
     data: "GetDriftMarketDepthValue" = betterproto.message_field(2)
 
 
+@dataclass(eq=False, repr=False)
+class GetMarketsRequestV2(betterproto.Message):
+    """Openbook V2 Messages"""
+
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetMarketsResponseV2(betterproto.Message):
+    markets: Dict[str, "MarketV2"] = betterproto.map_field(
+        1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+
+
+@dataclass(eq=False, repr=False)
+class MarketV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    address: str = betterproto.string_field(3)
+    base_mint: str = betterproto.string_field(4)
+    quoted_mint: str = betterproto.string_field(5)
+    base_decimals: int = betterproto.int64_field(6)
+    quote_decimals: int = betterproto.int64_field(7)
+
+
+@dataclass(eq=False, repr=False)
+class GetTickersRequestV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetTickersResponseV2(betterproto.Message):
+    tickers: List["TickerV2"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class TickerV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_address: str = betterproto.string_field(2)
+    bid: float = betterproto.double_field(3)
+    bid_size: float = betterproto.double_field(4)
+    ask: float = betterproto.double_field(5)
+    ask_size: float = betterproto.double_field(6)
+
+
+@dataclass(eq=False, repr=False)
+class GetOrderbookRequestV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetOrderbookResponseV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_address: str = betterproto.string_field(2)
+    bids: List["OrderbookItemV2"] = betterproto.message_field(3)
+    asks: List["OrderbookItemV2"] = betterproto.message_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class OrderbookItemV2(betterproto.Message):
+    price: float = betterproto.double_field(1)
+    size: float = betterproto.double_field(2)
+    order_id: str = betterproto.string_field(3)
+    client_order_id: int = betterproto.uint64_field(4)
+    owner_address: str = betterproto.string_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class GetMarketDepthRequestV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetMarketDepthResponseV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_address: str = betterproto.string_field(2)
+    bids: List["MarketDepthItemV2"] = betterproto.message_field(3)
+    asks: List["MarketDepthItemV2"] = betterproto.message_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class MarketDepthItemV2(betterproto.Message):
+    price: float = betterproto.double_field(1)
+    size: float = betterproto.double_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class PostOrderRequestV2(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    payer_address: str = betterproto.string_field(2)
+    market: str = betterproto.string_field(3)
+    side: "Side" = betterproto.enum_field(4)
+    type: List["_common__.OrderType"] = betterproto.enum_field(5)
+    amount: float = betterproto.double_field(6)
+    price: float = betterproto.double_field(7)
+    open_orders_address: str = betterproto.string_field(8)
+    client_order_id: int = betterproto.uint64_field(9)
+
+
+@dataclass(eq=False, repr=False)
+class PostReplaceOrderRequestV2(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    payer_address: str = betterproto.string_field(2)
+    market: str = betterproto.string_field(3)
+    side: "Side" = betterproto.enum_field(4)
+    type: List["_common__.OrderType"] = betterproto.enum_field(5)
+    amount: float = betterproto.double_field(6)
+    price: float = betterproto.double_field(7)
+    open_orders_address: str = betterproto.string_field(8)
+    client_order_id: int = betterproto.uint64_field(9)
+    order_id: str = betterproto.string_field(10)
+
+
+@dataclass(eq=False, repr=False)
+class PostCancelOrderRequestV2(betterproto.Message):
+    order_id: str = betterproto.string_field(1)
+    side: "Side" = betterproto.enum_field(2)
+    market_address: str = betterproto.string_field(3)
+    owner_address: str = betterproto.string_field(4)
+    open_orders_address: str = betterproto.string_field(5)
+    client_order_id: int = betterproto.uint64_field(6)
+    market: str = betterproto.string_field(7)
+
+
+@dataclass(eq=False, repr=False)
+class PostSettleRequestV2(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    market: str = betterproto.string_field(2)
+    base_token_wallet: str = betterproto.string_field(3)
+    quote_token_wallet: str = betterproto.string_field(4)
+    open_orders_address: str = betterproto.string_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class GetOpenOrdersRequestV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    limit: int = betterproto.uint32_field(2)
+    address: str = betterproto.string_field(3)
+    open_orders_address: str = betterproto.string_field(4)
+    order_id: str = betterproto.string_field(5)
+    client_order_id: int = betterproto.uint64_field(6)
+
+
+@dataclass(eq=False, repr=False)
+class GetUnsettledRequestV2(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    owner_address: str = betterproto.string_field(2)
+
+
 class ApiStub(betterproto.ServiceStub):
     async def get_drift_perp_positions(
         self,
@@ -1730,16 +1880,16 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_markets_v2(
         self,
-        get_markets_request: "GetMarketsRequest",
+        get_markets_request_v2: "GetMarketsRequestV2",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> "GetMarketsResponse":
+    ) -> "GetMarketsResponseV2":
         return await self._unary_unary(
             "/api.Api/GetMarketsV2",
-            get_markets_request,
-            GetMarketsResponse,
+            get_markets_request_v2,
+            GetMarketsResponseV2,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -1747,16 +1897,16 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_tickers_v2(
         self,
-        get_tickers_request: "GetTickersRequest",
+        get_tickers_request_v2: "GetTickersRequestV2",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> "GetTickersResponse":
+    ) -> "GetTickersResponseV2":
         return await self._unary_unary(
             "/api.Api/GetTickersV2",
-            get_tickers_request,
-            GetTickersResponse,
+            get_tickers_request_v2,
+            GetTickersResponseV2,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -1764,16 +1914,16 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_orderbook_v2(
         self,
-        get_orderbook_request: "GetOrderbookRequest",
+        get_orderbook_request_v2: "GetOrderbookRequestV2",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> "GetOrderbookResponse":
+    ) -> "GetOrderbookResponseV2":
         return await self._unary_unary(
             "/api.Api/GetOrderbookV2",
-            get_orderbook_request,
-            GetOrderbookResponse,
+            get_orderbook_request_v2,
+            GetOrderbookResponseV2,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -1781,16 +1931,16 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_market_depth_v2(
         self,
-        get_market_depth_request: "GetMarketDepthRequest",
+        get_market_depth_request_v2: "GetMarketDepthRequestV2",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> "GetMarketDepthResponse":
+    ) -> "GetMarketDepthResponseV2":
         return await self._unary_unary(
             "/api.Api/GetMarketDepthV2",
-            get_market_depth_request,
-            GetMarketDepthResponse,
+            get_market_depth_request_v2,
+            GetMarketDepthResponseV2,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -1798,7 +1948,7 @@ class ApiStub(betterproto.ServiceStub):
 
     async def post_order_v2(
         self,
-        post_order_request: "PostOrderRequest",
+        post_order_request_v2: "PostOrderRequestV2",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
@@ -1806,7 +1956,7 @@ class ApiStub(betterproto.ServiceStub):
     ) -> "PostOrderResponse":
         return await self._unary_unary(
             "/api.Api/PostOrderV2",
-            post_order_request,
+            post_order_request_v2,
             PostOrderResponse,
             timeout=timeout,
             deadline=deadline,
@@ -1815,7 +1965,7 @@ class ApiStub(betterproto.ServiceStub):
 
     async def post_cancel_order_v2(
         self,
-        post_cancel_order_request: "PostCancelOrderRequest",
+        post_cancel_order_request_v2: "PostCancelOrderRequestV2",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
@@ -1823,7 +1973,7 @@ class ApiStub(betterproto.ServiceStub):
     ) -> "PostCancelOrderResponse":
         return await self._unary_unary(
             "/api.Api/PostCancelOrderV2",
-            post_cancel_order_request,
+            post_cancel_order_request_v2,
             PostCancelOrderResponse,
             timeout=timeout,
             deadline=deadline,
@@ -1832,7 +1982,7 @@ class ApiStub(betterproto.ServiceStub):
 
     async def post_replace_order_v2(
         self,
-        post_replace_order_request: "PostReplaceOrderRequest",
+        post_replace_order_request_v2: "PostReplaceOrderRequestV2",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
@@ -1840,7 +1990,7 @@ class ApiStub(betterproto.ServiceStub):
     ) -> "PostOrderResponse":
         return await self._unary_unary(
             "/api.Api/PostReplaceOrderV2",
-            post_replace_order_request,
+            post_replace_order_request_v2,
             PostOrderResponse,
             timeout=timeout,
             deadline=deadline,
@@ -1849,7 +1999,7 @@ class ApiStub(betterproto.ServiceStub):
 
     async def post_settle_v2(
         self,
-        post_settle_request: "PostSettleRequest",
+        post_settle_request_v2: "PostSettleRequestV2",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
@@ -1857,7 +2007,7 @@ class ApiStub(betterproto.ServiceStub):
     ) -> "PostSettleResponse":
         return await self._unary_unary(
             "/api.Api/PostSettleV2",
-            post_settle_request,
+            post_settle_request_v2,
             PostSettleResponse,
             timeout=timeout,
             deadline=deadline,
@@ -1866,7 +2016,7 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_open_orders_v2(
         self,
-        get_open_orders_request: "GetOpenOrdersRequest",
+        get_open_orders_request_v2: "GetOpenOrdersRequestV2",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
@@ -1874,7 +2024,7 @@ class ApiStub(betterproto.ServiceStub):
     ) -> "GetOpenOrdersResponse":
         return await self._unary_unary(
             "/api.Api/GetOpenOrdersV2",
-            get_open_orders_request,
+            get_open_orders_request_v2,
             GetOpenOrdersResponse,
             timeout=timeout,
             deadline=deadline,
@@ -1883,7 +2033,7 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_unsettled_v2(
         self,
-        get_unsettled_request: "GetUnsettledRequest",
+        get_unsettled_request_v2: "GetUnsettledRequestV2",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
@@ -1891,7 +2041,7 @@ class ApiStub(betterproto.ServiceStub):
     ) -> "GetUnsettledResponse":
         return await self._unary_unary(
             "/api.Api/GetUnsettledV2",
-            get_unsettled_request,
+            get_unsettled_request_v2,
             GetUnsettledResponse,
             timeout=timeout,
             deadline=deadline,
@@ -2971,52 +3121,52 @@ class ApiBase(ServiceBase):
         yield GetDriftMarketDepthStreamResponse()
 
     async def get_markets_v2(
-        self, get_markets_request: "GetMarketsRequest"
-    ) -> "GetMarketsResponse":
+        self, get_markets_request_v2: "GetMarketsRequestV2"
+    ) -> "GetMarketsResponseV2":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_tickers_v2(
-        self, get_tickers_request: "GetTickersRequest"
-    ) -> "GetTickersResponse":
+        self, get_tickers_request_v2: "GetTickersRequestV2"
+    ) -> "GetTickersResponseV2":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_orderbook_v2(
-        self, get_orderbook_request: "GetOrderbookRequest"
-    ) -> "GetOrderbookResponse":
+        self, get_orderbook_request_v2: "GetOrderbookRequestV2"
+    ) -> "GetOrderbookResponseV2":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_market_depth_v2(
-        self, get_market_depth_request: "GetMarketDepthRequest"
-    ) -> "GetMarketDepthResponse":
+        self, get_market_depth_request_v2: "GetMarketDepthRequestV2"
+    ) -> "GetMarketDepthResponseV2":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def post_order_v2(
-        self, post_order_request: "PostOrderRequest"
+        self, post_order_request_v2: "PostOrderRequestV2"
     ) -> "PostOrderResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def post_cancel_order_v2(
-        self, post_cancel_order_request: "PostCancelOrderRequest"
+        self, post_cancel_order_request_v2: "PostCancelOrderRequestV2"
     ) -> "PostCancelOrderResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def post_replace_order_v2(
-        self, post_replace_order_request: "PostReplaceOrderRequest"
+        self, post_replace_order_request_v2: "PostReplaceOrderRequestV2"
     ) -> "PostOrderResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def post_settle_v2(
-        self, post_settle_request: "PostSettleRequest"
+        self, post_settle_request_v2: "PostSettleRequestV2"
     ) -> "PostSettleResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_open_orders_v2(
-        self, get_open_orders_request: "GetOpenOrdersRequest"
+        self, get_open_orders_request_v2: "GetOpenOrdersRequestV2"
     ) -> "GetOpenOrdersResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_unsettled_v2(
-        self, get_unsettled_request: "GetUnsettledRequest"
+        self, get_unsettled_request_v2: "GetUnsettledRequestV2"
     ) -> "GetUnsettledResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
@@ -3433,21 +3583,22 @@ class ApiBase(ServiceBase):
         )
 
     async def __rpc_get_markets_v2(
-        self, stream: "grpclib.server.Stream[GetMarketsRequest, GetMarketsResponse]"
+        self, stream: "grpclib.server.Stream[GetMarketsRequestV2, GetMarketsResponseV2]"
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_markets_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_tickers_v2(
-        self, stream: "grpclib.server.Stream[GetTickersRequest, GetTickersResponse]"
+        self, stream: "grpclib.server.Stream[GetTickersRequestV2, GetTickersResponseV2]"
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_tickers_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_orderbook_v2(
-        self, stream: "grpclib.server.Stream[GetOrderbookRequest, GetOrderbookResponse]"
+        self,
+        stream: "grpclib.server.Stream[GetOrderbookRequestV2, GetOrderbookResponseV2]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_orderbook_v2(request)
@@ -3455,14 +3606,14 @@ class ApiBase(ServiceBase):
 
     async def __rpc_get_market_depth_v2(
         self,
-        stream: "grpclib.server.Stream[GetMarketDepthRequest, GetMarketDepthResponse]",
+        stream: "grpclib.server.Stream[GetMarketDepthRequestV2, GetMarketDepthResponseV2]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_market_depth_v2(request)
         await stream.send_message(response)
 
     async def __rpc_post_order_v2(
-        self, stream: "grpclib.server.Stream[PostOrderRequest, PostOrderResponse]"
+        self, stream: "grpclib.server.Stream[PostOrderRequestV2, PostOrderResponse]"
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_order_v2(request)
@@ -3470,7 +3621,7 @@ class ApiBase(ServiceBase):
 
     async def __rpc_post_cancel_order_v2(
         self,
-        stream: "grpclib.server.Stream[PostCancelOrderRequest, PostCancelOrderResponse]",
+        stream: "grpclib.server.Stream[PostCancelOrderRequestV2, PostCancelOrderResponse]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_cancel_order_v2(request)
@@ -3478,14 +3629,14 @@ class ApiBase(ServiceBase):
 
     async def __rpc_post_replace_order_v2(
         self,
-        stream: "grpclib.server.Stream[PostReplaceOrderRequest, PostOrderResponse]",
+        stream: "grpclib.server.Stream[PostReplaceOrderRequestV2, PostOrderResponse]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_replace_order_v2(request)
         await stream.send_message(response)
 
     async def __rpc_post_settle_v2(
-        self, stream: "grpclib.server.Stream[PostSettleRequest, PostSettleResponse]"
+        self, stream: "grpclib.server.Stream[PostSettleRequestV2, PostSettleResponse]"
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_settle_v2(request)
@@ -3493,14 +3644,15 @@ class ApiBase(ServiceBase):
 
     async def __rpc_get_open_orders_v2(
         self,
-        stream: "grpclib.server.Stream[GetOpenOrdersRequest, GetOpenOrdersResponse]",
+        stream: "grpclib.server.Stream[GetOpenOrdersRequestV2, GetOpenOrdersResponse]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_open_orders_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_unsettled_v2(
-        self, stream: "grpclib.server.Stream[GetUnsettledRequest, GetUnsettledResponse]"
+        self,
+        stream: "grpclib.server.Stream[GetUnsettledRequestV2, GetUnsettledResponse]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_unsettled_v2(request)
@@ -4075,61 +4227,61 @@ class ApiBase(ServiceBase):
             "/api.Api/GetMarketsV2": grpclib.const.Handler(
                 self.__rpc_get_markets_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                GetMarketsRequest,
-                GetMarketsResponse,
+                GetMarketsRequestV2,
+                GetMarketsResponseV2,
             ),
             "/api.Api/GetTickersV2": grpclib.const.Handler(
                 self.__rpc_get_tickers_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                GetTickersRequest,
-                GetTickersResponse,
+                GetTickersRequestV2,
+                GetTickersResponseV2,
             ),
             "/api.Api/GetOrderbookV2": grpclib.const.Handler(
                 self.__rpc_get_orderbook_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                GetOrderbookRequest,
-                GetOrderbookResponse,
+                GetOrderbookRequestV2,
+                GetOrderbookResponseV2,
             ),
             "/api.Api/GetMarketDepthV2": grpclib.const.Handler(
                 self.__rpc_get_market_depth_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                GetMarketDepthRequest,
-                GetMarketDepthResponse,
+                GetMarketDepthRequestV2,
+                GetMarketDepthResponseV2,
             ),
             "/api.Api/PostOrderV2": grpclib.const.Handler(
                 self.__rpc_post_order_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                PostOrderRequest,
+                PostOrderRequestV2,
                 PostOrderResponse,
             ),
             "/api.Api/PostCancelOrderV2": grpclib.const.Handler(
                 self.__rpc_post_cancel_order_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                PostCancelOrderRequest,
+                PostCancelOrderRequestV2,
                 PostCancelOrderResponse,
             ),
             "/api.Api/PostReplaceOrderV2": grpclib.const.Handler(
                 self.__rpc_post_replace_order_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                PostReplaceOrderRequest,
+                PostReplaceOrderRequestV2,
                 PostOrderResponse,
             ),
             "/api.Api/PostSettleV2": grpclib.const.Handler(
                 self.__rpc_post_settle_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                PostSettleRequest,
+                PostSettleRequestV2,
                 PostSettleResponse,
             ),
             "/api.Api/GetOpenOrdersV2": grpclib.const.Handler(
                 self.__rpc_get_open_orders_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                GetOpenOrdersRequest,
+                GetOpenOrdersRequestV2,
                 GetOpenOrdersResponse,
             ),
             "/api.Api/GetUnsettledV2": grpclib.const.Handler(
                 self.__rpc_get_unsettled_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                GetUnsettledRequest,
+                GetUnsettledRequestV2,
                 GetUnsettledResponse,
             ),
             "/api.Api/GetPrice": grpclib.const.Handler(

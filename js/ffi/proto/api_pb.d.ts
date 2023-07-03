@@ -5471,6 +5471,547 @@ export namespace GetDriftMarketDepthResponse {
     }
 }
 
+export class GetMarketsRequestV2 extends jspb.Message { 
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarketsRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarketsRequestV2): GetMarketsRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarketsRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarketsRequestV2;
+    static deserializeBinaryFromReader(message: GetMarketsRequestV2, reader: jspb.BinaryReader): GetMarketsRequestV2;
+}
+
+export namespace GetMarketsRequestV2 {
+    export type AsObject = {
+    }
+}
+
+export class GetMarketsResponseV2 extends jspb.Message { 
+
+    getMarketsMap(): jspb.Map<string, MarketV2>;
+    clearMarketsMap(): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarketsResponseV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarketsResponseV2): GetMarketsResponseV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarketsResponseV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarketsResponseV2;
+    static deserializeBinaryFromReader(message: GetMarketsResponseV2, reader: jspb.BinaryReader): GetMarketsResponseV2;
+}
+
+export namespace GetMarketsResponseV2 {
+    export type AsObject = {
+
+        marketsMap: Array<[string, MarketV2.AsObject]>,
+    }
+}
+
+export class MarketV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): MarketV2;
+    getAddress(): string;
+    setAddress(value: string): MarketV2;
+    getBasemint(): string;
+    setBasemint(value: string): MarketV2;
+    getQuotedmint(): string;
+    setQuotedmint(value: string): MarketV2;
+    getBasedecimals(): number;
+    setBasedecimals(value: number): MarketV2;
+    getQuotedecimals(): number;
+    setQuotedecimals(value: number): MarketV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): MarketV2.AsObject;
+    static toObject(includeInstance: boolean, msg: MarketV2): MarketV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: MarketV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): MarketV2;
+    static deserializeBinaryFromReader(message: MarketV2, reader: jspb.BinaryReader): MarketV2;
+}
+
+export namespace MarketV2 {
+    export type AsObject = {
+        market: string,
+        address: string,
+        basemint: string,
+        quotedmint: string,
+        basedecimals: number,
+        quotedecimals: number,
+    }
+}
+
+export class GetTickersRequestV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetTickersRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTickersRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTickersRequestV2): GetTickersRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTickersRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTickersRequestV2;
+    static deserializeBinaryFromReader(message: GetTickersRequestV2, reader: jspb.BinaryReader): GetTickersRequestV2;
+}
+
+export namespace GetTickersRequestV2 {
+    export type AsObject = {
+        market: string,
+    }
+}
+
+export class GetTickersResponseV2 extends jspb.Message { 
+    clearTickersList(): void;
+    getTickersList(): Array<TickerV2>;
+    setTickersList(value: Array<TickerV2>): GetTickersResponseV2;
+    addTickers(value?: TickerV2, index?: number): TickerV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTickersResponseV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTickersResponseV2): GetTickersResponseV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTickersResponseV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTickersResponseV2;
+    static deserializeBinaryFromReader(message: GetTickersResponseV2, reader: jspb.BinaryReader): GetTickersResponseV2;
+}
+
+export namespace GetTickersResponseV2 {
+    export type AsObject = {
+        tickersList: Array<TickerV2.AsObject>,
+    }
+}
+
+export class TickerV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): TickerV2;
+    getMarketaddress(): string;
+    setMarketaddress(value: string): TickerV2;
+    getBid(): number;
+    setBid(value: number): TickerV2;
+    getBidsize(): number;
+    setBidsize(value: number): TickerV2;
+    getAsk(): number;
+    setAsk(value: number): TickerV2;
+    getAsksize(): number;
+    setAsksize(value: number): TickerV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): TickerV2.AsObject;
+    static toObject(includeInstance: boolean, msg: TickerV2): TickerV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: TickerV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TickerV2;
+    static deserializeBinaryFromReader(message: TickerV2, reader: jspb.BinaryReader): TickerV2;
+}
+
+export namespace TickerV2 {
+    export type AsObject = {
+        market: string,
+        marketaddress: string,
+        bid: number,
+        bidsize: number,
+        ask: number,
+        asksize: number,
+    }
+}
+
+export class GetOrderbookRequestV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetOrderbookRequestV2;
+    getLimit(): number;
+    setLimit(value: number): GetOrderbookRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetOrderbookRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetOrderbookRequestV2): GetOrderbookRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetOrderbookRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetOrderbookRequestV2;
+    static deserializeBinaryFromReader(message: GetOrderbookRequestV2, reader: jspb.BinaryReader): GetOrderbookRequestV2;
+}
+
+export namespace GetOrderbookRequestV2 {
+    export type AsObject = {
+        market: string,
+        limit: number,
+    }
+}
+
+export class GetOrderbookResponseV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetOrderbookResponseV2;
+    getMarketaddress(): string;
+    setMarketaddress(value: string): GetOrderbookResponseV2;
+    clearBidsList(): void;
+    getBidsList(): Array<OrderbookItemV2>;
+    setBidsList(value: Array<OrderbookItemV2>): GetOrderbookResponseV2;
+    addBids(value?: OrderbookItemV2, index?: number): OrderbookItemV2;
+    clearAsksList(): void;
+    getAsksList(): Array<OrderbookItemV2>;
+    setAsksList(value: Array<OrderbookItemV2>): GetOrderbookResponseV2;
+    addAsks(value?: OrderbookItemV2, index?: number): OrderbookItemV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetOrderbookResponseV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetOrderbookResponseV2): GetOrderbookResponseV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetOrderbookResponseV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetOrderbookResponseV2;
+    static deserializeBinaryFromReader(message: GetOrderbookResponseV2, reader: jspb.BinaryReader): GetOrderbookResponseV2;
+}
+
+export namespace GetOrderbookResponseV2 {
+    export type AsObject = {
+        market: string,
+        marketaddress: string,
+        bidsList: Array<OrderbookItemV2.AsObject>,
+        asksList: Array<OrderbookItemV2.AsObject>,
+    }
+}
+
+export class OrderbookItemV2 extends jspb.Message { 
+    getPrice(): number;
+    setPrice(value: number): OrderbookItemV2;
+    getSize(): number;
+    setSize(value: number): OrderbookItemV2;
+    getOrderid(): string;
+    setOrderid(value: string): OrderbookItemV2;
+    getClientorderid(): number;
+    setClientorderid(value: number): OrderbookItemV2;
+    getOwneraddress(): string;
+    setOwneraddress(value: string): OrderbookItemV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): OrderbookItemV2.AsObject;
+    static toObject(includeInstance: boolean, msg: OrderbookItemV2): OrderbookItemV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: OrderbookItemV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): OrderbookItemV2;
+    static deserializeBinaryFromReader(message: OrderbookItemV2, reader: jspb.BinaryReader): OrderbookItemV2;
+}
+
+export namespace OrderbookItemV2 {
+    export type AsObject = {
+        price: number,
+        size: number,
+        orderid: string,
+        clientorderid: number,
+        owneraddress: string,
+    }
+}
+
+export class GetMarketDepthRequestV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetMarketDepthRequestV2;
+    getLimit(): number;
+    setLimit(value: number): GetMarketDepthRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarketDepthRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarketDepthRequestV2): GetMarketDepthRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarketDepthRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarketDepthRequestV2;
+    static deserializeBinaryFromReader(message: GetMarketDepthRequestV2, reader: jspb.BinaryReader): GetMarketDepthRequestV2;
+}
+
+export namespace GetMarketDepthRequestV2 {
+    export type AsObject = {
+        market: string,
+        limit: number,
+    }
+}
+
+export class GetMarketDepthResponseV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetMarketDepthResponseV2;
+    getMarketaddress(): string;
+    setMarketaddress(value: string): GetMarketDepthResponseV2;
+    clearBidsList(): void;
+    getBidsList(): Array<MarketDepthItemV2>;
+    setBidsList(value: Array<MarketDepthItemV2>): GetMarketDepthResponseV2;
+    addBids(value?: MarketDepthItemV2, index?: number): MarketDepthItemV2;
+    clearAsksList(): void;
+    getAsksList(): Array<MarketDepthItemV2>;
+    setAsksList(value: Array<MarketDepthItemV2>): GetMarketDepthResponseV2;
+    addAsks(value?: MarketDepthItemV2, index?: number): MarketDepthItemV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetMarketDepthResponseV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetMarketDepthResponseV2): GetMarketDepthResponseV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetMarketDepthResponseV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetMarketDepthResponseV2;
+    static deserializeBinaryFromReader(message: GetMarketDepthResponseV2, reader: jspb.BinaryReader): GetMarketDepthResponseV2;
+}
+
+export namespace GetMarketDepthResponseV2 {
+    export type AsObject = {
+        market: string,
+        marketaddress: string,
+        bidsList: Array<MarketDepthItemV2.AsObject>,
+        asksList: Array<MarketDepthItemV2.AsObject>,
+    }
+}
+
+export class MarketDepthItemV2 extends jspb.Message { 
+    getPrice(): number;
+    setPrice(value: number): MarketDepthItemV2;
+    getSize(): number;
+    setSize(value: number): MarketDepthItemV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): MarketDepthItemV2.AsObject;
+    static toObject(includeInstance: boolean, msg: MarketDepthItemV2): MarketDepthItemV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: MarketDepthItemV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): MarketDepthItemV2;
+    static deserializeBinaryFromReader(message: MarketDepthItemV2, reader: jspb.BinaryReader): MarketDepthItemV2;
+}
+
+export namespace MarketDepthItemV2 {
+    export type AsObject = {
+        price: number,
+        size: number,
+    }
+}
+
+export class PostOrderRequestV2 extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostOrderRequestV2;
+    getPayeraddress(): string;
+    setPayeraddress(value: string): PostOrderRequestV2;
+    getMarket(): string;
+    setMarket(value: string): PostOrderRequestV2;
+    getSide(): Side;
+    setSide(value: Side): PostOrderRequestV2;
+    clearTypeList(): void;
+    getTypeList(): Array<common_pb.OrderType>;
+    setTypeList(value: Array<common_pb.OrderType>): PostOrderRequestV2;
+    addType(value: common_pb.OrderType, index?: number): common_pb.OrderType;
+    getAmount(): number;
+    setAmount(value: number): PostOrderRequestV2;
+    getPrice(): number;
+    setPrice(value: number): PostOrderRequestV2;
+    getOpenordersaddress(): string;
+    setOpenordersaddress(value: string): PostOrderRequestV2;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostOrderRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostOrderRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: PostOrderRequestV2): PostOrderRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostOrderRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostOrderRequestV2;
+    static deserializeBinaryFromReader(message: PostOrderRequestV2, reader: jspb.BinaryReader): PostOrderRequestV2;
+}
+
+export namespace PostOrderRequestV2 {
+    export type AsObject = {
+        owneraddress: string,
+        payeraddress: string,
+        market: string,
+        side: Side,
+        typeList: Array<common_pb.OrderType>,
+        amount: number,
+        price: number,
+        openordersaddress: string,
+        clientorderid: number,
+    }
+}
+
+export class PostReplaceOrderRequestV2 extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostReplaceOrderRequestV2;
+    getPayeraddress(): string;
+    setPayeraddress(value: string): PostReplaceOrderRequestV2;
+    getMarket(): string;
+    setMarket(value: string): PostReplaceOrderRequestV2;
+    getSide(): Side;
+    setSide(value: Side): PostReplaceOrderRequestV2;
+    clearTypeList(): void;
+    getTypeList(): Array<common_pb.OrderType>;
+    setTypeList(value: Array<common_pb.OrderType>): PostReplaceOrderRequestV2;
+    addType(value: common_pb.OrderType, index?: number): common_pb.OrderType;
+    getAmount(): number;
+    setAmount(value: number): PostReplaceOrderRequestV2;
+    getPrice(): number;
+    setPrice(value: number): PostReplaceOrderRequestV2;
+    getOpenordersaddress(): string;
+    setOpenordersaddress(value: string): PostReplaceOrderRequestV2;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostReplaceOrderRequestV2;
+    getOrderid(): string;
+    setOrderid(value: string): PostReplaceOrderRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostReplaceOrderRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: PostReplaceOrderRequestV2): PostReplaceOrderRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostReplaceOrderRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostReplaceOrderRequestV2;
+    static deserializeBinaryFromReader(message: PostReplaceOrderRequestV2, reader: jspb.BinaryReader): PostReplaceOrderRequestV2;
+}
+
+export namespace PostReplaceOrderRequestV2 {
+    export type AsObject = {
+        owneraddress: string,
+        payeraddress: string,
+        market: string,
+        side: Side,
+        typeList: Array<common_pb.OrderType>,
+        amount: number,
+        price: number,
+        openordersaddress: string,
+        clientorderid: number,
+        orderid: string,
+    }
+}
+
+export class PostCancelOrderRequestV2 extends jspb.Message { 
+    getOrderid(): string;
+    setOrderid(value: string): PostCancelOrderRequestV2;
+    getSide(): Side;
+    setSide(value: Side): PostCancelOrderRequestV2;
+    getMarketaddress(): string;
+    setMarketaddress(value: string): PostCancelOrderRequestV2;
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostCancelOrderRequestV2;
+    getOpenordersaddress(): string;
+    setOpenordersaddress(value: string): PostCancelOrderRequestV2;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostCancelOrderRequestV2;
+    getMarket(): string;
+    setMarket(value: string): PostCancelOrderRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostCancelOrderRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelOrderRequestV2): PostCancelOrderRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostCancelOrderRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelOrderRequestV2;
+    static deserializeBinaryFromReader(message: PostCancelOrderRequestV2, reader: jspb.BinaryReader): PostCancelOrderRequestV2;
+}
+
+export namespace PostCancelOrderRequestV2 {
+    export type AsObject = {
+        orderid: string,
+        side: Side,
+        marketaddress: string,
+        owneraddress: string,
+        openordersaddress: string,
+        clientorderid: number,
+        market: string,
+    }
+}
+
+export class PostSettleRequestV2 extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostSettleRequestV2;
+    getMarket(): string;
+    setMarket(value: string): PostSettleRequestV2;
+    getBasetokenwallet(): string;
+    setBasetokenwallet(value: string): PostSettleRequestV2;
+    getQuotetokenwallet(): string;
+    setQuotetokenwallet(value: string): PostSettleRequestV2;
+    getOpenordersaddress(): string;
+    setOpenordersaddress(value: string): PostSettleRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostSettleRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: PostSettleRequestV2): PostSettleRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostSettleRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostSettleRequestV2;
+    static deserializeBinaryFromReader(message: PostSettleRequestV2, reader: jspb.BinaryReader): PostSettleRequestV2;
+}
+
+export namespace PostSettleRequestV2 {
+    export type AsObject = {
+        owneraddress: string,
+        market: string,
+        basetokenwallet: string,
+        quotetokenwallet: string,
+        openordersaddress: string,
+    }
+}
+
+export class GetOpenOrdersRequestV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetOpenOrdersRequestV2;
+    getLimit(): number;
+    setLimit(value: number): GetOpenOrdersRequestV2;
+    getAddress(): string;
+    setAddress(value: string): GetOpenOrdersRequestV2;
+    getOpenordersaddress(): string;
+    setOpenordersaddress(value: string): GetOpenOrdersRequestV2;
+    getOrderid(): string;
+    setOrderid(value: string): GetOpenOrdersRequestV2;
+    getClientorderid(): number;
+    setClientorderid(value: number): GetOpenOrdersRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetOpenOrdersRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetOpenOrdersRequestV2): GetOpenOrdersRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetOpenOrdersRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetOpenOrdersRequestV2;
+    static deserializeBinaryFromReader(message: GetOpenOrdersRequestV2, reader: jspb.BinaryReader): GetOpenOrdersRequestV2;
+}
+
+export namespace GetOpenOrdersRequestV2 {
+    export type AsObject = {
+        market: string,
+        limit: number,
+        address: string,
+        openordersaddress: string,
+        orderid: string,
+        clientorderid: number,
+    }
+}
+
+export class GetUnsettledRequestV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetUnsettledRequestV2;
+    getOwneraddress(): string;
+    setOwneraddress(value: string): GetUnsettledRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetUnsettledRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetUnsettledRequestV2): GetUnsettledRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetUnsettledRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetUnsettledRequestV2;
+    static deserializeBinaryFromReader(message: GetUnsettledRequestV2, reader: jspb.BinaryReader): GetUnsettledRequestV2;
+}
+
+export namespace GetUnsettledRequestV2 {
+    export type AsObject = {
+        market: string,
+        owneraddress: string,
+    }
+}
+
 export enum MarketStatus {
     MS_UNKNOWN = 0,
     MS_ONLINE = 1,

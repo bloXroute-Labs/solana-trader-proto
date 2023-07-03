@@ -213,93 +213,93 @@ interface IApiService_IGetDriftMarketDepthsStream extends grpc.MethodDefinition<
     responseSerialize: grpc.serialize<api_pb.GetDriftMarketDepthStreamResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetDriftMarketDepthStreamResponse>;
 }
-interface IApiService_IGetMarketsV2 extends grpc.MethodDefinition<api_pb.GetMarketsRequest, api_pb.GetMarketsResponse> {
+interface IApiService_IGetMarketsV2 extends grpc.MethodDefinition<api_pb.GetMarketsRequestV2, api_pb.GetMarketsResponseV2> {
     path: "/api.Api/GetMarketsV2";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetMarketsRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetMarketsRequest>;
-    responseSerialize: grpc.serialize<api_pb.GetMarketsResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.GetMarketsResponse>;
+    requestSerialize: grpc.serialize<api_pb.GetMarketsRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.GetMarketsRequestV2>;
+    responseSerialize: grpc.serialize<api_pb.GetMarketsResponseV2>;
+    responseDeserialize: grpc.deserialize<api_pb.GetMarketsResponseV2>;
 }
-interface IApiService_IGetTickersV2 extends grpc.MethodDefinition<api_pb.GetTickersRequest, api_pb.GetTickersResponse> {
+interface IApiService_IGetTickersV2 extends grpc.MethodDefinition<api_pb.GetTickersRequestV2, api_pb.GetTickersResponseV2> {
     path: "/api.Api/GetTickersV2";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetTickersRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetTickersRequest>;
-    responseSerialize: grpc.serialize<api_pb.GetTickersResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.GetTickersResponse>;
+    requestSerialize: grpc.serialize<api_pb.GetTickersRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.GetTickersRequestV2>;
+    responseSerialize: grpc.serialize<api_pb.GetTickersResponseV2>;
+    responseDeserialize: grpc.deserialize<api_pb.GetTickersResponseV2>;
 }
-interface IApiService_IGetOrderbookV2 extends grpc.MethodDefinition<api_pb.GetOrderbookRequest, api_pb.GetOrderbookResponse> {
+interface IApiService_IGetOrderbookV2 extends grpc.MethodDefinition<api_pb.GetOrderbookRequestV2, api_pb.GetOrderbookResponseV2> {
     path: "/api.Api/GetOrderbookV2";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetOrderbookRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetOrderbookRequest>;
-    responseSerialize: grpc.serialize<api_pb.GetOrderbookResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.GetOrderbookResponse>;
+    requestSerialize: grpc.serialize<api_pb.GetOrderbookRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.GetOrderbookRequestV2>;
+    responseSerialize: grpc.serialize<api_pb.GetOrderbookResponseV2>;
+    responseDeserialize: grpc.deserialize<api_pb.GetOrderbookResponseV2>;
 }
-interface IApiService_IGetMarketDepthV2 extends grpc.MethodDefinition<api_pb.GetMarketDepthRequest, api_pb.GetMarketDepthResponse> {
+interface IApiService_IGetMarketDepthV2 extends grpc.MethodDefinition<api_pb.GetMarketDepthRequestV2, api_pb.GetMarketDepthResponseV2> {
     path: "/api.Api/GetMarketDepthV2";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetMarketDepthRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetMarketDepthRequest>;
-    responseSerialize: grpc.serialize<api_pb.GetMarketDepthResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.GetMarketDepthResponse>;
+    requestSerialize: grpc.serialize<api_pb.GetMarketDepthRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.GetMarketDepthRequestV2>;
+    responseSerialize: grpc.serialize<api_pb.GetMarketDepthResponseV2>;
+    responseDeserialize: grpc.deserialize<api_pb.GetMarketDepthResponseV2>;
 }
-interface IApiService_IPostOrderV2 extends grpc.MethodDefinition<api_pb.PostOrderRequest, api_pb.PostOrderResponse> {
+interface IApiService_IPostOrderV2 extends grpc.MethodDefinition<api_pb.PostOrderRequestV2, api_pb.PostOrderResponse> {
     path: "/api.Api/PostOrderV2";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.PostOrderRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.PostOrderRequest>;
+    requestSerialize: grpc.serialize<api_pb.PostOrderRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.PostOrderRequestV2>;
     responseSerialize: grpc.serialize<api_pb.PostOrderResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostOrderResponse>;
 }
-interface IApiService_IPostCancelOrderV2 extends grpc.MethodDefinition<api_pb.PostCancelOrderRequest, api_pb.PostCancelOrderResponse> {
+interface IApiService_IPostCancelOrderV2 extends grpc.MethodDefinition<api_pb.PostCancelOrderRequestV2, api_pb.PostCancelOrderResponse> {
     path: "/api.Api/PostCancelOrderV2";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.PostCancelOrderRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.PostCancelOrderRequest>;
+    requestSerialize: grpc.serialize<api_pb.PostCancelOrderRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.PostCancelOrderRequestV2>;
     responseSerialize: grpc.serialize<api_pb.PostCancelOrderResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostCancelOrderResponse>;
 }
-interface IApiService_IPostReplaceOrderV2 extends grpc.MethodDefinition<api_pb.PostReplaceOrderRequest, api_pb.PostOrderResponse> {
+interface IApiService_IPostReplaceOrderV2 extends grpc.MethodDefinition<api_pb.PostReplaceOrderRequestV2, api_pb.PostOrderResponse> {
     path: "/api.Api/PostReplaceOrderV2";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.PostReplaceOrderRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.PostReplaceOrderRequest>;
+    requestSerialize: grpc.serialize<api_pb.PostReplaceOrderRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.PostReplaceOrderRequestV2>;
     responseSerialize: grpc.serialize<api_pb.PostOrderResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostOrderResponse>;
 }
-interface IApiService_IPostSettleV2 extends grpc.MethodDefinition<api_pb.PostSettleRequest, api_pb.PostSettleResponse> {
+interface IApiService_IPostSettleV2 extends grpc.MethodDefinition<api_pb.PostSettleRequestV2, api_pb.PostSettleResponse> {
     path: "/api.Api/PostSettleV2";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.PostSettleRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.PostSettleRequest>;
+    requestSerialize: grpc.serialize<api_pb.PostSettleRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.PostSettleRequestV2>;
     responseSerialize: grpc.serialize<api_pb.PostSettleResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostSettleResponse>;
 }
-interface IApiService_IGetOpenOrdersV2 extends grpc.MethodDefinition<api_pb.GetOpenOrdersRequest, api_pb.GetOpenOrdersResponse> {
+interface IApiService_IGetOpenOrdersV2 extends grpc.MethodDefinition<api_pb.GetOpenOrdersRequestV2, api_pb.GetOpenOrdersResponse> {
     path: "/api.Api/GetOpenOrdersV2";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetOpenOrdersRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetOpenOrdersRequest>;
+    requestSerialize: grpc.serialize<api_pb.GetOpenOrdersRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.GetOpenOrdersRequestV2>;
     responseSerialize: grpc.serialize<api_pb.GetOpenOrdersResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetOpenOrdersResponse>;
 }
-interface IApiService_IGetUnsettledV2 extends grpc.MethodDefinition<api_pb.GetUnsettledRequest, api_pb.GetUnsettledResponse> {
+interface IApiService_IGetUnsettledV2 extends grpc.MethodDefinition<api_pb.GetUnsettledRequestV2, api_pb.GetUnsettledResponse> {
     path: "/api.Api/GetUnsettledV2";
     requestStream: false;
     responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.GetUnsettledRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.GetUnsettledRequest>;
+    requestSerialize: grpc.serialize<api_pb.GetUnsettledRequestV2>;
+    requestDeserialize: grpc.deserialize<api_pb.GetUnsettledRequestV2>;
     responseSerialize: grpc.serialize<api_pb.GetUnsettledResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetUnsettledResponse>;
 }
@@ -842,16 +842,16 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getDriftMarketDepth: grpc.handleUnaryCall<api_pb.GetDriftMarketDepthRequest, api_pb.GetDriftMarketDepthResponse>;
     getDriftMarginOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetDriftMarginOrderbooksRequest, api_pb.GetDriftMarginOrderbooksStreamResponse>;
     getDriftMarketDepthsStream: grpc.handleServerStreamingCall<api_pb.GetDriftMarketDepthsStreamRequest, api_pb.GetDriftMarketDepthStreamResponse>;
-    getMarketsV2: grpc.handleUnaryCall<api_pb.GetMarketsRequest, api_pb.GetMarketsResponse>;
-    getTickersV2: grpc.handleUnaryCall<api_pb.GetTickersRequest, api_pb.GetTickersResponse>;
-    getOrderbookV2: grpc.handleUnaryCall<api_pb.GetOrderbookRequest, api_pb.GetOrderbookResponse>;
-    getMarketDepthV2: grpc.handleUnaryCall<api_pb.GetMarketDepthRequest, api_pb.GetMarketDepthResponse>;
-    postOrderV2: grpc.handleUnaryCall<api_pb.PostOrderRequest, api_pb.PostOrderResponse>;
-    postCancelOrderV2: grpc.handleUnaryCall<api_pb.PostCancelOrderRequest, api_pb.PostCancelOrderResponse>;
-    postReplaceOrderV2: grpc.handleUnaryCall<api_pb.PostReplaceOrderRequest, api_pb.PostOrderResponse>;
-    postSettleV2: grpc.handleUnaryCall<api_pb.PostSettleRequest, api_pb.PostSettleResponse>;
-    getOpenOrdersV2: grpc.handleUnaryCall<api_pb.GetOpenOrdersRequest, api_pb.GetOpenOrdersResponse>;
-    getUnsettledV2: grpc.handleUnaryCall<api_pb.GetUnsettledRequest, api_pb.GetUnsettledResponse>;
+    getMarketsV2: grpc.handleUnaryCall<api_pb.GetMarketsRequestV2, api_pb.GetMarketsResponseV2>;
+    getTickersV2: grpc.handleUnaryCall<api_pb.GetTickersRequestV2, api_pb.GetTickersResponseV2>;
+    getOrderbookV2: grpc.handleUnaryCall<api_pb.GetOrderbookRequestV2, api_pb.GetOrderbookResponseV2>;
+    getMarketDepthV2: grpc.handleUnaryCall<api_pb.GetMarketDepthRequestV2, api_pb.GetMarketDepthResponseV2>;
+    postOrderV2: grpc.handleUnaryCall<api_pb.PostOrderRequestV2, api_pb.PostOrderResponse>;
+    postCancelOrderV2: grpc.handleUnaryCall<api_pb.PostCancelOrderRequestV2, api_pb.PostCancelOrderResponse>;
+    postReplaceOrderV2: grpc.handleUnaryCall<api_pb.PostReplaceOrderRequestV2, api_pb.PostOrderResponse>;
+    postSettleV2: grpc.handleUnaryCall<api_pb.PostSettleRequestV2, api_pb.PostSettleResponse>;
+    getOpenOrdersV2: grpc.handleUnaryCall<api_pb.GetOpenOrdersRequestV2, api_pb.GetOpenOrdersResponse>;
+    getUnsettledV2: grpc.handleUnaryCall<api_pb.GetUnsettledRequestV2, api_pb.GetUnsettledResponse>;
     getPrice: grpc.handleUnaryCall<api_pb.GetPriceRequest, api_pb.GetPriceResponse>;
     getMarkets: grpc.handleUnaryCall<api_pb.GetMarketsRequest, api_pb.GetMarketsResponse>;
     getPools: grpc.handleUnaryCall<api_pb.GetPoolsRequest, api_pb.GetPoolsResponse>;
@@ -950,36 +950,36 @@ export interface IApiClient {
     getDriftMarginOrderbooksStream(request: api_pb.GetDriftMarginOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetDriftMarginOrderbooksStreamResponse>;
     getDriftMarketDepthsStream(request: api_pb.GetDriftMarketDepthsStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetDriftMarketDepthStreamResponse>;
     getDriftMarketDepthsStream(request: api_pb.GetDriftMarketDepthsStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetDriftMarketDepthStreamResponse>;
-    getMarketsV2(request: api_pb.GetMarketsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
-    getMarketsV2(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
-    getMarketsV2(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
-    getTickersV2(request: api_pb.GetTickersRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
-    getTickersV2(request: api_pb.GetTickersRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
-    getTickersV2(request: api_pb.GetTickersRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
-    getOrderbookV2(request: api_pb.GetOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    getOrderbookV2(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    getOrderbookV2(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    getMarketDepthV2(request: api_pb.GetMarketDepthRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
-    getMarketDepthV2(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
-    getMarketDepthV2(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
-    postOrderV2(request: api_pb.PostOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    postOrderV2(request: api_pb.PostOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    postOrderV2(request: api_pb.PostOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    postCancelOrderV2(request: api_pb.PostCancelOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
-    postCancelOrderV2(request: api_pb.PostCancelOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
-    postCancelOrderV2(request: api_pb.PostCancelOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
-    postReplaceOrderV2(request: api_pb.PostReplaceOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    postReplaceOrderV2(request: api_pb.PostReplaceOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    postReplaceOrderV2(request: api_pb.PostReplaceOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    postSettleV2(request: api_pb.PostSettleRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
-    postSettleV2(request: api_pb.PostSettleRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
-    postSettleV2(request: api_pb.PostSettleRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
-    getOpenOrdersV2(request: api_pb.GetOpenOrdersRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
-    getOpenOrdersV2(request: api_pb.GetOpenOrdersRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
-    getOpenOrdersV2(request: api_pb.GetOpenOrdersRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
-    getUnsettledV2(request: api_pb.GetUnsettledRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
-    getUnsettledV2(request: api_pb.GetUnsettledRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
-    getUnsettledV2(request: api_pb.GetUnsettledRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
+    getMarketsV2(request: api_pb.GetMarketsRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
+    getMarketsV2(request: api_pb.GetMarketsRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
+    getMarketsV2(request: api_pb.GetMarketsRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
+    getTickersV2(request: api_pb.GetTickersRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
+    getTickersV2(request: api_pb.GetTickersRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
+    getTickersV2(request: api_pb.GetTickersRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
+    getOrderbookV2(request: api_pb.GetOrderbookRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponseV2) => void): grpc.ClientUnaryCall;
+    getOrderbookV2(request: api_pb.GetOrderbookRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponseV2) => void): grpc.ClientUnaryCall;
+    getOrderbookV2(request: api_pb.GetOrderbookRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponseV2) => void): grpc.ClientUnaryCall;
+    getMarketDepthV2(request: api_pb.GetMarketDepthRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponseV2) => void): grpc.ClientUnaryCall;
+    getMarketDepthV2(request: api_pb.GetMarketDepthRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponseV2) => void): grpc.ClientUnaryCall;
+    getMarketDepthV2(request: api_pb.GetMarketDepthRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponseV2) => void): grpc.ClientUnaryCall;
+    postOrderV2(request: api_pb.PostOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    postOrderV2(request: api_pb.PostOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    postOrderV2(request: api_pb.PostOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
+    postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
+    postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
+    postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    postSettleV2(request: api_pb.PostSettleRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
+    postSettleV2(request: api_pb.PostSettleRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
+    postSettleV2(request: api_pb.PostSettleRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
+    getOpenOrdersV2(request: api_pb.GetOpenOrdersRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
+    getOpenOrdersV2(request: api_pb.GetOpenOrdersRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
+    getOpenOrdersV2(request: api_pb.GetOpenOrdersRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
+    getUnsettledV2(request: api_pb.GetUnsettledRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
+    getUnsettledV2(request: api_pb.GetUnsettledRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
+    getUnsettledV2(request: api_pb.GetUnsettledRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
     getPrice(request: api_pb.GetPriceRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
     getPrice(request: api_pb.GetPriceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
     getPrice(request: api_pb.GetPriceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
@@ -1181,36 +1181,36 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getDriftMarginOrderbooksStream(request: api_pb.GetDriftMarginOrderbooksRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetDriftMarginOrderbooksStreamResponse>;
     public getDriftMarketDepthsStream(request: api_pb.GetDriftMarketDepthsStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetDriftMarketDepthStreamResponse>;
     public getDriftMarketDepthsStream(request: api_pb.GetDriftMarketDepthsStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetDriftMarketDepthStreamResponse>;
-    public getMarketsV2(request: api_pb.GetMarketsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
-    public getMarketsV2(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
-    public getMarketsV2(request: api_pb.GetMarketsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponse) => void): grpc.ClientUnaryCall;
-    public getTickersV2(request: api_pb.GetTickersRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
-    public getTickersV2(request: api_pb.GetTickersRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
-    public getTickersV2(request: api_pb.GetTickersRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponse) => void): grpc.ClientUnaryCall;
-    public getOrderbookV2(request: api_pb.GetOrderbookRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    public getOrderbookV2(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    public getOrderbookV2(request: api_pb.GetOrderbookRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponse) => void): grpc.ClientUnaryCall;
-    public getMarketDepthV2(request: api_pb.GetMarketDepthRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
-    public getMarketDepthV2(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
-    public getMarketDepthV2(request: api_pb.GetMarketDepthRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponse) => void): grpc.ClientUnaryCall;
-    public postOrderV2(request: api_pb.PostOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    public postOrderV2(request: api_pb.PostOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    public postOrderV2(request: api_pb.PostOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    public postCancelOrderV2(request: api_pb.PostCancelOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
-    public postCancelOrderV2(request: api_pb.PostCancelOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
-    public postCancelOrderV2(request: api_pb.PostCancelOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
-    public postReplaceOrderV2(request: api_pb.PostReplaceOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    public postReplaceOrderV2(request: api_pb.PostReplaceOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    public postReplaceOrderV2(request: api_pb.PostReplaceOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    public postSettleV2(request: api_pb.PostSettleRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
-    public postSettleV2(request: api_pb.PostSettleRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
-    public postSettleV2(request: api_pb.PostSettleRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
-    public getOpenOrdersV2(request: api_pb.GetOpenOrdersRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
-    public getOpenOrdersV2(request: api_pb.GetOpenOrdersRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
-    public getOpenOrdersV2(request: api_pb.GetOpenOrdersRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
-    public getUnsettledV2(request: api_pb.GetUnsettledRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
-    public getUnsettledV2(request: api_pb.GetUnsettledRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
-    public getUnsettledV2(request: api_pb.GetUnsettledRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
+    public getMarketsV2(request: api_pb.GetMarketsRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
+    public getMarketsV2(request: api_pb.GetMarketsRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
+    public getMarketsV2(request: api_pb.GetMarketsRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketsResponseV2) => void): grpc.ClientUnaryCall;
+    public getTickersV2(request: api_pb.GetTickersRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
+    public getTickersV2(request: api_pb.GetTickersRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
+    public getTickersV2(request: api_pb.GetTickersRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTickersResponseV2) => void): grpc.ClientUnaryCall;
+    public getOrderbookV2(request: api_pb.GetOrderbookRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponseV2) => void): grpc.ClientUnaryCall;
+    public getOrderbookV2(request: api_pb.GetOrderbookRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponseV2) => void): grpc.ClientUnaryCall;
+    public getOrderbookV2(request: api_pb.GetOrderbookRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOrderbookResponseV2) => void): grpc.ClientUnaryCall;
+    public getMarketDepthV2(request: api_pb.GetMarketDepthRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponseV2) => void): grpc.ClientUnaryCall;
+    public getMarketDepthV2(request: api_pb.GetMarketDepthRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponseV2) => void): grpc.ClientUnaryCall;
+    public getMarketDepthV2(request: api_pb.GetMarketDepthRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetMarketDepthResponseV2) => void): grpc.ClientUnaryCall;
+    public postOrderV2(request: api_pb.PostOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    public postOrderV2(request: api_pb.PostOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    public postOrderV2(request: api_pb.PostOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    public postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
+    public postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
+    public postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
+    public postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    public postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    public postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
+    public postSettleV2(request: api_pb.PostSettleRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
+    public postSettleV2(request: api_pb.PostSettleRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
+    public postSettleV2(request: api_pb.PostSettleRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSettleResponse) => void): grpc.ClientUnaryCall;
+    public getOpenOrdersV2(request: api_pb.GetOpenOrdersRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
+    public getOpenOrdersV2(request: api_pb.GetOpenOrdersRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
+    public getOpenOrdersV2(request: api_pb.GetOpenOrdersRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetOpenOrdersResponse) => void): grpc.ClientUnaryCall;
+    public getUnsettledV2(request: api_pb.GetUnsettledRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
+    public getUnsettledV2(request: api_pb.GetUnsettledRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
+    public getUnsettledV2(request: api_pb.GetUnsettledRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetUnsettledResponse) => void): grpc.ClientUnaryCall;
     public getPrice(request: api_pb.GetPriceRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
     public getPrice(request: api_pb.GetPriceRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;
     public getPrice(request: api_pb.GetPriceRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetPriceResponse) => void): grpc.ClientUnaryCall;

@@ -31,16 +31,16 @@ type ApiClient interface {
 	GetDriftMarketDepth(ctx context.Context, in *GetDriftMarketDepthRequest, opts ...grpc.CallOption) (*GetDriftMarketDepthResponse, error)
 	GetDriftMarginOrderbooksStream(ctx context.Context, in *GetDriftMarginOrderbooksRequest, opts ...grpc.CallOption) (Api_GetDriftMarginOrderbooksStreamClient, error)
 	GetDriftMarketDepthsStream(ctx context.Context, in *GetDriftMarketDepthsStreamRequest, opts ...grpc.CallOption) (Api_GetDriftMarketDepthsStreamClient, error)
-	GetMarketsV2(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error)
-	GetTickersV2(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error)
-	GetOrderbookV2(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error)
-	GetMarketDepthV2(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (*GetMarketDepthResponse, error)
-	PostOrderV2(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error)
-	PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequest, opts ...grpc.CallOption) (*PostCancelOrderResponse, error)
-	PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error)
-	PostSettleV2(ctx context.Context, in *PostSettleRequest, opts ...grpc.CallOption) (*PostSettleResponse, error)
-	GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequest, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error)
-	GetUnsettledV2(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
+	GetMarketsV2(ctx context.Context, in *GetMarketsRequestV2, opts ...grpc.CallOption) (*GetMarketsResponseV2, error)
+	GetTickersV2(ctx context.Context, in *GetTickersRequestV2, opts ...grpc.CallOption) (*GetTickersResponseV2, error)
+	GetOrderbookV2(ctx context.Context, in *GetOrderbookRequestV2, opts ...grpc.CallOption) (*GetOrderbookResponseV2, error)
+	GetMarketDepthV2(ctx context.Context, in *GetMarketDepthRequestV2, opts ...grpc.CallOption) (*GetMarketDepthResponseV2, error)
+	PostOrderV2(ctx context.Context, in *PostOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
+	PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponse, error)
+	PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
+	PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error)
+	GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error)
+	GetUnsettledV2(ctx context.Context, in *GetUnsettledRequestV2, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error)
 	GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error)
 	GetPools(ctx context.Context, in *GetPoolsRequest, opts ...grpc.CallOption) (*GetPoolsResponse, error)
@@ -283,8 +283,8 @@ func (x *apiGetDriftMarketDepthsStreamClient) Recv() (*GetDriftMarketDepthStream
 	return m, nil
 }
 
-func (c *apiClient) GetMarketsV2(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error) {
-	out := new(GetMarketsResponse)
+func (c *apiClient) GetMarketsV2(ctx context.Context, in *GetMarketsRequestV2, opts ...grpc.CallOption) (*GetMarketsResponseV2, error) {
+	out := new(GetMarketsResponseV2)
 	err := c.cc.Invoke(ctx, "/api.Api/GetMarketsV2", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -292,8 +292,8 @@ func (c *apiClient) GetMarketsV2(ctx context.Context, in *GetMarketsRequest, opt
 	return out, nil
 }
 
-func (c *apiClient) GetTickersV2(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error) {
-	out := new(GetTickersResponse)
+func (c *apiClient) GetTickersV2(ctx context.Context, in *GetTickersRequestV2, opts ...grpc.CallOption) (*GetTickersResponseV2, error) {
+	out := new(GetTickersResponseV2)
 	err := c.cc.Invoke(ctx, "/api.Api/GetTickersV2", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -301,8 +301,8 @@ func (c *apiClient) GetTickersV2(ctx context.Context, in *GetTickersRequest, opt
 	return out, nil
 }
 
-func (c *apiClient) GetOrderbookV2(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error) {
-	out := new(GetOrderbookResponse)
+func (c *apiClient) GetOrderbookV2(ctx context.Context, in *GetOrderbookRequestV2, opts ...grpc.CallOption) (*GetOrderbookResponseV2, error) {
+	out := new(GetOrderbookResponseV2)
 	err := c.cc.Invoke(ctx, "/api.Api/GetOrderbookV2", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -310,8 +310,8 @@ func (c *apiClient) GetOrderbookV2(ctx context.Context, in *GetOrderbookRequest,
 	return out, nil
 }
 
-func (c *apiClient) GetMarketDepthV2(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (*GetMarketDepthResponse, error) {
-	out := new(GetMarketDepthResponse)
+func (c *apiClient) GetMarketDepthV2(ctx context.Context, in *GetMarketDepthRequestV2, opts ...grpc.CallOption) (*GetMarketDepthResponseV2, error) {
+	out := new(GetMarketDepthResponseV2)
 	err := c.cc.Invoke(ctx, "/api.Api/GetMarketDepthV2", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -319,7 +319,7 @@ func (c *apiClient) GetMarketDepthV2(ctx context.Context, in *GetMarketDepthRequ
 	return out, nil
 }
 
-func (c *apiClient) PostOrderV2(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error) {
+func (c *apiClient) PostOrderV2(ctx context.Context, in *PostOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error) {
 	out := new(PostOrderResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostOrderV2", in, out, opts...)
 	if err != nil {
@@ -328,7 +328,7 @@ func (c *apiClient) PostOrderV2(ctx context.Context, in *PostOrderRequest, opts 
 	return out, nil
 }
 
-func (c *apiClient) PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequest, opts ...grpc.CallOption) (*PostCancelOrderResponse, error) {
+func (c *apiClient) PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponse, error) {
 	out := new(PostCancelOrderResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostCancelOrderV2", in, out, opts...)
 	if err != nil {
@@ -337,7 +337,7 @@ func (c *apiClient) PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRe
 	return out, nil
 }
 
-func (c *apiClient) PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error) {
+func (c *apiClient) PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error) {
 	out := new(PostOrderResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostReplaceOrderV2", in, out, opts...)
 	if err != nil {
@@ -346,7 +346,7 @@ func (c *apiClient) PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrder
 	return out, nil
 }
 
-func (c *apiClient) PostSettleV2(ctx context.Context, in *PostSettleRequest, opts ...grpc.CallOption) (*PostSettleResponse, error) {
+func (c *apiClient) PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error) {
 	out := new(PostSettleResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostSettleV2", in, out, opts...)
 	if err != nil {
@@ -355,7 +355,7 @@ func (c *apiClient) PostSettleV2(ctx context.Context, in *PostSettleRequest, opt
 	return out, nil
 }
 
-func (c *apiClient) GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequest, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error) {
+func (c *apiClient) GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error) {
 	out := new(GetOpenOrdersResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetOpenOrdersV2", in, out, opts...)
 	if err != nil {
@@ -364,7 +364,7 @@ func (c *apiClient) GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersReques
 	return out, nil
 }
 
-func (c *apiClient) GetUnsettledV2(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error) {
+func (c *apiClient) GetUnsettledV2(ctx context.Context, in *GetUnsettledRequestV2, opts ...grpc.CallOption) (*GetUnsettledResponse, error) {
 	out := new(GetUnsettledResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetUnsettledV2", in, out, opts...)
 	if err != nil {
@@ -1234,16 +1234,16 @@ type ApiServer interface {
 	GetDriftMarketDepth(context.Context, *GetDriftMarketDepthRequest) (*GetDriftMarketDepthResponse, error)
 	GetDriftMarginOrderbooksStream(*GetDriftMarginOrderbooksRequest, Api_GetDriftMarginOrderbooksStreamServer) error
 	GetDriftMarketDepthsStream(*GetDriftMarketDepthsStreamRequest, Api_GetDriftMarketDepthsStreamServer) error
-	GetMarketsV2(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error)
-	GetTickersV2(context.Context, *GetTickersRequest) (*GetTickersResponse, error)
-	GetOrderbookV2(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error)
-	GetMarketDepthV2(context.Context, *GetMarketDepthRequest) (*GetMarketDepthResponse, error)
-	PostOrderV2(context.Context, *PostOrderRequest) (*PostOrderResponse, error)
-	PostCancelOrderV2(context.Context, *PostCancelOrderRequest) (*PostCancelOrderResponse, error)
-	PostReplaceOrderV2(context.Context, *PostReplaceOrderRequest) (*PostOrderResponse, error)
-	PostSettleV2(context.Context, *PostSettleRequest) (*PostSettleResponse, error)
-	GetOpenOrdersV2(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error)
-	GetUnsettledV2(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
+	GetMarketsV2(context.Context, *GetMarketsRequestV2) (*GetMarketsResponseV2, error)
+	GetTickersV2(context.Context, *GetTickersRequestV2) (*GetTickersResponseV2, error)
+	GetOrderbookV2(context.Context, *GetOrderbookRequestV2) (*GetOrderbookResponseV2, error)
+	GetMarketDepthV2(context.Context, *GetMarketDepthRequestV2) (*GetMarketDepthResponseV2, error)
+	PostOrderV2(context.Context, *PostOrderRequestV2) (*PostOrderResponse, error)
+	PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponse, error)
+	PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error)
+	PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error)
+	GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponse, error)
+	GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error)
 	GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error)
 	GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error)
 	GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error)
@@ -1359,34 +1359,34 @@ func (UnimplementedApiServer) GetDriftMarginOrderbooksStream(*GetDriftMarginOrde
 func (UnimplementedApiServer) GetDriftMarketDepthsStream(*GetDriftMarketDepthsStreamRequest, Api_GetDriftMarketDepthsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetDriftMarketDepthsStream not implemented")
 }
-func (UnimplementedApiServer) GetMarketsV2(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error) {
+func (UnimplementedApiServer) GetMarketsV2(context.Context, *GetMarketsRequestV2) (*GetMarketsResponseV2, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMarketsV2 not implemented")
 }
-func (UnimplementedApiServer) GetTickersV2(context.Context, *GetTickersRequest) (*GetTickersResponse, error) {
+func (UnimplementedApiServer) GetTickersV2(context.Context, *GetTickersRequestV2) (*GetTickersResponseV2, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTickersV2 not implemented")
 }
-func (UnimplementedApiServer) GetOrderbookV2(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error) {
+func (UnimplementedApiServer) GetOrderbookV2(context.Context, *GetOrderbookRequestV2) (*GetOrderbookResponseV2, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderbookV2 not implemented")
 }
-func (UnimplementedApiServer) GetMarketDepthV2(context.Context, *GetMarketDepthRequest) (*GetMarketDepthResponse, error) {
+func (UnimplementedApiServer) GetMarketDepthV2(context.Context, *GetMarketDepthRequestV2) (*GetMarketDepthResponseV2, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMarketDepthV2 not implemented")
 }
-func (UnimplementedApiServer) PostOrderV2(context.Context, *PostOrderRequest) (*PostOrderResponse, error) {
+func (UnimplementedApiServer) PostOrderV2(context.Context, *PostOrderRequestV2) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostOrderV2 not implemented")
 }
-func (UnimplementedApiServer) PostCancelOrderV2(context.Context, *PostCancelOrderRequest) (*PostCancelOrderResponse, error) {
+func (UnimplementedApiServer) PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostCancelOrderV2 not implemented")
 }
-func (UnimplementedApiServer) PostReplaceOrderV2(context.Context, *PostReplaceOrderRequest) (*PostOrderResponse, error) {
+func (UnimplementedApiServer) PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostReplaceOrderV2 not implemented")
 }
-func (UnimplementedApiServer) PostSettleV2(context.Context, *PostSettleRequest) (*PostSettleResponse, error) {
+func (UnimplementedApiServer) PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSettleV2 not implemented")
 }
-func (UnimplementedApiServer) GetOpenOrdersV2(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error) {
+func (UnimplementedApiServer) GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOpenOrdersV2 not implemented")
 }
-func (UnimplementedApiServer) GetUnsettledV2(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error) {
+func (UnimplementedApiServer) GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUnsettledV2 not implemented")
 }
 func (UnimplementedApiServer) GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error) {
@@ -1817,7 +1817,7 @@ func (x *apiGetDriftMarketDepthsStreamServer) Send(m *GetDriftMarketDepthStreamR
 }
 
 func _Api_GetMarketsV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMarketsRequest)
+	in := new(GetMarketsRequestV2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1829,13 +1829,13 @@ func _Api_GetMarketsV2_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: "/api.Api/GetMarketsV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetMarketsV2(ctx, req.(*GetMarketsRequest))
+		return srv.(ApiServer).GetMarketsV2(ctx, req.(*GetMarketsRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_GetTickersV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTickersRequest)
+	in := new(GetTickersRequestV2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1847,13 +1847,13 @@ func _Api_GetTickersV2_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: "/api.Api/GetTickersV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetTickersV2(ctx, req.(*GetTickersRequest))
+		return srv.(ApiServer).GetTickersV2(ctx, req.(*GetTickersRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_GetOrderbookV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrderbookRequest)
+	in := new(GetOrderbookRequestV2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1865,13 +1865,13 @@ func _Api_GetOrderbookV2_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/api.Api/GetOrderbookV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOrderbookV2(ctx, req.(*GetOrderbookRequest))
+		return srv.(ApiServer).GetOrderbookV2(ctx, req.(*GetOrderbookRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_GetMarketDepthV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMarketDepthRequest)
+	in := new(GetMarketDepthRequestV2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1883,13 +1883,13 @@ func _Api_GetMarketDepthV2_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/api.Api/GetMarketDepthV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetMarketDepthV2(ctx, req.(*GetMarketDepthRequest))
+		return srv.(ApiServer).GetMarketDepthV2(ctx, req.(*GetMarketDepthRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_PostOrderV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostOrderRequest)
+	in := new(PostOrderRequestV2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1901,13 +1901,13 @@ func _Api_PostOrderV2_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: "/api.Api/PostOrderV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostOrderV2(ctx, req.(*PostOrderRequest))
+		return srv.(ApiServer).PostOrderV2(ctx, req.(*PostOrderRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_PostCancelOrderV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCancelOrderRequest)
+	in := new(PostCancelOrderRequestV2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1919,13 +1919,13 @@ func _Api_PostCancelOrderV2_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/api.Api/PostCancelOrderV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostCancelOrderV2(ctx, req.(*PostCancelOrderRequest))
+		return srv.(ApiServer).PostCancelOrderV2(ctx, req.(*PostCancelOrderRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_PostReplaceOrderV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostReplaceOrderRequest)
+	in := new(PostReplaceOrderRequestV2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1937,13 +1937,13 @@ func _Api_PostReplaceOrderV2_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/api.Api/PostReplaceOrderV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostReplaceOrderV2(ctx, req.(*PostReplaceOrderRequest))
+		return srv.(ApiServer).PostReplaceOrderV2(ctx, req.(*PostReplaceOrderRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_PostSettleV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostSettleRequest)
+	in := new(PostSettleRequestV2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1955,13 +1955,13 @@ func _Api_PostSettleV2_Handler(srv interface{}, ctx context.Context, dec func(in
 		FullMethod: "/api.Api/PostSettleV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostSettleV2(ctx, req.(*PostSettleRequest))
+		return srv.(ApiServer).PostSettleV2(ctx, req.(*PostSettleRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_GetOpenOrdersV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOpenOrdersRequest)
+	in := new(GetOpenOrdersRequestV2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1973,13 +1973,13 @@ func _Api_GetOpenOrdersV2_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: "/api.Api/GetOpenOrdersV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOpenOrdersV2(ctx, req.(*GetOpenOrdersRequest))
+		return srv.(ApiServer).GetOpenOrdersV2(ctx, req.(*GetOpenOrdersRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_GetUnsettledV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUnsettledRequest)
+	in := new(GetUnsettledRequestV2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1991,7 +1991,7 @@ func _Api_GetUnsettledV2_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/api.Api/GetUnsettledV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetUnsettledV2(ctx, req.(*GetUnsettledRequest))
+		return srv.(ApiServer).GetUnsettledV2(ctx, req.(*GetUnsettledRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }

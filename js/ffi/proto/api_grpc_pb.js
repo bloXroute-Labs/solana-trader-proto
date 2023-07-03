@@ -285,6 +285,17 @@ function deserialize_api_GetMarketDepthRequest(buffer_arg) {
   return api_pb.GetMarketDepthRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetMarketDepthRequestV2(arg) {
+  if (!(arg instanceof api_pb.GetMarketDepthRequestV2)) {
+    throw new Error('Expected argument of type api.GetMarketDepthRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMarketDepthRequestV2(buffer_arg) {
+  return api_pb.GetMarketDepthRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetMarketDepthResponse(arg) {
   if (!(arg instanceof api_pb.GetMarketDepthResponse)) {
     throw new Error('Expected argument of type api.GetMarketDepthResponse');
@@ -294,6 +305,17 @@ function serialize_api_GetMarketDepthResponse(arg) {
 
 function deserialize_api_GetMarketDepthResponse(buffer_arg) {
   return api_pb.GetMarketDepthResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetMarketDepthResponseV2(arg) {
+  if (!(arg instanceof api_pb.GetMarketDepthResponseV2)) {
+    throw new Error('Expected argument of type api.GetMarketDepthResponseV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMarketDepthResponseV2(buffer_arg) {
+  return api_pb.GetMarketDepthResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetMarketDepthsRequest(arg) {
@@ -329,6 +351,17 @@ function deserialize_api_GetMarketsRequest(buffer_arg) {
   return api_pb.GetMarketsRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetMarketsRequestV2(arg) {
+  if (!(arg instanceof api_pb.GetMarketsRequestV2)) {
+    throw new Error('Expected argument of type api.GetMarketsRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMarketsRequestV2(buffer_arg) {
+  return api_pb.GetMarketsRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetMarketsResponse(arg) {
   if (!(arg instanceof api_pb.GetMarketsResponse)) {
     throw new Error('Expected argument of type api.GetMarketsResponse');
@@ -338,6 +371,17 @@ function serialize_api_GetMarketsResponse(arg) {
 
 function deserialize_api_GetMarketsResponse(buffer_arg) {
   return api_pb.GetMarketsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetMarketsResponseV2(arg) {
+  if (!(arg instanceof api_pb.GetMarketsResponseV2)) {
+    throw new Error('Expected argument of type api.GetMarketsResponseV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMarketsResponseV2(buffer_arg) {
+  return api_pb.GetMarketsResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetNewPerpOrdersStreamRequest(arg) {
@@ -371,6 +415,17 @@ function serialize_api_GetOpenOrdersRequest(arg) {
 
 function deserialize_api_GetOpenOrdersRequest(buffer_arg) {
   return api_pb.GetOpenOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetOpenOrdersRequestV2(arg) {
+  if (!(arg instanceof api_pb.GetOpenOrdersRequestV2)) {
+    throw new Error('Expected argument of type api.GetOpenOrdersRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOpenOrdersRequestV2(buffer_arg) {
+  return api_pb.GetOpenOrdersRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetOpenOrdersResponse(arg) {
@@ -483,6 +538,17 @@ function deserialize_api_GetOrderbookRequest(buffer_arg) {
   return api_pb.GetOrderbookRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetOrderbookRequestV2(arg) {
+  if (!(arg instanceof api_pb.GetOrderbookRequestV2)) {
+    throw new Error('Expected argument of type api.GetOrderbookRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOrderbookRequestV2(buffer_arg) {
+  return api_pb.GetOrderbookRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetOrderbookResponse(arg) {
   if (!(arg instanceof api_pb.GetOrderbookResponse)) {
     throw new Error('Expected argument of type api.GetOrderbookResponse');
@@ -492,6 +558,17 @@ function serialize_api_GetOrderbookResponse(arg) {
 
 function deserialize_api_GetOrderbookResponse(buffer_arg) {
   return api_pb.GetOrderbookResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetOrderbookResponseV2(arg) {
+  if (!(arg instanceof api_pb.GetOrderbookResponseV2)) {
+    throw new Error('Expected argument of type api.GetOrderbookResponseV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOrderbookResponseV2(buffer_arg) {
+  return api_pb.GetOrderbookResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetOrderbooksRequest(arg) {
@@ -857,6 +934,17 @@ function deserialize_api_GetTickersRequest(buffer_arg) {
   return api_pb.GetTickersRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetTickersRequestV2(arg) {
+  if (!(arg instanceof api_pb.GetTickersRequestV2)) {
+    throw new Error('Expected argument of type api.GetTickersRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTickersRequestV2(buffer_arg) {
+  return api_pb.GetTickersRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetTickersResponse(arg) {
   if (!(arg instanceof api_pb.GetTickersResponse)) {
     throw new Error('Expected argument of type api.GetTickersResponse');
@@ -866,6 +954,17 @@ function serialize_api_GetTickersResponse(arg) {
 
 function deserialize_api_GetTickersResponse(buffer_arg) {
   return api_pb.GetTickersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetTickersResponseV2(arg) {
+  if (!(arg instanceof api_pb.GetTickersResponseV2)) {
+    throw new Error('Expected argument of type api.GetTickersResponseV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTickersResponseV2(buffer_arg) {
+  return api_pb.GetTickersResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetTickersStreamResponse(arg) {
@@ -943,6 +1042,17 @@ function serialize_api_GetUnsettledRequest(arg) {
 
 function deserialize_api_GetUnsettledRequest(buffer_arg) {
   return api_pb.GetUnsettledRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetUnsettledRequestV2(arg) {
+  if (!(arg instanceof api_pb.GetUnsettledRequestV2)) {
+    throw new Error('Expected argument of type api.GetUnsettledRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetUnsettledRequestV2(buffer_arg) {
+  return api_pb.GetUnsettledRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetUnsettledResponse(arg) {
@@ -1042,6 +1152,17 @@ function serialize_api_PostCancelOrderRequest(arg) {
 
 function deserialize_api_PostCancelOrderRequest(buffer_arg) {
   return api_pb.PostCancelOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostCancelOrderRequestV2(arg) {
+  if (!(arg instanceof api_pb.PostCancelOrderRequestV2)) {
+    throw new Error('Expected argument of type api.PostCancelOrderRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostCancelOrderRequestV2(buffer_arg) {
+  return api_pb.PostCancelOrderRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_PostCancelOrderResponse(arg) {
@@ -1286,6 +1407,17 @@ function deserialize_api_PostOrderRequest(buffer_arg) {
   return api_pb.PostOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostOrderRequestV2(arg) {
+  if (!(arg instanceof api_pb.PostOrderRequestV2)) {
+    throw new Error('Expected argument of type api.PostOrderRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostOrderRequestV2(buffer_arg) {
+  return api_pb.PostOrderRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostOrderResponse(arg) {
   if (!(arg instanceof api_pb.PostOrderResponse)) {
     throw new Error('Expected argument of type api.PostOrderResponse');
@@ -1328,6 +1460,17 @@ function serialize_api_PostReplaceOrderRequest(arg) {
 
 function deserialize_api_PostReplaceOrderRequest(buffer_arg) {
   return api_pb.PostReplaceOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostReplaceOrderRequestV2(arg) {
+  if (!(arg instanceof api_pb.PostReplaceOrderRequestV2)) {
+    throw new Error('Expected argument of type api.PostReplaceOrderRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostReplaceOrderRequestV2(buffer_arg) {
+  return api_pb.PostReplaceOrderRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_PostSettlePNLRequest(arg) {
@@ -1383,6 +1526,17 @@ function serialize_api_PostSettleRequest(arg) {
 
 function deserialize_api_PostSettleRequest(buffer_arg) {
   return api_pb.PostSettleRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostSettleRequestV2(arg) {
+  if (!(arg instanceof api_pb.PostSettleRequestV2)) {
+    throw new Error('Expected argument of type api.PostSettleRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostSettleRequestV2(buffer_arg) {
+  return api_pb.PostSettleRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_PostSettleResponse(arg) {
@@ -1628,54 +1782,54 @@ getMarketsV2: {
     path: '/api.Api/GetMarketsV2',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetMarketsRequest,
-    responseType: api_pb.GetMarketsResponse,
-    requestSerialize: serialize_api_GetMarketsRequest,
-    requestDeserialize: deserialize_api_GetMarketsRequest,
-    responseSerialize: serialize_api_GetMarketsResponse,
-    responseDeserialize: deserialize_api_GetMarketsResponse,
+    requestType: api_pb.GetMarketsRequestV2,
+    responseType: api_pb.GetMarketsResponseV2,
+    requestSerialize: serialize_api_GetMarketsRequestV2,
+    requestDeserialize: deserialize_api_GetMarketsRequestV2,
+    responseSerialize: serialize_api_GetMarketsResponseV2,
+    responseDeserialize: deserialize_api_GetMarketsResponseV2,
   },
   getTickersV2: {
     path: '/api.Api/GetTickersV2',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetTickersRequest,
-    responseType: api_pb.GetTickersResponse,
-    requestSerialize: serialize_api_GetTickersRequest,
-    requestDeserialize: deserialize_api_GetTickersRequest,
-    responseSerialize: serialize_api_GetTickersResponse,
-    responseDeserialize: deserialize_api_GetTickersResponse,
+    requestType: api_pb.GetTickersRequestV2,
+    responseType: api_pb.GetTickersResponseV2,
+    requestSerialize: serialize_api_GetTickersRequestV2,
+    requestDeserialize: deserialize_api_GetTickersRequestV2,
+    responseSerialize: serialize_api_GetTickersResponseV2,
+    responseDeserialize: deserialize_api_GetTickersResponseV2,
   },
   getOrderbookV2: {
     path: '/api.Api/GetOrderbookV2',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetOrderbookRequest,
-    responseType: api_pb.GetOrderbookResponse,
-    requestSerialize: serialize_api_GetOrderbookRequest,
-    requestDeserialize: deserialize_api_GetOrderbookRequest,
-    responseSerialize: serialize_api_GetOrderbookResponse,
-    responseDeserialize: deserialize_api_GetOrderbookResponse,
+    requestType: api_pb.GetOrderbookRequestV2,
+    responseType: api_pb.GetOrderbookResponseV2,
+    requestSerialize: serialize_api_GetOrderbookRequestV2,
+    requestDeserialize: deserialize_api_GetOrderbookRequestV2,
+    responseSerialize: serialize_api_GetOrderbookResponseV2,
+    responseDeserialize: deserialize_api_GetOrderbookResponseV2,
   },
   getMarketDepthV2: {
     path: '/api.Api/GetMarketDepthV2',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetMarketDepthRequest,
-    responseType: api_pb.GetMarketDepthResponse,
-    requestSerialize: serialize_api_GetMarketDepthRequest,
-    requestDeserialize: deserialize_api_GetMarketDepthRequest,
-    responseSerialize: serialize_api_GetMarketDepthResponse,
-    responseDeserialize: deserialize_api_GetMarketDepthResponse,
+    requestType: api_pb.GetMarketDepthRequestV2,
+    responseType: api_pb.GetMarketDepthResponseV2,
+    requestSerialize: serialize_api_GetMarketDepthRequestV2,
+    requestDeserialize: deserialize_api_GetMarketDepthRequestV2,
+    responseSerialize: serialize_api_GetMarketDepthResponseV2,
+    responseDeserialize: deserialize_api_GetMarketDepthResponseV2,
   },
   postOrderV2: {
     path: '/api.Api/PostOrderV2',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.PostOrderRequest,
+    requestType: api_pb.PostOrderRequestV2,
     responseType: api_pb.PostOrderResponse,
-    requestSerialize: serialize_api_PostOrderRequest,
-    requestDeserialize: deserialize_api_PostOrderRequest,
+    requestSerialize: serialize_api_PostOrderRequestV2,
+    requestDeserialize: deserialize_api_PostOrderRequestV2,
     responseSerialize: serialize_api_PostOrderResponse,
     responseDeserialize: deserialize_api_PostOrderResponse,
   },
@@ -1683,10 +1837,10 @@ getMarketsV2: {
     path: '/api.Api/PostCancelOrderV2',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.PostCancelOrderRequest,
+    requestType: api_pb.PostCancelOrderRequestV2,
     responseType: api_pb.PostCancelOrderResponse,
-    requestSerialize: serialize_api_PostCancelOrderRequest,
-    requestDeserialize: deserialize_api_PostCancelOrderRequest,
+    requestSerialize: serialize_api_PostCancelOrderRequestV2,
+    requestDeserialize: deserialize_api_PostCancelOrderRequestV2,
     responseSerialize: serialize_api_PostCancelOrderResponse,
     responseDeserialize: deserialize_api_PostCancelOrderResponse,
   },
@@ -1694,10 +1848,10 @@ getMarketsV2: {
     path: '/api.Api/PostReplaceOrderV2',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.PostReplaceOrderRequest,
+    requestType: api_pb.PostReplaceOrderRequestV2,
     responseType: api_pb.PostOrderResponse,
-    requestSerialize: serialize_api_PostReplaceOrderRequest,
-    requestDeserialize: deserialize_api_PostReplaceOrderRequest,
+    requestSerialize: serialize_api_PostReplaceOrderRequestV2,
+    requestDeserialize: deserialize_api_PostReplaceOrderRequestV2,
     responseSerialize: serialize_api_PostOrderResponse,
     responseDeserialize: deserialize_api_PostOrderResponse,
   },
@@ -1705,10 +1859,10 @@ getMarketsV2: {
     path: '/api.Api/PostSettleV2',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.PostSettleRequest,
+    requestType: api_pb.PostSettleRequestV2,
     responseType: api_pb.PostSettleResponse,
-    requestSerialize: serialize_api_PostSettleRequest,
-    requestDeserialize: deserialize_api_PostSettleRequest,
+    requestSerialize: serialize_api_PostSettleRequestV2,
+    requestDeserialize: deserialize_api_PostSettleRequestV2,
     responseSerialize: serialize_api_PostSettleResponse,
     responseDeserialize: deserialize_api_PostSettleResponse,
   },
@@ -1716,10 +1870,10 @@ getMarketsV2: {
     path: '/api.Api/GetOpenOrdersV2',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetOpenOrdersRequest,
+    requestType: api_pb.GetOpenOrdersRequestV2,
     responseType: api_pb.GetOpenOrdersResponse,
-    requestSerialize: serialize_api_GetOpenOrdersRequest,
-    requestDeserialize: deserialize_api_GetOpenOrdersRequest,
+    requestSerialize: serialize_api_GetOpenOrdersRequestV2,
+    requestDeserialize: deserialize_api_GetOpenOrdersRequestV2,
     responseSerialize: serialize_api_GetOpenOrdersResponse,
     responseDeserialize: deserialize_api_GetOpenOrdersResponse,
   },
@@ -1727,10 +1881,10 @@ getMarketsV2: {
     path: '/api.Api/GetUnsettledV2',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetUnsettledRequest,
+    requestType: api_pb.GetUnsettledRequestV2,
     responseType: api_pb.GetUnsettledResponse,
-    requestSerialize: serialize_api_GetUnsettledRequest,
-    requestDeserialize: deserialize_api_GetUnsettledRequest,
+    requestSerialize: serialize_api_GetUnsettledRequestV2,
+    requestDeserialize: deserialize_api_GetUnsettledRequestV2,
     responseSerialize: serialize_api_GetUnsettledResponse,
     responseDeserialize: deserialize_api_GetUnsettledResponse,
   },
