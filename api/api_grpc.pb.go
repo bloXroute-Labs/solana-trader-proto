@@ -31,7 +31,7 @@ type ApiClient interface {
 	GetDriftOpenPerpOrder(ctx context.Context, in *GetDriftOpenPerpOrderRequest, opts ...grpc.CallOption) (*GetDriftOpenPerpOrderResponse, error)
 	GetDriftOpenMarginOrder(ctx context.Context, in *GetDriftOpenMarginOrderRequest, opts ...grpc.CallOption) (*GetDriftOpenMarginOrderResponse, error)
 	GetDriftPerpPositions(ctx context.Context, in *GetDriftPerpPositionsRequest, opts ...grpc.CallOption) (*GetDriftPerpPositionsResponse, error)
-	GetDriftPerpOpenOrders(ctx context.Context, in *GetDriftPerpOpenOrdersRequest, opts ...grpc.CallOption) (*GetDriftPerpOpenOrdersResponse, error)
+	GetDriftOpenPerpOrders(ctx context.Context, in *GetDriftOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetDriftOpenPerpOrdersResponse, error)
 	PostDriftCancelPerpOrder(ctx context.Context, in *PostDriftCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostDriftCancelPerpOrderResponse, error)
 	PostModifyDriftOrder(ctx context.Context, in *PostModifyDriftOrderRequest, opts ...grpc.CallOption) (*PostModifyDriftOrderResponse, error)
 	PostCancelDriftMarginOrder(ctx context.Context, in *PostCancelDriftMarginOrderRequest, opts ...grpc.CallOption) (*PostCancelDriftMarginOrderResponse, error)
@@ -238,9 +238,9 @@ func (c *apiClient) GetDriftPerpPositions(ctx context.Context, in *GetDriftPerpP
 	return out, nil
 }
 
-func (c *apiClient) GetDriftPerpOpenOrders(ctx context.Context, in *GetDriftPerpOpenOrdersRequest, opts ...grpc.CallOption) (*GetDriftPerpOpenOrdersResponse, error) {
-	out := new(GetDriftPerpOpenOrdersResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetDriftPerpOpenOrders", in, out, opts...)
+func (c *apiClient) GetDriftOpenPerpOrders(ctx context.Context, in *GetDriftOpenPerpOrdersRequest, opts ...grpc.CallOption) (*GetDriftOpenPerpOrdersResponse, error) {
+	out := new(GetDriftOpenPerpOrdersResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetDriftOpenPerpOrders", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1221,7 +1221,7 @@ type ApiServer interface {
 	GetDriftOpenPerpOrder(context.Context, *GetDriftOpenPerpOrderRequest) (*GetDriftOpenPerpOrderResponse, error)
 	GetDriftOpenMarginOrder(context.Context, *GetDriftOpenMarginOrderRequest) (*GetDriftOpenMarginOrderResponse, error)
 	GetDriftPerpPositions(context.Context, *GetDriftPerpPositionsRequest) (*GetDriftPerpPositionsResponse, error)
-	GetDriftPerpOpenOrders(context.Context, *GetDriftPerpOpenOrdersRequest) (*GetDriftPerpOpenOrdersResponse, error)
+	GetDriftOpenPerpOrders(context.Context, *GetDriftOpenPerpOrdersRequest) (*GetDriftOpenPerpOrdersResponse, error)
 	PostDriftCancelPerpOrder(context.Context, *PostDriftCancelPerpOrderRequest) (*PostDriftCancelPerpOrderResponse, error)
 	PostModifyDriftOrder(context.Context, *PostModifyDriftOrderRequest) (*PostModifyDriftOrderResponse, error)
 	PostCancelDriftMarginOrder(context.Context, *PostCancelDriftMarginOrderRequest) (*PostCancelDriftMarginOrderResponse, error)
@@ -1347,8 +1347,8 @@ func (UnimplementedApiServer) GetDriftOpenMarginOrder(context.Context, *GetDrift
 func (UnimplementedApiServer) GetDriftPerpPositions(context.Context, *GetDriftPerpPositionsRequest) (*GetDriftPerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDriftPerpPositions not implemented")
 }
-func (UnimplementedApiServer) GetDriftPerpOpenOrders(context.Context, *GetDriftPerpOpenOrdersRequest) (*GetDriftPerpOpenOrdersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDriftPerpOpenOrders not implemented")
+func (UnimplementedApiServer) GetDriftOpenPerpOrders(context.Context, *GetDriftOpenPerpOrdersRequest) (*GetDriftOpenPerpOrdersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDriftOpenPerpOrders not implemented")
 }
 func (UnimplementedApiServer) PostDriftCancelPerpOrder(context.Context, *PostDriftCancelPerpOrderRequest) (*PostDriftCancelPerpOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostDriftCancelPerpOrder not implemented")
@@ -1801,20 +1801,20 @@ func _Api_GetDriftPerpPositions_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetDriftPerpOpenOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDriftPerpOpenOrdersRequest)
+func _Api_GetDriftOpenPerpOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDriftOpenPerpOrdersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).GetDriftPerpOpenOrders(ctx, in)
+		return srv.(ApiServer).GetDriftOpenPerpOrders(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/GetDriftPerpOpenOrders",
+		FullMethod: "/api.Api/GetDriftOpenPerpOrders",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetDriftPerpOpenOrders(ctx, req.(*GetDriftPerpOpenOrdersRequest))
+		return srv.(ApiServer).GetDriftOpenPerpOrders(ctx, req.(*GetDriftOpenPerpOrdersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3148,8 +3148,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetDriftPerpPositions_Handler,
 		},
 		{
-			MethodName: "GetDriftPerpOpenOrders",
-			Handler:    _Api_GetDriftPerpOpenOrders_Handler,
+			MethodName: "GetDriftOpenPerpOrders",
+			Handler:    _Api_GetDriftOpenPerpOrders_Handler,
 		},
 		{
 			MethodName: "PostDriftCancelPerpOrder",

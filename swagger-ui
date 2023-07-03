@@ -2416,12 +2416,12 @@
       "get": {
         "summary": "Drift open perp order",
         "description": "Returns the list current open perp orders on Drift",
-        "operationId": "Api_GetDriftPerpOpenOrders",
+        "operationId": "Api_GetDriftOpenPerpOrders",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetDriftPerpOpenOrdersResponse"
+              "$ref": "#/definitions/apiGetDriftOpenPerpOrdersResponse"
             }
           },
           "default": {
@@ -3267,6 +3267,31 @@
         }
       }
     },
+    "apiGetDriftOpenPerpOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "data": {
+          "$ref": "#/definitions/apiGetDriftOpenPerpOrdersValue"
+        }
+      }
+    },
+    "apiGetDriftOpenPerpOrdersValue": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDriftPerpOrder"
+          }
+        }
+      }
+    },
     "apiGetDriftPerpContractsResponse": {
       "type": "object",
       "properties": {
@@ -3277,31 +3302,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiContractInfo"
-          }
-        }
-      }
-    },
-    "apiGetDriftPerpOpenOrdersResponse": {
-      "type": "object",
-      "properties": {
-        "context": {
-          "$ref": "#/definitions/apiContext"
-        },
-        "data": {
-          "$ref": "#/definitions/apiGetDriftPerpOpenOrdersValue"
-        }
-      }
-    },
-    "apiGetDriftPerpOpenOrdersValue": {
-      "type": "object",
-      "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
-        "orders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiDriftPerpOrder"
           }
         }
       }

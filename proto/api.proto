@@ -202,7 +202,7 @@ service Api {
     };
   }
 
-  rpc GetDriftPerpOpenOrders(GetDriftPerpOpenOrdersRequest)  returns (GetDriftPerpOpenOrdersResponse) {
+  rpc GetDriftOpenPerpOrders(GetDriftOpenPerpOrdersRequest)  returns (GetDriftOpenPerpOrdersResponse) {
     option (google.api.http) = {
       get: "/api/v2/drift/perp/open-orders"
     };
@@ -2153,20 +2153,20 @@ message Context {
   uint64 slot = 1;
 }
 
-message GetDriftPerpOpenOrdersRequest {
+message GetDriftOpenPerpOrdersRequest {
   string ownerAddress = 1;
   string accountAddress = 2;
   repeated string contracts = 3;
 }
 
-message GetDriftPerpOpenOrdersValue {
+message GetDriftOpenPerpOrdersValue {
   string ownerAddress = 1;
   repeated DriftPerpOrder orders = 2;
 }
 
-message GetDriftPerpOpenOrdersResponse {
+message GetDriftOpenPerpOrdersResponse {
   Context context = 1;
-  GetDriftPerpOpenOrdersValue data = 2;
+  GetDriftOpenPerpOrdersValue data = 2;
 }
 
 message DriftPerpOrder {

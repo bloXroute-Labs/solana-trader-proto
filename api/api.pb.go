@@ -12318,7 +12318,7 @@ func (x *Context) GetSlot() uint64 {
 	return 0
 }
 
-type GetDriftPerpOpenOrdersRequest struct {
+type GetDriftOpenPerpOrdersRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -12328,8 +12328,8 @@ type GetDriftPerpOpenOrdersRequest struct {
 	Contracts      []string `protobuf:"bytes,3,rep,name=contracts,proto3" json:"contracts,omitempty"`
 }
 
-func (x *GetDriftPerpOpenOrdersRequest) Reset() {
-	*x = GetDriftPerpOpenOrdersRequest{}
+func (x *GetDriftOpenPerpOrdersRequest) Reset() {
+	*x = GetDriftOpenPerpOrdersRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_proto_msgTypes[177]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -12337,13 +12337,13 @@ func (x *GetDriftPerpOpenOrdersRequest) Reset() {
 	}
 }
 
-func (x *GetDriftPerpOpenOrdersRequest) String() string {
+func (x *GetDriftOpenPerpOrdersRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetDriftPerpOpenOrdersRequest) ProtoMessage() {}
+func (*GetDriftOpenPerpOrdersRequest) ProtoMessage() {}
 
-func (x *GetDriftPerpOpenOrdersRequest) ProtoReflect() protoreflect.Message {
+func (x *GetDriftOpenPerpOrdersRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_proto_msgTypes[177]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -12355,33 +12355,33 @@ func (x *GetDriftPerpOpenOrdersRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetDriftPerpOpenOrdersRequest.ProtoReflect.Descriptor instead.
-func (*GetDriftPerpOpenOrdersRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDriftOpenPerpOrdersRequest.ProtoReflect.Descriptor instead.
+func (*GetDriftOpenPerpOrdersRequest) Descriptor() ([]byte, []int) {
 	return file_api_proto_rawDescGZIP(), []int{177}
 }
 
-func (x *GetDriftPerpOpenOrdersRequest) GetOwnerAddress() string {
+func (x *GetDriftOpenPerpOrdersRequest) GetOwnerAddress() string {
 	if x != nil {
 		return x.OwnerAddress
 	}
 	return ""
 }
 
-func (x *GetDriftPerpOpenOrdersRequest) GetAccountAddress() string {
+func (x *GetDriftOpenPerpOrdersRequest) GetAccountAddress() string {
 	if x != nil {
 		return x.AccountAddress
 	}
 	return ""
 }
 
-func (x *GetDriftPerpOpenOrdersRequest) GetContracts() []string {
+func (x *GetDriftOpenPerpOrdersRequest) GetContracts() []string {
 	if x != nil {
 		return x.Contracts
 	}
 	return nil
 }
 
-type GetDriftPerpOpenOrdersValue struct {
+type GetDriftOpenPerpOrdersValue struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -12390,8 +12390,8 @@ type GetDriftPerpOpenOrdersValue struct {
 	Orders       []*DriftPerpOrder `protobuf:"bytes,2,rep,name=orders,proto3" json:"orders,omitempty"`
 }
 
-func (x *GetDriftPerpOpenOrdersValue) Reset() {
-	*x = GetDriftPerpOpenOrdersValue{}
+func (x *GetDriftOpenPerpOrdersValue) Reset() {
+	*x = GetDriftOpenPerpOrdersValue{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_proto_msgTypes[178]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -12399,13 +12399,13 @@ func (x *GetDriftPerpOpenOrdersValue) Reset() {
 	}
 }
 
-func (x *GetDriftPerpOpenOrdersValue) String() string {
+func (x *GetDriftOpenPerpOrdersValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetDriftPerpOpenOrdersValue) ProtoMessage() {}
+func (*GetDriftOpenPerpOrdersValue) ProtoMessage() {}
 
-func (x *GetDriftPerpOpenOrdersValue) ProtoReflect() protoreflect.Message {
+func (x *GetDriftOpenPerpOrdersValue) ProtoReflect() protoreflect.Message {
 	mi := &file_api_proto_msgTypes[178]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -12417,36 +12417,36 @@ func (x *GetDriftPerpOpenOrdersValue) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetDriftPerpOpenOrdersValue.ProtoReflect.Descriptor instead.
-func (*GetDriftPerpOpenOrdersValue) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDriftOpenPerpOrdersValue.ProtoReflect.Descriptor instead.
+func (*GetDriftOpenPerpOrdersValue) Descriptor() ([]byte, []int) {
 	return file_api_proto_rawDescGZIP(), []int{178}
 }
 
-func (x *GetDriftPerpOpenOrdersValue) GetOwnerAddress() string {
+func (x *GetDriftOpenPerpOrdersValue) GetOwnerAddress() string {
 	if x != nil {
 		return x.OwnerAddress
 	}
 	return ""
 }
 
-func (x *GetDriftPerpOpenOrdersValue) GetOrders() []*DriftPerpOrder {
+func (x *GetDriftOpenPerpOrdersValue) GetOrders() []*DriftPerpOrder {
 	if x != nil {
 		return x.Orders
 	}
 	return nil
 }
 
-type GetDriftPerpOpenOrdersResponse struct {
+type GetDriftOpenPerpOrdersResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Context *Context                     `protobuf:"bytes,1,opt,name=context,proto3" json:"context,omitempty"`
-	Data    *GetDriftPerpOpenOrdersValue `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
+	Data    *GetDriftOpenPerpOrdersValue `protobuf:"bytes,2,opt,name=data,proto3" json:"data,omitempty"`
 }
 
-func (x *GetDriftPerpOpenOrdersResponse) Reset() {
-	*x = GetDriftPerpOpenOrdersResponse{}
+func (x *GetDriftOpenPerpOrdersResponse) Reset() {
+	*x = GetDriftOpenPerpOrdersResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_proto_msgTypes[179]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -12454,13 +12454,13 @@ func (x *GetDriftPerpOpenOrdersResponse) Reset() {
 	}
 }
 
-func (x *GetDriftPerpOpenOrdersResponse) String() string {
+func (x *GetDriftOpenPerpOrdersResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GetDriftPerpOpenOrdersResponse) ProtoMessage() {}
+func (*GetDriftOpenPerpOrdersResponse) ProtoMessage() {}
 
-func (x *GetDriftPerpOpenOrdersResponse) ProtoReflect() protoreflect.Message {
+func (x *GetDriftOpenPerpOrdersResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_api_proto_msgTypes[179]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -12472,19 +12472,19 @@ func (x *GetDriftPerpOpenOrdersResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GetDriftPerpOpenOrdersResponse.ProtoReflect.Descriptor instead.
-func (*GetDriftPerpOpenOrdersResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDriftOpenPerpOrdersResponse.ProtoReflect.Descriptor instead.
+func (*GetDriftOpenPerpOrdersResponse) Descriptor() ([]byte, []int) {
 	return file_api_proto_rawDescGZIP(), []int{179}
 }
 
-func (x *GetDriftPerpOpenOrdersResponse) GetContext() *Context {
+func (x *GetDriftOpenPerpOrdersResponse) GetContext() *Context {
 	if x != nil {
 		return x.Context
 	}
 	return nil
 }
 
-func (x *GetDriftPerpOpenOrdersResponse) GetData() *GetDriftPerpOpenOrdersValue {
+func (x *GetDriftOpenPerpOrdersResponse) GetData() *GetDriftOpenPerpOrdersValue {
 	if x != nil {
 		return x.Data
 	}
@@ -15922,7 +15922,7 @@ var file_api_proto_rawDesc = []byte{
 	0x74, 0x69, 0x6f, 0x6e, 0x22, 0x1d, 0x0a, 0x07, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x12,
 	0x12, 0x0a, 0x04, 0x73, 0x6c, 0x6f, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x04, 0x73,
 	0x6c, 0x6f, 0x74, 0x22, 0x89, 0x01, 0x0a, 0x1d, 0x47, 0x65, 0x74, 0x44, 0x72, 0x69, 0x66, 0x74,
-	0x50, 0x65, 0x72, 0x70, 0x4f, 0x70, 0x65, 0x6e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65,
+	0x4f, 0x70, 0x65, 0x6e, 0x50, 0x65, 0x72, 0x70, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x41, 0x64,
 	0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x6f, 0x77, 0x6e,
 	0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x26, 0x0a, 0x0e, 0x61, 0x63, 0x63,
@@ -15930,20 +15930,20 @@ var file_api_proto_rawDesc = []byte{
 	0x09, 0x52, 0x0e, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73,
 	0x73, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x18, 0x03,
 	0x20, 0x03, 0x28, 0x09, 0x52, 0x09, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x22,
-	0x6e, 0x0a, 0x1b, 0x47, 0x65, 0x74, 0x44, 0x72, 0x69, 0x66, 0x74, 0x50, 0x65, 0x72, 0x70, 0x4f,
-	0x70, 0x65, 0x6e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x22,
+	0x6e, 0x0a, 0x1b, 0x47, 0x65, 0x74, 0x44, 0x72, 0x69, 0x66, 0x74, 0x4f, 0x70, 0x65, 0x6e, 0x50,
+	0x65, 0x72, 0x70, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x22,
 	0x0a, 0x0c, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65,
 	0x73, 0x73, 0x12, 0x2b, 0x0a, 0x06, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x18, 0x02, 0x20, 0x03,
 	0x28, 0x0b, 0x32, 0x13, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x44, 0x72, 0x69, 0x66, 0x74, 0x50, 0x65,
 	0x72, 0x70, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x52, 0x06, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x22,
-	0x7e, 0x0a, 0x1e, 0x47, 0x65, 0x74, 0x44, 0x72, 0x69, 0x66, 0x74, 0x50, 0x65, 0x72, 0x70, 0x4f,
-	0x70, 0x65, 0x6e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x7e, 0x0a, 0x1e, 0x47, 0x65, 0x74, 0x44, 0x72, 0x69, 0x66, 0x74, 0x4f, 0x70, 0x65, 0x6e, 0x50,
+	0x65, 0x72, 0x70, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
 	0x65, 0x12, 0x26, 0x0a, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74,
 	0x52, 0x07, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x12, 0x34, 0x0a, 0x04, 0x64, 0x61, 0x74,
 	0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x20, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x47, 0x65,
-	0x74, 0x44, 0x72, 0x69, 0x66, 0x74, 0x50, 0x65, 0x72, 0x70, 0x4f, 0x70, 0x65, 0x6e, 0x4f, 0x72,
+	0x74, 0x44, 0x72, 0x69, 0x66, 0x74, 0x4f, 0x70, 0x65, 0x6e, 0x50, 0x65, 0x72, 0x70, 0x4f, 0x72,
 	0x64, 0x65, 0x72, 0x73, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x22,
 	0xfe, 0x02, 0x0a, 0x0e, 0x44, 0x72, 0x69, 0x66, 0x74, 0x50, 0x65, 0x72, 0x70, 0x4f, 0x72, 0x64,
 	0x65, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20,
@@ -16436,11 +16436,11 @@ var file_api_proto_rawDesc = []byte{
 	0x65, 0x20, 0x6c, 0x69, 0x73, 0x74, 0x20, 0x63, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x20, 0x44,
 	0x72, 0x69, 0x66, 0x74, 0x20, 0x70, 0x65, 0x72, 0x70, 0x20, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x69,
 	0x6f, 0x6e, 0x73, 0x12, 0xf4, 0x01, 0x0a, 0x16, 0x47, 0x65, 0x74, 0x44, 0x72, 0x69, 0x66, 0x74,
-	0x50, 0x65, 0x72, 0x70, 0x4f, 0x70, 0x65, 0x6e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x12, 0x22,
-	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x47, 0x65, 0x74, 0x44, 0x72, 0x69, 0x66, 0x74, 0x50, 0x65, 0x72,
-	0x70, 0x4f, 0x70, 0x65, 0x6e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x4f, 0x70, 0x65, 0x6e, 0x50, 0x65, 0x72, 0x70, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x12, 0x22,
+	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x47, 0x65, 0x74, 0x44, 0x72, 0x69, 0x66, 0x74, 0x4f, 0x70, 0x65,
+	0x6e, 0x50, 0x65, 0x72, 0x70, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x1a, 0x23, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x47, 0x65, 0x74, 0x44, 0x72, 0x69, 0x66,
-	0x74, 0x50, 0x65, 0x72, 0x70, 0x4f, 0x70, 0x65, 0x6e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x52,
+	0x74, 0x4f, 0x70, 0x65, 0x6e, 0x50, 0x65, 0x72, 0x70, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x73, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x90, 0x01, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x20,
 	0x12, 0x1e, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x32, 0x2f, 0x64, 0x72, 0x69, 0x66, 0x74, 0x2f,
 	0x70, 0x65, 0x72, 0x70, 0x2f, 0x6f, 0x70, 0x65, 0x6e, 0x2d, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x73,
@@ -17518,9 +17518,9 @@ var file_api_proto_goTypes = []interface{}{
 	(*PostLiquidateDriftPerpRequest)(nil),          // 181: api.PostLiquidateDriftPerpRequest
 	(*PostLiquidateDriftPerpResponse)(nil),         // 182: api.PostLiquidateDriftPerpResponse
 	(*Context)(nil),                                // 183: api.Context
-	(*GetDriftPerpOpenOrdersRequest)(nil),          // 184: api.GetDriftPerpOpenOrdersRequest
-	(*GetDriftPerpOpenOrdersValue)(nil),            // 185: api.GetDriftPerpOpenOrdersValue
-	(*GetDriftPerpOpenOrdersResponse)(nil),         // 186: api.GetDriftPerpOpenOrdersResponse
+	(*GetDriftOpenPerpOrdersRequest)(nil),          // 184: api.GetDriftOpenPerpOrdersRequest
+	(*GetDriftOpenPerpOrdersValue)(nil),            // 185: api.GetDriftOpenPerpOrdersValue
+	(*GetDriftOpenPerpOrdersResponse)(nil),         // 186: api.GetDriftOpenPerpOrdersResponse
 	(*DriftPerpOrder)(nil),                         // 187: api.DriftPerpOrder
 	(*PostDriftCancelPerpOrderRequest)(nil),        // 188: api.PostDriftCancelPerpOrderRequest
 	(*PostDriftCancelPerpOrderValue)(nil),          // 189: api.PostDriftCancelPerpOrderValue
@@ -17763,9 +17763,9 @@ var file_api_proto_depIdxs = []int32{
 	42,  // 199: api.PostDriftSettlePNLsResponse.transactions:type_name -> api.TransactionMessage
 	219, // 200: api.PostLiquidateDriftPerpRequest.contract:type_name -> common.PerpContract
 	42,  // 201: api.PostLiquidateDriftPerpResponse.transaction:type_name -> api.TransactionMessage
-	187, // 202: api.GetDriftPerpOpenOrdersValue.orders:type_name -> api.DriftPerpOrder
-	183, // 203: api.GetDriftPerpOpenOrdersResponse.context:type_name -> api.Context
-	185, // 204: api.GetDriftPerpOpenOrdersResponse.data:type_name -> api.GetDriftPerpOpenOrdersValue
+	187, // 202: api.GetDriftOpenPerpOrdersValue.orders:type_name -> api.DriftPerpOrder
+	183, // 203: api.GetDriftOpenPerpOrdersResponse.context:type_name -> api.Context
+	185, // 204: api.GetDriftOpenPerpOrdersResponse.data:type_name -> api.GetDriftOpenPerpOrdersValue
 	42,  // 205: api.PostDriftCancelPerpOrderValue.transactions:type_name -> api.TransactionMessage
 	183, // 206: api.PostDriftCancelPerpOrderResponse.context:type_name -> api.Context
 	189, // 207: api.PostDriftCancelPerpOrderResponse.data:type_name -> api.PostDriftCancelPerpOrderValue
@@ -17804,7 +17804,7 @@ var file_api_proto_depIdxs = []int32{
 	169, // 240: api.Api.GetDriftOpenPerpOrder:input_type -> api.GetDriftOpenPerpOrderRequest
 	167, // 241: api.Api.GetDriftOpenMarginOrder:input_type -> api.GetDriftOpenMarginOrderRequest
 	191, // 242: api.Api.GetDriftPerpPositions:input_type -> api.GetDriftPerpPositionsRequest
-	184, // 243: api.Api.GetDriftPerpOpenOrders:input_type -> api.GetDriftPerpOpenOrdersRequest
+	184, // 243: api.Api.GetDriftOpenPerpOrders:input_type -> api.GetDriftOpenPerpOrdersRequest
 	188, // 244: api.Api.PostDriftCancelPerpOrder:input_type -> api.PostDriftCancelPerpOrderRequest
 	119, // 245: api.Api.PostModifyDriftOrder:input_type -> api.PostModifyDriftOrderRequest
 	117, // 246: api.Api.PostCancelDriftMarginOrder:input_type -> api.PostCancelDriftMarginOrderRequest
@@ -17886,7 +17886,7 @@ var file_api_proto_depIdxs = []int32{
 	170, // 322: api.Api.GetDriftOpenPerpOrder:output_type -> api.GetDriftOpenPerpOrderResponse
 	168, // 323: api.Api.GetDriftOpenMarginOrder:output_type -> api.GetDriftOpenMarginOrderResponse
 	193, // 324: api.Api.GetDriftPerpPositions:output_type -> api.GetDriftPerpPositionsResponse
-	186, // 325: api.Api.GetDriftPerpOpenOrders:output_type -> api.GetDriftPerpOpenOrdersResponse
+	186, // 325: api.Api.GetDriftOpenPerpOrders:output_type -> api.GetDriftOpenPerpOrdersResponse
 	190, // 326: api.Api.PostDriftCancelPerpOrder:output_type -> api.PostDriftCancelPerpOrderResponse
 	120, // 327: api.Api.PostModifyDriftOrder:output_type -> api.PostModifyDriftOrderResponse
 	118, // 328: api.Api.PostCancelDriftMarginOrder:output_type -> api.PostCancelDriftMarginOrderResponse
@@ -20093,7 +20093,7 @@ func file_api_proto_init() {
 			}
 		}
 		file_api_proto_msgTypes[177].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetDriftPerpOpenOrdersRequest); i {
+			switch v := v.(*GetDriftOpenPerpOrdersRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -20105,7 +20105,7 @@ func file_api_proto_init() {
 			}
 		}
 		file_api_proto_msgTypes[178].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetDriftPerpOpenOrdersValue); i {
+			switch v := v.(*GetDriftOpenPerpOrdersValue); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -20117,7 +20117,7 @@ func file_api_proto_init() {
 			}
 		}
 		file_api_proto_msgTypes[179].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetDriftPerpOpenOrdersResponse); i {
+			switch v := v.(*GetDriftOpenPerpOrdersResponse); i {
 			case 0:
 				return &v.state
 			case 1:

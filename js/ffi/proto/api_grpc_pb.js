@@ -274,6 +274,28 @@ function deserialize_api_GetDriftOpenPerpOrderResponse(buffer_arg) {
   return api_pb.GetDriftOpenPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetDriftOpenPerpOrdersRequest(arg) {
+  if (!(arg instanceof api_pb.GetDriftOpenPerpOrdersRequest)) {
+    throw new Error('Expected argument of type api.GetDriftOpenPerpOrdersRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftOpenPerpOrdersRequest(buffer_arg) {
+  return api_pb.GetDriftOpenPerpOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetDriftOpenPerpOrdersResponse(arg) {
+  if (!(arg instanceof api_pb.GetDriftOpenPerpOrdersResponse)) {
+    throw new Error('Expected argument of type api.GetDriftOpenPerpOrdersResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetDriftOpenPerpOrdersResponse(buffer_arg) {
+  return api_pb.GetDriftOpenPerpOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetDriftPerpContractsRequest(arg) {
   if (!(arg instanceof api_pb.GetDriftPerpContractsRequest)) {
     throw new Error('Expected argument of type api.GetDriftPerpContractsRequest');
@@ -294,28 +316,6 @@ function serialize_api_GetDriftPerpContractsResponse(arg) {
 
 function deserialize_api_GetDriftPerpContractsResponse(buffer_arg) {
   return api_pb.GetDriftPerpContractsResponse.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_api_GetDriftPerpOpenOrdersRequest(arg) {
-  if (!(arg instanceof api_pb.GetDriftPerpOpenOrdersRequest)) {
-    throw new Error('Expected argument of type api.GetDriftPerpOpenOrdersRequest');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetDriftPerpOpenOrdersRequest(buffer_arg) {
-  return api_pb.GetDriftPerpOpenOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
-}
-
-function serialize_api_GetDriftPerpOpenOrdersResponse(arg) {
-  if (!(arg instanceof api_pb.GetDriftPerpOpenOrdersResponse)) {
-    throw new Error('Expected argument of type api.GetDriftPerpOpenOrdersResponse');
-  }
-  return Buffer.from(arg.serializeBinary());
-}
-
-function deserialize_api_GetDriftPerpOpenOrdersResponse(buffer_arg) {
-  return api_pb.GetDriftPerpOpenOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetDriftPerpOrderbookRequest(arg) {
@@ -1862,16 +1862,16 @@ postCloseDriftPerpPositions: {
     responseSerialize: serialize_api_GetDriftPerpPositionsResponse,
     responseDeserialize: deserialize_api_GetDriftPerpPositionsResponse,
   },
-  getDriftPerpOpenOrders: {
-    path: '/api.Api/GetDriftPerpOpenOrders',
+  getDriftOpenPerpOrders: {
+    path: '/api.Api/GetDriftOpenPerpOrders',
     requestStream: false,
     responseStream: false,
-    requestType: api_pb.GetDriftPerpOpenOrdersRequest,
-    responseType: api_pb.GetDriftPerpOpenOrdersResponse,
-    requestSerialize: serialize_api_GetDriftPerpOpenOrdersRequest,
-    requestDeserialize: deserialize_api_GetDriftPerpOpenOrdersRequest,
-    responseSerialize: serialize_api_GetDriftPerpOpenOrdersResponse,
-    responseDeserialize: deserialize_api_GetDriftPerpOpenOrdersResponse,
+    requestType: api_pb.GetDriftOpenPerpOrdersRequest,
+    responseType: api_pb.GetDriftOpenPerpOrdersResponse,
+    requestSerialize: serialize_api_GetDriftOpenPerpOrdersRequest,
+    requestDeserialize: deserialize_api_GetDriftOpenPerpOrdersRequest,
+    responseSerialize: serialize_api_GetDriftOpenPerpOrdersResponse,
+    responseDeserialize: deserialize_api_GetDriftOpenPerpOrdersResponse,
   },
   postDriftCancelPerpOrder: {
     path: '/api.Api/PostDriftCancelPerpOrder',

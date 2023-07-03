@@ -1431,22 +1431,22 @@ class Context(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class GetDriftPerpOpenOrdersRequest(betterproto.Message):
+class GetDriftOpenPerpOrdersRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
     contracts: List[str] = betterproto.string_field(3)
 
 
 @dataclass(eq=False, repr=False)
-class GetDriftPerpOpenOrdersValue(betterproto.Message):
+class GetDriftOpenPerpOrdersValue(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     orders: List["DriftPerpOrder"] = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)
-class GetDriftPerpOpenOrdersResponse(betterproto.Message):
+class GetDriftOpenPerpOrdersResponse(betterproto.Message):
     context: "Context" = betterproto.message_field(1)
-    data: "GetDriftPerpOpenOrdersValue" = betterproto.message_field(2)
+    data: "GetDriftOpenPerpOrdersValue" = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -1855,18 +1855,18 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
-    async def get_drift_perp_open_orders(
+    async def get_drift_open_perp_orders(
         self,
-        get_drift_perp_open_orders_request: "GetDriftPerpOpenOrdersRequest",
+        get_drift_open_perp_orders_request: "GetDriftOpenPerpOrdersRequest",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> "GetDriftPerpOpenOrdersResponse":
+    ) -> "GetDriftOpenPerpOrdersResponse":
         return await self._unary_unary(
-            "/api.Api/GetDriftPerpOpenOrders",
-            get_drift_perp_open_orders_request,
-            GetDriftPerpOpenOrdersResponse,
+            "/api.Api/GetDriftOpenPerpOrders",
+            get_drift_open_perp_orders_request,
+            GetDriftOpenPerpOrdersResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3111,9 +3111,9 @@ class ApiBase(ServiceBase):
     ) -> "GetDriftPerpPositionsResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def get_drift_perp_open_orders(
-        self, get_drift_perp_open_orders_request: "GetDriftPerpOpenOrdersRequest"
-    ) -> "GetDriftPerpOpenOrdersResponse":
+    async def get_drift_open_perp_orders(
+        self, get_drift_open_perp_orders_request: "GetDriftOpenPerpOrdersRequest"
+    ) -> "GetDriftOpenPerpOrdersResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def post_drift_cancel_perp_order(
@@ -3575,12 +3575,12 @@ class ApiBase(ServiceBase):
         response = await self.get_drift_perp_positions(request)
         await stream.send_message(response)
 
-    async def __rpc_get_drift_perp_open_orders(
+    async def __rpc_get_drift_open_perp_orders(
         self,
-        stream: "grpclib.server.Stream[GetDriftPerpOpenOrdersRequest, GetDriftPerpOpenOrdersResponse]",
+        stream: "grpclib.server.Stream[GetDriftOpenPerpOrdersRequest, GetDriftOpenPerpOrdersResponse]",
     ) -> None:
         request = await stream.recv_message()
-        response = await self.get_drift_perp_open_orders(request)
+        response = await self.get_drift_open_perp_orders(request)
         await stream.send_message(response)
 
     async def __rpc_post_drift_cancel_perp_order(
@@ -4232,11 +4232,11 @@ class ApiBase(ServiceBase):
                 GetDriftPerpPositionsRequest,
                 GetDriftPerpPositionsResponse,
             ),
-            "/api.Api/GetDriftPerpOpenOrders": grpclib.const.Handler(
-                self.__rpc_get_drift_perp_open_orders,
+            "/api.Api/GetDriftOpenPerpOrders": grpclib.const.Handler(
+                self.__rpc_get_drift_open_perp_orders,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                GetDriftPerpOpenOrdersRequest,
-                GetDriftPerpOpenOrdersResponse,
+                GetDriftOpenPerpOrdersRequest,
+                GetDriftOpenPerpOrdersResponse,
             ),
             "/api.Api/PostDriftCancelPerpOrder": grpclib.const.Handler(
                 self.__rpc_post_drift_cancel_perp_order,

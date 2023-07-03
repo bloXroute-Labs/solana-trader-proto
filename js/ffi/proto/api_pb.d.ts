@@ -5215,27 +5215,27 @@ export namespace Context {
     }
 }
 
-export class GetDriftPerpOpenOrdersRequest extends jspb.Message { 
+export class GetDriftOpenPerpOrdersRequest extends jspb.Message { 
     getOwneraddress(): string;
-    setOwneraddress(value: string): GetDriftPerpOpenOrdersRequest;
+    setOwneraddress(value: string): GetDriftOpenPerpOrdersRequest;
     getAccountaddress(): string;
-    setAccountaddress(value: string): GetDriftPerpOpenOrdersRequest;
+    setAccountaddress(value: string): GetDriftOpenPerpOrdersRequest;
     clearContractsList(): void;
     getContractsList(): Array<string>;
-    setContractsList(value: Array<string>): GetDriftPerpOpenOrdersRequest;
+    setContractsList(value: Array<string>): GetDriftOpenPerpOrdersRequest;
     addContracts(value: string, index?: number): string;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetDriftPerpOpenOrdersRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: GetDriftPerpOpenOrdersRequest): GetDriftPerpOpenOrdersRequest.AsObject;
+    toObject(includeInstance?: boolean): GetDriftOpenPerpOrdersRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftOpenPerpOrdersRequest): GetDriftOpenPerpOrdersRequest.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetDriftPerpOpenOrdersRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetDriftPerpOpenOrdersRequest;
-    static deserializeBinaryFromReader(message: GetDriftPerpOpenOrdersRequest, reader: jspb.BinaryReader): GetDriftPerpOpenOrdersRequest;
+    static serializeBinaryToWriter(message: GetDriftOpenPerpOrdersRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftOpenPerpOrdersRequest;
+    static deserializeBinaryFromReader(message: GetDriftOpenPerpOrdersRequest, reader: jspb.BinaryReader): GetDriftOpenPerpOrdersRequest;
 }
 
-export namespace GetDriftPerpOpenOrdersRequest {
+export namespace GetDriftOpenPerpOrdersRequest {
     export type AsObject = {
         owneraddress: string,
         accountaddress: string,
@@ -5243,57 +5243,57 @@ export namespace GetDriftPerpOpenOrdersRequest {
     }
 }
 
-export class GetDriftPerpOpenOrdersValue extends jspb.Message { 
+export class GetDriftOpenPerpOrdersValue extends jspb.Message { 
     getOwneraddress(): string;
-    setOwneraddress(value: string): GetDriftPerpOpenOrdersValue;
+    setOwneraddress(value: string): GetDriftOpenPerpOrdersValue;
     clearOrdersList(): void;
     getOrdersList(): Array<DriftPerpOrder>;
-    setOrdersList(value: Array<DriftPerpOrder>): GetDriftPerpOpenOrdersValue;
+    setOrdersList(value: Array<DriftPerpOrder>): GetDriftOpenPerpOrdersValue;
     addOrders(value?: DriftPerpOrder, index?: number): DriftPerpOrder;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetDriftPerpOpenOrdersValue.AsObject;
-    static toObject(includeInstance: boolean, msg: GetDriftPerpOpenOrdersValue): GetDriftPerpOpenOrdersValue.AsObject;
+    toObject(includeInstance?: boolean): GetDriftOpenPerpOrdersValue.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftOpenPerpOrdersValue): GetDriftOpenPerpOrdersValue.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetDriftPerpOpenOrdersValue, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetDriftPerpOpenOrdersValue;
-    static deserializeBinaryFromReader(message: GetDriftPerpOpenOrdersValue, reader: jspb.BinaryReader): GetDriftPerpOpenOrdersValue;
+    static serializeBinaryToWriter(message: GetDriftOpenPerpOrdersValue, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftOpenPerpOrdersValue;
+    static deserializeBinaryFromReader(message: GetDriftOpenPerpOrdersValue, reader: jspb.BinaryReader): GetDriftOpenPerpOrdersValue;
 }
 
-export namespace GetDriftPerpOpenOrdersValue {
+export namespace GetDriftOpenPerpOrdersValue {
     export type AsObject = {
         owneraddress: string,
         ordersList: Array<DriftPerpOrder.AsObject>,
     }
 }
 
-export class GetDriftPerpOpenOrdersResponse extends jspb.Message { 
+export class GetDriftOpenPerpOrdersResponse extends jspb.Message { 
 
     hasContext(): boolean;
     clearContext(): void;
     getContext(): Context | undefined;
-    setContext(value?: Context): GetDriftPerpOpenOrdersResponse;
+    setContext(value?: Context): GetDriftOpenPerpOrdersResponse;
 
     hasData(): boolean;
     clearData(): void;
-    getData(): GetDriftPerpOpenOrdersValue | undefined;
-    setData(value?: GetDriftPerpOpenOrdersValue): GetDriftPerpOpenOrdersResponse;
+    getData(): GetDriftOpenPerpOrdersValue | undefined;
+    setData(value?: GetDriftOpenPerpOrdersValue): GetDriftOpenPerpOrdersResponse;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetDriftPerpOpenOrdersResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetDriftPerpOpenOrdersResponse): GetDriftPerpOpenOrdersResponse.AsObject;
+    toObject(includeInstance?: boolean): GetDriftOpenPerpOrdersResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetDriftOpenPerpOrdersResponse): GetDriftOpenPerpOrdersResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetDriftPerpOpenOrdersResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetDriftPerpOpenOrdersResponse;
-    static deserializeBinaryFromReader(message: GetDriftPerpOpenOrdersResponse, reader: jspb.BinaryReader): GetDriftPerpOpenOrdersResponse;
+    static serializeBinaryToWriter(message: GetDriftOpenPerpOrdersResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetDriftOpenPerpOrdersResponse;
+    static deserializeBinaryFromReader(message: GetDriftOpenPerpOrdersResponse, reader: jspb.BinaryReader): GetDriftOpenPerpOrdersResponse;
 }
 
-export namespace GetDriftPerpOpenOrdersResponse {
+export namespace GetDriftOpenPerpOrdersResponse {
     export type AsObject = {
         context?: Context.AsObject,
-        data?: GetDriftPerpOpenOrdersValue.AsObject,
+        data?: GetDriftOpenPerpOrdersValue.AsObject,
     }
 }
 
