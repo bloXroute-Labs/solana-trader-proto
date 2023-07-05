@@ -1423,7 +1423,7 @@ message GetOpenOrdersRequest {
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
   string address = 3 [(google.api.field_behavior) = OPTIONAL];
   string openOrdersAddress = 4 [(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming, Setting both address and openOrdersAddress is invalid, openOrdersAddress is preferred."}];
-  Project project = 5[(google.api.field_behavior) = OPTIONAL];
+  Project project = 5;
 }
 
 message GetOpenOrdersResponse {
