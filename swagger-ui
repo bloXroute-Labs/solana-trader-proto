@@ -1063,27 +1063,6 @@
             "type": "string"
           },
           {
-            "name": "contract",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP",
-              "APT_PERP",
-              "BONK_PERP",
-              "MATIC_PERP",
-              "ARB_PERP",
-              "DOGE_PERP",
-              "BNB_PERP",
-              "SUI_PERP",
-              "PEPE_PERP"
-            ],
-            "default": "ALL"
-          },
-          {
             "name": "orderID",
             "in": "query",
             "required": false,
@@ -1808,10 +1787,82 @@
         ]
       }
     },
-    "/api/v2/drift/enable-margin": {
+    "/api/v2/drift/assets": {
+      "get": {
+        "summary": "details of assets a user on Drift",
+        "description": "Returns details of assets a user has on Drift",
+        "operationId": "Api_GetDriftAssets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDriftAssetsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Drift V2"
+        ]
+      }
+    },
+    "/api/v2/drift/manage-collateral": {
+      "post": {
+        "summary": "posts collateral on Drift",
+        "description": "Returns a partially signed txn signature to manage collateral on Drift",
+        "operationId": "Api_PostDriftManageCollateral",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftManageCollateralResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftManageCollateralRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Drift V2"
+        ]
+      }
+    },
+    "/api/v2/drift/margin-enable": {
       "post": {
         "summary": "margin order",
-        "description": "Enables a margin trading on drift platform",
+        "description": "Enables a margin trading on Drift",
         "operationId": "Api_PostDriftEnableMarginTrading",
         "responses": {
           "200": {
@@ -1838,13 +1889,11 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Margin"
+          "Drift Margin V2"
         ]
       }
     },
-    "/api/v2/drift/margin-cancel": {
+    "/api/v2/drift/margin/cancel": {
       "post": {
         "summary": "cancel Drift margin orders",
         "description": "Returns a partially signed txn signature to cancel Drift margin orders",
@@ -1874,15 +1923,65 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Market"
+          "Drift Margin V2"
         ]
       }
     },
-    "/api/v2/drift/margin-open-orders": {
+    "/api/v2/drift/margin/open-order": {
       "get": {
-        "summary": "PERP order",
+        "summary": "Margin open order",
+        "description": "Returns the detail of an open margin order either by ID or ClientOrderID",
+        "operationId": "Api_GetDriftOpenMarginOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDriftOpenMarginOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "clientOrderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "Drift Margin V2"
+        ]
+      }
+    },
+    "/api/v2/drift/margin/open-orders": {
+      "get": {
+        "summary": "Margin open order",
         "description": "Returns the detail of all open margin orders",
         "operationId": "Api_GetDriftOpenMarginOrders",
         "responses": {
@@ -1924,13 +2023,11 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Margin"
+          "Drift Margin V2"
         ]
       }
     },
-    "/api/v2/drift/margin-orderbooks/{market}": {
+    "/api/v2/drift/margin/orderbooks/{market}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
         "description": "Returns perp contract's orderbook. Use limit param to reduce the number of bids/asks returned",
@@ -1972,16 +2069,14 @@
           }
         ],
         "tags": [
-          "v2",
-          "Orderbook",
-          "Market"
+          "Drift Margin V2"
         ]
       }
     },
-    "/api/v2/drift/margin-place": {
+    "/api/v2/drift/margin/place": {
       "post": {
         "summary": "margin order",
-        "description": "Places a margin order on drift platform",
+        "description": "Places a margin order on Drift",
         "operationId": "Api_PostDriftMarginOrder",
         "responses": {
           "200": {
@@ -2008,13 +2103,203 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Margin"
+          "Drift Margin V2"
         ]
       }
     },
-    "/api/v2/drift/market-depth/{contract}": {
+    "/api/v2/drift/markets": {
+      "get": {
+        "summary": "drift orderbook markets",
+        "description": "Returns the list of orderbook markets",
+        "operationId": "Api_GetDriftMarkets",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDriftMarketsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "metadata",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "Drift Margin V2"
+        ]
+      }
+    },
+    "/api/v2/drift/modify-order": {
+      "post": {
+        "summary": "modify Drift order",
+        "description": "post a modify order tx on Drift",
+        "operationId": "Api_PostModifyDriftOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostModifyDriftOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostModifyDriftOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Drift V2"
+        ]
+      }
+    },
+    "/api/v2/drift/perp/cancel": {
+      "post": {
+        "summary": "cancel perp orders on Drift",
+        "description": "Returns a partially signed txn signature to cancel perp orders on Drift",
+        "operationId": "Api_PostDriftCancelPerpOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftCancelPerpOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftCancelPerpOrderRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Drift Perp V2"
+        ]
+      }
+    },
+    "/api/v2/drift/perp/close": {
+      "post": {
+        "summary": "closes a perp position on Drift",
+        "description": "Returns a partially signed txn signature to close a perp position on Drift",
+        "operationId": "Api_PostCloseDriftPerpPositions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCloseDriftPerpPositionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCloseDriftPerpPositionsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Drift Perp V2"
+        ]
+      }
+    },
+    "/api/v2/drift/perp/contracts": {
+      "get": {
+        "summary": "details of available perp contracts on Drift",
+        "description": "Returns details of available perp contracts on Drift",
+        "operationId": "Api_GetDriftPerpContracts",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDriftPerpContractsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Drift Perp V2"
+        ]
+      }
+    },
+    "/api/v2/drift/perp/liquidate": {
+      "post": {
+        "summary": "liquidate perp positions",
+        "description": "Returns a partially signed txn signature to liquidate perp positions on Drift",
+        "operationId": "Api_PostLiquidateDriftPerp",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostLiquidateDriftPerpResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostLiquidateDriftPerpRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Drift Perp V2"
+        ]
+      }
+    },
+    "/api/v2/drift/perp/market-depth/{contract}": {
       "get": {
         "summary": "Perpetuals contract orderbook",
         "description": "Returns Drift contract's market depth data. Use limit param to reduce the number of bids/asks's data points returned",
@@ -2050,21 +2335,20 @@
           }
         ],
         "tags": [
-          "v2",
-          "Drift"
+          "Drift Perp V2"
         ]
       }
     },
-    "/api/v2/drift/markets": {
+    "/api/v2/drift/perp/open-order": {
       "get": {
-        "summary": "drift orderbook markets",
-        "description": "Returns the list of orderbook markets",
-        "operationId": "Api_GetDriftMarkets",
+        "summary": "PERP order",
+        "description": "Returns the detail of an open perp order either by ID or ClientOrderID",
+        "operationId": "Api_GetDriftOpenPerpOrder",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetDriftMarketsResponse"
+              "$ref": "#/definitions/apiGetDriftOpenPerpOrderResponse"
             }
           },
           "default": {
@@ -2076,102 +2360,47 @@
         },
         "parameters": [
           {
-            "name": "metadata",
+            "name": "ownerAddress",
             "in": "query",
             "required": false,
-            "type": "boolean"
-          }
-        ],
-        "tags": [
-          "v2",
-          "Market",
-          "Orderbook"
-        ]
-      }
-    },
-    "/api/v2/drift/modify-order": {
-      "post": {
-        "summary": "modify Drift order",
-        "description": "post a modify order tx on Drift platform",
-        "operationId": "Api_PostModifyDriftOrder",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostModifyDriftOrderResponse"
-            }
+            "type": "string"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiPostModifyDriftOrderRequest"
-            }
-          }
-        ],
-        "tags": [
-          "v2",
-          "Trade",
-          "Market"
-        ]
-      }
-    },
-    "/api/v2/drift/perp-cancel": {
-      "post": {
-        "summary": "cancel perp orders on Drift",
-        "description": "Returns a partially signed txn signature to cancel perp orders on Drift",
-        "operationId": "Api_PostDriftCancelPerpOrder",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostDriftCancelPerpOrderResponse"
-            }
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiPostDriftCancelPerpOrderRequest"
-            }
+            "name": "orderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "clientOrderID",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Perp",
-          "Orderbook"
+          "Drift V2"
         ]
       }
     },
-    "/api/v2/drift/perp-open-orders": {
+    "/api/v2/drift/perp/open-orders": {
       "get": {
         "summary": "Drift open perp order",
         "description": "Returns the list current open perp orders on Drift",
-        "operationId": "Api_GetDriftPerpOpenOrders",
+        "operationId": "Api_GetDriftOpenPerpOrders",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetDriftPerpOpenOrdersResponse"
+              "$ref": "#/definitions/apiGetDriftOpenPerpOrdersResponse"
             }
           },
           "default": {
@@ -2206,14 +2435,51 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Perp",
-          "Orderbook"
+          "Drift Perp V2"
         ]
       }
     },
-    "/api/v2/drift/perp-positions": {
+    "/api/v2/drift/perp/orderbook/{contract}": {
+      "get": {
+        "summary": "Perpetuals contract orderbook on Drift",
+        "description": "Returns perp contract's orderbook on Drift. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetDriftPerpOrderbook",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDriftPerpOrderbookResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "contract",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Drift Perp V2"
+        ]
+      }
+    },
+    "/api/v2/drift/perp/positions": {
       "get": {
         "summary": "Drift perp positions",
         "description": "Returns the list current Drift perp positions",
@@ -2257,10 +2523,145 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Perp",
-          "Orderbook"
+          "Drift Perp V2"
+        ]
+      }
+    },
+    "/api/v2/drift/perp/settle-pnl": {
+      "post": {
+        "summary": "settle pnl on Drift",
+        "description": "Returns a partially signed txn signature to settle pnl on Drift",
+        "operationId": "Api_PostDriftSettlePNL",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftSettlePNLResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftSettlePNLRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Drift Perp V2"
+        ]
+      }
+    },
+    "/api/v2/drift/perp/settle-pnls": {
+      "post": {
+        "summary": "settle pnls on Drift",
+        "description": "Returns a partially signed txn signature to settle pnls on Drift",
+        "operationId": "Api_PostDriftSettlePNLs",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftSettlePNLsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftSettlePNLsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Drift Perp V2"
+        ]
+      }
+    },
+    "/api/v2/drift/user": {
+      "get": {
+        "summary": "gets the user on Drift",
+        "description": "Returns the user info for an account on Drift",
+        "operationId": "Api_GetDriftUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDriftUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "accountAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Drift V2"
+        ]
+      },
+      "post": {
+        "summary": "creates a user profile on Drift",
+        "description": "Returns a partially signed txn signature to create a user on Drift",
+        "operationId": "Api_PostCreateDriftUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCreateDriftUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCreateDriftUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Drift V2"
         ]
       }
     },
@@ -2734,7 +3135,8 @@
           "type": "string",
           "format": "uint64"
         }
-      }
+      },
+      "title": "Drift V2"
     },
     "apiContractInfo": {
       "type": "object",
@@ -3021,6 +3423,23 @@
         }
       }
     },
+    "apiGetDriftAssetsResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "ownerAddress": {
+          "type": "string"
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAsset"
+          }
+        }
+      }
+    },
     "apiGetDriftMarginOrderbookResponse": {
       "type": "object",
       "properties": {
@@ -3130,9 +3549,26 @@
         }
       }
     },
+    "apiGetDriftOpenMarginOrderResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "ownerAddress": {
+          "type": "string"
+        },
+        "order": {
+          "$ref": "#/definitions/apiDriftMarginOrder"
+        }
+      }
+    },
     "apiGetDriftOpenMarginOrdersResponse": {
       "type": "object",
       "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
         "ownerAddress": {
           "type": "string"
         },
@@ -3144,18 +3580,32 @@
         }
       }
     },
-    "apiGetDriftPerpOpenOrdersResponse": {
+    "apiGetDriftOpenPerpOrderResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "ownerAddress": {
+          "type": "string"
+        },
+        "order": {
+          "$ref": "#/definitions/apiDriftPerpOrder"
+        }
+      }
+    },
+    "apiGetDriftOpenPerpOrdersResponse": {
       "type": "object",
       "properties": {
         "context": {
           "$ref": "#/definitions/apiContext"
         },
         "data": {
-          "$ref": "#/definitions/apiGetDriftPerpOpenOrdersValue"
+          "$ref": "#/definitions/apiGetDriftOpenPerpOrdersValue"
         }
       }
     },
-    "apiGetDriftPerpOpenOrdersValue": {
+    "apiGetDriftOpenPerpOrdersValue": {
       "type": "object",
       "properties": {
         "ownerAddress": {
@@ -3165,6 +3615,43 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiDriftPerpOrder"
+          }
+        }
+      }
+    },
+    "apiGetDriftPerpContractsResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "contracts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiContractInfo"
+          }
+        }
+      }
+    },
+    "apiGetDriftPerpOrderbookResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "contract": {
+          "type": "string"
+        },
+        "bids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPerpOrderbookItem"
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPerpOrderbookItem"
           }
         }
       }
@@ -3190,6 +3677,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiDriftPerpPosition"
+          }
+        }
+      }
+    },
+    "apiGetDriftUserResponse": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "$ref": "#/definitions/apiContext"
+        },
+        "userAccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiUserDetail"
           }
         }
       }
@@ -3289,56 +3790,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/apiMarketV2"
           }
-        }
-      }
-    },
-    "apiGetNewPerpOrdersStreamResponse": {
-      "type": "object",
-      "properties": {
-        "contract": {
-          "$ref": "#/definitions/commonPerpContract"
-        },
-        "side": {
-          "$ref": "#/definitions/commonPerpPositionSide"
-        },
-        "type": {
-          "$ref": "#/definitions/commonPerpOrderType"
-        },
-        "userAddress": {
-          "type": "string"
-        },
-        "orderID": {
-          "type": "string"
-        },
-        "clientOrderID": {
-          "type": "string"
-        },
-        "slot": {
-          "type": "string"
-        },
-        "price": {
-          "type": "number",
-          "format": "double"
-        },
-        "triggerPrice": {
-          "type": "number",
-          "format": "double"
-        },
-        "baseAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "baseAmountFilled": {
-          "type": "number",
-          "format": "double"
-        },
-        "quoteAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "quoteAmountFilled": {
-          "type": "number",
-          "format": "double"
         }
       }
     },
@@ -3666,9 +4117,8 @@
     "apiGetPerpTradesStreamResponse": {
       "type": "object",
       "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
+        "context": {
+          "$ref": "#/definitions/apiContext"
         },
         "trade": {
           "$ref": "#/definitions/apiGetPerpTradesResponse"
@@ -3952,9 +4402,6 @@
           "items": {
             "$ref": "#/definitions/apiUserDetail"
           }
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
         }
       }
     },
@@ -4586,6 +5033,34 @@
         }
       }
     },
+    "apiPostCloseDriftPerpPositionsRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "contracts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "apiPostCloseDriftPerpPositionsResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        }
+      }
+    },
     "apiPostClosePerpPositionsRequest": {
       "type": "object",
       "properties": {
@@ -4617,6 +5092,32 @@
         }
       }
     },
+    "apiPostCreateDriftUserRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "subAccountID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "accountName": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostCreateDriftUserResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
     "apiPostCreateUserRequest": {
       "type": "object",
       "properties": {
@@ -4643,9 +5144,6 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessage"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
         }
       }
     },
@@ -4715,6 +5213,35 @@
         }
       }
     },
+    "apiPostDriftManageCollateralRequest": {
+      "type": "object",
+      "properties": {
+        "accountAddress": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "toAccountAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostDriftManageCollateralResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
     "apiPostDriftMarginOrderRequest": {
       "type": "object",
       "properties": {
@@ -4755,6 +5282,82 @@
       }
     },
     "apiPostDriftMarginOrderResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostDriftSettlePNLRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "settleeAccountAddress": {
+          "type": "string"
+        },
+        "contract": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostDriftSettlePNLResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostDriftSettlePNLsRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "settleeAccountAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contract": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostDriftSettlePNLsResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        }
+      }
+    },
+    "apiPostLiquidateDriftPerpRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "settleeAccountAddress": {
+          "type": "string"
+        },
+        "contract": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostLiquidateDriftPerpResponse": {
       "type": "object",
       "properties": {
         "transaction": {
