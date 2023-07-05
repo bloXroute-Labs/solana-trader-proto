@@ -31197,10 +31197,8 @@ proto.api.PostCloseDriftPerpPositionsRequest.deserializeBinaryFromReader = funct
       msg.setAccountaddress(value);
       break;
     case 3:
-      var values = /** @type {!Array<!proto.common.PerpContract>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addContracts(values[i]);
-      }
+      var value = /** @type {string} */ (reader.readString());
+      msg.addContracts(value);
       break;
     default:
       reader.skipField();
@@ -31247,7 +31245,7 @@ proto.api.PostCloseDriftPerpPositionsRequest.serializeBinaryToWriter = function(
   }
   f = message.getContractsList();
   if (f.length > 0) {
-    writer.writePackedEnum(
+    writer.writeRepeatedString(
       3,
       f
     );
@@ -31292,16 +31290,16 @@ proto.api.PostCloseDriftPerpPositionsRequest.prototype.setAccountaddress = funct
 
 
 /**
- * repeated common.PerpContract contracts = 3;
- * @return {!Array<!proto.common.PerpContract>}
+ * repeated string contracts = 3;
+ * @return {!Array<string>}
  */
 proto.api.PostCloseDriftPerpPositionsRequest.prototype.getContractsList = function() {
-  return /** @type {!Array<!proto.common.PerpContract>} */ (jspb.Message.getRepeatedField(this, 3));
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
 
 /**
- * @param {!Array<!proto.common.PerpContract>} value
+ * @param {!Array<string>} value
  * @return {!proto.api.PostCloseDriftPerpPositionsRequest} returns this
  */
 proto.api.PostCloseDriftPerpPositionsRequest.prototype.setContractsList = function(value) {
@@ -31310,7 +31308,7 @@ proto.api.PostCloseDriftPerpPositionsRequest.prototype.setContractsList = functi
 
 
 /**
- * @param {!proto.common.PerpContract} value
+ * @param {string} value
  * @param {number=} opt_index
  * @return {!proto.api.PostCloseDriftPerpPositionsRequest} returns this
  */
@@ -31520,7 +31518,7 @@ proto.api.GetDriftPerpOrderbookRequest.prototype.toObject = function(opt_include
  */
 proto.api.GetDriftPerpOrderbookRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    contract: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    contract: jspb.Message.getFieldWithDefault(msg, 1, ""),
     limit: jspb.Message.getFieldWithDefault(msg, 2, 0)
   };
 
@@ -31559,7 +31557,7 @@ proto.api.GetDriftPerpOrderbookRequest.deserializeBinaryFromReader = function(ms
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setContract(value);
       break;
     case 2:
@@ -31596,8 +31594,8 @@ proto.api.GetDriftPerpOrderbookRequest.prototype.serializeBinary = function() {
 proto.api.GetDriftPerpOrderbookRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getContract();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       1,
       f
     );
@@ -31613,20 +31611,20 @@ proto.api.GetDriftPerpOrderbookRequest.serializeBinaryToWriter = function(messag
 
 
 /**
- * optional common.PerpContract contract = 1;
- * @return {!proto.common.PerpContract}
+ * optional string contract = 1;
+ * @return {string}
  */
 proto.api.GetDriftPerpOrderbookRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
- * @param {!proto.common.PerpContract} value
+ * @param {string} value
  * @return {!proto.api.GetDriftPerpOrderbookRequest} returns this
  */
 proto.api.GetDriftPerpOrderbookRequest.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 1, value);
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
@@ -31688,7 +31686,7 @@ proto.api.GetDriftPerpOrderbookResponse.prototype.toObject = function(opt_includ
 proto.api.GetDriftPerpOrderbookResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
-    contract: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    contract: jspb.Message.getFieldWithDefault(msg, 2, ""),
     bidsList: jspb.Message.toObjectList(msg.getBidsList(),
     proto.api.PerpOrderbookItem.toObject, includeInstance),
     asksList: jspb.Message.toObjectList(msg.getAsksList(),
@@ -31735,7 +31733,7 @@ proto.api.GetDriftPerpOrderbookResponse.deserializeBinaryFromReader = function(m
       msg.setContext(value);
       break;
     case 2:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setContract(value);
       break;
     case 3:
@@ -31786,8 +31784,8 @@ proto.api.GetDriftPerpOrderbookResponse.serializeBinaryToWriter = function(messa
     );
   }
   f = message.getContract();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
@@ -31849,20 +31847,20 @@ proto.api.GetDriftPerpOrderbookResponse.prototype.hasContext = function() {
 
 
 /**
- * optional common.PerpContract contract = 2;
- * @return {!proto.common.PerpContract}
+ * optional string contract = 2;
+ * @return {string}
  */
 proto.api.GetDriftPerpOrderbookResponse.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {!proto.common.PerpContract} value
+ * @param {string} value
  * @return {!proto.api.GetDriftPerpOrderbookResponse} returns this
  */
 proto.api.GetDriftPerpOrderbookResponse.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
@@ -41924,8 +41922,8 @@ proto.api.PostDriftManageCollateralRequest.toObject = function(includeInstance, 
   var f, obj = {
     accountaddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
-    type: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    token: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    type: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    token: jspb.Message.getFieldWithDefault(msg, 4, ""),
     toaccountaddress: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
@@ -41972,11 +41970,11 @@ proto.api.PostDriftManageCollateralRequest.deserializeBinaryFromReader = functio
       msg.setAmount(value);
       break;
     case 3:
-      var value = /** @type {!proto.common.PerpCollateralType} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setType(value);
       break;
     case 4:
-      var value = /** @type {!proto.common.PerpCollateralToken} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setToken(value);
       break;
     case 5:
@@ -42027,15 +42025,15 @@ proto.api.PostDriftManageCollateralRequest.serializeBinaryToWriter = function(me
     );
   }
   f = message.getType();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       3,
       f
     );
   }
   f = message.getToken();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       4,
       f
     );
@@ -42087,38 +42085,38 @@ proto.api.PostDriftManageCollateralRequest.prototype.setAmount = function(value)
 
 
 /**
- * optional common.PerpCollateralType type = 3;
- * @return {!proto.common.PerpCollateralType}
+ * optional string type = 3;
+ * @return {string}
  */
 proto.api.PostDriftManageCollateralRequest.prototype.getType = function() {
-  return /** @type {!proto.common.PerpCollateralType} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * @param {!proto.common.PerpCollateralType} value
+ * @param {string} value
  * @return {!proto.api.PostDriftManageCollateralRequest} returns this
  */
 proto.api.PostDriftManageCollateralRequest.prototype.setType = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional common.PerpCollateralToken token = 4;
- * @return {!proto.common.PerpCollateralToken}
+ * optional string token = 4;
+ * @return {string}
  */
 proto.api.PostDriftManageCollateralRequest.prototype.getToken = function() {
-  return /** @type {!proto.common.PerpCollateralToken} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
 /**
- * @param {!proto.common.PerpCollateralToken} value
+ * @param {string} value
  * @return {!proto.api.PostDriftManageCollateralRequest} returns this
  */
 proto.api.PostDriftManageCollateralRequest.prototype.setToken = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
@@ -42637,7 +42635,7 @@ proto.api.PostDriftSettlePNLRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     settleeaccountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    contract: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    contract: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -42683,7 +42681,7 @@ proto.api.PostDriftSettlePNLRequest.deserializeBinaryFromReader = function(msg, 
       msg.setSettleeaccountaddress(value);
       break;
     case 3:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setContract(value);
       break;
     default:
@@ -42730,8 +42728,8 @@ proto.api.PostDriftSettlePNLRequest.serializeBinaryToWriter = function(message, 
     );
   }
   f = message.getContract();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       3,
       f
     );
@@ -42776,20 +42774,20 @@ proto.api.PostDriftSettlePNLRequest.prototype.setSettleeaccountaddress = functio
 
 
 /**
- * optional common.PerpContract contract = 3;
- * @return {!proto.common.PerpContract}
+ * optional string contract = 3;
+ * @return {string}
  */
 proto.api.PostDriftSettlePNLRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * @param {!proto.common.PerpContract} value
+ * @param {string} value
  * @return {!proto.api.PostDriftSettlePNLRequest} returns this
  */
 proto.api.PostDriftSettlePNLRequest.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -43386,7 +43384,7 @@ proto.api.PostDriftSettlePNLsRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     settleeaccountaddressesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
-    contract: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    contract: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -43432,7 +43430,7 @@ proto.api.PostDriftSettlePNLsRequest.deserializeBinaryFromReader = function(msg,
       msg.addSettleeaccountaddresses(value);
       break;
     case 3:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setContract(value);
       break;
     default:
@@ -43479,8 +43477,8 @@ proto.api.PostDriftSettlePNLsRequest.serializeBinaryToWriter = function(message,
     );
   }
   f = message.getContract();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       3,
       f
     );
@@ -43544,20 +43542,20 @@ proto.api.PostDriftSettlePNLsRequest.prototype.clearSettleeaccountaddressesList 
 
 
 /**
- * optional common.PerpContract contract = 3;
- * @return {!proto.common.PerpContract}
+ * optional string contract = 3;
+ * @return {string}
  */
 proto.api.PostDriftSettlePNLsRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * @param {!proto.common.PerpContract} value
+ * @param {string} value
  * @return {!proto.api.PostDriftSettlePNLsRequest} returns this
  */
 proto.api.PostDriftSettlePNLsRequest.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
@@ -43755,7 +43753,7 @@ proto.api.PostLiquidateDriftPerpRequest.toObject = function(includeInstance, msg
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     settleeaccountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    contract: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    contract: jspb.Message.getFieldWithDefault(msg, 3, ""),
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
   };
 
@@ -43802,7 +43800,7 @@ proto.api.PostLiquidateDriftPerpRequest.deserializeBinaryFromReader = function(m
       msg.setSettleeaccountaddress(value);
       break;
     case 3:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setContract(value);
       break;
     case 4:
@@ -43853,8 +43851,8 @@ proto.api.PostLiquidateDriftPerpRequest.serializeBinaryToWriter = function(messa
     );
   }
   f = message.getContract();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       3,
       f
     );
@@ -43906,20 +43904,20 @@ proto.api.PostLiquidateDriftPerpRequest.prototype.setSettleeaccountaddress = fun
 
 
 /**
- * optional common.PerpContract contract = 3;
- * @return {!proto.common.PerpContract}
+ * optional string contract = 3;
+ * @return {string}
  */
 proto.api.PostLiquidateDriftPerpRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * @param {!proto.common.PerpContract} value
+ * @param {string} value
  * @return {!proto.api.PostLiquidateDriftPerpRequest} returns this
  */
 proto.api.PostLiquidateDriftPerpRequest.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

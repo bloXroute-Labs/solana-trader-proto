@@ -1808,9 +1808,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Perp",
-          "Trade"
+          "Drift V2"
         ]
       }
     },
@@ -1844,8 +1842,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade"
+          "Drift V2"
         ]
       }
     },
@@ -1879,9 +1876,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Margin"
+          "Drift Margin V2"
         ]
       }
     },
@@ -1915,9 +1910,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Market"
+          "Drift Margin V2"
         ]
       }
     },
@@ -1969,9 +1962,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Margin"
+          "Drift Margin V2"
         ]
       }
     },
@@ -2019,9 +2010,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Margin"
+          "Drift Margin V2"
         ]
       }
     },
@@ -2067,10 +2056,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Orderbook",
-          "Margin",
-          "Market"
+          "Drift Margin V2"
         ]
       }
     },
@@ -2104,9 +2090,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Margin"
+          "Drift Margin V2"
         ]
       }
     },
@@ -2138,9 +2122,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Market",
-          "Orderbook"
+          "Drift Margin V2"
         ]
       }
     },
@@ -2174,9 +2156,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Market"
+          "Drift V2"
         ]
       }
     },
@@ -2210,10 +2190,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Perp",
-          "Orderbook"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2247,9 +2224,7 @@
           }
         ],
         "tags": [
-          "Trade",
-          "Perp",
-          "Orderbook"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2273,9 +2248,7 @@
           }
         },
         "tags": [
-          "v2",
-          "Perp",
-          "Market"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2309,9 +2282,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Perp",
-          "Trade"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2351,9 +2322,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Drift",
-          "Perp"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2405,10 +2374,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Perp",
-          "Orderbook"
+          "Drift V2"
         ]
       }
     },
@@ -2456,10 +2422,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Perp",
-          "Orderbook"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2487,21 +2450,7 @@
             "name": "contract",
             "in": "path",
             "required": true,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "SOL_PERP",
-              "ETH_PERP",
-              "BTC_PERP",
-              "APT_PERP",
-              "BONK_PERP",
-              "MATIC_PERP",
-              "ARB_PERP",
-              "DOGE_PERP",
-              "BNB_PERP",
-              "SUI_PERP",
-              "PEPE_PERP"
-            ]
+            "type": "string"
           },
           {
             "name": "limit",
@@ -2513,10 +2462,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Perp",
-          "Orderbook",
-          "Market"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2564,10 +2510,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade",
-          "Perp",
-          "Orderbook"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2601,9 +2544,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Perp",
-          "Trade"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2637,9 +2578,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Perp",
-          "Trade"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2677,8 +2616,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade"
+          "Drift V2"
         ]
       },
       "post": {
@@ -2710,8 +2648,7 @@
           }
         ],
         "tags": [
-          "v2",
-          "Trade"
+          "Drift V2"
         ]
       }
     }
@@ -3313,7 +3250,7 @@
           "$ref": "#/definitions/apiContext"
         },
         "contract": {
-          "$ref": "#/definitions/commonPerpContract"
+          "type": "string"
         },
         "bids": {
           "type": "array",
@@ -4539,7 +4476,7 @@
         "contracts": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/commonPerpContract"
+            "type": "string"
           }
         }
       }
@@ -4718,10 +4655,10 @@
           "format": "double"
         },
         "type": {
-          "$ref": "#/definitions/commonPerpCollateralType"
+          "type": "string"
         },
         "token": {
-          "$ref": "#/definitions/commonPerpCollateralToken"
+          "type": "string"
         },
         "toAccountAddress": {
           "type": "string"
@@ -4793,7 +4730,7 @@
           "type": "string"
         },
         "contract": {
-          "$ref": "#/definitions/commonPerpContract"
+          "type": "string"
         }
       }
     },
@@ -4818,7 +4755,7 @@
           }
         },
         "contract": {
-          "$ref": "#/definitions/commonPerpContract"
+          "type": "string"
         }
       }
     },
@@ -4843,7 +4780,7 @@
           "type": "string"
         },
         "contract": {
-          "$ref": "#/definitions/commonPerpContract"
+          "type": "string"
         },
         "amount": {
           "type": "number",

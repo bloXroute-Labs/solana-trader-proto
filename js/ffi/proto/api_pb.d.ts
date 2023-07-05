@@ -3511,9 +3511,9 @@ export class PostCloseDriftPerpPositionsRequest extends jspb.Message {
     getAccountaddress(): string;
     setAccountaddress(value: string): PostCloseDriftPerpPositionsRequest;
     clearContractsList(): void;
-    getContractsList(): Array<common_pb.PerpContract>;
-    setContractsList(value: Array<common_pb.PerpContract>): PostCloseDriftPerpPositionsRequest;
-    addContracts(value: common_pb.PerpContract, index?: number): common_pb.PerpContract;
+    getContractsList(): Array<string>;
+    setContractsList(value: Array<string>): PostCloseDriftPerpPositionsRequest;
+    addContracts(value: string, index?: number): string;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCloseDriftPerpPositionsRequest.AsObject;
@@ -3529,7 +3529,7 @@ export namespace PostCloseDriftPerpPositionsRequest {
     export type AsObject = {
         owneraddress: string,
         accountaddress: string,
-        contractsList: Array<common_pb.PerpContract>,
+        contractsList: Array<string>,
     }
 }
 
@@ -3556,8 +3556,8 @@ export namespace PostCloseDriftPerpPositionsResponse {
 }
 
 export class GetDriftPerpOrderbookRequest extends jspb.Message { 
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): GetDriftPerpOrderbookRequest;
+    getContract(): string;
+    setContract(value: string): GetDriftPerpOrderbookRequest;
     getLimit(): number;
     setLimit(value: number): GetDriftPerpOrderbookRequest;
 
@@ -3573,7 +3573,7 @@ export class GetDriftPerpOrderbookRequest extends jspb.Message {
 
 export namespace GetDriftPerpOrderbookRequest {
     export type AsObject = {
-        contract: common_pb.PerpContract,
+        contract: string,
         limit: number,
     }
 }
@@ -3584,8 +3584,8 @@ export class GetDriftPerpOrderbookResponse extends jspb.Message {
     clearContext(): void;
     getContext(): Context | undefined;
     setContext(value?: Context): GetDriftPerpOrderbookResponse;
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): GetDriftPerpOrderbookResponse;
+    getContract(): string;
+    setContract(value: string): GetDriftPerpOrderbookResponse;
     clearBidsList(): void;
     getBidsList(): Array<PerpOrderbookItem>;
     setBidsList(value: Array<PerpOrderbookItem>): GetDriftPerpOrderbookResponse;
@@ -3608,7 +3608,7 @@ export class GetDriftPerpOrderbookResponse extends jspb.Message {
 export namespace GetDriftPerpOrderbookResponse {
     export type AsObject = {
         context?: Context.AsObject,
-        contract: common_pb.PerpContract,
+        contract: string,
         bidsList: Array<PerpOrderbookItem.AsObject>,
         asksList: Array<PerpOrderbookItem.AsObject>,
     }
@@ -4895,10 +4895,10 @@ export class PostDriftManageCollateralRequest extends jspb.Message {
     setAccountaddress(value: string): PostDriftManageCollateralRequest;
     getAmount(): number;
     setAmount(value: number): PostDriftManageCollateralRequest;
-    getType(): common_pb.PerpCollateralType;
-    setType(value: common_pb.PerpCollateralType): PostDriftManageCollateralRequest;
-    getToken(): common_pb.PerpCollateralToken;
-    setToken(value: common_pb.PerpCollateralToken): PostDriftManageCollateralRequest;
+    getType(): string;
+    setType(value: string): PostDriftManageCollateralRequest;
+    getToken(): string;
+    setToken(value: string): PostDriftManageCollateralRequest;
     getToaccountaddress(): string;
     setToaccountaddress(value: string): PostDriftManageCollateralRequest;
 
@@ -4916,8 +4916,8 @@ export namespace PostDriftManageCollateralRequest {
     export type AsObject = {
         accountaddress: string,
         amount: number,
-        type: common_pb.PerpCollateralType,
-        token: common_pb.PerpCollateralToken,
+        type: string,
+        token: string,
         toaccountaddress: string,
     }
 }
@@ -4995,8 +4995,8 @@ export class PostDriftSettlePNLRequest extends jspb.Message {
     setOwneraddress(value: string): PostDriftSettlePNLRequest;
     getSettleeaccountaddress(): string;
     setSettleeaccountaddress(value: string): PostDriftSettlePNLRequest;
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): PostDriftSettlePNLRequest;
+    getContract(): string;
+    setContract(value: string): PostDriftSettlePNLRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostDriftSettlePNLRequest.AsObject;
@@ -5012,7 +5012,7 @@ export namespace PostDriftSettlePNLRequest {
     export type AsObject = {
         owneraddress: string,
         settleeaccountaddress: string,
-        contract: common_pb.PerpContract,
+        contract: string,
     }
 }
 
@@ -5100,8 +5100,8 @@ export class PostDriftSettlePNLsRequest extends jspb.Message {
     getSettleeaccountaddressesList(): Array<string>;
     setSettleeaccountaddressesList(value: Array<string>): PostDriftSettlePNLsRequest;
     addSettleeaccountaddresses(value: string, index?: number): string;
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): PostDriftSettlePNLsRequest;
+    getContract(): string;
+    setContract(value: string): PostDriftSettlePNLsRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostDriftSettlePNLsRequest.AsObject;
@@ -5117,7 +5117,7 @@ export namespace PostDriftSettlePNLsRequest {
     export type AsObject = {
         owneraddress: string,
         settleeaccountaddressesList: Array<string>,
-        contract: common_pb.PerpContract,
+        contract: string,
     }
 }
 
@@ -5148,8 +5148,8 @@ export class PostLiquidateDriftPerpRequest extends jspb.Message {
     setOwneraddress(value: string): PostLiquidateDriftPerpRequest;
     getSettleeaccountaddress(): string;
     setSettleeaccountaddress(value: string): PostLiquidateDriftPerpRequest;
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): PostLiquidateDriftPerpRequest;
+    getContract(): string;
+    setContract(value: string): PostLiquidateDriftPerpRequest;
     getAmount(): number;
     setAmount(value: number): PostLiquidateDriftPerpRequest;
 
@@ -5167,7 +5167,7 @@ export namespace PostLiquidateDriftPerpRequest {
     export type AsObject = {
         owneraddress: string,
         settleeaccountaddress: string,
-        contract: common_pb.PerpContract,
+        contract: string,
         amount: number,
     }
 }

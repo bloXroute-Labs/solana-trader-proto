@@ -18,6 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
+	// Drift V2
 	PostCloseDriftPerpPositions(ctx context.Context, in *PostCloseDriftPerpPositionsRequest, opts ...grpc.CallOption) (*PostCloseDriftPerpPositionsResponse, error)
 	GetDriftPerpOrderbook(ctx context.Context, in *GetDriftPerpOrderbookRequest, opts ...grpc.CallOption) (*GetDriftPerpOrderbookResponse, error)
 	PostCreateDriftUser(ctx context.Context, in *PostCreateDriftUserRequest, opts ...grpc.CallOption) (*PostCreateDriftUserResponse, error)
@@ -85,16 +86,27 @@ type ApiClient interface {
 	PostCancelPerpOrders(ctx context.Context, in *PostCancelPerpOrdersRequest, opts ...grpc.CallOption) (*PostCancelPerpOrdersResponse, error)
 	// migrated to v2
 	PostCancelPerpOrder(ctx context.Context, in *PostCancelPerpOrderRequest, opts ...grpc.CallOption) (*PostCancelPerpOrderResponse, error)
+	// migrated to v2
 	PostClosePerpPositions(ctx context.Context, in *PostClosePerpPositionsRequest, opts ...grpc.CallOption) (*PostClosePerpPositionsResponse, error)
+	// migrated to v2
 	GetPerpOrderbook(ctx context.Context, in *GetPerpOrderbookRequest, opts ...grpc.CallOption) (*GetPerpOrderbookResponse, error)
+	// migrated to v2
 	PostCreateUser(ctx context.Context, in *PostCreateUserRequest, opts ...grpc.CallOption) (*PostCreateUserResponse, error)
+	// migrated to v2
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	// migrated to v2
 	PostManageCollateral(ctx context.Context, in *PostManageCollateralRequest, opts ...grpc.CallOption) (*PostManageCollateralResponse, error)
+	// migrated to v2
 	PostSettlePNL(ctx context.Context, in *PostSettlePNLRequest, opts ...grpc.CallOption) (*PostSettlePNLResponse, error)
+	// migrated to v2
 	PostSettlePNLs(ctx context.Context, in *PostSettlePNLsRequest, opts ...grpc.CallOption) (*PostSettlePNLsResponse, error)
+	// migrated to v2
 	GetAssets(ctx context.Context, in *GetAssetsRequest, opts ...grpc.CallOption) (*GetAssetsResponse, error)
+	// migrated to v2
 	GetPerpContracts(ctx context.Context, in *GetPerpContractsRequest, opts ...grpc.CallOption) (*GetPerpContractsResponse, error)
+	// migrated to v2
 	PostLiquidatePerp(ctx context.Context, in *PostLiquidatePerpRequest, opts ...grpc.CallOption) (*PostLiquidatePerpResponse, error)
+	// migrated to v2
 	GetOpenPerpOrder(ctx context.Context, in *GetOpenPerpOrderRequest, opts ...grpc.CallOption) (*GetOpenPerpOrderResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
@@ -1208,6 +1220,7 @@ func (x *apiGetPerpTradesStreamClient) Recv() (*GetPerpTradesStreamResponse, err
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
 type ApiServer interface {
+	// Drift V2
 	PostCloseDriftPerpPositions(context.Context, *PostCloseDriftPerpPositionsRequest) (*PostCloseDriftPerpPositionsResponse, error)
 	GetDriftPerpOrderbook(context.Context, *GetDriftPerpOrderbookRequest) (*GetDriftPerpOrderbookResponse, error)
 	PostCreateDriftUser(context.Context, *PostCreateDriftUserRequest) (*PostCreateDriftUserResponse, error)
@@ -1275,16 +1288,27 @@ type ApiServer interface {
 	PostCancelPerpOrders(context.Context, *PostCancelPerpOrdersRequest) (*PostCancelPerpOrdersResponse, error)
 	// migrated to v2
 	PostCancelPerpOrder(context.Context, *PostCancelPerpOrderRequest) (*PostCancelPerpOrderResponse, error)
+	// migrated to v2
 	PostClosePerpPositions(context.Context, *PostClosePerpPositionsRequest) (*PostClosePerpPositionsResponse, error)
+	// migrated to v2
 	GetPerpOrderbook(context.Context, *GetPerpOrderbookRequest) (*GetPerpOrderbookResponse, error)
+	// migrated to v2
 	PostCreateUser(context.Context, *PostCreateUserRequest) (*PostCreateUserResponse, error)
+	// migrated to v2
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	// migrated to v2
 	PostManageCollateral(context.Context, *PostManageCollateralRequest) (*PostManageCollateralResponse, error)
+	// migrated to v2
 	PostSettlePNL(context.Context, *PostSettlePNLRequest) (*PostSettlePNLResponse, error)
+	// migrated to v2
 	PostSettlePNLs(context.Context, *PostSettlePNLsRequest) (*PostSettlePNLsResponse, error)
+	// migrated to v2
 	GetAssets(context.Context, *GetAssetsRequest) (*GetAssetsResponse, error)
+	// migrated to v2
 	GetPerpContracts(context.Context, *GetPerpContractsRequest) (*GetPerpContractsResponse, error)
+	// migrated to v2
 	PostLiquidatePerp(context.Context, *PostLiquidatePerpRequest) (*PostLiquidatePerpResponse, error)
+	// migrated to v2
 	GetOpenPerpOrder(context.Context, *GetOpenPerpOrderRequest) (*GetOpenPerpOrderResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error

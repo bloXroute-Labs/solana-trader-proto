@@ -76,7 +76,6 @@ func request_Api_GetDriftPerpOrderbook_0(ctx context.Context, marshaler runtime.
 
 	var (
 		val string
-		e   int32
 		ok  bool
 		err error
 		_   = err
@@ -87,12 +86,10 @@ func request_Api_GetDriftPerpOrderbook_0(ctx context.Context, marshaler runtime.
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "contract")
 	}
 
-	e, err = runtime.Enum(val, common.PerpContract_value)
+	protoReq.Contract, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "contract", err)
 	}
-
-	protoReq.Contract = common.PerpContract(e)
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -112,7 +109,6 @@ func local_request_Api_GetDriftPerpOrderbook_0(ctx context.Context, marshaler ru
 
 	var (
 		val string
-		e   int32
 		ok  bool
 		err error
 		_   = err
@@ -123,12 +119,10 @@ func local_request_Api_GetDriftPerpOrderbook_0(ctx context.Context, marshaler ru
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "contract")
 	}
 
-	e, err = runtime.Enum(val, common.PerpContract_value)
+	protoReq.Contract, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "contract", err)
 	}
-
-	protoReq.Contract = common.PerpContract(e)
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)

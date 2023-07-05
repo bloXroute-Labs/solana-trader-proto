@@ -1718,7 +1718,6 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 var ApiService = exports.ApiService = {
   // Drift V2
-//
 postCloseDriftPerpPositions: {
     path: '/api.Api/PostCloseDriftPerpPositions',
     requestStream: false,
@@ -1994,9 +1993,7 @@ postCloseDriftPerpPositions: {
     responseSerialize: serialize_api_GetDriftMarketDepthStreamResponse,
     responseDeserialize: deserialize_api_GetDriftMarketDepthStreamResponse,
   },
-  // end of Drift V2
-//
-getPrice: {
+  getPrice: {
     path: '/api.Api/GetPrice',
     requestStream: false,
     responseStream: false,
@@ -2370,7 +2367,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_PostCancelPerpOrderResponse,
     responseDeserialize: deserialize_api_PostCancelPerpOrderResponse,
   },
-  postClosePerpPositions: {
+  // migrated to v2
+postClosePerpPositions: {
     path: '/api.Api/PostClosePerpPositions',
     requestStream: false,
     responseStream: false,
@@ -2381,7 +2379,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_PostClosePerpPositionsResponse,
     responseDeserialize: deserialize_api_PostClosePerpPositionsResponse,
   },
-  getPerpOrderbook: {
+  // migrated to v2
+getPerpOrderbook: {
     path: '/api.Api/GetPerpOrderbook',
     requestStream: false,
     responseStream: false,
@@ -2392,7 +2391,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_GetPerpOrderbookResponse,
     responseDeserialize: deserialize_api_GetPerpOrderbookResponse,
   },
-  postCreateUser: {
+  // migrated to v2
+postCreateUser: {
     path: '/api.Api/PostCreateUser',
     requestStream: false,
     responseStream: false,
@@ -2403,7 +2403,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_PostCreateUserResponse,
     responseDeserialize: deserialize_api_PostCreateUserResponse,
   },
-  getUser: {
+  // migrated to v2
+getUser: {
     path: '/api.Api/GetUser',
     requestStream: false,
     responseStream: false,
@@ -2414,7 +2415,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_GetUserResponse,
     responseDeserialize: deserialize_api_GetUserResponse,
   },
-  postManageCollateral: {
+  // migrated to v2
+postManageCollateral: {
     path: '/api.Api/PostManageCollateral',
     requestStream: false,
     responseStream: false,
@@ -2425,7 +2427,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_PostManageCollateralResponse,
     responseDeserialize: deserialize_api_PostManageCollateralResponse,
   },
-  postSettlePNL: {
+  // migrated to v2
+postSettlePNL: {
     path: '/api.Api/PostSettlePNL',
     requestStream: false,
     responseStream: false,
@@ -2436,7 +2439,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_PostSettlePNLResponse,
     responseDeserialize: deserialize_api_PostSettlePNLResponse,
   },
-  postSettlePNLs: {
+  // migrated to v2
+postSettlePNLs: {
     path: '/api.Api/PostSettlePNLs',
     requestStream: false,
     responseStream: false,
@@ -2447,7 +2451,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_PostSettlePNLsResponse,
     responseDeserialize: deserialize_api_PostSettlePNLsResponse,
   },
-  getAssets: {
+  // migrated to v2
+getAssets: {
     path: '/api.Api/GetAssets',
     requestStream: false,
     responseStream: false,
@@ -2458,7 +2463,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_GetAssetsResponse,
     responseDeserialize: deserialize_api_GetAssetsResponse,
   },
-  getPerpContracts: {
+  // migrated to v2
+getPerpContracts: {
     path: '/api.Api/GetPerpContracts',
     requestStream: false,
     responseStream: false,
@@ -2469,7 +2475,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_GetPerpContractsResponse,
     responseDeserialize: deserialize_api_GetPerpContractsResponse,
   },
-  postLiquidatePerp: {
+  // migrated to v2
+postLiquidatePerp: {
     path: '/api.Api/PostLiquidatePerp',
     requestStream: false,
     responseStream: false,
@@ -2480,7 +2487,8 @@ postCancelPerpOrder: {
     responseSerialize: serialize_api_PostLiquidatePerpResponse,
     responseDeserialize: deserialize_api_PostLiquidatePerpResponse,
   },
-  getOpenPerpOrder: {
+  // migrated to v2
+getOpenPerpOrder: {
     path: '/api.Api/GetOpenPerpOrder',
     requestStream: false,
     responseStream: false,

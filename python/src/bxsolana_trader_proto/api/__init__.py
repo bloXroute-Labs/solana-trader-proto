@@ -982,7 +982,7 @@ class GetDriftUserResponse(betterproto.Message):
 class PostCloseDriftPerpPositionsRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
-    contracts: List["_common__.PerpContract"] = betterproto.enum_field(3)
+    contracts: List[str] = betterproto.string_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -992,14 +992,14 @@ class PostCloseDriftPerpPositionsResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetDriftPerpOrderbookRequest(betterproto.Message):
-    contract: "_common__.PerpContract" = betterproto.enum_field(1)
+    contract: str = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
 
 
 @dataclass(eq=False, repr=False)
 class GetDriftPerpOrderbookResponse(betterproto.Message):
     context: "Context" = betterproto.message_field(1)
-    contract: "_common__.PerpContract" = betterproto.enum_field(2)
+    contract: str = betterproto.string_field(2)
     bids: List["PerpOrderbookItem"] = betterproto.message_field(3)
     asks: List["PerpOrderbookItem"] = betterproto.message_field(4)
 
@@ -1352,8 +1352,8 @@ class GetDriftOpenPerpOrderResponse(betterproto.Message):
 class PostDriftManageCollateralRequest(betterproto.Message):
     account_address: str = betterproto.string_field(1)
     amount: float = betterproto.double_field(2)
-    type: "_common__.PerpCollateralType" = betterproto.enum_field(3)
-    token: "_common__.PerpCollateralToken" = betterproto.enum_field(4)
+    type: str = betterproto.string_field(3)
+    token: str = betterproto.string_field(4)
     to_account_address: str = betterproto.string_field(5)
 
 
@@ -1377,7 +1377,7 @@ class GetDriftPerpContractsResponse(betterproto.Message):
 class PostDriftSettlePnlRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     settlee_account_address: str = betterproto.string_field(2)
-    contract: "_common__.PerpContract" = betterproto.enum_field(3)
+    contract: str = betterproto.string_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -1402,7 +1402,7 @@ class GetDriftAssetsResponse(betterproto.Message):
 class PostDriftSettlePnLsRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     settlee_account_addresses: List[str] = betterproto.string_field(2)
-    contract: "_common__.PerpContract" = betterproto.enum_field(3)
+    contract: str = betterproto.string_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -1414,7 +1414,7 @@ class PostDriftSettlePnLsResponse(betterproto.Message):
 class PostLiquidateDriftPerpRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     settlee_account_address: str = betterproto.string_field(2)
-    contract: "_common__.PerpContract" = betterproto.enum_field(3)
+    contract: str = betterproto.string_field(3)
     amount: float = betterproto.double_field(4)
 
 

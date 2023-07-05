@@ -1755,7 +1755,7 @@ message GetDriftUserResponse {
 message PostCloseDriftPerpPositionsRequest {
   string ownerAddress = 1;
   string accountAddress = 2;
-  repeated common.PerpContract contracts = 3;
+  repeated string contracts = 3;
 }
 
 message PostCloseDriftPerpPositionsResponse {
@@ -1763,13 +1763,13 @@ message PostCloseDriftPerpPositionsResponse {
 }
 
 message GetDriftPerpOrderbookRequest {
-  common.PerpContract contract = 1;
+  string contract = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
 }
 
 message GetDriftPerpOrderbookResponse {
   Context context = 1;
-  common.PerpContract contract = 2;
+  string contract = 2;
   repeated PerpOrderbookItem bids = 3;
   repeated PerpOrderbookItem asks = 4;
 }
@@ -2086,8 +2086,8 @@ message GetDriftOpenPerpOrderResponse {
 message PostDriftManageCollateralRequest {
   string accountAddress = 1;
   double amount = 2;
-  common.PerpCollateralType type = 3;
-  common.PerpCollateralToken token = 4;
+  string type = 3;
+  string token = 4;
   string toAccountAddress = 5;
 }
 
@@ -2106,7 +2106,7 @@ message GetDriftPerpContractsResponse {
 message PostDriftSettlePNLRequest {
   string ownerAddress = 1;
   string settleeAccountAddress = 2;
-  common.PerpContract contract = 3;
+  string contract = 3;
 }
 
 message PostDriftSettlePNLResponse {
@@ -2127,7 +2127,7 @@ message GetDriftAssetsResponse {
 message PostDriftSettlePNLsRequest {
   string ownerAddress = 1;
   repeated string settleeAccountAddresses = 2;
-  common.PerpContract contract = 3;
+  string contract = 3;
 }
 
 message PostDriftSettlePNLsResponse {
@@ -2137,7 +2137,7 @@ message PostDriftSettlePNLsResponse {
 message PostLiquidateDriftPerpRequest {
   string ownerAddress = 1;
   string settleeAccountAddress = 2;
-  common.PerpContract contract = 3;
+  string contract = 3;
   double amount = 4;
 }
 
