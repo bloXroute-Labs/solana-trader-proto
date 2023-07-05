@@ -45,6 +45,8 @@ goog.exportSymbol('proto.api.GetAssetsRequest', null, global);
 goog.exportSymbol('proto.api.GetAssetsResponse', null, global);
 goog.exportSymbol('proto.api.GetBlockStreamRequest', null, global);
 goog.exportSymbol('proto.api.GetBlockStreamResponse', null, global);
+goog.exportSymbol('proto.api.GetDriftAssetsRequest', null, global);
+goog.exportSymbol('proto.api.GetDriftAssetsResponse', null, global);
 goog.exportSymbol('proto.api.GetDriftMarginOrderbookRequest', null, global);
 goog.exportSymbol('proto.api.GetDriftMarginOrderbookResponse', null, global);
 goog.exportSymbol('proto.api.GetDriftMarginOrderbookValue', null, global);
@@ -58,14 +60,24 @@ goog.exportSymbol('proto.api.GetDriftMarketDepthsStreamRequest', null, global);
 goog.exportSymbol('proto.api.GetDriftMarketsRequest', null, global);
 goog.exportSymbol('proto.api.GetDriftMarketsResponse', null, global);
 goog.exportSymbol('proto.api.GetDriftMarketsValue', null, global);
+goog.exportSymbol('proto.api.GetDriftOpenMarginOrderRequest', null, global);
+goog.exportSymbol('proto.api.GetDriftOpenMarginOrderResponse', null, global);
 goog.exportSymbol('proto.api.GetDriftOpenMarginOrdersRequest', null, global);
 goog.exportSymbol('proto.api.GetDriftOpenMarginOrdersResponse', null, global);
-goog.exportSymbol('proto.api.GetDriftPerpOpenOrdersRequest', null, global);
-goog.exportSymbol('proto.api.GetDriftPerpOpenOrdersResponse', null, global);
-goog.exportSymbol('proto.api.GetDriftPerpOpenOrdersValue', null, global);
+goog.exportSymbol('proto.api.GetDriftOpenPerpOrderRequest', null, global);
+goog.exportSymbol('proto.api.GetDriftOpenPerpOrderResponse', null, global);
+goog.exportSymbol('proto.api.GetDriftOpenPerpOrdersRequest', null, global);
+goog.exportSymbol('proto.api.GetDriftOpenPerpOrdersResponse', null, global);
+goog.exportSymbol('proto.api.GetDriftOpenPerpOrdersValue', null, global);
+goog.exportSymbol('proto.api.GetDriftPerpContractsRequest', null, global);
+goog.exportSymbol('proto.api.GetDriftPerpContractsResponse', null, global);
+goog.exportSymbol('proto.api.GetDriftPerpOrderbookRequest', null, global);
+goog.exportSymbol('proto.api.GetDriftPerpOrderbookResponse', null, global);
 goog.exportSymbol('proto.api.GetDriftPerpPositionsRequest', null, global);
 goog.exportSymbol('proto.api.GetDriftPerpPositionsResponse', null, global);
 goog.exportSymbol('proto.api.GetDriftPerpPositionsValue', null, global);
+goog.exportSymbol('proto.api.GetDriftUserRequest', null, global);
+goog.exportSymbol('proto.api.GetDriftUserResponse', null, global);
 goog.exportSymbol('proto.api.GetKlineRequest', null, global);
 goog.exportSymbol('proto.api.GetKlineResponse', null, global);
 goog.exportSymbol('proto.api.GetMarketDepthRequest', null, global);
@@ -74,8 +86,6 @@ goog.exportSymbol('proto.api.GetMarketDepthsRequest', null, global);
 goog.exportSymbol('proto.api.GetMarketDepthsStreamResponse', null, global);
 goog.exportSymbol('proto.api.GetMarketsRequest', null, global);
 goog.exportSymbol('proto.api.GetMarketsResponse', null, global);
-goog.exportSymbol('proto.api.GetNewPerpOrdersStreamRequest', null, global);
-goog.exportSymbol('proto.api.GetNewPerpOrdersStreamResponse', null, global);
 goog.exportSymbol('proto.api.GetOpenOrdersRequest', null, global);
 goog.exportSymbol('proto.api.GetOpenOrdersResponse', null, global);
 goog.exportSymbol('proto.api.GetOpenPerpOrderRequest', null, global);
@@ -157,8 +167,12 @@ goog.exportSymbol('proto.api.PostCancelPerpOrderRequest', null, global);
 goog.exportSymbol('proto.api.PostCancelPerpOrderResponse', null, global);
 goog.exportSymbol('proto.api.PostCancelPerpOrdersRequest', null, global);
 goog.exportSymbol('proto.api.PostCancelPerpOrdersResponse', null, global);
+goog.exportSymbol('proto.api.PostCloseDriftPerpPositionsRequest', null, global);
+goog.exportSymbol('proto.api.PostCloseDriftPerpPositionsResponse', null, global);
 goog.exportSymbol('proto.api.PostClosePerpPositionsRequest', null, global);
 goog.exportSymbol('proto.api.PostClosePerpPositionsResponse', null, global);
+goog.exportSymbol('proto.api.PostCreateDriftUserRequest', null, global);
+goog.exportSymbol('proto.api.PostCreateDriftUserResponse', null, global);
 goog.exportSymbol('proto.api.PostCreateUserRequest', null, global);
 goog.exportSymbol('proto.api.PostCreateUserResponse', null, global);
 goog.exportSymbol('proto.api.PostDriftCancelPerpOrderRequest', null, global);
@@ -166,8 +180,16 @@ goog.exportSymbol('proto.api.PostDriftCancelPerpOrderResponse', null, global);
 goog.exportSymbol('proto.api.PostDriftCancelPerpOrderValue', null, global);
 goog.exportSymbol('proto.api.PostDriftEnableMarginTradingRequest', null, global);
 goog.exportSymbol('proto.api.PostDriftEnableMarginTradingResponse', null, global);
+goog.exportSymbol('proto.api.PostDriftManageCollateralRequest', null, global);
+goog.exportSymbol('proto.api.PostDriftManageCollateralResponse', null, global);
 goog.exportSymbol('proto.api.PostDriftMarginOrderRequest', null, global);
 goog.exportSymbol('proto.api.PostDriftMarginOrderResponse', null, global);
+goog.exportSymbol('proto.api.PostDriftSettlePNLRequest', null, global);
+goog.exportSymbol('proto.api.PostDriftSettlePNLResponse', null, global);
+goog.exportSymbol('proto.api.PostDriftSettlePNLsRequest', null, global);
+goog.exportSymbol('proto.api.PostDriftSettlePNLsResponse', null, global);
+goog.exportSymbol('proto.api.PostLiquidateDriftPerpRequest', null, global);
+goog.exportSymbol('proto.api.PostLiquidateDriftPerpResponse', null, global);
 goog.exportSymbol('proto.api.PostLiquidatePerpRequest', null, global);
 goog.exportSymbol('proto.api.PostLiquidatePerpResponse', null, global);
 goog.exportSymbol('proto.api.PostManageCollateralRequest', null, global);
@@ -2662,6 +2684,174 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.api.PostCreateDriftUserRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostCreateDriftUserRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostCreateDriftUserRequest.displayName = 'proto.api.PostCreateDriftUserRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostCreateDriftUserResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostCreateDriftUserResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostCreateDriftUserResponse.displayName = 'proto.api.PostCreateDriftUserResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftUserRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetDriftUserRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftUserRequest.displayName = 'proto.api.GetDriftUserRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftUserResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetDriftUserResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetDriftUserResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftUserResponse.displayName = 'proto.api.GetDriftUserResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostCloseDriftPerpPositionsRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostCloseDriftPerpPositionsRequest.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostCloseDriftPerpPositionsRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostCloseDriftPerpPositionsRequest.displayName = 'proto.api.PostCloseDriftPerpPositionsRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostCloseDriftPerpPositionsResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostCloseDriftPerpPositionsResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostCloseDriftPerpPositionsResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostCloseDriftPerpPositionsResponse.displayName = 'proto.api.PostCloseDriftPerpPositionsResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftPerpOrderbookRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetDriftPerpOrderbookRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftPerpOrderbookRequest.displayName = 'proto.api.GetDriftPerpOrderbookRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftPerpOrderbookResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetDriftPerpOrderbookResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetDriftPerpOrderbookResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftPerpOrderbookResponse.displayName = 'proto.api.GetDriftPerpOrderbookResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.api.PostManageCollateralRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -3061,48 +3251,6 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.api.GetNewPerpOrdersStreamRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetNewPerpOrdersStreamRequest.repeatedFields_, null);
-};
-goog.inherits(proto.api.GetNewPerpOrdersStreamRequest, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  /**
-   * @public
-   * @override
-   */
-  proto.api.GetNewPerpOrdersStreamRequest.displayName = 'proto.api.GetNewPerpOrdersStreamRequest';
-}
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.api.GetNewPerpOrdersStreamResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.api.GetNewPerpOrdersStreamResponse, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  /**
-   * @public
-   * @override
-   */
-  proto.api.GetNewPerpOrdersStreamResponse.displayName = 'proto.api.GetNewPerpOrdersStreamResponse';
-}
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
 proto.api.GetPerpTradesStreamRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetPerpTradesStreamRequest.repeatedFields_, null);
 };
@@ -3460,6 +3608,342 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.api.GetDriftOpenMarginOrderRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetDriftOpenMarginOrderRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftOpenMarginOrderRequest.displayName = 'proto.api.GetDriftOpenMarginOrderRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftOpenMarginOrderResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetDriftOpenMarginOrderResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftOpenMarginOrderResponse.displayName = 'proto.api.GetDriftOpenMarginOrderResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftOpenPerpOrderRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetDriftOpenPerpOrderRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftOpenPerpOrderRequest.displayName = 'proto.api.GetDriftOpenPerpOrderRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftOpenPerpOrderResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetDriftOpenPerpOrderResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftOpenPerpOrderResponse.displayName = 'proto.api.GetDriftOpenPerpOrderResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostDriftManageCollateralRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostDriftManageCollateralRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostDriftManageCollateralRequest.displayName = 'proto.api.PostDriftManageCollateralRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostDriftManageCollateralResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostDriftManageCollateralResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostDriftManageCollateralResponse.displayName = 'proto.api.PostDriftManageCollateralResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftPerpContractsRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetDriftPerpContractsRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftPerpContractsRequest.displayName = 'proto.api.GetDriftPerpContractsRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftPerpContractsResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetDriftPerpContractsResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetDriftPerpContractsResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftPerpContractsResponse.displayName = 'proto.api.GetDriftPerpContractsResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostDriftSettlePNLRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostDriftSettlePNLRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostDriftSettlePNLRequest.displayName = 'proto.api.PostDriftSettlePNLRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostDriftSettlePNLResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostDriftSettlePNLResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostDriftSettlePNLResponse.displayName = 'proto.api.PostDriftSettlePNLResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftAssetsRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetDriftAssetsRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftAssetsRequest.displayName = 'proto.api.GetDriftAssetsRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetDriftAssetsResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetDriftAssetsResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetDriftAssetsResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetDriftAssetsResponse.displayName = 'proto.api.GetDriftAssetsResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostDriftSettlePNLsRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostDriftSettlePNLsRequest.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostDriftSettlePNLsRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostDriftSettlePNLsRequest.displayName = 'proto.api.PostDriftSettlePNLsRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostDriftSettlePNLsResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostDriftSettlePNLsResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostDriftSettlePNLsResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostDriftSettlePNLsResponse.displayName = 'proto.api.PostDriftSettlePNLsResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostLiquidateDriftPerpRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostLiquidateDriftPerpRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostLiquidateDriftPerpRequest.displayName = 'proto.api.PostLiquidateDriftPerpRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostLiquidateDriftPerpResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostLiquidateDriftPerpResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostLiquidateDriftPerpResponse.displayName = 'proto.api.PostLiquidateDriftPerpResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.api.Context = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -3481,16 +3965,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.api.GetDriftPerpOpenOrdersRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetDriftPerpOpenOrdersRequest.repeatedFields_, null);
+proto.api.GetDriftOpenPerpOrdersRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetDriftOpenPerpOrdersRequest.repeatedFields_, null);
 };
-goog.inherits(proto.api.GetDriftPerpOpenOrdersRequest, jspb.Message);
+goog.inherits(proto.api.GetDriftOpenPerpOrdersRequest, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.api.GetDriftPerpOpenOrdersRequest.displayName = 'proto.api.GetDriftPerpOpenOrdersRequest';
+  proto.api.GetDriftOpenPerpOrdersRequest.displayName = 'proto.api.GetDriftOpenPerpOrdersRequest';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -3502,16 +3986,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.api.GetDriftPerpOpenOrdersValue = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetDriftPerpOpenOrdersValue.repeatedFields_, null);
+proto.api.GetDriftOpenPerpOrdersValue = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetDriftOpenPerpOrdersValue.repeatedFields_, null);
 };
-goog.inherits(proto.api.GetDriftPerpOpenOrdersValue, jspb.Message);
+goog.inherits(proto.api.GetDriftOpenPerpOrdersValue, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.api.GetDriftPerpOpenOrdersValue.displayName = 'proto.api.GetDriftPerpOpenOrdersValue';
+  proto.api.GetDriftOpenPerpOrdersValue.displayName = 'proto.api.GetDriftOpenPerpOrdersValue';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -3523,16 +4007,16 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.api.GetDriftPerpOpenOrdersResponse = function(opt_data) {
+proto.api.GetDriftOpenPerpOrdersResponse = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.api.GetDriftPerpOpenOrdersResponse, jspb.Message);
+goog.inherits(proto.api.GetDriftOpenPerpOrdersResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
   /**
    * @public
    * @override
    */
-  proto.api.GetDriftPerpOpenOrdersResponse.displayName = 'proto.api.GetDriftPerpOpenOrdersResponse';
+  proto.api.GetDriftOpenPerpOrdersResponse.displayName = 'proto.api.GetDriftOpenPerpOrdersResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -27491,8 +27975,7 @@ proto.api.GetUserResponse.prototype.toObject = function(opt_includeInstance) {
 proto.api.GetUserResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     useraccountsList: jspb.Message.toObjectList(msg.getUseraccountsList(),
-    proto.api.UserDetail.toObject, includeInstance),
-    project: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    proto.api.UserDetail.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -27534,10 +28017,6 @@ proto.api.GetUserResponse.deserializeBinaryFromReader = function(msg, reader) {
       reader.readMessage(value,proto.api.UserDetail.deserializeBinaryFromReader);
       msg.addUseraccounts(value);
       break;
-    case 2:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -27573,13 +28052,6 @@ proto.api.GetUserResponse.serializeBinaryToWriter = function(message, writer) {
       1,
       f,
       proto.api.UserDetail.serializeBinaryToWriter
-    );
-  }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      2,
-      f
     );
   }
 };
@@ -27620,24 +28092,6 @@ proto.api.GetUserResponse.prototype.addUseraccounts = function(opt_value, opt_in
  */
 proto.api.GetUserResponse.prototype.clearUseraccountsList = function() {
   return this.setUseraccountsList([]);
-};
-
-
-/**
- * optional Project project = 2;
- * @return {!proto.api.Project}
- */
-proto.api.GetUserResponse.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.GetUserResponse} returns this
- */
-proto.api.GetUserResponse.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
 };
 
 
@@ -28143,8 +28597,7 @@ proto.api.PostCreateUserResponse.prototype.toObject = function(opt_includeInstan
  */
 proto.api.PostCreateUserResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    transaction: (f = msg.getTransaction()) && proto.api.TransactionMessage.toObject(includeInstance, f),
-    project: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    transaction: (f = msg.getTransaction()) && proto.api.TransactionMessage.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -28186,10 +28639,6 @@ proto.api.PostCreateUserResponse.deserializeBinaryFromReader = function(msg, rea
       reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
       msg.setTransaction(value);
       break;
-    case 2:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
-      break;
     default:
       reader.skipField();
       break;
@@ -28225,13 +28674,6 @@ proto.api.PostCreateUserResponse.serializeBinaryToWriter = function(message, wri
       1,
       f,
       proto.api.TransactionMessage.serializeBinaryToWriter
-    );
-  }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      2,
-      f
     );
   }
 };
@@ -28271,24 +28713,6 @@ proto.api.PostCreateUserResponse.prototype.clearTransaction = function() {
  */
 proto.api.PostCreateUserResponse.prototype.hasTransaction = function() {
   return jspb.Message.getField(this, 1) != null;
-};
-
-
-/**
- * optional Project project = 2;
- * @return {!proto.api.Project}
- */
-proto.api.PostCreateUserResponse.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.PostCreateUserResponse} returns this
- */
-proto.api.PostCreateUserResponse.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
 };
 
 
@@ -29960,6 +30384,1578 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
+proto.api.PostCreateDriftUserRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostCreateDriftUserRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostCreateDriftUserRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCreateDriftUserRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    action: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    subaccountid: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    accountname: jspb.Message.getFieldWithDefault(msg, 4, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostCreateDriftUserRequest}
+ */
+proto.api.PostCreateDriftUserRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostCreateDriftUserRequest;
+  return proto.api.PostCreateDriftUserRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostCreateDriftUserRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostCreateDriftUserRequest}
+ */
+proto.api.PostCreateDriftUserRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAction(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setSubaccountid(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountname(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostCreateDriftUserRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostCreateDriftUserRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostCreateDriftUserRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCreateDriftUserRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getAction();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getSubaccountid();
+  if (f !== 0) {
+    writer.writeUint64(
+      3,
+      f
+    );
+  }
+  f = message.getAccountname();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostCreateDriftUserRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCreateDriftUserRequest} returns this
+ */
+proto.api.PostCreateDriftUserRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string action = 2;
+ * @return {string}
+ */
+proto.api.PostCreateDriftUserRequest.prototype.getAction = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCreateDriftUserRequest} returns this
+ */
+proto.api.PostCreateDriftUserRequest.prototype.setAction = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional uint64 subAccountID = 3;
+ * @return {number}
+ */
+proto.api.PostCreateDriftUserRequest.prototype.getSubaccountid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCreateDriftUserRequest} returns this
+ */
+proto.api.PostCreateDriftUserRequest.prototype.setSubaccountid = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional string accountName = 4;
+ * @return {string}
+ */
+proto.api.PostCreateDriftUserRequest.prototype.getAccountname = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCreateDriftUserRequest} returns this
+ */
+proto.api.PostCreateDriftUserRequest.prototype.setAccountname = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostCreateDriftUserResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostCreateDriftUserResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostCreateDriftUserResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCreateDriftUserResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transaction: (f = msg.getTransaction()) && proto.api.TransactionMessage.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostCreateDriftUserResponse}
+ */
+proto.api.PostCreateDriftUserResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostCreateDriftUserResponse;
+  return proto.api.PostCreateDriftUserResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostCreateDriftUserResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostCreateDriftUserResponse}
+ */
+proto.api.PostCreateDriftUserResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.setTransaction(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostCreateDriftUserResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostCreateDriftUserResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostCreateDriftUserResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCreateDriftUserResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransaction();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional TransactionMessage transaction = 1;
+ * @return {?proto.api.TransactionMessage}
+ */
+proto.api.PostCreateDriftUserResponse.prototype.getTransaction = function() {
+  return /** @type{?proto.api.TransactionMessage} */ (
+    jspb.Message.getWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {?proto.api.TransactionMessage|undefined} value
+ * @return {!proto.api.PostCreateDriftUserResponse} returns this
+*/
+proto.api.PostCreateDriftUserResponse.prototype.setTransaction = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.PostCreateDriftUserResponse} returns this
+ */
+proto.api.PostCreateDriftUserResponse.prototype.clearTransaction = function() {
+  return this.setTransaction(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostCreateDriftUserResponse.prototype.hasTransaction = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftUserRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftUserRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftUserRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftUserRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftUserRequest}
+ */
+proto.api.GetDriftUserRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftUserRequest;
+  return proto.api.GetDriftUserRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftUserRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftUserRequest}
+ */
+proto.api.GetDriftUserRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountaddress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftUserRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftUserRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftUserRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftUserRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getAccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.GetDriftUserRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftUserRequest} returns this
+ */
+proto.api.GetDriftUserRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string accountAddress = 2;
+ * @return {string}
+ */
+proto.api.GetDriftUserRequest.prototype.getAccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftUserRequest} returns this
+ */
+proto.api.GetDriftUserRequest.prototype.setAccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetDriftUserResponse.repeatedFields_ = [2];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftUserResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftUserResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftUserResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftUserResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
+    useraccountsList: jspb.Message.toObjectList(msg.getUseraccountsList(),
+    proto.api.UserDetail.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftUserResponse}
+ */
+proto.api.GetDriftUserResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftUserResponse;
+  return proto.api.GetDriftUserResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftUserResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftUserResponse}
+ */
+proto.api.GetDriftUserResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.Context;
+      reader.readMessage(value,proto.api.Context.deserializeBinaryFromReader);
+      msg.setContext(value);
+      break;
+    case 2:
+      var value = new proto.api.UserDetail;
+      reader.readMessage(value,proto.api.UserDetail.deserializeBinaryFromReader);
+      msg.addUseraccounts(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftUserResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftUserResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftUserResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftUserResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getContext();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.Context.serializeBinaryToWriter
+    );
+  }
+  f = message.getUseraccountsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      2,
+      f,
+      proto.api.UserDetail.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Context context = 1;
+ * @return {?proto.api.Context}
+ */
+proto.api.GetDriftUserResponse.prototype.getContext = function() {
+  return /** @type{?proto.api.Context} */ (
+    jspb.Message.getWrapperField(this, proto.api.Context, 1));
+};
+
+
+/**
+ * @param {?proto.api.Context|undefined} value
+ * @return {!proto.api.GetDriftUserResponse} returns this
+*/
+proto.api.GetDriftUserResponse.prototype.setContext = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetDriftUserResponse} returns this
+ */
+proto.api.GetDriftUserResponse.prototype.clearContext = function() {
+  return this.setContext(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetDriftUserResponse.prototype.hasContext = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * repeated UserDetail userAccounts = 2;
+ * @return {!Array<!proto.api.UserDetail>}
+ */
+proto.api.GetDriftUserResponse.prototype.getUseraccountsList = function() {
+  return /** @type{!Array<!proto.api.UserDetail>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.UserDetail, 2));
+};
+
+
+/**
+ * @param {!Array<!proto.api.UserDetail>} value
+ * @return {!proto.api.GetDriftUserResponse} returns this
+*/
+proto.api.GetDriftUserResponse.prototype.setUseraccountsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+};
+
+
+/**
+ * @param {!proto.api.UserDetail=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.UserDetail}
+ */
+proto.api.GetDriftUserResponse.prototype.addUseraccounts = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.UserDetail, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetDriftUserResponse} returns this
+ */
+proto.api.GetDriftUserResponse.prototype.clearUseraccountsList = function() {
+  return this.setUseraccountsList([]);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.repeatedFields_ = [3];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostCloseDriftPerpPositionsRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostCloseDriftPerpPositionsRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    contractsList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostCloseDriftPerpPositionsRequest}
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostCloseDriftPerpPositionsRequest;
+  return proto.api.PostCloseDriftPerpPositionsRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostCloseDriftPerpPositionsRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostCloseDriftPerpPositionsRequest}
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountaddress(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addContracts(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostCloseDriftPerpPositionsRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostCloseDriftPerpPositionsRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getAccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getContractsList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCloseDriftPerpPositionsRequest} returns this
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string accountAddress = 2;
+ * @return {string}
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.prototype.getAccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCloseDriftPerpPositionsRequest} returns this
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.prototype.setAccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * repeated string contracts = 3;
+ * @return {!Array<string>}
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.prototype.getContractsList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.api.PostCloseDriftPerpPositionsRequest} returns this
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.prototype.setContractsList = function(value) {
+  return jspb.Message.setField(this, 3, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.api.PostCloseDriftPerpPositionsRequest} returns this
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.prototype.addContracts = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostCloseDriftPerpPositionsRequest} returns this
+ */
+proto.api.PostCloseDriftPerpPositionsRequest.prototype.clearContractsList = function() {
+  return this.setContractsList([]);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostCloseDriftPerpPositionsResponse.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostCloseDriftPerpPositionsResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostCloseDriftPerpPositionsResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostCloseDriftPerpPositionsResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCloseDriftPerpPositionsResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
+    proto.api.TransactionMessage.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostCloseDriftPerpPositionsResponse}
+ */
+proto.api.PostCloseDriftPerpPositionsResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostCloseDriftPerpPositionsResponse;
+  return proto.api.PostCloseDriftPerpPositionsResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostCloseDriftPerpPositionsResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostCloseDriftPerpPositionsResponse}
+ */
+proto.api.PostCloseDriftPerpPositionsResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.addTransactions(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostCloseDriftPerpPositionsResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostCloseDriftPerpPositionsResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostCloseDriftPerpPositionsResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCloseDriftPerpPositionsResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransactionsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated TransactionMessage transactions = 1;
+ * @return {!Array<!proto.api.TransactionMessage>}
+ */
+proto.api.PostCloseDriftPerpPositionsResponse.prototype.getTransactionsList = function() {
+  return /** @type{!Array<!proto.api.TransactionMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.TransactionMessage>} value
+ * @return {!proto.api.PostCloseDriftPerpPositionsResponse} returns this
+*/
+proto.api.PostCloseDriftPerpPositionsResponse.prototype.setTransactionsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.TransactionMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TransactionMessage}
+ */
+proto.api.PostCloseDriftPerpPositionsResponse.prototype.addTransactions = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TransactionMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostCloseDriftPerpPositionsResponse} returns this
+ */
+proto.api.PostCloseDriftPerpPositionsResponse.prototype.clearTransactionsList = function() {
+  return this.setTransactionsList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftPerpOrderbookRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftPerpOrderbookRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftPerpOrderbookRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftPerpOrderbookRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    contract: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    limit: jspb.Message.getFieldWithDefault(msg, 2, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftPerpOrderbookRequest}
+ */
+proto.api.GetDriftPerpOrderbookRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftPerpOrderbookRequest;
+  return proto.api.GetDriftPerpOrderbookRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftPerpOrderbookRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftPerpOrderbookRequest}
+ */
+proto.api.GetDriftPerpOrderbookRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setContract(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setLimit(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftPerpOrderbookRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftPerpOrderbookRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftPerpOrderbookRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftPerpOrderbookRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getContract();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getLimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string contract = 1;
+ * @return {string}
+ */
+proto.api.GetDriftPerpOrderbookRequest.prototype.getContract = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftPerpOrderbookRequest} returns this
+ */
+proto.api.GetDriftPerpOrderbookRequest.prototype.setContract = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional uint32 limit = 2;
+ * @return {number}
+ */
+proto.api.GetDriftPerpOrderbookRequest.prototype.getLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetDriftPerpOrderbookRequest} returns this
+ */
+proto.api.GetDriftPerpOrderbookRequest.prototype.setLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetDriftPerpOrderbookResponse.repeatedFields_ = [3,4];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftPerpOrderbookResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftPerpOrderbookResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftPerpOrderbookResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
+    contract: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    bidsList: jspb.Message.toObjectList(msg.getBidsList(),
+    proto.api.PerpOrderbookItem.toObject, includeInstance),
+    asksList: jspb.Message.toObjectList(msg.getAsksList(),
+    proto.api.PerpOrderbookItem.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftPerpOrderbookResponse}
+ */
+proto.api.GetDriftPerpOrderbookResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftPerpOrderbookResponse;
+  return proto.api.GetDriftPerpOrderbookResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftPerpOrderbookResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftPerpOrderbookResponse}
+ */
+proto.api.GetDriftPerpOrderbookResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.Context;
+      reader.readMessage(value,proto.api.Context.deserializeBinaryFromReader);
+      msg.setContext(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setContract(value);
+      break;
+    case 3:
+      var value = new proto.api.PerpOrderbookItem;
+      reader.readMessage(value,proto.api.PerpOrderbookItem.deserializeBinaryFromReader);
+      msg.addBids(value);
+      break;
+    case 4:
+      var value = new proto.api.PerpOrderbookItem;
+      reader.readMessage(value,proto.api.PerpOrderbookItem.deserializeBinaryFromReader);
+      msg.addAsks(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftPerpOrderbookResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftPerpOrderbookResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftPerpOrderbookResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getContext();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.Context.serializeBinaryToWriter
+    );
+  }
+  f = message.getContract();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getBidsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      3,
+      f,
+      proto.api.PerpOrderbookItem.serializeBinaryToWriter
+    );
+  }
+  f = message.getAsksList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      4,
+      f,
+      proto.api.PerpOrderbookItem.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Context context = 1;
+ * @return {?proto.api.Context}
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.getContext = function() {
+  return /** @type{?proto.api.Context} */ (
+    jspb.Message.getWrapperField(this, proto.api.Context, 1));
+};
+
+
+/**
+ * @param {?proto.api.Context|undefined} value
+ * @return {!proto.api.GetDriftPerpOrderbookResponse} returns this
+*/
+proto.api.GetDriftPerpOrderbookResponse.prototype.setContext = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetDriftPerpOrderbookResponse} returns this
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.clearContext = function() {
+  return this.setContext(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.hasContext = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string contract = 2;
+ * @return {string}
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.getContract = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftPerpOrderbookResponse} returns this
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.setContract = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * repeated PerpOrderbookItem bids = 3;
+ * @return {!Array<!proto.api.PerpOrderbookItem>}
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.getBidsList = function() {
+  return /** @type{!Array<!proto.api.PerpOrderbookItem>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.PerpOrderbookItem, 3));
+};
+
+
+/**
+ * @param {!Array<!proto.api.PerpOrderbookItem>} value
+ * @return {!proto.api.GetDriftPerpOrderbookResponse} returns this
+*/
+proto.api.GetDriftPerpOrderbookResponse.prototype.setBidsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+};
+
+
+/**
+ * @param {!proto.api.PerpOrderbookItem=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.PerpOrderbookItem}
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.addBids = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.PerpOrderbookItem, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetDriftPerpOrderbookResponse} returns this
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.clearBidsList = function() {
+  return this.setBidsList([]);
+};
+
+
+/**
+ * repeated PerpOrderbookItem asks = 4;
+ * @return {!Array<!proto.api.PerpOrderbookItem>}
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.getAsksList = function() {
+  return /** @type{!Array<!proto.api.PerpOrderbookItem>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.PerpOrderbookItem, 4));
+};
+
+
+/**
+ * @param {!Array<!proto.api.PerpOrderbookItem>} value
+ * @return {!proto.api.GetDriftPerpOrderbookResponse} returns this
+*/
+proto.api.GetDriftPerpOrderbookResponse.prototype.setAsksList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+};
+
+
+/**
+ * @param {!proto.api.PerpOrderbookItem=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.PerpOrderbookItem}
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.addAsks = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.api.PerpOrderbookItem, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetDriftPerpOrderbookResponse} returns this
+ */
+proto.api.GetDriftPerpOrderbookResponse.prototype.clearAsksList = function() {
+  return this.setAsksList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
 proto.api.PostManageCollateralRequest.prototype.toObject = function(opt_includeInstance) {
   return proto.api.PostManageCollateralRequest.toObject(opt_includeInstance, this);
 };
@@ -30597,7 +32593,7 @@ proto.api.GetDriftOpenMarginOrdersRequest.prototype.clearMarketsList = function(
  * @private {!Array<number>}
  * @const
  */
-proto.api.GetDriftOpenMarginOrdersResponse.repeatedFields_ = [2];
+proto.api.GetDriftOpenMarginOrdersResponse.repeatedFields_ = [3];
 
 
 
@@ -30630,7 +32626,8 @@ proto.api.GetDriftOpenMarginOrdersResponse.prototype.toObject = function(opt_inc
  */
 proto.api.GetDriftOpenMarginOrdersResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     ordersList: jspb.Message.toObjectList(msg.getOrdersList(),
     proto.api.DriftMarginOrder.toObject, includeInstance)
   };
@@ -30670,10 +32667,15 @@ proto.api.GetDriftOpenMarginOrdersResponse.deserializeBinaryFromReader = functio
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
+      var value = new proto.api.Context;
+      reader.readMessage(value,proto.api.Context.deserializeBinaryFromReader);
+      msg.setContext(value);
+      break;
+    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setOwneraddress(value);
       break;
-    case 2:
+    case 3:
       var value = new proto.api.DriftMarginOrder;
       reader.readMessage(value,proto.api.DriftMarginOrder.deserializeBinaryFromReader);
       msg.addOrders(value);
@@ -30707,17 +32709,25 @@ proto.api.GetDriftOpenMarginOrdersResponse.prototype.serializeBinary = function(
  */
 proto.api.GetDriftOpenMarginOrdersResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
+  f = message.getContext();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.Context.serializeBinaryToWriter
+    );
+  }
   f = message.getOwneraddress();
   if (f.length > 0) {
     writer.writeString(
-      1,
+      2,
       f
     );
   }
   f = message.getOrdersList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      2,
+      3,
       f,
       proto.api.DriftMarginOrder.serializeBinaryToWriter
     );
@@ -30726,11 +32736,48 @@ proto.api.GetDriftOpenMarginOrdersResponse.serializeBinaryToWriter = function(me
 
 
 /**
- * optional string ownerAddress = 1;
+ * optional Context context = 1;
+ * @return {?proto.api.Context}
+ */
+proto.api.GetDriftOpenMarginOrdersResponse.prototype.getContext = function() {
+  return /** @type{?proto.api.Context} */ (
+    jspb.Message.getWrapperField(this, proto.api.Context, 1));
+};
+
+
+/**
+ * @param {?proto.api.Context|undefined} value
+ * @return {!proto.api.GetDriftOpenMarginOrdersResponse} returns this
+*/
+proto.api.GetDriftOpenMarginOrdersResponse.prototype.setContext = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetDriftOpenMarginOrdersResponse} returns this
+ */
+proto.api.GetDriftOpenMarginOrdersResponse.prototype.clearContext = function() {
+  return this.setContext(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetDriftOpenMarginOrdersResponse.prototype.hasContext = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string ownerAddress = 2;
  * @return {string}
  */
 proto.api.GetDriftOpenMarginOrdersResponse.prototype.getOwneraddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
@@ -30739,17 +32786,17 @@ proto.api.GetDriftOpenMarginOrdersResponse.prototype.getOwneraddress = function(
  * @return {!proto.api.GetDriftOpenMarginOrdersResponse} returns this
  */
 proto.api.GetDriftOpenMarginOrdersResponse.prototype.setOwneraddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * repeated DriftMarginOrder orders = 2;
+ * repeated DriftMarginOrder orders = 3;
  * @return {!Array<!proto.api.DriftMarginOrder>}
  */
 proto.api.GetDriftOpenMarginOrdersResponse.prototype.getOrdersList = function() {
   return /** @type{!Array<!proto.api.DriftMarginOrder>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.DriftMarginOrder, 2));
+    jspb.Message.getRepeatedWrapperField(this, proto.api.DriftMarginOrder, 3));
 };
 
 
@@ -30758,7 +32805,7 @@ proto.api.GetDriftOpenMarginOrdersResponse.prototype.getOrdersList = function() 
  * @return {!proto.api.GetDriftOpenMarginOrdersResponse} returns this
 */
 proto.api.GetDriftOpenMarginOrdersResponse.prototype.setOrdersList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
 };
 
 
@@ -30768,7 +32815,7 @@ proto.api.GetDriftOpenMarginOrdersResponse.prototype.setOrdersList = function(va
  * @return {!proto.api.DriftMarginOrder}
  */
 proto.api.GetDriftOpenMarginOrdersResponse.prototype.addOrders = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.DriftMarginOrder, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.DriftMarginOrder, opt_index);
 };
 
 
@@ -34864,682 +36911,6 @@ proto.api.PostDriftEnableMarginTradingResponse.prototype.hasTransaction = functi
  * @private {!Array<number>}
  * @const
  */
-proto.api.GetNewPerpOrdersStreamRequest.repeatedFields_ = [1];
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * Optional fields that are not set will be set to undefined.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
- * @param {boolean=} opt_includeInstance Deprecated. whether to include the
- *     JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.api.GetNewPerpOrdersStreamRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.GetNewPerpOrdersStreamRequest.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Deprecated. Whether to include
- *     the JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.api.GetNewPerpOrdersStreamRequest} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetNewPerpOrdersStreamRequest.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    marketsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f,
-    project: jspb.Message.getFieldWithDefault(msg, 3, 0)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.GetNewPerpOrdersStreamRequest}
- */
-proto.api.GetNewPerpOrdersStreamRequest.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.GetNewPerpOrdersStreamRequest;
-  return proto.api.GetNewPerpOrdersStreamRequest.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.api.GetNewPerpOrdersStreamRequest} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.GetNewPerpOrdersStreamRequest}
- */
-proto.api.GetNewPerpOrdersStreamRequest.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.addMarkets(value);
-      break;
-    case 3:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.api.GetNewPerpOrdersStreamRequest.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.api.GetNewPerpOrdersStreamRequest.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.api.GetNewPerpOrdersStreamRequest} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetNewPerpOrdersStreamRequest.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getMarketsList();
-  if (f.length > 0) {
-    writer.writeRepeatedString(
-      1,
-      f
-    );
-  }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      3,
-      f
-    );
-  }
-};
-
-
-/**
- * repeated string markets = 1;
- * @return {!Array<string>}
- */
-proto.api.GetNewPerpOrdersStreamRequest.prototype.getMarketsList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
-};
-
-
-/**
- * @param {!Array<string>} value
- * @return {!proto.api.GetNewPerpOrdersStreamRequest} returns this
- */
-proto.api.GetNewPerpOrdersStreamRequest.prototype.setMarketsList = function(value) {
-  return jspb.Message.setField(this, 1, value || []);
-};
-
-
-/**
- * @param {string} value
- * @param {number=} opt_index
- * @return {!proto.api.GetNewPerpOrdersStreamRequest} returns this
- */
-proto.api.GetNewPerpOrdersStreamRequest.prototype.addMarkets = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.api.GetNewPerpOrdersStreamRequest} returns this
- */
-proto.api.GetNewPerpOrdersStreamRequest.prototype.clearMarketsList = function() {
-  return this.setMarketsList([]);
-};
-
-
-/**
- * optional Project project = 3;
- * @return {!proto.api.Project}
- */
-proto.api.GetNewPerpOrdersStreamRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.GetNewPerpOrdersStreamRequest} returns this
- */
-proto.api.GetNewPerpOrdersStreamRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
-};
-
-
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * Optional fields that are not set will be set to undefined.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
- * @param {boolean=} opt_includeInstance Deprecated. whether to include the
- *     JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.GetNewPerpOrdersStreamResponse.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Deprecated. Whether to include
- *     the JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.api.GetNewPerpOrdersStreamResponse} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetNewPerpOrdersStreamResponse.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    contract: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    side: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    type: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    useraddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    orderid: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    slot: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    price: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
-    triggerprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
-    baseamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
-    baseamountfilled: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0),
-    quoteamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 12, 0.0),
-    quoteamountfilled: jspb.Message.getFloatingPointFieldWithDefault(msg, 13, 0.0)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.GetNewPerpOrdersStreamResponse}
- */
-proto.api.GetNewPerpOrdersStreamResponse.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.GetNewPerpOrdersStreamResponse;
-  return proto.api.GetNewPerpOrdersStreamResponse.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.api.GetNewPerpOrdersStreamResponse} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.GetNewPerpOrdersStreamResponse}
- */
-proto.api.GetNewPerpOrdersStreamResponse.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
-      msg.setContract(value);
-      break;
-    case 2:
-      var value = /** @type {!proto.common.PerpPositionSide} */ (reader.readEnum());
-      msg.setSide(value);
-      break;
-    case 3:
-      var value = /** @type {!proto.common.PerpOrderType} */ (reader.readEnum());
-      msg.setType(value);
-      break;
-    case 4:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setUseraddress(value);
-      break;
-    case 5:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setOrderid(value);
-      break;
-    case 6:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setClientorderid(value);
-      break;
-    case 7:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setSlot(value);
-      break;
-    case 8:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setPrice(value);
-      break;
-    case 9:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setTriggerprice(value);
-      break;
-    case 10:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setBaseamount(value);
-      break;
-    case 11:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setBaseamountfilled(value);
-      break;
-    case 12:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setQuoteamount(value);
-      break;
-    case 13:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setQuoteamountfilled(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.api.GetNewPerpOrdersStreamResponse.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.api.GetNewPerpOrdersStreamResponse} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetNewPerpOrdersStreamResponse.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getContract();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      1,
-      f
-    );
-  }
-  f = message.getSide();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      2,
-      f
-    );
-  }
-  f = message.getType();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      3,
-      f
-    );
-  }
-  f = message.getUseraddress();
-  if (f.length > 0) {
-    writer.writeString(
-      4,
-      f
-    );
-  }
-  f = message.getOrderid();
-  if (f.length > 0) {
-    writer.writeString(
-      5,
-      f
-    );
-  }
-  f = message.getClientorderid();
-  if (f.length > 0) {
-    writer.writeString(
-      6,
-      f
-    );
-  }
-  f = message.getSlot();
-  if (f.length > 0) {
-    writer.writeString(
-      7,
-      f
-    );
-  }
-  f = message.getPrice();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      8,
-      f
-    );
-  }
-  f = message.getTriggerprice();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      9,
-      f
-    );
-  }
-  f = message.getBaseamount();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      10,
-      f
-    );
-  }
-  f = message.getBaseamountfilled();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      11,
-      f
-    );
-  }
-  f = message.getQuoteamount();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      12,
-      f
-    );
-  }
-  f = message.getQuoteamountfilled();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      13,
-      f
-    );
-  }
-};
-
-
-/**
- * optional common.PerpContract contract = 1;
- * @return {!proto.common.PerpContract}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
-};
-
-
-/**
- * @param {!proto.common.PerpContract} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 1, value);
-};
-
-
-/**
- * optional common.PerpPositionSide side = 2;
- * @return {!proto.common.PerpPositionSide}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getSide = function() {
-  return /** @type {!proto.common.PerpPositionSide} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/**
- * @param {!proto.common.PerpPositionSide} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setSide = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
-};
-
-
-/**
- * optional common.PerpOrderType type = 3;
- * @return {!proto.common.PerpOrderType}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getType = function() {
-  return /** @type {!proto.common.PerpOrderType} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
-};
-
-
-/**
- * @param {!proto.common.PerpOrderType} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setType = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
-};
-
-
-/**
- * optional string userAddress = 4;
- * @return {string}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getUseraddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setUseraddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 4, value);
-};
-
-
-/**
- * optional string orderID = 5;
- * @return {string}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getOrderid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setOrderid = function(value) {
-  return jspb.Message.setProto3StringField(this, 5, value);
-};
-
-
-/**
- * optional string clientOrderID = 6;
- * @return {string}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getClientorderid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setClientorderid = function(value) {
-  return jspb.Message.setProto3StringField(this, 6, value);
-};
-
-
-/**
- * optional string slot = 7;
- * @return {string}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getSlot = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setSlot = function(value) {
-  return jspb.Message.setProto3StringField(this, 7, value);
-};
-
-
-/**
- * optional double price = 8;
- * @return {number}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getPrice = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setPrice = function(value) {
-  return jspb.Message.setProto3FloatField(this, 8, value);
-};
-
-
-/**
- * optional double triggerPrice = 9;
- * @return {number}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getTriggerprice = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setTriggerprice = function(value) {
-  return jspb.Message.setProto3FloatField(this, 9, value);
-};
-
-
-/**
- * optional double baseAmount = 10;
- * @return {number}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getBaseamount = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 10, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setBaseamount = function(value) {
-  return jspb.Message.setProto3FloatField(this, 10, value);
-};
-
-
-/**
- * optional double baseAmountFilled = 11;
- * @return {number}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getBaseamountfilled = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 11, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setBaseamountfilled = function(value) {
-  return jspb.Message.setProto3FloatField(this, 11, value);
-};
-
-
-/**
- * optional double quoteAmount = 12;
- * @return {number}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getQuoteamount = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 12, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setQuoteamount = function(value) {
-  return jspb.Message.setProto3FloatField(this, 12, value);
-};
-
-
-/**
- * optional double quoteAmountFilled = 13;
- * @return {number}
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.getQuoteamountfilled = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 13, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetNewPerpOrdersStreamResponse} returns this
- */
-proto.api.GetNewPerpOrdersStreamResponse.prototype.setQuoteamountfilled = function(value) {
-  return jspb.Message.setProto3FloatField(this, 13, value);
-};
-
-
-
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
 proto.api.GetPerpTradesStreamRequest.repeatedFields_ = [1];
 
 
@@ -35754,7 +37125,7 @@ proto.api.GetPerpTradesStreamResponse.prototype.toObject = function(opt_includeI
  */
 proto.api.GetPerpTradesStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
     trade: (f = msg.getTrade()) && proto.api.GetPerpTradesResponse.toObject(includeInstance, f)
   };
 
@@ -35793,8 +37164,9 @@ proto.api.GetPerpTradesStreamResponse.deserializeBinaryFromReader = function(msg
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt64());
-      msg.setSlot(value);
+      var value = new proto.api.Context;
+      reader.readMessage(value,proto.api.Context.deserializeBinaryFromReader);
+      msg.setContext(value);
       break;
     case 2:
       var value = new proto.api.GetPerpTradesResponse;
@@ -35830,11 +37202,12 @@ proto.api.GetPerpTradesStreamResponse.prototype.serializeBinary = function() {
  */
 proto.api.GetPerpTradesStreamResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getSlot();
-  if (f !== 0) {
-    writer.writeInt64(
+  f = message.getContext();
+  if (f != null) {
+    writer.writeMessage(
       1,
-      f
+      f,
+      proto.api.Context.serializeBinaryToWriter
     );
   }
   f = message.getTrade();
@@ -35849,20 +37222,39 @@ proto.api.GetPerpTradesStreamResponse.serializeBinaryToWriter = function(message
 
 
 /**
- * optional int64 slot = 1;
- * @return {number}
+ * optional Context context = 1;
+ * @return {?proto.api.Context}
  */
-proto.api.GetPerpTradesStreamResponse.prototype.getSlot = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+proto.api.GetPerpTradesStreamResponse.prototype.getContext = function() {
+  return /** @type{?proto.api.Context} */ (
+    jspb.Message.getWrapperField(this, proto.api.Context, 1));
 };
 
 
 /**
- * @param {number} value
+ * @param {?proto.api.Context|undefined} value
+ * @return {!proto.api.GetPerpTradesStreamResponse} returns this
+*/
+proto.api.GetPerpTradesStreamResponse.prototype.setContext = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
  * @return {!proto.api.GetPerpTradesStreamResponse} returns this
  */
-proto.api.GetPerpTradesStreamResponse.prototype.setSlot = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
+proto.api.GetPerpTradesStreamResponse.prototype.clearContext = function() {
+  return this.setContext(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetPerpTradesStreamResponse.prototype.hasContext = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -39195,10 +40587,9 @@ proto.api.GetOpenPerpOrderRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    contract: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    orderid: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    project: jspb.Message.getFieldWithDefault(msg, 6, 0)
+    orderid: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    project: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -39244,18 +40635,14 @@ proto.api.GetOpenPerpOrderRequest.deserializeBinaryFromReader = function(msg, re
       msg.setAccountaddress(value);
       break;
     case 3:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
-      msg.setContract(value);
-      break;
-    case 4:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setOrderid(value);
       break;
-    case 5:
+    case 4:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setClientorderid(value);
       break;
-    case 6:
+    case 5:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -39302,31 +40689,24 @@ proto.api.GetOpenPerpOrderRequest.serializeBinaryToWriter = function(message, wr
       f
     );
   }
-  f = message.getContract();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      3,
-      f
-    );
-  }
   f = message.getOrderid();
   if (f !== 0) {
     writer.writeUint64(
-      4,
+      3,
       f
     );
   }
   f = message.getClientorderid();
   if (f !== 0) {
     writer.writeUint64(
-      5,
+      4,
       f
     );
   }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      6,
+      5,
       f
     );
   }
@@ -39370,29 +40750,11 @@ proto.api.GetOpenPerpOrderRequest.prototype.setAccountaddress = function(value) 
 
 
 /**
- * optional common.PerpContract contract = 3;
- * @return {!proto.common.PerpContract}
- */
-proto.api.GetOpenPerpOrderRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
-};
-
-
-/**
- * @param {!proto.common.PerpContract} value
- * @return {!proto.api.GetOpenPerpOrderRequest} returns this
- */
-proto.api.GetOpenPerpOrderRequest.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 3, value);
-};
-
-
-/**
- * optional uint64 orderID = 4;
+ * optional uint64 orderID = 3;
  * @return {number}
  */
 proto.api.GetOpenPerpOrderRequest.prototype.getOrderid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
@@ -39401,16 +40763,16 @@ proto.api.GetOpenPerpOrderRequest.prototype.getOrderid = function() {
  * @return {!proto.api.GetOpenPerpOrderRequest} returns this
  */
 proto.api.GetOpenPerpOrderRequest.prototype.setOrderid = function(value) {
-  return jspb.Message.setProto3IntField(this, 4, value);
+  return jspb.Message.setProto3IntField(this, 3, value);
 };
 
 
 /**
- * optional uint64 clientOrderID = 5;
+ * optional uint64 clientOrderID = 4;
  * @return {number}
  */
 proto.api.GetOpenPerpOrderRequest.prototype.getClientorderid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
@@ -39419,16 +40781,16 @@ proto.api.GetOpenPerpOrderRequest.prototype.getClientorderid = function() {
  * @return {!proto.api.GetOpenPerpOrderRequest} returns this
  */
 proto.api.GetOpenPerpOrderRequest.prototype.setClientorderid = function(value) {
-  return jspb.Message.setProto3IntField(this, 5, value);
+  return jspb.Message.setProto3IntField(this, 4, value);
 };
 
 
 /**
- * optional Project project = 6;
+ * optional Project project = 5;
  * @return {!proto.api.Project}
  */
 proto.api.GetOpenPerpOrderRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
 };
 
 
@@ -39437,7 +40799,7 @@ proto.api.GetOpenPerpOrderRequest.prototype.getProject = function() {
  * @return {!proto.api.GetOpenPerpOrderRequest} returns this
  */
 proto.api.GetOpenPerpOrderRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 6, value);
+  return jspb.Message.setProto3EnumField(this, 5, value);
 };
 
 
@@ -39638,6 +41000,3112 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
+proto.api.GetDriftOpenMarginOrderRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftOpenMarginOrderRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftOpenMarginOrderRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftOpenMarginOrderRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    orderid: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 4, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftOpenMarginOrderRequest}
+ */
+proto.api.GetDriftOpenMarginOrderRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftOpenMarginOrderRequest;
+  return proto.api.GetDriftOpenMarginOrderRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftOpenMarginOrderRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftOpenMarginOrderRequest}
+ */
+proto.api.GetDriftOpenMarginOrderRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountaddress(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setOrderid(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setClientorderid(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftOpenMarginOrderRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftOpenMarginOrderRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftOpenMarginOrderRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftOpenMarginOrderRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getAccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getOrderid();
+  if (f !== 0) {
+    writer.writeUint64(
+      3,
+      f
+    );
+  }
+  f = message.getClientorderid();
+  if (f !== 0) {
+    writer.writeUint64(
+      4,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.GetDriftOpenMarginOrderRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftOpenMarginOrderRequest} returns this
+ */
+proto.api.GetDriftOpenMarginOrderRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string accountAddress = 2;
+ * @return {string}
+ */
+proto.api.GetDriftOpenMarginOrderRequest.prototype.getAccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftOpenMarginOrderRequest} returns this
+ */
+proto.api.GetDriftOpenMarginOrderRequest.prototype.setAccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional uint64 orderID = 3;
+ * @return {number}
+ */
+proto.api.GetDriftOpenMarginOrderRequest.prototype.getOrderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetDriftOpenMarginOrderRequest} returns this
+ */
+proto.api.GetDriftOpenMarginOrderRequest.prototype.setOrderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional uint64 clientOrderID = 4;
+ * @return {number}
+ */
+proto.api.GetDriftOpenMarginOrderRequest.prototype.getClientorderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetDriftOpenMarginOrderRequest} returns this
+ */
+proto.api.GetDriftOpenMarginOrderRequest.prototype.setClientorderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftOpenMarginOrderResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftOpenMarginOrderResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftOpenMarginOrderResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftOpenMarginOrderResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    order: (f = msg.getOrder()) && proto.api.DriftMarginOrder.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftOpenMarginOrderResponse}
+ */
+proto.api.GetDriftOpenMarginOrderResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftOpenMarginOrderResponse;
+  return proto.api.GetDriftOpenMarginOrderResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftOpenMarginOrderResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftOpenMarginOrderResponse}
+ */
+proto.api.GetDriftOpenMarginOrderResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.Context;
+      reader.readMessage(value,proto.api.Context.deserializeBinaryFromReader);
+      msg.setContext(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 3:
+      var value = new proto.api.DriftMarginOrder;
+      reader.readMessage(value,proto.api.DriftMarginOrder.deserializeBinaryFromReader);
+      msg.setOrder(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftOpenMarginOrderResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftOpenMarginOrderResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftOpenMarginOrderResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftOpenMarginOrderResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getContext();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.Context.serializeBinaryToWriter
+    );
+  }
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getOrder();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      proto.api.DriftMarginOrder.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Context context = 1;
+ * @return {?proto.api.Context}
+ */
+proto.api.GetDriftOpenMarginOrderResponse.prototype.getContext = function() {
+  return /** @type{?proto.api.Context} */ (
+    jspb.Message.getWrapperField(this, proto.api.Context, 1));
+};
+
+
+/**
+ * @param {?proto.api.Context|undefined} value
+ * @return {!proto.api.GetDriftOpenMarginOrderResponse} returns this
+*/
+proto.api.GetDriftOpenMarginOrderResponse.prototype.setContext = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetDriftOpenMarginOrderResponse} returns this
+ */
+proto.api.GetDriftOpenMarginOrderResponse.prototype.clearContext = function() {
+  return this.setContext(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetDriftOpenMarginOrderResponse.prototype.hasContext = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string ownerAddress = 2;
+ * @return {string}
+ */
+proto.api.GetDriftOpenMarginOrderResponse.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftOpenMarginOrderResponse} returns this
+ */
+proto.api.GetDriftOpenMarginOrderResponse.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional DriftMarginOrder order = 3;
+ * @return {?proto.api.DriftMarginOrder}
+ */
+proto.api.GetDriftOpenMarginOrderResponse.prototype.getOrder = function() {
+  return /** @type{?proto.api.DriftMarginOrder} */ (
+    jspb.Message.getWrapperField(this, proto.api.DriftMarginOrder, 3));
+};
+
+
+/**
+ * @param {?proto.api.DriftMarginOrder|undefined} value
+ * @return {!proto.api.GetDriftOpenMarginOrderResponse} returns this
+*/
+proto.api.GetDriftOpenMarginOrderResponse.prototype.setOrder = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetDriftOpenMarginOrderResponse} returns this
+ */
+proto.api.GetDriftOpenMarginOrderResponse.prototype.clearOrder = function() {
+  return this.setOrder(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetDriftOpenMarginOrderResponse.prototype.hasOrder = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftOpenPerpOrderRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftOpenPerpOrderRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftOpenPerpOrderRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftOpenPerpOrderRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    orderid: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 4, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftOpenPerpOrderRequest}
+ */
+proto.api.GetDriftOpenPerpOrderRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftOpenPerpOrderRequest;
+  return proto.api.GetDriftOpenPerpOrderRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftOpenPerpOrderRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftOpenPerpOrderRequest}
+ */
+proto.api.GetDriftOpenPerpOrderRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountaddress(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setOrderid(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setClientorderid(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftOpenPerpOrderRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftOpenPerpOrderRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftOpenPerpOrderRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftOpenPerpOrderRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getAccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getOrderid();
+  if (f !== 0) {
+    writer.writeUint64(
+      3,
+      f
+    );
+  }
+  f = message.getClientorderid();
+  if (f !== 0) {
+    writer.writeUint64(
+      4,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.GetDriftOpenPerpOrderRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftOpenPerpOrderRequest} returns this
+ */
+proto.api.GetDriftOpenPerpOrderRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string accountAddress = 2;
+ * @return {string}
+ */
+proto.api.GetDriftOpenPerpOrderRequest.prototype.getAccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftOpenPerpOrderRequest} returns this
+ */
+proto.api.GetDriftOpenPerpOrderRequest.prototype.setAccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional uint64 orderID = 3;
+ * @return {number}
+ */
+proto.api.GetDriftOpenPerpOrderRequest.prototype.getOrderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetDriftOpenPerpOrderRequest} returns this
+ */
+proto.api.GetDriftOpenPerpOrderRequest.prototype.setOrderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional uint64 clientOrderID = 4;
+ * @return {number}
+ */
+proto.api.GetDriftOpenPerpOrderRequest.prototype.getClientorderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetDriftOpenPerpOrderRequest} returns this
+ */
+proto.api.GetDriftOpenPerpOrderRequest.prototype.setClientorderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftOpenPerpOrderResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftOpenPerpOrderResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftOpenPerpOrderResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftOpenPerpOrderResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    order: (f = msg.getOrder()) && proto.api.DriftPerpOrder.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftOpenPerpOrderResponse}
+ */
+proto.api.GetDriftOpenPerpOrderResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftOpenPerpOrderResponse;
+  return proto.api.GetDriftOpenPerpOrderResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftOpenPerpOrderResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftOpenPerpOrderResponse}
+ */
+proto.api.GetDriftOpenPerpOrderResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.Context;
+      reader.readMessage(value,proto.api.Context.deserializeBinaryFromReader);
+      msg.setContext(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 3:
+      var value = new proto.api.DriftPerpOrder;
+      reader.readMessage(value,proto.api.DriftPerpOrder.deserializeBinaryFromReader);
+      msg.setOrder(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftOpenPerpOrderResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftOpenPerpOrderResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftOpenPerpOrderResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftOpenPerpOrderResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getContext();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.Context.serializeBinaryToWriter
+    );
+  }
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getOrder();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      proto.api.DriftPerpOrder.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Context context = 1;
+ * @return {?proto.api.Context}
+ */
+proto.api.GetDriftOpenPerpOrderResponse.prototype.getContext = function() {
+  return /** @type{?proto.api.Context} */ (
+    jspb.Message.getWrapperField(this, proto.api.Context, 1));
+};
+
+
+/**
+ * @param {?proto.api.Context|undefined} value
+ * @return {!proto.api.GetDriftOpenPerpOrderResponse} returns this
+*/
+proto.api.GetDriftOpenPerpOrderResponse.prototype.setContext = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetDriftOpenPerpOrderResponse} returns this
+ */
+proto.api.GetDriftOpenPerpOrderResponse.prototype.clearContext = function() {
+  return this.setContext(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetDriftOpenPerpOrderResponse.prototype.hasContext = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string ownerAddress = 2;
+ * @return {string}
+ */
+proto.api.GetDriftOpenPerpOrderResponse.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftOpenPerpOrderResponse} returns this
+ */
+proto.api.GetDriftOpenPerpOrderResponse.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional DriftPerpOrder order = 3;
+ * @return {?proto.api.DriftPerpOrder}
+ */
+proto.api.GetDriftOpenPerpOrderResponse.prototype.getOrder = function() {
+  return /** @type{?proto.api.DriftPerpOrder} */ (
+    jspb.Message.getWrapperField(this, proto.api.DriftPerpOrder, 3));
+};
+
+
+/**
+ * @param {?proto.api.DriftPerpOrder|undefined} value
+ * @return {!proto.api.GetDriftOpenPerpOrderResponse} returns this
+*/
+proto.api.GetDriftOpenPerpOrderResponse.prototype.setOrder = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetDriftOpenPerpOrderResponse} returns this
+ */
+proto.api.GetDriftOpenPerpOrderResponse.prototype.clearOrder = function() {
+  return this.setOrder(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetDriftOpenPerpOrderResponse.prototype.hasOrder = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostDriftManageCollateralRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostDriftManageCollateralRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftManageCollateralRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    type: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    token: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    toaccountaddress: jspb.Message.getFieldWithDefault(msg, 5, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostDriftManageCollateralRequest}
+ */
+proto.api.PostDriftManageCollateralRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostDriftManageCollateralRequest;
+  return proto.api.PostDriftManageCollateralRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostDriftManageCollateralRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostDriftManageCollateralRequest}
+ */
+proto.api.PostDriftManageCollateralRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountaddress(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAmount(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setType(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setToken(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setToaccountaddress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostDriftManageCollateralRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostDriftManageCollateralRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftManageCollateralRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getAccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getAmount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getType();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getToken();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getToaccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string accountAddress = 1;
+ * @return {string}
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.getAccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostDriftManageCollateralRequest} returns this
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.setAccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional double amount = 2;
+ * @return {number}
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.getAmount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostDriftManageCollateralRequest} returns this
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.setAmount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional string type = 3;
+ * @return {string}
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.getType = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostDriftManageCollateralRequest} returns this
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.setType = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string token = 4;
+ * @return {string}
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.getToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostDriftManageCollateralRequest} returns this
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.setToken = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string toAccountAddress = 5;
+ * @return {string}
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.getToaccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostDriftManageCollateralRequest} returns this
+ */
+proto.api.PostDriftManageCollateralRequest.prototype.setToaccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostDriftManageCollateralResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostDriftManageCollateralResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostDriftManageCollateralResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftManageCollateralResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transaction: (f = msg.getTransaction()) && proto.api.TransactionMessage.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostDriftManageCollateralResponse}
+ */
+proto.api.PostDriftManageCollateralResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostDriftManageCollateralResponse;
+  return proto.api.PostDriftManageCollateralResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostDriftManageCollateralResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostDriftManageCollateralResponse}
+ */
+proto.api.PostDriftManageCollateralResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.setTransaction(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostDriftManageCollateralResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostDriftManageCollateralResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostDriftManageCollateralResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftManageCollateralResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransaction();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional TransactionMessage transaction = 1;
+ * @return {?proto.api.TransactionMessage}
+ */
+proto.api.PostDriftManageCollateralResponse.prototype.getTransaction = function() {
+  return /** @type{?proto.api.TransactionMessage} */ (
+    jspb.Message.getWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {?proto.api.TransactionMessage|undefined} value
+ * @return {!proto.api.PostDriftManageCollateralResponse} returns this
+*/
+proto.api.PostDriftManageCollateralResponse.prototype.setTransaction = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.PostDriftManageCollateralResponse} returns this
+ */
+proto.api.PostDriftManageCollateralResponse.prototype.clearTransaction = function() {
+  return this.setTransaction(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostDriftManageCollateralResponse.prototype.hasTransaction = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftPerpContractsRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftPerpContractsRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftPerpContractsRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftPerpContractsRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftPerpContractsRequest}
+ */
+proto.api.GetDriftPerpContractsRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftPerpContractsRequest;
+  return proto.api.GetDriftPerpContractsRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftPerpContractsRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftPerpContractsRequest}
+ */
+proto.api.GetDriftPerpContractsRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftPerpContractsRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftPerpContractsRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftPerpContractsRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftPerpContractsRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetDriftPerpContractsResponse.repeatedFields_ = [2];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftPerpContractsResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftPerpContractsResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftPerpContractsResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftPerpContractsResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
+    contractsList: jspb.Message.toObjectList(msg.getContractsList(),
+    proto.api.ContractInfo.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftPerpContractsResponse}
+ */
+proto.api.GetDriftPerpContractsResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftPerpContractsResponse;
+  return proto.api.GetDriftPerpContractsResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftPerpContractsResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftPerpContractsResponse}
+ */
+proto.api.GetDriftPerpContractsResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.Context;
+      reader.readMessage(value,proto.api.Context.deserializeBinaryFromReader);
+      msg.setContext(value);
+      break;
+    case 2:
+      var value = new proto.api.ContractInfo;
+      reader.readMessage(value,proto.api.ContractInfo.deserializeBinaryFromReader);
+      msg.addContracts(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftPerpContractsResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftPerpContractsResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftPerpContractsResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftPerpContractsResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getContext();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.Context.serializeBinaryToWriter
+    );
+  }
+  f = message.getContractsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      2,
+      f,
+      proto.api.ContractInfo.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Context context = 1;
+ * @return {?proto.api.Context}
+ */
+proto.api.GetDriftPerpContractsResponse.prototype.getContext = function() {
+  return /** @type{?proto.api.Context} */ (
+    jspb.Message.getWrapperField(this, proto.api.Context, 1));
+};
+
+
+/**
+ * @param {?proto.api.Context|undefined} value
+ * @return {!proto.api.GetDriftPerpContractsResponse} returns this
+*/
+proto.api.GetDriftPerpContractsResponse.prototype.setContext = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetDriftPerpContractsResponse} returns this
+ */
+proto.api.GetDriftPerpContractsResponse.prototype.clearContext = function() {
+  return this.setContext(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetDriftPerpContractsResponse.prototype.hasContext = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * repeated ContractInfo contracts = 2;
+ * @return {!Array<!proto.api.ContractInfo>}
+ */
+proto.api.GetDriftPerpContractsResponse.prototype.getContractsList = function() {
+  return /** @type{!Array<!proto.api.ContractInfo>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.ContractInfo, 2));
+};
+
+
+/**
+ * @param {!Array<!proto.api.ContractInfo>} value
+ * @return {!proto.api.GetDriftPerpContractsResponse} returns this
+*/
+proto.api.GetDriftPerpContractsResponse.prototype.setContractsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+};
+
+
+/**
+ * @param {!proto.api.ContractInfo=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.ContractInfo}
+ */
+proto.api.GetDriftPerpContractsResponse.prototype.addContracts = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.ContractInfo, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetDriftPerpContractsResponse} returns this
+ */
+proto.api.GetDriftPerpContractsResponse.prototype.clearContractsList = function() {
+  return this.setContractsList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostDriftSettlePNLRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostDriftSettlePNLRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostDriftSettlePNLRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftSettlePNLRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    settleeaccountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    contract: jspb.Message.getFieldWithDefault(msg, 3, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostDriftSettlePNLRequest}
+ */
+proto.api.PostDriftSettlePNLRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostDriftSettlePNLRequest;
+  return proto.api.PostDriftSettlePNLRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostDriftSettlePNLRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostDriftSettlePNLRequest}
+ */
+proto.api.PostDriftSettlePNLRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSettleeaccountaddress(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setContract(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostDriftSettlePNLRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostDriftSettlePNLRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostDriftSettlePNLRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftSettlePNLRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getSettleeaccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getContract();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostDriftSettlePNLRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostDriftSettlePNLRequest} returns this
+ */
+proto.api.PostDriftSettlePNLRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string settleeAccountAddress = 2;
+ * @return {string}
+ */
+proto.api.PostDriftSettlePNLRequest.prototype.getSettleeaccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostDriftSettlePNLRequest} returns this
+ */
+proto.api.PostDriftSettlePNLRequest.prototype.setSettleeaccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string contract = 3;
+ * @return {string}
+ */
+proto.api.PostDriftSettlePNLRequest.prototype.getContract = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostDriftSettlePNLRequest} returns this
+ */
+proto.api.PostDriftSettlePNLRequest.prototype.setContract = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostDriftSettlePNLResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostDriftSettlePNLResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostDriftSettlePNLResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftSettlePNLResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transaction: (f = msg.getTransaction()) && proto.api.TransactionMessage.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostDriftSettlePNLResponse}
+ */
+proto.api.PostDriftSettlePNLResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostDriftSettlePNLResponse;
+  return proto.api.PostDriftSettlePNLResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostDriftSettlePNLResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostDriftSettlePNLResponse}
+ */
+proto.api.PostDriftSettlePNLResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.setTransaction(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostDriftSettlePNLResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostDriftSettlePNLResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostDriftSettlePNLResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftSettlePNLResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransaction();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional TransactionMessage transaction = 1;
+ * @return {?proto.api.TransactionMessage}
+ */
+proto.api.PostDriftSettlePNLResponse.prototype.getTransaction = function() {
+  return /** @type{?proto.api.TransactionMessage} */ (
+    jspb.Message.getWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {?proto.api.TransactionMessage|undefined} value
+ * @return {!proto.api.PostDriftSettlePNLResponse} returns this
+*/
+proto.api.PostDriftSettlePNLResponse.prototype.setTransaction = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.PostDriftSettlePNLResponse} returns this
+ */
+proto.api.PostDriftSettlePNLResponse.prototype.clearTransaction = function() {
+  return this.setTransaction(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostDriftSettlePNLResponse.prototype.hasTransaction = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftAssetsRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftAssetsRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftAssetsRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftAssetsRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    accountaddress: jspb.Message.getFieldWithDefault(msg, 2, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftAssetsRequest}
+ */
+proto.api.GetDriftAssetsRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftAssetsRequest;
+  return proto.api.GetDriftAssetsRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftAssetsRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftAssetsRequest}
+ */
+proto.api.GetDriftAssetsRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccountaddress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftAssetsRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftAssetsRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftAssetsRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftAssetsRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getAccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.GetDriftAssetsRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftAssetsRequest} returns this
+ */
+proto.api.GetDriftAssetsRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string accountAddress = 2;
+ * @return {string}
+ */
+proto.api.GetDriftAssetsRequest.prototype.getAccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftAssetsRequest} returns this
+ */
+proto.api.GetDriftAssetsRequest.prototype.setAccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetDriftAssetsResponse.repeatedFields_ = [3];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetDriftAssetsResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftAssetsResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetDriftAssetsResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftAssetsResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    assetsList: jspb.Message.toObjectList(msg.getAssetsList(),
+    proto.api.Asset.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetDriftAssetsResponse}
+ */
+proto.api.GetDriftAssetsResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetDriftAssetsResponse;
+  return proto.api.GetDriftAssetsResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetDriftAssetsResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetDriftAssetsResponse}
+ */
+proto.api.GetDriftAssetsResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.Context;
+      reader.readMessage(value,proto.api.Context.deserializeBinaryFromReader);
+      msg.setContext(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 3:
+      var value = new proto.api.Asset;
+      reader.readMessage(value,proto.api.Asset.deserializeBinaryFromReader);
+      msg.addAssets(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetDriftAssetsResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetDriftAssetsResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetDriftAssetsResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetDriftAssetsResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getContext();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.Context.serializeBinaryToWriter
+    );
+  }
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getAssetsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      3,
+      f,
+      proto.api.Asset.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional Context context = 1;
+ * @return {?proto.api.Context}
+ */
+proto.api.GetDriftAssetsResponse.prototype.getContext = function() {
+  return /** @type{?proto.api.Context} */ (
+    jspb.Message.getWrapperField(this, proto.api.Context, 1));
+};
+
+
+/**
+ * @param {?proto.api.Context|undefined} value
+ * @return {!proto.api.GetDriftAssetsResponse} returns this
+*/
+proto.api.GetDriftAssetsResponse.prototype.setContext = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetDriftAssetsResponse} returns this
+ */
+proto.api.GetDriftAssetsResponse.prototype.clearContext = function() {
+  return this.setContext(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetDriftAssetsResponse.prototype.hasContext = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string ownerAddress = 2;
+ * @return {string}
+ */
+proto.api.GetDriftAssetsResponse.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetDriftAssetsResponse} returns this
+ */
+proto.api.GetDriftAssetsResponse.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * repeated Asset assets = 3;
+ * @return {!Array<!proto.api.Asset>}
+ */
+proto.api.GetDriftAssetsResponse.prototype.getAssetsList = function() {
+  return /** @type{!Array<!proto.api.Asset>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.Asset, 3));
+};
+
+
+/**
+ * @param {!Array<!proto.api.Asset>} value
+ * @return {!proto.api.GetDriftAssetsResponse} returns this
+*/
+proto.api.GetDriftAssetsResponse.prototype.setAssetsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+};
+
+
+/**
+ * @param {!proto.api.Asset=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.Asset}
+ */
+proto.api.GetDriftAssetsResponse.prototype.addAssets = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.Asset, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetDriftAssetsResponse} returns this
+ */
+proto.api.GetDriftAssetsResponse.prototype.clearAssetsList = function() {
+  return this.setAssetsList([]);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostDriftSettlePNLsRequest.repeatedFields_ = [2];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostDriftSettlePNLsRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostDriftSettlePNLsRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostDriftSettlePNLsRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftSettlePNLsRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    settleeaccountaddressesList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
+    contract: jspb.Message.getFieldWithDefault(msg, 3, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostDriftSettlePNLsRequest}
+ */
+proto.api.PostDriftSettlePNLsRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostDriftSettlePNLsRequest;
+  return proto.api.PostDriftSettlePNLsRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostDriftSettlePNLsRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostDriftSettlePNLsRequest}
+ */
+proto.api.PostDriftSettlePNLsRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addSettleeaccountaddresses(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setContract(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostDriftSettlePNLsRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostDriftSettlePNLsRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostDriftSettlePNLsRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftSettlePNLsRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getSettleeaccountaddressesList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      2,
+      f
+    );
+  }
+  f = message.getContract();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostDriftSettlePNLsRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostDriftSettlePNLsRequest} returns this
+ */
+proto.api.PostDriftSettlePNLsRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * repeated string settleeAccountAddresses = 2;
+ * @return {!Array<string>}
+ */
+proto.api.PostDriftSettlePNLsRequest.prototype.getSettleeaccountaddressesList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 2));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.api.PostDriftSettlePNLsRequest} returns this
+ */
+proto.api.PostDriftSettlePNLsRequest.prototype.setSettleeaccountaddressesList = function(value) {
+  return jspb.Message.setField(this, 2, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.api.PostDriftSettlePNLsRequest} returns this
+ */
+proto.api.PostDriftSettlePNLsRequest.prototype.addSettleeaccountaddresses = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 2, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostDriftSettlePNLsRequest} returns this
+ */
+proto.api.PostDriftSettlePNLsRequest.prototype.clearSettleeaccountaddressesList = function() {
+  return this.setSettleeaccountaddressesList([]);
+};
+
+
+/**
+ * optional string contract = 3;
+ * @return {string}
+ */
+proto.api.PostDriftSettlePNLsRequest.prototype.getContract = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostDriftSettlePNLsRequest} returns this
+ */
+proto.api.PostDriftSettlePNLsRequest.prototype.setContract = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostDriftSettlePNLsResponse.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostDriftSettlePNLsResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostDriftSettlePNLsResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostDriftSettlePNLsResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftSettlePNLsResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
+    proto.api.TransactionMessage.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostDriftSettlePNLsResponse}
+ */
+proto.api.PostDriftSettlePNLsResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostDriftSettlePNLsResponse;
+  return proto.api.PostDriftSettlePNLsResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostDriftSettlePNLsResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostDriftSettlePNLsResponse}
+ */
+proto.api.PostDriftSettlePNLsResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.addTransactions(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostDriftSettlePNLsResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostDriftSettlePNLsResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostDriftSettlePNLsResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostDriftSettlePNLsResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransactionsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated TransactionMessage transactions = 1;
+ * @return {!Array<!proto.api.TransactionMessage>}
+ */
+proto.api.PostDriftSettlePNLsResponse.prototype.getTransactionsList = function() {
+  return /** @type{!Array<!proto.api.TransactionMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.TransactionMessage>} value
+ * @return {!proto.api.PostDriftSettlePNLsResponse} returns this
+*/
+proto.api.PostDriftSettlePNLsResponse.prototype.setTransactionsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.TransactionMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TransactionMessage}
+ */
+proto.api.PostDriftSettlePNLsResponse.prototype.addTransactions = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TransactionMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostDriftSettlePNLsResponse} returns this
+ */
+proto.api.PostDriftSettlePNLsResponse.prototype.clearTransactionsList = function() {
+  return this.setTransactionsList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostLiquidateDriftPerpRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostLiquidateDriftPerpRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostLiquidateDriftPerpRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostLiquidateDriftPerpRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    settleeaccountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    contract: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostLiquidateDriftPerpRequest}
+ */
+proto.api.PostLiquidateDriftPerpRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostLiquidateDriftPerpRequest;
+  return proto.api.PostLiquidateDriftPerpRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostLiquidateDriftPerpRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostLiquidateDriftPerpRequest}
+ */
+proto.api.PostLiquidateDriftPerpRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSettleeaccountaddress(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setContract(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAmount(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostLiquidateDriftPerpRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostLiquidateDriftPerpRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostLiquidateDriftPerpRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostLiquidateDriftPerpRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getSettleeaccountaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getContract();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getAmount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostLiquidateDriftPerpRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostLiquidateDriftPerpRequest} returns this
+ */
+proto.api.PostLiquidateDriftPerpRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string settleeAccountAddress = 2;
+ * @return {string}
+ */
+proto.api.PostLiquidateDriftPerpRequest.prototype.getSettleeaccountaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostLiquidateDriftPerpRequest} returns this
+ */
+proto.api.PostLiquidateDriftPerpRequest.prototype.setSettleeaccountaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string contract = 3;
+ * @return {string}
+ */
+proto.api.PostLiquidateDriftPerpRequest.prototype.getContract = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostLiquidateDriftPerpRequest} returns this
+ */
+proto.api.PostLiquidateDriftPerpRequest.prototype.setContract = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional double amount = 4;
+ * @return {number}
+ */
+proto.api.PostLiquidateDriftPerpRequest.prototype.getAmount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostLiquidateDriftPerpRequest} returns this
+ */
+proto.api.PostLiquidateDriftPerpRequest.prototype.setAmount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostLiquidateDriftPerpResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostLiquidateDriftPerpResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostLiquidateDriftPerpResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostLiquidateDriftPerpResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transaction: (f = msg.getTransaction()) && proto.api.TransactionMessage.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostLiquidateDriftPerpResponse}
+ */
+proto.api.PostLiquidateDriftPerpResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostLiquidateDriftPerpResponse;
+  return proto.api.PostLiquidateDriftPerpResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostLiquidateDriftPerpResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostLiquidateDriftPerpResponse}
+ */
+proto.api.PostLiquidateDriftPerpResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.setTransaction(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostLiquidateDriftPerpResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostLiquidateDriftPerpResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostLiquidateDriftPerpResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostLiquidateDriftPerpResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransaction();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional TransactionMessage transaction = 1;
+ * @return {?proto.api.TransactionMessage}
+ */
+proto.api.PostLiquidateDriftPerpResponse.prototype.getTransaction = function() {
+  return /** @type{?proto.api.TransactionMessage} */ (
+    jspb.Message.getWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {?proto.api.TransactionMessage|undefined} value
+ * @return {!proto.api.PostLiquidateDriftPerpResponse} returns this
+*/
+proto.api.PostLiquidateDriftPerpResponse.prototype.setTransaction = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.PostLiquidateDriftPerpResponse} returns this
+ */
+proto.api.PostLiquidateDriftPerpResponse.prototype.clearTransaction = function() {
+  return this.setTransaction(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostLiquidateDriftPerpResponse.prototype.hasTransaction = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
 proto.api.Context.prototype.toObject = function(opt_includeInstance) {
   return proto.api.Context.toObject(opt_includeInstance, this);
 };
@@ -39758,7 +44226,7 @@ proto.api.Context.prototype.setSlot = function(value) {
  * @private {!Array<number>}
  * @const
  */
-proto.api.GetDriftPerpOpenOrdersRequest.repeatedFields_ = [3];
+proto.api.GetDriftOpenPerpOrdersRequest.repeatedFields_ = [3];
 
 
 
@@ -39775,8 +44243,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.GetDriftPerpOpenOrdersRequest.toObject(opt_includeInstance, this);
+proto.api.GetDriftOpenPerpOrdersRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftOpenPerpOrdersRequest.toObject(opt_includeInstance, this);
 };
 
 
@@ -39785,11 +44253,11 @@ proto.api.GetDriftPerpOpenOrdersRequest.prototype.toObject = function(opt_includ
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.api.GetDriftPerpOpenOrdersRequest} msg The msg instance to transform.
+ * @param {!proto.api.GetDriftOpenPerpOrdersRequest} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.api.GetDriftPerpOpenOrdersRequest.toObject = function(includeInstance, msg) {
+proto.api.GetDriftOpenPerpOrdersRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     accountaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
@@ -39807,23 +44275,23 @@ proto.api.GetDriftPerpOpenOrdersRequest.toObject = function(includeInstance, msg
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.GetDriftPerpOpenOrdersRequest}
+ * @return {!proto.api.GetDriftOpenPerpOrdersRequest}
  */
-proto.api.GetDriftPerpOpenOrdersRequest.deserializeBinary = function(bytes) {
+proto.api.GetDriftOpenPerpOrdersRequest.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.GetDriftPerpOpenOrdersRequest;
-  return proto.api.GetDriftPerpOpenOrdersRequest.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.api.GetDriftOpenPerpOrdersRequest;
+  return proto.api.GetDriftOpenPerpOrdersRequest.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.api.GetDriftPerpOpenOrdersRequest} msg The message object to deserialize into.
+ * @param {!proto.api.GetDriftOpenPerpOrdersRequest} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.GetDriftPerpOpenOrdersRequest}
+ * @return {!proto.api.GetDriftOpenPerpOrdersRequest}
  */
-proto.api.GetDriftPerpOpenOrdersRequest.deserializeBinaryFromReader = function(msg, reader) {
+proto.api.GetDriftOpenPerpOrdersRequest.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -39855,9 +44323,9 @@ proto.api.GetDriftPerpOpenOrdersRequest.deserializeBinaryFromReader = function(m
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.serializeBinary = function() {
+proto.api.GetDriftOpenPerpOrdersRequest.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.api.GetDriftPerpOpenOrdersRequest.serializeBinaryToWriter(this, writer);
+  proto.api.GetDriftOpenPerpOrdersRequest.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -39865,11 +44333,11 @@ proto.api.GetDriftPerpOpenOrdersRequest.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.api.GetDriftPerpOpenOrdersRequest} message
+ * @param {!proto.api.GetDriftOpenPerpOrdersRequest} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.api.GetDriftPerpOpenOrdersRequest.serializeBinaryToWriter = function(message, writer) {
+proto.api.GetDriftOpenPerpOrdersRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getOwneraddress();
   if (f.length > 0) {
@@ -39899,16 +44367,16 @@ proto.api.GetDriftPerpOpenOrdersRequest.serializeBinaryToWriter = function(messa
  * optional string ownerAddress = 1;
  * @return {string}
  */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.getOwneraddress = function() {
+proto.api.GetDriftOpenPerpOrdersRequest.prototype.getOwneraddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.api.GetDriftPerpOpenOrdersRequest} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersRequest} returns this
  */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.setOwneraddress = function(value) {
+proto.api.GetDriftOpenPerpOrdersRequest.prototype.setOwneraddress = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -39917,16 +44385,16 @@ proto.api.GetDriftPerpOpenOrdersRequest.prototype.setOwneraddress = function(val
  * optional string accountAddress = 2;
  * @return {string}
  */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.getAccountaddress = function() {
+proto.api.GetDriftOpenPerpOrdersRequest.prototype.getAccountaddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.api.GetDriftPerpOpenOrdersRequest} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersRequest} returns this
  */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.setAccountaddress = function(value) {
+proto.api.GetDriftOpenPerpOrdersRequest.prototype.setAccountaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
@@ -39935,16 +44403,16 @@ proto.api.GetDriftPerpOpenOrdersRequest.prototype.setAccountaddress = function(v
  * repeated string contracts = 3;
  * @return {!Array<string>}
  */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.getContractsList = function() {
+proto.api.GetDriftOpenPerpOrdersRequest.prototype.getContractsList = function() {
   return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 3));
 };
 
 
 /**
  * @param {!Array<string>} value
- * @return {!proto.api.GetDriftPerpOpenOrdersRequest} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersRequest} returns this
  */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.setContractsList = function(value) {
+proto.api.GetDriftOpenPerpOrdersRequest.prototype.setContractsList = function(value) {
   return jspb.Message.setField(this, 3, value || []);
 };
 
@@ -39952,18 +44420,18 @@ proto.api.GetDriftPerpOpenOrdersRequest.prototype.setContractsList = function(va
 /**
  * @param {string} value
  * @param {number=} opt_index
- * @return {!proto.api.GetDriftPerpOpenOrdersRequest} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersRequest} returns this
  */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.addContracts = function(value, opt_index) {
+proto.api.GetDriftOpenPerpOrdersRequest.prototype.addContracts = function(value, opt_index) {
   return jspb.Message.addToRepeatedField(this, 3, value, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.api.GetDriftPerpOpenOrdersRequest} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersRequest} returns this
  */
-proto.api.GetDriftPerpOpenOrdersRequest.prototype.clearContractsList = function() {
+proto.api.GetDriftOpenPerpOrdersRequest.prototype.clearContractsList = function() {
   return this.setContractsList([]);
 };
 
@@ -39974,7 +44442,7 @@ proto.api.GetDriftPerpOpenOrdersRequest.prototype.clearContractsList = function(
  * @private {!Array<number>}
  * @const
  */
-proto.api.GetDriftPerpOpenOrdersValue.repeatedFields_ = [2];
+proto.api.GetDriftOpenPerpOrdersValue.repeatedFields_ = [2];
 
 
 
@@ -39991,8 +44459,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.api.GetDriftPerpOpenOrdersValue.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.GetDriftPerpOpenOrdersValue.toObject(opt_includeInstance, this);
+proto.api.GetDriftOpenPerpOrdersValue.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftOpenPerpOrdersValue.toObject(opt_includeInstance, this);
 };
 
 
@@ -40001,11 +44469,11 @@ proto.api.GetDriftPerpOpenOrdersValue.prototype.toObject = function(opt_includeI
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.api.GetDriftPerpOpenOrdersValue} msg The msg instance to transform.
+ * @param {!proto.api.GetDriftOpenPerpOrdersValue} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.api.GetDriftPerpOpenOrdersValue.toObject = function(includeInstance, msg) {
+proto.api.GetDriftOpenPerpOrdersValue.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     ordersList: jspb.Message.toObjectList(msg.getOrdersList(),
@@ -40023,23 +44491,23 @@ proto.api.GetDriftPerpOpenOrdersValue.toObject = function(includeInstance, msg) 
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.GetDriftPerpOpenOrdersValue}
+ * @return {!proto.api.GetDriftOpenPerpOrdersValue}
  */
-proto.api.GetDriftPerpOpenOrdersValue.deserializeBinary = function(bytes) {
+proto.api.GetDriftOpenPerpOrdersValue.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.GetDriftPerpOpenOrdersValue;
-  return proto.api.GetDriftPerpOpenOrdersValue.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.api.GetDriftOpenPerpOrdersValue;
+  return proto.api.GetDriftOpenPerpOrdersValue.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.api.GetDriftPerpOpenOrdersValue} msg The message object to deserialize into.
+ * @param {!proto.api.GetDriftOpenPerpOrdersValue} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.GetDriftPerpOpenOrdersValue}
+ * @return {!proto.api.GetDriftOpenPerpOrdersValue}
  */
-proto.api.GetDriftPerpOpenOrdersValue.deserializeBinaryFromReader = function(msg, reader) {
+proto.api.GetDriftOpenPerpOrdersValue.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -40068,9 +44536,9 @@ proto.api.GetDriftPerpOpenOrdersValue.deserializeBinaryFromReader = function(msg
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.api.GetDriftPerpOpenOrdersValue.prototype.serializeBinary = function() {
+proto.api.GetDriftOpenPerpOrdersValue.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.api.GetDriftPerpOpenOrdersValue.serializeBinaryToWriter(this, writer);
+  proto.api.GetDriftOpenPerpOrdersValue.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -40078,11 +44546,11 @@ proto.api.GetDriftPerpOpenOrdersValue.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.api.GetDriftPerpOpenOrdersValue} message
+ * @param {!proto.api.GetDriftOpenPerpOrdersValue} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.api.GetDriftPerpOpenOrdersValue.serializeBinaryToWriter = function(message, writer) {
+proto.api.GetDriftOpenPerpOrdersValue.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getOwneraddress();
   if (f.length > 0) {
@@ -40106,16 +44574,16 @@ proto.api.GetDriftPerpOpenOrdersValue.serializeBinaryToWriter = function(message
  * optional string ownerAddress = 1;
  * @return {string}
  */
-proto.api.GetDriftPerpOpenOrdersValue.prototype.getOwneraddress = function() {
+proto.api.GetDriftOpenPerpOrdersValue.prototype.getOwneraddress = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @return {!proto.api.GetDriftPerpOpenOrdersValue} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersValue} returns this
  */
-proto.api.GetDriftPerpOpenOrdersValue.prototype.setOwneraddress = function(value) {
+proto.api.GetDriftOpenPerpOrdersValue.prototype.setOwneraddress = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
@@ -40124,7 +44592,7 @@ proto.api.GetDriftPerpOpenOrdersValue.prototype.setOwneraddress = function(value
  * repeated DriftPerpOrder orders = 2;
  * @return {!Array<!proto.api.DriftPerpOrder>}
  */
-proto.api.GetDriftPerpOpenOrdersValue.prototype.getOrdersList = function() {
+proto.api.GetDriftOpenPerpOrdersValue.prototype.getOrdersList = function() {
   return /** @type{!Array<!proto.api.DriftPerpOrder>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.api.DriftPerpOrder, 2));
 };
@@ -40132,9 +44600,9 @@ proto.api.GetDriftPerpOpenOrdersValue.prototype.getOrdersList = function() {
 
 /**
  * @param {!Array<!proto.api.DriftPerpOrder>} value
- * @return {!proto.api.GetDriftPerpOpenOrdersValue} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersValue} returns this
 */
-proto.api.GetDriftPerpOpenOrdersValue.prototype.setOrdersList = function(value) {
+proto.api.GetDriftOpenPerpOrdersValue.prototype.setOrdersList = function(value) {
   return jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
@@ -40144,16 +44612,16 @@ proto.api.GetDriftPerpOpenOrdersValue.prototype.setOrdersList = function(value) 
  * @param {number=} opt_index
  * @return {!proto.api.DriftPerpOrder}
  */
-proto.api.GetDriftPerpOpenOrdersValue.prototype.addOrders = function(opt_value, opt_index) {
+proto.api.GetDriftOpenPerpOrdersValue.prototype.addOrders = function(opt_value, opt_index) {
   return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.DriftPerpOrder, opt_index);
 };
 
 
 /**
  * Clears the list making it empty but non-null.
- * @return {!proto.api.GetDriftPerpOpenOrdersValue} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersValue} returns this
  */
-proto.api.GetDriftPerpOpenOrdersValue.prototype.clearOrdersList = function() {
+proto.api.GetDriftOpenPerpOrdersValue.prototype.clearOrdersList = function() {
   return this.setOrdersList([]);
 };
 
@@ -40174,8 +44642,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.api.GetDriftPerpOpenOrdersResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.GetDriftPerpOpenOrdersResponse.toObject(opt_includeInstance, this);
+proto.api.GetDriftOpenPerpOrdersResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetDriftOpenPerpOrdersResponse.toObject(opt_includeInstance, this);
 };
 
 
@@ -40184,14 +44652,14 @@ proto.api.GetDriftPerpOpenOrdersResponse.prototype.toObject = function(opt_inclu
  * @param {boolean|undefined} includeInstance Deprecated. Whether to include
  *     the JSPB instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.api.GetDriftPerpOpenOrdersResponse} msg The msg instance to transform.
+ * @param {!proto.api.GetDriftOpenPerpOrdersResponse} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.api.GetDriftPerpOpenOrdersResponse.toObject = function(includeInstance, msg) {
+proto.api.GetDriftOpenPerpOrdersResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
-    data: (f = msg.getData()) && proto.api.GetDriftPerpOpenOrdersValue.toObject(includeInstance, f)
+    data: (f = msg.getData()) && proto.api.GetDriftOpenPerpOrdersValue.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -40205,23 +44673,23 @@ proto.api.GetDriftPerpOpenOrdersResponse.toObject = function(includeInstance, ms
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.GetDriftPerpOpenOrdersResponse}
+ * @return {!proto.api.GetDriftOpenPerpOrdersResponse}
  */
-proto.api.GetDriftPerpOpenOrdersResponse.deserializeBinary = function(bytes) {
+proto.api.GetDriftOpenPerpOrdersResponse.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.GetDriftPerpOpenOrdersResponse;
-  return proto.api.GetDriftPerpOpenOrdersResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.api.GetDriftOpenPerpOrdersResponse;
+  return proto.api.GetDriftOpenPerpOrdersResponse.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.api.GetDriftPerpOpenOrdersResponse} msg The message object to deserialize into.
+ * @param {!proto.api.GetDriftOpenPerpOrdersResponse} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.GetDriftPerpOpenOrdersResponse}
+ * @return {!proto.api.GetDriftOpenPerpOrdersResponse}
  */
-proto.api.GetDriftPerpOpenOrdersResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.api.GetDriftOpenPerpOrdersResponse.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -40234,8 +44702,8 @@ proto.api.GetDriftPerpOpenOrdersResponse.deserializeBinaryFromReader = function(
       msg.setContext(value);
       break;
     case 2:
-      var value = new proto.api.GetDriftPerpOpenOrdersValue;
-      reader.readMessage(value,proto.api.GetDriftPerpOpenOrdersValue.deserializeBinaryFromReader);
+      var value = new proto.api.GetDriftOpenPerpOrdersValue;
+      reader.readMessage(value,proto.api.GetDriftOpenPerpOrdersValue.deserializeBinaryFromReader);
       msg.setData(value);
       break;
     default:
@@ -40251,9 +44719,9 @@ proto.api.GetDriftPerpOpenOrdersResponse.deserializeBinaryFromReader = function(
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.api.GetDriftPerpOpenOrdersResponse.prototype.serializeBinary = function() {
+proto.api.GetDriftOpenPerpOrdersResponse.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.api.GetDriftPerpOpenOrdersResponse.serializeBinaryToWriter(this, writer);
+  proto.api.GetDriftOpenPerpOrdersResponse.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -40261,11 +44729,11 @@ proto.api.GetDriftPerpOpenOrdersResponse.prototype.serializeBinary = function() 
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.api.GetDriftPerpOpenOrdersResponse} message
+ * @param {!proto.api.GetDriftOpenPerpOrdersResponse} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.api.GetDriftPerpOpenOrdersResponse.serializeBinaryToWriter = function(message, writer) {
+proto.api.GetDriftOpenPerpOrdersResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getContext();
   if (f != null) {
@@ -40280,7 +44748,7 @@ proto.api.GetDriftPerpOpenOrdersResponse.serializeBinaryToWriter = function(mess
     writer.writeMessage(
       2,
       f,
-      proto.api.GetDriftPerpOpenOrdersValue.serializeBinaryToWriter
+      proto.api.GetDriftOpenPerpOrdersValue.serializeBinaryToWriter
     );
   }
 };
@@ -40290,7 +44758,7 @@ proto.api.GetDriftPerpOpenOrdersResponse.serializeBinaryToWriter = function(mess
  * optional Context context = 1;
  * @return {?proto.api.Context}
  */
-proto.api.GetDriftPerpOpenOrdersResponse.prototype.getContext = function() {
+proto.api.GetDriftOpenPerpOrdersResponse.prototype.getContext = function() {
   return /** @type{?proto.api.Context} */ (
     jspb.Message.getWrapperField(this, proto.api.Context, 1));
 };
@@ -40298,18 +44766,18 @@ proto.api.GetDriftPerpOpenOrdersResponse.prototype.getContext = function() {
 
 /**
  * @param {?proto.api.Context|undefined} value
- * @return {!proto.api.GetDriftPerpOpenOrdersResponse} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersResponse} returns this
 */
-proto.api.GetDriftPerpOpenOrdersResponse.prototype.setContext = function(value) {
+proto.api.GetDriftOpenPerpOrdersResponse.prototype.setContext = function(value) {
   return jspb.Message.setWrapperField(this, 1, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.api.GetDriftPerpOpenOrdersResponse} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersResponse} returns this
  */
-proto.api.GetDriftPerpOpenOrdersResponse.prototype.clearContext = function() {
+proto.api.GetDriftOpenPerpOrdersResponse.prototype.clearContext = function() {
   return this.setContext(undefined);
 };
 
@@ -40318,35 +44786,35 @@ proto.api.GetDriftPerpOpenOrdersResponse.prototype.clearContext = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.api.GetDriftPerpOpenOrdersResponse.prototype.hasContext = function() {
+proto.api.GetDriftOpenPerpOrdersResponse.prototype.hasContext = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
 
 /**
- * optional GetDriftPerpOpenOrdersValue data = 2;
- * @return {?proto.api.GetDriftPerpOpenOrdersValue}
+ * optional GetDriftOpenPerpOrdersValue data = 2;
+ * @return {?proto.api.GetDriftOpenPerpOrdersValue}
  */
-proto.api.GetDriftPerpOpenOrdersResponse.prototype.getData = function() {
-  return /** @type{?proto.api.GetDriftPerpOpenOrdersValue} */ (
-    jspb.Message.getWrapperField(this, proto.api.GetDriftPerpOpenOrdersValue, 2));
+proto.api.GetDriftOpenPerpOrdersResponse.prototype.getData = function() {
+  return /** @type{?proto.api.GetDriftOpenPerpOrdersValue} */ (
+    jspb.Message.getWrapperField(this, proto.api.GetDriftOpenPerpOrdersValue, 2));
 };
 
 
 /**
- * @param {?proto.api.GetDriftPerpOpenOrdersValue|undefined} value
- * @return {!proto.api.GetDriftPerpOpenOrdersResponse} returns this
+ * @param {?proto.api.GetDriftOpenPerpOrdersValue|undefined} value
+ * @return {!proto.api.GetDriftOpenPerpOrdersResponse} returns this
 */
-proto.api.GetDriftPerpOpenOrdersResponse.prototype.setData = function(value) {
+proto.api.GetDriftOpenPerpOrdersResponse.prototype.setData = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
  * Clears the message field making it undefined.
- * @return {!proto.api.GetDriftPerpOpenOrdersResponse} returns this
+ * @return {!proto.api.GetDriftOpenPerpOrdersResponse} returns this
  */
-proto.api.GetDriftPerpOpenOrdersResponse.prototype.clearData = function() {
+proto.api.GetDriftOpenPerpOrdersResponse.prototype.clearData = function() {
   return this.setData(undefined);
 };
 
@@ -40355,7 +44823,7 @@ proto.api.GetDriftPerpOpenOrdersResponse.prototype.clearData = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.api.GetDriftPerpOpenOrdersResponse.prototype.hasData = function() {
+proto.api.GetDriftOpenPerpOrdersResponse.prototype.hasData = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
