@@ -1267,8 +1267,6 @@ message PostCancelOrderRequest {
   string ownerAddress = 4 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
   Project project = 6;
-  uint64 clientOrderID = 7[(google.api.field_behavior) = OPTIONAL];
-  string market = 8[(google.api.field_behavior) = OPTIONAL];
 }
 
 message PostCancelByClientOrderIDRequest {
@@ -1426,8 +1424,6 @@ message GetOpenOrdersRequest {
   string address = 3 [(google.api.field_behavior) = OPTIONAL];
   string openOrdersAddress = 4 [(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming, Setting both address and openOrdersAddress is invalid, openOrdersAddress is preferred."}];
   Project project = 5[(google.api.field_behavior) = OPTIONAL];
-  string orderID = 6 [(google.api.field_behavior) = OPTIONAL];
-  uint64 clientOrderID = 7[(google.api.field_behavior) = OPTIONAL];
 }
 
 message GetOpenOrdersResponse {

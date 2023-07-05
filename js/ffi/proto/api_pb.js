@@ -11910,9 +11910,7 @@ proto.api.PostCancelOrderRequest.toObject = function(includeInstance, msg) {
     marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    market: jspb.Message.getFieldWithDefault(msg, 8, "")
+    project: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -11972,14 +11970,6 @@ proto.api.PostCancelOrderRequest.deserializeBinaryFromReader = function(msg, rea
     case 6:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
-      break;
-    case 7:
-      var value = /** @type {number} */ (reader.readUint64());
-      msg.setClientorderid(value);
-      break;
-    case 8:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
       break;
     default:
       reader.skipField();
@@ -12049,20 +12039,6 @@ proto.api.PostCancelOrderRequest.serializeBinaryToWriter = function(message, wri
   if (f !== 0.0) {
     writer.writeEnum(
       6,
-      f
-    );
-  }
-  f = message.getClientorderid();
-  if (f !== 0) {
-    writer.writeUint64(
-      7,
-      f
-    );
-  }
-  f = message.getMarket();
-  if (f.length > 0) {
-    writer.writeString(
-      8,
       f
     );
   }
@@ -12174,42 +12150,6 @@ proto.api.PostCancelOrderRequest.prototype.getProject = function() {
  */
 proto.api.PostCancelOrderRequest.prototype.setProject = function(value) {
   return jspb.Message.setProto3EnumField(this, 6, value);
-};
-
-
-/**
- * optional uint64 clientOrderID = 7;
- * @return {number}
- */
-proto.api.PostCancelOrderRequest.prototype.getClientorderid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.PostCancelOrderRequest} returns this
- */
-proto.api.PostCancelOrderRequest.prototype.setClientorderid = function(value) {
-  return jspb.Message.setProto3IntField(this, 7, value);
-};
-
-
-/**
- * optional string market = 8;
- * @return {string}
- */
-proto.api.PostCancelOrderRequest.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.PostCancelOrderRequest} returns this
- */
-proto.api.PostCancelOrderRequest.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 8, value);
 };
 
 
@@ -16668,9 +16608,7 @@ proto.api.GetOpenOrdersRequest.toObject = function(includeInstance, msg) {
     limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
     address: jspb.Message.getFieldWithDefault(msg, 3, ""),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    orderid: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 7, 0)
+    project: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -16726,14 +16664,6 @@ proto.api.GetOpenOrdersRequest.deserializeBinaryFromReader = function(msg, reade
     case 5:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
-      break;
-    case 6:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setOrderid(value);
-      break;
-    case 7:
-      var value = /** @type {number} */ (reader.readUint64());
-      msg.setClientorderid(value);
       break;
     default:
       reader.skipField();
@@ -16796,20 +16726,6 @@ proto.api.GetOpenOrdersRequest.serializeBinaryToWriter = function(message, write
   if (f !== 0.0) {
     writer.writeEnum(
       5,
-      f
-    );
-  }
-  f = message.getOrderid();
-  if (f.length > 0) {
-    writer.writeString(
-      6,
-      f
-    );
-  }
-  f = message.getClientorderid();
-  if (f !== 0) {
-    writer.writeUint64(
-      7,
       f
     );
   }
@@ -16903,42 +16819,6 @@ proto.api.GetOpenOrdersRequest.prototype.getProject = function() {
  */
 proto.api.GetOpenOrdersRequest.prototype.setProject = function(value) {
   return jspb.Message.setProto3EnumField(this, 5, value);
-};
-
-
-/**
- * optional string orderID = 6;
- * @return {string}
- */
-proto.api.GetOpenOrdersRequest.prototype.getOrderid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetOpenOrdersRequest} returns this
- */
-proto.api.GetOpenOrdersRequest.prototype.setOrderid = function(value) {
-  return jspb.Message.setProto3StringField(this, 6, value);
-};
-
-
-/**
- * optional uint64 clientOrderID = 7;
- * @return {number}
- */
-proto.api.GetOpenOrdersRequest.prototype.getClientorderid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetOpenOrdersRequest} returns this
- */
-proto.api.GetOpenOrdersRequest.prototype.setClientorderid = function(value) {
-  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 

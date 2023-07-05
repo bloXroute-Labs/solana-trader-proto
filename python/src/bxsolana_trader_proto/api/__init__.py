@@ -322,8 +322,6 @@ class PostCancelOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
     project: "Project" = betterproto.enum_field(6)
-    client_order_id: int = betterproto.uint64_field(7)
-    market: str = betterproto.string_field(8)
 
 
 @dataclass(eq=False, repr=False)
@@ -482,8 +480,6 @@ class GetOpenOrdersRequest(betterproto.Message):
     address: str = betterproto.string_field(3)
     open_orders_address: str = betterproto.string_field(4)
     project: "Project" = betterproto.enum_field(5)
-    order_id: str = betterproto.string_field(6)
-    client_order_id: int = betterproto.uint64_field(7)
 
 
 @dataclass(eq=False, repr=False)

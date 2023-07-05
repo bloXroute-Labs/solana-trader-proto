@@ -776,19 +776,6 @@
               "P_DRIFT"
             ],
             "default": "P_UNKNOWN"
-          },
-          {
-            "name": "orderID",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "clientOrderID",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
           }
         ],
         "tags": [
@@ -4907,13 +4894,6 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
-        },
-        "clientOrderID": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "market": {
-          "type": "string"
         }
       },
       "required": [
