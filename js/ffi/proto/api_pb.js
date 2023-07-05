@@ -4319,7 +4319,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.PostOrderRequestV2 = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostOrderRequestV2.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.api.PostOrderRequestV2, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -4340,7 +4340,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.PostReplaceOrderRequestV2 = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostReplaceOrderRequestV2.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.api.PostReplaceOrderRequestV2, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -48644,13 +48644,6 @@ proto.api.MarketDepthItemV2.prototype.setSize = function(value) {
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.api.PostOrderRequestV2.repeatedFields_ = [5];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -48686,7 +48679,6 @@ proto.api.PostOrderRequestV2.toObject = function(includeInstance, msg) {
     payeraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     market: jspb.Message.getFieldWithDefault(msg, 3, ""),
     side: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    typeList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f,
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
@@ -48742,12 +48734,6 @@ proto.api.PostOrderRequestV2.deserializeBinaryFromReader = function(msg, reader)
     case 4:
       var value = /** @type {!proto.api.Side} */ (reader.readEnum());
       msg.setSide(value);
-      break;
-    case 5:
-      var values = /** @type {!Array<!proto.common.OrderType>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addType(values[i]);
-      }
       break;
     case 6:
       var value = /** @type {number} */ (reader.readDouble());
@@ -48819,13 +48805,6 @@ proto.api.PostOrderRequestV2.serializeBinaryToWriter = function(message, writer)
   if (f !== 0.0) {
     writer.writeEnum(
       4,
-      f
-    );
-  }
-  f = message.getTypeList();
-  if (f.length > 0) {
-    writer.writePackedEnum(
-      5,
       f
     );
   }
@@ -48933,43 +48912,6 @@ proto.api.PostOrderRequestV2.prototype.setSide = function(value) {
 
 
 /**
- * repeated common.OrderType type = 5;
- * @return {!Array<!proto.common.OrderType>}
- */
-proto.api.PostOrderRequestV2.prototype.getTypeList = function() {
-  return /** @type {!Array<!proto.common.OrderType>} */ (jspb.Message.getRepeatedField(this, 5));
-};
-
-
-/**
- * @param {!Array<!proto.common.OrderType>} value
- * @return {!proto.api.PostOrderRequestV2} returns this
- */
-proto.api.PostOrderRequestV2.prototype.setTypeList = function(value) {
-  return jspb.Message.setField(this, 5, value || []);
-};
-
-
-/**
- * @param {!proto.common.OrderType} value
- * @param {number=} opt_index
- * @return {!proto.api.PostOrderRequestV2} returns this
- */
-proto.api.PostOrderRequestV2.prototype.addType = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 5, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.api.PostOrderRequestV2} returns this
- */
-proto.api.PostOrderRequestV2.prototype.clearTypeList = function() {
-  return this.setTypeList([]);
-};
-
-
-/**
  * optional double amount = 6;
  * @return {number}
  */
@@ -49042,13 +48984,6 @@ proto.api.PostOrderRequestV2.prototype.setClientorderid = function(value) {
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.api.PostReplaceOrderRequestV2.repeatedFields_ = [5];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -49084,7 +49019,6 @@ proto.api.PostReplaceOrderRequestV2.toObject = function(includeInstance, msg) {
     payeraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     market: jspb.Message.getFieldWithDefault(msg, 3, ""),
     side: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    typeList: (f = jspb.Message.getRepeatedField(msg, 5)) == null ? undefined : f,
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
@@ -49141,12 +49075,6 @@ proto.api.PostReplaceOrderRequestV2.deserializeBinaryFromReader = function(msg, 
     case 4:
       var value = /** @type {!proto.api.Side} */ (reader.readEnum());
       msg.setSide(value);
-      break;
-    case 5:
-      var values = /** @type {!Array<!proto.common.OrderType>} */ (reader.isDelimited() ? reader.readPackedEnum() : [reader.readEnum()]);
-      for (var i = 0; i < values.length; i++) {
-        msg.addType(values[i]);
-      }
       break;
     case 6:
       var value = /** @type {number} */ (reader.readDouble());
@@ -49222,13 +49150,6 @@ proto.api.PostReplaceOrderRequestV2.serializeBinaryToWriter = function(message, 
   if (f !== 0.0) {
     writer.writeEnum(
       4,
-      f
-    );
-  }
-  f = message.getTypeList();
-  if (f.length > 0) {
-    writer.writePackedEnum(
-      5,
       f
     );
   }
@@ -49339,43 +49260,6 @@ proto.api.PostReplaceOrderRequestV2.prototype.getSide = function() {
  */
 proto.api.PostReplaceOrderRequestV2.prototype.setSide = function(value) {
   return jspb.Message.setProto3EnumField(this, 4, value);
-};
-
-
-/**
- * repeated common.OrderType type = 5;
- * @return {!Array<!proto.common.OrderType>}
- */
-proto.api.PostReplaceOrderRequestV2.prototype.getTypeList = function() {
-  return /** @type {!Array<!proto.common.OrderType>} */ (jspb.Message.getRepeatedField(this, 5));
-};
-
-
-/**
- * @param {!Array<!proto.common.OrderType>} value
- * @return {!proto.api.PostReplaceOrderRequestV2} returns this
- */
-proto.api.PostReplaceOrderRequestV2.prototype.setTypeList = function(value) {
-  return jspb.Message.setField(this, 5, value || []);
-};
-
-
-/**
- * @param {!proto.common.OrderType} value
- * @param {number=} opt_index
- * @return {!proto.api.PostReplaceOrderRequestV2} returns this
- */
-proto.api.PostReplaceOrderRequestV2.prototype.addType = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 5, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.api.PostReplaceOrderRequestV2} returns this
- */
-proto.api.PostReplaceOrderRequestV2.prototype.clearTypeList = function() {
-  return this.setTypeList([]);
 };
 
 

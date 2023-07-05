@@ -4953,15 +4953,6 @@
         "side": {
           "$ref": "#/definitions/apiSide"
         },
-        "type": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/commonOrderType"
-          },
-          "required": [
-            "type"
-          ]
-        },
         "amount": {
           "type": "number",
           "format": "double",
@@ -4990,7 +4981,6 @@
         "ownerAddress",
         "payerAddress",
         "market",
-        "type",
         "amount",
         "price"
       ]
@@ -5156,15 +5146,6 @@
         "side": {
           "$ref": "#/definitions/apiSide"
         },
-        "type": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/commonOrderType"
-          },
-          "required": [
-            "type"
-          ]
-        },
         "amount": {
           "type": "number",
           "format": "double",
@@ -5200,7 +5181,6 @@
         "ownerAddress",
         "payerAddress",
         "market",
-        "type",
         "amount",
         "price",
         "openOrdersAddress"

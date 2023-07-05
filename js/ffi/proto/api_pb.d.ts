@@ -5798,10 +5798,6 @@ export class PostOrderRequestV2 extends jspb.Message {
     setMarket(value: string): PostOrderRequestV2;
     getSide(): Side;
     setSide(value: Side): PostOrderRequestV2;
-    clearTypeList(): void;
-    getTypeList(): Array<common_pb.OrderType>;
-    setTypeList(value: Array<common_pb.OrderType>): PostOrderRequestV2;
-    addType(value: common_pb.OrderType, index?: number): common_pb.OrderType;
     getAmount(): number;
     setAmount(value: number): PostOrderRequestV2;
     getPrice(): number;
@@ -5827,7 +5823,6 @@ export namespace PostOrderRequestV2 {
         payeraddress: string,
         market: string,
         side: Side,
-        typeList: Array<common_pb.OrderType>,
         amount: number,
         price: number,
         openordersaddress: string,
@@ -5844,10 +5839,6 @@ export class PostReplaceOrderRequestV2 extends jspb.Message {
     setMarket(value: string): PostReplaceOrderRequestV2;
     getSide(): Side;
     setSide(value: Side): PostReplaceOrderRequestV2;
-    clearTypeList(): void;
-    getTypeList(): Array<common_pb.OrderType>;
-    setTypeList(value: Array<common_pb.OrderType>): PostReplaceOrderRequestV2;
-    addType(value: common_pb.OrderType, index?: number): common_pb.OrderType;
     getAmount(): number;
     setAmount(value: number): PostReplaceOrderRequestV2;
     getPrice(): number;
@@ -5875,7 +5866,6 @@ export namespace PostReplaceOrderRequestV2 {
         payeraddress: string,
         market: string,
         side: Side,
-        typeList: Array<common_pb.OrderType>,
         amount: number,
         price: number,
         openordersaddress: string,
