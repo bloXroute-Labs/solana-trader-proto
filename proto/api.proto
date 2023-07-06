@@ -585,7 +585,7 @@ message GetKlineRequest {
 }
 
 message GetKlineResponse {
-  map<string, Candles> candles = 3;
+  map<string, Candles> marketCandles = 3;
 }
 
 message Candle {

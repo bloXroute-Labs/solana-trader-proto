@@ -130,7 +130,7 @@ class GetKlineRequest(betterproto.Message):
 
 @dataclass
 class GetKlineResponse(betterproto.Message):
-    candles: Dict[str, "Candles"] = betterproto.map_field(
+    market_candles: Dict[str, "Candles"] = betterproto.map_field(
         3, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
 

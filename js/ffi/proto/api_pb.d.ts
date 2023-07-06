@@ -266,8 +266,8 @@ export namespace GetKlineRequest {
 
 export class GetKlineResponse extends jspb.Message { 
 
-    getCandlesMap(): jspb.Map<string, Candles>;
-    clearCandlesMap(): void;
+    getMarketcandlesMap(): jspb.Map<string, Candles>;
+    clearMarketcandlesMap(): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetKlineResponse.AsObject;
@@ -282,7 +282,7 @@ export class GetKlineResponse extends jspb.Message {
 export namespace GetKlineResponse {
     export type AsObject = {
 
-        candlesMap: Array<[string, Candles.AsObject]>,
+        marketcandlesMap: Array<[string, Candles.AsObject]>,
     }
 }
 

@@ -4482,7 +4482,7 @@ proto.api.GetKlineResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.api.GetKlineResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    candlesMap: (f = msg.getCandlesMap()) ? f.toObject(includeInstance, proto.api.Candles.toObject) : []
+    marketcandlesMap: (f = msg.getMarketcandlesMap()) ? f.toObject(includeInstance, proto.api.Candles.toObject) : []
   };
 
   if (includeInstance) {
@@ -4520,7 +4520,7 @@ proto.api.GetKlineResponse.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 3:
-      var value = msg.getCandlesMap();
+      var value = msg.getMarketcandlesMap();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.api.Candles.deserializeBinaryFromReader, "", new proto.api.Candles());
          });
@@ -4554,7 +4554,7 @@ proto.api.GetKlineResponse.prototype.serializeBinary = function() {
  */
 proto.api.GetKlineResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getCandlesMap(true);
+  f = message.getMarketcandlesMap(true);
   if (f && f.getLength() > 0) {
     f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.Candles.serializeBinaryToWriter);
   }
@@ -4562,12 +4562,12 @@ proto.api.GetKlineResponse.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * map<string, Candles> candles = 3;
+ * map<string, Candles> marketCandles = 3;
  * @param {boolean=} opt_noLazyCreate Do not create the map if
  * empty, instead returning `undefined`
  * @return {!jspb.Map<string,!proto.api.Candles>}
  */
-proto.api.GetKlineResponse.prototype.getCandlesMap = function(opt_noLazyCreate) {
+proto.api.GetKlineResponse.prototype.getMarketcandlesMap = function(opt_noLazyCreate) {
   return /** @type {!jspb.Map<string,!proto.api.Candles>} */ (
       jspb.Message.getMapField(this, 3, opt_noLazyCreate,
       proto.api.Candles));
@@ -4578,8 +4578,8 @@ proto.api.GetKlineResponse.prototype.getCandlesMap = function(opt_noLazyCreate) 
  * Clears values from the map. The map will be non-null.
  * @return {!proto.api.GetKlineResponse} returns this
  */
-proto.api.GetKlineResponse.prototype.clearCandlesMap = function() {
-  this.getCandlesMap().clear();
+proto.api.GetKlineResponse.prototype.clearMarketcandlesMap = function() {
+  this.getMarketcandlesMap().clear();
   return this;};
 
 

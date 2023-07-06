@@ -1449,7 +1449,7 @@
     "apiGetKlineResponse": {
       "type": "object",
       "properties": {
-        "candles": {
+        "marketCandles": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/apiCandles"
