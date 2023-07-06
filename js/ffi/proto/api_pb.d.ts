@@ -6458,6 +6458,28 @@ export namespace PostCancelOrderRequestV2 {
     }
 }
 
+export class PostCancelOrderResponseV2 extends jspb.Message { 
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostCancelOrderResponseV2;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostCancelOrderResponseV2.AsObject;
+    static toObject(includeInstance: boolean, msg: PostCancelOrderResponseV2): PostCancelOrderResponseV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostCancelOrderResponseV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostCancelOrderResponseV2;
+    static deserializeBinaryFromReader(message: PostCancelOrderResponseV2, reader: jspb.BinaryReader): PostCancelOrderResponseV2;
+}
+
+export namespace PostCancelOrderResponseV2 {
+    export type AsObject = {
+        transactionsList: Array<TransactionMessage.AsObject>,
+    }
+}
+
 export class PostSettleRequestV2 extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): PostSettleRequestV2;

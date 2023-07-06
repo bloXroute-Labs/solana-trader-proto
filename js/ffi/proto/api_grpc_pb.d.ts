@@ -377,14 +377,14 @@ interface IApiService_IPostOrderV2 extends grpc.MethodDefinition<api_pb.PostOrde
     responseSerialize: grpc.serialize<api_pb.PostOrderResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostOrderResponse>;
 }
-interface IApiService_IPostCancelOrderV2 extends grpc.MethodDefinition<api_pb.PostCancelOrderRequestV2, api_pb.PostCancelOrderResponse> {
+interface IApiService_IPostCancelOrderV2 extends grpc.MethodDefinition<api_pb.PostCancelOrderRequestV2, api_pb.PostCancelOrderResponseV2> {
     path: "/api.Api/PostCancelOrderV2";
     requestStream: false;
     responseStream: false;
     requestSerialize: grpc.serialize<api_pb.PostCancelOrderRequestV2>;
     requestDeserialize: grpc.deserialize<api_pb.PostCancelOrderRequestV2>;
-    responseSerialize: grpc.serialize<api_pb.PostCancelOrderResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.PostCancelOrderResponse>;
+    responseSerialize: grpc.serialize<api_pb.PostCancelOrderResponseV2>;
+    responseDeserialize: grpc.deserialize<api_pb.PostCancelOrderResponseV2>;
 }
 interface IApiService_IPostReplaceOrderV2 extends grpc.MethodDefinition<api_pb.PostReplaceOrderRequestV2, api_pb.PostOrderResponse> {
     path: "/api.Api/PostReplaceOrderV2";
@@ -969,7 +969,7 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getOrderbookV2: grpc.handleUnaryCall<api_pb.GetOrderbookRequestV2, api_pb.GetOrderbookResponseV2>;
     getMarketDepthV2: grpc.handleUnaryCall<api_pb.GetMarketDepthRequestV2, api_pb.GetMarketDepthResponseV2>;
     postOrderV2: grpc.handleUnaryCall<api_pb.PostOrderRequestV2, api_pb.PostOrderResponse>;
-    postCancelOrderV2: grpc.handleUnaryCall<api_pb.PostCancelOrderRequestV2, api_pb.PostCancelOrderResponse>;
+    postCancelOrderV2: grpc.handleUnaryCall<api_pb.PostCancelOrderRequestV2, api_pb.PostCancelOrderResponseV2>;
     postReplaceOrderV2: grpc.handleUnaryCall<api_pb.PostReplaceOrderRequestV2, api_pb.PostOrderResponse>;
     postSettleV2: grpc.handleUnaryCall<api_pb.PostSettleRequestV2, api_pb.PostSettleResponse>;
     getOpenOrdersV2: grpc.handleUnaryCall<api_pb.GetOpenOrdersRequestV2, api_pb.GetOpenOrdersResponse>;
@@ -1122,9 +1122,9 @@ export interface IApiClient {
     postOrderV2(request: api_pb.PostOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     postOrderV2(request: api_pb.PostOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     postOrderV2(request: api_pb.PostOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
-    postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
-    postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
+    postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponseV2) => void): grpc.ClientUnaryCall;
+    postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponseV2) => void): grpc.ClientUnaryCall;
+    postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponseV2) => void): grpc.ClientUnaryCall;
     postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
@@ -1387,9 +1387,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postOrderV2(request: api_pb.PostOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     public postOrderV2(request: api_pb.PostOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     public postOrderV2(request: api_pb.PostOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
-    public postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
-    public postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
-    public postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponse) => void): grpc.ClientUnaryCall;
+    public postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponseV2) => void): grpc.ClientUnaryCall;
+    public postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponseV2) => void): grpc.ClientUnaryCall;
+    public postCancelOrderV2(request: api_pb.PostCancelOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCancelOrderResponseV2) => void): grpc.ClientUnaryCall;
     public postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     public postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;
     public postReplaceOrderV2(request: api_pb.PostReplaceOrderRequestV2, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostOrderResponse) => void): grpc.ClientUnaryCall;

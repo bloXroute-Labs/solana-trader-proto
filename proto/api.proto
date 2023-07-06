@@ -389,7 +389,7 @@ service Api {
     };
   }
 
-  rpc PostCancelOrderV2(PostCancelOrderRequestV2) returns (PostCancelOrderResponse) {
+  rpc PostCancelOrderV2(PostCancelOrderRequestV2) returns (PostCancelOrderResponseV2) {
     option (google.api.http) = {
       post: "/api/v2/trade/cancel"
       body: "*"
@@ -2548,6 +2548,10 @@ message PostCancelOrderRequestV2 {
   string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
   uint64 clientOrderID = 6[(google.api.field_behavior) = OPTIONAL];
   string market = 7[(google.api.field_behavior) = OPTIONAL];
+}
+
+message PostCancelOrderResponseV2 {
+  repeated TransactionMessage transactions = 1;
 }
 
 message PostSettleRequestV2 {

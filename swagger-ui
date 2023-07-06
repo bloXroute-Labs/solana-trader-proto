@@ -2798,7 +2798,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostCancelOrderResponse"
+              "$ref": "#/definitions/apiPostCancelOrderResponseV2"
             }
           },
           "default": {
@@ -4949,6 +4949,17 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostCancelOrderResponseV2": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
         }
       }
     },

@@ -1286,6 +1286,17 @@ function deserialize_api_PostCancelOrderResponse(buffer_arg) {
   return api_pb.PostCancelOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostCancelOrderResponseV2(arg) {
+  if (!(arg instanceof api_pb.PostCancelOrderResponseV2)) {
+    throw new Error('Expected argument of type api.PostCancelOrderResponseV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostCancelOrderResponseV2(buffer_arg) {
+  return api_pb.PostCancelOrderResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostCancelPerpOrderRequest(arg) {
   if (!(arg instanceof api_pb.PostCancelPerpOrderRequest)) {
     throw new Error('Expected argument of type api.PostCancelPerpOrderRequest');
@@ -2209,11 +2220,11 @@ getMarketsV2: {
     requestStream: false,
     responseStream: false,
     requestType: api_pb.PostCancelOrderRequestV2,
-    responseType: api_pb.PostCancelOrderResponse,
+    responseType: api_pb.PostCancelOrderResponseV2,
     requestSerialize: serialize_api_PostCancelOrderRequestV2,
     requestDeserialize: deserialize_api_PostCancelOrderRequestV2,
-    responseSerialize: serialize_api_PostCancelOrderResponse,
-    responseDeserialize: deserialize_api_PostCancelOrderResponse,
+    responseSerialize: serialize_api_PostCancelOrderResponseV2,
+    responseDeserialize: deserialize_api_PostCancelOrderResponseV2,
   },
   postReplaceOrderV2: {
     path: '/api.Api/PostReplaceOrderV2',

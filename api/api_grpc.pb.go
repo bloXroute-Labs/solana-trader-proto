@@ -49,7 +49,7 @@ type ApiClient interface {
 	GetOrderbookV2(ctx context.Context, in *GetOrderbookRequestV2, opts ...grpc.CallOption) (*GetOrderbookResponseV2, error)
 	GetMarketDepthV2(ctx context.Context, in *GetMarketDepthRequestV2, opts ...grpc.CallOption) (*GetMarketDepthResponseV2, error)
 	PostOrderV2(ctx context.Context, in *PostOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
-	PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponse, error)
+	PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponseV2, error)
 	PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
 	PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error)
 	GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error)
@@ -459,8 +459,8 @@ func (c *apiClient) PostOrderV2(ctx context.Context, in *PostOrderRequestV2, opt
 	return out, nil
 }
 
-func (c *apiClient) PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponse, error) {
-	out := new(PostCancelOrderResponse)
+func (c *apiClient) PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponseV2, error) {
+	out := new(PostCancelOrderResponseV2)
 	err := c.cc.Invoke(ctx, "/api.Api/PostCancelOrderV2", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1351,7 +1351,7 @@ type ApiServer interface {
 	GetOrderbookV2(context.Context, *GetOrderbookRequestV2) (*GetOrderbookResponseV2, error)
 	GetMarketDepthV2(context.Context, *GetMarketDepthRequestV2) (*GetMarketDepthResponseV2, error)
 	PostOrderV2(context.Context, *PostOrderRequestV2) (*PostOrderResponse, error)
-	PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponse, error)
+	PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponseV2, error)
 	PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error)
 	PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error)
 	GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponse, error)
@@ -1532,7 +1532,7 @@ func (UnimplementedApiServer) GetMarketDepthV2(context.Context, *GetMarketDepthR
 func (UnimplementedApiServer) PostOrderV2(context.Context, *PostOrderRequestV2) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostOrderV2 not implemented")
 }
-func (UnimplementedApiServer) PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponse, error) {
+func (UnimplementedApiServer) PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponseV2, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostCancelOrderV2 not implemented")
 }
 func (UnimplementedApiServer) PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error) {

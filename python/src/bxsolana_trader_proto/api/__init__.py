@@ -1757,6 +1757,11 @@ class PostCancelOrderRequestV2(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostCancelOrderResponseV2(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostSettleRequestV2(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     market: str = betterproto.string_field(2)
@@ -2301,11 +2306,11 @@ class ApiStub(betterproto.ServiceStub):
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> "PostCancelOrderResponse":
+    ) -> "PostCancelOrderResponseV2":
         return await self._unary_unary(
             "/api.Api/PostCancelOrderV2",
             post_cancel_order_request_v2,
-            PostCancelOrderResponse,
+            PostCancelOrderResponseV2,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3521,7 +3526,7 @@ class ApiBase(ServiceBase):
 
     async def post_cancel_order_v2(
         self, post_cancel_order_request_v2: "PostCancelOrderRequestV2"
-    ) -> "PostCancelOrderResponse":
+    ) -> "PostCancelOrderResponseV2":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def post_replace_order_v2(
@@ -4084,7 +4089,7 @@ class ApiBase(ServiceBase):
 
     async def __rpc_post_cancel_order_v2(
         self,
-        stream: "grpclib.server.Stream[PostCancelOrderRequestV2, PostCancelOrderResponse]",
+        stream: "grpclib.server.Stream[PostCancelOrderRequestV2, PostCancelOrderResponseV2]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_cancel_order_v2(request)
@@ -4782,7 +4787,7 @@ class ApiBase(ServiceBase):
                 self.__rpc_post_cancel_order_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostCancelOrderRequestV2,
-                PostCancelOrderResponse,
+                PostCancelOrderResponseV2,
             ),
             "/api.Api/PostReplaceOrderV2": grpclib.const.Handler(
                 self.__rpc_post_replace_order_v2,
