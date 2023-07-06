@@ -2651,6 +2651,56 @@
           "Drift V2"
         ]
       }
+    },
+    "/api/v2/market/tickers/{market}": {
+      "get": {
+        "summary": "Orderbook tickers V2",
+        "description": "Returns updated ticker(s). To receive all tickers use empty string for {market} param value",
+        "operationId": "Api_GetTickersV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTickersResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "description": "Use empty string for all markets",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK",
+              "P_DRIFT"
+            ],
+            "default": "P_UNKNOWN"
+          }
+        ],
+        "tags": [
+          "Market",
+          "Orderbook"
+        ]
+      }
     }
   },
   "definitions": {
@@ -2708,6 +2758,12 @@
           "type": "string",
           "format": "date-time"
         },
+        "marketAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
         "open": {
           "type": "number",
           "format": "double"
@@ -2735,6 +2791,17 @@
         "count": {
           "type": "number",
           "format": "double"
+        }
+      }
+    },
+    "apiCandles": {
+      "type": "object",
+      "properties": {
+        "candles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiCandle"
+          }
         }
       }
     },
@@ -3308,17 +3375,10 @@
     "apiGetKlineResponse": {
       "type": "object",
       "properties": {
-        "market": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "candles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiCandle"
+        "marketCandles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiCandles"
           }
         }
       }
@@ -3365,6 +3425,17 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/apiMarket"
+          }
+        }
+      }
+    },
+    "apiGetMyOrdersResponse": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMyOrder"
           }
         }
       }
@@ -3876,6 +3947,17 @@
         }
       }
     },
+    "apiGetTickersResponseV2": {
+      "type": "object",
+      "properties": {
+        "tickers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiCandle"
+          }
+        }
+      }
+    },
     "apiGetTickersStreamResponse": {
       "type": "object",
       "properties": {
@@ -3998,6 +4080,46 @@
         "MS_ONLINE"
       ],
       "default": "MS_UNKNOWN"
+    },
+    "apiMyOrder": {
+      "type": "object",
+      "properties": {
+        "Timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Project": {
+          "$ref": "#/definitions/apiProject"
+        },
+        "OwnerAddress": {
+          "type": "string"
+        },
+        "Date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ClientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "MarketAddress": {
+          "type": "string"
+        },
+        "ProgramOrderID": {
+          "type": "string"
+        },
+        "Side": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "Price": {
+          "type": "number",
+          "format": "double"
+        }
+      }
     },
     "apiOrder": {
       "type": "object",

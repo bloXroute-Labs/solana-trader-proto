@@ -5,6 +5,7 @@ var grpc = require('@grpc/grpc-js');
 var api_pb = require('./api_pb.js');
 var google_api_annotations_pb = require('./google/api/annotations_pb.js');
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
+var google_protobuf_duration_pb = require('google-protobuf/google/protobuf/duration_pb.js');
 var google_api_field_behavior_pb = require('./google/api/field_behavior_pb.js');
 var google_api_visibility_pb = require('./google/api/visibility_pb.js');
 var protoc$gen$openapiv2_options_annotations_pb = require('./protoc-gen-openapiv2/options/annotations_pb.js');
@@ -470,6 +471,28 @@ function serialize_api_GetMarketsResponse(arg) {
 
 function deserialize_api_GetMarketsResponse(buffer_arg) {
   return api_pb.GetMarketsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetMyOrdersRequest(arg) {
+  if (!(arg instanceof api_pb.GetMyOrdersRequest)) {
+    throw new Error('Expected argument of type api.GetMyOrdersRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMyOrdersRequest(buffer_arg) {
+  return api_pb.GetMyOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetMyOrdersResponse(arg) {
+  if (!(arg instanceof api_pb.GetMyOrdersResponse)) {
+    throw new Error('Expected argument of type api.GetMyOrdersResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMyOrdersResponse(buffer_arg) {
+  return api_pb.GetMyOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetOpenOrdersRequest(arg) {
@@ -967,6 +990,17 @@ function deserialize_api_GetTickersRequest(buffer_arg) {
   return api_pb.GetTickersRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetTickersRequestV2(arg) {
+  if (!(arg instanceof api_pb.GetTickersRequestV2)) {
+    throw new Error('Expected argument of type api.GetTickersRequestV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTickersRequestV2(buffer_arg) {
+  return api_pb.GetTickersRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetTickersResponse(arg) {
   if (!(arg instanceof api_pb.GetTickersResponse)) {
     throw new Error('Expected argument of type api.GetTickersResponse');
@@ -976,6 +1010,17 @@ function serialize_api_GetTickersResponse(arg) {
 
 function deserialize_api_GetTickersResponse(buffer_arg) {
   return api_pb.GetTickersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetTickersResponseV2(arg) {
+  if (!(arg instanceof api_pb.GetTickersResponseV2)) {
+    throw new Error('Expected argument of type api.GetTickersResponseV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTickersResponseV2(buffer_arg) {
+  return api_pb.GetTickersResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetTickersStreamResponse(arg) {
@@ -2037,6 +2082,17 @@ postCloseDriftPerpPositions: {
     responseSerialize: serialize_api_GetTickersResponse,
     responseDeserialize: deserialize_api_GetTickersResponse,
   },
+  getTickersV2: {
+    path: '/api.Api/GetTickersV2',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetTickersRequestV2,
+    responseType: api_pb.GetTickersResponseV2,
+    requestSerialize: serialize_api_GetTickersRequestV2,
+    requestDeserialize: deserialize_api_GetTickersRequestV2,
+    responseSerialize: serialize_api_GetTickersResponseV2,
+    responseDeserialize: deserialize_api_GetTickersResponseV2,
+  },
   getKline: {
     path: '/api.Api/GetKline',
     requestStream: false,
@@ -2259,6 +2315,17 @@ postOrder: {
     requestDeserialize: deserialize_api_GetOrdersRequest,
     responseSerialize: serialize_api_GetOrdersResponse,
     responseDeserialize: deserialize_api_GetOrdersResponse,
+  },
+  getMyOrders: {
+    path: '/api.Api/GetMyOrders',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetMyOrdersRequest,
+    responseType: api_pb.GetMyOrdersResponse,
+    requestSerialize: serialize_api_GetMyOrdersRequest,
+    requestDeserialize: deserialize_api_GetMyOrdersRequest,
+    responseSerialize: serialize_api_GetMyOrdersResponse,
+    responseDeserialize: deserialize_api_GetMyOrdersResponse,
   },
   getOpenOrders: {
     path: '/api.Api/GetOpenOrders',
