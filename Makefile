@@ -37,8 +37,7 @@ proto-build-api-python:
 	protoc \
 		-I $(CURDIR)/proto \
 		--python_betterproto_out=$(CURDIR)/python/src/bxsolana_trader_proto/ \
-		$(CURDIR)/proto/api.proto \
-		&& echo 'from .api import *' > $(CURDIR)/python/src/bxsolana_trader_proto/__init__.py
+		$(CURDIR)/proto/api.proto
 
 proto-build-common-go:
 	docker run -v $(CURDIR)/common:/go/protobuf/out \

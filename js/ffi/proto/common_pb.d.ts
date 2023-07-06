@@ -76,11 +76,42 @@ export enum PerpPositionSide {
     PS_SHORT = 2,
 }
 
+export enum PostOnlyParams {
+    PO_NONE = 0,
+    PO_MUST_POST_ONLY = 1,
+    PO_TRY_POST_ONLY = 2,
+}
+
+export enum MarginContract {
+    ALL_SPOTS = 0,
+    SOL_SPOT = 1,
+    USDC_SPOT = 2,
+}
+
 export enum PerpContract {
     ALL = 0,
     SOL_PERP = 1,
     ETH_PERP = 2,
     BTC_PERP = 3,
+    APT_PERP = 4,
+    BONK_PERP = 5,
+    MATIC_PERP = 6,
+    ARB_PERP = 7,
+    DOGE_PERP = 8,
+    BNB_PERP = 9,
+    SUI_PERP = 10,
+    PEPE_PERP = 11,
+}
+
+export enum PerpCollateralType {
+    PCT_DEPOSIT = 0,
+    PCT_WITHDRAWAL = 1,
+    PCT_TRANSFER = 2,
+}
+
+export enum PerpCollateralToken {
+    PCTK_USDC = 0,
+    PCTK_SOL = 1,
 }
 
 export enum Infinity {
