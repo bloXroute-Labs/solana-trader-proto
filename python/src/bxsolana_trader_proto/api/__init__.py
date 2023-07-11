@@ -1753,7 +1753,6 @@ class PostCancelOrderRequestV2(betterproto.Message):
     owner_address: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
     client_order_id: int = betterproto.uint64_field(6)
-    market: str = betterproto.string_field(7)
 
 
 @dataclass(eq=False, repr=False)
