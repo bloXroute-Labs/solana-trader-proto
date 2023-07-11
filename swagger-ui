@@ -4933,9 +4933,6 @@
         "clientOrderID": {
           "type": "string",
           "format": "uint64"
-        },
-        "market": {
-          "type": "string"
         }
       },
       "required": [

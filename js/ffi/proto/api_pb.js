@@ -53760,8 +53760,7 @@ proto.api.PostCancelOrderRequestV2.toObject = function(includeInstance, msg) {
     marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    market: jspb.Message.getFieldWithDefault(msg, 7, "")
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -53821,10 +53820,6 @@ proto.api.PostCancelOrderRequestV2.deserializeBinaryFromReader = function(msg, r
     case 6:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setClientorderid(value);
-      break;
-    case 7:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
       break;
     default:
       reader.skipField();
@@ -53894,13 +53889,6 @@ proto.api.PostCancelOrderRequestV2.serializeBinaryToWriter = function(message, w
   if (f !== 0) {
     writer.writeUint64(
       6,
-      f
-    );
-  }
-  f = message.getMarket();
-  if (f.length > 0) {
-    writer.writeString(
-      7,
       f
     );
   }
@@ -54012,24 +54000,6 @@ proto.api.PostCancelOrderRequestV2.prototype.getClientorderid = function() {
  */
 proto.api.PostCancelOrderRequestV2.prototype.setClientorderid = function(value) {
   return jspb.Message.setProto3IntField(this, 6, value);
-};
-
-
-/**
- * optional string market = 7;
- * @return {string}
- */
-proto.api.PostCancelOrderRequestV2.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.PostCancelOrderRequestV2} returns this
- */
-proto.api.PostCancelOrderRequestV2.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 

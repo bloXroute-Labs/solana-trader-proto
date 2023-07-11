@@ -6433,8 +6433,6 @@ export class PostCancelOrderRequestV2 extends jspb.Message {
     setOpenordersaddress(value: string): PostCancelOrderRequestV2;
     getClientorderid(): number;
     setClientorderid(value: number): PostCancelOrderRequestV2;
-    getMarket(): string;
-    setMarket(value: string): PostCancelOrderRequestV2;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelOrderRequestV2.AsObject;
@@ -6454,7 +6452,6 @@ export namespace PostCancelOrderRequestV2 {
         owneraddress: string,
         openordersaddress: string,
         clientorderid: number,
-        market: string,
     }
 }
 
