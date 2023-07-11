@@ -2547,7 +2547,6 @@ message PostCancelOrderRequestV2 {
   string ownerAddress = 4 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
   uint64 clientOrderID = 6[(google.api.field_behavior) = OPTIONAL];
-  string market = 7[(google.api.field_behavior) = OPTIONAL];
 }
 
 message PostCancelOrderResponseV2 {
