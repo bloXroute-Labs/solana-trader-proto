@@ -494,17 +494,6 @@ service Api {
     };
   }
 
-  rpc GetTickersV2(GetTickersRequestV2) returns (GetTickersResponseV2) {
-    option (google.api.http) = {
-      get: "/api/v2/market/tickers/{market}"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns updated ticker(s). To receive all tickers use empty string for {market} param value";
-      summary: "Orderbook tickers V2";
-      tags: ["Market", "Orderbook"];
-    };
-  }
-
   rpc GetKline(GetKlineRequest) returns (GetKlineResponse) {
     option (google.api.method_visibility).restriction = "INTERNAL";
     option (google.api.http) = {
@@ -2525,22 +2514,6 @@ message MarketV2 {
   int64 quoteDecimals = 7;
 }
 
-message GetTickersRequestV2 {
-  string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
-}
-
-message GetTickersResponseV2 {
-  repeated TickerV2 tickers = 1;
-}
-
-message TickerV2 {
-  string market = 1;
-  string marketAddress = 2;
-  double bid = 3;
-  double bidSize = 4;
-  double ask = 5;
-  double askSize = 6;
-}
 message GetOrderbookRequestV2 {
   string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];

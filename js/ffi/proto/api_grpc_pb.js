@@ -516,6 +516,28 @@ function deserialize_api_GetMarketsResponseV2(buffer_arg) {
   return api_pb.GetMarketsResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetMyOrdersRequest(arg) {
+  if (!(arg instanceof api_pb.GetMyOrdersRequest)) {
+    throw new Error('Expected argument of type api.GetMyOrdersRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMyOrdersRequest(buffer_arg) {
+  return api_pb.GetMyOrdersRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetMyOrdersResponse(arg) {
+  if (!(arg instanceof api_pb.GetMyOrdersResponse)) {
+    throw new Error('Expected argument of type api.GetMyOrdersResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetMyOrdersResponse(buffer_arg) {
+  return api_pb.GetMyOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetOpenOrdersRequest(arg) {
   if (!(arg instanceof api_pb.GetOpenOrdersRequest)) {
     throw new Error('Expected argument of type api.GetOpenOrdersRequest');
@@ -2538,6 +2560,17 @@ postOrder: {
     requestDeserialize: deserialize_api_GetOrdersRequest,
     responseSerialize: serialize_api_GetOrdersResponse,
     responseDeserialize: deserialize_api_GetOrdersResponse,
+  },
+  getMyOrders: {
+    path: '/api.Api/GetMyOrders',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetMyOrdersRequest,
+    responseType: api_pb.GetMyOrdersResponse,
+    requestSerialize: serialize_api_GetMyOrdersRequest,
+    requestDeserialize: deserialize_api_GetMyOrdersRequest,
+    responseSerialize: serialize_api_GetMyOrdersResponse,
+    responseDeserialize: deserialize_api_GetMyOrdersResponse,
   },
   getOpenOrders: {
     path: '/api.Api/GetOpenOrders',
