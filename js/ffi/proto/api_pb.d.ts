@@ -6,7 +6,6 @@
 
 import * as jspb from "google-protobuf";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
-import * as google_protobuf_duration_pb from "google-protobuf/google/protobuf/duration_pb";
 import * as google_api_field_behavior_pb from "./google/api/field_behavior_pb";
 import * as google_api_visibility_pb from "./google/api/visibility_pb";
 import * as protoc_gen_openapiv2_options_annotations_pb from "./protoc-gen-openapiv2/options/annotations_pb";
@@ -233,11 +232,8 @@ export class GetKlineRequest extends jspb.Message {
     clearTo(): void;
     getTo(): google_protobuf_timestamp_pb.Timestamp | undefined;
     setTo(value?: google_protobuf_timestamp_pb.Timestamp): GetKlineRequest;
-
-    hasResolution(): boolean;
-    clearResolution(): void;
-    getResolution(): google_protobuf_duration_pb.Duration | undefined;
-    setResolution(value?: google_protobuf_duration_pb.Duration): GetKlineRequest;
+    getResolution(): string;
+    setResolution(value: string): GetKlineRequest;
     getLimit(): number;
     setLimit(value: number): GetKlineRequest;
     getProject(): Project;
@@ -258,7 +254,7 @@ export namespace GetKlineRequest {
         market: string,
         from?: google_protobuf_timestamp_pb.Timestamp.AsObject,
         to?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-        resolution?: google_protobuf_duration_pb.Duration.AsObject,
+        resolution: string,
         limit: number,
         project: Project,
     }

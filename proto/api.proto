@@ -4,7 +4,6 @@ option go_package = "github.com/bloXroute-Labs/solana-trader-proto/api";
 
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/duration.proto";
 import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
@@ -1006,7 +1005,7 @@ message GetKlineRequest {
   string market = 1;
   google.protobuf.Timestamp from = 2;
   google.protobuf.Timestamp to = 3;
-  google.protobuf.Duration resolution = 4; // indicates a duration: e.g. 1d, 4h, 1h, 30m, 15m, 1m
+  string resolution = 4; // indicates a duration: e.g. 1d, 4h, 1h, 30m, 15m, 1m
   uint32 limit = 5;
   Project project = 6;
 }
