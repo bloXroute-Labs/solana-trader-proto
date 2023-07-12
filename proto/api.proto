@@ -339,7 +339,7 @@ service Api {
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list of orderbook markets";
-      summary: "Orderbook markets";
+      summary: "Openbook markets";
       tags: ["Openbook V2"];
     };
   }
@@ -350,7 +350,7 @@ service Api {
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns updated ticker(s). To receive all tickers use empty string for {market} param value";
-      summary: "Orderbook tickers";
+      summary: "Openbook tickers";
       tags: ["Openbook V2"];
     };
   }
@@ -361,7 +361,7 @@ service Api {
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned";
-      summary: "Market orderbook";
+      summary: "Openbook market orderbook";
       tags: ["Openbook V2"];
     };
   }
@@ -372,7 +372,7 @@ service Api {
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns market's aggregated price data. Use limit param to reduce the number of price points returned";
-      summary: "Market depth";
+      summary: "Openbook market depth";
       tags: ["Openbook V2"];
     };
   }
@@ -384,7 +384,7 @@ service Api {
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Generates a NewOrderV3 unsigned transaction object";
-      summary: "Unsigned NewOrderV3 transaction";
+      summary: "Openbook unsigned NewOrderV3 transaction";
       tags: ["Openbook V2"];
     };
   }
@@ -396,7 +396,7 @@ service Api {
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Generates a CancelOrder unsigned transaction object";
-      summary: "Unsigned CancelOrder transaction";
+      summary: "Openbook unsigned CancelOrder transaction";
       tags: ["Openbook V2"];
     };
   }
@@ -408,7 +408,7 @@ service Api {
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Generates a ReplaceOrder unsigned transaction object";
-      summary: "Unsigned ReplaceOrder transaction";
+      summary: "Openbook Unsigned ReplaceOrder transaction";
       tags:["Openbook V2"];
     };
   }
@@ -420,7 +420,7 @@ service Api {
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Generates a SettleFunds unsigned transaction object";
-      summary: "Unsigned SettleFunds transaction";
+      summary: "Openbook unsigned SettleFunds transaction";
       tags: ["Openbook V2"];
     };
   }
@@ -431,7 +431,7 @@ service Api {
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list of open orders per user per market";
-      summary: "List of user's open orders";
+      summary: "List of user's open orders in Openbook";
       tags: ["Openbook V2"];
     };
   }
