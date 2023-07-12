@@ -78,6 +78,10 @@ goog.exportSymbol('proto.api.GetDriftPerpPositionsResponse', null, global);
 goog.exportSymbol('proto.api.GetDriftPerpPositionsValue', null, global);
 goog.exportSymbol('proto.api.GetDriftUserRequest', null, global);
 goog.exportSymbol('proto.api.GetDriftUserResponse', null, global);
+goog.exportSymbol('proto.api.GetJupiterPricesRequest', null, global);
+goog.exportSymbol('proto.api.GetJupiterPricesResponse', null, global);
+goog.exportSymbol('proto.api.GetJupiterQuotesRequest', null, global);
+goog.exportSymbol('proto.api.GetJupiterQuotesResponse', null, global);
 goog.exportSymbol('proto.api.GetKlineRequest', null, global);
 goog.exportSymbol('proto.api.GetKlineResponse', null, global);
 goog.exportSymbol('proto.api.GetMarketDepthRequest', null, global);
@@ -134,6 +138,12 @@ goog.exportSymbol('proto.api.GetQuotesResponse', null, global);
 goog.exportSymbol('proto.api.GetQuotesStreamRequest', null, global);
 goog.exportSymbol('proto.api.GetQuotesStreamResponse', null, global);
 goog.exportSymbol('proto.api.GetQuotesStreamUpdate', null, global);
+goog.exportSymbol('proto.api.GetRaydiumPoolsRequest', null, global);
+goog.exportSymbol('proto.api.GetRaydiumPoolsResponse', null, global);
+goog.exportSymbol('proto.api.GetRaydiumPricesRequest', null, global);
+goog.exportSymbol('proto.api.GetRaydiumPricesResponse', null, global);
+goog.exportSymbol('proto.api.GetRaydiumQuotesRequest', null, global);
+goog.exportSymbol('proto.api.GetRaydiumQuotesResponse', null, global);
 goog.exportSymbol('proto.api.GetRecentBlockHashRequest', null, global);
 goog.exportSymbol('proto.api.GetRecentBlockHashResponse', null, global);
 goog.exportSymbol('proto.api.GetServerTimeRequest', null, global);
@@ -156,6 +166,9 @@ goog.exportSymbol('proto.api.GetUnsettledRequestV2', null, global);
 goog.exportSymbol('proto.api.GetUnsettledResponse', null, global);
 goog.exportSymbol('proto.api.GetUserRequest', null, global);
 goog.exportSymbol('proto.api.GetUserResponse', null, global);
+goog.exportSymbol('proto.api.JupiterQuoteRoute', null, global);
+goog.exportSymbol('proto.api.JupiterQuoteStep', null, global);
+goog.exportSymbol('proto.api.JupiterRouteStep', null, global);
 goog.exportSymbol('proto.api.Market', null, global);
 goog.exportSymbol('proto.api.MarketDepthItem', null, global);
 goog.exportSymbol('proto.api.MarketDepthItemV2', null, global);
@@ -203,6 +216,10 @@ goog.exportSymbol('proto.api.PostDriftSettlePNLRequest', null, global);
 goog.exportSymbol('proto.api.PostDriftSettlePNLResponse', null, global);
 goog.exportSymbol('proto.api.PostDriftSettlePNLsRequest', null, global);
 goog.exportSymbol('proto.api.PostDriftSettlePNLsResponse', null, global);
+goog.exportSymbol('proto.api.PostJupiterRouteSwapRequest', null, global);
+goog.exportSymbol('proto.api.PostJupiterRouteSwapResponse', null, global);
+goog.exportSymbol('proto.api.PostJupiterSwapRequest', null, global);
+goog.exportSymbol('proto.api.PostJupiterSwapResponse', null, global);
 goog.exportSymbol('proto.api.PostLiquidateDriftPerpRequest', null, global);
 goog.exportSymbol('proto.api.PostLiquidateDriftPerpResponse', null, global);
 goog.exportSymbol('proto.api.PostLiquidatePerpRequest', null, global);
@@ -216,6 +233,10 @@ goog.exportSymbol('proto.api.PostOrderRequestV2', null, global);
 goog.exportSymbol('proto.api.PostOrderResponse', null, global);
 goog.exportSymbol('proto.api.PostPerpOrderRequest', null, global);
 goog.exportSymbol('proto.api.PostPerpOrderResponse', null, global);
+goog.exportSymbol('proto.api.PostRaydiumRouteSwapRequest', null, global);
+goog.exportSymbol('proto.api.PostRaydiumRouteSwapResponse', null, global);
+goog.exportSymbol('proto.api.PostRaydiumSwapRequest', null, global);
+goog.exportSymbol('proto.api.PostRaydiumSwapResponse', null, global);
 goog.exportSymbol('proto.api.PostReplaceOrderRequest', null, global);
 goog.exportSymbol('proto.api.PostReplaceOrderRequestV2', null, global);
 goog.exportSymbol('proto.api.PostSettlePNLRequest', null, global);
@@ -237,6 +258,9 @@ goog.exportSymbol('proto.api.ProjectPools', null, global);
 goog.exportSymbol('proto.api.ProjectQuote', null, global);
 goog.exportSymbol('proto.api.QuoteRoute', null, global);
 goog.exportSymbol('proto.api.QuoteStep', null, global);
+goog.exportSymbol('proto.api.RaydiumQuoteRoute', null, global);
+goog.exportSymbol('proto.api.RaydiumQuoteStep', null, global);
+goog.exportSymbol('proto.api.RaydiumRouteStep', null, global);
 goog.exportSymbol('proto.api.RouteStep', null, global);
 goog.exportSymbol('proto.api.RouteTradeSwapRequest', null, global);
 goog.exportSymbol('proto.api.Settlement', null, global);
@@ -250,6 +274,7 @@ goog.exportSymbol('proto.api.TokenAccount', null, global);
 goog.exportSymbol('proto.api.TokenBalance', null, global);
 goog.exportSymbol('proto.api.TokenPair', null, global);
 goog.exportSymbol('proto.api.TokenPrice', null, global);
+goog.exportSymbol('proto.api.TokenPriceV2', null, global);
 goog.exportSymbol('proto.api.Trade', null, global);
 goog.exportSymbol('proto.api.TradeSwapRequest', null, global);
 goog.exportSymbol('proto.api.TradeSwapResponse', null, global);
@@ -1653,6 +1678,90 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.api.GetRaydiumQuotesRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetRaydiumQuotesRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetRaydiumQuotesRequest.displayName = 'proto.api.GetRaydiumQuotesRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetRaydiumQuotesResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetRaydiumQuotesResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetRaydiumQuotesResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetRaydiumQuotesResponse.displayName = 'proto.api.GetRaydiumQuotesResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetJupiterQuotesRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetJupiterQuotesRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetJupiterQuotesRequest.displayName = 'proto.api.GetJupiterQuotesRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetJupiterQuotesResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetJupiterQuotesResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetJupiterQuotesResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetJupiterQuotesResponse.displayName = 'proto.api.GetJupiterQuotesResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.api.ProjectQuote = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, proto.api.ProjectQuote.repeatedFields_, null);
 };
@@ -1695,6 +1804,132 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.api.PostJupiterSwapRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostJupiterSwapRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostJupiterSwapRequest.displayName = 'proto.api.PostJupiterSwapRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostRaydiumSwapRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostRaydiumSwapRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostRaydiumSwapRequest.displayName = 'proto.api.PostRaydiumSwapRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostRaydiumSwapResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostRaydiumSwapResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostRaydiumSwapResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostRaydiumSwapResponse.displayName = 'proto.api.PostRaydiumSwapResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostJupiterSwapResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostJupiterSwapResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostJupiterSwapResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostJupiterSwapResponse.displayName = 'proto.api.PostJupiterSwapResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostRaydiumRouteSwapResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostRaydiumRouteSwapResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostRaydiumRouteSwapResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostRaydiumRouteSwapResponse.displayName = 'proto.api.PostRaydiumRouteSwapResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostJupiterRouteSwapResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostJupiterRouteSwapResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostJupiterRouteSwapResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostJupiterRouteSwapResponse.displayName = 'proto.api.PostJupiterRouteSwapResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.api.RouteTradeSwapRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, proto.api.RouteTradeSwapRequest.repeatedFields_, null);
 };
@@ -1705,6 +1940,90 @@ if (goog.DEBUG && !COMPILED) {
    * @override
    */
   proto.api.RouteTradeSwapRequest.displayName = 'proto.api.RouteTradeSwapRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostRaydiumRouteSwapRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostRaydiumRouteSwapRequest.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostRaydiumRouteSwapRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostRaydiumRouteSwapRequest.displayName = 'proto.api.PostRaydiumRouteSwapRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.RaydiumRouteStep = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.RaydiumRouteStep, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.RaydiumRouteStep.displayName = 'proto.api.RaydiumRouteStep';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostJupiterRouteSwapRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostJupiterRouteSwapRequest.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostJupiterRouteSwapRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostJupiterRouteSwapRequest.displayName = 'proto.api.PostJupiterRouteSwapRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.JupiterRouteStep = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.JupiterRouteStep, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.JupiterRouteStep.displayName = 'proto.api.JupiterRouteStep';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1789,6 +2108,90 @@ if (goog.DEBUG && !COMPILED) {
    * @override
    */
   proto.api.QuoteStep.displayName = 'proto.api.QuoteStep';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.JupiterQuoteRoute = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.JupiterQuoteRoute.repeatedFields_, null);
+};
+goog.inherits(proto.api.JupiterQuoteRoute, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.JupiterQuoteRoute.displayName = 'proto.api.JupiterQuoteRoute';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.JupiterQuoteStep = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.JupiterQuoteStep, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.JupiterQuoteStep.displayName = 'proto.api.JupiterQuoteStep';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.RaydiumQuoteRoute = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.RaydiumQuoteRoute.repeatedFields_, null);
+};
+goog.inherits(proto.api.RaydiumQuoteRoute, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.RaydiumQuoteRoute.displayName = 'proto.api.RaydiumQuoteRoute';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.RaydiumQuoteStep = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.RaydiumQuoteStep, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.RaydiumQuoteStep.displayName = 'proto.api.RaydiumQuoteStep';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -1957,6 +2360,48 @@ if (goog.DEBUG && !COMPILED) {
    * @override
    */
   proto.api.GetPoolsResponse.displayName = 'proto.api.GetPoolsResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetRaydiumPoolsRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetRaydiumPoolsRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetRaydiumPoolsRequest.displayName = 'proto.api.GetRaydiumPoolsRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetRaydiumPoolsResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetRaydiumPoolsResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetRaydiumPoolsResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetRaydiumPoolsResponse.displayName = 'proto.api.GetRaydiumPoolsResponse';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -2199,6 +2644,90 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
+proto.api.GetRaydiumPricesRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetRaydiumPricesRequest.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetRaydiumPricesRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetRaydiumPricesRequest.displayName = 'proto.api.GetRaydiumPricesRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetJupiterPricesRequest = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetJupiterPricesRequest.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetJupiterPricesRequest, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetJupiterPricesRequest.displayName = 'proto.api.GetJupiterPricesRequest';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetRaydiumPricesResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetRaydiumPricesResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetRaydiumPricesResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetRaydiumPricesResponse.displayName = 'proto.api.GetRaydiumPricesResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetJupiterPricesResponse = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetJupiterPricesResponse.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetJupiterPricesResponse, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetJupiterPricesResponse.displayName = 'proto.api.GetJupiterPricesResponse';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
 proto.api.TokenPrice = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -2209,6 +2738,27 @@ if (goog.DEBUG && !COMPILED) {
    * @override
    */
   proto.api.TokenPrice.displayName = 'proto.api.TokenPrice';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.TokenPriceV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.TokenPriceV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.TokenPriceV2.displayName = 'proto.api.TokenPriceV2';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -19460,6 +20010,1126 @@ proto.api.GetQuotesResponse.prototype.clearQuotesList = function() {
 
 
 
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetRaydiumQuotesRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetRaydiumQuotesRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumQuotesRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    intoken: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    limit: jspb.Message.getFieldWithDefault(msg, 5, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetRaydiumQuotesRequest}
+ */
+proto.api.GetRaydiumQuotesRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetRaydiumQuotesRequest;
+  return proto.api.GetRaydiumQuotesRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetRaydiumQuotesRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetRaydiumQuotesRequest}
+ */
+proto.api.GetRaydiumQuotesRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntoken(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttoken(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSlippage(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setLimit(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetRaydiumQuotesRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetRaydiumQuotesRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumQuotesRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getIntoken();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getOuttoken();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getSlippage();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+  f = message.getLimit();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string inToken = 1;
+ * @return {string}
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.getIntoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetRaydiumQuotesRequest} returns this
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.setIntoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string outToken = 2;
+ * @return {string}
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.getOuttoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetRaydiumQuotesRequest} returns this
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.setOuttoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional double inAmount = 3;
+ * @return {number}
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetRaydiumQuotesRequest} returns this
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional double slippage = 4;
+ * @return {number}
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.getSlippage = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetRaydiumQuotesRequest} returns this
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.setSlippage = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional int32 limit = 5;
+ * @return {number}
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.getLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetRaydiumQuotesRequest} returns this
+ */
+proto.api.GetRaydiumQuotesRequest.prototype.setLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetRaydiumQuotesResponse.repeatedFields_ = [6];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetRaydiumQuotesResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetRaydiumQuotesResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumQuotesResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    intoken: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    intokenaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    outtokenaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    routesList: jspb.Message.toObjectList(msg.getRoutesList(),
+    proto.api.RaydiumQuoteRoute.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetRaydiumQuotesResponse}
+ */
+proto.api.GetRaydiumQuotesResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetRaydiumQuotesResponse;
+  return proto.api.GetRaydiumQuotesResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetRaydiumQuotesResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetRaydiumQuotesResponse}
+ */
+proto.api.GetRaydiumQuotesResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntoken(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntokenaddress(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttoken(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttokenaddress(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 6:
+      var value = new proto.api.RaydiumQuoteRoute;
+      reader.readMessage(value,proto.api.RaydiumQuoteRoute.deserializeBinaryFromReader);
+      msg.addRoutes(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetRaydiumQuotesResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetRaydiumQuotesResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumQuotesResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getIntoken();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getIntokenaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getOuttoken();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getOuttokenaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+  f = message.getRoutesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      6,
+      f,
+      proto.api.RaydiumQuoteRoute.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional string inToken = 1;
+ * @return {string}
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.getIntoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetRaydiumQuotesResponse} returns this
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.setIntoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string inTokenAddress = 2;
+ * @return {string}
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.getIntokenaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetRaydiumQuotesResponse} returns this
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.setIntokenaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string outToken = 3;
+ * @return {string}
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.getOuttoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetRaydiumQuotesResponse} returns this
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.setOuttoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string outTokenAddress = 4;
+ * @return {string}
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.getOuttokenaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetRaydiumQuotesResponse} returns this
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.setOuttokenaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional double inAmount = 5;
+ * @return {number}
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetRaydiumQuotesResponse} returns this
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * repeated RaydiumQuoteRoute routes = 6;
+ * @return {!Array<!proto.api.RaydiumQuoteRoute>}
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.getRoutesList = function() {
+  return /** @type{!Array<!proto.api.RaydiumQuoteRoute>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.RaydiumQuoteRoute, 6));
+};
+
+
+/**
+ * @param {!Array<!proto.api.RaydiumQuoteRoute>} value
+ * @return {!proto.api.GetRaydiumQuotesResponse} returns this
+*/
+proto.api.GetRaydiumQuotesResponse.prototype.setRoutesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 6, value);
+};
+
+
+/**
+ * @param {!proto.api.RaydiumQuoteRoute=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.RaydiumQuoteRoute}
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.addRoutes = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 6, opt_value, proto.api.RaydiumQuoteRoute, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetRaydiumQuotesResponse} returns this
+ */
+proto.api.GetRaydiumQuotesResponse.prototype.clearRoutesList = function() {
+  return this.setRoutesList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetJupiterQuotesRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetJupiterQuotesRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetJupiterQuotesRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetJupiterQuotesRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    intoken: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    limit: jspb.Message.getFieldWithDefault(msg, 5, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetJupiterQuotesRequest}
+ */
+proto.api.GetJupiterQuotesRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetJupiterQuotesRequest;
+  return proto.api.GetJupiterQuotesRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetJupiterQuotesRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetJupiterQuotesRequest}
+ */
+proto.api.GetJupiterQuotesRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntoken(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttoken(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSlippage(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setLimit(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetJupiterQuotesRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetJupiterQuotesRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetJupiterQuotesRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetJupiterQuotesRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getIntoken();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getOuttoken();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getSlippage();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+  f = message.getLimit();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string inToken = 1;
+ * @return {string}
+ */
+proto.api.GetJupiterQuotesRequest.prototype.getIntoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetJupiterQuotesRequest} returns this
+ */
+proto.api.GetJupiterQuotesRequest.prototype.setIntoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string outToken = 2;
+ * @return {string}
+ */
+proto.api.GetJupiterQuotesRequest.prototype.getOuttoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetJupiterQuotesRequest} returns this
+ */
+proto.api.GetJupiterQuotesRequest.prototype.setOuttoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional double inAmount = 3;
+ * @return {number}
+ */
+proto.api.GetJupiterQuotesRequest.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetJupiterQuotesRequest} returns this
+ */
+proto.api.GetJupiterQuotesRequest.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional double slippage = 4;
+ * @return {number}
+ */
+proto.api.GetJupiterQuotesRequest.prototype.getSlippage = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetJupiterQuotesRequest} returns this
+ */
+proto.api.GetJupiterQuotesRequest.prototype.setSlippage = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional int32 limit = 5;
+ * @return {number}
+ */
+proto.api.GetJupiterQuotesRequest.prototype.getLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetJupiterQuotesRequest} returns this
+ */
+proto.api.GetJupiterQuotesRequest.prototype.setLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetJupiterQuotesResponse.repeatedFields_ = [6];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetJupiterQuotesResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetJupiterQuotesResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetJupiterQuotesResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetJupiterQuotesResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    intoken: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    intokenaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    outtokenaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    routesList: jspb.Message.toObjectList(msg.getRoutesList(),
+    proto.api.JupiterQuoteRoute.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetJupiterQuotesResponse}
+ */
+proto.api.GetJupiterQuotesResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetJupiterQuotesResponse;
+  return proto.api.GetJupiterQuotesResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetJupiterQuotesResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetJupiterQuotesResponse}
+ */
+proto.api.GetJupiterQuotesResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntoken(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntokenaddress(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttoken(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttokenaddress(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 6:
+      var value = new proto.api.JupiterQuoteRoute;
+      reader.readMessage(value,proto.api.JupiterQuoteRoute.deserializeBinaryFromReader);
+      msg.addRoutes(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetJupiterQuotesResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetJupiterQuotesResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetJupiterQuotesResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetJupiterQuotesResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getIntoken();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getIntokenaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getOuttoken();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getOuttokenaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+  f = message.getRoutesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      6,
+      f,
+      proto.api.JupiterQuoteRoute.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional string inToken = 1;
+ * @return {string}
+ */
+proto.api.GetJupiterQuotesResponse.prototype.getIntoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetJupiterQuotesResponse} returns this
+ */
+proto.api.GetJupiterQuotesResponse.prototype.setIntoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string inTokenAddress = 2;
+ * @return {string}
+ */
+proto.api.GetJupiterQuotesResponse.prototype.getIntokenaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetJupiterQuotesResponse} returns this
+ */
+proto.api.GetJupiterQuotesResponse.prototype.setIntokenaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string outToken = 3;
+ * @return {string}
+ */
+proto.api.GetJupiterQuotesResponse.prototype.getOuttoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetJupiterQuotesResponse} returns this
+ */
+proto.api.GetJupiterQuotesResponse.prototype.setOuttoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string outTokenAddress = 4;
+ * @return {string}
+ */
+proto.api.GetJupiterQuotesResponse.prototype.getOuttokenaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetJupiterQuotesResponse} returns this
+ */
+proto.api.GetJupiterQuotesResponse.prototype.setOuttokenaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional double inAmount = 5;
+ * @return {number}
+ */
+proto.api.GetJupiterQuotesResponse.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetJupiterQuotesResponse} returns this
+ */
+proto.api.GetJupiterQuotesResponse.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * repeated JupiterQuoteRoute routes = 6;
+ * @return {!Array<!proto.api.JupiterQuoteRoute>}
+ */
+proto.api.GetJupiterQuotesResponse.prototype.getRoutesList = function() {
+  return /** @type{!Array<!proto.api.JupiterQuoteRoute>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.JupiterQuoteRoute, 6));
+};
+
+
+/**
+ * @param {!Array<!proto.api.JupiterQuoteRoute>} value
+ * @return {!proto.api.GetJupiterQuotesResponse} returns this
+*/
+proto.api.GetJupiterQuotesResponse.prototype.setRoutesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 6, value);
+};
+
+
+/**
+ * @param {!proto.api.JupiterQuoteRoute=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.JupiterQuoteRoute}
+ */
+proto.api.GetJupiterQuotesResponse.prototype.addRoutes = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 6, opt_value, proto.api.JupiterQuoteRoute, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetJupiterQuotesResponse} returns this
+ */
+proto.api.GetJupiterQuotesResponse.prototype.clearRoutesList = function() {
+  return this.setRoutesList([]);
+};
+
+
+
 /**
  * List of repeated fields within this message type.
  * @private {!Array<number>}
@@ -19930,6 +21600,1802 @@ proto.api.TradeSwapRequest.prototype.setSlippage = function(value) {
 
 
 
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostJupiterSwapRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostJupiterSwapRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostJupiterSwapRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostJupiterSwapRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    intoken: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostJupiterSwapRequest}
+ */
+proto.api.PostJupiterSwapRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostJupiterSwapRequest;
+  return proto.api.PostJupiterSwapRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostJupiterSwapRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostJupiterSwapRequest}
+ */
+proto.api.PostJupiterSwapRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntoken(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttoken(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSlippage(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostJupiterSwapRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostJupiterSwapRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostJupiterSwapRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostJupiterSwapRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getIntoken();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getOuttoken();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+  f = message.getSlippage();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostJupiterSwapRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostJupiterSwapRequest} returns this
+ */
+proto.api.PostJupiterSwapRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string inToken = 2;
+ * @return {string}
+ */
+proto.api.PostJupiterSwapRequest.prototype.getIntoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostJupiterSwapRequest} returns this
+ */
+proto.api.PostJupiterSwapRequest.prototype.setIntoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string outToken = 3;
+ * @return {string}
+ */
+proto.api.PostJupiterSwapRequest.prototype.getOuttoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostJupiterSwapRequest} returns this
+ */
+proto.api.PostJupiterSwapRequest.prototype.setOuttoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional double inAmount = 4;
+ * @return {number}
+ */
+proto.api.PostJupiterSwapRequest.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterSwapRequest} returns this
+ */
+proto.api.PostJupiterSwapRequest.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double slippage = 5;
+ * @return {number}
+ */
+proto.api.PostJupiterSwapRequest.prototype.getSlippage = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterSwapRequest} returns this
+ */
+proto.api.PostJupiterSwapRequest.prototype.setSlippage = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostRaydiumSwapRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostRaydiumSwapRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostRaydiumSwapRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    intoken: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostRaydiumSwapRequest}
+ */
+proto.api.PostRaydiumSwapRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostRaydiumSwapRequest;
+  return proto.api.PostRaydiumSwapRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostRaydiumSwapRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostRaydiumSwapRequest}
+ */
+proto.api.PostRaydiumSwapRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntoken(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttoken(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSlippage(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostRaydiumSwapRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostRaydiumSwapRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostRaydiumSwapRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getIntoken();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getOuttoken();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+  f = message.getSlippage();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostRaydiumSwapRequest} returns this
+ */
+proto.api.PostRaydiumSwapRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string inToken = 2;
+ * @return {string}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.getIntoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostRaydiumSwapRequest} returns this
+ */
+proto.api.PostRaydiumSwapRequest.prototype.setIntoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string outToken = 3;
+ * @return {string}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.getOuttoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostRaydiumSwapRequest} returns this
+ */
+proto.api.PostRaydiumSwapRequest.prototype.setOuttoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional double inAmount = 4;
+ * @return {number}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumSwapRequest} returns this
+ */
+proto.api.PostRaydiumSwapRequest.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double slippage = 5;
+ * @return {number}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.getSlippage = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumSwapRequest} returns this
+ */
+proto.api.PostRaydiumSwapRequest.prototype.setSlippage = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostRaydiumSwapResponse.repeatedFields_ = [1,5];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostRaydiumSwapResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostRaydiumSwapResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostRaydiumSwapResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostRaydiumSwapResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
+    proto.api.TransactionMessage.toObject, includeInstance),
+    outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    priceimpact: (f = msg.getPriceimpact()) && common_pb.PriceImpactPercentV2.toObject(includeInstance, f),
+    feesList: jspb.Message.toObjectList(msg.getFeesList(),
+    common_pb.Fee.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostRaydiumSwapResponse}
+ */
+proto.api.PostRaydiumSwapResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostRaydiumSwapResponse;
+  return proto.api.PostRaydiumSwapResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostRaydiumSwapResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostRaydiumSwapResponse}
+ */
+proto.api.PostRaydiumSwapResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.addTransactions(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamount(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamountmin(value);
+      break;
+    case 4:
+      var value = new common_pb.PriceImpactPercentV2;
+      reader.readMessage(value,common_pb.PriceImpactPercentV2.deserializeBinaryFromReader);
+      msg.setPriceimpact(value);
+      break;
+    case 5:
+      var value = new common_pb.Fee;
+      reader.readMessage(value,common_pb.Fee.deserializeBinaryFromReader);
+      msg.addFees(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostRaydiumSwapResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostRaydiumSwapResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostRaydiumSwapResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostRaydiumSwapResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransactionsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+  f = message.getOutamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getOutamountmin();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getPriceimpact();
+  if (f != null) {
+    writer.writeMessage(
+      4,
+      f,
+      common_pb.PriceImpactPercentV2.serializeBinaryToWriter
+    );
+  }
+  f = message.getFeesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      5,
+      f,
+      common_pb.Fee.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated TransactionMessage transactions = 1;
+ * @return {!Array<!proto.api.TransactionMessage>}
+ */
+proto.api.PostRaydiumSwapResponse.prototype.getTransactionsList = function() {
+  return /** @type{!Array<!proto.api.TransactionMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.TransactionMessage>} value
+ * @return {!proto.api.PostRaydiumSwapResponse} returns this
+*/
+proto.api.PostRaydiumSwapResponse.prototype.setTransactionsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.TransactionMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TransactionMessage}
+ */
+proto.api.PostRaydiumSwapResponse.prototype.addTransactions = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TransactionMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostRaydiumSwapResponse} returns this
+ */
+proto.api.PostRaydiumSwapResponse.prototype.clearTransactionsList = function() {
+  return this.setTransactionsList([]);
+};
+
+
+/**
+ * optional double outAmount = 2;
+ * @return {number}
+ */
+proto.api.PostRaydiumSwapResponse.prototype.getOutamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumSwapResponse} returns this
+ */
+proto.api.PostRaydiumSwapResponse.prototype.setOutamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional double outAmountMin = 3;
+ * @return {number}
+ */
+proto.api.PostRaydiumSwapResponse.prototype.getOutamountmin = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumSwapResponse} returns this
+ */
+proto.api.PostRaydiumSwapResponse.prototype.setOutamountmin = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional common.PriceImpactPercentV2 priceImpact = 4;
+ * @return {?proto.common.PriceImpactPercentV2}
+ */
+proto.api.PostRaydiumSwapResponse.prototype.getPriceimpact = function() {
+  return /** @type{?proto.common.PriceImpactPercentV2} */ (
+    jspb.Message.getWrapperField(this, common_pb.PriceImpactPercentV2, 4));
+};
+
+
+/**
+ * @param {?proto.common.PriceImpactPercentV2|undefined} value
+ * @return {!proto.api.PostRaydiumSwapResponse} returns this
+*/
+proto.api.PostRaydiumSwapResponse.prototype.setPriceimpact = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.PostRaydiumSwapResponse} returns this
+ */
+proto.api.PostRaydiumSwapResponse.prototype.clearPriceimpact = function() {
+  return this.setPriceimpact(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostRaydiumSwapResponse.prototype.hasPriceimpact = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * repeated common.Fee fees = 5;
+ * @return {!Array<!proto.common.Fee>}
+ */
+proto.api.PostRaydiumSwapResponse.prototype.getFeesList = function() {
+  return /** @type{!Array<!proto.common.Fee>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_pb.Fee, 5));
+};
+
+
+/**
+ * @param {!Array<!proto.common.Fee>} value
+ * @return {!proto.api.PostRaydiumSwapResponse} returns this
+*/
+proto.api.PostRaydiumSwapResponse.prototype.setFeesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 5, value);
+};
+
+
+/**
+ * @param {!proto.common.Fee=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.common.Fee}
+ */
+proto.api.PostRaydiumSwapResponse.prototype.addFees = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.common.Fee, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostRaydiumSwapResponse} returns this
+ */
+proto.api.PostRaydiumSwapResponse.prototype.clearFeesList = function() {
+  return this.setFeesList([]);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostJupiterSwapResponse.repeatedFields_ = [1,5];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostJupiterSwapResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostJupiterSwapResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostJupiterSwapResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostJupiterSwapResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
+    proto.api.TransactionMessage.toObject, includeInstance),
+    outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    priceimpact: (f = msg.getPriceimpact()) && common_pb.PriceImpactPercentV2.toObject(includeInstance, f),
+    feesList: jspb.Message.toObjectList(msg.getFeesList(),
+    common_pb.Fee.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostJupiterSwapResponse}
+ */
+proto.api.PostJupiterSwapResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostJupiterSwapResponse;
+  return proto.api.PostJupiterSwapResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostJupiterSwapResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostJupiterSwapResponse}
+ */
+proto.api.PostJupiterSwapResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.addTransactions(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamount(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamountmin(value);
+      break;
+    case 4:
+      var value = new common_pb.PriceImpactPercentV2;
+      reader.readMessage(value,common_pb.PriceImpactPercentV2.deserializeBinaryFromReader);
+      msg.setPriceimpact(value);
+      break;
+    case 5:
+      var value = new common_pb.Fee;
+      reader.readMessage(value,common_pb.Fee.deserializeBinaryFromReader);
+      msg.addFees(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostJupiterSwapResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostJupiterSwapResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostJupiterSwapResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostJupiterSwapResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransactionsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+  f = message.getOutamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getOutamountmin();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getPriceimpact();
+  if (f != null) {
+    writer.writeMessage(
+      4,
+      f,
+      common_pb.PriceImpactPercentV2.serializeBinaryToWriter
+    );
+  }
+  f = message.getFeesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      5,
+      f,
+      common_pb.Fee.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated TransactionMessage transactions = 1;
+ * @return {!Array<!proto.api.TransactionMessage>}
+ */
+proto.api.PostJupiterSwapResponse.prototype.getTransactionsList = function() {
+  return /** @type{!Array<!proto.api.TransactionMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.TransactionMessage>} value
+ * @return {!proto.api.PostJupiterSwapResponse} returns this
+*/
+proto.api.PostJupiterSwapResponse.prototype.setTransactionsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.TransactionMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TransactionMessage}
+ */
+proto.api.PostJupiterSwapResponse.prototype.addTransactions = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TransactionMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostJupiterSwapResponse} returns this
+ */
+proto.api.PostJupiterSwapResponse.prototype.clearTransactionsList = function() {
+  return this.setTransactionsList([]);
+};
+
+
+/**
+ * optional double outAmount = 2;
+ * @return {number}
+ */
+proto.api.PostJupiterSwapResponse.prototype.getOutamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterSwapResponse} returns this
+ */
+proto.api.PostJupiterSwapResponse.prototype.setOutamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional double outAmountMin = 3;
+ * @return {number}
+ */
+proto.api.PostJupiterSwapResponse.prototype.getOutamountmin = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterSwapResponse} returns this
+ */
+proto.api.PostJupiterSwapResponse.prototype.setOutamountmin = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional common.PriceImpactPercentV2 priceImpact = 4;
+ * @return {?proto.common.PriceImpactPercentV2}
+ */
+proto.api.PostJupiterSwapResponse.prototype.getPriceimpact = function() {
+  return /** @type{?proto.common.PriceImpactPercentV2} */ (
+    jspb.Message.getWrapperField(this, common_pb.PriceImpactPercentV2, 4));
+};
+
+
+/**
+ * @param {?proto.common.PriceImpactPercentV2|undefined} value
+ * @return {!proto.api.PostJupiterSwapResponse} returns this
+*/
+proto.api.PostJupiterSwapResponse.prototype.setPriceimpact = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.PostJupiterSwapResponse} returns this
+ */
+proto.api.PostJupiterSwapResponse.prototype.clearPriceimpact = function() {
+  return this.setPriceimpact(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostJupiterSwapResponse.prototype.hasPriceimpact = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * repeated common.Fee fees = 5;
+ * @return {!Array<!proto.common.Fee>}
+ */
+proto.api.PostJupiterSwapResponse.prototype.getFeesList = function() {
+  return /** @type{!Array<!proto.common.Fee>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_pb.Fee, 5));
+};
+
+
+/**
+ * @param {!Array<!proto.common.Fee>} value
+ * @return {!proto.api.PostJupiterSwapResponse} returns this
+*/
+proto.api.PostJupiterSwapResponse.prototype.setFeesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 5, value);
+};
+
+
+/**
+ * @param {!proto.common.Fee=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.common.Fee}
+ */
+proto.api.PostJupiterSwapResponse.prototype.addFees = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.common.Fee, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostJupiterSwapResponse} returns this
+ */
+proto.api.PostJupiterSwapResponse.prototype.clearFeesList = function() {
+  return this.setFeesList([]);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostRaydiumRouteSwapResponse.repeatedFields_ = [1,5];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostRaydiumRouteSwapResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostRaydiumRouteSwapResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostRaydiumRouteSwapResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
+    proto.api.TransactionMessage.toObject, includeInstance),
+    outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    priceimpact: (f = msg.getPriceimpact()) && common_pb.PriceImpactPercentV2.toObject(includeInstance, f),
+    feesList: jspb.Message.toObjectList(msg.getFeesList(),
+    common_pb.Fee.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostRaydiumRouteSwapResponse}
+ */
+proto.api.PostRaydiumRouteSwapResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostRaydiumRouteSwapResponse;
+  return proto.api.PostRaydiumRouteSwapResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostRaydiumRouteSwapResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostRaydiumRouteSwapResponse}
+ */
+proto.api.PostRaydiumRouteSwapResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.addTransactions(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamount(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamountmin(value);
+      break;
+    case 4:
+      var value = new common_pb.PriceImpactPercentV2;
+      reader.readMessage(value,common_pb.PriceImpactPercentV2.deserializeBinaryFromReader);
+      msg.setPriceimpact(value);
+      break;
+    case 5:
+      var value = new common_pb.Fee;
+      reader.readMessage(value,common_pb.Fee.deserializeBinaryFromReader);
+      msg.addFees(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostRaydiumRouteSwapResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostRaydiumRouteSwapResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostRaydiumRouteSwapResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransactionsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+  f = message.getOutamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getOutamountmin();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getPriceimpact();
+  if (f != null) {
+    writer.writeMessage(
+      4,
+      f,
+      common_pb.PriceImpactPercentV2.serializeBinaryToWriter
+    );
+  }
+  f = message.getFeesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      5,
+      f,
+      common_pb.Fee.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated TransactionMessage transactions = 1;
+ * @return {!Array<!proto.api.TransactionMessage>}
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.getTransactionsList = function() {
+  return /** @type{!Array<!proto.api.TransactionMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.TransactionMessage>} value
+ * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
+*/
+proto.api.PostRaydiumRouteSwapResponse.prototype.setTransactionsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.TransactionMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TransactionMessage}
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.addTransactions = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TransactionMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.clearTransactionsList = function() {
+  return this.setTransactionsList([]);
+};
+
+
+/**
+ * optional double outAmount = 2;
+ * @return {number}
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.getOutamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.setOutamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional double outAmountMin = 3;
+ * @return {number}
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.getOutamountmin = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.setOutamountmin = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional common.PriceImpactPercentV2 priceImpact = 4;
+ * @return {?proto.common.PriceImpactPercentV2}
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.getPriceimpact = function() {
+  return /** @type{?proto.common.PriceImpactPercentV2} */ (
+    jspb.Message.getWrapperField(this, common_pb.PriceImpactPercentV2, 4));
+};
+
+
+/**
+ * @param {?proto.common.PriceImpactPercentV2|undefined} value
+ * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
+*/
+proto.api.PostRaydiumRouteSwapResponse.prototype.setPriceimpact = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.clearPriceimpact = function() {
+  return this.setPriceimpact(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.hasPriceimpact = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * repeated common.Fee fees = 5;
+ * @return {!Array<!proto.common.Fee>}
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.getFeesList = function() {
+  return /** @type{!Array<!proto.common.Fee>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_pb.Fee, 5));
+};
+
+
+/**
+ * @param {!Array<!proto.common.Fee>} value
+ * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
+*/
+proto.api.PostRaydiumRouteSwapResponse.prototype.setFeesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 5, value);
+};
+
+
+/**
+ * @param {!proto.common.Fee=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.common.Fee}
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.addFees = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.common.Fee, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
+ */
+proto.api.PostRaydiumRouteSwapResponse.prototype.clearFeesList = function() {
+  return this.setFeesList([]);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostJupiterRouteSwapResponse.repeatedFields_ = [1,5];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostJupiterRouteSwapResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostJupiterRouteSwapResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostJupiterRouteSwapResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
+    proto.api.TransactionMessage.toObject, includeInstance),
+    outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    priceimpact: (f = msg.getPriceimpact()) && common_pb.PriceImpactPercentV2.toObject(includeInstance, f),
+    feesList: jspb.Message.toObjectList(msg.getFeesList(),
+    common_pb.Fee.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostJupiterRouteSwapResponse}
+ */
+proto.api.PostJupiterRouteSwapResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostJupiterRouteSwapResponse;
+  return proto.api.PostJupiterRouteSwapResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostJupiterRouteSwapResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostJupiterRouteSwapResponse}
+ */
+proto.api.PostJupiterRouteSwapResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.addTransactions(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamount(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamountmin(value);
+      break;
+    case 4:
+      var value = new common_pb.PriceImpactPercentV2;
+      reader.readMessage(value,common_pb.PriceImpactPercentV2.deserializeBinaryFromReader);
+      msg.setPriceimpact(value);
+      break;
+    case 5:
+      var value = new common_pb.Fee;
+      reader.readMessage(value,common_pb.Fee.deserializeBinaryFromReader);
+      msg.addFees(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostJupiterRouteSwapResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostJupiterRouteSwapResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostJupiterRouteSwapResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransactionsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+  f = message.getOutamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getOutamountmin();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getPriceimpact();
+  if (f != null) {
+    writer.writeMessage(
+      4,
+      f,
+      common_pb.PriceImpactPercentV2.serializeBinaryToWriter
+    );
+  }
+  f = message.getFeesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      5,
+      f,
+      common_pb.Fee.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated TransactionMessage transactions = 1;
+ * @return {!Array<!proto.api.TransactionMessage>}
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.getTransactionsList = function() {
+  return /** @type{!Array<!proto.api.TransactionMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.TransactionMessage>} value
+ * @return {!proto.api.PostJupiterRouteSwapResponse} returns this
+*/
+proto.api.PostJupiterRouteSwapResponse.prototype.setTransactionsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.TransactionMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TransactionMessage}
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.addTransactions = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TransactionMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostJupiterRouteSwapResponse} returns this
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.clearTransactionsList = function() {
+  return this.setTransactionsList([]);
+};
+
+
+/**
+ * optional double outAmount = 2;
+ * @return {number}
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.getOutamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterRouteSwapResponse} returns this
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.setOutamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional double outAmountMin = 3;
+ * @return {number}
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.getOutamountmin = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterRouteSwapResponse} returns this
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.setOutamountmin = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional common.PriceImpactPercentV2 priceImpact = 4;
+ * @return {?proto.common.PriceImpactPercentV2}
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.getPriceimpact = function() {
+  return /** @type{?proto.common.PriceImpactPercentV2} */ (
+    jspb.Message.getWrapperField(this, common_pb.PriceImpactPercentV2, 4));
+};
+
+
+/**
+ * @param {?proto.common.PriceImpactPercentV2|undefined} value
+ * @return {!proto.api.PostJupiterRouteSwapResponse} returns this
+*/
+proto.api.PostJupiterRouteSwapResponse.prototype.setPriceimpact = function(value) {
+  return jspb.Message.setWrapperField(this, 4, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.PostJupiterRouteSwapResponse} returns this
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.clearPriceimpact = function() {
+  return this.setPriceimpact(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.hasPriceimpact = function() {
+  return jspb.Message.getField(this, 4) != null;
+};
+
+
+/**
+ * repeated common.Fee fees = 5;
+ * @return {!Array<!proto.common.Fee>}
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.getFeesList = function() {
+  return /** @type{!Array<!proto.common.Fee>} */ (
+    jspb.Message.getRepeatedWrapperField(this, common_pb.Fee, 5));
+};
+
+
+/**
+ * @param {!Array<!proto.common.Fee>} value
+ * @return {!proto.api.PostJupiterRouteSwapResponse} returns this
+*/
+proto.api.PostJupiterRouteSwapResponse.prototype.setFeesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 5, value);
+};
+
+
+/**
+ * @param {!proto.common.Fee=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.common.Fee}
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.addFees = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.common.Fee, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostJupiterRouteSwapResponse} returns this
+ */
+proto.api.PostJupiterRouteSwapResponse.prototype.clearFeesList = function() {
+  return this.setFeesList([]);
+};
+
+
+
 /**
  * List of repeated fields within this message type.
  * @private {!Array<number>}
@@ -20176,6 +23642,1027 @@ proto.api.RouteTradeSwapRequest.prototype.getSlippage = function() {
  */
 proto.api.RouteTradeSwapRequest.prototype.setSlippage = function(value) {
   return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostRaydiumRouteSwapRequest.repeatedFields_ = [2];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostRaydiumRouteSwapRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostRaydiumRouteSwapRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostRaydiumRouteSwapRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    stepsList: jspb.Message.toObjectList(msg.getStepsList(),
+    proto.api.RaydiumRouteStep.toObject, includeInstance),
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostRaydiumRouteSwapRequest}
+ */
+proto.api.PostRaydiumRouteSwapRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostRaydiumRouteSwapRequest;
+  return proto.api.PostRaydiumRouteSwapRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostRaydiumRouteSwapRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostRaydiumRouteSwapRequest}
+ */
+proto.api.PostRaydiumRouteSwapRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = new proto.api.RaydiumRouteStep;
+      reader.readMessage(value,proto.api.RaydiumRouteStep.deserializeBinaryFromReader);
+      msg.addSteps(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSlippage(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostRaydiumRouteSwapRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostRaydiumRouteSwapRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostRaydiumRouteSwapRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getStepsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      2,
+      f,
+      proto.api.RaydiumRouteStep.serializeBinaryToWriter
+    );
+  }
+  f = message.getSlippage();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostRaydiumRouteSwapRequest} returns this
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * repeated RaydiumRouteStep steps = 2;
+ * @return {!Array<!proto.api.RaydiumRouteStep>}
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.getStepsList = function() {
+  return /** @type{!Array<!proto.api.RaydiumRouteStep>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.RaydiumRouteStep, 2));
+};
+
+
+/**
+ * @param {!Array<!proto.api.RaydiumRouteStep>} value
+ * @return {!proto.api.PostRaydiumRouteSwapRequest} returns this
+*/
+proto.api.PostRaydiumRouteSwapRequest.prototype.setStepsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+};
+
+
+/**
+ * @param {!proto.api.RaydiumRouteStep=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.RaydiumRouteStep}
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.addSteps = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.RaydiumRouteStep, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostRaydiumRouteSwapRequest} returns this
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.clearStepsList = function() {
+  return this.setStepsList([]);
+};
+
+
+/**
+ * optional double slippage = 3;
+ * @return {number}
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.getSlippage = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumRouteSwapRequest} returns this
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.setSlippage = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.RaydiumRouteStep.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.RaydiumRouteStep.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.RaydiumRouteStep} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.RaydiumRouteStep.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    intoken: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    pooladdress: jspb.Message.getFieldWithDefault(msg, 6, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.RaydiumRouteStep}
+ */
+proto.api.RaydiumRouteStep.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.RaydiumRouteStep;
+  return proto.api.RaydiumRouteStep.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.RaydiumRouteStep} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.RaydiumRouteStep}
+ */
+proto.api.RaydiumRouteStep.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntoken(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttoken(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamount(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamountmin(value);
+      break;
+    case 6:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPooladdress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.RaydiumRouteStep.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.RaydiumRouteStep.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.RaydiumRouteStep} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.RaydiumRouteStep.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getIntoken();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getOuttoken();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getOutamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+  f = message.getOutamountmin();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+  f = message.getPooladdress();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string inToken = 1;
+ * @return {string}
+ */
+proto.api.RaydiumRouteStep.prototype.getIntoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.RaydiumRouteStep} returns this
+ */
+proto.api.RaydiumRouteStep.prototype.setIntoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional double inAmount = 2;
+ * @return {number}
+ */
+proto.api.RaydiumRouteStep.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RaydiumRouteStep} returns this
+ */
+proto.api.RaydiumRouteStep.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional string outToken = 3;
+ * @return {string}
+ */
+proto.api.RaydiumRouteStep.prototype.getOuttoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.RaydiumRouteStep} returns this
+ */
+proto.api.RaydiumRouteStep.prototype.setOuttoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional double outAmount = 4;
+ * @return {number}
+ */
+proto.api.RaydiumRouteStep.prototype.getOutamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RaydiumRouteStep} returns this
+ */
+proto.api.RaydiumRouteStep.prototype.setOutamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double outAmountMin = 5;
+ * @return {number}
+ */
+proto.api.RaydiumRouteStep.prototype.getOutamountmin = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RaydiumRouteStep} returns this
+ */
+proto.api.RaydiumRouteStep.prototype.setOutamountmin = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * optional string poolAddress = 6;
+ * @return {string}
+ */
+proto.api.RaydiumRouteStep.prototype.getPooladdress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.RaydiumRouteStep} returns this
+ */
+proto.api.RaydiumRouteStep.prototype.setPooladdress = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostJupiterRouteSwapRequest.repeatedFields_ = [2];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostJupiterRouteSwapRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostJupiterRouteSwapRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostJupiterRouteSwapRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    stepsList: jspb.Message.toObjectList(msg.getStepsList(),
+    proto.api.JupiterRouteStep.toObject, includeInstance),
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostJupiterRouteSwapRequest}
+ */
+proto.api.PostJupiterRouteSwapRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostJupiterRouteSwapRequest;
+  return proto.api.PostJupiterRouteSwapRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostJupiterRouteSwapRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostJupiterRouteSwapRequest}
+ */
+proto.api.PostJupiterRouteSwapRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = new proto.api.JupiterRouteStep;
+      reader.readMessage(value,proto.api.JupiterRouteStep.deserializeBinaryFromReader);
+      msg.addSteps(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSlippage(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostJupiterRouteSwapRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostJupiterRouteSwapRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostJupiterRouteSwapRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getStepsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      2,
+      f,
+      proto.api.JupiterRouteStep.serializeBinaryToWriter
+    );
+  }
+  f = message.getSlippage();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostJupiterRouteSwapRequest} returns this
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * repeated JupiterRouteStep steps = 2;
+ * @return {!Array<!proto.api.JupiterRouteStep>}
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.getStepsList = function() {
+  return /** @type{!Array<!proto.api.JupiterRouteStep>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.JupiterRouteStep, 2));
+};
+
+
+/**
+ * @param {!Array<!proto.api.JupiterRouteStep>} value
+ * @return {!proto.api.PostJupiterRouteSwapRequest} returns this
+*/
+proto.api.PostJupiterRouteSwapRequest.prototype.setStepsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+};
+
+
+/**
+ * @param {!proto.api.JupiterRouteStep=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.JupiterRouteStep}
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.addSteps = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.JupiterRouteStep, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostJupiterRouteSwapRequest} returns this
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.clearStepsList = function() {
+  return this.setStepsList([]);
+};
+
+
+/**
+ * optional double slippage = 3;
+ * @return {number}
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.getSlippage = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterRouteSwapRequest} returns this
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.setSlippage = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.JupiterRouteStep.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.JupiterRouteStep.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.JupiterRouteStep} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.JupiterRouteStep.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    intoken: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    project: (f = msg.getProject()) && proto.api.StepProject.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.JupiterRouteStep}
+ */
+proto.api.JupiterRouteStep.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.JupiterRouteStep;
+  return proto.api.JupiterRouteStep.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.JupiterRouteStep} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.JupiterRouteStep}
+ */
+proto.api.JupiterRouteStep.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntoken(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttoken(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamount(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamountmin(value);
+      break;
+    case 6:
+      var value = new proto.api.StepProject;
+      reader.readMessage(value,proto.api.StepProject.deserializeBinaryFromReader);
+      msg.setProject(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.JupiterRouteStep.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.JupiterRouteStep.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.JupiterRouteStep} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.JupiterRouteStep.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getIntoken();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getOuttoken();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getOutamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+  f = message.getOutamountmin();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+  f = message.getProject();
+  if (f != null) {
+    writer.writeMessage(
+      6,
+      f,
+      proto.api.StepProject.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional string inToken = 1;
+ * @return {string}
+ */
+proto.api.JupiterRouteStep.prototype.getIntoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.JupiterRouteStep} returns this
+ */
+proto.api.JupiterRouteStep.prototype.setIntoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional double inAmount = 2;
+ * @return {number}
+ */
+proto.api.JupiterRouteStep.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.JupiterRouteStep} returns this
+ */
+proto.api.JupiterRouteStep.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional string outToken = 3;
+ * @return {string}
+ */
+proto.api.JupiterRouteStep.prototype.getOuttoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.JupiterRouteStep} returns this
+ */
+proto.api.JupiterRouteStep.prototype.setOuttoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional double outAmount = 4;
+ * @return {number}
+ */
+proto.api.JupiterRouteStep.prototype.getOutamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.JupiterRouteStep} returns this
+ */
+proto.api.JupiterRouteStep.prototype.setOutamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double outAmountMin = 5;
+ * @return {number}
+ */
+proto.api.JupiterRouteStep.prototype.getOutamountmin = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.JupiterRouteStep} returns this
+ */
+proto.api.JupiterRouteStep.prototype.setOutamountmin = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * optional StepProject project = 6;
+ * @return {?proto.api.StepProject}
+ */
+proto.api.JupiterRouteStep.prototype.getProject = function() {
+  return /** @type{?proto.api.StepProject} */ (
+    jspb.Message.getWrapperField(this, proto.api.StepProject, 6));
+};
+
+
+/**
+ * @param {?proto.api.StepProject|undefined} value
+ * @return {!proto.api.JupiterRouteStep} returns this
+*/
+proto.api.JupiterRouteStep.prototype.setProject = function(value) {
+  return jspb.Message.setWrapperField(this, 6, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.JupiterRouteStep} returns this
+ */
+proto.api.JupiterRouteStep.prototype.clearProject = function() {
+  return this.setProject(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.JupiterRouteStep.prototype.hasProject = function() {
+  return jspb.Message.getField(this, 6) != null;
 };
 
 
@@ -21578,6 +26065,1441 @@ proto.api.QuoteStep.prototype.setOutamountmin = function(value) {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.JupiterQuoteRoute.repeatedFields_ = [4];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.JupiterQuoteRoute.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.JupiterQuoteRoute.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.JupiterQuoteRoute} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.JupiterQuoteRoute.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
+    outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    stepsList: jspb.Message.toObjectList(msg.getStepsList(),
+    proto.api.JupiterQuoteStep.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.JupiterQuoteRoute}
+ */
+proto.api.JupiterQuoteRoute.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.JupiterQuoteRoute;
+  return proto.api.JupiterQuoteRoute.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.JupiterQuoteRoute} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.JupiterQuoteRoute}
+ */
+proto.api.JupiterQuoteRoute.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamount(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamountmin(value);
+      break;
+    case 4:
+      var value = new proto.api.JupiterQuoteStep;
+      reader.readMessage(value,proto.api.JupiterQuoteStep.deserializeBinaryFromReader);
+      msg.addSteps(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.JupiterQuoteRoute.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.JupiterQuoteRoute.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.JupiterQuoteRoute} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.JupiterQuoteRoute.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      1,
+      f
+    );
+  }
+  f = message.getOutamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getOutamountmin();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getStepsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      4,
+      f,
+      proto.api.JupiterQuoteStep.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional double inAmount = 1;
+ * @return {number}
+ */
+proto.api.JupiterQuoteRoute.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 1, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.JupiterQuoteRoute} returns this
+ */
+proto.api.JupiterQuoteRoute.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 1, value);
+};
+
+
+/**
+ * optional double outAmount = 2;
+ * @return {number}
+ */
+proto.api.JupiterQuoteRoute.prototype.getOutamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.JupiterQuoteRoute} returns this
+ */
+proto.api.JupiterQuoteRoute.prototype.setOutamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional double outAmountMin = 3;
+ * @return {number}
+ */
+proto.api.JupiterQuoteRoute.prototype.getOutamountmin = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.JupiterQuoteRoute} returns this
+ */
+proto.api.JupiterQuoteRoute.prototype.setOutamountmin = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * repeated JupiterQuoteStep steps = 4;
+ * @return {!Array<!proto.api.JupiterQuoteStep>}
+ */
+proto.api.JupiterQuoteRoute.prototype.getStepsList = function() {
+  return /** @type{!Array<!proto.api.JupiterQuoteStep>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.JupiterQuoteStep, 4));
+};
+
+
+/**
+ * @param {!Array<!proto.api.JupiterQuoteStep>} value
+ * @return {!proto.api.JupiterQuoteRoute} returns this
+*/
+proto.api.JupiterQuoteRoute.prototype.setStepsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+};
+
+
+/**
+ * @param {!proto.api.JupiterQuoteStep=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.JupiterQuoteStep}
+ */
+proto.api.JupiterQuoteRoute.prototype.addSteps = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.api.JupiterQuoteStep, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.JupiterQuoteRoute} returns this
+ */
+proto.api.JupiterQuoteRoute.prototype.clearStepsList = function() {
+  return this.setStepsList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.JupiterQuoteStep.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.JupiterQuoteStep.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.JupiterQuoteStep} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.JupiterQuoteStep.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    project: (f = msg.getProject()) && proto.api.StepProject.toObject(includeInstance, f),
+    intoken: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    intokenaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    outtokenaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
+    priceimpactpercent: (f = msg.getPriceimpactpercent()) && common_pb.PriceImpactPercentV2.toObject(includeInstance, f),
+    fee: (f = msg.getFee()) && common_pb.Fee.toObject(includeInstance, f),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.JupiterQuoteStep}
+ */
+proto.api.JupiterQuoteStep.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.JupiterQuoteStep;
+  return proto.api.JupiterQuoteStep.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.JupiterQuoteStep} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.JupiterQuoteStep}
+ */
+proto.api.JupiterQuoteStep.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.StepProject;
+      reader.readMessage(value,proto.api.StepProject.deserializeBinaryFromReader);
+      msg.setProject(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntoken(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntokenaddress(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttoken(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttokenaddress(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamount(value);
+      break;
+    case 8:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSlippage(value);
+      break;
+    case 9:
+      var value = new common_pb.PriceImpactPercentV2;
+      reader.readMessage(value,common_pb.PriceImpactPercentV2.deserializeBinaryFromReader);
+      msg.setPriceimpactpercent(value);
+      break;
+    case 10:
+      var value = new common_pb.Fee;
+      reader.readMessage(value,common_pb.Fee.deserializeBinaryFromReader);
+      msg.setFee(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamountmin(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.JupiterQuoteStep.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.JupiterQuoteStep.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.JupiterQuoteStep} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.JupiterQuoteStep.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getProject();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.api.StepProject.serializeBinaryToWriter
+    );
+  }
+  f = message.getIntoken();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getIntokenaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getOuttoken();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getOuttokenaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      6,
+      f
+    );
+  }
+  f = message.getOutamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      7,
+      f
+    );
+  }
+  f = message.getSlippage();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      8,
+      f
+    );
+  }
+  f = message.getPriceimpactpercent();
+  if (f != null) {
+    writer.writeMessage(
+      9,
+      f,
+      common_pb.PriceImpactPercentV2.serializeBinaryToWriter
+    );
+  }
+  f = message.getFee();
+  if (f != null) {
+    writer.writeMessage(
+      10,
+      f,
+      common_pb.Fee.serializeBinaryToWriter
+    );
+  }
+  f = message.getOutamountmin();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      11,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional StepProject project = 1;
+ * @return {?proto.api.StepProject}
+ */
+proto.api.JupiterQuoteStep.prototype.getProject = function() {
+  return /** @type{?proto.api.StepProject} */ (
+    jspb.Message.getWrapperField(this, proto.api.StepProject, 1));
+};
+
+
+/**
+ * @param {?proto.api.StepProject|undefined} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+*/
+proto.api.JupiterQuoteStep.prototype.setProject = function(value) {
+  return jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.clearProject = function() {
+  return this.setProject(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.JupiterQuoteStep.prototype.hasProject = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional string inToken = 2;
+ * @return {string}
+ */
+proto.api.JupiterQuoteStep.prototype.getIntoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.setIntoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string inTokenAddress = 3;
+ * @return {string}
+ */
+proto.api.JupiterQuoteStep.prototype.getIntokenaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.setIntokenaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string outToken = 4;
+ * @return {string}
+ */
+proto.api.JupiterQuoteStep.prototype.getOuttoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.setOuttoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string outTokenAddress = 5;
+ * @return {string}
+ */
+proto.api.JupiterQuoteStep.prototype.getOuttokenaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.setOuttokenaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional double inAmount = 6;
+ * @return {number}
+ */
+proto.api.JupiterQuoteStep.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 6, value);
+};
+
+
+/**
+ * optional double outAmount = 7;
+ * @return {number}
+ */
+proto.api.JupiterQuoteStep.prototype.getOutamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.setOutamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 7, value);
+};
+
+
+/**
+ * optional double slippage = 8;
+ * @return {number}
+ */
+proto.api.JupiterQuoteStep.prototype.getSlippage = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.setSlippage = function(value) {
+  return jspb.Message.setProto3FloatField(this, 8, value);
+};
+
+
+/**
+ * optional common.PriceImpactPercentV2 priceImpactPercent = 9;
+ * @return {?proto.common.PriceImpactPercentV2}
+ */
+proto.api.JupiterQuoteStep.prototype.getPriceimpactpercent = function() {
+  return /** @type{?proto.common.PriceImpactPercentV2} */ (
+    jspb.Message.getWrapperField(this, common_pb.PriceImpactPercentV2, 9));
+};
+
+
+/**
+ * @param {?proto.common.PriceImpactPercentV2|undefined} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+*/
+proto.api.JupiterQuoteStep.prototype.setPriceimpactpercent = function(value) {
+  return jspb.Message.setWrapperField(this, 9, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.clearPriceimpactpercent = function() {
+  return this.setPriceimpactpercent(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.JupiterQuoteStep.prototype.hasPriceimpactpercent = function() {
+  return jspb.Message.getField(this, 9) != null;
+};
+
+
+/**
+ * optional common.Fee fee = 10;
+ * @return {?proto.common.Fee}
+ */
+proto.api.JupiterQuoteStep.prototype.getFee = function() {
+  return /** @type{?proto.common.Fee} */ (
+    jspb.Message.getWrapperField(this, common_pb.Fee, 10));
+};
+
+
+/**
+ * @param {?proto.common.Fee|undefined} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+*/
+proto.api.JupiterQuoteStep.prototype.setFee = function(value) {
+  return jspb.Message.setWrapperField(this, 10, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.clearFee = function() {
+  return this.setFee(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.JupiterQuoteStep.prototype.hasFee = function() {
+  return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * optional double outAmountMin = 11;
+ * @return {number}
+ */
+proto.api.JupiterQuoteStep.prototype.getOutamountmin = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 11, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.JupiterQuoteStep} returns this
+ */
+proto.api.JupiterQuoteStep.prototype.setOutamountmin = function(value) {
+  return jspb.Message.setProto3FloatField(this, 11, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.RaydiumQuoteRoute.repeatedFields_ = [4];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.RaydiumQuoteRoute.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.RaydiumQuoteRoute.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.RaydiumQuoteRoute} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.RaydiumQuoteRoute.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
+    outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    stepsList: jspb.Message.toObjectList(msg.getStepsList(),
+    proto.api.RaydiumQuoteStep.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.RaydiumQuoteRoute}
+ */
+proto.api.RaydiumQuoteRoute.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.RaydiumQuoteRoute;
+  return proto.api.RaydiumQuoteRoute.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.RaydiumQuoteRoute} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.RaydiumQuoteRoute}
+ */
+proto.api.RaydiumQuoteRoute.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamount(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamountmin(value);
+      break;
+    case 4:
+      var value = new proto.api.RaydiumQuoteStep;
+      reader.readMessage(value,proto.api.RaydiumQuoteStep.deserializeBinaryFromReader);
+      msg.addSteps(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.RaydiumQuoteRoute.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.RaydiumQuoteRoute.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.RaydiumQuoteRoute} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.RaydiumQuoteRoute.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      1,
+      f
+    );
+  }
+  f = message.getOutamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getOutamountmin();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getStepsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      4,
+      f,
+      proto.api.RaydiumQuoteStep.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional double inAmount = 1;
+ * @return {number}
+ */
+proto.api.RaydiumQuoteRoute.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 1, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RaydiumQuoteRoute} returns this
+ */
+proto.api.RaydiumQuoteRoute.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 1, value);
+};
+
+
+/**
+ * optional double outAmount = 2;
+ * @return {number}
+ */
+proto.api.RaydiumQuoteRoute.prototype.getOutamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RaydiumQuoteRoute} returns this
+ */
+proto.api.RaydiumQuoteRoute.prototype.setOutamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional double outAmountMin = 3;
+ * @return {number}
+ */
+proto.api.RaydiumQuoteRoute.prototype.getOutamountmin = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RaydiumQuoteRoute} returns this
+ */
+proto.api.RaydiumQuoteRoute.prototype.setOutamountmin = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * repeated RaydiumQuoteStep steps = 4;
+ * @return {!Array<!proto.api.RaydiumQuoteStep>}
+ */
+proto.api.RaydiumQuoteRoute.prototype.getStepsList = function() {
+  return /** @type{!Array<!proto.api.RaydiumQuoteStep>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.RaydiumQuoteStep, 4));
+};
+
+
+/**
+ * @param {!Array<!proto.api.RaydiumQuoteStep>} value
+ * @return {!proto.api.RaydiumQuoteRoute} returns this
+*/
+proto.api.RaydiumQuoteRoute.prototype.setStepsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+};
+
+
+/**
+ * @param {!proto.api.RaydiumQuoteStep=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.RaydiumQuoteStep}
+ */
+proto.api.RaydiumQuoteRoute.prototype.addSteps = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.api.RaydiumQuoteStep, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.RaydiumQuoteRoute} returns this
+ */
+proto.api.RaydiumQuoteRoute.prototype.clearStepsList = function() {
+  return this.setStepsList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.RaydiumQuoteStep.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.RaydiumQuoteStep.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.RaydiumQuoteStep} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.RaydiumQuoteStep.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    intoken: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    intokenaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    outtoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    outtokenaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
+    priceimpactpercent: (f = msg.getPriceimpactpercent()) && common_pb.PriceImpactPercentV2.toObject(includeInstance, f),
+    fee: (f = msg.getFee()) && common_pb.Fee.toObject(includeInstance, f),
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.RaydiumQuoteStep}
+ */
+proto.api.RaydiumQuoteStep.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.RaydiumQuoteStep;
+  return proto.api.RaydiumQuoteStep.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.RaydiumQuoteStep} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.RaydiumQuoteStep}
+ */
+proto.api.RaydiumQuoteStep.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntoken(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setIntokenaddress(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttoken(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOuttokenaddress(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setInamount(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamount(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSlippage(value);
+      break;
+    case 8:
+      var value = new common_pb.PriceImpactPercentV2;
+      reader.readMessage(value,common_pb.PriceImpactPercentV2.deserializeBinaryFromReader);
+      msg.setPriceimpactpercent(value);
+      break;
+    case 10:
+      var value = new common_pb.Fee;
+      reader.readMessage(value,common_pb.Fee.deserializeBinaryFromReader);
+      msg.setFee(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setOutamountmin(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.RaydiumQuoteStep.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.RaydiumQuoteStep.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.RaydiumQuoteStep} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.RaydiumQuoteStep.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getIntoken();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getIntokenaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getOuttoken();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getOuttokenaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getInamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+  f = message.getOutamount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      6,
+      f
+    );
+  }
+  f = message.getSlippage();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      7,
+      f
+    );
+  }
+  f = message.getPriceimpactpercent();
+  if (f != null) {
+    writer.writeMessage(
+      8,
+      f,
+      common_pb.PriceImpactPercentV2.serializeBinaryToWriter
+    );
+  }
+  f = message.getFee();
+  if (f != null) {
+    writer.writeMessage(
+      10,
+      f,
+      common_pb.Fee.serializeBinaryToWriter
+    );
+  }
+  f = message.getOutamountmin();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      11,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string inToken = 1;
+ * @return {string}
+ */
+proto.api.RaydiumQuoteStep.prototype.getIntoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+ */
+proto.api.RaydiumQuoteStep.prototype.setIntoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string inTokenAddress = 2;
+ * @return {string}
+ */
+proto.api.RaydiumQuoteStep.prototype.getIntokenaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+ */
+proto.api.RaydiumQuoteStep.prototype.setIntokenaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string outToken = 3;
+ * @return {string}
+ */
+proto.api.RaydiumQuoteStep.prototype.getOuttoken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+ */
+proto.api.RaydiumQuoteStep.prototype.setOuttoken = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string outTokenAddress = 4;
+ * @return {string}
+ */
+proto.api.RaydiumQuoteStep.prototype.getOuttokenaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+ */
+proto.api.RaydiumQuoteStep.prototype.setOuttokenaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional double inAmount = 5;
+ * @return {number}
+ */
+proto.api.RaydiumQuoteStep.prototype.getInamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+ */
+proto.api.RaydiumQuoteStep.prototype.setInamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * optional double outAmount = 6;
+ * @return {number}
+ */
+proto.api.RaydiumQuoteStep.prototype.getOutamount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+ */
+proto.api.RaydiumQuoteStep.prototype.setOutamount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 6, value);
+};
+
+
+/**
+ * optional double slippage = 7;
+ * @return {number}
+ */
+proto.api.RaydiumQuoteStep.prototype.getSlippage = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+ */
+proto.api.RaydiumQuoteStep.prototype.setSlippage = function(value) {
+  return jspb.Message.setProto3FloatField(this, 7, value);
+};
+
+
+/**
+ * optional common.PriceImpactPercentV2 priceImpactPercent = 8;
+ * @return {?proto.common.PriceImpactPercentV2}
+ */
+proto.api.RaydiumQuoteStep.prototype.getPriceimpactpercent = function() {
+  return /** @type{?proto.common.PriceImpactPercentV2} */ (
+    jspb.Message.getWrapperField(this, common_pb.PriceImpactPercentV2, 8));
+};
+
+
+/**
+ * @param {?proto.common.PriceImpactPercentV2|undefined} value
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+*/
+proto.api.RaydiumQuoteStep.prototype.setPriceimpactpercent = function(value) {
+  return jspb.Message.setWrapperField(this, 8, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+ */
+proto.api.RaydiumQuoteStep.prototype.clearPriceimpactpercent = function() {
+  return this.setPriceimpactpercent(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.RaydiumQuoteStep.prototype.hasPriceimpactpercent = function() {
+  return jspb.Message.getField(this, 8) != null;
+};
+
+
+/**
+ * optional common.Fee fee = 10;
+ * @return {?proto.common.Fee}
+ */
+proto.api.RaydiumQuoteStep.prototype.getFee = function() {
+  return /** @type{?proto.common.Fee} */ (
+    jspb.Message.getWrapperField(this, common_pb.Fee, 10));
+};
+
+
+/**
+ * @param {?proto.common.Fee|undefined} value
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+*/
+proto.api.RaydiumQuoteStep.prototype.setFee = function(value) {
+  return jspb.Message.setWrapperField(this, 10, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+ */
+proto.api.RaydiumQuoteStep.prototype.clearFee = function() {
+  return this.setFee(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.RaydiumQuoteStep.prototype.hasFee = function() {
+  return jspb.Message.getField(this, 10) != null;
+};
+
+
+/**
+ * optional double outAmountMin = 11;
+ * @return {number}
+ */
+proto.api.RaydiumQuoteStep.prototype.getOutamountmin = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 11, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RaydiumQuoteStep} returns this
+ */
+proto.api.RaydiumQuoteStep.prototype.setOutamountmin = function(value) {
+  return jspb.Message.setProto3FloatField(this, 11, value);
+};
+
+
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -22785,6 +28707,296 @@ proto.api.GetPoolsResponse.prototype.addProjects = function(opt_value, opt_index
  */
 proto.api.GetPoolsResponse.prototype.clearProjectsList = function() {
   return this.setProjectsList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetRaydiumPoolsRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetRaydiumPoolsRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetRaydiumPoolsRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumPoolsRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    pairoraddress: jspb.Message.getFieldWithDefault(msg, 1, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetRaydiumPoolsRequest}
+ */
+proto.api.GetRaydiumPoolsRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetRaydiumPoolsRequest;
+  return proto.api.GetRaydiumPoolsRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetRaydiumPoolsRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetRaydiumPoolsRequest}
+ */
+proto.api.GetRaydiumPoolsRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPairoraddress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetRaydiumPoolsRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetRaydiumPoolsRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetRaydiumPoolsRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumPoolsRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getPairoraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string pairOrAddress = 1;
+ * @return {string}
+ */
+proto.api.GetRaydiumPoolsRequest.prototype.getPairoraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetRaydiumPoolsRequest} returns this
+ */
+proto.api.GetRaydiumPoolsRequest.prototype.setPairoraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetRaydiumPoolsResponse.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetRaydiumPoolsResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetRaydiumPoolsResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetRaydiumPoolsResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumPoolsResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    poolsList: jspb.Message.toObjectList(msg.getPoolsList(),
+    proto.api.ProjectPool.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetRaydiumPoolsResponse}
+ */
+proto.api.GetRaydiumPoolsResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetRaydiumPoolsResponse;
+  return proto.api.GetRaydiumPoolsResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetRaydiumPoolsResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetRaydiumPoolsResponse}
+ */
+proto.api.GetRaydiumPoolsResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.ProjectPool;
+      reader.readMessage(value,proto.api.ProjectPool.deserializeBinaryFromReader);
+      msg.addPools(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetRaydiumPoolsResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetRaydiumPoolsResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetRaydiumPoolsResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumPoolsResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getPoolsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.ProjectPool.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated ProjectPool pools = 1;
+ * @return {!Array<!proto.api.ProjectPool>}
+ */
+proto.api.GetRaydiumPoolsResponse.prototype.getPoolsList = function() {
+  return /** @type{!Array<!proto.api.ProjectPool>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.ProjectPool, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.ProjectPool>} value
+ * @return {!proto.api.GetRaydiumPoolsResponse} returns this
+*/
+proto.api.GetRaydiumPoolsResponse.prototype.setPoolsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.ProjectPool=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.ProjectPool}
+ */
+proto.api.GetRaydiumPoolsResponse.prototype.addPools = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.ProjectPool, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetRaydiumPoolsResponse} returns this
+ */
+proto.api.GetRaydiumPoolsResponse.prototype.clearPoolsList = function() {
+  return this.setPoolsList([]);
 };
 
 
@@ -25435,6 +31647,638 @@ proto.api.GetPriceResponse.prototype.clearTokenpricesList = function() {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetRaydiumPricesRequest.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetRaydiumPricesRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetRaydiumPricesRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetRaydiumPricesRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumPricesRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    tokensList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetRaydiumPricesRequest}
+ */
+proto.api.GetRaydiumPricesRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetRaydiumPricesRequest;
+  return proto.api.GetRaydiumPricesRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetRaydiumPricesRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetRaydiumPricesRequest}
+ */
+proto.api.GetRaydiumPricesRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addTokens(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetRaydiumPricesRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetRaydiumPricesRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetRaydiumPricesRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumPricesRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTokensList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * repeated string tokens = 1;
+ * @return {!Array<string>}
+ */
+proto.api.GetRaydiumPricesRequest.prototype.getTokensList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.api.GetRaydiumPricesRequest} returns this
+ */
+proto.api.GetRaydiumPricesRequest.prototype.setTokensList = function(value) {
+  return jspb.Message.setField(this, 1, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.api.GetRaydiumPricesRequest} returns this
+ */
+proto.api.GetRaydiumPricesRequest.prototype.addTokens = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetRaydiumPricesRequest} returns this
+ */
+proto.api.GetRaydiumPricesRequest.prototype.clearTokensList = function() {
+  return this.setTokensList([]);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetJupiterPricesRequest.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetJupiterPricesRequest.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetJupiterPricesRequest.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetJupiterPricesRequest} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetJupiterPricesRequest.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    tokensList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetJupiterPricesRequest}
+ */
+proto.api.GetJupiterPricesRequest.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetJupiterPricesRequest;
+  return proto.api.GetJupiterPricesRequest.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetJupiterPricesRequest} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetJupiterPricesRequest}
+ */
+proto.api.GetJupiterPricesRequest.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.addTokens(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetJupiterPricesRequest.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetJupiterPricesRequest.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetJupiterPricesRequest} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetJupiterPricesRequest.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTokensList();
+  if (f.length > 0) {
+    writer.writeRepeatedString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * repeated string tokens = 1;
+ * @return {!Array<string>}
+ */
+proto.api.GetJupiterPricesRequest.prototype.getTokensList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.api.GetJupiterPricesRequest} returns this
+ */
+proto.api.GetJupiterPricesRequest.prototype.setTokensList = function(value) {
+  return jspb.Message.setField(this, 1, value || []);
+};
+
+
+/**
+ * @param {string} value
+ * @param {number=} opt_index
+ * @return {!proto.api.GetJupiterPricesRequest} returns this
+ */
+proto.api.GetJupiterPricesRequest.prototype.addTokens = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetJupiterPricesRequest} returns this
+ */
+proto.api.GetJupiterPricesRequest.prototype.clearTokensList = function() {
+  return this.setTokensList([]);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetRaydiumPricesResponse.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetRaydiumPricesResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetRaydiumPricesResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetRaydiumPricesResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumPricesResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    tokenpricesList: jspb.Message.toObjectList(msg.getTokenpricesList(),
+    proto.api.TokenPriceV2.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetRaydiumPricesResponse}
+ */
+proto.api.GetRaydiumPricesResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetRaydiumPricesResponse;
+  return proto.api.GetRaydiumPricesResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetRaydiumPricesResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetRaydiumPricesResponse}
+ */
+proto.api.GetRaydiumPricesResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TokenPriceV2;
+      reader.readMessage(value,proto.api.TokenPriceV2.deserializeBinaryFromReader);
+      msg.addTokenprices(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetRaydiumPricesResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetRaydiumPricesResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetRaydiumPricesResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetRaydiumPricesResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTokenpricesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.TokenPriceV2.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated TokenPriceV2 tokenPrices = 1;
+ * @return {!Array<!proto.api.TokenPriceV2>}
+ */
+proto.api.GetRaydiumPricesResponse.prototype.getTokenpricesList = function() {
+  return /** @type{!Array<!proto.api.TokenPriceV2>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TokenPriceV2, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.TokenPriceV2>} value
+ * @return {!proto.api.GetRaydiumPricesResponse} returns this
+*/
+proto.api.GetRaydiumPricesResponse.prototype.setTokenpricesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.TokenPriceV2=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TokenPriceV2}
+ */
+proto.api.GetRaydiumPricesResponse.prototype.addTokenprices = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TokenPriceV2, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetRaydiumPricesResponse} returns this
+ */
+proto.api.GetRaydiumPricesResponse.prototype.clearTokenpricesList = function() {
+  return this.setTokenpricesList([]);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetJupiterPricesResponse.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetJupiterPricesResponse.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetJupiterPricesResponse.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetJupiterPricesResponse} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetJupiterPricesResponse.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    tokenpricesList: jspb.Message.toObjectList(msg.getTokenpricesList(),
+    proto.api.TokenPriceV2.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetJupiterPricesResponse}
+ */
+proto.api.GetJupiterPricesResponse.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetJupiterPricesResponse;
+  return proto.api.GetJupiterPricesResponse.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetJupiterPricesResponse} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetJupiterPricesResponse}
+ */
+proto.api.GetJupiterPricesResponse.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TokenPriceV2;
+      reader.readMessage(value,proto.api.TokenPriceV2.deserializeBinaryFromReader);
+      msg.addTokenprices(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetJupiterPricesResponse.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetJupiterPricesResponse.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetJupiterPricesResponse} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetJupiterPricesResponse.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTokenpricesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.TokenPriceV2.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated TokenPriceV2 tokenPrices = 1;
+ * @return {!Array<!proto.api.TokenPriceV2>}
+ */
+proto.api.GetJupiterPricesResponse.prototype.getTokenpricesList = function() {
+  return /** @type{!Array<!proto.api.TokenPriceV2>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TokenPriceV2, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.TokenPriceV2>} value
+ * @return {!proto.api.GetJupiterPricesResponse} returns this
+*/
+proto.api.GetJupiterPricesResponse.prototype.setTokenpricesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.TokenPriceV2=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TokenPriceV2}
+ */
+proto.api.GetJupiterPricesResponse.prototype.addTokenprices = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TokenPriceV2, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetJupiterPricesResponse} returns this
+ */
+proto.api.GetJupiterPricesResponse.prototype.clearTokenpricesList = function() {
+  return this.setTokenpricesList([]);
+};
+
+
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -25741,6 +32585,286 @@ proto.api.TokenPrice.prototype.getSellsize = function() {
  */
 proto.api.TokenPrice.prototype.setSellsize = function(value) {
   return jspb.Message.setProto3FloatField(this, 7, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.TokenPriceV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.TokenPriceV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.TokenPriceV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.TokenPriceV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    token: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    tokenaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    buy: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    buysize: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    sell: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    sellsize: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.TokenPriceV2}
+ */
+proto.api.TokenPriceV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.TokenPriceV2;
+  return proto.api.TokenPriceV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.TokenPriceV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.TokenPriceV2}
+ */
+proto.api.TokenPriceV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setToken(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTokenaddress(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setBuy(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setBuysize(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSell(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSellsize(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.TokenPriceV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.TokenPriceV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.TokenPriceV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.TokenPriceV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getToken();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getTokenaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getBuy();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getBuysize();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+  f = message.getSell();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+  f = message.getSellsize();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      6,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string token = 1;
+ * @return {string}
+ */
+proto.api.TokenPriceV2.prototype.getToken = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.TokenPriceV2} returns this
+ */
+proto.api.TokenPriceV2.prototype.setToken = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string tokenAddress = 2;
+ * @return {string}
+ */
+proto.api.TokenPriceV2.prototype.getTokenaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.TokenPriceV2} returns this
+ */
+proto.api.TokenPriceV2.prototype.setTokenaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional double buy = 3;
+ * @return {number}
+ */
+proto.api.TokenPriceV2.prototype.getBuy = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TokenPriceV2} returns this
+ */
+proto.api.TokenPriceV2.prototype.setBuy = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional double buySize = 4;
+ * @return {number}
+ */
+proto.api.TokenPriceV2.prototype.getBuysize = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TokenPriceV2} returns this
+ */
+proto.api.TokenPriceV2.prototype.setBuysize = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double sell = 5;
+ * @return {number}
+ */
+proto.api.TokenPriceV2.prototype.getSell = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TokenPriceV2} returns this
+ */
+proto.api.TokenPriceV2.prototype.setSell = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * optional double sellSize = 6;
+ * @return {number}
+ */
+proto.api.TokenPriceV2.prototype.getSellsize = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TokenPriceV2} returns this
+ */
+proto.api.TokenPriceV2.prototype.setSellsize = function(value) {
+  return jspb.Message.setProto3FloatField(this, 6, value);
 };
 
 

@@ -2652,6 +2652,169 @@
         ]
       }
     },
+    "/api/v2/jupiter/prices": {
+      "get": {
+        "summary": "Token prices on Rayidum",
+        "description": "Returns the list of prices for specified tokens on Jupiter",
+        "operationId": "Api_GetJupiterPrices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetJupiterPricesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tokens",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Jupiter V2"
+        ]
+      }
+    },
+    "/api/v2/jupiter/quotes": {
+      "get": {
+        "summary": "Jupiter Quotes",
+        "description": "Returns quotes from Jupiter",
+        "operationId": "Api_GetJupiterQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetJupiterQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Jupiter V2"
+        ]
+      }
+    },
+    "/api/v2/jupiter/route-swap": {
+      "post": {
+        "summary": "Unsigned Jupiter swap transaction along route",
+        "description": "Generates an unsigned transaction object to make a swap on Jupiter on the specified route",
+        "operationId": "Api_PostJupiterRouteSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostJupiterRouteSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostJupiterRouteSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Jupiter V2"
+        ]
+      }
+    },
+    "/api/v2/jupiter/swap": {
+      "post": {
+        "summary": "Unsigned Jupiter swap transaction",
+        "description": "Generates an unsigned transaction object to make a swap on Jupiter",
+        "operationId": "Api_PostJupiterSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostJupiterSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostJupiterSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Jupiter V2"
+        ]
+      }
+    },
     "/api/v2/openbook/cancel": {
       "post": {
         "summary": "Openbook unsigned CancelOrder transaction",
@@ -3026,6 +3189,201 @@
         ],
         "tags": [
           "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/pools": {
+      "get": {
+        "summary": "Raydium Pools",
+        "description": "Returns the list of Raydium pools",
+        "operationId": "Api_GetRaydiumPools",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumPoolsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairOrAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/prices": {
+      "get": {
+        "summary": "Token prices on Rayidum",
+        "description": "Returns the list of prices for specified tokens on Raydium",
+        "operationId": "Api_GetRaydiumPrices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumPricesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tokens",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/quotes": {
+      "get": {
+        "summary": "Raydium Quotes",
+        "description": "Returns quotes from Raydium",
+        "operationId": "Api_GetRaydiumQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/route-swap": {
+      "post": {
+        "summary": "Unsigned Raydium swap transaction along route",
+        "description": "Generates an unsigned transaction object to make a swap on Raydium on the specified route",
+        "operationId": "Api_PostRaydiumRouteSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/swap": {
+      "post": {
+        "summary": "Unsigned Raydium swap transaction",
+        "description": "Generates an unsigned transaction object to make a swap on Raydium",
+        "operationId": "Api_PostRaydiumSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
         ]
       }
     }
@@ -3682,6 +4040,44 @@
         }
       }
     },
+    "apiGetJupiterPricesResponse": {
+      "type": "object",
+      "properties": {
+        "tokenPrices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTokenPriceV2"
+          }
+        }
+      }
+    },
+    "apiGetJupiterQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiJupiterQuoteRoute"
+          }
+        }
+      }
+    },
     "apiGetKlineResponse": {
       "type": "object",
       "properties": {
@@ -4225,6 +4621,55 @@
         }
       }
     },
+    "apiGetRaydiumPoolsResponse": {
+      "type": "object",
+      "properties": {
+        "pools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiProjectPool"
+          }
+        }
+      }
+    },
+    "apiGetRaydiumPricesResponse": {
+      "type": "object",
+      "properties": {
+        "tokenPrices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTokenPriceV2"
+          }
+        }
+      }
+    },
+    "apiGetRaydiumQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumQuoteRoute"
+          }
+        }
+      }
+    },
     "apiGetRecentBlockHashResponse": {
       "type": "object",
       "properties": {
@@ -4389,6 +4834,97 @@
           "items": {
             "$ref": "#/definitions/apiUserDetail"
           }
+        }
+      }
+    },
+    "apiJupiterQuoteRoute": {
+      "type": "object",
+      "properties": {
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiJupiterQuoteStep"
+          }
+        }
+      }
+    },
+    "apiJupiterQuoteStep": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiStepProject"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpactPercent": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fee": {
+          "$ref": "#/definitions/commonFee"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiJupiterRouteStep": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiStepProject"
         }
       }
     },
@@ -5327,6 +5863,102 @@
         }
       }
     },
+    "apiPostJupiterRouteSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiJupiterRouteStep"
+          }
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostJupiterRouteSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpact": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonFee"
+          }
+        }
+      }
+    },
+    "apiPostJupiterSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostJupiterSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpact": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonFee"
+          }
+        }
+      }
+    },
     "apiPostLiquidateDriftPerpRequest": {
       "type": "object",
       "properties": {
@@ -5634,6 +6266,102 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostRaydiumRouteSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumRouteStep"
+          }
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostRaydiumRouteSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpact": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonFee"
+          }
+        }
+      }
+    },
+    "apiPostRaydiumSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostRaydiumSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpact": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonFee"
+          }
         }
       }
     },
@@ -6128,6 +6856,94 @@
         }
       }
     },
+    "apiRaydiumQuoteRoute": {
+      "type": "object",
+      "properties": {
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumQuoteStep"
+          }
+        }
+      }
+    },
+    "apiRaydiumQuoteStep": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpactPercent": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fee": {
+          "$ref": "#/definitions/commonFee"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiRaydiumRouteStep": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "poolAddress": {
+          "type": "string"
+        }
+      }
+    },
     "apiRouteStep": {
       "type": "object",
       "properties": {
@@ -6329,6 +7145,33 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        },
+        "buy": {
+          "type": "number",
+          "format": "double"
+        },
+        "buySize": {
+          "type": "number",
+          "format": "double"
+        },
+        "sell": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellSize": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiTokenPriceV2": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "tokenAddress": {
+          "type": "string"
         },
         "buy": {
           "type": "number",
@@ -6601,6 +7444,18 @@
         },
         "infinity": {
           "$ref": "#/definitions/commonInfinity"
+        }
+      }
+    },
+    "commonPriceImpactPercentV2": {
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "number",
+          "format": "double"
+        },
+        "infinity": {
+          "type": "string"
         }
       }
     },

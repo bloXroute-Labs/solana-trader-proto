@@ -75,6 +75,11 @@ message PriceImpactPercent {
   Infinity infinity = 2;
 }
 
+message PriceImpactPercentV2 {
+  double percent = 1;
+  string infinity = 2; // NOT, NEGATIVE, POSITIVE
+}
+
 message Fee {
   float amount = 1;
   string mint = 2;
