@@ -2652,9 +2652,43 @@
         ]
       }
     },
-    "/api/v2/market/depth/{market}": {
+    "/api/v2/openbook/cancel": {
+      "post": {
+        "summary": "Openbook unsigned CancelOrder transaction",
+        "description": "Generates a CancelOrder unsigned transaction object",
+        "operationId": "Api_PostCancelOrderV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelOrderResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelOrderRequestV2"
+            }
+          }
+        ],
+        "tags": [
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/openbook/depth/{market}": {
       "get": {
-        "summary": "Market depth",
+        "summary": "Openbook market depth",
         "description": "Returns market's aggregated price data. Use limit param to reduce the number of price points returned",
         "operationId": "Api_GetMarketDepthV2",
         "responses": {
@@ -2692,9 +2726,9 @@
         ]
       }
     },
-    "/api/v2/market/markets": {
+    "/api/v2/openbook/markets": {
       "get": {
-        "summary": "Orderbook markets",
+        "summary": "Openbook markets",
         "description": "Returns the list of orderbook markets",
         "operationId": "Api_GetMarketsV2",
         "responses": {
@@ -2716,116 +2750,9 @@
         ]
       }
     },
-    "/api/v2/market/orderbook/{market}": {
+    "/api/v2/openbook/open-orders/{market}": {
       "get": {
-        "summary": "Market orderbook",
-        "description": "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned",
-        "operationId": "Api_GetOrderbookV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetOrderbookResponseV2"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "market",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "description": "Use 0 for no limits",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "Openbook V2"
-        ]
-      }
-    },
-    "/api/v2/market/tickers/{market}": {
-      "get": {
-        "summary": "Orderbook tickers",
-        "description": "Returns updated ticker(s). To receive all tickers use empty string for {market} param value",
-        "operationId": "Api_GetTickersV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetTickersResponseV2"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "market",
-            "description": "Use empty string for all markets",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Openbook V2"
-        ]
-      }
-    },
-    "/api/v2/trade/cancel": {
-      "post": {
-        "summary": "Unsigned CancelOrder transaction",
-        "description": "Generates a CancelOrder unsigned transaction object",
-        "operationId": "Api_PostCancelOrderV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostCancelOrderResponseV2"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiPostCancelOrderRequestV2"
-            }
-          }
-        ],
-        "tags": [
-          "Openbook V2"
-        ]
-      }
-    },
-    "/api/v2/trade/open-orders/{market}": {
-      "get": {
-        "summary": "List of user's open orders",
+        "summary": "List of user's open orders in Openbook",
         "description": "Returns the list of open orders per user per market",
         "operationId": "Api_GetOpenOrdersV2",
         "responses": {
@@ -2889,9 +2816,49 @@
         ]
       }
     },
-    "/api/v2/trade/place": {
+    "/api/v2/openbook/orderbooks/{market}": {
+      "get": {
+        "summary": "Openbook market orderbook",
+        "description": "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetOrderbookV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOrderbookResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/openbook/place": {
       "post": {
-        "summary": "Unsigned NewOrderV3 transaction",
+        "summary": "Openbook unsigned NewOrderV3 transaction",
         "description": "Generates a NewOrderV3 unsigned transaction object",
         "operationId": "Api_PostOrderV2",
         "responses": {
@@ -2923,9 +2890,9 @@
         ]
       }
     },
-    "/api/v2/trade/replace": {
+    "/api/v2/openbook/replace": {
       "post": {
-        "summary": "Unsigned ReplaceOrder transaction",
+        "summary": "Openbook Unsigned ReplaceOrder transaction",
         "description": "Generates a ReplaceOrder unsigned transaction object",
         "operationId": "Api_PostReplaceOrderV2",
         "responses": {
@@ -2957,9 +2924,9 @@
         ]
       }
     },
-    "/api/v2/trade/settle": {
+    "/api/v2/openbook/settle": {
       "post": {
-        "summary": "Unsigned SettleFunds transaction",
+        "summary": "Openbook unsigned SettleFunds transaction",
         "description": "Generates a SettleFunds unsigned transaction object",
         "operationId": "Api_PostSettleV2",
         "responses": {
@@ -2991,7 +2958,40 @@
         ]
       }
     },
-    "/api/v2/trade/unsettled/{market}": {
+    "/api/v2/openbook/tickers/{market}": {
+      "get": {
+        "summary": "Openbook tickers",
+        "description": "Returns updated ticker(s). To receive all tickers use empty string for {market} param value",
+        "operationId": "Api_GetTickersV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTickersResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "description": "Use empty string for all markets",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/openbook/unsettled/{market}": {
       "get": {
         "summary": "Unsettled amounts",
         "description": "Returns the unsettled amounts of user in a market",
