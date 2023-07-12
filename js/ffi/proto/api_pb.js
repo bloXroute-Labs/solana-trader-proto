@@ -30,7 +30,6 @@ goog.object.extend(proto, common_pb);
 goog.exportSymbol('proto.api.Asset', null, global);
 goog.exportSymbol('proto.api.Block', null, global);
 goog.exportSymbol('proto.api.Candle', null, global);
-goog.exportSymbol('proto.api.Candles', null, global);
 goog.exportSymbol('proto.api.Context', null, global);
 goog.exportSymbol('proto.api.ContractInfo', null, global);
 goog.exportSymbol('proto.api.Direction', null, global);
@@ -82,14 +81,17 @@ goog.exportSymbol('proto.api.GetDriftUserResponse', null, global);
 goog.exportSymbol('proto.api.GetKlineRequest', null, global);
 goog.exportSymbol('proto.api.GetKlineResponse', null, global);
 goog.exportSymbol('proto.api.GetMarketDepthRequest', null, global);
+goog.exportSymbol('proto.api.GetMarketDepthRequestV2', null, global);
 goog.exportSymbol('proto.api.GetMarketDepthResponse', null, global);
+goog.exportSymbol('proto.api.GetMarketDepthResponseV2', null, global);
 goog.exportSymbol('proto.api.GetMarketDepthsRequest', null, global);
 goog.exportSymbol('proto.api.GetMarketDepthsStreamResponse', null, global);
 goog.exportSymbol('proto.api.GetMarketsRequest', null, global);
+goog.exportSymbol('proto.api.GetMarketsRequestV2', null, global);
 goog.exportSymbol('proto.api.GetMarketsResponse', null, global);
-goog.exportSymbol('proto.api.GetMyOrdersRequest', null, global);
-goog.exportSymbol('proto.api.GetMyOrdersResponse', null, global);
+goog.exportSymbol('proto.api.GetMarketsResponseV2', null, global);
 goog.exportSymbol('proto.api.GetOpenOrdersRequest', null, global);
+goog.exportSymbol('proto.api.GetOpenOrdersRequestV2', null, global);
 goog.exportSymbol('proto.api.GetOpenOrdersResponse', null, global);
 goog.exportSymbol('proto.api.GetOpenPerpOrderRequest', null, global);
 goog.exportSymbol('proto.api.GetOpenPerpOrderResponse', null, global);
@@ -101,7 +103,9 @@ goog.exportSymbol('proto.api.GetOrderStatusResponse', null, global);
 goog.exportSymbol('proto.api.GetOrderStatusStreamRequest', null, global);
 goog.exportSymbol('proto.api.GetOrderStatusStreamResponse', null, global);
 goog.exportSymbol('proto.api.GetOrderbookRequest', null, global);
+goog.exportSymbol('proto.api.GetOrderbookRequestV2', null, global);
 goog.exportSymbol('proto.api.GetOrderbookResponse', null, global);
+goog.exportSymbol('proto.api.GetOrderbookResponseV2', null, global);
 goog.exportSymbol('proto.api.GetOrderbooksRequest', null, global);
 goog.exportSymbol('proto.api.GetOrderbooksStreamResponse', null, global);
 goog.exportSymbol('proto.api.GetOrdersRequest', null, global);
@@ -148,16 +152,19 @@ goog.exportSymbol('proto.api.GetTradesRequest', null, global);
 goog.exportSymbol('proto.api.GetTradesResponse', null, global);
 goog.exportSymbol('proto.api.GetTradesStreamResponse', null, global);
 goog.exportSymbol('proto.api.GetUnsettledRequest', null, global);
+goog.exportSymbol('proto.api.GetUnsettledRequestV2', null, global);
 goog.exportSymbol('proto.api.GetUnsettledResponse', null, global);
 goog.exportSymbol('proto.api.GetUserRequest', null, global);
 goog.exportSymbol('proto.api.GetUserResponse', null, global);
 goog.exportSymbol('proto.api.Market', null, global);
 goog.exportSymbol('proto.api.MarketDepthItem', null, global);
+goog.exportSymbol('proto.api.MarketDepthItemV2', null, global);
 goog.exportSymbol('proto.api.MarketStatus', null, global);
-goog.exportSymbol('proto.api.MyOrder', null, global);
+goog.exportSymbol('proto.api.MarketV2', null, global);
 goog.exportSymbol('proto.api.Order', null, global);
 goog.exportSymbol('proto.api.OrderStatus', null, global);
 goog.exportSymbol('proto.api.OrderbookItem', null, global);
+goog.exportSymbol('proto.api.OrderbookItemV2', null, global);
 goog.exportSymbol('proto.api.PerpOrder', null, global);
 goog.exportSymbol('proto.api.PerpOrderbookItem', null, global);
 goog.exportSymbol('proto.api.PerpPosition', null, global);
@@ -168,7 +175,9 @@ goog.exportSymbol('proto.api.PostCancelByClientOrderIDRequest', null, global);
 goog.exportSymbol('proto.api.PostCancelDriftMarginOrderRequest', null, global);
 goog.exportSymbol('proto.api.PostCancelDriftMarginOrderResponse', null, global);
 goog.exportSymbol('proto.api.PostCancelOrderRequest', null, global);
+goog.exportSymbol('proto.api.PostCancelOrderRequestV2', null, global);
 goog.exportSymbol('proto.api.PostCancelOrderResponse', null, global);
+goog.exportSymbol('proto.api.PostCancelOrderResponseV2', null, global);
 goog.exportSymbol('proto.api.PostCancelPerpOrderRequest', null, global);
 goog.exportSymbol('proto.api.PostCancelPerpOrderResponse', null, global);
 goog.exportSymbol('proto.api.PostCancelPerpOrdersRequest', null, global);
@@ -203,15 +212,18 @@ goog.exportSymbol('proto.api.PostManageCollateralResponse', null, global);
 goog.exportSymbol('proto.api.PostModifyDriftOrderRequest', null, global);
 goog.exportSymbol('proto.api.PostModifyDriftOrderResponse', null, global);
 goog.exportSymbol('proto.api.PostOrderRequest', null, global);
+goog.exportSymbol('proto.api.PostOrderRequestV2', null, global);
 goog.exportSymbol('proto.api.PostOrderResponse', null, global);
 goog.exportSymbol('proto.api.PostPerpOrderRequest', null, global);
 goog.exportSymbol('proto.api.PostPerpOrderResponse', null, global);
 goog.exportSymbol('proto.api.PostReplaceOrderRequest', null, global);
+goog.exportSymbol('proto.api.PostReplaceOrderRequestV2', null, global);
 goog.exportSymbol('proto.api.PostSettlePNLRequest', null, global);
 goog.exportSymbol('proto.api.PostSettlePNLResponse', null, global);
 goog.exportSymbol('proto.api.PostSettlePNLsRequest', null, global);
 goog.exportSymbol('proto.api.PostSettlePNLsResponse', null, global);
 goog.exportSymbol('proto.api.PostSettleRequest', null, global);
+goog.exportSymbol('proto.api.PostSettleRequestV2', null, global);
 goog.exportSymbol('proto.api.PostSettleResponse', null, global);
 goog.exportSymbol('proto.api.PostSubmitBatchRequest', null, global);
 goog.exportSymbol('proto.api.PostSubmitBatchResponse', null, global);
@@ -233,6 +245,7 @@ goog.exportSymbol('proto.api.Step', null, global);
 goog.exportSymbol('proto.api.StepProject', null, global);
 goog.exportSymbol('proto.api.SubmitStrategy', null, global);
 goog.exportSymbol('proto.api.Ticker', null, global);
+goog.exportSymbol('proto.api.TickerV2', null, global);
 goog.exportSymbol('proto.api.TokenAccount', null, global);
 goog.exportSymbol('proto.api.TokenBalance', null, global);
 goog.exportSymbol('proto.api.TokenPair', null, global);
@@ -380,48 +393,6 @@ if (goog.DEBUG && !COMPILED) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.api.GetTickersRequestV2 = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.api.GetTickersRequestV2, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  /**
-   * @public
-   * @override
-   */
-  proto.api.GetTickersRequestV2.displayName = 'proto.api.GetTickersRequestV2';
-}
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.api.GetTickersResponseV2 = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.api.GetTickersResponseV2, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  /**
-   * @public
-   * @override
-   */
-  proto.api.GetTickersResponseV2.displayName = 'proto.api.GetTickersResponseV2';
-}
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
 proto.api.GetKlineRequest = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -444,7 +415,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.GetKlineResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetKlineResponse.repeatedFields_, null);
 };
 goog.inherits(proto.api.GetKlineResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -474,90 +445,6 @@ if (goog.DEBUG && !COMPILED) {
    * @override
    */
   proto.api.Candle.displayName = 'proto.api.Candle';
-}
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.api.Candles = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.Candles.repeatedFields_, null);
-};
-goog.inherits(proto.api.Candles, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  /**
-   * @public
-   * @override
-   */
-  proto.api.Candles.displayName = 'proto.api.Candles';
-}
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.api.GetMyOrdersRequest = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.api.GetMyOrdersRequest, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  /**
-   * @public
-   * @override
-   */
-  proto.api.GetMyOrdersRequest.displayName = 'proto.api.GetMyOrdersRequest';
-}
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.api.GetMyOrdersResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetMyOrdersResponse.repeatedFields_, null);
-};
-goog.inherits(proto.api.GetMyOrdersResponse, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  /**
-   * @public
-   * @override
-   */
-  proto.api.GetMyOrdersResponse.displayName = 'proto.api.GetMyOrdersResponse';
-}
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.api.MyOrder = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.api.MyOrder, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  /**
-   * @public
-   * @override
-   */
-  proto.api.MyOrder.displayName = 'proto.api.MyOrder';
 }
 /**
  * Generated by JsPbCodeGenerator.
@@ -4654,6 +4541,405 @@ if (goog.DEBUG && !COMPILED) {
    */
   proto.api.GetDriftMarketDepthResponse.displayName = 'proto.api.GetDriftMarketDepthResponse';
 }
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetMarketsRequestV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetMarketsRequestV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetMarketsRequestV2.displayName = 'proto.api.GetMarketsRequestV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetMarketsResponseV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetMarketsResponseV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetMarketsResponseV2.displayName = 'proto.api.GetMarketsResponseV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.MarketV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.MarketV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.MarketV2.displayName = 'proto.api.MarketV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetTickersRequestV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetTickersRequestV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetTickersRequestV2.displayName = 'proto.api.GetTickersRequestV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetTickersResponseV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetTickersResponseV2.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetTickersResponseV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetTickersResponseV2.displayName = 'proto.api.GetTickersResponseV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.TickerV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.TickerV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.TickerV2.displayName = 'proto.api.TickerV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetOrderbookRequestV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetOrderbookRequestV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetOrderbookRequestV2.displayName = 'proto.api.GetOrderbookRequestV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetOrderbookResponseV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetOrderbookResponseV2.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetOrderbookResponseV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetOrderbookResponseV2.displayName = 'proto.api.GetOrderbookResponseV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.OrderbookItemV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.OrderbookItemV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.OrderbookItemV2.displayName = 'proto.api.OrderbookItemV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetMarketDepthRequestV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetMarketDepthRequestV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetMarketDepthRequestV2.displayName = 'proto.api.GetMarketDepthRequestV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetMarketDepthResponseV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetMarketDepthResponseV2.repeatedFields_, null);
+};
+goog.inherits(proto.api.GetMarketDepthResponseV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetMarketDepthResponseV2.displayName = 'proto.api.GetMarketDepthResponseV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.MarketDepthItemV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.MarketDepthItemV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.MarketDepthItemV2.displayName = 'proto.api.MarketDepthItemV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostOrderRequestV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostOrderRequestV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostOrderRequestV2.displayName = 'proto.api.PostOrderRequestV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostReplaceOrderRequestV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostReplaceOrderRequestV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostReplaceOrderRequestV2.displayName = 'proto.api.PostReplaceOrderRequestV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostCancelOrderRequestV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostCancelOrderRequestV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostCancelOrderRequestV2.displayName = 'proto.api.PostCancelOrderRequestV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostCancelOrderResponseV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostCancelOrderResponseV2.repeatedFields_, null);
+};
+goog.inherits(proto.api.PostCancelOrderResponseV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostCancelOrderResponseV2.displayName = 'proto.api.PostCancelOrderResponseV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.PostSettleRequestV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.PostSettleRequestV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.PostSettleRequestV2.displayName = 'proto.api.PostSettleRequestV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetOpenOrdersRequestV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetOpenOrdersRequestV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetOpenOrdersRequestV2.displayName = 'proto.api.GetOpenOrdersRequestV2';
+}
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.api.GetUnsettledRequestV2 = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.api.GetUnsettledRequestV2, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  /**
+   * @public
+   * @override
+   */
+  proto.api.GetUnsettledRequestV2.displayName = 'proto.api.GetUnsettledRequestV2';
+}
 
 
 
@@ -5874,299 +6160,6 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.api.GetTickersRequestV2.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.GetTickersRequestV2.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Deprecated. Whether to include
- *     the JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.api.GetTickersRequestV2} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetTickersRequestV2.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 2, 0)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.GetTickersRequestV2}
- */
-proto.api.GetTickersRequestV2.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.GetTickersRequestV2;
-  return proto.api.GetTickersRequestV2.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.api.GetTickersRequestV2} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.GetTickersRequestV2}
- */
-proto.api.GetTickersRequestV2.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
-      break;
-    case 2:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.api.GetTickersRequestV2.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.api.GetTickersRequestV2.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.api.GetTickersRequestV2} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetTickersRequestV2.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getMarket();
-  if (f.length > 0) {
-    writer.writeString(
-      1,
-      f
-    );
-  }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      2,
-      f
-    );
-  }
-};
-
-
-/**
- * optional string market = 1;
- * @return {string}
- */
-proto.api.GetTickersRequestV2.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetTickersRequestV2} returns this
- */
-proto.api.GetTickersRequestV2.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional Project project = 2;
- * @return {!proto.api.Project}
- */
-proto.api.GetTickersRequestV2.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.GetTickersRequestV2} returns this
- */
-proto.api.GetTickersRequestV2.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
-};
-
-
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * Optional fields that are not set will be set to undefined.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
- * @param {boolean=} opt_includeInstance Deprecated. whether to include the
- *     JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.api.GetTickersResponseV2.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.GetTickersResponseV2.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Deprecated. Whether to include
- *     the JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.api.GetTickersResponseV2} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetTickersResponseV2.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    tickersMap: (f = msg.getTickersMap()) ? f.toObject(includeInstance, proto.api.Candle.toObject) : []
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.GetTickersResponseV2}
- */
-proto.api.GetTickersResponseV2.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.GetTickersResponseV2;
-  return proto.api.GetTickersResponseV2.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.api.GetTickersResponseV2} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.GetTickersResponseV2}
- */
-proto.api.GetTickersResponseV2.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 3:
-      var value = msg.getTickersMap();
-      reader.readMessage(value, function(message, reader) {
-        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.api.Candle.deserializeBinaryFromReader, "", new proto.api.Candle());
-         });
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.api.GetTickersResponseV2.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.api.GetTickersResponseV2.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.api.GetTickersResponseV2} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetTickersResponseV2.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getTickersMap(true);
-  if (f && f.getLength() > 0) {
-    f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.Candle.serializeBinaryToWriter);
-  }
-};
-
-
-/**
- * map<string, Candle> tickers = 3;
- * @param {boolean=} opt_noLazyCreate Do not create the map if
- * empty, instead returning `undefined`
- * @return {!jspb.Map<string,!proto.api.Candle>}
- */
-proto.api.GetTickersResponseV2.prototype.getTickersMap = function(opt_noLazyCreate) {
-  return /** @type {!jspb.Map<string,!proto.api.Candle>} */ (
-      jspb.Message.getMapField(this, 3, opt_noLazyCreate,
-      proto.api.Candle));
-};
-
-
-/**
- * Clears values from the map. The map will be non-null.
- * @return {!proto.api.GetTickersResponseV2} returns this
- */
-proto.api.GetTickersResponseV2.prototype.clearTickersMap = function() {
-  this.getTickersMap().clear();
-  return this;};
-
-
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * Optional fields that are not set will be set to undefined.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
- * @param {boolean=} opt_includeInstance Deprecated. whether to include the
- *     JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @return {!Object}
- */
 proto.api.GetKlineRequest.prototype.toObject = function(opt_includeInstance) {
   return proto.api.GetKlineRequest.toObject(opt_includeInstance, this);
 };
@@ -6187,8 +6180,7 @@ proto.api.GetKlineRequest.toObject = function(includeInstance, msg) {
     from: (f = msg.getFrom()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     to: (f = msg.getTo()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     resolution: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    limit: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    project: jspb.Message.getFieldWithDefault(msg, 6, 0)
+    limit: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -6246,10 +6238,6 @@ proto.api.GetKlineRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 5:
       var value = /** @type {number} */ (reader.readUint32());
       msg.setLimit(value);
-      break;
-    case 6:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
       break;
     default:
       reader.skipField();
@@ -6314,13 +6302,6 @@ proto.api.GetKlineRequest.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint32(
       5,
-      f
-    );
-  }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      6,
       f
     );
   }
@@ -6455,24 +6436,13 @@ proto.api.GetKlineRequest.prototype.setLimit = function(value) {
 };
 
 
-/**
- * optional Project project = 6;
- * @return {!proto.api.Project}
- */
-proto.api.GetKlineRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
-};
-
 
 /**
- * @param {!proto.api.Project} value
- * @return {!proto.api.GetKlineRequest} returns this
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
  */
-proto.api.GetKlineRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 6, value);
-};
-
-
+proto.api.GetKlineResponse.repeatedFields_ = [3];
 
 
 
@@ -6505,7 +6475,10 @@ proto.api.GetKlineResponse.prototype.toObject = function(opt_includeInstance) {
  */
 proto.api.GetKlineResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    marketcandlesMap: (f = msg.getMarketcandlesMap()) ? f.toObject(includeInstance, proto.api.Candles.toObject) : []
+    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+    candlesList: jspb.Message.toObjectList(msg.getCandlesList(),
+    proto.api.Candle.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -6542,11 +6515,19 @@ proto.api.GetKlineResponse.deserializeBinaryFromReader = function(msg, reader) {
     }
     var field = reader.getFieldNumber();
     switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 2:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     case 3:
-      var value = msg.getMarketcandlesMap();
-      reader.readMessage(value, function(message, reader) {
-        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.api.Candles.deserializeBinaryFromReader, "", new proto.api.Candles());
-         });
+      var value = new proto.api.Candle;
+      reader.readMessage(value,proto.api.Candle.deserializeBinaryFromReader);
+      msg.addCandles(value);
       break;
     default:
       reader.skipField();
@@ -6577,33 +6558,123 @@ proto.api.GetKlineResponse.prototype.serializeBinary = function() {
  */
 proto.api.GetKlineResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarketcandlesMap(true);
-  if (f && f.getLength() > 0) {
-    f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.Candles.serializeBinaryToWriter);
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
+  f = message.getCandlesList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      3,
+      f,
+      proto.api.Candle.serializeBinaryToWriter
+    );
   }
 };
 
 
 /**
- * map<string, Candles> marketCandles = 3;
- * @param {boolean=} opt_noLazyCreate Do not create the map if
- * empty, instead returning `undefined`
- * @return {!jspb.Map<string,!proto.api.Candles>}
+ * optional string market = 1;
+ * @return {string}
  */
-proto.api.GetKlineResponse.prototype.getMarketcandlesMap = function(opt_noLazyCreate) {
-  return /** @type {!jspb.Map<string,!proto.api.Candles>} */ (
-      jspb.Message.getMapField(this, 3, opt_noLazyCreate,
-      proto.api.Candles));
+proto.api.GetKlineResponse.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
- * Clears values from the map. The map will be non-null.
+ * @param {string} value
  * @return {!proto.api.GetKlineResponse} returns this
  */
-proto.api.GetKlineResponse.prototype.clearMarketcandlesMap = function() {
-  this.getMarketcandlesMap().clear();
-  return this;};
+proto.api.GetKlineResponse.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 2;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetKlineResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetKlineResponse} returns this
+*/
+proto.api.GetKlineResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetKlineResponse} returns this
+ */
+proto.api.GetKlineResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetKlineResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * repeated Candle candles = 3;
+ * @return {!Array<!proto.api.Candle>}
+ */
+proto.api.GetKlineResponse.prototype.getCandlesList = function() {
+  return /** @type{!Array<!proto.api.Candle>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.Candle, 3));
+};
+
+
+/**
+ * @param {!Array<!proto.api.Candle>} value
+ * @return {!proto.api.GetKlineResponse} returns this
+*/
+proto.api.GetKlineResponse.prototype.setCandlesList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+};
+
+
+/**
+ * @param {!proto.api.Candle=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.Candle}
+ */
+proto.api.GetKlineResponse.prototype.addCandles = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.Candle, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetKlineResponse} returns this
+ */
+proto.api.GetKlineResponse.prototype.clearCandlesList = function() {
+  return this.setCandlesList([]);
+};
 
 
 
@@ -6640,15 +6711,13 @@ proto.api.Candle.toObject = function(includeInstance, msg) {
   var f, obj = {
     starttime: (f = msg.getStarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatetime: (f = msg.getUpdatetime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    open: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    close: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
-    low: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
-    high: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
-    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
-    volume: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
-    count: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0)
+    open: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    close: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    low: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    high: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
+    volume: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
+    count: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0)
   };
 
   if (includeInstance) {
@@ -6696,38 +6765,30 @@ proto.api.Candle.deserializeBinaryFromReader = function(msg, reader) {
       msg.setUpdatetime(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarketaddress(value);
-      break;
-    case 4:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
-      break;
-    case 5:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setOpen(value);
       break;
-    case 6:
+    case 4:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setClose(value);
       break;
-    case 7:
+    case 5:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setLow(value);
       break;
-    case 8:
+    case 6:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setHigh(value);
       break;
-    case 9:
+    case 7:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setAmount(value);
       break;
-    case 10:
+    case 8:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setVolume(value);
       break;
-    case 11:
+    case 9:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setCount(value);
       break;
@@ -6776,66 +6837,52 @@ proto.api.Candle.serializeBinaryToWriter = function(message, writer) {
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
-  f = message.getMarketaddress();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      4,
-      f
-    );
-  }
   f = message.getOpen();
   if (f !== 0.0) {
     writer.writeDouble(
-      5,
+      3,
       f
     );
   }
   f = message.getClose();
   if (f !== 0.0) {
     writer.writeDouble(
-      6,
+      4,
       f
     );
   }
   f = message.getLow();
   if (f !== 0.0) {
     writer.writeDouble(
-      7,
+      5,
       f
     );
   }
   f = message.getHigh();
   if (f !== 0.0) {
     writer.writeDouble(
-      8,
+      6,
       f
     );
   }
   f = message.getAmount();
   if (f !== 0.0) {
     writer.writeDouble(
-      9,
+      7,
       f
     );
   }
   f = message.getVolume();
   if (f !== 0.0) {
     writer.writeDouble(
-      10,
+      8,
       f
     );
   }
   f = message.getCount();
   if (f !== 0.0) {
     writer.writeDouble(
-      11,
+      9,
       f
     );
   }
@@ -6917,47 +6964,11 @@ proto.api.Candle.prototype.hasUpdatetime = function() {
 
 
 /**
- * optional string marketAddress = 3;
- * @return {string}
- */
-proto.api.Candle.prototype.getMarketaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.Candle} returns this
- */
-proto.api.Candle.prototype.setMarketaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
-/**
- * optional Project project = 4;
- * @return {!proto.api.Project}
- */
-proto.api.Candle.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.Candle} returns this
- */
-proto.api.Candle.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
-};
-
-
-/**
- * optional double open = 5;
+ * optional double open = 3;
  * @return {number}
  */
 proto.api.Candle.prototype.getOpen = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
 };
 
 
@@ -6966,16 +6977,16 @@ proto.api.Candle.prototype.getOpen = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setOpen = function(value) {
-  return jspb.Message.setProto3FloatField(this, 5, value);
+  return jspb.Message.setProto3FloatField(this, 3, value);
 };
 
 
 /**
- * optional double close = 6;
+ * optional double close = 4;
  * @return {number}
  */
 proto.api.Candle.prototype.getClose = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
 };
 
 
@@ -6984,16 +6995,16 @@ proto.api.Candle.prototype.getClose = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setClose = function(value) {
-  return jspb.Message.setProto3FloatField(this, 6, value);
+  return jspb.Message.setProto3FloatField(this, 4, value);
 };
 
 
 /**
- * optional double low = 7;
+ * optional double low = 5;
  * @return {number}
  */
 proto.api.Candle.prototype.getLow = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
 };
 
 
@@ -7002,16 +7013,16 @@ proto.api.Candle.prototype.getLow = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setLow = function(value) {
-  return jspb.Message.setProto3FloatField(this, 7, value);
+  return jspb.Message.setProto3FloatField(this, 5, value);
 };
 
 
 /**
- * optional double high = 8;
+ * optional double high = 6;
  * @return {number}
  */
 proto.api.Candle.prototype.getHigh = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
 };
 
 
@@ -7020,16 +7031,16 @@ proto.api.Candle.prototype.getHigh = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setHigh = function(value) {
-  return jspb.Message.setProto3FloatField(this, 8, value);
+  return jspb.Message.setProto3FloatField(this, 6, value);
 };
 
 
 /**
- * optional double amount = 9;
+ * optional double amount = 7;
  * @return {number}
  */
 proto.api.Candle.prototype.getAmount = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
 };
 
 
@@ -7038,16 +7049,16 @@ proto.api.Candle.prototype.getAmount = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setAmount = function(value) {
-  return jspb.Message.setProto3FloatField(this, 9, value);
+  return jspb.Message.setProto3FloatField(this, 7, value);
 };
 
 
 /**
- * optional double volume = 10;
+ * optional double volume = 8;
  * @return {number}
  */
 proto.api.Candle.prototype.getVolume = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 10, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
 };
 
 
@@ -7056,16 +7067,16 @@ proto.api.Candle.prototype.getVolume = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setVolume = function(value) {
-  return jspb.Message.setProto3FloatField(this, 10, value);
+  return jspb.Message.setProto3FloatField(this, 8, value);
 };
 
 
 /**
- * optional double count = 11;
+ * optional double count = 9;
  * @return {number}
  */
 proto.api.Candle.prototype.getCount = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 11, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
 };
 
 
@@ -7074,989 +7085,7 @@ proto.api.Candle.prototype.getCount = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setCount = function(value) {
-  return jspb.Message.setProto3FloatField(this, 11, value);
-};
-
-
-
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.api.Candles.repeatedFields_ = [1];
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * Optional fields that are not set will be set to undefined.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
- * @param {boolean=} opt_includeInstance Deprecated. whether to include the
- *     JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.api.Candles.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.Candles.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Deprecated. Whether to include
- *     the JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.api.Candles} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.Candles.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    candlesList: jspb.Message.toObjectList(msg.getCandlesList(),
-    proto.api.Candle.toObject, includeInstance)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.Candles}
- */
-proto.api.Candles.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.Candles;
-  return proto.api.Candles.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.api.Candles} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.Candles}
- */
-proto.api.Candles.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = new proto.api.Candle;
-      reader.readMessage(value,proto.api.Candle.deserializeBinaryFromReader);
-      msg.addCandles(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.api.Candles.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.api.Candles.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.api.Candles} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.Candles.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getCandlesList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
-      1,
-      f,
-      proto.api.Candle.serializeBinaryToWriter
-    );
-  }
-};
-
-
-/**
- * repeated Candle candles = 1;
- * @return {!Array<!proto.api.Candle>}
- */
-proto.api.Candles.prototype.getCandlesList = function() {
-  return /** @type{!Array<!proto.api.Candle>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.Candle, 1));
-};
-
-
-/**
- * @param {!Array<!proto.api.Candle>} value
- * @return {!proto.api.Candles} returns this
-*/
-proto.api.Candles.prototype.setCandlesList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 1, value);
-};
-
-
-/**
- * @param {!proto.api.Candle=} opt_value
- * @param {number=} opt_index
- * @return {!proto.api.Candle}
- */
-proto.api.Candles.prototype.addCandles = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.Candle, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.api.Candles} returns this
- */
-proto.api.Candles.prototype.clearCandlesList = function() {
-  return this.setCandlesList([]);
-};
-
-
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * Optional fields that are not set will be set to undefined.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
- * @param {boolean=} opt_includeInstance Deprecated. whether to include the
- *     JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.api.GetMyOrdersRequest.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.GetMyOrdersRequest.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Deprecated. Whether to include
- *     the JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.api.GetMyOrdersRequest} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetMyOrdersRequest.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    orderid: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 4, "")
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.GetMyOrdersRequest}
- */
-proto.api.GetMyOrdersRequest.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.GetMyOrdersRequest;
-  return proto.api.GetMyOrdersRequest.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.api.GetMyOrdersRequest} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.GetMyOrdersRequest}
- */
-proto.api.GetMyOrdersRequest.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
-      break;
-    case 2:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setOrderid(value);
-      break;
-    case 4:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setClientorderid(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.api.GetMyOrdersRequest.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.api.GetMyOrdersRequest.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.api.GetMyOrdersRequest} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetMyOrdersRequest.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getMarket();
-  if (f.length > 0) {
-    writer.writeString(
-      1,
-      f
-    );
-  }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      2,
-      f
-    );
-  }
-  f = message.getOrderid();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
-  f = message.getClientorderid();
-  if (f.length > 0) {
-    writer.writeString(
-      4,
-      f
-    );
-  }
-};
-
-
-/**
- * optional string market = 1;
- * @return {string}
- */
-proto.api.GetMyOrdersRequest.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetMyOrdersRequest} returns this
- */
-proto.api.GetMyOrdersRequest.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional Project project = 2;
- * @return {!proto.api.Project}
- */
-proto.api.GetMyOrdersRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.GetMyOrdersRequest} returns this
- */
-proto.api.GetMyOrdersRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
-};
-
-
-/**
- * optional string orderID = 3;
- * @return {string}
- */
-proto.api.GetMyOrdersRequest.prototype.getOrderid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetMyOrdersRequest} returns this
- */
-proto.api.GetMyOrdersRequest.prototype.setOrderid = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
-/**
- * optional string clientOrderID = 4;
- * @return {string}
- */
-proto.api.GetMyOrdersRequest.prototype.getClientorderid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.GetMyOrdersRequest} returns this
- */
-proto.api.GetMyOrdersRequest.prototype.setClientorderid = function(value) {
-  return jspb.Message.setProto3StringField(this, 4, value);
-};
-
-
-
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.api.GetMyOrdersResponse.repeatedFields_ = [1];
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * Optional fields that are not set will be set to undefined.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
- * @param {boolean=} opt_includeInstance Deprecated. whether to include the
- *     JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.api.GetMyOrdersResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.GetMyOrdersResponse.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Deprecated. Whether to include
- *     the JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.api.GetMyOrdersResponse} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetMyOrdersResponse.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    ordersList: jspb.Message.toObjectList(msg.getOrdersList(),
-    proto.api.MyOrder.toObject, includeInstance)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.GetMyOrdersResponse}
- */
-proto.api.GetMyOrdersResponse.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.GetMyOrdersResponse;
-  return proto.api.GetMyOrdersResponse.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.api.GetMyOrdersResponse} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.GetMyOrdersResponse}
- */
-proto.api.GetMyOrdersResponse.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = new proto.api.MyOrder;
-      reader.readMessage(value,proto.api.MyOrder.deserializeBinaryFromReader);
-      msg.addOrders(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.api.GetMyOrdersResponse.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.api.GetMyOrdersResponse.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.api.GetMyOrdersResponse} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.GetMyOrdersResponse.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getOrdersList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
-      1,
-      f,
-      proto.api.MyOrder.serializeBinaryToWriter
-    );
-  }
-};
-
-
-/**
- * repeated MyOrder orders = 1;
- * @return {!Array<!proto.api.MyOrder>}
- */
-proto.api.GetMyOrdersResponse.prototype.getOrdersList = function() {
-  return /** @type{!Array<!proto.api.MyOrder>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.MyOrder, 1));
-};
-
-
-/**
- * @param {!Array<!proto.api.MyOrder>} value
- * @return {!proto.api.GetMyOrdersResponse} returns this
-*/
-proto.api.GetMyOrdersResponse.prototype.setOrdersList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 1, value);
-};
-
-
-/**
- * @param {!proto.api.MyOrder=} opt_value
- * @param {number=} opt_index
- * @return {!proto.api.MyOrder}
- */
-proto.api.GetMyOrdersResponse.prototype.addOrders = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.MyOrder, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.api.GetMyOrdersResponse} returns this
- */
-proto.api.GetMyOrdersResponse.prototype.clearOrdersList = function() {
-  return this.setOrdersList([]);
-};
-
-
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * Optional fields that are not set will be set to undefined.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
- * @param {boolean=} opt_includeInstance Deprecated. whether to include the
- *     JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.api.MyOrder.prototype.toObject = function(opt_includeInstance) {
-  return proto.api.MyOrder.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Deprecated. Whether to include
- *     the JSPB instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.api.MyOrder} msg The msg instance to transform.
- * @return {!Object}
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.MyOrder.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    project: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    owneraddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    date: (f = msg.getDate()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    marketaddress: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    programorderid: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    side: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
-    price: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.api.MyOrder}
- */
-proto.api.MyOrder.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.api.MyOrder;
-  return proto.api.MyOrder.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.api.MyOrder} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.api.MyOrder}
- */
-proto.api.MyOrder.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setTimestamp(value);
-      break;
-    case 2:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
-      break;
-    case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setOwneraddress(value);
-      break;
-    case 4:
-      var value = new google_protobuf_timestamp_pb.Timestamp;
-      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
-      msg.setDate(value);
-      break;
-    case 5:
-      var value = /** @type {number} */ (reader.readUint64());
-      msg.setClientorderid(value);
-      break;
-    case 6:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setMarketaddress(value);
-      break;
-    case 7:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setProgramorderid(value);
-      break;
-    case 8:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setSide(value);
-      break;
-    case 9:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setAmount(value);
-      break;
-    case 10:
-      var value = /** @type {number} */ (reader.readDouble());
-      msg.setPrice(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.api.MyOrder.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.api.MyOrder.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.api.MyOrder} message
- * @param {!jspb.BinaryWriter} writer
- * @suppress {unusedLocalVariables} f is only used for nested messages
- */
-proto.api.MyOrder.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getTimestamp();
-  if (f != null) {
-    writer.writeMessage(
-      1,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
-    );
-  }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      2,
-      f
-    );
-  }
-  f = message.getOwneraddress();
-  if (f.length > 0) {
-    writer.writeString(
-      3,
-      f
-    );
-  }
-  f = message.getDate();
-  if (f != null) {
-    writer.writeMessage(
-      4,
-      f,
-      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
-    );
-  }
-  f = message.getClientorderid();
-  if (f !== 0) {
-    writer.writeUint64(
-      5,
-      f
-    );
-  }
-  f = message.getMarketaddress();
-  if (f.length > 0) {
-    writer.writeString(
-      6,
-      f
-    );
-  }
-  f = message.getProgramorderid();
-  if (f.length > 0) {
-    writer.writeString(
-      7,
-      f
-    );
-  }
-  f = message.getSide();
-  if (f.length > 0) {
-    writer.writeString(
-      8,
-      f
-    );
-  }
-  f = message.getAmount();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      9,
-      f
-    );
-  }
-  f = message.getPrice();
-  if (f !== 0.0) {
-    writer.writeDouble(
-      10,
-      f
-    );
-  }
-};
-
-
-/**
- * optional google.protobuf.Timestamp Timestamp = 1;
- * @return {?proto.google.protobuf.Timestamp}
- */
-proto.api.MyOrder.prototype.getTimestamp = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 1));
-};
-
-
-/**
- * @param {?proto.google.protobuf.Timestamp|undefined} value
- * @return {!proto.api.MyOrder} returns this
-*/
-proto.api.MyOrder.prototype.setTimestamp = function(value) {
-  return jspb.Message.setWrapperField(this, 1, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.api.MyOrder} returns this
- */
-proto.api.MyOrder.prototype.clearTimestamp = function() {
-  return this.setTimestamp(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.api.MyOrder.prototype.hasTimestamp = function() {
-  return jspb.Message.getField(this, 1) != null;
-};
-
-
-/**
- * optional Project Project = 2;
- * @return {!proto.api.Project}
- */
-proto.api.MyOrder.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.MyOrder} returns this
- */
-proto.api.MyOrder.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
-};
-
-
-/**
- * optional string OwnerAddress = 3;
- * @return {string}
- */
-proto.api.MyOrder.prototype.getOwneraddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.MyOrder} returns this
- */
-proto.api.MyOrder.prototype.setOwneraddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
-};
-
-
-/**
- * optional google.protobuf.Timestamp Date = 4;
- * @return {?proto.google.protobuf.Timestamp}
- */
-proto.api.MyOrder.prototype.getDate = function() {
-  return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 4));
-};
-
-
-/**
- * @param {?proto.google.protobuf.Timestamp|undefined} value
- * @return {!proto.api.MyOrder} returns this
-*/
-proto.api.MyOrder.prototype.setDate = function(value) {
-  return jspb.Message.setWrapperField(this, 4, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.api.MyOrder} returns this
- */
-proto.api.MyOrder.prototype.clearDate = function() {
-  return this.setDate(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.api.MyOrder.prototype.hasDate = function() {
-  return jspb.Message.getField(this, 4) != null;
-};
-
-
-/**
- * optional uint64 ClientOrderID = 5;
- * @return {number}
- */
-proto.api.MyOrder.prototype.getClientorderid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.MyOrder} returns this
- */
-proto.api.MyOrder.prototype.setClientorderid = function(value) {
-  return jspb.Message.setProto3IntField(this, 5, value);
-};
-
-
-/**
- * optional string MarketAddress = 6;
- * @return {string}
- */
-proto.api.MyOrder.prototype.getMarketaddress = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.MyOrder} returns this
- */
-proto.api.MyOrder.prototype.setMarketaddress = function(value) {
-  return jspb.Message.setProto3StringField(this, 6, value);
-};
-
-
-/**
- * optional string ProgramOrderID = 7;
- * @return {string}
- */
-proto.api.MyOrder.prototype.getProgramorderid = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.MyOrder} returns this
- */
-proto.api.MyOrder.prototype.setProgramorderid = function(value) {
-  return jspb.Message.setProto3StringField(this, 7, value);
-};
-
-
-/**
- * optional string Side = 8;
- * @return {string}
- */
-proto.api.MyOrder.prototype.getSide = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.api.MyOrder} returns this
- */
-proto.api.MyOrder.prototype.setSide = function(value) {
-  return jspb.Message.setProto3StringField(this, 8, value);
-};
-
-
-/**
- * optional double Amount = 9;
- * @return {number}
- */
-proto.api.MyOrder.prototype.getAmount = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.MyOrder} returns this
- */
-proto.api.MyOrder.prototype.setAmount = function(value) {
   return jspb.Message.setProto3FloatField(this, 9, value);
-};
-
-
-/**
- * optional double Price = 10;
- * @return {number}
- */
-proto.api.MyOrder.prototype.getPrice = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 10, 0.0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.MyOrder} returns this
- */
-proto.api.MyOrder.prototype.setPrice = function(value) {
-  return jspb.Message.setProto3FloatField(this, 10, value);
 };
 
 
@@ -51621,6 +50650,4206 @@ proto.api.GetDriftMarketDepthResponse.prototype.clearData = function() {
  */
 proto.api.GetDriftMarketDepthResponse.prototype.hasData = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetMarketsRequestV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetMarketsRequestV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetMarketsRequestV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetMarketsRequestV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetMarketsRequestV2}
+ */
+proto.api.GetMarketsRequestV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetMarketsRequestV2;
+  return proto.api.GetMarketsRequestV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetMarketsRequestV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetMarketsRequestV2}
+ */
+proto.api.GetMarketsRequestV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetMarketsRequestV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetMarketsRequestV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetMarketsRequestV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetMarketsRequestV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetMarketsResponseV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetMarketsResponseV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetMarketsResponseV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetMarketsResponseV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    marketsMap: (f = msg.getMarketsMap()) ? f.toObject(includeInstance, proto.api.MarketV2.toObject) : []
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetMarketsResponseV2}
+ */
+proto.api.GetMarketsResponseV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetMarketsResponseV2;
+  return proto.api.GetMarketsResponseV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetMarketsResponseV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetMarketsResponseV2}
+ */
+proto.api.GetMarketsResponseV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = msg.getMarketsMap();
+      reader.readMessage(value, function(message, reader) {
+        jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.api.MarketV2.deserializeBinaryFromReader, "", new proto.api.MarketV2());
+         });
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetMarketsResponseV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetMarketsResponseV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetMarketsResponseV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetMarketsResponseV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMarketsMap(true);
+  if (f && f.getLength() > 0) {
+    f.serializeBinary(1, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.MarketV2.serializeBinaryToWriter);
+  }
+};
+
+
+/**
+ * map<string, MarketV2> markets = 1;
+ * @param {boolean=} opt_noLazyCreate Do not create the map if
+ * empty, instead returning `undefined`
+ * @return {!jspb.Map<string,!proto.api.MarketV2>}
+ */
+proto.api.GetMarketsResponseV2.prototype.getMarketsMap = function(opt_noLazyCreate) {
+  return /** @type {!jspb.Map<string,!proto.api.MarketV2>} */ (
+      jspb.Message.getMapField(this, 1, opt_noLazyCreate,
+      proto.api.MarketV2));
+};
+
+
+/**
+ * Clears values from the map. The map will be non-null.
+ * @return {!proto.api.GetMarketsResponseV2} returns this
+ */
+proto.api.GetMarketsResponseV2.prototype.clearMarketsMap = function() {
+  this.getMarketsMap().clear();
+  return this;};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.MarketV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.MarketV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.MarketV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.MarketV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    address: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    basemint: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    quotedmint: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    basedecimals: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    quotedecimals: jspb.Message.getFieldWithDefault(msg, 7, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.MarketV2}
+ */
+proto.api.MarketV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.MarketV2;
+  return proto.api.MarketV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.MarketV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.MarketV2}
+ */
+proto.api.MarketV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAddress(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBasemint(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setQuotedmint(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setBasedecimals(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readInt64());
+      msg.setQuotedecimals(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.MarketV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.MarketV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.MarketV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.MarketV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getAddress();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getBasemint();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getQuotedmint();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getBasedecimals();
+  if (f !== 0) {
+    writer.writeInt64(
+      6,
+      f
+    );
+  }
+  f = message.getQuotedecimals();
+  if (f !== 0) {
+    writer.writeInt64(
+      7,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string market = 1;
+ * @return {string}
+ */
+proto.api.MarketV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarketV2} returns this
+ */
+proto.api.MarketV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string address = 3;
+ * @return {string}
+ */
+proto.api.MarketV2.prototype.getAddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarketV2} returns this
+ */
+proto.api.MarketV2.prototype.setAddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string baseMint = 4;
+ * @return {string}
+ */
+proto.api.MarketV2.prototype.getBasemint = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarketV2} returns this
+ */
+proto.api.MarketV2.prototype.setBasemint = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string quotedMint = 5;
+ * @return {string}
+ */
+proto.api.MarketV2.prototype.getQuotedmint = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.MarketV2} returns this
+ */
+proto.api.MarketV2.prototype.setQuotedmint = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional int64 baseDecimals = 6;
+ * @return {number}
+ */
+proto.api.MarketV2.prototype.getBasedecimals = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarketV2} returns this
+ */
+proto.api.MarketV2.prototype.setBasedecimals = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional int64 quoteDecimals = 7;
+ * @return {number}
+ */
+proto.api.MarketV2.prototype.getQuotedecimals = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarketV2} returns this
+ */
+proto.api.MarketV2.prototype.setQuotedecimals = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetTickersRequestV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetTickersRequestV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetTickersRequestV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetTickersRequestV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    market: jspb.Message.getFieldWithDefault(msg, 1, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetTickersRequestV2}
+ */
+proto.api.GetTickersRequestV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetTickersRequestV2;
+  return proto.api.GetTickersRequestV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetTickersRequestV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetTickersRequestV2}
+ */
+proto.api.GetTickersRequestV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetTickersRequestV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetTickersRequestV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetTickersRequestV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetTickersRequestV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string market = 1;
+ * @return {string}
+ */
+proto.api.GetTickersRequestV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetTickersRequestV2} returns this
+ */
+proto.api.GetTickersRequestV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetTickersResponseV2.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetTickersResponseV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetTickersResponseV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetTickersResponseV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetTickersResponseV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    tickersList: jspb.Message.toObjectList(msg.getTickersList(),
+    proto.api.TickerV2.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetTickersResponseV2}
+ */
+proto.api.GetTickersResponseV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetTickersResponseV2;
+  return proto.api.GetTickersResponseV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetTickersResponseV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetTickersResponseV2}
+ */
+proto.api.GetTickersResponseV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TickerV2;
+      reader.readMessage(value,proto.api.TickerV2.deserializeBinaryFromReader);
+      msg.addTickers(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetTickersResponseV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetTickersResponseV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetTickersResponseV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetTickersResponseV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTickersList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.TickerV2.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated TickerV2 tickers = 1;
+ * @return {!Array<!proto.api.TickerV2>}
+ */
+proto.api.GetTickersResponseV2.prototype.getTickersList = function() {
+  return /** @type{!Array<!proto.api.TickerV2>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TickerV2, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.TickerV2>} value
+ * @return {!proto.api.GetTickersResponseV2} returns this
+*/
+proto.api.GetTickersResponseV2.prototype.setTickersList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.TickerV2=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TickerV2}
+ */
+proto.api.GetTickersResponseV2.prototype.addTickers = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TickerV2, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetTickersResponseV2} returns this
+ */
+proto.api.GetTickersResponseV2.prototype.clearTickersList = function() {
+  return this.setTickersList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.TickerV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.TickerV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.TickerV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.TickerV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    marketaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    bid: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    bidsize: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    ask: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    asksize: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.TickerV2}
+ */
+proto.api.TickerV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.TickerV2;
+  return proto.api.TickerV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.TickerV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.TickerV2}
+ */
+proto.api.TickerV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarketaddress(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setBid(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setBidsize(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAsk(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAsksize(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.TickerV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.TickerV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.TickerV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.TickerV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getMarketaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getBid();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      3,
+      f
+    );
+  }
+  f = message.getBidsize();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      4,
+      f
+    );
+  }
+  f = message.getAsk();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      5,
+      f
+    );
+  }
+  f = message.getAsksize();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      6,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string market = 1;
+ * @return {string}
+ */
+proto.api.TickerV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.TickerV2} returns this
+ */
+proto.api.TickerV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string marketAddress = 2;
+ * @return {string}
+ */
+proto.api.TickerV2.prototype.getMarketaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.TickerV2} returns this
+ */
+proto.api.TickerV2.prototype.setMarketaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional double bid = 3;
+ * @return {number}
+ */
+proto.api.TickerV2.prototype.getBid = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TickerV2} returns this
+ */
+proto.api.TickerV2.prototype.setBid = function(value) {
+  return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional double bidSize = 4;
+ * @return {number}
+ */
+proto.api.TickerV2.prototype.getBidsize = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TickerV2} returns this
+ */
+proto.api.TickerV2.prototype.setBidsize = function(value) {
+  return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional double ask = 5;
+ * @return {number}
+ */
+proto.api.TickerV2.prototype.getAsk = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TickerV2} returns this
+ */
+proto.api.TickerV2.prototype.setAsk = function(value) {
+  return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * optional double askSize = 6;
+ * @return {number}
+ */
+proto.api.TickerV2.prototype.getAsksize = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TickerV2} returns this
+ */
+proto.api.TickerV2.prototype.setAsksize = function(value) {
+  return jspb.Message.setProto3FloatField(this, 6, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetOrderbookRequestV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetOrderbookRequestV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetOrderbookRequestV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetOrderbookRequestV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    limit: jspb.Message.getFieldWithDefault(msg, 2, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetOrderbookRequestV2}
+ */
+proto.api.GetOrderbookRequestV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetOrderbookRequestV2;
+  return proto.api.GetOrderbookRequestV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetOrderbookRequestV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetOrderbookRequestV2}
+ */
+proto.api.GetOrderbookRequestV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setLimit(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetOrderbookRequestV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetOrderbookRequestV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetOrderbookRequestV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetOrderbookRequestV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getLimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string market = 1;
+ * @return {string}
+ */
+proto.api.GetOrderbookRequestV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetOrderbookRequestV2} returns this
+ */
+proto.api.GetOrderbookRequestV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional uint32 limit = 2;
+ * @return {number}
+ */
+proto.api.GetOrderbookRequestV2.prototype.getLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetOrderbookRequestV2} returns this
+ */
+proto.api.GetOrderbookRequestV2.prototype.setLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetOrderbookResponseV2.repeatedFields_ = [3,4];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetOrderbookResponseV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetOrderbookResponseV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetOrderbookResponseV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetOrderbookResponseV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    marketaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    bidsList: jspb.Message.toObjectList(msg.getBidsList(),
+    proto.api.OrderbookItemV2.toObject, includeInstance),
+    asksList: jspb.Message.toObjectList(msg.getAsksList(),
+    proto.api.OrderbookItemV2.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetOrderbookResponseV2}
+ */
+proto.api.GetOrderbookResponseV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetOrderbookResponseV2;
+  return proto.api.GetOrderbookResponseV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetOrderbookResponseV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetOrderbookResponseV2}
+ */
+proto.api.GetOrderbookResponseV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarketaddress(value);
+      break;
+    case 3:
+      var value = new proto.api.OrderbookItemV2;
+      reader.readMessage(value,proto.api.OrderbookItemV2.deserializeBinaryFromReader);
+      msg.addBids(value);
+      break;
+    case 4:
+      var value = new proto.api.OrderbookItemV2;
+      reader.readMessage(value,proto.api.OrderbookItemV2.deserializeBinaryFromReader);
+      msg.addAsks(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetOrderbookResponseV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetOrderbookResponseV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetOrderbookResponseV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetOrderbookResponseV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getMarketaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getBidsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      3,
+      f,
+      proto.api.OrderbookItemV2.serializeBinaryToWriter
+    );
+  }
+  f = message.getAsksList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      4,
+      f,
+      proto.api.OrderbookItemV2.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional string market = 1;
+ * @return {string}
+ */
+proto.api.GetOrderbookResponseV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetOrderbookResponseV2} returns this
+ */
+proto.api.GetOrderbookResponseV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string marketAddress = 2;
+ * @return {string}
+ */
+proto.api.GetOrderbookResponseV2.prototype.getMarketaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetOrderbookResponseV2} returns this
+ */
+proto.api.GetOrderbookResponseV2.prototype.setMarketaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * repeated OrderbookItemV2 bids = 3;
+ * @return {!Array<!proto.api.OrderbookItemV2>}
+ */
+proto.api.GetOrderbookResponseV2.prototype.getBidsList = function() {
+  return /** @type{!Array<!proto.api.OrderbookItemV2>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.OrderbookItemV2, 3));
+};
+
+
+/**
+ * @param {!Array<!proto.api.OrderbookItemV2>} value
+ * @return {!proto.api.GetOrderbookResponseV2} returns this
+*/
+proto.api.GetOrderbookResponseV2.prototype.setBidsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+};
+
+
+/**
+ * @param {!proto.api.OrderbookItemV2=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.OrderbookItemV2}
+ */
+proto.api.GetOrderbookResponseV2.prototype.addBids = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.OrderbookItemV2, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetOrderbookResponseV2} returns this
+ */
+proto.api.GetOrderbookResponseV2.prototype.clearBidsList = function() {
+  return this.setBidsList([]);
+};
+
+
+/**
+ * repeated OrderbookItemV2 asks = 4;
+ * @return {!Array<!proto.api.OrderbookItemV2>}
+ */
+proto.api.GetOrderbookResponseV2.prototype.getAsksList = function() {
+  return /** @type{!Array<!proto.api.OrderbookItemV2>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.OrderbookItemV2, 4));
+};
+
+
+/**
+ * @param {!Array<!proto.api.OrderbookItemV2>} value
+ * @return {!proto.api.GetOrderbookResponseV2} returns this
+*/
+proto.api.GetOrderbookResponseV2.prototype.setAsksList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+};
+
+
+/**
+ * @param {!proto.api.OrderbookItemV2=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.OrderbookItemV2}
+ */
+proto.api.GetOrderbookResponseV2.prototype.addAsks = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.api.OrderbookItemV2, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetOrderbookResponseV2} returns this
+ */
+proto.api.GetOrderbookResponseV2.prototype.clearAsksList = function() {
+  return this.setAsksList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.OrderbookItemV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.OrderbookItemV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.OrderbookItemV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.OrderbookItemV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    price: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
+    size: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
+    orderid: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 5, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.OrderbookItemV2}
+ */
+proto.api.OrderbookItemV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.OrderbookItemV2;
+  return proto.api.OrderbookItemV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.OrderbookItemV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.OrderbookItemV2}
+ */
+proto.api.OrderbookItemV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setPrice(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSize(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOrderid(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setClientorderid(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.OrderbookItemV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.OrderbookItemV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.OrderbookItemV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.OrderbookItemV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getPrice();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      1,
+      f
+    );
+  }
+  f = message.getSize();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+  f = message.getOrderid();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getClientorderid();
+  if (f !== 0) {
+    writer.writeUint64(
+      4,
+      f
+    );
+  }
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional double price = 1;
+ * @return {number}
+ */
+proto.api.OrderbookItemV2.prototype.getPrice = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 1, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.OrderbookItemV2} returns this
+ */
+proto.api.OrderbookItemV2.prototype.setPrice = function(value) {
+  return jspb.Message.setProto3FloatField(this, 1, value);
+};
+
+
+/**
+ * optional double size = 2;
+ * @return {number}
+ */
+proto.api.OrderbookItemV2.prototype.getSize = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.OrderbookItemV2} returns this
+ */
+proto.api.OrderbookItemV2.prototype.setSize = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+/**
+ * optional string orderID = 3;
+ * @return {string}
+ */
+proto.api.OrderbookItemV2.prototype.getOrderid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.OrderbookItemV2} returns this
+ */
+proto.api.OrderbookItemV2.prototype.setOrderid = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional uint64 clientOrderID = 4;
+ * @return {number}
+ */
+proto.api.OrderbookItemV2.prototype.getClientorderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.OrderbookItemV2} returns this
+ */
+proto.api.OrderbookItemV2.prototype.setClientorderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional string ownerAddress = 5;
+ * @return {string}
+ */
+proto.api.OrderbookItemV2.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.OrderbookItemV2} returns this
+ */
+proto.api.OrderbookItemV2.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetMarketDepthRequestV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetMarketDepthRequestV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetMarketDepthRequestV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetMarketDepthRequestV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    limit: jspb.Message.getFieldWithDefault(msg, 2, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetMarketDepthRequestV2}
+ */
+proto.api.GetMarketDepthRequestV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetMarketDepthRequestV2;
+  return proto.api.GetMarketDepthRequestV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetMarketDepthRequestV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetMarketDepthRequestV2}
+ */
+proto.api.GetMarketDepthRequestV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setLimit(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetMarketDepthRequestV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetMarketDepthRequestV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetMarketDepthRequestV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetMarketDepthRequestV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getLimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string market = 1;
+ * @return {string}
+ */
+proto.api.GetMarketDepthRequestV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetMarketDepthRequestV2} returns this
+ */
+proto.api.GetMarketDepthRequestV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional uint32 limit = 2;
+ * @return {number}
+ */
+proto.api.GetMarketDepthRequestV2.prototype.getLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetMarketDepthRequestV2} returns this
+ */
+proto.api.GetMarketDepthRequestV2.prototype.setLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetMarketDepthResponseV2.repeatedFields_ = [3,4];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetMarketDepthResponseV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetMarketDepthResponseV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetMarketDepthResponseV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetMarketDepthResponseV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    marketaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    bidsList: jspb.Message.toObjectList(msg.getBidsList(),
+    proto.api.MarketDepthItemV2.toObject, includeInstance),
+    asksList: jspb.Message.toObjectList(msg.getAsksList(),
+    proto.api.MarketDepthItemV2.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetMarketDepthResponseV2}
+ */
+proto.api.GetMarketDepthResponseV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetMarketDepthResponseV2;
+  return proto.api.GetMarketDepthResponseV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetMarketDepthResponseV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetMarketDepthResponseV2}
+ */
+proto.api.GetMarketDepthResponseV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarketaddress(value);
+      break;
+    case 3:
+      var value = new proto.api.MarketDepthItemV2;
+      reader.readMessage(value,proto.api.MarketDepthItemV2.deserializeBinaryFromReader);
+      msg.addBids(value);
+      break;
+    case 4:
+      var value = new proto.api.MarketDepthItemV2;
+      reader.readMessage(value,proto.api.MarketDepthItemV2.deserializeBinaryFromReader);
+      msg.addAsks(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetMarketDepthResponseV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetMarketDepthResponseV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetMarketDepthResponseV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetMarketDepthResponseV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getMarketaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getBidsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      3,
+      f,
+      proto.api.MarketDepthItemV2.serializeBinaryToWriter
+    );
+  }
+  f = message.getAsksList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      4,
+      f,
+      proto.api.MarketDepthItemV2.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional string market = 1;
+ * @return {string}
+ */
+proto.api.GetMarketDepthResponseV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetMarketDepthResponseV2} returns this
+ */
+proto.api.GetMarketDepthResponseV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string marketAddress = 2;
+ * @return {string}
+ */
+proto.api.GetMarketDepthResponseV2.prototype.getMarketaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetMarketDepthResponseV2} returns this
+ */
+proto.api.GetMarketDepthResponseV2.prototype.setMarketaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * repeated MarketDepthItemV2 bids = 3;
+ * @return {!Array<!proto.api.MarketDepthItemV2>}
+ */
+proto.api.GetMarketDepthResponseV2.prototype.getBidsList = function() {
+  return /** @type{!Array<!proto.api.MarketDepthItemV2>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.MarketDepthItemV2, 3));
+};
+
+
+/**
+ * @param {!Array<!proto.api.MarketDepthItemV2>} value
+ * @return {!proto.api.GetMarketDepthResponseV2} returns this
+*/
+proto.api.GetMarketDepthResponseV2.prototype.setBidsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 3, value);
+};
+
+
+/**
+ * @param {!proto.api.MarketDepthItemV2=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.MarketDepthItemV2}
+ */
+proto.api.GetMarketDepthResponseV2.prototype.addBids = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 3, opt_value, proto.api.MarketDepthItemV2, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetMarketDepthResponseV2} returns this
+ */
+proto.api.GetMarketDepthResponseV2.prototype.clearBidsList = function() {
+  return this.setBidsList([]);
+};
+
+
+/**
+ * repeated MarketDepthItemV2 asks = 4;
+ * @return {!Array<!proto.api.MarketDepthItemV2>}
+ */
+proto.api.GetMarketDepthResponseV2.prototype.getAsksList = function() {
+  return /** @type{!Array<!proto.api.MarketDepthItemV2>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.MarketDepthItemV2, 4));
+};
+
+
+/**
+ * @param {!Array<!proto.api.MarketDepthItemV2>} value
+ * @return {!proto.api.GetMarketDepthResponseV2} returns this
+*/
+proto.api.GetMarketDepthResponseV2.prototype.setAsksList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+};
+
+
+/**
+ * @param {!proto.api.MarketDepthItemV2=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.MarketDepthItemV2}
+ */
+proto.api.GetMarketDepthResponseV2.prototype.addAsks = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.api.MarketDepthItemV2, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetMarketDepthResponseV2} returns this
+ */
+proto.api.GetMarketDepthResponseV2.prototype.clearAsksList = function() {
+  return this.setAsksList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.MarketDepthItemV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.MarketDepthItemV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.MarketDepthItemV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.MarketDepthItemV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    price: jspb.Message.getFloatingPointFieldWithDefault(msg, 1, 0.0),
+    size: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.MarketDepthItemV2}
+ */
+proto.api.MarketDepthItemV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.MarketDepthItemV2;
+  return proto.api.MarketDepthItemV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.MarketDepthItemV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.MarketDepthItemV2}
+ */
+proto.api.MarketDepthItemV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setPrice(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setSize(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.MarketDepthItemV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.MarketDepthItemV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.MarketDepthItemV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.MarketDepthItemV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getPrice();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      1,
+      f
+    );
+  }
+  f = message.getSize();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional double price = 1;
+ * @return {number}
+ */
+proto.api.MarketDepthItemV2.prototype.getPrice = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 1, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarketDepthItemV2} returns this
+ */
+proto.api.MarketDepthItemV2.prototype.setPrice = function(value) {
+  return jspb.Message.setProto3FloatField(this, 1, value);
+};
+
+
+/**
+ * optional double size = 2;
+ * @return {number}
+ */
+proto.api.MarketDepthItemV2.prototype.getSize = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.MarketDepthItemV2} returns this
+ */
+proto.api.MarketDepthItemV2.prototype.setSize = function(value) {
+  return jspb.Message.setProto3FloatField(this, 2, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostOrderRequestV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostOrderRequestV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostOrderRequestV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostOrderRequestV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    payeraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    market: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    side: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostOrderRequestV2}
+ */
+proto.api.PostOrderRequestV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostOrderRequestV2;
+  return proto.api.PostOrderRequestV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostOrderRequestV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostOrderRequestV2}
+ */
+proto.api.PostOrderRequestV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPayeraddress(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 4:
+      var value = /** @type {!proto.api.Side} */ (reader.readEnum());
+      msg.setSide(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAmount(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setPrice(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOpenordersaddress(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setClientorderid(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostOrderRequestV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostOrderRequestV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostOrderRequestV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostOrderRequestV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getPayeraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getSide();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      4,
+      f
+    );
+  }
+  f = message.getAmount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      6,
+      f
+    );
+  }
+  f = message.getPrice();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      7,
+      f
+    );
+  }
+  f = message.getOpenordersaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
+    );
+  }
+  f = message.getClientorderid();
+  if (f !== 0) {
+    writer.writeUint64(
+      9,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostOrderRequestV2.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string payerAddress = 2;
+ * @return {string}
+ */
+proto.api.PostOrderRequestV2.prototype.getPayeraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setPayeraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string market = 3;
+ * @return {string}
+ */
+proto.api.PostOrderRequestV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional Side side = 4;
+ * @return {!proto.api.Side}
+ */
+proto.api.PostOrderRequestV2.prototype.getSide = function() {
+  return /** @type {!proto.api.Side} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {!proto.api.Side} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setSide = function(value) {
+  return jspb.Message.setProto3EnumField(this, 4, value);
+};
+
+
+/**
+ * optional double amount = 6;
+ * @return {number}
+ */
+proto.api.PostOrderRequestV2.prototype.getAmount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setAmount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 6, value);
+};
+
+
+/**
+ * optional double price = 7;
+ * @return {number}
+ */
+proto.api.PostOrderRequestV2.prototype.getPrice = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setPrice = function(value) {
+  return jspb.Message.setProto3FloatField(this, 7, value);
+};
+
+
+/**
+ * optional string openOrdersAddress = 8;
+ * @return {string}
+ */
+proto.api.PostOrderRequestV2.prototype.getOpenordersaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setOpenordersaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional uint64 clientOrderID = 9;
+ * @return {number}
+ */
+proto.api.PostOrderRequestV2.prototype.getClientorderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setClientorderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostReplaceOrderRequestV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostReplaceOrderRequestV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostReplaceOrderRequestV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    payeraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    market: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    side: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    orderid: jspb.Message.getFieldWithDefault(msg, 10, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostReplaceOrderRequestV2}
+ */
+proto.api.PostReplaceOrderRequestV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostReplaceOrderRequestV2;
+  return proto.api.PostReplaceOrderRequestV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostReplaceOrderRequestV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostReplaceOrderRequestV2}
+ */
+proto.api.PostReplaceOrderRequestV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPayeraddress(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 4:
+      var value = /** @type {!proto.api.Side} */ (reader.readEnum());
+      msg.setSide(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setAmount(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readDouble());
+      msg.setPrice(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOpenordersaddress(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setClientorderid(value);
+      break;
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOrderid(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostReplaceOrderRequestV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostReplaceOrderRequestV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostReplaceOrderRequestV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getPayeraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getSide();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      4,
+      f
+    );
+  }
+  f = message.getAmount();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      6,
+      f
+    );
+  }
+  f = message.getPrice();
+  if (f !== 0.0) {
+    writer.writeDouble(
+      7,
+      f
+    );
+  }
+  f = message.getOpenordersaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
+    );
+  }
+  f = message.getClientorderid();
+  if (f !== 0) {
+    writer.writeUint64(
+      9,
+      f
+    );
+  }
+  f = message.getOrderid();
+  if (f.length > 0) {
+    writer.writeString(
+      10,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string payerAddress = 2;
+ * @return {string}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getPayeraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setPayeraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string market = 3;
+ * @return {string}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional Side side = 4;
+ * @return {!proto.api.Side}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getSide = function() {
+  return /** @type {!proto.api.Side} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {!proto.api.Side} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setSide = function(value) {
+  return jspb.Message.setProto3EnumField(this, 4, value);
+};
+
+
+/**
+ * optional double amount = 6;
+ * @return {number}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getAmount = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setAmount = function(value) {
+  return jspb.Message.setProto3FloatField(this, 6, value);
+};
+
+
+/**
+ * optional double price = 7;
+ * @return {number}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getPrice = function() {
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setPrice = function(value) {
+  return jspb.Message.setProto3FloatField(this, 7, value);
+};
+
+
+/**
+ * optional string openOrdersAddress = 8;
+ * @return {string}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getOpenordersaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setOpenordersaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional uint64 clientOrderID = 9;
+ * @return {number}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getClientorderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setClientorderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 9, value);
+};
+
+
+/**
+ * optional string orderID = 10;
+ * @return {string}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getOrderid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setOrderid = function(value) {
+  return jspb.Message.setProto3StringField(this, 10, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostCancelOrderRequestV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostCancelOrderRequestV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCancelOrderRequestV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    orderid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    side: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 6, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostCancelOrderRequestV2}
+ */
+proto.api.PostCancelOrderRequestV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostCancelOrderRequestV2;
+  return proto.api.PostCancelOrderRequestV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostCancelOrderRequestV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostCancelOrderRequestV2}
+ */
+proto.api.PostCancelOrderRequestV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOrderid(value);
+      break;
+    case 2:
+      var value = /** @type {!proto.api.Side} */ (reader.readEnum());
+      msg.setSide(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarketaddress(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOpenordersaddress(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setClientorderid(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostCancelOrderRequestV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostCancelOrderRequestV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCancelOrderRequestV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOrderid();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getSide();
+  if (f !== 0.0) {
+    writer.writeEnum(
+      2,
+      f
+    );
+  }
+  f = message.getMarketaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getOpenordersaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getClientorderid();
+  if (f !== 0) {
+    writer.writeUint64(
+      6,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string orderID = 1;
+ * @return {string}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.getOrderid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCancelOrderRequestV2} returns this
+ */
+proto.api.PostCancelOrderRequestV2.prototype.setOrderid = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional Side side = 2;
+ * @return {!proto.api.Side}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.getSide = function() {
+  return /** @type {!proto.api.Side} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {!proto.api.Side} value
+ * @return {!proto.api.PostCancelOrderRequestV2} returns this
+ */
+proto.api.PostCancelOrderRequestV2.prototype.setSide = function(value) {
+  return jspb.Message.setProto3EnumField(this, 2, value);
+};
+
+
+/**
+ * optional string marketAddress = 3;
+ * @return {string}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.getMarketaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCancelOrderRequestV2} returns this
+ */
+proto.api.PostCancelOrderRequestV2.prototype.setMarketaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string ownerAddress = 4;
+ * @return {string}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCancelOrderRequestV2} returns this
+ */
+proto.api.PostCancelOrderRequestV2.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string openOrdersAddress = 5;
+ * @return {string}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.getOpenordersaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostCancelOrderRequestV2} returns this
+ */
+proto.api.PostCancelOrderRequestV2.prototype.setOpenordersaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional uint64 clientOrderID = 6;
+ * @return {number}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.getClientorderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelOrderRequestV2} returns this
+ */
+proto.api.PostCancelOrderRequestV2.prototype.setClientorderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.PostCancelOrderResponseV2.repeatedFields_ = [1];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostCancelOrderResponseV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostCancelOrderResponseV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostCancelOrderResponseV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCancelOrderResponseV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
+    proto.api.TransactionMessage.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostCancelOrderResponseV2}
+ */
+proto.api.PostCancelOrderResponseV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostCancelOrderResponseV2;
+  return proto.api.PostCancelOrderResponseV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostCancelOrderResponseV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostCancelOrderResponseV2}
+ */
+proto.api.PostCancelOrderResponseV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.api.TransactionMessage;
+      reader.readMessage(value,proto.api.TransactionMessage.deserializeBinaryFromReader);
+      msg.addTransactions(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostCancelOrderResponseV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostCancelOrderResponseV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostCancelOrderResponseV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostCancelOrderResponseV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTransactionsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      1,
+      f,
+      proto.api.TransactionMessage.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * repeated TransactionMessage transactions = 1;
+ * @return {!Array<!proto.api.TransactionMessage>}
+ */
+proto.api.PostCancelOrderResponseV2.prototype.getTransactionsList = function() {
+  return /** @type{!Array<!proto.api.TransactionMessage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.api.TransactionMessage, 1));
+};
+
+
+/**
+ * @param {!Array<!proto.api.TransactionMessage>} value
+ * @return {!proto.api.PostCancelOrderResponseV2} returns this
+*/
+proto.api.PostCancelOrderResponseV2.prototype.setTransactionsList = function(value) {
+  return jspb.Message.setRepeatedWrapperField(this, 1, value);
+};
+
+
+/**
+ * @param {!proto.api.TransactionMessage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.api.TransactionMessage}
+ */
+proto.api.PostCancelOrderResponseV2.prototype.addTransactions = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 1, opt_value, proto.api.TransactionMessage, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.PostCancelOrderResponseV2} returns this
+ */
+proto.api.PostCancelOrderResponseV2.prototype.clearTransactionsList = function() {
+  return this.setTransactionsList([]);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.PostSettleRequestV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.PostSettleRequestV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.PostSettleRequestV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostSettleRequestV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    market: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    basetokenwallet: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    quotetokenwallet: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.PostSettleRequestV2}
+ */
+proto.api.PostSettleRequestV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.PostSettleRequestV2;
+  return proto.api.PostSettleRequestV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.PostSettleRequestV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.PostSettleRequestV2}
+ */
+proto.api.PostSettleRequestV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setBasetokenwallet(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setQuotetokenwallet(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOpenordersaddress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.PostSettleRequestV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.PostSettleRequestV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.PostSettleRequestV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.PostSettleRequestV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getBasetokenwallet();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getQuotetokenwallet();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getOpenordersaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string ownerAddress = 1;
+ * @return {string}
+ */
+proto.api.PostSettleRequestV2.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostSettleRequestV2} returns this
+ */
+proto.api.PostSettleRequestV2.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string market = 2;
+ * @return {string}
+ */
+proto.api.PostSettleRequestV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostSettleRequestV2} returns this
+ */
+proto.api.PostSettleRequestV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string baseTokenWallet = 3;
+ * @return {string}
+ */
+proto.api.PostSettleRequestV2.prototype.getBasetokenwallet = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostSettleRequestV2} returns this
+ */
+proto.api.PostSettleRequestV2.prototype.setBasetokenwallet = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string quoteTokenWallet = 4;
+ * @return {string}
+ */
+proto.api.PostSettleRequestV2.prototype.getQuotetokenwallet = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostSettleRequestV2} returns this
+ */
+proto.api.PostSettleRequestV2.prototype.setQuotetokenwallet = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string openOrdersAddress = 5;
+ * @return {string}
+ */
+proto.api.PostSettleRequestV2.prototype.getOpenordersaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.PostSettleRequestV2} returns this
+ */
+proto.api.PostSettleRequestV2.prototype.setOpenordersaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetOpenOrdersRequestV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetOpenOrdersRequestV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetOpenOrdersRequestV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    limit: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    address: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    orderid: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 6, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetOpenOrdersRequestV2}
+ */
+proto.api.GetOpenOrdersRequestV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetOpenOrdersRequestV2;
+  return proto.api.GetOpenOrdersRequestV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetOpenOrdersRequestV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetOpenOrdersRequestV2}
+ */
+proto.api.GetOpenOrdersRequestV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 2:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setLimit(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAddress(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOpenordersaddress(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOrderid(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setClientorderid(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetOpenOrdersRequestV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetOpenOrdersRequestV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetOpenOrdersRequestV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getLimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      2,
+      f
+    );
+  }
+  f = message.getAddress();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getOpenordersaddress();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getOrderid();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
+      f
+    );
+  }
+  f = message.getClientorderid();
+  if (f !== 0) {
+    writer.writeUint64(
+      6,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string market = 1;
+ * @return {string}
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetOpenOrdersRequestV2} returns this
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional uint32 limit = 2;
+ * @return {number}
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.getLimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetOpenOrdersRequestV2} returns this
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.setLimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 2, value);
+};
+
+
+/**
+ * optional string address = 3;
+ * @return {string}
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.getAddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetOpenOrdersRequestV2} returns this
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.setAddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string openOrdersAddress = 4;
+ * @return {string}
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.getOpenordersaddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetOpenOrdersRequestV2} returns this
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.setOpenordersaddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string orderID = 5;
+ * @return {string}
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.getOrderid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetOpenOrdersRequestV2} returns this
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.setOrderid = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional uint64 clientOrderID = 6;
+ * @return {number}
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.getClientorderid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetOpenOrdersRequestV2} returns this
+ */
+proto.api.GetOpenOrdersRequestV2.prototype.setClientorderid = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * Optional fields that are not set will be set to undefined.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     net/proto2/compiler/js/internal/generator.cc#kKeyword.
+ * @param {boolean=} opt_includeInstance Deprecated. whether to include the
+ *     JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.api.GetUnsettledRequestV2.prototype.toObject = function(opt_includeInstance) {
+  return proto.api.GetUnsettledRequestV2.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Deprecated. Whether to include
+ *     the JSPB instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.api.GetUnsettledRequestV2} msg The msg instance to transform.
+ * @return {!Object}
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetUnsettledRequestV2.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    market: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    owneraddress: jspb.Message.getFieldWithDefault(msg, 2, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.api.GetUnsettledRequestV2}
+ */
+proto.api.GetUnsettledRequestV2.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.api.GetUnsettledRequestV2;
+  return proto.api.GetUnsettledRequestV2.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.api.GetUnsettledRequestV2} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.api.GetUnsettledRequestV2}
+ */
+proto.api.GetUnsettledRequestV2.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setMarket(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setOwneraddress(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.api.GetUnsettledRequestV2.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.api.GetUnsettledRequestV2.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.api.GetUnsettledRequestV2} message
+ * @param {!jspb.BinaryWriter} writer
+ * @suppress {unusedLocalVariables} f is only used for nested messages
+ */
+proto.api.GetUnsettledRequestV2.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMarket();
+  if (f.length > 0) {
+    writer.writeString(
+      1,
+      f
+    );
+  }
+  f = message.getOwneraddress();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional string market = 1;
+ * @return {string}
+ */
+proto.api.GetUnsettledRequestV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetUnsettledRequestV2} returns this
+ */
+proto.api.GetUnsettledRequestV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional string ownerAddress = 2;
+ * @return {string}
+ */
+proto.api.GetUnsettledRequestV2.prototype.getOwneraddress = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.GetUnsettledRequestV2} returns this
+ */
+proto.api.GetUnsettledRequestV2.prototype.setOwneraddress = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
