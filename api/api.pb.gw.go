@@ -3809,7 +3809,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetMarketsV2", runtime.WithHTTPPathPattern("/api/v2/market/markets"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetMarketsV2", runtime.WithHTTPPathPattern("/api/v2/openbook/markets"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3833,7 +3833,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetTickersV2", runtime.WithHTTPPathPattern("/api/v2/market/tickers/{market}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetTickersV2", runtime.WithHTTPPathPattern("/api/v2/openbook/tickers/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3857,7 +3857,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetOrderbookV2", runtime.WithHTTPPathPattern("/api/v2/market/orderbook/{market}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetOrderbookV2", runtime.WithHTTPPathPattern("/api/v2/openbook/orderbooks/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3881,7 +3881,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetMarketDepthV2", runtime.WithHTTPPathPattern("/api/v2/market/depth/{market}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetMarketDepthV2", runtime.WithHTTPPathPattern("/api/v2/openbook/depth/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3905,7 +3905,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostOrderV2", runtime.WithHTTPPathPattern("/api/v2/trade/place"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostOrderV2", runtime.WithHTTPPathPattern("/api/v2/openbook/place"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3929,7 +3929,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostCancelOrderV2", runtime.WithHTTPPathPattern("/api/v2/trade/cancel"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostCancelOrderV2", runtime.WithHTTPPathPattern("/api/v2/openbook/cancel"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3953,7 +3953,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostReplaceOrderV2", runtime.WithHTTPPathPattern("/api/v2/trade/replace"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostReplaceOrderV2", runtime.WithHTTPPathPattern("/api/v2/openbook/replace"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -3977,7 +3977,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostSettleV2", runtime.WithHTTPPathPattern("/api/v2/trade/settle"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostSettleV2", runtime.WithHTTPPathPattern("/api/v2/openbook/settle"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4001,7 +4001,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetOpenOrdersV2", runtime.WithHTTPPathPattern("/api/v2/trade/open-orders/{market}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetOpenOrdersV2", runtime.WithHTTPPathPattern("/api/v2/openbook/open-orders/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4025,7 +4025,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetUnsettledV2", runtime.WithHTTPPathPattern("/api/v2/trade/unsettled/{market}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetUnsettledV2", runtime.WithHTTPPathPattern("/api/v2/openbook/unsettled/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5627,7 +5627,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetMarketsV2", runtime.WithHTTPPathPattern("/api/v2/market/markets"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetMarketsV2", runtime.WithHTTPPathPattern("/api/v2/openbook/markets"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5648,7 +5648,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetTickersV2", runtime.WithHTTPPathPattern("/api/v2/market/tickers/{market}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetTickersV2", runtime.WithHTTPPathPattern("/api/v2/openbook/tickers/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5669,7 +5669,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetOrderbookV2", runtime.WithHTTPPathPattern("/api/v2/market/orderbook/{market}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetOrderbookV2", runtime.WithHTTPPathPattern("/api/v2/openbook/orderbooks/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5690,7 +5690,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetMarketDepthV2", runtime.WithHTTPPathPattern("/api/v2/market/depth/{market}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetMarketDepthV2", runtime.WithHTTPPathPattern("/api/v2/openbook/depth/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5711,7 +5711,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostOrderV2", runtime.WithHTTPPathPattern("/api/v2/trade/place"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostOrderV2", runtime.WithHTTPPathPattern("/api/v2/openbook/place"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5732,7 +5732,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostCancelOrderV2", runtime.WithHTTPPathPattern("/api/v2/trade/cancel"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostCancelOrderV2", runtime.WithHTTPPathPattern("/api/v2/openbook/cancel"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5753,7 +5753,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostReplaceOrderV2", runtime.WithHTTPPathPattern("/api/v2/trade/replace"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostReplaceOrderV2", runtime.WithHTTPPathPattern("/api/v2/openbook/replace"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5774,7 +5774,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostSettleV2", runtime.WithHTTPPathPattern("/api/v2/trade/settle"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostSettleV2", runtime.WithHTTPPathPattern("/api/v2/openbook/settle"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5795,7 +5795,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetOpenOrdersV2", runtime.WithHTTPPathPattern("/api/v2/trade/open-orders/{market}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetOpenOrdersV2", runtime.WithHTTPPathPattern("/api/v2/openbook/open-orders/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5816,7 +5816,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetUnsettledV2", runtime.WithHTTPPathPattern("/api/v2/trade/unsettled/{market}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetUnsettledV2", runtime.WithHTTPPathPattern("/api/v2/openbook/unsettled/{market}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -6806,25 +6806,25 @@ var (
 
 	pattern_Api_GetDriftMarketDepth_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"api", "v2", "drift", "perp", "market-depth", "contract"}, ""))
 
-	pattern_Api_GetMarketsV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "market", "markets"}, ""))
+	pattern_Api_GetMarketsV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "openbook", "markets"}, ""))
 
-	pattern_Api_GetTickersV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 2}, []string{"api", "v2", "market", "tickers"}, ""))
+	pattern_Api_GetTickersV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v2", "openbook", "tickers", "market"}, ""))
 
-	pattern_Api_GetOrderbookV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 2}, []string{"api", "v2", "market", "orderbook"}, ""))
+	pattern_Api_GetOrderbookV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v2", "openbook", "orderbooks", "market"}, ""))
 
-	pattern_Api_GetMarketDepthV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 2}, []string{"api", "v2", "market", "depth"}, ""))
+	pattern_Api_GetMarketDepthV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v2", "openbook", "depth", "market"}, ""))
 
-	pattern_Api_PostOrderV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "trade", "place"}, ""))
+	pattern_Api_PostOrderV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "openbook", "place"}, ""))
 
-	pattern_Api_PostCancelOrderV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "trade", "cancel"}, ""))
+	pattern_Api_PostCancelOrderV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "openbook", "cancel"}, ""))
 
-	pattern_Api_PostReplaceOrderV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "trade", "replace"}, ""))
+	pattern_Api_PostReplaceOrderV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "openbook", "replace"}, ""))
 
-	pattern_Api_PostSettleV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "trade", "settle"}, ""))
+	pattern_Api_PostSettleV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "openbook", "settle"}, ""))
 
-	pattern_Api_GetOpenOrdersV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v2", "trade", "open-orders", "market"}, ""))
+	pattern_Api_GetOpenOrdersV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v2", "openbook", "open-orders", "market"}, ""))
 
-	pattern_Api_GetUnsettledV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v2", "trade", "unsettled", "market"}, ""))
+	pattern_Api_GetUnsettledV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v2", "openbook", "unsettled", "market"}, ""))
 
 	pattern_Api_GetPrice_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v1", "market", "price"}, ""))
 
