@@ -776,8 +776,7 @@ type GetTickersRequestV2 struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Market  string  `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
-	Project Project `protobuf:"varint,2,opt,name=project,proto3,enum=api.Project" json:"project,omitempty"`
+	Market string `protobuf:"bytes,1,opt,name=market,proto3" json:"market,omitempty"`
 }
 
 func (x *GetTickersRequestV2) Reset() {
@@ -817,13 +816,6 @@ func (x *GetTickersRequestV2) GetMarket() string {
 		return x.Market
 	}
 	return ""
-}
-
-func (x *GetTickersRequestV2) GetProject() Project {
-	if x != nil {
-		return x.Project
-	}
-	return Project_P_UNKNOWN
 }
 
 type GetTickersResponseV2 struct {
@@ -883,7 +875,6 @@ type GetKlineRequest struct {
 	To         *timestamp.Timestamp `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`
 	Resolution string               `protobuf:"bytes,4,opt,name=resolution,proto3" json:"resolution,omitempty"` // indicates a duration: e.g. 1d, 4h, 1h, 30m, 15m, 1m
 	Limit      uint32               `protobuf:"varint,5,opt,name=limit,proto3" json:"limit,omitempty"`
-	Project    Project              `protobuf:"varint,6,opt,name=project,proto3,enum=api.Project" json:"project,omitempty"`
 }
 
 func (x *GetKlineRequest) Reset() {
@@ -951,13 +942,6 @@ func (x *GetKlineRequest) GetLimit() uint32 {
 		return x.Limit
 	}
 	return 0
-}
-
-func (x *GetKlineRequest) GetProject() Project {
-	if x != nil {
-		return x.Project
-	}
-	return Project_P_UNKNOWN
 }
 
 type GetKlineResponse struct {
@@ -15673,39 +15657,34 @@ var file_api_proto_rawDesc = []byte{
 	0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x01, 0x52, 0x07, 0x61, 0x73, 0x6b, 0x53, 0x69, 0x7a, 0x65,
 	0x12, 0x26, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x07, 0x20, 0x01, 0x28,
 	0x0e, 0x32, 0x0c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x52,
-	0x07, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x22, 0x7c, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x54,
+	0x07, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x22, 0x54, 0x0a, 0x13, 0x47, 0x65, 0x74, 0x54,
 	0x69, 0x63, 0x6b, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x56, 0x32, 0x12,
 	0x3d, 0x0a, 0x06, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x42,
 	0x25, 0x92, 0x41, 0x22, 0x32, 0x20, 0x55, 0x73, 0x65, 0x20, 0x65, 0x6d, 0x70, 0x74, 0x79, 0x20,
 	0x73, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x20, 0x66, 0x6f, 0x72, 0x20, 0x61, 0x6c, 0x6c, 0x20, 0x6d,
-	0x61, 0x72, 0x6b, 0x65, 0x74, 0x73, 0x52, 0x06, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x12, 0x26,
-	0x0a, 0x07, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32,
-	0x0c, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x07, 0x70,
-	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x22, 0xa1, 0x01, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x54, 0x69,
-	0x63, 0x6b, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x56, 0x32, 0x12,
-	0x40, 0x0a, 0x07, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b,
-	0x32, 0x26, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x72,
-	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x56, 0x32, 0x2e, 0x54, 0x69, 0x63, 0x6b,
-	0x65, 0x72, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x07, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x72,
-	0x73, 0x1a, 0x47, 0x0a, 0x0c, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x74, 0x72,
-	0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
-	0x6b, 0x65, 0x79, 0x12, 0x21, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x0b, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x43, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x52,
-	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0xe3, 0x01, 0x0a, 0x0f, 0x47,
-	0x65, 0x74, 0x4b, 0x6c, 0x69, 0x6e, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16,
-	0x0a, 0x06, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
-	0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x12, 0x2e, 0x0a, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
-	0x52, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x12, 0x2a, 0x0a, 0x02, 0x74, 0x6f, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x02,
-	0x74, 0x6f, 0x12, 0x1e, 0x0a, 0x0a, 0x72, 0x65, 0x73, 0x6f, 0x6c, 0x75, 0x74, 0x69, 0x6f, 0x6e,
-	0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x72, 0x65, 0x73, 0x6f, 0x6c, 0x75, 0x74, 0x69,
-	0x6f, 0x6e, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28,
-	0x0d, 0x52, 0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x26, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x6a,
-	0x65, 0x63, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x0c, 0x2e, 0x61, 0x70, 0x69, 0x2e,
-	0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
+	0x61, 0x72, 0x6b, 0x65, 0x74, 0x73, 0x52, 0x06, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x22, 0xa1,
+	0x01, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x56, 0x32, 0x12, 0x40, 0x0a, 0x07, 0x74, 0x69, 0x63, 0x6b, 0x65,
+	0x72, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x47,
+	0x65, 0x74, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x56, 0x32, 0x2e, 0x54, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79,
+	0x52, 0x07, 0x74, 0x69, 0x63, 0x6b, 0x65, 0x72, 0x73, 0x1a, 0x47, 0x0a, 0x0c, 0x54, 0x69, 0x63,
+	0x6b, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x21, 0x0a, 0x05, 0x76,
+	0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0b, 0x2e, 0x61, 0x70, 0x69,
+	0x2e, 0x43, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02,
+	0x38, 0x01, 0x22, 0xbb, 0x01, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x4b, 0x6c, 0x69, 0x6e, 0x65, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x12, 0x2e,
+	0x0a, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67,
+	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54,
+	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x04, 0x66, 0x72, 0x6f, 0x6d, 0x12, 0x2a,
+	0x0a, 0x02, 0x74, 0x6f, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d,
+	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x02, 0x74, 0x6f, 0x12, 0x1e, 0x0a, 0x0a, 0x72, 0x65,
+	0x73, 0x6f, 0x6c, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
+	0x72, 0x65, 0x73, 0x6f, 0x6c, 0x75, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x14, 0x0a, 0x05, 0x6c, 0x69,
+	0x6d, 0x69, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x6c, 0x69, 0x6d, 0x69, 0x74,
 	0x22, 0xb2, 0x01, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x4b, 0x6c, 0x69, 0x6e, 0x65, 0x52, 0x65, 0x73,
 	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a, 0x0d, 0x6d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x43,
 	0x61, 0x6e, 0x64, 0x6c, 0x65, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x28, 0x2e, 0x61,
@@ -19521,434 +19500,432 @@ var file_api_proto_depIdxs = []int32{
 	6,   // 3: api.GetTickersRequest.project:type_name -> api.Project
 	12,  // 4: api.GetTickersResponse.tickers:type_name -> api.Ticker
 	6,   // 5: api.Ticker.project:type_name -> api.Project
-	6,   // 6: api.GetTickersRequestV2.project:type_name -> api.Project
-	234, // 7: api.GetTickersResponseV2.tickers:type_name -> api.GetTickersResponseV2.TickersEntry
-	240, // 8: api.GetKlineRequest.from:type_name -> google.protobuf.Timestamp
-	240, // 9: api.GetKlineRequest.to:type_name -> google.protobuf.Timestamp
-	6,   // 10: api.GetKlineRequest.project:type_name -> api.Project
-	235, // 11: api.GetKlineResponse.marketCandles:type_name -> api.GetKlineResponse.MarketCandlesEntry
-	240, // 12: api.Candle.startTime:type_name -> google.protobuf.Timestamp
-	240, // 13: api.Candle.updateTime:type_name -> google.protobuf.Timestamp
-	6,   // 14: api.Candle.project:type_name -> api.Project
-	17,  // 15: api.Candles.candles:type_name -> api.Candle
-	6,   // 16: api.GetMyOrdersRequest.project:type_name -> api.Project
-	21,  // 17: api.GetMyOrdersResponse.orders:type_name -> api.MyOrder
-	240, // 18: api.MyOrder.Timestamp:type_name -> google.protobuf.Timestamp
-	6,   // 19: api.MyOrder.Project:type_name -> api.Project
-	240, // 20: api.MyOrder.Date:type_name -> google.protobuf.Timestamp
-	6,   // 21: api.GetOrderbookRequest.project:type_name -> api.Project
-	6,   // 22: api.GetOrderbooksRequest.project:type_name -> api.Project
-	25,  // 23: api.GetOrderbookResponse.bids:type_name -> api.OrderbookItem
-	25,  // 24: api.GetOrderbookResponse.asks:type_name -> api.OrderbookItem
-	6,   // 25: api.GetMarketDepthRequest.project:type_name -> api.Project
-	6,   // 26: api.GetMarketDepthsRequest.project:type_name -> api.Project
-	29,  // 27: api.GetMarketDepthResponse.bids:type_name -> api.MarketDepthItem
-	29,  // 28: api.GetMarketDepthResponse.asks:type_name -> api.MarketDepthItem
-	6,   // 29: api.GetTradesRequest.project:type_name -> api.Project
-	32,  // 30: api.GetTradesResponse.trades:type_name -> api.Trade
-	1,   // 31: api.Trade.side:type_name -> api.Side
-	37,  // 32: api.GetAccountBalanceResponse.tokens:type_name -> api.TokenBalance
-	40,  // 33: api.GetTokenAccountsResponse.accounts:type_name -> api.TokenAccount
-	1,   // 34: api.PostOrderRequest.side:type_name -> api.Side
-	241, // 35: api.PostOrderRequest.type:type_name -> common.OrderType
-	6,   // 36: api.PostOrderRequest.project:type_name -> api.Project
-	1,   // 37: api.PostReplaceOrderRequest.side:type_name -> api.Side
-	241, // 38: api.PostReplaceOrderRequest.type:type_name -> common.OrderType
-	6,   // 39: api.PostReplaceOrderRequest.project:type_name -> api.Project
-	48,  // 40: api.PostOrderResponse.transaction:type_name -> api.TransactionMessage
-	1,   // 41: api.PostCancelOrderRequest.side:type_name -> api.Side
-	6,   // 42: api.PostCancelOrderRequest.project:type_name -> api.Project
-	6,   // 43: api.PostCancelByClientOrderIDRequest.project:type_name -> api.Project
-	48,  // 44: api.PostCancelOrderResponse.transaction:type_name -> api.TransactionMessage
-	6,   // 45: api.PostCancelAllRequest.project:type_name -> api.Project
-	48,  // 46: api.PostCancelAllResponse.transactions:type_name -> api.TransactionMessage
-	6,   // 47: api.PostSettleRequest.project:type_name -> api.Project
-	48,  // 48: api.PostSettleResponse.transaction:type_name -> api.TransactionMessage
-	2,   // 49: api.GetOrdersRequest.status:type_name -> api.OrderStatus
-	1,   // 50: api.GetOrdersRequest.side:type_name -> api.Side
-	241, // 51: api.GetOrdersRequest.types:type_name -> common.OrderType
-	240, // 52: api.GetOrdersRequest.from:type_name -> google.protobuf.Timestamp
-	3,   // 53: api.GetOrdersRequest.direction:type_name -> api.Direction
-	6,   // 54: api.GetOrdersRequest.project:type_name -> api.Project
-	55,  // 55: api.GetOrdersResponse.orders:type_name -> api.Order
-	1,   // 56: api.Order.side:type_name -> api.Side
-	241, // 57: api.Order.types:type_name -> common.OrderType
-	240, // 58: api.Order.createdAt:type_name -> google.protobuf.Timestamp
-	6,   // 59: api.GetOrderStatusStreamRequest.project:type_name -> api.Project
-	58,  // 60: api.GetOrderStatusStreamResponse.orderInfo:type_name -> api.GetOrderStatusResponse
-	1,   // 61: api.GetOrderStatusResponse.side:type_name -> api.Side
-	2,   // 62: api.GetOrderStatusResponse.orderStatus:type_name -> api.OrderStatus
-	48,  // 63: api.PostSubmitRequest.transaction:type_name -> api.TransactionMessage
-	48,  // 64: api.PostSubmitRequestEntry.transaction:type_name -> api.TransactionMessage
-	60,  // 65: api.PostSubmitBatchRequest.entries:type_name -> api.PostSubmitRequestEntry
-	4,   // 66: api.PostSubmitBatchRequest.submitStrategy:type_name -> api.SubmitStrategy
-	63,  // 67: api.PostSubmitBatchResponse.transactions:type_name -> api.PostSubmitBatchResponseEntry
-	6,   // 68: api.GetOpenOrdersRequest.project:type_name -> api.Project
-	55,  // 69: api.GetOpenOrdersResponse.orders:type_name -> api.Order
-	6,   // 70: api.GetOrderByIDRequest.project:type_name -> api.Project
-	55,  // 71: api.GetOrderByIDResponse.order:type_name -> api.Order
-	6,   // 72: api.GetUnsettledRequest.project:type_name -> api.Project
-	70,  // 73: api.UnsettledAccount.baseToken:type_name -> api.UnsettledAccountToken
-	70,  // 74: api.UnsettledAccount.quoteToken:type_name -> api.UnsettledAccountToken
-	71,  // 75: api.GetUnsettledResponse.unsettled:type_name -> api.UnsettledAccount
-	24,  // 76: api.GetOrderbooksStreamResponse.orderbook:type_name -> api.GetOrderbookResponse
-	28,  // 77: api.GetMarketDepthsStreamResponse.Data:type_name -> api.GetMarketDepthResponse
-	11,  // 78: api.GetTickersStreamResponse.ticker:type_name -> api.GetTickersResponse
-	31,  // 79: api.GetTradesStreamResponse.trades:type_name -> api.GetTradesResponse
-	6,   // 80: api.GetQuotesRequest.projects:type_name -> api.Project
-	79,  // 81: api.GetQuotesResponse.quotes:type_name -> api.ProjectQuote
-	6,   // 82: api.ProjectQuote.project:type_name -> api.Project
-	84,  // 83: api.ProjectQuote.routes:type_name -> api.QuoteRoute
-	6,   // 84: api.TradeSwapRequest.project:type_name -> api.Project
-	6,   // 85: api.RouteTradeSwapRequest.project:type_name -> api.Project
-	82,  // 86: api.RouteTradeSwapRequest.steps:type_name -> api.RouteStep
-	86,  // 87: api.RouteStep.project:type_name -> api.StepProject
-	6,   // 88: api.TradeSwapResponse.project:type_name -> api.Project
-	48,  // 89: api.TradeSwapResponse.transactions:type_name -> api.TransactionMessage
-	242, // 90: api.TradeSwapResponse.priceImpact:type_name -> common.PriceImpactPercent
-	243, // 91: api.TradeSwapResponse.fees:type_name -> common.Fee
-	85,  // 92: api.QuoteRoute.steps:type_name -> api.QuoteStep
-	86,  // 93: api.QuoteStep.project:type_name -> api.StepProject
-	242, // 94: api.QuoteStep.priceImpactPercent:type_name -> common.PriceImpactPercent
-	243, // 95: api.QuoteStep.fee:type_name -> common.Fee
-	89,  // 96: api.GetBlockStreamResponse.block:type_name -> api.Block
-	6,   // 97: api.GetPoolsRequest.projects:type_name -> api.Project
-	94,  // 98: api.GetPoolsResponse.projects:type_name -> api.ProjectPools
-	6,   // 99: api.ProjectPools.project:type_name -> api.Project
-	95,  // 100: api.ProjectPools.pools:type_name -> api.ProjectPool
-	6,   // 101: api.GetQuotesStreamRequest.projects:type_name -> api.Project
-	102, // 102: api.GetQuotesStreamRequest.tokenPairs:type_name -> api.TokenPair
-	98,  // 103: api.GetQuotesStreamResponse.quote:type_name -> api.GetQuotesStreamUpdate
-	6,   // 104: api.GetQuotesStreamUpdate.project:type_name -> api.Project
-	6,   // 105: api.GetSwapsStreamRequest.projects:type_name -> api.Project
-	101, // 106: api.GetSwapsStreamResponse.swap:type_name -> api.GetSwapsStreamUpdate
-	6,   // 107: api.GetSwapsStreamUpdate.project:type_name -> api.Project
-	105, // 108: api.GetPriceResponse.tokenPrices:type_name -> api.TokenPrice
-	6,   // 109: api.TokenPrice.project:type_name -> api.Project
-	107, // 110: api.GetPoolReservesStreamResponse.reserves:type_name -> api.PoolReserves
-	6,   // 111: api.PoolReserves.project:type_name -> api.Project
-	6,   // 112: api.GetPoolReservesStreamRequest.projects:type_name -> api.Project
-	6,   // 113: api.GetPricesStreamRequest.projects:type_name -> api.Project
-	105, // 114: api.GetPricesStreamResponse.price:type_name -> api.TokenPrice
-	244, // 115: api.GetPerpOrderbookRequest.contract:type_name -> common.PerpContract
-	6,   // 116: api.GetPerpOrderbookRequest.project:type_name -> api.Project
-	244, // 117: api.GetPerpOrderbooksRequest.contracts:type_name -> common.PerpContract
-	6,   // 118: api.GetPerpOrderbooksRequest.project:type_name -> api.Project
-	244, // 119: api.GetPerpOrderbookResponse.contract:type_name -> common.PerpContract
-	114, // 120: api.GetPerpOrderbookResponse.bids:type_name -> api.PerpOrderbookItem
-	114, // 121: api.GetPerpOrderbookResponse.asks:type_name -> api.PerpOrderbookItem
-	113, // 122: api.GetPerpOrderbooksStreamResponse.orderbook:type_name -> api.GetPerpOrderbookResponse
-	6,   // 123: api.GetUserRequest.project:type_name -> api.Project
-	118, // 124: api.GetUserResponse.userAccounts:type_name -> api.UserDetail
-	6,   // 125: api.PostCreateUserRequest.project:type_name -> api.Project
-	48,  // 126: api.PostCreateUserResponse.transaction:type_name -> api.TransactionMessage
-	6,   // 127: api.PostCancelPerpOrdersRequest.project:type_name -> api.Project
-	244, // 128: api.PostCancelPerpOrdersRequest.contract:type_name -> common.PerpContract
-	48,  // 129: api.PostCancelPerpOrdersResponse.transactions:type_name -> api.TransactionMessage
-	48,  // 130: api.PostCancelDriftMarginOrderResponse.transactions:type_name -> api.TransactionMessage
-	48,  // 131: api.PostModifyDriftOrderResponse.transaction:type_name -> api.TransactionMessage
-	6,   // 132: api.PostCancelPerpOrderRequest.project:type_name -> api.Project
-	244, // 133: api.PostCancelPerpOrderRequest.contract:type_name -> common.PerpContract
-	48,  // 134: api.PostCancelPerpOrderResponse.transaction:type_name -> api.TransactionMessage
-	48,  // 135: api.PostCreateDriftUserResponse.transaction:type_name -> api.TransactionMessage
-	189, // 136: api.GetDriftUserResponse.context:type_name -> api.Context
-	118, // 137: api.GetDriftUserResponse.userAccounts:type_name -> api.UserDetail
-	48,  // 138: api.PostCloseDriftPerpPositionsResponse.transactions:type_name -> api.TransactionMessage
-	189, // 139: api.GetDriftPerpOrderbookResponse.context:type_name -> api.Context
-	114, // 140: api.GetDriftPerpOrderbookResponse.bids:type_name -> api.PerpOrderbookItem
-	114, // 141: api.GetDriftPerpOrderbookResponse.asks:type_name -> api.PerpOrderbookItem
-	6,   // 142: api.PostManageCollateralRequest.project:type_name -> api.Project
-	245, // 143: api.PostManageCollateralRequest.type:type_name -> common.PerpCollateralType
-	246, // 144: api.PostManageCollateralRequest.token:type_name -> common.PerpCollateralToken
-	48,  // 145: api.PostManageCollateralResponse.transaction:type_name -> api.TransactionMessage
-	189, // 146: api.GetDriftOpenMarginOrdersResponse.context:type_name -> api.Context
-	141, // 147: api.GetDriftOpenMarginOrdersResponse.orders:type_name -> api.DriftMarginOrder
-	6,   // 148: api.GetOpenPerpOrdersRequest.project:type_name -> api.Project
-	244, // 149: api.GetOpenPerpOrdersRequest.contracts:type_name -> common.PerpContract
-	144, // 150: api.GetOpenPerpOrdersResponse.orders:type_name -> api.PerpOrder
-	244, // 151: api.PerpOrder.contract:type_name -> common.PerpContract
-	247, // 152: api.PerpOrder.positionSide:type_name -> common.PerpPositionSide
-	6,   // 153: api.GetPerpPositionsRequest.project:type_name -> api.Project
-	244, // 154: api.GetPerpPositionsRequest.contracts:type_name -> common.PerpContract
-	149, // 155: api.GetPerpPositionsResponse.perpPositions:type_name -> api.PerpPosition
-	6,   // 156: api.PostClosePerpPositionsRequest.project:type_name -> api.Project
-	244, // 157: api.PostClosePerpPositionsRequest.contracts:type_name -> common.PerpContract
-	48,  // 158: api.PostClosePerpPositionsResponse.transactions:type_name -> api.TransactionMessage
-	244, // 159: api.PerpPosition.contract:type_name -> common.PerpContract
-	247, // 160: api.PerpPosition.positionSide:type_name -> common.PerpPositionSide
-	6,   // 161: api.PostPerpOrderRequest.project:type_name -> api.Project
-	244, // 162: api.PostPerpOrderRequest.contract:type_name -> common.PerpContract
-	247, // 163: api.PostPerpOrderRequest.positionSide:type_name -> common.PerpPositionSide
-	248, // 164: api.PostPerpOrderRequest.type:type_name -> common.PerpOrderType
-	249, // 165: api.PostPerpOrderRequest.postOnly:type_name -> common.PostOnlyParams
-	48,  // 166: api.PostPerpOrderResponse.transaction:type_name -> api.TransactionMessage
-	249, // 167: api.PostDriftMarginOrderRequest.postOnly:type_name -> common.PostOnlyParams
-	48,  // 168: api.PostDriftMarginOrderResponse.transaction:type_name -> api.TransactionMessage
-	48,  // 169: api.PostDriftEnableMarginTradingResponse.transaction:type_name -> api.TransactionMessage
-	244, // 170: api.GetPerpTradesStreamRequest.contracts:type_name -> common.PerpContract
-	6,   // 171: api.GetPerpTradesStreamRequest.project:type_name -> api.Project
-	189, // 172: api.GetPerpTradesStreamResponse.context:type_name -> api.Context
-	158, // 173: api.GetPerpTradesStreamResponse.trade:type_name -> api.GetPerpTradesResponse
-	244, // 174: api.GetPerpTradesResponse.contract:type_name -> common.PerpContract
-	244, // 175: api.PostSettlePNLRequest.contract:type_name -> common.PerpContract
-	6,   // 176: api.PostSettlePNLRequest.project:type_name -> api.Project
-	48,  // 177: api.PostSettlePNLResponse.transaction:type_name -> api.TransactionMessage
-	6,   // 178: api.GetAssetsRequest.project:type_name -> api.Project
-	162, // 179: api.GetAssetsResponse.assets:type_name -> api.Asset
-	244, // 180: api.PostSettlePNLsRequest.contract:type_name -> common.PerpContract
-	6,   // 181: api.PostSettlePNLsRequest.project:type_name -> api.Project
-	48,  // 182: api.PostSettlePNLsResponse.transactions:type_name -> api.TransactionMessage
-	244, // 183: api.PostLiquidatePerpRequest.contract:type_name -> common.PerpContract
-	6,   // 184: api.PostLiquidatePerpRequest.project:type_name -> api.Project
-	48,  // 185: api.PostLiquidatePerpResponse.transaction:type_name -> api.TransactionMessage
-	6,   // 186: api.GetPerpContractsRequest.project:type_name -> api.Project
-	244, // 187: api.ContractInfo.contract:type_name -> common.PerpContract
-	169, // 188: api.GetPerpContractsResponse.contracts:type_name -> api.ContractInfo
-	6,   // 189: api.GetOpenPerpOrderRequest.project:type_name -> api.Project
-	144, // 190: api.GetOpenPerpOrderResponse.order:type_name -> api.PerpOrder
-	189, // 191: api.GetDriftOpenMarginOrderResponse.context:type_name -> api.Context
-	141, // 192: api.GetDriftOpenMarginOrderResponse.order:type_name -> api.DriftMarginOrder
-	189, // 193: api.GetDriftOpenPerpOrderResponse.context:type_name -> api.Context
-	193, // 194: api.GetDriftOpenPerpOrderResponse.order:type_name -> api.DriftPerpOrder
-	48,  // 195: api.PostDriftManageCollateralResponse.transaction:type_name -> api.TransactionMessage
-	189, // 196: api.GetDriftPerpContractsResponse.context:type_name -> api.Context
-	169, // 197: api.GetDriftPerpContractsResponse.contracts:type_name -> api.ContractInfo
-	48,  // 198: api.PostDriftSettlePNLResponse.transaction:type_name -> api.TransactionMessage
-	189, // 199: api.GetDriftAssetsResponse.context:type_name -> api.Context
-	162, // 200: api.GetDriftAssetsResponse.assets:type_name -> api.Asset
-	48,  // 201: api.PostDriftSettlePNLsResponse.transactions:type_name -> api.TransactionMessage
-	48,  // 202: api.PostLiquidateDriftPerpResponse.transaction:type_name -> api.TransactionMessage
-	193, // 203: api.GetDriftOpenPerpOrdersValue.orders:type_name -> api.DriftPerpOrder
-	189, // 204: api.GetDriftOpenPerpOrdersResponse.context:type_name -> api.Context
-	191, // 205: api.GetDriftOpenPerpOrdersResponse.data:type_name -> api.GetDriftOpenPerpOrdersValue
-	48,  // 206: api.PostDriftCancelPerpOrderValue.transactions:type_name -> api.TransactionMessage
-	189, // 207: api.PostDriftCancelPerpOrderResponse.context:type_name -> api.Context
-	195, // 208: api.PostDriftCancelPerpOrderResponse.data:type_name -> api.PostDriftCancelPerpOrderValue
-	200, // 209: api.GetDriftPerpPositionsValue.perpPositions:type_name -> api.DriftPerpPosition
-	189, // 210: api.GetDriftPerpPositionsResponse.context:type_name -> api.Context
-	198, // 211: api.GetDriftPerpPositionsResponse.data:type_name -> api.GetDriftPerpPositionsValue
-	189, // 212: api.GetDriftMarginOrderbooksStreamResponse.context:type_name -> api.Context
-	205, // 213: api.GetDriftMarginOrderbooksStreamResponse.orderbook:type_name -> api.GetDriftMarginOrderbookResponse
-	206, // 214: api.GetDriftMarginOrderbookValue.bids:type_name -> api.DriftMarginOrderbookItem
-	206, // 215: api.GetDriftMarginOrderbookValue.asks:type_name -> api.DriftMarginOrderbookItem
-	189, // 216: api.GetDriftMarginOrderbookResponse.context:type_name -> api.Context
-	204, // 217: api.GetDriftMarginOrderbookResponse.data:type_name -> api.GetDriftMarginOrderbookValue
-	236, // 218: api.DriftMarginOrderbookItem.metadata:type_name -> api.DriftMarginOrderbookItem.MetadataEntry
-	237, // 219: api.GetDriftMarketsValue.markets:type_name -> api.GetDriftMarketsValue.MarketsEntry
-	189, // 220: api.GetDriftMarketsResponse.context:type_name -> api.Context
-	208, // 221: api.GetDriftMarketsResponse.data:type_name -> api.GetDriftMarketsValue
-	238, // 222: api.DriftMarket.metadata:type_name -> api.DriftMarket.MetadataEntry
-	189, // 223: api.GetDriftMarketDepthStreamResponse.context:type_name -> api.Context
-	216, // 224: api.GetDriftMarketDepthStreamResponse.data:type_name -> api.GetDriftMarketDepthResponse
-	214, // 225: api.GetDriftMarketDepthValue.bids:type_name -> api.DriftMarketDepthItem
-	214, // 226: api.GetDriftMarketDepthValue.asks:type_name -> api.DriftMarketDepthItem
-	189, // 227: api.GetDriftMarketDepthResponse.context:type_name -> api.Context
-	215, // 228: api.GetDriftMarketDepthResponse.data:type_name -> api.GetDriftMarketDepthValue
-	239, // 229: api.GetMarketsResponseV2.markets:type_name -> api.GetMarketsResponseV2.MarketsEntry
-	222, // 230: api.GetOrderbookResponseV2.bids:type_name -> api.OrderbookItemV2
-	222, // 231: api.GetOrderbookResponseV2.asks:type_name -> api.OrderbookItemV2
-	225, // 232: api.GetMarketDepthResponseV2.bids:type_name -> api.MarketDepthItemV2
-	225, // 233: api.GetMarketDepthResponseV2.asks:type_name -> api.MarketDepthItemV2
-	1,   // 234: api.PostOrderRequestV2.side:type_name -> api.Side
-	1,   // 235: api.PostReplaceOrderRequestV2.side:type_name -> api.Side
-	1,   // 236: api.PostCancelOrderRequestV2.side:type_name -> api.Side
-	48,  // 237: api.PostCancelOrderResponseV2.transactions:type_name -> api.TransactionMessage
-	9,   // 238: api.GetMarketsResponse.MarketsEntry.value:type_name -> api.Market
-	17,  // 239: api.GetTickersResponseV2.TickersEntry.value:type_name -> api.Candle
-	18,  // 240: api.GetKlineResponse.MarketCandlesEntry.value:type_name -> api.Candles
-	210, // 241: api.GetDriftMarketsValue.MarketsEntry.value:type_name -> api.DriftMarket
-	219, // 242: api.GetMarketsResponseV2.MarketsEntry.value:type_name -> api.MarketV2
-	133, // 243: api.Api.PostCloseDriftPerpPositions:input_type -> api.PostCloseDriftPerpPositionsRequest
-	135, // 244: api.Api.GetDriftPerpOrderbook:input_type -> api.GetDriftPerpOrderbookRequest
-	129, // 245: api.Api.PostCreateDriftUser:input_type -> api.PostCreateDriftUserRequest
-	131, // 246: api.Api.GetDriftUser:input_type -> api.GetDriftUserRequest
-	177, // 247: api.Api.PostDriftManageCollateral:input_type -> api.PostDriftManageCollateralRequest
-	181, // 248: api.Api.PostDriftSettlePNL:input_type -> api.PostDriftSettlePNLRequest
-	185, // 249: api.Api.PostDriftSettlePNLs:input_type -> api.PostDriftSettlePNLsRequest
-	183, // 250: api.Api.GetDriftAssets:input_type -> api.GetDriftAssetsRequest
-	179, // 251: api.Api.GetDriftPerpContracts:input_type -> api.GetDriftPerpContractsRequest
-	187, // 252: api.Api.PostLiquidateDriftPerp:input_type -> api.PostLiquidateDriftPerpRequest
-	175, // 253: api.Api.GetDriftOpenPerpOrder:input_type -> api.GetDriftOpenPerpOrderRequest
-	173, // 254: api.Api.GetDriftOpenMarginOrder:input_type -> api.GetDriftOpenMarginOrderRequest
-	197, // 255: api.Api.GetDriftPerpPositions:input_type -> api.GetDriftPerpPositionsRequest
-	190, // 256: api.Api.GetDriftOpenPerpOrders:input_type -> api.GetDriftOpenPerpOrdersRequest
-	194, // 257: api.Api.PostDriftCancelPerpOrder:input_type -> api.PostDriftCancelPerpOrderRequest
-	125, // 258: api.Api.PostModifyDriftOrder:input_type -> api.PostModifyDriftOrderRequest
-	123, // 259: api.Api.PostCancelDriftMarginOrder:input_type -> api.PostCancelDriftMarginOrderRequest
-	139, // 260: api.Api.GetDriftOpenMarginOrders:input_type -> api.GetDriftOpenMarginOrdersRequest
-	207, // 261: api.Api.GetDriftMarkets:input_type -> api.GetDriftMarketsRequest
-	152, // 262: api.Api.PostDriftMarginOrder:input_type -> api.PostDriftMarginOrderRequest
-	154, // 263: api.Api.PostDriftEnableMarginTrading:input_type -> api.PostDriftEnableMarginTradingRequest
-	203, // 264: api.Api.GetDriftMarginOrderbook:input_type -> api.GetDriftMarginOrderbookRequest
-	211, // 265: api.Api.GetDriftMarketDepth:input_type -> api.GetDriftMarketDepthRequest
-	201, // 266: api.Api.GetDriftMarginOrderbooksStream:input_type -> api.GetDriftMarginOrderbooksRequest
-	212, // 267: api.Api.GetDriftMarketDepthsStream:input_type -> api.GetDriftMarketDepthsStreamRequest
-	217, // 268: api.Api.GetMarketsV2:input_type -> api.GetMarketsRequestV2
-	13,  // 269: api.Api.GetTickersV2:input_type -> api.GetTickersRequestV2
-	220, // 270: api.Api.GetOrderbookV2:input_type -> api.GetOrderbookRequestV2
-	223, // 271: api.Api.GetMarketDepthV2:input_type -> api.GetMarketDepthRequestV2
-	226, // 272: api.Api.PostOrderV2:input_type -> api.PostOrderRequestV2
-	228, // 273: api.Api.PostCancelOrderV2:input_type -> api.PostCancelOrderRequestV2
-	227, // 274: api.Api.PostReplaceOrderV2:input_type -> api.PostReplaceOrderRequestV2
-	230, // 275: api.Api.PostSettleV2:input_type -> api.PostSettleRequestV2
-	231, // 276: api.Api.GetOpenOrdersV2:input_type -> api.GetOpenOrdersRequestV2
-	232, // 277: api.Api.GetUnsettledV2:input_type -> api.GetUnsettledRequestV2
-	103, // 278: api.Api.GetPrice:input_type -> api.GetPriceRequest
-	7,   // 279: api.Api.GetMarkets:input_type -> api.GetMarketsRequest
-	92,  // 280: api.Api.GetPools:input_type -> api.GetPoolsRequest
-	10,  // 281: api.Api.GetTickers:input_type -> api.GetTickersRequest
-	15,  // 282: api.Api.GetKline:input_type -> api.GetKlineRequest
-	22,  // 283: api.Api.GetOrderbook:input_type -> api.GetOrderbookRequest
-	26,  // 284: api.Api.GetMarketDepth:input_type -> api.GetMarketDepthRequest
-	30,  // 285: api.Api.GetTrades:input_type -> api.GetTradesRequest
-	77,  // 286: api.Api.GetQuotes:input_type -> api.GetQuotesRequest
-	33,  // 287: api.Api.GetServerTime:input_type -> api.GetServerTimeRequest
-	87,  // 288: api.Api.GetRecentBlockHash:input_type -> api.GetRecentBlockHashRequest
-	35,  // 289: api.Api.GetAccountBalance:input_type -> api.GetAccountBalanceRequest
-	38,  // 290: api.Api.GetTokenAccounts:input_type -> api.GetTokenAccountsRequest
-	41,  // 291: api.Api.PostOrder:input_type -> api.PostOrderRequest
-	59,  // 292: api.Api.PostSubmit:input_type -> api.PostSubmitRequest
-	61,  // 293: api.Api.PostSubmitBatch:input_type -> api.PostSubmitBatchRequest
-	44,  // 294: api.Api.PostCancelOrder:input_type -> api.PostCancelOrderRequest
-	45,  // 295: api.Api.PostCancelByClientOrderID:input_type -> api.PostCancelByClientOrderIDRequest
-	47,  // 296: api.Api.PostCancelAll:input_type -> api.PostCancelAllRequest
-	41,  // 297: api.Api.PostReplaceByClientOrderID:input_type -> api.PostOrderRequest
-	42,  // 298: api.Api.PostReplaceOrder:input_type -> api.PostReplaceOrderRequest
-	50,  // 299: api.Api.PostSettle:input_type -> api.PostSettleRequest
-	80,  // 300: api.Api.PostTradeSwap:input_type -> api.TradeSwapRequest
-	53,  // 301: api.Api.GetOrders:input_type -> api.GetOrdersRequest
-	19,  // 302: api.Api.GetMyOrders:input_type -> api.GetMyOrdersRequest
-	65,  // 303: api.Api.GetOpenOrders:input_type -> api.GetOpenOrdersRequest
-	67,  // 304: api.Api.GetOrderByID:input_type -> api.GetOrderByIDRequest
-	69,  // 305: api.Api.GetUnsettled:input_type -> api.GetUnsettledRequest
-	81,  // 306: api.Api.PostRouteTradeSwap:input_type -> api.RouteTradeSwapRequest
-	150, // 307: api.Api.PostPerpOrder:input_type -> api.PostPerpOrderRequest
-	145, // 308: api.Api.GetPerpPositions:input_type -> api.GetPerpPositionsRequest
-	142, // 309: api.Api.GetOpenPerpOrders:input_type -> api.GetOpenPerpOrdersRequest
-	121, // 310: api.Api.PostCancelPerpOrders:input_type -> api.PostCancelPerpOrdersRequest
-	127, // 311: api.Api.PostCancelPerpOrder:input_type -> api.PostCancelPerpOrderRequest
-	147, // 312: api.Api.PostClosePerpPositions:input_type -> api.PostClosePerpPositionsRequest
-	111, // 313: api.Api.GetPerpOrderbook:input_type -> api.GetPerpOrderbookRequest
-	119, // 314: api.Api.PostCreateUser:input_type -> api.PostCreateUserRequest
-	116, // 315: api.Api.GetUser:input_type -> api.GetUserRequest
-	137, // 316: api.Api.PostManageCollateral:input_type -> api.PostManageCollateralRequest
-	159, // 317: api.Api.PostSettlePNL:input_type -> api.PostSettlePNLRequest
-	164, // 318: api.Api.PostSettlePNLs:input_type -> api.PostSettlePNLsRequest
-	161, // 319: api.Api.GetAssets:input_type -> api.GetAssetsRequest
-	168, // 320: api.Api.GetPerpContracts:input_type -> api.GetPerpContractsRequest
-	166, // 321: api.Api.PostLiquidatePerp:input_type -> api.PostLiquidatePerpRequest
-	171, // 322: api.Api.GetOpenPerpOrder:input_type -> api.GetOpenPerpOrderRequest
-	23,  // 323: api.Api.GetOrderbooksStream:input_type -> api.GetOrderbooksRequest
-	27,  // 324: api.Api.GetMarketDepthsStream:input_type -> api.GetMarketDepthsRequest
-	10,  // 325: api.Api.GetTickersStream:input_type -> api.GetTickersRequest
-	30,  // 326: api.Api.GetTradesStream:input_type -> api.GetTradesRequest
-	56,  // 327: api.Api.GetOrderStatusStream:input_type -> api.GetOrderStatusStreamRequest
-	87,  // 328: api.Api.GetRecentBlockHashStream:input_type -> api.GetRecentBlockHashRequest
-	90,  // 329: api.Api.GetBlockStream:input_type -> api.GetBlockStreamRequest
-	96,  // 330: api.Api.GetQuotesStream:input_type -> api.GetQuotesStreamRequest
-	108, // 331: api.Api.GetPoolReservesStream:input_type -> api.GetPoolReservesStreamRequest
-	109, // 332: api.Api.GetPricesStream:input_type -> api.GetPricesStreamRequest
-	99,  // 333: api.Api.GetSwapsStream:input_type -> api.GetSwapsStreamRequest
-	112, // 334: api.Api.GetPerpOrderbooksStream:input_type -> api.GetPerpOrderbooksRequest
-	156, // 335: api.Api.GetPerpTradesStream:input_type -> api.GetPerpTradesStreamRequest
-	134, // 336: api.Api.PostCloseDriftPerpPositions:output_type -> api.PostCloseDriftPerpPositionsResponse
-	136, // 337: api.Api.GetDriftPerpOrderbook:output_type -> api.GetDriftPerpOrderbookResponse
-	130, // 338: api.Api.PostCreateDriftUser:output_type -> api.PostCreateDriftUserResponse
-	132, // 339: api.Api.GetDriftUser:output_type -> api.GetDriftUserResponse
-	178, // 340: api.Api.PostDriftManageCollateral:output_type -> api.PostDriftManageCollateralResponse
-	182, // 341: api.Api.PostDriftSettlePNL:output_type -> api.PostDriftSettlePNLResponse
-	186, // 342: api.Api.PostDriftSettlePNLs:output_type -> api.PostDriftSettlePNLsResponse
-	184, // 343: api.Api.GetDriftAssets:output_type -> api.GetDriftAssetsResponse
-	180, // 344: api.Api.GetDriftPerpContracts:output_type -> api.GetDriftPerpContractsResponse
-	188, // 345: api.Api.PostLiquidateDriftPerp:output_type -> api.PostLiquidateDriftPerpResponse
-	176, // 346: api.Api.GetDriftOpenPerpOrder:output_type -> api.GetDriftOpenPerpOrderResponse
-	174, // 347: api.Api.GetDriftOpenMarginOrder:output_type -> api.GetDriftOpenMarginOrderResponse
-	199, // 348: api.Api.GetDriftPerpPositions:output_type -> api.GetDriftPerpPositionsResponse
-	192, // 349: api.Api.GetDriftOpenPerpOrders:output_type -> api.GetDriftOpenPerpOrdersResponse
-	196, // 350: api.Api.PostDriftCancelPerpOrder:output_type -> api.PostDriftCancelPerpOrderResponse
-	126, // 351: api.Api.PostModifyDriftOrder:output_type -> api.PostModifyDriftOrderResponse
-	124, // 352: api.Api.PostCancelDriftMarginOrder:output_type -> api.PostCancelDriftMarginOrderResponse
-	140, // 353: api.Api.GetDriftOpenMarginOrders:output_type -> api.GetDriftOpenMarginOrdersResponse
-	209, // 354: api.Api.GetDriftMarkets:output_type -> api.GetDriftMarketsResponse
-	153, // 355: api.Api.PostDriftMarginOrder:output_type -> api.PostDriftMarginOrderResponse
-	155, // 356: api.Api.PostDriftEnableMarginTrading:output_type -> api.PostDriftEnableMarginTradingResponse
-	205, // 357: api.Api.GetDriftMarginOrderbook:output_type -> api.GetDriftMarginOrderbookResponse
-	216, // 358: api.Api.GetDriftMarketDepth:output_type -> api.GetDriftMarketDepthResponse
-	202, // 359: api.Api.GetDriftMarginOrderbooksStream:output_type -> api.GetDriftMarginOrderbooksStreamResponse
-	213, // 360: api.Api.GetDriftMarketDepthsStream:output_type -> api.GetDriftMarketDepthStreamResponse
-	218, // 361: api.Api.GetMarketsV2:output_type -> api.GetMarketsResponseV2
-	14,  // 362: api.Api.GetTickersV2:output_type -> api.GetTickersResponseV2
-	221, // 363: api.Api.GetOrderbookV2:output_type -> api.GetOrderbookResponseV2
-	224, // 364: api.Api.GetMarketDepthV2:output_type -> api.GetMarketDepthResponseV2
-	43,  // 365: api.Api.PostOrderV2:output_type -> api.PostOrderResponse
-	229, // 366: api.Api.PostCancelOrderV2:output_type -> api.PostCancelOrderResponseV2
-	43,  // 367: api.Api.PostReplaceOrderV2:output_type -> api.PostOrderResponse
-	51,  // 368: api.Api.PostSettleV2:output_type -> api.PostSettleResponse
-	66,  // 369: api.Api.GetOpenOrdersV2:output_type -> api.GetOpenOrdersResponse
-	72,  // 370: api.Api.GetUnsettledV2:output_type -> api.GetUnsettledResponse
-	104, // 371: api.Api.GetPrice:output_type -> api.GetPriceResponse
-	8,   // 372: api.Api.GetMarkets:output_type -> api.GetMarketsResponse
-	93,  // 373: api.Api.GetPools:output_type -> api.GetPoolsResponse
-	11,  // 374: api.Api.GetTickers:output_type -> api.GetTickersResponse
-	16,  // 375: api.Api.GetKline:output_type -> api.GetKlineResponse
-	24,  // 376: api.Api.GetOrderbook:output_type -> api.GetOrderbookResponse
-	28,  // 377: api.Api.GetMarketDepth:output_type -> api.GetMarketDepthResponse
-	31,  // 378: api.Api.GetTrades:output_type -> api.GetTradesResponse
-	78,  // 379: api.Api.GetQuotes:output_type -> api.GetQuotesResponse
-	34,  // 380: api.Api.GetServerTime:output_type -> api.GetServerTimeResponse
-	88,  // 381: api.Api.GetRecentBlockHash:output_type -> api.GetRecentBlockHashResponse
-	36,  // 382: api.Api.GetAccountBalance:output_type -> api.GetAccountBalanceResponse
-	39,  // 383: api.Api.GetTokenAccounts:output_type -> api.GetTokenAccountsResponse
-	43,  // 384: api.Api.PostOrder:output_type -> api.PostOrderResponse
-	62,  // 385: api.Api.PostSubmit:output_type -> api.PostSubmitResponse
-	64,  // 386: api.Api.PostSubmitBatch:output_type -> api.PostSubmitBatchResponse
-	46,  // 387: api.Api.PostCancelOrder:output_type -> api.PostCancelOrderResponse
-	46,  // 388: api.Api.PostCancelByClientOrderID:output_type -> api.PostCancelOrderResponse
-	49,  // 389: api.Api.PostCancelAll:output_type -> api.PostCancelAllResponse
-	43,  // 390: api.Api.PostReplaceByClientOrderID:output_type -> api.PostOrderResponse
-	43,  // 391: api.Api.PostReplaceOrder:output_type -> api.PostOrderResponse
-	51,  // 392: api.Api.PostSettle:output_type -> api.PostSettleResponse
-	83,  // 393: api.Api.PostTradeSwap:output_type -> api.TradeSwapResponse
-	54,  // 394: api.Api.GetOrders:output_type -> api.GetOrdersResponse
-	20,  // 395: api.Api.GetMyOrders:output_type -> api.GetMyOrdersResponse
-	66,  // 396: api.Api.GetOpenOrders:output_type -> api.GetOpenOrdersResponse
-	68,  // 397: api.Api.GetOrderByID:output_type -> api.GetOrderByIDResponse
-	72,  // 398: api.Api.GetUnsettled:output_type -> api.GetUnsettledResponse
-	83,  // 399: api.Api.PostRouteTradeSwap:output_type -> api.TradeSwapResponse
-	151, // 400: api.Api.PostPerpOrder:output_type -> api.PostPerpOrderResponse
-	146, // 401: api.Api.GetPerpPositions:output_type -> api.GetPerpPositionsResponse
-	143, // 402: api.Api.GetOpenPerpOrders:output_type -> api.GetOpenPerpOrdersResponse
-	122, // 403: api.Api.PostCancelPerpOrders:output_type -> api.PostCancelPerpOrdersResponse
-	128, // 404: api.Api.PostCancelPerpOrder:output_type -> api.PostCancelPerpOrderResponse
-	148, // 405: api.Api.PostClosePerpPositions:output_type -> api.PostClosePerpPositionsResponse
-	113, // 406: api.Api.GetPerpOrderbook:output_type -> api.GetPerpOrderbookResponse
-	120, // 407: api.Api.PostCreateUser:output_type -> api.PostCreateUserResponse
-	117, // 408: api.Api.GetUser:output_type -> api.GetUserResponse
-	138, // 409: api.Api.PostManageCollateral:output_type -> api.PostManageCollateralResponse
-	160, // 410: api.Api.PostSettlePNL:output_type -> api.PostSettlePNLResponse
-	165, // 411: api.Api.PostSettlePNLs:output_type -> api.PostSettlePNLsResponse
-	163, // 412: api.Api.GetAssets:output_type -> api.GetAssetsResponse
-	170, // 413: api.Api.GetPerpContracts:output_type -> api.GetPerpContractsResponse
-	167, // 414: api.Api.PostLiquidatePerp:output_type -> api.PostLiquidatePerpResponse
-	172, // 415: api.Api.GetOpenPerpOrder:output_type -> api.GetOpenPerpOrderResponse
-	73,  // 416: api.Api.GetOrderbooksStream:output_type -> api.GetOrderbooksStreamResponse
-	74,  // 417: api.Api.GetMarketDepthsStream:output_type -> api.GetMarketDepthsStreamResponse
-	75,  // 418: api.Api.GetTickersStream:output_type -> api.GetTickersStreamResponse
-	76,  // 419: api.Api.GetTradesStream:output_type -> api.GetTradesStreamResponse
-	57,  // 420: api.Api.GetOrderStatusStream:output_type -> api.GetOrderStatusStreamResponse
-	88,  // 421: api.Api.GetRecentBlockHashStream:output_type -> api.GetRecentBlockHashResponse
-	91,  // 422: api.Api.GetBlockStream:output_type -> api.GetBlockStreamResponse
-	97,  // 423: api.Api.GetQuotesStream:output_type -> api.GetQuotesStreamResponse
-	106, // 424: api.Api.GetPoolReservesStream:output_type -> api.GetPoolReservesStreamResponse
-	110, // 425: api.Api.GetPricesStream:output_type -> api.GetPricesStreamResponse
-	100, // 426: api.Api.GetSwapsStream:output_type -> api.GetSwapsStreamResponse
-	115, // 427: api.Api.GetPerpOrderbooksStream:output_type -> api.GetPerpOrderbooksStreamResponse
-	157, // 428: api.Api.GetPerpTradesStream:output_type -> api.GetPerpTradesStreamResponse
-	336, // [336:429] is the sub-list for method output_type
-	243, // [243:336] is the sub-list for method input_type
-	243, // [243:243] is the sub-list for extension type_name
-	243, // [243:243] is the sub-list for extension extendee
-	0,   // [0:243] is the sub-list for field type_name
+	234, // 6: api.GetTickersResponseV2.tickers:type_name -> api.GetTickersResponseV2.TickersEntry
+	240, // 7: api.GetKlineRequest.from:type_name -> google.protobuf.Timestamp
+	240, // 8: api.GetKlineRequest.to:type_name -> google.protobuf.Timestamp
+	235, // 9: api.GetKlineResponse.marketCandles:type_name -> api.GetKlineResponse.MarketCandlesEntry
+	240, // 10: api.Candle.startTime:type_name -> google.protobuf.Timestamp
+	240, // 11: api.Candle.updateTime:type_name -> google.protobuf.Timestamp
+	6,   // 12: api.Candle.project:type_name -> api.Project
+	17,  // 13: api.Candles.candles:type_name -> api.Candle
+	6,   // 14: api.GetMyOrdersRequest.project:type_name -> api.Project
+	21,  // 15: api.GetMyOrdersResponse.orders:type_name -> api.MyOrder
+	240, // 16: api.MyOrder.Timestamp:type_name -> google.protobuf.Timestamp
+	6,   // 17: api.MyOrder.Project:type_name -> api.Project
+	240, // 18: api.MyOrder.Date:type_name -> google.protobuf.Timestamp
+	6,   // 19: api.GetOrderbookRequest.project:type_name -> api.Project
+	6,   // 20: api.GetOrderbooksRequest.project:type_name -> api.Project
+	25,  // 21: api.GetOrderbookResponse.bids:type_name -> api.OrderbookItem
+	25,  // 22: api.GetOrderbookResponse.asks:type_name -> api.OrderbookItem
+	6,   // 23: api.GetMarketDepthRequest.project:type_name -> api.Project
+	6,   // 24: api.GetMarketDepthsRequest.project:type_name -> api.Project
+	29,  // 25: api.GetMarketDepthResponse.bids:type_name -> api.MarketDepthItem
+	29,  // 26: api.GetMarketDepthResponse.asks:type_name -> api.MarketDepthItem
+	6,   // 27: api.GetTradesRequest.project:type_name -> api.Project
+	32,  // 28: api.GetTradesResponse.trades:type_name -> api.Trade
+	1,   // 29: api.Trade.side:type_name -> api.Side
+	37,  // 30: api.GetAccountBalanceResponse.tokens:type_name -> api.TokenBalance
+	40,  // 31: api.GetTokenAccountsResponse.accounts:type_name -> api.TokenAccount
+	1,   // 32: api.PostOrderRequest.side:type_name -> api.Side
+	241, // 33: api.PostOrderRequest.type:type_name -> common.OrderType
+	6,   // 34: api.PostOrderRequest.project:type_name -> api.Project
+	1,   // 35: api.PostReplaceOrderRequest.side:type_name -> api.Side
+	241, // 36: api.PostReplaceOrderRequest.type:type_name -> common.OrderType
+	6,   // 37: api.PostReplaceOrderRequest.project:type_name -> api.Project
+	48,  // 38: api.PostOrderResponse.transaction:type_name -> api.TransactionMessage
+	1,   // 39: api.PostCancelOrderRequest.side:type_name -> api.Side
+	6,   // 40: api.PostCancelOrderRequest.project:type_name -> api.Project
+	6,   // 41: api.PostCancelByClientOrderIDRequest.project:type_name -> api.Project
+	48,  // 42: api.PostCancelOrderResponse.transaction:type_name -> api.TransactionMessage
+	6,   // 43: api.PostCancelAllRequest.project:type_name -> api.Project
+	48,  // 44: api.PostCancelAllResponse.transactions:type_name -> api.TransactionMessage
+	6,   // 45: api.PostSettleRequest.project:type_name -> api.Project
+	48,  // 46: api.PostSettleResponse.transaction:type_name -> api.TransactionMessage
+	2,   // 47: api.GetOrdersRequest.status:type_name -> api.OrderStatus
+	1,   // 48: api.GetOrdersRequest.side:type_name -> api.Side
+	241, // 49: api.GetOrdersRequest.types:type_name -> common.OrderType
+	240, // 50: api.GetOrdersRequest.from:type_name -> google.protobuf.Timestamp
+	3,   // 51: api.GetOrdersRequest.direction:type_name -> api.Direction
+	6,   // 52: api.GetOrdersRequest.project:type_name -> api.Project
+	55,  // 53: api.GetOrdersResponse.orders:type_name -> api.Order
+	1,   // 54: api.Order.side:type_name -> api.Side
+	241, // 55: api.Order.types:type_name -> common.OrderType
+	240, // 56: api.Order.createdAt:type_name -> google.protobuf.Timestamp
+	6,   // 57: api.GetOrderStatusStreamRequest.project:type_name -> api.Project
+	58,  // 58: api.GetOrderStatusStreamResponse.orderInfo:type_name -> api.GetOrderStatusResponse
+	1,   // 59: api.GetOrderStatusResponse.side:type_name -> api.Side
+	2,   // 60: api.GetOrderStatusResponse.orderStatus:type_name -> api.OrderStatus
+	48,  // 61: api.PostSubmitRequest.transaction:type_name -> api.TransactionMessage
+	48,  // 62: api.PostSubmitRequestEntry.transaction:type_name -> api.TransactionMessage
+	60,  // 63: api.PostSubmitBatchRequest.entries:type_name -> api.PostSubmitRequestEntry
+	4,   // 64: api.PostSubmitBatchRequest.submitStrategy:type_name -> api.SubmitStrategy
+	63,  // 65: api.PostSubmitBatchResponse.transactions:type_name -> api.PostSubmitBatchResponseEntry
+	6,   // 66: api.GetOpenOrdersRequest.project:type_name -> api.Project
+	55,  // 67: api.GetOpenOrdersResponse.orders:type_name -> api.Order
+	6,   // 68: api.GetOrderByIDRequest.project:type_name -> api.Project
+	55,  // 69: api.GetOrderByIDResponse.order:type_name -> api.Order
+	6,   // 70: api.GetUnsettledRequest.project:type_name -> api.Project
+	70,  // 71: api.UnsettledAccount.baseToken:type_name -> api.UnsettledAccountToken
+	70,  // 72: api.UnsettledAccount.quoteToken:type_name -> api.UnsettledAccountToken
+	71,  // 73: api.GetUnsettledResponse.unsettled:type_name -> api.UnsettledAccount
+	24,  // 74: api.GetOrderbooksStreamResponse.orderbook:type_name -> api.GetOrderbookResponse
+	28,  // 75: api.GetMarketDepthsStreamResponse.Data:type_name -> api.GetMarketDepthResponse
+	11,  // 76: api.GetTickersStreamResponse.ticker:type_name -> api.GetTickersResponse
+	31,  // 77: api.GetTradesStreamResponse.trades:type_name -> api.GetTradesResponse
+	6,   // 78: api.GetQuotesRequest.projects:type_name -> api.Project
+	79,  // 79: api.GetQuotesResponse.quotes:type_name -> api.ProjectQuote
+	6,   // 80: api.ProjectQuote.project:type_name -> api.Project
+	84,  // 81: api.ProjectQuote.routes:type_name -> api.QuoteRoute
+	6,   // 82: api.TradeSwapRequest.project:type_name -> api.Project
+	6,   // 83: api.RouteTradeSwapRequest.project:type_name -> api.Project
+	82,  // 84: api.RouteTradeSwapRequest.steps:type_name -> api.RouteStep
+	86,  // 85: api.RouteStep.project:type_name -> api.StepProject
+	6,   // 86: api.TradeSwapResponse.project:type_name -> api.Project
+	48,  // 87: api.TradeSwapResponse.transactions:type_name -> api.TransactionMessage
+	242, // 88: api.TradeSwapResponse.priceImpact:type_name -> common.PriceImpactPercent
+	243, // 89: api.TradeSwapResponse.fees:type_name -> common.Fee
+	85,  // 90: api.QuoteRoute.steps:type_name -> api.QuoteStep
+	86,  // 91: api.QuoteStep.project:type_name -> api.StepProject
+	242, // 92: api.QuoteStep.priceImpactPercent:type_name -> common.PriceImpactPercent
+	243, // 93: api.QuoteStep.fee:type_name -> common.Fee
+	89,  // 94: api.GetBlockStreamResponse.block:type_name -> api.Block
+	6,   // 95: api.GetPoolsRequest.projects:type_name -> api.Project
+	94,  // 96: api.GetPoolsResponse.projects:type_name -> api.ProjectPools
+	6,   // 97: api.ProjectPools.project:type_name -> api.Project
+	95,  // 98: api.ProjectPools.pools:type_name -> api.ProjectPool
+	6,   // 99: api.GetQuotesStreamRequest.projects:type_name -> api.Project
+	102, // 100: api.GetQuotesStreamRequest.tokenPairs:type_name -> api.TokenPair
+	98,  // 101: api.GetQuotesStreamResponse.quote:type_name -> api.GetQuotesStreamUpdate
+	6,   // 102: api.GetQuotesStreamUpdate.project:type_name -> api.Project
+	6,   // 103: api.GetSwapsStreamRequest.projects:type_name -> api.Project
+	101, // 104: api.GetSwapsStreamResponse.swap:type_name -> api.GetSwapsStreamUpdate
+	6,   // 105: api.GetSwapsStreamUpdate.project:type_name -> api.Project
+	105, // 106: api.GetPriceResponse.tokenPrices:type_name -> api.TokenPrice
+	6,   // 107: api.TokenPrice.project:type_name -> api.Project
+	107, // 108: api.GetPoolReservesStreamResponse.reserves:type_name -> api.PoolReserves
+	6,   // 109: api.PoolReserves.project:type_name -> api.Project
+	6,   // 110: api.GetPoolReservesStreamRequest.projects:type_name -> api.Project
+	6,   // 111: api.GetPricesStreamRequest.projects:type_name -> api.Project
+	105, // 112: api.GetPricesStreamResponse.price:type_name -> api.TokenPrice
+	244, // 113: api.GetPerpOrderbookRequest.contract:type_name -> common.PerpContract
+	6,   // 114: api.GetPerpOrderbookRequest.project:type_name -> api.Project
+	244, // 115: api.GetPerpOrderbooksRequest.contracts:type_name -> common.PerpContract
+	6,   // 116: api.GetPerpOrderbooksRequest.project:type_name -> api.Project
+	244, // 117: api.GetPerpOrderbookResponse.contract:type_name -> common.PerpContract
+	114, // 118: api.GetPerpOrderbookResponse.bids:type_name -> api.PerpOrderbookItem
+	114, // 119: api.GetPerpOrderbookResponse.asks:type_name -> api.PerpOrderbookItem
+	113, // 120: api.GetPerpOrderbooksStreamResponse.orderbook:type_name -> api.GetPerpOrderbookResponse
+	6,   // 121: api.GetUserRequest.project:type_name -> api.Project
+	118, // 122: api.GetUserResponse.userAccounts:type_name -> api.UserDetail
+	6,   // 123: api.PostCreateUserRequest.project:type_name -> api.Project
+	48,  // 124: api.PostCreateUserResponse.transaction:type_name -> api.TransactionMessage
+	6,   // 125: api.PostCancelPerpOrdersRequest.project:type_name -> api.Project
+	244, // 126: api.PostCancelPerpOrdersRequest.contract:type_name -> common.PerpContract
+	48,  // 127: api.PostCancelPerpOrdersResponse.transactions:type_name -> api.TransactionMessage
+	48,  // 128: api.PostCancelDriftMarginOrderResponse.transactions:type_name -> api.TransactionMessage
+	48,  // 129: api.PostModifyDriftOrderResponse.transaction:type_name -> api.TransactionMessage
+	6,   // 130: api.PostCancelPerpOrderRequest.project:type_name -> api.Project
+	244, // 131: api.PostCancelPerpOrderRequest.contract:type_name -> common.PerpContract
+	48,  // 132: api.PostCancelPerpOrderResponse.transaction:type_name -> api.TransactionMessage
+	48,  // 133: api.PostCreateDriftUserResponse.transaction:type_name -> api.TransactionMessage
+	189, // 134: api.GetDriftUserResponse.context:type_name -> api.Context
+	118, // 135: api.GetDriftUserResponse.userAccounts:type_name -> api.UserDetail
+	48,  // 136: api.PostCloseDriftPerpPositionsResponse.transactions:type_name -> api.TransactionMessage
+	189, // 137: api.GetDriftPerpOrderbookResponse.context:type_name -> api.Context
+	114, // 138: api.GetDriftPerpOrderbookResponse.bids:type_name -> api.PerpOrderbookItem
+	114, // 139: api.GetDriftPerpOrderbookResponse.asks:type_name -> api.PerpOrderbookItem
+	6,   // 140: api.PostManageCollateralRequest.project:type_name -> api.Project
+	245, // 141: api.PostManageCollateralRequest.type:type_name -> common.PerpCollateralType
+	246, // 142: api.PostManageCollateralRequest.token:type_name -> common.PerpCollateralToken
+	48,  // 143: api.PostManageCollateralResponse.transaction:type_name -> api.TransactionMessage
+	189, // 144: api.GetDriftOpenMarginOrdersResponse.context:type_name -> api.Context
+	141, // 145: api.GetDriftOpenMarginOrdersResponse.orders:type_name -> api.DriftMarginOrder
+	6,   // 146: api.GetOpenPerpOrdersRequest.project:type_name -> api.Project
+	244, // 147: api.GetOpenPerpOrdersRequest.contracts:type_name -> common.PerpContract
+	144, // 148: api.GetOpenPerpOrdersResponse.orders:type_name -> api.PerpOrder
+	244, // 149: api.PerpOrder.contract:type_name -> common.PerpContract
+	247, // 150: api.PerpOrder.positionSide:type_name -> common.PerpPositionSide
+	6,   // 151: api.GetPerpPositionsRequest.project:type_name -> api.Project
+	244, // 152: api.GetPerpPositionsRequest.contracts:type_name -> common.PerpContract
+	149, // 153: api.GetPerpPositionsResponse.perpPositions:type_name -> api.PerpPosition
+	6,   // 154: api.PostClosePerpPositionsRequest.project:type_name -> api.Project
+	244, // 155: api.PostClosePerpPositionsRequest.contracts:type_name -> common.PerpContract
+	48,  // 156: api.PostClosePerpPositionsResponse.transactions:type_name -> api.TransactionMessage
+	244, // 157: api.PerpPosition.contract:type_name -> common.PerpContract
+	247, // 158: api.PerpPosition.positionSide:type_name -> common.PerpPositionSide
+	6,   // 159: api.PostPerpOrderRequest.project:type_name -> api.Project
+	244, // 160: api.PostPerpOrderRequest.contract:type_name -> common.PerpContract
+	247, // 161: api.PostPerpOrderRequest.positionSide:type_name -> common.PerpPositionSide
+	248, // 162: api.PostPerpOrderRequest.type:type_name -> common.PerpOrderType
+	249, // 163: api.PostPerpOrderRequest.postOnly:type_name -> common.PostOnlyParams
+	48,  // 164: api.PostPerpOrderResponse.transaction:type_name -> api.TransactionMessage
+	249, // 165: api.PostDriftMarginOrderRequest.postOnly:type_name -> common.PostOnlyParams
+	48,  // 166: api.PostDriftMarginOrderResponse.transaction:type_name -> api.TransactionMessage
+	48,  // 167: api.PostDriftEnableMarginTradingResponse.transaction:type_name -> api.TransactionMessage
+	244, // 168: api.GetPerpTradesStreamRequest.contracts:type_name -> common.PerpContract
+	6,   // 169: api.GetPerpTradesStreamRequest.project:type_name -> api.Project
+	189, // 170: api.GetPerpTradesStreamResponse.context:type_name -> api.Context
+	158, // 171: api.GetPerpTradesStreamResponse.trade:type_name -> api.GetPerpTradesResponse
+	244, // 172: api.GetPerpTradesResponse.contract:type_name -> common.PerpContract
+	244, // 173: api.PostSettlePNLRequest.contract:type_name -> common.PerpContract
+	6,   // 174: api.PostSettlePNLRequest.project:type_name -> api.Project
+	48,  // 175: api.PostSettlePNLResponse.transaction:type_name -> api.TransactionMessage
+	6,   // 176: api.GetAssetsRequest.project:type_name -> api.Project
+	162, // 177: api.GetAssetsResponse.assets:type_name -> api.Asset
+	244, // 178: api.PostSettlePNLsRequest.contract:type_name -> common.PerpContract
+	6,   // 179: api.PostSettlePNLsRequest.project:type_name -> api.Project
+	48,  // 180: api.PostSettlePNLsResponse.transactions:type_name -> api.TransactionMessage
+	244, // 181: api.PostLiquidatePerpRequest.contract:type_name -> common.PerpContract
+	6,   // 182: api.PostLiquidatePerpRequest.project:type_name -> api.Project
+	48,  // 183: api.PostLiquidatePerpResponse.transaction:type_name -> api.TransactionMessage
+	6,   // 184: api.GetPerpContractsRequest.project:type_name -> api.Project
+	244, // 185: api.ContractInfo.contract:type_name -> common.PerpContract
+	169, // 186: api.GetPerpContractsResponse.contracts:type_name -> api.ContractInfo
+	6,   // 187: api.GetOpenPerpOrderRequest.project:type_name -> api.Project
+	144, // 188: api.GetOpenPerpOrderResponse.order:type_name -> api.PerpOrder
+	189, // 189: api.GetDriftOpenMarginOrderResponse.context:type_name -> api.Context
+	141, // 190: api.GetDriftOpenMarginOrderResponse.order:type_name -> api.DriftMarginOrder
+	189, // 191: api.GetDriftOpenPerpOrderResponse.context:type_name -> api.Context
+	193, // 192: api.GetDriftOpenPerpOrderResponse.order:type_name -> api.DriftPerpOrder
+	48,  // 193: api.PostDriftManageCollateralResponse.transaction:type_name -> api.TransactionMessage
+	189, // 194: api.GetDriftPerpContractsResponse.context:type_name -> api.Context
+	169, // 195: api.GetDriftPerpContractsResponse.contracts:type_name -> api.ContractInfo
+	48,  // 196: api.PostDriftSettlePNLResponse.transaction:type_name -> api.TransactionMessage
+	189, // 197: api.GetDriftAssetsResponse.context:type_name -> api.Context
+	162, // 198: api.GetDriftAssetsResponse.assets:type_name -> api.Asset
+	48,  // 199: api.PostDriftSettlePNLsResponse.transactions:type_name -> api.TransactionMessage
+	48,  // 200: api.PostLiquidateDriftPerpResponse.transaction:type_name -> api.TransactionMessage
+	193, // 201: api.GetDriftOpenPerpOrdersValue.orders:type_name -> api.DriftPerpOrder
+	189, // 202: api.GetDriftOpenPerpOrdersResponse.context:type_name -> api.Context
+	191, // 203: api.GetDriftOpenPerpOrdersResponse.data:type_name -> api.GetDriftOpenPerpOrdersValue
+	48,  // 204: api.PostDriftCancelPerpOrderValue.transactions:type_name -> api.TransactionMessage
+	189, // 205: api.PostDriftCancelPerpOrderResponse.context:type_name -> api.Context
+	195, // 206: api.PostDriftCancelPerpOrderResponse.data:type_name -> api.PostDriftCancelPerpOrderValue
+	200, // 207: api.GetDriftPerpPositionsValue.perpPositions:type_name -> api.DriftPerpPosition
+	189, // 208: api.GetDriftPerpPositionsResponse.context:type_name -> api.Context
+	198, // 209: api.GetDriftPerpPositionsResponse.data:type_name -> api.GetDriftPerpPositionsValue
+	189, // 210: api.GetDriftMarginOrderbooksStreamResponse.context:type_name -> api.Context
+	205, // 211: api.GetDriftMarginOrderbooksStreamResponse.orderbook:type_name -> api.GetDriftMarginOrderbookResponse
+	206, // 212: api.GetDriftMarginOrderbookValue.bids:type_name -> api.DriftMarginOrderbookItem
+	206, // 213: api.GetDriftMarginOrderbookValue.asks:type_name -> api.DriftMarginOrderbookItem
+	189, // 214: api.GetDriftMarginOrderbookResponse.context:type_name -> api.Context
+	204, // 215: api.GetDriftMarginOrderbookResponse.data:type_name -> api.GetDriftMarginOrderbookValue
+	236, // 216: api.DriftMarginOrderbookItem.metadata:type_name -> api.DriftMarginOrderbookItem.MetadataEntry
+	237, // 217: api.GetDriftMarketsValue.markets:type_name -> api.GetDriftMarketsValue.MarketsEntry
+	189, // 218: api.GetDriftMarketsResponse.context:type_name -> api.Context
+	208, // 219: api.GetDriftMarketsResponse.data:type_name -> api.GetDriftMarketsValue
+	238, // 220: api.DriftMarket.metadata:type_name -> api.DriftMarket.MetadataEntry
+	189, // 221: api.GetDriftMarketDepthStreamResponse.context:type_name -> api.Context
+	216, // 222: api.GetDriftMarketDepthStreamResponse.data:type_name -> api.GetDriftMarketDepthResponse
+	214, // 223: api.GetDriftMarketDepthValue.bids:type_name -> api.DriftMarketDepthItem
+	214, // 224: api.GetDriftMarketDepthValue.asks:type_name -> api.DriftMarketDepthItem
+	189, // 225: api.GetDriftMarketDepthResponse.context:type_name -> api.Context
+	215, // 226: api.GetDriftMarketDepthResponse.data:type_name -> api.GetDriftMarketDepthValue
+	239, // 227: api.GetMarketsResponseV2.markets:type_name -> api.GetMarketsResponseV2.MarketsEntry
+	222, // 228: api.GetOrderbookResponseV2.bids:type_name -> api.OrderbookItemV2
+	222, // 229: api.GetOrderbookResponseV2.asks:type_name -> api.OrderbookItemV2
+	225, // 230: api.GetMarketDepthResponseV2.bids:type_name -> api.MarketDepthItemV2
+	225, // 231: api.GetMarketDepthResponseV2.asks:type_name -> api.MarketDepthItemV2
+	1,   // 232: api.PostOrderRequestV2.side:type_name -> api.Side
+	1,   // 233: api.PostReplaceOrderRequestV2.side:type_name -> api.Side
+	1,   // 234: api.PostCancelOrderRequestV2.side:type_name -> api.Side
+	48,  // 235: api.PostCancelOrderResponseV2.transactions:type_name -> api.TransactionMessage
+	9,   // 236: api.GetMarketsResponse.MarketsEntry.value:type_name -> api.Market
+	17,  // 237: api.GetTickersResponseV2.TickersEntry.value:type_name -> api.Candle
+	18,  // 238: api.GetKlineResponse.MarketCandlesEntry.value:type_name -> api.Candles
+	210, // 239: api.GetDriftMarketsValue.MarketsEntry.value:type_name -> api.DriftMarket
+	219, // 240: api.GetMarketsResponseV2.MarketsEntry.value:type_name -> api.MarketV2
+	133, // 241: api.Api.PostCloseDriftPerpPositions:input_type -> api.PostCloseDriftPerpPositionsRequest
+	135, // 242: api.Api.GetDriftPerpOrderbook:input_type -> api.GetDriftPerpOrderbookRequest
+	129, // 243: api.Api.PostCreateDriftUser:input_type -> api.PostCreateDriftUserRequest
+	131, // 244: api.Api.GetDriftUser:input_type -> api.GetDriftUserRequest
+	177, // 245: api.Api.PostDriftManageCollateral:input_type -> api.PostDriftManageCollateralRequest
+	181, // 246: api.Api.PostDriftSettlePNL:input_type -> api.PostDriftSettlePNLRequest
+	185, // 247: api.Api.PostDriftSettlePNLs:input_type -> api.PostDriftSettlePNLsRequest
+	183, // 248: api.Api.GetDriftAssets:input_type -> api.GetDriftAssetsRequest
+	179, // 249: api.Api.GetDriftPerpContracts:input_type -> api.GetDriftPerpContractsRequest
+	187, // 250: api.Api.PostLiquidateDriftPerp:input_type -> api.PostLiquidateDriftPerpRequest
+	175, // 251: api.Api.GetDriftOpenPerpOrder:input_type -> api.GetDriftOpenPerpOrderRequest
+	173, // 252: api.Api.GetDriftOpenMarginOrder:input_type -> api.GetDriftOpenMarginOrderRequest
+	197, // 253: api.Api.GetDriftPerpPositions:input_type -> api.GetDriftPerpPositionsRequest
+	190, // 254: api.Api.GetDriftOpenPerpOrders:input_type -> api.GetDriftOpenPerpOrdersRequest
+	194, // 255: api.Api.PostDriftCancelPerpOrder:input_type -> api.PostDriftCancelPerpOrderRequest
+	125, // 256: api.Api.PostModifyDriftOrder:input_type -> api.PostModifyDriftOrderRequest
+	123, // 257: api.Api.PostCancelDriftMarginOrder:input_type -> api.PostCancelDriftMarginOrderRequest
+	139, // 258: api.Api.GetDriftOpenMarginOrders:input_type -> api.GetDriftOpenMarginOrdersRequest
+	207, // 259: api.Api.GetDriftMarkets:input_type -> api.GetDriftMarketsRequest
+	152, // 260: api.Api.PostDriftMarginOrder:input_type -> api.PostDriftMarginOrderRequest
+	154, // 261: api.Api.PostDriftEnableMarginTrading:input_type -> api.PostDriftEnableMarginTradingRequest
+	203, // 262: api.Api.GetDriftMarginOrderbook:input_type -> api.GetDriftMarginOrderbookRequest
+	211, // 263: api.Api.GetDriftMarketDepth:input_type -> api.GetDriftMarketDepthRequest
+	201, // 264: api.Api.GetDriftMarginOrderbooksStream:input_type -> api.GetDriftMarginOrderbooksRequest
+	212, // 265: api.Api.GetDriftMarketDepthsStream:input_type -> api.GetDriftMarketDepthsStreamRequest
+	217, // 266: api.Api.GetMarketsV2:input_type -> api.GetMarketsRequestV2
+	13,  // 267: api.Api.GetTickersV2:input_type -> api.GetTickersRequestV2
+	220, // 268: api.Api.GetOrderbookV2:input_type -> api.GetOrderbookRequestV2
+	223, // 269: api.Api.GetMarketDepthV2:input_type -> api.GetMarketDepthRequestV2
+	226, // 270: api.Api.PostOrderV2:input_type -> api.PostOrderRequestV2
+	228, // 271: api.Api.PostCancelOrderV2:input_type -> api.PostCancelOrderRequestV2
+	227, // 272: api.Api.PostReplaceOrderV2:input_type -> api.PostReplaceOrderRequestV2
+	230, // 273: api.Api.PostSettleV2:input_type -> api.PostSettleRequestV2
+	231, // 274: api.Api.GetOpenOrdersV2:input_type -> api.GetOpenOrdersRequestV2
+	232, // 275: api.Api.GetUnsettledV2:input_type -> api.GetUnsettledRequestV2
+	103, // 276: api.Api.GetPrice:input_type -> api.GetPriceRequest
+	7,   // 277: api.Api.GetMarkets:input_type -> api.GetMarketsRequest
+	92,  // 278: api.Api.GetPools:input_type -> api.GetPoolsRequest
+	10,  // 279: api.Api.GetTickers:input_type -> api.GetTickersRequest
+	15,  // 280: api.Api.GetKline:input_type -> api.GetKlineRequest
+	22,  // 281: api.Api.GetOrderbook:input_type -> api.GetOrderbookRequest
+	26,  // 282: api.Api.GetMarketDepth:input_type -> api.GetMarketDepthRequest
+	30,  // 283: api.Api.GetTrades:input_type -> api.GetTradesRequest
+	77,  // 284: api.Api.GetQuotes:input_type -> api.GetQuotesRequest
+	33,  // 285: api.Api.GetServerTime:input_type -> api.GetServerTimeRequest
+	87,  // 286: api.Api.GetRecentBlockHash:input_type -> api.GetRecentBlockHashRequest
+	35,  // 287: api.Api.GetAccountBalance:input_type -> api.GetAccountBalanceRequest
+	38,  // 288: api.Api.GetTokenAccounts:input_type -> api.GetTokenAccountsRequest
+	41,  // 289: api.Api.PostOrder:input_type -> api.PostOrderRequest
+	59,  // 290: api.Api.PostSubmit:input_type -> api.PostSubmitRequest
+	61,  // 291: api.Api.PostSubmitBatch:input_type -> api.PostSubmitBatchRequest
+	44,  // 292: api.Api.PostCancelOrder:input_type -> api.PostCancelOrderRequest
+	45,  // 293: api.Api.PostCancelByClientOrderID:input_type -> api.PostCancelByClientOrderIDRequest
+	47,  // 294: api.Api.PostCancelAll:input_type -> api.PostCancelAllRequest
+	41,  // 295: api.Api.PostReplaceByClientOrderID:input_type -> api.PostOrderRequest
+	42,  // 296: api.Api.PostReplaceOrder:input_type -> api.PostReplaceOrderRequest
+	50,  // 297: api.Api.PostSettle:input_type -> api.PostSettleRequest
+	80,  // 298: api.Api.PostTradeSwap:input_type -> api.TradeSwapRequest
+	53,  // 299: api.Api.GetOrders:input_type -> api.GetOrdersRequest
+	19,  // 300: api.Api.GetMyOrders:input_type -> api.GetMyOrdersRequest
+	65,  // 301: api.Api.GetOpenOrders:input_type -> api.GetOpenOrdersRequest
+	67,  // 302: api.Api.GetOrderByID:input_type -> api.GetOrderByIDRequest
+	69,  // 303: api.Api.GetUnsettled:input_type -> api.GetUnsettledRequest
+	81,  // 304: api.Api.PostRouteTradeSwap:input_type -> api.RouteTradeSwapRequest
+	150, // 305: api.Api.PostPerpOrder:input_type -> api.PostPerpOrderRequest
+	145, // 306: api.Api.GetPerpPositions:input_type -> api.GetPerpPositionsRequest
+	142, // 307: api.Api.GetOpenPerpOrders:input_type -> api.GetOpenPerpOrdersRequest
+	121, // 308: api.Api.PostCancelPerpOrders:input_type -> api.PostCancelPerpOrdersRequest
+	127, // 309: api.Api.PostCancelPerpOrder:input_type -> api.PostCancelPerpOrderRequest
+	147, // 310: api.Api.PostClosePerpPositions:input_type -> api.PostClosePerpPositionsRequest
+	111, // 311: api.Api.GetPerpOrderbook:input_type -> api.GetPerpOrderbookRequest
+	119, // 312: api.Api.PostCreateUser:input_type -> api.PostCreateUserRequest
+	116, // 313: api.Api.GetUser:input_type -> api.GetUserRequest
+	137, // 314: api.Api.PostManageCollateral:input_type -> api.PostManageCollateralRequest
+	159, // 315: api.Api.PostSettlePNL:input_type -> api.PostSettlePNLRequest
+	164, // 316: api.Api.PostSettlePNLs:input_type -> api.PostSettlePNLsRequest
+	161, // 317: api.Api.GetAssets:input_type -> api.GetAssetsRequest
+	168, // 318: api.Api.GetPerpContracts:input_type -> api.GetPerpContractsRequest
+	166, // 319: api.Api.PostLiquidatePerp:input_type -> api.PostLiquidatePerpRequest
+	171, // 320: api.Api.GetOpenPerpOrder:input_type -> api.GetOpenPerpOrderRequest
+	23,  // 321: api.Api.GetOrderbooksStream:input_type -> api.GetOrderbooksRequest
+	27,  // 322: api.Api.GetMarketDepthsStream:input_type -> api.GetMarketDepthsRequest
+	10,  // 323: api.Api.GetTickersStream:input_type -> api.GetTickersRequest
+	30,  // 324: api.Api.GetTradesStream:input_type -> api.GetTradesRequest
+	56,  // 325: api.Api.GetOrderStatusStream:input_type -> api.GetOrderStatusStreamRequest
+	87,  // 326: api.Api.GetRecentBlockHashStream:input_type -> api.GetRecentBlockHashRequest
+	90,  // 327: api.Api.GetBlockStream:input_type -> api.GetBlockStreamRequest
+	96,  // 328: api.Api.GetQuotesStream:input_type -> api.GetQuotesStreamRequest
+	108, // 329: api.Api.GetPoolReservesStream:input_type -> api.GetPoolReservesStreamRequest
+	109, // 330: api.Api.GetPricesStream:input_type -> api.GetPricesStreamRequest
+	99,  // 331: api.Api.GetSwapsStream:input_type -> api.GetSwapsStreamRequest
+	112, // 332: api.Api.GetPerpOrderbooksStream:input_type -> api.GetPerpOrderbooksRequest
+	156, // 333: api.Api.GetPerpTradesStream:input_type -> api.GetPerpTradesStreamRequest
+	134, // 334: api.Api.PostCloseDriftPerpPositions:output_type -> api.PostCloseDriftPerpPositionsResponse
+	136, // 335: api.Api.GetDriftPerpOrderbook:output_type -> api.GetDriftPerpOrderbookResponse
+	130, // 336: api.Api.PostCreateDriftUser:output_type -> api.PostCreateDriftUserResponse
+	132, // 337: api.Api.GetDriftUser:output_type -> api.GetDriftUserResponse
+	178, // 338: api.Api.PostDriftManageCollateral:output_type -> api.PostDriftManageCollateralResponse
+	182, // 339: api.Api.PostDriftSettlePNL:output_type -> api.PostDriftSettlePNLResponse
+	186, // 340: api.Api.PostDriftSettlePNLs:output_type -> api.PostDriftSettlePNLsResponse
+	184, // 341: api.Api.GetDriftAssets:output_type -> api.GetDriftAssetsResponse
+	180, // 342: api.Api.GetDriftPerpContracts:output_type -> api.GetDriftPerpContractsResponse
+	188, // 343: api.Api.PostLiquidateDriftPerp:output_type -> api.PostLiquidateDriftPerpResponse
+	176, // 344: api.Api.GetDriftOpenPerpOrder:output_type -> api.GetDriftOpenPerpOrderResponse
+	174, // 345: api.Api.GetDriftOpenMarginOrder:output_type -> api.GetDriftOpenMarginOrderResponse
+	199, // 346: api.Api.GetDriftPerpPositions:output_type -> api.GetDriftPerpPositionsResponse
+	192, // 347: api.Api.GetDriftOpenPerpOrders:output_type -> api.GetDriftOpenPerpOrdersResponse
+	196, // 348: api.Api.PostDriftCancelPerpOrder:output_type -> api.PostDriftCancelPerpOrderResponse
+	126, // 349: api.Api.PostModifyDriftOrder:output_type -> api.PostModifyDriftOrderResponse
+	124, // 350: api.Api.PostCancelDriftMarginOrder:output_type -> api.PostCancelDriftMarginOrderResponse
+	140, // 351: api.Api.GetDriftOpenMarginOrders:output_type -> api.GetDriftOpenMarginOrdersResponse
+	209, // 352: api.Api.GetDriftMarkets:output_type -> api.GetDriftMarketsResponse
+	153, // 353: api.Api.PostDriftMarginOrder:output_type -> api.PostDriftMarginOrderResponse
+	155, // 354: api.Api.PostDriftEnableMarginTrading:output_type -> api.PostDriftEnableMarginTradingResponse
+	205, // 355: api.Api.GetDriftMarginOrderbook:output_type -> api.GetDriftMarginOrderbookResponse
+	216, // 356: api.Api.GetDriftMarketDepth:output_type -> api.GetDriftMarketDepthResponse
+	202, // 357: api.Api.GetDriftMarginOrderbooksStream:output_type -> api.GetDriftMarginOrderbooksStreamResponse
+	213, // 358: api.Api.GetDriftMarketDepthsStream:output_type -> api.GetDriftMarketDepthStreamResponse
+	218, // 359: api.Api.GetMarketsV2:output_type -> api.GetMarketsResponseV2
+	14,  // 360: api.Api.GetTickersV2:output_type -> api.GetTickersResponseV2
+	221, // 361: api.Api.GetOrderbookV2:output_type -> api.GetOrderbookResponseV2
+	224, // 362: api.Api.GetMarketDepthV2:output_type -> api.GetMarketDepthResponseV2
+	43,  // 363: api.Api.PostOrderV2:output_type -> api.PostOrderResponse
+	229, // 364: api.Api.PostCancelOrderV2:output_type -> api.PostCancelOrderResponseV2
+	43,  // 365: api.Api.PostReplaceOrderV2:output_type -> api.PostOrderResponse
+	51,  // 366: api.Api.PostSettleV2:output_type -> api.PostSettleResponse
+	66,  // 367: api.Api.GetOpenOrdersV2:output_type -> api.GetOpenOrdersResponse
+	72,  // 368: api.Api.GetUnsettledV2:output_type -> api.GetUnsettledResponse
+	104, // 369: api.Api.GetPrice:output_type -> api.GetPriceResponse
+	8,   // 370: api.Api.GetMarkets:output_type -> api.GetMarketsResponse
+	93,  // 371: api.Api.GetPools:output_type -> api.GetPoolsResponse
+	11,  // 372: api.Api.GetTickers:output_type -> api.GetTickersResponse
+	16,  // 373: api.Api.GetKline:output_type -> api.GetKlineResponse
+	24,  // 374: api.Api.GetOrderbook:output_type -> api.GetOrderbookResponse
+	28,  // 375: api.Api.GetMarketDepth:output_type -> api.GetMarketDepthResponse
+	31,  // 376: api.Api.GetTrades:output_type -> api.GetTradesResponse
+	78,  // 377: api.Api.GetQuotes:output_type -> api.GetQuotesResponse
+	34,  // 378: api.Api.GetServerTime:output_type -> api.GetServerTimeResponse
+	88,  // 379: api.Api.GetRecentBlockHash:output_type -> api.GetRecentBlockHashResponse
+	36,  // 380: api.Api.GetAccountBalance:output_type -> api.GetAccountBalanceResponse
+	39,  // 381: api.Api.GetTokenAccounts:output_type -> api.GetTokenAccountsResponse
+	43,  // 382: api.Api.PostOrder:output_type -> api.PostOrderResponse
+	62,  // 383: api.Api.PostSubmit:output_type -> api.PostSubmitResponse
+	64,  // 384: api.Api.PostSubmitBatch:output_type -> api.PostSubmitBatchResponse
+	46,  // 385: api.Api.PostCancelOrder:output_type -> api.PostCancelOrderResponse
+	46,  // 386: api.Api.PostCancelByClientOrderID:output_type -> api.PostCancelOrderResponse
+	49,  // 387: api.Api.PostCancelAll:output_type -> api.PostCancelAllResponse
+	43,  // 388: api.Api.PostReplaceByClientOrderID:output_type -> api.PostOrderResponse
+	43,  // 389: api.Api.PostReplaceOrder:output_type -> api.PostOrderResponse
+	51,  // 390: api.Api.PostSettle:output_type -> api.PostSettleResponse
+	83,  // 391: api.Api.PostTradeSwap:output_type -> api.TradeSwapResponse
+	54,  // 392: api.Api.GetOrders:output_type -> api.GetOrdersResponse
+	20,  // 393: api.Api.GetMyOrders:output_type -> api.GetMyOrdersResponse
+	66,  // 394: api.Api.GetOpenOrders:output_type -> api.GetOpenOrdersResponse
+	68,  // 395: api.Api.GetOrderByID:output_type -> api.GetOrderByIDResponse
+	72,  // 396: api.Api.GetUnsettled:output_type -> api.GetUnsettledResponse
+	83,  // 397: api.Api.PostRouteTradeSwap:output_type -> api.TradeSwapResponse
+	151, // 398: api.Api.PostPerpOrder:output_type -> api.PostPerpOrderResponse
+	146, // 399: api.Api.GetPerpPositions:output_type -> api.GetPerpPositionsResponse
+	143, // 400: api.Api.GetOpenPerpOrders:output_type -> api.GetOpenPerpOrdersResponse
+	122, // 401: api.Api.PostCancelPerpOrders:output_type -> api.PostCancelPerpOrdersResponse
+	128, // 402: api.Api.PostCancelPerpOrder:output_type -> api.PostCancelPerpOrderResponse
+	148, // 403: api.Api.PostClosePerpPositions:output_type -> api.PostClosePerpPositionsResponse
+	113, // 404: api.Api.GetPerpOrderbook:output_type -> api.GetPerpOrderbookResponse
+	120, // 405: api.Api.PostCreateUser:output_type -> api.PostCreateUserResponse
+	117, // 406: api.Api.GetUser:output_type -> api.GetUserResponse
+	138, // 407: api.Api.PostManageCollateral:output_type -> api.PostManageCollateralResponse
+	160, // 408: api.Api.PostSettlePNL:output_type -> api.PostSettlePNLResponse
+	165, // 409: api.Api.PostSettlePNLs:output_type -> api.PostSettlePNLsResponse
+	163, // 410: api.Api.GetAssets:output_type -> api.GetAssetsResponse
+	170, // 411: api.Api.GetPerpContracts:output_type -> api.GetPerpContractsResponse
+	167, // 412: api.Api.PostLiquidatePerp:output_type -> api.PostLiquidatePerpResponse
+	172, // 413: api.Api.GetOpenPerpOrder:output_type -> api.GetOpenPerpOrderResponse
+	73,  // 414: api.Api.GetOrderbooksStream:output_type -> api.GetOrderbooksStreamResponse
+	74,  // 415: api.Api.GetMarketDepthsStream:output_type -> api.GetMarketDepthsStreamResponse
+	75,  // 416: api.Api.GetTickersStream:output_type -> api.GetTickersStreamResponse
+	76,  // 417: api.Api.GetTradesStream:output_type -> api.GetTradesStreamResponse
+	57,  // 418: api.Api.GetOrderStatusStream:output_type -> api.GetOrderStatusStreamResponse
+	88,  // 419: api.Api.GetRecentBlockHashStream:output_type -> api.GetRecentBlockHashResponse
+	91,  // 420: api.Api.GetBlockStream:output_type -> api.GetBlockStreamResponse
+	97,  // 421: api.Api.GetQuotesStream:output_type -> api.GetQuotesStreamResponse
+	106, // 422: api.Api.GetPoolReservesStream:output_type -> api.GetPoolReservesStreamResponse
+	110, // 423: api.Api.GetPricesStream:output_type -> api.GetPricesStreamResponse
+	100, // 424: api.Api.GetSwapsStream:output_type -> api.GetSwapsStreamResponse
+	115, // 425: api.Api.GetPerpOrderbooksStream:output_type -> api.GetPerpOrderbooksStreamResponse
+	157, // 426: api.Api.GetPerpTradesStream:output_type -> api.GetPerpTradesStreamResponse
+	334, // [334:427] is the sub-list for method output_type
+	241, // [241:334] is the sub-list for method input_type
+	241, // [241:241] is the sub-list for extension type_name
+	241, // [241:241] is the sub-list for extension extendee
+	0,   // [0:241] is the sub-list for field type_name
 }
 
 func init() { file_api_proto_init() }
