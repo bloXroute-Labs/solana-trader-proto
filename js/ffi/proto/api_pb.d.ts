@@ -2274,15 +2274,6 @@ export class PostRaydiumRouteSwapResponse extends jspb.Message {
     getOutamountmin(): number;
     setOutamountmin(value: number): PostRaydiumRouteSwapResponse;
 
-    hasPriceimpact(): boolean;
-    clearPriceimpact(): void;
-    getPriceimpact(): common_pb.PriceImpactPercentV2 | undefined;
-    setPriceimpact(value?: common_pb.PriceImpactPercentV2): PostRaydiumRouteSwapResponse;
-    clearFeesList(): void;
-    getFeesList(): Array<common_pb.Fee>;
-    setFeesList(value: Array<common_pb.Fee>): PostRaydiumRouteSwapResponse;
-    addFees(value?: common_pb.Fee, index?: number): common_pb.Fee;
-
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostRaydiumRouteSwapResponse.AsObject;
     static toObject(includeInstance: boolean, msg: PostRaydiumRouteSwapResponse): PostRaydiumRouteSwapResponse.AsObject;
@@ -2298,8 +2289,6 @@ export namespace PostRaydiumRouteSwapResponse {
         transactionsList: Array<TransactionMessage.AsObject>,
         outamount: number,
         outamountmin: number,
-        priceimpact?: common_pb.PriceImpactPercentV2.AsObject,
-        feesList: Array<common_pb.Fee.AsObject>,
     }
 }
 

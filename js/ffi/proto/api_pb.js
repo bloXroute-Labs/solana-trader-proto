@@ -22753,7 +22753,7 @@ proto.api.PostJupiterSwapResponse.prototype.clearFeesList = function() {
  * @private {!Array<number>}
  * @const
  */
-proto.api.PostRaydiumRouteSwapResponse.repeatedFields_ = [1,5];
+proto.api.PostRaydiumRouteSwapResponse.repeatedFields_ = [1];
 
 
 
@@ -22789,10 +22789,7 @@ proto.api.PostRaydiumRouteSwapResponse.toObject = function(includeInstance, msg)
     transactionsList: jspb.Message.toObjectList(msg.getTransactionsList(),
     proto.api.TransactionMessage.toObject, includeInstance),
     outamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
-    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
-    priceimpact: (f = msg.getPriceimpact()) && common_pb.PriceImpactPercentV2.toObject(includeInstance, f),
-    feesList: jspb.Message.toObjectList(msg.getFeesList(),
-    common_pb.Fee.toObject, includeInstance)
+    outamountmin: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0)
   };
 
   if (includeInstance) {
@@ -22841,16 +22838,6 @@ proto.api.PostRaydiumRouteSwapResponse.deserializeBinaryFromReader = function(ms
     case 3:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setOutamountmin(value);
-      break;
-    case 4:
-      var value = new common_pb.PriceImpactPercentV2;
-      reader.readMessage(value,common_pb.PriceImpactPercentV2.deserializeBinaryFromReader);
-      msg.setPriceimpact(value);
-      break;
-    case 5:
-      var value = new common_pb.Fee;
-      reader.readMessage(value,common_pb.Fee.deserializeBinaryFromReader);
-      msg.addFees(value);
       break;
     default:
       reader.skipField();
@@ -22901,22 +22888,6 @@ proto.api.PostRaydiumRouteSwapResponse.serializeBinaryToWriter = function(messag
     writer.writeDouble(
       3,
       f
-    );
-  }
-  f = message.getPriceimpact();
-  if (f != null) {
-    writer.writeMessage(
-      4,
-      f,
-      common_pb.PriceImpactPercentV2.serializeBinaryToWriter
-    );
-  }
-  f = message.getFeesList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
-      5,
-      f,
-      common_pb.Fee.serializeBinaryToWriter
     );
   }
 };
@@ -22993,81 +22964,6 @@ proto.api.PostRaydiumRouteSwapResponse.prototype.getOutamountmin = function() {
  */
 proto.api.PostRaydiumRouteSwapResponse.prototype.setOutamountmin = function(value) {
   return jspb.Message.setProto3FloatField(this, 3, value);
-};
-
-
-/**
- * optional common.PriceImpactPercentV2 priceImpact = 4;
- * @return {?proto.common.PriceImpactPercentV2}
- */
-proto.api.PostRaydiumRouteSwapResponse.prototype.getPriceimpact = function() {
-  return /** @type{?proto.common.PriceImpactPercentV2} */ (
-    jspb.Message.getWrapperField(this, common_pb.PriceImpactPercentV2, 4));
-};
-
-
-/**
- * @param {?proto.common.PriceImpactPercentV2|undefined} value
- * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
-*/
-proto.api.PostRaydiumRouteSwapResponse.prototype.setPriceimpact = function(value) {
-  return jspb.Message.setWrapperField(this, 4, value);
-};
-
-
-/**
- * Clears the message field making it undefined.
- * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
- */
-proto.api.PostRaydiumRouteSwapResponse.prototype.clearPriceimpact = function() {
-  return this.setPriceimpact(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {boolean}
- */
-proto.api.PostRaydiumRouteSwapResponse.prototype.hasPriceimpact = function() {
-  return jspb.Message.getField(this, 4) != null;
-};
-
-
-/**
- * repeated common.Fee fees = 5;
- * @return {!Array<!proto.common.Fee>}
- */
-proto.api.PostRaydiumRouteSwapResponse.prototype.getFeesList = function() {
-  return /** @type{!Array<!proto.common.Fee>} */ (
-    jspb.Message.getRepeatedWrapperField(this, common_pb.Fee, 5));
-};
-
-
-/**
- * @param {!Array<!proto.common.Fee>} value
- * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
-*/
-proto.api.PostRaydiumRouteSwapResponse.prototype.setFeesList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 5, value);
-};
-
-
-/**
- * @param {!proto.common.Fee=} opt_value
- * @param {number=} opt_index
- * @return {!proto.common.Fee}
- */
-proto.api.PostRaydiumRouteSwapResponse.prototype.addFees = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 5, opt_value, proto.common.Fee, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.api.PostRaydiumRouteSwapResponse} returns this
- */
-proto.api.PostRaydiumRouteSwapResponse.prototype.clearFeesList = function() {
-  return this.setFeesList([]);
 };
 
 

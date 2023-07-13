@@ -664,8 +664,6 @@ class PostRaydiumRouteSwapResponse(betterproto.Message):
     transactions: List["TransactionMessage"] = betterproto.message_field(1)
     out_amount: float = betterproto.double_field(2)
     out_amount_min: float = betterproto.double_field(3)
-    price_impact: "_common__.PriceImpactPercentV2" = betterproto.message_field(4)
-    fees: List["_common__.Fee"] = betterproto.message_field(5)
 
 
 @dataclass(eq=False, repr=False)

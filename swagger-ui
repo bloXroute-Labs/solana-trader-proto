@@ -2654,7 +2654,7 @@
     },
     "/api/v2/jupiter/prices": {
       "get": {
-        "summary": "Token prices on Rayidum",
+        "summary": "Token prices on Jupiter",
         "description": "Returns the list of prices for specified tokens on Jupiter",
         "operationId": "Api_GetJupiterPrices",
         "responses": {
@@ -6303,15 +6303,6 @@
         "outAmountMin": {
           "type": "number",
           "format": "double"
-        },
-        "priceImpact": {
-          "$ref": "#/definitions/commonPriceImpactPercentV2"
-        },
-        "fees": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/commonFee"
-          }
         }
       }
     },
