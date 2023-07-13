@@ -51,6 +51,115 @@ service Api {
     }
   };
 
+  // Raydium V2
+  rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/pools"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of Raydium pools";
+      summary: "Raydium Pools";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumQuotes(GetRaydiumQuotesRequest) returns (GetRaydiumQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Raydium";
+      summary: "Raydium Quotes";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumPrices(GetRaydiumPricesRequest) returns (GetRaydiumPricesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/prices"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for specified tokens on Raydium";
+      summary: "Token prices on Rayidum";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumSwap(PostRaydiumSwapRequest) returns (PostRaydiumSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium";
+      summary: "Unsigned Raydium swap transaction";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumRouteSwap(PostRaydiumRouteSwapRequest) returns (PostRaydiumRouteSwapResponse) {
+    option(google.api.http) = {
+      post: "/api/v2/raydium/route-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium on the specified route";
+      summary: "Unsigned Raydium swap transaction along route";
+      tags: ["Raydium V2"];
+    };
+  }
+  // End of Raydium V2
+
+  // Jupiter V2
+  rpc GetJupiterQuotes(GetJupiterQuotesRequest) returns (GetJupiterQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/jupiter/quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Jupiter";
+      summary: "Jupiter Quotes";
+      tags: ["Jupiter V2"];
+    };
+  }
+
+  rpc GetJupiterPrices(GetJupiterPricesRequest) returns (GetJupiterPricesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/jupiter/prices"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for specified tokens on Jupiter";
+      summary: "Token prices on Jupiter";
+      tags: ["Jupiter V2"];
+    };
+  }
+
+  rpc PostJupiterSwap(PostJupiterSwapRequest) returns (PostJupiterSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/jupiter/swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Jupiter";
+      summary: "Unsigned Jupiter swap transaction";
+      tags: ["Jupiter V2"];
+    };
+  }
+
+  rpc PostJupiterRouteSwap(PostJupiterRouteSwapRequest) returns (PostJupiterRouteSwapResponse) {
+    option(google.api.http) = {
+      post: "/api/v2/jupiter/route-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Jupiter on the specified route";
+      summary: "Unsigned Jupiter swap transaction along route";
+      tags: ["Jupiter V2"];
+    };
+  }
+  // End of Jupiter V2
+
+
+
   // Drift V2
   rpc PostCloseDriftPerpPositions(PostCloseDriftPerpPositionsRequest) returns (PostCloseDriftPerpPositionsResponse) {
     option (google.api.http) = {
@@ -447,7 +556,7 @@ service Api {
     };
   }
 
-  //end o Openbook V2
+  //end of Openbook V2
 
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
     option (google.api.http) = {
@@ -1498,13 +1607,47 @@ message GetQuotesRequest{
   repeated Project projects = 6;
 }
 
-message GetQuotesResponse{
+message GetQuotesResponse {
   string inToken = 1;
   string inTokenAddress = 2;
   string outToken = 3;
   string outTokenAddress = 4;
   double inAmount = 5;
   repeated ProjectQuote quotes = 6;
+}
+
+message GetRaydiumQuotesRequest {
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+  int32 limit = 5;
+}
+
+message GetRaydiumQuotesResponse{
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated RaydiumQuoteRoute routes = 6;
+}
+
+message GetJupiterQuotesRequest{
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+  int32 limit = 5;
+}
+
+message GetJupiterQuotesResponse{
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated JupiterQuoteRoute routes = 6;
 }
 
 message ProjectQuote {
@@ -1521,11 +1664,87 @@ message TradeSwapRequest {
   double slippage = 6;
 }
 
+message PostJupiterSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+}
+
+message PostRaydiumSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+}
+
+message PostRaydiumSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
+message PostJupiterSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
+message PostRaydiumRouteSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+}
+
+message PostJupiterRouteSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
 message RouteTradeSwapRequest {
   Project project = 1;
   string ownerAddress = 2;
   repeated RouteStep steps = 3;
   double slippage = 4;
+}
+
+message PostRaydiumRouteSwapRequest {
+  string ownerAddress = 1;
+  repeated RaydiumRouteStep steps = 2;
+  double slippage = 3;
+}
+
+message RaydiumRouteStep {
+  string inToken = 1;
+  double inAmount = 2;
+  string outToken = 3;
+  double outAmount = 4;
+  double outAmountMin = 5;
+  string poolAddress = 6;
+}
+
+message PostJupiterRouteSwapRequest {
+  string ownerAddress = 1;
+  repeated JupiterRouteStep steps = 2;
+  double slippage = 3;
+}
+
+message JupiterRouteStep {
+  string inToken = 1;
+  double inAmount = 2;
+  string outToken = 3;
+  double outAmount = 4;
+  double outAmountMin = 5;
+  StepProject project = 6;
 }
 
 message RouteStep {
@@ -1577,6 +1796,47 @@ message QuoteStep {
   double outAmountMin = 11;
 }
 
+message JupiterQuoteRoute {
+  double inAmount = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  repeated JupiterQuoteStep steps = 4;
+}
+
+message JupiterQuoteStep {
+  StepProject project = 1;
+  string inToken = 2;
+  string inTokenAddress = 3;
+  string outToken = 4;
+  string outTokenAddress = 5;
+  double inAmount = 6;
+  double outAmount = 7;
+  double slippage = 8;
+  common.PriceImpactPercentV2 priceImpactPercent = 9;
+  common.Fee fee = 10;
+  double outAmountMin = 11;
+}
+
+message RaydiumQuoteRoute {
+  double inAmount = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  repeated RaydiumQuoteStep steps = 4;
+}
+
+message RaydiumQuoteStep {
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  double outAmount = 6;
+  double slippage = 7;
+  common.PriceImpactPercentV2 priceImpactPercent = 8;
+  common.Fee fee = 10;
+  double outAmountMin = 11;
+}
+
 message StepProject {
   string label = 1;
   string id = 2;
@@ -1610,6 +1870,14 @@ message GetPoolsRequest {
 
 message GetPoolsResponse {
   repeated ProjectPools projects = 1;
+}
+
+message GetRaydiumPoolsRequest {
+  string pairOrAddress = 1;
+}
+
+message GetRaydiumPoolsResponse {
+  repeated ProjectPool pools = 1;
 }
 
 message ProjectPools {
@@ -1691,6 +1959,22 @@ message GetPriceResponse {
   repeated TokenPrice tokenPrices = 1;
 }
 
+message GetRaydiumPricesRequest {
+  repeated string tokens = 1;
+}
+
+message GetJupiterPricesRequest {
+  repeated string tokens = 1;
+}
+
+message GetRaydiumPricesResponse {
+  repeated TokenPriceV2 tokenPrices = 1;
+}
+
+message GetJupiterPricesResponse {
+  repeated TokenPriceV2 tokenPrices = 1;
+}
+
 message TokenPrice {
   string token = 1;
   string tokenAddress = 2;
@@ -1699,6 +1983,15 @@ message TokenPrice {
   double buySize = 5;
   double sell = 6;
   double sellSize = 7;
+}
+
+message TokenPriceV2 {
+  string token = 1;
+  string tokenAddress = 2;
+  double buy = 3;
+  double buySize = 4;
+  double sell = 5;
+  double sellSize = 6;
 }
 
 message GetPoolReservesStreamResponse {

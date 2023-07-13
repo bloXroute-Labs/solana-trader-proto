@@ -29,6 +29,29 @@ export namespace PriceImpactPercent {
     }
 }
 
+export class PriceImpactPercentV2 extends jspb.Message { 
+    getPercent(): number;
+    setPercent(value: number): PriceImpactPercentV2;
+    getInfinity(): string;
+    setInfinity(value: string): PriceImpactPercentV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PriceImpactPercentV2.AsObject;
+    static toObject(includeInstance: boolean, msg: PriceImpactPercentV2): PriceImpactPercentV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PriceImpactPercentV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PriceImpactPercentV2;
+    static deserializeBinaryFromReader(message: PriceImpactPercentV2, reader: jspb.BinaryReader): PriceImpactPercentV2;
+}
+
+export namespace PriceImpactPercentV2 {
+    export type AsObject = {
+        percent: number,
+        infinity: string,
+    }
+}
+
 export class Fee extends jspb.Message { 
     getAmount(): number;
     setAmount(value: number): Fee;

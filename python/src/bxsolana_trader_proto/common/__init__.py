@@ -84,6 +84,12 @@ class PriceImpactPercent(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PriceImpactPercentV2(betterproto.Message):
+    percent: float = betterproto.double_field(1)
+    infinity: str = betterproto.string_field(2)
+
+
+@dataclass(eq=False, repr=False)
 class Fee(betterproto.Message):
     amount: float = betterproto.float_field(1)
     mint: str = betterproto.string_field(2)
