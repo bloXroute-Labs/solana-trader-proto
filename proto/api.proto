@@ -1621,7 +1621,6 @@ message GetRaydiumQuotesRequest {
   string outToken = 2;
   double inAmount = 3;
   double slippage = 4;
-  int32 limit = 5;
 }
 
 message GetRaydiumQuotesResponse{

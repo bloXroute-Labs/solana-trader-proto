@@ -20044,8 +20044,7 @@ proto.api.GetRaydiumQuotesRequest.toObject = function(includeInstance, msg) {
     intoken: jspb.Message.getFieldWithDefault(msg, 1, ""),
     outtoken: jspb.Message.getFieldWithDefault(msg, 2, ""),
     inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
-    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
-    limit: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
   };
 
   if (includeInstance) {
@@ -20097,10 +20096,6 @@ proto.api.GetRaydiumQuotesRequest.deserializeBinaryFromReader = function(msg, re
     case 4:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setSlippage(value);
-      break;
-    case 5:
-      var value = /** @type {number} */ (reader.readInt32());
-      msg.setLimit(value);
       break;
     default:
       reader.skipField();
@@ -20156,13 +20151,6 @@ proto.api.GetRaydiumQuotesRequest.serializeBinaryToWriter = function(message, wr
   if (f !== 0.0) {
     writer.writeDouble(
       4,
-      f
-    );
-  }
-  f = message.getLimit();
-  if (f !== 0) {
-    writer.writeInt32(
-      5,
       f
     );
   }
@@ -20238,24 +20226,6 @@ proto.api.GetRaydiumQuotesRequest.prototype.getSlippage = function() {
  */
 proto.api.GetRaydiumQuotesRequest.prototype.setSlippage = function(value) {
   return jspb.Message.setProto3FloatField(this, 4, value);
-};
-
-
-/**
- * optional int32 limit = 5;
- * @return {number}
- */
-proto.api.GetRaydiumQuotesRequest.prototype.getLimit = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetRaydiumQuotesRequest} returns this
- */
-proto.api.GetRaydiumQuotesRequest.prototype.setLimit = function(value) {
-  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
