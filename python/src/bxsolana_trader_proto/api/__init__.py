@@ -575,7 +575,6 @@ class GetRaydiumQuotesRequest(betterproto.Message):
     out_token: str = betterproto.string_field(2)
     in_amount: float = betterproto.double_field(3)
     slippage: float = betterproto.double_field(4)
-    limit: int = betterproto.int32_field(5)
 
 
 @dataclass(eq=False, repr=False)

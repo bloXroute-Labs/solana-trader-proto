@@ -1933,8 +1933,6 @@ export class GetRaydiumQuotesRequest extends jspb.Message {
     setInamount(value: number): GetRaydiumQuotesRequest;
     getSlippage(): number;
     setSlippage(value: number): GetRaydiumQuotesRequest;
-    getLimit(): number;
-    setLimit(value: number): GetRaydiumQuotesRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetRaydiumQuotesRequest.AsObject;
@@ -1952,7 +1950,6 @@ export namespace GetRaydiumQuotesRequest {
         outtoken: string,
         inamount: number,
         slippage: number,
-        limit: number,
     }
 }
 
