@@ -1330,7 +1330,7 @@ class PerpPosition(betterproto.Message):
     liquidation_price: float = betterproto.double_field(8)
     account_address: str = betterproto.string_field(9)
     sub_account_id: int = betterproto.int64_field(10)
-    unrealized_pnl: int = betterproto.int64_field(11)
+    unrealized_pnl: float = betterproto.double_field(11)
 
 
 @dataclass(eq=False, repr=False)

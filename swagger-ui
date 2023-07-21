@@ -5295,8 +5295,8 @@
           "format": "int64"
         },
         "unrealizedPNL": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         }
       }
     },

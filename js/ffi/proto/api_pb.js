@@ -42526,7 +42526,7 @@ proto.api.PerpPosition.toObject = function(includeInstance, msg) {
     liquidationprice: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
     accountaddress: jspb.Message.getFieldWithDefault(msg, 9, ""),
     subaccountid: jspb.Message.getFieldWithDefault(msg, 10, 0),
-    unrealizedpnl: jspb.Message.getFieldWithDefault(msg, 11, 0)
+    unrealizedpnl: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0)
   };
 
   if (includeInstance) {
@@ -42604,7 +42604,7 @@ proto.api.PerpPosition.deserializeBinaryFromReader = function(msg, reader) {
       msg.setSubaccountid(value);
       break;
     case 11:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = /** @type {number} */ (reader.readDouble());
       msg.setUnrealizedpnl(value);
       break;
     default:
@@ -42707,8 +42707,8 @@ proto.api.PerpPosition.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getUnrealizedpnl();
-  if (f !== 0) {
-    writer.writeInt64(
+  if (f !== 0.0) {
+    writer.writeDouble(
       11,
       f
     );
@@ -42897,11 +42897,11 @@ proto.api.PerpPosition.prototype.setSubaccountid = function(value) {
 
 
 /**
- * optional int64 unrealizedPNL = 11;
+ * optional double unrealizedPNL = 11;
  * @return {number}
  */
 proto.api.PerpPosition.prototype.getUnrealizedpnl = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 11, 0.0));
 };
 
 
@@ -42910,7 +42910,7 @@ proto.api.PerpPosition.prototype.getUnrealizedpnl = function() {
  * @return {!proto.api.PerpPosition} returns this
  */
 proto.api.PerpPosition.prototype.setUnrealizedpnl = function(value) {
-  return jspb.Message.setProto3IntField(this, 11, value);
+  return jspb.Message.setProto3FloatField(this, 11, value);
 };
 
 
