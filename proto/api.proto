@@ -2310,7 +2310,7 @@ message PerpPosition {
 
   string accountAddress = 9;
   int64 subAccountID = 10;
-  int64 unrealizedPNL = 11;
+  double unrealizedPNL = 11;
 }
 
 message PostPerpOrderRequest {
