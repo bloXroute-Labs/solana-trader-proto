@@ -5836,7 +5836,7 @@
           "format": "uint64"
         },
         "postOnly": {
-          "$ref": "#/definitions/commonPostOnlyParams"
+          "type": "string"
         }
       }
     },

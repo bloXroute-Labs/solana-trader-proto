@@ -44087,7 +44087,7 @@ proto.api.PostDriftMarginOrderRequest.toObject = function(includeInstance, msg) 
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
-    postonly: jspb.Message.getFieldWithDefault(msg, 10, 0)
+    postonly: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -44161,7 +44161,7 @@ proto.api.PostDriftMarginOrderRequest.deserializeBinaryFromReader = function(msg
       msg.setClientorderid(value);
       break;
     case 10:
-      var value = /** @type {!proto.common.PostOnlyParams} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setPostonly(value);
       break;
     default:
@@ -44257,8 +44257,8 @@ proto.api.PostDriftMarginOrderRequest.serializeBinaryToWriter = function(message
     );
   }
   f = message.getPostonly();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       10,
       f
     );
@@ -44429,20 +44429,20 @@ proto.api.PostDriftMarginOrderRequest.prototype.setClientorderid = function(valu
 
 
 /**
- * optional common.PostOnlyParams postOnly = 10;
- * @return {!proto.common.PostOnlyParams}
+ * optional string postOnly = 10;
+ * @return {string}
  */
 proto.api.PostDriftMarginOrderRequest.prototype.getPostonly = function() {
-  return /** @type {!proto.common.PostOnlyParams} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
 };
 
 
 /**
- * @param {!proto.common.PostOnlyParams} value
+ * @param {string} value
  * @return {!proto.api.PostDriftMarginOrderRequest} returns this
  */
 proto.api.PostDriftMarginOrderRequest.prototype.setPostonly = function(value) {
-  return jspb.Message.setProto3EnumField(this, 10, value);
+  return jspb.Message.setProto3StringField(this, 10, value);
 };
 
 

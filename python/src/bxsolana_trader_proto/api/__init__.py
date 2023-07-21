@@ -1383,7 +1383,7 @@ class PostDriftMarginOrderRequest(betterproto.Message):
     amount: float = betterproto.double_field(7)
     price: float = betterproto.double_field(8)
     client_order_id: int = betterproto.uint64_field(9)
-    post_only: "_common__.PostOnlyParams" = betterproto.enum_field(10)
+    post_only: str = betterproto.string_field(10)
 
 
 @dataclass(eq=False, repr=False)

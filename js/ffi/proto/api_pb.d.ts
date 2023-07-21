@@ -5026,8 +5026,8 @@ export class PostDriftMarginOrderRequest extends jspb.Message {
     setPrice(value: number): PostDriftMarginOrderRequest;
     getClientorderid(): number;
     setClientorderid(value: number): PostDriftMarginOrderRequest;
-    getPostonly(): common_pb.PostOnlyParams;
-    setPostonly(value: common_pb.PostOnlyParams): PostDriftMarginOrderRequest;
+    getPostonly(): string;
+    setPostonly(value: string): PostDriftMarginOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostDriftMarginOrderRequest.AsObject;
@@ -5050,7 +5050,7 @@ export namespace PostDriftMarginOrderRequest {
         amount: number,
         price: number,
         clientorderid: number,
-        postonly: common_pb.PostOnlyParams,
+        postonly: string,
     }
 }
 

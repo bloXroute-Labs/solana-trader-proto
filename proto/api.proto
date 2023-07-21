@@ -2358,7 +2358,7 @@ message PostDriftMarginOrderRequest {
   double amount = 7;
   double price = 8;
   uint64 clientOrderID = 9;
-  common.PostOnlyParams postOnly = 10;
+  string postOnly = 10;
 }
 
 message PostDriftMarginOrderResponse {
