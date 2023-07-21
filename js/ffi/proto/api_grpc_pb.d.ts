@@ -27,6 +27,7 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     postCreateDriftUser: IApiService_IPostCreateDriftUser;
     getDriftUser: IApiService_IGetDriftUser;
     postDriftManageCollateral: IApiService_IPostDriftManageCollateral;
+    postDriftPerpOrder: IApiService_IPostDriftPerpOrder;
     postDriftSettlePNL: IApiService_IPostDriftSettlePNL;
     postDriftSettlePNLs: IApiService_IPostDriftSettlePNLs;
     getDriftAssets: IApiService_IGetDriftAssets;
@@ -241,6 +242,15 @@ interface IApiService_IPostDriftManageCollateral extends grpc.MethodDefinition<a
     requestDeserialize: grpc.deserialize<api_pb.PostDriftManageCollateralRequest>;
     responseSerialize: grpc.serialize<api_pb.PostDriftManageCollateralResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostDriftManageCollateralResponse>;
+}
+interface IApiService_IPostDriftPerpOrder extends grpc.MethodDefinition<api_pb.PostDriftPerpOrderRequest, api_pb.PostDriftPerpOrderResponse> {
+    path: "/api.Api/PostDriftPerpOrder";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostDriftPerpOrderRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostDriftPerpOrderRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostDriftPerpOrderResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostDriftPerpOrderResponse>;
 }
 interface IApiService_IPostDriftSettlePNL extends grpc.MethodDefinition<api_pb.PostDriftSettlePNLRequest, api_pb.PostDriftSettlePNLResponse> {
     path: "/api.Api/PostDriftSettlePNL";
@@ -1043,6 +1053,7 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     postCreateDriftUser: grpc.handleUnaryCall<api_pb.PostCreateDriftUserRequest, api_pb.PostCreateDriftUserResponse>;
     getDriftUser: grpc.handleUnaryCall<api_pb.GetDriftUserRequest, api_pb.GetDriftUserResponse>;
     postDriftManageCollateral: grpc.handleUnaryCall<api_pb.PostDriftManageCollateralRequest, api_pb.PostDriftManageCollateralResponse>;
+    postDriftPerpOrder: grpc.handleUnaryCall<api_pb.PostDriftPerpOrderRequest, api_pb.PostDriftPerpOrderResponse>;
     postDriftSettlePNL: grpc.handleUnaryCall<api_pb.PostDriftSettlePNLRequest, api_pb.PostDriftSettlePNLResponse>;
     postDriftSettlePNLs: grpc.handleUnaryCall<api_pb.PostDriftSettlePNLsRequest, api_pb.PostDriftSettlePNLsResponse>;
     getDriftAssets: grpc.handleUnaryCall<api_pb.GetDriftAssetsRequest, api_pb.GetDriftAssetsResponse>;
@@ -1175,6 +1186,9 @@ export interface IApiClient {
     postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
     postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
     postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
+    postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
+    postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
+    postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
     postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;
     postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;
     postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;
@@ -1467,6 +1481,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
     public postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
     public postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
+    public postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
+    public postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
+    public postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
     public postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;
     public postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;
     public postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;

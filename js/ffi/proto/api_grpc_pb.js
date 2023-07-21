@@ -1627,6 +1627,28 @@ function deserialize_api_PostDriftMarginOrderResponse(buffer_arg) {
   return api_pb.PostDriftMarginOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostDriftPerpOrderRequest(arg) {
+  if (!(arg instanceof api_pb.PostDriftPerpOrderRequest)) {
+    throw new Error('Expected argument of type api.PostDriftPerpOrderRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDriftPerpOrderRequest(buffer_arg) {
+  return api_pb.PostDriftPerpOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostDriftPerpOrderResponse(arg) {
+  if (!(arg instanceof api_pb.PostDriftPerpOrderResponse)) {
+    throw new Error('Expected argument of type api.PostDriftPerpOrderResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDriftPerpOrderResponse(buffer_arg) {
+  return api_pb.PostDriftPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostDriftSettlePNLRequest(arg) {
   if (!(arg instanceof api_pb.PostDriftSettlePNLRequest)) {
     throw new Error('Expected argument of type api.PostDriftSettlePNLRequest');
@@ -2236,6 +2258,17 @@ postCloseDriftPerpPositions: {
     requestDeserialize: deserialize_api_PostDriftManageCollateralRequest,
     responseSerialize: serialize_api_PostDriftManageCollateralResponse,
     responseDeserialize: deserialize_api_PostDriftManageCollateralResponse,
+  },
+  postDriftPerpOrder: {
+    path: '/api.Api/PostDriftPerpOrder',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostDriftPerpOrderRequest,
+    responseType: api_pb.PostDriftPerpOrderResponse,
+    requestSerialize: serialize_api_PostDriftPerpOrderRequest,
+    requestDeserialize: deserialize_api_PostDriftPerpOrderRequest,
+    responseSerialize: serialize_api_PostDriftPerpOrderResponse,
+    responseDeserialize: deserialize_api_PostDriftPerpOrderResponse,
   },
   postDriftSettlePNL: {
     path: '/api.Api/PostDriftSettlePNL',
