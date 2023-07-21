@@ -5855,7 +5855,7 @@
           "type": "string"
         },
         "contract": {
-          "$ref": "#/definitions/commonPerpContract"
+          "type": "string"
         },
         "accountAddress": {
           "type": "string"

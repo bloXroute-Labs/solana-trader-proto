@@ -4940,8 +4940,8 @@ export namespace PostPerpOrderResponse {
 export class PostDriftPerpOrderRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): PostDriftPerpOrderRequest;
-    getContract(): common_pb.PerpContract;
-    setContract(value: common_pb.PerpContract): PostDriftPerpOrderRequest;
+    getContract(): string;
+    setContract(value: string): PostDriftPerpOrderRequest;
     getAccountaddress(): string;
     setAccountaddress(value: string): PostDriftPerpOrderRequest;
     getPositionside(): string;
@@ -4972,7 +4972,7 @@ export class PostDriftPerpOrderRequest extends jspb.Message {
 export namespace PostDriftPerpOrderRequest {
     export type AsObject = {
         owneraddress: string,
-        contract: common_pb.PerpContract,
+        contract: string,
         accountaddress: string,
         positionside: string,
         slippage: number,

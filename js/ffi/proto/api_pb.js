@@ -43528,7 +43528,7 @@ proto.api.PostDriftPerpOrderRequest.prototype.toObject = function(opt_includeIns
 proto.api.PostDriftPerpOrderRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    contract: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    contract: jspb.Message.getFieldWithDefault(msg, 2, ""),
     accountaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     positionside: jspb.Message.getFieldWithDefault(msg, 4, ""),
     slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
@@ -43578,7 +43578,7 @@ proto.api.PostDriftPerpOrderRequest.deserializeBinaryFromReader = function(msg, 
       msg.setOwneraddress(value);
       break;
     case 2:
-      var value = /** @type {!proto.common.PerpContract} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setContract(value);
       break;
     case 3:
@@ -43650,8 +43650,8 @@ proto.api.PostDriftPerpOrderRequest.serializeBinaryToWriter = function(message, 
     );
   }
   f = message.getContract();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
@@ -43734,20 +43734,20 @@ proto.api.PostDriftPerpOrderRequest.prototype.setOwneraddress = function(value) 
 
 
 /**
- * optional common.PerpContract contract = 2;
- * @return {!proto.common.PerpContract}
+ * optional string contract = 2;
+ * @return {string}
  */
 proto.api.PostDriftPerpOrderRequest.prototype.getContract = function() {
-  return /** @type {!proto.common.PerpContract} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {!proto.common.PerpContract} value
+ * @param {string} value
  * @return {!proto.api.PostDriftPerpOrderRequest} returns this
  */
 proto.api.PostDriftPerpOrderRequest.prototype.setContract = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

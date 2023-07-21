@@ -2333,7 +2333,7 @@ message PostPerpOrderResponse {
 
 message PostDriftPerpOrderRequest {
   string ownerAddress = 1;
-  common.PerpContract contract = 2;
+  string contract = 2;
   string accountAddress = 3;
   string positionSide = 4;
   double slippage = 5;

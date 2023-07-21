@@ -1356,7 +1356,7 @@ class PostPerpOrderResponse(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostDriftPerpOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
-    contract: "_common__.PerpContract" = betterproto.enum_field(2)
+    contract: str = betterproto.string_field(2)
     account_address: str = betterproto.string_field(3)
     position_side: str = betterproto.string_field(4)
     slippage: float = betterproto.double_field(5)
