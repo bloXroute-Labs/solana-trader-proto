@@ -16104,7 +16104,7 @@ func (x *GetDriftMarketDepthResponse) GetData() *GetDriftMarketDepthValue {
 	return nil
 }
 
-//Openbook V2 Messages
+// Openbook V2 Messages
 type GetMarketsRequestV2 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
