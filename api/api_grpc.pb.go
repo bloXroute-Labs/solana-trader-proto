@@ -35,6 +35,7 @@ type ApiClient interface {
 	PostCreateDriftUser(ctx context.Context, in *PostCreateDriftUserRequest, opts ...grpc.CallOption) (*PostCreateDriftUserResponse, error)
 	GetDriftUser(ctx context.Context, in *GetDriftUserRequest, opts ...grpc.CallOption) (*GetDriftUserResponse, error)
 	PostDriftManageCollateral(ctx context.Context, in *PostDriftManageCollateralRequest, opts ...grpc.CallOption) (*PostDriftManageCollateralResponse, error)
+	PostDriftPerpOrder(ctx context.Context, in *PostDriftPerpOrderRequest, opts ...grpc.CallOption) (*PostDriftPerpOrderResponse, error)
 	PostDriftSettlePNL(ctx context.Context, in *PostDriftSettlePNLRequest, opts ...grpc.CallOption) (*PostDriftSettlePNLResponse, error)
 	PostDriftSettlePNLs(ctx context.Context, in *PostDriftSettlePNLsRequest, opts ...grpc.CallOption) (*PostDriftSettlePNLsResponse, error)
 	GetDriftAssets(ctx context.Context, in *GetDriftAssetsRequest, opts ...grpc.CallOption) (*GetDriftAssetsResponse, error)
@@ -274,6 +275,15 @@ func (c *apiClient) GetDriftUser(ctx context.Context, in *GetDriftUserRequest, o
 func (c *apiClient) PostDriftManageCollateral(ctx context.Context, in *PostDriftManageCollateralRequest, opts ...grpc.CallOption) (*PostDriftManageCollateralResponse, error) {
 	out := new(PostDriftManageCollateralResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostDriftManageCollateral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostDriftPerpOrder(ctx context.Context, in *PostDriftPerpOrderRequest, opts ...grpc.CallOption) (*PostDriftPerpOrderResponse, error) {
+	out := new(PostDriftPerpOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostDriftPerpOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1429,6 +1439,7 @@ type ApiServer interface {
 	PostCreateDriftUser(context.Context, *PostCreateDriftUserRequest) (*PostCreateDriftUserResponse, error)
 	GetDriftUser(context.Context, *GetDriftUserRequest) (*GetDriftUserResponse, error)
 	PostDriftManageCollateral(context.Context, *PostDriftManageCollateralRequest) (*PostDriftManageCollateralResponse, error)
+	PostDriftPerpOrder(context.Context, *PostDriftPerpOrderRequest) (*PostDriftPerpOrderResponse, error)
 	PostDriftSettlePNL(context.Context, *PostDriftSettlePNLRequest) (*PostDriftSettlePNLResponse, error)
 	PostDriftSettlePNLs(context.Context, *PostDriftSettlePNLsRequest) (*PostDriftSettlePNLsResponse, error)
 	GetDriftAssets(context.Context, *GetDriftAssetsRequest) (*GetDriftAssetsResponse, error)
@@ -1586,6 +1597,9 @@ func (UnimplementedApiServer) GetDriftUser(context.Context, *GetDriftUserRequest
 }
 func (UnimplementedApiServer) PostDriftManageCollateral(context.Context, *PostDriftManageCollateralRequest) (*PostDriftManageCollateralResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostDriftManageCollateral not implemented")
+}
+func (UnimplementedApiServer) PostDriftPerpOrder(context.Context, *PostDriftPerpOrderRequest) (*PostDriftPerpOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostDriftPerpOrder not implemented")
 }
 func (UnimplementedApiServer) PostDriftSettlePNL(context.Context, *PostDriftSettlePNLRequest) (*PostDriftSettlePNLResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostDriftSettlePNL not implemented")
@@ -2109,6 +2123,24 @@ func _Api_PostDriftManageCollateral_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostDriftManageCollateral(ctx, req.(*PostDriftManageCollateralRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostDriftPerpOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostDriftPerpOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostDriftPerpOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostDriftPerpOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostDriftPerpOrder(ctx, req.(*PostDriftPerpOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3786,6 +3818,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostDriftManageCollateral",
 			Handler:    _Api_PostDriftManageCollateral_Handler,
+		},
+		{
+			MethodName: "PostDriftPerpOrder",
+			Handler:    _Api_PostDriftPerpOrder_Handler,
 		},
 		{
 			MethodName: "PostDriftSettlePNL",

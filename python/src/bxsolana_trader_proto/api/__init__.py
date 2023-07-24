@@ -1330,6 +1330,7 @@ class PerpPosition(betterproto.Message):
     liquidation_price: float = betterproto.double_field(8)
     account_address: str = betterproto.string_field(9)
     sub_account_id: int = betterproto.int64_field(10)
+    unrealized_pnl: float = betterproto.double_field(11)
 
 
 @dataclass(eq=False, repr=False)
@@ -1353,6 +1354,25 @@ class PostPerpOrderResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostDriftPerpOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    contract: str = betterproto.string_field(2)
+    account_address: str = betterproto.string_field(3)
+    position_side: str = betterproto.string_field(4)
+    slippage: float = betterproto.double_field(5)
+    type: str = betterproto.string_field(6)
+    amount: float = betterproto.double_field(7)
+    price: float = betterproto.double_field(8)
+    client_order_id: int = betterproto.uint64_field(9)
+    post_only: str = betterproto.string_field(10)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftPerpOrderResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostDriftMarginOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
@@ -1363,7 +1383,7 @@ class PostDriftMarginOrderRequest(betterproto.Message):
     amount: float = betterproto.double_field(7)
     price: float = betterproto.double_field(8)
     client_order_id: int = betterproto.uint64_field(9)
-    post_only: "_common__.PostOnlyParams" = betterproto.enum_field(10)
+    post_only: str = betterproto.string_field(10)
 
 
 @dataclass(eq=False, repr=False)
@@ -1728,6 +1748,7 @@ class DriftPerpPosition(betterproto.Message):
     notional_value: float = betterproto.double_field(8)
     index_price: float = betterproto.double_field(9)
     liquidation_price: float = betterproto.double_field(10)
+    unrealized_pnl: float = betterproto.double_field(11)
 
 
 @dataclass(eq=False, repr=False)
@@ -2231,6 +2252,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostDriftManageCollateral",
             post_drift_manage_collateral_request,
             PostDriftManageCollateralResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_drift_perp_order(
+        self,
+        post_drift_perp_order_request: "PostDriftPerpOrderRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostDriftPerpOrderResponse":
+        return await self._unary_unary(
+            "/api.Api/PostDriftPerpOrder",
+            post_drift_perp_order_request,
+            PostDriftPerpOrderResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3803,6 +3841,11 @@ class ApiBase(ServiceBase):
     ) -> "PostDriftManageCollateralResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_drift_perp_order(
+        self, post_drift_perp_order_request: "PostDriftPerpOrderRequest"
+    ) -> "PostDriftPerpOrderResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_drift_settle_pnl(
         self, post_drift_settle_pnl_request: "PostDriftSettlePnlRequest"
     ) -> "PostDriftSettlePnlResponse":
@@ -4363,6 +4406,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_drift_manage_collateral(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_drift_perp_order(
+        self,
+        stream: "grpclib.server.Stream[PostDriftPerpOrderRequest, PostDriftPerpOrderResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_drift_perp_order(request)
         await stream.send_message(response)
 
     async def __rpc_post_drift_settle_pnl(
@@ -5167,6 +5218,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostDriftManageCollateralRequest,
                 PostDriftManageCollateralResponse,
+            ),
+            "/api.Api/PostDriftPerpOrder": grpclib.const.Handler(
+                self.__rpc_post_drift_perp_order,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostDriftPerpOrderRequest,
+                PostDriftPerpOrderResponse,
             ),
             "/api.Api/PostDriftSettlePNL": grpclib.const.Handler(
                 self.__rpc_post_drift_settle_pnl,

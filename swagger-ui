@@ -2374,7 +2374,7 @@
           }
         ],
         "tags": [
-          "Drift V2"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2459,6 +2459,40 @@
             "required": false,
             "type": "integer",
             "format": "int64"
+          }
+        ],
+        "tags": [
+          "Drift Perp V2"
+        ]
+      }
+    },
+    "/api/v2/drift/perp/place": {
+      "post": {
+        "summary": "perp order on Drift",
+        "description": "posts a perp order on Drift",
+        "operationId": "Api_PostDriftPerpOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftPerpOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftPerpOrderRequest"
+            }
           }
         ],
         "tags": [
@@ -3723,6 +3757,10 @@
           "format": "double"
         },
         "liquidationPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "unrealizedPNL": {
           "type": "number",
           "format": "double"
         }
@@ -5255,6 +5293,10 @@
         "subAccountID": {
           "type": "string",
           "format": "int64"
+        },
+        "unrealizedPNL": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -5794,11 +5836,58 @@
           "format": "uint64"
         },
         "postOnly": {
-          "$ref": "#/definitions/commonPostOnlyParams"
+          "type": "string"
         }
       }
     },
     "apiPostDriftMarginOrderResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostDriftPerpOrderRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "contract": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "positionSide": {
+          "type": "string"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "postOnly": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostDriftPerpOrderResponse": {
       "type": "object",
       "properties": {
         "transaction": {

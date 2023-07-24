@@ -219,6 +219,18 @@ service Api {
     };
   }
 
+  rpc PostDriftPerpOrder(PostDriftPerpOrderRequest)  returns (PostDriftPerpOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/drift/perp/place"
+      body: "*",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "posts a perp order on Drift";
+      summary: "perp order on Drift";
+      tags: ["Drift Perp V2"];
+    };
+  }
+
   rpc PostDriftSettlePNL(PostDriftSettlePNLRequest) returns (PostDriftSettlePNLResponse) {
     option (google.api.http) = {
       post: "/api/v2/drift/perp/settle-pnl"
@@ -284,7 +296,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the detail of an open perp order either by ID or ClientOrderID";
       summary: "PERP order";
-      tags: ["Drift V2"];
+      tags: ["Drift Perp V2"];
     };
   }
 
@@ -2298,6 +2310,7 @@ message PerpPosition {
 
   string accountAddress = 9;
   int64 subAccountID = 10;
+  double unrealizedPNL = 11;
 }
 
 message PostPerpOrderRequest {
@@ -2318,6 +2331,23 @@ message PostPerpOrderResponse {
   TransactionMessage transaction = 1;
 }
 
+message PostDriftPerpOrderRequest {
+  string ownerAddress = 1;
+  string contract = 2;
+  string accountAddress = 3;
+  string positionSide = 4;
+  double slippage = 5;
+  string type = 6;
+  double amount = 7;
+  double price = 8;
+  uint64 clientOrderID = 9;
+  string postOnly = 10;
+}
+
+message PostDriftPerpOrderResponse {
+  TransactionMessage transaction = 1;
+}
+
 message PostDriftMarginOrderRequest {
   string ownerAddress = 1;
   string accountAddress = 2;
@@ -2328,7 +2358,7 @@ message PostDriftMarginOrderRequest {
   double amount = 7;
   double price = 8;
   uint64 clientOrderID = 9;
-  common.PostOnlyParams postOnly = 10;
+  string postOnly = 10;
 }
 
 message PostDriftMarginOrderResponse {
@@ -2643,6 +2673,7 @@ message DriftPerpPosition {
   double notionalValue = 8;
   double indexPrice = 9;
   double liquidationPrice = 10;
+  double unrealizedPNL = 11;
 }
 
 message GetDriftMarginOrderbooksRequest {

@@ -4835,6 +4835,8 @@ export class PerpPosition extends jspb.Message {
     setAccountaddress(value: string): PerpPosition;
     getSubaccountid(): number;
     setSubaccountid(value: number): PerpPosition;
+    getUnrealizedpnl(): number;
+    setUnrealizedpnl(value: number): PerpPosition;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PerpPosition.AsObject;
@@ -4858,6 +4860,7 @@ export namespace PerpPosition {
         liquidationprice: number,
         accountaddress: string,
         subaccountid: number,
+        unrealizedpnl: number,
     }
 }
 
@@ -4934,6 +4937,76 @@ export namespace PostPerpOrderResponse {
     }
 }
 
+export class PostDriftPerpOrderRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostDriftPerpOrderRequest;
+    getContract(): string;
+    setContract(value: string): PostDriftPerpOrderRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostDriftPerpOrderRequest;
+    getPositionside(): string;
+    setPositionside(value: string): PostDriftPerpOrderRequest;
+    getSlippage(): number;
+    setSlippage(value: number): PostDriftPerpOrderRequest;
+    getType(): string;
+    setType(value: string): PostDriftPerpOrderRequest;
+    getAmount(): number;
+    setAmount(value: number): PostDriftPerpOrderRequest;
+    getPrice(): number;
+    setPrice(value: number): PostDriftPerpOrderRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostDriftPerpOrderRequest;
+    getPostonly(): string;
+    setPostonly(value: string): PostDriftPerpOrderRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftPerpOrderRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftPerpOrderRequest): PostDriftPerpOrderRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftPerpOrderRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftPerpOrderRequest;
+    static deserializeBinaryFromReader(message: PostDriftPerpOrderRequest, reader: jspb.BinaryReader): PostDriftPerpOrderRequest;
+}
+
+export namespace PostDriftPerpOrderRequest {
+    export type AsObject = {
+        owneraddress: string,
+        contract: string,
+        accountaddress: string,
+        positionside: string,
+        slippage: number,
+        type: string,
+        amount: number,
+        price: number,
+        clientorderid: number,
+        postonly: string,
+    }
+}
+
+export class PostDriftPerpOrderResponse extends jspb.Message { 
+
+    hasTransaction(): boolean;
+    clearTransaction(): void;
+    getTransaction(): TransactionMessage | undefined;
+    setTransaction(value?: TransactionMessage): PostDriftPerpOrderResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftPerpOrderResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftPerpOrderResponse): PostDriftPerpOrderResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftPerpOrderResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftPerpOrderResponse;
+    static deserializeBinaryFromReader(message: PostDriftPerpOrderResponse, reader: jspb.BinaryReader): PostDriftPerpOrderResponse;
+}
+
+export namespace PostDriftPerpOrderResponse {
+    export type AsObject = {
+        transaction?: TransactionMessage.AsObject,
+    }
+}
+
 export class PostDriftMarginOrderRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): PostDriftMarginOrderRequest;
@@ -4953,8 +5026,8 @@ export class PostDriftMarginOrderRequest extends jspb.Message {
     setPrice(value: number): PostDriftMarginOrderRequest;
     getClientorderid(): number;
     setClientorderid(value: number): PostDriftMarginOrderRequest;
-    getPostonly(): common_pb.PostOnlyParams;
-    setPostonly(value: common_pb.PostOnlyParams): PostDriftMarginOrderRequest;
+    getPostonly(): string;
+    setPostonly(value: string): PostDriftMarginOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostDriftMarginOrderRequest.AsObject;
@@ -4977,7 +5050,7 @@ export namespace PostDriftMarginOrderRequest {
         amount: number,
         price: number,
         clientorderid: number,
-        postonly: common_pb.PostOnlyParams,
+        postonly: string,
     }
 }
 
@@ -6348,6 +6421,8 @@ export class DriftPerpPosition extends jspb.Message {
     setIndexprice(value: number): DriftPerpPosition;
     getLiquidationprice(): number;
     setLiquidationprice(value: number): DriftPerpPosition;
+    getUnrealizedpnl(): number;
+    setUnrealizedpnl(value: number): DriftPerpPosition;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): DriftPerpPosition.AsObject;
@@ -6371,6 +6446,7 @@ export namespace DriftPerpPosition {
         notionalvalue: number,
         indexprice: number,
         liquidationprice: number,
+        unrealizedpnl: number,
     }
 }
 
