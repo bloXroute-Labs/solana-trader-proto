@@ -397,7 +397,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.GetTickersRequestV2 = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetTickersRequestV2.repeatedFields_, null);
 };
 goog.inherits(proto.api.GetTickersRequestV2, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -6211,6 +6211,13 @@ proto.api.Ticker.prototype.setProject = function(value) {
 
 
 
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.api.GetTickersRequestV2.repeatedFields_ = [1];
+
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -6242,7 +6249,7 @@ proto.api.GetTickersRequestV2.prototype.toObject = function(opt_includeInstance)
  */
 proto.api.GetTickersRequestV2.toObject = function(includeInstance, msg) {
   var f, obj = {
-    market: jspb.Message.getFieldWithDefault(msg, 1, "")
+    marketList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -6281,7 +6288,7 @@ proto.api.GetTickersRequestV2.deserializeBinaryFromReader = function(msg, reader
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setMarket(value);
+      msg.addMarket(value);
       break;
     default:
       reader.skipField();
@@ -6312,9 +6319,9 @@ proto.api.GetTickersRequestV2.prototype.serializeBinary = function() {
  */
 proto.api.GetTickersRequestV2.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarket();
+  f = message.getMarketList();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeRepeatedString(
       1,
       f
     );
@@ -6323,20 +6330,39 @@ proto.api.GetTickersRequestV2.serializeBinaryToWriter = function(message, writer
 
 
 /**
- * optional string market = 1;
- * @return {string}
+ * repeated string market = 1;
+ * @return {!Array<string>}
  */
-proto.api.GetTickersRequestV2.prototype.getMarket = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.api.GetTickersRequestV2.prototype.getMarketList = function() {
+  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
+};
+
+
+/**
+ * @param {!Array<string>} value
+ * @return {!proto.api.GetTickersRequestV2} returns this
+ */
+proto.api.GetTickersRequestV2.prototype.setMarketList = function(value) {
+  return jspb.Message.setField(this, 1, value || []);
 };
 
 
 /**
  * @param {string} value
+ * @param {number=} opt_index
  * @return {!proto.api.GetTickersRequestV2} returns this
  */
-proto.api.GetTickersRequestV2.prototype.setMarket = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
+proto.api.GetTickersRequestV2.prototype.addMarket = function(value, opt_index) {
+  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
+};
+
+
+/**
+ * Clears the list making it empty but non-null.
+ * @return {!proto.api.GetTickersRequestV2} returns this
+ */
+proto.api.GetTickersRequestV2.prototype.clearMarketList = function() {
+  return this.setMarketList([]);
 };
 
 
@@ -6372,7 +6398,7 @@ proto.api.GetTickersResponseV2.prototype.toObject = function(opt_includeInstance
  */
 proto.api.GetTickersResponseV2.toObject = function(includeInstance, msg) {
   var f, obj = {
-    tickersMap: (f = msg.getTickersMap()) ? f.toObject(includeInstance, proto.api.Candle.toObject) : []
+    markettickersMap: (f = msg.getMarkettickersMap()) ? f.toObject(includeInstance, proto.api.Candle.toObject) : []
   };
 
   if (includeInstance) {
@@ -6409,8 +6435,8 @@ proto.api.GetTickersResponseV2.deserializeBinaryFromReader = function(msg, reade
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 3:
-      var value = msg.getTickersMap();
+    case 1:
+      var value = msg.getMarkettickersMap();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.api.Candle.deserializeBinaryFromReader, "", new proto.api.Candle());
          });
@@ -6444,22 +6470,22 @@ proto.api.GetTickersResponseV2.prototype.serializeBinary = function() {
  */
 proto.api.GetTickersResponseV2.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getTickersMap(true);
+  f = message.getMarkettickersMap(true);
   if (f && f.getLength() > 0) {
-    f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.Candle.serializeBinaryToWriter);
+    f.serializeBinary(1, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.Candle.serializeBinaryToWriter);
   }
 };
 
 
 /**
- * map<string, Candle> tickers = 3;
+ * map<string, Candle> marketTickers = 1;
  * @param {boolean=} opt_noLazyCreate Do not create the map if
  * empty, instead returning `undefined`
  * @return {!jspb.Map<string,!proto.api.Candle>}
  */
-proto.api.GetTickersResponseV2.prototype.getTickersMap = function(opt_noLazyCreate) {
+proto.api.GetTickersResponseV2.prototype.getMarkettickersMap = function(opt_noLazyCreate) {
   return /** @type {!jspb.Map<string,!proto.api.Candle>} */ (
-      jspb.Message.getMapField(this, 3, opt_noLazyCreate,
+      jspb.Message.getMapField(this, 1, opt_noLazyCreate,
       proto.api.Candle));
 };
 
@@ -6468,8 +6494,8 @@ proto.api.GetTickersResponseV2.prototype.getTickersMap = function(opt_noLazyCrea
  * Clears values from the map. The map will be non-null.
  * @return {!proto.api.GetTickersResponseV2} returns this
  */
-proto.api.GetTickersResponseV2.prototype.clearTickersMap = function() {
-  this.getTickersMap().clear();
+proto.api.GetTickersResponseV2.prototype.clearMarkettickersMap = function() {
+  this.getMarkettickersMap().clear();
   return this;};
 
 
@@ -6834,7 +6860,7 @@ proto.api.GetKlineResponse.deserializeBinaryFromReader = function(msg, reader) {
     }
     var field = reader.getFieldNumber();
     switch (field) {
-    case 3:
+    case 1:
       var value = msg.getMarketcandlesMap();
       reader.readMessage(value, function(message, reader) {
         jspb.Map.deserializeBinary(message, reader, jspb.BinaryReader.prototype.readString, jspb.BinaryReader.prototype.readMessage, proto.api.Candles.deserializeBinaryFromReader, "", new proto.api.Candles());
@@ -6871,20 +6897,20 @@ proto.api.GetKlineResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getMarketcandlesMap(true);
   if (f && f.getLength() > 0) {
-    f.serializeBinary(3, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.Candles.serializeBinaryToWriter);
+    f.serializeBinary(1, writer, jspb.BinaryWriter.prototype.writeString, jspb.BinaryWriter.prototype.writeMessage, proto.api.Candles.serializeBinaryToWriter);
   }
 };
 
 
 /**
- * map<string, Candles> marketCandles = 3;
+ * map<string, Candles> marketCandles = 1;
  * @param {boolean=} opt_noLazyCreate Do not create the map if
  * empty, instead returning `undefined`
  * @return {!jspb.Map<string,!proto.api.Candles>}
  */
 proto.api.GetKlineResponse.prototype.getMarketcandlesMap = function(opt_noLazyCreate) {
   return /** @type {!jspb.Map<string,!proto.api.Candles>} */ (
-      jspb.Message.getMapField(this, 3, opt_noLazyCreate,
+      jspb.Message.getMapField(this, 1, opt_noLazyCreate,
       proto.api.Candles));
 };
 

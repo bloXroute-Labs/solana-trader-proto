@@ -1101,11 +1101,11 @@ message Ticker {
 }
 
 message GetTickersRequestV2 {
-  string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
+  repeated string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty array for all markets"}];
 }
 
 message GetTickersResponseV2 {
-  map<string, Candle> tickers = 3;
+  map<string, Candle> marketTickers = 1;
 }
 
 message GetKlineRequest {
@@ -1117,7 +1117,7 @@ message GetKlineRequest {
 }
 
 message GetKlineResponse {
-  map<string, Candles> marketCandles = 3;
+  map<string, Candles> marketCandles = 1;
 }
 
 message Candle {

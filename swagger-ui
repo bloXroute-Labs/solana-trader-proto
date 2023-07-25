@@ -2778,10 +2778,15 @@
         "parameters": [
           {
             "name": "market",
-            "description": "Use empty string for all markets",
+            "description": "Use empty array for all markets",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv",
+            "minItems": 1
           }
         ],
         "tags": [
@@ -4334,7 +4339,7 @@
     "apiGetTickersResponseV2": {
       "type": "object",
       "properties": {
-        "tickers": {
+        "marketTickers": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/apiCandle"

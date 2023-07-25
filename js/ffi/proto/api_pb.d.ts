@@ -175,8 +175,10 @@ export namespace Ticker {
 }
 
 export class GetTickersRequestV2 extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetTickersRequestV2;
+    clearMarketList(): void;
+    getMarketList(): Array<string>;
+    setMarketList(value: Array<string>): GetTickersRequestV2;
+    addMarket(value: string, index?: number): string;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTickersRequestV2.AsObject;
@@ -190,14 +192,14 @@ export class GetTickersRequestV2 extends jspb.Message {
 
 export namespace GetTickersRequestV2 {
     export type AsObject = {
-        market: string,
+        marketList: Array<string>,
     }
 }
 
 export class GetTickersResponseV2 extends jspb.Message { 
 
-    getTickersMap(): jspb.Map<string, Candle>;
-    clearTickersMap(): void;
+    getMarkettickersMap(): jspb.Map<string, Candle>;
+    clearMarkettickersMap(): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTickersResponseV2.AsObject;
@@ -212,7 +214,7 @@ export class GetTickersResponseV2 extends jspb.Message {
 export namespace GetTickersResponseV2 {
     export type AsObject = {
 
-        tickersMap: Array<[string, Candle.AsObject]>,
+        markettickersMap: Array<[string, Candle.AsObject]>,
     }
 }
 
