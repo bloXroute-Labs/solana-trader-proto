@@ -851,18 +851,6 @@ service Api {
     };
   }
 
-  rpc GetMyOrders(GetMyOrdersRequest) returns (GetMyOrdersResponse) {
-    option (google.api.method_visibility).restriction = "INTERNAL";
-    option (google.api.http) = {
-      get: "/api/v1/trade/my/orders/{market}"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns all user's orders";
-      summary: "List of user's orders";
-      tags: ["Trade", "Orderbook"];
-    };
-  }
-
   rpc GetOpenOrders(GetOpenOrdersRequest) returns (GetOpenOrdersResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/openorders/{market}"
@@ -1257,30 +1245,6 @@ message Candle {
 
 message Candles {
   repeated Candle candles = 1;
-}
-
-message GetMyOrdersRequest {
-  string market = 1;
-  Project project = 2;
-  string orderID = 3;
-  string clientOrderID = 4;
-}
-
-message GetMyOrdersResponse {
-  repeated MyOrder orders = 1;
-}
-
-message MyOrder {
-  google.protobuf.Timestamp  Timestamp = 1;
-  Project  Project = 2;
-  string  OwnerAddress = 3;
-  google.protobuf.Timestamp  Date = 4;
-  uint64  ClientOrderID = 5;
-  string  MarketAddress = 6;
-  string  ProgramOrderID = 7;
-  string  Side = 8;
-  double  Amount = 9;
-  double  Price = 10;
 }
 
 message GetOrderbookRequest {
