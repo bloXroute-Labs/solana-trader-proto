@@ -6256,7 +6256,18 @@
           ]
         },
         "side": {
-          "$ref": "#/definitions/apiSide"
+          "type": "string",
+          "description": " Supported values : Bid, Ask",
+          "required": [
+            "side"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Supported values : Limit, IoC, PostOnly",
+          "required": [
+            "type"
+          ]
         },
         "amount": {
           "type": "number",
@@ -6286,6 +6297,8 @@
         "ownerAddress",
         "payerAddress",
         "market",
+        "side",
+        "type",
         "amount",
         "price"
       ]
@@ -6536,7 +6549,18 @@
           ]
         },
         "side": {
-          "$ref": "#/definitions/apiSide"
+          "type": "string",
+          "description": " Supported values : Bid, Ask",
+          "required": [
+            "side"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Supported values : Limit, IoC, PostOnly",
+          "required": [
+            "type"
+          ]
         },
         "amount": {
           "type": "number",
@@ -6573,6 +6597,8 @@
         "ownerAddress",
         "payerAddress",
         "market",
+        "side",
+        "type",
         "amount",
         "price",
         "openOrdersAddress"

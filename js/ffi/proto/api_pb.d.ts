@@ -7230,8 +7230,10 @@ export class PostOrderRequestV2 extends jspb.Message {
     setPayeraddress(value: string): PostOrderRequestV2;
     getMarket(): string;
     setMarket(value: string): PostOrderRequestV2;
-    getSide(): Side;
-    setSide(value: Side): PostOrderRequestV2;
+    getSide(): string;
+    setSide(value: string): PostOrderRequestV2;
+    getType(): string;
+    setType(value: string): PostOrderRequestV2;
     getAmount(): number;
     setAmount(value: number): PostOrderRequestV2;
     getPrice(): number;
@@ -7256,7 +7258,8 @@ export namespace PostOrderRequestV2 {
         owneraddress: string,
         payeraddress: string,
         market: string,
-        side: Side,
+        side: string,
+        type: string,
         amount: number,
         price: number,
         openordersaddress: string,
@@ -7271,8 +7274,10 @@ export class PostReplaceOrderRequestV2 extends jspb.Message {
     setPayeraddress(value: string): PostReplaceOrderRequestV2;
     getMarket(): string;
     setMarket(value: string): PostReplaceOrderRequestV2;
-    getSide(): Side;
-    setSide(value: Side): PostReplaceOrderRequestV2;
+    getSide(): string;
+    setSide(value: string): PostReplaceOrderRequestV2;
+    getType(): string;
+    setType(value: string): PostReplaceOrderRequestV2;
     getAmount(): number;
     setAmount(value: number): PostReplaceOrderRequestV2;
     getPrice(): number;
@@ -7299,7 +7304,8 @@ export namespace PostReplaceOrderRequestV2 {
         owneraddress: string,
         payeraddress: string,
         market: string,
-        side: Side,
+        side: string,
+        type: string,
         amount: number,
         price: number,
         openordersaddress: string,
