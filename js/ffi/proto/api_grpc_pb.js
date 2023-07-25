@@ -384,6 +384,50 @@ function deserialize_api_GetDriftUserResponse(buffer_arg) {
   return api_pb.GetDriftUserResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetJupiterPricesRequest(arg) {
+  if (!(arg instanceof api_pb.GetJupiterPricesRequest)) {
+    throw new Error('Expected argument of type api.GetJupiterPricesRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetJupiterPricesRequest(buffer_arg) {
+  return api_pb.GetJupiterPricesRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetJupiterPricesResponse(arg) {
+  if (!(arg instanceof api_pb.GetJupiterPricesResponse)) {
+    throw new Error('Expected argument of type api.GetJupiterPricesResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetJupiterPricesResponse(buffer_arg) {
+  return api_pb.GetJupiterPricesResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetJupiterQuotesRequest(arg) {
+  if (!(arg instanceof api_pb.GetJupiterQuotesRequest)) {
+    throw new Error('Expected argument of type api.GetJupiterQuotesRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetJupiterQuotesRequest(buffer_arg) {
+  return api_pb.GetJupiterQuotesRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetJupiterQuotesResponse(arg) {
+  if (!(arg instanceof api_pb.GetJupiterQuotesResponse)) {
+    throw new Error('Expected argument of type api.GetJupiterQuotesResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetJupiterQuotesResponse(buffer_arg) {
+  return api_pb.GetJupiterQuotesResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetKlineRequest(arg) {
   if (!(arg instanceof api_pb.GetKlineRequest)) {
     throw new Error('Expected argument of type api.GetKlineRequest');
@@ -989,6 +1033,72 @@ function deserialize_api_GetQuotesStreamResponse(buffer_arg) {
   return api_pb.GetQuotesStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetRaydiumPoolsRequest(arg) {
+  if (!(arg instanceof api_pb.GetRaydiumPoolsRequest)) {
+    throw new Error('Expected argument of type api.GetRaydiumPoolsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetRaydiumPoolsRequest(buffer_arg) {
+  return api_pb.GetRaydiumPoolsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetRaydiumPoolsResponse(arg) {
+  if (!(arg instanceof api_pb.GetRaydiumPoolsResponse)) {
+    throw new Error('Expected argument of type api.GetRaydiumPoolsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetRaydiumPoolsResponse(buffer_arg) {
+  return api_pb.GetRaydiumPoolsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetRaydiumPricesRequest(arg) {
+  if (!(arg instanceof api_pb.GetRaydiumPricesRequest)) {
+    throw new Error('Expected argument of type api.GetRaydiumPricesRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetRaydiumPricesRequest(buffer_arg) {
+  return api_pb.GetRaydiumPricesRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetRaydiumPricesResponse(arg) {
+  if (!(arg instanceof api_pb.GetRaydiumPricesResponse)) {
+    throw new Error('Expected argument of type api.GetRaydiumPricesResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetRaydiumPricesResponse(buffer_arg) {
+  return api_pb.GetRaydiumPricesResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetRaydiumQuotesRequest(arg) {
+  if (!(arg instanceof api_pb.GetRaydiumQuotesRequest)) {
+    throw new Error('Expected argument of type api.GetRaydiumQuotesRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetRaydiumQuotesRequest(buffer_arg) {
+  return api_pb.GetRaydiumQuotesRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetRaydiumQuotesResponse(arg) {
+  if (!(arg instanceof api_pb.GetRaydiumQuotesResponse)) {
+    throw new Error('Expected argument of type api.GetRaydiumQuotesResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetRaydiumQuotesResponse(buffer_arg) {
+  return api_pb.GetRaydiumQuotesResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetRecentBlockHashRequest(arg) {
   if (!(arg instanceof api_pb.GetRecentBlockHashRequest)) {
     throw new Error('Expected argument of type api.GetRecentBlockHashRequest');
@@ -1539,6 +1649,28 @@ function deserialize_api_PostDriftMarginOrderResponse(buffer_arg) {
   return api_pb.PostDriftMarginOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostDriftPerpOrderRequest(arg) {
+  if (!(arg instanceof api_pb.PostDriftPerpOrderRequest)) {
+    throw new Error('Expected argument of type api.PostDriftPerpOrderRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDriftPerpOrderRequest(buffer_arg) {
+  return api_pb.PostDriftPerpOrderRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostDriftPerpOrderResponse(arg) {
+  if (!(arg instanceof api_pb.PostDriftPerpOrderResponse)) {
+    throw new Error('Expected argument of type api.PostDriftPerpOrderResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostDriftPerpOrderResponse(buffer_arg) {
+  return api_pb.PostDriftPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostDriftSettlePNLRequest(arg) {
   if (!(arg instanceof api_pb.PostDriftSettlePNLRequest)) {
     throw new Error('Expected argument of type api.PostDriftSettlePNLRequest');
@@ -1581,6 +1713,50 @@ function serialize_api_PostDriftSettlePNLsResponse(arg) {
 
 function deserialize_api_PostDriftSettlePNLsResponse(buffer_arg) {
   return api_pb.PostDriftSettlePNLsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostJupiterRouteSwapRequest(arg) {
+  if (!(arg instanceof api_pb.PostJupiterRouteSwapRequest)) {
+    throw new Error('Expected argument of type api.PostJupiterRouteSwapRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostJupiterRouteSwapRequest(buffer_arg) {
+  return api_pb.PostJupiterRouteSwapRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostJupiterRouteSwapResponse(arg) {
+  if (!(arg instanceof api_pb.PostJupiterRouteSwapResponse)) {
+    throw new Error('Expected argument of type api.PostJupiterRouteSwapResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostJupiterRouteSwapResponse(buffer_arg) {
+  return api_pb.PostJupiterRouteSwapResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostJupiterSwapRequest(arg) {
+  if (!(arg instanceof api_pb.PostJupiterSwapRequest)) {
+    throw new Error('Expected argument of type api.PostJupiterSwapRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostJupiterSwapRequest(buffer_arg) {
+  return api_pb.PostJupiterSwapRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostJupiterSwapResponse(arg) {
+  if (!(arg instanceof api_pb.PostJupiterSwapResponse)) {
+    throw new Error('Expected argument of type api.PostJupiterSwapResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostJupiterSwapResponse(buffer_arg) {
+  return api_pb.PostJupiterSwapResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_PostLiquidateDriftPerpRequest(arg) {
@@ -1724,6 +1900,50 @@ function serialize_api_PostPerpOrderResponse(arg) {
 
 function deserialize_api_PostPerpOrderResponse(buffer_arg) {
   return api_pb.PostPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostRaydiumRouteSwapRequest(arg) {
+  if (!(arg instanceof api_pb.PostRaydiumRouteSwapRequest)) {
+    throw new Error('Expected argument of type api.PostRaydiumRouteSwapRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostRaydiumRouteSwapRequest(buffer_arg) {
+  return api_pb.PostRaydiumRouteSwapRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostRaydiumRouteSwapResponse(arg) {
+  if (!(arg instanceof api_pb.PostRaydiumRouteSwapResponse)) {
+    throw new Error('Expected argument of type api.PostRaydiumRouteSwapResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostRaydiumRouteSwapResponse(buffer_arg) {
+  return api_pb.PostRaydiumRouteSwapResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostRaydiumSwapRequest(arg) {
+  if (!(arg instanceof api_pb.PostRaydiumSwapRequest)) {
+    throw new Error('Expected argument of type api.PostRaydiumSwapRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostRaydiumSwapRequest(buffer_arg) {
+  return api_pb.PostRaydiumSwapRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostRaydiumSwapResponse(arg) {
+  if (!(arg instanceof api_pb.PostRaydiumSwapResponse)) {
+    throw new Error('Expected argument of type api.PostRaydiumSwapResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostRaydiumSwapResponse(buffer_arg) {
+  return api_pb.PostRaydiumSwapResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_PostReplaceOrderRequest(arg) {
@@ -1904,6 +2124,107 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 
 var ApiService = exports.ApiService = {
+  // Raydium V2
+getRaydiumPools: {
+    path: '/api.Api/GetRaydiumPools',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetRaydiumPoolsRequest,
+    responseType: api_pb.GetRaydiumPoolsResponse,
+    requestSerialize: serialize_api_GetRaydiumPoolsRequest,
+    requestDeserialize: deserialize_api_GetRaydiumPoolsRequest,
+    responseSerialize: serialize_api_GetRaydiumPoolsResponse,
+    responseDeserialize: deserialize_api_GetRaydiumPoolsResponse,
+  },
+  getRaydiumQuotes: {
+    path: '/api.Api/GetRaydiumQuotes',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetRaydiumQuotesRequest,
+    responseType: api_pb.GetRaydiumQuotesResponse,
+    requestSerialize: serialize_api_GetRaydiumQuotesRequest,
+    requestDeserialize: deserialize_api_GetRaydiumQuotesRequest,
+    responseSerialize: serialize_api_GetRaydiumQuotesResponse,
+    responseDeserialize: deserialize_api_GetRaydiumQuotesResponse,
+  },
+  getRaydiumPrices: {
+    path: '/api.Api/GetRaydiumPrices',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetRaydiumPricesRequest,
+    responseType: api_pb.GetRaydiumPricesResponse,
+    requestSerialize: serialize_api_GetRaydiumPricesRequest,
+    requestDeserialize: deserialize_api_GetRaydiumPricesRequest,
+    responseSerialize: serialize_api_GetRaydiumPricesResponse,
+    responseDeserialize: deserialize_api_GetRaydiumPricesResponse,
+  },
+  postRaydiumSwap: {
+    path: '/api.Api/PostRaydiumSwap',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostRaydiumSwapRequest,
+    responseType: api_pb.PostRaydiumSwapResponse,
+    requestSerialize: serialize_api_PostRaydiumSwapRequest,
+    requestDeserialize: deserialize_api_PostRaydiumSwapRequest,
+    responseSerialize: serialize_api_PostRaydiumSwapResponse,
+    responseDeserialize: deserialize_api_PostRaydiumSwapResponse,
+  },
+  postRaydiumRouteSwap: {
+    path: '/api.Api/PostRaydiumRouteSwap',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostRaydiumRouteSwapRequest,
+    responseType: api_pb.PostRaydiumRouteSwapResponse,
+    requestSerialize: serialize_api_PostRaydiumRouteSwapRequest,
+    requestDeserialize: deserialize_api_PostRaydiumRouteSwapRequest,
+    responseSerialize: serialize_api_PostRaydiumRouteSwapResponse,
+    responseDeserialize: deserialize_api_PostRaydiumRouteSwapResponse,
+  },
+  // Jupiter V2
+getJupiterQuotes: {
+    path: '/api.Api/GetJupiterQuotes',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetJupiterQuotesRequest,
+    responseType: api_pb.GetJupiterQuotesResponse,
+    requestSerialize: serialize_api_GetJupiterQuotesRequest,
+    requestDeserialize: deserialize_api_GetJupiterQuotesRequest,
+    responseSerialize: serialize_api_GetJupiterQuotesResponse,
+    responseDeserialize: deserialize_api_GetJupiterQuotesResponse,
+  },
+  getJupiterPrices: {
+    path: '/api.Api/GetJupiterPrices',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetJupiterPricesRequest,
+    responseType: api_pb.GetJupiterPricesResponse,
+    requestSerialize: serialize_api_GetJupiterPricesRequest,
+    requestDeserialize: deserialize_api_GetJupiterPricesRequest,
+    responseSerialize: serialize_api_GetJupiterPricesResponse,
+    responseDeserialize: deserialize_api_GetJupiterPricesResponse,
+  },
+  postJupiterSwap: {
+    path: '/api.Api/PostJupiterSwap',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostJupiterSwapRequest,
+    responseType: api_pb.PostJupiterSwapResponse,
+    requestSerialize: serialize_api_PostJupiterSwapRequest,
+    requestDeserialize: deserialize_api_PostJupiterSwapRequest,
+    responseSerialize: serialize_api_PostJupiterSwapResponse,
+    responseDeserialize: deserialize_api_PostJupiterSwapResponse,
+  },
+  postJupiterRouteSwap: {
+    path: '/api.Api/PostJupiterRouteSwap',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostJupiterRouteSwapRequest,
+    responseType: api_pb.PostJupiterRouteSwapResponse,
+    requestSerialize: serialize_api_PostJupiterRouteSwapRequest,
+    requestDeserialize: deserialize_api_PostJupiterRouteSwapRequest,
+    responseSerialize: serialize_api_PostJupiterRouteSwapResponse,
+    responseDeserialize: deserialize_api_PostJupiterRouteSwapResponse,
+  },
   // Drift V2
 postCloseDriftPerpPositions: {
     path: '/api.Api/PostCloseDriftPerpPositions',
@@ -1959,6 +2280,17 @@ postCloseDriftPerpPositions: {
     requestDeserialize: deserialize_api_PostDriftManageCollateralRequest,
     responseSerialize: serialize_api_PostDriftManageCollateralResponse,
     responseDeserialize: deserialize_api_PostDriftManageCollateralResponse,
+  },
+  postDriftPerpOrder: {
+    path: '/api.Api/PostDriftPerpOrder',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostDriftPerpOrderRequest,
+    responseType: api_pb.PostDriftPerpOrderResponse,
+    requestSerialize: serialize_api_PostDriftPerpOrderRequest,
+    requestDeserialize: deserialize_api_PostDriftPerpOrderRequest,
+    responseSerialize: serialize_api_PostDriftPerpOrderResponse,
+    responseDeserialize: deserialize_api_PostDriftPerpOrderResponse,
   },
   postDriftSettlePNL: {
     path: '/api.Api/PostDriftSettlePNL',
@@ -2292,7 +2624,7 @@ getMarketsV2: {
     responseSerialize: serialize_api_GetUnsettledResponse,
     responseDeserialize: deserialize_api_GetUnsettledResponse,
   },
-  // end o Openbook V2
+  // end of Openbook V2
 //
 getPrice: {
     path: '/api.Api/GetPrice',

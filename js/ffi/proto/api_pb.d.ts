@@ -2091,6 +2091,141 @@ export namespace GetQuotesResponse {
     }
 }
 
+export class GetRaydiumQuotesRequest extends jspb.Message { 
+    getIntoken(): string;
+    setIntoken(value: string): GetRaydiumQuotesRequest;
+    getOuttoken(): string;
+    setOuttoken(value: string): GetRaydiumQuotesRequest;
+    getInamount(): number;
+    setInamount(value: number): GetRaydiumQuotesRequest;
+    getSlippage(): number;
+    setSlippage(value: number): GetRaydiumQuotesRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetRaydiumQuotesRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetRaydiumQuotesRequest): GetRaydiumQuotesRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetRaydiumQuotesRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetRaydiumQuotesRequest;
+    static deserializeBinaryFromReader(message: GetRaydiumQuotesRequest, reader: jspb.BinaryReader): GetRaydiumQuotesRequest;
+}
+
+export namespace GetRaydiumQuotesRequest {
+    export type AsObject = {
+        intoken: string,
+        outtoken: string,
+        inamount: number,
+        slippage: number,
+    }
+}
+
+export class GetRaydiumQuotesResponse extends jspb.Message { 
+    getIntoken(): string;
+    setIntoken(value: string): GetRaydiumQuotesResponse;
+    getIntokenaddress(): string;
+    setIntokenaddress(value: string): GetRaydiumQuotesResponse;
+    getOuttoken(): string;
+    setOuttoken(value: string): GetRaydiumQuotesResponse;
+    getOuttokenaddress(): string;
+    setOuttokenaddress(value: string): GetRaydiumQuotesResponse;
+    getInamount(): number;
+    setInamount(value: number): GetRaydiumQuotesResponse;
+    clearRoutesList(): void;
+    getRoutesList(): Array<RaydiumQuoteRoute>;
+    setRoutesList(value: Array<RaydiumQuoteRoute>): GetRaydiumQuotesResponse;
+    addRoutes(value?: RaydiumQuoteRoute, index?: number): RaydiumQuoteRoute;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetRaydiumQuotesResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetRaydiumQuotesResponse): GetRaydiumQuotesResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetRaydiumQuotesResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetRaydiumQuotesResponse;
+    static deserializeBinaryFromReader(message: GetRaydiumQuotesResponse, reader: jspb.BinaryReader): GetRaydiumQuotesResponse;
+}
+
+export namespace GetRaydiumQuotesResponse {
+    export type AsObject = {
+        intoken: string,
+        intokenaddress: string,
+        outtoken: string,
+        outtokenaddress: string,
+        inamount: number,
+        routesList: Array<RaydiumQuoteRoute.AsObject>,
+    }
+}
+
+export class GetJupiterQuotesRequest extends jspb.Message { 
+    getIntoken(): string;
+    setIntoken(value: string): GetJupiterQuotesRequest;
+    getOuttoken(): string;
+    setOuttoken(value: string): GetJupiterQuotesRequest;
+    getInamount(): number;
+    setInamount(value: number): GetJupiterQuotesRequest;
+    getSlippage(): number;
+    setSlippage(value: number): GetJupiterQuotesRequest;
+    getLimit(): number;
+    setLimit(value: number): GetJupiterQuotesRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetJupiterQuotesRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetJupiterQuotesRequest): GetJupiterQuotesRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetJupiterQuotesRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetJupiterQuotesRequest;
+    static deserializeBinaryFromReader(message: GetJupiterQuotesRequest, reader: jspb.BinaryReader): GetJupiterQuotesRequest;
+}
+
+export namespace GetJupiterQuotesRequest {
+    export type AsObject = {
+        intoken: string,
+        outtoken: string,
+        inamount: number,
+        slippage: number,
+        limit: number,
+    }
+}
+
+export class GetJupiterQuotesResponse extends jspb.Message { 
+    getIntoken(): string;
+    setIntoken(value: string): GetJupiterQuotesResponse;
+    getIntokenaddress(): string;
+    setIntokenaddress(value: string): GetJupiterQuotesResponse;
+    getOuttoken(): string;
+    setOuttoken(value: string): GetJupiterQuotesResponse;
+    getOuttokenaddress(): string;
+    setOuttokenaddress(value: string): GetJupiterQuotesResponse;
+    getInamount(): number;
+    setInamount(value: number): GetJupiterQuotesResponse;
+    clearRoutesList(): void;
+    getRoutesList(): Array<JupiterQuoteRoute>;
+    setRoutesList(value: Array<JupiterQuoteRoute>): GetJupiterQuotesResponse;
+    addRoutes(value?: JupiterQuoteRoute, index?: number): JupiterQuoteRoute;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetJupiterQuotesResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetJupiterQuotesResponse): GetJupiterQuotesResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetJupiterQuotesResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetJupiterQuotesResponse;
+    static deserializeBinaryFromReader(message: GetJupiterQuotesResponse, reader: jspb.BinaryReader): GetJupiterQuotesResponse;
+}
+
+export namespace GetJupiterQuotesResponse {
+    export type AsObject = {
+        intoken: string,
+        intokenaddress: string,
+        outtoken: string,
+        outtokenaddress: string,
+        inamount: number,
+        routesList: Array<JupiterQuoteRoute.AsObject>,
+    }
+}
+
 export class ProjectQuote extends jspb.Message { 
     getProject(): Project;
     setProject(value: Project): ProjectQuote;
@@ -2151,6 +2286,215 @@ export namespace TradeSwapRequest {
     }
 }
 
+export class PostJupiterSwapRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostJupiterSwapRequest;
+    getIntoken(): string;
+    setIntoken(value: string): PostJupiterSwapRequest;
+    getOuttoken(): string;
+    setOuttoken(value: string): PostJupiterSwapRequest;
+    getInamount(): number;
+    setInamount(value: number): PostJupiterSwapRequest;
+    getSlippage(): number;
+    setSlippage(value: number): PostJupiterSwapRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostJupiterSwapRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostJupiterSwapRequest): PostJupiterSwapRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostJupiterSwapRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostJupiterSwapRequest;
+    static deserializeBinaryFromReader(message: PostJupiterSwapRequest, reader: jspb.BinaryReader): PostJupiterSwapRequest;
+}
+
+export namespace PostJupiterSwapRequest {
+    export type AsObject = {
+        owneraddress: string,
+        intoken: string,
+        outtoken: string,
+        inamount: number,
+        slippage: number,
+    }
+}
+
+export class PostRaydiumSwapRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostRaydiumSwapRequest;
+    getIntoken(): string;
+    setIntoken(value: string): PostRaydiumSwapRequest;
+    getOuttoken(): string;
+    setOuttoken(value: string): PostRaydiumSwapRequest;
+    getInamount(): number;
+    setInamount(value: number): PostRaydiumSwapRequest;
+    getSlippage(): number;
+    setSlippage(value: number): PostRaydiumSwapRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostRaydiumSwapRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostRaydiumSwapRequest): PostRaydiumSwapRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostRaydiumSwapRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostRaydiumSwapRequest;
+    static deserializeBinaryFromReader(message: PostRaydiumSwapRequest, reader: jspb.BinaryReader): PostRaydiumSwapRequest;
+}
+
+export namespace PostRaydiumSwapRequest {
+    export type AsObject = {
+        owneraddress: string,
+        intoken: string,
+        outtoken: string,
+        inamount: number,
+        slippage: number,
+    }
+}
+
+export class PostRaydiumSwapResponse extends jspb.Message { 
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostRaydiumSwapResponse;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
+    getOutamount(): number;
+    setOutamount(value: number): PostRaydiumSwapResponse;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): PostRaydiumSwapResponse;
+
+    hasPriceimpact(): boolean;
+    clearPriceimpact(): void;
+    getPriceimpact(): common_pb.PriceImpactPercentV2 | undefined;
+    setPriceimpact(value?: common_pb.PriceImpactPercentV2): PostRaydiumSwapResponse;
+    clearFeesList(): void;
+    getFeesList(): Array<common_pb.Fee>;
+    setFeesList(value: Array<common_pb.Fee>): PostRaydiumSwapResponse;
+    addFees(value?: common_pb.Fee, index?: number): common_pb.Fee;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostRaydiumSwapResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostRaydiumSwapResponse): PostRaydiumSwapResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostRaydiumSwapResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostRaydiumSwapResponse;
+    static deserializeBinaryFromReader(message: PostRaydiumSwapResponse, reader: jspb.BinaryReader): PostRaydiumSwapResponse;
+}
+
+export namespace PostRaydiumSwapResponse {
+    export type AsObject = {
+        transactionsList: Array<TransactionMessage.AsObject>,
+        outamount: number,
+        outamountmin: number,
+        priceimpact?: common_pb.PriceImpactPercentV2.AsObject,
+        feesList: Array<common_pb.Fee.AsObject>,
+    }
+}
+
+export class PostJupiterSwapResponse extends jspb.Message { 
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostJupiterSwapResponse;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
+    getOutamount(): number;
+    setOutamount(value: number): PostJupiterSwapResponse;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): PostJupiterSwapResponse;
+
+    hasPriceimpact(): boolean;
+    clearPriceimpact(): void;
+    getPriceimpact(): common_pb.PriceImpactPercentV2 | undefined;
+    setPriceimpact(value?: common_pb.PriceImpactPercentV2): PostJupiterSwapResponse;
+    clearFeesList(): void;
+    getFeesList(): Array<common_pb.Fee>;
+    setFeesList(value: Array<common_pb.Fee>): PostJupiterSwapResponse;
+    addFees(value?: common_pb.Fee, index?: number): common_pb.Fee;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostJupiterSwapResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostJupiterSwapResponse): PostJupiterSwapResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostJupiterSwapResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostJupiterSwapResponse;
+    static deserializeBinaryFromReader(message: PostJupiterSwapResponse, reader: jspb.BinaryReader): PostJupiterSwapResponse;
+}
+
+export namespace PostJupiterSwapResponse {
+    export type AsObject = {
+        transactionsList: Array<TransactionMessage.AsObject>,
+        outamount: number,
+        outamountmin: number,
+        priceimpact?: common_pb.PriceImpactPercentV2.AsObject,
+        feesList: Array<common_pb.Fee.AsObject>,
+    }
+}
+
+export class PostRaydiumRouteSwapResponse extends jspb.Message { 
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostRaydiumRouteSwapResponse;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
+    getOutamount(): number;
+    setOutamount(value: number): PostRaydiumRouteSwapResponse;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): PostRaydiumRouteSwapResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostRaydiumRouteSwapResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostRaydiumRouteSwapResponse): PostRaydiumRouteSwapResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostRaydiumRouteSwapResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostRaydiumRouteSwapResponse;
+    static deserializeBinaryFromReader(message: PostRaydiumRouteSwapResponse, reader: jspb.BinaryReader): PostRaydiumRouteSwapResponse;
+}
+
+export namespace PostRaydiumRouteSwapResponse {
+    export type AsObject = {
+        transactionsList: Array<TransactionMessage.AsObject>,
+        outamount: number,
+        outamountmin: number,
+    }
+}
+
+export class PostJupiterRouteSwapResponse extends jspb.Message { 
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostJupiterRouteSwapResponse;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
+    getOutamount(): number;
+    setOutamount(value: number): PostJupiterRouteSwapResponse;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): PostJupiterRouteSwapResponse;
+
+    hasPriceimpact(): boolean;
+    clearPriceimpact(): void;
+    getPriceimpact(): common_pb.PriceImpactPercentV2 | undefined;
+    setPriceimpact(value?: common_pb.PriceImpactPercentV2): PostJupiterRouteSwapResponse;
+    clearFeesList(): void;
+    getFeesList(): Array<common_pb.Fee>;
+    setFeesList(value: Array<common_pb.Fee>): PostJupiterRouteSwapResponse;
+    addFees(value?: common_pb.Fee, index?: number): common_pb.Fee;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostJupiterRouteSwapResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostJupiterRouteSwapResponse): PostJupiterRouteSwapResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostJupiterRouteSwapResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostJupiterRouteSwapResponse;
+    static deserializeBinaryFromReader(message: PostJupiterRouteSwapResponse, reader: jspb.BinaryReader): PostJupiterRouteSwapResponse;
+}
+
+export namespace PostJupiterRouteSwapResponse {
+    export type AsObject = {
+        transactionsList: Array<TransactionMessage.AsObject>,
+        outamount: number,
+        outamountmin: number,
+        priceimpact?: common_pb.PriceImpactPercentV2.AsObject,
+        feesList: Array<common_pb.Fee.AsObject>,
+    }
+}
+
 export class RouteTradeSwapRequest extends jspb.Message { 
     getProject(): Project;
     setProject(value: Project): RouteTradeSwapRequest;
@@ -2179,6 +2523,135 @@ export namespace RouteTradeSwapRequest {
         owneraddress: string,
         stepsList: Array<RouteStep.AsObject>,
         slippage: number,
+    }
+}
+
+export class PostRaydiumRouteSwapRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostRaydiumRouteSwapRequest;
+    clearStepsList(): void;
+    getStepsList(): Array<RaydiumRouteStep>;
+    setStepsList(value: Array<RaydiumRouteStep>): PostRaydiumRouteSwapRequest;
+    addSteps(value?: RaydiumRouteStep, index?: number): RaydiumRouteStep;
+    getSlippage(): number;
+    setSlippage(value: number): PostRaydiumRouteSwapRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostRaydiumRouteSwapRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostRaydiumRouteSwapRequest): PostRaydiumRouteSwapRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostRaydiumRouteSwapRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostRaydiumRouteSwapRequest;
+    static deserializeBinaryFromReader(message: PostRaydiumRouteSwapRequest, reader: jspb.BinaryReader): PostRaydiumRouteSwapRequest;
+}
+
+export namespace PostRaydiumRouteSwapRequest {
+    export type AsObject = {
+        owneraddress: string,
+        stepsList: Array<RaydiumRouteStep.AsObject>,
+        slippage: number,
+    }
+}
+
+export class RaydiumRouteStep extends jspb.Message { 
+    getIntoken(): string;
+    setIntoken(value: string): RaydiumRouteStep;
+    getInamount(): number;
+    setInamount(value: number): RaydiumRouteStep;
+    getOuttoken(): string;
+    setOuttoken(value: string): RaydiumRouteStep;
+    getOutamount(): number;
+    setOutamount(value: number): RaydiumRouteStep;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): RaydiumRouteStep;
+    getPooladdress(): string;
+    setPooladdress(value: string): RaydiumRouteStep;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): RaydiumRouteStep.AsObject;
+    static toObject(includeInstance: boolean, msg: RaydiumRouteStep): RaydiumRouteStep.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: RaydiumRouteStep, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): RaydiumRouteStep;
+    static deserializeBinaryFromReader(message: RaydiumRouteStep, reader: jspb.BinaryReader): RaydiumRouteStep;
+}
+
+export namespace RaydiumRouteStep {
+    export type AsObject = {
+        intoken: string,
+        inamount: number,
+        outtoken: string,
+        outamount: number,
+        outamountmin: number,
+        pooladdress: string,
+    }
+}
+
+export class PostJupiterRouteSwapRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostJupiterRouteSwapRequest;
+    clearStepsList(): void;
+    getStepsList(): Array<JupiterRouteStep>;
+    setStepsList(value: Array<JupiterRouteStep>): PostJupiterRouteSwapRequest;
+    addSteps(value?: JupiterRouteStep, index?: number): JupiterRouteStep;
+    getSlippage(): number;
+    setSlippage(value: number): PostJupiterRouteSwapRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostJupiterRouteSwapRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostJupiterRouteSwapRequest): PostJupiterRouteSwapRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostJupiterRouteSwapRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostJupiterRouteSwapRequest;
+    static deserializeBinaryFromReader(message: PostJupiterRouteSwapRequest, reader: jspb.BinaryReader): PostJupiterRouteSwapRequest;
+}
+
+export namespace PostJupiterRouteSwapRequest {
+    export type AsObject = {
+        owneraddress: string,
+        stepsList: Array<JupiterRouteStep.AsObject>,
+        slippage: number,
+    }
+}
+
+export class JupiterRouteStep extends jspb.Message { 
+    getIntoken(): string;
+    setIntoken(value: string): JupiterRouteStep;
+    getInamount(): number;
+    setInamount(value: number): JupiterRouteStep;
+    getOuttoken(): string;
+    setOuttoken(value: string): JupiterRouteStep;
+    getOutamount(): number;
+    setOutamount(value: number): JupiterRouteStep;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): JupiterRouteStep;
+
+    hasProject(): boolean;
+    clearProject(): void;
+    getProject(): StepProject | undefined;
+    setProject(value?: StepProject): JupiterRouteStep;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): JupiterRouteStep.AsObject;
+    static toObject(includeInstance: boolean, msg: JupiterRouteStep): JupiterRouteStep.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: JupiterRouteStep, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): JupiterRouteStep;
+    static deserializeBinaryFromReader(message: JupiterRouteStep, reader: jspb.BinaryReader): JupiterRouteStep;
+}
+
+export namespace JupiterRouteStep {
+    export type AsObject = {
+        intoken: string,
+        inamount: number,
+        outtoken: string,
+        outamount: number,
+        outamountmin: number,
+        project?: StepProject.AsObject,
     }
 }
 
@@ -2347,6 +2820,180 @@ export namespace QuoteStep {
         outamount: number,
         slippage: number,
         priceimpactpercent?: common_pb.PriceImpactPercent.AsObject,
+        fee?: common_pb.Fee.AsObject,
+        outamountmin: number,
+    }
+}
+
+export class JupiterQuoteRoute extends jspb.Message { 
+    getInamount(): number;
+    setInamount(value: number): JupiterQuoteRoute;
+    getOutamount(): number;
+    setOutamount(value: number): JupiterQuoteRoute;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): JupiterQuoteRoute;
+    clearStepsList(): void;
+    getStepsList(): Array<JupiterQuoteStep>;
+    setStepsList(value: Array<JupiterQuoteStep>): JupiterQuoteRoute;
+    addSteps(value?: JupiterQuoteStep, index?: number): JupiterQuoteStep;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): JupiterQuoteRoute.AsObject;
+    static toObject(includeInstance: boolean, msg: JupiterQuoteRoute): JupiterQuoteRoute.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: JupiterQuoteRoute, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): JupiterQuoteRoute;
+    static deserializeBinaryFromReader(message: JupiterQuoteRoute, reader: jspb.BinaryReader): JupiterQuoteRoute;
+}
+
+export namespace JupiterQuoteRoute {
+    export type AsObject = {
+        inamount: number,
+        outamount: number,
+        outamountmin: number,
+        stepsList: Array<JupiterQuoteStep.AsObject>,
+    }
+}
+
+export class JupiterQuoteStep extends jspb.Message { 
+
+    hasProject(): boolean;
+    clearProject(): void;
+    getProject(): StepProject | undefined;
+    setProject(value?: StepProject): JupiterQuoteStep;
+    getIntoken(): string;
+    setIntoken(value: string): JupiterQuoteStep;
+    getIntokenaddress(): string;
+    setIntokenaddress(value: string): JupiterQuoteStep;
+    getOuttoken(): string;
+    setOuttoken(value: string): JupiterQuoteStep;
+    getOuttokenaddress(): string;
+    setOuttokenaddress(value: string): JupiterQuoteStep;
+    getInamount(): number;
+    setInamount(value: number): JupiterQuoteStep;
+    getOutamount(): number;
+    setOutamount(value: number): JupiterQuoteStep;
+    getSlippage(): number;
+    setSlippage(value: number): JupiterQuoteStep;
+
+    hasPriceimpactpercent(): boolean;
+    clearPriceimpactpercent(): void;
+    getPriceimpactpercent(): common_pb.PriceImpactPercentV2 | undefined;
+    setPriceimpactpercent(value?: common_pb.PriceImpactPercentV2): JupiterQuoteStep;
+
+    hasFee(): boolean;
+    clearFee(): void;
+    getFee(): common_pb.Fee | undefined;
+    setFee(value?: common_pb.Fee): JupiterQuoteStep;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): JupiterQuoteStep;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): JupiterQuoteStep.AsObject;
+    static toObject(includeInstance: boolean, msg: JupiterQuoteStep): JupiterQuoteStep.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: JupiterQuoteStep, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): JupiterQuoteStep;
+    static deserializeBinaryFromReader(message: JupiterQuoteStep, reader: jspb.BinaryReader): JupiterQuoteStep;
+}
+
+export namespace JupiterQuoteStep {
+    export type AsObject = {
+        project?: StepProject.AsObject,
+        intoken: string,
+        intokenaddress: string,
+        outtoken: string,
+        outtokenaddress: string,
+        inamount: number,
+        outamount: number,
+        slippage: number,
+        priceimpactpercent?: common_pb.PriceImpactPercentV2.AsObject,
+        fee?: common_pb.Fee.AsObject,
+        outamountmin: number,
+    }
+}
+
+export class RaydiumQuoteRoute extends jspb.Message { 
+    getInamount(): number;
+    setInamount(value: number): RaydiumQuoteRoute;
+    getOutamount(): number;
+    setOutamount(value: number): RaydiumQuoteRoute;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): RaydiumQuoteRoute;
+    clearStepsList(): void;
+    getStepsList(): Array<RaydiumQuoteStep>;
+    setStepsList(value: Array<RaydiumQuoteStep>): RaydiumQuoteRoute;
+    addSteps(value?: RaydiumQuoteStep, index?: number): RaydiumQuoteStep;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): RaydiumQuoteRoute.AsObject;
+    static toObject(includeInstance: boolean, msg: RaydiumQuoteRoute): RaydiumQuoteRoute.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: RaydiumQuoteRoute, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): RaydiumQuoteRoute;
+    static deserializeBinaryFromReader(message: RaydiumQuoteRoute, reader: jspb.BinaryReader): RaydiumQuoteRoute;
+}
+
+export namespace RaydiumQuoteRoute {
+    export type AsObject = {
+        inamount: number,
+        outamount: number,
+        outamountmin: number,
+        stepsList: Array<RaydiumQuoteStep.AsObject>,
+    }
+}
+
+export class RaydiumQuoteStep extends jspb.Message { 
+    getIntoken(): string;
+    setIntoken(value: string): RaydiumQuoteStep;
+    getIntokenaddress(): string;
+    setIntokenaddress(value: string): RaydiumQuoteStep;
+    getOuttoken(): string;
+    setOuttoken(value: string): RaydiumQuoteStep;
+    getOuttokenaddress(): string;
+    setOuttokenaddress(value: string): RaydiumQuoteStep;
+    getInamount(): number;
+    setInamount(value: number): RaydiumQuoteStep;
+    getOutamount(): number;
+    setOutamount(value: number): RaydiumQuoteStep;
+    getSlippage(): number;
+    setSlippage(value: number): RaydiumQuoteStep;
+
+    hasPriceimpactpercent(): boolean;
+    clearPriceimpactpercent(): void;
+    getPriceimpactpercent(): common_pb.PriceImpactPercentV2 | undefined;
+    setPriceimpactpercent(value?: common_pb.PriceImpactPercentV2): RaydiumQuoteStep;
+
+    hasFee(): boolean;
+    clearFee(): void;
+    getFee(): common_pb.Fee | undefined;
+    setFee(value?: common_pb.Fee): RaydiumQuoteStep;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): RaydiumQuoteStep;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): RaydiumQuoteStep.AsObject;
+    static toObject(includeInstance: boolean, msg: RaydiumQuoteStep): RaydiumQuoteStep.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: RaydiumQuoteStep, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): RaydiumQuoteStep;
+    static deserializeBinaryFromReader(message: RaydiumQuoteStep, reader: jspb.BinaryReader): RaydiumQuoteStep;
+}
+
+export namespace RaydiumQuoteStep {
+    export type AsObject = {
+        intoken: string,
+        intokenaddress: string,
+        outtoken: string,
+        outtokenaddress: string,
+        inamount: number,
+        outamount: number,
+        slippage: number,
+        priceimpactpercent?: common_pb.PriceImpactPercentV2.AsObject,
         fee?: common_pb.Fee.AsObject,
         outamountmin: number,
     }
@@ -2525,6 +3172,48 @@ export class GetPoolsResponse extends jspb.Message {
 export namespace GetPoolsResponse {
     export type AsObject = {
         projectsList: Array<ProjectPools.AsObject>,
+    }
+}
+
+export class GetRaydiumPoolsRequest extends jspb.Message { 
+    getPairoraddress(): string;
+    setPairoraddress(value: string): GetRaydiumPoolsRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetRaydiumPoolsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetRaydiumPoolsRequest): GetRaydiumPoolsRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetRaydiumPoolsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetRaydiumPoolsRequest;
+    static deserializeBinaryFromReader(message: GetRaydiumPoolsRequest, reader: jspb.BinaryReader): GetRaydiumPoolsRequest;
+}
+
+export namespace GetRaydiumPoolsRequest {
+    export type AsObject = {
+        pairoraddress: string,
+    }
+}
+
+export class GetRaydiumPoolsResponse extends jspb.Message { 
+    clearPoolsList(): void;
+    getPoolsList(): Array<ProjectPool>;
+    setPoolsList(value: Array<ProjectPool>): GetRaydiumPoolsResponse;
+    addPools(value?: ProjectPool, index?: number): ProjectPool;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetRaydiumPoolsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetRaydiumPoolsResponse): GetRaydiumPoolsResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetRaydiumPoolsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetRaydiumPoolsResponse;
+    static deserializeBinaryFromReader(message: GetRaydiumPoolsResponse, reader: jspb.BinaryReader): GetRaydiumPoolsResponse;
+}
+
+export namespace GetRaydiumPoolsResponse {
+    export type AsObject = {
+        poolsList: Array<ProjectPool.AsObject>,
     }
 }
 
@@ -2867,6 +3556,94 @@ export namespace GetPriceResponse {
     }
 }
 
+export class GetRaydiumPricesRequest extends jspb.Message { 
+    clearTokensList(): void;
+    getTokensList(): Array<string>;
+    setTokensList(value: Array<string>): GetRaydiumPricesRequest;
+    addTokens(value: string, index?: number): string;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetRaydiumPricesRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetRaydiumPricesRequest): GetRaydiumPricesRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetRaydiumPricesRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetRaydiumPricesRequest;
+    static deserializeBinaryFromReader(message: GetRaydiumPricesRequest, reader: jspb.BinaryReader): GetRaydiumPricesRequest;
+}
+
+export namespace GetRaydiumPricesRequest {
+    export type AsObject = {
+        tokensList: Array<string>,
+    }
+}
+
+export class GetJupiterPricesRequest extends jspb.Message { 
+    clearTokensList(): void;
+    getTokensList(): Array<string>;
+    setTokensList(value: Array<string>): GetJupiterPricesRequest;
+    addTokens(value: string, index?: number): string;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetJupiterPricesRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetJupiterPricesRequest): GetJupiterPricesRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetJupiterPricesRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetJupiterPricesRequest;
+    static deserializeBinaryFromReader(message: GetJupiterPricesRequest, reader: jspb.BinaryReader): GetJupiterPricesRequest;
+}
+
+export namespace GetJupiterPricesRequest {
+    export type AsObject = {
+        tokensList: Array<string>,
+    }
+}
+
+export class GetRaydiumPricesResponse extends jspb.Message { 
+    clearTokenpricesList(): void;
+    getTokenpricesList(): Array<TokenPriceV2>;
+    setTokenpricesList(value: Array<TokenPriceV2>): GetRaydiumPricesResponse;
+    addTokenprices(value?: TokenPriceV2, index?: number): TokenPriceV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetRaydiumPricesResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetRaydiumPricesResponse): GetRaydiumPricesResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetRaydiumPricesResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetRaydiumPricesResponse;
+    static deserializeBinaryFromReader(message: GetRaydiumPricesResponse, reader: jspb.BinaryReader): GetRaydiumPricesResponse;
+}
+
+export namespace GetRaydiumPricesResponse {
+    export type AsObject = {
+        tokenpricesList: Array<TokenPriceV2.AsObject>,
+    }
+}
+
+export class GetJupiterPricesResponse extends jspb.Message { 
+    clearTokenpricesList(): void;
+    getTokenpricesList(): Array<TokenPriceV2>;
+    setTokenpricesList(value: Array<TokenPriceV2>): GetJupiterPricesResponse;
+    addTokenprices(value?: TokenPriceV2, index?: number): TokenPriceV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetJupiterPricesResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetJupiterPricesResponse): GetJupiterPricesResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetJupiterPricesResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetJupiterPricesResponse;
+    static deserializeBinaryFromReader(message: GetJupiterPricesResponse, reader: jspb.BinaryReader): GetJupiterPricesResponse;
+}
+
+export namespace GetJupiterPricesResponse {
+    export type AsObject = {
+        tokenpricesList: Array<TokenPriceV2.AsObject>,
+    }
+}
+
 export class TokenPrice extends jspb.Message { 
     getToken(): string;
     setToken(value: string): TokenPrice;
@@ -2898,6 +3675,41 @@ export namespace TokenPrice {
         token: string,
         tokenaddress: string,
         project: Project,
+        buy: number,
+        buysize: number,
+        sell: number,
+        sellsize: number,
+    }
+}
+
+export class TokenPriceV2 extends jspb.Message { 
+    getToken(): string;
+    setToken(value: string): TokenPriceV2;
+    getTokenaddress(): string;
+    setTokenaddress(value: string): TokenPriceV2;
+    getBuy(): number;
+    setBuy(value: number): TokenPriceV2;
+    getBuysize(): number;
+    setBuysize(value: number): TokenPriceV2;
+    getSell(): number;
+    setSell(value: number): TokenPriceV2;
+    getSellsize(): number;
+    setSellsize(value: number): TokenPriceV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): TokenPriceV2.AsObject;
+    static toObject(includeInstance: boolean, msg: TokenPriceV2): TokenPriceV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: TokenPriceV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TokenPriceV2;
+    static deserializeBinaryFromReader(message: TokenPriceV2, reader: jspb.BinaryReader): TokenPriceV2;
+}
+
+export namespace TokenPriceV2 {
+    export type AsObject = {
+        token: string,
+        tokenaddress: string,
         buy: number,
         buysize: number,
         sell: number,
@@ -4190,6 +5002,8 @@ export class PerpPosition extends jspb.Message {
     setAccountaddress(value: string): PerpPosition;
     getSubaccountid(): number;
     setSubaccountid(value: number): PerpPosition;
+    getUnrealizedpnl(): number;
+    setUnrealizedpnl(value: number): PerpPosition;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PerpPosition.AsObject;
@@ -4213,6 +5027,7 @@ export namespace PerpPosition {
         liquidationprice: number,
         accountaddress: string,
         subaccountid: number,
+        unrealizedpnl: number,
     }
 }
 
@@ -4289,6 +5104,76 @@ export namespace PostPerpOrderResponse {
     }
 }
 
+export class PostDriftPerpOrderRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostDriftPerpOrderRequest;
+    getContract(): string;
+    setContract(value: string): PostDriftPerpOrderRequest;
+    getAccountaddress(): string;
+    setAccountaddress(value: string): PostDriftPerpOrderRequest;
+    getPositionside(): string;
+    setPositionside(value: string): PostDriftPerpOrderRequest;
+    getSlippage(): number;
+    setSlippage(value: number): PostDriftPerpOrderRequest;
+    getType(): string;
+    setType(value: string): PostDriftPerpOrderRequest;
+    getAmount(): number;
+    setAmount(value: number): PostDriftPerpOrderRequest;
+    getPrice(): number;
+    setPrice(value: number): PostDriftPerpOrderRequest;
+    getClientorderid(): number;
+    setClientorderid(value: number): PostDriftPerpOrderRequest;
+    getPostonly(): string;
+    setPostonly(value: string): PostDriftPerpOrderRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftPerpOrderRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftPerpOrderRequest): PostDriftPerpOrderRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftPerpOrderRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftPerpOrderRequest;
+    static deserializeBinaryFromReader(message: PostDriftPerpOrderRequest, reader: jspb.BinaryReader): PostDriftPerpOrderRequest;
+}
+
+export namespace PostDriftPerpOrderRequest {
+    export type AsObject = {
+        owneraddress: string,
+        contract: string,
+        accountaddress: string,
+        positionside: string,
+        slippage: number,
+        type: string,
+        amount: number,
+        price: number,
+        clientorderid: number,
+        postonly: string,
+    }
+}
+
+export class PostDriftPerpOrderResponse extends jspb.Message { 
+
+    hasTransaction(): boolean;
+    clearTransaction(): void;
+    getTransaction(): TransactionMessage | undefined;
+    setTransaction(value?: TransactionMessage): PostDriftPerpOrderResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostDriftPerpOrderResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostDriftPerpOrderResponse): PostDriftPerpOrderResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostDriftPerpOrderResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostDriftPerpOrderResponse;
+    static deserializeBinaryFromReader(message: PostDriftPerpOrderResponse, reader: jspb.BinaryReader): PostDriftPerpOrderResponse;
+}
+
+export namespace PostDriftPerpOrderResponse {
+    export type AsObject = {
+        transaction?: TransactionMessage.AsObject,
+    }
+}
+
 export class PostDriftMarginOrderRequest extends jspb.Message { 
     getOwneraddress(): string;
     setOwneraddress(value: string): PostDriftMarginOrderRequest;
@@ -4308,8 +5193,8 @@ export class PostDriftMarginOrderRequest extends jspb.Message {
     setPrice(value: number): PostDriftMarginOrderRequest;
     getClientorderid(): number;
     setClientorderid(value: number): PostDriftMarginOrderRequest;
-    getPostonly(): common_pb.PostOnlyParams;
-    setPostonly(value: common_pb.PostOnlyParams): PostDriftMarginOrderRequest;
+    getPostonly(): string;
+    setPostonly(value: string): PostDriftMarginOrderRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostDriftMarginOrderRequest.AsObject;
@@ -4332,7 +5217,7 @@ export namespace PostDriftMarginOrderRequest {
         amount: number,
         price: number,
         clientorderid: number,
-        postonly: common_pb.PostOnlyParams,
+        postonly: string,
     }
 }
 
@@ -5703,6 +6588,8 @@ export class DriftPerpPosition extends jspb.Message {
     setIndexprice(value: number): DriftPerpPosition;
     getLiquidationprice(): number;
     setLiquidationprice(value: number): DriftPerpPosition;
+    getUnrealizedpnl(): number;
+    setUnrealizedpnl(value: number): DriftPerpPosition;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): DriftPerpPosition.AsObject;
@@ -5726,6 +6613,7 @@ export namespace DriftPerpPosition {
         notionalvalue: number,
         indexprice: number,
         liquidationprice: number,
+        unrealizedpnl: number,
     }
 }
 
@@ -6432,8 +7320,10 @@ export class PostOrderRequestV2 extends jspb.Message {
     setPayeraddress(value: string): PostOrderRequestV2;
     getMarket(): string;
     setMarket(value: string): PostOrderRequestV2;
-    getSide(): Side;
-    setSide(value: Side): PostOrderRequestV2;
+    getSide(): string;
+    setSide(value: string): PostOrderRequestV2;
+    getType(): string;
+    setType(value: string): PostOrderRequestV2;
     getAmount(): number;
     setAmount(value: number): PostOrderRequestV2;
     getPrice(): number;
@@ -6458,7 +7348,8 @@ export namespace PostOrderRequestV2 {
         owneraddress: string,
         payeraddress: string,
         market: string,
-        side: Side,
+        side: string,
+        type: string,
         amount: number,
         price: number,
         openordersaddress: string,
@@ -6473,8 +7364,10 @@ export class PostReplaceOrderRequestV2 extends jspb.Message {
     setPayeraddress(value: string): PostReplaceOrderRequestV2;
     getMarket(): string;
     setMarket(value: string): PostReplaceOrderRequestV2;
-    getSide(): Side;
-    setSide(value: Side): PostReplaceOrderRequestV2;
+    getSide(): string;
+    setSide(value: string): PostReplaceOrderRequestV2;
+    getType(): string;
+    setType(value: string): PostReplaceOrderRequestV2;
     getAmount(): number;
     setAmount(value: number): PostReplaceOrderRequestV2;
     getPrice(): number;
@@ -6501,7 +7394,8 @@ export namespace PostReplaceOrderRequestV2 {
         owneraddress: string,
         payeraddress: string,
         market: string,
-        side: Side,
+        side: string,
+        type: string,
         amount: number,
         price: number,
         openordersaddress: string,

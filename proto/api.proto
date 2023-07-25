@@ -51,6 +51,115 @@ service Api {
     }
   };
 
+  // Raydium V2
+  rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/pools"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of Raydium pools";
+      summary: "Raydium Pools";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumQuotes(GetRaydiumQuotesRequest) returns (GetRaydiumQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Raydium";
+      summary: "Raydium Quotes";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumPrices(GetRaydiumPricesRequest) returns (GetRaydiumPricesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/prices"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for specified tokens on Raydium";
+      summary: "Token prices on Rayidum";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumSwap(PostRaydiumSwapRequest) returns (PostRaydiumSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium";
+      summary: "Unsigned Raydium swap transaction";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumRouteSwap(PostRaydiumRouteSwapRequest) returns (PostRaydiumRouteSwapResponse) {
+    option(google.api.http) = {
+      post: "/api/v2/raydium/route-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium on the specified route";
+      summary: "Unsigned Raydium swap transaction along route";
+      tags: ["Raydium V2"];
+    };
+  }
+  // End of Raydium V2
+
+  // Jupiter V2
+  rpc GetJupiterQuotes(GetJupiterQuotesRequest) returns (GetJupiterQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/jupiter/quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Jupiter";
+      summary: "Jupiter Quotes";
+      tags: ["Jupiter V2"];
+    };
+  }
+
+  rpc GetJupiterPrices(GetJupiterPricesRequest) returns (GetJupiterPricesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/jupiter/prices"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for specified tokens on Jupiter";
+      summary: "Token prices on Jupiter";
+      tags: ["Jupiter V2"];
+    };
+  }
+
+  rpc PostJupiterSwap(PostJupiterSwapRequest) returns (PostJupiterSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/jupiter/swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Jupiter";
+      summary: "Unsigned Jupiter swap transaction";
+      tags: ["Jupiter V2"];
+    };
+  }
+
+  rpc PostJupiterRouteSwap(PostJupiterRouteSwapRequest) returns (PostJupiterRouteSwapResponse) {
+    option(google.api.http) = {
+      post: "/api/v2/jupiter/route-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Jupiter on the specified route";
+      summary: "Unsigned Jupiter swap transaction along route";
+      tags: ["Jupiter V2"];
+    };
+  }
+  // End of Jupiter V2
+
+
+
   // Drift V2
   rpc PostCloseDriftPerpPositions(PostCloseDriftPerpPositionsRequest) returns (PostCloseDriftPerpPositionsResponse) {
     option (google.api.http) = {
@@ -107,6 +216,18 @@ service Api {
       description: "Returns a partially signed txn signature to manage collateral on Drift";
       summary: "posts collateral on Drift";
       tags: ["Drift V2"];
+    };
+  }
+
+  rpc PostDriftPerpOrder(PostDriftPerpOrderRequest)  returns (PostDriftPerpOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/drift/perp/place"
+      body: "*",
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "posts a perp order on Drift";
+      summary: "perp order on Drift";
+      tags: ["Drift Perp V2"];
     };
   }
 
@@ -175,7 +296,7 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the detail of an open perp order either by ID or ClientOrderID";
       summary: "PERP order";
-      tags: ["Drift V2"];
+      tags: ["Drift Perp V2"];
     };
   }
 
@@ -334,111 +455,111 @@ service Api {
 
   rpc GetMarketsV2(GetMarketsRequestV2) returns (GetMarketsResponseV2) {
     option (google.api.http) = {
-      get: "/api/v2/market/markets"
+      get: "/api/v2/openbook/markets"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list of orderbook markets";
-      summary: "Orderbook markets";
+      summary: "Openbook markets";
       tags: ["Openbook V2"];
     };
   }
 
   rpc GetTickersV2(GetTickersRequestV2) returns (GetTickersResponseV2) {
     option (google.api.http) = {
-      get: "/api/v2/market/tickers/{market}"
+      get: "/api/v2/openbook/tickers/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns updated ticker(s). To receive all tickers use empty string for {market} param value";
-      summary: "Orderbook tickers";
+      summary: "Openbook tickers";
       tags: ["Openbook V2"];
     };
   }
 
   rpc GetOrderbookV2(GetOrderbookRequestV2) returns (GetOrderbookResponseV2) {
     option (google.api.http) = {
-      get: "/api/v2/market/orderbook/{market}"
+      get: "/api/v2/openbook/orderbooks/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned";
-      summary: "Market orderbook";
+      summary: "Openbook market orderbook";
       tags: ["Openbook V2"];
     };
   }
 
   rpc GetMarketDepthV2(GetMarketDepthRequestV2) returns (GetMarketDepthResponseV2) {
     option (google.api.http) = {
-      get: "/api/v2/market/depth/{market}"
+      get: "/api/v2/openbook/depth/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns market's aggregated price data. Use limit param to reduce the number of price points returned";
-      summary: "Market depth";
+      summary: "Openbook market depth";
       tags: ["Openbook V2"];
     };
   }
 
   rpc PostOrderV2(PostOrderRequestV2) returns (PostOrderResponse) {
     option (google.api.http) = {
-      post: "/api/v2/trade/place"
+      post: "/api/v2/openbook/place"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Generates a NewOrderV3 unsigned transaction object";
-      summary: "Unsigned NewOrderV3 transaction";
+      summary: "Openbook unsigned NewOrderV3 transaction";
       tags: ["Openbook V2"];
     };
   }
 
   rpc PostCancelOrderV2(PostCancelOrderRequestV2) returns (PostCancelOrderResponseV2) {
     option (google.api.http) = {
-      post: "/api/v2/trade/cancel"
+      post: "/api/v2/openbook/cancel"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Generates a CancelOrder unsigned transaction object";
-      summary: "Unsigned CancelOrder transaction";
+      summary: "Openbook unsigned CancelOrder transaction";
       tags: ["Openbook V2"];
     };
   }
 
   rpc PostReplaceOrderV2(PostReplaceOrderRequestV2) returns (PostOrderResponse) {
     option (google.api.http) = {
-      post: "/api/v2/trade/replace"
+      post: "/api/v2/openbook/replace"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Generates a ReplaceOrder unsigned transaction object";
-      summary: "Unsigned ReplaceOrder transaction";
+      summary: "Openbook Unsigned ReplaceOrder transaction";
       tags:["Openbook V2"];
     };
   }
 
   rpc PostSettleV2(PostSettleRequestV2) returns (PostSettleResponse) {
     option (google.api.http) = {
-      post: "/api/v2/trade/settle"
+      post: "/api/v2/openbook/settle"
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Generates a SettleFunds unsigned transaction object";
-      summary: "Unsigned SettleFunds transaction";
+      summary: "Openbook unsigned SettleFunds transaction";
       tags: ["Openbook V2"];
     };
   }
 
   rpc GetOpenOrdersV2(GetOpenOrdersRequestV2) returns (GetOpenOrdersResponse) {
     option (google.api.http) = {
-      get: "/api/v2/trade/open-orders/{market}"
+      get: "/api/v2/openbook/open-orders/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list of open orders per user per market";
-      summary: "List of user's open orders";
+      summary: "List of user's open orders in Openbook";
       tags: ["Openbook V2"];
     };
   }
 
   rpc GetUnsettledV2(GetUnsettledRequestV2) returns (GetUnsettledResponse) {
     option (google.api.http) = {
-      get: "/api/v2/trade/unsettled/{market}"
+      get: "/api/v2/openbook/unsettled/{market}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the unsettled amounts of user in a market";
@@ -447,7 +568,7 @@ service Api {
     };
   }
 
-  //end o Openbook V2
+  //end of Openbook V2
 
   rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
     option (google.api.http) = {
@@ -1546,13 +1667,46 @@ message GetQuotesRequest{
   repeated Project projects = 6;
 }
 
-message GetQuotesResponse{
+message GetQuotesResponse {
   string inToken = 1;
   string inTokenAddress = 2;
   string outToken = 3;
   string outTokenAddress = 4;
   double inAmount = 5;
   repeated ProjectQuote quotes = 6;
+}
+
+message GetRaydiumQuotesRequest {
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+}
+
+message GetRaydiumQuotesResponse{
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated RaydiumQuoteRoute routes = 6;
+}
+
+message GetJupiterQuotesRequest{
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+  int32 limit = 5;
+}
+
+message GetJupiterQuotesResponse{
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated JupiterQuoteRoute routes = 6;
 }
 
 message ProjectQuote {
@@ -1569,11 +1723,87 @@ message TradeSwapRequest {
   double slippage = 6;
 }
 
+message PostJupiterSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+}
+
+message PostRaydiumSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+}
+
+message PostRaydiumSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
+message PostJupiterSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
+message PostRaydiumRouteSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+}
+
+message PostJupiterRouteSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
 message RouteTradeSwapRequest {
   Project project = 1;
   string ownerAddress = 2;
   repeated RouteStep steps = 3;
   double slippage = 4;
+}
+
+message PostRaydiumRouteSwapRequest {
+  string ownerAddress = 1;
+  repeated RaydiumRouteStep steps = 2;
+  double slippage = 3;
+}
+
+message RaydiumRouteStep {
+  string inToken = 1;
+  double inAmount = 2;
+  string outToken = 3;
+  double outAmount = 4;
+  double outAmountMin = 5;
+  string poolAddress = 6;
+}
+
+message PostJupiterRouteSwapRequest {
+  string ownerAddress = 1;
+  repeated JupiterRouteStep steps = 2;
+  double slippage = 3;
+}
+
+message JupiterRouteStep {
+  string inToken = 1;
+  double inAmount = 2;
+  string outToken = 3;
+  double outAmount = 4;
+  double outAmountMin = 5;
+  StepProject project = 6;
 }
 
 message RouteStep {
@@ -1625,6 +1855,47 @@ message QuoteStep {
   double outAmountMin = 11;
 }
 
+message JupiterQuoteRoute {
+  double inAmount = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  repeated JupiterQuoteStep steps = 4;
+}
+
+message JupiterQuoteStep {
+  StepProject project = 1;
+  string inToken = 2;
+  string inTokenAddress = 3;
+  string outToken = 4;
+  string outTokenAddress = 5;
+  double inAmount = 6;
+  double outAmount = 7;
+  double slippage = 8;
+  common.PriceImpactPercentV2 priceImpactPercent = 9;
+  common.Fee fee = 10;
+  double outAmountMin = 11;
+}
+
+message RaydiumQuoteRoute {
+  double inAmount = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  repeated RaydiumQuoteStep steps = 4;
+}
+
+message RaydiumQuoteStep {
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  double outAmount = 6;
+  double slippage = 7;
+  common.PriceImpactPercentV2 priceImpactPercent = 8;
+  common.Fee fee = 10;
+  double outAmountMin = 11;
+}
+
 message StepProject {
   string label = 1;
   string id = 2;
@@ -1658,6 +1929,14 @@ message GetPoolsRequest {
 
 message GetPoolsResponse {
   repeated ProjectPools projects = 1;
+}
+
+message GetRaydiumPoolsRequest {
+  string pairOrAddress = 1;
+}
+
+message GetRaydiumPoolsResponse {
+  repeated ProjectPool pools = 1;
 }
 
 message ProjectPools {
@@ -1739,6 +2018,22 @@ message GetPriceResponse {
   repeated TokenPrice tokenPrices = 1;
 }
 
+message GetRaydiumPricesRequest {
+  repeated string tokens = 1;
+}
+
+message GetJupiterPricesRequest {
+  repeated string tokens = 1;
+}
+
+message GetRaydiumPricesResponse {
+  repeated TokenPriceV2 tokenPrices = 1;
+}
+
+message GetJupiterPricesResponse {
+  repeated TokenPriceV2 tokenPrices = 1;
+}
+
 message TokenPrice {
   string token = 1;
   string tokenAddress = 2;
@@ -1747,6 +2042,15 @@ message TokenPrice {
   double buySize = 5;
   double sell = 6;
   double sellSize = 7;
+}
+
+message TokenPriceV2 {
+  string token = 1;
+  string tokenAddress = 2;
+  double buy = 3;
+  double buySize = 4;
+  double sell = 5;
+  double sellSize = 6;
 }
 
 message GetPoolReservesStreamResponse {
@@ -2054,6 +2358,7 @@ message PerpPosition {
 
   string accountAddress = 9;
   int64 subAccountID = 10;
+  double unrealizedPNL = 11;
 }
 
 message PostPerpOrderRequest {
@@ -2074,6 +2379,23 @@ message PostPerpOrderResponse {
   TransactionMessage transaction = 1;
 }
 
+message PostDriftPerpOrderRequest {
+  string ownerAddress = 1;
+  string contract = 2;
+  string accountAddress = 3;
+  string positionSide = 4;
+  double slippage = 5;
+  string type = 6;
+  double amount = 7;
+  double price = 8;
+  uint64 clientOrderID = 9;
+  string postOnly = 10;
+}
+
+message PostDriftPerpOrderResponse {
+  TransactionMessage transaction = 1;
+}
+
 message PostDriftMarginOrderRequest {
   string ownerAddress = 1;
   string accountAddress = 2;
@@ -2084,7 +2406,7 @@ message PostDriftMarginOrderRequest {
   double amount = 7;
   double price = 8;
   uint64 clientOrderID = 9;
-  common.PostOnlyParams postOnly = 10;
+  string postOnly = 10;
 }
 
 message PostDriftMarginOrderResponse {
@@ -2399,6 +2721,7 @@ message DriftPerpPosition {
   double notionalValue = 8;
   double indexPrice = 9;
   double liquidationPrice = 10;
+  double unrealizedPNL = 11;
 }
 
 message GetDriftMarginOrderbooksRequest {
@@ -2553,7 +2876,8 @@ message PostOrderRequestV2 {
   string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
   string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
   string market = 3 [(google.api.field_behavior) = REQUIRED];
-  Side side = 4 [(google.api.field_behavior) = REQUIRED];
+  string side = 4 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
+  string type = 5 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Supported values : Limit, IoC, PostOnly"}];
   double amount = 6 [(google.api.field_behavior) = REQUIRED];
   double price = 7 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
@@ -2564,7 +2888,8 @@ message PostReplaceOrderRequestV2 {
   string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
   string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
   string market = 3 [(google.api.field_behavior) = REQUIRED];
-  Side side = 4 [(google.api.field_behavior) = REQUIRED];
+  string side = 4 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
+  string type = 5 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Supported values : Limit, IoC, PostOnly"}];
   double amount = 6 [(google.api.field_behavior) = REQUIRED];
   double price = 7 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 8 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];

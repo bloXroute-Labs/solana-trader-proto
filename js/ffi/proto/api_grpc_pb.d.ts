@@ -13,11 +13,21 @@ import * as protoc_gen_openapiv2_options_annotations_pb from "./protoc-gen-opena
 import * as common_pb from "./common_pb";
 
 interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
+    getRaydiumPools: IApiService_IGetRaydiumPools;
+    getRaydiumQuotes: IApiService_IGetRaydiumQuotes;
+    getRaydiumPrices: IApiService_IGetRaydiumPrices;
+    postRaydiumSwap: IApiService_IPostRaydiumSwap;
+    postRaydiumRouteSwap: IApiService_IPostRaydiumRouteSwap;
+    getJupiterQuotes: IApiService_IGetJupiterQuotes;
+    getJupiterPrices: IApiService_IGetJupiterPrices;
+    postJupiterSwap: IApiService_IPostJupiterSwap;
+    postJupiterRouteSwap: IApiService_IPostJupiterRouteSwap;
     postCloseDriftPerpPositions: IApiService_IPostCloseDriftPerpPositions;
     getDriftPerpOrderbook: IApiService_IGetDriftPerpOrderbook;
     postCreateDriftUser: IApiService_IPostCreateDriftUser;
     getDriftUser: IApiService_IGetDriftUser;
     postDriftManageCollateral: IApiService_IPostDriftManageCollateral;
+    postDriftPerpOrder: IApiService_IPostDriftPerpOrder;
     postDriftSettlePNL: IApiService_IPostDriftSettlePNL;
     postDriftSettlePNLs: IApiService_IPostDriftSettlePNLs;
     getDriftAssets: IApiService_IGetDriftAssets;
@@ -108,6 +118,87 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getPerpTradesStream: IApiService_IGetPerpTradesStream;
 }
 
+interface IApiService_IGetRaydiumPools extends grpc.MethodDefinition<api_pb.GetRaydiumPoolsRequest, api_pb.GetRaydiumPoolsResponse> {
+    path: "/api.Api/GetRaydiumPools";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetRaydiumPoolsRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetRaydiumPoolsRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetRaydiumPoolsResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetRaydiumPoolsResponse>;
+}
+interface IApiService_IGetRaydiumQuotes extends grpc.MethodDefinition<api_pb.GetRaydiumQuotesRequest, api_pb.GetRaydiumQuotesResponse> {
+    path: "/api.Api/GetRaydiumQuotes";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetRaydiumQuotesRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetRaydiumQuotesRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetRaydiumQuotesResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetRaydiumQuotesResponse>;
+}
+interface IApiService_IGetRaydiumPrices extends grpc.MethodDefinition<api_pb.GetRaydiumPricesRequest, api_pb.GetRaydiumPricesResponse> {
+    path: "/api.Api/GetRaydiumPrices";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetRaydiumPricesRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetRaydiumPricesRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetRaydiumPricesResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetRaydiumPricesResponse>;
+}
+interface IApiService_IPostRaydiumSwap extends grpc.MethodDefinition<api_pb.PostRaydiumSwapRequest, api_pb.PostRaydiumSwapResponse> {
+    path: "/api.Api/PostRaydiumSwap";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostRaydiumSwapRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostRaydiumSwapRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostRaydiumSwapResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostRaydiumSwapResponse>;
+}
+interface IApiService_IPostRaydiumRouteSwap extends grpc.MethodDefinition<api_pb.PostRaydiumRouteSwapRequest, api_pb.PostRaydiumRouteSwapResponse> {
+    path: "/api.Api/PostRaydiumRouteSwap";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostRaydiumRouteSwapRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostRaydiumRouteSwapRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostRaydiumRouteSwapResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostRaydiumRouteSwapResponse>;
+}
+interface IApiService_IGetJupiterQuotes extends grpc.MethodDefinition<api_pb.GetJupiterQuotesRequest, api_pb.GetJupiterQuotesResponse> {
+    path: "/api.Api/GetJupiterQuotes";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetJupiterQuotesRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetJupiterQuotesRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetJupiterQuotesResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetJupiterQuotesResponse>;
+}
+interface IApiService_IGetJupiterPrices extends grpc.MethodDefinition<api_pb.GetJupiterPricesRequest, api_pb.GetJupiterPricesResponse> {
+    path: "/api.Api/GetJupiterPrices";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetJupiterPricesRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetJupiterPricesRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetJupiterPricesResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetJupiterPricesResponse>;
+}
+interface IApiService_IPostJupiterSwap extends grpc.MethodDefinition<api_pb.PostJupiterSwapRequest, api_pb.PostJupiterSwapResponse> {
+    path: "/api.Api/PostJupiterSwap";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostJupiterSwapRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostJupiterSwapRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostJupiterSwapResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostJupiterSwapResponse>;
+}
+interface IApiService_IPostJupiterRouteSwap extends grpc.MethodDefinition<api_pb.PostJupiterRouteSwapRequest, api_pb.PostJupiterRouteSwapResponse> {
+    path: "/api.Api/PostJupiterRouteSwap";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostJupiterRouteSwapRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostJupiterRouteSwapRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostJupiterRouteSwapResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostJupiterRouteSwapResponse>;
+}
 interface IApiService_IPostCloseDriftPerpPositions extends grpc.MethodDefinition<api_pb.PostCloseDriftPerpPositionsRequest, api_pb.PostCloseDriftPerpPositionsResponse> {
     path: "/api.Api/PostCloseDriftPerpPositions";
     requestStream: false;
@@ -152,6 +243,15 @@ interface IApiService_IPostDriftManageCollateral extends grpc.MethodDefinition<a
     requestDeserialize: grpc.deserialize<api_pb.PostDriftManageCollateralRequest>;
     responseSerialize: grpc.serialize<api_pb.PostDriftManageCollateralResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostDriftManageCollateralResponse>;
+}
+interface IApiService_IPostDriftPerpOrder extends grpc.MethodDefinition<api_pb.PostDriftPerpOrderRequest, api_pb.PostDriftPerpOrderResponse> {
+    path: "/api.Api/PostDriftPerpOrder";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostDriftPerpOrderRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostDriftPerpOrderRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostDriftPerpOrderResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostDriftPerpOrderResponse>;
 }
 interface IApiService_IPostDriftSettlePNL extends grpc.MethodDefinition<api_pb.PostDriftSettlePNLRequest, api_pb.PostDriftSettlePNLResponse> {
     path: "/api.Api/PostDriftSettlePNL";
@@ -949,11 +1049,21 @@ interface IApiService_IGetPerpTradesStream extends grpc.MethodDefinition<api_pb.
 export const ApiService: IApiService;
 
 export interface IApiServer extends grpc.UntypedServiceImplementation {
+    getRaydiumPools: grpc.handleUnaryCall<api_pb.GetRaydiumPoolsRequest, api_pb.GetRaydiumPoolsResponse>;
+    getRaydiumQuotes: grpc.handleUnaryCall<api_pb.GetRaydiumQuotesRequest, api_pb.GetRaydiumQuotesResponse>;
+    getRaydiumPrices: grpc.handleUnaryCall<api_pb.GetRaydiumPricesRequest, api_pb.GetRaydiumPricesResponse>;
+    postRaydiumSwap: grpc.handleUnaryCall<api_pb.PostRaydiumSwapRequest, api_pb.PostRaydiumSwapResponse>;
+    postRaydiumRouteSwap: grpc.handleUnaryCall<api_pb.PostRaydiumRouteSwapRequest, api_pb.PostRaydiumRouteSwapResponse>;
+    getJupiterQuotes: grpc.handleUnaryCall<api_pb.GetJupiterQuotesRequest, api_pb.GetJupiterQuotesResponse>;
+    getJupiterPrices: grpc.handleUnaryCall<api_pb.GetJupiterPricesRequest, api_pb.GetJupiterPricesResponse>;
+    postJupiterSwap: grpc.handleUnaryCall<api_pb.PostJupiterSwapRequest, api_pb.PostJupiterSwapResponse>;
+    postJupiterRouteSwap: grpc.handleUnaryCall<api_pb.PostJupiterRouteSwapRequest, api_pb.PostJupiterRouteSwapResponse>;
     postCloseDriftPerpPositions: grpc.handleUnaryCall<api_pb.PostCloseDriftPerpPositionsRequest, api_pb.PostCloseDriftPerpPositionsResponse>;
     getDriftPerpOrderbook: grpc.handleUnaryCall<api_pb.GetDriftPerpOrderbookRequest, api_pb.GetDriftPerpOrderbookResponse>;
     postCreateDriftUser: grpc.handleUnaryCall<api_pb.PostCreateDriftUserRequest, api_pb.PostCreateDriftUserResponse>;
     getDriftUser: grpc.handleUnaryCall<api_pb.GetDriftUserRequest, api_pb.GetDriftUserResponse>;
     postDriftManageCollateral: grpc.handleUnaryCall<api_pb.PostDriftManageCollateralRequest, api_pb.PostDriftManageCollateralResponse>;
+    postDriftPerpOrder: grpc.handleUnaryCall<api_pb.PostDriftPerpOrderRequest, api_pb.PostDriftPerpOrderResponse>;
     postDriftSettlePNL: grpc.handleUnaryCall<api_pb.PostDriftSettlePNLRequest, api_pb.PostDriftSettlePNLResponse>;
     postDriftSettlePNLs: grpc.handleUnaryCall<api_pb.PostDriftSettlePNLsRequest, api_pb.PostDriftSettlePNLsResponse>;
     getDriftAssets: grpc.handleUnaryCall<api_pb.GetDriftAssetsRequest, api_pb.GetDriftAssetsResponse>;
@@ -1045,6 +1155,33 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
 }
 
 export interface IApiClient {
+    getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumQuotes(request: api_pb.GetRaydiumQuotesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumQuotesResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumQuotes(request: api_pb.GetRaydiumQuotesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumQuotesResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumQuotes(request: api_pb.GetRaydiumQuotesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumQuotesResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumPrices(request: api_pb.GetRaydiumPricesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPricesResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumPrices(request: api_pb.GetRaydiumPricesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPricesResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumPrices(request: api_pb.GetRaydiumPricesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPricesResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    getJupiterQuotes(request: api_pb.GetJupiterQuotesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterQuotesResponse) => void): grpc.ClientUnaryCall;
+    getJupiterQuotes(request: api_pb.GetJupiterQuotesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterQuotesResponse) => void): grpc.ClientUnaryCall;
+    getJupiterQuotes(request: api_pb.GetJupiterQuotesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterQuotesResponse) => void): grpc.ClientUnaryCall;
+    getJupiterPrices(request: api_pb.GetJupiterPricesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterPricesResponse) => void): grpc.ClientUnaryCall;
+    getJupiterPrices(request: api_pb.GetJupiterPricesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterPricesResponse) => void): grpc.ClientUnaryCall;
+    getJupiterPrices(request: api_pb.GetJupiterPricesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterPricesResponse) => void): grpc.ClientUnaryCall;
+    postJupiterSwap(request: api_pb.PostJupiterSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterSwapResponse) => void): grpc.ClientUnaryCall;
+    postJupiterSwap(request: api_pb.PostJupiterSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterSwapResponse) => void): grpc.ClientUnaryCall;
+    postJupiterSwap(request: api_pb.PostJupiterSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterSwapResponse) => void): grpc.ClientUnaryCall;
+    postJupiterRouteSwap(request: api_pb.PostJupiterRouteSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    postJupiterRouteSwap(request: api_pb.PostJupiterRouteSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    postJupiterRouteSwap(request: api_pb.PostJupiterRouteSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterRouteSwapResponse) => void): grpc.ClientUnaryCall;
     postCloseDriftPerpPositions(request: api_pb.PostCloseDriftPerpPositionsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostCloseDriftPerpPositionsResponse) => void): grpc.ClientUnaryCall;
     postCloseDriftPerpPositions(request: api_pb.PostCloseDriftPerpPositionsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCloseDriftPerpPositionsResponse) => void): grpc.ClientUnaryCall;
     postCloseDriftPerpPositions(request: api_pb.PostCloseDriftPerpPositionsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCloseDriftPerpPositionsResponse) => void): grpc.ClientUnaryCall;
@@ -1060,6 +1197,9 @@ export interface IApiClient {
     postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
     postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
     postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
+    postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
+    postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
+    postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
     postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;
     postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;
     postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;
@@ -1313,6 +1453,33 @@ export interface IApiClient {
 
 export class ApiClient extends grpc.Client implements IApiClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: Partial<grpc.ClientOptions>);
+    public getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumQuotes(request: api_pb.GetRaydiumQuotesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumQuotes(request: api_pb.GetRaydiumQuotesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumQuotes(request: api_pb.GetRaydiumQuotesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumPrices(request: api_pb.GetRaydiumPricesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPricesResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumPrices(request: api_pb.GetRaydiumPricesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPricesResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumPrices(request: api_pb.GetRaydiumPricesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPricesResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    public getJupiterQuotes(request: api_pb.GetJupiterQuotesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getJupiterQuotes(request: api_pb.GetJupiterQuotesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getJupiterQuotes(request: api_pb.GetJupiterQuotesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getJupiterPrices(request: api_pb.GetJupiterPricesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterPricesResponse) => void): grpc.ClientUnaryCall;
+    public getJupiterPrices(request: api_pb.GetJupiterPricesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterPricesResponse) => void): grpc.ClientUnaryCall;
+    public getJupiterPrices(request: api_pb.GetJupiterPricesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetJupiterPricesResponse) => void): grpc.ClientUnaryCall;
+    public postJupiterSwap(request: api_pb.PostJupiterSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterSwapResponse) => void): grpc.ClientUnaryCall;
+    public postJupiterSwap(request: api_pb.PostJupiterSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterSwapResponse) => void): grpc.ClientUnaryCall;
+    public postJupiterSwap(request: api_pb.PostJupiterSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterSwapResponse) => void): grpc.ClientUnaryCall;
+    public postJupiterRouteSwap(request: api_pb.PostJupiterRouteSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    public postJupiterRouteSwap(request: api_pb.PostJupiterRouteSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    public postJupiterRouteSwap(request: api_pb.PostJupiterRouteSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostJupiterRouteSwapResponse) => void): grpc.ClientUnaryCall;
     public postCloseDriftPerpPositions(request: api_pb.PostCloseDriftPerpPositionsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostCloseDriftPerpPositionsResponse) => void): grpc.ClientUnaryCall;
     public postCloseDriftPerpPositions(request: api_pb.PostCloseDriftPerpPositionsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostCloseDriftPerpPositionsResponse) => void): grpc.ClientUnaryCall;
     public postCloseDriftPerpPositions(request: api_pb.PostCloseDriftPerpPositionsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostCloseDriftPerpPositionsResponse) => void): grpc.ClientUnaryCall;
@@ -1328,6 +1495,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
     public postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
     public postDriftManageCollateral(request: api_pb.PostDriftManageCollateralRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftManageCollateralResponse) => void): grpc.ClientUnaryCall;
+    public postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
+    public postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
+    public postDriftPerpOrder(request: api_pb.PostDriftPerpOrderRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftPerpOrderResponse) => void): grpc.ClientUnaryCall;
     public postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;
     public postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;
     public postDriftSettlePNL(request: api_pb.PostDriftSettlePNLRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostDriftSettlePNLResponse) => void): grpc.ClientUnaryCall;

@@ -18,12 +18,24 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
+	// Raydium V2
+	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
+	GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error)
+	GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error)
+	PostRaydiumSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error)
+	PostRaydiumRouteSwap(ctx context.Context, in *PostRaydiumRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumRouteSwapResponse, error)
+	// Jupiter V2
+	GetJupiterQuotes(ctx context.Context, in *GetJupiterQuotesRequest, opts ...grpc.CallOption) (*GetJupiterQuotesResponse, error)
+	GetJupiterPrices(ctx context.Context, in *GetJupiterPricesRequest, opts ...grpc.CallOption) (*GetJupiterPricesResponse, error)
+	PostJupiterSwap(ctx context.Context, in *PostJupiterSwapRequest, opts ...grpc.CallOption) (*PostJupiterSwapResponse, error)
+	PostJupiterRouteSwap(ctx context.Context, in *PostJupiterRouteSwapRequest, opts ...grpc.CallOption) (*PostJupiterRouteSwapResponse, error)
 	// Drift V2
 	PostCloseDriftPerpPositions(ctx context.Context, in *PostCloseDriftPerpPositionsRequest, opts ...grpc.CallOption) (*PostCloseDriftPerpPositionsResponse, error)
 	GetDriftPerpOrderbook(ctx context.Context, in *GetDriftPerpOrderbookRequest, opts ...grpc.CallOption) (*GetDriftPerpOrderbookResponse, error)
 	PostCreateDriftUser(ctx context.Context, in *PostCreateDriftUserRequest, opts ...grpc.CallOption) (*PostCreateDriftUserResponse, error)
 	GetDriftUser(ctx context.Context, in *GetDriftUserRequest, opts ...grpc.CallOption) (*GetDriftUserResponse, error)
 	PostDriftManageCollateral(ctx context.Context, in *PostDriftManageCollateralRequest, opts ...grpc.CallOption) (*PostDriftManageCollateralResponse, error)
+	PostDriftPerpOrder(ctx context.Context, in *PostDriftPerpOrderRequest, opts ...grpc.CallOption) (*PostDriftPerpOrderResponse, error)
 	PostDriftSettlePNL(ctx context.Context, in *PostDriftSettlePNLRequest, opts ...grpc.CallOption) (*PostDriftSettlePNLResponse, error)
 	PostDriftSettlePNLs(ctx context.Context, in *PostDriftSettlePNLsRequest, opts ...grpc.CallOption) (*PostDriftSettlePNLsResponse, error)
 	GetDriftAssets(ctx context.Context, in *GetDriftAssetsRequest, opts ...grpc.CallOption) (*GetDriftAssetsResponse, error)
@@ -144,6 +156,87 @@ func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 	return &apiClient{cc}
 }
 
+func (c *apiClient) GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error) {
+	out := new(GetRaydiumPoolsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumPools", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error) {
+	out := new(GetRaydiumQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumQuotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error) {
+	out := new(GetRaydiumPricesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumPrices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostRaydiumSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error) {
+	out := new(PostRaydiumSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostRaydiumRouteSwap(ctx context.Context, in *PostRaydiumRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumRouteSwapResponse, error) {
+	out := new(PostRaydiumRouteSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumRouteSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetJupiterQuotes(ctx context.Context, in *GetJupiterQuotesRequest, opts ...grpc.CallOption) (*GetJupiterQuotesResponse, error) {
+	out := new(GetJupiterQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetJupiterQuotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetJupiterPrices(ctx context.Context, in *GetJupiterPricesRequest, opts ...grpc.CallOption) (*GetJupiterPricesResponse, error) {
+	out := new(GetJupiterPricesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetJupiterPrices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostJupiterSwap(ctx context.Context, in *PostJupiterSwapRequest, opts ...grpc.CallOption) (*PostJupiterSwapResponse, error) {
+	out := new(PostJupiterSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostJupiterSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostJupiterRouteSwap(ctx context.Context, in *PostJupiterRouteSwapRequest, opts ...grpc.CallOption) (*PostJupiterRouteSwapResponse, error) {
+	out := new(PostJupiterRouteSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostJupiterRouteSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) PostCloseDriftPerpPositions(ctx context.Context, in *PostCloseDriftPerpPositionsRequest, opts ...grpc.CallOption) (*PostCloseDriftPerpPositionsResponse, error) {
 	out := new(PostCloseDriftPerpPositionsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostCloseDriftPerpPositions", in, out, opts...)
@@ -183,6 +276,15 @@ func (c *apiClient) GetDriftUser(ctx context.Context, in *GetDriftUserRequest, o
 func (c *apiClient) PostDriftManageCollateral(ctx context.Context, in *PostDriftManageCollateralRequest, opts ...grpc.CallOption) (*PostDriftManageCollateralResponse, error) {
 	out := new(PostDriftManageCollateralResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostDriftManageCollateral", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostDriftPerpOrder(ctx context.Context, in *PostDriftPerpOrderRequest, opts ...grpc.CallOption) (*PostDriftPerpOrderResponse, error) {
+	out := new(PostDriftPerpOrderResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostDriftPerpOrder", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1330,12 +1432,24 @@ func (x *apiGetPerpTradesStreamClient) Recv() (*GetPerpTradesStreamResponse, err
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
 type ApiServer interface {
+	// Raydium V2
+	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
+	GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error)
+	GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error)
+	PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error)
+	PostRaydiumRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error)
+	// Jupiter V2
+	GetJupiterQuotes(context.Context, *GetJupiterQuotesRequest) (*GetJupiterQuotesResponse, error)
+	GetJupiterPrices(context.Context, *GetJupiterPricesRequest) (*GetJupiterPricesResponse, error)
+	PostJupiterSwap(context.Context, *PostJupiterSwapRequest) (*PostJupiterSwapResponse, error)
+	PostJupiterRouteSwap(context.Context, *PostJupiterRouteSwapRequest) (*PostJupiterRouteSwapResponse, error)
 	// Drift V2
 	PostCloseDriftPerpPositions(context.Context, *PostCloseDriftPerpPositionsRequest) (*PostCloseDriftPerpPositionsResponse, error)
 	GetDriftPerpOrderbook(context.Context, *GetDriftPerpOrderbookRequest) (*GetDriftPerpOrderbookResponse, error)
 	PostCreateDriftUser(context.Context, *PostCreateDriftUserRequest) (*PostCreateDriftUserResponse, error)
 	GetDriftUser(context.Context, *GetDriftUserRequest) (*GetDriftUserResponse, error)
 	PostDriftManageCollateral(context.Context, *PostDriftManageCollateralRequest) (*PostDriftManageCollateralResponse, error)
+	PostDriftPerpOrder(context.Context, *PostDriftPerpOrderRequest) (*PostDriftPerpOrderResponse, error)
 	PostDriftSettlePNL(context.Context, *PostDriftSettlePNLRequest) (*PostDriftSettlePNLResponse, error)
 	PostDriftSettlePNLs(context.Context, *PostDriftSettlePNLsRequest) (*PostDriftSettlePNLsResponse, error)
 	GetDriftAssets(context.Context, *GetDriftAssetsRequest) (*GetDriftAssetsResponse, error)
@@ -1453,6 +1567,33 @@ type ApiServer interface {
 type UnimplementedApiServer struct {
 }
 
+func (UnimplementedApiServer) GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPools not implemented")
+}
+func (UnimplementedApiServer) GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumQuotes not implemented")
+}
+func (UnimplementedApiServer) GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPrices not implemented")
+}
+func (UnimplementedApiServer) PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumSwap not implemented")
+}
+func (UnimplementedApiServer) PostRaydiumRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumRouteSwap not implemented")
+}
+func (UnimplementedApiServer) GetJupiterQuotes(context.Context, *GetJupiterQuotesRequest) (*GetJupiterQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetJupiterQuotes not implemented")
+}
+func (UnimplementedApiServer) GetJupiterPrices(context.Context, *GetJupiterPricesRequest) (*GetJupiterPricesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetJupiterPrices not implemented")
+}
+func (UnimplementedApiServer) PostJupiterSwap(context.Context, *PostJupiterSwapRequest) (*PostJupiterSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostJupiterSwap not implemented")
+}
+func (UnimplementedApiServer) PostJupiterRouteSwap(context.Context, *PostJupiterRouteSwapRequest) (*PostJupiterRouteSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostJupiterRouteSwap not implemented")
+}
 func (UnimplementedApiServer) PostCloseDriftPerpPositions(context.Context, *PostCloseDriftPerpPositionsRequest) (*PostCloseDriftPerpPositionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostCloseDriftPerpPositions not implemented")
 }
@@ -1467,6 +1608,9 @@ func (UnimplementedApiServer) GetDriftUser(context.Context, *GetDriftUserRequest
 }
 func (UnimplementedApiServer) PostDriftManageCollateral(context.Context, *PostDriftManageCollateralRequest) (*PostDriftManageCollateralResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostDriftManageCollateral not implemented")
+}
+func (UnimplementedApiServer) PostDriftPerpOrder(context.Context, *PostDriftPerpOrderRequest) (*PostDriftPerpOrderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostDriftPerpOrder not implemented")
 }
 func (UnimplementedApiServer) PostDriftSettlePNL(context.Context, *PostDriftSettlePNLRequest) (*PostDriftSettlePNLResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostDriftSettlePNL not implemented")
@@ -1745,6 +1889,168 @@ func RegisterApiServer(s grpc.ServiceRegistrar, srv ApiServer) {
 	s.RegisterService(&Api_ServiceDesc, srv)
 }
 
+func _Api_GetRaydiumPools_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRaydiumPoolsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRaydiumPools(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRaydiumPools",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRaydiumPools(ctx, req.(*GetRaydiumPoolsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetRaydiumQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRaydiumQuotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRaydiumQuotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRaydiumQuotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRaydiumQuotes(ctx, req.(*GetRaydiumQuotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetRaydiumPrices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRaydiumPricesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRaydiumPrices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRaydiumPrices",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRaydiumPrices(ctx, req.(*GetRaydiumPricesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostRaydiumSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRaydiumSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostRaydiumSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostRaydiumSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostRaydiumSwap(ctx, req.(*PostRaydiumSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostRaydiumRouteSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRaydiumRouteSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostRaydiumRouteSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostRaydiumRouteSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostRaydiumRouteSwap(ctx, req.(*PostRaydiumRouteSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetJupiterQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetJupiterQuotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetJupiterQuotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetJupiterQuotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetJupiterQuotes(ctx, req.(*GetJupiterQuotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetJupiterPrices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetJupiterPricesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetJupiterPrices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetJupiterPrices",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetJupiterPrices(ctx, req.(*GetJupiterPricesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostJupiterSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostJupiterSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostJupiterSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostJupiterSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostJupiterSwap(ctx, req.(*PostJupiterSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostJupiterRouteSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostJupiterRouteSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostJupiterRouteSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostJupiterRouteSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostJupiterRouteSwap(ctx, req.(*PostJupiterRouteSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_PostCloseDriftPerpPositions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostCloseDriftPerpPositionsRequest)
 	if err := dec(in); err != nil {
@@ -1831,6 +2137,24 @@ func _Api_PostDriftManageCollateral_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostDriftManageCollateral(ctx, req.(*PostDriftManageCollateralRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostDriftPerpOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostDriftPerpOrderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostDriftPerpOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostDriftPerpOrder",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostDriftPerpOrder(ctx, req.(*PostDriftPerpOrderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3472,6 +3796,42 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*ApiServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "GetRaydiumPools",
+			Handler:    _Api_GetRaydiumPools_Handler,
+		},
+		{
+			MethodName: "GetRaydiumQuotes",
+			Handler:    _Api_GetRaydiumQuotes_Handler,
+		},
+		{
+			MethodName: "GetRaydiumPrices",
+			Handler:    _Api_GetRaydiumPrices_Handler,
+		},
+		{
+			MethodName: "PostRaydiumSwap",
+			Handler:    _Api_PostRaydiumSwap_Handler,
+		},
+		{
+			MethodName: "PostRaydiumRouteSwap",
+			Handler:    _Api_PostRaydiumRouteSwap_Handler,
+		},
+		{
+			MethodName: "GetJupiterQuotes",
+			Handler:    _Api_GetJupiterQuotes_Handler,
+		},
+		{
+			MethodName: "GetJupiterPrices",
+			Handler:    _Api_GetJupiterPrices_Handler,
+		},
+		{
+			MethodName: "PostJupiterSwap",
+			Handler:    _Api_PostJupiterSwap_Handler,
+		},
+		{
+			MethodName: "PostJupiterRouteSwap",
+			Handler:    _Api_PostJupiterRouteSwap_Handler,
+		},
+		{
 			MethodName: "PostCloseDriftPerpPositions",
 			Handler:    _Api_PostCloseDriftPerpPositions_Handler,
 		},
@@ -3490,6 +3850,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostDriftManageCollateral",
 			Handler:    _Api_PostDriftManageCollateral_Handler,
+		},
+		{
+			MethodName: "PostDriftPerpOrder",
+			Handler:    _Api_PostDriftPerpOrder_Handler,
 		},
 		{
 			MethodName: "PostDriftSettlePNL",

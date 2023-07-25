@@ -2374,7 +2374,7 @@
           }
         ],
         "tags": [
-          "Drift V2"
+          "Drift Perp V2"
         ]
       }
     },
@@ -2459,6 +2459,40 @@
             "required": false,
             "type": "integer",
             "format": "int64"
+          }
+        ],
+        "tags": [
+          "Drift Perp V2"
+        ]
+      }
+    },
+    "/api/v2/drift/perp/place": {
+      "post": {
+        "summary": "perp order on Drift",
+        "description": "posts a perp order on Drift",
+        "operationId": "Api_PostDriftPerpOrder",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftPerpOrderResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostDriftPerpOrderRequest"
+            }
           }
         ],
         "tags": [
@@ -2652,9 +2686,206 @@
         ]
       }
     },
-    "/api/v2/market/depth/{market}": {
+    "/api/v2/jupiter/prices": {
       "get": {
-        "summary": "Market depth",
+        "summary": "Token prices on Jupiter",
+        "description": "Returns the list of prices for specified tokens on Jupiter",
+        "operationId": "Api_GetJupiterPrices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetJupiterPricesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tokens",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Jupiter V2"
+        ]
+      }
+    },
+    "/api/v2/jupiter/quotes": {
+      "get": {
+        "summary": "Jupiter Quotes",
+        "description": "Returns quotes from Jupiter",
+        "operationId": "Api_GetJupiterQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetJupiterQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Jupiter V2"
+        ]
+      }
+    },
+    "/api/v2/jupiter/route-swap": {
+      "post": {
+        "summary": "Unsigned Jupiter swap transaction along route",
+        "description": "Generates an unsigned transaction object to make a swap on Jupiter on the specified route",
+        "operationId": "Api_PostJupiterRouteSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostJupiterRouteSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostJupiterRouteSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Jupiter V2"
+        ]
+      }
+    },
+    "/api/v2/jupiter/swap": {
+      "post": {
+        "summary": "Unsigned Jupiter swap transaction",
+        "description": "Generates an unsigned transaction object to make a swap on Jupiter",
+        "operationId": "Api_PostJupiterSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostJupiterSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostJupiterSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Jupiter V2"
+        ]
+      }
+    },
+    "/api/v2/openbook/cancel": {
+      "post": {
+        "summary": "Openbook unsigned CancelOrder transaction",
+        "description": "Generates a CancelOrder unsigned transaction object",
+        "operationId": "Api_PostCancelOrderV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelOrderResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostCancelOrderRequestV2"
+            }
+          }
+        ],
+        "tags": [
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/openbook/depth/{market}": {
+      "get": {
+        "summary": "Openbook market depth",
         "description": "Returns market's aggregated price data. Use limit param to reduce the number of price points returned",
         "operationId": "Api_GetMarketDepthV2",
         "responses": {
@@ -2692,9 +2923,9 @@
         ]
       }
     },
-    "/api/v2/market/markets": {
+    "/api/v2/openbook/markets": {
       "get": {
-        "summary": "Orderbook markets",
+        "summary": "Openbook markets",
         "description": "Returns the list of orderbook markets",
         "operationId": "Api_GetMarketsV2",
         "responses": {
@@ -2716,121 +2947,9 @@
         ]
       }
     },
-    "/api/v2/market/orderbook/{market}": {
+    "/api/v2/openbook/open-orders/{market}": {
       "get": {
-        "summary": "Market orderbook",
-        "description": "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned",
-        "operationId": "Api_GetOrderbookV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetOrderbookResponseV2"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "market",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "description": "Use 0 for no limits",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "tags": [
-          "Openbook V2"
-        ]
-      }
-    },
-    "/api/v2/market/tickers/{market}": {
-      "get": {
-        "summary": "Orderbook tickers",
-        "description": "Returns updated ticker(s). To receive all tickers use empty string for {market} param value",
-        "operationId": "Api_GetTickersV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetTickersResponseV2"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "market",
-            "description": "Use empty array for all markets",
-            "in": "path",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv",
-            "minItems": 1
-          }
-        ],
-        "tags": [
-          "Openbook V2"
-        ]
-      }
-    },
-    "/api/v2/trade/cancel": {
-      "post": {
-        "summary": "Unsigned CancelOrder transaction",
-        "description": "Generates a CancelOrder unsigned transaction object",
-        "operationId": "Api_PostCancelOrderV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostCancelOrderResponseV2"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiPostCancelOrderRequestV2"
-            }
-          }
-        ],
-        "tags": [
-          "Openbook V2"
-        ]
-      }
-    },
-    "/api/v2/trade/open-orders/{market}": {
-      "get": {
-        "summary": "List of user's open orders",
+        "summary": "List of user's open orders in Openbook",
         "description": "Returns the list of open orders per user per market",
         "operationId": "Api_GetOpenOrdersV2",
         "responses": {
@@ -2894,9 +3013,49 @@
         ]
       }
     },
-    "/api/v2/trade/place": {
+    "/api/v2/openbook/orderbooks/{market}": {
+      "get": {
+        "summary": "Openbook market orderbook",
+        "description": "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned",
+        "operationId": "Api_GetOrderbookV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetOrderbookResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Use 0 for no limits",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/openbook/place": {
       "post": {
-        "summary": "Unsigned NewOrderV3 transaction",
+        "summary": "Openbook unsigned NewOrderV3 transaction",
         "description": "Generates a NewOrderV3 unsigned transaction object",
         "operationId": "Api_PostOrderV2",
         "responses": {
@@ -2928,9 +3087,9 @@
         ]
       }
     },
-    "/api/v2/trade/replace": {
+    "/api/v2/openbook/replace": {
       "post": {
-        "summary": "Unsigned ReplaceOrder transaction",
+        "summary": "Openbook Unsigned ReplaceOrder transaction",
         "description": "Generates a ReplaceOrder unsigned transaction object",
         "operationId": "Api_PostReplaceOrderV2",
         "responses": {
@@ -2962,9 +3121,9 @@
         ]
       }
     },
-    "/api/v2/trade/settle": {
+    "/api/v2/openbook/settle": {
       "post": {
-        "summary": "Unsigned SettleFunds transaction",
+        "summary": "Openbook unsigned SettleFunds transaction",
         "description": "Generates a SettleFunds unsigned transaction object",
         "operationId": "Api_PostSettleV2",
         "responses": {
@@ -2996,7 +3155,40 @@
         ]
       }
     },
-    "/api/v2/trade/unsettled/{market}": {
+    "/api/v2/openbook/tickers/{market}": {
+      "get": {
+        "summary": "Openbook tickers",
+        "description": "Returns updated ticker(s). To receive all tickers use empty string for {market} param value",
+        "operationId": "Api_GetTickersV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTickersResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "market",
+            "description": "Use empty string for all markets",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/openbook/unsettled/{market}": {
       "get": {
         "summary": "Unsettled amounts",
         "description": "Returns the unsettled amounts of user in a market",
@@ -3031,6 +3223,194 @@
         ],
         "tags": [
           "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/pools": {
+      "get": {
+        "summary": "Raydium Pools",
+        "description": "Returns the list of Raydium pools",
+        "operationId": "Api_GetRaydiumPools",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumPoolsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairOrAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/prices": {
+      "get": {
+        "summary": "Token prices on Rayidum",
+        "description": "Returns the list of prices for specified tokens on Raydium",
+        "operationId": "Api_GetRaydiumPrices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumPricesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tokens",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/quotes": {
+      "get": {
+        "summary": "Raydium Quotes",
+        "description": "Returns quotes from Raydium",
+        "operationId": "Api_GetRaydiumQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/route-swap": {
+      "post": {
+        "summary": "Unsigned Raydium swap transaction along route",
+        "description": "Generates an unsigned transaction object to make a swap on Raydium on the specified route",
+        "operationId": "Api_PostRaydiumRouteSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/swap": {
+      "post": {
+        "summary": "Unsigned Raydium swap transaction",
+        "description": "Generates an unsigned transaction object to make a swap on Raydium",
+        "operationId": "Api_PostRaydiumSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
         ]
       }
     }
@@ -3090,12 +3470,6 @@
           "type": "string",
           "format": "date-time"
         },
-        "marketAddress": {
-          "type": "string"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
-        },
         "open": {
           "type": "number",
           "format": "double"
@@ -3123,17 +3497,6 @@
         "count": {
           "type": "number",
           "format": "double"
-        }
-      }
-    },
-    "apiCandles": {
-      "type": "object",
-      "properties": {
-        "candles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiCandle"
-          }
         }
       }
     },
@@ -3394,6 +3757,10 @@
           "format": "double"
         },
         "liquidationPrice": {
+          "type": "number",
+          "format": "double"
+        },
+        "unrealizedPNL": {
           "type": "number",
           "format": "double"
         }
@@ -3704,13 +4071,58 @@
         }
       }
     },
+    "apiGetJupiterPricesResponse": {
+      "type": "object",
+      "properties": {
+        "tokenPrices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTokenPriceV2"
+          }
+        }
+      }
+    },
+    "apiGetJupiterQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiJupiterQuoteRoute"
+          }
+        }
+      }
+    },
     "apiGetKlineResponse": {
       "type": "object",
       "properties": {
-        "marketCandles": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/apiCandles"
+        "market": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "candles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiCandle"
           }
         }
       }
@@ -3791,17 +4203,6 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/apiMarketV2"
-          }
-        }
-      }
-    },
-    "apiGetMyOrdersResponse": {
-      "type": "object",
-      "properties": {
-        "orders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiMyOrder"
           }
         }
       }
@@ -4251,6 +4652,55 @@
         }
       }
     },
+    "apiGetRaydiumPoolsResponse": {
+      "type": "object",
+      "properties": {
+        "pools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiProjectPool"
+          }
+        }
+      }
+    },
+    "apiGetRaydiumPricesResponse": {
+      "type": "object",
+      "properties": {
+        "tokenPrices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTokenPriceV2"
+          }
+        }
+      }
+    },
+    "apiGetRaydiumQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumQuoteRoute"
+          }
+        }
+      }
+    },
     "apiGetRecentBlockHashResponse": {
       "type": "object",
       "properties": {
@@ -4339,10 +4789,10 @@
     "apiGetTickersResponseV2": {
       "type": "object",
       "properties": {
-        "marketTickers": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/apiCandle"
+        "tickers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTickerV2"
           }
         }
       }
@@ -4415,6 +4865,97 @@
           "items": {
             "$ref": "#/definitions/apiUserDetail"
           }
+        }
+      }
+    },
+    "apiJupiterQuoteRoute": {
+      "type": "object",
+      "properties": {
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiJupiterQuoteStep"
+          }
+        }
+      }
+    },
+    "apiJupiterQuoteStep": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/definitions/apiStepProject"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpactPercent": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fee": {
+          "$ref": "#/definitions/commonFee"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiJupiterRouteStep": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiStepProject"
         }
       }
     },
@@ -4505,46 +5046,6 @@
         "quoteDecimals": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "apiMyOrder": {
-      "type": "object",
-      "properties": {
-        "Timestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "Project": {
-          "$ref": "#/definitions/apiProject"
-        },
-        "OwnerAddress": {
-          "type": "string"
-        },
-        "Date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "ClientOrderID": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "MarketAddress": {
-          "type": "string"
-        },
-        "ProgramOrderID": {
-          "type": "string"
-        },
-        "Side": {
-          "type": "string"
-        },
-        "Amount": {
-          "type": "number",
-          "format": "double"
-        },
-        "Price": {
-          "type": "number",
-          "format": "double"
         }
       }
     },
@@ -4792,6 +5293,10 @@
         "subAccountID": {
           "type": "string",
           "format": "int64"
+        },
+        "unrealizedPNL": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -5331,11 +5836,58 @@
           "format": "uint64"
         },
         "postOnly": {
-          "$ref": "#/definitions/commonPostOnlyParams"
+          "type": "string"
         }
       }
     },
     "apiPostDriftMarginOrderResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostDriftPerpOrderRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "contract": {
+          "type": "string"
+        },
+        "accountAddress": {
+          "type": "string"
+        },
+        "positionSide": {
+          "type": "string"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "clientOrderID": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "postOnly": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostDriftPerpOrderResponse": {
       "type": "object",
       "properties": {
         "transaction": {
@@ -5389,6 +5941,102 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiTransactionMessage"
+          }
+        }
+      }
+    },
+    "apiPostJupiterRouteSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiJupiterRouteStep"
+          }
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostJupiterRouteSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpact": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonFee"
+          }
+        }
+      }
+    },
+    "apiPostJupiterSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostJupiterSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpact": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonFee"
           }
         }
       }
@@ -5608,7 +6256,18 @@
           ]
         },
         "side": {
-          "$ref": "#/definitions/apiSide"
+          "type": "string",
+          "description": " Supported values : Bid, Ask",
+          "required": [
+            "side"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Supported values : Limit, IoC, PostOnly",
+          "required": [
+            "type"
+          ]
         },
         "amount": {
           "type": "number",
@@ -5638,6 +6297,8 @@
         "ownerAddress",
         "payerAddress",
         "market",
+        "side",
+        "type",
         "amount",
         "price"
       ]
@@ -5700,6 +6361,93 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostRaydiumRouteSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumRouteStep"
+          }
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostRaydiumRouteSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostRaydiumSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostRaydiumSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpact": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonFee"
+          }
         }
       }
     },
@@ -5801,7 +6549,18 @@
           ]
         },
         "side": {
-          "$ref": "#/definitions/apiSide"
+          "type": "string",
+          "description": " Supported values : Bid, Ask",
+          "required": [
+            "side"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Supported values : Limit, IoC, PostOnly",
+          "required": [
+            "type"
+          ]
         },
         "amount": {
           "type": "number",
@@ -5838,6 +6597,8 @@
         "ownerAddress",
         "payerAddress",
         "market",
+        "side",
+        "type",
         "amount",
         "price",
         "openOrdersAddress"
@@ -6194,6 +6955,94 @@
         }
       }
     },
+    "apiRaydiumQuoteRoute": {
+      "type": "object",
+      "properties": {
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumQuoteStep"
+          }
+        }
+      }
+    },
+    "apiRaydiumQuoteStep": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpactPercent": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fee": {
+          "$ref": "#/definitions/commonFee"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiRaydiumRouteStep": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "poolAddress": {
+          "type": "string"
+        }
+      }
+    },
     "apiRouteStep": {
       "type": "object",
       "properties": {
@@ -6301,6 +7150,33 @@
         }
       }
     },
+    "apiTickerV2": {
+      "type": "object",
+      "properties": {
+        "market": {
+          "type": "string"
+        },
+        "marketAddress": {
+          "type": "string"
+        },
+        "bid": {
+          "type": "number",
+          "format": "double"
+        },
+        "bidSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "ask": {
+          "type": "number",
+          "format": "double"
+        },
+        "askSize": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiTokenAccount": {
       "type": "object",
       "properties": {
@@ -6368,6 +7244,33 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        },
+        "buy": {
+          "type": "number",
+          "format": "double"
+        },
+        "buySize": {
+          "type": "number",
+          "format": "double"
+        },
+        "sell": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellSize": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiTokenPriceV2": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "tokenAddress": {
+          "type": "string"
         },
         "buy": {
           "type": "number",
@@ -6640,6 +7543,18 @@
         },
         "infinity": {
           "$ref": "#/definitions/commonInfinity"
+        }
+      }
+    },
+    "commonPriceImpactPercentV2": {
+      "type": "object",
+      "properties": {
+        "percent": {
+          "type": "number",
+          "format": "double"
+        },
+        "infinity": {
+          "type": "string"
         }
       }
     },

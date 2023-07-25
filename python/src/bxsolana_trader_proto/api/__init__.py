@@ -570,6 +570,43 @@ class GetQuotesResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetRaydiumQuotesRequest(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    out_token: str = betterproto.string_field(2)
+    in_amount: float = betterproto.double_field(3)
+    slippage: float = betterproto.double_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumQuotesResponse(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    in_token_address: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    out_token_address: str = betterproto.string_field(4)
+    in_amount: float = betterproto.double_field(5)
+    routes: List["RaydiumQuoteRoute"] = betterproto.message_field(6)
+
+
+@dataclass(eq=False, repr=False)
+class GetJupiterQuotesRequest(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    out_token: str = betterproto.string_field(2)
+    in_amount: float = betterproto.double_field(3)
+    slippage: float = betterproto.double_field(4)
+    limit: int = betterproto.int32_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class GetJupiterQuotesResponse(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    in_token_address: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    out_token_address: str = betterproto.string_field(4)
+    in_amount: float = betterproto.double_field(5)
+    routes: List["JupiterQuoteRoute"] = betterproto.message_field(6)
+
+
+@dataclass(eq=False, repr=False)
 class ProjectQuote(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     routes: List["QuoteRoute"] = betterproto.message_field(2)
@@ -586,11 +623,97 @@ class TradeSwapRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostJupiterSwapRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    in_token: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    in_amount: float = betterproto.double_field(4)
+    slippage: float = betterproto.double_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumSwapRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    in_token: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    in_amount: float = betterproto.double_field(4)
+    slippage: float = betterproto.double_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumSwapResponse(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
+    price_impact: "_common__.PriceImpactPercentV2" = betterproto.message_field(4)
+    fees: List["_common__.Fee"] = betterproto.message_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class PostJupiterSwapResponse(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
+    price_impact: "_common__.PriceImpactPercentV2" = betterproto.message_field(4)
+    fees: List["_common__.Fee"] = betterproto.message_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumRouteSwapResponse(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class PostJupiterRouteSwapResponse(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
+    price_impact: "_common__.PriceImpactPercentV2" = betterproto.message_field(4)
+    fees: List["_common__.Fee"] = betterproto.message_field(5)
+
+
+@dataclass(eq=False, repr=False)
 class RouteTradeSwapRequest(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     owner_address: str = betterproto.string_field(2)
     steps: List["RouteStep"] = betterproto.message_field(3)
     slippage: float = betterproto.double_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumRouteSwapRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    steps: List["RaydiumRouteStep"] = betterproto.message_field(2)
+    slippage: float = betterproto.double_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class RaydiumRouteStep(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    in_amount: float = betterproto.double_field(2)
+    out_token: str = betterproto.string_field(3)
+    out_amount: float = betterproto.double_field(4)
+    out_amount_min: float = betterproto.double_field(5)
+    pool_address: str = betterproto.string_field(6)
+
+
+@dataclass(eq=False, repr=False)
+class PostJupiterRouteSwapRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    steps: List["JupiterRouteStep"] = betterproto.message_field(2)
+    slippage: float = betterproto.double_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class JupiterRouteStep(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    in_amount: float = betterproto.double_field(2)
+    out_token: str = betterproto.string_field(3)
+    out_amount: float = betterproto.double_field(4)
+    out_amount_min: float = betterproto.double_field(5)
+    project: "StepProject" = betterproto.message_field(6)
 
 
 @dataclass(eq=False, repr=False)
@@ -632,6 +755,55 @@ class QuoteStep(betterproto.Message):
     out_amount: float = betterproto.double_field(7)
     slippage: float = betterproto.double_field(8)
     price_impact_percent: "_common__.PriceImpactPercent" = betterproto.message_field(9)
+    fee: "_common__.Fee" = betterproto.message_field(10)
+    out_amount_min: float = betterproto.double_field(11)
+
+
+@dataclass(eq=False, repr=False)
+class JupiterQuoteRoute(betterproto.Message):
+    in_amount: float = betterproto.double_field(1)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
+    steps: List["JupiterQuoteStep"] = betterproto.message_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class JupiterQuoteStep(betterproto.Message):
+    project: "StepProject" = betterproto.message_field(1)
+    in_token: str = betterproto.string_field(2)
+    in_token_address: str = betterproto.string_field(3)
+    out_token: str = betterproto.string_field(4)
+    out_token_address: str = betterproto.string_field(5)
+    in_amount: float = betterproto.double_field(6)
+    out_amount: float = betterproto.double_field(7)
+    slippage: float = betterproto.double_field(8)
+    price_impact_percent: "_common__.PriceImpactPercentV2" = betterproto.message_field(
+        9
+    )
+    fee: "_common__.Fee" = betterproto.message_field(10)
+    out_amount_min: float = betterproto.double_field(11)
+
+
+@dataclass(eq=False, repr=False)
+class RaydiumQuoteRoute(betterproto.Message):
+    in_amount: float = betterproto.double_field(1)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
+    steps: List["RaydiumQuoteStep"] = betterproto.message_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class RaydiumQuoteStep(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    in_token_address: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    out_token_address: str = betterproto.string_field(4)
+    in_amount: float = betterproto.double_field(5)
+    out_amount: float = betterproto.double_field(6)
+    slippage: float = betterproto.double_field(7)
+    price_impact_percent: "_common__.PriceImpactPercentV2" = betterproto.message_field(
+        8
+    )
     fee: "_common__.Fee" = betterproto.message_field(10)
     out_amount_min: float = betterproto.double_field(11)
 
@@ -679,6 +851,16 @@ class GetPoolsRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetPoolsResponse(betterproto.Message):
     projects: List["ProjectPools"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumPoolsRequest(betterproto.Message):
+    pair_or_address: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumPoolsResponse(betterproto.Message):
+    pools: List["ProjectPool"] = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)
@@ -770,6 +952,26 @@ class GetPriceResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetRaydiumPricesRequest(betterproto.Message):
+    tokens: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetJupiterPricesRequest(betterproto.Message):
+    tokens: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumPricesResponse(betterproto.Message):
+    token_prices: List["TokenPriceV2"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetJupiterPricesResponse(betterproto.Message):
+    token_prices: List["TokenPriceV2"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class TokenPrice(betterproto.Message):
     token: str = betterproto.string_field(1)
     token_address: str = betterproto.string_field(2)
@@ -778,6 +980,16 @@ class TokenPrice(betterproto.Message):
     buy_size: float = betterproto.double_field(5)
     sell: float = betterproto.double_field(6)
     sell_size: float = betterproto.double_field(7)
+
+
+@dataclass(eq=False, repr=False)
+class TokenPriceV2(betterproto.Message):
+    token: str = betterproto.string_field(1)
+    token_address: str = betterproto.string_field(2)
+    buy: float = betterproto.double_field(3)
+    buy_size: float = betterproto.double_field(4)
+    sell: float = betterproto.double_field(5)
+    sell_size: float = betterproto.double_field(6)
 
 
 @dataclass(eq=False, repr=False)
@@ -1118,6 +1330,7 @@ class PerpPosition(betterproto.Message):
     liquidation_price: float = betterproto.double_field(8)
     account_address: str = betterproto.string_field(9)
     sub_account_id: int = betterproto.int64_field(10)
+    unrealized_pnl: float = betterproto.double_field(11)
 
 
 @dataclass(eq=False, repr=False)
@@ -1141,6 +1354,25 @@ class PostPerpOrderResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostDriftPerpOrderRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    contract: str = betterproto.string_field(2)
+    account_address: str = betterproto.string_field(3)
+    position_side: str = betterproto.string_field(4)
+    slippage: float = betterproto.double_field(5)
+    type: str = betterproto.string_field(6)
+    amount: float = betterproto.double_field(7)
+    price: float = betterproto.double_field(8)
+    client_order_id: int = betterproto.uint64_field(9)
+    post_only: str = betterproto.string_field(10)
+
+
+@dataclass(eq=False, repr=False)
+class PostDriftPerpOrderResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostDriftMarginOrderRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     account_address: str = betterproto.string_field(2)
@@ -1151,7 +1383,7 @@ class PostDriftMarginOrderRequest(betterproto.Message):
     amount: float = betterproto.double_field(7)
     price: float = betterproto.double_field(8)
     client_order_id: int = betterproto.uint64_field(9)
-    post_only: "_common__.PostOnlyParams" = betterproto.enum_field(10)
+    post_only: str = betterproto.string_field(10)
 
 
 @dataclass(eq=False, repr=False)
@@ -1516,6 +1748,7 @@ class DriftPerpPosition(betterproto.Message):
     notional_value: float = betterproto.double_field(8)
     index_price: float = betterproto.double_field(9)
     liquidation_price: float = betterproto.double_field(10)
+    unrealized_pnl: float = betterproto.double_field(11)
 
 
 @dataclass(eq=False, repr=False)
@@ -1725,7 +1958,8 @@ class PostOrderRequestV2(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     payer_address: str = betterproto.string_field(2)
     market: str = betterproto.string_field(3)
-    side: "Side" = betterproto.enum_field(4)
+    side: str = betterproto.string_field(4)
+    type: str = betterproto.string_field(5)
     amount: float = betterproto.double_field(6)
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
@@ -1737,7 +1971,8 @@ class PostReplaceOrderRequestV2(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     payer_address: str = betterproto.string_field(2)
     market: str = betterproto.string_field(3)
-    side: "Side" = betterproto.enum_field(4)
+    side: str = betterproto.string_field(4)
+    type: str = betterproto.string_field(5)
     amount: float = betterproto.double_field(6)
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
@@ -1786,6 +2021,159 @@ class GetUnsettledRequestV2(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def get_raydium_pools(
+        self,
+        get_raydium_pools_request: "GetRaydiumPoolsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumPoolsResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRaydiumPools",
+            get_raydium_pools_request,
+            GetRaydiumPoolsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_raydium_quotes(
+        self,
+        get_raydium_quotes_request: "GetRaydiumQuotesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumQuotesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRaydiumQuotes",
+            get_raydium_quotes_request,
+            GetRaydiumQuotesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_raydium_prices(
+        self,
+        get_raydium_prices_request: "GetRaydiumPricesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumPricesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRaydiumPrices",
+            get_raydium_prices_request,
+            GetRaydiumPricesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_raydium_swap(
+        self,
+        post_raydium_swap_request: "PostRaydiumSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostRaydiumSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostRaydiumSwap",
+            post_raydium_swap_request,
+            PostRaydiumSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_raydium_route_swap(
+        self,
+        post_raydium_route_swap_request: "PostRaydiumRouteSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostRaydiumRouteSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostRaydiumRouteSwap",
+            post_raydium_route_swap_request,
+            PostRaydiumRouteSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_jupiter_quotes(
+        self,
+        get_jupiter_quotes_request: "GetJupiterQuotesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetJupiterQuotesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetJupiterQuotes",
+            get_jupiter_quotes_request,
+            GetJupiterQuotesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_jupiter_prices(
+        self,
+        get_jupiter_prices_request: "GetJupiterPricesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetJupiterPricesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetJupiterPrices",
+            get_jupiter_prices_request,
+            GetJupiterPricesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_jupiter_swap(
+        self,
+        post_jupiter_swap_request: "PostJupiterSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostJupiterSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostJupiterSwap",
+            post_jupiter_swap_request,
+            PostJupiterSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_jupiter_route_swap(
+        self,
+        post_jupiter_route_swap_request: "PostJupiterRouteSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostJupiterRouteSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostJupiterRouteSwap",
+            post_jupiter_route_swap_request,
+            PostJupiterRouteSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def post_close_drift_perp_positions(
         self,
         post_close_drift_perp_positions_request: "PostCloseDriftPerpPositionsRequest",
@@ -1866,6 +2254,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostDriftManageCollateral",
             post_drift_manage_collateral_request,
             PostDriftManageCollateralResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_drift_perp_order(
+        self,
+        post_drift_perp_order_request: "PostDriftPerpOrderRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostDriftPerpOrderResponse":
+        return await self._unary_unary(
+            "/api.Api/PostDriftPerpOrder",
+            post_drift_perp_order_request,
+            PostDriftPerpOrderResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3367,6 +3772,51 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+    async def get_raydium_pools(
+        self, get_raydium_pools_request: "GetRaydiumPoolsRequest"
+    ) -> "GetRaydiumPoolsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_raydium_quotes(
+        self, get_raydium_quotes_request: "GetRaydiumQuotesRequest"
+    ) -> "GetRaydiumQuotesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_raydium_prices(
+        self, get_raydium_prices_request: "GetRaydiumPricesRequest"
+    ) -> "GetRaydiumPricesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_raydium_swap(
+        self, post_raydium_swap_request: "PostRaydiumSwapRequest"
+    ) -> "PostRaydiumSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_raydium_route_swap(
+        self, post_raydium_route_swap_request: "PostRaydiumRouteSwapRequest"
+    ) -> "PostRaydiumRouteSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_jupiter_quotes(
+        self, get_jupiter_quotes_request: "GetJupiterQuotesRequest"
+    ) -> "GetJupiterQuotesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_jupiter_prices(
+        self, get_jupiter_prices_request: "GetJupiterPricesRequest"
+    ) -> "GetJupiterPricesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_jupiter_swap(
+        self, post_jupiter_swap_request: "PostJupiterSwapRequest"
+    ) -> "PostJupiterSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_jupiter_route_swap(
+        self, post_jupiter_route_swap_request: "PostJupiterRouteSwapRequest"
+    ) -> "PostJupiterRouteSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_close_drift_perp_positions(
         self,
         post_close_drift_perp_positions_request: "PostCloseDriftPerpPositionsRequest",
@@ -3391,6 +3841,11 @@ class ApiBase(ServiceBase):
     async def post_drift_manage_collateral(
         self, post_drift_manage_collateral_request: "PostDriftManageCollateralRequest"
     ) -> "PostDriftManageCollateralResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_drift_perp_order(
+        self, post_drift_perp_order_request: "PostDriftPerpOrderRequest"
+    ) -> "PostDriftPerpOrderResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def post_drift_settle_pnl(
@@ -3844,6 +4299,78 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPerpTradesStreamResponse()
 
+    async def __rpc_get_raydium_pools(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumPoolsRequest, GetRaydiumPoolsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_raydium_pools(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_raydium_quotes(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumQuotesRequest, GetRaydiumQuotesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_raydium_quotes(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_raydium_prices(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumPricesRequest, GetRaydiumPricesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_raydium_prices(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_raydium_swap(
+        self,
+        stream: "grpclib.server.Stream[PostRaydiumSwapRequest, PostRaydiumSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_raydium_swap(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_raydium_route_swap(
+        self,
+        stream: "grpclib.server.Stream[PostRaydiumRouteSwapRequest, PostRaydiumRouteSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_raydium_route_swap(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_jupiter_quotes(
+        self,
+        stream: "grpclib.server.Stream[GetJupiterQuotesRequest, GetJupiterQuotesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_jupiter_quotes(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_jupiter_prices(
+        self,
+        stream: "grpclib.server.Stream[GetJupiterPricesRequest, GetJupiterPricesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_jupiter_prices(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_jupiter_swap(
+        self,
+        stream: "grpclib.server.Stream[PostJupiterSwapRequest, PostJupiterSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_jupiter_swap(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_jupiter_route_swap(
+        self,
+        stream: "grpclib.server.Stream[PostJupiterRouteSwapRequest, PostJupiterRouteSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_jupiter_route_swap(request)
+        await stream.send_message(response)
+
     async def __rpc_post_close_drift_perp_positions(
         self,
         stream: "grpclib.server.Stream[PostCloseDriftPerpPositionsRequest, PostCloseDriftPerpPositionsResponse]",
@@ -3881,6 +4408,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_drift_manage_collateral(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_drift_perp_order(
+        self,
+        stream: "grpclib.server.Stream[PostDriftPerpOrderRequest, PostDriftPerpOrderResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_drift_perp_order(request)
         await stream.send_message(response)
 
     async def __rpc_post_drift_settle_pnl(
@@ -4602,6 +5137,60 @@ class ApiBase(ServiceBase):
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
+            "/api.Api/GetRaydiumPools": grpclib.const.Handler(
+                self.__rpc_get_raydium_pools,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumPoolsRequest,
+                GetRaydiumPoolsResponse,
+            ),
+            "/api.Api/GetRaydiumQuotes": grpclib.const.Handler(
+                self.__rpc_get_raydium_quotes,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumQuotesRequest,
+                GetRaydiumQuotesResponse,
+            ),
+            "/api.Api/GetRaydiumPrices": grpclib.const.Handler(
+                self.__rpc_get_raydium_prices,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumPricesRequest,
+                GetRaydiumPricesResponse,
+            ),
+            "/api.Api/PostRaydiumSwap": grpclib.const.Handler(
+                self.__rpc_post_raydium_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostRaydiumSwapRequest,
+                PostRaydiumSwapResponse,
+            ),
+            "/api.Api/PostRaydiumRouteSwap": grpclib.const.Handler(
+                self.__rpc_post_raydium_route_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostRaydiumRouteSwapRequest,
+                PostRaydiumRouteSwapResponse,
+            ),
+            "/api.Api/GetJupiterQuotes": grpclib.const.Handler(
+                self.__rpc_get_jupiter_quotes,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetJupiterQuotesRequest,
+                GetJupiterQuotesResponse,
+            ),
+            "/api.Api/GetJupiterPrices": grpclib.const.Handler(
+                self.__rpc_get_jupiter_prices,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetJupiterPricesRequest,
+                GetJupiterPricesResponse,
+            ),
+            "/api.Api/PostJupiterSwap": grpclib.const.Handler(
+                self.__rpc_post_jupiter_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostJupiterSwapRequest,
+                PostJupiterSwapResponse,
+            ),
+            "/api.Api/PostJupiterRouteSwap": grpclib.const.Handler(
+                self.__rpc_post_jupiter_route_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostJupiterRouteSwapRequest,
+                PostJupiterRouteSwapResponse,
+            ),
             "/api.Api/PostCloseDriftPerpPositions": grpclib.const.Handler(
                 self.__rpc_post_close_drift_perp_positions,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -4631,6 +5220,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostDriftManageCollateralRequest,
                 PostDriftManageCollateralResponse,
+            ),
+            "/api.Api/PostDriftPerpOrder": grpclib.const.Handler(
+                self.__rpc_post_drift_perp_order,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostDriftPerpOrderRequest,
+                PostDriftPerpOrderResponse,
             ),
             "/api.Api/PostDriftSettlePNL": grpclib.const.Handler(
                 self.__rpc_post_drift_settle_pnl,
