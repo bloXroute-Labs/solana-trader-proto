@@ -4222,17 +4222,6 @@
         }
       }
     },
-    "apiGetMyOrdersResponse": {
-      "type": "object",
-      "properties": {
-        "orders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiMyOrder"
-          }
-        }
-      }
-    },
     "apiGetOpenOrdersResponse": {
       "type": "object",
       "properties": {
@@ -5072,46 +5061,6 @@
         "quoteDecimals": {
           "type": "string",
           "format": "int64"
-        }
-      }
-    },
-    "apiMyOrder": {
-      "type": "object",
-      "properties": {
-        "Timestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "Project": {
-          "$ref": "#/definitions/apiProject"
-        },
-        "OwnerAddress": {
-          "type": "string"
-        },
-        "Date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "ClientOrderID": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "MarketAddress": {
-          "type": "string"
-        },
-        "ProgramOrderID": {
-          "type": "string"
-        },
-        "Side": {
-          "type": "string"
-        },
-        "Amount": {
-          "type": "number",
-          "format": "double"
-        },
-        "Price": {
-          "type": "number",
-          "format": "double"
         }
       }
     },
