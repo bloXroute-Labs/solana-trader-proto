@@ -1210,7 +1210,7 @@ message Ticker {
 }
 
 message GetTickersRequestV2 {
-  repeated string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty array for all markets"}];
+  string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty array for all markets"}];
 }
 
 message GetTickersResponseV2 {

@@ -175,10 +175,8 @@ export namespace Ticker {
 }
 
 export class GetTickersRequestV2 extends jspb.Message { 
-    clearMarketList(): void;
-    getMarketList(): Array<string>;
-    setMarketList(value: Array<string>): GetTickersRequestV2;
-    addMarket(value: string, index?: number): string;
+    getMarket(): string;
+    setMarket(value: string): GetTickersRequestV2;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTickersRequestV2.AsObject;
@@ -192,7 +190,7 @@ export class GetTickersRequestV2 extends jspb.Message {
 
 export namespace GetTickersRequestV2 {
     export type AsObject = {
-        marketList: Array<string>,
+        market: string,
     }
 }
 

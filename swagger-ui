@@ -3180,12 +3180,7 @@
             "description": "Use empty array for all markets",
             "in": "path",
             "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "csv",
-            "minItems": 1
+            "type": "string"
           }
         ],
         "tags": [

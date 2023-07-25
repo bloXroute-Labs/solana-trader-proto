@@ -421,7 +421,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.GetTickersRequestV2 = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetTickersRequestV2.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.api.GetTickersRequestV2, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -6739,13 +6739,6 @@ proto.api.Ticker.prototype.setProject = function(value) {
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.api.GetTickersRequestV2.repeatedFields_ = [1];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -6777,7 +6770,7 @@ proto.api.GetTickersRequestV2.prototype.toObject = function(opt_includeInstance)
  */
 proto.api.GetTickersRequestV2.toObject = function(includeInstance, msg) {
   var f, obj = {
-    marketList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+    market: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -6816,7 +6809,7 @@ proto.api.GetTickersRequestV2.deserializeBinaryFromReader = function(msg, reader
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.addMarket(value);
+      msg.setMarket(value);
       break;
     default:
       reader.skipField();
@@ -6847,9 +6840,9 @@ proto.api.GetTickersRequestV2.prototype.serializeBinary = function() {
  */
 proto.api.GetTickersRequestV2.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMarketList();
+  f = message.getMarket();
   if (f.length > 0) {
-    writer.writeRepeatedString(
+    writer.writeString(
       1,
       f
     );
@@ -6858,39 +6851,20 @@ proto.api.GetTickersRequestV2.serializeBinaryToWriter = function(message, writer
 
 
 /**
- * repeated string market = 1;
- * @return {!Array<string>}
+ * optional string market = 1;
+ * @return {string}
  */
-proto.api.GetTickersRequestV2.prototype.getMarketList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
-};
-
-
-/**
- * @param {!Array<string>} value
- * @return {!proto.api.GetTickersRequestV2} returns this
- */
-proto.api.GetTickersRequestV2.prototype.setMarketList = function(value) {
-  return jspb.Message.setField(this, 1, value || []);
+proto.api.GetTickersRequestV2.prototype.getMarket = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @param {number=} opt_index
  * @return {!proto.api.GetTickersRequestV2} returns this
  */
-proto.api.GetTickersRequestV2.prototype.addMarket = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.api.GetTickersRequestV2} returns this
- */
-proto.api.GetTickersRequestV2.prototype.clearMarketList = function() {
-  return this.setMarketList([]);
+proto.api.GetTickersRequestV2.prototype.setMarket = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 

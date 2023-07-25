@@ -1306,7 +1306,7 @@ func request_Api_GetTickersV2_0(ctx context.Context, marshaler runtime.Marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "market")
 	}
 
-	protoReq.Market, err = runtime.StringSlice(val, ",")
+	protoReq.Market, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "market", err)
 	}
@@ -1332,7 +1332,7 @@ func local_request_Api_GetTickersV2_0(ctx context.Context, marshaler runtime.Mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "market")
 	}
 
-	protoReq.Market, err = runtime.StringSlice(val, ",")
+	protoReq.Market, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "market", err)
 	}
