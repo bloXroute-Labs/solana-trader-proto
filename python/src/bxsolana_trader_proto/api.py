@@ -2001,6 +2001,24 @@ class GetUnsettledRequestV2(betterproto.Message):
     owner_address: str = betterproto.string_field(2)
 
 
+@dataclass
+class GetOpenOrdersResponseV2(betterproto.Message):
+    orders: List["OrderV2"] = betterproto.message_field(1)
+
+
+@dataclass
+class OrderV2(betterproto.Message):
+    order_i_d: str = betterproto.string_field(1)
+    market: str = betterproto.string_field(2)
+    side: str = betterproto.string_field(3)
+    type: str = betterproto.string_field(4)
+    price: float = betterproto.double_field(5)
+    remaining_size: float = betterproto.double_field(6)
+    created_at: datetime = betterproto.message_field(7)
+    client_order_i_d: str = betterproto.string_field(8)
+    open_order_account: str = betterproto.string_field(9)
+
+
 class ApiStub(betterproto.ServiceStub):
     async def get_raydium_pools(
         self, *, pair_or_address: str = ""
@@ -2806,7 +2824,7 @@ class ApiStub(betterproto.ServiceStub):
         open_orders_address: str = "",
         order_i_d: str = "",
         client_order_i_d: int = 0,
-    ) -> GetOpenOrdersResponse:
+    ) -> GetOpenOrdersResponseV2:
         request = GetOpenOrdersRequestV2()
         request.market = market
         request.limit = limit
@@ -2818,7 +2836,7 @@ class ApiStub(betterproto.ServiceStub):
         return await self._unary_unary(
             "/api.Api/GetOpenOrdersV2",
             request,
-            GetOpenOrdersResponse,
+            GetOpenOrdersResponseV2,
         )
 
     async def get_unsettled_v2(
