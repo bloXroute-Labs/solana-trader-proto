@@ -3177,7 +3177,7 @@
         "parameters": [
           {
             "name": "market",
-            "description": "Use empty string for all markets",
+            "description": "Use empty array for all markets",
             "in": "path",
             "required": true,
             "type": "string"
@@ -3470,6 +3470,12 @@
           "type": "string",
           "format": "date-time"
         },
+        "marketAddress": {
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
         "open": {
           "type": "number",
           "format": "double"
@@ -3497,6 +3503,17 @@
         "count": {
           "type": "number",
           "format": "double"
+        }
+      }
+    },
+    "apiCandles": {
+      "type": "object",
+      "properties": {
+        "candles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiCandle"
+          }
         }
       }
     },
@@ -4112,17 +4129,10 @@
     "apiGetKlineResponse": {
       "type": "object",
       "properties": {
-        "market": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "candles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiCandle"
+        "marketCandles": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiCandles"
           }
         }
       }
@@ -4789,10 +4799,10 @@
     "apiGetTickersResponseV2": {
       "type": "object",
       "properties": {
-        "tickers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiTickerV2"
+        "marketTickers": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiCandle"
           }
         }
       }
@@ -7121,33 +7131,6 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
-        }
-      }
-    },
-    "apiTickerV2": {
-      "type": "object",
-      "properties": {
-        "market": {
-          "type": "string"
-        },
-        "marketAddress": {
-          "type": "string"
-        },
-        "bid": {
-          "type": "number",
-          "format": "double"
-        },
-        "bidSize": {
-          "type": "number",
-          "format": "double"
-        },
-        "ask": {
-          "type": "number",
-          "format": "double"
-        },
-        "askSize": {
-          "type": "number",
-          "format": "double"
         }
       }
     },
