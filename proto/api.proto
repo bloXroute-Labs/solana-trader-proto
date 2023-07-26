@@ -546,7 +546,7 @@ service Api {
     };
   }
 
-  rpc GetOpenOrdersV2(GetOpenOrdersRequestV2) returns (GetOpenOrdersResponse) {
+  rpc GetOpenOrdersV2(GetOpenOrdersRequestV2) returns (GetOpenOrdersResponseV2) {
     option (google.api.http) = {
       get: "/api/v2/openbook/open-orders/{market}"
     };
@@ -2867,7 +2867,7 @@ message PostReplaceOrderRequestV2 {
 
 message PostCancelOrderRequestV2 {
   string orderID = 1 [(google.api.field_behavior) = OPTIONAL];
-  Side side = 2 [(google.api.field_behavior) = REQUIRED];
+  string side = 2 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
   string marketAddress = 3 [(google.api.field_behavior) = REQUIRED];
   string ownerAddress = 4 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
@@ -2898,4 +2898,21 @@ message GetUnsettledRequestV2 {
   string market = 1 [(google.api.field_behavior) = REQUIRED];
   string ownerAddress = 2 [(google.api.field_behavior) = REQUIRED];
 }
+
+message GetOpenOrdersResponseV2 {
+  repeated OrderV2 orders = 1;
+}
+
+message OrderV2 {
+  string orderID = 1;
+  string market = 2;
+  string side = 3 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
+  string type = 4 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Supported values : Limit, IoC, PostOnly"}];
+  double price = 5;
+  double remainingSize = 6;
+  google.protobuf.Timestamp createdAt = 7;
+  string clientOrderID = 8;
+  string openOrderAccount = 9;
+}
+
 //End of Openbook V2 Messages

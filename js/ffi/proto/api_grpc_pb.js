@@ -593,6 +593,17 @@ function deserialize_api_GetOpenOrdersResponse(buffer_arg) {
   return api_pb.GetOpenOrdersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetOpenOrdersResponseV2(arg) {
+  if (!(arg instanceof api_pb.GetOpenOrdersResponseV2)) {
+    throw new Error('Expected argument of type api.GetOpenOrdersResponseV2');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetOpenOrdersResponseV2(buffer_arg) {
+  return api_pb.GetOpenOrdersResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetOpenPerpOrderRequest(arg) {
   if (!(arg instanceof api_pb.GetOpenPerpOrderRequest)) {
     throw new Error('Expected argument of type api.GetOpenPerpOrderRequest');
@@ -2585,11 +2596,11 @@ getMarketsV2: {
     requestStream: false,
     responseStream: false,
     requestType: api_pb.GetOpenOrdersRequestV2,
-    responseType: api_pb.GetOpenOrdersResponse,
+    responseType: api_pb.GetOpenOrdersResponseV2,
     requestSerialize: serialize_api_GetOpenOrdersRequestV2,
     requestDeserialize: deserialize_api_GetOpenOrdersRequestV2,
-    responseSerialize: serialize_api_GetOpenOrdersResponse,
-    responseDeserialize: deserialize_api_GetOpenOrdersResponse,
+    responseSerialize: serialize_api_GetOpenOrdersResponseV2,
+    responseDeserialize: deserialize_api_GetOpenOrdersResponseV2,
   },
   getUnsettledV2: {
     path: '/api.Api/GetUnsettledV2',
