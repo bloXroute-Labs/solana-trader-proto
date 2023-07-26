@@ -2867,7 +2867,7 @@ message PostReplaceOrderRequestV2 {
 
 message PostCancelOrderRequestV2 {
   string orderID = 1 [(google.api.field_behavior) = OPTIONAL];
-  Side side = 2 [(google.api.field_behavior) = REQUIRED];
+  string side = 2 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
   string marketAddress = 3 [(google.api.field_behavior) = REQUIRED];
   string ownerAddress = 4 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];

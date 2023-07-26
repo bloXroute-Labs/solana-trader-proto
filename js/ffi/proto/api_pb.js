@@ -61461,7 +61461,7 @@ proto.api.PostCancelOrderRequestV2.prototype.toObject = function(opt_includeInst
 proto.api.PostCancelOrderRequestV2.toObject = function(includeInstance, msg) {
   var f, obj = {
     orderid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    side: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    side: jspb.Message.getFieldWithDefault(msg, 2, ""),
     marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
@@ -61507,7 +61507,7 @@ proto.api.PostCancelOrderRequestV2.deserializeBinaryFromReader = function(msg, r
       msg.setOrderid(value);
       break;
     case 2:
-      var value = /** @type {!proto.api.Side} */ (reader.readEnum());
+      var value = /** @type {string} */ (reader.readString());
       msg.setSide(value);
       break;
     case 3:
@@ -61563,8 +61563,8 @@ proto.api.PostCancelOrderRequestV2.serializeBinaryToWriter = function(message, w
     );
   }
   f = message.getSide();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
@@ -61619,20 +61619,20 @@ proto.api.PostCancelOrderRequestV2.prototype.setOrderid = function(value) {
 
 
 /**
- * optional Side side = 2;
- * @return {!proto.api.Side}
+ * optional string side = 2;
+ * @return {string}
  */
 proto.api.PostCancelOrderRequestV2.prototype.getSide = function() {
-  return /** @type {!proto.api.Side} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /**
- * @param {!proto.api.Side} value
+ * @param {string} value
  * @return {!proto.api.PostCancelOrderRequestV2} returns this
  */
 proto.api.PostCancelOrderRequestV2.prototype.setSide = function(value) {
-  return jspb.Message.setProto3EnumField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

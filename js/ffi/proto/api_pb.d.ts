@@ -7317,8 +7317,8 @@ export namespace PostReplaceOrderRequestV2 {
 export class PostCancelOrderRequestV2 extends jspb.Message { 
     getOrderid(): string;
     setOrderid(value: string): PostCancelOrderRequestV2;
-    getSide(): Side;
-    setSide(value: Side): PostCancelOrderRequestV2;
+    getSide(): string;
+    setSide(value: string): PostCancelOrderRequestV2;
     getMarketaddress(): string;
     setMarketaddress(value: string): PostCancelOrderRequestV2;
     getOwneraddress(): string;
@@ -7341,7 +7341,7 @@ export class PostCancelOrderRequestV2 extends jspb.Message {
 export namespace PostCancelOrderRequestV2 {
     export type AsObject = {
         orderid: string,
-        side: Side,
+        side: string,
         marketaddress: string,
         owneraddress: string,
         openordersaddress: string,

@@ -5481,7 +5481,11 @@
           "type": "string"
         },
         "side": {
-          "$ref": "#/definitions/apiSide"
+          "type": "string",
+          "description": " Supported values : Bid, Ask",
+          "required": [
+            "side"
+          ]
         },
         "marketAddress": {
           "type": "string",
@@ -5507,6 +5511,7 @@
         }
       },
       "required": [
+        "side",
         "marketAddress",
         "ownerAddress",
         "openOrdersAddress"
