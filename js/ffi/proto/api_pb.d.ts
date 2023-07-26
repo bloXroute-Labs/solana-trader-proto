@@ -174,6 +174,48 @@ export namespace Ticker {
     }
 }
 
+export class GetTickersRequestV2 extends jspb.Message { 
+    getMarket(): string;
+    setMarket(value: string): GetTickersRequestV2;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTickersRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTickersRequestV2): GetTickersRequestV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTickersRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTickersRequestV2;
+    static deserializeBinaryFromReader(message: GetTickersRequestV2, reader: jspb.BinaryReader): GetTickersRequestV2;
+}
+
+export namespace GetTickersRequestV2 {
+    export type AsObject = {
+        market: string,
+    }
+}
+
+export class GetTickersResponseV2 extends jspb.Message { 
+
+    getMarkettickersMap(): jspb.Map<string, Candle>;
+    clearMarkettickersMap(): void;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTickersResponseV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTickersResponseV2): GetTickersResponseV2.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTickersResponseV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTickersResponseV2;
+    static deserializeBinaryFromReader(message: GetTickersResponseV2, reader: jspb.BinaryReader): GetTickersResponseV2;
+}
+
+export namespace GetTickersResponseV2 {
+    export type AsObject = {
+
+        markettickersMap: Array<[string, Candle.AsObject]>,
+    }
+}
+
 export class GetKlineRequest extends jspb.Message { 
     getMarket(): string;
     setMarket(value: string): GetKlineRequest;
@@ -213,17 +255,9 @@ export namespace GetKlineRequest {
 }
 
 export class GetKlineResponse extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetKlineResponse;
 
-    hasTimestamp(): boolean;
-    clearTimestamp(): void;
-    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
-    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetKlineResponse;
-    clearCandlesList(): void;
-    getCandlesList(): Array<Candle>;
-    setCandlesList(value: Array<Candle>): GetKlineResponse;
-    addCandles(value?: Candle, index?: number): Candle;
+    getMarketcandlesMap(): jspb.Map<string, Candles>;
+    clearMarketcandlesMap(): void;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetKlineResponse.AsObject;
@@ -237,9 +271,8 @@ export class GetKlineResponse extends jspb.Message {
 
 export namespace GetKlineResponse {
     export type AsObject = {
-        market: string,
-        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
-        candlesList: Array<Candle.AsObject>,
+
+        marketcandlesMap: Array<[string, Candles.AsObject]>,
     }
 }
 
@@ -254,6 +287,10 @@ export class Candle extends jspb.Message {
     clearUpdatetime(): void;
     getUpdatetime(): google_protobuf_timestamp_pb.Timestamp | undefined;
     setUpdatetime(value?: google_protobuf_timestamp_pb.Timestamp): Candle;
+    getMarketaddress(): string;
+    setMarketaddress(value: string): Candle;
+    getProject(): Project;
+    setProject(value: Project): Candle;
     getOpen(): number;
     setOpen(value: number): Candle;
     getClose(): number;
@@ -283,6 +320,8 @@ export namespace Candle {
     export type AsObject = {
         starttime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
         updatetime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+        marketaddress: string,
+        project: Project,
         open: number,
         close: number,
         low: number,
@@ -290,6 +329,28 @@ export namespace Candle {
         amount: number,
         volume: number,
         count: number,
+    }
+}
+
+export class Candles extends jspb.Message { 
+    clearCandlesList(): void;
+    getCandlesList(): Array<Candle>;
+    setCandlesList(value: Array<Candle>): Candles;
+    addCandles(value?: Candle, index?: number): Candle;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Candles.AsObject;
+    static toObject(includeInstance: boolean, msg: Candles): Candles.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Candles, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Candles;
+    static deserializeBinaryFromReader(message: Candles, reader: jspb.BinaryReader): Candles;
+}
+
+export namespace Candles {
+    export type AsObject = {
+        candlesList: Array<Candle.AsObject>,
     }
 }
 
@@ -6976,83 +7037,6 @@ export namespace MarketV2 {
         quotedmint: string,
         basedecimals: number,
         quotedecimals: number,
-    }
-}
-
-export class GetTickersRequestV2 extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): GetTickersRequestV2;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetTickersRequestV2.AsObject;
-    static toObject(includeInstance: boolean, msg: GetTickersRequestV2): GetTickersRequestV2.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetTickersRequestV2, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetTickersRequestV2;
-    static deserializeBinaryFromReader(message: GetTickersRequestV2, reader: jspb.BinaryReader): GetTickersRequestV2;
-}
-
-export namespace GetTickersRequestV2 {
-    export type AsObject = {
-        market: string,
-    }
-}
-
-export class GetTickersResponseV2 extends jspb.Message { 
-    clearTickersList(): void;
-    getTickersList(): Array<TickerV2>;
-    setTickersList(value: Array<TickerV2>): GetTickersResponseV2;
-    addTickers(value?: TickerV2, index?: number): TickerV2;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetTickersResponseV2.AsObject;
-    static toObject(includeInstance: boolean, msg: GetTickersResponseV2): GetTickersResponseV2.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetTickersResponseV2, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetTickersResponseV2;
-    static deserializeBinaryFromReader(message: GetTickersResponseV2, reader: jspb.BinaryReader): GetTickersResponseV2;
-}
-
-export namespace GetTickersResponseV2 {
-    export type AsObject = {
-        tickersList: Array<TickerV2.AsObject>,
-    }
-}
-
-export class TickerV2 extends jspb.Message { 
-    getMarket(): string;
-    setMarket(value: string): TickerV2;
-    getMarketaddress(): string;
-    setMarketaddress(value: string): TickerV2;
-    getBid(): number;
-    setBid(value: number): TickerV2;
-    getBidsize(): number;
-    setBidsize(value: number): TickerV2;
-    getAsk(): number;
-    setAsk(value: number): TickerV2;
-    getAsksize(): number;
-    setAsksize(value: number): TickerV2;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): TickerV2.AsObject;
-    static toObject(includeInstance: boolean, msg: TickerV2): TickerV2.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: TickerV2, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): TickerV2;
-    static deserializeBinaryFromReader(message: TickerV2, reader: jspb.BinaryReader): TickerV2;
-}
-
-export namespace TickerV2 {
-    export type AsObject = {
-        market: string,
-        marketaddress: string,
-        bid: number,
-        bidsize: number,
-        ask: number,
-        asksize: number,
     }
 }
 

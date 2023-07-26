@@ -1209,6 +1209,14 @@ message Ticker {
   Project project = 7;
 }
 
+message GetTickersRequestV2 {
+  string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty array for all markets"}];
+}
+
+message GetTickersResponseV2 {
+  map<string, Candle> marketTickers = 1;
+}
+
 message GetKlineRequest {
   string market = 1;
   google.protobuf.Timestamp from = 2;
@@ -1218,21 +1226,25 @@ message GetKlineRequest {
 }
 
 message GetKlineResponse {
-  string market = 1;
-  google.protobuf.Timestamp timestamp = 2;
-  repeated Candle candles = 3;
+  map<string, Candles> marketCandles = 1;
 }
 
 message Candle {
   google.protobuf.Timestamp startTime = 1;
   google.protobuf.Timestamp updateTime = 2;
-  double open = 3;
-  double close = 4;
-  double low = 5;
-  double high = 6;
-  double amount = 7;
-  double volume = 8;
-  double count = 9;
+  string marketAddress = 3;
+  Project project = 4;
+  double open = 5;
+  double close = 6;
+  double low = 7;
+  double high = 8;
+  double amount = 9;
+  double volume = 10;
+  double count = 11;
+}
+
+message Candles {
+  repeated Candle candles = 1;
 }
 
 message GetOrderbookRequest {
@@ -2787,22 +2799,6 @@ message MarketV2 {
   int64 quoteDecimals = 7;
 }
 
-message GetTickersRequestV2 {
-  string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
-}
-
-message GetTickersResponseV2 {
-  repeated TickerV2 tickers = 1;
-}
-
-message TickerV2 {
-  string market = 1;
-  string marketAddress = 2;
-  double bid = 3;
-  double bidSize = 4;
-  double ask = 5;
-  double askSize = 6;
-}
 message GetOrderbookRequestV2 {
   string market = 1;
   uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
