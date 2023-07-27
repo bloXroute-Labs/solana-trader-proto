@@ -36,6 +36,10 @@ enum MarginContract {
   ALL_SPOTS = 0;  // ALL
   SOL_SPOT = 1;   // SOL
   USDC_SPOT = 2;  // USDC
+  MSOL_SPOT = 3;  // MSOL
+  WBTC_SPOT = 4;  // WBTC
+  WETH_SPOT = 5;  // WETH
+  USDT_SPOT = 6;  // USDT
 }
 
 enum PerpContract {
@@ -50,6 +54,9 @@ enum PerpContract {
   DOGE_PERP = 8;   // DOGE-PERP
   BNB_PERP = 9;    // BNB-PERP
   SUI_PERP = 10;    // SUI-PERP
+  PEPE_PERP = 11;    // PEPE-PERP
+  PEPE_PERP = 11;    // PEPE-PERP
+  PEPE_PERP = 11;    // PEPE-PERP
   PEPE_PERP = 11;    // PEPE-PERP
 }
 
