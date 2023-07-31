@@ -289,8 +289,8 @@ export class Candle extends jspb.Message {
     setUpdatetime(value?: google_protobuf_timestamp_pb.Timestamp): Candle;
     getMarketaddress(): string;
     setMarketaddress(value: string): Candle;
-    getProject(): Project;
-    setProject(value: Project): Candle;
+    getProject(): string;
+    setProject(value: string): Candle;
     getOpen(): number;
     setOpen(value: number): Candle;
     getClose(): number;
@@ -321,7 +321,7 @@ export namespace Candle {
         starttime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
         updatetime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
         marketaddress: string,
-        project: Project,
+        project: string,
         open: number,
         close: number,
         low: number,
