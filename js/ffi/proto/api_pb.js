@@ -7461,7 +7461,7 @@ proto.api.Candle.toObject = function(includeInstance, msg) {
     starttime: (f = msg.getStarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatetime: (f = msg.getUpdatetime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    project: jspb.Message.getFieldWithDefault(msg, 4, 0),
     open: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
     close: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
     low: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
@@ -7520,7 +7520,7 @@ proto.api.Candle.deserializeBinaryFromReader = function(msg, reader) {
       msg.setMarketaddress(value);
       break;
     case 4:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
     case 5:
@@ -7604,8 +7604,8 @@ proto.api.Candle.serializeBinaryToWriter = function(message, writer) {
     );
   }
   f = message.getProject();
-  if (f.length > 0) {
-    writer.writeString(
+  if (f !== 0.0) {
+    writer.writeEnum(
       4,
       f
     );
@@ -7755,20 +7755,20 @@ proto.api.Candle.prototype.setMarketaddress = function(value) {
 
 
 /**
- * optional string project = 4;
- * @return {string}
+ * optional Project project = 4;
+ * @return {!proto.api.Project}
  */
 proto.api.Candle.prototype.getProject = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
 /**
- * @param {string} value
+ * @param {!proto.api.Project} value
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setProject = function(value) {
-  return jspb.Message.setProto3StringField(this, 4, value);
+  return jspb.Message.setProto3EnumField(this, 4, value);
 };
 
 

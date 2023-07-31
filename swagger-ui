@@ -3474,7 +3474,7 @@
           "type": "string"
         },
         "project": {
-          "type": "string"
+          "$ref": "#/definitions/apiProject"
         },
         "open": {
           "type": "number",

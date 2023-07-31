@@ -1233,7 +1233,7 @@ message Candle {
   google.protobuf.Timestamp startTime = 1;
   google.protobuf.Timestamp updateTime = 2;
   string marketAddress = 3;
-  string project = 4;
+  Project project = 4;
   double open = 5;
   double close = 6;
   double low = 7;
