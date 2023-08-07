@@ -3177,7 +3177,7 @@
         "parameters": [
           {
             "name": "market",
-            "description": "Use empty array for all markets",
+            "description": "Use empty string for all markets",
             "in": "path",
             "required": true,
             "type": "string"
@@ -3472,9 +3472,6 @@
         },
         "marketAddress": {
           "type": "string"
-        },
-        "project": {
-          "$ref": "#/definitions/apiProject"
         },
         "open": {
           "type": "number",

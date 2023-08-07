@@ -7461,14 +7461,13 @@ proto.api.Candle.toObject = function(includeInstance, msg) {
     starttime: (f = msg.getStarttime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     updatetime: (f = msg.getUpdatetime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
     marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    open: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    close: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
-    low: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
-    high: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
-    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
-    volume: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0),
-    count: jspb.Message.getFloatingPointFieldWithDefault(msg, 11, 0.0)
+    open: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    close: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    low: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    high: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
+    amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 8, 0.0),
+    volume: jspb.Message.getFloatingPointFieldWithDefault(msg, 9, 0.0),
+    count: jspb.Message.getFloatingPointFieldWithDefault(msg, 10, 0.0)
   };
 
   if (includeInstance) {
@@ -7520,34 +7519,30 @@ proto.api.Candle.deserializeBinaryFromReader = function(msg, reader) {
       msg.setMarketaddress(value);
       break;
     case 4:
-      var value = /** @type {!proto.api.Project} */ (reader.readEnum());
-      msg.setProject(value);
-      break;
-    case 5:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setOpen(value);
       break;
-    case 6:
+    case 5:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setClose(value);
       break;
-    case 7:
+    case 6:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setLow(value);
       break;
-    case 8:
+    case 7:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setHigh(value);
       break;
-    case 9:
+    case 8:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setAmount(value);
       break;
-    case 10:
+    case 9:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setVolume(value);
       break;
-    case 11:
+    case 10:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setCount(value);
       break;
@@ -7603,59 +7598,52 @@ proto.api.Candle.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getProject();
-  if (f !== 0.0) {
-    writer.writeEnum(
-      4,
-      f
-    );
-  }
   f = message.getOpen();
   if (f !== 0.0) {
     writer.writeDouble(
-      5,
+      4,
       f
     );
   }
   f = message.getClose();
   if (f !== 0.0) {
     writer.writeDouble(
-      6,
+      5,
       f
     );
   }
   f = message.getLow();
   if (f !== 0.0) {
     writer.writeDouble(
-      7,
+      6,
       f
     );
   }
   f = message.getHigh();
   if (f !== 0.0) {
     writer.writeDouble(
-      8,
+      7,
       f
     );
   }
   f = message.getAmount();
   if (f !== 0.0) {
     writer.writeDouble(
-      9,
+      8,
       f
     );
   }
   f = message.getVolume();
   if (f !== 0.0) {
     writer.writeDouble(
-      10,
+      9,
       f
     );
   }
   f = message.getCount();
   if (f !== 0.0) {
     writer.writeDouble(
-      11,
+      10,
       f
     );
   }
@@ -7755,29 +7743,11 @@ proto.api.Candle.prototype.setMarketaddress = function(value) {
 
 
 /**
- * optional Project project = 4;
- * @return {!proto.api.Project}
- */
-proto.api.Candle.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
-};
-
-
-/**
- * @param {!proto.api.Project} value
- * @return {!proto.api.Candle} returns this
- */
-proto.api.Candle.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
-};
-
-
-/**
- * optional double open = 5;
+ * optional double open = 4;
  * @return {number}
  */
 proto.api.Candle.prototype.getOpen = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
 };
 
 
@@ -7786,16 +7756,16 @@ proto.api.Candle.prototype.getOpen = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setOpen = function(value) {
-  return jspb.Message.setProto3FloatField(this, 5, value);
+  return jspb.Message.setProto3FloatField(this, 4, value);
 };
 
 
 /**
- * optional double close = 6;
+ * optional double close = 5;
  * @return {number}
  */
 proto.api.Candle.prototype.getClose = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
 };
 
 
@@ -7804,16 +7774,16 @@ proto.api.Candle.prototype.getClose = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setClose = function(value) {
-  return jspb.Message.setProto3FloatField(this, 6, value);
+  return jspb.Message.setProto3FloatField(this, 5, value);
 };
 
 
 /**
- * optional double low = 7;
+ * optional double low = 6;
  * @return {number}
  */
 proto.api.Candle.prototype.getLow = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 6, 0.0));
 };
 
 
@@ -7822,16 +7792,16 @@ proto.api.Candle.prototype.getLow = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setLow = function(value) {
-  return jspb.Message.setProto3FloatField(this, 7, value);
+  return jspb.Message.setProto3FloatField(this, 6, value);
 };
 
 
 /**
- * optional double high = 8;
+ * optional double high = 7;
  * @return {number}
  */
 proto.api.Candle.prototype.getHigh = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
 };
 
 
@@ -7840,16 +7810,16 @@ proto.api.Candle.prototype.getHigh = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setHigh = function(value) {
-  return jspb.Message.setProto3FloatField(this, 8, value);
+  return jspb.Message.setProto3FloatField(this, 7, value);
 };
 
 
 /**
- * optional double amount = 9;
+ * optional double amount = 8;
  * @return {number}
  */
 proto.api.Candle.prototype.getAmount = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 8, 0.0));
 };
 
 
@@ -7858,16 +7828,16 @@ proto.api.Candle.prototype.getAmount = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setAmount = function(value) {
-  return jspb.Message.setProto3FloatField(this, 9, value);
+  return jspb.Message.setProto3FloatField(this, 8, value);
 };
 
 
 /**
- * optional double volume = 10;
+ * optional double volume = 9;
  * @return {number}
  */
 proto.api.Candle.prototype.getVolume = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 10, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 9, 0.0));
 };
 
 
@@ -7876,16 +7846,16 @@ proto.api.Candle.prototype.getVolume = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setVolume = function(value) {
-  return jspb.Message.setProto3FloatField(this, 10, value);
+  return jspb.Message.setProto3FloatField(this, 9, value);
 };
 
 
 /**
- * optional double count = 11;
+ * optional double count = 10;
  * @return {number}
  */
 proto.api.Candle.prototype.getCount = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 11, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 10, 0.0));
 };
 
 
@@ -7894,7 +7864,7 @@ proto.api.Candle.prototype.getCount = function() {
  * @return {!proto.api.Candle} returns this
  */
 proto.api.Candle.prototype.setCount = function(value) {
-  return jspb.Message.setProto3FloatField(this, 11, value);
+  return jspb.Message.setProto3FloatField(this, 10, value);
 };
 
 

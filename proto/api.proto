@@ -1210,7 +1210,7 @@ message Ticker {
 }
 
 message GetTickersRequestV2 {
-  string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty array for all markets"}];
+  string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
 }
 
 message GetTickersResponseV2 {
@@ -1233,14 +1233,13 @@ message Candle {
   google.protobuf.Timestamp startTime = 1;
   google.protobuf.Timestamp updateTime = 2;
   string marketAddress = 3;
-  Project project = 4;
-  double open = 5;
-  double close = 6;
-  double low = 7;
-  double high = 8;
-  double amount = 9;
-  double volume = 10;
-  double count = 11;
+  double open = 4;
+  double close = 5;
+  double low = 6;
+  double high = 7;
+  double amount = 8;
+  double volume = 9;
+  double count = 10;
 }
 
 message Candles {
