@@ -428,26 +428,26 @@ function deserialize_api_GetJupiterQuotesResponse(buffer_arg) {
   return api_pb.GetJupiterQuotesResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_api_GetKlineRequest(arg) {
-  if (!(arg instanceof api_pb.GetKlineRequest)) {
-    throw new Error('Expected argument of type api.GetKlineRequest');
+function serialize_api_GetKlineRequestV2(arg) {
+  if (!(arg instanceof api_pb.GetKlineRequestV2)) {
+    throw new Error('Expected argument of type api.GetKlineRequestV2');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_api_GetKlineRequest(buffer_arg) {
-  return api_pb.GetKlineRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_api_GetKlineRequestV2(buffer_arg) {
+  return api_pb.GetKlineRequestV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_api_GetKlineResponse(arg) {
-  if (!(arg instanceof api_pb.GetKlineResponse)) {
-    throw new Error('Expected argument of type api.GetKlineResponse');
+function serialize_api_GetKlineResponseV2(arg) {
+  if (!(arg instanceof api_pb.GetKlineResponseV2)) {
+    throw new Error('Expected argument of type api.GetKlineResponseV2');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_api_GetKlineResponse(buffer_arg) {
-  return api_pb.GetKlineResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_api_GetKlineResponseV2(buffer_arg) {
+  return api_pb.GetKlineResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_api_GetMarketDepthRequest(arg) {
@@ -2514,6 +2514,17 @@ getMarketsV2: {
     responseSerialize: serialize_api_GetTickersResponseV2,
     responseDeserialize: deserialize_api_GetTickersResponseV2,
   },
+  getKlineV2: {
+    path: '/api.Api/GetKlineV2',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetKlineRequestV2,
+    responseType: api_pb.GetKlineResponseV2,
+    requestSerialize: serialize_api_GetKlineRequestV2,
+    requestDeserialize: deserialize_api_GetKlineRequestV2,
+    responseSerialize: serialize_api_GetKlineResponseV2,
+    responseDeserialize: deserialize_api_GetKlineResponseV2,
+  },
   getOrderbookV2: {
     path: '/api.Api/GetOrderbookV2',
     requestStream: false,
@@ -2647,17 +2658,6 @@ getPrice: {
     requestDeserialize: deserialize_api_GetTickersRequest,
     responseSerialize: serialize_api_GetTickersResponse,
     responseDeserialize: deserialize_api_GetTickersResponse,
-  },
-  getKline: {
-    path: '/api.Api/GetKline',
-    requestStream: false,
-    responseStream: false,
-    requestType: api_pb.GetKlineRequest,
-    responseType: api_pb.GetKlineResponse,
-    requestSerialize: serialize_api_GetKlineRequest,
-    requestDeserialize: deserialize_api_GetKlineRequest,
-    responseSerialize: serialize_api_GetKlineResponse,
-    responseDeserialize: deserialize_api_GetKlineResponse,
   },
   getOrderbook: {
     path: '/api.Api/GetOrderbook',

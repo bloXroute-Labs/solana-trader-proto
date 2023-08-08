@@ -58,6 +58,7 @@ type ApiClient interface {
 	GetDriftMarketDepthsStream(ctx context.Context, in *GetDriftMarketDepthsStreamRequest, opts ...grpc.CallOption) (Api_GetDriftMarketDepthsStreamClient, error)
 	GetMarketsV2(ctx context.Context, in *GetMarketsRequestV2, opts ...grpc.CallOption) (*GetMarketsResponseV2, error)
 	GetTickersV2(ctx context.Context, in *GetTickersRequestV2, opts ...grpc.CallOption) (*GetTickersResponseV2, error)
+	GetKlineV2(ctx context.Context, in *GetKlineRequestV2, opts ...grpc.CallOption) (*GetKlineResponseV2, error)
 	GetOrderbookV2(ctx context.Context, in *GetOrderbookRequestV2, opts ...grpc.CallOption) (*GetOrderbookResponseV2, error)
 	GetMarketDepthV2(ctx context.Context, in *GetMarketDepthRequestV2, opts ...grpc.CallOption) (*GetMarketDepthResponseV2, error)
 	PostOrderV2(ctx context.Context, in *PostOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
@@ -70,7 +71,6 @@ type ApiClient interface {
 	GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error)
 	GetPools(ctx context.Context, in *GetPoolsRequest, opts ...grpc.CallOption) (*GetPoolsResponse, error)
 	GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error)
-	GetKline(ctx context.Context, in *GetKlineRequest, opts ...grpc.CallOption) (*GetKlineResponse, error)
 	GetOrderbook(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error)
 	GetMarketDepth(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (*GetMarketDepthResponse, error)
 	GetTrades(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (*GetTradesResponse, error)
@@ -534,6 +534,15 @@ func (c *apiClient) GetTickersV2(ctx context.Context, in *GetTickersRequestV2, o
 	return out, nil
 }
 
+func (c *apiClient) GetKlineV2(ctx context.Context, in *GetKlineRequestV2, opts ...grpc.CallOption) (*GetKlineResponseV2, error) {
+	out := new(GetKlineResponseV2)
+	err := c.cc.Invoke(ctx, "/api.Api/GetKlineV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) GetOrderbookV2(ctx context.Context, in *GetOrderbookRequestV2, opts ...grpc.CallOption) (*GetOrderbookResponseV2, error) {
 	out := new(GetOrderbookResponseV2)
 	err := c.cc.Invoke(ctx, "/api.Api/GetOrderbookV2", in, out, opts...)
@@ -636,15 +645,6 @@ func (c *apiClient) GetPools(ctx context.Context, in *GetPoolsRequest, opts ...g
 func (c *apiClient) GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error) {
 	out := new(GetTickersResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetTickers", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetKline(ctx context.Context, in *GetKlineRequest, opts ...grpc.CallOption) (*GetKlineResponse, error) {
-	out := new(GetKlineResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetKline", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1462,6 +1462,7 @@ type ApiServer interface {
 	GetDriftMarketDepthsStream(*GetDriftMarketDepthsStreamRequest, Api_GetDriftMarketDepthsStreamServer) error
 	GetMarketsV2(context.Context, *GetMarketsRequestV2) (*GetMarketsResponseV2, error)
 	GetTickersV2(context.Context, *GetTickersRequestV2) (*GetTickersResponseV2, error)
+	GetKlineV2(context.Context, *GetKlineRequestV2) (*GetKlineResponseV2, error)
 	GetOrderbookV2(context.Context, *GetOrderbookRequestV2) (*GetOrderbookResponseV2, error)
 	GetMarketDepthV2(context.Context, *GetMarketDepthRequestV2) (*GetMarketDepthResponseV2, error)
 	PostOrderV2(context.Context, *PostOrderRequestV2) (*PostOrderResponse, error)
@@ -1474,7 +1475,6 @@ type ApiServer interface {
 	GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error)
 	GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error)
 	GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error)
-	GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error)
 	GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error)
 	GetMarketDepth(context.Context, *GetMarketDepthRequest) (*GetMarketDepthResponse, error)
 	GetTrades(context.Context, *GetTradesRequest) (*GetTradesResponse, error)
@@ -1667,6 +1667,9 @@ func (UnimplementedApiServer) GetMarketsV2(context.Context, *GetMarketsRequestV2
 func (UnimplementedApiServer) GetTickersV2(context.Context, *GetTickersRequestV2) (*GetTickersResponseV2, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTickersV2 not implemented")
 }
+func (UnimplementedApiServer) GetKlineV2(context.Context, *GetKlineRequestV2) (*GetKlineResponseV2, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetKlineV2 not implemented")
+}
 func (UnimplementedApiServer) GetOrderbookV2(context.Context, *GetOrderbookRequestV2) (*GetOrderbookResponseV2, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderbookV2 not implemented")
 }
@@ -1702,9 +1705,6 @@ func (UnimplementedApiServer) GetPools(context.Context, *GetPoolsRequest) (*GetP
 }
 func (UnimplementedApiServer) GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTickers not implemented")
-}
-func (UnimplementedApiServer) GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetKline not implemented")
 }
 func (UnimplementedApiServer) GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderbook not implemented")
@@ -2547,6 +2547,24 @@ func _Api_GetTickersV2_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetKlineV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetKlineRequestV2)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetKlineV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetKlineV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetKlineV2(ctx, req.(*GetKlineRequestV2))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetOrderbookV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOrderbookRequestV2)
 	if err := dec(in); err != nil {
@@ -2759,24 +2777,6 @@ func _Api_GetTickers_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetTickers(ctx, req.(*GetTickersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetKlineRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetKline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetKline",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetKline(ctx, req.(*GetKlineRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3904,6 +3904,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetTickersV2_Handler,
 		},
 		{
+			MethodName: "GetKlineV2",
+			Handler:    _Api_GetKlineV2_Handler,
+		},
+		{
 			MethodName: "GetOrderbookV2",
 			Handler:    _Api_GetOrderbookV2_Handler,
 		},
@@ -3950,10 +3954,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTickers",
 			Handler:    _Api_GetTickers_Handler,
-		},
-		{
-			MethodName: "GetKline",
-			Handler:    _Api_GetKline_Handler,
 		},
 		{
 			MethodName: "GetOrderbook",

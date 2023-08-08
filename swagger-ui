@@ -4123,7 +4123,7 @@
         }
       }
     },
-    "apiGetKlineResponse": {
+    "apiGetKlineResponseV2": {
       "type": "object",
       "properties": {
         "marketCandles": {

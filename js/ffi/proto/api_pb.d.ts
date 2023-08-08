@@ -216,60 +216,57 @@ export namespace GetTickersResponseV2 {
     }
 }
 
-export class GetKlineRequest extends jspb.Message { 
+export class GetKlineRequestV2 extends jspb.Message { 
     getMarket(): string;
-    setMarket(value: string): GetKlineRequest;
+    setMarket(value: string): GetKlineRequestV2;
 
     hasFrom(): boolean;
     clearFrom(): void;
     getFrom(): google_protobuf_timestamp_pb.Timestamp | undefined;
-    setFrom(value?: google_protobuf_timestamp_pb.Timestamp): GetKlineRequest;
+    setFrom(value?: google_protobuf_timestamp_pb.Timestamp): GetKlineRequestV2;
 
     hasTo(): boolean;
     clearTo(): void;
     getTo(): google_protobuf_timestamp_pb.Timestamp | undefined;
-    setTo(value?: google_protobuf_timestamp_pb.Timestamp): GetKlineRequest;
+    setTo(value?: google_protobuf_timestamp_pb.Timestamp): GetKlineRequestV2;
     getResolution(): string;
-    setResolution(value: string): GetKlineRequest;
-    getLimit(): number;
-    setLimit(value: number): GetKlineRequest;
+    setResolution(value: string): GetKlineRequestV2;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetKlineRequest.AsObject;
-    static toObject(includeInstance: boolean, msg: GetKlineRequest): GetKlineRequest.AsObject;
+    toObject(includeInstance?: boolean): GetKlineRequestV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetKlineRequestV2): GetKlineRequestV2.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetKlineRequest, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetKlineRequest;
-    static deserializeBinaryFromReader(message: GetKlineRequest, reader: jspb.BinaryReader): GetKlineRequest;
+    static serializeBinaryToWriter(message: GetKlineRequestV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetKlineRequestV2;
+    static deserializeBinaryFromReader(message: GetKlineRequestV2, reader: jspb.BinaryReader): GetKlineRequestV2;
 }
 
-export namespace GetKlineRequest {
+export namespace GetKlineRequestV2 {
     export type AsObject = {
         market: string,
         from?: google_protobuf_timestamp_pb.Timestamp.AsObject,
         to?: google_protobuf_timestamp_pb.Timestamp.AsObject,
         resolution: string,
-        limit: number,
     }
 }
 
-export class GetKlineResponse extends jspb.Message { 
+export class GetKlineResponseV2 extends jspb.Message { 
 
     getMarketcandlesMap(): jspb.Map<string, Candles>;
     clearMarketcandlesMap(): void;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): GetKlineResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: GetKlineResponse): GetKlineResponse.AsObject;
+    toObject(includeInstance?: boolean): GetKlineResponseV2.AsObject;
+    static toObject(includeInstance: boolean, msg: GetKlineResponseV2): GetKlineResponseV2.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: GetKlineResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): GetKlineResponse;
-    static deserializeBinaryFromReader(message: GetKlineResponse, reader: jspb.BinaryReader): GetKlineResponse;
+    static serializeBinaryToWriter(message: GetKlineResponseV2, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetKlineResponseV2;
+    static deserializeBinaryFromReader(message: GetKlineResponseV2, reader: jspb.BinaryReader): GetKlineResponseV2;
 }
 
-export namespace GetKlineResponse {
+export namespace GetKlineResponseV2 {
     export type AsObject = {
 
         marketcandlesMap: Array<[string, Candles.AsObject]>,

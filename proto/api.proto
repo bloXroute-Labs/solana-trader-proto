@@ -476,6 +476,18 @@ service Api {
     };
   }
 
+  rpc GetKlineV2(GetKlineRequestV2) returns (GetKlineResponseV2) {
+    option (google.api.method_visibility).restriction = "INTERNAL";
+    option (google.api.http) = {
+      get: "/api/v2/openbook/kline/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the kline for market specified. Only one market at a time.";
+      summary: "Market KLine";
+      tags: ["Market", "Orderbook"];
+    };
+  }
+
   rpc GetOrderbookV2(GetOrderbookRequestV2) returns (GetOrderbookResponseV2) {
     option (google.api.http) = {
       get: "/api/v2/openbook/orderbooks/{market}"
@@ -615,17 +627,6 @@ service Api {
     };
   }
 
-  rpc GetKline(GetKlineRequest) returns (GetKlineResponse) {
-    option (google.api.method_visibility).restriction = "INTERNAL";
-    option (google.api.http) = {
-      get: "/api/v1/market/kline/{market}"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns the KLine per market";
-      summary: "Market KLine";
-      tags: ["Market", "Orderbook"];
-    };
-  }
 
   rpc GetOrderbook(GetOrderbookRequest) returns (GetOrderbookResponse) {
     option (google.api.http) = {
@@ -1217,15 +1218,14 @@ message GetTickersResponseV2 {
   map<string, Candle> marketTickers = 1;
 }
 
-message GetKlineRequest {
+message GetKlineRequestV2 {
   string market = 1;
   google.protobuf.Timestamp from = 2;
   google.protobuf.Timestamp to = 3;
   string resolution = 4; // indicates a duration: e.g. 1d, 4h, 1h, 30m, 15m, 1m
-  uint32 limit = 5;
 }
 
-message GetKlineResponse {
+message GetKlineResponseV2 {
   map<string, Candles> marketCandles = 1;
 }
 
