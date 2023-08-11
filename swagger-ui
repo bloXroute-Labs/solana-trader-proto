@@ -2956,7 +2956,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetOpenOrdersResponse"
+              "$ref": "#/definitions/apiGetOpenOrdersResponseV2"
             }
           },
           "default": {
@@ -4225,6 +4225,17 @@
         }
       }
     },
+    "apiGetOpenOrdersResponseV2": {
+      "type": "object",
+      "properties": {
+        "orders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiOrderV2"
+          }
+        }
+      }
+    },
     "apiGetOpenPerpOrderResponse": {
       "type": "object",
       "properties": {
@@ -5105,6 +5116,53 @@
       ],
       "default": "OS_UNKNOWN"
     },
+    "apiOrderV2": {
+      "type": "object",
+      "properties": {
+        "orderID": {
+          "type": "string"
+        },
+        "market": {
+          "type": "string"
+        },
+        "side": {
+          "type": "string",
+          "description": " Supported values : Bid, Ask",
+          "required": [
+            "side"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Supported values : Limit, IoC, PostOnly",
+          "required": [
+            "type"
+          ]
+        },
+        "price": {
+          "type": "number",
+          "format": "double"
+        },
+        "remainingSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "clientOrderID": {
+          "type": "string"
+        },
+        "openOrderAccount": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "side",
+        "type"
+      ]
+    },
     "apiOrderbookItem": {
       "type": "object",
       "properties": {
@@ -5488,7 +5546,11 @@
           "type": "string"
         },
         "side": {
-          "$ref": "#/definitions/apiSide"
+          "type": "string",
+          "description": " Supported values : Bid, Ask",
+          "required": [
+            "side"
+          ]
         },
         "marketAddress": {
           "type": "string",
@@ -5514,6 +5576,7 @@
         }
       },
       "required": [
+        "side",
         "marketAddress",
         "ownerAddress",
         "openOrdersAddress"
@@ -6263,7 +6326,18 @@
           ]
         },
         "side": {
-          "$ref": "#/definitions/apiSide"
+          "type": "string",
+          "description": " Supported values : Bid, Ask",
+          "required": [
+            "side"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Supported values : Limit, IoC, PostOnly",
+          "required": [
+            "type"
+          ]
         },
         "amount": {
           "type": "number",
@@ -6293,6 +6367,8 @@
         "ownerAddress",
         "payerAddress",
         "market",
+        "side",
+        "type",
         "amount",
         "price"
       ]
@@ -6543,7 +6619,18 @@
           ]
         },
         "side": {
-          "$ref": "#/definitions/apiSide"
+          "type": "string",
+          "description": " Supported values : Bid, Ask",
+          "required": [
+            "side"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Supported values : Limit, IoC, PostOnly",
+          "required": [
+            "type"
+          ]
         },
         "amount": {
           "type": "number",
@@ -6580,6 +6667,8 @@
         "ownerAddress",
         "payerAddress",
         "market",
+        "side",
+        "type",
         "amount",
         "price",
         "openOrdersAddress"

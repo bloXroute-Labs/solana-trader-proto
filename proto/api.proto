@@ -558,7 +558,7 @@ service Api {
     };
   }
 
-  rpc GetOpenOrdersV2(GetOpenOrdersRequestV2) returns (GetOpenOrdersResponse) {
+  rpc GetOpenOrdersV2(GetOpenOrdersRequestV2) returns (GetOpenOrdersResponseV2) {
     option (google.api.http) = {
       get: "/api/v2/openbook/open-orders/{market}"
     };
@@ -2839,7 +2839,8 @@ message PostOrderRequestV2 {
   string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
   string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
   string market = 3 [(google.api.field_behavior) = REQUIRED];
-  Side side = 4 [(google.api.field_behavior) = REQUIRED];
+  string side = 4 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
+  string type = 5 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Supported values : Limit, IoC, PostOnly"}];
   double amount = 6 [(google.api.field_behavior) = REQUIRED];
   double price = 7 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
@@ -2850,7 +2851,8 @@ message PostReplaceOrderRequestV2 {
   string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
   string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
   string market = 3 [(google.api.field_behavior) = REQUIRED];
-  Side side = 4 [(google.api.field_behavior) = REQUIRED];
+  string side = 4 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
+  string type = 5 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Supported values : Limit, IoC, PostOnly"}];
   double amount = 6 [(google.api.field_behavior) = REQUIRED];
   double price = 7 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 8 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
@@ -2860,7 +2862,7 @@ message PostReplaceOrderRequestV2 {
 
 message PostCancelOrderRequestV2 {
   string orderID = 1 [(google.api.field_behavior) = OPTIONAL];
-  Side side = 2 [(google.api.field_behavior) = REQUIRED];
+  string side = 2 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
   string marketAddress = 3 [(google.api.field_behavior) = REQUIRED];
   string ownerAddress = 4 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
@@ -2891,4 +2893,21 @@ message GetUnsettledRequestV2 {
   string market = 1 [(google.api.field_behavior) = REQUIRED];
   string ownerAddress = 2 [(google.api.field_behavior) = REQUIRED];
 }
+
+message GetOpenOrdersResponseV2 {
+  repeated OrderV2 orders = 1;
+}
+
+message OrderV2 {
+  string orderID = 1;
+  string market = 2;
+  string side = 3 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
+  string type = 4 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Supported values : Limit, IoC, PostOnly"}];
+  double price = 5;
+  double remainingSize = 6;
+  google.protobuf.Timestamp createdAt = 7;
+  string clientOrderID = 8;
+  string openOrderAccount = 9;
+}
+
 //End of Openbook V2 Messages

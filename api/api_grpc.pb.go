@@ -65,7 +65,7 @@ type ApiClient interface {
 	PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponseV2, error)
 	PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
 	PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error)
-	GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error)
+	GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponseV2, error)
 	GetUnsettledV2(ctx context.Context, in *GetUnsettledRequestV2, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error)
 	GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error)
@@ -597,8 +597,8 @@ func (c *apiClient) PostSettleV2(ctx context.Context, in *PostSettleRequestV2, o
 	return out, nil
 }
 
-func (c *apiClient) GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error) {
-	out := new(GetOpenOrdersResponse)
+func (c *apiClient) GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponseV2, error) {
+	out := new(GetOpenOrdersResponseV2)
 	err := c.cc.Invoke(ctx, "/api.Api/GetOpenOrdersV2", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1469,7 +1469,7 @@ type ApiServer interface {
 	PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponseV2, error)
 	PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error)
 	PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error)
-	GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponse, error)
+	GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponseV2, error)
 	GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error)
 	GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error)
 	GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error)
@@ -1688,7 +1688,7 @@ func (UnimplementedApiServer) PostReplaceOrderV2(context.Context, *PostReplaceOr
 func (UnimplementedApiServer) PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSettleV2 not implemented")
 }
-func (UnimplementedApiServer) GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponse, error) {
+func (UnimplementedApiServer) GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponseV2, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOpenOrdersV2 not implemented")
 }
 func (UnimplementedApiServer) GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error) {
