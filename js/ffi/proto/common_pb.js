@@ -645,7 +645,11 @@ proto.common.PostOnlyParams = {
 proto.common.MarginContract = {
   ALL_SPOTS: 0,
   SOL_SPOT: 1,
-  USDC_SPOT: 2
+  USDC_SPOT: 2,
+  MSOL_SPOT: 3,
+  WBTC_SPOT: 4,
+  WETH_SPOT: 5,
+  USDT_SPOT: 6
 };
 
 /**
@@ -663,7 +667,10 @@ proto.common.PerpContract = {
   DOGE_PERP: 8,
   BNB_PERP: 9,
   SUI_PERP: 10,
-  PEPE_PERP: 11
+  PEPE_PERP: 11,
+  OP_PERP: 12,
+  RNDR_PERP: 13,
+  XRP_PERP: 14
 };
 
 /**

@@ -308,7 +308,10 @@
               "DOGE_PERP",
               "BNB_PERP",
               "SUI_PERP",
-              "PEPE_PERP"
+              "PEPE_PERP",
+              "OP_PERP",
+              "RNDR_PERP",
+              "XRP_PERP"
             ]
           },
           {
@@ -1154,7 +1157,10 @@
                 "DOGE_PERP",
                 "BNB_PERP",
                 "SUI_PERP",
-                "PEPE_PERP"
+                "PEPE_PERP",
+                "OP_PERP",
+                "RNDR_PERP",
+                "XRP_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -1270,7 +1276,10 @@
                 "DOGE_PERP",
                 "BNB_PERP",
                 "SUI_PERP",
-                "PEPE_PERP"
+                "PEPE_PERP",
+                "OP_PERP",
+                "RNDR_PERP",
+                "XRP_PERP"
               ]
             },
             "collectionFormat": "multi"
@@ -7563,7 +7572,10 @@
         "DOGE_PERP",
         "BNB_PERP",
         "SUI_PERP",
-        "PEPE_PERP"
+        "PEPE_PERP",
+        "OP_PERP",
+        "RNDR_PERP",
+        "XRP_PERP"
       ],
       "default": "ALL"
     },
