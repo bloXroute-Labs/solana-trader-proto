@@ -1983,7 +1983,7 @@ class PostReplaceOrderRequestV2(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostCancelOrderRequestV2(betterproto.Message):
     order_id: str = betterproto.string_field(1)
-    side: "Side" = betterproto.enum_field(2)
+    side: str = betterproto.string_field(2)
     market_address: str = betterproto.string_field(3)
     owner_address: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
@@ -2018,6 +2018,24 @@ class GetOpenOrdersRequestV2(betterproto.Message):
 class GetUnsettledRequestV2(betterproto.Message):
     market: str = betterproto.string_field(1)
     owner_address: str = betterproto.string_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetOpenOrdersResponseV2(betterproto.Message):
+    orders: List["OrderV2"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class OrderV2(betterproto.Message):
+    order_id: str = betterproto.string_field(1)
+    market: str = betterproto.string_field(2)
+    side: str = betterproto.string_field(3)
+    type: str = betterproto.string_field(4)
+    price: float = betterproto.double_field(5)
+    remaining_size: float = betterproto.double_field(6)
+    created_at: datetime = betterproto.message_field(7)
+    client_order_id: str = betterproto.string_field(8)
+    open_order_account: str = betterproto.string_field(9)
 
 
 class ApiStub(betterproto.ServiceStub):
@@ -2761,11 +2779,11 @@ class ApiStub(betterproto.ServiceStub):
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> "GetOpenOrdersResponse":
+    ) -> "GetOpenOrdersResponseV2":
         return await self._unary_unary(
             "/api.Api/GetOpenOrdersV2",
             get_open_orders_request_v2,
-            GetOpenOrdersResponse,
+            GetOpenOrdersResponseV2,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3995,7 +4013,7 @@ class ApiBase(ServiceBase):
 
     async def get_open_orders_v2(
         self, get_open_orders_request_v2: "GetOpenOrdersRequestV2"
-    ) -> "GetOpenOrdersResponse":
+    ) -> "GetOpenOrdersResponseV2":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_unsettled_v2(
@@ -4646,7 +4664,7 @@ class ApiBase(ServiceBase):
 
     async def __rpc_get_open_orders_v2(
         self,
-        stream: "grpclib.server.Stream[GetOpenOrdersRequestV2, GetOpenOrdersResponse]",
+        stream: "grpclib.server.Stream[GetOpenOrdersRequestV2, GetOpenOrdersResponseV2]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_open_orders_v2(request)
@@ -5399,7 +5417,7 @@ class ApiBase(ServiceBase):
                 self.__rpc_get_open_orders_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetOpenOrdersRequestV2,
-                GetOpenOrdersResponse,
+                GetOpenOrdersResponseV2,
             ),
             "/api.Api/GetUnsettledV2": grpclib.const.Handler(
                 self.__rpc_get_unsettled_v2,
