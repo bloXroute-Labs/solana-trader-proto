@@ -55,9 +55,9 @@ enum PerpContract {
   BNB_PERP = 9;    // BNB-PERP
   SUI_PERP = 10;    // SUI-PERP
   PEPE_PERP = 11;    // PEPE-PERP
-  OP_PERP = 12;    // PEPE-PERP
-  RNDR_PERP = 13;    // PEPE-PERP
-  XRP_PERP = 14;    // PEPE-PERP
+  OP_PERP = 12;    // OP_PERP
+  RNDR_PERP = 13;    // RNDR_PERP
+  XRP_PERP = 14;    // XRP_PERP
 }
 
 enum PerpCollateralType {
