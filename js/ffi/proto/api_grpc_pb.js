@@ -1891,6 +1891,28 @@ function deserialize_api_PostPerpOrderResponse(buffer_arg) {
   return api_pb.PostPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostRaydiumCLMMSwapRequest(arg) {
+  if (!(arg instanceof api_pb.PostRaydiumCLMMSwapRequest)) {
+    throw new Error('Expected argument of type api.PostRaydiumCLMMSwapRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostRaydiumCLMMSwapRequest(buffer_arg) {
+  return api_pb.PostRaydiumCLMMSwapRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostRaydiumCLMMSwapResponse(arg) {
+  if (!(arg instanceof api_pb.PostRaydiumCLMMSwapResponse)) {
+    throw new Error('Expected argument of type api.PostRaydiumCLMMSwapResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostRaydiumCLMMSwapResponse(buffer_arg) {
+  return api_pb.PostRaydiumCLMMSwapResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostRaydiumRouteSwapRequest(arg) {
   if (!(arg instanceof api_pb.PostRaydiumRouteSwapRequest)) {
     throw new Error('Expected argument of type api.PostRaydiumRouteSwapRequest');
@@ -2157,6 +2179,17 @@ getRaydiumPools: {
     requestDeserialize: deserialize_api_PostRaydiumSwapRequest,
     responseSerialize: serialize_api_PostRaydiumSwapResponse,
     responseDeserialize: deserialize_api_PostRaydiumSwapResponse,
+  },
+  postRaydiumCLMMSwap: {
+    path: '/api.Api/PostRaydiumCLMMSwap',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostRaydiumCLMMSwapRequest,
+    responseType: api_pb.PostRaydiumCLMMSwapResponse,
+    requestSerialize: serialize_api_PostRaydiumCLMMSwapRequest,
+    requestDeserialize: deserialize_api_PostRaydiumCLMMSwapRequest,
+    responseSerialize: serialize_api_PostRaydiumCLMMSwapResponse,
+    responseDeserialize: deserialize_api_PostRaydiumCLMMSwapResponse,
   },
   postRaydiumRouteSwap: {
     path: '/api.Api/PostRaydiumRouteSwap',

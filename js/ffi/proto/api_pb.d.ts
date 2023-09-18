@@ -2222,6 +2222,66 @@ export namespace PostRaydiumSwapResponse {
     }
 }
 
+export class PostRaydiumCLMMSwapRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostRaydiumCLMMSwapRequest;
+    getIntoken(): string;
+    setIntoken(value: string): PostRaydiumCLMMSwapRequest;
+    getOuttoken(): string;
+    setOuttoken(value: string): PostRaydiumCLMMSwapRequest;
+    getInamount(): number;
+    setInamount(value: number): PostRaydiumCLMMSwapRequest;
+    getSlippage(): number;
+    setSlippage(value: number): PostRaydiumCLMMSwapRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostRaydiumCLMMSwapRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostRaydiumCLMMSwapRequest): PostRaydiumCLMMSwapRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostRaydiumCLMMSwapRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostRaydiumCLMMSwapRequest;
+    static deserializeBinaryFromReader(message: PostRaydiumCLMMSwapRequest, reader: jspb.BinaryReader): PostRaydiumCLMMSwapRequest;
+}
+
+export namespace PostRaydiumCLMMSwapRequest {
+    export type AsObject = {
+        owneraddress: string,
+        intoken: string,
+        outtoken: string,
+        inamount: number,
+        slippage: number,
+    }
+}
+
+export class PostRaydiumCLMMSwapResponse extends jspb.Message { 
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostRaydiumCLMMSwapResponse;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
+    getOutamount(): number;
+    setOutamount(value: number): PostRaydiumCLMMSwapResponse;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): PostRaydiumCLMMSwapResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostRaydiumCLMMSwapResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostRaydiumCLMMSwapResponse): PostRaydiumCLMMSwapResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostRaydiumCLMMSwapResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostRaydiumCLMMSwapResponse;
+    static deserializeBinaryFromReader(message: PostRaydiumCLMMSwapResponse, reader: jspb.BinaryReader): PostRaydiumCLMMSwapResponse;
+}
+
+export namespace PostRaydiumCLMMSwapResponse {
+    export type AsObject = {
+        transactionsList: Array<TransactionMessage.AsObject>,
+        outamount: number,
+        outamountmin: number,
+    }
+}
+
 export class PostJupiterSwapResponse extends jspb.Message { 
     clearTransactionsList(): void;
     getTransactionsList(): Array<TransactionMessage>;

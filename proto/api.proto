@@ -97,6 +97,18 @@ service Api {
     };
   }
 
+  rpc PostRaydiumCLMMSwap(PostRaydiumCLMMSwapRequest) returns (PostRaydiumCLMMSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/swap-clmm"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium CLMMs";
+      summary: "Unsigned Raydium CLMM swap transaction";
+      tags: ["Raydium V2"];
+    };
+  }
+
   rpc PostRaydiumRouteSwap(PostRaydiumRouteSwapRequest) returns (PostRaydiumRouteSwapResponse) {
     option(google.api.http) = {
       post: "/api/v2/raydium/route-swap"
@@ -1697,6 +1709,20 @@ message PostRaydiumSwapResponse{
   double outAmountMin = 3;
   common.PriceImpactPercentV2 priceImpact = 4;
   repeated common.Fee fees = 5;
+}
+
+message PostRaydiumCLMMSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+}
+
+message PostRaydiumCLMMSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
 }
 
 message PostJupiterSwapResponse{

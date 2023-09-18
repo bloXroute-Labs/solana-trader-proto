@@ -23,6 +23,7 @@ type ApiClient interface {
 	GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error)
 	GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error)
 	PostRaydiumSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error)
+	PostRaydiumCLMMSwap(ctx context.Context, in *PostRaydiumCLMMSwapRequest, opts ...grpc.CallOption) (*PostRaydiumCLMMSwapResponse, error)
 	PostRaydiumRouteSwap(ctx context.Context, in *PostRaydiumRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumRouteSwapResponse, error)
 	// Jupiter V2
 	GetJupiterQuotes(ctx context.Context, in *GetJupiterQuotesRequest, opts ...grpc.CallOption) (*GetJupiterQuotesResponse, error)
@@ -185,6 +186,15 @@ func (c *apiClient) GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRe
 func (c *apiClient) PostRaydiumSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error) {
 	out := new(PostRaydiumSwapResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostRaydiumCLMMSwap(ctx context.Context, in *PostRaydiumCLMMSwapRequest, opts ...grpc.CallOption) (*PostRaydiumCLMMSwapResponse, error) {
+	out := new(PostRaydiumCLMMSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumCLMMSwap", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1427,6 +1437,7 @@ type ApiServer interface {
 	GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error)
 	GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error)
 	PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error)
+	PostRaydiumCLMMSwap(context.Context, *PostRaydiumCLMMSwapRequest) (*PostRaydiumCLMMSwapResponse, error)
 	PostRaydiumRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error)
 	// Jupiter V2
 	GetJupiterQuotes(context.Context, *GetJupiterQuotesRequest) (*GetJupiterQuotesResponse, error)
@@ -1567,6 +1578,9 @@ func (UnimplementedApiServer) GetRaydiumPrices(context.Context, *GetRaydiumPrice
 }
 func (UnimplementedApiServer) PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumSwap not implemented")
+}
+func (UnimplementedApiServer) PostRaydiumCLMMSwap(context.Context, *PostRaydiumCLMMSwapRequest) (*PostRaydiumCLMMSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumCLMMSwap not implemented")
 }
 func (UnimplementedApiServer) PostRaydiumRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumRouteSwap not implemented")
@@ -1943,6 +1957,24 @@ func _Api_PostRaydiumSwap_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostRaydiumSwap(ctx, req.(*PostRaydiumSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostRaydiumCLMMSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRaydiumCLMMSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostRaydiumCLMMSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostRaydiumCLMMSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostRaydiumCLMMSwap(ctx, req.(*PostRaydiumCLMMSwapRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3778,6 +3810,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostRaydiumSwap",
 			Handler:    _Api_PostRaydiumSwap_Handler,
+		},
+		{
+			MethodName: "PostRaydiumCLMMSwap",
+			Handler:    _Api_PostRaydiumCLMMSwap_Handler,
 		},
 		{
 			MethodName: "PostRaydiumRouteSwap",

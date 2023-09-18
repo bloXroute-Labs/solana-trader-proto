@@ -3422,6 +3422,40 @@
           "Raydium V2"
         ]
       }
+    },
+    "/api/v2/raydium/swap-clmm": {
+      "post": {
+        "summary": "Unsigned Raydium CLMM swap transaction",
+        "description": "Generates an unsigned transaction object to make a swap on Raydium CLMMs",
+        "operationId": "Api_PostRaydiumCLMMSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumCLMMSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumCLMMSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
     }
   },
   "definitions": {
@@ -6433,6 +6467,47 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiPostRaydiumCLMMSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiPostRaydiumCLMMSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
