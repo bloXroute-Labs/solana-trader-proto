@@ -588,6 +588,24 @@ class GetRaydiumQuotesResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetRaydiumClmmQuotesRequest(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    out_token: str = betterproto.string_field(2)
+    in_amount: float = betterproto.double_field(3)
+    slippage: float = betterproto.double_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumClmmQuotesResponse(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    in_token_address: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    out_token_address: str = betterproto.string_field(4)
+    in_amount: float = betterproto.double_field(5)
+    routes: List["RaydiumQuoteRoute"] = betterproto.message_field(6)
+
+
+@dataclass(eq=False, repr=False)
 class GetJupiterQuotesRequest(betterproto.Message):
     in_token: str = betterproto.string_field(1)
     out_token: str = betterproto.string_field(2)
@@ -656,6 +674,7 @@ class PostRaydiumClmmSwapRequest(betterproto.Message):
     out_token: str = betterproto.string_field(3)
     in_amount: float = betterproto.double_field(4)
     slippage: float = betterproto.double_field(5)
+    pool_address: str = betterproto.string_field(6)
 
 
 @dataclass(eq=False, repr=False)
@@ -672,13 +691,6 @@ class PostJupiterSwapResponse(betterproto.Message):
     out_amount_min: float = betterproto.double_field(3)
     price_impact: "_common__.PriceImpactPercentV2" = betterproto.message_field(4)
     fees: List["_common__.Fee"] = betterproto.message_field(5)
-
-
-@dataclass(eq=False, repr=False)
-class PostRaydiumRouteSwapResponse(betterproto.Message):
-    transactions: List["TransactionMessage"] = betterproto.message_field(1)
-    out_amount: float = betterproto.double_field(2)
-    out_amount_min: float = betterproto.double_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -706,6 +718,13 @@ class PostRaydiumRouteSwapRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostRaydiumRouteSwapResponse(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
+
+
+@dataclass(eq=False, repr=False)
 class RaydiumRouteStep(betterproto.Message):
     in_token: str = betterproto.string_field(1)
     in_amount: float = betterproto.double_field(2)
@@ -713,6 +732,20 @@ class RaydiumRouteStep(betterproto.Message):
     out_amount: float = betterproto.double_field(4)
     out_amount_min: float = betterproto.double_field(5)
     pool_address: str = betterproto.string_field(6)
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumClmmRouteSwapRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    steps: List["RaydiumRouteStep"] = betterproto.message_field(2)
+    slippage: float = betterproto.double_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumClmmRouteSwapResponse(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -876,6 +909,16 @@ class GetRaydiumPoolsRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetRaydiumPoolsResponse(betterproto.Message):
+    pools: List["ProjectPool"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumClmmPoolsRequest(betterproto.Message):
+    pair_or_address: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumClmmPoolsResponse(betterproto.Message):
     pools: List["ProjectPool"] = betterproto.message_field(1)
 
 
@@ -2055,6 +2098,74 @@ class OrderV2(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def get_raydium_clmm_quotes(
+        self,
+        get_raydium_clmm_quotes_request: "GetRaydiumClmmQuotesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumClmmQuotesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRaydiumCLMMQuotes",
+            get_raydium_clmm_quotes_request,
+            GetRaydiumClmmQuotesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_raydium_clmm_pools(
+        self,
+        get_raydium_clmm_pools_request: "GetRaydiumClmmPoolsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumClmmPoolsResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRaydiumCLMMPools",
+            get_raydium_clmm_pools_request,
+            GetRaydiumClmmPoolsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_raydium_clmm_swap(
+        self,
+        post_raydium_clmm_swap_request: "PostRaydiumClmmSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostRaydiumClmmSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostRaydiumCLMMSwap",
+            post_raydium_clmm_swap_request,
+            PostRaydiumClmmSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_raydium_clmm_route_swap(
+        self,
+        post_raydium_clmm_route_swap_request: "PostRaydiumClmmRouteSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostRaydiumClmmRouteSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostRaydiumCLMMRouteSwap",
+            post_raydium_clmm_route_swap_request,
+            PostRaydiumClmmRouteSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_raydium_pools(
         self,
         get_raydium_pools_request: "GetRaydiumPoolsRequest",
@@ -2118,23 +2229,6 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostRaydiumSwap",
             post_raydium_swap_request,
             PostRaydiumSwapResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
-    async def post_raydium_clmm_swap(
-        self,
-        post_raydium_clmm_swap_request: "PostRaydiumClmmSwapRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "PostRaydiumClmmSwapResponse":
-        return await self._unary_unary(
-            "/api.Api/PostRaydiumCLMMSwap",
-            post_raydium_clmm_swap_request,
-            PostRaydiumClmmSwapResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3823,6 +3917,26 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+    async def get_raydium_clmm_quotes(
+        self, get_raydium_clmm_quotes_request: "GetRaydiumClmmQuotesRequest"
+    ) -> "GetRaydiumClmmQuotesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_raydium_clmm_pools(
+        self, get_raydium_clmm_pools_request: "GetRaydiumClmmPoolsRequest"
+    ) -> "GetRaydiumClmmPoolsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_raydium_clmm_swap(
+        self, post_raydium_clmm_swap_request: "PostRaydiumClmmSwapRequest"
+    ) -> "PostRaydiumClmmSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_raydium_clmm_route_swap(
+        self, post_raydium_clmm_route_swap_request: "PostRaydiumClmmRouteSwapRequest"
+    ) -> "PostRaydiumClmmRouteSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_raydium_pools(
         self, get_raydium_pools_request: "GetRaydiumPoolsRequest"
     ) -> "GetRaydiumPoolsResponse":
@@ -3841,11 +3955,6 @@ class ApiBase(ServiceBase):
     async def post_raydium_swap(
         self, post_raydium_swap_request: "PostRaydiumSwapRequest"
     ) -> "PostRaydiumSwapResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
-    async def post_raydium_clmm_swap(
-        self, post_raydium_clmm_swap_request: "PostRaydiumClmmSwapRequest"
-    ) -> "PostRaydiumClmmSwapResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def post_raydium_route_swap(
@@ -4355,6 +4464,38 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPerpTradesStreamResponse()
 
+    async def __rpc_get_raydium_clmm_quotes(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumClmmQuotesRequest, GetRaydiumClmmQuotesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_raydium_clmm_quotes(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_raydium_clmm_pools(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumClmmPoolsRequest, GetRaydiumClmmPoolsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_raydium_clmm_pools(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_raydium_clmm_swap(
+        self,
+        stream: "grpclib.server.Stream[PostRaydiumClmmSwapRequest, PostRaydiumClmmSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_raydium_clmm_swap(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_raydium_clmm_route_swap(
+        self,
+        stream: "grpclib.server.Stream[PostRaydiumClmmRouteSwapRequest, PostRaydiumClmmRouteSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_raydium_clmm_route_swap(request)
+        await stream.send_message(response)
+
     async def __rpc_get_raydium_pools(
         self,
         stream: "grpclib.server.Stream[GetRaydiumPoolsRequest, GetRaydiumPoolsResponse]",
@@ -4385,14 +4526,6 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_raydium_swap(request)
-        await stream.send_message(response)
-
-    async def __rpc_post_raydium_clmm_swap(
-        self,
-        stream: "grpclib.server.Stream[PostRaydiumClmmSwapRequest, PostRaydiumClmmSwapResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.post_raydium_clmm_swap(request)
         await stream.send_message(response)
 
     async def __rpc_post_raydium_route_swap(
@@ -5201,6 +5334,30 @@ class ApiBase(ServiceBase):
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
+            "/api.Api/GetRaydiumCLMMQuotes": grpclib.const.Handler(
+                self.__rpc_get_raydium_clmm_quotes,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumClmmQuotesRequest,
+                GetRaydiumClmmQuotesResponse,
+            ),
+            "/api.Api/GetRaydiumCLMMPools": grpclib.const.Handler(
+                self.__rpc_get_raydium_clmm_pools,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumClmmPoolsRequest,
+                GetRaydiumClmmPoolsResponse,
+            ),
+            "/api.Api/PostRaydiumCLMMSwap": grpclib.const.Handler(
+                self.__rpc_post_raydium_clmm_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostRaydiumClmmSwapRequest,
+                PostRaydiumClmmSwapResponse,
+            ),
+            "/api.Api/PostRaydiumCLMMRouteSwap": grpclib.const.Handler(
+                self.__rpc_post_raydium_clmm_route_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostRaydiumClmmRouteSwapRequest,
+                PostRaydiumClmmRouteSwapResponse,
+            ),
             "/api.Api/GetRaydiumPools": grpclib.const.Handler(
                 self.__rpc_get_raydium_pools,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -5224,12 +5381,6 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostRaydiumSwapRequest,
                 PostRaydiumSwapResponse,
-            ),
-            "/api.Api/PostRaydiumCLMMSwap": grpclib.const.Handler(
-                self.__rpc_post_raydium_clmm_swap,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                PostRaydiumClmmSwapRequest,
-                PostRaydiumClmmSwapResponse,
             ),
             "/api.Api/PostRaydiumRouteSwap": grpclib.const.Handler(
                 self.__rpc_post_raydium_route_swap,

@@ -1990,6 +1990,72 @@ export namespace GetRaydiumQuotesResponse {
     }
 }
 
+export class GetRaydiumCLMMQuotesRequest extends jspb.Message { 
+    getIntoken(): string;
+    setIntoken(value: string): GetRaydiumCLMMQuotesRequest;
+    getOuttoken(): string;
+    setOuttoken(value: string): GetRaydiumCLMMQuotesRequest;
+    getInamount(): number;
+    setInamount(value: number): GetRaydiumCLMMQuotesRequest;
+    getSlippage(): number;
+    setSlippage(value: number): GetRaydiumCLMMQuotesRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetRaydiumCLMMQuotesRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetRaydiumCLMMQuotesRequest): GetRaydiumCLMMQuotesRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetRaydiumCLMMQuotesRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetRaydiumCLMMQuotesRequest;
+    static deserializeBinaryFromReader(message: GetRaydiumCLMMQuotesRequest, reader: jspb.BinaryReader): GetRaydiumCLMMQuotesRequest;
+}
+
+export namespace GetRaydiumCLMMQuotesRequest {
+    export type AsObject = {
+        intoken: string,
+        outtoken: string,
+        inamount: number,
+        slippage: number,
+    }
+}
+
+export class GetRaydiumCLMMQuotesResponse extends jspb.Message { 
+    getIntoken(): string;
+    setIntoken(value: string): GetRaydiumCLMMQuotesResponse;
+    getIntokenaddress(): string;
+    setIntokenaddress(value: string): GetRaydiumCLMMQuotesResponse;
+    getOuttoken(): string;
+    setOuttoken(value: string): GetRaydiumCLMMQuotesResponse;
+    getOuttokenaddress(): string;
+    setOuttokenaddress(value: string): GetRaydiumCLMMQuotesResponse;
+    getInamount(): number;
+    setInamount(value: number): GetRaydiumCLMMQuotesResponse;
+    clearRoutesList(): void;
+    getRoutesList(): Array<RaydiumQuoteRoute>;
+    setRoutesList(value: Array<RaydiumQuoteRoute>): GetRaydiumCLMMQuotesResponse;
+    addRoutes(value?: RaydiumQuoteRoute, index?: number): RaydiumQuoteRoute;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetRaydiumCLMMQuotesResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetRaydiumCLMMQuotesResponse): GetRaydiumCLMMQuotesResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetRaydiumCLMMQuotesResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetRaydiumCLMMQuotesResponse;
+    static deserializeBinaryFromReader(message: GetRaydiumCLMMQuotesResponse, reader: jspb.BinaryReader): GetRaydiumCLMMQuotesResponse;
+}
+
+export namespace GetRaydiumCLMMQuotesResponse {
+    export type AsObject = {
+        intoken: string,
+        intokenaddress: string,
+        outtoken: string,
+        outtokenaddress: string,
+        inamount: number,
+        routesList: Array<RaydiumQuoteRoute.AsObject>,
+    }
+}
+
 export class GetJupiterQuotesRequest extends jspb.Message { 
     getIntoken(): string;
     setIntoken(value: string): GetJupiterQuotesRequest;
@@ -2233,6 +2299,8 @@ export class PostRaydiumCLMMSwapRequest extends jspb.Message {
     setInamount(value: number): PostRaydiumCLMMSwapRequest;
     getSlippage(): number;
     setSlippage(value: number): PostRaydiumCLMMSwapRequest;
+    getPooladdress(): string;
+    setPooladdress(value: string): PostRaydiumCLMMSwapRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostRaydiumCLMMSwapRequest.AsObject;
@@ -2251,6 +2319,7 @@ export namespace PostRaydiumCLMMSwapRequest {
         outtoken: string,
         inamount: number,
         slippage: number,
+        pooladdress: string,
     }
 }
 
@@ -2318,34 +2387,6 @@ export namespace PostJupiterSwapResponse {
         outamountmin: number,
         priceimpact?: common_pb.PriceImpactPercentV2.AsObject,
         feesList: Array<common_pb.Fee.AsObject>,
-    }
-}
-
-export class PostRaydiumRouteSwapResponse extends jspb.Message { 
-    clearTransactionsList(): void;
-    getTransactionsList(): Array<TransactionMessage>;
-    setTransactionsList(value: Array<TransactionMessage>): PostRaydiumRouteSwapResponse;
-    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
-    getOutamount(): number;
-    setOutamount(value: number): PostRaydiumRouteSwapResponse;
-    getOutamountmin(): number;
-    setOutamountmin(value: number): PostRaydiumRouteSwapResponse;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostRaydiumRouteSwapResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: PostRaydiumRouteSwapResponse): PostRaydiumRouteSwapResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostRaydiumRouteSwapResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostRaydiumRouteSwapResponse;
-    static deserializeBinaryFromReader(message: PostRaydiumRouteSwapResponse, reader: jspb.BinaryReader): PostRaydiumRouteSwapResponse;
-}
-
-export namespace PostRaydiumRouteSwapResponse {
-    export type AsObject = {
-        transactionsList: Array<TransactionMessage.AsObject>,
-        outamount: number,
-        outamountmin: number,
     }
 }
 
@@ -2447,6 +2488,34 @@ export namespace PostRaydiumRouteSwapRequest {
     }
 }
 
+export class PostRaydiumRouteSwapResponse extends jspb.Message { 
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostRaydiumRouteSwapResponse;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
+    getOutamount(): number;
+    setOutamount(value: number): PostRaydiumRouteSwapResponse;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): PostRaydiumRouteSwapResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostRaydiumRouteSwapResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostRaydiumRouteSwapResponse): PostRaydiumRouteSwapResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostRaydiumRouteSwapResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostRaydiumRouteSwapResponse;
+    static deserializeBinaryFromReader(message: PostRaydiumRouteSwapResponse, reader: jspb.BinaryReader): PostRaydiumRouteSwapResponse;
+}
+
+export namespace PostRaydiumRouteSwapResponse {
+    export type AsObject = {
+        transactionsList: Array<TransactionMessage.AsObject>,
+        outamount: number,
+        outamountmin: number,
+    }
+}
+
 export class RaydiumRouteStep extends jspb.Message { 
     getIntoken(): string;
     setIntoken(value: string): RaydiumRouteStep;
@@ -2479,6 +2548,62 @@ export namespace RaydiumRouteStep {
         outamount: number,
         outamountmin: number,
         pooladdress: string,
+    }
+}
+
+export class PostRaydiumCLMMRouteSwapRequest extends jspb.Message { 
+    getOwneraddress(): string;
+    setOwneraddress(value: string): PostRaydiumCLMMRouteSwapRequest;
+    clearStepsList(): void;
+    getStepsList(): Array<RaydiumRouteStep>;
+    setStepsList(value: Array<RaydiumRouteStep>): PostRaydiumCLMMRouteSwapRequest;
+    addSteps(value?: RaydiumRouteStep, index?: number): RaydiumRouteStep;
+    getSlippage(): number;
+    setSlippage(value: number): PostRaydiumCLMMRouteSwapRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostRaydiumCLMMRouteSwapRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostRaydiumCLMMRouteSwapRequest): PostRaydiumCLMMRouteSwapRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostRaydiumCLMMRouteSwapRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostRaydiumCLMMRouteSwapRequest;
+    static deserializeBinaryFromReader(message: PostRaydiumCLMMRouteSwapRequest, reader: jspb.BinaryReader): PostRaydiumCLMMRouteSwapRequest;
+}
+
+export namespace PostRaydiumCLMMRouteSwapRequest {
+    export type AsObject = {
+        owneraddress: string,
+        stepsList: Array<RaydiumRouteStep.AsObject>,
+        slippage: number,
+    }
+}
+
+export class PostRaydiumCLMMRouteSwapResponse extends jspb.Message { 
+    clearTransactionsList(): void;
+    getTransactionsList(): Array<TransactionMessage>;
+    setTransactionsList(value: Array<TransactionMessage>): PostRaydiumCLMMRouteSwapResponse;
+    addTransactions(value?: TransactionMessage, index?: number): TransactionMessage;
+    getOutamount(): number;
+    setOutamount(value: number): PostRaydiumCLMMRouteSwapResponse;
+    getOutamountmin(): number;
+    setOutamountmin(value: number): PostRaydiumCLMMRouteSwapResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostRaydiumCLMMRouteSwapResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostRaydiumCLMMRouteSwapResponse): PostRaydiumCLMMRouteSwapResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostRaydiumCLMMRouteSwapResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostRaydiumCLMMRouteSwapResponse;
+    static deserializeBinaryFromReader(message: PostRaydiumCLMMRouteSwapResponse, reader: jspb.BinaryReader): PostRaydiumCLMMRouteSwapResponse;
+}
+
+export namespace PostRaydiumCLMMRouteSwapResponse {
+    export type AsObject = {
+        transactionsList: Array<TransactionMessage.AsObject>,
+        outamount: number,
+        outamountmin: number,
     }
 }
 
@@ -3105,6 +3230,48 @@ export class GetRaydiumPoolsResponse extends jspb.Message {
 }
 
 export namespace GetRaydiumPoolsResponse {
+    export type AsObject = {
+        poolsList: Array<ProjectPool.AsObject>,
+    }
+}
+
+export class GetRaydiumCLMMPoolsRequest extends jspb.Message { 
+    getPairoraddress(): string;
+    setPairoraddress(value: string): GetRaydiumCLMMPoolsRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetRaydiumCLMMPoolsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetRaydiumCLMMPoolsRequest): GetRaydiumCLMMPoolsRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetRaydiumCLMMPoolsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetRaydiumCLMMPoolsRequest;
+    static deserializeBinaryFromReader(message: GetRaydiumCLMMPoolsRequest, reader: jspb.BinaryReader): GetRaydiumCLMMPoolsRequest;
+}
+
+export namespace GetRaydiumCLMMPoolsRequest {
+    export type AsObject = {
+        pairoraddress: string,
+    }
+}
+
+export class GetRaydiumCLMMPoolsResponse extends jspb.Message { 
+    clearPoolsList(): void;
+    getPoolsList(): Array<ProjectPool>;
+    setPoolsList(value: Array<ProjectPool>): GetRaydiumCLMMPoolsResponse;
+    addPools(value?: ProjectPool, index?: number): ProjectPool;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetRaydiumCLMMPoolsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetRaydiumCLMMPoolsResponse): GetRaydiumCLMMPoolsResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetRaydiumCLMMPoolsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetRaydiumCLMMPoolsResponse;
+    static deserializeBinaryFromReader(message: GetRaydiumCLMMPoolsResponse, reader: jspb.BinaryReader): GetRaydiumCLMMPoolsResponse;
+}
+
+export namespace GetRaydiumCLMMPoolsResponse {
     export type AsObject = {
         poolsList: Array<ProjectPool.AsObject>,
     }

@@ -1022,6 +1022,50 @@ function deserialize_api_GetQuotesStreamResponse(buffer_arg) {
   return api_pb.GetQuotesStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetRaydiumCLMMPoolsRequest(arg) {
+  if (!(arg instanceof api_pb.GetRaydiumCLMMPoolsRequest)) {
+    throw new Error('Expected argument of type api.GetRaydiumCLMMPoolsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetRaydiumCLMMPoolsRequest(buffer_arg) {
+  return api_pb.GetRaydiumCLMMPoolsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetRaydiumCLMMPoolsResponse(arg) {
+  if (!(arg instanceof api_pb.GetRaydiumCLMMPoolsResponse)) {
+    throw new Error('Expected argument of type api.GetRaydiumCLMMPoolsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetRaydiumCLMMPoolsResponse(buffer_arg) {
+  return api_pb.GetRaydiumCLMMPoolsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetRaydiumCLMMQuotesRequest(arg) {
+  if (!(arg instanceof api_pb.GetRaydiumCLMMQuotesRequest)) {
+    throw new Error('Expected argument of type api.GetRaydiumCLMMQuotesRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetRaydiumCLMMQuotesRequest(buffer_arg) {
+  return api_pb.GetRaydiumCLMMQuotesRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetRaydiumCLMMQuotesResponse(arg) {
+  if (!(arg instanceof api_pb.GetRaydiumCLMMQuotesResponse)) {
+    throw new Error('Expected argument of type api.GetRaydiumCLMMQuotesResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetRaydiumCLMMQuotesResponse(buffer_arg) {
+  return api_pb.GetRaydiumCLMMQuotesResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetRaydiumPoolsRequest(arg) {
   if (!(arg instanceof api_pb.GetRaydiumPoolsRequest)) {
     throw new Error('Expected argument of type api.GetRaydiumPoolsRequest');
@@ -1891,6 +1935,28 @@ function deserialize_api_PostPerpOrderResponse(buffer_arg) {
   return api_pb.PostPerpOrderResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostRaydiumCLMMRouteSwapRequest(arg) {
+  if (!(arg instanceof api_pb.PostRaydiumCLMMRouteSwapRequest)) {
+    throw new Error('Expected argument of type api.PostRaydiumCLMMRouteSwapRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostRaydiumCLMMRouteSwapRequest(buffer_arg) {
+  return api_pb.PostRaydiumCLMMRouteSwapRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_PostRaydiumCLMMRouteSwapResponse(arg) {
+  if (!(arg instanceof api_pb.PostRaydiumCLMMRouteSwapResponse)) {
+    throw new Error('Expected argument of type api.PostRaydiumCLMMRouteSwapResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostRaydiumCLMMRouteSwapResponse(buffer_arg) {
+  return api_pb.PostRaydiumCLMMRouteSwapResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostRaydiumCLMMSwapRequest(arg) {
   if (!(arg instanceof api_pb.PostRaydiumCLMMSwapRequest)) {
     throw new Error('Expected argument of type api.PostRaydiumCLMMSwapRequest');
@@ -2136,7 +2202,51 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 var ApiService = exports.ApiService = {
   // Raydium V2
-getRaydiumPools: {
+getRaydiumCLMMQuotes: {
+    path: '/api.Api/GetRaydiumCLMMQuotes',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetRaydiumCLMMQuotesRequest,
+    responseType: api_pb.GetRaydiumCLMMQuotesResponse,
+    requestSerialize: serialize_api_GetRaydiumCLMMQuotesRequest,
+    requestDeserialize: deserialize_api_GetRaydiumCLMMQuotesRequest,
+    responseSerialize: serialize_api_GetRaydiumCLMMQuotesResponse,
+    responseDeserialize: deserialize_api_GetRaydiumCLMMQuotesResponse,
+  },
+  getRaydiumCLMMPools: {
+    path: '/api.Api/GetRaydiumCLMMPools',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetRaydiumCLMMPoolsRequest,
+    responseType: api_pb.GetRaydiumCLMMPoolsResponse,
+    requestSerialize: serialize_api_GetRaydiumCLMMPoolsRequest,
+    requestDeserialize: deserialize_api_GetRaydiumCLMMPoolsRequest,
+    responseSerialize: serialize_api_GetRaydiumCLMMPoolsResponse,
+    responseDeserialize: deserialize_api_GetRaydiumCLMMPoolsResponse,
+  },
+  postRaydiumCLMMSwap: {
+    path: '/api.Api/PostRaydiumCLMMSwap',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostRaydiumCLMMSwapRequest,
+    responseType: api_pb.PostRaydiumCLMMSwapResponse,
+    requestSerialize: serialize_api_PostRaydiumCLMMSwapRequest,
+    requestDeserialize: deserialize_api_PostRaydiumCLMMSwapRequest,
+    responseSerialize: serialize_api_PostRaydiumCLMMSwapResponse,
+    responseDeserialize: deserialize_api_PostRaydiumCLMMSwapResponse,
+  },
+  postRaydiumCLMMRouteSwap: {
+    path: '/api.Api/PostRaydiumCLMMRouteSwap',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostRaydiumCLMMRouteSwapRequest,
+    responseType: api_pb.PostRaydiumCLMMRouteSwapResponse,
+    requestSerialize: serialize_api_PostRaydiumCLMMRouteSwapRequest,
+    requestDeserialize: deserialize_api_PostRaydiumCLMMRouteSwapRequest,
+    responseSerialize: serialize_api_PostRaydiumCLMMRouteSwapResponse,
+    responseDeserialize: deserialize_api_PostRaydiumCLMMRouteSwapResponse,
+  },
+  getRaydiumPools: {
     path: '/api.Api/GetRaydiumPools',
     requestStream: false,
     responseStream: false,
@@ -2179,17 +2289,6 @@ getRaydiumPools: {
     requestDeserialize: deserialize_api_PostRaydiumSwapRequest,
     responseSerialize: serialize_api_PostRaydiumSwapResponse,
     responseDeserialize: deserialize_api_PostRaydiumSwapResponse,
-  },
-  postRaydiumCLMMSwap: {
-    path: '/api.Api/PostRaydiumCLMMSwap',
-    requestStream: false,
-    responseStream: false,
-    requestType: api_pb.PostRaydiumCLMMSwapRequest,
-    responseType: api_pb.PostRaydiumCLMMSwapResponse,
-    requestSerialize: serialize_api_PostRaydiumCLMMSwapRequest,
-    requestDeserialize: deserialize_api_PostRaydiumCLMMSwapRequest,
-    responseSerialize: serialize_api_PostRaydiumCLMMSwapResponse,
-    responseDeserialize: deserialize_api_PostRaydiumCLMMSwapResponse,
   },
   postRaydiumRouteSwap: {
     path: '/api.Api/PostRaydiumRouteSwap',

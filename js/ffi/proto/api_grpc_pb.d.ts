@@ -13,11 +13,14 @@ import * as protoc_gen_openapiv2_options_annotations_pb from "./protoc-gen-opena
 import * as common_pb from "./common_pb";
 
 interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
+    getRaydiumCLMMQuotes: IApiService_IGetRaydiumCLMMQuotes;
+    getRaydiumCLMMPools: IApiService_IGetRaydiumCLMMPools;
+    postRaydiumCLMMSwap: IApiService_IPostRaydiumCLMMSwap;
+    postRaydiumCLMMRouteSwap: IApiService_IPostRaydiumCLMMRouteSwap;
     getRaydiumPools: IApiService_IGetRaydiumPools;
     getRaydiumQuotes: IApiService_IGetRaydiumQuotes;
     getRaydiumPrices: IApiService_IGetRaydiumPrices;
     postRaydiumSwap: IApiService_IPostRaydiumSwap;
-    postRaydiumCLMMSwap: IApiService_IPostRaydiumCLMMSwap;
     postRaydiumRouteSwap: IApiService_IPostRaydiumRouteSwap;
     getJupiterQuotes: IApiService_IGetJupiterQuotes;
     getJupiterPrices: IApiService_IGetJupiterPrices;
@@ -118,6 +121,42 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getPerpTradesStream: IApiService_IGetPerpTradesStream;
 }
 
+interface IApiService_IGetRaydiumCLMMQuotes extends grpc.MethodDefinition<api_pb.GetRaydiumCLMMQuotesRequest, api_pb.GetRaydiumCLMMQuotesResponse> {
+    path: "/api.Api/GetRaydiumCLMMQuotes";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetRaydiumCLMMQuotesRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetRaydiumCLMMQuotesRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetRaydiumCLMMQuotesResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetRaydiumCLMMQuotesResponse>;
+}
+interface IApiService_IGetRaydiumCLMMPools extends grpc.MethodDefinition<api_pb.GetRaydiumCLMMPoolsRequest, api_pb.GetRaydiumCLMMPoolsResponse> {
+    path: "/api.Api/GetRaydiumCLMMPools";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetRaydiumCLMMPoolsRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetRaydiumCLMMPoolsRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetRaydiumCLMMPoolsResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetRaydiumCLMMPoolsResponse>;
+}
+interface IApiService_IPostRaydiumCLMMSwap extends grpc.MethodDefinition<api_pb.PostRaydiumCLMMSwapRequest, api_pb.PostRaydiumCLMMSwapResponse> {
+    path: "/api.Api/PostRaydiumCLMMSwap";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostRaydiumCLMMSwapRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostRaydiumCLMMSwapRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostRaydiumCLMMSwapResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostRaydiumCLMMSwapResponse>;
+}
+interface IApiService_IPostRaydiumCLMMRouteSwap extends grpc.MethodDefinition<api_pb.PostRaydiumCLMMRouteSwapRequest, api_pb.PostRaydiumCLMMRouteSwapResponse> {
+    path: "/api.Api/PostRaydiumCLMMRouteSwap";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostRaydiumCLMMRouteSwapRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostRaydiumCLMMRouteSwapRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostRaydiumCLMMRouteSwapResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostRaydiumCLMMRouteSwapResponse>;
+}
 interface IApiService_IGetRaydiumPools extends grpc.MethodDefinition<api_pb.GetRaydiumPoolsRequest, api_pb.GetRaydiumPoolsResponse> {
     path: "/api.Api/GetRaydiumPools";
     requestStream: false;
@@ -153,15 +192,6 @@ interface IApiService_IPostRaydiumSwap extends grpc.MethodDefinition<api_pb.Post
     requestDeserialize: grpc.deserialize<api_pb.PostRaydiumSwapRequest>;
     responseSerialize: grpc.serialize<api_pb.PostRaydiumSwapResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostRaydiumSwapResponse>;
-}
-interface IApiService_IPostRaydiumCLMMSwap extends grpc.MethodDefinition<api_pb.PostRaydiumCLMMSwapRequest, api_pb.PostRaydiumCLMMSwapResponse> {
-    path: "/api.Api/PostRaydiumCLMMSwap";
-    requestStream: false;
-    responseStream: false;
-    requestSerialize: grpc.serialize<api_pb.PostRaydiumCLMMSwapRequest>;
-    requestDeserialize: grpc.deserialize<api_pb.PostRaydiumCLMMSwapRequest>;
-    responseSerialize: grpc.serialize<api_pb.PostRaydiumCLMMSwapResponse>;
-    responseDeserialize: grpc.deserialize<api_pb.PostRaydiumCLMMSwapResponse>;
 }
 interface IApiService_IPostRaydiumRouteSwap extends grpc.MethodDefinition<api_pb.PostRaydiumRouteSwapRequest, api_pb.PostRaydiumRouteSwapResponse> {
     path: "/api.Api/PostRaydiumRouteSwap";
@@ -1049,11 +1079,14 @@ interface IApiService_IGetPerpTradesStream extends grpc.MethodDefinition<api_pb.
 export const ApiService: IApiService;
 
 export interface IApiServer extends grpc.UntypedServiceImplementation {
+    getRaydiumCLMMQuotes: grpc.handleUnaryCall<api_pb.GetRaydiumCLMMQuotesRequest, api_pb.GetRaydiumCLMMQuotesResponse>;
+    getRaydiumCLMMPools: grpc.handleUnaryCall<api_pb.GetRaydiumCLMMPoolsRequest, api_pb.GetRaydiumCLMMPoolsResponse>;
+    postRaydiumCLMMSwap: grpc.handleUnaryCall<api_pb.PostRaydiumCLMMSwapRequest, api_pb.PostRaydiumCLMMSwapResponse>;
+    postRaydiumCLMMRouteSwap: grpc.handleUnaryCall<api_pb.PostRaydiumCLMMRouteSwapRequest, api_pb.PostRaydiumCLMMRouteSwapResponse>;
     getRaydiumPools: grpc.handleUnaryCall<api_pb.GetRaydiumPoolsRequest, api_pb.GetRaydiumPoolsResponse>;
     getRaydiumQuotes: grpc.handleUnaryCall<api_pb.GetRaydiumQuotesRequest, api_pb.GetRaydiumQuotesResponse>;
     getRaydiumPrices: grpc.handleUnaryCall<api_pb.GetRaydiumPricesRequest, api_pb.GetRaydiumPricesResponse>;
     postRaydiumSwap: grpc.handleUnaryCall<api_pb.PostRaydiumSwapRequest, api_pb.PostRaydiumSwapResponse>;
-    postRaydiumCLMMSwap: grpc.handleUnaryCall<api_pb.PostRaydiumCLMMSwapRequest, api_pb.PostRaydiumCLMMSwapResponse>;
     postRaydiumRouteSwap: grpc.handleUnaryCall<api_pb.PostRaydiumRouteSwapRequest, api_pb.PostRaydiumRouteSwapResponse>;
     getJupiterQuotes: grpc.handleUnaryCall<api_pb.GetJupiterQuotesRequest, api_pb.GetJupiterQuotesResponse>;
     getJupiterPrices: grpc.handleUnaryCall<api_pb.GetJupiterPricesRequest, api_pb.GetJupiterPricesResponse>;
@@ -1155,6 +1188,18 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
 }
 
 export interface IApiClient {
+    getRaydiumCLMMQuotes(request: api_pb.GetRaydiumCLMMQuotesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMQuotesResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumCLMMQuotes(request: api_pb.GetRaydiumCLMMQuotesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMQuotesResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumCLMMQuotes(request: api_pb.GetRaydiumCLMMQuotesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMQuotesResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumCLMMPools(request: api_pb.GetRaydiumCLMMPoolsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMPoolsResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumCLMMPools(request: api_pb.GetRaydiumCLMMPoolsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMPoolsResponse) => void): grpc.ClientUnaryCall;
+    getRaydiumCLMMPools(request: api_pb.GetRaydiumCLMMPoolsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMPoolsResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumCLMMRouteSwap(request: api_pb.PostRaydiumCLMMRouteSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumCLMMRouteSwap(request: api_pb.PostRaydiumCLMMRouteSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    postRaydiumCLMMRouteSwap(request: api_pb.PostRaydiumCLMMRouteSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMRouteSwapResponse) => void): grpc.ClientUnaryCall;
     getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
     getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
     getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
@@ -1167,9 +1212,6 @@ export interface IApiClient {
     postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
     postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
     postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
-    postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
-    postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
-    postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
     postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
     postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
     postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
@@ -1453,6 +1495,18 @@ export interface IApiClient {
 
 export class ApiClient extends grpc.Client implements IApiClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: Partial<grpc.ClientOptions>);
+    public getRaydiumCLMMQuotes(request: api_pb.GetRaydiumCLMMQuotesRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumCLMMQuotes(request: api_pb.GetRaydiumCLMMQuotesRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumCLMMQuotes(request: api_pb.GetRaydiumCLMMQuotesRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMQuotesResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumCLMMPools(request: api_pb.GetRaydiumCLMMPoolsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMPoolsResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumCLMMPools(request: api_pb.GetRaydiumCLMMPoolsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMPoolsResponse) => void): grpc.ClientUnaryCall;
+    public getRaydiumCLMMPools(request: api_pb.GetRaydiumCLMMPoolsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumCLMMPoolsResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumCLMMRouteSwap(request: api_pb.PostRaydiumCLMMRouteSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumCLMMRouteSwap(request: api_pb.PostRaydiumCLMMRouteSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMRouteSwapResponse) => void): grpc.ClientUnaryCall;
+    public postRaydiumCLMMRouteSwap(request: api_pb.PostRaydiumCLMMRouteSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMRouteSwapResponse) => void): grpc.ClientUnaryCall;
     public getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
     public getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
     public getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
@@ -1465,9 +1519,6 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
     public postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
     public postRaydiumSwap(request: api_pb.PostRaydiumSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumSwapResponse) => void): grpc.ClientUnaryCall;
-    public postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
-    public postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
-    public postRaydiumCLMMSwap(request: api_pb.PostRaydiumCLMMSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumCLMMSwapResponse) => void): grpc.ClientUnaryCall;
     public postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
     public postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
     public postRaydiumRouteSwap(request: api_pb.PostRaydiumRouteSwapRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostRaydiumRouteSwapResponse) => void): grpc.ClientUnaryCall;
