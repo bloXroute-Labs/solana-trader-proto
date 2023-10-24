@@ -3269,8 +3269,8 @@
     },
     "/api/v2/raydium/clmm-quotes": {
       "get": {
-        "summary": "Raydium Quotes",
-        "description": "Returns quotes from Raydium",
+        "summary": "Raydium CLMM Quotes",
+        "description": "Returns quotes from Raydium CLMM pools",
         "operationId": "Api_GetRaydiumCLMMQuotes",
         "responses": {
           "200": {
