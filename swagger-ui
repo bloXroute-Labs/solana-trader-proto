@@ -3422,6 +3422,76 @@
           "Raydium V2"
         ]
       }
+    },
+    "/api/v2/submit": {
+      "post": {
+        "summary": "Transaction submit",
+        "description": "Submits a signed transaction",
+        "operationId": "Api_PostSubmitV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
+    "/api/v2/submit-batch": {
+      "post": {
+        "summary": "Transaction batch submit",
+        "description": "Submits a batch of signed transactions",
+        "operationId": "Api_PostSubmitBatchV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitBatchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitBatchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
     }
   },
   "definitions": {
