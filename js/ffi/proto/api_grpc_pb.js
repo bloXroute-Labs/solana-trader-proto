@@ -2113,6 +2113,28 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 
 var ApiService = exports.ApiService = {
+  postSubmitV2: {
+    path: '/api.Api/PostSubmitV2',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostSubmitRequest,
+    responseType: api_pb.PostSubmitResponse,
+    requestSerialize: serialize_api_PostSubmitRequest,
+    requestDeserialize: deserialize_api_PostSubmitRequest,
+    responseSerialize: serialize_api_PostSubmitResponse,
+    responseDeserialize: deserialize_api_PostSubmitResponse,
+  },
+  postSubmitBatchV2: {
+    path: '/api.Api/PostSubmitBatchV2',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.PostSubmitBatchRequest,
+    responseType: api_pb.PostSubmitBatchResponse,
+    requestSerialize: serialize_api_PostSubmitBatchRequest,
+    requestDeserialize: deserialize_api_PostSubmitBatchRequest,
+    responseSerialize: serialize_api_PostSubmitBatchResponse,
+    responseDeserialize: deserialize_api_PostSubmitBatchResponse,
+  },
   // Raydium V2
 getRaydiumPools: {
     path: '/api.Api/GetRaydiumPools',

@@ -2039,6 +2039,40 @@ class OrderV2(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def post_submit_v2(
+        self,
+        post_submit_request: "PostSubmitRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitV2",
+            post_submit_request,
+            PostSubmitResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_submit_batch_v2(
+        self,
+        post_submit_batch_request: "PostSubmitBatchRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitBatchResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitBatchV2",
+            post_submit_batch_request,
+            PostSubmitBatchResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_raydium_pools(
         self,
         get_raydium_pools_request: "GetRaydiumPoolsRequest",
@@ -3790,6 +3824,16 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+    async def post_submit_v2(
+        self, post_submit_request: "PostSubmitRequest"
+    ) -> "PostSubmitResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_submit_batch_v2(
+        self, post_submit_batch_request: "PostSubmitBatchRequest"
+    ) -> "PostSubmitBatchResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_raydium_pools(
         self, get_raydium_pools_request: "GetRaydiumPoolsRequest"
     ) -> "GetRaydiumPoolsResponse":
@@ -4316,6 +4360,21 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetPerpTradesStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPerpTradesStreamResponse()
+
+    async def __rpc_post_submit_v2(
+        self, stream: "grpclib.server.Stream[PostSubmitRequest, PostSubmitResponse]"
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_submit_batch_v2(
+        self,
+        stream: "grpclib.server.Stream[PostSubmitBatchRequest, PostSubmitBatchResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_batch_v2(request)
+        await stream.send_message(response)
 
     async def __rpc_get_raydium_pools(
         self,
@@ -5155,6 +5214,18 @@ class ApiBase(ServiceBase):
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
+            "/api.Api/PostSubmitV2": grpclib.const.Handler(
+                self.__rpc_post_submit_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitRequest,
+                PostSubmitResponse,
+            ),
+            "/api.Api/PostSubmitBatchV2": grpclib.const.Handler(
+                self.__rpc_post_submit_batch_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitBatchRequest,
+                PostSubmitBatchResponse,
+            ),
             "/api.Api/GetRaydiumPools": grpclib.const.Handler(
                 self.__rpc_get_raydium_pools,
                 grpclib.const.Cardinality.UNARY_UNARY,

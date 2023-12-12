@@ -51,6 +51,30 @@ service Api {
     }
   };
 
+  rpc PostSubmitV2(PostSubmitRequest) returns (PostSubmitResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/submit"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits a signed transaction";
+      summary: "Transaction submit";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
+  rpc PostSubmitBatchV2(PostSubmitBatchRequest) returns (PostSubmitBatchResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/submit-batch"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits a batch of signed transactions";
+      summary: "Transaction batch submit";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
   // Raydium V2
   rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
     option (google.api.http) = {
