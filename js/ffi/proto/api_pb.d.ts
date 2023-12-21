@@ -1505,26 +1505,6 @@ export namespace PostSubmitBatchRequest {
     }
 }
 
-export class PostSubmitResponse extends jspb.Message { 
-    getSignature(): string;
-    setSignature(value: string): PostSubmitResponse;
-
-    serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostSubmitResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: PostSubmitResponse): PostSubmitResponse.AsObject;
-    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
-    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostSubmitResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostSubmitResponse;
-    static deserializeBinaryFromReader(message: PostSubmitResponse, reader: jspb.BinaryReader): PostSubmitResponse;
-}
-
-export namespace PostSubmitResponse {
-    export type AsObject = {
-        signature: string,
-    }
-}
-
 export class PostSubmitBatchResponseEntry extends jspb.Message { 
     getSignature(): string;
     setSignature(value: string): PostSubmitBatchResponseEntry;
@@ -1570,6 +1550,26 @@ export class PostSubmitBatchResponse extends jspb.Message {
 export namespace PostSubmitBatchResponse {
     export type AsObject = {
         transactionsList: Array<PostSubmitBatchResponseEntry.AsObject>,
+    }
+}
+
+export class PostSubmitResponse extends jspb.Message { 
+    getSignature(): string;
+    setSignature(value: string): PostSubmitResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostSubmitResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostSubmitResponse): PostSubmitResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostSubmitResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostSubmitResponse;
+    static deserializeBinaryFromReader(message: PostSubmitResponse, reader: jspb.BinaryReader): PostSubmitResponse;
+}
+
+export namespace PostSubmitResponse {
+    export type AsObject = {
+        signature: string,
     }
 }
 
@@ -3119,6 +3119,225 @@ export class GetRaydiumPoolsResponse extends jspb.Message {
 export namespace GetRaydiumPoolsResponse {
     export type AsObject = {
         poolsList: Array<ProjectPool.AsObject>,
+    }
+}
+
+export class GetTransactionRequest extends jspb.Message { 
+    getMaxsupportedtransactionversion(): number;
+    setMaxsupportedtransactionversion(value: number): GetTransactionRequest;
+    getSignature(): string;
+    setSignature(value: string): GetTransactionRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTransactionRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTransactionRequest): GetTransactionRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTransactionRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTransactionRequest;
+    static deserializeBinaryFromReader(message: GetTransactionRequest, reader: jspb.BinaryReader): GetTransactionRequest;
+}
+
+export namespace GetTransactionRequest {
+    export type AsObject = {
+        maxsupportedtransactionversion: number,
+        signature: string,
+    }
+}
+
+export class GetTransactionResponse extends jspb.Message { 
+    getStatus(): string;
+    setStatus(value: string): GetTransactionResponse;
+
+    hasMetadata(): boolean;
+    clearMetadata(): void;
+    getMetadata(): TransactionMeta | undefined;
+    setMetadata(value?: TransactionMeta): GetTransactionResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTransactionResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTransactionResponse): GetTransactionResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTransactionResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTransactionResponse;
+    static deserializeBinaryFromReader(message: GetTransactionResponse, reader: jspb.BinaryReader): GetTransactionResponse;
+}
+
+export namespace GetTransactionResponse {
+    export type AsObject = {
+        status: string,
+        metadata?: TransactionMeta.AsObject,
+    }
+}
+
+export class Instruction extends jspb.Message { 
+    getProgramIdIndex(): number;
+    setProgramIdIndex(value: number): Instruction;
+    clearAccountsList(): void;
+    getAccountsList(): Array<number>;
+    setAccountsList(value: Array<number>): Instruction;
+    addAccounts(value: number, index?: number): number;
+    getData(): string;
+    setData(value: string): Instruction;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): Instruction.AsObject;
+    static toObject(includeInstance: boolean, msg: Instruction): Instruction.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: Instruction, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): Instruction;
+    static deserializeBinaryFromReader(message: Instruction, reader: jspb.BinaryReader): Instruction;
+}
+
+export namespace Instruction {
+    export type AsObject = {
+        programIdIndex: number,
+        accountsList: Array<number>,
+        data: string,
+    }
+}
+
+export class TransactionMeta extends jspb.Message { 
+    getErr(): string;
+    setErr(value: string): TransactionMeta;
+    getErrored(): boolean;
+    setErrored(value: boolean): TransactionMeta;
+    getFee(): number;
+    setFee(value: number): TransactionMeta;
+    clearPreBalancesList(): void;
+    getPreBalancesList(): Array<number>;
+    setPreBalancesList(value: Array<number>): TransactionMeta;
+    addPreBalances(value: number, index?: number): number;
+    clearPostBalancesList(): void;
+    getPostBalancesList(): Array<number>;
+    setPostBalancesList(value: Array<number>): TransactionMeta;
+    addPostBalances(value: number, index?: number): number;
+    clearInnerInstructionsList(): void;
+    getInnerInstructionsList(): Array<TransactionMetaInnerInstruction>;
+    setInnerInstructionsList(value: Array<TransactionMetaInnerInstruction>): TransactionMeta;
+    addInnerInstructions(value?: TransactionMetaInnerInstruction, index?: number): TransactionMetaInnerInstruction;
+    clearLogMessagesList(): void;
+    getLogMessagesList(): Array<string>;
+    setLogMessagesList(value: Array<string>): TransactionMeta;
+    addLogMessages(value: string, index?: number): string;
+    clearPreTokenBalancesList(): void;
+    getPreTokenBalancesList(): Array<TransactionMetaTokenBalance>;
+    setPreTokenBalancesList(value: Array<TransactionMetaTokenBalance>): TransactionMeta;
+    addPreTokenBalances(value?: TransactionMetaTokenBalance, index?: number): TransactionMetaTokenBalance;
+    clearPostTokenBalancesList(): void;
+    getPostTokenBalancesList(): Array<TransactionMetaTokenBalance>;
+    setPostTokenBalancesList(value: Array<TransactionMetaTokenBalance>): TransactionMeta;
+    addPostTokenBalances(value?: TransactionMetaTokenBalance, index?: number): TransactionMetaTokenBalance;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): TransactionMeta.AsObject;
+    static toObject(includeInstance: boolean, msg: TransactionMeta): TransactionMeta.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: TransactionMeta, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TransactionMeta;
+    static deserializeBinaryFromReader(message: TransactionMeta, reader: jspb.BinaryReader): TransactionMeta;
+}
+
+export namespace TransactionMeta {
+    export type AsObject = {
+        err: string,
+        errored: boolean,
+        fee: number,
+        preBalancesList: Array<number>,
+        postBalancesList: Array<number>,
+        innerInstructionsList: Array<TransactionMetaInnerInstruction.AsObject>,
+        logMessagesList: Array<string>,
+        preTokenBalancesList: Array<TransactionMetaTokenBalance.AsObject>,
+        postTokenBalancesList: Array<TransactionMetaTokenBalance.AsObject>,
+    }
+}
+
+export class TransactionMetaInnerInstruction extends jspb.Message { 
+    getIndex(): number;
+    setIndex(value: number): TransactionMetaInnerInstruction;
+    clearInstructionsList(): void;
+    getInstructionsList(): Array<Instruction>;
+    setInstructionsList(value: Array<Instruction>): TransactionMetaInnerInstruction;
+    addInstructions(value?: Instruction, index?: number): Instruction;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): TransactionMetaInnerInstruction.AsObject;
+    static toObject(includeInstance: boolean, msg: TransactionMetaInnerInstruction): TransactionMetaInnerInstruction.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: TransactionMetaInnerInstruction, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TransactionMetaInnerInstruction;
+    static deserializeBinaryFromReader(message: TransactionMetaInnerInstruction, reader: jspb.BinaryReader): TransactionMetaInnerInstruction;
+}
+
+export namespace TransactionMetaInnerInstruction {
+    export type AsObject = {
+        index: number,
+        instructionsList: Array<Instruction.AsObject>,
+    }
+}
+
+export class TransactionMetaTokenBalance extends jspb.Message { 
+    getAccountindex(): number;
+    setAccountindex(value: number): TransactionMetaTokenBalance;
+    getMint(): string;
+    setMint(value: string): TransactionMetaTokenBalance;
+
+    hasUiTokenAmount(): boolean;
+    clearUiTokenAmount(): void;
+    getUiTokenAmount(): UITokenAmount | undefined;
+    setUiTokenAmount(value?: UITokenAmount): TransactionMetaTokenBalance;
+    getOwner(): string;
+    setOwner(value: string): TransactionMetaTokenBalance;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): TransactionMetaTokenBalance.AsObject;
+    static toObject(includeInstance: boolean, msg: TransactionMetaTokenBalance): TransactionMetaTokenBalance.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: TransactionMetaTokenBalance, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TransactionMetaTokenBalance;
+    static deserializeBinaryFromReader(message: TransactionMetaTokenBalance, reader: jspb.BinaryReader): TransactionMetaTokenBalance;
+}
+
+export namespace TransactionMetaTokenBalance {
+    export type AsObject = {
+        accountindex: number,
+        mint: string,
+        uiTokenAmount?: UITokenAmount.AsObject,
+        owner: string,
+    }
+}
+
+export class UITokenAmount extends jspb.Message { 
+    getUiAmount(): number;
+    setUiAmount(value: number): UITokenAmount;
+    getDecimals(): number;
+    setDecimals(value: number): UITokenAmount;
+    getAmount(): string;
+    setAmount(value: string): UITokenAmount;
+    getUiAmountString(): string;
+    setUiAmountString(value: string): UITokenAmount;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): UITokenAmount.AsObject;
+    static toObject(includeInstance: boolean, msg: UITokenAmount): UITokenAmount.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: UITokenAmount, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): UITokenAmount;
+    static deserializeBinaryFromReader(message: UITokenAmount, reader: jspb.BinaryReader): UITokenAmount;
+}
+
+export namespace UITokenAmount {
+    export type AsObject = {
+        uiAmount: number,
+        decimals: number,
+        amount: string,
+        uiAmountString: string,
     }
 }
 
