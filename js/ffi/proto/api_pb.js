@@ -2399,7 +2399,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.GetNewRaydiumPoolsResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.GetNewRaydiumPoolsResponse.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.api.GetNewRaydiumPoolsResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -28810,13 +28810,6 @@ proto.api.GetNewRaydiumPoolsRequest.serializeBinaryToWriter = function(message, 
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.api.GetNewRaydiumPoolsResponse.repeatedFields_ = [2];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -28849,8 +28842,7 @@ proto.api.GetNewRaydiumPoolsResponse.prototype.toObject = function(opt_includeIn
 proto.api.GetNewRaydiumPoolsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    poolsList: jspb.Message.toObjectList(msg.getPoolsList(),
-    proto.api.ProjectPool.toObject, includeInstance)
+    pools: (f = msg.getPools()) && proto.api.ProjectPool.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -28894,7 +28886,7 @@ proto.api.GetNewRaydiumPoolsResponse.deserializeBinaryFromReader = function(msg,
     case 2:
       var value = new proto.api.ProjectPool;
       reader.readMessage(value,proto.api.ProjectPool.deserializeBinaryFromReader);
-      msg.addPools(value);
+      msg.setPools(value);
       break;
     default:
       reader.skipField();
@@ -28932,9 +28924,9 @@ proto.api.GetNewRaydiumPoolsResponse.serializeBinaryToWriter = function(message,
       f
     );
   }
-  f = message.getPoolsList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
+  f = message.getPools();
+  if (f != null) {
+    writer.writeMessage(
       2,
       f,
       proto.api.ProjectPool.serializeBinaryToWriter
@@ -28962,40 +28954,39 @@ proto.api.GetNewRaydiumPoolsResponse.prototype.setSlot = function(value) {
 
 
 /**
- * repeated ProjectPool pools = 2;
- * @return {!Array<!proto.api.ProjectPool>}
+ * optional ProjectPool pools = 2;
+ * @return {?proto.api.ProjectPool}
  */
-proto.api.GetNewRaydiumPoolsResponse.prototype.getPoolsList = function() {
-  return /** @type{!Array<!proto.api.ProjectPool>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.api.ProjectPool, 2));
+proto.api.GetNewRaydiumPoolsResponse.prototype.getPools = function() {
+  return /** @type{?proto.api.ProjectPool} */ (
+    jspb.Message.getWrapperField(this, proto.api.ProjectPool, 2));
 };
 
 
 /**
- * @param {!Array<!proto.api.ProjectPool>} value
+ * @param {?proto.api.ProjectPool|undefined} value
  * @return {!proto.api.GetNewRaydiumPoolsResponse} returns this
 */
-proto.api.GetNewRaydiumPoolsResponse.prototype.setPoolsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 2, value);
+proto.api.GetNewRaydiumPoolsResponse.prototype.setPools = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
 };
 
 
 /**
- * @param {!proto.api.ProjectPool=} opt_value
- * @param {number=} opt_index
- * @return {!proto.api.ProjectPool}
- */
-proto.api.GetNewRaydiumPoolsResponse.prototype.addPools = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.api.ProjectPool, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
+ * Clears the message field making it undefined.
  * @return {!proto.api.GetNewRaydiumPoolsResponse} returns this
  */
-proto.api.GetNewRaydiumPoolsResponse.prototype.clearPoolsList = function() {
-  return this.setPoolsList([]);
+proto.api.GetNewRaydiumPoolsResponse.prototype.clearPools = function() {
+  return this.setPools(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetNewRaydiumPoolsResponse.prototype.hasPools = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 

@@ -842,7 +842,7 @@ class GetNewRaydiumPoolsRequest(betterproto.Message):
 @dataclass
 class GetNewRaydiumPoolsResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
-    pools: List["ProjectPool"] = betterproto.message_field(2)
+    pools: "ProjectPool" = betterproto.message_field(2)
 
 
 @dataclass

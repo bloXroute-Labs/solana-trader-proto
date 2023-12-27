@@ -3028,10 +3028,11 @@ export namespace GetNewRaydiumPoolsRequest {
 export class GetNewRaydiumPoolsResponse extends jspb.Message { 
     getSlot(): number;
     setSlot(value: number): GetNewRaydiumPoolsResponse;
-    clearPoolsList(): void;
-    getPoolsList(): Array<ProjectPool>;
-    setPoolsList(value: Array<ProjectPool>): GetNewRaydiumPoolsResponse;
-    addPools(value?: ProjectPool, index?: number): ProjectPool;
+
+    hasPools(): boolean;
+    clearPools(): void;
+    getPools(): ProjectPool | undefined;
+    setPools(value?: ProjectPool): GetNewRaydiumPoolsResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetNewRaydiumPoolsResponse.AsObject;
@@ -3046,7 +3047,7 @@ export class GetNewRaydiumPoolsResponse extends jspb.Message {
 export namespace GetNewRaydiumPoolsResponse {
     export type AsObject = {
         slot: number,
-        poolsList: Array<ProjectPool.AsObject>,
+        pools?: ProjectPool.AsObject,
     }
 }
 
