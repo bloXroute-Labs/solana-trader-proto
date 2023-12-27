@@ -1907,6 +1907,14 @@ message GetPoolsResponse {
   repeated ProjectPools projects = 1;
 }
 
+message GetNewRaydiumPoolsRequest {
+}
+
+message GetNewRaydiumPoolsResponse {
+  int64 slot = 1;
+  repeated ProjectPool pools = 2;
+}
+
 message GetRaydiumPoolsRequest {
   string pairOrAddress = 1;
 }
