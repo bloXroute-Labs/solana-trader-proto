@@ -1912,7 +1912,7 @@ message GetNewRaydiumPoolsRequest {
 
 message GetNewRaydiumPoolsResponse {
   int64 slot = 1;
-  ProjectPool pools = 2;
+  ProjectPool pool = 2;
 }
 
 message GetRaydiumPoolsRequest {
