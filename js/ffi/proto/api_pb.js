@@ -28842,7 +28842,7 @@ proto.api.GetNewRaydiumPoolsResponse.prototype.toObject = function(opt_includeIn
 proto.api.GetNewRaydiumPoolsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    pools: (f = msg.getPools()) && proto.api.ProjectPool.toObject(includeInstance, f)
+    pool: (f = msg.getPool()) && proto.api.ProjectPool.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -28886,7 +28886,7 @@ proto.api.GetNewRaydiumPoolsResponse.deserializeBinaryFromReader = function(msg,
     case 2:
       var value = new proto.api.ProjectPool;
       reader.readMessage(value,proto.api.ProjectPool.deserializeBinaryFromReader);
-      msg.setPools(value);
+      msg.setPool(value);
       break;
     default:
       reader.skipField();
@@ -28924,7 +28924,7 @@ proto.api.GetNewRaydiumPoolsResponse.serializeBinaryToWriter = function(message,
       f
     );
   }
-  f = message.getPools();
+  f = message.getPool();
   if (f != null) {
     writer.writeMessage(
       2,
@@ -28954,10 +28954,10 @@ proto.api.GetNewRaydiumPoolsResponse.prototype.setSlot = function(value) {
 
 
 /**
- * optional ProjectPool pools = 2;
+ * optional ProjectPool pool = 2;
  * @return {?proto.api.ProjectPool}
  */
-proto.api.GetNewRaydiumPoolsResponse.prototype.getPools = function() {
+proto.api.GetNewRaydiumPoolsResponse.prototype.getPool = function() {
   return /** @type{?proto.api.ProjectPool} */ (
     jspb.Message.getWrapperField(this, proto.api.ProjectPool, 2));
 };
@@ -28967,7 +28967,7 @@ proto.api.GetNewRaydiumPoolsResponse.prototype.getPools = function() {
  * @param {?proto.api.ProjectPool|undefined} value
  * @return {!proto.api.GetNewRaydiumPoolsResponse} returns this
 */
-proto.api.GetNewRaydiumPoolsResponse.prototype.setPools = function(value) {
+proto.api.GetNewRaydiumPoolsResponse.prototype.setPool = function(value) {
   return jspb.Message.setWrapperField(this, 2, value);
 };
 
@@ -28976,8 +28976,8 @@ proto.api.GetNewRaydiumPoolsResponse.prototype.setPools = function(value) {
  * Clears the message field making it undefined.
  * @return {!proto.api.GetNewRaydiumPoolsResponse} returns this
  */
-proto.api.GetNewRaydiumPoolsResponse.prototype.clearPools = function() {
-  return this.setPools(undefined);
+proto.api.GetNewRaydiumPoolsResponse.prototype.clearPool = function() {
+  return this.setPool(undefined);
 };
 
 
@@ -28985,7 +28985,7 @@ proto.api.GetNewRaydiumPoolsResponse.prototype.clearPools = function() {
  * Returns whether this field is set.
  * @return {boolean}
  */
-proto.api.GetNewRaydiumPoolsResponse.prototype.hasPools = function() {
+proto.api.GetNewRaydiumPoolsResponse.prototype.hasPool = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 

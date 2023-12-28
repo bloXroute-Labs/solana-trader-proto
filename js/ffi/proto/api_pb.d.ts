@@ -3029,10 +3029,10 @@ export class GetNewRaydiumPoolsResponse extends jspb.Message {
     getSlot(): number;
     setSlot(value: number): GetNewRaydiumPoolsResponse;
 
-    hasPools(): boolean;
-    clearPools(): void;
-    getPools(): ProjectPool | undefined;
-    setPools(value?: ProjectPool): GetNewRaydiumPoolsResponse;
+    hasPool(): boolean;
+    clearPool(): void;
+    getPool(): ProjectPool | undefined;
+    setPool(value?: ProjectPool): GetNewRaydiumPoolsResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetNewRaydiumPoolsResponse.AsObject;
@@ -3047,7 +3047,7 @@ export class GetNewRaydiumPoolsResponse extends jspb.Message {
 export namespace GetNewRaydiumPoolsResponse {
     export type AsObject = {
         slot: number,
-        pools?: ProjectPool.AsObject,
+        pool?: ProjectPool.AsObject,
     }
 }
 
