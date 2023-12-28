@@ -3937,6 +3937,18 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_new_raydium_pools_stream(
+        self,
+    ) -> AsyncGenerator[GetNewRaydiumPoolsResponse, None]:
+        request = GetNewRaydiumPoolsRequest()
+
+        async for response in self._unary_stream(
+            "/api.Api/GetNewRaydiumPoolsStream",
+            request,
+            GetNewRaydiumPoolsResponse,
+        ):
+            yield response
+
     async def get_swaps_stream(
         self,
         *,

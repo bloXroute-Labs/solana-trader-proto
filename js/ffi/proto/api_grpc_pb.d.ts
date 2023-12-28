@@ -114,6 +114,7 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getQuotesStream: IApiService_IGetQuotesStream;
     getPoolReservesStream: IApiService_IGetPoolReservesStream;
     getPricesStream: IApiService_IGetPricesStream;
+    getNewRaydiumPoolsStream: IApiService_IGetNewRaydiumPoolsStream;
     getSwapsStream: IApiService_IGetSwapsStream;
     getPerpOrderbooksStream: IApiService_IGetPerpOrderbooksStream;
     getPerpTradesStream: IApiService_IGetPerpTradesStream;
@@ -1028,6 +1029,15 @@ interface IApiService_IGetPricesStream extends grpc.MethodDefinition<api_pb.GetP
     responseSerialize: grpc.serialize<api_pb.GetPricesStreamResponse>;
     responseDeserialize: grpc.deserialize<api_pb.GetPricesStreamResponse>;
 }
+interface IApiService_IGetNewRaydiumPoolsStream extends grpc.MethodDefinition<api_pb.GetNewRaydiumPoolsRequest, api_pb.GetNewRaydiumPoolsResponse> {
+    path: "/api.Api/GetNewRaydiumPoolsStream";
+    requestStream: false;
+    responseStream: true;
+    requestSerialize: grpc.serialize<api_pb.GetNewRaydiumPoolsRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetNewRaydiumPoolsRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetNewRaydiumPoolsResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetNewRaydiumPoolsResponse>;
+}
 interface IApiService_IGetSwapsStream extends grpc.MethodDefinition<api_pb.GetSwapsStreamRequest, api_pb.GetSwapsStreamResponse> {
     path: "/api.Api/GetSwapsStream";
     requestStream: false;
@@ -1160,6 +1170,7 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
     getQuotesStream: grpc.handleServerStreamingCall<api_pb.GetQuotesStreamRequest, api_pb.GetQuotesStreamResponse>;
     getPoolReservesStream: grpc.handleServerStreamingCall<api_pb.GetPoolReservesStreamRequest, api_pb.GetPoolReservesStreamResponse>;
     getPricesStream: grpc.handleServerStreamingCall<api_pb.GetPricesStreamRequest, api_pb.GetPricesStreamResponse>;
+    getNewRaydiumPoolsStream: grpc.handleServerStreamingCall<api_pb.GetNewRaydiumPoolsRequest, api_pb.GetNewRaydiumPoolsResponse>;
     getSwapsStream: grpc.handleServerStreamingCall<api_pb.GetSwapsStreamRequest, api_pb.GetSwapsStreamResponse>;
     getPerpOrderbooksStream: grpc.handleServerStreamingCall<api_pb.GetPerpOrderbooksRequest, api_pb.GetPerpOrderbooksStreamResponse>;
     getPerpTradesStream: grpc.handleServerStreamingCall<api_pb.GetPerpTradesStreamRequest, api_pb.GetPerpTradesStreamResponse>;
@@ -1457,6 +1468,8 @@ export interface IApiClient {
     getPoolReservesStream(request: api_pb.GetPoolReservesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPoolReservesStreamResponse>;
     getPricesStream(request: api_pb.GetPricesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPricesStreamResponse>;
     getPricesStream(request: api_pb.GetPricesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPricesStreamResponse>;
+    getNewRaydiumPoolsStream(request: api_pb.GetNewRaydiumPoolsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetNewRaydiumPoolsResponse>;
+    getNewRaydiumPoolsStream(request: api_pb.GetNewRaydiumPoolsRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetNewRaydiumPoolsResponse>;
     getSwapsStream(request: api_pb.GetSwapsStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
     getSwapsStream(request: api_pb.GetSwapsStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
     getPerpOrderbooksStream(request: api_pb.GetPerpOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPerpOrderbooksStreamResponse>;
@@ -1758,6 +1771,8 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public getPoolReservesStream(request: api_pb.GetPoolReservesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPoolReservesStreamResponse>;
     public getPricesStream(request: api_pb.GetPricesStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPricesStreamResponse>;
     public getPricesStream(request: api_pb.GetPricesStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPricesStreamResponse>;
+    public getNewRaydiumPoolsStream(request: api_pb.GetNewRaydiumPoolsRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetNewRaydiumPoolsResponse>;
+    public getNewRaydiumPoolsStream(request: api_pb.GetNewRaydiumPoolsRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetNewRaydiumPoolsResponse>;
     public getSwapsStream(request: api_pb.GetSwapsStreamRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
     public getSwapsStream(request: api_pb.GetSwapsStreamRequest, metadata?: grpc.Metadata, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetSwapsStreamResponse>;
     public getPerpOrderbooksStream(request: api_pb.GetPerpOrderbooksRequest, options?: Partial<grpc.CallOptions>): grpc.ClientReadableStream<api_pb.GetPerpOrderbooksStreamResponse>;
