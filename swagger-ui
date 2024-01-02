@@ -4286,6 +4286,18 @@
         }
       }
     },
+    "apiGetNewRaydiumPoolsResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "pool": {
+          "$ref": "#/definitions/apiProjectPool"
+        }
+      }
+    },
     "apiGetOpenOrdersResponse": {
       "type": "object",
       "properties": {

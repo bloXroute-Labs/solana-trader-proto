@@ -560,6 +560,28 @@ function deserialize_api_GetMarketsResponseV2(buffer_arg) {
   return api_pb.GetMarketsResponseV2.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetNewRaydiumPoolsRequest(arg) {
+  if (!(arg instanceof api_pb.GetNewRaydiumPoolsRequest)) {
+    throw new Error('Expected argument of type api.GetNewRaydiumPoolsRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetNewRaydiumPoolsRequest(buffer_arg) {
+  return api_pb.GetNewRaydiumPoolsRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetNewRaydiumPoolsResponse(arg) {
+  if (!(arg instanceof api_pb.GetNewRaydiumPoolsResponse)) {
+    throw new Error('Expected argument of type api.GetNewRaydiumPoolsResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetNewRaydiumPoolsResponse(buffer_arg) {
+  return api_pb.GetNewRaydiumPoolsResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetOpenOrdersRequest(arg) {
   if (!(arg instanceof api_pb.GetOpenOrdersRequest)) {
     throw new Error('Expected argument of type api.GetOpenOrdersRequest');
@@ -3253,6 +3275,17 @@ getOrderbooksStream: {
     requestDeserialize: deserialize_api_GetPricesStreamRequest,
     responseSerialize: serialize_api_GetPricesStreamResponse,
     responseDeserialize: deserialize_api_GetPricesStreamResponse,
+  },
+  getNewRaydiumPoolsStream: {
+    path: '/api.Api/GetNewRaydiumPoolsStream',
+    requestStream: false,
+    responseStream: true,
+    requestType: api_pb.GetNewRaydiumPoolsRequest,
+    responseType: api_pb.GetNewRaydiumPoolsResponse,
+    requestSerialize: serialize_api_GetNewRaydiumPoolsRequest,
+    requestDeserialize: deserialize_api_GetNewRaydiumPoolsRequest,
+    responseSerialize: serialize_api_GetNewRaydiumPoolsResponse,
+    responseDeserialize: deserialize_api_GetNewRaydiumPoolsResponse,
   },
   getSwapsStream: {
     path: '/api.Api/GetSwapsStream',

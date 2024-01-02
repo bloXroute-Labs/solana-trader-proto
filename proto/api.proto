@@ -628,6 +628,10 @@ service Api {
     };
   }
 
+
+
+
+
   rpc GetTickers(GetTickersRequest) returns (GetTickersResponse) {
     option (google.api.http) = {
       get: "/api/v1/market/tickers/{market}"
@@ -1166,6 +1170,12 @@ service Api {
   }
 
   rpc GetPricesStream(GetPricesStreamRequest) returns (stream GetPricesStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetNewRaydiumPoolsStream(GetNewRaydiumPoolsRequest) returns (stream GetNewRaydiumPoolsResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
     };
@@ -1905,6 +1915,14 @@ message GetPoolsRequest {
 
 message GetPoolsResponse {
   repeated ProjectPools projects = 1;
+}
+
+message GetNewRaydiumPoolsRequest {
+}
+
+message GetNewRaydiumPoolsResponse {
+  int64 slot = 1;
+  ProjectPool pool = 2;
 }
 
 message GetRaydiumPoolsRequest {

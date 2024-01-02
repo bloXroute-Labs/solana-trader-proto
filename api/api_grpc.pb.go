@@ -143,6 +143,7 @@ type ApiClient interface {
 	GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error)
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
+	GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error)
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
 	// Perp streaming endpoints
 	GetPerpOrderbooksStream(ctx context.Context, in *GetPerpOrderbooksRequest, opts ...grpc.CallOption) (Api_GetPerpOrderbooksStreamClient, error)
@@ -1342,8 +1343,40 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 	return m, nil
 }
 
+func (c *apiClient) GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetNewRaydiumPoolsStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetNewRaydiumPoolsStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetNewRaydiumPoolsStreamClient interface {
+	Recv() (*GetNewRaydiumPoolsResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetNewRaydiumPoolsStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetNewRaydiumPoolsStreamClient) Recv() (*GetNewRaydiumPoolsResponse, error) {
+	m := new(GetNewRaydiumPoolsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1375,7 +1408,7 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 }
 
 func (c *apiClient) GetPerpOrderbooksStream(ctx context.Context, in *GetPerpOrderbooksRequest, opts ...grpc.CallOption) (Api_GetPerpOrderbooksStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetPerpOrderbooksStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetPerpOrderbooksStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1407,7 +1440,7 @@ func (x *apiGetPerpOrderbooksStreamClient) Recv() (*GetPerpOrderbooksStreamRespo
 }
 
 func (c *apiClient) GetPerpTradesStream(ctx context.Context, in *GetPerpTradesStreamRequest, opts ...grpc.CallOption) (Api_GetPerpTradesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetPerpTradesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[15], "/api.Api/GetPerpTradesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1567,6 +1600,7 @@ type ApiServer interface {
 	GetQuotesStream(*GetQuotesStreamRequest, Api_GetQuotesStreamServer) error
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
+	GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsRequest, Api_GetNewRaydiumPoolsStreamServer) error
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
 	// Perp streaming endpoints
 	GetPerpOrderbooksStream(*GetPerpOrderbooksRequest, Api_GetPerpOrderbooksStreamServer) error
@@ -1880,6 +1914,9 @@ func (UnimplementedApiServer) GetPoolReservesStream(*GetPoolReservesStreamReques
 }
 func (UnimplementedApiServer) GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPricesStream not implemented")
+}
+func (UnimplementedApiServer) GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsRequest, Api_GetNewRaydiumPoolsStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetNewRaydiumPoolsStream not implemented")
 }
 func (UnimplementedApiServer) GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetSwapsStream not implemented")
@@ -3757,6 +3794,27 @@ func (x *apiGetPricesStreamServer) Send(m *GetPricesStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetNewRaydiumPoolsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetNewRaydiumPoolsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetNewRaydiumPoolsStream(m, &apiGetNewRaydiumPoolsStreamServer{stream})
+}
+
+type Api_GetNewRaydiumPoolsStreamServer interface {
+	Send(*GetNewRaydiumPoolsResponse) error
+	grpc.ServerStream
+}
+
+type apiGetNewRaydiumPoolsStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetNewRaydiumPoolsStreamServer) Send(m *GetNewRaydiumPoolsResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetSwapsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetSwapsStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -4243,6 +4301,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetPricesStream",
 			Handler:       _Api_GetPricesStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetNewRaydiumPoolsStream",
+			Handler:       _Api_GetNewRaydiumPoolsStream_Handler,
 			ServerStreams: true,
 		},
 		{
