@@ -1171,6 +1171,12 @@ service Api {
     };
   }
 
+  rpc GetNewRaydiumPoolsStream(GetNewRaydiumPoolsRequest) returns (stream GetNewRaydiumPoolsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
   rpc GetSwapsStream(GetSwapsStreamRequest) returns (stream GetSwapsStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
@@ -1979,6 +1985,14 @@ message GetSwapsStreamRequest {
 message GetSwapsStreamResponse {
   int64 slot = 1;
   GetSwapsStreamUpdate swap = 2;
+}
+
+message GetNewRaydiumPoolsRequest {
+}
+
+message GetNewRaydiumPoolsResponse {
+  int64 slot = 1;
+  ProjectPool pool = 2;
 }
 
 message GetSwapsStreamUpdate {

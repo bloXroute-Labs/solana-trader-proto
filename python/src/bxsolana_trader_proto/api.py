@@ -915,6 +915,17 @@ class GetSwapsStreamResponse(betterproto.Message):
 
 
 @dataclass
+class GetNewRaydiumPoolsRequest(betterproto.Message):
+    pass
+
+
+@dataclass
+class GetNewRaydiumPoolsResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    pool: "ProjectPool" = betterproto.message_field(2)
+
+
+@dataclass
 class GetSwapsStreamUpdate(betterproto.Message):
     success: bool = betterproto.bool_field(1)
     project: "Project" = betterproto.enum_field(2)
@@ -3999,6 +4010,18 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetPricesStream",
             request,
             GetPricesStreamResponse,
+        ):
+            yield response
+
+    async def get_new_raydium_pools_stream(
+        self,
+    ) -> AsyncGenerator[GetNewRaydiumPoolsResponse, None]:
+        request = GetNewRaydiumPoolsRequest()
+
+        async for response in self._unary_stream(
+            "/api.Api/GetNewRaydiumPoolsStream",
+            request,
+            GetNewRaydiumPoolsResponse,
         ):
             yield response
 

@@ -3311,6 +3311,49 @@ export namespace GetSwapsStreamResponse {
     }
 }
 
+export class GetNewRaydiumPoolsRequest extends jspb.Message { 
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetNewRaydiumPoolsRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetNewRaydiumPoolsRequest): GetNewRaydiumPoolsRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetNewRaydiumPoolsRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetNewRaydiumPoolsRequest;
+    static deserializeBinaryFromReader(message: GetNewRaydiumPoolsRequest, reader: jspb.BinaryReader): GetNewRaydiumPoolsRequest;
+}
+
+export namespace GetNewRaydiumPoolsRequest {
+    export type AsObject = {
+    }
+}
+
+export class GetNewRaydiumPoolsResponse extends jspb.Message { 
+    getSlot(): number;
+    setSlot(value: number): GetNewRaydiumPoolsResponse;
+
+    hasPool(): boolean;
+    clearPool(): void;
+    getPool(): ProjectPool | undefined;
+    setPool(value?: ProjectPool): GetNewRaydiumPoolsResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetNewRaydiumPoolsResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetNewRaydiumPoolsResponse): GetNewRaydiumPoolsResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetNewRaydiumPoolsResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetNewRaydiumPoolsResponse;
+    static deserializeBinaryFromReader(message: GetNewRaydiumPoolsResponse, reader: jspb.BinaryReader): GetNewRaydiumPoolsResponse;
+}
+
+export namespace GetNewRaydiumPoolsResponse {
+    export type AsObject = {
+        slot: number,
+        pool?: ProjectPool.AsObject,
+    }
+}
+
 export class GetSwapsStreamUpdate extends jspb.Message { 
     getSuccess(): boolean;
     setSuccess(value: boolean): GetSwapsStreamUpdate;
