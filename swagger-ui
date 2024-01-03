@@ -5481,6 +5481,16 @@
             "type": "string"
           }
         },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
         "project": {
           "$ref": "#/definitions/apiProject"
         }
@@ -5528,6 +5538,16 @@
           "required": [
             "openOrdersAddress"
           ]
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         },
         "project": {
           "$ref": "#/definitions/apiProject"
@@ -5600,6 +5620,16 @@
             "openOrdersAddress"
           ]
         },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
         "project": {
           "$ref": "#/definitions/apiProject"
         }
@@ -5645,6 +5675,16 @@
         "clientOrderID": {
           "type": "string",
           "format": "uint64"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         }
       },
       "required": [
@@ -6152,6 +6192,16 @@
         "slippage": {
           "type": "number",
           "format": "double"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         }
       }
     },
@@ -6356,12 +6406,22 @@
         },
         "openOrdersAddress": {
           "type": "string",
-          "description": "If left empty the Serum API will lookup the account which can be time consuming"
+          "description": "If left empty the Openbook API will lookup the account which can be time consuming"
         },
         "clientOrderID": {
           "type": "string",
           "format": "uint64",
           "description": "Client defined OrderID"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         },
         "project": {
           "$ref": "#/definitions/apiProject"
@@ -6433,6 +6493,16 @@
           "type": "string",
           "format": "uint64",
           "description": "Client defined OrderID"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         }
       },
       "required": [
@@ -6562,6 +6632,16 @@
         "slippage": {
           "type": "number",
           "format": "double"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         }
       }
     },
@@ -6653,7 +6733,17 @@
         },
         "orderID": {
           "type": "string",
-          "description": "Serum generated OrderID"
+          "description": "Openbook generated OrderID"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         },
         "project": {
           "$ref": "#/definitions/apiProject"
@@ -6733,6 +6823,16 @@
         "orderID": {
           "type": "string",
           "description": "Openbook generated OrderID"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         }
       },
       "required": [
@@ -6833,6 +6933,16 @@
           "type": "string",
           "description": "If left empty the Serum API will lookup the account which can be time consuming"
         },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
         "project": {
           "$ref": "#/definitions/apiProject"
         }
@@ -6874,6 +6984,16 @@
         "openOrdersAddress": {
           "type": "string",
           "description": "If left empty the Serum API will lookup the account which can be time consuming"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         }
       },
       "required": [

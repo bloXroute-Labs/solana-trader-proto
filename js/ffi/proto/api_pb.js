@@ -11514,7 +11514,9 @@ proto.api.PostOrderRequest.toObject = function(includeInstance, msg) {
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
-    project: jspb.Message.getFieldWithDefault(msg, 10, 0)
+    computelimit: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    project: jspb.Message.getFieldWithDefault(msg, 12, 0)
   };
 
   if (includeInstance) {
@@ -11590,6 +11592,14 @@ proto.api.PostOrderRequest.deserializeBinaryFromReader = function(msg, reader) {
       msg.setClientorderid(value);
       break;
     case 10:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
+      break;
+    case 12:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -11685,10 +11695,24 @@ proto.api.PostOrderRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      10,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      11,
+      f
+    );
+  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      10,
+      12,
       f
     );
   }
@@ -11877,11 +11901,47 @@ proto.api.PostOrderRequest.prototype.setClientorderid = function(value) {
 
 
 /**
- * optional Project project = 10;
+ * optional uint32 computeLimit = 10;
+ * @return {number}
+ */
+proto.api.PostOrderRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostOrderRequest} returns this
+ */
+proto.api.PostOrderRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 10, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 11;
+ * @return {number}
+ */
+proto.api.PostOrderRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostOrderRequest} returns this
+ */
+proto.api.PostOrderRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional Project project = 12;
  * @return {!proto.api.Project}
  */
 proto.api.PostOrderRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
 };
 
 
@@ -11890,7 +11950,7 @@ proto.api.PostOrderRequest.prototype.getProject = function() {
  * @return {!proto.api.PostOrderRequest} returns this
  */
 proto.api.PostOrderRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 10, value);
+  return jspb.Message.setProto3EnumField(this, 12, value);
 };
 
 
@@ -11943,7 +12003,9 @@ proto.api.PostReplaceOrderRequest.toObject = function(includeInstance, msg) {
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
     orderid: jspb.Message.getFieldWithDefault(msg, 10, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 11, 0)
+    computelimit: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    project: jspb.Message.getFieldWithDefault(msg, 13, 0)
   };
 
   if (includeInstance) {
@@ -12023,6 +12085,14 @@ proto.api.PostReplaceOrderRequest.deserializeBinaryFromReader = function(msg, re
       msg.setOrderid(value);
       break;
     case 11:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
+      break;
+    case 13:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -12125,10 +12195,24 @@ proto.api.PostReplaceOrderRequest.serializeBinaryToWriter = function(message, wr
       f
     );
   }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      11,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      12,
+      f
+    );
+  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      11,
+      13,
       f
     );
   }
@@ -12335,11 +12419,47 @@ proto.api.PostReplaceOrderRequest.prototype.setOrderid = function(value) {
 
 
 /**
- * optional Project project = 11;
+ * optional uint32 computeLimit = 11;
+ * @return {number}
+ */
+proto.api.PostReplaceOrderRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostReplaceOrderRequest} returns this
+ */
+proto.api.PostReplaceOrderRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 12;
+ * @return {number}
+ */
+proto.api.PostReplaceOrderRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostReplaceOrderRequest} returns this
+ */
+proto.api.PostReplaceOrderRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 12, value);
+};
+
+
+/**
+ * optional Project project = 13;
  * @return {!proto.api.Project}
  */
 proto.api.PostReplaceOrderRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
 };
 
 
@@ -12348,7 +12468,7 @@ proto.api.PostReplaceOrderRequest.prototype.getProject = function() {
  * @return {!proto.api.PostReplaceOrderRequest} returns this
  */
 proto.api.PostReplaceOrderRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 11, value);
+  return jspb.Message.setProto3EnumField(this, 13, value);
 };
 
 
@@ -12570,7 +12690,9 @@ proto.api.PostCancelOrderRequest.toObject = function(includeInstance, msg) {
     marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 6, 0)
+    computelimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    project: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -12628,6 +12750,14 @@ proto.api.PostCancelOrderRequest.deserializeBinaryFromReader = function(msg, rea
       msg.setOpenordersaddress(value);
       break;
     case 6:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
+      break;
+    case 8:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -12695,10 +12825,24 @@ proto.api.PostCancelOrderRequest.serializeBinaryToWriter = function(message, wri
       f
     );
   }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      6,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      7,
+      f
+    );
+  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      6,
+      8,
       f
     );
   }
@@ -12796,11 +12940,47 @@ proto.api.PostCancelOrderRequest.prototype.setOpenordersaddress = function(value
 
 
 /**
- * optional Project project = 6;
+ * optional uint32 computeLimit = 6;
+ * @return {number}
+ */
+proto.api.PostCancelOrderRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelOrderRequest} returns this
+ */
+proto.api.PostCancelOrderRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 7;
+ * @return {number}
+ */
+proto.api.PostCancelOrderRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelOrderRequest} returns this
+ */
+proto.api.PostCancelOrderRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * optional Project project = 8;
  * @return {!proto.api.Project}
  */
 proto.api.PostCancelOrderRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
@@ -12809,7 +12989,7 @@ proto.api.PostCancelOrderRequest.prototype.getProject = function() {
  * @return {!proto.api.PostCancelOrderRequest} returns this
  */
 proto.api.PostCancelOrderRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 6, value);
+  return jspb.Message.setProto3EnumField(this, 8, value);
 };
 
 
@@ -12849,7 +13029,9 @@ proto.api.PostCancelByClientOrderIDRequest.toObject = function(includeInstance, 
     marketaddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    computelimit: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    project: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -12903,6 +13085,14 @@ proto.api.PostCancelByClientOrderIDRequest.deserializeBinaryFromReader = functio
       msg.setOpenordersaddress(value);
       break;
     case 5:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
+      break;
+    case 7:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -12963,10 +13153,24 @@ proto.api.PostCancelByClientOrderIDRequest.serializeBinaryToWriter = function(me
       f
     );
   }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      5,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      6,
+      f
+    );
+  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      5,
+      7,
       f
     );
   }
@@ -13046,11 +13250,47 @@ proto.api.PostCancelByClientOrderIDRequest.prototype.setOpenordersaddress = func
 
 
 /**
- * optional Project project = 5;
+ * optional uint32 computeLimit = 5;
+ * @return {number}
+ */
+proto.api.PostCancelByClientOrderIDRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelByClientOrderIDRequest} returns this
+ */
+proto.api.PostCancelByClientOrderIDRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 6;
+ * @return {number}
+ */
+proto.api.PostCancelByClientOrderIDRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelByClientOrderIDRequest} returns this
+ */
+proto.api.PostCancelByClientOrderIDRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional Project project = 7;
  * @return {!proto.api.Project}
  */
 proto.api.PostCancelByClientOrderIDRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
 };
 
 
@@ -13059,7 +13299,7 @@ proto.api.PostCancelByClientOrderIDRequest.prototype.getProject = function() {
  * @return {!proto.api.PostCancelByClientOrderIDRequest} returns this
  */
 proto.api.PostCancelByClientOrderIDRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 5, value);
+  return jspb.Message.setProto3EnumField(this, 7, value);
 };
 
 
@@ -13256,7 +13496,9 @@ proto.api.PostCancelAllRequest.toObject = function(includeInstance, msg) {
     market: jspb.Message.getFieldWithDefault(msg, 1, ""),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     openordersaddressesList: (f = jspb.Message.getRepeatedField(msg, 3)) == null ? undefined : f,
-    project: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    computelimit: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    project: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -13306,6 +13548,14 @@ proto.api.PostCancelAllRequest.deserializeBinaryFromReader = function(msg, reade
       msg.addOpenordersaddresses(value);
       break;
     case 4:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
+      break;
+    case 6:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -13359,10 +13609,24 @@ proto.api.PostCancelAllRequest.serializeBinaryToWriter = function(message, write
       f
     );
   }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      4,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      5,
+      f
+    );
+  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      4,
+      6,
       f
     );
   }
@@ -13443,11 +13707,47 @@ proto.api.PostCancelAllRequest.prototype.clearOpenordersaddressesList = function
 
 
 /**
- * optional Project project = 4;
+ * optional uint32 computeLimit = 4;
+ * @return {number}
+ */
+proto.api.PostCancelAllRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelAllRequest} returns this
+ */
+proto.api.PostCancelAllRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 5;
+ * @return {number}
+ */
+proto.api.PostCancelAllRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelAllRequest} returns this
+ */
+proto.api.PostCancelAllRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional Project project = 6;
  * @return {!proto.api.Project}
  */
 proto.api.PostCancelAllRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
 };
 
 
@@ -13456,7 +13756,7 @@ proto.api.PostCancelAllRequest.prototype.getProject = function() {
  * @return {!proto.api.PostCancelAllRequest} returns this
  */
 proto.api.PostCancelAllRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 4, value);
+  return jspb.Message.setProto3EnumField(this, 6, value);
 };
 
 
@@ -13817,7 +14117,9 @@ proto.api.PostSettleRequest.toObject = function(includeInstance, msg) {
     basetokenwallet: jspb.Message.getFieldWithDefault(msg, 3, ""),
     quotetokenwallet: jspb.Message.getFieldWithDefault(msg, 4, ""),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    project: jspb.Message.getFieldWithDefault(msg, 6, 0)
+    computelimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    project: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -13875,6 +14177,14 @@ proto.api.PostSettleRequest.deserializeBinaryFromReader = function(msg, reader) 
       msg.setOpenordersaddress(value);
       break;
     case 6:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
+      break;
+    case 8:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -13942,10 +14252,24 @@ proto.api.PostSettleRequest.serializeBinaryToWriter = function(message, writer) 
       f
     );
   }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      6,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      7,
+      f
+    );
+  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      6,
+      8,
       f
     );
   }
@@ -14043,11 +14367,47 @@ proto.api.PostSettleRequest.prototype.setOpenordersaddress = function(value) {
 
 
 /**
- * optional Project project = 6;
+ * optional uint32 computeLimit = 6;
+ * @return {number}
+ */
+proto.api.PostSettleRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostSettleRequest} returns this
+ */
+proto.api.PostSettleRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 7;
+ * @return {number}
+ */
+proto.api.PostSettleRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostSettleRequest} returns this
+ */
+proto.api.PostSettleRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * optional Project project = 8;
  * @return {!proto.api.Project}
  */
 proto.api.PostSettleRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
@@ -14056,7 +14416,7 @@ proto.api.PostSettleRequest.prototype.getProject = function() {
  * @return {!proto.api.PostSettleRequest} returns this
  */
 proto.api.PostSettleRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 6, value);
+  return jspb.Message.setProto3EnumField(this, 8, value);
 };
 
 
@@ -21693,7 +22053,9 @@ proto.api.PostJupiterSwapRequest.toObject = function(includeInstance, msg) {
     intoken: jspb.Message.getFieldWithDefault(msg, 2, ""),
     outtoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
     inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
-    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0)
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    computelimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -21749,6 +22111,14 @@ proto.api.PostJupiterSwapRequest.deserializeBinaryFromReader = function(msg, rea
     case 5:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setSlippage(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
       break;
     default:
       reader.skipField();
@@ -21811,6 +22181,20 @@ proto.api.PostJupiterSwapRequest.serializeBinaryToWriter = function(message, wri
   if (f !== 0.0) {
     writer.writeDouble(
       5,
+      f
+    );
+  }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      6,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      7,
       f
     );
   }
@@ -21907,6 +22291,42 @@ proto.api.PostJupiterSwapRequest.prototype.setSlippage = function(value) {
 };
 
 
+/**
+ * optional uint32 computeLimit = 6;
+ * @return {number}
+ */
+proto.api.PostJupiterSwapRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterSwapRequest} returns this
+ */
+proto.api.PostJupiterSwapRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 7;
+ * @return {number}
+ */
+proto.api.PostJupiterSwapRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterSwapRequest} returns this
+ */
+proto.api.PostJupiterSwapRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
 
 
 
@@ -21943,7 +22363,9 @@ proto.api.PostRaydiumSwapRequest.toObject = function(includeInstance, msg) {
     intoken: jspb.Message.getFieldWithDefault(msg, 2, ""),
     outtoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
     inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
-    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0)
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    computelimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -21999,6 +22421,14 @@ proto.api.PostRaydiumSwapRequest.deserializeBinaryFromReader = function(msg, rea
     case 5:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setSlippage(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
       break;
     default:
       reader.skipField();
@@ -22061,6 +22491,20 @@ proto.api.PostRaydiumSwapRequest.serializeBinaryToWriter = function(message, wri
   if (f !== 0.0) {
     writer.writeDouble(
       5,
+      f
+    );
+  }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      6,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      7,
       f
     );
   }
@@ -22154,6 +22598,42 @@ proto.api.PostRaydiumSwapRequest.prototype.getSlippage = function() {
  */
 proto.api.PostRaydiumSwapRequest.prototype.setSlippage = function(value) {
   return jspb.Message.setProto3FloatField(this, 5, value);
+};
+
+
+/**
+ * optional uint32 computeLimit = 6;
+ * @return {number}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumSwapRequest} returns this
+ */
+proto.api.PostRaydiumSwapRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 7;
+ * @return {number}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumSwapRequest} returns this
+ */
+proto.api.PostRaydiumSwapRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 
@@ -60742,7 +61222,9 @@ proto.api.PostOrderRequestV2.toObject = function(includeInstance, msg) {
     amount: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0)
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
+    computelimit: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 11, 0)
   };
 
   if (includeInstance) {
@@ -60814,6 +61296,14 @@ proto.api.PostOrderRequestV2.deserializeBinaryFromReader = function(msg, reader)
     case 9:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setClientorderid(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
       break;
     default:
       reader.skipField();
@@ -60904,6 +61394,20 @@ proto.api.PostOrderRequestV2.serializeBinaryToWriter = function(message, writer)
   if (f !== 0) {
     writer.writeUint64(
       9,
+      f
+    );
+  }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      10,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      11,
       f
     );
   }
@@ -61072,6 +61576,42 @@ proto.api.PostOrderRequestV2.prototype.setClientorderid = function(value) {
 };
 
 
+/**
+ * optional uint32 computeLimit = 10;
+ * @return {number}
+ */
+proto.api.PostOrderRequestV2.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 10, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 11;
+ * @return {number}
+ */
+proto.api.PostOrderRequestV2.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
 
 
 
@@ -61113,7 +61653,9 @@ proto.api.PostReplaceOrderRequestV2.toObject = function(includeInstance, msg) {
     price: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
-    orderid: jspb.Message.getFieldWithDefault(msg, 10, "")
+    orderid: jspb.Message.getFieldWithDefault(msg, 10, ""),
+    computelimit: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 12, 0)
   };
 
   if (includeInstance) {
@@ -61189,6 +61731,14 @@ proto.api.PostReplaceOrderRequestV2.deserializeBinaryFromReader = function(msg, 
     case 10:
       var value = /** @type {string} */ (reader.readString());
       msg.setOrderid(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
       break;
     default:
       reader.skipField();
@@ -61286,6 +61836,20 @@ proto.api.PostReplaceOrderRequestV2.serializeBinaryToWriter = function(message, 
   if (f.length > 0) {
     writer.writeString(
       10,
+      f
+    );
+  }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      11,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      12,
       f
     );
   }
@@ -61472,6 +62036,42 @@ proto.api.PostReplaceOrderRequestV2.prototype.setOrderid = function(value) {
 };
 
 
+/**
+ * optional uint32 computeLimit = 11;
+ * @return {number}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 12;
+ * @return {number}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 12, value);
+};
+
+
 
 
 
@@ -61509,7 +62109,9 @@ proto.api.PostCancelOrderRequestV2.toObject = function(includeInstance, msg) {
     marketaddress: jspb.Message.getFieldWithDefault(msg, 3, ""),
     owneraddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    clientorderid: jspb.Message.getFieldWithDefault(msg, 6, 0)
+    clientorderid: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    computelimit: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -61569,6 +62171,14 @@ proto.api.PostCancelOrderRequestV2.deserializeBinaryFromReader = function(msg, r
     case 6:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setClientorderid(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 8:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
       break;
     default:
       reader.skipField();
@@ -61638,6 +62248,20 @@ proto.api.PostCancelOrderRequestV2.serializeBinaryToWriter = function(message, w
   if (f !== 0) {
     writer.writeUint64(
       6,
+      f
+    );
+  }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      7,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      8,
       f
     );
   }
@@ -61749,6 +62373,42 @@ proto.api.PostCancelOrderRequestV2.prototype.getClientorderid = function() {
  */
 proto.api.PostCancelOrderRequestV2.prototype.setClientorderid = function(value) {
   return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional uint32 computeLimit = 7;
+ * @return {number}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelOrderRequestV2} returns this
+ */
+proto.api.PostCancelOrderRequestV2.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 8;
+ * @return {number}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelOrderRequestV2} returns this
+ */
+proto.api.PostCancelOrderRequestV2.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
@@ -61948,7 +62608,9 @@ proto.api.PostSettleRequestV2.toObject = function(includeInstance, msg) {
     market: jspb.Message.getFieldWithDefault(msg, 2, ""),
     basetokenwallet: jspb.Message.getFieldWithDefault(msg, 3, ""),
     quotetokenwallet: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, "")
+    openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    computelimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -62004,6 +62666,14 @@ proto.api.PostSettleRequestV2.deserializeBinaryFromReader = function(msg, reader
     case 5:
       var value = /** @type {string} */ (reader.readString());
       msg.setOpenordersaddress(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
       break;
     default:
       reader.skipField();
@@ -62066,6 +62736,20 @@ proto.api.PostSettleRequestV2.serializeBinaryToWriter = function(message, writer
   if (f.length > 0) {
     writer.writeString(
       5,
+      f
+    );
+  }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      6,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      7,
       f
     );
   }
@@ -62159,6 +62843,42 @@ proto.api.PostSettleRequestV2.prototype.getOpenordersaddress = function() {
  */
 proto.api.PostSettleRequestV2.prototype.setOpenordersaddress = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional uint32 computeLimit = 6;
+ * @return {number}
+ */
+proto.api.PostSettleRequestV2.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostSettleRequestV2} returns this
+ */
+proto.api.PostSettleRequestV2.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 7;
+ * @return {number}
+ */
+proto.api.PostSettleRequestV2.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostSettleRequestV2} returns this
+ */
+proto.api.PostSettleRequestV2.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 

@@ -814,6 +814,10 @@ export class PostOrderRequest extends jspb.Message {
     setOpenordersaddress(value: string): PostOrderRequest;
     getClientorderid(): number;
     setClientorderid(value: number): PostOrderRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostOrderRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostOrderRequest;
     getProject(): Project;
     setProject(value: Project): PostOrderRequest;
 
@@ -838,6 +842,8 @@ export namespace PostOrderRequest {
         price: number,
         openordersaddress: string,
         clientorderid: number,
+        computelimit: number,
+        computeprice: number,
         project: Project,
     }
 }
@@ -865,6 +871,10 @@ export class PostReplaceOrderRequest extends jspb.Message {
     setClientorderid(value: number): PostReplaceOrderRequest;
     getOrderid(): string;
     setOrderid(value: string): PostReplaceOrderRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostReplaceOrderRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostReplaceOrderRequest;
     getProject(): Project;
     setProject(value: Project): PostReplaceOrderRequest;
 
@@ -890,6 +900,8 @@ export namespace PostReplaceOrderRequest {
         openordersaddress: string,
         clientorderid: number,
         orderid: string,
+        computelimit: number,
+        computeprice: number,
         project: Project,
     }
 }
@@ -931,6 +943,10 @@ export class PostCancelOrderRequest extends jspb.Message {
     setOwneraddress(value: string): PostCancelOrderRequest;
     getOpenordersaddress(): string;
     setOpenordersaddress(value: string): PostCancelOrderRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostCancelOrderRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostCancelOrderRequest;
     getProject(): Project;
     setProject(value: Project): PostCancelOrderRequest;
 
@@ -951,6 +967,8 @@ export namespace PostCancelOrderRequest {
         marketaddress: string,
         owneraddress: string,
         openordersaddress: string,
+        computelimit: number,
+        computeprice: number,
         project: Project,
     }
 }
@@ -964,6 +982,10 @@ export class PostCancelByClientOrderIDRequest extends jspb.Message {
     setOwneraddress(value: string): PostCancelByClientOrderIDRequest;
     getOpenordersaddress(): string;
     setOpenordersaddress(value: string): PostCancelByClientOrderIDRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostCancelByClientOrderIDRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostCancelByClientOrderIDRequest;
     getProject(): Project;
     setProject(value: Project): PostCancelByClientOrderIDRequest;
 
@@ -983,6 +1005,8 @@ export namespace PostCancelByClientOrderIDRequest {
         marketaddress: string,
         owneraddress: string,
         openordersaddress: string,
+        computelimit: number,
+        computeprice: number,
         project: Project,
     }
 }
@@ -1019,6 +1043,10 @@ export class PostCancelAllRequest extends jspb.Message {
     getOpenordersaddressesList(): Array<string>;
     setOpenordersaddressesList(value: Array<string>): PostCancelAllRequest;
     addOpenordersaddresses(value: string, index?: number): string;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostCancelAllRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostCancelAllRequest;
     getProject(): Project;
     setProject(value: Project): PostCancelAllRequest;
 
@@ -1037,6 +1065,8 @@ export namespace PostCancelAllRequest {
         market: string,
         owneraddress: string,
         openordersaddressesList: Array<string>,
+        computelimit: number,
+        computeprice: number,
         project: Project,
     }
 }
@@ -1097,6 +1127,10 @@ export class PostSettleRequest extends jspb.Message {
     setQuotetokenwallet(value: string): PostSettleRequest;
     getOpenordersaddress(): string;
     setOpenordersaddress(value: string): PostSettleRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostSettleRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostSettleRequest;
     getProject(): Project;
     setProject(value: Project): PostSettleRequest;
 
@@ -1117,6 +1151,8 @@ export namespace PostSettleRequest {
         basetokenwallet: string,
         quotetokenwallet: string,
         openordersaddress: string,
+        computelimit: number,
+        computeprice: number,
         project: Project,
     }
 }
@@ -2130,6 +2166,10 @@ export class PostJupiterSwapRequest extends jspb.Message {
     setInamount(value: number): PostJupiterSwapRequest;
     getSlippage(): number;
     setSlippage(value: number): PostJupiterSwapRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostJupiterSwapRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostJupiterSwapRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostJupiterSwapRequest.AsObject;
@@ -2148,6 +2188,8 @@ export namespace PostJupiterSwapRequest {
         outtoken: string,
         inamount: number,
         slippage: number,
+        computelimit: number,
+        computeprice: number,
     }
 }
 
@@ -2162,6 +2204,10 @@ export class PostRaydiumSwapRequest extends jspb.Message {
     setInamount(value: number): PostRaydiumSwapRequest;
     getSlippage(): number;
     setSlippage(value: number): PostRaydiumSwapRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostRaydiumSwapRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostRaydiumSwapRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostRaydiumSwapRequest.AsObject;
@@ -2180,6 +2226,8 @@ export namespace PostRaydiumSwapRequest {
         outtoken: string,
         inamount: number,
         slippage: number,
+        computelimit: number,
+        computeprice: number,
     }
 }
 
@@ -7242,6 +7290,10 @@ export class PostOrderRequestV2 extends jspb.Message {
     setOpenordersaddress(value: string): PostOrderRequestV2;
     getClientorderid(): number;
     setClientorderid(value: number): PostOrderRequestV2;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostOrderRequestV2;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostOrderRequestV2;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostOrderRequestV2.AsObject;
@@ -7264,6 +7316,8 @@ export namespace PostOrderRequestV2 {
         price: number,
         openordersaddress: string,
         clientorderid: number,
+        computelimit: number,
+        computeprice: number,
     }
 }
 
@@ -7288,6 +7342,10 @@ export class PostReplaceOrderRequestV2 extends jspb.Message {
     setClientorderid(value: number): PostReplaceOrderRequestV2;
     getOrderid(): string;
     setOrderid(value: string): PostReplaceOrderRequestV2;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostReplaceOrderRequestV2;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostReplaceOrderRequestV2;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostReplaceOrderRequestV2.AsObject;
@@ -7311,6 +7369,8 @@ export namespace PostReplaceOrderRequestV2 {
         openordersaddress: string,
         clientorderid: number,
         orderid: string,
+        computelimit: number,
+        computeprice: number,
     }
 }
 
@@ -7327,6 +7387,10 @@ export class PostCancelOrderRequestV2 extends jspb.Message {
     setOpenordersaddress(value: string): PostCancelOrderRequestV2;
     getClientorderid(): number;
     setClientorderid(value: number): PostCancelOrderRequestV2;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostCancelOrderRequestV2;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostCancelOrderRequestV2;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelOrderRequestV2.AsObject;
@@ -7346,6 +7410,8 @@ export namespace PostCancelOrderRequestV2 {
         owneraddress: string,
         openordersaddress: string,
         clientorderid: number,
+        computelimit: number,
+        computeprice: number,
     }
 }
 
@@ -7382,6 +7448,10 @@ export class PostSettleRequestV2 extends jspb.Message {
     setQuotetokenwallet(value: string): PostSettleRequestV2;
     getOpenordersaddress(): string;
     setOpenordersaddress(value: string): PostSettleRequestV2;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostSettleRequestV2;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostSettleRequestV2;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostSettleRequestV2.AsObject;
@@ -7400,6 +7470,8 @@ export namespace PostSettleRequestV2 {
         basetokenwallet: string,
         quotetokenwallet: string,
         openordersaddress: string,
+        computelimit: number,
+        computeprice: number,
     }
 }
 
