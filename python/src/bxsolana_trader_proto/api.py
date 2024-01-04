@@ -683,6 +683,8 @@ class RouteTradeSwapRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(2)
     steps: List["RouteStep"] = betterproto.message_field(3)
     slippage: float = betterproto.double_field(4)
+    compute_limit: int = betterproto.uint32_field(5)
+    compute_price: int = betterproto.uint64_field(6)
 
 
 @dataclass
@@ -3504,6 +3506,8 @@ class ApiStub(betterproto.ServiceStub):
         owner_address: str = "",
         steps: List["RouteStep"] = [],
         slippage: float = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> TradeSwapResponse:
         request = RouteTradeSwapRequest()
         request.project = project
@@ -3511,6 +3515,8 @@ class ApiStub(betterproto.ServiceStub):
         if steps is not None:
             request.steps = steps
         request.slippage = slippage
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostRouteTradeSwap",

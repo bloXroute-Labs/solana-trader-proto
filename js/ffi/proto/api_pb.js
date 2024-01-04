@@ -23976,7 +23976,9 @@ proto.api.RouteTradeSwapRequest.toObject = function(includeInstance, msg) {
     owneraddress: jspb.Message.getFieldWithDefault(msg, 2, ""),
     stepsList: jspb.Message.toObjectList(msg.getStepsList(),
     proto.api.RouteStep.toObject, includeInstance),
-    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0)
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    computelimit: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -24029,6 +24031,14 @@ proto.api.RouteTradeSwapRequest.deserializeBinaryFromReader = function(msg, read
     case 4:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setSlippage(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
       break;
     default:
       reader.skipField();
@@ -24085,6 +24095,20 @@ proto.api.RouteTradeSwapRequest.serializeBinaryToWriter = function(message, writ
   if (f !== 0.0) {
     writer.writeDouble(
       4,
+      f
+    );
+  }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      5,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      6,
       f
     );
   }
@@ -24180,6 +24204,42 @@ proto.api.RouteTradeSwapRequest.prototype.getSlippage = function() {
  */
 proto.api.RouteTradeSwapRequest.prototype.setSlippage = function(value) {
   return jspb.Message.setProto3FloatField(this, 4, value);
+};
+
+
+/**
+ * optional uint32 computeLimit = 5;
+ * @return {number}
+ */
+proto.api.RouteTradeSwapRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RouteTradeSwapRequest} returns this
+ */
+proto.api.RouteTradeSwapRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 6;
+ * @return {number}
+ */
+proto.api.RouteTradeSwapRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.RouteTradeSwapRequest} returns this
+ */
+proto.api.RouteTradeSwapRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
 };
 
 

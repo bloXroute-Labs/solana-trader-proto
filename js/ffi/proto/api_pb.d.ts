@@ -2393,6 +2393,10 @@ export class RouteTradeSwapRequest extends jspb.Message {
     addSteps(value?: RouteStep, index?: number): RouteStep;
     getSlippage(): number;
     setSlippage(value: number): RouteTradeSwapRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): RouteTradeSwapRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): RouteTradeSwapRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): RouteTradeSwapRequest.AsObject;
@@ -2410,6 +2414,8 @@ export namespace RouteTradeSwapRequest {
         owneraddress: string,
         stepsList: Array<RouteStep.AsObject>,
         slippage: number,
+        computelimit: number,
+        computeprice: number,
     }
 }
 
