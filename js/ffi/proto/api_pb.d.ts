@@ -2416,6 +2416,10 @@ export class PostRaydiumRouteSwapRequest extends jspb.Message {
     addSteps(value?: RaydiumRouteStep, index?: number): RaydiumRouteStep;
     getSlippage(): number;
     setSlippage(value: number): PostRaydiumRouteSwapRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostRaydiumRouteSwapRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostRaydiumRouteSwapRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostRaydiumRouteSwapRequest.AsObject;
@@ -2432,6 +2436,8 @@ export namespace PostRaydiumRouteSwapRequest {
         owneraddress: string,
         stepsList: Array<RaydiumRouteStep.AsObject>,
         slippage: number,
+        computelimit: number,
+        computeprice: number,
     }
 }
 

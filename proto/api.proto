@@ -1779,6 +1779,8 @@ message PostRaydiumRouteSwapRequest {
   string ownerAddress = 1;
   repeated RaydiumRouteStep steps = 2;
   double slippage = 3;
+  uint32 computeLimit = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
 }
 
 message RaydiumRouteStep {

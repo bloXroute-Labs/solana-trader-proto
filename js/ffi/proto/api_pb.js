@@ -24165,7 +24165,9 @@ proto.api.PostRaydiumRouteSwapRequest.toObject = function(includeInstance, msg) 
     owneraddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     stepsList: jspb.Message.toObjectList(msg.getStepsList(),
     proto.api.RaydiumRouteStep.toObject, includeInstance),
-    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0)
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    computelimit: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -24215,6 +24217,14 @@ proto.api.PostRaydiumRouteSwapRequest.deserializeBinaryFromReader = function(msg
       var value = /** @type {number} */ (reader.readDouble());
       msg.setSlippage(value);
       break;
+    case 4:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -24263,6 +24273,20 @@ proto.api.PostRaydiumRouteSwapRequest.serializeBinaryToWriter = function(message
   if (f !== 0.0) {
     writer.writeDouble(
       3,
+      f
+    );
+  }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      4,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      5,
       f
     );
   }
@@ -24340,6 +24364,42 @@ proto.api.PostRaydiumRouteSwapRequest.prototype.getSlippage = function() {
  */
 proto.api.PostRaydiumRouteSwapRequest.prototype.setSlippage = function(value) {
   return jspb.Message.setProto3FloatField(this, 3, value);
+};
+
+
+/**
+ * optional uint32 computeLimit = 4;
+ * @return {number}
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumRouteSwapRequest} returns this
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 5;
+ * @return {number}
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumRouteSwapRequest} returns this
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
 };
 
 
