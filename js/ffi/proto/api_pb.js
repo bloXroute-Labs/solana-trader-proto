@@ -21818,7 +21818,9 @@ proto.api.TradeSwapRequest.toObject = function(includeInstance, msg) {
     intoken: jspb.Message.getFieldWithDefault(msg, 3, ""),
     outtoken: jspb.Message.getFieldWithDefault(msg, 4, ""),
     inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
-    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0)
+    slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
+    computelimit: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    computeprice: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -21878,6 +21880,14 @@ proto.api.TradeSwapRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 6:
       var value = /** @type {number} */ (reader.readDouble());
       msg.setSlippage(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setComputelimit(value);
+      break;
+    case 8:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setComputeprice(value);
       break;
     default:
       reader.skipField();
@@ -21947,6 +21957,20 @@ proto.api.TradeSwapRequest.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0.0) {
     writer.writeDouble(
       6,
+      f
+    );
+  }
+  f = message.getComputelimit();
+  if (f !== 0) {
+    writer.writeUint32(
+      7,
+      f
+    );
+  }
+  f = message.getComputeprice();
+  if (f !== 0) {
+    writer.writeUint64(
+      8,
       f
     );
   }
@@ -22058,6 +22082,42 @@ proto.api.TradeSwapRequest.prototype.getSlippage = function() {
  */
 proto.api.TradeSwapRequest.prototype.setSlippage = function(value) {
   return jspb.Message.setProto3FloatField(this, 6, value);
+};
+
+
+/**
+ * optional uint32 computeLimit = 7;
+ * @return {number}
+ */
+proto.api.TradeSwapRequest.prototype.getComputelimit = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TradeSwapRequest} returns this
+ */
+proto.api.TradeSwapRequest.prototype.setComputelimit = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * optional uint64 computePrice = 8;
+ * @return {number}
+ */
+proto.api.TradeSwapRequest.prototype.getComputeprice = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TradeSwapRequest} returns this
+ */
+proto.api.TradeSwapRequest.prototype.setComputeprice = function(value) {
+  return jspb.Message.setProto3IntField(this, 8, value);
 };
 
 

@@ -617,6 +617,8 @@ class TradeSwapRequest(betterproto.Message):
     out_token: str = betterproto.string_field(4)
     in_amount: float = betterproto.double_field(5)
     slippage: float = betterproto.double_field(6)
+    compute_limit: int = betterproto.uint32_field(7)
+    compute_price: int = betterproto.uint64_field(8)
 
 
 @dataclass
@@ -3393,6 +3395,8 @@ class ApiStub(betterproto.ServiceStub):
         out_token: str = "",
         in_amount: float = 0,
         slippage: float = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> TradeSwapResponse:
         request = TradeSwapRequest()
         request.project = project
@@ -3401,6 +3405,8 @@ class ApiStub(betterproto.ServiceStub):
         request.out_token = out_token
         request.in_amount = in_amount
         request.slippage = slippage
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostTradeSwap",

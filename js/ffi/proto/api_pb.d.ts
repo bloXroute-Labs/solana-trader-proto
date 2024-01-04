@@ -2133,6 +2133,10 @@ export class TradeSwapRequest extends jspb.Message {
     setInamount(value: number): TradeSwapRequest;
     getSlippage(): number;
     setSlippage(value: number): TradeSwapRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): TradeSwapRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): TradeSwapRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): TradeSwapRequest.AsObject;
@@ -2152,6 +2156,8 @@ export namespace TradeSwapRequest {
         outtoken: string,
         inamount: number,
         slippage: number,
+        computelimit: number,
+        computeprice: number,
     }
 }
 

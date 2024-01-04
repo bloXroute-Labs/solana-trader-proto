@@ -1716,6 +1716,8 @@ message TradeSwapRequest {
   string outToken = 4;
   double inAmount = 5;
   double slippage = 6;
+  uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
 }
 
 message PostJupiterSwapRequest {
