@@ -2497,6 +2497,10 @@ export class PostJupiterRouteSwapRequest extends jspb.Message {
     addSteps(value?: JupiterRouteStep, index?: number): JupiterRouteStep;
     getSlippage(): number;
     setSlippage(value: number): PostJupiterRouteSwapRequest;
+    getComputelimit(): number;
+    setComputelimit(value: number): PostJupiterRouteSwapRequest;
+    getComputeprice(): number;
+    setComputeprice(value: number): PostJupiterRouteSwapRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostJupiterRouteSwapRequest.AsObject;
@@ -2513,6 +2517,8 @@ export namespace PostJupiterRouteSwapRequest {
         owneraddress: string,
         stepsList: Array<JupiterRouteStep.AsObject>,
         slippage: number,
+        computelimit: number,
+        computeprice: number,
     }
 }
 
