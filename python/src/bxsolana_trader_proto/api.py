@@ -275,7 +275,9 @@ class PostOrderRequest(betterproto.Message):
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
     client_order_i_d: int = betterproto.uint64_field(9)
-    project: "Project" = betterproto.enum_field(10)
+    compute_limit: int = betterproto.uint32_field(10)
+    compute_price: int = betterproto.uint64_field(11)
+    project: "Project" = betterproto.enum_field(12)
 
 
 @dataclass
@@ -290,7 +292,9 @@ class PostReplaceOrderRequest(betterproto.Message):
     open_orders_address: str = betterproto.string_field(8)
     client_order_i_d: int = betterproto.uint64_field(9)
     order_i_d: str = betterproto.string_field(10)
-    project: "Project" = betterproto.enum_field(11)
+    compute_limit: int = betterproto.uint32_field(11)
+    compute_price: int = betterproto.uint64_field(12)
+    project: "Project" = betterproto.enum_field(13)
 
 
 @dataclass
@@ -306,7 +310,9 @@ class PostCancelOrderRequest(betterproto.Message):
     market_address: str = betterproto.string_field(3)
     owner_address: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
-    project: "Project" = betterproto.enum_field(6)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
+    project: "Project" = betterproto.enum_field(8)
 
 
 @dataclass
@@ -315,7 +321,9 @@ class PostCancelByClientOrderIDRequest(betterproto.Message):
     market_address: str = betterproto.string_field(2)
     owner_address: str = betterproto.string_field(3)
     open_orders_address: str = betterproto.string_field(4)
-    project: "Project" = betterproto.enum_field(5)
+    compute_limit: int = betterproto.uint32_field(5)
+    compute_price: int = betterproto.uint64_field(6)
+    project: "Project" = betterproto.enum_field(7)
 
 
 @dataclass
@@ -328,7 +336,9 @@ class PostCancelAllRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     owner_address: str = betterproto.string_field(2)
     open_orders_addresses: List[str] = betterproto.string_field(3)
-    project: "Project" = betterproto.enum_field(4)
+    compute_limit: int = betterproto.uint32_field(4)
+    compute_price: int = betterproto.uint64_field(5)
+    project: "Project" = betterproto.enum_field(6)
 
 
 @dataclass
@@ -349,7 +359,9 @@ class PostSettleRequest(betterproto.Message):
     base_token_wallet: str = betterproto.string_field(3)
     quote_token_wallet: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
-    project: "Project" = betterproto.enum_field(6)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
+    project: "Project" = betterproto.enum_field(8)
 
 
 @dataclass
@@ -605,6 +617,8 @@ class TradeSwapRequest(betterproto.Message):
     out_token: str = betterproto.string_field(4)
     in_amount: float = betterproto.double_field(5)
     slippage: float = betterproto.double_field(6)
+    compute_limit: int = betterproto.uint32_field(7)
+    compute_price: int = betterproto.uint64_field(8)
 
 
 @dataclass
@@ -614,6 +628,8 @@ class PostJupiterSwapRequest(betterproto.Message):
     out_token: str = betterproto.string_field(3)
     in_amount: float = betterproto.double_field(4)
     slippage: float = betterproto.double_field(5)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
 
 
 @dataclass
@@ -623,6 +639,8 @@ class PostRaydiumSwapRequest(betterproto.Message):
     out_token: str = betterproto.string_field(3)
     in_amount: float = betterproto.double_field(4)
     slippage: float = betterproto.double_field(5)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
 
 
 @dataclass
@@ -665,6 +683,8 @@ class RouteTradeSwapRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(2)
     steps: List["RouteStep"] = betterproto.message_field(3)
     slippage: float = betterproto.double_field(4)
+    compute_limit: int = betterproto.uint32_field(5)
+    compute_price: int = betterproto.uint64_field(6)
 
 
 @dataclass
@@ -672,6 +692,8 @@ class PostRaydiumRouteSwapRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     steps: List["RaydiumRouteStep"] = betterproto.message_field(2)
     slippage: float = betterproto.double_field(3)
+    compute_limit: int = betterproto.uint32_field(4)
+    compute_price: int = betterproto.uint64_field(5)
 
 
 @dataclass
@@ -689,6 +711,8 @@ class PostJupiterRouteSwapRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     steps: List["JupiterRouteStep"] = betterproto.message_field(2)
     slippage: float = betterproto.double_field(3)
+    compute_limit: int = betterproto.uint32_field(4)
+    compute_price: int = betterproto.uint64_field(5)
 
 
 @dataclass
@@ -835,17 +859,6 @@ class GetPoolsResponse(betterproto.Message):
 
 
 @dataclass
-class GetNewRaydiumPoolsRequest(betterproto.Message):
-    pass
-
-
-@dataclass
-class GetNewRaydiumPoolsResponse(betterproto.Message):
-    slot: int = betterproto.int64_field(1)
-    pool: "ProjectPool" = betterproto.message_field(2)
-
-
-@dataclass
 class GetRaydiumPoolsRequest(betterproto.Message):
     pair_or_address: str = betterproto.string_field(1)
 
@@ -907,6 +920,17 @@ class GetSwapsStreamRequest(betterproto.Message):
 class GetSwapsStreamResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
     swap: "GetSwapsStreamUpdate" = betterproto.message_field(2)
+
+
+@dataclass
+class GetNewRaydiumPoolsRequest(betterproto.Message):
+    pass
+
+
+@dataclass
+class GetNewRaydiumPoolsResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    pool: "ProjectPool" = betterproto.message_field(2)
 
 
 @dataclass
@@ -1956,6 +1980,8 @@ class PostOrderRequestV2(betterproto.Message):
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
     client_order_i_d: int = betterproto.uint64_field(9)
+    compute_limit: int = betterproto.uint32_field(10)
+    compute_price: int = betterproto.uint64_field(11)
 
 
 @dataclass
@@ -1970,6 +1996,8 @@ class PostReplaceOrderRequestV2(betterproto.Message):
     open_orders_address: str = betterproto.string_field(8)
     client_order_i_d: int = betterproto.uint64_field(9)
     order_i_d: str = betterproto.string_field(10)
+    compute_limit: int = betterproto.uint32_field(11)
+    compute_price: int = betterproto.uint64_field(12)
 
 
 @dataclass
@@ -1980,6 +2008,8 @@ class PostCancelOrderRequestV2(betterproto.Message):
     owner_address: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
     client_order_i_d: int = betterproto.uint64_field(6)
+    compute_limit: int = betterproto.uint32_field(7)
+    compute_price: int = betterproto.uint64_field(8)
 
 
 @dataclass
@@ -1994,6 +2024,8 @@ class PostSettleRequestV2(betterproto.Message):
     base_token_wallet: str = betterproto.string_field(3)
     quote_token_wallet: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
 
 
 @dataclass
@@ -2119,6 +2151,8 @@ class ApiStub(betterproto.ServiceStub):
         out_token: str = "",
         in_amount: float = 0,
         slippage: float = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> PostRaydiumSwapResponse:
         request = PostRaydiumSwapRequest()
         request.owner_address = owner_address
@@ -2126,6 +2160,8 @@ class ApiStub(betterproto.ServiceStub):
         request.out_token = out_token
         request.in_amount = in_amount
         request.slippage = slippage
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostRaydiumSwap",
@@ -2139,12 +2175,16 @@ class ApiStub(betterproto.ServiceStub):
         owner_address: str = "",
         steps: List["RaydiumRouteStep"] = [],
         slippage: float = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> PostRaydiumRouteSwapResponse:
         request = PostRaydiumRouteSwapRequest()
         request.owner_address = owner_address
         if steps is not None:
             request.steps = steps
         request.slippage = slippage
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostRaydiumRouteSwap",
@@ -2196,6 +2236,8 @@ class ApiStub(betterproto.ServiceStub):
         out_token: str = "",
         in_amount: float = 0,
         slippage: float = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> PostJupiterSwapResponse:
         request = PostJupiterSwapRequest()
         request.owner_address = owner_address
@@ -2203,6 +2245,8 @@ class ApiStub(betterproto.ServiceStub):
         request.out_token = out_token
         request.in_amount = in_amount
         request.slippage = slippage
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostJupiterSwap",
@@ -2216,12 +2260,16 @@ class ApiStub(betterproto.ServiceStub):
         owner_address: str = "",
         steps: List["JupiterRouteStep"] = [],
         slippage: float = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> PostJupiterRouteSwapResponse:
         request = PostJupiterRouteSwapRequest()
         request.owner_address = owner_address
         if steps is not None:
             request.steps = steps
         request.slippage = slippage
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostJupiterRouteSwap",
@@ -2764,6 +2812,8 @@ class ApiStub(betterproto.ServiceStub):
         price: float = 0,
         open_orders_address: str = "",
         client_order_i_d: int = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> PostOrderResponse:
         request = PostOrderRequestV2()
         request.owner_address = owner_address
@@ -2775,6 +2825,8 @@ class ApiStub(betterproto.ServiceStub):
         request.price = price
         request.open_orders_address = open_orders_address
         request.client_order_i_d = client_order_i_d
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostOrderV2",
@@ -2791,6 +2843,8 @@ class ApiStub(betterproto.ServiceStub):
         owner_address: str = "",
         open_orders_address: str = "",
         client_order_i_d: int = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> PostCancelOrderResponseV2:
         request = PostCancelOrderRequestV2()
         request.order_i_d = order_i_d
@@ -2799,6 +2853,8 @@ class ApiStub(betterproto.ServiceStub):
         request.owner_address = owner_address
         request.open_orders_address = open_orders_address
         request.client_order_i_d = client_order_i_d
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostCancelOrderV2",
@@ -2819,6 +2875,8 @@ class ApiStub(betterproto.ServiceStub):
         open_orders_address: str = "",
         client_order_i_d: int = 0,
         order_i_d: str = "",
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> PostOrderResponse:
         request = PostReplaceOrderRequestV2()
         request.owner_address = owner_address
@@ -2831,6 +2889,8 @@ class ApiStub(betterproto.ServiceStub):
         request.open_orders_address = open_orders_address
         request.client_order_i_d = client_order_i_d
         request.order_i_d = order_i_d
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostReplaceOrderV2",
@@ -2846,6 +2906,8 @@ class ApiStub(betterproto.ServiceStub):
         base_token_wallet: str = "",
         quote_token_wallet: str = "",
         open_orders_address: str = "",
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> PostSettleResponse:
         request = PostSettleRequestV2()
         request.owner_address = owner_address
@@ -2853,6 +2915,8 @@ class ApiStub(betterproto.ServiceStub):
         request.base_token_wallet = base_token_wallet
         request.quote_token_wallet = quote_token_wallet
         request.open_orders_address = open_orders_address
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostSettleV2",
@@ -3090,6 +3154,8 @@ class ApiStub(betterproto.ServiceStub):
         price: float = 0,
         open_orders_address: str = "",
         client_order_i_d: int = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
         project: "Project" = 0,
     ) -> PostOrderResponse:
         """trade endpoints"""
@@ -3104,6 +3170,8 @@ class ApiStub(betterproto.ServiceStub):
         request.price = price
         request.open_orders_address = open_orders_address
         request.client_order_i_d = client_order_i_d
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
         request.project = project
 
         return await self._unary_unary(
@@ -3154,6 +3222,8 @@ class ApiStub(betterproto.ServiceStub):
         market_address: str = "",
         owner_address: str = "",
         open_orders_address: str = "",
+        compute_limit: int = 0,
+        compute_price: int = 0,
         project: "Project" = 0,
     ) -> PostCancelOrderResponse:
         request = PostCancelOrderRequest()
@@ -3162,6 +3232,8 @@ class ApiStub(betterproto.ServiceStub):
         request.market_address = market_address
         request.owner_address = owner_address
         request.open_orders_address = open_orders_address
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
         request.project = project
 
         return await self._unary_unary(
@@ -3177,6 +3249,8 @@ class ApiStub(betterproto.ServiceStub):
         market_address: str = "",
         owner_address: str = "",
         open_orders_address: str = "",
+        compute_limit: int = 0,
+        compute_price: int = 0,
         project: "Project" = 0,
     ) -> PostCancelOrderResponse:
         request = PostCancelByClientOrderIDRequest()
@@ -3184,6 +3258,8 @@ class ApiStub(betterproto.ServiceStub):
         request.market_address = market_address
         request.owner_address = owner_address
         request.open_orders_address = open_orders_address
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
         request.project = project
 
         return await self._unary_unary(
@@ -3198,12 +3274,16 @@ class ApiStub(betterproto.ServiceStub):
         market: str = "",
         owner_address: str = "",
         open_orders_addresses: List[str] = [],
+        compute_limit: int = 0,
+        compute_price: int = 0,
         project: "Project" = 0,
     ) -> PostCancelAllResponse:
         request = PostCancelAllRequest()
         request.market = market
         request.owner_address = owner_address
         request.open_orders_addresses = open_orders_addresses
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
         request.project = project
 
         return await self._unary_unary(
@@ -3224,6 +3304,8 @@ class ApiStub(betterproto.ServiceStub):
         price: float = 0,
         open_orders_address: str = "",
         client_order_i_d: int = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
         project: "Project" = 0,
     ) -> PostOrderResponse:
         request = PostOrderRequest()
@@ -3236,6 +3318,8 @@ class ApiStub(betterproto.ServiceStub):
         request.price = price
         request.open_orders_address = open_orders_address
         request.client_order_i_d = client_order_i_d
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
         request.project = project
 
         return await self._unary_unary(
@@ -3257,6 +3341,8 @@ class ApiStub(betterproto.ServiceStub):
         open_orders_address: str = "",
         client_order_i_d: int = 0,
         order_i_d: str = "",
+        compute_limit: int = 0,
+        compute_price: int = 0,
         project: "Project" = 0,
     ) -> PostOrderResponse:
         request = PostReplaceOrderRequest()
@@ -3270,6 +3356,8 @@ class ApiStub(betterproto.ServiceStub):
         request.open_orders_address = open_orders_address
         request.client_order_i_d = client_order_i_d
         request.order_i_d = order_i_d
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
         request.project = project
 
         return await self._unary_unary(
@@ -3286,6 +3374,8 @@ class ApiStub(betterproto.ServiceStub):
         base_token_wallet: str = "",
         quote_token_wallet: str = "",
         open_orders_address: str = "",
+        compute_limit: int = 0,
+        compute_price: int = 0,
         project: "Project" = 0,
     ) -> PostSettleResponse:
         request = PostSettleRequest()
@@ -3294,6 +3384,8 @@ class ApiStub(betterproto.ServiceStub):
         request.base_token_wallet = base_token_wallet
         request.quote_token_wallet = quote_token_wallet
         request.open_orders_address = open_orders_address
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
         request.project = project
 
         return await self._unary_unary(
@@ -3311,6 +3403,8 @@ class ApiStub(betterproto.ServiceStub):
         out_token: str = "",
         in_amount: float = 0,
         slippage: float = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> TradeSwapResponse:
         request = TradeSwapRequest()
         request.project = project
@@ -3319,6 +3413,8 @@ class ApiStub(betterproto.ServiceStub):
         request.out_token = out_token
         request.in_amount = in_amount
         request.slippage = slippage
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostTradeSwap",
@@ -3416,6 +3512,8 @@ class ApiStub(betterproto.ServiceStub):
         owner_address: str = "",
         steps: List["RouteStep"] = [],
         slippage: float = 0,
+        compute_limit: int = 0,
+        compute_price: int = 0,
     ) -> TradeSwapResponse:
         request = RouteTradeSwapRequest()
         request.project = project
@@ -3423,6 +3521,8 @@ class ApiStub(betterproto.ServiceStub):
         if steps is not None:
             request.steps = steps
         request.slippage = slippage
+        request.compute_limit = compute_limit
+        request.compute_price = compute_price
 
         return await self._unary_unary(
             "/api.Api/PostRouteTradeSwap",
