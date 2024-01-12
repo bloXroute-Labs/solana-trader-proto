@@ -3492,6 +3492,40 @@
           "Universal"
         ]
       }
+    },
+    "/api/v2/token-info": {
+      "post": {
+        "summary": "Returns the details of a token",
+        "description": "Returns the details of a token. i.e decimals, symbol, name",
+        "operationId": "Api_GetTokenInfoV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTokenInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetTokenInfoRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Universal"
+        ]
+      }
     }
   },
   "definitions": {
@@ -4919,6 +4953,35 @@
           "items": {
             "$ref": "#/definitions/apiTokenAccount"
           }
+        }
+      }
+    },
+    "apiGetTokenInfoRequest": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "apiGetTokenInfoResponse": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "mint": {
+          "type": "string"
+        },
+        "decimals": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

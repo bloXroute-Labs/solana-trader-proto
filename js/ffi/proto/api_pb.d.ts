@@ -7669,6 +7669,58 @@ export namespace OrderV2 {
     }
 }
 
+export class GetTokenInfoRequest extends jspb.Message { 
+    getAddress(): string;
+    setAddress(value: string): GetTokenInfoRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTokenInfoRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTokenInfoRequest): GetTokenInfoRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTokenInfoRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTokenInfoRequest;
+    static deserializeBinaryFromReader(message: GetTokenInfoRequest, reader: jspb.BinaryReader): GetTokenInfoRequest;
+}
+
+export namespace GetTokenInfoRequest {
+    export type AsObject = {
+        address: string,
+    }
+}
+
+export class GetTokenInfoResponse extends jspb.Message { 
+    getAddress(): string;
+    setAddress(value: string): GetTokenInfoResponse;
+    getName(): string;
+    setName(value: string): GetTokenInfoResponse;
+    getSymbol(): string;
+    setSymbol(value: string): GetTokenInfoResponse;
+    getMint(): string;
+    setMint(value: string): GetTokenInfoResponse;
+    getDecimals(): number;
+    setDecimals(value: number): GetTokenInfoResponse;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): GetTokenInfoResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: GetTokenInfoResponse): GetTokenInfoResponse.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: GetTokenInfoResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): GetTokenInfoResponse;
+    static deserializeBinaryFromReader(message: GetTokenInfoResponse, reader: jspb.BinaryReader): GetTokenInfoResponse;
+}
+
+export namespace GetTokenInfoResponse {
+    export type AsObject = {
+        address: string,
+        name: string,
+        symbol: string,
+        mint: string,
+        decimals: number,
+    }
+}
+
 export enum MarketStatus {
     MS_UNKNOWN = 0,
     MS_ONLINE = 1,

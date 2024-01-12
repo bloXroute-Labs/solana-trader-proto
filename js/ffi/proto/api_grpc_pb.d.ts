@@ -15,6 +15,7 @@ import * as common_pb from "./common_pb";
 interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     postSubmitV2: IApiService_IPostSubmitV2;
     postSubmitBatchV2: IApiService_IPostSubmitBatchV2;
+    getTokenInfoV2: IApiService_IGetTokenInfoV2;
     getRaydiumPools: IApiService_IGetRaydiumPools;
     getRaydiumQuotes: IApiService_IGetRaydiumQuotes;
     getRaydiumPrices: IApiService_IGetRaydiumPrices;
@@ -137,6 +138,15 @@ interface IApiService_IPostSubmitBatchV2 extends grpc.MethodDefinition<api_pb.Po
     requestDeserialize: grpc.deserialize<api_pb.PostSubmitBatchRequest>;
     responseSerialize: grpc.serialize<api_pb.PostSubmitBatchResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostSubmitBatchResponse>;
+}
+interface IApiService_IGetTokenInfoV2 extends grpc.MethodDefinition<api_pb.GetTokenInfoRequest, api_pb.GetTokenInfoResponse> {
+    path: "/api.Api/GetTokenInfoV2";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetTokenInfoRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetTokenInfoRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetTokenInfoResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetTokenInfoResponse>;
 }
 interface IApiService_IGetRaydiumPools extends grpc.MethodDefinition<api_pb.GetRaydiumPoolsRequest, api_pb.GetRaydiumPoolsResponse> {
     path: "/api.Api/GetRaydiumPools";
@@ -1071,6 +1081,7 @@ export const ApiService: IApiService;
 export interface IApiServer extends grpc.UntypedServiceImplementation {
     postSubmitV2: grpc.handleUnaryCall<api_pb.PostSubmitRequest, api_pb.PostSubmitResponse>;
     postSubmitBatchV2: grpc.handleUnaryCall<api_pb.PostSubmitBatchRequest, api_pb.PostSubmitBatchResponse>;
+    getTokenInfoV2: grpc.handleUnaryCall<api_pb.GetTokenInfoRequest, api_pb.GetTokenInfoResponse>;
     getRaydiumPools: grpc.handleUnaryCall<api_pb.GetRaydiumPoolsRequest, api_pb.GetRaydiumPoolsResponse>;
     getRaydiumQuotes: grpc.handleUnaryCall<api_pb.GetRaydiumQuotesRequest, api_pb.GetRaydiumQuotesResponse>;
     getRaydiumPrices: grpc.handleUnaryCall<api_pb.GetRaydiumPricesRequest, api_pb.GetRaydiumPricesResponse>;
@@ -1183,6 +1194,9 @@ export interface IApiClient {
     postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
     postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
     postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
+    getTokenInfoV2(request: api_pb.GetTokenInfoRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenInfoResponse) => void): grpc.ClientUnaryCall;
+    getTokenInfoV2(request: api_pb.GetTokenInfoRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenInfoResponse) => void): grpc.ClientUnaryCall;
+    getTokenInfoV2(request: api_pb.GetTokenInfoRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenInfoResponse) => void): grpc.ClientUnaryCall;
     getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
     getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
     getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
@@ -1486,6 +1500,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
     public postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
     public postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
+    public getTokenInfoV2(request: api_pb.GetTokenInfoRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenInfoResponse) => void): grpc.ClientUnaryCall;
+    public getTokenInfoV2(request: api_pb.GetTokenInfoRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenInfoResponse) => void): grpc.ClientUnaryCall;
+    public getTokenInfoV2(request: api_pb.GetTokenInfoRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTokenInfoResponse) => void): grpc.ClientUnaryCall;
     public getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
     public getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;
     public getRaydiumPools(request: api_pb.GetRaydiumPoolsRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetRaydiumPoolsResponse) => void): grpc.ClientUnaryCall;

@@ -1253,6 +1253,28 @@ function deserialize_api_GetTokenAccountsResponse(buffer_arg) {
   return api_pb.GetTokenAccountsResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetTokenInfoRequest(arg) {
+  if (!(arg instanceof api_pb.GetTokenInfoRequest)) {
+    throw new Error('Expected argument of type api.GetTokenInfoRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTokenInfoRequest(buffer_arg) {
+  return api_pb.GetTokenInfoRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetTokenInfoResponse(arg) {
+  if (!(arg instanceof api_pb.GetTokenInfoResponse)) {
+    throw new Error('Expected argument of type api.GetTokenInfoResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTokenInfoResponse(buffer_arg) {
+  return api_pb.GetTokenInfoResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetTradesRequest(arg) {
   if (!(arg instanceof api_pb.GetTradesRequest)) {
     throw new Error('Expected argument of type api.GetTradesRequest');
@@ -2156,6 +2178,17 @@ var ApiService = exports.ApiService = {
     requestDeserialize: deserialize_api_PostSubmitBatchRequest,
     responseSerialize: serialize_api_PostSubmitBatchResponse,
     responseDeserialize: deserialize_api_PostSubmitBatchResponse,
+  },
+  getTokenInfoV2: {
+    path: '/api.Api/GetTokenInfoV2',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetTokenInfoRequest,
+    responseType: api_pb.GetTokenInfoResponse,
+    requestSerialize: serialize_api_GetTokenInfoRequest,
+    requestDeserialize: deserialize_api_GetTokenInfoRequest,
+    responseSerialize: serialize_api_GetTokenInfoResponse,
+    responseDeserialize: deserialize_api_GetTokenInfoResponse,
   },
   // Raydium V2
 getRaydiumPools: {

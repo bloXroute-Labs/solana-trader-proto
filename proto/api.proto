@@ -75,6 +75,18 @@ service Api {
     };
   }
 
+  rpc GetTokenInfoV2(GetTokenInfoRequest) returns (GetTokenInfoResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/token-info"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the details of a token. i.e decimals, symbol, name";
+      summary: "Returns the details of a token";
+      tags: ["Universal"];
+    };
+  }
+
   // Raydium V2
   rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
     option (google.api.http) = {
@@ -2991,3 +3003,16 @@ message OrderV2 {
 }
 
 //End of Openbook V2 Messages
+
+
+message GetTokenInfoRequest {
+  string address = 1;
+}
+
+message GetTokenInfoResponse {
+  string address = 1;
+  string name = 2;
+  string symbol = 3;
+  string mint = 4;
+  int32 decimals = 5;
+}

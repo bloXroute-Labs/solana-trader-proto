@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 type ApiClient interface {
 	PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
 	PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
+	GetTokenInfoV2(ctx context.Context, in *GetTokenInfoRequest, opts ...grpc.CallOption) (*GetTokenInfoResponse, error)
 	// Raydium V2
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error)
@@ -170,6 +171,15 @@ func (c *apiClient) PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opt
 func (c *apiClient) PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error) {
 	out := new(PostSubmitBatchResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitBatchV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetTokenInfoV2(ctx context.Context, in *GetTokenInfoRequest, opts ...grpc.CallOption) (*GetTokenInfoResponse, error) {
+	out := new(GetTokenInfoResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetTokenInfoV2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1477,6 +1487,7 @@ func (x *apiGetPerpTradesStreamClient) Recv() (*GetPerpTradesStreamResponse, err
 type ApiServer interface {
 	PostSubmitV2(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
 	PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
+	GetTokenInfoV2(context.Context, *GetTokenInfoRequest) (*GetTokenInfoResponse, error)
 	// Raydium V2
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error)
@@ -1617,6 +1628,9 @@ func (UnimplementedApiServer) PostSubmitV2(context.Context, *PostSubmitRequest) 
 }
 func (UnimplementedApiServer) PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitBatchV2 not implemented")
+}
+func (UnimplementedApiServer) GetTokenInfoV2(context.Context, *GetTokenInfoRequest) (*GetTokenInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTokenInfoV2 not implemented")
 }
 func (UnimplementedApiServer) GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPools not implemented")
@@ -1972,6 +1986,24 @@ func _Api_PostSubmitBatchV2_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostSubmitBatchV2(ctx, req.(*PostSubmitBatchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetTokenInfoV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTokenInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetTokenInfoV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetTokenInfoV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetTokenInfoV2(ctx, req.(*GetTokenInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3892,6 +3924,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostSubmitBatchV2",
 			Handler:    _Api_PostSubmitBatchV2_Handler,
+		},
+		{
+			MethodName: "GetTokenInfoV2",
+			Handler:    _Api_GetTokenInfoV2_Handler,
 		},
 		{
 			MethodName: "GetRaydiumPools",
