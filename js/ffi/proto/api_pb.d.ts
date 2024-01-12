@@ -3164,6 +3164,8 @@ export class ProjectPool extends jspb.Message {
     setToken2mintaddress(value: string): ProjectPool;
     getToken2mintsymbol(): string;
     setToken2mintsymbol(value: string): ProjectPool;
+    getOpentime(): number;
+    setOpentime(value: number): ProjectPool;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): ProjectPool.AsObject;
@@ -3185,6 +3187,7 @@ export namespace ProjectPool {
         token2reserves: number,
         token2mintaddress: string,
         token2mintsymbol: string,
+        opentime: number,
     }
 }
 

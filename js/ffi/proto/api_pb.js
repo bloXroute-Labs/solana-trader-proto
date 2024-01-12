@@ -29947,7 +29947,8 @@ proto.api.ProjectPool.toObject = function(includeInstance, msg) {
     token1mintsymbol: jspb.Message.getFieldWithDefault(msg, 5, ""),
     token2reserves: jspb.Message.getFieldWithDefault(msg, 6, 0),
     token2mintaddress: jspb.Message.getFieldWithDefault(msg, 7, ""),
-    token2mintsymbol: jspb.Message.getFieldWithDefault(msg, 8, "")
+    token2mintsymbol: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    opentime: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {
@@ -30015,6 +30016,10 @@ proto.api.ProjectPool.deserializeBinaryFromReader = function(msg, reader) {
     case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setToken2mintsymbol(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setOpentime(value);
       break;
     default:
       reader.skipField();
@@ -30098,6 +30103,13 @@ proto.api.ProjectPool.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       8,
+      f
+    );
+  }
+  f = message.getOpentime();
+  if (f !== 0) {
+    writer.writeUint64(
+      9,
       f
     );
   }
@@ -30245,6 +30257,24 @@ proto.api.ProjectPool.prototype.getToken2mintsymbol = function() {
  */
 proto.api.ProjectPool.prototype.setToken2mintsymbol = function(value) {
   return jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional uint64 openTime = 9;
+ * @return {number}
+ */
+proto.api.ProjectPool.prototype.getOpentime = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.ProjectPool} returns this
+ */
+proto.api.ProjectPool.prototype.setOpentime = function(value) {
+  return jspb.Message.setProto3IntField(this, 9, value);
 };
 
 

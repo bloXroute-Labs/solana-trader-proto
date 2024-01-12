@@ -290,7 +290,9 @@ class PostOrderRequest(betterproto.Message):
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
     client_order_id: int = betterproto.uint64_field(9)
-    project: "Project" = betterproto.enum_field(10)
+    compute_limit: int = betterproto.uint32_field(10)
+    compute_price: int = betterproto.uint64_field(11)
+    project: "Project" = betterproto.enum_field(12)
 
 
 @dataclass(eq=False, repr=False)
@@ -305,7 +307,9 @@ class PostReplaceOrderRequest(betterproto.Message):
     open_orders_address: str = betterproto.string_field(8)
     client_order_id: int = betterproto.uint64_field(9)
     order_id: str = betterproto.string_field(10)
-    project: "Project" = betterproto.enum_field(11)
+    compute_limit: int = betterproto.uint32_field(11)
+    compute_price: int = betterproto.uint64_field(12)
+    project: "Project" = betterproto.enum_field(13)
 
 
 @dataclass(eq=False, repr=False)
@@ -321,7 +325,9 @@ class PostCancelOrderRequest(betterproto.Message):
     market_address: str = betterproto.string_field(3)
     owner_address: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
-    project: "Project" = betterproto.enum_field(6)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
+    project: "Project" = betterproto.enum_field(8)
 
 
 @dataclass(eq=False, repr=False)
@@ -330,7 +336,9 @@ class PostCancelByClientOrderIdRequest(betterproto.Message):
     market_address: str = betterproto.string_field(2)
     owner_address: str = betterproto.string_field(3)
     open_orders_address: str = betterproto.string_field(4)
-    project: "Project" = betterproto.enum_field(5)
+    compute_limit: int = betterproto.uint32_field(5)
+    compute_price: int = betterproto.uint64_field(6)
+    project: "Project" = betterproto.enum_field(7)
 
 
 @dataclass(eq=False, repr=False)
@@ -343,7 +351,9 @@ class PostCancelAllRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     owner_address: str = betterproto.string_field(2)
     open_orders_addresses: List[str] = betterproto.string_field(3)
-    project: "Project" = betterproto.enum_field(4)
+    compute_limit: int = betterproto.uint32_field(4)
+    compute_price: int = betterproto.uint64_field(5)
+    project: "Project" = betterproto.enum_field(6)
 
 
 @dataclass(eq=False, repr=False)
@@ -364,7 +374,9 @@ class PostSettleRequest(betterproto.Message):
     base_token_wallet: str = betterproto.string_field(3)
     quote_token_wallet: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
-    project: "Project" = betterproto.enum_field(6)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
+    project: "Project" = betterproto.enum_field(8)
 
 
 @dataclass(eq=False, repr=False)
@@ -620,6 +632,8 @@ class TradeSwapRequest(betterproto.Message):
     out_token: str = betterproto.string_field(4)
     in_amount: float = betterproto.double_field(5)
     slippage: float = betterproto.double_field(6)
+    compute_limit: int = betterproto.uint32_field(7)
+    compute_price: int = betterproto.uint64_field(8)
 
 
 @dataclass(eq=False, repr=False)
@@ -629,6 +643,8 @@ class PostJupiterSwapRequest(betterproto.Message):
     out_token: str = betterproto.string_field(3)
     in_amount: float = betterproto.double_field(4)
     slippage: float = betterproto.double_field(5)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
 
 
 @dataclass(eq=False, repr=False)
@@ -638,6 +654,8 @@ class PostRaydiumSwapRequest(betterproto.Message):
     out_token: str = betterproto.string_field(3)
     in_amount: float = betterproto.double_field(4)
     slippage: float = betterproto.double_field(5)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
 
 
 @dataclass(eq=False, repr=False)
@@ -680,6 +698,8 @@ class RouteTradeSwapRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(2)
     steps: List["RouteStep"] = betterproto.message_field(3)
     slippage: float = betterproto.double_field(4)
+    compute_limit: int = betterproto.uint32_field(5)
+    compute_price: int = betterproto.uint64_field(6)
 
 
 @dataclass(eq=False, repr=False)
@@ -687,6 +707,8 @@ class PostRaydiumRouteSwapRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     steps: List["RaydiumRouteStep"] = betterproto.message_field(2)
     slippage: float = betterproto.double_field(3)
+    compute_limit: int = betterproto.uint32_field(4)
+    compute_price: int = betterproto.uint64_field(5)
 
 
 @dataclass(eq=False, repr=False)
@@ -704,6 +726,8 @@ class PostJupiterRouteSwapRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     steps: List["JupiterRouteStep"] = betterproto.message_field(2)
     slippage: float = betterproto.double_field(3)
+    compute_limit: int = betterproto.uint32_field(4)
+    compute_price: int = betterproto.uint64_field(5)
 
 
 @dataclass(eq=False, repr=False)
@@ -879,6 +903,7 @@ class ProjectPool(betterproto.Message):
     token2_reserves: int = betterproto.int64_field(6)
     token2_mint_address: str = betterproto.string_field(7)
     token2_mint_symbol: str = betterproto.string_field(8)
+    open_time: int = betterproto.uint64_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -915,6 +940,17 @@ class GetSwapsStreamRequest(betterproto.Message):
 class GetSwapsStreamResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
     swap: "GetSwapsStreamUpdate" = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetNewRaydiumPoolsRequest(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetNewRaydiumPoolsResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    pool: "ProjectPool" = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -1964,6 +2000,8 @@ class PostOrderRequestV2(betterproto.Message):
     price: float = betterproto.double_field(7)
     open_orders_address: str = betterproto.string_field(8)
     client_order_id: int = betterproto.uint64_field(9)
+    compute_limit: int = betterproto.uint32_field(10)
+    compute_price: int = betterproto.uint64_field(11)
 
 
 @dataclass(eq=False, repr=False)
@@ -1978,6 +2016,8 @@ class PostReplaceOrderRequestV2(betterproto.Message):
     open_orders_address: str = betterproto.string_field(8)
     client_order_id: int = betterproto.uint64_field(9)
     order_id: str = betterproto.string_field(10)
+    compute_limit: int = betterproto.uint32_field(11)
+    compute_price: int = betterproto.uint64_field(12)
 
 
 @dataclass(eq=False, repr=False)
@@ -1988,6 +2028,8 @@ class PostCancelOrderRequestV2(betterproto.Message):
     owner_address: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
     client_order_id: int = betterproto.uint64_field(6)
+    compute_limit: int = betterproto.uint32_field(7)
+    compute_price: int = betterproto.uint64_field(8)
 
 
 @dataclass(eq=False, repr=False)
@@ -2002,6 +2044,8 @@ class PostSettleRequestV2(betterproto.Message):
     base_token_wallet: str = betterproto.string_field(3)
     quote_token_wallet: str = betterproto.string_field(4)
     open_orders_address: str = betterproto.string_field(5)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
 
 
 @dataclass(eq=False, repr=False)
@@ -3768,6 +3812,24 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_new_raydium_pools_stream(
+        self,
+        get_new_raydium_pools_request: "GetNewRaydiumPoolsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetNewRaydiumPoolsResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetNewRaydiumPoolsStream",
+            get_new_raydium_pools_request,
+            GetNewRaydiumPoolsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
     async def get_swaps_stream(
         self,
         get_swaps_stream_request: "GetSwapsStreamRequest",
@@ -4342,6 +4404,12 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetPricesStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPricesStreamResponse()
+
+    async def get_new_raydium_pools_stream(
+        self, get_new_raydium_pools_request: "GetNewRaydiumPoolsRequest"
+    ) -> AsyncIterator["GetNewRaydiumPoolsResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetNewRaydiumPoolsResponse()
 
     async def get_swaps_stream(
         self, get_swaps_stream_request: "GetSwapsStreamRequest"
@@ -5179,6 +5247,17 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_new_raydium_pools_stream(
+        self,
+        stream: "grpclib.server.Stream[GetNewRaydiumPoolsRequest, GetNewRaydiumPoolsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_new_raydium_pools_stream,
+            stream,
+            request,
+        )
+
     async def __rpc_get_swaps_stream(
         self,
         stream: "grpclib.server.Stream[GetSwapsStreamRequest, GetSwapsStreamResponse]",
@@ -5819,6 +5898,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetPricesStreamRequest,
                 GetPricesStreamResponse,
+            ),
+            "/api.Api/GetNewRaydiumPoolsStream": grpclib.const.Handler(
+                self.__rpc_get_new_raydium_pools_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetNewRaydiumPoolsRequest,
+                GetNewRaydiumPoolsResponse,
             ),
             "/api.Api/GetSwapsStream": grpclib.const.Handler(
                 self.__rpc_get_swaps_stream,
