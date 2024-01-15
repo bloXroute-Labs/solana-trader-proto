@@ -1966,6 +1966,7 @@ message ProjectPool {
   int64 token2Reserves = 6;
   string token2MintAddress = 7;
   string token2MintSymbol = 8;
+  uint64 openTime = 9;
 }
 
 message GetQuotesStreamRequest {

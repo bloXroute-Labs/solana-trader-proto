@@ -7153,6 +7153,10 @@
         },
         "token2MintSymbol": {
           "type": "string"
+        },
+        "openTime": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },

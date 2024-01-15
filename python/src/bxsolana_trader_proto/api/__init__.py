@@ -901,6 +901,7 @@ class ProjectPool(betterproto.Message):
     token2_reserves: int = betterproto.int64_field(6)
     token2_mint_address: str = betterproto.string_field(7)
     token2_mint_symbol: str = betterproto.string_field(8)
+    open_time: int = betterproto.uint64_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -4376,6 +4377,12 @@ class ApiBase(ServiceBase):
         self, get_new_raydium_pools_request: "GetNewRaydiumPoolsRequest"
     ) -> AsyncIterator["GetNewRaydiumPoolsResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_new_raydium_pools_stream(
+        self, get_new_raydium_pools_request: "GetNewRaydiumPoolsRequest"
+    ) -> AsyncIterator["GetNewRaydiumPoolsResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetNewRaydiumPoolsResponse()
 
     async def get_swaps_stream(
         self, get_swaps_stream_request: "GetSwapsStreamRequest"
