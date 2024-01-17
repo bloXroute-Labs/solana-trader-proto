@@ -4,7 +4,7 @@
 // 	protoc        v3.19.3
 // source: auth.proto
 
-package jitoproto
+package auth
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"

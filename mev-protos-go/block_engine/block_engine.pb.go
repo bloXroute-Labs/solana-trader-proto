@@ -4,7 +4,7 @@
 // 	protoc        v3.19.3
 // source: block_engine.proto
 
-package jitoproto
+package block_engine
 
 import (
 	bundle "github.com/bloXroute-Labs/solana-trader-proto/bundle"

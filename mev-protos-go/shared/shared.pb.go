@@ -4,7 +4,7 @@
 // 	protoc        v3.19.3
 // source: shared.proto
 
-package jitoproto
+package shared
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"

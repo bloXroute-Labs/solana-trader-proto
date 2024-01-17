@@ -4,7 +4,7 @@
 // 	protoc        v3.19.3
 // source: trace_shred.proto
 
-package jitoproto
+package trace_shred
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"

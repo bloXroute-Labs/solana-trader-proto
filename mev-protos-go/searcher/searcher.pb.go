@@ -4,7 +4,7 @@
 // 	protoc        v3.19.3
 // source: searcher.proto
 
-package jitoproto
+package searcher
 
 import (
 	bundle "github.com/bloXroute-Labs/solana-trader-proto/bundle"
