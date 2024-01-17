@@ -2,6 +2,8 @@ syntax = "proto3";
 package api;
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/api";
 
+
+import "mev-protos/packet.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/api/field_behavior.proto";
@@ -1459,6 +1461,11 @@ message TransactionMessage {
   bool isCleanup = 2;
 }
 
+message TransactionMessageJito {
+  string content = 1;
+  packet.Packet Packet = 2;
+}
+
 message PostCancelAllResponse {
   repeated TransactionMessage transactions = 1;
 }
@@ -1554,6 +1561,13 @@ message PostSubmitRequest {
   TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
   bool skipPreFlight = 2;
 }
+
+message PostSubmitJitoBundleRequest {
+  TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
+
+
+}
+
 
 message PostSubmitRequestEntry {
   TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];

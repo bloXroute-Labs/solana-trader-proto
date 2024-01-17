@@ -9,6 +9,7 @@ import betterproto
 import grpclib
 
 from . import common
+from . import packet
 
 
 class MarketStatus(betterproto.Enum):
@@ -348,6 +349,12 @@ class TransactionMessage(betterproto.Message):
 
 
 @dataclass
+class TransactionMessageJito(betterproto.Message):
+    content: str = betterproto.string_field(1)
+    packet: packet.Packet = betterproto.message_field(2)
+
+
+@dataclass
 class PostCancelAllResponse(betterproto.Message):
     transactions: List["TransactionMessage"] = betterproto.message_field(1)
 
@@ -439,6 +446,11 @@ class GetOrderStatusResponse(betterproto.Message):
 class PostSubmitRequest(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
     skip_pre_flight: bool = betterproto.bool_field(2)
+
+
+@dataclass
+class PostSubmitJitoBundleRequest(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
 @dataclass

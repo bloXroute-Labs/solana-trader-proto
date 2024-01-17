@@ -5,6 +5,7 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
+import * as packet_pb from "./packet_pb";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 import * as google_api_field_behavior_pb from "./google/api/field_behavior_pb";
 import * as google_api_visibility_pb from "./google/api/visibility_pb";
@@ -1094,6 +1095,32 @@ export namespace TransactionMessage {
     }
 }
 
+export class TransactionMessageJito extends jspb.Message { 
+    getContent(): string;
+    setContent(value: string): TransactionMessageJito;
+
+    hasPacket(): boolean;
+    clearPacket(): void;
+    getPacket(): packet_pb.Packet | undefined;
+    setPacket(value?: packet_pb.Packet): TransactionMessageJito;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): TransactionMessageJito.AsObject;
+    static toObject(includeInstance: boolean, msg: TransactionMessageJito): TransactionMessageJito.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: TransactionMessageJito, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): TransactionMessageJito;
+    static deserializeBinaryFromReader(message: TransactionMessageJito, reader: jspb.BinaryReader): TransactionMessageJito;
+}
+
+export namespace TransactionMessageJito {
+    export type AsObject = {
+        content: string,
+        packet?: packet_pb.Packet.AsObject,
+    }
+}
+
 export class PostCancelAllResponse extends jspb.Message { 
     clearTransactionsList(): void;
     getTransactionsList(): Array<TransactionMessage>;
@@ -1451,6 +1478,29 @@ export namespace PostSubmitRequest {
     export type AsObject = {
         transaction?: TransactionMessage.AsObject,
         skippreflight: boolean,
+    }
+}
+
+export class PostSubmitJitoBundleRequest extends jspb.Message { 
+
+    hasTransaction(): boolean;
+    clearTransaction(): void;
+    getTransaction(): TransactionMessage | undefined;
+    setTransaction(value?: TransactionMessage): PostSubmitJitoBundleRequest;
+
+    serializeBinary(): Uint8Array;
+    toObject(includeInstance?: boolean): PostSubmitJitoBundleRequest.AsObject;
+    static toObject(includeInstance: boolean, msg: PostSubmitJitoBundleRequest): PostSubmitJitoBundleRequest.AsObject;
+    static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+    static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+    static serializeBinaryToWriter(message: PostSubmitJitoBundleRequest, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostSubmitJitoBundleRequest;
+    static deserializeBinaryFromReader(message: PostSubmitJitoBundleRequest, reader: jspb.BinaryReader): PostSubmitJitoBundleRequest;
+}
+
+export namespace PostSubmitJitoBundleRequest {
+    export type AsObject = {
+        transaction?: TransactionMessage.AsObject,
     }
 }
 
