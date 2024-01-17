@@ -3514,13 +3514,6 @@
         },
         "parameters": [
           {
-            "name": "maxSupportedTransactionVersion",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "signature",
             "in": "query",
             "required": false,

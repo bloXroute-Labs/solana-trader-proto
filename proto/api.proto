@@ -1962,8 +1962,7 @@ message GetRaydiumPoolsResponse {
 }
 
 message GetTransactionRequest {
-  int32 maxSupportedTransactionVersion = 1;
-  string signature = 2;
+  string signature = 1;
 }
 
 message GetTransactionResponse {

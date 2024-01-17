@@ -29904,8 +29904,7 @@ proto.api.GetTransactionRequest.prototype.toObject = function(opt_includeInstanc
  */
 proto.api.GetTransactionRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    maxsupportedtransactionversion: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    signature: jspb.Message.getFieldWithDefault(msg, 2, "")
+    signature: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -29943,10 +29942,6 @@ proto.api.GetTransactionRequest.deserializeBinaryFromReader = function(msg, read
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt32());
-      msg.setMaxsupportedtransactionversion(value);
-      break;
-    case 2:
       var value = /** @type {string} */ (reader.readString());
       msg.setSignature(value);
       break;
@@ -29979,47 +29974,22 @@ proto.api.GetTransactionRequest.prototype.serializeBinary = function() {
  */
 proto.api.GetTransactionRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getMaxsupportedtransactionversion();
-  if (f !== 0) {
-    writer.writeInt32(
+  f = message.getSignature();
+  if (f.length > 0) {
+    writer.writeString(
       1,
       f
     );
   }
-  f = message.getSignature();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
 };
 
 
 /**
- * optional int32 maxSupportedTransactionVersion = 1;
- * @return {number}
- */
-proto.api.GetTransactionRequest.prototype.getMaxsupportedtransactionversion = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
-};
-
-
-/**
- * @param {number} value
- * @return {!proto.api.GetTransactionRequest} returns this
- */
-proto.api.GetTransactionRequest.prototype.setMaxsupportedtransactionversion = function(value) {
-  return jspb.Message.setProto3IntField(this, 1, value);
-};
-
-
-/**
- * optional string signature = 2;
+ * optional string signature = 1;
  * @return {string}
  */
 proto.api.GetTransactionRequest.prototype.getSignature = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
@@ -30028,7 +29998,7 @@ proto.api.GetTransactionRequest.prototype.getSignature = function() {
  * @return {!proto.api.GetTransactionRequest} returns this
  */
 proto.api.GetTransactionRequest.prototype.setSignature = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
