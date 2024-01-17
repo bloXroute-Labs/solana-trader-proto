@@ -1563,9 +1563,7 @@ message PostSubmitRequest {
 }
 
 message PostSubmitJitoBundleRequest {
-  TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
-
-
+  repeated TransactionMessageJito transactions = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 

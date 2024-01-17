@@ -35,7 +35,7 @@ proto-build-api-go:
 
 proto-build-api-jito:
 	docker run -v $(CURDIR)/mev-protos-go:/go/protobuf/out \
-			   -v $(CURDIR)/mev-protos:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
+			   -v $(CURDIR)/proto/mev-protos:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
 		protoc --go_out=../out --go_opt=paths=source_relative  --go-grpc_out=../out --go-grpc_opt=paths=source_relative auth.proto block.proto block_engine.proto bundle.proto packet.proto relayer.proto searcher.proto shared.proto shredstream.proto trace_shred.proto
 
 proto-build-api-python:
