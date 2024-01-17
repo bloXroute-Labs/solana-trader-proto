@@ -8,7 +8,7 @@ package api
 
 import (
 	common "github.com/bloXroute-Labs/solana-trader-proto/common"
-	packet "github.com/bloXroute-Labs/solana-trader-proto/mev-proto/packet"
+	packet "github.com/bloXroute-Labs/solana-trader-proto/packet"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
