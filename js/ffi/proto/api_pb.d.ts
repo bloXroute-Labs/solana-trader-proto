@@ -3123,8 +3123,6 @@ export namespace GetRaydiumPoolsResponse {
 }
 
 export class GetTransactionRequest extends jspb.Message { 
-    getMaxsupportedtransactionversion(): number;
-    setMaxsupportedtransactionversion(value: number): GetTransactionRequest;
     getSignature(): string;
     setSignature(value: string): GetTransactionRequest;
 
@@ -3140,7 +3138,6 @@ export class GetTransactionRequest extends jspb.Message {
 
 export namespace GetTransactionRequest {
     export type AsObject = {
-        maxsupportedtransactionversion: number,
         signature: string,
     }
 }

@@ -889,8 +889,7 @@ class GetRaydiumPoolsResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetTransactionRequest(betterproto.Message):
-    max_supported_transaction_version: int = betterproto.int32_field(1)
-    signature: str = betterproto.string_field(2)
+    signature: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
