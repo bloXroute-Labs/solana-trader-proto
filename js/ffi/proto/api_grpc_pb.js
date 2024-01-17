@@ -1287,6 +1287,28 @@ function deserialize_api_GetTradesStreamResponse(buffer_arg) {
   return api_pb.GetTradesStreamResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_GetTransactionRequest(arg) {
+  if (!(arg instanceof api_pb.GetTransactionRequest)) {
+    throw new Error('Expected argument of type api.GetTransactionRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTransactionRequest(buffer_arg) {
+  return api_pb.GetTransactionRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_api_GetTransactionResponse(arg) {
+  if (!(arg instanceof api_pb.GetTransactionResponse)) {
+    throw new Error('Expected argument of type api.GetTransactionResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_GetTransactionResponse(buffer_arg) {
+  return api_pb.GetTransactionResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_GetUnsettledRequest(arg) {
   if (!(arg instanceof api_pb.GetUnsettledRequest)) {
     throw new Error('Expected argument of type api.GetUnsettledRequest');
@@ -2136,6 +2158,17 @@ function deserialize_api_TradeSwapResponse(buffer_arg) {
 
 
 var ApiService = exports.ApiService = {
+  getTransaction: {
+    path: '/api.Api/GetTransaction',
+    requestStream: false,
+    responseStream: false,
+    requestType: api_pb.GetTransactionRequest,
+    responseType: api_pb.GetTransactionResponse,
+    requestSerialize: serialize_api_GetTransactionRequest,
+    requestDeserialize: deserialize_api_GetTransactionRequest,
+    responseSerialize: serialize_api_GetTransactionResponse,
+    responseDeserialize: deserialize_api_GetTransactionResponse,
+  },
   postSubmitV2: {
     path: '/api.Api/PostSubmitV2',
     requestStream: false,

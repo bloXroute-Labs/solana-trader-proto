@@ -14,6 +14,7 @@ import * as protoc_gen_openapiv2_options_annotations_pb from "./protoc-gen-opena
 import * as common_pb from "./common_pb";
 
 interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
+    getTransaction: IApiService_IGetTransaction;
     postSubmitV2: IApiService_IPostSubmitV2;
     postSubmitBatchV2: IApiService_IPostSubmitBatchV2;
     getRaydiumPools: IApiService_IGetRaydiumPools;
@@ -121,6 +122,15 @@ interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplemen
     getPerpTradesStream: IApiService_IGetPerpTradesStream;
 }
 
+interface IApiService_IGetTransaction extends grpc.MethodDefinition<api_pb.GetTransactionRequest, api_pb.GetTransactionResponse> {
+    path: "/api.Api/GetTransaction";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.GetTransactionRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.GetTransactionRequest>;
+    responseSerialize: grpc.serialize<api_pb.GetTransactionResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.GetTransactionResponse>;
+}
 interface IApiService_IPostSubmitV2 extends grpc.MethodDefinition<api_pb.PostSubmitRequest, api_pb.PostSubmitResponse> {
     path: "/api.Api/PostSubmitV2";
     requestStream: false;
@@ -1070,6 +1080,7 @@ interface IApiService_IGetPerpTradesStream extends grpc.MethodDefinition<api_pb.
 export const ApiService: IApiService;
 
 export interface IApiServer extends grpc.UntypedServiceImplementation {
+    getTransaction: grpc.handleUnaryCall<api_pb.GetTransactionRequest, api_pb.GetTransactionResponse>;
     postSubmitV2: grpc.handleUnaryCall<api_pb.PostSubmitRequest, api_pb.PostSubmitResponse>;
     postSubmitBatchV2: grpc.handleUnaryCall<api_pb.PostSubmitBatchRequest, api_pb.PostSubmitBatchResponse>;
     getRaydiumPools: grpc.handleUnaryCall<api_pb.GetRaydiumPoolsRequest, api_pb.GetRaydiumPoolsResponse>;
@@ -1178,6 +1189,9 @@ export interface IApiServer extends grpc.UntypedServiceImplementation {
 }
 
 export interface IApiClient {
+    getTransaction(request: api_pb.GetTransactionRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTransactionResponse) => void): grpc.ClientUnaryCall;
+    getTransaction(request: api_pb.GetTransactionRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTransactionResponse) => void): grpc.ClientUnaryCall;
+    getTransaction(request: api_pb.GetTransactionRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTransactionResponse) => void): grpc.ClientUnaryCall;
     postSubmitV2(request: api_pb.PostSubmitRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     postSubmitV2(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     postSubmitV2(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
@@ -1481,6 +1495,9 @@ export interface IApiClient {
 
 export class ApiClient extends grpc.Client implements IApiClient {
     constructor(address: string, credentials: grpc.ChannelCredentials, options?: Partial<grpc.ClientOptions>);
+    public getTransaction(request: api_pb.GetTransactionRequest, callback: (error: grpc.ServiceError | null, response: api_pb.GetTransactionResponse) => void): grpc.ClientUnaryCall;
+    public getTransaction(request: api_pb.GetTransactionRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.GetTransactionResponse) => void): grpc.ClientUnaryCall;
+    public getTransaction(request: api_pb.GetTransactionRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.GetTransactionResponse) => void): grpc.ClientUnaryCall;
     public postSubmitV2(request: api_pb.PostSubmitRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     public postSubmitV2(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     public postSubmitV2(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
