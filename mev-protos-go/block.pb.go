@@ -4,7 +4,7 @@
 // 	protoc        v3.19.3
 // source: block.proto
 
-package block
+package jitoproto
 
 import (
 	shared "github.com/bloXroute-Labs/solana-trader-proto/shared"

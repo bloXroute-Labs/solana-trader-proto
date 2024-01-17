@@ -4,7 +4,7 @@
 // 	protoc        v3.19.3
 // source: relayer.proto
 
-package relayer
+package jitoproto
 
 import (
 	packet "github.com/bloXroute-Labs/solana-trader-proto/packet"

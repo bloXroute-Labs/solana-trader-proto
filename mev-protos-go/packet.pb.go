@@ -4,7 +4,7 @@
 // 	protoc        v3.19.3
 // source: packet.proto
 
-package packet
+package jitoproto
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
