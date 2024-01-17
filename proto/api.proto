@@ -51,6 +51,17 @@ service Api {
     }
   };
 
+  rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/transaction"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the details of a transaction";
+      summary: "Returns the details of a transaction";
+      tags: ["Solana RPC"];
+    };
+  }
+
   rpc PostSubmitV2(PostSubmitRequest) returns (PostSubmitResponse) {
     option (google.api.http) = {
       post: "/api/v2/submit"
@@ -1571,11 +1582,6 @@ message PostSubmitBatchRequest {
   repeated PostSubmitRequestEntry entries = 1;
   SubmitStrategy submitStrategy = 2;
 }
-
-message PostSubmitResponse {
-  string signature = 1;
-}
-
 message PostSubmitBatchResponseEntry {
   string signature = 1;
   string error = 2;
@@ -1585,6 +1591,11 @@ message PostSubmitBatchResponseEntry {
 message PostSubmitBatchResponse {
   repeated PostSubmitBatchResponseEntry transactions = 1;
 }
+
+message PostSubmitResponse {
+  string signature = 1;
+}
+
 
 message GetOpenOrdersRequest {
   string market = 1 [(google.api.field_behavior) = REQUIRED];
@@ -1948,6 +1959,53 @@ message GetRaydiumPoolsRequest {
 
 message GetRaydiumPoolsResponse {
   repeated ProjectPool pools = 1;
+}
+
+message GetTransactionRequest {
+  int32 maxSupportedTransactionVersion = 1;
+  string signature = 2;
+}
+
+message GetTransactionResponse {
+  string status = 1;
+  TransactionMeta metadata = 2;
+}
+
+message Instruction {
+  uint32 program_id_index = 1;
+  repeated uint32 accounts = 2;
+  string data = 3;
+}
+
+message TransactionMeta {
+  string err = 1;
+  bool errored = 2;
+  uint64 fee = 3;
+  repeated uint64 pre_balances = 4;
+  repeated uint64 post_balances = 5;
+  repeated TransactionMetaInnerInstruction inner_instructions = 6;
+  repeated string log_messages = 7;
+  repeated TransactionMetaTokenBalance pre_token_balances = 8;
+  repeated TransactionMetaTokenBalance post_token_balances = 9;
+}
+
+message TransactionMetaInnerInstruction {
+  uint32 index = 1;
+  repeated Instruction instructions = 2;
+}
+
+message TransactionMetaTokenBalance {
+  uint32 accountIndex = 1;
+  string mint = 2;
+  UITokenAmount ui_token_amount = 3;
+  string owner = 4;
+}
+
+message UITokenAmount {
+  float ui_amount = 1;
+  uint32 decimals = 2;
+  string amount = 3;
+  string ui_amount_string = 4;
 }
 
 message ProjectPools {
