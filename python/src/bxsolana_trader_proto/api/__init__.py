@@ -468,11 +468,6 @@ class PostSubmitBatchRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class PostSubmitResponse(betterproto.Message):
-    signature: str = betterproto.string_field(1)
-
-
-@dataclass(eq=False, repr=False)
 class PostSubmitBatchResponseEntry(betterproto.Message):
     signature: str = betterproto.string_field(1)
     error: str = betterproto.string_field(2)
@@ -482,6 +477,11 @@ class PostSubmitBatchResponseEntry(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitBatchResponse(betterproto.Message):
     transactions: List["PostSubmitBatchResponseEntry"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class PostSubmitResponse(betterproto.Message):
+    signature: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
@@ -887,6 +887,65 @@ class GetRaydiumPoolsResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetTransactionRequest(betterproto.Message):
+    signature: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetTransactionResponse(betterproto.Message):
+    status: str = betterproto.string_field(1)
+    metadata: "TransactionMeta" = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class Instruction(betterproto.Message):
+    program_id_index: int = betterproto.uint32_field(1)
+    accounts: List[int] = betterproto.uint32_field(2)
+    data: str = betterproto.string_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionMeta(betterproto.Message):
+    err: str = betterproto.string_field(1)
+    errored: bool = betterproto.bool_field(2)
+    fee: int = betterproto.uint64_field(3)
+    pre_balances: List[int] = betterproto.uint64_field(4)
+    post_balances: List[int] = betterproto.uint64_field(5)
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
+    log_messages: List[str] = betterproto.string_field(7)
+    pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
+        8
+    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionMetaInnerInstruction(betterproto.Message):
+    index: int = betterproto.uint32_field(1)
+    instructions: List["Instruction"] = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionMetaTokenBalance(betterproto.Message):
+    account_index: int = betterproto.uint32_field(1)
+    mint: str = betterproto.string_field(2)
+    ui_token_amount: "UiTokenAmount" = betterproto.message_field(3)
+    owner: str = betterproto.string_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class UiTokenAmount(betterproto.Message):
+    ui_amount: float = betterproto.float_field(1)
+    decimals: int = betterproto.uint32_field(2)
+    amount: str = betterproto.string_field(3)
+    ui_amount_string: str = betterproto.string_field(4)
+
+
+@dataclass(eq=False, repr=False)
 class ProjectPools(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     pools: List["ProjectPool"] = betterproto.message_field(2)
@@ -1242,6 +1301,23 @@ class OrderV2(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def get_transaction(
+        self,
+        get_transaction_request: "GetTransactionRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetTransactionResponse":
+        return await self._unary_unary(
+            "/api.Api/GetTransaction",
+            get_transaction_request,
+            GetTransactionResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def post_submit_v2(
         self,
         post_submit_request: "PostSubmitRequest",
@@ -2293,6 +2369,11 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+    async def get_transaction(
+        self, get_transaction_request: "GetTransactionRequest"
+    ) -> "GetTransactionResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_submit_v2(
         self, post_submit_request: "PostSubmitRequest"
     ) -> "PostSubmitResponse":
@@ -2609,6 +2690,14 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetSwapsStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetSwapsStreamResponse()
+
+    async def __rpc_get_transaction(
+        self,
+        stream: "grpclib.server.Stream[GetTransactionRequest, GetTransactionResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_transaction(request)
+        await stream.send_message(response)
 
     async def __rpc_post_submit_v2(
         self, stream: "grpclib.server.Stream[PostSubmitRequest, PostSubmitResponse]"
@@ -3113,6 +3202,12 @@ class ApiBase(ServiceBase):
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
+            "/api.Api/GetTransaction": grpclib.const.Handler(
+                self.__rpc_get_transaction,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetTransactionRequest,
+                GetTransactionResponse,
+            ),
             "/api.Api/PostSubmitV2": grpclib.const.Handler(
                 self.__rpc_post_submit_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,

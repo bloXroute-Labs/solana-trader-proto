@@ -1794,6 +1794,38 @@
           "Universal"
         ]
       }
+    },
+    "/api/v2/transaction": {
+      "get": {
+        "summary": "Returns the details of a transaction",
+        "description": "Returns the details of a transaction",
+        "operationId": "Api_GetTransaction",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTransactionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "signature",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Solana RPC"
+        ]
+      }
     }
   },
   "definitions": {
@@ -2488,6 +2520,17 @@
         }
       }
     },
+    "apiGetTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/apiTransactionMeta"
+        }
+      }
+    },
     "apiGetUnsettledResponse": {
       "type": "object",
       "properties": {
@@ -2499,6 +2542,25 @@
           "items": {
             "$ref": "#/definitions/apiUnsettledAccount"
           }
+        }
+      }
+    },
+    "apiInstruction": {
+      "type": "object",
+      "properties": {
+        "programIdIndex": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "accounts": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "data": {
+          "type": "string"
         }
       }
     },
@@ -4410,6 +4472,111 @@
         },
         "isCleanup": {
           "type": "boolean"
+        }
+      }
+    },
+    "apiTransactionMeta": {
+      "type": "object",
+      "properties": {
+        "err": {
+          "type": "string"
+        },
+        "errored": {
+          "type": "boolean"
+        },
+        "fee": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "preBalances": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uint64"
+          }
+        },
+        "postBalances": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uint64"
+          }
+        },
+        "innerInstructions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMetaInnerInstruction"
+          }
+        },
+        "logMessages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "preTokenBalances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMetaTokenBalance"
+          }
+        },
+        "postTokenBalances": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMetaTokenBalance"
+          }
+        }
+      }
+    },
+    "apiTransactionMetaInnerInstruction": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "instructions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiInstruction"
+          }
+        }
+      }
+    },
+    "apiTransactionMetaTokenBalance": {
+      "type": "object",
+      "properties": {
+        "accountIndex": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "mint": {
+          "type": "string"
+        },
+        "uiTokenAmount": {
+          "$ref": "#/definitions/apiUITokenAmount"
+        },
+        "owner": {
+          "type": "string"
+        }
+      }
+    },
+    "apiUITokenAmount": {
+      "type": "object",
+      "properties": {
+        "uiAmount": {
+          "type": "number",
+          "format": "float"
+        },
+        "decimals": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "amount": {
+          "type": "string"
+        },
+        "uiAmountString": {
+          "type": "string"
         }
       }
     },
