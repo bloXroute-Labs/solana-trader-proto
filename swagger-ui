@@ -3493,6 +3493,41 @@
         ]
       }
     },
+    "/api/v2/submit-jito": {
+      "post": {
+        "summary": "Transaction submit",
+        "description": "Submits a signed transaction",
+        "operationId": "Api_PostSubmitJitoBundle",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitJitoBundleRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
     "/api/v2/transaction": {
       "get": {
         "summary": "Returns the details of a transaction",
@@ -7144,6 +7179,23 @@
         }
       }
     },
+    "apiPostSubmitJitoBundleRequest": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessageJito"
+          },
+          "required": [
+            "transactions"
+          ]
+        }
+      },
+      "required": [
+        "transactions"
+      ]
+    },
     "apiPostSubmitRequest": {
       "type": "object",
       "properties": {
@@ -7770,6 +7822,17 @@
         }
       }
     },
+    "apiTransactionMessageJito": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "Packet": {
+          "$ref": "#/definitions/packetPacket"
+        }
+      }
+    },
     "apiTransactionMeta": {
       "type": "object",
       "properties": {
@@ -8043,6 +8106,61 @@
         },
         "infinity": {
           "type": "string"
+        }
+      }
+    },
+    "packetMeta": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "addr": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "flags": {
+          "$ref": "#/definitions/packetPacketFlags"
+        },
+        "senderStake": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "packetPacket": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string",
+          "format": "byte"
+        },
+        "meta": {
+          "$ref": "#/definitions/packetMeta"
+        }
+      }
+    },
+    "packetPacketFlags": {
+      "type": "object",
+      "properties": {
+        "discard": {
+          "type": "boolean"
+        },
+        "forwarded": {
+          "type": "boolean"
+        },
+        "repair": {
+          "type": "boolean"
+        },
+        "simpleVoteTx": {
+          "type": "boolean"
+        },
+        "tracerPacket": {
+          "type": "boolean"
         }
       }
     },

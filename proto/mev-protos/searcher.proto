@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package searcher;
 
-import "bundle.proto";
-import "packet.proto";
+import "mev-protos/bundle.proto";
+import "mev-protos/packet.proto";
 
 import "google/protobuf/timestamp.proto";
 

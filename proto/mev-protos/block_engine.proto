@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-import "packet.proto";
-import "shared.proto";
-import "bundle.proto";
+import "mev-protos/packet.proto";
+import "mev-protos/shared.proto";
+import "mev-protos/bundle.proto";
 
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/block_engine";
 

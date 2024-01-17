@@ -6,7 +6,7 @@
 
 import * as grpc from "@grpc/grpc-js";
 import * as api_pb from "./api_pb";
-import * as packet_pb from "./packet_pb";
+import * as mev_protos_packet_pb from "./mev-protos/packet_pb";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 import * as google_api_field_behavior_pb from "./google/api/field_behavior_pb";
 import * as google_api_visibility_pb from "./google/api/visibility_pb";
@@ -16,6 +16,7 @@ import * as common_pb from "./common_pb";
 interface IApiService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
     getTransaction: IApiService_IGetTransaction;
     postSubmitV2: IApiService_IPostSubmitV2;
+    postSubmitJitoBundle: IApiService_IPostSubmitJitoBundle;
     postSubmitBatchV2: IApiService_IPostSubmitBatchV2;
     getRaydiumPools: IApiService_IGetRaydiumPools;
     getRaydiumQuotes: IApiService_IGetRaydiumQuotes;
@@ -137,6 +138,15 @@ interface IApiService_IPostSubmitV2 extends grpc.MethodDefinition<api_pb.PostSub
     responseStream: false;
     requestSerialize: grpc.serialize<api_pb.PostSubmitRequest>;
     requestDeserialize: grpc.deserialize<api_pb.PostSubmitRequest>;
+    responseSerialize: grpc.serialize<api_pb.PostSubmitResponse>;
+    responseDeserialize: grpc.deserialize<api_pb.PostSubmitResponse>;
+}
+interface IApiService_IPostSubmitJitoBundle extends grpc.MethodDefinition<api_pb.PostSubmitJitoBundleRequest, api_pb.PostSubmitResponse> {
+    path: "/api.Api/PostSubmitJitoBundle";
+    requestStream: false;
+    responseStream: false;
+    requestSerialize: grpc.serialize<api_pb.PostSubmitJitoBundleRequest>;
+    requestDeserialize: grpc.deserialize<api_pb.PostSubmitJitoBundleRequest>;
     responseSerialize: grpc.serialize<api_pb.PostSubmitResponse>;
     responseDeserialize: grpc.deserialize<api_pb.PostSubmitResponse>;
 }
@@ -1082,6 +1092,7 @@ export const ApiService: IApiService;
 export interface IApiServer extends grpc.UntypedServiceImplementation {
     getTransaction: grpc.handleUnaryCall<api_pb.GetTransactionRequest, api_pb.GetTransactionResponse>;
     postSubmitV2: grpc.handleUnaryCall<api_pb.PostSubmitRequest, api_pb.PostSubmitResponse>;
+    postSubmitJitoBundle: grpc.handleUnaryCall<api_pb.PostSubmitJitoBundleRequest, api_pb.PostSubmitResponse>;
     postSubmitBatchV2: grpc.handleUnaryCall<api_pb.PostSubmitBatchRequest, api_pb.PostSubmitBatchResponse>;
     getRaydiumPools: grpc.handleUnaryCall<api_pb.GetRaydiumPoolsRequest, api_pb.GetRaydiumPoolsResponse>;
     getRaydiumQuotes: grpc.handleUnaryCall<api_pb.GetRaydiumQuotesRequest, api_pb.GetRaydiumQuotesResponse>;
@@ -1195,6 +1206,9 @@ export interface IApiClient {
     postSubmitV2(request: api_pb.PostSubmitRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     postSubmitV2(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     postSubmitV2(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
+    postSubmitJitoBundle(request: api_pb.PostSubmitJitoBundleRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
+    postSubmitJitoBundle(request: api_pb.PostSubmitJitoBundleRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
+    postSubmitJitoBundle(request: api_pb.PostSubmitJitoBundleRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
     postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
     postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
@@ -1501,6 +1515,9 @@ export class ApiClient extends grpc.Client implements IApiClient {
     public postSubmitV2(request: api_pb.PostSubmitRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     public postSubmitV2(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     public postSubmitV2(request: api_pb.PostSubmitRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
+    public postSubmitJitoBundle(request: api_pb.PostSubmitJitoBundleRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
+    public postSubmitJitoBundle(request: api_pb.PostSubmitJitoBundleRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
+    public postSubmitJitoBundle(request: api_pb.PostSubmitJitoBundleRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitResponse) => void): grpc.ClientUnaryCall;
     public postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
     public postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;
     public postSubmitBatchV2(request: api_pb.PostSubmitBatchRequest, metadata: grpc.Metadata, options: Partial<grpc.CallOptions>, callback: (error: grpc.ServiceError | null, response: api_pb.PostSubmitBatchResponse) => void): grpc.ClientUnaryCall;

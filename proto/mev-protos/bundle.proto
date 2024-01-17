@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-import "packet.proto";
-import "shared.proto";
+import "mev-protos/packet.proto";
+import "mev-protos/shared.proto";
 
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/bundle";
 
