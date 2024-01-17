@@ -7,7 +7,7 @@
 package shredstream
 
 import (
-	shared "github.com/bloXroute-Labs/solana-trader-proto/shared"
+	shared "github.com/bloXroute-Labs/solana-trader-proto/mev-protos-go/shared"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

@@ -7,9 +7,9 @@
 package block_engine
 
 import (
-	bundle "github.com/bloXroute-Labs/solana-trader-proto/bundle"
-	packet "github.com/bloXroute-Labs/solana-trader-proto/packet"
-	shared "github.com/bloXroute-Labs/solana-trader-proto/shared"
+	bundle "github.com/bloXroute-Labs/solana-trader-proto/mev-protos-go/bundle"
+	packet "github.com/bloXroute-Labs/solana-trader-proto/mev-protos-go/packet"
+	shared "github.com/bloXroute-Labs/solana-trader-proto/mev-protos-go/shared"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

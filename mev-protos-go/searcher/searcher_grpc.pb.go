@@ -4,7 +4,7 @@ package searcher
 
 import (
 	context "context"
-	bundle "github.com/bloXroute-Labs/solana-trader-proto/bundle"
+	bundle "github.com/bloXroute-Labs/solana-trader-proto/mev-protos-go/bundle"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

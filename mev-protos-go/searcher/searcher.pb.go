@@ -7,8 +7,8 @@
 package searcher
 
 import (
-	bundle "github.com/bloXroute-Labs/solana-trader-proto/bundle"
-	packet "github.com/bloXroute-Labs/solana-trader-proto/packet"
+	bundle "github.com/bloXroute-Labs/solana-trader-proto/mev-protos-go/bundle"
+	packet "github.com/bloXroute-Labs/solana-trader-proto/mev-protos-go/packet"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
