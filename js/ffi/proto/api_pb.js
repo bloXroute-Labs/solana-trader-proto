@@ -30475,7 +30475,11 @@ proto.api.TransactionMeta.toObject = function(includeInstance, msg) {
     preTokenBalancesList: jspb.Message.toObjectList(msg.getPreTokenBalancesList(),
     proto.api.TransactionMetaTokenBalance.toObject, includeInstance),
     postTokenBalancesList: jspb.Message.toObjectList(msg.getPostTokenBalancesList(),
-    proto.api.TransactionMetaTokenBalance.toObject, includeInstance)
+    proto.api.TransactionMetaTokenBalance.toObject, includeInstance),
+    slot: jspb.Message.getFieldWithDefault(msg, 10, 0),
+    blockTime: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    version: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    confirmationStatus: jspb.Message.getFieldWithDefault(msg, 13, "")
   };
 
   if (includeInstance) {
@@ -30554,6 +30558,22 @@ proto.api.TransactionMeta.deserializeBinaryFromReader = function(msg, reader) {
       var value = new proto.api.TransactionMetaTokenBalance;
       reader.readMessage(value,proto.api.TransactionMetaTokenBalance.deserializeBinaryFromReader);
       msg.addPostTokenBalances(value);
+      break;
+    case 10:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setSlot(value);
+      break;
+    case 11:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBlockTime(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setVersion(value);
+      break;
+    case 13:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setConfirmationStatus(value);
       break;
     default:
       reader.skipField();
@@ -30648,6 +30668,34 @@ proto.api.TransactionMeta.serializeBinaryToWriter = function(message, writer) {
       9,
       f,
       proto.api.TransactionMetaTokenBalance.serializeBinaryToWriter
+    );
+  }
+  f = message.getSlot();
+  if (f !== 0) {
+    writer.writeUint64(
+      10,
+      f
+    );
+  }
+  f = message.getBlockTime();
+  if (f !== 0) {
+    writer.writeUint64(
+      11,
+      f
+    );
+  }
+  f = message.getVersion();
+  if (f !== 0) {
+    writer.writeInt32(
+      12,
+      f
+    );
+  }
+  f = message.getConfirmationStatus();
+  if (f.length > 0) {
+    writer.writeString(
+      13,
+      f
     );
   }
 };
@@ -30929,6 +30977,78 @@ proto.api.TransactionMeta.prototype.addPostTokenBalances = function(opt_value, o
  */
 proto.api.TransactionMeta.prototype.clearPostTokenBalancesList = function() {
   return this.setPostTokenBalancesList([]);
+};
+
+
+/**
+ * optional uint64 slot = 10;
+ * @return {number}
+ */
+proto.api.TransactionMeta.prototype.getSlot = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 10, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TransactionMeta} returns this
+ */
+proto.api.TransactionMeta.prototype.setSlot = function(value) {
+  return jspb.Message.setProto3IntField(this, 10, value);
+};
+
+
+/**
+ * optional uint64 block_time = 11;
+ * @return {number}
+ */
+proto.api.TransactionMeta.prototype.getBlockTime = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 11, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TransactionMeta} returns this
+ */
+proto.api.TransactionMeta.prototype.setBlockTime = function(value) {
+  return jspb.Message.setProto3IntField(this, 11, value);
+};
+
+
+/**
+ * optional int32 version = 12;
+ * @return {number}
+ */
+proto.api.TransactionMeta.prototype.getVersion = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TransactionMeta} returns this
+ */
+proto.api.TransactionMeta.prototype.setVersion = function(value) {
+  return jspb.Message.setProto3IntField(this, 12, value);
+};
+
+
+/**
+ * optional string confirmation_status = 13;
+ * @return {string}
+ */
+proto.api.TransactionMeta.prototype.getConfirmationStatus = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 13, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.api.TransactionMeta} returns this
+ */
+proto.api.TransactionMeta.prototype.setConfirmationStatus = function(value) {
+  return jspb.Message.setProto3StringField(this, 13, value);
 };
 
 

@@ -3229,6 +3229,14 @@ export class TransactionMeta extends jspb.Message {
     getPostTokenBalancesList(): Array<TransactionMetaTokenBalance>;
     setPostTokenBalancesList(value: Array<TransactionMetaTokenBalance>): TransactionMeta;
     addPostTokenBalances(value?: TransactionMetaTokenBalance, index?: number): TransactionMetaTokenBalance;
+    getSlot(): number;
+    setSlot(value: number): TransactionMeta;
+    getBlockTime(): number;
+    setBlockTime(value: number): TransactionMeta;
+    getVersion(): number;
+    setVersion(value: number): TransactionMeta;
+    getConfirmationStatus(): string;
+    setConfirmationStatus(value: string): TransactionMeta;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): TransactionMeta.AsObject;
@@ -3251,6 +3259,10 @@ export namespace TransactionMeta {
         logMessagesList: Array<string>,
         preTokenBalancesList: Array<TransactionMetaTokenBalance.AsObject>,
         postTokenBalancesList: Array<TransactionMetaTokenBalance.AsObject>,
+        slot: number,
+        blockTime: number,
+        version: number,
+        confirmationStatus: string,
     }
 }
 

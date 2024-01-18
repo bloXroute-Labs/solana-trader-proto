@@ -7821,6 +7821,21 @@
           "items": {
             "$ref": "#/definitions/apiTransactionMetaTokenBalance"
           }
+        },
+        "slot": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "blockTime": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "confirmationStatus": {
+          "type": "string"
         }
       }
     },

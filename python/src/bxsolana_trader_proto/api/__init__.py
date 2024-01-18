@@ -922,6 +922,10 @@ class TransactionMeta(betterproto.Message):
     post_token_balances: List[
         "TransactionMetaTokenBalance"
     ] = betterproto.message_field(9)
+    slot: int = betterproto.uint64_field(10)
+    block_time: int = betterproto.uint64_field(11)
+    version: int = betterproto.int32_field(12)
+    confirmation_status: str = betterproto.string_field(13)
 
 
 @dataclass(eq=False, repr=False)
