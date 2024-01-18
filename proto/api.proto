@@ -1968,6 +1968,9 @@ message GetTransactionRequest {
 message GetTransactionResponse {
   string status = 1;
   TransactionMeta metadata = 2;
+  uint64 slot = 3;
+  uint64 block_time = 4;
+  int32 version = 5;
 }
 
 message Instruction {
@@ -1986,10 +1989,6 @@ message TransactionMeta {
   repeated string log_messages = 7;
   repeated TransactionMetaTokenBalance pre_token_balances = 8;
   repeated TransactionMetaTokenBalance post_token_balances = 9;
-  uint64 slot = 10;
-  uint64 block_time = 11;
-  int32 version = 12;
-  string confirmation_status = 13;
 }
 
 message TransactionMetaInnerInstruction {
