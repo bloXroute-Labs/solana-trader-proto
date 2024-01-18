@@ -3496,7 +3496,7 @@
     "/api/v2/submit-jito": {
       "post": {
         "summary": "Transaction submit",
-        "description": "Submits a signed transaction",
+        "description": "Submits a signed transaction as a jito bundle",
         "operationId": "Api_PostSubmitJitoBundle",
         "responses": {
           "200": {

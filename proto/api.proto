@@ -80,7 +80,7 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Submits a signed transaction";
+      description: "Submits a signed transaction as a jito bundle";
       summary: "Transaction submit";
       tags: ["Trade", "Universal"];
     };
