@@ -30035,7 +30035,10 @@ proto.api.GetTransactionResponse.prototype.toObject = function(opt_includeInstan
 proto.api.GetTransactionResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     status: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    metadata: (f = msg.getMetadata()) && proto.api.TransactionMeta.toObject(includeInstance, f)
+    metadata: (f = msg.getMetadata()) && proto.api.TransactionMeta.toObject(includeInstance, f),
+    slot: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    blockTime: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    version: jspb.Message.getFieldWithDefault(msg, 5, 0)
   };
 
   if (includeInstance) {
@@ -30081,6 +30084,18 @@ proto.api.GetTransactionResponse.deserializeBinaryFromReader = function(msg, rea
       reader.readMessage(value,proto.api.TransactionMeta.deserializeBinaryFromReader);
       msg.setMetadata(value);
       break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setSlot(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBlockTime(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setVersion(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -30123,6 +30138,27 @@ proto.api.GetTransactionResponse.serializeBinaryToWriter = function(message, wri
       2,
       f,
       proto.api.TransactionMeta.serializeBinaryToWriter
+    );
+  }
+  f = message.getSlot();
+  if (f !== 0) {
+    writer.writeUint64(
+      3,
+      f
+    );
+  }
+  f = message.getBlockTime();
+  if (f !== 0) {
+    writer.writeUint64(
+      4,
+      f
+    );
+  }
+  f = message.getVersion();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
+      f
     );
   }
 };
@@ -30183,6 +30219,60 @@ proto.api.GetTransactionResponse.prototype.hasMetadata = function() {
 };
 
 
+/**
+ * optional uint64 slot = 3;
+ * @return {number}
+ */
+proto.api.GetTransactionResponse.prototype.getSlot = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetTransactionResponse} returns this
+ */
+proto.api.GetTransactionResponse.prototype.setSlot = function(value) {
+  return jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional uint64 block_time = 4;
+ * @return {number}
+ */
+proto.api.GetTransactionResponse.prototype.getBlockTime = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetTransactionResponse} returns this
+ */
+proto.api.GetTransactionResponse.prototype.setBlockTime = function(value) {
+  return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional int32 version = 5;
+ * @return {number}
+ */
+proto.api.GetTransactionResponse.prototype.getVersion = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.GetTransactionResponse} returns this
+ */
+proto.api.GetTransactionResponse.prototype.setVersion = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
 
 /**
  * List of repeated fields within this message type.
@@ -30224,7 +30314,7 @@ proto.api.Instruction.toObject = function(includeInstance, msg) {
   var f, obj = {
     programIdIndex: jspb.Message.getFieldWithDefault(msg, 1, 0),
     accountsList: (f = jspb.Message.getRepeatedField(msg, 2)) == null ? undefined : f,
-    data: jspb.Message.getFieldWithDefault(msg, 3, "")
+    data: msg.getData_asB64()
   };
 
   if (includeInstance) {
@@ -30272,7 +30362,7 @@ proto.api.Instruction.deserializeBinaryFromReader = function(msg, reader) {
       }
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setData(value);
       break;
     default:
@@ -30318,9 +30408,9 @@ proto.api.Instruction.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getData();
+  f = message.getData_asU8();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeBytes(
       3,
       f
     );
@@ -30384,20 +30474,44 @@ proto.api.Instruction.prototype.clearAccountsList = function() {
 
 
 /**
- * optional string data = 3;
- * @return {string}
+ * optional bytes data = 3;
+ * @return {!(string|Uint8Array)}
  */
 proto.api.Instruction.prototype.getData = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
 
 /**
- * @param {string} value
+ * optional bytes data = 3;
+ * This is a type-conversion wrapper around `getData()`
+ * @return {string}
+ */
+proto.api.Instruction.prototype.getData_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getData()));
+};
+
+
+/**
+ * optional bytes data = 3;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getData()`
+ * @return {!Uint8Array}
+ */
+proto.api.Instruction.prototype.getData_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getData()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
  * @return {!proto.api.Instruction} returns this
  */
 proto.api.Instruction.prototype.setData = function(value) {
-  return jspb.Message.setProto3StringField(this, 3, value);
+  return jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 

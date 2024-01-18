@@ -3150,6 +3150,12 @@ export class GetTransactionResponse extends jspb.Message {
     clearMetadata(): void;
     getMetadata(): TransactionMeta | undefined;
     setMetadata(value?: TransactionMeta): GetTransactionResponse;
+    getSlot(): number;
+    setSlot(value: number): GetTransactionResponse;
+    getBlockTime(): number;
+    setBlockTime(value: number): GetTransactionResponse;
+    getVersion(): number;
+    setVersion(value: number): GetTransactionResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTransactionResponse.AsObject;
@@ -3165,6 +3171,9 @@ export namespace GetTransactionResponse {
     export type AsObject = {
         status: string,
         metadata?: TransactionMeta.AsObject,
+        slot: number,
+        blockTime: number,
+        version: number,
     }
 }
 
@@ -3175,8 +3184,10 @@ export class Instruction extends jspb.Message {
     getAccountsList(): Array<number>;
     setAccountsList(value: Array<number>): Instruction;
     addAccounts(value: number, index?: number): number;
-    getData(): string;
-    setData(value: string): Instruction;
+    getData(): Uint8Array | string;
+    getData_asU8(): Uint8Array;
+    getData_asB64(): string;
+    setData(value: Uint8Array | string): Instruction;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Instruction.AsObject;
@@ -3192,7 +3203,7 @@ export namespace Instruction {
     export type AsObject = {
         programIdIndex: number,
         accountsList: Array<number>,
-        data: string,
+        data: Uint8Array | string,
     }
 }
 
