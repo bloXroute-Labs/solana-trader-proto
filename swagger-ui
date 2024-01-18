@@ -7200,10 +7200,7 @@
       "type": "object",
       "properties": {
         "uuids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "string"
         }
       }
     },

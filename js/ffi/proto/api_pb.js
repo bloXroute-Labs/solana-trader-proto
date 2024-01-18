@@ -1338,7 +1338,7 @@ if (goog.DEBUG && !COMPILED) {
  * @constructor
  */
 proto.api.PostSubmitJitoBundleResponse = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.api.PostSubmitJitoBundleResponse.repeatedFields_, null);
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
 goog.inherits(proto.api.PostSubmitJitoBundleResponse, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
@@ -17296,13 +17296,6 @@ proto.api.PostSubmitJitoBundleRequest.prototype.clearTransactionsList = function
 
 
 
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.api.PostSubmitJitoBundleResponse.repeatedFields_ = [1];
-
 
 
 if (jspb.Message.GENERATE_TO_OBJECT) {
@@ -17334,7 +17327,7 @@ proto.api.PostSubmitJitoBundleResponse.prototype.toObject = function(opt_include
  */
 proto.api.PostSubmitJitoBundleResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uuidsList: (f = jspb.Message.getRepeatedField(msg, 1)) == null ? undefined : f
+    uuids: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -17373,7 +17366,7 @@ proto.api.PostSubmitJitoBundleResponse.deserializeBinaryFromReader = function(ms
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.addUuids(value);
+      msg.setUuids(value);
       break;
     default:
       reader.skipField();
@@ -17404,9 +17397,9 @@ proto.api.PostSubmitJitoBundleResponse.prototype.serializeBinary = function() {
  */
 proto.api.PostSubmitJitoBundleResponse.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getUuidsList();
+  f = message.getUuids();
   if (f.length > 0) {
-    writer.writeRepeatedString(
+    writer.writeString(
       1,
       f
     );
@@ -17415,39 +17408,20 @@ proto.api.PostSubmitJitoBundleResponse.serializeBinaryToWriter = function(messag
 
 
 /**
- * repeated string uuids = 1;
- * @return {!Array<string>}
+ * optional string uuids = 1;
+ * @return {string}
  */
-proto.api.PostSubmitJitoBundleResponse.prototype.getUuidsList = function() {
-  return /** @type {!Array<string>} */ (jspb.Message.getRepeatedField(this, 1));
-};
-
-
-/**
- * @param {!Array<string>} value
- * @return {!proto.api.PostSubmitJitoBundleResponse} returns this
- */
-proto.api.PostSubmitJitoBundleResponse.prototype.setUuidsList = function(value) {
-  return jspb.Message.setField(this, 1, value || []);
+proto.api.PostSubmitJitoBundleResponse.prototype.getUuids = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
 /**
  * @param {string} value
- * @param {number=} opt_index
  * @return {!proto.api.PostSubmitJitoBundleResponse} returns this
  */
-proto.api.PostSubmitJitoBundleResponse.prototype.addUuids = function(value, opt_index) {
-  return jspb.Message.addToRepeatedField(this, 1, value, opt_index);
-};
-
-
-/**
- * Clears the list making it empty but non-null.
- * @return {!proto.api.PostSubmitJitoBundleResponse} returns this
- */
-proto.api.PostSubmitJitoBundleResponse.prototype.clearUuidsList = function() {
-  return this.setUuidsList([]);
+proto.api.PostSubmitJitoBundleResponse.prototype.setUuids = function(value) {
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 

@@ -1588,7 +1588,7 @@ message PostSubmitJitoBundleRequest {
 }
 
 message PostSubmitJitoBundleResponse {
-  repeated string uuids = 1;
+  string uuids = 1;
 }
 
 

@@ -1497,10 +1497,8 @@ export namespace PostSubmitJitoBundleRequest {
 }
 
 export class PostSubmitJitoBundleResponse extends jspb.Message { 
-    clearUuidsList(): void;
-    getUuidsList(): Array<string>;
-    setUuidsList(value: Array<string>): PostSubmitJitoBundleResponse;
-    addUuids(value: string, index?: number): string;
+    getUuids(): string;
+    setUuids(value: string): PostSubmitJitoBundleResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostSubmitJitoBundleResponse.AsObject;
@@ -1514,7 +1512,7 @@ export class PostSubmitJitoBundleResponse extends jspb.Message {
 
 export namespace PostSubmitJitoBundleResponse {
     export type AsObject = {
-        uuidsList: Array<string>,
+        uuids: string,
     }
 }
 

@@ -453,7 +453,7 @@ class PostSubmitJitoBundleRequest(betterproto.Message):
 
 @dataclass
 class PostSubmitJitoBundleResponse(betterproto.Message):
-    uuids: List[str] = betterproto.string_field(1)
+    uuids: str = betterproto.string_field(1)
 
 
 @dataclass
