@@ -5,7 +5,6 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
-import * as mev_protos_packet_pb from "./mev-protos/packet_pb";
 import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 import * as google_api_field_behavior_pb from "./google/api/field_behavior_pb";
 import * as google_api_visibility_pb from "./google/api/visibility_pb";
@@ -1099,11 +1098,6 @@ export class TransactionMessageJito extends jspb.Message {
     getContent(): string;
     setContent(value: string): TransactionMessageJito;
 
-    hasPacket(): boolean;
-    clearPacket(): void;
-    getPacket(): mev_protos_packet_pb.Packet | undefined;
-    setPacket(value?: mev_protos_packet_pb.Packet): TransactionMessageJito;
-
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): TransactionMessageJito.AsObject;
     static toObject(includeInstance: boolean, msg: TransactionMessageJito): TransactionMessageJito.AsObject;
@@ -1117,7 +1111,6 @@ export class TransactionMessageJito extends jspb.Message {
 export namespace TransactionMessageJito {
     export type AsObject = {
         content: string,
-        packet?: mev_protos_packet_pb.Packet.AsObject,
     }
 }
 
@@ -1503,25 +1496,25 @@ export namespace PostSubmitJitoBundleRequest {
     }
 }
 
-export class PostSubmitJitoResponse extends jspb.Message { 
-    clearSignatureList(): void;
-    getSignatureList(): Array<string>;
-    setSignatureList(value: Array<string>): PostSubmitJitoResponse;
-    addSignature(value: string, index?: number): string;
+export class PostSubmitJitoBundleResponse extends jspb.Message { 
+    clearUuidsList(): void;
+    getUuidsList(): Array<string>;
+    setUuidsList(value: Array<string>): PostSubmitJitoBundleResponse;
+    addUuids(value: string, index?: number): string;
 
     serializeBinary(): Uint8Array;
-    toObject(includeInstance?: boolean): PostSubmitJitoResponse.AsObject;
-    static toObject(includeInstance: boolean, msg: PostSubmitJitoResponse): PostSubmitJitoResponse.AsObject;
+    toObject(includeInstance?: boolean): PostSubmitJitoBundleResponse.AsObject;
+    static toObject(includeInstance: boolean, msg: PostSubmitJitoBundleResponse): PostSubmitJitoBundleResponse.AsObject;
     static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
     static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-    static serializeBinaryToWriter(message: PostSubmitJitoResponse, writer: jspb.BinaryWriter): void;
-    static deserializeBinary(bytes: Uint8Array): PostSubmitJitoResponse;
-    static deserializeBinaryFromReader(message: PostSubmitJitoResponse, reader: jspb.BinaryReader): PostSubmitJitoResponse;
+    static serializeBinaryToWriter(message: PostSubmitJitoBundleResponse, writer: jspb.BinaryWriter): void;
+    static deserializeBinary(bytes: Uint8Array): PostSubmitJitoBundleResponse;
+    static deserializeBinaryFromReader(message: PostSubmitJitoBundleResponse, reader: jspb.BinaryReader): PostSubmitJitoBundleResponse;
 }
 
-export namespace PostSubmitJitoResponse {
+export namespace PostSubmitJitoBundleResponse {
     export type AsObject = {
-        signatureList: Array<string>,
+        uuidsList: Array<string>,
     }
 }
 

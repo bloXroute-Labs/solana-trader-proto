@@ -9,7 +9,6 @@ import betterproto
 import grpclib
 
 from . import common
-from . import packet
 
 
 class MarketStatus(betterproto.Enum):
@@ -351,7 +350,6 @@ class TransactionMessage(betterproto.Message):
 @dataclass
 class TransactionMessageJito(betterproto.Message):
     content: str = betterproto.string_field(1)
-    packet: packet.Packet = betterproto.message_field(2)
 
 
 @dataclass
@@ -454,8 +452,8 @@ class PostSubmitJitoBundleRequest(betterproto.Message):
 
 
 @dataclass
-class PostSubmitJitoResponse(betterproto.Message):
-    signature: List[str] = betterproto.string_field(1)
+class PostSubmitJitoBundleResponse(betterproto.Message):
+    uuids: List[str] = betterproto.string_field(1)
 
 
 @dataclass
@@ -2169,7 +2167,7 @@ class ApiStub(betterproto.ServiceStub):
 
     async def post_submit_jito_bundle(
         self, *, transactions: List["TransactionMessageJito"] = []
-    ) -> PostSubmitResponse:
+    ) -> PostSubmitJitoBundleResponse:
         request = PostSubmitJitoBundleRequest()
         if transactions is not None:
             request.transactions = transactions
@@ -2177,7 +2175,7 @@ class ApiStub(betterproto.ServiceStub):
         return await self._unary_unary(
             "/api.Api/PostSubmitJitoBundle",
             request,
-            PostSubmitResponse,
+            PostSubmitJitoBundleResponse,
         )
 
     async def post_submit_batch_v2(

@@ -3,7 +3,6 @@
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var api_pb = require('./api_pb.js');
-var mev$protos_packet_pb = require('./mev-protos/packet_pb.js');
 var google_api_annotations_pb = require('./google/api/annotations_pb.js');
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 var google_api_field_behavior_pb = require('./google/api/field_behavior_pb.js');
@@ -2112,6 +2111,17 @@ function deserialize_api_PostSubmitJitoBundleRequest(buffer_arg) {
   return api_pb.PostSubmitJitoBundleRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_api_PostSubmitJitoBundleResponse(arg) {
+  if (!(arg instanceof api_pb.PostSubmitJitoBundleResponse)) {
+    throw new Error('Expected argument of type api.PostSubmitJitoBundleResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_api_PostSubmitJitoBundleResponse(buffer_arg) {
+  return api_pb.PostSubmitJitoBundleResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_api_PostSubmitRequest(arg) {
   if (!(arg instanceof api_pb.PostSubmitRequest)) {
     throw new Error('Expected argument of type api.PostSubmitRequest');
@@ -2196,11 +2206,11 @@ var ApiService = exports.ApiService = {
     requestStream: false,
     responseStream: false,
     requestType: api_pb.PostSubmitJitoBundleRequest,
-    responseType: api_pb.PostSubmitResponse,
+    responseType: api_pb.PostSubmitJitoBundleResponse,
     requestSerialize: serialize_api_PostSubmitJitoBundleRequest,
     requestDeserialize: deserialize_api_PostSubmitJitoBundleRequest,
-    responseSerialize: serialize_api_PostSubmitResponse,
-    responseDeserialize: deserialize_api_PostSubmitResponse,
+    responseSerialize: serialize_api_PostSubmitJitoBundleResponse,
+    responseDeserialize: deserialize_api_PostSubmitJitoBundleResponse,
   },
   postSubmitBatchV2: {
     path: '/api.Api/PostSubmitBatchV2',

@@ -3502,7 +3502,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostSubmitResponse"
+              "$ref": "#/definitions/apiPostSubmitJitoBundleResponse"
             }
           },
           "default": {
@@ -7196,6 +7196,17 @@
         "transactions"
       ]
     },
+    "apiPostSubmitJitoBundleResponse": {
+      "type": "object",
+      "properties": {
+        "uuids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "apiPostSubmitRequest": {
       "type": "object",
       "properties": {
@@ -7827,9 +7838,6 @@
       "properties": {
         "content": {
           "type": "string"
-        },
-        "Packet": {
-          "$ref": "#/definitions/packetPacket"
         }
       }
     },
@@ -8106,61 +8114,6 @@
         },
         "infinity": {
           "type": "string"
-        }
-      }
-    },
-    "packetMeta": {
-      "type": "object",
-      "properties": {
-        "size": {
-          "type": "string",
-          "format": "uint64"
-        },
-        "addr": {
-          "type": "string"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "flags": {
-          "$ref": "#/definitions/packetPacketFlags"
-        },
-        "senderStake": {
-          "type": "string",
-          "format": "uint64"
-        }
-      }
-    },
-    "packetPacket": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "string",
-          "format": "byte"
-        },
-        "meta": {
-          "$ref": "#/definitions/packetMeta"
-        }
-      }
-    },
-    "packetPacketFlags": {
-      "type": "object",
-      "properties": {
-        "discard": {
-          "type": "boolean"
-        },
-        "forwarded": {
-          "type": "boolean"
-        },
-        "repair": {
-          "type": "boolean"
-        },
-        "simpleVoteTx": {
-          "type": "boolean"
-        },
-        "tracerPacket": {
-          "type": "boolean"
         }
       }
     },

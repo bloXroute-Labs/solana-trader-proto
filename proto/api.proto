@@ -2,7 +2,6 @@ syntax = "proto3";
 package api;
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/api";
 
-import "mev-protos/packet.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/api/field_behavior.proto";
@@ -75,7 +74,7 @@ service Api {
     };
   }
 
-  rpc PostSubmitJitoBundle(PostSubmitJitoBundleRequest) returns (PostSubmitResponse) {
+  rpc PostSubmitJitoBundle(PostSubmitJitoBundleRequest) returns (PostSubmitJitoBundleResponse) {
     option (google.api.http) = {
       post: "/api/v2/submit-jito"
       body: "*"
@@ -1486,7 +1485,6 @@ message TransactionMessage {
 
 message TransactionMessageJito {
   string content = 1;
-  packet.Packet Packet = 2;
 }
 
 message PostCancelAllResponse {
@@ -1589,10 +1587,9 @@ message PostSubmitJitoBundleRequest {
   repeated TransactionMessageJito transactions = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
-message PostSubmitJitoResponse {
-  repeated string signature = 1;
+message PostSubmitJitoBundleResponse {
+  repeated string uuids = 1;
 }
-
 
 
 message PostSubmitRequestEntry {

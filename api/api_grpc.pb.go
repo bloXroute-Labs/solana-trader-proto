@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 type ApiClient interface {
 	GetTransaction(ctx context.Context, in *GetTransactionRequest, opts ...grpc.CallOption) (*GetTransactionResponse, error)
 	PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
-	PostSubmitJitoBundle(ctx context.Context, in *PostSubmitJitoBundleRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
+	PostSubmitJitoBundle(ctx context.Context, in *PostSubmitJitoBundleRequest, opts ...grpc.CallOption) (*PostSubmitJitoBundleResponse, error)
 	PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
 	// Raydium V2
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
@@ -178,8 +178,8 @@ func (c *apiClient) PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opt
 	return out, nil
 }
 
-func (c *apiClient) PostSubmitJitoBundle(ctx context.Context, in *PostSubmitJitoBundleRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error) {
-	out := new(PostSubmitResponse)
+func (c *apiClient) PostSubmitJitoBundle(ctx context.Context, in *PostSubmitJitoBundleRequest, opts ...grpc.CallOption) (*PostSubmitJitoBundleResponse, error) {
+	out := new(PostSubmitJitoBundleResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitJitoBundle", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1497,7 +1497,7 @@ func (x *apiGetPerpTradesStreamClient) Recv() (*GetPerpTradesStreamResponse, err
 type ApiServer interface {
 	GetTransaction(context.Context, *GetTransactionRequest) (*GetTransactionResponse, error)
 	PostSubmitV2(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
-	PostSubmitJitoBundle(context.Context, *PostSubmitJitoBundleRequest) (*PostSubmitResponse, error)
+	PostSubmitJitoBundle(context.Context, *PostSubmitJitoBundleRequest) (*PostSubmitJitoBundleResponse, error)
 	PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
 	// Raydium V2
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
@@ -1640,7 +1640,7 @@ func (UnimplementedApiServer) GetTransaction(context.Context, *GetTransactionReq
 func (UnimplementedApiServer) PostSubmitV2(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitV2 not implemented")
 }
-func (UnimplementedApiServer) PostSubmitJitoBundle(context.Context, *PostSubmitJitoBundleRequest) (*PostSubmitResponse, error) {
+func (UnimplementedApiServer) PostSubmitJitoBundle(context.Context, *PostSubmitJitoBundleRequest) (*PostSubmitJitoBundleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitJitoBundle not implemented")
 }
 func (UnimplementedApiServer) PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error) {
