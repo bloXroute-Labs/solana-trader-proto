@@ -902,7 +902,7 @@ class GetTransactionResponse(betterproto.Message):
 class Instruction(betterproto.Message):
     program_id_index: int = betterproto.uint32_field(1)
     accounts: List[int] = betterproto.uint32_field(2)
-    data: str = betterproto.string_field(3)
+    data: bytes = betterproto.bytes_field(3)
 
 
 @dataclass(eq=False, repr=False)

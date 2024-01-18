@@ -3175,8 +3175,10 @@ export class Instruction extends jspb.Message {
     getAccountsList(): Array<number>;
     setAccountsList(value: Array<number>): Instruction;
     addAccounts(value: number, index?: number): number;
-    getData(): string;
-    setData(value: string): Instruction;
+    getData(): Uint8Array | string;
+    getData_asU8(): Uint8Array;
+    getData_asB64(): string;
+    setData(value: Uint8Array | string): Instruction;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): Instruction.AsObject;
@@ -3192,7 +3194,7 @@ export namespace Instruction {
     export type AsObject = {
         programIdIndex: number,
         accountsList: Array<number>,
-        data: string,
+        data: Uint8Array | string,
     }
 }
 

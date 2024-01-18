@@ -5028,7 +5028,8 @@
           }
         },
         "data": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         }
       }
     },
