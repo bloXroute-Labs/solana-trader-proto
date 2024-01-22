@@ -2478,6 +2478,11 @@ export class RouteTradeSwapRequest extends jspb.Message {
     getComputeprice(): number;
     setComputeprice(value: number): RouteTradeSwapRequest;
 
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): RouteTradeSwapRequest;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): RouteTradeSwapRequest.AsObject;
     static toObject(includeInstance: boolean, msg: RouteTradeSwapRequest): RouteTradeSwapRequest.AsObject;
@@ -2496,6 +2501,7 @@ export namespace RouteTradeSwapRequest {
         slippage: number,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
     }
 }
 

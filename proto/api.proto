@@ -1822,6 +1822,7 @@ message RouteTradeSwapRequest {
   double slippage = 4;
   uint32 computeLimit = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 bundleTip = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
 }
 
 message PostRaydiumRouteSwapRequest {
