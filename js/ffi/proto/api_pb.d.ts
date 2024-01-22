@@ -2200,6 +2200,11 @@ export class TradeSwapRequest extends jspb.Message {
     getComputeprice(): number;
     setComputeprice(value: number): TradeSwapRequest;
 
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): TradeSwapRequest;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): TradeSwapRequest.AsObject;
     static toObject(includeInstance: boolean, msg: TradeSwapRequest): TradeSwapRequest.AsObject;
@@ -2220,6 +2225,7 @@ export namespace TradeSwapRequest {
         slippage: number,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
     }
 }
 
@@ -2238,6 +2244,11 @@ export class PostJupiterSwapRequest extends jspb.Message {
     setComputelimit(value: number): PostJupiterSwapRequest;
     getComputeprice(): number;
     setComputeprice(value: number): PostJupiterSwapRequest;
+
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostJupiterSwapRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostJupiterSwapRequest.AsObject;
@@ -2258,6 +2269,7 @@ export namespace PostJupiterSwapRequest {
         slippage: number,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
     }
 }
 
@@ -2276,6 +2288,11 @@ export class PostRaydiumSwapRequest extends jspb.Message {
     setComputelimit(value: number): PostRaydiumSwapRequest;
     getComputeprice(): number;
     setComputeprice(value: number): PostRaydiumSwapRequest;
+
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostRaydiumSwapRequest;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostRaydiumSwapRequest.AsObject;
@@ -2296,6 +2313,7 @@ export namespace PostRaydiumSwapRequest {
         slippage: number,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
     }
 }
 
@@ -2495,6 +2513,11 @@ export class PostRaydiumRouteSwapRequest extends jspb.Message {
     getComputeprice(): number;
     setComputeprice(value: number): PostRaydiumRouteSwapRequest;
 
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostRaydiumRouteSwapRequest;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostRaydiumRouteSwapRequest.AsObject;
     static toObject(includeInstance: boolean, msg: PostRaydiumRouteSwapRequest): PostRaydiumRouteSwapRequest.AsObject;
@@ -2512,6 +2535,7 @@ export namespace PostRaydiumRouteSwapRequest {
         slippage: number,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
     }
 }
 
@@ -2564,6 +2588,11 @@ export class PostJupiterRouteSwapRequest extends jspb.Message {
     getComputeprice(): number;
     setComputeprice(value: number): PostJupiterRouteSwapRequest;
 
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostJupiterRouteSwapRequest;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostJupiterRouteSwapRequest.AsObject;
     static toObject(includeInstance: boolean, msg: PostJupiterRouteSwapRequest): PostJupiterRouteSwapRequest.AsObject;
@@ -2581,6 +2610,7 @@ export namespace PostJupiterRouteSwapRequest {
         slippage: number,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
     }
 }
 
@@ -7643,6 +7673,11 @@ export class PostOrderRequestV2 extends jspb.Message {
     getComputeprice(): number;
     setComputeprice(value: number): PostOrderRequestV2;
 
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostOrderRequestV2;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostOrderRequestV2.AsObject;
     static toObject(includeInstance: boolean, msg: PostOrderRequestV2): PostOrderRequestV2.AsObject;
@@ -7666,6 +7701,7 @@ export namespace PostOrderRequestV2 {
         clientorderid: number,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
     }
 }
 
@@ -7695,6 +7731,11 @@ export class PostReplaceOrderRequestV2 extends jspb.Message {
     getComputeprice(): number;
     setComputeprice(value: number): PostReplaceOrderRequestV2;
 
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostReplaceOrderRequestV2;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostReplaceOrderRequestV2.AsObject;
     static toObject(includeInstance: boolean, msg: PostReplaceOrderRequestV2): PostReplaceOrderRequestV2.AsObject;
@@ -7719,6 +7760,7 @@ export namespace PostReplaceOrderRequestV2 {
         orderid: string,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
     }
 }
 
@@ -7740,6 +7782,11 @@ export class PostCancelOrderRequestV2 extends jspb.Message {
     getComputeprice(): number;
     setComputeprice(value: number): PostCancelOrderRequestV2;
 
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostCancelOrderRequestV2;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostCancelOrderRequestV2.AsObject;
     static toObject(includeInstance: boolean, msg: PostCancelOrderRequestV2): PostCancelOrderRequestV2.AsObject;
@@ -7760,6 +7807,7 @@ export namespace PostCancelOrderRequestV2 {
         clientorderid: number,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
     }
 }
 
@@ -7801,6 +7849,11 @@ export class PostSettleRequestV2 extends jspb.Message {
     getComputeprice(): number;
     setComputeprice(value: number): PostSettleRequestV2;
 
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostSettleRequestV2;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): PostSettleRequestV2.AsObject;
     static toObject(includeInstance: boolean, msg: PostSettleRequestV2): PostSettleRequestV2.AsObject;
@@ -7820,6 +7873,7 @@ export namespace PostSettleRequestV2 {
         openordersaddress: string,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
     }
 }
 

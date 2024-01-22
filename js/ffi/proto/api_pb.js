@@ -22460,7 +22460,8 @@ proto.api.TradeSwapRequest.toObject = function(includeInstance, msg) {
     inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
     slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 6, 0.0),
     computelimit: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    computeprice: jspb.Message.getFieldWithDefault(msg, 8, 0)
+    computeprice: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    bundletip: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {
@@ -22528,6 +22529,10 @@ proto.api.TradeSwapRequest.deserializeBinaryFromReader = function(msg, reader) {
     case 8:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setComputeprice(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBundletip(value);
       break;
     default:
       reader.skipField();
@@ -22611,6 +22616,13 @@ proto.api.TradeSwapRequest.serializeBinaryToWriter = function(message, writer) {
   if (f !== 0) {
     writer.writeUint64(
       8,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 9));
+  if (f != null) {
+    writer.writeUint64(
+      9,
       f
     );
   }
@@ -22761,6 +22773,42 @@ proto.api.TradeSwapRequest.prototype.setComputeprice = function(value) {
 };
 
 
+/**
+ * optional uint64 bundleTip = 9;
+ * @return {number}
+ */
+proto.api.TradeSwapRequest.prototype.getBundletip = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.TradeSwapRequest} returns this
+ */
+proto.api.TradeSwapRequest.prototype.setBundletip = function(value) {
+  return jspb.Message.setField(this, 9, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.api.TradeSwapRequest} returns this
+ */
+proto.api.TradeSwapRequest.prototype.clearBundletip = function() {
+  return jspb.Message.setField(this, 9, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.TradeSwapRequest.prototype.hasBundletip = function() {
+  return jspb.Message.getField(this, 9) != null;
+};
+
+
 
 
 
@@ -22799,7 +22847,8 @@ proto.api.PostJupiterSwapRequest.toObject = function(includeInstance, msg) {
     inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
     slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
     computelimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0)
+    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    bundletip: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -22863,6 +22912,10 @@ proto.api.PostJupiterSwapRequest.deserializeBinaryFromReader = function(msg, rea
     case 7:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setComputeprice(value);
+      break;
+    case 8:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBundletip(value);
       break;
     default:
       reader.skipField();
@@ -22939,6 +22992,13 @@ proto.api.PostJupiterSwapRequest.serializeBinaryToWriter = function(message, wri
   if (f !== 0) {
     writer.writeUint64(
       7,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 8));
+  if (f != null) {
+    writer.writeUint64(
+      8,
       f
     );
   }
@@ -23071,6 +23131,42 @@ proto.api.PostJupiterSwapRequest.prototype.setComputeprice = function(value) {
 };
 
 
+/**
+ * optional uint64 bundleTip = 8;
+ * @return {number}
+ */
+proto.api.PostJupiterSwapRequest.prototype.getBundletip = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterSwapRequest} returns this
+ */
+proto.api.PostJupiterSwapRequest.prototype.setBundletip = function(value) {
+  return jspb.Message.setField(this, 8, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.api.PostJupiterSwapRequest} returns this
+ */
+proto.api.PostJupiterSwapRequest.prototype.clearBundletip = function() {
+  return jspb.Message.setField(this, 8, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostJupiterSwapRequest.prototype.hasBundletip = function() {
+  return jspb.Message.getField(this, 8) != null;
+};
+
+
 
 
 
@@ -23109,7 +23205,8 @@ proto.api.PostRaydiumSwapRequest.toObject = function(includeInstance, msg) {
     inamount: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
     slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
     computelimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0)
+    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    bundletip: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -23173,6 +23270,10 @@ proto.api.PostRaydiumSwapRequest.deserializeBinaryFromReader = function(msg, rea
     case 7:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setComputeprice(value);
+      break;
+    case 8:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBundletip(value);
       break;
     default:
       reader.skipField();
@@ -23249,6 +23350,13 @@ proto.api.PostRaydiumSwapRequest.serializeBinaryToWriter = function(message, wri
   if (f !== 0) {
     writer.writeUint64(
       7,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 8));
+  if (f != null) {
+    writer.writeUint64(
+      8,
       f
     );
   }
@@ -23378,6 +23486,42 @@ proto.api.PostRaydiumSwapRequest.prototype.getComputeprice = function() {
  */
 proto.api.PostRaydiumSwapRequest.prototype.setComputeprice = function(value) {
   return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * optional uint64 bundleTip = 8;
+ * @return {number}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.getBundletip = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumSwapRequest} returns this
+ */
+proto.api.PostRaydiumSwapRequest.prototype.setBundletip = function(value) {
+  return jspb.Message.setField(this, 8, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.api.PostRaydiumSwapRequest} returns this
+ */
+proto.api.PostRaydiumSwapRequest.prototype.clearBundletip = function() {
+  return jspb.Message.setField(this, 8, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostRaydiumSwapRequest.prototype.hasBundletip = function() {
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
@@ -24927,7 +25071,8 @@ proto.api.PostRaydiumRouteSwapRequest.toObject = function(includeInstance, msg) 
     proto.api.RaydiumRouteStep.toObject, includeInstance),
     slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
     computelimit: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    computeprice: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    computeprice: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    bundletip: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -24984,6 +25129,10 @@ proto.api.PostRaydiumRouteSwapRequest.deserializeBinaryFromReader = function(msg
     case 5:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setComputeprice(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBundletip(value);
       break;
     default:
       reader.skipField();
@@ -25047,6 +25196,13 @@ proto.api.PostRaydiumRouteSwapRequest.serializeBinaryToWriter = function(message
   if (f !== 0) {
     writer.writeUint64(
       5,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 6));
+  if (f != null) {
+    writer.writeUint64(
+      6,
       f
     );
   }
@@ -25160,6 +25316,42 @@ proto.api.PostRaydiumRouteSwapRequest.prototype.getComputeprice = function() {
  */
 proto.api.PostRaydiumRouteSwapRequest.prototype.setComputeprice = function(value) {
   return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional uint64 bundleTip = 6;
+ * @return {number}
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.getBundletip = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostRaydiumRouteSwapRequest} returns this
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.setBundletip = function(value) {
+  return jspb.Message.setField(this, 6, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.api.PostRaydiumRouteSwapRequest} returns this
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.clearBundletip = function() {
+  return jspb.Message.setField(this, 6, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostRaydiumRouteSwapRequest.prototype.hasBundletip = function() {
+  return jspb.Message.getField(this, 6) != null;
 };
 
 
@@ -25487,7 +25679,8 @@ proto.api.PostJupiterRouteSwapRequest.toObject = function(includeInstance, msg) 
     proto.api.JupiterRouteStep.toObject, includeInstance),
     slippage: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
     computelimit: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    computeprice: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    computeprice: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    bundletip: jspb.Message.getFieldWithDefault(msg, 6, 0)
   };
 
   if (includeInstance) {
@@ -25544,6 +25737,10 @@ proto.api.PostJupiterRouteSwapRequest.deserializeBinaryFromReader = function(msg
     case 5:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setComputeprice(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBundletip(value);
       break;
     default:
       reader.skipField();
@@ -25607,6 +25804,13 @@ proto.api.PostJupiterRouteSwapRequest.serializeBinaryToWriter = function(message
   if (f !== 0) {
     writer.writeUint64(
       5,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 6));
+  if (f != null) {
+    writer.writeUint64(
+      6,
       f
     );
   }
@@ -25720,6 +25924,42 @@ proto.api.PostJupiterRouteSwapRequest.prototype.getComputeprice = function() {
  */
 proto.api.PostJupiterRouteSwapRequest.prototype.setComputeprice = function(value) {
   return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional uint64 bundleTip = 6;
+ * @return {number}
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.getBundletip = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostJupiterRouteSwapRequest} returns this
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.setBundletip = function(value) {
+  return jspb.Message.setField(this, 6, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.api.PostJupiterRouteSwapRequest} returns this
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.clearBundletip = function() {
+  return jspb.Message.setField(this, 6, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostJupiterRouteSwapRequest.prototype.hasBundletip = function() {
+  return jspb.Message.getField(this, 6) != null;
 };
 
 
@@ -64147,7 +64387,8 @@ proto.api.PostOrderRequestV2.toObject = function(includeInstance, msg) {
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 8, ""),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
     computelimit: jspb.Message.getFieldWithDefault(msg, 10, 0),
-    computeprice: jspb.Message.getFieldWithDefault(msg, 11, 0)
+    computeprice: jspb.Message.getFieldWithDefault(msg, 11, 0),
+    bundletip: jspb.Message.getFieldWithDefault(msg, 12, 0)
   };
 
   if (includeInstance) {
@@ -64227,6 +64468,10 @@ proto.api.PostOrderRequestV2.deserializeBinaryFromReader = function(msg, reader)
     case 11:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setComputeprice(value);
+      break;
+    case 12:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBundletip(value);
       break;
     default:
       reader.skipField();
@@ -64331,6 +64576,13 @@ proto.api.PostOrderRequestV2.serializeBinaryToWriter = function(message, writer)
   if (f !== 0) {
     writer.writeUint64(
       11,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 12));
+  if (f != null) {
+    writer.writeUint64(
+      12,
       f
     );
   }
@@ -64535,6 +64787,42 @@ proto.api.PostOrderRequestV2.prototype.setComputeprice = function(value) {
 };
 
 
+/**
+ * optional uint64 bundleTip = 12;
+ * @return {number}
+ */
+proto.api.PostOrderRequestV2.prototype.getBundletip = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.setBundletip = function(value) {
+  return jspb.Message.setField(this, 12, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.api.PostOrderRequestV2} returns this
+ */
+proto.api.PostOrderRequestV2.prototype.clearBundletip = function() {
+  return jspb.Message.setField(this, 12, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostOrderRequestV2.prototype.hasBundletip = function() {
+  return jspb.Message.getField(this, 12) != null;
+};
+
+
 
 
 
@@ -64578,7 +64866,8 @@ proto.api.PostReplaceOrderRequestV2.toObject = function(includeInstance, msg) {
     clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
     orderid: jspb.Message.getFieldWithDefault(msg, 10, ""),
     computelimit: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    computeprice: jspb.Message.getFieldWithDefault(msg, 12, 0)
+    computeprice: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    bundletip: jspb.Message.getFieldWithDefault(msg, 13, 0)
   };
 
   if (includeInstance) {
@@ -64662,6 +64951,10 @@ proto.api.PostReplaceOrderRequestV2.deserializeBinaryFromReader = function(msg, 
     case 12:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setComputeprice(value);
+      break;
+    case 13:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBundletip(value);
       break;
     default:
       reader.skipField();
@@ -64773,6 +65066,13 @@ proto.api.PostReplaceOrderRequestV2.serializeBinaryToWriter = function(message, 
   if (f !== 0) {
     writer.writeUint64(
       12,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 13));
+  if (f != null) {
+    writer.writeUint64(
+      13,
       f
     );
   }
@@ -64995,6 +65295,42 @@ proto.api.PostReplaceOrderRequestV2.prototype.setComputeprice = function(value) 
 };
 
 
+/**
+ * optional uint64 bundleTip = 13;
+ * @return {number}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.getBundletip = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.setBundletip = function(value) {
+  return jspb.Message.setField(this, 13, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.api.PostReplaceOrderRequestV2} returns this
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.clearBundletip = function() {
+  return jspb.Message.setField(this, 13, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostReplaceOrderRequestV2.prototype.hasBundletip = function() {
+  return jspb.Message.getField(this, 13) != null;
+};
+
+
 
 
 
@@ -65034,7 +65370,8 @@ proto.api.PostCancelOrderRequestV2.toObject = function(includeInstance, msg) {
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
     clientorderid: jspb.Message.getFieldWithDefault(msg, 6, 0),
     computelimit: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    computeprice: jspb.Message.getFieldWithDefault(msg, 8, 0)
+    computeprice: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    bundletip: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {
@@ -65102,6 +65439,10 @@ proto.api.PostCancelOrderRequestV2.deserializeBinaryFromReader = function(msg, r
     case 8:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setComputeprice(value);
+      break;
+    case 9:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBundletip(value);
       break;
     default:
       reader.skipField();
@@ -65185,6 +65526,13 @@ proto.api.PostCancelOrderRequestV2.serializeBinaryToWriter = function(message, w
   if (f !== 0) {
     writer.writeUint64(
       8,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 9));
+  if (f != null) {
+    writer.writeUint64(
+      9,
       f
     );
   }
@@ -65332,6 +65680,42 @@ proto.api.PostCancelOrderRequestV2.prototype.getComputeprice = function() {
  */
 proto.api.PostCancelOrderRequestV2.prototype.setComputeprice = function(value) {
   return jspb.Message.setProto3IntField(this, 8, value);
+};
+
+
+/**
+ * optional uint64 bundleTip = 9;
+ * @return {number}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.getBundletip = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostCancelOrderRequestV2} returns this
+ */
+proto.api.PostCancelOrderRequestV2.prototype.setBundletip = function(value) {
+  return jspb.Message.setField(this, 9, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.api.PostCancelOrderRequestV2} returns this
+ */
+proto.api.PostCancelOrderRequestV2.prototype.clearBundletip = function() {
+  return jspb.Message.setField(this, 9, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostCancelOrderRequestV2.prototype.hasBundletip = function() {
+  return jspb.Message.getField(this, 9) != null;
 };
 
 
@@ -65533,7 +65917,8 @@ proto.api.PostSettleRequestV2.toObject = function(includeInstance, msg) {
     quotetokenwallet: jspb.Message.getFieldWithDefault(msg, 4, ""),
     openordersaddress: jspb.Message.getFieldWithDefault(msg, 5, ""),
     computelimit: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0)
+    computeprice: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    bundletip: jspb.Message.getFieldWithDefault(msg, 8, 0)
   };
 
   if (includeInstance) {
@@ -65597,6 +65982,10 @@ proto.api.PostSettleRequestV2.deserializeBinaryFromReader = function(msg, reader
     case 7:
       var value = /** @type {number} */ (reader.readUint64());
       msg.setComputeprice(value);
+      break;
+    case 8:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBundletip(value);
       break;
     default:
       reader.skipField();
@@ -65673,6 +66062,13 @@ proto.api.PostSettleRequestV2.serializeBinaryToWriter = function(message, writer
   if (f !== 0) {
     writer.writeUint64(
       7,
+      f
+    );
+  }
+  f = /** @type {number} */ (jspb.Message.getField(message, 8));
+  if (f != null) {
+    writer.writeUint64(
+      8,
       f
     );
   }
@@ -65802,6 +66198,42 @@ proto.api.PostSettleRequestV2.prototype.getComputeprice = function() {
  */
 proto.api.PostSettleRequestV2.prototype.setComputeprice = function(value) {
   return jspb.Message.setProto3IntField(this, 7, value);
+};
+
+
+/**
+ * optional uint64 bundleTip = 8;
+ * @return {number}
+ */
+proto.api.PostSettleRequestV2.prototype.getBundletip = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostSettleRequestV2} returns this
+ */
+proto.api.PostSettleRequestV2.prototype.setBundletip = function(value) {
+  return jspb.Message.setField(this, 8, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.api.PostSettleRequestV2} returns this
+ */
+proto.api.PostSettleRequestV2.prototype.clearBundletip = function() {
+  return jspb.Message.setField(this, 8, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostSettleRequestV2.prototype.hasBundletip = function() {
+  return jspb.Message.getField(this, 8) != null;
 };
 
 

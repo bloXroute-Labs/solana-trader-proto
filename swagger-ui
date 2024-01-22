@@ -5794,6 +5794,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "bundleTip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"
         }
       },
       "required": [
@@ -6261,6 +6266,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "bundleTip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"
         }
       }
     },
@@ -6321,6 +6331,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "bundleTip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"
         }
       }
     },
@@ -6622,6 +6637,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "bundleTip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"
         }
       },
       "required": [
@@ -6720,6 +6740,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "bundleTip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"
         }
       }
     },
@@ -6771,6 +6796,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "bundleTip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"
         }
       }
     },
@@ -6962,6 +6992,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "bundleTip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"
         }
       },
       "required": [
@@ -7123,6 +7158,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "bundleTip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"
         }
       },
       "required": [
@@ -7785,6 +7825,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "bundleTip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"
         }
       }
     },
