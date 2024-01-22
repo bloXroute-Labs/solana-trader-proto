@@ -1476,12 +1476,15 @@ message GetTransactionRequest {
 message GetTransactionResponse {
   string status = 1;
   TransactionMeta metadata = 2;
+  uint64 slot = 3;
+  uint64 block_time = 4;
+  int32 version = 5;
 }
 
 message Instruction {
   uint32 program_id_index = 1;
   repeated uint32 accounts = 2;
-  string data = 3;
+  bytes data = 3;
 }
 
 message TransactionMeta {

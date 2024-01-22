@@ -2528,6 +2528,18 @@
         },
         "metadata": {
           "$ref": "#/definitions/apiTransactionMeta"
+        },
+        "slot": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "blockTime": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -2560,7 +2572,8 @@
           }
         },
         "data": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
         }
       }
     },
