@@ -4134,6 +4134,9 @@
         },
         "project": {
           "$ref": "#/definitions/apiStepProject"
+        },
+        "fee": {
+          "$ref": "#/definitions/commonFee"
         }
       }
     },

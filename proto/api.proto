@@ -1343,6 +1343,7 @@ message RouteStep {
   double outAmount = 4;
   double outAmountMin = 5;
   StepProject project = 6;
+  common.Fee fee = 7;
 }
 
 message TradeSwapResponse{

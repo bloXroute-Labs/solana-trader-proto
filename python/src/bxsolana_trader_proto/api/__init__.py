@@ -746,6 +746,7 @@ class RouteStep(betterproto.Message):
     out_amount: float = betterproto.double_field(4)
     out_amount_min: float = betterproto.double_field(5)
     project: "StepProject" = betterproto.message_field(6)
+    fee: "_common__.Fee" = betterproto.message_field(7)
 
 
 @dataclass(eq=False, repr=False)
