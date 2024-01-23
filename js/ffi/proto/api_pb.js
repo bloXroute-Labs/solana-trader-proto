@@ -11780,7 +11780,8 @@ proto.api.PostOrderRequest.toObject = function(includeInstance, msg) {
     clientorderid: jspb.Message.getFieldWithDefault(msg, 9, 0),
     computelimit: jspb.Message.getFieldWithDefault(msg, 10, 0),
     computeprice: jspb.Message.getFieldWithDefault(msg, 11, 0),
-    project: jspb.Message.getFieldWithDefault(msg, 12, 0)
+    bundletip: jspb.Message.getFieldWithDefault(msg, 12, 0),
+    project: jspb.Message.getFieldWithDefault(msg, 13, 0)
   };
 
   if (includeInstance) {
@@ -11864,6 +11865,10 @@ proto.api.PostOrderRequest.deserializeBinaryFromReader = function(msg, reader) {
       msg.setComputeprice(value);
       break;
     case 12:
+      var value = /** @type {number} */ (reader.readUint64());
+      msg.setBundletip(value);
+      break;
+    case 13:
       var value = /** @type {!proto.api.Project} */ (reader.readEnum());
       msg.setProject(value);
       break;
@@ -11973,10 +11978,17 @@ proto.api.PostOrderRequest.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = /** @type {number} */ (jspb.Message.getField(message, 12));
+  if (f != null) {
+    writer.writeUint64(
+      12,
+      f
+    );
+  }
   f = message.getProject();
   if (f !== 0.0) {
     writer.writeEnum(
-      12,
+      13,
       f
     );
   }
@@ -12201,11 +12213,47 @@ proto.api.PostOrderRequest.prototype.setComputeprice = function(value) {
 
 
 /**
- * optional Project project = 12;
+ * optional uint64 bundleTip = 12;
+ * @return {number}
+ */
+proto.api.PostOrderRequest.prototype.getBundletip = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.api.PostOrderRequest} returns this
+ */
+proto.api.PostOrderRequest.prototype.setBundletip = function(value) {
+  return jspb.Message.setField(this, 12, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.api.PostOrderRequest} returns this
+ */
+proto.api.PostOrderRequest.prototype.clearBundletip = function() {
+  return jspb.Message.setField(this, 12, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.PostOrderRequest.prototype.hasBundletip = function() {
+  return jspb.Message.getField(this, 12) != null;
+};
+
+
+/**
+ * optional Project project = 13;
  * @return {!proto.api.Project}
  */
 proto.api.PostOrderRequest.prototype.getProject = function() {
-  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 12, 0));
+  return /** @type {!proto.api.Project} */ (jspb.Message.getFieldWithDefault(this, 13, 0));
 };
 
 
@@ -12214,7 +12262,7 @@ proto.api.PostOrderRequest.prototype.getProject = function() {
  * @return {!proto.api.PostOrderRequest} returns this
  */
 proto.api.PostOrderRequest.prototype.setProject = function(value) {
-  return jspb.Message.setProto3EnumField(this, 12, value);
+  return jspb.Message.setProto3EnumField(this, 13, value);
 };
 
 

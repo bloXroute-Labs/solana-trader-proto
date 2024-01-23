@@ -1413,8 +1413,8 @@ message PostOrderRequest {
   uint64 clientOrderID = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Client defined OrderID"}];
   uint32 computeLimit = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  Project project = 12;
-
+  optional uint64 bundleTip = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  Project project = 13;
 }
 
 message PostReplaceOrderRequest {

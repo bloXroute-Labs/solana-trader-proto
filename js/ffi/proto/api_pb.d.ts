@@ -818,6 +818,11 @@ export class PostOrderRequest extends jspb.Message {
     setComputelimit(value: number): PostOrderRequest;
     getComputeprice(): number;
     setComputeprice(value: number): PostOrderRequest;
+
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostOrderRequest;
     getProject(): Project;
     setProject(value: Project): PostOrderRequest;
 
@@ -844,6 +849,7 @@ export namespace PostOrderRequest {
         clientorderid: number,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
         project: Project,
     }
 }
