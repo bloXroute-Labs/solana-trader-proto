@@ -881,6 +881,11 @@ export class PostReplaceOrderRequest extends jspb.Message {
     setComputelimit(value: number): PostReplaceOrderRequest;
     getComputeprice(): number;
     setComputeprice(value: number): PostReplaceOrderRequest;
+
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostReplaceOrderRequest;
     getProject(): Project;
     setProject(value: Project): PostReplaceOrderRequest;
 
@@ -908,6 +913,7 @@ export namespace PostReplaceOrderRequest {
         orderid: string,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
         project: Project,
     }
 }
