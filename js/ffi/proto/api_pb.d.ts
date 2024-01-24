@@ -959,6 +959,11 @@ export class PostCancelOrderRequest extends jspb.Message {
     setComputelimit(value: number): PostCancelOrderRequest;
     getComputeprice(): number;
     setComputeprice(value: number): PostCancelOrderRequest;
+
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostCancelOrderRequest;
     getProject(): Project;
     setProject(value: Project): PostCancelOrderRequest;
 
@@ -981,6 +986,7 @@ export namespace PostCancelOrderRequest {
         openordersaddress: string,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
         project: Project,
     }
 }
@@ -998,6 +1004,11 @@ export class PostCancelByClientOrderIDRequest extends jspb.Message {
     setComputelimit(value: number): PostCancelByClientOrderIDRequest;
     getComputeprice(): number;
     setComputeprice(value: number): PostCancelByClientOrderIDRequest;
+
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostCancelByClientOrderIDRequest;
     getProject(): Project;
     setProject(value: Project): PostCancelByClientOrderIDRequest;
 
@@ -1019,6 +1030,7 @@ export namespace PostCancelByClientOrderIDRequest {
         openordersaddress: string,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
         project: Project,
     }
 }
@@ -1059,6 +1071,11 @@ export class PostCancelAllRequest extends jspb.Message {
     setComputelimit(value: number): PostCancelAllRequest;
     getComputeprice(): number;
     setComputeprice(value: number): PostCancelAllRequest;
+
+    hasBundletip(): boolean;
+    clearBundletip(): void;
+    getBundletip(): number | undefined;
+    setBundletip(value: number): PostCancelAllRequest;
     getProject(): Project;
     setProject(value: Project): PostCancelAllRequest;
 
@@ -1079,6 +1096,7 @@ export namespace PostCancelAllRequest {
         openordersaddressesList: Array<string>,
         computelimit: number,
         computeprice: number,
+        bundletip?: number,
         project: Project,
     }
 }
