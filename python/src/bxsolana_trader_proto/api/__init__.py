@@ -896,13 +896,16 @@ class GetTransactionRequest(betterproto.Message):
 class GetTransactionResponse(betterproto.Message):
     status: str = betterproto.string_field(1)
     metadata: "TransactionMeta" = betterproto.message_field(2)
+    slot: int = betterproto.uint64_field(3)
+    block_time: int = betterproto.uint64_field(4)
+    version: int = betterproto.int32_field(5)
 
 
 @dataclass(eq=False, repr=False)
 class Instruction(betterproto.Message):
     program_id_index: int = betterproto.uint32_field(1)
     accounts: List[int] = betterproto.uint32_field(2)
-    data: str = betterproto.string_field(3)
+    data: bytes = betterproto.bytes_field(3)
 
 
 @dataclass(eq=False, repr=False)
