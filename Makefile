@@ -2,7 +2,7 @@ PB_GO_IMAGE_NAME=bloxroute/bdn-protobuf:v3.19.3-go
 PB_JS_IMAGE_NAME=bloxroute/bdn-protobuf:v3.19.3-js
 
 .PHONY: all test integration fmt
-.PHONY: proto proto-build-gw proto-build-swagger proto-build-api proto-build-common-go proto-build-ffi-go proto-build-ffi-js
+.PHONY: proto proto-build-gw proto-build-swagger proto-build-api proto-build-common-go
 .PHONY: proto-docker proto-docker-push-go proto-docker-build-go proto-docker-push-js proto-docker-build-js
 .PHONY: cred-github cred-solana data-accounts environment-dev
 
