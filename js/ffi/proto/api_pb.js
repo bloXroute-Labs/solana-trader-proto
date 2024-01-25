@@ -16056,7 +16056,8 @@ proto.api.GetOrderStatusStreamResponse.prototype.toObject = function(opt_include
 proto.api.GetOrderStatusStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    orderinfo: (f = msg.getOrderinfo()) && proto.api.GetOrderStatusResponse.toObject(includeInstance, f)
+    orderinfo: (f = msg.getOrderinfo()) && proto.api.GetOrderStatusResponse.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -16102,6 +16103,11 @@ proto.api.GetOrderStatusStreamResponse.deserializeBinaryFromReader = function(ms
       reader.readMessage(value,proto.api.GetOrderStatusResponse.deserializeBinaryFromReader);
       msg.setOrderinfo(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -16144,6 +16150,14 @@ proto.api.GetOrderStatusStreamResponse.serializeBinaryToWriter = function(messag
       2,
       f,
       proto.api.GetOrderStatusResponse.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -16201,6 +16215,43 @@ proto.api.GetOrderStatusStreamResponse.prototype.clearOrderinfo = function() {
  */
 proto.api.GetOrderStatusStreamResponse.prototype.hasOrderinfo = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetOrderStatusStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetOrderStatusStreamResponse} returns this
+*/
+proto.api.GetOrderStatusStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetOrderStatusStreamResponse} returns this
+ */
+proto.api.GetOrderStatusStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetOrderStatusStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -19192,7 +19243,8 @@ proto.api.GetOrderbooksStreamResponse.prototype.toObject = function(opt_includeI
 proto.api.GetOrderbooksStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    orderbook: (f = msg.getOrderbook()) && proto.api.GetOrderbookResponse.toObject(includeInstance, f)
+    orderbook: (f = msg.getOrderbook()) && proto.api.GetOrderbookResponse.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -19238,6 +19290,11 @@ proto.api.GetOrderbooksStreamResponse.deserializeBinaryFromReader = function(msg
       reader.readMessage(value,proto.api.GetOrderbookResponse.deserializeBinaryFromReader);
       msg.setOrderbook(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -19280,6 +19337,14 @@ proto.api.GetOrderbooksStreamResponse.serializeBinaryToWriter = function(message
       2,
       f,
       proto.api.GetOrderbookResponse.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -19340,6 +19405,43 @@ proto.api.GetOrderbooksStreamResponse.prototype.hasOrderbook = function() {
 };
 
 
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetOrderbooksStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetOrderbooksStreamResponse} returns this
+*/
+proto.api.GetOrderbooksStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetOrderbooksStreamResponse} returns this
+ */
+proto.api.GetOrderbooksStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetOrderbooksStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
 
 
 
@@ -19373,7 +19475,8 @@ proto.api.GetMarketDepthsStreamResponse.prototype.toObject = function(opt_includ
 proto.api.GetMarketDepthsStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    data: (f = msg.getData()) && proto.api.GetMarketDepthResponse.toObject(includeInstance, f)
+    data: (f = msg.getData()) && proto.api.GetMarketDepthResponse.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -19419,6 +19522,11 @@ proto.api.GetMarketDepthsStreamResponse.deserializeBinaryFromReader = function(m
       reader.readMessage(value,proto.api.GetMarketDepthResponse.deserializeBinaryFromReader);
       msg.setData(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -19461,6 +19569,14 @@ proto.api.GetMarketDepthsStreamResponse.serializeBinaryToWriter = function(messa
       2,
       f,
       proto.api.GetMarketDepthResponse.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -19521,6 +19637,43 @@ proto.api.GetMarketDepthsStreamResponse.prototype.hasData = function() {
 };
 
 
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetMarketDepthsStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetMarketDepthsStreamResponse} returns this
+*/
+proto.api.GetMarketDepthsStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetMarketDepthsStreamResponse} returns this
+ */
+proto.api.GetMarketDepthsStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetMarketDepthsStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
 
 
 
@@ -19554,7 +19707,8 @@ proto.api.GetTickersStreamResponse.prototype.toObject = function(opt_includeInst
 proto.api.GetTickersStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    ticker: (f = msg.getTicker()) && proto.api.GetTickersResponse.toObject(includeInstance, f)
+    ticker: (f = msg.getTicker()) && proto.api.GetTickersResponse.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -19600,6 +19754,11 @@ proto.api.GetTickersStreamResponse.deserializeBinaryFromReader = function(msg, r
       reader.readMessage(value,proto.api.GetTickersResponse.deserializeBinaryFromReader);
       msg.setTicker(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -19642,6 +19801,14 @@ proto.api.GetTickersStreamResponse.serializeBinaryToWriter = function(message, w
       2,
       f,
       proto.api.GetTickersResponse.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -19702,6 +19869,43 @@ proto.api.GetTickersStreamResponse.prototype.hasTicker = function() {
 };
 
 
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetTickersStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetTickersStreamResponse} returns this
+*/
+proto.api.GetTickersStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetTickersStreamResponse} returns this
+ */
+proto.api.GetTickersStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetTickersStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
 
 
 
@@ -19735,7 +19939,8 @@ proto.api.GetTradesStreamResponse.prototype.toObject = function(opt_includeInsta
 proto.api.GetTradesStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    trades: (f = msg.getTrades()) && proto.api.GetTradesResponse.toObject(includeInstance, f)
+    trades: (f = msg.getTrades()) && proto.api.GetTradesResponse.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -19781,6 +19986,11 @@ proto.api.GetTradesStreamResponse.deserializeBinaryFromReader = function(msg, re
       reader.readMessage(value,proto.api.GetTradesResponse.deserializeBinaryFromReader);
       msg.setTrades(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -19823,6 +20033,14 @@ proto.api.GetTradesStreamResponse.serializeBinaryToWriter = function(message, wr
       2,
       f,
       proto.api.GetTradesResponse.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -19880,6 +20098,43 @@ proto.api.GetTradesStreamResponse.prototype.clearTrades = function() {
  */
 proto.api.GetTradesStreamResponse.prototype.hasTrades = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetTradesStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetTradesStreamResponse} returns this
+*/
+proto.api.GetTradesStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetTradesStreamResponse} returns this
+ */
+proto.api.GetTradesStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetTradesStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -28510,7 +28765,8 @@ proto.api.GetRecentBlockHashResponse.prototype.toObject = function(opt_includeIn
  */
 proto.api.GetRecentBlockHashResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    blockhash: jspb.Message.getFieldWithDefault(msg, 1, "")
+    blockhash: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -28551,6 +28807,11 @@ proto.api.GetRecentBlockHashResponse.deserializeBinaryFromReader = function(msg,
       var value = /** @type {string} */ (reader.readString());
       msg.setBlockhash(value);
       break;
+    case 2:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -28587,6 +28848,14 @@ proto.api.GetRecentBlockHashResponse.serializeBinaryToWriter = function(message,
       f
     );
   }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
 };
 
 
@@ -28605,6 +28874,43 @@ proto.api.GetRecentBlockHashResponse.prototype.getBlockhash = function() {
  */
 proto.api.GetRecentBlockHashResponse.prototype.setBlockhash = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 2;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetRecentBlockHashResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetRecentBlockHashResponse} returns this
+*/
+proto.api.GetRecentBlockHashResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetRecentBlockHashResponse} returns this
+ */
+proto.api.GetRecentBlockHashResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetRecentBlockHashResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -28961,7 +29267,8 @@ proto.api.GetBlockStreamResponse.prototype.toObject = function(opt_includeInstan
  */
 proto.api.GetBlockStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
-    block: (f = msg.getBlock()) && proto.api.Block.toObject(includeInstance, f)
+    block: (f = msg.getBlock()) && proto.api.Block.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -29003,6 +29310,11 @@ proto.api.GetBlockStreamResponse.deserializeBinaryFromReader = function(msg, rea
       reader.readMessage(value,proto.api.Block.deserializeBinaryFromReader);
       msg.setBlock(value);
       break;
+    case 2:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -29038,6 +29350,14 @@ proto.api.GetBlockStreamResponse.serializeBinaryToWriter = function(message, wri
       1,
       f,
       proto.api.Block.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -29077,6 +29397,43 @@ proto.api.GetBlockStreamResponse.prototype.clearBlock = function() {
  */
 proto.api.GetBlockStreamResponse.prototype.hasBlock = function() {
   return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 2;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetBlockStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetBlockStreamResponse} returns this
+*/
+proto.api.GetBlockStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetBlockStreamResponse} returns this
+ */
+proto.api.GetBlockStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetBlockStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 2) != null;
 };
 
 
@@ -30522,7 +30879,8 @@ proto.api.GetQuotesStreamResponse.prototype.toObject = function(opt_includeInsta
 proto.api.GetQuotesStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    quote: (f = msg.getQuote()) && proto.api.GetQuotesStreamUpdate.toObject(includeInstance, f)
+    quote: (f = msg.getQuote()) && proto.api.GetQuotesStreamUpdate.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -30568,6 +30926,11 @@ proto.api.GetQuotesStreamResponse.deserializeBinaryFromReader = function(msg, re
       reader.readMessage(value,proto.api.GetQuotesStreamUpdate.deserializeBinaryFromReader);
       msg.setQuote(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -30610,6 +30973,14 @@ proto.api.GetQuotesStreamResponse.serializeBinaryToWriter = function(message, wr
       2,
       f,
       proto.api.GetQuotesStreamUpdate.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -30667,6 +31038,43 @@ proto.api.GetQuotesStreamResponse.prototype.clearQuote = function() {
  */
 proto.api.GetQuotesStreamResponse.prototype.hasQuote = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetQuotesStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetQuotesStreamResponse} returns this
+*/
+proto.api.GetQuotesStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetQuotesStreamResponse} returns this
+ */
+proto.api.GetQuotesStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetQuotesStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -31250,7 +31658,8 @@ proto.api.GetSwapsStreamResponse.prototype.toObject = function(opt_includeInstan
 proto.api.GetSwapsStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    swap: (f = msg.getSwap()) && proto.api.GetSwapsStreamUpdate.toObject(includeInstance, f)
+    swap: (f = msg.getSwap()) && proto.api.GetSwapsStreamUpdate.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -31296,6 +31705,11 @@ proto.api.GetSwapsStreamResponse.deserializeBinaryFromReader = function(msg, rea
       reader.readMessage(value,proto.api.GetSwapsStreamUpdate.deserializeBinaryFromReader);
       msg.setSwap(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -31338,6 +31752,14 @@ proto.api.GetSwapsStreamResponse.serializeBinaryToWriter = function(message, wri
       2,
       f,
       proto.api.GetSwapsStreamUpdate.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -31395,6 +31817,43 @@ proto.api.GetSwapsStreamResponse.prototype.clearSwap = function() {
  */
 proto.api.GetSwapsStreamResponse.prototype.hasSwap = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetSwapsStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetSwapsStreamResponse} returns this
+*/
+proto.api.GetSwapsStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetSwapsStreamResponse} returns this
+ */
+proto.api.GetSwapsStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetSwapsStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -31532,7 +31991,8 @@ proto.api.GetNewRaydiumPoolsResponse.prototype.toObject = function(opt_includeIn
 proto.api.GetNewRaydiumPoolsResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    pool: (f = msg.getPool()) && proto.api.ProjectPool.toObject(includeInstance, f)
+    pool: (f = msg.getPool()) && proto.api.ProjectPool.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -31578,6 +32038,11 @@ proto.api.GetNewRaydiumPoolsResponse.deserializeBinaryFromReader = function(msg,
       reader.readMessage(value,proto.api.ProjectPool.deserializeBinaryFromReader);
       msg.setPool(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -31620,6 +32085,14 @@ proto.api.GetNewRaydiumPoolsResponse.serializeBinaryToWriter = function(message,
       2,
       f,
       proto.api.ProjectPool.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -31677,6 +32150,43 @@ proto.api.GetNewRaydiumPoolsResponse.prototype.clearPool = function() {
  */
 proto.api.GetNewRaydiumPoolsResponse.prototype.hasPool = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetNewRaydiumPoolsResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetNewRaydiumPoolsResponse} returns this
+*/
+proto.api.GetNewRaydiumPoolsResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetNewRaydiumPoolsResponse} returns this
+ */
+proto.api.GetNewRaydiumPoolsResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetNewRaydiumPoolsResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -33931,7 +34441,8 @@ proto.api.GetPoolReservesStreamResponse.prototype.toObject = function(opt_includ
 proto.api.GetPoolReservesStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    reserves: (f = msg.getReserves()) && proto.api.PoolReserves.toObject(includeInstance, f)
+    reserves: (f = msg.getReserves()) && proto.api.PoolReserves.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -33977,6 +34488,11 @@ proto.api.GetPoolReservesStreamResponse.deserializeBinaryFromReader = function(m
       reader.readMessage(value,proto.api.PoolReserves.deserializeBinaryFromReader);
       msg.setReserves(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -34019,6 +34535,14 @@ proto.api.GetPoolReservesStreamResponse.serializeBinaryToWriter = function(messa
       2,
       f,
       proto.api.PoolReserves.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -34076,6 +34600,43 @@ proto.api.GetPoolReservesStreamResponse.prototype.clearReserves = function() {
  */
 proto.api.GetPoolReservesStreamResponse.prototype.hasReserves = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetPoolReservesStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetPoolReservesStreamResponse} returns this
+*/
+proto.api.GetPoolReservesStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetPoolReservesStreamResponse} returns this
+ */
+proto.api.GetPoolReservesStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetPoolReservesStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -34787,7 +35348,8 @@ proto.api.GetPricesStreamResponse.prototype.toObject = function(opt_includeInsta
 proto.api.GetPricesStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    price: (f = msg.getPrice()) && proto.api.TokenPrice.toObject(includeInstance, f)
+    price: (f = msg.getPrice()) && proto.api.TokenPrice.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -34833,6 +35395,11 @@ proto.api.GetPricesStreamResponse.deserializeBinaryFromReader = function(msg, re
       reader.readMessage(value,proto.api.TokenPrice.deserializeBinaryFromReader);
       msg.setPrice(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -34875,6 +35442,14 @@ proto.api.GetPricesStreamResponse.serializeBinaryToWriter = function(message, wr
       2,
       f,
       proto.api.TokenPrice.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -34932,6 +35507,43 @@ proto.api.GetPricesStreamResponse.prototype.clearPrice = function() {
  */
 proto.api.GetPricesStreamResponse.prototype.hasPrice = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetPricesStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetPricesStreamResponse} returns this
+*/
+proto.api.GetPricesStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetPricesStreamResponse} returns this
+ */
+proto.api.GetPricesStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetPricesStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -36169,7 +36781,8 @@ proto.api.GetPerpOrderbooksStreamResponse.prototype.toObject = function(opt_incl
 proto.api.GetPerpOrderbooksStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     slot: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    orderbook: (f = msg.getOrderbook()) && proto.api.GetPerpOrderbookResponse.toObject(includeInstance, f)
+    orderbook: (f = msg.getOrderbook()) && proto.api.GetPerpOrderbookResponse.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -36215,6 +36828,11 @@ proto.api.GetPerpOrderbooksStreamResponse.deserializeBinaryFromReader = function
       reader.readMessage(value,proto.api.GetPerpOrderbookResponse.deserializeBinaryFromReader);
       msg.setOrderbook(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -36257,6 +36875,14 @@ proto.api.GetPerpOrderbooksStreamResponse.serializeBinaryToWriter = function(mes
       2,
       f,
       proto.api.GetPerpOrderbookResponse.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -36314,6 +36940,43 @@ proto.api.GetPerpOrderbooksStreamResponse.prototype.clearOrderbook = function() 
  */
 proto.api.GetPerpOrderbooksStreamResponse.prototype.hasOrderbook = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetPerpOrderbooksStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetPerpOrderbooksStreamResponse} returns this
+*/
+proto.api.GetPerpOrderbooksStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetPerpOrderbooksStreamResponse} returns this
+ */
+proto.api.GetPerpOrderbooksStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetPerpOrderbooksStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 
@@ -46279,7 +46942,8 @@ proto.api.GetPerpTradesStreamResponse.prototype.toObject = function(opt_includeI
 proto.api.GetPerpTradesStreamResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     context: (f = msg.getContext()) && proto.api.Context.toObject(includeInstance, f),
-    trade: (f = msg.getTrade()) && proto.api.GetPerpTradesResponse.toObject(includeInstance, f)
+    trade: (f = msg.getTrade()) && proto.api.GetPerpTradesResponse.toObject(includeInstance, f),
+    timestamp: (f = msg.getTimestamp()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -46326,6 +46990,11 @@ proto.api.GetPerpTradesStreamResponse.deserializeBinaryFromReader = function(msg
       reader.readMessage(value,proto.api.GetPerpTradesResponse.deserializeBinaryFromReader);
       msg.setTrade(value);
       break;
+    case 3:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setTimestamp(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -46369,6 +47038,14 @@ proto.api.GetPerpTradesStreamResponse.serializeBinaryToWriter = function(message
       2,
       f,
       proto.api.GetPerpTradesResponse.serializeBinaryToWriter
+    );
+  }
+  f = message.getTimestamp();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
   }
 };
@@ -46445,6 +47122,43 @@ proto.api.GetPerpTradesStreamResponse.prototype.clearTrade = function() {
  */
 proto.api.GetPerpTradesStreamResponse.prototype.hasTrade = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional google.protobuf.Timestamp timestamp = 3;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.api.GetPerpTradesStreamResponse.prototype.getTimestamp = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 3));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.api.GetPerpTradesStreamResponse} returns this
+*/
+proto.api.GetPerpTradesStreamResponse.prototype.setTimestamp = function(value) {
+  return jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.api.GetPerpTradesStreamResponse} returns this
+ */
+proto.api.GetPerpTradesStreamResponse.prototype.clearTimestamp = function() {
+  return this.setTimestamp(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.api.GetPerpTradesStreamResponse.prototype.hasTimestamp = function() {
+  return jspb.Message.getField(this, 3) != null;
 };
 
 

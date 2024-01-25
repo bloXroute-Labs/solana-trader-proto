@@ -3875,6 +3875,10 @@
       "properties": {
         "block": {
           "$ref": "#/definitions/apiBlock"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4261,6 +4265,10 @@
         },
         "Data": {
           "$ref": "#/definitions/apiGetMarketDepthResponse"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4295,6 +4303,10 @@
         },
         "pool": {
           "$ref": "#/definitions/apiProjectPool"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4402,6 +4414,10 @@
         },
         "orderInfo": {
           "$ref": "#/definitions/apiGetOrderStatusResponse"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4460,6 +4476,10 @@
         },
         "orderbook": {
           "$ref": "#/definitions/apiGetOrderbookResponse"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4514,6 +4534,10 @@
         },
         "orderbook": {
           "$ref": "#/definitions/apiGetPerpOrderbookResponse"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4638,6 +4662,10 @@
         },
         "trade": {
           "$ref": "#/definitions/apiGetPerpTradesResponse"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4650,6 +4678,10 @@
         },
         "reserves": {
           "$ref": "#/definitions/apiPoolReserves"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4684,6 +4716,10 @@
         },
         "price": {
           "$ref": "#/definitions/apiTokenPrice"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4723,6 +4759,10 @@
         },
         "quote": {
           "$ref": "#/definitions/apiGetQuotesStreamUpdate"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4808,6 +4848,10 @@
       "properties": {
         "blockHash": {
           "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4828,6 +4872,10 @@
         },
         "swap": {
           "$ref": "#/definitions/apiGetSwapsStreamUpdate"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4908,6 +4956,10 @@
         },
         "ticker": {
           "$ref": "#/definitions/apiGetTickersResponse"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4942,6 +4994,10 @@
         },
         "trades": {
           "$ref": "#/definitions/apiGetTradesResponse"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },

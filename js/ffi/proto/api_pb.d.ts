@@ -1364,6 +1364,11 @@ export class GetOrderStatusStreamResponse extends jspb.Message {
     getOrderinfo(): GetOrderStatusResponse | undefined;
     setOrderinfo(value?: GetOrderStatusResponse): GetOrderStatusStreamResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetOrderStatusStreamResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderStatusStreamResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetOrderStatusStreamResponse): GetOrderStatusStreamResponse.AsObject;
@@ -1378,6 +1383,7 @@ export namespace GetOrderStatusStreamResponse {
     export type AsObject = {
         slot: number,
         orderinfo?: GetOrderStatusResponse.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -1791,6 +1797,11 @@ export class GetOrderbooksStreamResponse extends jspb.Message {
     getOrderbook(): GetOrderbookResponse | undefined;
     setOrderbook(value?: GetOrderbookResponse): GetOrderbooksStreamResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetOrderbooksStreamResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetOrderbooksStreamResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetOrderbooksStreamResponse): GetOrderbooksStreamResponse.AsObject;
@@ -1805,6 +1816,7 @@ export namespace GetOrderbooksStreamResponse {
     export type AsObject = {
         slot: number,
         orderbook?: GetOrderbookResponse.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -1816,6 +1828,11 @@ export class GetMarketDepthsStreamResponse extends jspb.Message {
     clearData(): void;
     getData(): GetMarketDepthResponse | undefined;
     setData(value?: GetMarketDepthResponse): GetMarketDepthsStreamResponse;
+
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetMarketDepthsStreamResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetMarketDepthsStreamResponse.AsObject;
@@ -1831,6 +1848,7 @@ export namespace GetMarketDepthsStreamResponse {
     export type AsObject = {
         slot: number,
         data?: GetMarketDepthResponse.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -1842,6 +1860,11 @@ export class GetTickersStreamResponse extends jspb.Message {
     clearTicker(): void;
     getTicker(): GetTickersResponse | undefined;
     setTicker(value?: GetTickersResponse): GetTickersStreamResponse;
+
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetTickersStreamResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTickersStreamResponse.AsObject;
@@ -1857,6 +1880,7 @@ export namespace GetTickersStreamResponse {
     export type AsObject = {
         slot: number,
         ticker?: GetTickersResponse.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -1868,6 +1892,11 @@ export class GetTradesStreamResponse extends jspb.Message {
     clearTrades(): void;
     getTrades(): GetTradesResponse | undefined;
     setTrades(value?: GetTradesResponse): GetTradesStreamResponse;
+
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetTradesStreamResponse;
 
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetTradesStreamResponse.AsObject;
@@ -1883,6 +1912,7 @@ export namespace GetTradesStreamResponse {
     export type AsObject = {
         slot: number,
         trades?: GetTradesResponse.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -2948,6 +2978,11 @@ export class GetRecentBlockHashResponse extends jspb.Message {
     getBlockhash(): string;
     setBlockhash(value: string): GetRecentBlockHashResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetRecentBlockHashResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetRecentBlockHashResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetRecentBlockHashResponse): GetRecentBlockHashResponse.AsObject;
@@ -2961,6 +2996,7 @@ export class GetRecentBlockHashResponse extends jspb.Message {
 export namespace GetRecentBlockHashResponse {
     export type AsObject = {
         blockhash: string,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -3017,6 +3053,11 @@ export class GetBlockStreamResponse extends jspb.Message {
     getBlock(): Block | undefined;
     setBlock(value?: Block): GetBlockStreamResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetBlockStreamResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetBlockStreamResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetBlockStreamResponse): GetBlockStreamResponse.AsObject;
@@ -3030,6 +3071,7 @@ export class GetBlockStreamResponse extends jspb.Message {
 export namespace GetBlockStreamResponse {
     export type AsObject = {
         block?: Block.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -3227,6 +3269,11 @@ export class GetQuotesStreamResponse extends jspb.Message {
     getQuote(): GetQuotesStreamUpdate | undefined;
     setQuote(value?: GetQuotesStreamUpdate): GetQuotesStreamResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetQuotesStreamResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetQuotesStreamResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetQuotesStreamResponse): GetQuotesStreamResponse.AsObject;
@@ -3241,6 +3288,7 @@ export namespace GetQuotesStreamResponse {
     export type AsObject = {
         slot: number,
         quote?: GetQuotesStreamUpdate.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -3321,6 +3369,11 @@ export class GetSwapsStreamResponse extends jspb.Message {
     getSwap(): GetSwapsStreamUpdate | undefined;
     setSwap(value?: GetSwapsStreamUpdate): GetSwapsStreamResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetSwapsStreamResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetSwapsStreamResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetSwapsStreamResponse): GetSwapsStreamResponse.AsObject;
@@ -3335,6 +3388,7 @@ export namespace GetSwapsStreamResponse {
     export type AsObject = {
         slot: number,
         swap?: GetSwapsStreamUpdate.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -3364,6 +3418,11 @@ export class GetNewRaydiumPoolsResponse extends jspb.Message {
     getPool(): ProjectPool | undefined;
     setPool(value?: ProjectPool): GetNewRaydiumPoolsResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetNewRaydiumPoolsResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetNewRaydiumPoolsResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetNewRaydiumPoolsResponse): GetNewRaydiumPoolsResponse.AsObject;
@@ -3378,6 +3437,7 @@ export namespace GetNewRaydiumPoolsResponse {
     export type AsObject = {
         slot: number,
         pool?: ProjectPool.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -3677,6 +3737,11 @@ export class GetPoolReservesStreamResponse extends jspb.Message {
     getReserves(): PoolReserves | undefined;
     setReserves(value?: PoolReserves): GetPoolReservesStreamResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetPoolReservesStreamResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPoolReservesStreamResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetPoolReservesStreamResponse): GetPoolReservesStreamResponse.AsObject;
@@ -3691,6 +3756,7 @@ export namespace GetPoolReservesStreamResponse {
     export type AsObject = {
         slot: number,
         reserves?: PoolReserves.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -3790,6 +3856,11 @@ export class GetPricesStreamResponse extends jspb.Message {
     getPrice(): TokenPrice | undefined;
     setPrice(value?: TokenPrice): GetPricesStreamResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetPricesStreamResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPricesStreamResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetPricesStreamResponse): GetPricesStreamResponse.AsObject;
@@ -3804,6 +3875,7 @@ export namespace GetPricesStreamResponse {
     export type AsObject = {
         slot: number,
         price?: TokenPrice.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -3962,6 +4034,11 @@ export class GetPerpOrderbooksStreamResponse extends jspb.Message {
     getOrderbook(): GetPerpOrderbookResponse | undefined;
     setOrderbook(value?: GetPerpOrderbookResponse): GetPerpOrderbooksStreamResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetPerpOrderbooksStreamResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPerpOrderbooksStreamResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetPerpOrderbooksStreamResponse): GetPerpOrderbooksStreamResponse.AsObject;
@@ -3976,6 +4053,7 @@ export namespace GetPerpOrderbooksStreamResponse {
     export type AsObject = {
         slot: number,
         orderbook?: GetPerpOrderbookResponse.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
@@ -5281,6 +5359,11 @@ export class GetPerpTradesStreamResponse extends jspb.Message {
     getTrade(): GetPerpTradesResponse | undefined;
     setTrade(value?: GetPerpTradesResponse): GetPerpTradesStreamResponse;
 
+    hasTimestamp(): boolean;
+    clearTimestamp(): void;
+    getTimestamp(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setTimestamp(value?: google_protobuf_timestamp_pb.Timestamp): GetPerpTradesStreamResponse;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): GetPerpTradesStreamResponse.AsObject;
     static toObject(includeInstance: boolean, msg: GetPerpTradesStreamResponse): GetPerpTradesStreamResponse.AsObject;
@@ -5295,6 +5378,7 @@ export namespace GetPerpTradesStreamResponse {
     export type AsObject = {
         context?: Context.AsObject,
         trade?: GetPerpTradesResponse.AsObject,
+        timestamp?: google_protobuf_timestamp_pb.Timestamp.AsObject,
     }
 }
 
