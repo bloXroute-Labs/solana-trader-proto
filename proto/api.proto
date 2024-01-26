@@ -668,12 +668,6 @@ message PostSettleResponse {
   TransactionMessage transaction = 1;
 }
 
-message Settlement {
-  string symbol = 1;
-  double unsettled = 2;
-  double amount = 3;
-}
-
 message GetOrdersRequest {
   string market = 1;
   OrderStatus status = 2;
@@ -1208,14 +1202,6 @@ message TokenPair {
   string inToken = 1;
   string outToken = 2;
   double inAmount = 3;
-}
-
-message GetPriceRequest {
-  repeated string tokens = 1;
-}
-
-message GetPriceResponse {
-  repeated TokenPrice tokenPrices = 1;
 }
 
 message GetRaydiumPricesRequest {

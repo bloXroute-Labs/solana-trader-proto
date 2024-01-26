@@ -282,13 +282,6 @@ class PostSettleResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class Settlement(betterproto.Message):
-    symbol: str = betterproto.string_field(1)
-    unsettled: float = betterproto.double_field(2)
-    amount: float = betterproto.double_field(3)
-
-
-@dataclass(eq=False, repr=False)
 class GetOrdersRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     status: "OrderStatus" = betterproto.enum_field(2)
@@ -867,16 +860,6 @@ class TokenPair(betterproto.Message):
     in_token: str = betterproto.string_field(1)
     out_token: str = betterproto.string_field(2)
     in_amount: float = betterproto.double_field(3)
-
-
-@dataclass(eq=False, repr=False)
-class GetPriceRequest(betterproto.Message):
-    tokens: List[str] = betterproto.string_field(1)
-
-
-@dataclass(eq=False, repr=False)
-class GetPriceResponse(betterproto.Message):
-    token_prices: List["TokenPrice"] = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)
