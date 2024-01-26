@@ -1074,6 +1074,7 @@ message GetOrderStatusStreamRequest {
 message GetOrderStatusStreamResponse {
   int64 slot = 1;
   GetOrderStatusResponse orderInfo = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 message GetOrderStatusResponse {
@@ -1181,16 +1182,19 @@ message GetUnsettledResponse {
 message GetOrderbooksStreamResponse {
   int64 slot = 1;
   GetOrderbookResponse orderbook = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 message GetMarketDepthsStreamResponse {
   int64 slot = 1;
   GetMarketDepthResponse Data = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 message GetTickersStreamResponse {
   int64 slot = 1;
   GetTickersResponse ticker = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 enum Step {
@@ -1203,6 +1207,7 @@ enum Step {
 message GetTradesStreamResponse {
   int64 slot = 1;
   GetTradesResponse trades = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 message GetQuotesRequest{
@@ -1473,6 +1478,7 @@ message GetRecentBlockHashRequest {
 
 message GetRecentBlockHashResponse {
   string blockHash = 1;
+  google.protobuf.Timestamp timestamp = 2;
 }
 
 message Block {
@@ -1487,6 +1493,7 @@ message GetBlockStreamRequest {
 
 message GetBlockStreamResponse {
   Block block = 1;
+  google.protobuf.Timestamp timestamp = 2;
 }
 
 message GetPoolsRequest {
@@ -1582,6 +1589,7 @@ message GetQuotesStreamRequest {
 message GetQuotesStreamResponse {
   int64 slot = 1;
   GetQuotesStreamUpdate quote = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 message GetQuotesStreamUpdate {
@@ -1603,6 +1611,7 @@ message GetSwapsStreamRequest {
 message GetSwapsStreamResponse {
   int64 slot = 1;
   GetSwapsStreamUpdate swap = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 message GetNewRaydiumPoolsRequest {
@@ -1611,6 +1620,7 @@ message GetNewRaydiumPoolsRequest {
 message GetNewRaydiumPoolsResponse {
   int64 slot = 1;
   ProjectPool pool = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 message GetSwapsStreamUpdate {
@@ -1681,6 +1691,7 @@ message TokenPriceV2 {
 message GetPoolReservesStreamResponse {
   int64 slot = 1;
   PoolReserves reserves = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 message PoolReserves {
@@ -1705,6 +1716,7 @@ message GetPricesStreamRequest {
 message GetPricesStreamResponse {
   int64 slot = 1;
   TokenPrice price = 2;
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 
