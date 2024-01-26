@@ -26,11 +26,6 @@ if TYPE_CHECKING:
     from grpclib.metadata import Deadline
 
 
-class MarketStatus(betterproto.Enum):
-    MS_UNKNOWN = 0
-    MS_ONLINE = 1
-
-
 class Side(betterproto.Enum):
     S_UNKNOWN = 0
     S_BID = 1
@@ -74,38 +69,9 @@ class Project(betterproto.Enum):
 
 
 @dataclass(eq=False, repr=False)
-class GetMarketsRequest(betterproto.Message):
-    pass
-
-
-@dataclass(eq=False, repr=False)
-class GetMarketsResponse(betterproto.Message):
-    markets: Dict[str, "Market"] = betterproto.map_field(
-        1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
-    )
-
-
-@dataclass(eq=False, repr=False)
-class Market(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    status: "MarketStatus" = betterproto.enum_field(2)
-    address: str = betterproto.string_field(3)
-    base_mint: str = betterproto.string_field(4)
-    quoted_mint: str = betterproto.string_field(5)
-    base_decimals: int = betterproto.int64_field(6)
-    quote_decimals: int = betterproto.int64_field(7)
-    project: "Project" = betterproto.enum_field(8)
-
-
-@dataclass(eq=False, repr=False)
 class GetTickersRequest(betterproto.Message):
     market: str = betterproto.string_field(1)
     project: "Project" = betterproto.enum_field(2)
-
-
-@dataclass(eq=False, repr=False)
-class GetTickersResponse(betterproto.Message):
-    tickers: List["Ticker"] = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)
@@ -133,6 +99,11 @@ class GetKlineResponse(betterproto.Message):
     market: str = betterproto.string_field(1)
     timestamp: datetime = betterproto.message_field(2)
     candles: List["Candle"] = betterproto.message_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class GetTickersResponse(betterproto.Message):
+    tickers: List["Ticker"] = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)
@@ -177,14 +148,6 @@ class GetMarketDepthsRequest(betterproto.Message):
     markets: List[str] = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
     project: "Project" = betterproto.enum_field(3)
-
-
-@dataclass(eq=False, repr=False)
-class GetMarketDepthResponse(betterproto.Message):
-    market: str = betterproto.string_field(1)
-    market_address: str = betterproto.string_field(2)
-    bids: List["MarketDepthItem"] = betterproto.message_field(3)
-    asks: List["MarketDepthItem"] = betterproto.message_field(4)
 
 
 @dataclass(eq=False, repr=False)
@@ -412,6 +375,14 @@ class GetOrderbooksStreamResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
     orderbook: "GetOrderbookResponse" = betterproto.message_field(2)
     timestamp: datetime = betterproto.message_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class GetMarketDepthResponse(betterproto.Message):
+    market: str = betterproto.string_field(1)
+    market_address: str = betterproto.string_field(2)
+    bids: List["MarketDepthItem"] = betterproto.message_field(3)
+    asks: List["MarketDepthItem"] = betterproto.message_field(4)
 
 
 @dataclass(eq=False, repr=False)
@@ -684,17 +655,6 @@ class GetBlockStreamRequest(betterproto.Message):
 class GetBlockStreamResponse(betterproto.Message):
     block: "Block" = betterproto.message_field(1)
     timestamp: datetime = betterproto.message_field(2)
-
-
-@dataclass(eq=False, repr=False)
-class GetPoolsRequest(betterproto.Message):
-    projects: List["Project"] = betterproto.enum_field(1)
-    pair_or_address: str = betterproto.string_field(2)
-
-
-@dataclass(eq=False, repr=False)
-class GetPoolsResponse(betterproto.Message):
-    projects: List["ProjectPools"] = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)

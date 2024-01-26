@@ -484,36 +484,9 @@ service Api {
   }
 }
 
-message GetMarketsRequest {
-}
-
-message GetMarketsResponse {
-  map<string, Market> markets = 1;
-}
-
-message Market {
-  string market = 1;
-  MarketStatus status = 2;
-  string address = 3;
-  string baseMint = 4;
-  string quotedMint = 5;
-  int64 baseDecimals = 6;
-  int64 quoteDecimals = 7;
-  Project project = 8;
-}
-
-enum MarketStatus {
-  MS_UNKNOWN = 0; // unknown
-  MS_ONLINE = 1; // online
-}
-
 message GetTickersRequest {
   string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
   Project project = 2;
-}
-
-message GetTickersResponse {
-  repeated Ticker tickers = 1;
 }
 
 message Ticker {
@@ -538,6 +511,9 @@ message GetKlineResponse {
   string market = 1;
   google.protobuf.Timestamp timestamp = 2;
   repeated Candle candles = 3;
+}
+message GetTickersResponse {
+  repeated Ticker tickers = 1;
 }
 
 message Candle {
@@ -579,12 +555,6 @@ message GetMarketDepthsRequest {
   Project project = 3;
 }
 
-message GetMarketDepthResponse {
-  string market = 1;
-  string marketAddress = 2;
-  repeated MarketDepthItem bids = 3;
-  repeated MarketDepthItem asks = 4;
-}
 message MarketDepthItem {
   double price = 1;
   double size = 2;
@@ -801,6 +771,13 @@ message GetOrderbooksStreamResponse {
   int64 slot = 1;
   GetOrderbookResponse orderbook = 2;
   google.protobuf.Timestamp timestamp = 3;
+}
+
+message GetMarketDepthResponse {
+  string market = 1;
+  string marketAddress = 2;
+  repeated MarketDepthItem bids = 3;
+  repeated MarketDepthItem asks = 4;
 }
 
 message GetMarketDepthsStreamResponse {
@@ -1053,15 +1030,6 @@ message GetBlockStreamRequest {
 message GetBlockStreamResponse {
   Block block = 1;
   google.protobuf.Timestamp timestamp = 2;
-}
-
-message GetPoolsRequest {
-  repeated Project projects = 1;
-  string pairOrAddress = 2;
-}
-
-message GetPoolsResponse {
-  repeated ProjectPools projects = 1;
 }
 
 message GetRaydiumPoolsRequest {
