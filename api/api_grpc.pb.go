@@ -42,37 +42,16 @@ type ApiClient interface {
 	PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error)
 	GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponseV2, error)
 	GetUnsettledV2(ctx context.Context, in *GetUnsettledRequestV2, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
-	GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error)
-	GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error)
-	GetPools(ctx context.Context, in *GetPoolsRequest, opts ...grpc.CallOption) (*GetPoolsResponse, error)
-	GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error)
 	GetKline(ctx context.Context, in *GetKlineRequest, opts ...grpc.CallOption) (*GetKlineResponse, error)
-	GetOrderbook(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error)
-	GetMarketDepth(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (*GetMarketDepthResponse, error)
 	GetTrades(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (*GetTradesResponse, error)
-	GetQuotes(ctx context.Context, in *GetQuotesRequest, opts ...grpc.CallOption) (*GetQuotesResponse, error)
 	// system API
 	GetServerTime(ctx context.Context, in *GetServerTimeRequest, opts ...grpc.CallOption) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error)
 	// account endpoints
 	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(ctx context.Context, in *GetTokenAccountsRequest, opts ...grpc.CallOption) (*GetTokenAccountsResponse, error)
-	// trade endpoints
-	PostOrder(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error)
-	PostSubmit(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
-	PostSubmitBatch(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
-	PostCancelOrder(ctx context.Context, in *PostCancelOrderRequest, opts ...grpc.CallOption) (*PostCancelOrderResponse, error)
-	PostCancelByClientOrderID(ctx context.Context, in *PostCancelByClientOrderIDRequest, opts ...grpc.CallOption) (*PostCancelOrderResponse, error)
-	PostCancelAll(ctx context.Context, in *PostCancelAllRequest, opts ...grpc.CallOption) (*PostCancelAllResponse, error)
-	PostReplaceByClientOrderID(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error)
-	PostReplaceOrder(ctx context.Context, in *PostReplaceOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error)
-	PostSettle(ctx context.Context, in *PostSettleRequest, opts ...grpc.CallOption) (*PostSettleResponse, error)
-	PostTradeSwap(ctx context.Context, in *TradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
 	GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error)
-	GetOpenOrders(ctx context.Context, in *GetOpenOrdersRequest, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error)
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
-	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
-	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -294,42 +273,6 @@ func (c *apiClient) GetUnsettledV2(ctx context.Context, in *GetUnsettledRequestV
 	return out, nil
 }
 
-func (c *apiClient) GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error) {
-	out := new(GetPriceResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetPrice", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error) {
-	out := new(GetMarketsResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetMarkets", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetPools(ctx context.Context, in *GetPoolsRequest, opts ...grpc.CallOption) (*GetPoolsResponse, error) {
-	out := new(GetPoolsResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetPools", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error) {
-	out := new(GetTickersResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetTickers", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *apiClient) GetKline(ctx context.Context, in *GetKlineRequest, opts ...grpc.CallOption) (*GetKlineResponse, error) {
 	out := new(GetKlineResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetKline", in, out, opts...)
@@ -339,36 +282,9 @@ func (c *apiClient) GetKline(ctx context.Context, in *GetKlineRequest, opts ...g
 	return out, nil
 }
 
-func (c *apiClient) GetOrderbook(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error) {
-	out := new(GetOrderbookResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetOrderbook", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetMarketDepth(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (*GetMarketDepthResponse, error) {
-	out := new(GetMarketDepthResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetMarketDepth", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *apiClient) GetTrades(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (*GetTradesResponse, error) {
 	out := new(GetTradesResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetTrades", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetQuotes(ctx context.Context, in *GetQuotesRequest, opts ...grpc.CallOption) (*GetQuotesResponse, error) {
-	out := new(GetQuotesResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetQuotes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -411,96 +327,6 @@ func (c *apiClient) GetTokenAccounts(ctx context.Context, in *GetTokenAccountsRe
 	return out, nil
 }
 
-func (c *apiClient) PostOrder(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error) {
-	out := new(PostOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostOrder", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostSubmit(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error) {
-	out := new(PostSubmitResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostSubmit", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostSubmitBatch(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error) {
-	out := new(PostSubmitBatchResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitBatch", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostCancelOrder(ctx context.Context, in *PostCancelOrderRequest, opts ...grpc.CallOption) (*PostCancelOrderResponse, error) {
-	out := new(PostCancelOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostCancelOrder", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostCancelByClientOrderID(ctx context.Context, in *PostCancelByClientOrderIDRequest, opts ...grpc.CallOption) (*PostCancelOrderResponse, error) {
-	out := new(PostCancelOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostCancelByClientOrderID", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostCancelAll(ctx context.Context, in *PostCancelAllRequest, opts ...grpc.CallOption) (*PostCancelAllResponse, error) {
-	out := new(PostCancelAllResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostCancelAll", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostReplaceByClientOrderID(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error) {
-	out := new(PostOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostReplaceByClientOrderID", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostReplaceOrder(ctx context.Context, in *PostReplaceOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error) {
-	out := new(PostOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostReplaceOrder", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostSettle(ctx context.Context, in *PostSettleRequest, opts ...grpc.CallOption) (*PostSettleResponse, error) {
-	out := new(PostSettleResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostSettle", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostTradeSwap(ctx context.Context, in *TradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error) {
-	out := new(TradeSwapResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostTradeSwap", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *apiClient) GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error) {
 	out := new(GetOrdersResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetOrders", in, out, opts...)
@@ -510,36 +336,9 @@ func (c *apiClient) GetOrders(ctx context.Context, in *GetOrdersRequest, opts ..
 	return out, nil
 }
 
-func (c *apiClient) GetOpenOrders(ctx context.Context, in *GetOpenOrdersRequest, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error) {
-	out := new(GetOpenOrdersResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetOpenOrders", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *apiClient) GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error) {
 	out := new(GetOrderByIDResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetOrderByID", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error) {
-	out := new(GetUnsettledResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetUnsettled", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error) {
-	out := new(TradeSwapResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostRouteTradeSwap", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -958,37 +757,16 @@ type ApiServer interface {
 	PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error)
 	GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponseV2, error)
 	GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error)
-	GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error)
-	GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error)
-	GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error)
-	GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error)
 	GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error)
-	GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error)
-	GetMarketDepth(context.Context, *GetMarketDepthRequest) (*GetMarketDepthResponse, error)
 	GetTrades(context.Context, *GetTradesRequest) (*GetTradesResponse, error)
-	GetQuotes(context.Context, *GetQuotesRequest) (*GetQuotesResponse, error)
 	// system API
 	GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error)
 	// account endpoints
 	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(context.Context, *GetTokenAccountsRequest) (*GetTokenAccountsResponse, error)
-	// trade endpoints
-	PostOrder(context.Context, *PostOrderRequest) (*PostOrderResponse, error)
-	PostSubmit(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
-	PostSubmitBatch(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
-	PostCancelOrder(context.Context, *PostCancelOrderRequest) (*PostCancelOrderResponse, error)
-	PostCancelByClientOrderID(context.Context, *PostCancelByClientOrderIDRequest) (*PostCancelOrderResponse, error)
-	PostCancelAll(context.Context, *PostCancelAllRequest) (*PostCancelAllResponse, error)
-	PostReplaceByClientOrderID(context.Context, *PostOrderRequest) (*PostOrderResponse, error)
-	PostReplaceOrder(context.Context, *PostReplaceOrderRequest) (*PostOrderResponse, error)
-	PostSettle(context.Context, *PostSettleRequest) (*PostSettleResponse, error)
-	PostTradeSwap(context.Context, *TradeSwapRequest) (*TradeSwapResponse, error)
 	GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error)
-	GetOpenOrders(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error)
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
-	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
-	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -1075,32 +853,11 @@ func (UnimplementedApiServer) GetOpenOrdersV2(context.Context, *GetOpenOrdersReq
 func (UnimplementedApiServer) GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUnsettledV2 not implemented")
 }
-func (UnimplementedApiServer) GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPrice not implemented")
-}
-func (UnimplementedApiServer) GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMarkets not implemented")
-}
-func (UnimplementedApiServer) GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPools not implemented")
-}
-func (UnimplementedApiServer) GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTickers not implemented")
-}
 func (UnimplementedApiServer) GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetKline not implemented")
 }
-func (UnimplementedApiServer) GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOrderbook not implemented")
-}
-func (UnimplementedApiServer) GetMarketDepth(context.Context, *GetMarketDepthRequest) (*GetMarketDepthResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMarketDepth not implemented")
-}
 func (UnimplementedApiServer) GetTrades(context.Context, *GetTradesRequest) (*GetTradesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTrades not implemented")
-}
-func (UnimplementedApiServer) GetQuotes(context.Context, *GetQuotesRequest) (*GetQuotesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetQuotes not implemented")
 }
 func (UnimplementedApiServer) GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerTime not implemented")
@@ -1114,50 +871,11 @@ func (UnimplementedApiServer) GetAccountBalance(context.Context, *GetAccountBala
 func (UnimplementedApiServer) GetTokenAccounts(context.Context, *GetTokenAccountsRequest) (*GetTokenAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTokenAccounts not implemented")
 }
-func (UnimplementedApiServer) PostOrder(context.Context, *PostOrderRequest) (*PostOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostOrder not implemented")
-}
-func (UnimplementedApiServer) PostSubmit(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostSubmit not implemented")
-}
-func (UnimplementedApiServer) PostSubmitBatch(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitBatch not implemented")
-}
-func (UnimplementedApiServer) PostCancelOrder(context.Context, *PostCancelOrderRequest) (*PostCancelOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostCancelOrder not implemented")
-}
-func (UnimplementedApiServer) PostCancelByClientOrderID(context.Context, *PostCancelByClientOrderIDRequest) (*PostCancelOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostCancelByClientOrderID not implemented")
-}
-func (UnimplementedApiServer) PostCancelAll(context.Context, *PostCancelAllRequest) (*PostCancelAllResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostCancelAll not implemented")
-}
-func (UnimplementedApiServer) PostReplaceByClientOrderID(context.Context, *PostOrderRequest) (*PostOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostReplaceByClientOrderID not implemented")
-}
-func (UnimplementedApiServer) PostReplaceOrder(context.Context, *PostReplaceOrderRequest) (*PostOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostReplaceOrder not implemented")
-}
-func (UnimplementedApiServer) PostSettle(context.Context, *PostSettleRequest) (*PostSettleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostSettle not implemented")
-}
-func (UnimplementedApiServer) PostTradeSwap(context.Context, *TradeSwapRequest) (*TradeSwapResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostTradeSwap not implemented")
-}
 func (UnimplementedApiServer) GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrders not implemented")
 }
-func (UnimplementedApiServer) GetOpenOrders(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOpenOrders not implemented")
-}
 func (UnimplementedApiServer) GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderByID not implemented")
-}
-func (UnimplementedApiServer) GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUnsettled not implemented")
-}
-func (UnimplementedApiServer) PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostRouteTradeSwap not implemented")
 }
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
@@ -1604,78 +1322,6 @@ func _Api_GetUnsettledV2_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPriceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetPrice(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetPrice",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetPrice(ctx, req.(*GetPriceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetMarkets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMarketsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetMarkets(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetMarkets",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetMarkets(ctx, req.(*GetMarketsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetPools_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPoolsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetPools(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetPools",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetPools(ctx, req.(*GetPoolsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetTickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTickersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetTickers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetTickers",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetTickers(ctx, req.(*GetTickersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Api_GetKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetKlineRequest)
 	if err := dec(in); err != nil {
@@ -1694,42 +1340,6 @@ func _Api_GetKline_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrderbookRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetOrderbook(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetOrderbook",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOrderbook(ctx, req.(*GetOrderbookRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetMarketDepth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMarketDepthRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetMarketDepth(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetMarketDepth",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetMarketDepth(ctx, req.(*GetMarketDepthRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Api_GetTrades_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTradesRequest)
 	if err := dec(in); err != nil {
@@ -1744,24 +1354,6 @@ func _Api_GetTrades_Handler(srv interface{}, ctx context.Context, dec func(inter
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetTrades(ctx, req.(*GetTradesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetQuotesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetQuotes(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetQuotes",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetQuotes(ctx, req.(*GetQuotesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1838,186 +1430,6 @@ func _Api_GetTokenAccounts_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_PostOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostOrder(ctx, req.(*PostOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostSubmit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostSubmitRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostSubmit(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostSubmit",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostSubmit(ctx, req.(*PostSubmitRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostSubmitBatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostSubmitBatchRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostSubmitBatch(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostSubmitBatch",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostSubmitBatch(ctx, req.(*PostSubmitBatchRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostCancelOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCancelOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostCancelOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostCancelOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostCancelOrder(ctx, req.(*PostCancelOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostCancelByClientOrderID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCancelByClientOrderIDRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostCancelByClientOrderID(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostCancelByClientOrderID",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostCancelByClientOrderID(ctx, req.(*PostCancelByClientOrderIDRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostCancelAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCancelAllRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostCancelAll(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostCancelAll",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostCancelAll(ctx, req.(*PostCancelAllRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostReplaceByClientOrderID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostReplaceByClientOrderID(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostReplaceByClientOrderID",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostReplaceByClientOrderID(ctx, req.(*PostOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostReplaceOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostReplaceOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostReplaceOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostReplaceOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostReplaceOrder(ctx, req.(*PostReplaceOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostSettle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostSettleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostSettle(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostSettle",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostSettle(ctx, req.(*PostSettleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostTradeSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TradeSwapRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostTradeSwap(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostTradeSwap",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostTradeSwap(ctx, req.(*TradeSwapRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Api_GetOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOrdersRequest)
 	if err := dec(in); err != nil {
@@ -2036,24 +1448,6 @@ func _Api_GetOrders_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetOpenOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOpenOrdersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetOpenOrders(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetOpenOrders",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOpenOrders(ctx, req.(*GetOpenOrdersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Api_GetOrderByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetOrderByIDRequest)
 	if err := dec(in); err != nil {
@@ -2068,42 +1462,6 @@ func _Api_GetOrderByID_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetOrderByID(ctx, req.(*GetOrderByIDRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetUnsettled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUnsettledRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetUnsettled(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetUnsettled",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetUnsettled(ctx, req.(*GetUnsettledRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostRouteTradeSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RouteTradeSwapRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostRouteTradeSwap(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostRouteTradeSwap",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostRouteTradeSwap(ctx, req.(*RouteTradeSwapRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2456,40 +1814,12 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetUnsettledV2_Handler,
 		},
 		{
-			MethodName: "GetPrice",
-			Handler:    _Api_GetPrice_Handler,
-		},
-		{
-			MethodName: "GetMarkets",
-			Handler:    _Api_GetMarkets_Handler,
-		},
-		{
-			MethodName: "GetPools",
-			Handler:    _Api_GetPools_Handler,
-		},
-		{
-			MethodName: "GetTickers",
-			Handler:    _Api_GetTickers_Handler,
-		},
-		{
 			MethodName: "GetKline",
 			Handler:    _Api_GetKline_Handler,
 		},
 		{
-			MethodName: "GetOrderbook",
-			Handler:    _Api_GetOrderbook_Handler,
-		},
-		{
-			MethodName: "GetMarketDepth",
-			Handler:    _Api_GetMarketDepth_Handler,
-		},
-		{
 			MethodName: "GetTrades",
 			Handler:    _Api_GetTrades_Handler,
-		},
-		{
-			MethodName: "GetQuotes",
-			Handler:    _Api_GetQuotes_Handler,
 		},
 		{
 			MethodName: "GetServerTime",
@@ -2508,64 +1838,12 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetTokenAccounts_Handler,
 		},
 		{
-			MethodName: "PostOrder",
-			Handler:    _Api_PostOrder_Handler,
-		},
-		{
-			MethodName: "PostSubmit",
-			Handler:    _Api_PostSubmit_Handler,
-		},
-		{
-			MethodName: "PostSubmitBatch",
-			Handler:    _Api_PostSubmitBatch_Handler,
-		},
-		{
-			MethodName: "PostCancelOrder",
-			Handler:    _Api_PostCancelOrder_Handler,
-		},
-		{
-			MethodName: "PostCancelByClientOrderID",
-			Handler:    _Api_PostCancelByClientOrderID_Handler,
-		},
-		{
-			MethodName: "PostCancelAll",
-			Handler:    _Api_PostCancelAll_Handler,
-		},
-		{
-			MethodName: "PostReplaceByClientOrderID",
-			Handler:    _Api_PostReplaceByClientOrderID_Handler,
-		},
-		{
-			MethodName: "PostReplaceOrder",
-			Handler:    _Api_PostReplaceOrder_Handler,
-		},
-		{
-			MethodName: "PostSettle",
-			Handler:    _Api_PostSettle_Handler,
-		},
-		{
-			MethodName: "PostTradeSwap",
-			Handler:    _Api_PostTradeSwap_Handler,
-		},
-		{
 			MethodName: "GetOrders",
 			Handler:    _Api_GetOrders_Handler,
 		},
 		{
-			MethodName: "GetOpenOrders",
-			Handler:    _Api_GetOpenOrders_Handler,
-		},
-		{
 			MethodName: "GetOrderByID",
 			Handler:    _Api_GetOrderByID_Handler,
-		},
-		{
-			MethodName: "GetUnsettled",
-			Handler:    _Api_GetUnsettled_Handler,
-		},
-		{
-			MethodName: "PostRouteTradeSwap",
-			Handler:    _Api_PostRouteTradeSwap_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
