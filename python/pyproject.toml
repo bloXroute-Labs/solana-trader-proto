@@ -1,6 +1,10 @@
 [project]
 name = "bxsolana-trader-proto"
+<<<<<<< Updated upstream
 version = "0.0.50"
+=======
+version = "0.0.48"
+>>>>>>> Stashed changes
 description = "proto-generated files for solana-trader-api"
 dependencies = [
     "betterproto==v2.0.0b5"
