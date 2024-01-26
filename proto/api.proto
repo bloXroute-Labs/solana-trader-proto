@@ -74,19 +74,6 @@ service Api {
     };
   }
 
-  rpc PostSubmitJitoBundle(PostSubmitJitoBundleRequest) returns (PostSubmitJitoBundleResponse) {
-    option (google.api.http) = {
-      post: "/api/v2/submit-jito"
-      body: "*"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Submits a signed transaction as a jito bundle";
-      summary: "Transaction submit";
-      tags: ["Trade", "Universal"];
-    };
-  }
-
-
   rpc PostSubmitBatchV2(PostSubmitBatchRequest) returns (PostSubmitBatchResponse) {
     option (google.api.http) = {
       post: "/api/v2/submit-batch"
@@ -920,7 +907,7 @@ message PostOrderRequest {
   uint64 clientOrderID = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Client defined OrderID"}];
   uint32 computeLimit = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum value is 1025."}];
   Project project = 13;
 }
 
@@ -937,7 +924,7 @@ message PostReplaceOrderRequest {
   string orderID = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Openbook generated OrderID"}];
   uint32 computeLimit = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
   Project project = 14;
 }
 
@@ -960,7 +947,7 @@ message PostCancelOrderRequest {
   string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
   uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
   Project project = 9;
 }
 
@@ -971,7 +958,7 @@ message PostCancelByClientOrderIDRequest {
   string openOrdersAddress = 4 [(google.api.field_behavior) = REQUIRED];
   uint32 computeLimit = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
   Project project = 8;
 }
 
@@ -985,17 +972,13 @@ message PostCancelAllRequest {
   repeated string openOrdersAddresses = 3;
   uint32 computeLimit = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
   Project project = 7;
 }
 
 message TransactionMessage {
   string content = 1;
   bool isCleanup = 2;
-}
-
-message TransactionMessageJito {
-  string content = 1;
 }
 
 message PostCancelAllResponse {
@@ -1093,15 +1076,7 @@ message GetOrderStatusResponse {
 message PostSubmitRequest {
   TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
   bool skipPreFlight = 2;
-}
-
-message PostSubmitJitoBundleRequest {
-  repeated TransactionMessageJito transactions = 1 [(google.api.field_behavior) = REQUIRED];
-}
-
-message PostSubmitJitoBundleResponse {
-  string uuids = 1;
-  repeated string signatures = 2;
+  optional bool frontRunningProtection = 3;
 }
 
 message PostSubmitRequestEntry {
@@ -1119,6 +1094,7 @@ enum SubmitStrategy {
 message PostSubmitBatchRequest {
   repeated PostSubmitRequestEntry entries = 1;
   SubmitStrategy submitStrategy = 2;
+  optional bool useBundle = 3;
 }
 message PostSubmitBatchResponseEntry {
   string signature = 1;
@@ -1275,7 +1251,7 @@ message TradeSwapRequest {
   double slippage = 6;
   uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message PostJupiterSwapRequest {
@@ -1286,7 +1262,7 @@ message PostJupiterSwapRequest {
   double slippage = 5;
    uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
    uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-   optional uint64 bundleTip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+   optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message PostRaydiumSwapRequest {
@@ -1297,7 +1273,7 @@ message PostRaydiumSwapRequest {
   double slippage = 5;
    uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
    uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 
 }
 
@@ -1338,7 +1314,7 @@ message RouteTradeSwapRequest {
   double slippage = 4;
   uint32 computeLimit = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message PostRaydiumRouteSwapRequest {
@@ -1347,7 +1323,7 @@ message PostRaydiumRouteSwapRequest {
   double slippage = 3;
   uint32 computeLimit = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message RaydiumRouteStep {
@@ -1365,7 +1341,7 @@ message PostJupiterRouteSwapRequest {
   double slippage = 3;
   uint32 computeLimit = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 6[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 6[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message JupiterRouteStep {
@@ -1803,7 +1779,7 @@ message PostOrderRequestV2 {
   uint64 clientOrderID = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Client defined OrderID"}];
    uint32 computeLimit = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
    uint64 computePrice = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message PostReplaceOrderRequestV2 {
@@ -1819,7 +1795,7 @@ message PostReplaceOrderRequestV2 {
   string orderID = 10 [(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Openbook generated OrderID"}];
    uint32 computeLimit = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
    uint64 computePrice = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message PostCancelOrderRequestV2 {
@@ -1831,7 +1807,7 @@ message PostCancelOrderRequestV2 {
   uint64 clientOrderID = 6[(google.api.field_behavior) = OPTIONAL];
    uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
    uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message PostCancelOrderResponseV2 {
@@ -1846,7 +1822,7 @@ message PostSettleRequestV2 {
   string openOrdersAddress = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
    uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
    uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 bundleTip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum tip is 1025 micro lamports"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 
 }
 message GetOpenOrdersRequestV2 {

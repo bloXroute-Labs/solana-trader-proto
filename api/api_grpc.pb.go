@@ -20,7 +20,6 @@ const _ = grpc.SupportPackageIsVersion7
 type ApiClient interface {
 	GetTransaction(ctx context.Context, in *GetTransactionRequest, opts ...grpc.CallOption) (*GetTransactionResponse, error)
 	PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
-	PostSubmitJitoBundle(ctx context.Context, in *PostSubmitJitoBundleRequest, opts ...grpc.CallOption) (*PostSubmitJitoBundleResponse, error)
 	PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
 	// Raydium V2
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
@@ -109,15 +108,6 @@ func (c *apiClient) GetTransaction(ctx context.Context, in *GetTransactionReques
 func (c *apiClient) PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error) {
 	out := new(PostSubmitResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitV2", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostSubmitJitoBundle(ctx context.Context, in *PostSubmitJitoBundleRequest, opts ...grpc.CallOption) (*PostSubmitJitoBundleResponse, error) {
-	out := new(PostSubmitJitoBundleResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitJitoBundle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -946,7 +936,6 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 type ApiServer interface {
 	GetTransaction(context.Context, *GetTransactionRequest) (*GetTransactionResponse, error)
 	PostSubmitV2(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
-	PostSubmitJitoBundle(context.Context, *PostSubmitJitoBundleRequest) (*PostSubmitJitoBundleResponse, error)
 	PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
 	// Raydium V2
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
@@ -1025,9 +1014,6 @@ func (UnimplementedApiServer) GetTransaction(context.Context, *GetTransactionReq
 }
 func (UnimplementedApiServer) PostSubmitV2(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitV2 not implemented")
-}
-func (UnimplementedApiServer) PostSubmitJitoBundle(context.Context, *PostSubmitJitoBundleRequest) (*PostSubmitJitoBundleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitJitoBundle not implemented")
 }
 func (UnimplementedApiServer) PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitBatchV2 not implemented")
@@ -1254,24 +1240,6 @@ func _Api_PostSubmitV2_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostSubmitV2(ctx, req.(*PostSubmitRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostSubmitJitoBundle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostSubmitJitoBundleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostSubmitJitoBundle(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostSubmitJitoBundle",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostSubmitJitoBundle(ctx, req.(*PostSubmitJitoBundleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2406,10 +2374,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostSubmitV2",
 			Handler:    _Api_PostSubmitV2_Handler,
-		},
-		{
-			MethodName: "PostSubmitJitoBundle",
-			Handler:    _Api_PostSubmitJitoBundle_Handler,
 		},
 		{
 			MethodName: "PostSubmitBatchV2",
