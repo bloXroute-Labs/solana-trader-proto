@@ -3988,6 +3988,12 @@
       "properties": {
         "uuids": {
           "type": "string"
+        },
+        "signatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

@@ -1100,8 +1100,8 @@ message PostSubmitJitoBundleRequest {
 
 message PostSubmitJitoBundleResponse {
   string uuids = 1;
+  repeated string signatures = 2;
 }
-
 
 message PostSubmitRequestEntry {
   TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
