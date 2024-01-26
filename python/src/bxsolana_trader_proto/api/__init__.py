@@ -289,7 +289,10 @@ class PostOrderRequest(betterproto.Message):
     client_order_id: int = betterproto.uint64_field(9)
     compute_limit: int = betterproto.uint32_field(10)
     compute_price: int = betterproto.uint64_field(11)
-    project: "Project" = betterproto.enum_field(12)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        12, optional=True, group="_bundleTip"
+    )
+    project: "Project" = betterproto.enum_field(13)
 
 
 @dataclass(eq=False, repr=False)
@@ -306,7 +309,10 @@ class PostReplaceOrderRequest(betterproto.Message):
     order_id: str = betterproto.string_field(10)
     compute_limit: int = betterproto.uint32_field(11)
     compute_price: int = betterproto.uint64_field(12)
-    project: "Project" = betterproto.enum_field(13)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        13, optional=True, group="_bundleTip"
+    )
+    project: "Project" = betterproto.enum_field(14)
 
 
 @dataclass(eq=False, repr=False)
@@ -324,7 +330,10 @@ class PostCancelOrderRequest(betterproto.Message):
     open_orders_address: str = betterproto.string_field(5)
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
-    project: "Project" = betterproto.enum_field(8)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        8, optional=True, group="_bundleTip"
+    )
+    project: "Project" = betterproto.enum_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -335,7 +344,10 @@ class PostCancelByClientOrderIdRequest(betterproto.Message):
     open_orders_address: str = betterproto.string_field(4)
     compute_limit: int = betterproto.uint32_field(5)
     compute_price: int = betterproto.uint64_field(6)
-    project: "Project" = betterproto.enum_field(7)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        7, optional=True, group="_bundleTip"
+    )
+    project: "Project" = betterproto.enum_field(8)
 
 
 @dataclass(eq=False, repr=False)
@@ -350,13 +362,21 @@ class PostCancelAllRequest(betterproto.Message):
     open_orders_addresses: List[str] = betterproto.string_field(3)
     compute_limit: int = betterproto.uint32_field(4)
     compute_price: int = betterproto.uint64_field(5)
-    project: "Project" = betterproto.enum_field(6)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        6, optional=True, group="_bundleTip"
+    )
+    project: "Project" = betterproto.enum_field(7)
 
 
 @dataclass(eq=False, repr=False)
 class TransactionMessage(betterproto.Message):
     content: str = betterproto.string_field(1)
     is_cleanup: bool = betterproto.bool_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionMessageJito(betterproto.Message):
+    content: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
@@ -451,6 +471,17 @@ class GetOrderStatusResponse(betterproto.Message):
 class PostSubmitRequest(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
     skip_pre_flight: bool = betterproto.bool_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class PostSubmitJitoBundleRequest(betterproto.Message):
+    transactions: List["TransactionMessageJito"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class PostSubmitJitoBundleResponse(betterproto.Message):
+    uuids: str = betterproto.string_field(1)
+    signatures: List[str] = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -631,6 +662,9 @@ class TradeSwapRequest(betterproto.Message):
     slippage: float = betterproto.double_field(6)
     compute_limit: int = betterproto.uint32_field(7)
     compute_price: int = betterproto.uint64_field(8)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        9, optional=True, group="_bundleTip"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -642,6 +676,9 @@ class PostJupiterSwapRequest(betterproto.Message):
     slippage: float = betterproto.double_field(5)
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        8, optional=True, group="_bundleTip"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -653,6 +690,9 @@ class PostRaydiumSwapRequest(betterproto.Message):
     slippage: float = betterproto.double_field(5)
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        8, optional=True, group="_bundleTip"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -697,6 +737,9 @@ class RouteTradeSwapRequest(betterproto.Message):
     slippage: float = betterproto.double_field(4)
     compute_limit: int = betterproto.uint32_field(5)
     compute_price: int = betterproto.uint64_field(6)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        7, optional=True, group="_bundleTip"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -706,6 +749,9 @@ class PostRaydiumRouteSwapRequest(betterproto.Message):
     slippage: float = betterproto.double_field(3)
     compute_limit: int = betterproto.uint32_field(4)
     compute_price: int = betterproto.uint64_field(5)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        6, optional=True, group="_bundleTip"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -725,6 +771,9 @@ class PostJupiterRouteSwapRequest(betterproto.Message):
     slippage: float = betterproto.double_field(3)
     compute_limit: int = betterproto.uint32_field(4)
     compute_price: int = betterproto.uint64_field(5)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        6, optional=True, group="_bundleTip"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1223,6 +1272,9 @@ class PostOrderRequestV2(betterproto.Message):
     client_order_id: int = betterproto.uint64_field(9)
     compute_limit: int = betterproto.uint32_field(10)
     compute_price: int = betterproto.uint64_field(11)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        12, optional=True, group="_bundleTip"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1239,6 +1291,9 @@ class PostReplaceOrderRequestV2(betterproto.Message):
     order_id: str = betterproto.string_field(10)
     compute_limit: int = betterproto.uint32_field(11)
     compute_price: int = betterproto.uint64_field(12)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        13, optional=True, group="_bundleTip"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1251,6 +1306,9 @@ class PostCancelOrderRequestV2(betterproto.Message):
     client_order_id: int = betterproto.uint64_field(6)
     compute_limit: int = betterproto.uint32_field(7)
     compute_price: int = betterproto.uint64_field(8)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        9, optional=True, group="_bundleTip"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1267,6 +1325,9 @@ class PostSettleRequestV2(betterproto.Message):
     open_orders_address: str = betterproto.string_field(5)
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
+    bundle_tip: Optional[int] = betterproto.uint64_field(
+        8, optional=True, group="_bundleTip"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1333,6 +1394,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostSubmitV2",
             post_submit_request,
             PostSubmitResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_submit_jito_bundle(
+        self,
+        post_submit_jito_bundle_request: "PostSubmitJitoBundleRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitJitoBundleResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitJitoBundle",
+            post_submit_jito_bundle_request,
+            PostSubmitJitoBundleResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2380,6 +2458,11 @@ class ApiBase(ServiceBase):
     ) -> "PostSubmitResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_submit_jito_bundle(
+        self, post_submit_jito_bundle_request: "PostSubmitJitoBundleRequest"
+    ) -> "PostSubmitJitoBundleResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_submit_batch_v2(
         self, post_submit_batch_request: "PostSubmitBatchRequest"
     ) -> "PostSubmitBatchResponse":
@@ -2689,6 +2772,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_submit_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_submit_jito_bundle(
+        self,
+        stream: "grpclib.server.Stream[PostSubmitJitoBundleRequest, PostSubmitJitoBundleResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_jito_bundle(request)
         await stream.send_message(response)
 
     async def __rpc_post_submit_batch_v2(
@@ -3198,6 +3289,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostSubmitRequest,
                 PostSubmitResponse,
+            ),
+            "/api.Api/PostSubmitJitoBundle": grpclib.const.Handler(
+                self.__rpc_post_submit_jito_bundle,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitJitoBundleRequest,
+                PostSubmitJitoBundleResponse,
             ),
             "/api.Api/PostSubmitBatchV2": grpclib.const.Handler(
                 self.__rpc_post_submit_batch_v2,
