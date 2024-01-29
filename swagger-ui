@@ -3009,6 +3009,11 @@
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
         "project": {
           "$ref": "#/definitions/apiProject"
         }
@@ -3067,6 +3072,11 @@
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
         "project": {
           "$ref": "#/definitions/apiProject"
         }
@@ -3117,6 +3127,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         },
         "project": {
           "$ref": "#/definitions/apiProject"
@@ -3173,6 +3188,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       },
       "required": [
@@ -3226,6 +3246,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       }
     },
@@ -3286,6 +3311,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       }
     },
@@ -3383,6 +3413,11 @@
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum value is 1025."
+        },
         "project": {
           "$ref": "#/definitions/apiProject"
         }
@@ -3463,6 +3498,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       },
       "required": [
@@ -3511,6 +3551,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       }
     },
@@ -3562,6 +3607,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       }
     },
@@ -3665,6 +3715,11 @@
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
         "project": {
           "$ref": "#/definitions/apiProject"
         }
@@ -3753,6 +3808,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       },
       "required": [
@@ -3858,6 +3918,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       },
       "required": [
@@ -3886,6 +3951,9 @@
         },
         "submitStrategy": {
           "$ref": "#/definitions/apiSubmitStrategy"
+        },
+        "useBundle": {
+          "type": "boolean"
         }
       }
     },
@@ -3921,6 +3989,9 @@
           "$ref": "#/definitions/apiTransactionMessage"
         },
         "skipPreFlight": {
+          "type": "boolean"
+        },
+        "frontRunningProtection": {
           "type": "boolean"
         }
       }
@@ -4229,6 +4300,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       }
     },
@@ -4497,6 +4573,11 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       }
     },

@@ -1,2 +1,2 @@
 .
-betterproto[compiler] @ git+https://github.com/danielgtaylor/python-betterproto@2b41383745a89183c432251f09a472d56611f21b
+betterproto[compiler] @ git+https://github.com/danielgtaylor/python-betterproto@098989e

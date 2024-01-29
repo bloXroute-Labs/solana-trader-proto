@@ -348,6 +348,11 @@ class TransactionMessage(betterproto.Message):
 
 
 @dataclass
+class TransactionMessageJito(betterproto.Message):
+    content: str = betterproto.string_field(1)
+
+
+@dataclass
 class PostCancelAllResponse(betterproto.Message):
     transactions: List["TransactionMessage"] = betterproto.message_field(1)
 
@@ -442,6 +447,16 @@ class PostSubmitRequest(betterproto.Message):
 
 
 @dataclass
+class PostSubmitJitoBundleRequest(betterproto.Message):
+    transactions: List["TransactionMessageJito"] = betterproto.message_field(1)
+
+
+@dataclass
+class PostSubmitJitoBundleResponse(betterproto.Message):
+    uuids: str = betterproto.string_field(1)
+
+
+@dataclass
 class PostSubmitRequestEntry(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
     skip_pre_flight: bool = betterproto.bool_field(2)
@@ -454,11 +469,6 @@ class PostSubmitBatchRequest(betterproto.Message):
 
 
 @dataclass
-class PostSubmitResponse(betterproto.Message):
-    signature: str = betterproto.string_field(1)
-
-
-@dataclass
 class PostSubmitBatchResponseEntry(betterproto.Message):
     signature: str = betterproto.string_field(1)
     error: str = betterproto.string_field(2)
@@ -468,6 +478,11 @@ class PostSubmitBatchResponseEntry(betterproto.Message):
 @dataclass
 class PostSubmitBatchResponse(betterproto.Message):
     transactions: List["PostSubmitBatchResponseEntry"] = betterproto.message_field(1)
+
+
+@dataclass
+class PostSubmitResponse(betterproto.Message):
+    signature: str = betterproto.string_field(1)
 
 
 @dataclass
@@ -869,6 +884,65 @@ class GetRaydiumPoolsResponse(betterproto.Message):
 
 
 @dataclass
+class GetTransactionRequest(betterproto.Message):
+    signature: str = betterproto.string_field(1)
+
+
+@dataclass
+class GetTransactionResponse(betterproto.Message):
+    status: str = betterproto.string_field(1)
+    metadata: "TransactionMeta" = betterproto.message_field(2)
+
+
+@dataclass
+class Instruction(betterproto.Message):
+    program_id_index: int = betterproto.uint32_field(1)
+    accounts: List[int] = betterproto.uint32_field(2)
+    data: str = betterproto.string_field(3)
+
+
+@dataclass
+class TransactionMeta(betterproto.Message):
+    err: str = betterproto.string_field(1)
+    errored: bool = betterproto.bool_field(2)
+    fee: int = betterproto.uint64_field(3)
+    pre_balances: List[int] = betterproto.uint64_field(4)
+    post_balances: List[int] = betterproto.uint64_field(5)
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
+    log_messages: List[str] = betterproto.string_field(7)
+    pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
+        8
+    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
+
+
+@dataclass
+class TransactionMetaInnerInstruction(betterproto.Message):
+    index: int = betterproto.uint32_field(1)
+    instructions: List["Instruction"] = betterproto.message_field(2)
+
+
+@dataclass
+class TransactionMetaTokenBalance(betterproto.Message):
+    account_index: int = betterproto.uint32_field(1)
+    mint: str = betterproto.string_field(2)
+    ui_token_amount: "UITokenAmount" = betterproto.message_field(3)
+    owner: str = betterproto.string_field(4)
+
+
+@dataclass
+class UITokenAmount(betterproto.Message):
+    ui_amount: float = betterproto.float_field(1)
+    decimals: int = betterproto.uint32_field(2)
+    amount: str = betterproto.string_field(3)
+    ui_amount_string: str = betterproto.string_field(4)
+
+
+@dataclass
 class ProjectPools(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     pools: List["ProjectPool"] = betterproto.message_field(2)
@@ -884,6 +958,7 @@ class ProjectPool(betterproto.Message):
     token2_reserves: int = betterproto.int64_field(6)
     token2_mint_address: str = betterproto.string_field(7)
     token2_mint_symbol: str = betterproto.string_field(8)
+    open_time: int = betterproto.uint64_field(9)
 
 
 @dataclass
@@ -2063,6 +2138,16 @@ class OrderV2(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def get_transaction(self, *, signature: str = "") -> GetTransactionResponse:
+        request = GetTransactionRequest()
+        request.signature = signature
+
+        return await self._unary_unary(
+            "/api.Api/GetTransaction",
+            request,
+            GetTransactionResponse,
+        )
+
     async def post_submit_v2(
         self,
         *,
@@ -2078,6 +2163,19 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostSubmitV2",
             request,
             PostSubmitResponse,
+        )
+
+    async def post_submit_jito_bundle(
+        self, *, transactions: List["TransactionMessageJito"] = []
+    ) -> PostSubmitJitoBundleResponse:
+        request = PostSubmitJitoBundleRequest()
+        if transactions is not None:
+            request.transactions = transactions
+
+        return await self._unary_unary(
+            "/api.Api/PostSubmitJitoBundle",
+            request,
+            PostSubmitJitoBundleResponse,
         )
 
     async def post_submit_batch_v2(
