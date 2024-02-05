@@ -1620,7 +1620,8 @@ message GetBundleResultsStreamRequest {
 }
 
 message GetBundleResultsStreamResponse {
-  string bundleResult = 1;
+  int64 slot = 1;
+  string bundleResult = 2;
   google.protobuf.Timestamp timestamp = 3;
 }
 
