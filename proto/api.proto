@@ -1615,6 +1615,15 @@ message GetSwapsStreamUpdate {
   string signature = 13;
 }
 
+message GetBundleResultsStreamRequest {
+
+}
+
+message GetBundleResultsStreamResponse {
+  string bundleResult = 1;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
 message TokenPair {
   string inToken = 1;
   string outToken = 2;
