@@ -1921,6 +1921,22 @@
         }
       }
     },
+    "apiGetBundleResultsStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "bundleResult": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "apiGetJupiterPricesResponse": {
       "type": "object",
       "properties": {

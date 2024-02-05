@@ -712,6 +712,13 @@ service Api {
     };
   }
 
+  rpc GetBundleResultsStream(GetBundleResultsStreamRequest) returns (stream GetBundleResultsStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+
   rpc GetSwapsStream(GetSwapsStreamRequest) returns (stream GetSwapsStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
