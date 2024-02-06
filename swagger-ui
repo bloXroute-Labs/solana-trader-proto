@@ -1924,9 +1924,8 @@
     "apiGetBundleResultsStreamResponse": {
       "type": "object",
       "properties": {
-        "slot": {
-          "type": "string",
-          "format": "int64"
+        "uuid": {
+          "type": "string"
         },
         "bundleResult": {
           "type": "string",
