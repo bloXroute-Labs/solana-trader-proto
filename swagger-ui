@@ -465,6 +465,39 @@
         ]
       }
     },
+    "/api/v1/system/priority-fee": {
+      "get": {
+        "summary": "Current priority fee",
+        "description": "Returns the current priority fee",
+        "operationId": "Api_GetPriorityFee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPriorityFeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "percentile",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
     "/api/v1/system/time": {
       "get": {
         "summary": "Server time",
@@ -2287,6 +2320,19 @@
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "apiGetPriorityFeeResponse": {
+      "type": "object",
+      "properties": {
+        "percentile": {
+          "type": "string",
+          "format": "int64"
+        },
+        "feeAtPercentile": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
