@@ -913,6 +913,22 @@ class GetRaydiumPoolsResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetRateLimitRequest(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetRateLimitResponse(betterproto.Message):
+    uuid: str = betterproto.string_field(1)
+    tier: str = betterproto.string_field(2)
+    interval: str = betterproto.string_field(3)
+    interval_num: str = betterproto.string_field(4)
+    limit: int = betterproto.uint64_field(5)
+    count: int = betterproto.uint64_field(6)
+    ts: int = betterproto.uint64_field(7)
+
+
+@dataclass(eq=False, repr=False)
 class GetTransactionRequest(betterproto.Message):
     signature: str = betterproto.string_field(1)
 
@@ -1339,6 +1355,23 @@ class OrderV2(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def get_rate_limit(
+        self,
+        get_rate_limit_request: "GetRateLimitRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRateLimitResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRateLimit",
+            get_rate_limit_request,
+            GetRateLimitResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_transaction(
         self,
         get_transaction_request: "GetTransactionRequest",
@@ -2407,6 +2440,11 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+    async def get_rate_limit(
+        self, get_rate_limit_request: "GetRateLimitRequest"
+    ) -> "GetRateLimitResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_transaction(
         self, get_transaction_request: "GetTransactionRequest"
     ) -> "GetTransactionResponse":
@@ -2728,6 +2766,13 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetSwapsStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetSwapsStreamResponse()
+
+    async def __rpc_get_rate_limit(
+        self, stream: "grpclib.server.Stream[GetRateLimitRequest, GetRateLimitResponse]"
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_rate_limit(request)
+        await stream.send_message(response)
 
     async def __rpc_get_transaction(
         self,
@@ -3240,6 +3285,12 @@ class ApiBase(ServiceBase):
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
+            "/api.Api/GetRateLimit": grpclib.const.Handler(
+                self.__rpc_get_rate_limit,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRateLimitRequest,
+                GetRateLimitResponse,
+            ),
             "/api.Api/GetTransaction": grpclib.const.Handler(
                 self.__rpc_get_transaction,
                 grpclib.const.Cardinality.UNARY_UNARY,
