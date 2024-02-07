@@ -489,8 +489,8 @@
             "name": "percentile",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int64"
+            "type": "number",
+            "format": "double"
           }
         ],
         "tags": [
@@ -2327,8 +2327,8 @@
       "type": "object",
       "properties": {
         "percentile": {
-          "type": "string",
-          "format": "int64"
+          "type": "number",
+          "format": "double"
         },
         "feeAtPercentile": {
           "type": "number",

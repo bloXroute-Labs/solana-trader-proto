@@ -1154,14 +1154,14 @@ class GetPricesStreamResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetPriorityFeeRequest(betterproto.Message):
-    percentile: Optional[int] = betterproto.uint32_field(
+    percentile: Optional[float] = betterproto.double_field(
         1, optional=True, group="_percentile"
     )
 
 
 @dataclass(eq=False, repr=False)
 class GetPriorityFeeResponse(betterproto.Message):
-    percentile: int = betterproto.int64_field(1)
+    percentile: float = betterproto.double_field(1)
     fee_at_percentile: float = betterproto.double_field(2)
 
 

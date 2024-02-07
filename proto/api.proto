@@ -1713,11 +1713,11 @@ message GetPricesStreamResponse {
 }
 
 message GetPriorityFeeRequest {
-  optional uint32 percentile = 1; 
+  optional double percentile = 1; 
 }
 
 message GetPriorityFeeResponse {
-  int64 percentile = 1;
+  double percentile = 1;
   double feeAtPercentile = 2;
 }
 
