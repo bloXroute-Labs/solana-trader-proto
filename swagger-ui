@@ -997,6 +997,30 @@
         ]
       }
     },
+    "/api/v2/account/rate-limit": {
+      "get": {
+        "summary": "Returns the details of an account rate limits",
+        "description": "Returns the details of an account rate limits",
+        "operationId": "Api_GetRateLimit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRateLimitResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Solana RPC"
+        ]
+      }
+    },
     "/api/v2/jupiter/prices": {
       "get": {
         "summary": "Token prices on Jupiter",
@@ -2358,6 +2382,35 @@
         },
         "project": {
           "$ref": "#/definitions/apiProject"
+        }
+      }
+    },
+    "apiGetRateLimitResponse": {
+      "type": "object",
+      "properties": {
+        "accountID": {
+          "type": "string"
+        },
+        "tier": {
+          "type": "string"
+        },
+        "interval": {
+          "type": "string"
+        },
+        "intervalNum": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "count": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "ts": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
