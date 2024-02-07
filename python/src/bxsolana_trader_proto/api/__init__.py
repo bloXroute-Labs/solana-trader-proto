@@ -919,7 +919,7 @@ class GetRateLimitRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetRateLimitResponse(betterproto.Message):
-    uuid: str = betterproto.string_field(1)
+    account_id: str = betterproto.string_field(1)
     tier: str = betterproto.string_field(2)
     interval: str = betterproto.string_field(3)
     interval_num: str = betterproto.string_field(4)

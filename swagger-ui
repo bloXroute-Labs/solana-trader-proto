@@ -2388,7 +2388,7 @@
     "apiGetRateLimitResponse": {
       "type": "object",
       "properties": {
-        "uuid": {
+        "accountID": {
           "type": "string"
         },
         "tier": {

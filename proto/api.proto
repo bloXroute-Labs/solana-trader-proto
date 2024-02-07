@@ -1504,7 +1504,7 @@ message GetRateLimitRequest {
 }
 
 message GetRateLimitResponse {
-  string uuid = 1;
+  string accountID = 1;
   string tier = 2;
   string interval = 3;
   string intervalNum = 4;
