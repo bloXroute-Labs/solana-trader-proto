@@ -2414,7 +2414,8 @@
           "type": "string"
         },
         "intervalNum": {
-          "type": "string"
+          "type": "string",
+          "format": "uint64"
         },
         "limit": {
           "type": "string",
