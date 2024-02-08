@@ -1516,7 +1516,7 @@ message GetRateLimitResponse {
   string accountID = 1;
   string tier = 2;
   string interval = 3;
-  string intervalNum = 4;
+  uint64 intervalNum = 4;
   uint64 limit = 5;
   uint64 count = 6;
   uint64 ts = 7;
