@@ -1162,7 +1162,7 @@ class GetPriorityFeeRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetPriorityFeeResponse(betterproto.Message):
     percentile: float = betterproto.double_field(1)
-    fee_at_percentile: float = betterproto.double_field(2)
+    fee_at_percentile: int = betterproto.uint64_field(2)
 
 
 @dataclass(eq=False, repr=False)

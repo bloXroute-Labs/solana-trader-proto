@@ -467,8 +467,8 @@
     },
     "/api/v1/system/priority-fee": {
       "get": {
-        "summary": "Current priority fee",
-        "description": "Returns the current priority fee",
+        "summary": "Estimated priority fee",
+        "description": "Returns an estimated prioritization fee based on recent transactions",
         "operationId": "Api_GetPriorityFee",
         "responses": {
           "200": {
@@ -2331,8 +2331,8 @@
           "format": "double"
         },
         "feeAtPercentile": {
-          "type": "number",
-          "format": "double"
+          "type": "string",
+          "format": "uint64"
         }
       }
     },

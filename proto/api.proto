@@ -448,8 +448,8 @@ service Api {
       get: "/api/v1/system/priority-fee"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns the current priority fee";
-      summary: "Current priority fee";
+      description: "Returns an estimated prioritization fee based on recent transactions";
+      summary: "Estimated priority fee";
       tags: "System";
     };
   }
@@ -1718,7 +1718,7 @@ message GetPriorityFeeRequest {
 
 message GetPriorityFeeResponse {
   double percentile = 1;
-  double feeAtPercentile = 2;
+  uint64 feeAtPercentile = 2;
 }
 
 //Openbook V2 Messages
