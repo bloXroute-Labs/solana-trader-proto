@@ -51,6 +51,17 @@ service Api {
     }
   };
 
+  rpc GetRateLimit(GetRateLimitRequest) returns (GetRateLimitResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/account/rate-limit"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the details of an account rate limits";
+      summary: "Returns the details of an account rate limits";
+      tags: ["Solana RPC"];
+    };
+  }
+
   rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse) {
     option (google.api.http) = {
       get: "/api/v2/transaction"
@@ -729,6 +740,13 @@ service Api {
     };
   }
 
+  rpc GetBundleResultsStream(GetBundleResultsStreamRequest) returns (stream GetBundleResultsStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Trade";
+    };
+  }
+
+
   rpc GetSwapsStream(GetSwapsStreamRequest) returns (stream GetSwapsStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
@@ -1121,10 +1139,12 @@ message PostSubmitBatchResponseEntry {
 
 message PostSubmitBatchResponse {
   repeated PostSubmitBatchResponseEntry transactions = 1;
+  optional string uuid = 4;
 }
 
 message PostSubmitResponse {
   string signature = 1;
+  optional string uuid = 2;
 }
 
 
@@ -1506,6 +1526,19 @@ message GetRaydiumPoolsResponse {
   repeated ProjectPool pools = 1;
 }
 
+message GetRateLimitRequest {
+}
+
+message GetRateLimitResponse {
+  string accountID = 1;
+  string tier = 2;
+  string interval = 3;
+  uint64 intervalNum = 4;
+  uint64 limit = 5;
+  uint64 count = 6;
+  uint64 ts = 7;
+}
+
 message GetTransactionRequest {
   string signature = 1;
 }
@@ -1630,6 +1663,15 @@ message GetSwapsStreamUpdate {
   string destinationAccount = 11;
   string ownerAccount = 12;
   string signature = 13;
+}
+
+message GetBundleResultsStreamRequest {
+}
+
+message GetBundleResultsStreamResponse {
+  string uuid = 1;
+  string bundleResult = 2[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "bundleResult contains a string description of the status of a bundle after it has been submitted. Based on the result, (rejected, accepted, processed, dropped), there will be some different fields provided to give information about what happened in the bundle"}];
+  google.protobuf.Timestamp timestamp = 3;
 }
 
 message TokenPair {

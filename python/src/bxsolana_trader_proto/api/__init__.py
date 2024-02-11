@@ -487,11 +487,13 @@ class PostSubmitBatchResponseEntry(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitBatchResponse(betterproto.Message):
     transactions: List["PostSubmitBatchResponseEntry"] = betterproto.message_field(1)
+    uuid: Optional[str] = betterproto.string_field(4, optional=True, group="_uuid")
 
 
 @dataclass(eq=False, repr=False)
 class PostSubmitResponse(betterproto.Message):
     signature: str = betterproto.string_field(1)
+    uuid: Optional[str] = betterproto.string_field(2, optional=True, group="_uuid")
 
 
 @dataclass(eq=False, repr=False)
@@ -911,6 +913,22 @@ class GetRaydiumPoolsResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetRateLimitRequest(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetRateLimitResponse(betterproto.Message):
+    account_id: str = betterproto.string_field(1)
+    tier: str = betterproto.string_field(2)
+    interval: str = betterproto.string_field(3)
+    interval_num: int = betterproto.uint64_field(4)
+    limit: int = betterproto.uint64_field(5)
+    count: int = betterproto.uint64_field(6)
+    ts: int = betterproto.uint64_field(7)
+
+
+@dataclass(eq=False, repr=False)
 class GetTransactionRequest(betterproto.Message):
     signature: str = betterproto.string_field(1)
 
@@ -1056,6 +1074,18 @@ class GetSwapsStreamUpdate(betterproto.Message):
     destination_account: str = betterproto.string_field(11)
     owner_account: str = betterproto.string_field(12)
     signature: str = betterproto.string_field(13)
+
+
+@dataclass(eq=False, repr=False)
+class GetBundleResultsStreamRequest(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetBundleResultsStreamResponse(betterproto.Message):
+    uuid: str = betterproto.string_field(1)
+    bundle_result: str = betterproto.string_field(2)
+    timestamp: datetime = betterproto.message_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -1350,6 +1380,23 @@ class OrderV2(betterproto.Message):
 
 
 class ApiStub(betterproto.ServiceStub):
+    async def get_rate_limit(
+        self,
+        get_rate_limit_request: "GetRateLimitRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRateLimitResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRateLimit",
+            get_rate_limit_request,
+            GetRateLimitResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_transaction(
         self,
         get_transaction_request: "GetTransactionRequest",
@@ -2431,6 +2478,24 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_bundle_results_stream(
+        self,
+        get_bundle_results_stream_request: "GetBundleResultsStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetBundleResultsStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetBundleResultsStream",
+            get_bundle_results_stream_request,
+            GetBundleResultsStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
     async def get_swaps_stream(
         self,
         get_swaps_stream_request: "GetSwapsStreamRequest",
@@ -2451,6 +2516,11 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+    async def get_rate_limit(
+        self, get_rate_limit_request: "GetRateLimitRequest"
+    ) -> "GetRateLimitResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_transaction(
         self, get_transaction_request: "GetTransactionRequest"
     ) -> "GetTransactionResponse":
@@ -2762,10 +2832,22 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetNewRaydiumPoolsResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def get_bundle_results_stream(
+        self, get_bundle_results_stream_request: "GetBundleResultsStreamRequest"
+    ) -> AsyncIterator["GetBundleResultsStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_swaps_stream(
         self, get_swaps_stream_request: "GetSwapsStreamRequest"
     ) -> AsyncIterator["GetSwapsStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def __rpc_get_rate_limit(
+        self, stream: "grpclib.server.Stream[GetRateLimitRequest, GetRateLimitResponse]"
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_rate_limit(request)
+        await stream.send_message(response)
 
     async def __rpc_get_transaction(
         self,
@@ -3284,6 +3366,17 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_bundle_results_stream(
+        self,
+        stream: "grpclib.server.Stream[GetBundleResultsStreamRequest, GetBundleResultsStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_bundle_results_stream,
+            stream,
+            request,
+        )
+
     async def __rpc_get_swaps_stream(
         self,
         stream: "grpclib.server.Stream[GetSwapsStreamRequest, GetSwapsStreamResponse]",
@@ -3297,6 +3390,12 @@ class ApiBase(ServiceBase):
 
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
+            "/api.Api/GetRateLimit": grpclib.const.Handler(
+                self.__rpc_get_rate_limit,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRateLimitRequest,
+                GetRateLimitResponse,
+            ),
             "/api.Api/GetTransaction": grpclib.const.Handler(
                 self.__rpc_get_transaction,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -3674,6 +3773,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetNewRaydiumPoolsRequest,
                 GetNewRaydiumPoolsResponse,
+            ),
+            "/api.Api/GetBundleResultsStream": grpclib.const.Handler(
+                self.__rpc_get_bundle_results_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetBundleResultsStreamRequest,
+                GetBundleResultsStreamResponse,
             ),
             "/api.Api/GetSwapsStream": grpclib.const.Handler(
                 self.__rpc_get_swaps_stream,
