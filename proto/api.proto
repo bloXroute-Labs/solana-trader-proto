@@ -454,6 +454,17 @@ service Api {
     };
   }
 
+  rpc GetPriorityFee(GetPriorityFeeRequest) returns (GetPriorityFeeResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/system/priority-fee"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns an estimated prioritization fee based on recent transactions";
+      summary: "Estimated priority fee";
+      tags: "System";
+    };
+  }
+
   // account endpoints
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse) {
     option (google.api.http) = {
@@ -694,6 +705,12 @@ service Api {
   }
 
   rpc GetBlockStream(GetBlockStreamRequest) returns (stream GetBlockStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
+  rpc GetPriorityFeeStream(GetPriorityFeeRequest) returns (stream GetPriorityFeeResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "System";
     };
@@ -1737,7 +1754,14 @@ message GetPricesStreamResponse {
   google.protobuf.Timestamp timestamp = 3;
 }
 
+message GetPriorityFeeRequest {
+  optional double percentile = 1; 
+}
 
+message GetPriorityFeeResponse {
+  double percentile = 1;
+  uint64 feeAtPercentile = 2;
+}
 
 //Openbook V2 Messages
 message GetMarketsRequestV2 {

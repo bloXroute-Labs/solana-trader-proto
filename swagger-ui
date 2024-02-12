@@ -1819,6 +1819,39 @@
         ]
       }
     },
+    "/api/v2/system/priority-fee": {
+      "get": {
+        "summary": "Estimated priority fee",
+        "description": "Returns an estimated prioritization fee based on recent transactions",
+        "operationId": "Api_GetPriorityFee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPriorityFeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "percentile",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
     "/api/v2/transaction": {
       "get": {
         "summary": "Returns the details of a transaction",
@@ -2327,6 +2360,19 @@
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "apiGetPriorityFeeResponse": {
+      "type": "object",
+      "properties": {
+        "percentile": {
+          "type": "number",
+          "format": "double"
+        },
+        "feeAtPercentile": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },

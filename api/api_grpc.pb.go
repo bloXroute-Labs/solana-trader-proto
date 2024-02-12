@@ -55,6 +55,7 @@ type ApiClient interface {
 	// system API
 	GetServerTime(ctx context.Context, in *GetServerTimeRequest, opts ...grpc.CallOption) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error)
+	GetPriorityFee(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (*GetPriorityFeeResponse, error)
 	// account endpoints
 	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(ctx context.Context, in *GetTokenAccountsRequest, opts ...grpc.CallOption) (*GetTokenAccountsResponse, error)
@@ -82,6 +83,7 @@ type ApiClient interface {
 	GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error)
 	GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error)
 	GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error)
+	GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error)
 	GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error)
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
@@ -398,6 +400,15 @@ func (c *apiClient) GetServerTime(ctx context.Context, in *GetServerTimeRequest,
 func (c *apiClient) GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error) {
 	out := new(GetRecentBlockHashResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRecentBlockHash", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetPriorityFee(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (*GetPriorityFeeResponse, error) {
+	out := new(GetPriorityFeeResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPriorityFee", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -781,8 +792,40 @@ func (x *apiGetBlockStreamClient) Recv() (*GetBlockStreamResponse, error) {
 	return m, nil
 }
 
+func (c *apiClient) GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetPriorityFeeStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPriorityFeeStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPriorityFeeStreamClient interface {
+	Recv() (*GetPriorityFeeResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPriorityFeeStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPriorityFeeStreamClient) Recv() (*GetPriorityFeeResponse, error) {
+	m := new(GetPriorityFeeResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetQuotesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetQuotesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -814,7 +857,7 @@ func (x *apiGetQuotesStreamClient) Recv() (*GetQuotesStreamResponse, error) {
 }
 
 func (c *apiClient) GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetPoolReservesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetPoolReservesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -846,7 +889,7 @@ func (x *apiGetPoolReservesStreamClient) Recv() (*GetPoolReservesStreamResponse,
 }
 
 func (c *apiClient) GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetPricesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPricesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -878,7 +921,7 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 }
 
 func (c *apiClient) GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetNewRaydiumPoolsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetNewRaydiumPoolsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -910,7 +953,7 @@ func (x *apiGetNewRaydiumPoolsStreamClient) Recv() (*GetNewRaydiumPoolsResponse,
 }
 
 func (c *apiClient) GetBundleResultsStream(ctx context.Context, in *GetBundleResultsStreamRequest, opts ...grpc.CallOption) (Api_GetBundleResultsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetBundleResultsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetBundleResultsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -942,7 +985,7 @@ func (x *apiGetBundleResultsStreamClient) Recv() (*GetBundleResultsStreamRespons
 }
 
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1014,6 +1057,7 @@ type ApiServer interface {
 	// system API
 	GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error)
+	GetPriorityFee(context.Context, *GetPriorityFeeRequest) (*GetPriorityFeeResponse, error)
 	// account endpoints
 	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(context.Context, *GetTokenAccountsRequest) (*GetTokenAccountsResponse, error)
@@ -1041,6 +1085,7 @@ type ApiServer interface {
 	GetOrderStatusStream(*GetOrderStatusStreamRequest, Api_GetOrderStatusStreamServer) error
 	GetRecentBlockHashStream(*GetRecentBlockHashRequest, Api_GetRecentBlockHashStreamServer) error
 	GetBlockStream(*GetBlockStreamRequest, Api_GetBlockStreamServer) error
+	GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error
 	GetQuotesStream(*GetQuotesStreamRequest, Api_GetQuotesStreamServer) error
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
@@ -1156,6 +1201,9 @@ func (UnimplementedApiServer) GetServerTime(context.Context, *GetServerTimeReque
 func (UnimplementedApiServer) GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecentBlockHash not implemented")
 }
+func (UnimplementedApiServer) GetPriorityFee(context.Context, *GetPriorityFeeRequest) (*GetPriorityFeeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPriorityFee not implemented")
+}
 func (UnimplementedApiServer) GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBalance not implemented")
 }
@@ -1227,6 +1275,9 @@ func (UnimplementedApiServer) GetRecentBlockHashStream(*GetRecentBlockHashReques
 }
 func (UnimplementedApiServer) GetBlockStream(*GetBlockStreamRequest, Api_GetBlockStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetBlockStream not implemented")
+}
+func (UnimplementedApiServer) GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPriorityFeeStream not implemented")
 }
 func (UnimplementedApiServer) GetQuotesStream(*GetQuotesStreamRequest, Api_GetQuotesStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetQuotesStream not implemented")
@@ -1871,6 +1922,24 @@ func _Api_GetRecentBlockHash_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetPriorityFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPriorityFeeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPriorityFee(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPriorityFee",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPriorityFee(ctx, req.(*GetPriorityFeeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetAccountBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAccountBalanceRequest)
 	if err := dec(in); err != nil {
@@ -2324,6 +2393,27 @@ func (x *apiGetBlockStreamServer) Send(m *GetBlockStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetPriorityFeeStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPriorityFeeRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPriorityFeeStream(m, &apiGetPriorityFeeStreamServer{stream})
+}
+
+type Api_GetPriorityFeeStreamServer interface {
+	Send(*GetPriorityFeeResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPriorityFeeStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPriorityFeeStreamServer) Send(m *GetPriorityFeeResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetQuotesStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetQuotesStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2594,6 +2684,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetRecentBlockHash_Handler,
 		},
 		{
+			MethodName: "GetPriorityFee",
+			Handler:    _Api_GetPriorityFee_Handler,
+		},
+		{
 			MethodName: "GetAccountBalance",
 			Handler:    _Api_GetAccountBalance_Handler,
 		},
@@ -2696,6 +2790,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetBlockStream",
 			Handler:       _Api_GetBlockStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPriorityFeeStream",
+			Handler:       _Api_GetPriorityFeeStream_Handler,
 			ServerStreams: true,
 		},
 		{
