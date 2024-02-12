@@ -465,39 +465,6 @@
         ]
       }
     },
-    "/api/v1/system/priority-fee": {
-      "get": {
-        "summary": "Estimated priority fee",
-        "description": "Returns an estimated prioritization fee based on recent transactions",
-        "operationId": "Api_GetPriorityFee",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetPriorityFeeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "percentile",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
-          }
-        ],
-        "tags": [
-          "System"
-        ]
-      }
-    },
     "/api/v1/system/time": {
       "get": {
         "summary": "Server time",
@@ -1849,6 +1816,39 @@
         "tags": [
           "Trade",
           "Universal"
+        ]
+      }
+    },
+    "/api/v2/system/priority-fee": {
+      "get": {
+        "summary": "Estimated priority fee",
+        "description": "Returns an estimated prioritization fee based on recent transactions",
+        "operationId": "Api_GetPriorityFee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPriorityFeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "percentile",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "System"
         ]
       }
     },
