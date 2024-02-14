@@ -2232,7 +2232,7 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
-    async def get_bundle_result(
+    async def get_bundle_result_v2(
         self,
         get_bundle_results_request: "GetBundleResultsRequest",
         *,
@@ -2241,7 +2241,7 @@ class ApiStub(betterproto.ServiceStub):
         metadata: Optional["MetadataLike"] = None
     ) -> AsyncIterator["GetBundleResultsResponse"]:
         async for response in self._unary_stream(
-            "/api.Api/GetBundleResult",
+            "/api.Api/GetBundleResultV2",
             get_bundle_results_request,
             GetBundleResultsResponse,
             timeout=timeout,
@@ -2770,7 +2770,7 @@ class ApiBase(ServiceBase):
     ) -> "GetOrderByIdResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def get_bundle_result(
+    async def get_bundle_result_v2(
         self, get_bundle_results_request: "GetBundleResultsRequest"
     ) -> AsyncIterator["GetBundleResultsResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
@@ -3243,13 +3243,13 @@ class ApiBase(ServiceBase):
         response = await self.get_order_by_id(request)
         await stream.send_message(response)
 
-    async def __rpc_get_bundle_result(
+    async def __rpc_get_bundle_result_v2(
         self,
         stream: "grpclib.server.Stream[GetBundleResultsRequest, GetBundleResultsResponse]",
     ) -> None:
         request = await stream.recv_message()
         await self._call_rpc_handler_server_stream(
-            self.get_bundle_result,
+            self.get_bundle_result_v2,
             stream,
             request,
         )
@@ -3712,8 +3712,8 @@ class ApiBase(ServiceBase):
                 GetOrderByIdRequest,
                 GetOrderByIdResponse,
             ),
-            "/api.Api/GetBundleResult": grpclib.const.Handler(
-                self.__rpc_get_bundle_result,
+            "/api.Api/GetBundleResultV2": grpclib.const.Handler(
+                self.__rpc_get_bundle_result_v2,
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetBundleResultsRequest,
                 GetBundleResultsResponse,
