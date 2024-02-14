@@ -489,6 +489,47 @@
         ]
       }
     },
+    "/api/v1/trade/bundle-result": {
+      "get": {
+        "summary": "bundle status based on uuid",
+        "description": "returns bundle result status based on uuid",
+        "operationId": "Api_GetBundleResultV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/apiGetBundleResultsResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of apiGetBundleResultsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Trade"
+        ]
+      }
+    },
     "/api/v1/trade/cancel": {
       "post": {
         "summary": "Unsigned CancelOrder transaction",
@@ -1978,7 +2019,7 @@
         }
       }
     },
-    "apiGetBundleResultsStreamResponse": {
+    "apiGetBundleResultsResponse": {
       "type": "object",
       "properties": {
         "uuid": {
