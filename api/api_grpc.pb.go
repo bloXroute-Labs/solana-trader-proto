@@ -73,6 +73,7 @@ type ApiClient interface {
 	GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error)
 	GetOpenOrders(ctx context.Context, in *GetOpenOrdersRequest, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error)
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
+	GetBundleResultByUUID(ctx context.Context, in *GetBundleResultsRequest, opts ...grpc.CallOption) (Api_GetBundleResultByUUIDClient, error)
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
 	// streaming endpoints
@@ -88,7 +89,6 @@ type ApiClient interface {
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
 	GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error)
-	GetBundleResultsStream(ctx context.Context, in *GetBundleResultsStreamRequest, opts ...grpc.CallOption) (Api_GetBundleResultsStreamClient, error)
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
 }
 
@@ -550,6 +550,38 @@ func (c *apiClient) GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, o
 	return out, nil
 }
 
+func (c *apiClient) GetBundleResultByUUID(ctx context.Context, in *GetBundleResultsRequest, opts ...grpc.CallOption) (Api_GetBundleResultByUUIDClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[0], "/api.Api/GetBundleResultByUUID", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetBundleResultByUUIDClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetBundleResultByUUIDClient interface {
+	Recv() (*GetBundleResultsResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetBundleResultByUUIDClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetBundleResultByUUIDClient) Recv() (*GetBundleResultsResponse, error) {
+	m := new(GetBundleResultsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error) {
 	out := new(GetUnsettledResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetUnsettled", in, out, opts...)
@@ -569,7 +601,7 @@ func (c *apiClient) PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRe
 }
 
 func (c *apiClient) GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[0], "/api.Api/GetOrderbooksStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[1], "/api.Api/GetOrderbooksStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -601,7 +633,7 @@ func (x *apiGetOrderbooksStreamClient) Recv() (*GetOrderbooksStreamResponse, err
 }
 
 func (c *apiClient) GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[1], "/api.Api/GetMarketDepthsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[2], "/api.Api/GetMarketDepthsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -633,7 +665,7 @@ func (x *apiGetMarketDepthsStreamClient) Recv() (*GetMarketDepthsStreamResponse,
 }
 
 func (c *apiClient) GetTickersStream(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (Api_GetTickersStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[2], "/api.Api/GetTickersStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetTickersStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -665,7 +697,7 @@ func (x *apiGetTickersStreamClient) Recv() (*GetTickersStreamResponse, error) {
 }
 
 func (c *apiClient) GetTradesStream(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (Api_GetTradesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetTradesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetTradesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -697,7 +729,7 @@ func (x *apiGetTradesStreamClient) Recv() (*GetTradesStreamResponse, error) {
 }
 
 func (c *apiClient) GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetOrderStatusStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetOrderStatusStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -729,7 +761,7 @@ func (x *apiGetOrderStatusStreamClient) Recv() (*GetOrderStatusStreamResponse, e
 }
 
 func (c *apiClient) GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetRecentBlockHashStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetRecentBlockHashStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -761,7 +793,7 @@ func (x *apiGetRecentBlockHashStreamClient) Recv() (*GetRecentBlockHashResponse,
 }
 
 func (c *apiClient) GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetBlockStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetBlockStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -793,7 +825,7 @@ func (x *apiGetBlockStreamClient) Recv() (*GetBlockStreamResponse, error) {
 }
 
 func (c *apiClient) GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetPriorityFeeStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetPriorityFeeStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -825,7 +857,7 @@ func (x *apiGetPriorityFeeStreamClient) Recv() (*GetPriorityFeeResponse, error) 
 }
 
 func (c *apiClient) GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetQuotesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetQuotesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -857,7 +889,7 @@ func (x *apiGetQuotesStreamClient) Recv() (*GetQuotesStreamResponse, error) {
 }
 
 func (c *apiClient) GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetPoolReservesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPoolReservesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -889,7 +921,7 @@ func (x *apiGetPoolReservesStreamClient) Recv() (*GetPoolReservesStreamResponse,
 }
 
 func (c *apiClient) GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPricesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetPricesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -921,7 +953,7 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 }
 
 func (c *apiClient) GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetNewRaydiumPoolsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetNewRaydiumPoolsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -946,38 +978,6 @@ type apiGetNewRaydiumPoolsStreamClient struct {
 
 func (x *apiGetNewRaydiumPoolsStreamClient) Recv() (*GetNewRaydiumPoolsResponse, error) {
 	m := new(GetNewRaydiumPoolsResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiClient) GetBundleResultsStream(ctx context.Context, in *GetBundleResultsStreamRequest, opts ...grpc.CallOption) (Api_GetBundleResultsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetBundleResultsStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetBundleResultsStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetBundleResultsStreamClient interface {
-	Recv() (*GetBundleResultsStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetBundleResultsStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetBundleResultsStreamClient) Recv() (*GetBundleResultsStreamResponse, error) {
-	m := new(GetBundleResultsStreamResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -1075,6 +1075,7 @@ type ApiServer interface {
 	GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error)
 	GetOpenOrders(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error)
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
+	GetBundleResultByUUID(*GetBundleResultsRequest, Api_GetBundleResultByUUIDServer) error
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
 	// streaming endpoints
@@ -1090,7 +1091,6 @@ type ApiServer interface {
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
 	GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsRequest, Api_GetNewRaydiumPoolsStreamServer) error
-	GetBundleResultsStream(*GetBundleResultsStreamRequest, Api_GetBundleResultsStreamServer) error
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
 	mustEmbedUnimplementedApiServer()
 }
@@ -1249,6 +1249,9 @@ func (UnimplementedApiServer) GetOpenOrders(context.Context, *GetOpenOrdersReque
 func (UnimplementedApiServer) GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderByID not implemented")
 }
+func (UnimplementedApiServer) GetBundleResultByUUID(*GetBundleResultsRequest, Api_GetBundleResultByUUIDServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetBundleResultByUUID not implemented")
+}
 func (UnimplementedApiServer) GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUnsettled not implemented")
 }
@@ -1290,9 +1293,6 @@ func (UnimplementedApiServer) GetPricesStream(*GetPricesStreamRequest, Api_GetPr
 }
 func (UnimplementedApiServer) GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsRequest, Api_GetNewRaydiumPoolsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetNewRaydiumPoolsStream not implemented")
-}
-func (UnimplementedApiServer) GetBundleResultsStream(*GetBundleResultsStreamRequest, Api_GetBundleResultsStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetBundleResultsStream not implemented")
 }
 func (UnimplementedApiServer) GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetSwapsStream not implemented")
@@ -2210,6 +2210,27 @@ func _Api_GetOrderByID_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetBundleResultByUUID_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetBundleResultsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetBundleResultByUUID(m, &apiGetBundleResultByUUIDServer{stream})
+}
+
+type Api_GetBundleResultByUUIDServer interface {
+	Send(*GetBundleResultsResponse) error
+	grpc.ServerStream
+}
+
+type apiGetBundleResultByUUIDServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetBundleResultByUUIDServer) Send(m *GetBundleResultsResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetUnsettled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUnsettledRequest)
 	if err := dec(in); err != nil {
@@ -2498,27 +2519,6 @@ func (x *apiGetNewRaydiumPoolsStreamServer) Send(m *GetNewRaydiumPoolsResponse) 
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Api_GetBundleResultsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetBundleResultsStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetBundleResultsStream(m, &apiGetBundleResultsStreamServer{stream})
-}
-
-type Api_GetBundleResultsStreamServer interface {
-	Send(*GetBundleResultsStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetBundleResultsStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetBundleResultsStreamServer) Send(m *GetBundleResultsStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
 func _Api_GetSwapsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetSwapsStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2758,6 +2758,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
+			StreamName:    "GetBundleResultByUUID",
+			Handler:       _Api_GetBundleResultByUUID_Handler,
+			ServerStreams: true,
+		},
+		{
 			StreamName:    "GetOrderbooksStream",
 			Handler:       _Api_GetOrderbooksStream_Handler,
 			ServerStreams: true,
@@ -2815,11 +2820,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetNewRaydiumPoolsStream",
 			Handler:       _Api_GetNewRaydiumPoolsStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetBundleResultsStream",
-			Handler:       _Api_GetBundleResultsStream_Handler,
 			ServerStreams: true,
 		},
 		{
