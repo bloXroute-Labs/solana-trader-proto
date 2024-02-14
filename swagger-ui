@@ -493,7 +493,7 @@
       "get": {
         "summary": "bundle status based on uuid",
         "description": "returns bundle result status based on uuid",
-        "operationId": "Api_GetBundleResultByUUID",
+        "operationId": "Api_GetBundleResult",
         "responses": {
           "200": {
             "description": "A successful response.(streaming responses)",
