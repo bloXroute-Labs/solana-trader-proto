@@ -958,16 +958,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List["TransactionMetaInnerInstruction"] = (
-        betterproto.message_field(6)
-    )
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List["TransactionMetaTokenBalance"] = (
-        betterproto.message_field(9)
-    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -1079,12 +1079,12 @@ class GetSwapsStreamUpdate(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class GetBundleResultsRequest(betterproto.Message):
+class GetBundleResultRequest(betterproto.Message):
     uuid: str = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
-class GetBundleResultsResponse(betterproto.Message):
+class GetBundleResultResponse(betterproto.Message):
     uuid: str = betterproto.string_field(1)
     bundle_result: str = betterproto.string_field(2)
     timestamp: datetime = betterproto.message_field(3)
@@ -2234,21 +2234,20 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_bundle_result_v2(
         self,
-        get_bundle_results_request: "GetBundleResultsRequest",
+        get_bundle_result_request: "GetBundleResultRequest",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> AsyncIterator["GetBundleResultsResponse"]:
-        async for response in self._unary_stream(
+    ) -> "GetBundleResultResponse":
+        return await self._unary_unary(
             "/api.Api/GetBundleResultV2",
-            get_bundle_results_request,
-            GetBundleResultsResponse,
+            get_bundle_result_request,
+            GetBundleResultResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
-        ):
-            yield response
+        )
 
     async def get_unsettled(
         self,
@@ -2771,10 +2770,9 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_bundle_result_v2(
-        self, get_bundle_results_request: "GetBundleResultsRequest"
-    ) -> AsyncIterator["GetBundleResultsResponse"]:
+        self, get_bundle_result_request: "GetBundleResultRequest"
+    ) -> "GetBundleResultResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-        yield GetBundleResultsResponse()
 
     async def get_unsettled(
         self, get_unsettled_request: "GetUnsettledRequest"
@@ -3245,14 +3243,11 @@ class ApiBase(ServiceBase):
 
     async def __rpc_get_bundle_result_v2(
         self,
-        stream: "grpclib.server.Stream[GetBundleResultsRequest, GetBundleResultsResponse]",
+        stream: "grpclib.server.Stream[GetBundleResultRequest, GetBundleResultResponse]",
     ) -> None:
         request = await stream.recv_message()
-        await self._call_rpc_handler_server_stream(
-            self.get_bundle_result_v2,
-            stream,
-            request,
-        )
+        response = await self.get_bundle_result_v2(request)
+        await stream.send_message(response)
 
     async def __rpc_get_unsettled(
         self, stream: "grpclib.server.Stream[GetUnsettledRequest, GetUnsettledResponse]"
@@ -3714,9 +3709,9 @@ class ApiBase(ServiceBase):
             ),
             "/api.Api/GetBundleResultV2": grpclib.const.Handler(
                 self.__rpc_get_bundle_result_v2,
-                grpclib.const.Cardinality.UNARY_STREAM,
-                GetBundleResultsRequest,
-                GetBundleResultsResponse,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetBundleResultRequest,
+                GetBundleResultResponse,
             ),
             "/api.Api/GetUnsettled": grpclib.const.Handler(
                 self.__rpc_get_unsettled,
