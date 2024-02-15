@@ -496,18 +496,9 @@
         "operationId": "Api_GetBundleResultV2",
         "responses": {
           "200": {
-            "description": "A successful response.(streaming responses)",
+            "description": "A successful response.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/apiGetBundleResultsResponse"
-                },
-                "error": {
-                  "$ref": "#/definitions/rpcStatus"
-                }
-              },
-              "title": "Stream result of apiGetBundleResultsResponse"
+              "$ref": "#/definitions/apiGetBundleResultsResponse"
             }
           },
           "default": {

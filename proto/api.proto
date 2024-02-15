@@ -646,7 +646,7 @@ service Api {
     };
   }
 
-  rpc GetBundleResultV2(GetBundleResultsRequest) returns (stream GetBundleResultsResponse) {
+  rpc GetBundleResultV2(GetBundleResultsRequest) returns (GetBundleResultsResponse) {
     option (google.api.http) = {
       get: "/api/v1/trade/bundle-result"
     };
