@@ -73,7 +73,7 @@ type ApiClient interface {
 	GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error)
 	GetOpenOrders(ctx context.Context, in *GetOpenOrdersRequest, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error)
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
-	GetBundleResultV2(ctx context.Context, in *GetBundleResultsRequest, opts ...grpc.CallOption) (*GetBundleResultsResponse, error)
+	GetBundleResultV2(ctx context.Context, in *GetBundleResultRequest, opts ...grpc.CallOption) (*GetBundleResultResponse, error)
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
 	// streaming endpoints
@@ -550,8 +550,8 @@ func (c *apiClient) GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, o
 	return out, nil
 }
 
-func (c *apiClient) GetBundleResultV2(ctx context.Context, in *GetBundleResultsRequest, opts ...grpc.CallOption) (*GetBundleResultsResponse, error) {
-	out := new(GetBundleResultsResponse)
+func (c *apiClient) GetBundleResultV2(ctx context.Context, in *GetBundleResultRequest, opts ...grpc.CallOption) (*GetBundleResultResponse, error) {
+	out := new(GetBundleResultResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetBundleResultV2", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1052,7 +1052,7 @@ type ApiServer interface {
 	GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error)
 	GetOpenOrders(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error)
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
-	GetBundleResultV2(context.Context, *GetBundleResultsRequest) (*GetBundleResultsResponse, error)
+	GetBundleResultV2(context.Context, *GetBundleResultRequest) (*GetBundleResultResponse, error)
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
 	// streaming endpoints
@@ -1226,7 +1226,7 @@ func (UnimplementedApiServer) GetOpenOrders(context.Context, *GetOpenOrdersReque
 func (UnimplementedApiServer) GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderByID not implemented")
 }
-func (UnimplementedApiServer) GetBundleResultV2(context.Context, *GetBundleResultsRequest) (*GetBundleResultsResponse, error) {
+func (UnimplementedApiServer) GetBundleResultV2(context.Context, *GetBundleResultRequest) (*GetBundleResultResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBundleResultV2 not implemented")
 }
 func (UnimplementedApiServer) GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error) {
@@ -2188,7 +2188,7 @@ func _Api_GetOrderByID_Handler(srv interface{}, ctx context.Context, dec func(in
 }
 
 func _Api_GetBundleResultV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBundleResultsRequest)
+	in := new(GetBundleResultRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -2200,7 +2200,7 @@ func _Api_GetBundleResultV2_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: "/api.Api/GetBundleResultV2",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetBundleResultV2(ctx, req.(*GetBundleResultsRequest))
+		return srv.(ApiServer).GetBundleResultV2(ctx, req.(*GetBundleResultRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
