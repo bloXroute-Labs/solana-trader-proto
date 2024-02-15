@@ -489,6 +489,38 @@
         ]
       }
     },
+    "/api/v1/trade/bundle-result": {
+      "get": {
+        "summary": "bundle status based on uuid",
+        "description": "returns bundle result status based on uuid",
+        "operationId": "Api_GetBundleResultV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetBundleResultsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Trade"
+        ]
+      }
+    },
     "/api/v1/trade/cancel": {
       "post": {
         "summary": "Unsigned CancelOrder transaction",
@@ -1849,38 +1881,6 @@
         ],
         "tags": [
           "System"
-        ]
-      }
-    },
-    "/api/v2/trade/bundle-result": {
-      "get": {
-        "summary": "bundle status based on uuid",
-        "description": "returns bundle result status based on uuid",
-        "operationId": "Api_GetBundleResultV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetBundleResultsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Trade"
         ]
       }
     },
