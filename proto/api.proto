@@ -648,7 +648,7 @@ service Api {
 
   rpc GetBundleResultV2(GetBundleResultsRequest) returns (GetBundleResultsResponse) {
     option (google.api.http) = {
-      get: "/api/v1/trade/bundle-result"
+      get: "/api/v2/trade/bundle-result"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
