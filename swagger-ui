@@ -1840,6 +1840,21 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "P_UNKNOWN",
+              "P_ALL",
+              "P_JUPITER",
+              "P_RAYDIUM",
+              "P_SERUM",
+              "P_OPENBOOK"
+            ],
+            "default": "P_UNKNOWN"
+          },
+          {
             "name": "percentile",
             "in": "query",
             "required": false,
@@ -2398,6 +2413,9 @@
     "apiGetPriorityFeeResponse": {
       "type": "object",
       "properties": {
+        "project": {
+          "$ref": "#/definitions/apiProject"
+        },
         "percentile": {
           "type": "number",
           "format": "double"

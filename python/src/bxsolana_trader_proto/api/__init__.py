@@ -958,16 +958,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1186,15 +1186,17 @@ class GetPricesStreamResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetPriorityFeeRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
     percentile: Optional[float] = betterproto.double_field(
-        1, optional=True, group="_percentile"
+        2, optional=True, group="_percentile"
     )
 
 
 @dataclass(eq=False, repr=False)
 class GetPriorityFeeResponse(betterproto.Message):
-    percentile: float = betterproto.double_field(1)
-    fee_at_percentile: int = betterproto.uint64_field(2)
+    project: "Project" = betterproto.enum_field(1)
+    percentile: float = betterproto.double_field(2)
+    fee_at_percentile: int = betterproto.uint64_field(3)
 
 
 @dataclass(eq=False, repr=False)
