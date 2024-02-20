@@ -666,6 +666,34 @@ class PostJupiterSwapRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostJupiterSwapInstructionsRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    in_token: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    in_amount: float = betterproto.double_field(4)
+    slippage: float = betterproto.double_field(5)
+    compute_price: int = betterproto.uint64_field(7)
+    tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+
+
+@dataclass(eq=False, repr=False)
+class PublicKeys(betterproto.Message):
+    pks: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class PostJupiterSwapInstructionsResponse(betterproto.Message):
+    instructions: List["InstructionJupiter"] = betterproto.message_field(1)
+    address_lookup_table_addresses: Dict[str, "PublicKeys"] = betterproto.map_field(
+        2, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+    out_amount: float = betterproto.double_field(3)
+    out_amount_min: float = betterproto.double_field(4)
+    price_impact: "_common__.PriceImpactPercentV2" = betterproto.message_field(5)
+    fees: List["_common__.Fee"] = betterproto.message_field(6)
+
+
+@dataclass(eq=False, repr=False)
 class PostRaydiumSwapRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     in_token: str = betterproto.string_field(2)
@@ -951,22 +979,36 @@ class Instruction(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class AccountMeta(betterproto.Message):
+    program_id: str = betterproto.string_field(1)
+    is_signer: bool = betterproto.bool_field(2)
+    is_writable: bool = betterproto.bool_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class InstructionJupiter(betterproto.Message):
+    program_id: str = betterproto.string_field(1)
+    accounts: List["AccountMeta"] = betterproto.message_field(2)
+    data: bytes = betterproto.bytes_field(3)
+
+
+@dataclass(eq=False, repr=False)
 class TransactionMeta(betterproto.Message):
     err: str = betterproto.string_field(1)
     errored: bool = betterproto.bool_field(2)
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List["TransactionMetaInnerInstruction"] = (
-        betterproto.message_field(6)
-    )
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List["TransactionMetaTokenBalance"] = (
-        betterproto.message_field(9)
-    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -1580,6 +1622,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostJupiterSwap",
             post_jupiter_swap_request,
             PostJupiterSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_jupiter_swap_instructions(
+        self,
+        post_jupiter_swap_instructions_request: "PostJupiterSwapInstructionsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostJupiterSwapInstructionsResponse":
+        return await self._unary_unary(
+            "/api.Api/PostJupiterSwapInstructions",
+            post_jupiter_swap_instructions_request,
+            PostJupiterSwapInstructionsResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2578,6 +2637,12 @@ class ApiBase(ServiceBase):
     ) -> "PostJupiterSwapResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_jupiter_swap_instructions(
+        self,
+        post_jupiter_swap_instructions_request: "PostJupiterSwapInstructionsRequest",
+    ) -> "PostJupiterSwapInstructionsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_jupiter_route_swap(
         self, post_jupiter_route_swap_request: "PostJupiterRouteSwapRequest"
     ) -> "PostJupiterRouteSwapResponse":
@@ -2953,6 +3018,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_jupiter_swap(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_jupiter_swap_instructions(
+        self,
+        stream: "grpclib.server.Stream[PostJupiterSwapInstructionsRequest, PostJupiterSwapInstructionsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_jupiter_swap_instructions(request)
         await stream.send_message(response)
 
     async def __rpc_post_jupiter_route_swap(
@@ -3477,6 +3550,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostJupiterSwapRequest,
                 PostJupiterSwapResponse,
+            ),
+            "/api.Api/PostJupiterSwapInstructions": grpclib.const.Handler(
+                self.__rpc_post_jupiter_swap_instructions,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostJupiterSwapInstructionsRequest,
+                PostJupiterSwapInstructionsResponse,
             ),
             "/api.Api/PostJupiterRouteSwap": grpclib.const.Handler(
                 self.__rpc_post_jupiter_route_swap,
