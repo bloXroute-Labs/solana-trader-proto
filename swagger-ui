@@ -3499,10 +3499,11 @@
           }
         },
         "addressLookupTableAddresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiPublicKeys"
+          },
+          "description": "Returns a map[publicKey][]publicKey that is used in solana versioned transaction creation."
         },
         "outAmount": {
           "type": "number",
@@ -4333,6 +4334,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiQuoteRoute"
+          }
+        }
+      }
+    },
+    "apiPublicKeys": {
+      "type": "object",
+      "properties": {
+        "pks": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
