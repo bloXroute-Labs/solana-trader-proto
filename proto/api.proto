@@ -1335,7 +1335,7 @@ message PublicKeys {
 }
 
 message PostJupiterSwapInstructionsResponse {
-  repeated Instruction instructions = 1;
+  repeated InstructionJupiter instructions = 1;
   map<string, PublicKeys> addressLookupTableAddresses = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Returns a map[publicKey][]publicKey that is used in solana versioned transaction creation."}];
   double outAmount = 3;
   double outAmountMin = 4;
@@ -1595,6 +1595,18 @@ message GetTransactionResponse {
 message Instruction {
   uint32 program_id_index = 1;
   repeated uint32 accounts = 2;
+  bytes data = 3;
+}
+
+message AccountMeta {
+  string programID = 1;
+  bool isSigner = 2;
+  bool isWritable = 3;
+}
+
+message InstructionJupiter {
+  string programID = 1;
+  repeated AccountMeta accounts = 2;
   bytes data = 3;
 }
 

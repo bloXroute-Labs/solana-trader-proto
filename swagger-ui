@@ -1945,6 +1945,20 @@
     }
   },
   "definitions": {
+    "apiAccountMeta": {
+      "type": "object",
+      "properties": {
+        "programID": {
+          "type": "string"
+        },
+        "isSigner": {
+          "type": "boolean"
+        },
+        "isWritable": {
+          "type": "boolean"
+        }
+      }
+    },
     "apiBlock": {
       "type": "object",
       "properties": {
@@ -2800,6 +2814,24 @@
         }
       }
     },
+    "apiInstructionJupiter": {
+      "type": "object",
+      "properties": {
+        "programID": {
+          "type": "string"
+        },
+        "accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAccountMeta"
+          }
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
     "apiJupiterQuoteRoute": {
       "type": "object",
       "properties": {
@@ -3495,7 +3527,7 @@
         "instructions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/apiInstruction"
+            "$ref": "#/definitions/apiInstructionJupiter"
           }
         },
         "addressLookupTableAddresses": {
