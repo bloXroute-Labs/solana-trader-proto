@@ -32,6 +32,7 @@ type ApiClient interface {
 	GetJupiterQuotes(ctx context.Context, in *GetJupiterQuotesRequest, opts ...grpc.CallOption) (*GetJupiterQuotesResponse, error)
 	GetJupiterPrices(ctx context.Context, in *GetJupiterPricesRequest, opts ...grpc.CallOption) (*GetJupiterPricesResponse, error)
 	PostJupiterSwap(ctx context.Context, in *PostJupiterSwapRequest, opts ...grpc.CallOption) (*PostJupiterSwapResponse, error)
+	PostJupiterSwapInstructions(ctx context.Context, in *PostJupiterSwapInstructionsRequest, opts ...grpc.CallOption) (*PostJupiterSwapInstructionsResponse, error)
 	PostJupiterRouteSwap(ctx context.Context, in *PostJupiterRouteSwapRequest, opts ...grpc.CallOption) (*PostJupiterRouteSwapResponse, error)
 	GetMarketsV2(ctx context.Context, in *GetMarketsRequestV2, opts ...grpc.CallOption) (*GetMarketsResponseV2, error)
 	GetTickersV2(ctx context.Context, in *GetTickersRequestV2, opts ...grpc.CallOption) (*GetTickersResponseV2, error)
@@ -202,6 +203,15 @@ func (c *apiClient) GetJupiterPrices(ctx context.Context, in *GetJupiterPricesRe
 func (c *apiClient) PostJupiterSwap(ctx context.Context, in *PostJupiterSwapRequest, opts ...grpc.CallOption) (*PostJupiterSwapResponse, error) {
 	out := new(PostJupiterSwapResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostJupiterSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostJupiterSwapInstructions(ctx context.Context, in *PostJupiterSwapInstructionsRequest, opts ...grpc.CallOption) (*PostJupiterSwapInstructionsResponse, error) {
+	out := new(PostJupiterSwapInstructionsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostJupiterSwapInstructions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1011,6 +1021,7 @@ type ApiServer interface {
 	GetJupiterQuotes(context.Context, *GetJupiterQuotesRequest) (*GetJupiterQuotesResponse, error)
 	GetJupiterPrices(context.Context, *GetJupiterPricesRequest) (*GetJupiterPricesResponse, error)
 	PostJupiterSwap(context.Context, *PostJupiterSwapRequest) (*PostJupiterSwapResponse, error)
+	PostJupiterSwapInstructions(context.Context, *PostJupiterSwapInstructionsRequest) (*PostJupiterSwapInstructionsResponse, error)
 	PostJupiterRouteSwap(context.Context, *PostJupiterRouteSwapRequest) (*PostJupiterRouteSwapResponse, error)
 	GetMarketsV2(context.Context, *GetMarketsRequestV2) (*GetMarketsResponseV2, error)
 	GetTickersV2(context.Context, *GetTickersRequestV2) (*GetTickersResponseV2, error)
@@ -1111,6 +1122,9 @@ func (UnimplementedApiServer) GetJupiterPrices(context.Context, *GetJupiterPrice
 }
 func (UnimplementedApiServer) PostJupiterSwap(context.Context, *PostJupiterSwapRequest) (*PostJupiterSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostJupiterSwap not implemented")
+}
+func (UnimplementedApiServer) PostJupiterSwapInstructions(context.Context, *PostJupiterSwapInstructionsRequest) (*PostJupiterSwapInstructionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostJupiterSwapInstructions not implemented")
 }
 func (UnimplementedApiServer) PostJupiterRouteSwap(context.Context, *PostJupiterRouteSwapRequest) (*PostJupiterRouteSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostJupiterRouteSwap not implemented")
@@ -1499,6 +1513,24 @@ func _Api_PostJupiterSwap_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostJupiterSwap(ctx, req.(*PostJupiterSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostJupiterSwapInstructions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostJupiterSwapInstructionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostJupiterSwapInstructions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostJupiterSwapInstructions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostJupiterSwapInstructions(ctx, req.(*PostJupiterSwapInstructionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2568,6 +2600,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostJupiterSwap",
 			Handler:    _Api_PostJupiterSwap_Handler,
+		},
+		{
+			MethodName: "PostJupiterSwapInstructions",
+			Handler:    _Api_PostJupiterSwapInstructions_Handler,
 		},
 		{
 			MethodName: "PostJupiterRouteSwap",

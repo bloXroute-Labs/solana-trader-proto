@@ -191,6 +191,18 @@ service Api {
     };
   }
 
+  rpc PostJupiterSwapInstructions(PostJupiterSwapInstructionsRequest) returns (PostJupiterSwapInstructionsResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/jupiter/swap-instructions"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object using jupiter instructions";
+      summary: "Unsigned Jupiter swap transaction from instructions";
+      tags: ["Jupiter V2"];
+    };
+  }
+
   rpc PostJupiterRouteSwap(PostJupiterRouteSwapRequest) returns (PostJupiterRouteSwapResponse) {
     option(google.api.http) = {
       post: "/api/v2/jupiter/route-swap"
@@ -1306,6 +1318,24 @@ message PostJupiterSwapRequest {
    uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
    uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
    optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostJupiterSwapInstructionsRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostJupiterSwapInstructionsResponse {
+  repeated Instruction instructions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
 }
 
 message PostRaydiumSwapRequest {
