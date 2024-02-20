@@ -3498,6 +3498,12 @@
             "$ref": "#/definitions/apiInstruction"
           }
         },
+        "addressLookupTableAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "outAmount": {
           "type": "number",
           "format": "double"

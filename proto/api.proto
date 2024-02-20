@@ -1332,10 +1332,11 @@ message PostJupiterSwapInstructionsRequest {
 
 message PostJupiterSwapInstructionsResponse {
   repeated Instruction instructions = 1;
-  double outAmount = 2;
-  double outAmountMin = 3;
-  common.PriceImpactPercentV2 priceImpact = 4;
-  repeated common.Fee fees = 5;
+  repeated string addressLookupTableAddresses = 2;
+  double outAmount = 3;
+  double outAmountMin = 4;
+  common.PriceImpactPercentV2 priceImpact = 5;
+  repeated common.Fee fees = 6;
 }
 
 message PostRaydiumSwapRequest {
