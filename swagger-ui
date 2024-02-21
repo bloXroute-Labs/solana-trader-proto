@@ -1102,13 +1102,6 @@
             "required": false,
             "type": "number",
             "format": "double"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "tags": [
