@@ -1185,15 +1185,17 @@ class GetPricesStreamResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetPriorityFeeRequest(betterproto.Message):
+    project: "Project" = betterproto.enum_field(1)
     percentile: Optional[float] = betterproto.double_field(
-        1, optional=True, group="_percentile"
+        2, optional=True, group="_percentile"
     )
 
 
 @dataclass(eq=False, repr=False)
 class GetPriorityFeeResponse(betterproto.Message):
-    percentile: float = betterproto.double_field(1)
-    fee_at_percentile: int = betterproto.uint64_field(2)
+    project: "Project" = betterproto.enum_field(1)
+    percentile: float = betterproto.double_field(2)
+    fee_at_percentile: int = betterproto.uint64_field(3)
 
 
 @dataclass(eq=False, repr=False)
