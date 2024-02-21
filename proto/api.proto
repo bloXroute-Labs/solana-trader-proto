@@ -1809,12 +1809,14 @@ message GetPricesStreamResponse {
 }
 
 message GetPriorityFeeRequest {
-  optional double percentile = 1; 
+  Project project = 1;
+  optional double percentile = 2; 
 }
 
 message GetPriorityFeeResponse {
-  double percentile = 1;
-  uint64 feeAtPercentile = 2;
+  Project project = 1;
+  double percentile = 2;
+  uint64 feeAtPercentile = 3;
 }
 
 //Openbook V2 Messages
