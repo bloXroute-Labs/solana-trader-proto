@@ -1177,6 +1177,40 @@
         ]
       }
     },
+    "/api/v2/jupiter/swap-instructions": {
+      "post": {
+        "summary": "Unsigned Jupiter swap transaction from instructions",
+        "description": "Generates an unsigned transaction object using jupiter instructions",
+        "operationId": "Api_PostJupiterSwapInstructions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostJupiterSwapInstructionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostJupiterSwapInstructionsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Jupiter V2"
+        ]
+      }
+    },
     "/api/v2/openbook/cancel": {
       "post": {
         "summary": "Openbook unsigned CancelOrder transaction",
@@ -1926,6 +1960,20 @@
     }
   },
   "definitions": {
+    "apiAccountMeta": {
+      "type": "object",
+      "properties": {
+        "programID": {
+          "type": "string"
+        },
+        "isSigner": {
+          "type": "boolean"
+        },
+        "isWritable": {
+          "type": "boolean"
+        }
+      }
+    },
     "apiBlock": {
       "type": "object",
       "properties": {
@@ -2784,6 +2832,24 @@
         }
       }
     },
+    "apiInstructionJupiter": {
+      "type": "object",
+      "properties": {
+        "programID": {
+          "type": "string"
+        },
+        "accounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAccountMeta"
+          }
+        },
+        "data": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
     "apiJupiterQuoteRoute": {
       "type": "object",
       "properties": {
@@ -3421,6 +3487,73 @@
           "items": {
             "$ref": "#/definitions/apiTransactionMessage"
           }
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
+        },
+        "priceImpact": {
+          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonFee"
+          }
+        }
+      }
+    },
+    "apiPostJupiterSwapInstructionsRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        }
+      }
+    },
+    "apiPostJupiterSwapInstructionsResponse": {
+      "type": "object",
+      "properties": {
+        "instructions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiInstructionJupiter"
+          }
+        },
+        "addressLookupTableAddresses": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiPublicKeys"
+          },
+          "description": "Returns a map[publicKey][]publicKey that is used in solana versioned transaction creation."
         },
         "outAmount": {
           "type": "number",
@@ -4251,6 +4384,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiQuoteRoute"
+          }
+        }
+      }
+    },
+    "apiPublicKeys": {
+      "type": "object",
+      "properties": {
+        "pks": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }

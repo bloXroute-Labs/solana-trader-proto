@@ -191,6 +191,18 @@ service Api {
     };
   }
 
+  rpc PostJupiterSwapInstructions(PostJupiterSwapInstructionsRequest) returns (PostJupiterSwapInstructionsResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/jupiter/swap-instructions"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object using jupiter instructions";
+      summary: "Unsigned Jupiter swap transaction from instructions";
+      tags: ["Jupiter V2"];
+    };
+  }
+
   rpc PostJupiterRouteSwap(PostJupiterRouteSwapRequest) returns (PostJupiterRouteSwapResponse) {
     option(google.api.http) = {
       post: "/api/v2/jupiter/route-swap"
@@ -1308,6 +1320,29 @@ message PostJupiterSwapRequest {
    optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
+message PostJupiterSwapInstructionsRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PublicKeys {
+  repeated string pks = 1;
+}
+
+message PostJupiterSwapInstructionsResponse {
+  repeated InstructionJupiter instructions = 1;
+  map<string, PublicKeys> addressLookupTableAddresses = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Returns a map[publicKey][]publicKey that is used in solana versioned transaction creation."}];
+  double outAmount = 3;
+  double outAmountMin = 4;
+  common.PriceImpactPercentV2 priceImpact = 5;
+  repeated common.Fee fees = 6;
+}
+
 message PostRaydiumSwapRequest {
   string ownerAddress = 1;
   string inToken = 2;
@@ -1560,6 +1595,18 @@ message GetTransactionResponse {
 message Instruction {
   uint32 program_id_index = 1;
   repeated uint32 accounts = 2;
+  bytes data = 3;
+}
+
+message AccountMeta {
+  string programID = 1;
+  bool isSigner = 2;
+  bool isWritable = 3;
+}
+
+message InstructionJupiter {
+  string programID = 1;
+  repeated AccountMeta accounts = 2;
   bytes data = 3;
 }
 
