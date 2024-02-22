@@ -3552,7 +3552,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetBundleResultV2", runtime.WithHTTPPathPattern("/api/v2/trade/bundle-result/{uuid}"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetBundleResultV2", runtime.WithHTTPPathPattern("/api/v2/bundle-result/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4734,7 +4734,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetBundleResultV2", runtime.WithHTTPPathPattern("/api/v2/trade/bundle-result/{uuid}"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetBundleResultV2", runtime.WithHTTPPathPattern("/api/v2/bundle-result/{uuid}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4898,7 +4898,7 @@ var (
 
 	pattern_Api_GetOrderByID_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v1", "trade", "orderbyid", "orderID"}, ""))
 
-	pattern_Api_GetBundleResultV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v2", "trade", "bundle-result", "uuid"}, ""))
+	pattern_Api_GetBundleResultV2_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"api", "v2", "bundle-result", "uuid"}, ""))
 
 	pattern_Api_GetUnsettled_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"api", "v1", "trade", "unsettled", "market"}, ""))
 
