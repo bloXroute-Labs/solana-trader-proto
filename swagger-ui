@@ -1021,6 +1021,38 @@
         ]
       }
     },
+    "/api/v2/bundle-result/{uuid}": {
+      "get": {
+        "summary": "bundle status based on uuid",
+        "description": "returns bundle result status based on uuid",
+        "operationId": "Api_GetBundleResultV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetBundleResultResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Trade"
+        ]
+      }
+    },
     "/api/v2/jupiter/prices": {
       "get": {
         "summary": "Token prices on Jupiter",
@@ -1891,38 +1923,6 @@
         ],
         "tags": [
           "System"
-        ]
-      }
-    },
-    "/api/v2/trade/bundle-result/{uuid}": {
-      "get": {
-        "summary": "bundle status based on uuid",
-        "description": "returns bundle result status based on uuid",
-        "operationId": "Api_GetBundleResultV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetBundleResultResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Trade"
         ]
       }
     },
