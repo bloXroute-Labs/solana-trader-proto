@@ -4523,6 +4523,9 @@
         "outAmountMin": {
           "type": "number",
           "format": "double"
+        },
+        "project": {
+          "$ref": "#/definitions/apiStepProject"
         }
       }
     },
@@ -4549,6 +4552,9 @@
         },
         "poolAddress": {
           "type": "string"
+        },
+        "project": {
+          "$ref": "#/definitions/apiStepProject"
         }
       }
     },

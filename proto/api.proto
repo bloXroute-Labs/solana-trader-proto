@@ -1411,6 +1411,7 @@ message RaydiumRouteStep {
   double outAmount = 4;
   double outAmountMin = 5;
   string poolAddress = 6;
+  StepProject project = 7;
 }
 
 message PostJupiterRouteSwapRequest {
@@ -1518,8 +1519,9 @@ message RaydiumQuoteStep {
   double outAmount = 6;
   double slippage = 7;
   common.PriceImpactPercentV2 priceImpactPercent = 8;
-  common.Fee fee = 10;
-  double outAmountMin = 11;
+  common.Fee fee = 9;
+  double outAmountMin = 10;
+  StepProject project = 11;
 }
 
 message StepProject {

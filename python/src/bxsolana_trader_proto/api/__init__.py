@@ -768,6 +768,7 @@ class RaydiumRouteStep(betterproto.Message):
     out_amount: float = betterproto.double_field(4)
     out_amount_min: float = betterproto.double_field(5)
     pool_address: str = betterproto.string_field(6)
+    project: "StepProject" = betterproto.message_field(7)
 
 
 @dataclass(eq=False, repr=False)
@@ -880,8 +881,9 @@ class RaydiumQuoteStep(betterproto.Message):
     price_impact_percent: "_common__.PriceImpactPercentV2" = betterproto.message_field(
         8
     )
-    fee: "_common__.Fee" = betterproto.message_field(10)
-    out_amount_min: float = betterproto.double_field(11)
+    fee: "_common__.Fee" = betterproto.message_field(9)
+    out_amount_min: float = betterproto.double_field(10)
+    project: "StepProject" = betterproto.message_field(11)
 
 
 @dataclass(eq=False, repr=False)
