@@ -53,7 +53,7 @@ service Api {
 
   rpc GetRateLimit(GetRateLimitRequest) returns (GetRateLimitResponse) {
     option (google.api.http) = {
-      get: "/api/v2/account/rate-limit"
+      get: "/api/v2/rate-limit"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the details of an account rate limits";
@@ -1577,7 +1577,7 @@ message GetRateLimitResponse {
   uint64 intervalNum = 4;
   uint64 limit = 5;
   uint64 count = 6;
-  uint64 ts = 7;
+  uint64 reset = 7;
 }
 
 message GetTransactionRequest {
