@@ -954,7 +954,7 @@ class GetRateLimitResponse(betterproto.Message):
     interval_num: int = betterproto.uint64_field(4)
     limit: int = betterproto.uint64_field(5)
     count: int = betterproto.uint64_field(6)
-    ts: int = betterproto.uint64_field(7)
+    reset: int = betterproto.uint64_field(7)
 
 
 @dataclass(eq=False, repr=False)

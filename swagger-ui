@@ -997,30 +997,6 @@
         ]
       }
     },
-    "/api/v2/account/rate-limit": {
-      "get": {
-        "summary": "Returns the details of an account rate limits",
-        "description": "Returns the details of an account rate limits",
-        "operationId": "Api_GetRateLimit",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetRateLimitResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "tags": [
-          "Solana RPC"
-        ]
-      }
-    },
     "/api/v2/bundle-result/{uuid}": {
       "get": {
         "summary": "bundle status based on uuid",
@@ -1617,6 +1593,30 @@
         ],
         "tags": [
           "Openbook V2"
+        ]
+      }
+    },
+    "/api/v2/rate-limit": {
+      "get": {
+        "summary": "Returns the details of an account rate limits",
+        "description": "Returns the details of an account rate limits",
+        "operationId": "Api_GetRateLimit",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRateLimitResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "Solana RPC"
         ]
       }
     },
@@ -2562,7 +2562,7 @@
           "type": "string",
           "format": "uint64"
         },
-        "ts": {
+        "reset": {
           "type": "string",
           "format": "uint64"
         }
