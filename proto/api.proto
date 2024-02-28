@@ -1225,6 +1225,7 @@ message GetMarketDepthsStreamResponse {
 
 message GetTickersStreamRequest {
   repeated string markets = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
+  Project project = 2;
 }
 
 message GetTickersStreamResponse {

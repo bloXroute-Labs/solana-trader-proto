@@ -567,6 +567,7 @@ class GetMarketDepthsStreamResponse(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetTickersStreamRequest(betterproto.Message):
     markets: List[str] = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
 
 
 @dataclass(eq=False, repr=False)
