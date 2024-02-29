@@ -1801,7 +1801,7 @@ message PoolReserves {
 
 message GetPoolReservesStreamRequest {
   repeated Project projects = 1;
-  repeated string tokens = 2;
+  repeated string pairOrAddress = 2;
 }
 
 message GetPricesStreamRequest {

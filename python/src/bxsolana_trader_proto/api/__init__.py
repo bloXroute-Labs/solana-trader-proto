@@ -1217,7 +1217,7 @@ class PoolReserves(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetPoolReservesStreamRequest(betterproto.Message):
     projects: List["Project"] = betterproto.enum_field(1)
-    tokens: List[str] = betterproto.string_field(2)
+    pair_or_address: List[str] = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)
