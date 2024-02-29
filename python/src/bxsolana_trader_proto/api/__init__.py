@@ -565,6 +565,12 @@ class GetMarketDepthsStreamResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetTickersStreamRequest(betterproto.Message):
+    markets: List[str] = betterproto.string_field(1)
+    project: "Project" = betterproto.enum_field(2)
+
+
+@dataclass(eq=False, repr=False)
 class GetTickersStreamResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
     ticker: "GetTickersResponse" = betterproto.message_field(2)
@@ -1211,7 +1217,7 @@ class PoolReserves(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetPoolReservesStreamRequest(betterproto.Message):
     projects: List["Project"] = betterproto.enum_field(1)
-    pair_or_address: str = betterproto.string_field(2)
+    pair_or_address: List[str] = betterproto.string_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -2383,7 +2389,7 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_tickers_stream(
         self,
-        get_tickers_request: "GetTickersRequest",
+        get_tickers_stream_request: "GetTickersStreamRequest",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
@@ -2391,7 +2397,7 @@ class ApiStub(betterproto.ServiceStub):
     ) -> AsyncIterator["GetTickersStreamResponse"]:
         async for response in self._unary_stream(
             "/api.Api/GetTickersStream",
-            get_tickers_request,
+            get_tickers_stream_request,
             GetTickersStreamResponse,
             timeout=timeout,
             deadline=deadline,
@@ -2865,7 +2871,7 @@ class ApiBase(ServiceBase):
         yield GetMarketDepthsStreamResponse()
 
     async def get_tickers_stream(
-        self, get_tickers_request: "GetTickersRequest"
+        self, get_tickers_stream_request: "GetTickersStreamRequest"
     ) -> AsyncIterator["GetTickersStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetTickersStreamResponse()
@@ -3363,7 +3369,7 @@ class ApiBase(ServiceBase):
 
     async def __rpc_get_tickers_stream(
         self,
-        stream: "grpclib.server.Stream[GetTickersRequest, GetTickersStreamResponse]",
+        stream: "grpclib.server.Stream[GetTickersStreamRequest, GetTickersStreamResponse]",
     ) -> None:
         request = await stream.recv_message()
         await self._call_rpc_handler_server_stream(
@@ -3822,7 +3828,7 @@ class ApiBase(ServiceBase):
             "/api.Api/GetTickersStream": grpclib.const.Handler(
                 self.__rpc_get_tickers_stream,
                 grpclib.const.Cardinality.UNARY_STREAM,
-                GetTickersRequest,
+                GetTickersStreamRequest,
                 GetTickersStreamResponse,
             ),
             "/api.Api/GetTradesStream": grpclib.const.Handler(
