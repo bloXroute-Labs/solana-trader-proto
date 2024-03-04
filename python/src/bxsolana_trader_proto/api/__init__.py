@@ -941,7 +941,7 @@ class GetPoolsResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetRaydiumPoolsRequest(betterproto.Message):
-    pair_or_address: str = betterproto.string_field(1)
+    pass
 
 
 @dataclass(eq=False, repr=False)
