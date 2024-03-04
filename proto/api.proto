@@ -1562,7 +1562,6 @@ message GetPoolsResponse {
 }
 
 message GetRaydiumPoolsRequest {
-  string pairOrAddress = 1;
 }
 
 message GetRaydiumPoolsResponse {

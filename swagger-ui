@@ -1639,14 +1639,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "pairOrAddress",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
         "tags": [
           "Raydium V2"
         ]
