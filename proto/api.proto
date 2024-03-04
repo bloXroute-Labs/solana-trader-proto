@@ -706,7 +706,7 @@ service Api {
     };
   }
 
-  rpc GetTickersStream(GetTickersRequest) returns (stream GetTickersStreamResponse) {
+  rpc GetTickersStream(GetTickersStreamRequest) returns (stream GetTickersStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Trade";
     };
@@ -1221,6 +1221,11 @@ message GetMarketDepthsStreamResponse {
   int64 slot = 1;
   GetMarketDepthResponse Data = 2;
   google.protobuf.Timestamp timestamp = 3;
+}
+
+message GetTickersStreamRequest {
+  repeated string markets = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
+  Project project = 2;
 }
 
 message GetTickersStreamResponse {
@@ -1795,7 +1800,7 @@ message PoolReserves {
 
 message GetPoolReservesStreamRequest {
   repeated Project projects = 1;
-  string pairOrAddress = 2;
+  repeated string pools = 2;
 }
 
 message GetPricesStreamRequest {
