@@ -950,6 +950,16 @@ class GetRaydiumPoolsResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetRaydiumPoolReserveRequest(betterproto.Message):
+    pair_or_address: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumPoolReserveResponse(betterproto.Message):
+    pools: List["ProjectPool"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class GetRateLimitRequest(betterproto.Message):
     pass
 
@@ -1513,6 +1523,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetRaydiumPools",
             get_raydium_pools_request,
             GetRaydiumPoolsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_raydium_pool_reserve(
+        self,
+        get_raydium_pool_reserve_request: "GetRaydiumPoolReserveRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumPoolReserveResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRaydiumPoolReserve",
+            get_raydium_pool_reserve_request,
+            GetRaydiumPoolReserveResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2612,6 +2639,11 @@ class ApiBase(ServiceBase):
     ) -> "GetRaydiumPoolsResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def get_raydium_pool_reserve(
+        self, get_raydium_pool_reserve_request: "GetRaydiumPoolReserveRequest"
+    ) -> "GetRaydiumPoolReserveResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_raydium_quotes(
         self, get_raydium_quotes_request: "GetRaydiumQuotesRequest"
     ) -> "GetRaydiumQuotesResponse":
@@ -2972,6 +3004,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_raydium_pools(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_raydium_pool_reserve(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumPoolReserveRequest, GetRaydiumPoolReserveResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_raydium_pool_reserve(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_quotes(
@@ -3518,6 +3558,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetRaydiumPoolsRequest,
                 GetRaydiumPoolsResponse,
+            ),
+            "/api.Api/GetRaydiumPoolReserve": grpclib.const.Handler(
+                self.__rpc_get_raydium_pool_reserve,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumPoolReserveRequest,
+                GetRaydiumPoolReserveResponse,
             ),
             "/api.Api/GetRaydiumQuotes": grpclib.const.Handler(
                 self.__rpc_get_raydium_quotes,

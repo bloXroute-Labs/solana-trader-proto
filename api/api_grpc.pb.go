@@ -24,6 +24,7 @@ type ApiClient interface {
 	PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
 	// Raydium V2
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
+	GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoolReserveRequest, opts ...grpc.CallOption) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error)
 	GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error)
 	PostRaydiumSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error)
@@ -140,6 +141,15 @@ func (c *apiClient) PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRe
 func (c *apiClient) GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error) {
 	out := new(GetRaydiumPoolsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumPools", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoolReserveRequest, opts ...grpc.CallOption) (*GetRaydiumPoolReserveResponse, error) {
+	out := new(GetRaydiumPoolReserveResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumPoolReserve", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1013,6 +1023,7 @@ type ApiServer interface {
 	PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
 	// Raydium V2
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
+	GetRaydiumPoolReserve(context.Context, *GetRaydiumPoolReserveRequest) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error)
 	GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error)
 	PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error)
@@ -1101,6 +1112,9 @@ func (UnimplementedApiServer) PostSubmitBatchV2(context.Context, *PostSubmitBatc
 }
 func (UnimplementedApiServer) GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPools not implemented")
+}
+func (UnimplementedApiServer) GetRaydiumPoolReserve(context.Context, *GetRaydiumPoolReserveRequest) (*GetRaydiumPoolReserveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPoolReserve not implemented")
 }
 func (UnimplementedApiServer) GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumQuotes not implemented")
@@ -1387,6 +1401,24 @@ func _Api_GetRaydiumPools_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetRaydiumPools(ctx, req.(*GetRaydiumPoolsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetRaydiumPoolReserve_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRaydiumPoolReserveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRaydiumPoolReserve(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRaydiumPoolReserve",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRaydiumPoolReserve(ctx, req.(*GetRaydiumPoolReserveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2572,6 +2604,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRaydiumPools",
 			Handler:    _Api_GetRaydiumPools_Handler,
+		},
+		{
+			MethodName: "GetRaydiumPoolReserve",
+			Handler:    _Api_GetRaydiumPoolReserve_Handler,
 		},
 		{
 			MethodName: "GetRaydiumQuotes",
