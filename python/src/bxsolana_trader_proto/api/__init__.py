@@ -951,7 +951,7 @@ class GetRaydiumPoolsResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetRaydiumPoolReserveRequest(betterproto.Message):
-    pair_or_address: str = betterproto.string_field(1)
+    pairs_or_addresses: List[str] = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)

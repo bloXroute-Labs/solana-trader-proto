@@ -1585,7 +1585,7 @@ message GetRaydiumPoolsResponse {
 }
 
 message GetRaydiumPoolReserveRequest {
-  string pairOrAddress = 1;
+  repeated string pairsOrAddresses = 1;
 }
 
 message GetRaydiumPoolReserveResponse {
