@@ -1620,6 +1620,42 @@
         ]
       }
     },
+    "/api/v2/raydium/pool-reserves": {
+      "get": {
+        "summary": "Raydium Pool reserve info",
+        "description": "Returns the Raydium pool reserve info",
+        "operationId": "Api_GetRaydiumPoolReserve",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumPoolReserveResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairsOrAddresses",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
     "/api/v2/raydium/pools": {
       "get": {
         "summary": "Raydium Pools",
@@ -2557,6 +2593,17 @@
         "reset": {
           "type": "string",
           "format": "uint64"
+        }
+      }
+    },
+    "apiGetRaydiumPoolReserveResponse": {
+      "type": "object",
+      "properties": {
+        "pools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiProjectPool"
+          }
         }
       }
     },

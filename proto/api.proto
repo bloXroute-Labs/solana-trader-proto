@@ -109,6 +109,17 @@ service Api {
     };
   }
 
+  rpc GetRaydiumPoolReserve(GetRaydiumPoolReserveRequest) returns (GetRaydiumPoolReserveResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/pool-reserves"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the Raydium pool reserve info";
+      summary: "Raydium Pool reserve info";
+      tags: ["Raydium V2"];
+    };
+  }
+
   rpc GetRaydiumQuotes(GetRaydiumQuotesRequest) returns (GetRaydiumQuotesResponse) {
     option (google.api.http) = {
       get: "/api/v2/raydium/quotes"
@@ -1570,6 +1581,14 @@ message GetRaydiumPoolsRequest {
 }
 
 message GetRaydiumPoolsResponse {
+  repeated ProjectPool pools = 1;
+}
+
+message GetRaydiumPoolReserveRequest {
+  repeated string pairsOrAddresses = 1;
+}
+
+message GetRaydiumPoolReserveResponse {
   repeated ProjectPool pools = 1;
 }
 
