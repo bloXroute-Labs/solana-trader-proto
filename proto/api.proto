@@ -747,6 +747,12 @@ service Api {
     };
   }
 
+  rpc GetZetaTransactionStream(GetZetaStreamRequest) returns (stream GetZetaStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
   rpc GetPriorityFeeStream(GetPriorityFeeRequest) returns (stream GetPriorityFeeResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "System";

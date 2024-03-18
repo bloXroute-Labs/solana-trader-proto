@@ -86,6 +86,7 @@ type ApiClient interface {
 	GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error)
 	GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error)
 	GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error)
+	GetZetaTransactionStream(ctx context.Context, in *GetZetaStreamRequest, opts ...grpc.CallOption) (Api_GetZetaTransactionStreamClient, error)
 	GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error)
 	GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error)
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
@@ -821,8 +822,40 @@ func (x *apiGetBlockStreamClient) Recv() (*GetBlockStreamResponse, error) {
 	return m, nil
 }
 
+func (c *apiClient) GetZetaTransactionStream(ctx context.Context, in *GetZetaStreamRequest, opts ...grpc.CallOption) (Api_GetZetaTransactionStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetZetaTransactionStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetZetaTransactionStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetZetaTransactionStreamClient interface {
+	Recv() (*GetZetaStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetZetaTransactionStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetZetaTransactionStreamClient) Recv() (*GetZetaStreamResponse, error) {
+	m := new(GetZetaStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetPriorityFeeStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetPriorityFeeStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -854,7 +887,7 @@ func (x *apiGetPriorityFeeStreamClient) Recv() (*GetPriorityFeeResponse, error) 
 }
 
 func (c *apiClient) GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetQuotesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetQuotesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -886,7 +919,7 @@ func (x *apiGetQuotesStreamClient) Recv() (*GetQuotesStreamResponse, error) {
 }
 
 func (c *apiClient) GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetPoolReservesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPoolReservesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -918,7 +951,7 @@ func (x *apiGetPoolReservesStreamClient) Recv() (*GetPoolReservesStreamResponse,
 }
 
 func (c *apiClient) GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPricesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetPricesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -950,7 +983,7 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 }
 
 func (c *apiClient) GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetNewRaydiumPoolsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetNewRaydiumPoolsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -982,7 +1015,7 @@ func (x *apiGetNewRaydiumPoolsStreamClient) Recv() (*GetNewRaydiumPoolsResponse,
 }
 
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1085,6 +1118,7 @@ type ApiServer interface {
 	GetOrderStatusStream(*GetOrderStatusStreamRequest, Api_GetOrderStatusStreamServer) error
 	GetRecentBlockHashStream(*GetRecentBlockHashRequest, Api_GetRecentBlockHashStreamServer) error
 	GetBlockStream(*GetBlockStreamRequest, Api_GetBlockStreamServer) error
+	GetZetaTransactionStream(*GetZetaStreamRequest, Api_GetZetaTransactionStreamServer) error
 	GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error
 	GetQuotesStream(*GetQuotesStreamRequest, Api_GetQuotesStreamServer) error
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
@@ -1283,6 +1317,9 @@ func (UnimplementedApiServer) GetRecentBlockHashStream(*GetRecentBlockHashReques
 }
 func (UnimplementedApiServer) GetBlockStream(*GetBlockStreamRequest, Api_GetBlockStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetBlockStream not implemented")
+}
+func (UnimplementedApiServer) GetZetaTransactionStream(*GetZetaStreamRequest, Api_GetZetaTransactionStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetZetaTransactionStream not implemented")
 }
 func (UnimplementedApiServer) GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPriorityFeeStream not implemented")
@@ -2452,6 +2489,27 @@ func (x *apiGetBlockStreamServer) Send(m *GetBlockStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetZetaTransactionStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetZetaStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetZetaTransactionStream(m, &apiGetZetaTransactionStreamServer{stream})
+}
+
+type Api_GetZetaTransactionStreamServer interface {
+	Send(*GetZetaStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetZetaTransactionStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetZetaTransactionStreamServer) Send(m *GetZetaStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetPriorityFeeStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetPriorityFeeRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2840,6 +2898,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetBlockStream",
 			Handler:       _Api_GetBlockStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetZetaTransactionStream",
+			Handler:       _Api_GetZetaTransactionStream_Handler,
 			ServerStreams: true,
 		},
 		{
