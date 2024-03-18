@@ -1623,6 +1623,10 @@ message Instruction {
   bytes data = 3;
 }
 
+message InstructionRequest {
+  uint32 program_id_index = 1;
+}
+
 message AccountMeta {
   string programID = 1;
   bool isSigner = 2;
@@ -1820,6 +1824,18 @@ message PoolReserves {
 message GetPoolReservesStreamRequest {
   repeated Project projects = 1;
   repeated string pools = 2;
+}
+
+message GetZetaStreamRequest {
+  repeated InstructionRequest instructions = 1;
+}
+
+message GetZetaStreamResponse {
+  int64 slot = 1;
+  string signature = 2;
+  string signer = 3;
+  repeated Instruction instructions = 4;
+  google.protobuf.Timestamp timestamp = 5;
 }
 
 message GetPricesStreamRequest {
