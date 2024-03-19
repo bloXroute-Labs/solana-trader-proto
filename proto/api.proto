@@ -1836,12 +1836,19 @@ message GetZetaStreamRequest {
   repeated string instructionPks = 1;
 }
 
+message ZetaInstruction {
+  string instructionName = 1;
+  string metaData = 2;
+}
+
 message GetZetaStreamResponse {
   int64 slot = 1;
   string signature = 2;
   string signer = 3;
-  repeated Instruction instructions = 4;
-  google.protobuf.Timestamp timestamp = 5;
+
+  repeated ZetaInstruction instructions = 4;
+  string metaData  = 5;
+  google.protobuf.Timestamp timestamp = 6;
 }
 
 message GetPricesStreamRequest {
