@@ -1845,10 +1845,7 @@ message GetZetaStreamResponse {
   int64 slot = 1;
   string signature = 2;
   string signer = 3;
-
-  repeated ZetaInstruction instructions = 4;
-  string metaData  = 5;
-  google.protobuf.Timestamp timestamp = 6;
+  TransactionMeta metaData  = 4;
 }
 
 message GetPricesStreamRequest {
