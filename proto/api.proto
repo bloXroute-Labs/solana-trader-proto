@@ -747,7 +747,7 @@ service Api {
     };
   }
 
-  rpc GetZetaTransactionStream(GetZetaStreamRequest) returns (stream GetZetaStreamResponse) {
+  rpc GetZetaTransactionStream(GetZetaTransactionStreamRequest) returns (stream GetZetaTransactionStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "System";
     };
@@ -1832,20 +1832,38 @@ message GetPoolReservesStreamRequest {
   repeated string pools = 2;
 }
 
-message GetZetaStreamRequest {
-  repeated string instructionPks = 1;
+message GetZetaTransactionStreamRequest {
 }
 
-message ZetaInstruction {
-  string instructionName = 1;
-  string metaData = 2;
+message Transaction {
+  repeated string signatures = 1;
+  TransactionMessageZeta message = 2;
 }
 
-message GetZetaStreamResponse {
+message TransactionMessageZeta {
+  TransactionMessageHeader header = 1;
+  repeated string account_keys = 2;
+  string recent_blockhash = 3;
+  repeated Instruction instructions = 4;
+  repeated AddressTableLookup address_table_lookups = 5;
+}
+
+message TransactionMessageHeader {
+  uint32 num_required_signatures = 1;
+  uint32 num_readonly_signed_accounts = 2;
+  uint32 num_readonly_unsigned_accounts = 3;
+}
+
+message AddressTableLookup {
+  string account_key = 1;
+  repeated uint32 writable_indexes = 2;
+  repeated uint32 readonly_indexes = 3;
+}
+
+message GetZetaTransactionStreamResponse {
   int64 slot = 1;
-  string signature = 2;
-  string signer = 3;
-  TransactionMeta metaData  = 4;
+  TransactionMessageZeta transaction = 2;
+  TransactionMeta meta = 3;
 }
 
 message GetPricesStreamRequest {

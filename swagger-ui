@@ -2002,6 +2002,28 @@
         }
       }
     },
+    "apiAddressTableLookup": {
+      "type": "object",
+      "properties": {
+        "accountKey": {
+          "type": "string"
+        },
+        "writableIndexes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "readonlyIndexes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    },
     "apiBlock": {
       "type": "object",
       "properties": {
@@ -2848,6 +2870,21 @@
           "items": {
             "$ref": "#/definitions/apiUnsettledAccount"
           }
+        }
+      }
+    },
+    "apiGetZetaTransactionStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessageZeta"
+        },
+        "meta": {
+          "$ref": "#/definitions/apiTransactionMeta"
         }
       }
     },
@@ -4974,6 +5011,52 @@
         },
         "isCleanup": {
           "type": "boolean"
+        }
+      }
+    },
+    "apiTransactionMessageHeader": {
+      "type": "object",
+      "properties": {
+        "numRequiredSignatures": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "numReadonlySignedAccounts": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "numReadonlyUnsignedAccounts": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "apiTransactionMessageZeta": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/apiTransactionMessageHeader"
+        },
+        "accountKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recentBlockhash": {
+          "type": "string"
+        },
+        "instructions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiInstruction"
+          }
+        },
+        "addressTableLookups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAddressTableLookup"
+          }
         }
       }
     },
