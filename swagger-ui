@@ -2470,6 +2470,23 @@
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        },
+        "meta": {
+          "$ref": "#/definitions/apiGetPoolReservesStreamResponseMeta"
+        }
+      }
+    },
+    "apiGetPoolReservesStreamResponseMeta": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "unknownPools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2721,6 +2738,9 @@
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        },
+        "meta": {
+          "$ref": "#/definitions/apiGetSwapsStreamUpdateMeta"
         }
       }
     },
@@ -2767,6 +2787,20 @@
         },
         "signature": {
           "type": "string"
+        }
+      }
+    },
+    "apiGetSwapsStreamUpdateMeta": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "unknownPools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
