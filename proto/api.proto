@@ -1727,6 +1727,12 @@ message GetSwapsStreamResponse {
   int64 slot = 1;
   GetSwapsStreamUpdate swap = 2;
   google.protobuf.Timestamp timestamp = 3;
+  GetSwapsStreamUpdateMeta meta = 4;
+}
+
+message GetSwapsStreamUpdateMeta {
+  string message = 1;
+  repeated string unknown_pools = 2;
 }
 
 message GetNewRaydiumPoolsRequest {
@@ -1817,6 +1823,12 @@ message GetPoolReservesStreamResponse {
   int64 slot = 1;
   PoolReserves reserves = 2;
   google.protobuf.Timestamp timestamp = 3;
+  GetPoolReservesStreamResponseMeta meta = 4;
+}
+
+message GetPoolReservesStreamResponseMeta {
+  string message = 1;
+  repeated string unknown_pools = 2;
 }
 
 message PoolReserves {
