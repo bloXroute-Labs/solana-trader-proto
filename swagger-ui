@@ -997,6 +997,38 @@
         ]
       }
     },
+    "/api/v2/balance": {
+      "get": {
+        "summary": "Token balances",
+        "description": "Returns the all token balances for a wallet",
+        "operationId": "Api_GetAccountBalanceV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetAccountBalanceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "ownerAddress",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Account"
+        ]
+      }
+    },
     "/api/v2/bundle-result/{uuid}": {
       "get": {
         "summary": "bundle status based on uuid",
