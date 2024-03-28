@@ -1833,6 +1833,7 @@ message GetPoolReservesStreamRequest {
 }
 
 message GetZetaTransactionStreamRequest {
+  repeated string instructions = 1;
 }
 
 message Transaction {
