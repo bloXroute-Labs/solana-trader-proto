@@ -5034,6 +5034,9 @@
     "apiTransactionMessageZeta": {
       "type": "object",
       "properties": {
+        "signature": {
+          "type": "string"
+        },
         "header": {
           "$ref": "#/definitions/apiTransactionMessageHeader"
         },

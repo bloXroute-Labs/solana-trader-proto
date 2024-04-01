@@ -1842,11 +1842,12 @@ message Transaction {
 }
 
 message TransactionMessageZeta {
-  TransactionMessageHeader header = 1;
-  repeated string account_keys = 2;
-  string recent_blockhash = 3;
-  repeated Instruction instructions = 4;
-  repeated AddressTableLookup address_table_lookups = 5;
+  string signature = 1;
+  TransactionMessageHeader header = 2;
+  repeated string account_keys = 3;
+  string recent_blockhash = 4;
+  repeated Instruction instructions = 5;
+  repeated AddressTableLookup address_table_lookups = 6;
 }
 
 message TransactionMessageHeader {
