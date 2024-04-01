@@ -1842,7 +1842,6 @@ message Transaction {
 }
 
 message TransactionMessageZeta {
-  string signature = 1;
   TransactionMessageHeader header = 2;
   repeated string account_keys = 3;
   string recent_blockhash = 4;
@@ -1864,7 +1863,7 @@ message AddressTableLookup {
 
 message GetZetaTransactionStreamResponse {
   int64 slot = 1;
-  TransactionMessageZeta transaction = 2;
+  Transaction transaction = 2;
   TransactionMeta meta = 3;
 }
 
