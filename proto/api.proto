@@ -1671,7 +1671,7 @@ message TransactionMetaTokenBalance {
 }
 
 message UITokenAmount {
-  float ui_amount = 1;
+  double ui_amount = 1;
   uint32 decimals = 2;
   string amount = 3;
   string ui_amount_string = 4;

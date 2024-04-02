@@ -5100,7 +5100,7 @@
       "properties": {
         "uiAmount": {
           "type": "number",
-          "format": "float"
+          "format": "double"
         },
         "decimals": {
           "type": "integer",

@@ -1045,7 +1045,7 @@ class TransactionMetaTokenBalance(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class UiTokenAmount(betterproto.Message):
-    ui_amount: float = betterproto.float_field(1)
+    ui_amount: float = betterproto.double_field(1)
     decimals: int = betterproto.uint32_field(2)
     amount: str = betterproto.string_field(3)
     ui_amount_string: str = betterproto.string_field(4)
