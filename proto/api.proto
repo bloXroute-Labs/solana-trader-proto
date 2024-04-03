@@ -511,6 +511,17 @@ service Api {
     };
   }
 
+  rpc GetAccountBalanceV2(GetAccountBalanceRequest) returns (GetAccountBalanceResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/balance"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the all token balances for a wallet";
+      summary: "Token balances";
+      tags: "Account";
+    };
+  }
+
   // trade endpoints
   rpc PostOrder(PostOrderRequest) returns (PostOrderResponse) {
     option (google.api.http) = {
@@ -1670,7 +1681,7 @@ message TransactionMetaTokenBalance {
 }
 
 message UITokenAmount {
-  float ui_amount = 1;
+  double ui_amount = 1;
   uint32 decimals = 2;
   string amount = 3;
   string ui_amount_string = 4;

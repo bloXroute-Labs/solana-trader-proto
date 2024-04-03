@@ -61,6 +61,7 @@ type ApiClient interface {
 	// account endpoints
 	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(ctx context.Context, in *GetTokenAccountsRequest, opts ...grpc.CallOption) (*GetTokenAccountsResponse, error)
+	GetAccountBalanceV2(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	// trade endpoints
 	PostOrder(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error)
 	PostSubmit(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
@@ -448,6 +449,15 @@ func (c *apiClient) GetAccountBalance(ctx context.Context, in *GetAccountBalance
 func (c *apiClient) GetTokenAccounts(ctx context.Context, in *GetTokenAccountsRequest, opts ...grpc.CallOption) (*GetTokenAccountsResponse, error) {
 	out := new(GetTokenAccountsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetTokenAccounts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetAccountBalanceV2(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error) {
+	out := new(GetAccountBalanceResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetAccountBalanceV2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1093,6 +1103,7 @@ type ApiServer interface {
 	// account endpoints
 	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(context.Context, *GetTokenAccountsRequest) (*GetTokenAccountsResponse, error)
+	GetAccountBalanceV2(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	// trade endpoints
 	PostOrder(context.Context, *PostOrderRequest) (*PostOrderResponse, error)
 	PostSubmit(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
@@ -1248,6 +1259,9 @@ func (UnimplementedApiServer) GetAccountBalance(context.Context, *GetAccountBala
 }
 func (UnimplementedApiServer) GetTokenAccounts(context.Context, *GetTokenAccountsRequest) (*GetTokenAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTokenAccounts not implemented")
+}
+func (UnimplementedApiServer) GetAccountBalanceV2(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBalanceV2 not implemented")
 }
 func (UnimplementedApiServer) PostOrder(context.Context, *PostOrderRequest) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostOrder not implemented")
@@ -2054,6 +2068,24 @@ func _Api_GetTokenAccounts_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetAccountBalanceV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountBalanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetAccountBalanceV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetAccountBalanceV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetAccountBalanceV2(ctx, req.(*GetAccountBalanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_PostOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostOrderRequest)
 	if err := dec(in); err != nil {
@@ -2798,6 +2830,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTokenAccounts",
 			Handler:    _Api_GetTokenAccounts_Handler,
+		},
+		{
+			MethodName: "GetAccountBalanceV2",
+			Handler:    _Api_GetAccountBalanceV2_Handler,
 		},
 		{
 			MethodName: "PostOrder",

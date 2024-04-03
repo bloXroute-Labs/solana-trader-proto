@@ -1017,16 +1017,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1045,7 +1045,7 @@ class TransactionMetaTokenBalance(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class UiTokenAmount(betterproto.Message):
-    ui_amount: float = betterproto.float_field(1)
+    ui_amount: float = betterproto.double_field(1)
     decimals: int = betterproto.uint32_field(2)
     amount: str = betterproto.string_field(3)
     ui_amount_string: str = betterproto.string_field(4)
@@ -2106,6 +2106,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def get_account_balance_v2(
+        self,
+        get_account_balance_request: "GetAccountBalanceRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetAccountBalanceResponse":
+        return await self._unary_unary(
+            "/api.Api/GetAccountBalanceV2",
+            get_account_balance_request,
+            GetAccountBalanceResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def post_order(
         self,
         post_order_request: "PostOrderRequest",
@@ -2810,6 +2827,11 @@ class ApiBase(ServiceBase):
     ) -> "GetTokenAccountsResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def get_account_balance_v2(
+        self, get_account_balance_request: "GetAccountBalanceRequest"
+    ) -> "GetAccountBalanceResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_order(
         self, post_order_request: "PostOrderRequest"
     ) -> "PostOrderResponse":
@@ -3264,6 +3286,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_token_accounts(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_account_balance_v2(
+        self,
+        stream: "grpclib.server.Stream[GetAccountBalanceRequest, GetAccountBalanceResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_account_balance_v2(request)
         await stream.send_message(response)
 
     async def __rpc_post_order(
@@ -3762,6 +3792,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetTokenAccountsRequest,
                 GetTokenAccountsResponse,
+            ),
+            "/api.Api/GetAccountBalanceV2": grpclib.const.Handler(
+                self.__rpc_get_account_balance_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetAccountBalanceRequest,
+                GetAccountBalanceResponse,
             ),
             "/api.Api/PostOrder": grpclib.const.Handler(
                 self.__rpc_post_order,
