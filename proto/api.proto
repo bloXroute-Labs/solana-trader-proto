@@ -1867,6 +1867,14 @@ message GetZetaTransactionStreamResponse {
   TransactionMeta meta = 3;
 }
 
+message PostZetaCrossMarginAccountRequest {
+  string owner_address = 1;
+}
+
+message PostZetaCrossMarginAccountResponse {
+  repeated TransactionMessage transactions = 1;
+}
+
 message GetPricesStreamRequest {
   repeated Project projects = 1;
   repeated string tokens = 2;
