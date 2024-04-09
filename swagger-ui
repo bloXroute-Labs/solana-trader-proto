@@ -1142,6 +1142,17 @@
             "required": false,
             "type": "number",
             "format": "double"
+          },
+          {
+            "name": "excludeDexes",
+            "description": "Optional: specifies the DEXes to exclude from the quote",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
@@ -3603,6 +3614,13 @@
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
         },
+        "excludeDexes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional: specifies the DEXes to exclude from the quote"
+        },
         "tip": {
           "type": "string",
           "format": "uint64",
@@ -3674,6 +3692,13 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "excludeDexes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional: specifies the DEXes to exclude from the quote"
         },
         "tip": {
           "type": "string",

@@ -628,6 +628,7 @@ class GetJupiterQuotesRequest(betterproto.Message):
     out_token: str = betterproto.string_field(2)
     in_amount: float = betterproto.double_field(3)
     slippage: float = betterproto.double_field(4)
+    exclude_dexes: List[str] = betterproto.string_field(5)
 
 
 @dataclass(eq=False, repr=False)
@@ -668,7 +669,8 @@ class PostJupiterSwapRequest(betterproto.Message):
     slippage: float = betterproto.double_field(5)
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
-    tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    exclude_dexes: List[str] = betterproto.string_field(8)
+    tip: Optional[int] = betterproto.uint64_field(9, optional=True, group="_tip")
 
 
 @dataclass(eq=False, repr=False)
@@ -679,7 +681,8 @@ class PostJupiterSwapInstructionsRequest(betterproto.Message):
     in_amount: float = betterproto.double_field(4)
     slippage: float = betterproto.double_field(5)
     compute_price: int = betterproto.uint64_field(7)
-    tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    exclude_dexes: List[str] = betterproto.string_field(8)
+    tip: Optional[int] = betterproto.uint64_field(9, optional=True, group="_tip")
 
 
 @dataclass(eq=False, repr=False)
