@@ -88,6 +88,7 @@ type ApiClient interface {
 	GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error)
 	GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error)
 	GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error)
+	GetJitoTipStream(ctx context.Context, in *GetJitoTipRequest, opts ...grpc.CallOption) (Api_GetJitoTipStreamClient, error)
 	GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error)
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
@@ -863,8 +864,40 @@ func (x *apiGetPriorityFeeStreamClient) Recv() (*GetPriorityFeeResponse, error) 
 	return m, nil
 }
 
+func (c *apiClient) GetJitoTipStream(ctx context.Context, in *GetJitoTipRequest, opts ...grpc.CallOption) (Api_GetJitoTipStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetJitoTipStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetJitoTipStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetJitoTipStreamClient interface {
+	Recv() (*GetJitoTipResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetJitoTipStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetJitoTipStreamClient) Recv() (*GetJitoTipResponse, error) {
+	m := new(GetJitoTipResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetQuotesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetQuotesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -896,7 +929,7 @@ func (x *apiGetQuotesStreamClient) Recv() (*GetQuotesStreamResponse, error) {
 }
 
 func (c *apiClient) GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetPoolReservesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPoolReservesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -928,7 +961,7 @@ func (x *apiGetPoolReservesStreamClient) Recv() (*GetPoolReservesStreamResponse,
 }
 
 func (c *apiClient) GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPricesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetPricesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -960,7 +993,7 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 }
 
 func (c *apiClient) GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetNewRaydiumPoolsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetNewRaydiumPoolsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -992,7 +1025,7 @@ func (x *apiGetNewRaydiumPoolsStreamClient) Recv() (*GetNewRaydiumPoolsResponse,
 }
 
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1097,6 +1130,7 @@ type ApiServer interface {
 	GetRecentBlockHashStream(*GetRecentBlockHashRequest, Api_GetRecentBlockHashStreamServer) error
 	GetBlockStream(*GetBlockStreamRequest, Api_GetBlockStreamServer) error
 	GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error
+	GetJitoTipStream(*GetJitoTipRequest, Api_GetJitoTipStreamServer) error
 	GetQuotesStream(*GetQuotesStreamRequest, Api_GetQuotesStreamServer) error
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
@@ -1300,6 +1334,9 @@ func (UnimplementedApiServer) GetBlockStream(*GetBlockStreamRequest, Api_GetBloc
 }
 func (UnimplementedApiServer) GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPriorityFeeStream not implemented")
+}
+func (UnimplementedApiServer) GetJitoTipStream(*GetJitoTipRequest, Api_GetJitoTipStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetJitoTipStream not implemented")
 }
 func (UnimplementedApiServer) GetQuotesStream(*GetQuotesStreamRequest, Api_GetQuotesStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetQuotesStream not implemented")
@@ -2505,6 +2542,27 @@ func (x *apiGetPriorityFeeStreamServer) Send(m *GetPriorityFeeResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetJitoTipStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetJitoTipRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetJitoTipStream(m, &apiGetJitoTipStreamServer{stream})
+}
+
+type Api_GetJitoTipStreamServer interface {
+	Send(*GetJitoTipResponse) error
+	grpc.ServerStream
+}
+
+type apiGetJitoTipStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetJitoTipStreamServer) Send(m *GetJitoTipResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetQuotesStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetQuotesStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2881,6 +2939,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetPriorityFeeStream",
 			Handler:       _Api_GetPriorityFeeStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetJitoTipStream",
+			Handler:       _Api_GetJitoTipStream_Handler,
 			ServerStreams: true,
 		},
 		{

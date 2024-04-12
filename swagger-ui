@@ -2142,6 +2142,39 @@
         }
       }
     },
+    "apiGetJitoTipResponse": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "percentile25": {
+          "type": "number",
+          "format": "double"
+        },
+        "percentile50": {
+          "type": "number",
+          "format": "double"
+        },
+        "percentile75": {
+          "type": "number",
+          "format": "double"
+        },
+        "percentile95": {
+          "type": "number",
+          "format": "double"
+        },
+        "percentile99": {
+          "type": "number",
+          "format": "double"
+        },
+        "emaPercentile50": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiGetJupiterPricesResponse": {
       "type": "object",
       "properties": {

@@ -764,6 +764,12 @@ service Api {
     };
   }
 
+  rpc GetJitoTipStream(GetJitoTipRequest) returns (stream GetJitoTipResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
   rpc GetQuotesStream(GetQuotesStreamRequest) returns (stream GetQuotesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
@@ -1853,6 +1859,18 @@ message GetPriorityFeeResponse {
   Project project = 1;
   double percentile = 2;
   uint64 feeAtPercentile = 3;
+}
+
+message GetJitoTipRequest{}
+
+message GetJitoTipResponse {
+  google.protobuf.Timestamp timestamp = 1;
+  double percentile25 = 2;
+  double percentile50 = 3;
+  double percentile75 = 4;
+  double percentile95 = 5;
+  double percentile99 = 6;
+  double emaPercentile50 = 7;
 }
 
 //Openbook V2 Messages
