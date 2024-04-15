@@ -33,6 +33,7 @@ type ApiClient interface {
 	GetJupiterQuotes(ctx context.Context, in *GetJupiterQuotesRequest, opts ...grpc.CallOption) (*GetJupiterQuotesResponse, error)
 	GetJupiterPrices(ctx context.Context, in *GetJupiterPricesRequest, opts ...grpc.CallOption) (*GetJupiterPricesResponse, error)
 	PostJupiterSwap(ctx context.Context, in *PostJupiterSwapRequest, opts ...grpc.CallOption) (*PostJupiterSwapResponse, error)
+	PostRaydiumSwapInstructions(ctx context.Context, in *PostRaydiumSwapInstructionsRequest, opts ...grpc.CallOption) (*PostRaydiumSwapInstructionsResponse, error)
 	PostJupiterSwapInstructions(ctx context.Context, in *PostJupiterSwapInstructionsRequest, opts ...grpc.CallOption) (*PostJupiterSwapInstructionsResponse, error)
 	PostJupiterRouteSwap(ctx context.Context, in *PostJupiterRouteSwapRequest, opts ...grpc.CallOption) (*PostJupiterRouteSwapResponse, error)
 	GetMarketsV2(ctx context.Context, in *GetMarketsRequestV2, opts ...grpc.CallOption) (*GetMarketsResponseV2, error)
@@ -215,6 +216,15 @@ func (c *apiClient) GetJupiterPrices(ctx context.Context, in *GetJupiterPricesRe
 func (c *apiClient) PostJupiterSwap(ctx context.Context, in *PostJupiterSwapRequest, opts ...grpc.CallOption) (*PostJupiterSwapResponse, error) {
 	out := new(PostJupiterSwapResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostJupiterSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostRaydiumSwapInstructions(ctx context.Context, in *PostRaydiumSwapInstructionsRequest, opts ...grpc.CallOption) (*PostRaydiumSwapInstructionsResponse, error) {
+	out := new(PostRaydiumSwapInstructionsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumSwapInstructions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1075,6 +1085,7 @@ type ApiServer interface {
 	GetJupiterQuotes(context.Context, *GetJupiterQuotesRequest) (*GetJupiterQuotesResponse, error)
 	GetJupiterPrices(context.Context, *GetJupiterPricesRequest) (*GetJupiterPricesResponse, error)
 	PostJupiterSwap(context.Context, *PostJupiterSwapRequest) (*PostJupiterSwapResponse, error)
+	PostRaydiumSwapInstructions(context.Context, *PostRaydiumSwapInstructionsRequest) (*PostRaydiumSwapInstructionsResponse, error)
 	PostJupiterSwapInstructions(context.Context, *PostJupiterSwapInstructionsRequest) (*PostJupiterSwapInstructionsResponse, error)
 	PostJupiterRouteSwap(context.Context, *PostJupiterRouteSwapRequest) (*PostJupiterRouteSwapResponse, error)
 	GetMarketsV2(context.Context, *GetMarketsRequestV2) (*GetMarketsResponseV2, error)
@@ -1181,6 +1192,9 @@ func (UnimplementedApiServer) GetJupiterPrices(context.Context, *GetJupiterPrice
 }
 func (UnimplementedApiServer) PostJupiterSwap(context.Context, *PostJupiterSwapRequest) (*PostJupiterSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostJupiterSwap not implemented")
+}
+func (UnimplementedApiServer) PostRaydiumSwapInstructions(context.Context, *PostRaydiumSwapInstructionsRequest) (*PostRaydiumSwapInstructionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumSwapInstructions not implemented")
 }
 func (UnimplementedApiServer) PostJupiterSwapInstructions(context.Context, *PostJupiterSwapInstructionsRequest) (*PostJupiterSwapInstructionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostJupiterSwapInstructions not implemented")
@@ -1596,6 +1610,24 @@ func _Api_PostJupiterSwap_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostJupiterSwap(ctx, req.(*PostJupiterSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostRaydiumSwapInstructions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRaydiumSwapInstructionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostRaydiumSwapInstructions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostRaydiumSwapInstructions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostRaydiumSwapInstructions(ctx, req.(*PostRaydiumSwapInstructionsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2726,6 +2758,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostJupiterSwap",
 			Handler:    _Api_PostJupiterSwap_Handler,
+		},
+		{
+			MethodName: "PostRaydiumSwapInstructions",
+			Handler:    _Api_PostRaydiumSwapInstructions_Handler,
 		},
 		{
 			MethodName: "PostJupiterSwapInstructions",

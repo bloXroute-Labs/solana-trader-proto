@@ -683,6 +683,17 @@ class PostJupiterSwapInstructionsRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostRaydiumSwapInstructionsRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    in_token: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    in_amount: float = betterproto.double_field(4)
+    slippage: float = betterproto.double_field(5)
+    compute_price: int = betterproto.uint64_field(7)
+    tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+
+
+@dataclass(eq=False, repr=False)
 class PublicKeys(betterproto.Message):
     pks: List[str] = betterproto.string_field(1)
 
@@ -690,6 +701,18 @@ class PublicKeys(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostJupiterSwapInstructionsResponse(betterproto.Message):
     instructions: List["InstructionJupiter"] = betterproto.message_field(1)
+    address_lookup_table_addresses: Dict[str, "PublicKeys"] = betterproto.map_field(
+        2, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+    out_amount: float = betterproto.double_field(3)
+    out_amount_min: float = betterproto.double_field(4)
+    price_impact: "_common__.PriceImpactPercentV2" = betterproto.message_field(5)
+    fees: List["_common__.Fee"] = betterproto.message_field(6)
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumSwapInstructionsResponse(betterproto.Message):
+    instructions: List["InstructionRaydium"] = betterproto.message_field(1)
     address_lookup_table_addresses: Dict[str, "PublicKeys"] = betterproto.map_field(
         2, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
     )
@@ -1004,6 +1027,13 @@ class AccountMeta(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class InstructionRaydium(betterproto.Message):
+    program_id: str = betterproto.string_field(1)
+    accounts: List["AccountMeta"] = betterproto.message_field(2)
+    data: bytes = betterproto.bytes_field(3)
+
+
+@dataclass(eq=False, repr=False)
 class InstructionJupiter(betterproto.Message):
     program_id: str = betterproto.string_field(1)
     accounts: List["AccountMeta"] = betterproto.message_field(2)
@@ -1017,16 +1047,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List["TransactionMetaInnerInstruction"] = (
-        betterproto.message_field(6)
-    )
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List["TransactionMetaTokenBalance"] = (
-        betterproto.message_field(9)
-    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -1675,6 +1705,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostJupiterSwap",
             post_jupiter_swap_request,
             PostJupiterSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_raydium_swap_instructions(
+        self,
+        post_raydium_swap_instructions_request: "PostRaydiumSwapInstructionsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostRaydiumSwapInstructionsResponse":
+        return await self._unary_unary(
+            "/api.Api/PostRaydiumSwapInstructions",
+            post_raydium_swap_instructions_request,
+            PostRaydiumSwapInstructionsResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2730,6 +2777,12 @@ class ApiBase(ServiceBase):
     ) -> "PostJupiterSwapResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_raydium_swap_instructions(
+        self,
+        post_raydium_swap_instructions_request: "PostRaydiumSwapInstructionsRequest",
+    ) -> "PostRaydiumSwapInstructionsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_jupiter_swap_instructions(
         self,
         post_jupiter_swap_instructions_request: "PostJupiterSwapInstructionsRequest",
@@ -3130,6 +3183,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_jupiter_swap(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_raydium_swap_instructions(
+        self,
+        stream: "grpclib.server.Stream[PostRaydiumSwapInstructionsRequest, PostRaydiumSwapInstructionsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_raydium_swap_instructions(request)
         await stream.send_message(response)
 
     async def __rpc_post_jupiter_swap_instructions(
@@ -3686,6 +3747,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostJupiterSwapRequest,
                 PostJupiterSwapResponse,
+            ),
+            "/api.Api/PostRaydiumSwapInstructions": grpclib.const.Handler(
+                self.__rpc_post_raydium_swap_instructions,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostRaydiumSwapInstructionsRequest,
+                PostRaydiumSwapInstructionsResponse,
             ),
             "/api.Api/PostJupiterSwapInstructions": grpclib.const.Handler(
                 self.__rpc_post_jupiter_swap_instructions,
