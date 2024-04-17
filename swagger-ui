@@ -2153,7 +2153,7 @@
         }
       }
     },
-    "apiGetJitoTipResponse": {
+    "apiGetBundleTipResponse": {
       "type": "object",
       "properties": {
         "timestamp": {

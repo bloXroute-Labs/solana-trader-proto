@@ -88,7 +88,7 @@ type ApiClient interface {
 	GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error)
 	GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error)
 	GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error)
-	GetJitoTipStream(ctx context.Context, in *GetJitoTipRequest, opts ...grpc.CallOption) (Api_GetJitoTipStreamClient, error)
+	GetBundleTipStream(ctx context.Context, in *GetBundleTipRequest, opts ...grpc.CallOption) (Api_GetBundleTipStreamClient, error)
 	GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error)
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
@@ -864,12 +864,12 @@ func (x *apiGetPriorityFeeStreamClient) Recv() (*GetPriorityFeeResponse, error) 
 	return m, nil
 }
 
-func (c *apiClient) GetJitoTipStream(ctx context.Context, in *GetJitoTipRequest, opts ...grpc.CallOption) (Api_GetJitoTipStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetJitoTipStream", opts...)
+func (c *apiClient) GetBundleTipStream(ctx context.Context, in *GetBundleTipRequest, opts ...grpc.CallOption) (Api_GetBundleTipStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetBundleTipStream", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &apiGetJitoTipStreamClient{stream}
+	x := &apiGetBundleTipStreamClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -879,17 +879,17 @@ func (c *apiClient) GetJitoTipStream(ctx context.Context, in *GetJitoTipRequest,
 	return x, nil
 }
 
-type Api_GetJitoTipStreamClient interface {
-	Recv() (*GetJitoTipResponse, error)
+type Api_GetBundleTipStreamClient interface {
+	Recv() (*GetBundleTipResponse, error)
 	grpc.ClientStream
 }
 
-type apiGetJitoTipStreamClient struct {
+type apiGetBundleTipStreamClient struct {
 	grpc.ClientStream
 }
 
-func (x *apiGetJitoTipStreamClient) Recv() (*GetJitoTipResponse, error) {
-	m := new(GetJitoTipResponse)
+func (x *apiGetBundleTipStreamClient) Recv() (*GetBundleTipResponse, error) {
+	m := new(GetBundleTipResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -1130,7 +1130,7 @@ type ApiServer interface {
 	GetRecentBlockHashStream(*GetRecentBlockHashRequest, Api_GetRecentBlockHashStreamServer) error
 	GetBlockStream(*GetBlockStreamRequest, Api_GetBlockStreamServer) error
 	GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error
-	GetJitoTipStream(*GetJitoTipRequest, Api_GetJitoTipStreamServer) error
+	GetBundleTipStream(*GetBundleTipRequest, Api_GetBundleTipStreamServer) error
 	GetQuotesStream(*GetQuotesStreamRequest, Api_GetQuotesStreamServer) error
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
@@ -1335,8 +1335,8 @@ func (UnimplementedApiServer) GetBlockStream(*GetBlockStreamRequest, Api_GetBloc
 func (UnimplementedApiServer) GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPriorityFeeStream not implemented")
 }
-func (UnimplementedApiServer) GetJitoTipStream(*GetJitoTipRequest, Api_GetJitoTipStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetJitoTipStream not implemented")
+func (UnimplementedApiServer) GetBundleTipStream(*GetBundleTipRequest, Api_GetBundleTipStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetBundleTipStream not implemented")
 }
 func (UnimplementedApiServer) GetQuotesStream(*GetQuotesStreamRequest, Api_GetQuotesStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetQuotesStream not implemented")
@@ -2542,24 +2542,24 @@ func (x *apiGetPriorityFeeStreamServer) Send(m *GetPriorityFeeResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Api_GetJitoTipStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetJitoTipRequest)
+func _Api_GetBundleTipStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetBundleTipRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(ApiServer).GetJitoTipStream(m, &apiGetJitoTipStreamServer{stream})
+	return srv.(ApiServer).GetBundleTipStream(m, &apiGetBundleTipStreamServer{stream})
 }
 
-type Api_GetJitoTipStreamServer interface {
-	Send(*GetJitoTipResponse) error
+type Api_GetBundleTipStreamServer interface {
+	Send(*GetBundleTipResponse) error
 	grpc.ServerStream
 }
 
-type apiGetJitoTipStreamServer struct {
+type apiGetBundleTipStreamServer struct {
 	grpc.ServerStream
 }
 
-func (x *apiGetJitoTipStreamServer) Send(m *GetJitoTipResponse) error {
+func (x *apiGetBundleTipStreamServer) Send(m *GetBundleTipResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -2942,8 +2942,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "GetJitoTipStream",
-			Handler:       _Api_GetJitoTipStream_Handler,
+			StreamName:    "GetBundleTipStream",
+			Handler:       _Api_GetBundleTipStream_Handler,
 			ServerStreams: true,
 		},
 		{

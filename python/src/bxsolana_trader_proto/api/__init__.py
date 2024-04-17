@@ -1262,12 +1262,12 @@ class GetPriorityFeeResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class GetJitoTipRequest(betterproto.Message):
+class GetBundleTipRequest(betterproto.Message):
     pass
 
 
 @dataclass(eq=False, repr=False)
-class GetJitoTipResponse(betterproto.Message):
+class GetBundleTipResponse(betterproto.Message):
     timestamp: datetime = betterproto.message_field(1)
     percentile25: float = betterproto.double_field(2)
     percentile50: float = betterproto.double_field(3)
@@ -2558,18 +2558,18 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
-    async def get_jito_tip_stream(
+    async def get_bundle_tip_stream(
         self,
-        get_jito_tip_request: "GetJitoTipRequest",
+        get_bundle_tip_request: "GetBundleTipRequest",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> AsyncIterator["GetJitoTipResponse"]:
+    ) -> AsyncIterator["GetBundleTipResponse"]:
         async for response in self._unary_stream(
-            "/api.Api/GetJitoTipStream",
-            get_jito_tip_request,
-            GetJitoTipResponse,
+            "/api.Api/GetBundleTipStream",
+            get_bundle_tip_request,
+            GetBundleTipResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2997,11 +2997,11 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPriorityFeeResponse()
 
-    async def get_jito_tip_stream(
-        self, get_jito_tip_request: "GetJitoTipRequest"
-    ) -> AsyncIterator["GetJitoTipResponse"]:
+    async def get_bundle_tip_stream(
+        self, get_bundle_tip_request: "GetBundleTipRequest"
+    ) -> AsyncIterator["GetBundleTipResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-        yield GetJitoTipResponse()
+        yield GetBundleTipResponse()
 
     async def get_quotes_stream(
         self, get_quotes_stream_request: "GetQuotesStreamRequest"
@@ -3545,12 +3545,12 @@ class ApiBase(ServiceBase):
             request,
         )
 
-    async def __rpc_get_jito_tip_stream(
-        self, stream: "grpclib.server.Stream[GetJitoTipRequest, GetJitoTipResponse]"
+    async def __rpc_get_bundle_tip_stream(
+        self, stream: "grpclib.server.Stream[GetBundleTipRequest, GetBundleTipResponse]"
     ) -> None:
         request = await stream.recv_message()
         await self._call_rpc_handler_server_stream(
-            self.get_jito_tip_stream,
+            self.get_bundle_tip_stream,
             stream,
             request,
         )
@@ -3996,11 +3996,11 @@ class ApiBase(ServiceBase):
                 GetPriorityFeeRequest,
                 GetPriorityFeeResponse,
             ),
-            "/api.Api/GetJitoTipStream": grpclib.const.Handler(
-                self.__rpc_get_jito_tip_stream,
+            "/api.Api/GetBundleTipStream": grpclib.const.Handler(
+                self.__rpc_get_bundle_tip_stream,
                 grpclib.const.Cardinality.UNARY_STREAM,
-                GetJitoTipRequest,
-                GetJitoTipResponse,
+                GetBundleTipRequest,
+                GetBundleTipResponse,
             ),
             "/api.Api/GetQuotesStream": grpclib.const.Handler(
                 self.__rpc_get_quotes_stream,
