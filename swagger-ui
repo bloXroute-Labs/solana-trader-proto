@@ -4072,13 +4072,6 @@
             "$ref": "#/definitions/apiInstructionRaydium"
           }
         },
-        "addressLookupTableAddresses": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/apiPublicKeys"
-          },
-          "description": "Returns a map[publicKey][]publicKey that is used in solana versioned transaction creation."
-        },
         "outAmount": {
           "type": "number",
           "format": "double"

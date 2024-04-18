@@ -5956,12 +5956,11 @@ type PostRaydiumSwapInstructionsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Instructions                []*InstructionRaydium        `protobuf:"bytes,1,rep,name=instructions,proto3" json:"instructions,omitempty"`
-	AddressLookupTableAddresses map[string]*PublicKeys       `protobuf:"bytes,2,rep,name=addressLookupTableAddresses,proto3" json:"addressLookupTableAddresses,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	OutAmount                   float64                      `protobuf:"fixed64,3,opt,name=outAmount,proto3" json:"outAmount,omitempty"`
-	OutAmountMin                float64                      `protobuf:"fixed64,4,opt,name=outAmountMin,proto3" json:"outAmountMin,omitempty"`
-	PriceImpact                 *common.PriceImpactPercentV2 `protobuf:"bytes,5,opt,name=priceImpact,proto3" json:"priceImpact,omitempty"`
-	Fees                        []*common.Fee                `protobuf:"bytes,6,rep,name=fees,proto3" json:"fees,omitempty"`
+	Instructions []*InstructionRaydium        `protobuf:"bytes,1,rep,name=instructions,proto3" json:"instructions,omitempty"`
+	OutAmount    float64                      `protobuf:"fixed64,2,opt,name=outAmount,proto3" json:"outAmount,omitempty"`
+	OutAmountMin float64                      `protobuf:"fixed64,3,opt,name=outAmountMin,proto3" json:"outAmountMin,omitempty"`
+	PriceImpact  *common.PriceImpactPercentV2 `protobuf:"bytes,4,opt,name=priceImpact,proto3" json:"priceImpact,omitempty"`
+	Fees         []*common.Fee                `protobuf:"bytes,5,rep,name=fees,proto3" json:"fees,omitempty"`
 }
 
 func (x *PostRaydiumSwapInstructionsResponse) Reset() {
@@ -5999,13 +5998,6 @@ func (*PostRaydiumSwapInstructionsResponse) Descriptor() ([]byte, []int) {
 func (x *PostRaydiumSwapInstructionsResponse) GetInstructions() []*InstructionRaydium {
 	if x != nil {
 		return x.Instructions
-	}
-	return nil
-}
-
-func (x *PostRaydiumSwapInstructionsResponse) GetAddressLookupTableAddresses() map[string]*PublicKeys {
-	if x != nil {
-		return x.AddressLookupTableAddresses
 	}
 	return nil
 }
@@ -13754,45 +13746,24 @@ var file_api_proto_rawDesc = []byte{
 	0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x25,
 	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e,
 	0x61, 0x70, 0x69, 0x2e, 0x50, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x4b, 0x65, 0x79, 0x73, 0x52, 0x05,
-	0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0xd5, 0x04, 0x0a, 0x23, 0x50, 0x6f,
+	0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x85, 0x02, 0x0a, 0x23, 0x50, 0x6f,
 	0x73, 0x74, 0x52, 0x61, 0x79, 0x64, 0x69, 0x75, 0x6d, 0x53, 0x77, 0x61, 0x70, 0x49, 0x6e, 0x73,
 	0x74, 0x72, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
 	0x65, 0x12, 0x3b, 0x0a, 0x0c, 0x69, 0x6e, 0x73, 0x74, 0x72, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e,
 	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x49, 0x6e,
 	0x73, 0x74, 0x72, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x61, 0x79, 0x64, 0x69, 0x75, 0x6d,
-	0x52, 0x0c, 0x69, 0x6e, 0x73, 0x74, 0x72, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0xec,
-	0x01, 0x0a, 0x1b, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x4c, 0x6f, 0x6f, 0x6b, 0x75, 0x70,
-	0x54, 0x61, 0x62, 0x6c, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x18, 0x02,
-	0x20, 0x03, 0x28, 0x0b, 0x32, 0x49, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x52,
-	0x61, 0x79, 0x64, 0x69, 0x75, 0x6d, 0x53, 0x77, 0x61, 0x70, 0x49, 0x6e, 0x73, 0x74, 0x72, 0x75,
-	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x41,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x4c, 0x6f, 0x6f, 0x6b, 0x75, 0x70, 0x54, 0x61, 0x62, 0x6c,
-	0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x42,
-	0x5f, 0x92, 0x41, 0x5c, 0x32, 0x5a, 0x52, 0x65, 0x74, 0x75, 0x72, 0x6e, 0x73, 0x20, 0x61, 0x20,
-	0x6d, 0x61, 0x70, 0x5b, 0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x4b, 0x65, 0x79, 0x5d, 0x5b, 0x5d,
-	0x70, 0x75, 0x62, 0x6c, 0x69, 0x63, 0x4b, 0x65, 0x79, 0x20, 0x74, 0x68, 0x61, 0x74, 0x20, 0x69,
-	0x73, 0x20, 0x75, 0x73, 0x65, 0x64, 0x20, 0x69, 0x6e, 0x20, 0x73, 0x6f, 0x6c, 0x61, 0x6e, 0x61,
-	0x20, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x65, 0x64, 0x20, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x20, 0x63, 0x72, 0x65, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
-	0x52, 0x1b, 0x61, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x4c, 0x6f, 0x6f, 0x6b, 0x75, 0x70, 0x54,
-	0x61, 0x62, 0x6c, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x12, 0x1c, 0x0a,
-	0x09, 0x6f, 0x75, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x01,
-	0x52, 0x09, 0x6f, 0x75, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x6f,
-	0x75, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x4d, 0x69, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28,
-	0x01, 0x52, 0x0c, 0x6f, 0x75, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x4d, 0x69, 0x6e, 0x12,
-	0x3e, 0x0a, 0x0b, 0x70, 0x72, 0x69, 0x63, 0x65, 0x49, 0x6d, 0x70, 0x61, 0x63, 0x74, 0x18, 0x05,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x50, 0x72,
-	0x69, 0x63, 0x65, 0x49, 0x6d, 0x70, 0x61, 0x63, 0x74, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74,
-	0x56, 0x32, 0x52, 0x0b, 0x70, 0x72, 0x69, 0x63, 0x65, 0x49, 0x6d, 0x70, 0x61, 0x63, 0x74, 0x12,
-	0x1f, 0x0a, 0x04, 0x66, 0x65, 0x65, 0x73, 0x18, 0x06, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0b, 0x2e,
-	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x46, 0x65, 0x65, 0x52, 0x04, 0x66, 0x65, 0x65, 0x73,
-	0x1a, 0x5f, 0x0a, 0x20, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x4c, 0x6f, 0x6f, 0x6b, 0x75,
-	0x70, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x65, 0x73, 0x45,
-	0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x25, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x75, 0x62, 0x6c,
-	0x69, 0x63, 0x4b, 0x65, 0x79, 0x73, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38,
-	0x01, 0x22, 0x8e, 0x05, 0x0a, 0x16, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x61, 0x79, 0x64, 0x69, 0x75,
+	0x52, 0x0c, 0x69, 0x6e, 0x73, 0x74, 0x72, 0x75, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x1c,
+	0x0a, 0x09, 0x6f, 0x75, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x01, 0x52, 0x09, 0x6f, 0x75, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x22, 0x0a, 0x0c,
+	0x6f, 0x75, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x4d, 0x69, 0x6e, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x01, 0x52, 0x0c, 0x6f, 0x75, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x4d, 0x69, 0x6e,
+	0x12, 0x3e, 0x0a, 0x0b, 0x70, 0x72, 0x69, 0x63, 0x65, 0x49, 0x6d, 0x70, 0x61, 0x63, 0x74, 0x18,
+	0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x50,
+	0x72, 0x69, 0x63, 0x65, 0x49, 0x6d, 0x70, 0x61, 0x63, 0x74, 0x50, 0x65, 0x72, 0x63, 0x65, 0x6e,
+	0x74, 0x56, 0x32, 0x52, 0x0b, 0x70, 0x72, 0x69, 0x63, 0x65, 0x49, 0x6d, 0x70, 0x61, 0x63, 0x74,
+	0x12, 0x1f, 0x0a, 0x04, 0x66, 0x65, 0x65, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0b,
+	0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x46, 0x65, 0x65, 0x52, 0x04, 0x66, 0x65, 0x65,
+	0x73, 0x22, 0x8e, 0x05, 0x0a, 0x16, 0x50, 0x6f, 0x73, 0x74, 0x52, 0x61, 0x79, 0x64, 0x69, 0x75,
 	0x6d, 0x53, 0x77, 0x61, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x22, 0x0a, 0x0c,
 	0x6f, 0x77, 0x6e, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x0c, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73,
@@ -15948,7 +15919,7 @@ func file_api_proto_rawDescGZIP() []byte {
 }
 
 var file_api_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
-var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 176)
+var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 175)
 var file_api_proto_goTypes = []interface{}{
 	(MarketStatus)(0),                           // 0: api.MarketStatus
 	(Side)(0),                                   // 1: api.Side
@@ -16131,13 +16102,12 @@ var file_api_proto_goTypes = []interface{}{
 	(*OrderV2)(nil),                             // 178: api.OrderV2
 	nil,                                         // 179: api.GetMarketsResponse.MarketsEntry
 	nil,                                         // 180: api.PostJupiterSwapInstructionsResponse.AddressLookupTableAddressesEntry
-	nil,                                         // 181: api.PostRaydiumSwapInstructionsResponse.AddressLookupTableAddressesEntry
-	nil,                                         // 182: api.GetMarketsResponseV2.MarketsEntry
-	(*timestamp.Timestamp)(nil),                 // 183: google.protobuf.Timestamp
-	(common.OrderType)(0),                       // 184: common.OrderType
-	(*common.PriceImpactPercentV2)(nil),         // 185: common.PriceImpactPercentV2
-	(*common.Fee)(nil),                          // 186: common.Fee
-	(*common.PriceImpactPercent)(nil),           // 187: common.PriceImpactPercent
+	nil,                                         // 181: api.GetMarketsResponseV2.MarketsEntry
+	(*timestamp.Timestamp)(nil),                 // 182: google.protobuf.Timestamp
+	(common.OrderType)(0),                       // 183: common.OrderType
+	(*common.PriceImpactPercentV2)(nil),         // 184: common.PriceImpactPercentV2
+	(*common.Fee)(nil),                          // 185: common.Fee
+	(*common.PriceImpactPercent)(nil),           // 186: common.PriceImpactPercent
 }
 var file_api_proto_depIdxs = []int32{
 	179, // 0: api.GetMarketsResponse.markets:type_name -> api.GetMarketsResponse.MarketsEntry
@@ -16146,12 +16116,12 @@ var file_api_proto_depIdxs = []int32{
 	6,   // 3: api.GetTickersRequest.project:type_name -> api.Project
 	12,  // 4: api.GetTickersResponse.tickers:type_name -> api.Ticker
 	6,   // 5: api.Ticker.project:type_name -> api.Project
-	183, // 6: api.GetKlineRequest.from:type_name -> google.protobuf.Timestamp
-	183, // 7: api.GetKlineRequest.to:type_name -> google.protobuf.Timestamp
-	183, // 8: api.GetKlineResponse.timestamp:type_name -> google.protobuf.Timestamp
+	182, // 6: api.GetKlineRequest.from:type_name -> google.protobuf.Timestamp
+	182, // 7: api.GetKlineRequest.to:type_name -> google.protobuf.Timestamp
+	182, // 8: api.GetKlineResponse.timestamp:type_name -> google.protobuf.Timestamp
 	15,  // 9: api.GetKlineResponse.candles:type_name -> api.Candle
-	183, // 10: api.Candle.startTime:type_name -> google.protobuf.Timestamp
-	183, // 11: api.Candle.updateTime:type_name -> google.protobuf.Timestamp
+	182, // 10: api.Candle.startTime:type_name -> google.protobuf.Timestamp
+	182, // 11: api.Candle.updateTime:type_name -> google.protobuf.Timestamp
 	6,   // 12: api.GetOrderbookRequest.project:type_name -> api.Project
 	6,   // 13: api.GetOrderbooksRequest.project:type_name -> api.Project
 	19,  // 14: api.GetOrderbookResponse.bids:type_name -> api.OrderbookItem
@@ -16166,10 +16136,10 @@ var file_api_proto_depIdxs = []int32{
 	31,  // 23: api.GetAccountBalanceResponse.tokens:type_name -> api.TokenBalance
 	34,  // 24: api.GetTokenAccountsResponse.accounts:type_name -> api.TokenAccount
 	1,   // 25: api.PostOrderRequest.side:type_name -> api.Side
-	184, // 26: api.PostOrderRequest.type:type_name -> common.OrderType
+	183, // 26: api.PostOrderRequest.type:type_name -> common.OrderType
 	6,   // 27: api.PostOrderRequest.project:type_name -> api.Project
 	1,   // 28: api.PostReplaceOrderRequest.side:type_name -> api.Side
-	184, // 29: api.PostReplaceOrderRequest.type:type_name -> common.OrderType
+	183, // 29: api.PostReplaceOrderRequest.type:type_name -> common.OrderType
 	6,   // 30: api.PostReplaceOrderRequest.project:type_name -> api.Project
 	42,  // 31: api.PostOrderResponse.transaction:type_name -> api.TransactionMessage
 	1,   // 32: api.PostCancelOrderRequest.side:type_name -> api.Side
@@ -16182,17 +16152,17 @@ var file_api_proto_depIdxs = []int32{
 	42,  // 39: api.PostSettleResponse.transaction:type_name -> api.TransactionMessage
 	2,   // 40: api.GetOrdersRequest.status:type_name -> api.OrderStatus
 	1,   // 41: api.GetOrdersRequest.side:type_name -> api.Side
-	184, // 42: api.GetOrdersRequest.types:type_name -> common.OrderType
-	183, // 43: api.GetOrdersRequest.from:type_name -> google.protobuf.Timestamp
+	183, // 42: api.GetOrdersRequest.types:type_name -> common.OrderType
+	182, // 43: api.GetOrdersRequest.from:type_name -> google.protobuf.Timestamp
 	3,   // 44: api.GetOrdersRequest.direction:type_name -> api.Direction
 	6,   // 45: api.GetOrdersRequest.project:type_name -> api.Project
 	49,  // 46: api.GetOrdersResponse.orders:type_name -> api.Order
 	1,   // 47: api.Order.side:type_name -> api.Side
-	184, // 48: api.Order.types:type_name -> common.OrderType
-	183, // 49: api.Order.createdAt:type_name -> google.protobuf.Timestamp
+	183, // 48: api.Order.types:type_name -> common.OrderType
+	182, // 49: api.Order.createdAt:type_name -> google.protobuf.Timestamp
 	6,   // 50: api.GetOrderStatusStreamRequest.project:type_name -> api.Project
 	52,  // 51: api.GetOrderStatusStreamResponse.orderInfo:type_name -> api.GetOrderStatusResponse
-	183, // 52: api.GetOrderStatusStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	182, // 52: api.GetOrderStatusStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
 	1,   // 53: api.GetOrderStatusResponse.side:type_name -> api.Side
 	2,   // 54: api.GetOrderStatusResponse.orderStatus:type_name -> api.OrderStatus
 	42,  // 55: api.PostSubmitRequest.transaction:type_name -> api.TransactionMessage
@@ -16209,14 +16179,14 @@ var file_api_proto_depIdxs = []int32{
 	64,  // 66: api.UnsettledAccount.quoteToken:type_name -> api.UnsettledAccountToken
 	65,  // 67: api.GetUnsettledResponse.unsettled:type_name -> api.UnsettledAccount
 	18,  // 68: api.GetOrderbooksStreamResponse.orderbook:type_name -> api.GetOrderbookResponse
-	183, // 69: api.GetOrderbooksStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	182, // 69: api.GetOrderbooksStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
 	22,  // 70: api.GetMarketDepthsStreamResponse.Data:type_name -> api.GetMarketDepthResponse
-	183, // 71: api.GetMarketDepthsStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	182, // 71: api.GetMarketDepthsStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
 	6,   // 72: api.GetTickersStreamRequest.project:type_name -> api.Project
 	11,  // 73: api.GetTickersStreamResponse.ticker:type_name -> api.GetTickersResponse
-	183, // 74: api.GetTickersStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	182, // 74: api.GetTickersStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
 	25,  // 75: api.GetTradesStreamResponse.trades:type_name -> api.GetTradesResponse
-	183, // 76: api.GetTradesStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	182, // 76: api.GetTradesStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
 	6,   // 77: api.GetQuotesRequest.projects:type_name -> api.Project
 	78,  // 78: api.GetQuotesResponse.quotes:type_name -> api.ProjectQuote
 	102, // 79: api.GetRaydiumQuotesResponse.routes:type_name -> api.RaydiumQuoteRoute
@@ -16226,250 +16196,248 @@ var file_api_proto_depIdxs = []int32{
 	6,   // 83: api.TradeSwapRequest.project:type_name -> api.Project
 	123, // 84: api.PostJupiterSwapInstructionsResponse.instructions:type_name -> api.InstructionJupiter
 	180, // 85: api.PostJupiterSwapInstructionsResponse.addressLookupTableAddresses:type_name -> api.PostJupiterSwapInstructionsResponse.AddressLookupTableAddressesEntry
-	185, // 86: api.PostJupiterSwapInstructionsResponse.priceImpact:type_name -> common.PriceImpactPercentV2
-	186, // 87: api.PostJupiterSwapInstructionsResponse.fees:type_name -> common.Fee
+	184, // 86: api.PostJupiterSwapInstructionsResponse.priceImpact:type_name -> common.PriceImpactPercentV2
+	185, // 87: api.PostJupiterSwapInstructionsResponse.fees:type_name -> common.Fee
 	122, // 88: api.PostRaydiumSwapInstructionsResponse.instructions:type_name -> api.InstructionRaydium
-	181, // 89: api.PostRaydiumSwapInstructionsResponse.addressLookupTableAddresses:type_name -> api.PostRaydiumSwapInstructionsResponse.AddressLookupTableAddressesEntry
-	185, // 90: api.PostRaydiumSwapInstructionsResponse.priceImpact:type_name -> common.PriceImpactPercentV2
-	186, // 91: api.PostRaydiumSwapInstructionsResponse.fees:type_name -> common.Fee
-	42,  // 92: api.PostRaydiumSwapResponse.transactions:type_name -> api.TransactionMessage
-	185, // 93: api.PostRaydiumSwapResponse.priceImpact:type_name -> common.PriceImpactPercentV2
-	186, // 94: api.PostRaydiumSwapResponse.fees:type_name -> common.Fee
-	42,  // 95: api.PostJupiterSwapResponse.transactions:type_name -> api.TransactionMessage
-	185, // 96: api.PostJupiterSwapResponse.priceImpact:type_name -> common.PriceImpactPercentV2
-	186, // 97: api.PostJupiterSwapResponse.fees:type_name -> common.Fee
-	42,  // 98: api.PostRaydiumRouteSwapResponse.transactions:type_name -> api.TransactionMessage
-	42,  // 99: api.PostJupiterRouteSwapResponse.transactions:type_name -> api.TransactionMessage
-	185, // 100: api.PostJupiterRouteSwapResponse.priceImpact:type_name -> common.PriceImpactPercentV2
-	186, // 101: api.PostJupiterRouteSwapResponse.fees:type_name -> common.Fee
-	6,   // 102: api.RouteTradeSwapRequest.project:type_name -> api.Project
-	96,  // 103: api.RouteTradeSwapRequest.steps:type_name -> api.RouteStep
-	93,  // 104: api.PostRaydiumRouteSwapRequest.steps:type_name -> api.RaydiumRouteStep
-	104, // 105: api.RaydiumRouteStep.project:type_name -> api.StepProject
-	95,  // 106: api.PostJupiterRouteSwapRequest.steps:type_name -> api.JupiterRouteStep
-	104, // 107: api.JupiterRouteStep.project:type_name -> api.StepProject
-	186, // 108: api.JupiterRouteStep.fee:type_name -> common.Fee
-	104, // 109: api.RouteStep.project:type_name -> api.StepProject
-	186, // 110: api.RouteStep.fee:type_name -> common.Fee
-	6,   // 111: api.TradeSwapResponse.project:type_name -> api.Project
-	42,  // 112: api.TradeSwapResponse.transactions:type_name -> api.TransactionMessage
-	187, // 113: api.TradeSwapResponse.priceImpact:type_name -> common.PriceImpactPercent
-	186, // 114: api.TradeSwapResponse.fees:type_name -> common.Fee
-	99,  // 115: api.QuoteRoute.steps:type_name -> api.QuoteStep
-	104, // 116: api.QuoteStep.project:type_name -> api.StepProject
-	187, // 117: api.QuoteStep.priceImpactPercent:type_name -> common.PriceImpactPercent
-	186, // 118: api.QuoteStep.fee:type_name -> common.Fee
-	101, // 119: api.JupiterQuoteRoute.steps:type_name -> api.JupiterQuoteStep
-	104, // 120: api.JupiterQuoteStep.project:type_name -> api.StepProject
-	185, // 121: api.JupiterQuoteStep.priceImpactPercent:type_name -> common.PriceImpactPercentV2
-	186, // 122: api.JupiterQuoteStep.fee:type_name -> common.Fee
-	103, // 123: api.RaydiumQuoteRoute.steps:type_name -> api.RaydiumQuoteStep
-	185, // 124: api.RaydiumQuoteStep.priceImpactPercent:type_name -> common.PriceImpactPercentV2
-	186, // 125: api.RaydiumQuoteStep.fee:type_name -> common.Fee
-	104, // 126: api.RaydiumQuoteStep.project:type_name -> api.StepProject
-	183, // 127: api.GetRecentBlockHashResponse.timestamp:type_name -> google.protobuf.Timestamp
-	107, // 128: api.GetBlockStreamResponse.block:type_name -> api.Block
-	183, // 129: api.GetBlockStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
-	6,   // 130: api.GetPoolsRequest.projects:type_name -> api.Project
-	128, // 131: api.GetPoolsResponse.projects:type_name -> api.ProjectPools
-	129, // 132: api.GetRaydiumPoolsResponse.pools:type_name -> api.ProjectPool
-	129, // 133: api.GetRaydiumPoolReserveResponse.pools:type_name -> api.ProjectPool
-	124, // 134: api.GetTransactionResponse.metadata:type_name -> api.TransactionMeta
-	121, // 135: api.InstructionRaydium.accounts:type_name -> api.AccountMeta
-	121, // 136: api.InstructionJupiter.accounts:type_name -> api.AccountMeta
-	125, // 137: api.TransactionMeta.inner_instructions:type_name -> api.TransactionMetaInnerInstruction
-	126, // 138: api.TransactionMeta.pre_token_balances:type_name -> api.TransactionMetaTokenBalance
-	126, // 139: api.TransactionMeta.post_token_balances:type_name -> api.TransactionMetaTokenBalance
-	120, // 140: api.TransactionMetaInnerInstruction.instructions:type_name -> api.Instruction
-	127, // 141: api.TransactionMetaTokenBalance.ui_token_amount:type_name -> api.UITokenAmount
-	6,   // 142: api.ProjectPools.project:type_name -> api.Project
-	129, // 143: api.ProjectPools.pools:type_name -> api.ProjectPool
-	6,   // 144: api.GetQuotesStreamRequest.projects:type_name -> api.Project
-	140, // 145: api.GetQuotesStreamRequest.tokenPairs:type_name -> api.TokenPair
-	132, // 146: api.GetQuotesStreamResponse.quote:type_name -> api.GetQuotesStreamUpdate
-	183, // 147: api.GetQuotesStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
-	6,   // 148: api.GetQuotesStreamUpdate.project:type_name -> api.Project
-	6,   // 149: api.GetSwapsStreamRequest.projects:type_name -> api.Project
-	137, // 150: api.GetSwapsStreamResponse.swap:type_name -> api.GetSwapsStreamUpdate
-	183, // 151: api.GetSwapsStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
-	129, // 152: api.GetNewRaydiumPoolsResponse.pool:type_name -> api.ProjectPool
-	183, // 153: api.GetNewRaydiumPoolsResponse.timestamp:type_name -> google.protobuf.Timestamp
-	6,   // 154: api.GetSwapsStreamUpdate.project:type_name -> api.Project
-	183, // 155: api.GetBundleResultResponse.timestamp:type_name -> google.protobuf.Timestamp
-	147, // 156: api.GetPriceResponse.tokenPrices:type_name -> api.TokenPrice
-	148, // 157: api.GetRaydiumPricesResponse.tokenPrices:type_name -> api.TokenPriceV2
-	148, // 158: api.GetJupiterPricesResponse.tokenPrices:type_name -> api.TokenPriceV2
-	6,   // 159: api.TokenPrice.project:type_name -> api.Project
-	150, // 160: api.GetPoolReservesStreamResponse.reserves:type_name -> api.PoolReserves
-	183, // 161: api.GetPoolReservesStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
-	6,   // 162: api.PoolReserves.project:type_name -> api.Project
-	6,   // 163: api.GetPoolReservesStreamRequest.projects:type_name -> api.Project
-	6,   // 164: api.GetPricesStreamRequest.projects:type_name -> api.Project
-	147, // 165: api.GetPricesStreamResponse.price:type_name -> api.TokenPrice
-	183, // 166: api.GetPricesStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
-	6,   // 167: api.GetPriorityFeeRequest.project:type_name -> api.Project
-	6,   // 168: api.GetPriorityFeeResponse.project:type_name -> api.Project
-	183, // 169: api.GetBundleTipResponse.timestamp:type_name -> google.protobuf.Timestamp
-	182, // 170: api.GetMarketsResponseV2.markets:type_name -> api.GetMarketsResponseV2.MarketsEntry
-	163, // 171: api.GetTickersResponseV2.tickers:type_name -> api.TickerV2
-	166, // 172: api.GetOrderbookResponseV2.bids:type_name -> api.OrderbookItemV2
-	166, // 173: api.GetOrderbookResponseV2.asks:type_name -> api.OrderbookItemV2
-	169, // 174: api.GetMarketDepthResponseV2.bids:type_name -> api.MarketDepthItemV2
-	169, // 175: api.GetMarketDepthResponseV2.asks:type_name -> api.MarketDepthItemV2
-	42,  // 176: api.PostCancelOrderResponseV2.transactions:type_name -> api.TransactionMessage
-	178, // 177: api.GetOpenOrdersResponseV2.orders:type_name -> api.OrderV2
-	183, // 178: api.OrderV2.createdAt:type_name -> google.protobuf.Timestamp
-	9,   // 179: api.GetMarketsResponse.MarketsEntry.value:type_name -> api.Market
-	83,  // 180: api.PostJupiterSwapInstructionsResponse.AddressLookupTableAddressesEntry.value:type_name -> api.PublicKeys
-	83,  // 181: api.PostRaydiumSwapInstructionsResponse.AddressLookupTableAddressesEntry.value:type_name -> api.PublicKeys
-	160, // 182: api.GetMarketsResponseV2.MarketsEntry.value:type_name -> api.MarketV2
-	116, // 183: api.Api.GetRateLimit:input_type -> api.GetRateLimitRequest
-	118, // 184: api.Api.GetTransaction:input_type -> api.GetTransactionRequest
-	53,  // 185: api.Api.PostSubmitV2:input_type -> api.PostSubmitRequest
-	55,  // 186: api.Api.PostSubmitBatchV2:input_type -> api.PostSubmitBatchRequest
-	112, // 187: api.Api.GetRaydiumPools:input_type -> api.GetRaydiumPoolsRequest
-	114, // 188: api.Api.GetRaydiumPoolReserve:input_type -> api.GetRaydiumPoolReserveRequest
-	74,  // 189: api.Api.GetRaydiumQuotes:input_type -> api.GetRaydiumQuotesRequest
-	143, // 190: api.Api.GetRaydiumPrices:input_type -> api.GetRaydiumPricesRequest
-	86,  // 191: api.Api.PostRaydiumSwap:input_type -> api.PostRaydiumSwapRequest
-	92,  // 192: api.Api.PostRaydiumRouteSwap:input_type -> api.PostRaydiumRouteSwapRequest
-	76,  // 193: api.Api.GetJupiterQuotes:input_type -> api.GetJupiterQuotesRequest
-	144, // 194: api.Api.GetJupiterPrices:input_type -> api.GetJupiterPricesRequest
-	80,  // 195: api.Api.PostJupiterSwap:input_type -> api.PostJupiterSwapRequest
-	82,  // 196: api.Api.PostRaydiumSwapInstructions:input_type -> api.PostRaydiumSwapInstructionsRequest
-	81,  // 197: api.Api.PostJupiterSwapInstructions:input_type -> api.PostJupiterSwapInstructionsRequest
-	94,  // 198: api.Api.PostJupiterRouteSwap:input_type -> api.PostJupiterRouteSwapRequest
-	158, // 199: api.Api.GetMarketsV2:input_type -> api.GetMarketsRequestV2
-	161, // 200: api.Api.GetTickersV2:input_type -> api.GetTickersRequestV2
-	164, // 201: api.Api.GetOrderbookV2:input_type -> api.GetOrderbookRequestV2
-	167, // 202: api.Api.GetMarketDepthV2:input_type -> api.GetMarketDepthRequestV2
-	170, // 203: api.Api.PostOrderV2:input_type -> api.PostOrderRequestV2
-	172, // 204: api.Api.PostCancelOrderV2:input_type -> api.PostCancelOrderRequestV2
-	171, // 205: api.Api.PostReplaceOrderV2:input_type -> api.PostReplaceOrderRequestV2
-	174, // 206: api.Api.PostSettleV2:input_type -> api.PostSettleRequestV2
-	175, // 207: api.Api.GetOpenOrdersV2:input_type -> api.GetOpenOrdersRequestV2
-	176, // 208: api.Api.GetUnsettledV2:input_type -> api.GetUnsettledRequestV2
-	141, // 209: api.Api.GetPrice:input_type -> api.GetPriceRequest
-	7,   // 210: api.Api.GetMarkets:input_type -> api.GetMarketsRequest
-	110, // 211: api.Api.GetPools:input_type -> api.GetPoolsRequest
-	10,  // 212: api.Api.GetTickers:input_type -> api.GetTickersRequest
-	13,  // 213: api.Api.GetKline:input_type -> api.GetKlineRequest
-	16,  // 214: api.Api.GetOrderbook:input_type -> api.GetOrderbookRequest
-	20,  // 215: api.Api.GetMarketDepth:input_type -> api.GetMarketDepthRequest
-	24,  // 216: api.Api.GetTrades:input_type -> api.GetTradesRequest
-	72,  // 217: api.Api.GetQuotes:input_type -> api.GetQuotesRequest
-	27,  // 218: api.Api.GetServerTime:input_type -> api.GetServerTimeRequest
-	105, // 219: api.Api.GetRecentBlockHash:input_type -> api.GetRecentBlockHashRequest
-	154, // 220: api.Api.GetPriorityFee:input_type -> api.GetPriorityFeeRequest
-	29,  // 221: api.Api.GetAccountBalance:input_type -> api.GetAccountBalanceRequest
-	32,  // 222: api.Api.GetTokenAccounts:input_type -> api.GetTokenAccountsRequest
-	29,  // 223: api.Api.GetAccountBalanceV2:input_type -> api.GetAccountBalanceRequest
-	35,  // 224: api.Api.PostOrder:input_type -> api.PostOrderRequest
-	53,  // 225: api.Api.PostSubmit:input_type -> api.PostSubmitRequest
-	55,  // 226: api.Api.PostSubmitBatch:input_type -> api.PostSubmitBatchRequest
-	38,  // 227: api.Api.PostCancelOrder:input_type -> api.PostCancelOrderRequest
-	39,  // 228: api.Api.PostCancelByClientOrderID:input_type -> api.PostCancelByClientOrderIDRequest
-	41,  // 229: api.Api.PostCancelAll:input_type -> api.PostCancelAllRequest
-	35,  // 230: api.Api.PostReplaceByClientOrderID:input_type -> api.PostOrderRequest
-	36,  // 231: api.Api.PostReplaceOrder:input_type -> api.PostReplaceOrderRequest
-	44,  // 232: api.Api.PostSettle:input_type -> api.PostSettleRequest
-	79,  // 233: api.Api.PostTradeSwap:input_type -> api.TradeSwapRequest
-	47,  // 234: api.Api.GetOrders:input_type -> api.GetOrdersRequest
-	59,  // 235: api.Api.GetOpenOrders:input_type -> api.GetOpenOrdersRequest
-	61,  // 236: api.Api.GetOrderByID:input_type -> api.GetOrderByIDRequest
-	138, // 237: api.Api.GetBundleResultV2:input_type -> api.GetBundleResultRequest
-	63,  // 238: api.Api.GetUnsettled:input_type -> api.GetUnsettledRequest
-	91,  // 239: api.Api.PostRouteTradeSwap:input_type -> api.RouteTradeSwapRequest
-	17,  // 240: api.Api.GetOrderbooksStream:input_type -> api.GetOrderbooksRequest
-	21,  // 241: api.Api.GetMarketDepthsStream:input_type -> api.GetMarketDepthsRequest
-	69,  // 242: api.Api.GetTickersStream:input_type -> api.GetTickersStreamRequest
-	24,  // 243: api.Api.GetTradesStream:input_type -> api.GetTradesRequest
-	50,  // 244: api.Api.GetOrderStatusStream:input_type -> api.GetOrderStatusStreamRequest
-	105, // 245: api.Api.GetRecentBlockHashStream:input_type -> api.GetRecentBlockHashRequest
-	108, // 246: api.Api.GetBlockStream:input_type -> api.GetBlockStreamRequest
-	154, // 247: api.Api.GetPriorityFeeStream:input_type -> api.GetPriorityFeeRequest
-	156, // 248: api.Api.GetBundleTipStream:input_type -> api.GetBundleTipRequest
-	130, // 249: api.Api.GetQuotesStream:input_type -> api.GetQuotesStreamRequest
-	151, // 250: api.Api.GetPoolReservesStream:input_type -> api.GetPoolReservesStreamRequest
-	152, // 251: api.Api.GetPricesStream:input_type -> api.GetPricesStreamRequest
-	135, // 252: api.Api.GetNewRaydiumPoolsStream:input_type -> api.GetNewRaydiumPoolsRequest
-	133, // 253: api.Api.GetSwapsStream:input_type -> api.GetSwapsStreamRequest
-	117, // 254: api.Api.GetRateLimit:output_type -> api.GetRateLimitResponse
-	119, // 255: api.Api.GetTransaction:output_type -> api.GetTransactionResponse
-	58,  // 256: api.Api.PostSubmitV2:output_type -> api.PostSubmitResponse
-	57,  // 257: api.Api.PostSubmitBatchV2:output_type -> api.PostSubmitBatchResponse
-	113, // 258: api.Api.GetRaydiumPools:output_type -> api.GetRaydiumPoolsResponse
-	115, // 259: api.Api.GetRaydiumPoolReserve:output_type -> api.GetRaydiumPoolReserveResponse
-	75,  // 260: api.Api.GetRaydiumQuotes:output_type -> api.GetRaydiumQuotesResponse
-	145, // 261: api.Api.GetRaydiumPrices:output_type -> api.GetRaydiumPricesResponse
-	87,  // 262: api.Api.PostRaydiumSwap:output_type -> api.PostRaydiumSwapResponse
-	89,  // 263: api.Api.PostRaydiumRouteSwap:output_type -> api.PostRaydiumRouteSwapResponse
-	77,  // 264: api.Api.GetJupiterQuotes:output_type -> api.GetJupiterQuotesResponse
-	146, // 265: api.Api.GetJupiterPrices:output_type -> api.GetJupiterPricesResponse
-	88,  // 266: api.Api.PostJupiterSwap:output_type -> api.PostJupiterSwapResponse
-	85,  // 267: api.Api.PostRaydiumSwapInstructions:output_type -> api.PostRaydiumSwapInstructionsResponse
-	84,  // 268: api.Api.PostJupiterSwapInstructions:output_type -> api.PostJupiterSwapInstructionsResponse
-	90,  // 269: api.Api.PostJupiterRouteSwap:output_type -> api.PostJupiterRouteSwapResponse
-	159, // 270: api.Api.GetMarketsV2:output_type -> api.GetMarketsResponseV2
-	162, // 271: api.Api.GetTickersV2:output_type -> api.GetTickersResponseV2
-	165, // 272: api.Api.GetOrderbookV2:output_type -> api.GetOrderbookResponseV2
-	168, // 273: api.Api.GetMarketDepthV2:output_type -> api.GetMarketDepthResponseV2
-	37,  // 274: api.Api.PostOrderV2:output_type -> api.PostOrderResponse
-	173, // 275: api.Api.PostCancelOrderV2:output_type -> api.PostCancelOrderResponseV2
-	37,  // 276: api.Api.PostReplaceOrderV2:output_type -> api.PostOrderResponse
-	45,  // 277: api.Api.PostSettleV2:output_type -> api.PostSettleResponse
-	177, // 278: api.Api.GetOpenOrdersV2:output_type -> api.GetOpenOrdersResponseV2
-	66,  // 279: api.Api.GetUnsettledV2:output_type -> api.GetUnsettledResponse
-	142, // 280: api.Api.GetPrice:output_type -> api.GetPriceResponse
-	8,   // 281: api.Api.GetMarkets:output_type -> api.GetMarketsResponse
-	111, // 282: api.Api.GetPools:output_type -> api.GetPoolsResponse
-	11,  // 283: api.Api.GetTickers:output_type -> api.GetTickersResponse
-	14,  // 284: api.Api.GetKline:output_type -> api.GetKlineResponse
-	18,  // 285: api.Api.GetOrderbook:output_type -> api.GetOrderbookResponse
-	22,  // 286: api.Api.GetMarketDepth:output_type -> api.GetMarketDepthResponse
-	25,  // 287: api.Api.GetTrades:output_type -> api.GetTradesResponse
-	73,  // 288: api.Api.GetQuotes:output_type -> api.GetQuotesResponse
-	28,  // 289: api.Api.GetServerTime:output_type -> api.GetServerTimeResponse
-	106, // 290: api.Api.GetRecentBlockHash:output_type -> api.GetRecentBlockHashResponse
-	155, // 291: api.Api.GetPriorityFee:output_type -> api.GetPriorityFeeResponse
-	30,  // 292: api.Api.GetAccountBalance:output_type -> api.GetAccountBalanceResponse
-	33,  // 293: api.Api.GetTokenAccounts:output_type -> api.GetTokenAccountsResponse
-	30,  // 294: api.Api.GetAccountBalanceV2:output_type -> api.GetAccountBalanceResponse
-	37,  // 295: api.Api.PostOrder:output_type -> api.PostOrderResponse
-	58,  // 296: api.Api.PostSubmit:output_type -> api.PostSubmitResponse
-	57,  // 297: api.Api.PostSubmitBatch:output_type -> api.PostSubmitBatchResponse
-	40,  // 298: api.Api.PostCancelOrder:output_type -> api.PostCancelOrderResponse
-	40,  // 299: api.Api.PostCancelByClientOrderID:output_type -> api.PostCancelOrderResponse
-	43,  // 300: api.Api.PostCancelAll:output_type -> api.PostCancelAllResponse
-	37,  // 301: api.Api.PostReplaceByClientOrderID:output_type -> api.PostOrderResponse
-	37,  // 302: api.Api.PostReplaceOrder:output_type -> api.PostOrderResponse
-	45,  // 303: api.Api.PostSettle:output_type -> api.PostSettleResponse
-	97,  // 304: api.Api.PostTradeSwap:output_type -> api.TradeSwapResponse
-	48,  // 305: api.Api.GetOrders:output_type -> api.GetOrdersResponse
-	60,  // 306: api.Api.GetOpenOrders:output_type -> api.GetOpenOrdersResponse
-	62,  // 307: api.Api.GetOrderByID:output_type -> api.GetOrderByIDResponse
-	139, // 308: api.Api.GetBundleResultV2:output_type -> api.GetBundleResultResponse
-	66,  // 309: api.Api.GetUnsettled:output_type -> api.GetUnsettledResponse
-	97,  // 310: api.Api.PostRouteTradeSwap:output_type -> api.TradeSwapResponse
-	67,  // 311: api.Api.GetOrderbooksStream:output_type -> api.GetOrderbooksStreamResponse
-	68,  // 312: api.Api.GetMarketDepthsStream:output_type -> api.GetMarketDepthsStreamResponse
-	70,  // 313: api.Api.GetTickersStream:output_type -> api.GetTickersStreamResponse
-	71,  // 314: api.Api.GetTradesStream:output_type -> api.GetTradesStreamResponse
-	51,  // 315: api.Api.GetOrderStatusStream:output_type -> api.GetOrderStatusStreamResponse
-	106, // 316: api.Api.GetRecentBlockHashStream:output_type -> api.GetRecentBlockHashResponse
-	109, // 317: api.Api.GetBlockStream:output_type -> api.GetBlockStreamResponse
-	155, // 318: api.Api.GetPriorityFeeStream:output_type -> api.GetPriorityFeeResponse
-	157, // 319: api.Api.GetBundleTipStream:output_type -> api.GetBundleTipResponse
-	131, // 320: api.Api.GetQuotesStream:output_type -> api.GetQuotesStreamResponse
-	149, // 321: api.Api.GetPoolReservesStream:output_type -> api.GetPoolReservesStreamResponse
-	153, // 322: api.Api.GetPricesStream:output_type -> api.GetPricesStreamResponse
-	136, // 323: api.Api.GetNewRaydiumPoolsStream:output_type -> api.GetNewRaydiumPoolsResponse
-	134, // 324: api.Api.GetSwapsStream:output_type -> api.GetSwapsStreamResponse
-	254, // [254:325] is the sub-list for method output_type
-	183, // [183:254] is the sub-list for method input_type
-	183, // [183:183] is the sub-list for extension type_name
-	183, // [183:183] is the sub-list for extension extendee
-	0,   // [0:183] is the sub-list for field type_name
+	184, // 89: api.PostRaydiumSwapInstructionsResponse.priceImpact:type_name -> common.PriceImpactPercentV2
+	185, // 90: api.PostRaydiumSwapInstructionsResponse.fees:type_name -> common.Fee
+	42,  // 91: api.PostRaydiumSwapResponse.transactions:type_name -> api.TransactionMessage
+	184, // 92: api.PostRaydiumSwapResponse.priceImpact:type_name -> common.PriceImpactPercentV2
+	185, // 93: api.PostRaydiumSwapResponse.fees:type_name -> common.Fee
+	42,  // 94: api.PostJupiterSwapResponse.transactions:type_name -> api.TransactionMessage
+	184, // 95: api.PostJupiterSwapResponse.priceImpact:type_name -> common.PriceImpactPercentV2
+	185, // 96: api.PostJupiterSwapResponse.fees:type_name -> common.Fee
+	42,  // 97: api.PostRaydiumRouteSwapResponse.transactions:type_name -> api.TransactionMessage
+	42,  // 98: api.PostJupiterRouteSwapResponse.transactions:type_name -> api.TransactionMessage
+	184, // 99: api.PostJupiterRouteSwapResponse.priceImpact:type_name -> common.PriceImpactPercentV2
+	185, // 100: api.PostJupiterRouteSwapResponse.fees:type_name -> common.Fee
+	6,   // 101: api.RouteTradeSwapRequest.project:type_name -> api.Project
+	96,  // 102: api.RouteTradeSwapRequest.steps:type_name -> api.RouteStep
+	93,  // 103: api.PostRaydiumRouteSwapRequest.steps:type_name -> api.RaydiumRouteStep
+	104, // 104: api.RaydiumRouteStep.project:type_name -> api.StepProject
+	95,  // 105: api.PostJupiterRouteSwapRequest.steps:type_name -> api.JupiterRouteStep
+	104, // 106: api.JupiterRouteStep.project:type_name -> api.StepProject
+	185, // 107: api.JupiterRouteStep.fee:type_name -> common.Fee
+	104, // 108: api.RouteStep.project:type_name -> api.StepProject
+	185, // 109: api.RouteStep.fee:type_name -> common.Fee
+	6,   // 110: api.TradeSwapResponse.project:type_name -> api.Project
+	42,  // 111: api.TradeSwapResponse.transactions:type_name -> api.TransactionMessage
+	186, // 112: api.TradeSwapResponse.priceImpact:type_name -> common.PriceImpactPercent
+	185, // 113: api.TradeSwapResponse.fees:type_name -> common.Fee
+	99,  // 114: api.QuoteRoute.steps:type_name -> api.QuoteStep
+	104, // 115: api.QuoteStep.project:type_name -> api.StepProject
+	186, // 116: api.QuoteStep.priceImpactPercent:type_name -> common.PriceImpactPercent
+	185, // 117: api.QuoteStep.fee:type_name -> common.Fee
+	101, // 118: api.JupiterQuoteRoute.steps:type_name -> api.JupiterQuoteStep
+	104, // 119: api.JupiterQuoteStep.project:type_name -> api.StepProject
+	184, // 120: api.JupiterQuoteStep.priceImpactPercent:type_name -> common.PriceImpactPercentV2
+	185, // 121: api.JupiterQuoteStep.fee:type_name -> common.Fee
+	103, // 122: api.RaydiumQuoteRoute.steps:type_name -> api.RaydiumQuoteStep
+	184, // 123: api.RaydiumQuoteStep.priceImpactPercent:type_name -> common.PriceImpactPercentV2
+	185, // 124: api.RaydiumQuoteStep.fee:type_name -> common.Fee
+	104, // 125: api.RaydiumQuoteStep.project:type_name -> api.StepProject
+	182, // 126: api.GetRecentBlockHashResponse.timestamp:type_name -> google.protobuf.Timestamp
+	107, // 127: api.GetBlockStreamResponse.block:type_name -> api.Block
+	182, // 128: api.GetBlockStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	6,   // 129: api.GetPoolsRequest.projects:type_name -> api.Project
+	128, // 130: api.GetPoolsResponse.projects:type_name -> api.ProjectPools
+	129, // 131: api.GetRaydiumPoolsResponse.pools:type_name -> api.ProjectPool
+	129, // 132: api.GetRaydiumPoolReserveResponse.pools:type_name -> api.ProjectPool
+	124, // 133: api.GetTransactionResponse.metadata:type_name -> api.TransactionMeta
+	121, // 134: api.InstructionRaydium.accounts:type_name -> api.AccountMeta
+	121, // 135: api.InstructionJupiter.accounts:type_name -> api.AccountMeta
+	125, // 136: api.TransactionMeta.inner_instructions:type_name -> api.TransactionMetaInnerInstruction
+	126, // 137: api.TransactionMeta.pre_token_balances:type_name -> api.TransactionMetaTokenBalance
+	126, // 138: api.TransactionMeta.post_token_balances:type_name -> api.TransactionMetaTokenBalance
+	120, // 139: api.TransactionMetaInnerInstruction.instructions:type_name -> api.Instruction
+	127, // 140: api.TransactionMetaTokenBalance.ui_token_amount:type_name -> api.UITokenAmount
+	6,   // 141: api.ProjectPools.project:type_name -> api.Project
+	129, // 142: api.ProjectPools.pools:type_name -> api.ProjectPool
+	6,   // 143: api.GetQuotesStreamRequest.projects:type_name -> api.Project
+	140, // 144: api.GetQuotesStreamRequest.tokenPairs:type_name -> api.TokenPair
+	132, // 145: api.GetQuotesStreamResponse.quote:type_name -> api.GetQuotesStreamUpdate
+	182, // 146: api.GetQuotesStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	6,   // 147: api.GetQuotesStreamUpdate.project:type_name -> api.Project
+	6,   // 148: api.GetSwapsStreamRequest.projects:type_name -> api.Project
+	137, // 149: api.GetSwapsStreamResponse.swap:type_name -> api.GetSwapsStreamUpdate
+	182, // 150: api.GetSwapsStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	129, // 151: api.GetNewRaydiumPoolsResponse.pool:type_name -> api.ProjectPool
+	182, // 152: api.GetNewRaydiumPoolsResponse.timestamp:type_name -> google.protobuf.Timestamp
+	6,   // 153: api.GetSwapsStreamUpdate.project:type_name -> api.Project
+	182, // 154: api.GetBundleResultResponse.timestamp:type_name -> google.protobuf.Timestamp
+	147, // 155: api.GetPriceResponse.tokenPrices:type_name -> api.TokenPrice
+	148, // 156: api.GetRaydiumPricesResponse.tokenPrices:type_name -> api.TokenPriceV2
+	148, // 157: api.GetJupiterPricesResponse.tokenPrices:type_name -> api.TokenPriceV2
+	6,   // 158: api.TokenPrice.project:type_name -> api.Project
+	150, // 159: api.GetPoolReservesStreamResponse.reserves:type_name -> api.PoolReserves
+	182, // 160: api.GetPoolReservesStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	6,   // 161: api.PoolReserves.project:type_name -> api.Project
+	6,   // 162: api.GetPoolReservesStreamRequest.projects:type_name -> api.Project
+	6,   // 163: api.GetPricesStreamRequest.projects:type_name -> api.Project
+	147, // 164: api.GetPricesStreamResponse.price:type_name -> api.TokenPrice
+	182, // 165: api.GetPricesStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	6,   // 166: api.GetPriorityFeeRequest.project:type_name -> api.Project
+	6,   // 167: api.GetPriorityFeeResponse.project:type_name -> api.Project
+	182, // 168: api.GetBundleTipResponse.timestamp:type_name -> google.protobuf.Timestamp
+	181, // 169: api.GetMarketsResponseV2.markets:type_name -> api.GetMarketsResponseV2.MarketsEntry
+	163, // 170: api.GetTickersResponseV2.tickers:type_name -> api.TickerV2
+	166, // 171: api.GetOrderbookResponseV2.bids:type_name -> api.OrderbookItemV2
+	166, // 172: api.GetOrderbookResponseV2.asks:type_name -> api.OrderbookItemV2
+	169, // 173: api.GetMarketDepthResponseV2.bids:type_name -> api.MarketDepthItemV2
+	169, // 174: api.GetMarketDepthResponseV2.asks:type_name -> api.MarketDepthItemV2
+	42,  // 175: api.PostCancelOrderResponseV2.transactions:type_name -> api.TransactionMessage
+	178, // 176: api.GetOpenOrdersResponseV2.orders:type_name -> api.OrderV2
+	182, // 177: api.OrderV2.createdAt:type_name -> google.protobuf.Timestamp
+	9,   // 178: api.GetMarketsResponse.MarketsEntry.value:type_name -> api.Market
+	83,  // 179: api.PostJupiterSwapInstructionsResponse.AddressLookupTableAddressesEntry.value:type_name -> api.PublicKeys
+	160, // 180: api.GetMarketsResponseV2.MarketsEntry.value:type_name -> api.MarketV2
+	116, // 181: api.Api.GetRateLimit:input_type -> api.GetRateLimitRequest
+	118, // 182: api.Api.GetTransaction:input_type -> api.GetTransactionRequest
+	53,  // 183: api.Api.PostSubmitV2:input_type -> api.PostSubmitRequest
+	55,  // 184: api.Api.PostSubmitBatchV2:input_type -> api.PostSubmitBatchRequest
+	112, // 185: api.Api.GetRaydiumPools:input_type -> api.GetRaydiumPoolsRequest
+	114, // 186: api.Api.GetRaydiumPoolReserve:input_type -> api.GetRaydiumPoolReserveRequest
+	74,  // 187: api.Api.GetRaydiumQuotes:input_type -> api.GetRaydiumQuotesRequest
+	143, // 188: api.Api.GetRaydiumPrices:input_type -> api.GetRaydiumPricesRequest
+	86,  // 189: api.Api.PostRaydiumSwap:input_type -> api.PostRaydiumSwapRequest
+	92,  // 190: api.Api.PostRaydiumRouteSwap:input_type -> api.PostRaydiumRouteSwapRequest
+	76,  // 191: api.Api.GetJupiterQuotes:input_type -> api.GetJupiterQuotesRequest
+	144, // 192: api.Api.GetJupiterPrices:input_type -> api.GetJupiterPricesRequest
+	80,  // 193: api.Api.PostJupiterSwap:input_type -> api.PostJupiterSwapRequest
+	82,  // 194: api.Api.PostRaydiumSwapInstructions:input_type -> api.PostRaydiumSwapInstructionsRequest
+	81,  // 195: api.Api.PostJupiterSwapInstructions:input_type -> api.PostJupiterSwapInstructionsRequest
+	94,  // 196: api.Api.PostJupiterRouteSwap:input_type -> api.PostJupiterRouteSwapRequest
+	158, // 197: api.Api.GetMarketsV2:input_type -> api.GetMarketsRequestV2
+	161, // 198: api.Api.GetTickersV2:input_type -> api.GetTickersRequestV2
+	164, // 199: api.Api.GetOrderbookV2:input_type -> api.GetOrderbookRequestV2
+	167, // 200: api.Api.GetMarketDepthV2:input_type -> api.GetMarketDepthRequestV2
+	170, // 201: api.Api.PostOrderV2:input_type -> api.PostOrderRequestV2
+	172, // 202: api.Api.PostCancelOrderV2:input_type -> api.PostCancelOrderRequestV2
+	171, // 203: api.Api.PostReplaceOrderV2:input_type -> api.PostReplaceOrderRequestV2
+	174, // 204: api.Api.PostSettleV2:input_type -> api.PostSettleRequestV2
+	175, // 205: api.Api.GetOpenOrdersV2:input_type -> api.GetOpenOrdersRequestV2
+	176, // 206: api.Api.GetUnsettledV2:input_type -> api.GetUnsettledRequestV2
+	141, // 207: api.Api.GetPrice:input_type -> api.GetPriceRequest
+	7,   // 208: api.Api.GetMarkets:input_type -> api.GetMarketsRequest
+	110, // 209: api.Api.GetPools:input_type -> api.GetPoolsRequest
+	10,  // 210: api.Api.GetTickers:input_type -> api.GetTickersRequest
+	13,  // 211: api.Api.GetKline:input_type -> api.GetKlineRequest
+	16,  // 212: api.Api.GetOrderbook:input_type -> api.GetOrderbookRequest
+	20,  // 213: api.Api.GetMarketDepth:input_type -> api.GetMarketDepthRequest
+	24,  // 214: api.Api.GetTrades:input_type -> api.GetTradesRequest
+	72,  // 215: api.Api.GetQuotes:input_type -> api.GetQuotesRequest
+	27,  // 216: api.Api.GetServerTime:input_type -> api.GetServerTimeRequest
+	105, // 217: api.Api.GetRecentBlockHash:input_type -> api.GetRecentBlockHashRequest
+	154, // 218: api.Api.GetPriorityFee:input_type -> api.GetPriorityFeeRequest
+	29,  // 219: api.Api.GetAccountBalance:input_type -> api.GetAccountBalanceRequest
+	32,  // 220: api.Api.GetTokenAccounts:input_type -> api.GetTokenAccountsRequest
+	29,  // 221: api.Api.GetAccountBalanceV2:input_type -> api.GetAccountBalanceRequest
+	35,  // 222: api.Api.PostOrder:input_type -> api.PostOrderRequest
+	53,  // 223: api.Api.PostSubmit:input_type -> api.PostSubmitRequest
+	55,  // 224: api.Api.PostSubmitBatch:input_type -> api.PostSubmitBatchRequest
+	38,  // 225: api.Api.PostCancelOrder:input_type -> api.PostCancelOrderRequest
+	39,  // 226: api.Api.PostCancelByClientOrderID:input_type -> api.PostCancelByClientOrderIDRequest
+	41,  // 227: api.Api.PostCancelAll:input_type -> api.PostCancelAllRequest
+	35,  // 228: api.Api.PostReplaceByClientOrderID:input_type -> api.PostOrderRequest
+	36,  // 229: api.Api.PostReplaceOrder:input_type -> api.PostReplaceOrderRequest
+	44,  // 230: api.Api.PostSettle:input_type -> api.PostSettleRequest
+	79,  // 231: api.Api.PostTradeSwap:input_type -> api.TradeSwapRequest
+	47,  // 232: api.Api.GetOrders:input_type -> api.GetOrdersRequest
+	59,  // 233: api.Api.GetOpenOrders:input_type -> api.GetOpenOrdersRequest
+	61,  // 234: api.Api.GetOrderByID:input_type -> api.GetOrderByIDRequest
+	138, // 235: api.Api.GetBundleResultV2:input_type -> api.GetBundleResultRequest
+	63,  // 236: api.Api.GetUnsettled:input_type -> api.GetUnsettledRequest
+	91,  // 237: api.Api.PostRouteTradeSwap:input_type -> api.RouteTradeSwapRequest
+	17,  // 238: api.Api.GetOrderbooksStream:input_type -> api.GetOrderbooksRequest
+	21,  // 239: api.Api.GetMarketDepthsStream:input_type -> api.GetMarketDepthsRequest
+	69,  // 240: api.Api.GetTickersStream:input_type -> api.GetTickersStreamRequest
+	24,  // 241: api.Api.GetTradesStream:input_type -> api.GetTradesRequest
+	50,  // 242: api.Api.GetOrderStatusStream:input_type -> api.GetOrderStatusStreamRequest
+	105, // 243: api.Api.GetRecentBlockHashStream:input_type -> api.GetRecentBlockHashRequest
+	108, // 244: api.Api.GetBlockStream:input_type -> api.GetBlockStreamRequest
+	154, // 245: api.Api.GetPriorityFeeStream:input_type -> api.GetPriorityFeeRequest
+	156, // 246: api.Api.GetBundleTipStream:input_type -> api.GetBundleTipRequest
+	130, // 247: api.Api.GetQuotesStream:input_type -> api.GetQuotesStreamRequest
+	151, // 248: api.Api.GetPoolReservesStream:input_type -> api.GetPoolReservesStreamRequest
+	152, // 249: api.Api.GetPricesStream:input_type -> api.GetPricesStreamRequest
+	135, // 250: api.Api.GetNewRaydiumPoolsStream:input_type -> api.GetNewRaydiumPoolsRequest
+	133, // 251: api.Api.GetSwapsStream:input_type -> api.GetSwapsStreamRequest
+	117, // 252: api.Api.GetRateLimit:output_type -> api.GetRateLimitResponse
+	119, // 253: api.Api.GetTransaction:output_type -> api.GetTransactionResponse
+	58,  // 254: api.Api.PostSubmitV2:output_type -> api.PostSubmitResponse
+	57,  // 255: api.Api.PostSubmitBatchV2:output_type -> api.PostSubmitBatchResponse
+	113, // 256: api.Api.GetRaydiumPools:output_type -> api.GetRaydiumPoolsResponse
+	115, // 257: api.Api.GetRaydiumPoolReserve:output_type -> api.GetRaydiumPoolReserveResponse
+	75,  // 258: api.Api.GetRaydiumQuotes:output_type -> api.GetRaydiumQuotesResponse
+	145, // 259: api.Api.GetRaydiumPrices:output_type -> api.GetRaydiumPricesResponse
+	87,  // 260: api.Api.PostRaydiumSwap:output_type -> api.PostRaydiumSwapResponse
+	89,  // 261: api.Api.PostRaydiumRouteSwap:output_type -> api.PostRaydiumRouteSwapResponse
+	77,  // 262: api.Api.GetJupiterQuotes:output_type -> api.GetJupiterQuotesResponse
+	146, // 263: api.Api.GetJupiterPrices:output_type -> api.GetJupiterPricesResponse
+	88,  // 264: api.Api.PostJupiterSwap:output_type -> api.PostJupiterSwapResponse
+	85,  // 265: api.Api.PostRaydiumSwapInstructions:output_type -> api.PostRaydiumSwapInstructionsResponse
+	84,  // 266: api.Api.PostJupiterSwapInstructions:output_type -> api.PostJupiterSwapInstructionsResponse
+	90,  // 267: api.Api.PostJupiterRouteSwap:output_type -> api.PostJupiterRouteSwapResponse
+	159, // 268: api.Api.GetMarketsV2:output_type -> api.GetMarketsResponseV2
+	162, // 269: api.Api.GetTickersV2:output_type -> api.GetTickersResponseV2
+	165, // 270: api.Api.GetOrderbookV2:output_type -> api.GetOrderbookResponseV2
+	168, // 271: api.Api.GetMarketDepthV2:output_type -> api.GetMarketDepthResponseV2
+	37,  // 272: api.Api.PostOrderV2:output_type -> api.PostOrderResponse
+	173, // 273: api.Api.PostCancelOrderV2:output_type -> api.PostCancelOrderResponseV2
+	37,  // 274: api.Api.PostReplaceOrderV2:output_type -> api.PostOrderResponse
+	45,  // 275: api.Api.PostSettleV2:output_type -> api.PostSettleResponse
+	177, // 276: api.Api.GetOpenOrdersV2:output_type -> api.GetOpenOrdersResponseV2
+	66,  // 277: api.Api.GetUnsettledV2:output_type -> api.GetUnsettledResponse
+	142, // 278: api.Api.GetPrice:output_type -> api.GetPriceResponse
+	8,   // 279: api.Api.GetMarkets:output_type -> api.GetMarketsResponse
+	111, // 280: api.Api.GetPools:output_type -> api.GetPoolsResponse
+	11,  // 281: api.Api.GetTickers:output_type -> api.GetTickersResponse
+	14,  // 282: api.Api.GetKline:output_type -> api.GetKlineResponse
+	18,  // 283: api.Api.GetOrderbook:output_type -> api.GetOrderbookResponse
+	22,  // 284: api.Api.GetMarketDepth:output_type -> api.GetMarketDepthResponse
+	25,  // 285: api.Api.GetTrades:output_type -> api.GetTradesResponse
+	73,  // 286: api.Api.GetQuotes:output_type -> api.GetQuotesResponse
+	28,  // 287: api.Api.GetServerTime:output_type -> api.GetServerTimeResponse
+	106, // 288: api.Api.GetRecentBlockHash:output_type -> api.GetRecentBlockHashResponse
+	155, // 289: api.Api.GetPriorityFee:output_type -> api.GetPriorityFeeResponse
+	30,  // 290: api.Api.GetAccountBalance:output_type -> api.GetAccountBalanceResponse
+	33,  // 291: api.Api.GetTokenAccounts:output_type -> api.GetTokenAccountsResponse
+	30,  // 292: api.Api.GetAccountBalanceV2:output_type -> api.GetAccountBalanceResponse
+	37,  // 293: api.Api.PostOrder:output_type -> api.PostOrderResponse
+	58,  // 294: api.Api.PostSubmit:output_type -> api.PostSubmitResponse
+	57,  // 295: api.Api.PostSubmitBatch:output_type -> api.PostSubmitBatchResponse
+	40,  // 296: api.Api.PostCancelOrder:output_type -> api.PostCancelOrderResponse
+	40,  // 297: api.Api.PostCancelByClientOrderID:output_type -> api.PostCancelOrderResponse
+	43,  // 298: api.Api.PostCancelAll:output_type -> api.PostCancelAllResponse
+	37,  // 299: api.Api.PostReplaceByClientOrderID:output_type -> api.PostOrderResponse
+	37,  // 300: api.Api.PostReplaceOrder:output_type -> api.PostOrderResponse
+	45,  // 301: api.Api.PostSettle:output_type -> api.PostSettleResponse
+	97,  // 302: api.Api.PostTradeSwap:output_type -> api.TradeSwapResponse
+	48,  // 303: api.Api.GetOrders:output_type -> api.GetOrdersResponse
+	60,  // 304: api.Api.GetOpenOrders:output_type -> api.GetOpenOrdersResponse
+	62,  // 305: api.Api.GetOrderByID:output_type -> api.GetOrderByIDResponse
+	139, // 306: api.Api.GetBundleResultV2:output_type -> api.GetBundleResultResponse
+	66,  // 307: api.Api.GetUnsettled:output_type -> api.GetUnsettledResponse
+	97,  // 308: api.Api.PostRouteTradeSwap:output_type -> api.TradeSwapResponse
+	67,  // 309: api.Api.GetOrderbooksStream:output_type -> api.GetOrderbooksStreamResponse
+	68,  // 310: api.Api.GetMarketDepthsStream:output_type -> api.GetMarketDepthsStreamResponse
+	70,  // 311: api.Api.GetTickersStream:output_type -> api.GetTickersStreamResponse
+	71,  // 312: api.Api.GetTradesStream:output_type -> api.GetTradesStreamResponse
+	51,  // 313: api.Api.GetOrderStatusStream:output_type -> api.GetOrderStatusStreamResponse
+	106, // 314: api.Api.GetRecentBlockHashStream:output_type -> api.GetRecentBlockHashResponse
+	109, // 315: api.Api.GetBlockStream:output_type -> api.GetBlockStreamResponse
+	155, // 316: api.Api.GetPriorityFeeStream:output_type -> api.GetPriorityFeeResponse
+	157, // 317: api.Api.GetBundleTipStream:output_type -> api.GetBundleTipResponse
+	131, // 318: api.Api.GetQuotesStream:output_type -> api.GetQuotesStreamResponse
+	149, // 319: api.Api.GetPoolReservesStream:output_type -> api.GetPoolReservesStreamResponse
+	153, // 320: api.Api.GetPricesStream:output_type -> api.GetPricesStreamResponse
+	136, // 321: api.Api.GetNewRaydiumPoolsStream:output_type -> api.GetNewRaydiumPoolsResponse
+	134, // 322: api.Api.GetSwapsStream:output_type -> api.GetSwapsStreamResponse
+	252, // [252:323] is the sub-list for method output_type
+	181, // [181:252] is the sub-list for method input_type
+	181, // [181:181] is the sub-list for extension type_name
+	181, // [181:181] is the sub-list for extension extendee
+	0,   // [0:181] is the sub-list for field type_name
 }
 
 func init() { file_api_proto_init() }
@@ -18571,7 +18539,7 @@ func file_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_proto_rawDesc,
 			NumEnums:      7,
-			NumMessages:   176,
+			NumMessages:   175,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

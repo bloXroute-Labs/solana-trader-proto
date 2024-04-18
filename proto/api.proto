@@ -1401,11 +1401,10 @@ message PostJupiterSwapInstructionsResponse {
 
 message PostRaydiumSwapInstructionsResponse {
   repeated InstructionRaydium instructions = 1;
-  map<string, PublicKeys> addressLookupTableAddresses = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Returns a map[publicKey][]publicKey that is used in solana versioned transaction creation."}];
-  double outAmount = 3;
-  double outAmountMin = 4;
-  common.PriceImpactPercentV2 priceImpact = 5;
-  repeated common.Fee fees = 6;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
 }
 
 

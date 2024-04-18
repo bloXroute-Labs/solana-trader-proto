@@ -714,13 +714,10 @@ class PostJupiterSwapInstructionsResponse(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostRaydiumSwapInstructionsResponse(betterproto.Message):
     instructions: List["InstructionRaydium"] = betterproto.message_field(1)
-    address_lookup_table_addresses: Dict[str, "PublicKeys"] = betterproto.map_field(
-        2, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
-    )
-    out_amount: float = betterproto.double_field(3)
-    out_amount_min: float = betterproto.double_field(4)
-    price_impact: "_common__.PriceImpactPercentV2" = betterproto.message_field(5)
-    fees: List["_common__.Fee"] = betterproto.message_field(6)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
+    price_impact: "_common__.PriceImpactPercentV2" = betterproto.message_field(4)
+    fees: List["_common__.Fee"] = betterproto.message_field(5)
 
 
 @dataclass(eq=False, repr=False)
