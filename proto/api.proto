@@ -764,7 +764,7 @@ service Api {
     };
   }
 
-  rpc GetJitoTipStream(GetJitoTipRequest) returns (stream GetJitoTipResponse) {
+  rpc GetBundleTipStream(GetBundleTipRequest) returns (stream GetBundleTipResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "System";
     };
@@ -1861,9 +1861,9 @@ message GetPriorityFeeResponse {
   uint64 feeAtPercentile = 3;
 }
 
-message GetJitoTipRequest{}
+message GetBundleTipRequest{}
 
-message GetJitoTipResponse {
+message GetBundleTipResponse {
   google.protobuf.Timestamp timestamp = 1;
   double percentile25 = 2;
   double percentile50 = 3;
