@@ -4046,6 +4046,11 @@
           "type": "number",
           "format": "double"
         },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
         "computePrice": {
           "type": "string",
           "format": "uint64",
