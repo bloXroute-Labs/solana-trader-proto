@@ -1653,6 +1653,14 @@ message GetRateLimitResponse {
   uint64 limit = 5;
   uint64 count = 6;
   uint64 reset = 7;
+  repeated StreamInfo streamInfos = 8;
+}
+
+message StreamInfo {
+   string streamName = 1;
+   string subscriptionID = 2;
+   uint64 startTime = 3;
+   uint64 creditUsed = 4;
 }
 
 message GetTransactionRequest {

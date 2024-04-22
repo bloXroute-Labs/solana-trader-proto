@@ -995,6 +995,15 @@ class GetRateLimitResponse(betterproto.Message):
     limit: int = betterproto.uint64_field(5)
     count: int = betterproto.uint64_field(6)
     reset: int = betterproto.uint64_field(7)
+    stream_infos: List["StreamInfo"] = betterproto.message_field(8)
+
+
+@dataclass(eq=False, repr=False)
+class StreamInfo(betterproto.Message):
+    stream_name: str = betterproto.string_field(1)
+    subscription_id: str = betterproto.string_field(2)
+    start_time: int = betterproto.uint64_field(3)
+    credit_used: int = betterproto.uint64_field(4)
 
 
 @dataclass(eq=False, repr=False)
