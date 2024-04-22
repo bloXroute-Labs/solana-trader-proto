@@ -1659,8 +1659,8 @@ message GetRateLimitResponse {
 message StreamInfo {
    string streamName = 1;
    string subscriptionID = 2;
-   uint64 startTime = 3;
-   uint64 creditUsed = 4;
+   int64 startTime = 3;
+   int64 creditUsed = 4;
 }
 
 message GetTransactionRequest {

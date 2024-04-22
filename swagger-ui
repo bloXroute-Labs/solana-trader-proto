@@ -4885,11 +4885,11 @@
         },
         "startTime": {
           "type": "string",
-          "format": "uint64"
+          "format": "int64"
         },
         "creditUsed": {
           "type": "string",
-          "format": "uint64"
+          "format": "int64"
         }
       }
     },
