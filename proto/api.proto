@@ -202,6 +202,18 @@ service Api {
     };
   }
 
+  rpc PostRaydiumSwapInstructions(PostRaydiumSwapInstructionsRequest) returns (PostRaydiumSwapInstructionsResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/swap-instructions"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object using raydium instructions";
+      summary: "Unsigned Raydium swap transaction from instructions";
+      tags: ["Raydium V2"];
+    };
+  }
+
   rpc PostJupiterSwapInstructions(PostJupiterSwapInstructionsRequest) returns (PostJupiterSwapInstructionsResponse) {
     option (google.api.http) = {
       post: "/api/v2/jupiter/swap-instructions"
@@ -1363,6 +1375,17 @@ message PostJupiterSwapInstructionsRequest {
   optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
+message PostRaydiumSwapInstructionsRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
 message PublicKeys {
   repeated string pks = 1;
 }
@@ -1375,6 +1398,15 @@ message PostJupiterSwapInstructionsResponse {
   common.PriceImpactPercentV2 priceImpact = 5;
   repeated common.Fee fees = 6;
 }
+
+message PostRaydiumSwapInstructionsResponse {
+  repeated InstructionRaydium instructions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
 
 message PostRaydiumSwapRequest {
   string ownerAddress = 1;
@@ -1644,6 +1676,12 @@ message AccountMeta {
   string programID = 1;
   bool isSigner = 2;
   bool isWritable = 3;
+}
+
+message InstructionRaydium {
+  string programID = 1;
+  repeated AccountMeta accounts = 2;
+  bytes data = 3;
 }
 
 message InstructionJupiter {
