@@ -1171,6 +1171,7 @@ message PostSubmitRequest {
   TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
   bool skipPreFlight = 2;
   optional bool frontRunningProtection = 3;
+  optional uint64 tip = 4;
 }
 
 message PostSubmitRequestEntry {
