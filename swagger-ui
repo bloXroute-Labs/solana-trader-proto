@@ -2692,6 +2692,12 @@
         "reset": {
           "type": "string",
           "format": "uint64"
+        },
+        "streamInfos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiStreamInfo"
+          }
         }
       }
     },
@@ -4865,6 +4871,25 @@
         },
         "id": {
           "type": "string"
+        }
+      }
+    },
+    "apiStreamInfo": {
+      "type": "object",
+      "properties": {
+        "streamName": {
+          "type": "string"
+        },
+        "subscriptionID": {
+          "type": "string"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creditUsed": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
