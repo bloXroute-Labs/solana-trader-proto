@@ -164,9 +164,9 @@ class Swagger(betterproto.Message):
     external_docs: "ExternalDocumentation" = betterproto.message_field(14)
     """Additional external documentation."""
 
-    extensions: Dict[
-        str, "betterproto_lib_google_protobuf.Value"
-    ] = betterproto.map_field(15, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    extensions: Dict[str, "betterproto_lib_google_protobuf.Value"] = (
+        betterproto.map_field(15, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -256,9 +256,9 @@ class Operation(betterproto.Message):
     security declaration, an empty array can be used.
     """
 
-    extensions: Dict[
-        str, "betterproto_lib_google_protobuf.Value"
-    ] = betterproto.map_field(13, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    extensions: Dict[str, "betterproto_lib_google_protobuf.Value"] = (
+        betterproto.map_field(13, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -334,9 +334,9 @@ class Response(betterproto.Message):
     Specification/blob/3.0.0/versions/2.0.md#example-object
     """
 
-    extensions: Dict[
-        str, "betterproto_lib_google_protobuf.Value"
-    ] = betterproto.map_field(5, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    extensions: Dict[str, "betterproto_lib_google_protobuf.Value"] = (
+        betterproto.map_field(5, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -378,9 +378,9 @@ class Info(betterproto.Message):
     specification version).
     """
 
-    extensions: Dict[
-        str, "betterproto_lib_google_protobuf.Value"
-    ] = betterproto.map_field(7, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    extensions: Dict[str, "betterproto_lib_google_protobuf.Value"] = (
+        betterproto.map_field(7, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -582,9 +582,9 @@ class JsonSchema(betterproto.Message):
     Additional field level properties used when generating the OpenAPI v2 file.
     """
 
-    extensions: Dict[
-        str, "betterproto_lib_google_protobuf.Value"
-    ] = betterproto.map_field(48, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    extensions: Dict[str, "betterproto_lib_google_protobuf.Value"] = (
+        betterproto.map_field(48, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -699,9 +699,9 @@ class SecurityScheme(betterproto.Message):
     The available scopes for the OAuth2 security scheme. Valid for oauth2.
     """
 
-    extensions: Dict[
-        str, "betterproto_lib_google_protobuf.Value"
-    ] = betterproto.map_field(9, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    extensions: Dict[str, "betterproto_lib_google_protobuf.Value"] = (
+        betterproto.map_field(9, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -717,9 +717,9 @@ class SecurityRequirement(betterproto.Message):
     Definitions.
     """
 
-    security_requirement: Dict[
-        str, "SecurityRequirementSecurityRequirementValue"
-    ] = betterproto.map_field(1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    security_requirement: Dict[str, "SecurityRequirementSecurityRequirementValue"] = (
+        betterproto.map_field(1, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE)
+    )
     """
     Each name must correspond to a security scheme which is declared in the
     Security Definitions. If the security scheme is of type "oauth2", then the
