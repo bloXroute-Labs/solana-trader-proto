@@ -1142,6 +1142,12 @@
             "required": false,
             "type": "number",
             "format": "double"
+          },
+          {
+            "name": "fastMode",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -3698,6 +3704,9 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
+        "fastMode": {
+          "type": "boolean"
         }
       }
     },
@@ -3770,6 +3779,9 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
+        "fastMode": {
+          "type": "boolean"
         }
       }
     },
