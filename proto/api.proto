@@ -1327,6 +1327,7 @@ message GetJupiterQuotesRequest{
   string outToken = 2;
   double inAmount = 3;
   double slippage = 4;
+  optional bool fastMode = 5;
 }
 
 message GetJupiterQuotesResponse{
@@ -1361,9 +1362,10 @@ message PostJupiterSwapRequest {
   string outToken = 3;
   double inAmount = 4;
   double slippage = 5;
-   uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
-   uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-   optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+  uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+  optional bool fastMode = 9;
 }
 
 message PostJupiterSwapInstructionsRequest {
@@ -1374,6 +1376,7 @@ message PostJupiterSwapInstructionsRequest {
   double slippage = 5;
   uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
   optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+  optional bool fastMode = 9;
 }
 
 message PostRaydiumSwapInstructionsRequest {

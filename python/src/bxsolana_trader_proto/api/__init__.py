@@ -629,6 +629,9 @@ class GetJupiterQuotesRequest(betterproto.Message):
     out_token: str = betterproto.string_field(2)
     in_amount: float = betterproto.double_field(3)
     slippage: float = betterproto.double_field(4)
+    fast_mode: Optional[bool] = betterproto.bool_field(
+        5, optional=True, group="_fastMode"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -670,6 +673,9 @@ class PostJupiterSwapRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    fast_mode: Optional[bool] = betterproto.bool_field(
+        9, optional=True, group="_fastMode"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -681,6 +687,9 @@ class PostJupiterSwapInstructionsRequest(betterproto.Message):
     slippage: float = betterproto.double_field(5)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    fast_mode: Optional[bool] = betterproto.bool_field(
+        9, optional=True, group="_fastMode"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1055,16 +1064,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
