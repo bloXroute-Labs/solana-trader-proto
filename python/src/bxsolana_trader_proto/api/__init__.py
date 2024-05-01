@@ -463,6 +463,7 @@ class PostSubmitRequest(betterproto.Message):
         3, optional=True, group="_frontRunningProtection"
     )
     tip: Optional[int] = betterproto.uint64_field(4, optional=True, group="_tip")
+    tpu: Optional[int] = betterproto.uint32_field(5, optional=True, group="_tpu")
 
 
 @dataclass(eq=False, repr=False)
@@ -475,9 +476,6 @@ class PostSubmitRequestEntry(betterproto.Message):
 class PostSubmitBatchRequest(betterproto.Message):
     entries: List["PostSubmitRequestEntry"] = betterproto.message_field(1)
     submit_strategy: "SubmitStrategy" = betterproto.enum_field(2)
-    use_bundle: Optional[bool] = betterproto.bool_field(
-        3, optional=True, group="_useBundle"
-    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1064,16 +1062,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List["TransactionMetaInnerInstruction"] = (
-        betterproto.message_field(6)
-    )
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List["TransactionMetaTokenBalance"] = (
-        betterproto.message_field(9)
-    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
 
 
 @dataclass(eq=False, repr=False)

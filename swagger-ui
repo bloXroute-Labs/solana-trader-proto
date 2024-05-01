@@ -4482,9 +4482,6 @@
         },
         "submitStrategy": {
           "$ref": "#/definitions/apiSubmitStrategy"
-        },
-        "useBundle": {
-          "type": "boolean"
         }
       }
     },
@@ -4531,6 +4528,10 @@
         "tip": {
           "type": "string",
           "format": "uint64"
+        },
+        "tpu": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
