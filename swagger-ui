@@ -4531,6 +4531,10 @@
         "tip": {
           "type": "string",
           "format": "uint64"
+        },
+        "tpu": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
