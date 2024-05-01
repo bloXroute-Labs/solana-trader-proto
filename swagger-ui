@@ -4482,6 +4482,9 @@
         },
         "submitStrategy": {
           "$ref": "#/definitions/apiSubmitStrategy"
+        },
+        "useBundle": {
+          "type": "boolean"
         }
       }
     },

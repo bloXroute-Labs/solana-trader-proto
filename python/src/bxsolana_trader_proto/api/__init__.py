@@ -476,6 +476,9 @@ class PostSubmitRequestEntry(betterproto.Message):
 class PostSubmitBatchRequest(betterproto.Message):
     entries: List["PostSubmitRequestEntry"] = betterproto.message_field(1)
     submit_strategy: "SubmitStrategy" = betterproto.enum_field(2)
+    use_bundle: Optional[bool] = betterproto.bool_field(
+        3, optional=True, group="_useBundle"
+    )
 
 
 @dataclass(eq=False, repr=False)
