@@ -464,6 +464,12 @@ class PostSubmitRequest(betterproto.Message):
     )
     tip: Optional[int] = betterproto.uint64_field(4, optional=True, group="_tip")
     tpu: Optional[int] = betterproto.uint32_field(5, optional=True, group="_tpu")
+    use_staked_rp_cs: Optional[bool] = betterproto.bool_field(
+        6, optional=True, group="_useStakedRPCs"
+    )
+    fast_best_effort: Optional[bool] = betterproto.bool_field(
+        7, optional=True, group="_fastBestEffort"
+    )
 
 
 @dataclass(eq=False, repr=False)
