@@ -467,6 +467,9 @@ class PostSubmitRequest(betterproto.Message):
     use_staked_rp_cs: Optional[bool] = betterproto.bool_field(
         6, optional=True, group="_useStakedRPCs"
     )
+    fast_best_effort: Optional[bool] = betterproto.bool_field(
+        7, optional=True, group="_fastBestEffort"
+    )
 
 
 @dataclass(eq=False, repr=False)

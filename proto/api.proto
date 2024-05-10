@@ -1174,6 +1174,7 @@ message PostSubmitRequest {
   optional uint64 tip = 4;
   optional uint32 tpu = 5;
   optional bool useStakedRPCs = 6;
+  optional bool fastBestEffort = 7;
 }
 
 message PostSubmitRequestEntry {
