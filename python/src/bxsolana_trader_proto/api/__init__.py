@@ -462,12 +462,11 @@ class PostSubmitRequest(betterproto.Message):
     front_running_protection: Optional[bool] = betterproto.bool_field(
         3, optional=True, group="_frontRunningProtection"
     )
-    tip: Optional[int] = betterproto.uint64_field(4, optional=True, group="_tip")
     use_staked_rp_cs: Optional[bool] = betterproto.bool_field(
-        6, optional=True, group="_useStakedRPCs"
+        4, optional=True, group="_useStakedRPCs"
     )
     fast_best_effort: Optional[bool] = betterproto.bool_field(
-        7, optional=True, group="_fastBestEffort"
+        5, optional=True, group="_fastBestEffort"
     )
 
 

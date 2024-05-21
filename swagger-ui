@@ -4528,10 +4528,6 @@
         "frontRunningProtection": {
           "type": "boolean"
         },
-        "tip": {
-          "type": "string",
-          "format": "uint64"
-        },
         "useStakedRPCs": {
           "type": "boolean"
         },
