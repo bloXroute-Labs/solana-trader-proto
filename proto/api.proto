@@ -1172,7 +1172,6 @@ message PostSubmitRequest {
   bool skipPreFlight = 2;
   optional bool frontRunningProtection = 3;
   optional uint64 tip = 4;
-  optional uint32 tpu = 5;
   optional bool useStakedRPCs = 6;
   optional bool fastBestEffort = 7;
 }
