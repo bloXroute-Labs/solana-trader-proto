@@ -4606,6 +4606,9 @@
         "openTime": {
           "type": "string",
           "format": "uint64"
+        },
+        "poolType": {
+          "type": "string"
         }
       }
     },

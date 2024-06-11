@@ -1752,6 +1752,7 @@ message ProjectPool {
   string token2MintAddress = 7;
   string token2MintSymbol = 8;
   uint64 openTime = 9;
+  string poolType = 10;
 }
 
 message GetQuotesStreamRequest {
@@ -1788,6 +1789,7 @@ message GetSwapsStreamResponse {
 }
 
 message GetNewRaydiumPoolsRequest {
+      optional bool includeCPMM = 1;
 }
 
 message GetNewRaydiumPoolsResponse {
