@@ -496,13 +496,11 @@ class PostSubmitBatchResponseEntry(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitBatchResponse(betterproto.Message):
     transactions: List["PostSubmitBatchResponseEntry"] = betterproto.message_field(1)
-    uuid: Optional[str] = betterproto.string_field(4, optional=True, group="_uuid")
 
 
 @dataclass(eq=False, repr=False)
 class PostSubmitResponse(betterproto.Message):
     signature: str = betterproto.string_field(1)
-    uuid: Optional[str] = betterproto.string_field(2, optional=True, group="_uuid")
 
 
 @dataclass(eq=False, repr=False)
@@ -966,6 +964,11 @@ class GetBlockStreamResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class InstructionRequest(betterproto.Message):
+    program_id_index: int = betterproto.uint32_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class GetPoolsRequest(betterproto.Message):
     projects: List["Project"] = betterproto.enum_field(1)
     pair_or_address: str = betterproto.string_field(2)
@@ -1070,16 +1073,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1121,6 +1124,7 @@ class ProjectPool(betterproto.Message):
     token2_mint_address: str = betterproto.string_field(7)
     token2_mint_symbol: str = betterproto.string_field(8)
     open_time: int = betterproto.uint64_field(9)
+    pool_type: str = betterproto.string_field(10)
 
 
 @dataclass(eq=False, repr=False)
@@ -1163,7 +1167,9 @@ class GetSwapsStreamResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetNewRaydiumPoolsRequest(betterproto.Message):
-    pass
+    include_cpmm: Optional[bool] = betterproto.bool_field(
+        1, optional=True, group="_includeCPMM"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1188,18 +1194,6 @@ class GetSwapsStreamUpdate(betterproto.Message):
     destination_account: str = betterproto.string_field(11)
     owner_account: str = betterproto.string_field(12)
     signature: str = betterproto.string_field(13)
-
-
-@dataclass(eq=False, repr=False)
-class GetBundleResultRequest(betterproto.Message):
-    uuid: str = betterproto.string_field(1)
-
-
-@dataclass(eq=False, repr=False)
-class GetBundleResultResponse(betterproto.Message):
-    uuid: str = betterproto.string_field(1)
-    bundle_result: str = betterproto.string_field(2)
-    timestamp: datetime = betterproto.message_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -1237,6 +1231,47 @@ class GetRaydiumPricesResponse(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetJupiterPricesResponse(betterproto.Message):
     token_prices: List["TokenPriceV2"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetZetaTransactionStreamRequest(betterproto.Message):
+    instructions: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class Transaction(betterproto.Message):
+    signatures: List[str] = betterproto.string_field(1)
+    message: "TransactionMessageZeta" = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionMessageZeta(betterproto.Message):
+    header: "TransactionMessageHeader" = betterproto.message_field(2)
+    account_keys: List[str] = betterproto.string_field(3)
+    recent_blockhash: str = betterproto.string_field(4)
+    instructions: List["Instruction"] = betterproto.message_field(5)
+    address_table_lookups: List["AddressTableLookup"] = betterproto.message_field(6)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionMessageHeader(betterproto.Message):
+    num_required_signatures: int = betterproto.uint32_field(1)
+    num_readonly_signed_accounts: int = betterproto.uint32_field(2)
+    num_readonly_unsigned_accounts: int = betterproto.uint32_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class AddressTableLookup(betterproto.Message):
+    account_key: str = betterproto.string_field(1)
+    writable_indexes: List[int] = betterproto.uint32_field(2)
+    readonly_indexes: List[int] = betterproto.uint32_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class GetZetaTransactionStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    transaction: "Transaction" = betterproto.message_field(2)
+    meta: "TransactionMeta" = betterproto.message_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -1475,6 +1510,18 @@ class PostSettleRequestV2(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+
+
+@dataclass(eq=False, repr=False)
+class PostZetaCrossMarginAccountRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    compute_limit: int = betterproto.uint32_field(2)
+    compute_price: int = betterproto.uint64_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class PostZetaCrossMarginAccountResponse(betterproto.Message):
+    transactions: "TransactionMessage" = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)
@@ -2430,23 +2477,6 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
-    async def get_bundle_result_v2(
-        self,
-        get_bundle_result_request: "GetBundleResultRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "GetBundleResultResponse":
-        return await self._unary_unary(
-            "/api.Api/GetBundleResultV2",
-            get_bundle_result_request,
-            GetBundleResultResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
     async def get_unsettled(
         self,
         get_unsettled_request: "GetUnsettledRequest",
@@ -2529,6 +2559,24 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetTickersStream",
             get_tickers_stream_request,
             GetTickersStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
+    async def get_zeta_transaction_stream(
+        self,
+        get_zeta_transaction_stream_request: "GetZetaTransactionStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetZetaTransactionStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetZetaTransactionStream",
+            get_zeta_transaction_stream_request,
+            GetZetaTransactionStreamResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2735,6 +2783,7 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
@@ -3007,11 +3056,6 @@ class ApiBase(ServiceBase):
     ) -> "GetOrderByIdResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def get_bundle_result_v2(
-        self, get_bundle_result_request: "GetBundleResultRequest"
-    ) -> "GetBundleResultResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
     async def get_unsettled(
         self, get_unsettled_request: "GetUnsettledRequest"
     ) -> "GetUnsettledResponse":
@@ -3039,6 +3083,12 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetTickersStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetTickersStreamResponse()
+
+    async def get_zeta_transaction_stream(
+        self, get_zeta_transaction_stream_request: "GetZetaTransactionStreamRequest"
+    ) -> AsyncIterator["GetZetaTransactionStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetZetaTransactionStreamResponse()
 
     async def get_trades_stream(
         self, get_trades_request: "GetTradesRequest"
@@ -3517,14 +3567,6 @@ class ApiBase(ServiceBase):
         response = await self.get_order_by_id(request)
         await stream.send_message(response)
 
-    async def __rpc_get_bundle_result_v2(
-        self,
-        stream: "grpclib.server.Stream[GetBundleResultRequest, GetBundleResultResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.get_bundle_result_v2(request)
-        await stream.send_message(response)
-
     async def __rpc_get_unsettled(
         self, stream: "grpclib.server.Stream[GetUnsettledRequest, GetUnsettledResponse]"
     ) -> None:
@@ -3568,6 +3610,17 @@ class ApiBase(ServiceBase):
         request = await stream.recv_message()
         await self._call_rpc_handler_server_stream(
             self.get_tickers_stream,
+            stream,
+            request,
+        )
+
+    async def __rpc_get_zeta_transaction_stream(
+        self,
+        stream: "grpclib.server.Stream[GetZetaTransactionStreamRequest, GetZetaTransactionStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_zeta_transaction_stream,
             stream,
             request,
         )
@@ -4017,12 +4070,6 @@ class ApiBase(ServiceBase):
                 GetOrderByIdRequest,
                 GetOrderByIdResponse,
             ),
-            "/api.Api/GetBundleResultV2": grpclib.const.Handler(
-                self.__rpc_get_bundle_result_v2,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                GetBundleResultRequest,
-                GetBundleResultResponse,
-            ),
             "/api.Api/GetUnsettled": grpclib.const.Handler(
                 self.__rpc_get_unsettled,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -4052,6 +4099,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetTickersStreamRequest,
                 GetTickersStreamResponse,
+            ),
+            "/api.Api/GetZetaTransactionStream": grpclib.const.Handler(
+                self.__rpc_get_zeta_transaction_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetZetaTransactionStreamRequest,
+                GetZetaTransactionStreamResponse,
             ),
             "/api.Api/GetTradesStream": grpclib.const.Handler(
                 self.__rpc_get_trades_stream,
