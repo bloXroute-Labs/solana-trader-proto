@@ -1029,38 +1029,6 @@
         ]
       }
     },
-    "/api/v2/bundle-result/{uuid}": {
-      "get": {
-        "summary": "bundle status based on uuid",
-        "description": "returns bundle result status based on uuid",
-        "operationId": "Api_GetBundleResultV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetBundleResultResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Trade"
-        ]
-      }
-    },
     "/api/v2/jupiter/prices": {
       "get": {
         "summary": "Token prices on Jupiter",
@@ -2159,22 +2127,6 @@
       "properties": {
         "block": {
           "$ref": "#/definitions/apiBlock"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "apiGetBundleResultResponse": {
-      "type": "object",
-      "properties": {
-        "uuid": {
-          "type": "string"
-        },
-        "bundleResult": {
-          "type": "string",
-          "description": "bundleResult contains a string description of the status of a bundle after it has been submitted. Based on the result, (rejected, accepted, processed, dropped), there will be some different fields provided to give information about what happened in the bundle"
         },
         "timestamp": {
           "type": "string",
