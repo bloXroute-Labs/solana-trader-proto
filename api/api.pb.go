@@ -11584,7 +11584,7 @@ func (x *GetBundleTipResponse) GetEmaPercentile50() float64 {
 	return 0
 }
 
-//Openbook V2 Messages
+// Openbook V2 Messages
 type GetMarketsRequestV2 struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
