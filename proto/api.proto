@@ -678,8 +678,6 @@ service Api {
     };
   }
 
-
-
   rpc GetOrderByID(GetOrderByIDRequest) returns (GetOrderByIDResponse) {
     option (google.api.method_visibility).restriction = "INTERNAL";
     option (google.api.http) = {
@@ -689,18 +687,6 @@ service Api {
       description: "Returns an order by ID";
       summary: "Order by ID";
       tags: ["Trade", "Orderbook"];
-    };
-  }
-
-  rpc GetBundleResultV2(GetBundleResultRequest) returns (GetBundleResultResponse) {
-    option (google.api.http) = {
-      get: "/api/v2/bundle-result/{uuid}"
-    };
-
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "returns bundle result status based on uuid";
-      summary: "bundle status based on uuid";
-      tags: ["Trade"];
     };
   }
 
@@ -1201,12 +1187,10 @@ message PostSubmitBatchResponseEntry {
 
 message PostSubmitBatchResponse {
   repeated PostSubmitBatchResponseEntry transactions = 1;
-  optional string uuid = 4;
 }
 
 message PostSubmitResponse {
   string signature = 1;
-  optional string uuid = 2;
 }
 
 
@@ -1812,16 +1796,6 @@ message GetSwapsStreamUpdate {
   string destinationAccount = 11;
   string ownerAccount = 12;
   string signature = 13;
-}
-
-message GetBundleResultRequest {
-  string uuid = 1 [(google.api.field_behavior) = REQUIRED];
-}
-
-message GetBundleResultResponse {
-  string uuid = 1;
-  string bundleResult = 2[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "bundleResult contains a string description of the status of a bundle after it has been submitted. Based on the result, (rejected, accepted, processed, dropped), there will be some different fields provided to give information about what happened in the bundle"}];
-  google.protobuf.Timestamp timestamp = 3;
 }
 
 message TokenPair {

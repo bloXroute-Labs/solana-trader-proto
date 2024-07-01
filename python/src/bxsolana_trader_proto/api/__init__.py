@@ -496,13 +496,11 @@ class PostSubmitBatchResponseEntry(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitBatchResponse(betterproto.Message):
     transactions: List["PostSubmitBatchResponseEntry"] = betterproto.message_field(1)
-    uuid: Optional[str] = betterproto.string_field(4, optional=True, group="_uuid")
 
 
 @dataclass(eq=False, repr=False)
 class PostSubmitResponse(betterproto.Message):
     signature: str = betterproto.string_field(1)
-    uuid: Optional[str] = betterproto.string_field(2, optional=True, group="_uuid")
 
 
 @dataclass(eq=False, repr=False)
@@ -1070,16 +1068,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1121,6 +1119,7 @@ class ProjectPool(betterproto.Message):
     token2_mint_address: str = betterproto.string_field(7)
     token2_mint_symbol: str = betterproto.string_field(8)
     open_time: int = betterproto.uint64_field(9)
+    pool_type: str = betterproto.string_field(10)
 
 
 @dataclass(eq=False, repr=False)
@@ -1163,7 +1162,9 @@ class GetSwapsStreamResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetNewRaydiumPoolsRequest(betterproto.Message):
-    pass
+    include_cpmm: Optional[bool] = betterproto.bool_field(
+        1, optional=True, group="_includeCPMM"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1188,18 +1189,6 @@ class GetSwapsStreamUpdate(betterproto.Message):
     destination_account: str = betterproto.string_field(11)
     owner_account: str = betterproto.string_field(12)
     signature: str = betterproto.string_field(13)
-
-
-@dataclass(eq=False, repr=False)
-class GetBundleResultRequest(betterproto.Message):
-    uuid: str = betterproto.string_field(1)
-
-
-@dataclass(eq=False, repr=False)
-class GetBundleResultResponse(betterproto.Message):
-    uuid: str = betterproto.string_field(1)
-    bundle_result: str = betterproto.string_field(2)
-    timestamp: datetime = betterproto.message_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -2430,23 +2419,6 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
-    async def get_bundle_result_v2(
-        self,
-        get_bundle_result_request: "GetBundleResultRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "GetBundleResultResponse":
-        return await self._unary_unary(
-            "/api.Api/GetBundleResultV2",
-            get_bundle_result_request,
-            GetBundleResultResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
     async def get_unsettled(
         self,
         get_unsettled_request: "GetUnsettledRequest",
@@ -2735,6 +2707,7 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
@@ -3005,11 +2978,6 @@ class ApiBase(ServiceBase):
     async def get_order_by_id(
         self, get_order_by_id_request: "GetOrderByIdRequest"
     ) -> "GetOrderByIdResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
-    async def get_bundle_result_v2(
-        self, get_bundle_result_request: "GetBundleResultRequest"
-    ) -> "GetBundleResultResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_unsettled(
@@ -3517,14 +3485,6 @@ class ApiBase(ServiceBase):
         response = await self.get_order_by_id(request)
         await stream.send_message(response)
 
-    async def __rpc_get_bundle_result_v2(
-        self,
-        stream: "grpclib.server.Stream[GetBundleResultRequest, GetBundleResultResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.get_bundle_result_v2(request)
-        await stream.send_message(response)
-
     async def __rpc_get_unsettled(
         self, stream: "grpclib.server.Stream[GetUnsettledRequest, GetUnsettledResponse]"
     ) -> None:
@@ -4016,12 +3976,6 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetOrderByIdRequest,
                 GetOrderByIdResponse,
-            ),
-            "/api.Api/GetBundleResultV2": grpclib.const.Handler(
-                self.__rpc_get_bundle_result_v2,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                GetBundleResultRequest,
-                GetBundleResultResponse,
             ),
             "/api.Api/GetUnsettled": grpclib.const.Handler(
                 self.__rpc_get_unsettled,
