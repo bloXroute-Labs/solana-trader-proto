@@ -1201,12 +1201,10 @@ message PostSubmitBatchResponseEntry {
 
 message PostSubmitBatchResponse {
   repeated PostSubmitBatchResponseEntry transactions = 1;
-  optional string uuid = 4;
 }
 
 message PostSubmitResponse {
   string signature = 1;
-  optional string uuid = 2;
 }
 
 

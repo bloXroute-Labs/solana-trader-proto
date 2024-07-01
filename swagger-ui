@@ -4496,9 +4496,6 @@
           "items": {
             "$ref": "#/definitions/apiPostSubmitBatchResponseEntry"
           }
-        },
-        "uuid": {
-          "type": "string"
         }
       }
     },
@@ -4555,9 +4552,6 @@
       "type": "object",
       "properties": {
         "signature": {
-          "type": "string"
-        },
-        "uuid": {
           "type": "string"
         }
       }
