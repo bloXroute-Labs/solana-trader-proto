@@ -1521,7 +1521,7 @@ class PostZetaCrossMarginAccountRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class PostZetaCrossMarginAccountResponse(betterproto.Message):
-    transactions: "TransactionMessage" = betterproto.message_field(1)
+    transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)

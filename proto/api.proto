@@ -2093,7 +2093,7 @@ message PostZetaCrossMarginAccountRequest {
 }
 
 message PostZetaCrossMarginAccountResponse {
-  TransactionMessage transactions = 1;
+  TransactionMessage transaction = 1;
 }
 
 message GetOpenOrdersRequestV2 {
