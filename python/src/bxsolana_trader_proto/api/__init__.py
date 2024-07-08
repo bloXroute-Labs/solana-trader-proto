@@ -1950,6 +1950,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def post_zeta_cross_margin_account(
+        self,
+        post_zeta_cross_margin_account_request: "PostZetaCrossMarginAccountRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostZetaCrossMarginAccountResponse":
+        return await self._unary_unary(
+            "/api.Api/PostZetaCrossMarginAccount",
+            post_zeta_cross_margin_account_request,
+            PostZetaCrossMarginAccountResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def post_settle_v2(
         self,
         post_settle_request_v2: "PostSettleRequestV2",
@@ -2901,6 +2918,12 @@ class ApiBase(ServiceBase):
     ) -> "PostOrderResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_zeta_cross_margin_account(
+        self,
+        post_zeta_cross_margin_account_request: "PostZetaCrossMarginAccountRequest",
+    ) -> "PostZetaCrossMarginAccountResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_settle_v2(
         self, post_settle_request_v2: "PostSettleRequestV2"
     ) -> "PostSettleResponse":
@@ -3333,6 +3356,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_replace_order_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_zeta_cross_margin_account(
+        self,
+        stream: "grpclib.server.Stream[PostZetaCrossMarginAccountRequest, PostZetaCrossMarginAccountResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_zeta_cross_margin_account(request)
         await stream.send_message(response)
 
     async def __rpc_post_settle_v2(
@@ -3883,6 +3914,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostReplaceOrderRequestV2,
                 PostOrderResponse,
+            ),
+            "/api.Api/PostZetaCrossMarginAccount": grpclib.const.Handler(
+                self.__rpc_post_zeta_cross_margin_account,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostZetaCrossMarginAccountRequest,
+                PostZetaCrossMarginAccountResponse,
             ),
             "/api.Api/PostSettleV2": grpclib.const.Handler(
                 self.__rpc_post_settle_v2,
