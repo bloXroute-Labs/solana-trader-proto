@@ -964,6 +964,11 @@ class GetBlockStreamResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class InstructionRequest(betterproto.Message):
+    program_id_index: int = betterproto.uint32_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class GetPoolsRequest(betterproto.Message):
     projects: List["Project"] = betterproto.enum_field(1)
     pair_or_address: str = betterproto.string_field(2)
@@ -1229,6 +1234,39 @@ class GetJupiterPricesResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetZetaTransactionStreamRequest(betterproto.Message):
+    instructions: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionZeta(betterproto.Message):
+    signatures: List[str] = betterproto.string_field(1)
+    message: "TransactionMessageZeta" = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionMessageZeta(betterproto.Message):
+    header: "TransactionMessageHeader" = betterproto.message_field(2)
+    account_keys: List[str] = betterproto.string_field(3)
+    recent_blockhash: str = betterproto.string_field(4)
+    instructions: List["Instruction"] = betterproto.message_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionMessageHeader(betterproto.Message):
+    num_required_signatures: int = betterproto.uint32_field(1)
+    num_readonly_signed_accounts: int = betterproto.uint32_field(2)
+    num_readonly_unsigned_accounts: int = betterproto.uint32_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class GetZetaTransactionStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    transaction: "TransactionZeta" = betterproto.message_field(2)
+    meta: "TransactionMeta" = betterproto.message_field(3)
+
+
+@dataclass(eq=False, repr=False)
 class TokenPrice(betterproto.Message):
     token: str = betterproto.string_field(1)
     token_address: str = betterproto.string_field(2)
@@ -1464,6 +1502,18 @@ class PostSettleRequestV2(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+
+
+@dataclass(eq=False, repr=False)
+class PostZetaCrossMarginAccountRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    compute_limit: int = betterproto.uint32_field(2)
+    compute_price: int = betterproto.uint64_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class PostZetaCrossMarginAccountResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)
@@ -1887,6 +1937,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostReplaceOrderV2",
             post_replace_order_request_v2,
             PostOrderResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_zeta_cross_margin_account(
+        self,
+        post_zeta_cross_margin_account_request: "PostZetaCrossMarginAccountRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostZetaCrossMarginAccountResponse":
+        return await self._unary_unary(
+            "/api.Api/PostZetaCrossMarginAccount",
+            post_zeta_cross_margin_account_request,
+            PostZetaCrossMarginAccountResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2507,6 +2574,24 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_zeta_transaction_stream(
+        self,
+        get_zeta_transaction_stream_request: "GetZetaTransactionStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetZetaTransactionStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetZetaTransactionStream",
+            get_zeta_transaction_stream_request,
+            GetZetaTransactionStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
     async def get_trades_stream(
         self,
         get_trades_request: "GetTradesRequest",
@@ -2825,6 +2910,12 @@ class ApiBase(ServiceBase):
     ) -> "PostOrderResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_zeta_cross_margin_account(
+        self,
+        post_zeta_cross_margin_account_request: "PostZetaCrossMarginAccountRequest",
+    ) -> "PostZetaCrossMarginAccountResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_settle_v2(
         self, post_settle_request_v2: "PostSettleRequestV2"
     ) -> "PostSettleResponse":
@@ -3007,6 +3098,12 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetTickersStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetTickersStreamResponse()
+
+    async def get_zeta_transaction_stream(
+        self, get_zeta_transaction_stream_request: "GetZetaTransactionStreamRequest"
+    ) -> AsyncIterator["GetZetaTransactionStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetZetaTransactionStreamResponse()
 
     async def get_trades_stream(
         self, get_trades_request: "GetTradesRequest"
@@ -3251,6 +3348,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_replace_order_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_zeta_cross_margin_account(
+        self,
+        stream: "grpclib.server.Stream[PostZetaCrossMarginAccountRequest, PostZetaCrossMarginAccountResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_zeta_cross_margin_account(request)
         await stream.send_message(response)
 
     async def __rpc_post_settle_v2(
@@ -3532,6 +3637,17 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_zeta_transaction_stream(
+        self,
+        stream: "grpclib.server.Stream[GetZetaTransactionStreamRequest, GetZetaTransactionStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_zeta_transaction_stream,
+            stream,
+            request,
+        )
+
     async def __rpc_get_trades_stream(
         self, stream: "grpclib.server.Stream[GetTradesRequest, GetTradesStreamResponse]"
     ) -> None:
@@ -3791,6 +3907,12 @@ class ApiBase(ServiceBase):
                 PostReplaceOrderRequestV2,
                 PostOrderResponse,
             ),
+            "/api.Api/PostZetaCrossMarginAccount": grpclib.const.Handler(
+                self.__rpc_post_zeta_cross_margin_account,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostZetaCrossMarginAccountRequest,
+                PostZetaCrossMarginAccountResponse,
+            ),
             "/api.Api/PostSettleV2": grpclib.const.Handler(
                 self.__rpc_post_settle_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -4006,6 +4128,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetTickersStreamRequest,
                 GetTickersStreamResponse,
+            ),
+            "/api.Api/GetZetaTransactionStream": grpclib.const.Handler(
+                self.__rpc_get_zeta_transaction_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetZetaTransactionStreamRequest,
+                GetZetaTransactionStreamResponse,
             ),
             "/api.Api/GetTradesStream": grpclib.const.Handler(
                 self.__rpc_get_trades_stream,
