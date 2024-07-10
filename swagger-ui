@@ -2076,28 +2076,6 @@
         }
       }
     },
-    "apiAddressTableLookup": {
-      "type": "object",
-      "properties": {
-        "accountKey": {
-          "type": "string"
-        },
-        "writableIndexes": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          }
-        },
-        "readonlyIndexes": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      }
-    },
     "apiBlock": {
       "type": "object",
       "properties": {
@@ -5302,12 +5280,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiInstruction"
-          }
-        },
-        "addressTableLookups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiAddressTableLookup"
           }
         }
       }

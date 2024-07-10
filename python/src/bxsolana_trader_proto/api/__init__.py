@@ -1250,7 +1250,6 @@ class TransactionMessageZeta(betterproto.Message):
     account_keys: List[str] = betterproto.string_field(3)
     recent_blockhash: str = betterproto.string_field(4)
     instructions: List["Instruction"] = betterproto.message_field(5)
-    address_table_lookups: List["AddressTableLookup"] = betterproto.message_field(6)
 
 
 @dataclass(eq=False, repr=False)
@@ -1258,13 +1257,6 @@ class TransactionMessageHeader(betterproto.Message):
     num_required_signatures: int = betterproto.uint32_field(1)
     num_readonly_signed_accounts: int = betterproto.uint32_field(2)
     num_readonly_unsigned_accounts: int = betterproto.uint32_field(3)
-
-
-@dataclass(eq=False, repr=False)
-class AddressTableLookup(betterproto.Message):
-    account_key: str = betterproto.string_field(1)
-    writable_indexes: List[int] = betterproto.uint32_field(2)
-    readonly_indexes: List[int] = betterproto.uint32_field(3)
 
 
 @dataclass(eq=False, repr=False)
