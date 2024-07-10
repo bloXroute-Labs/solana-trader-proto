@@ -1239,7 +1239,7 @@ class GetZetaTransactionStreamRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
-class Transaction(betterproto.Message):
+class TransactionZeta(betterproto.Message):
     signatures: List[str] = betterproto.string_field(1)
     message: "TransactionMessageZeta" = betterproto.message_field(2)
 
@@ -1262,7 +1262,7 @@ class TransactionMessageHeader(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetZetaTransactionStreamResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
-    transaction: "Transaction" = betterproto.message_field(2)
+    transaction: "TransactionZeta" = betterproto.message_field(2)
     meta: "TransactionMeta" = betterproto.message_field(3)
 
 

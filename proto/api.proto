@@ -1854,7 +1854,7 @@ message GetZetaTransactionStreamRequest {
   repeated string instructions = 1;
 }
 
-message Transaction {
+message TransactionZeta {
   repeated string signatures = 1;
   TransactionMessageZeta message = 2;
 }
@@ -1876,7 +1876,7 @@ message TransactionMessageHeader {
 
 message GetZetaTransactionStreamResponse {
   int64 slot = 1;
-  Transaction transaction = 2;
+  TransactionZeta transaction = 2;
   TransactionMeta meta = 3;
 }
 

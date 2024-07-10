@@ -2956,7 +2956,7 @@
           "format": "int64"
         },
         "transaction": {
-          "$ref": "#/definitions/apiTransaction"
+          "$ref": "#/definitions/apiTransactionZeta"
         },
         "meta": {
           "$ref": "#/definitions/apiTransactionMeta"
@@ -5219,20 +5219,6 @@
         }
       }
     },
-    "apiTransaction": {
-      "type": "object",
-      "properties": {
-        "signatures": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "message": {
-          "$ref": "#/definitions/apiTransactionMessageZeta"
-        }
-      }
-    },
     "apiTransactionMessage": {
       "type": "object",
       "properties": {
@@ -5367,6 +5353,20 @@
         },
         "owner": {
           "type": "string"
+        }
+      }
+    },
+    "apiTransactionZeta": {
+      "type": "object",
+      "properties": {
+        "signatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "$ref": "#/definitions/apiTransactionMessageZeta"
         }
       }
     },
