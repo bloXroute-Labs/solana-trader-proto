@@ -2085,6 +2085,7 @@ message PostZetaCrossMarginAccountRequest {
   string owner_address = 1;
   uint32 computeLimit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message PostZetaCrossMarginAccountResponse {
