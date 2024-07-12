@@ -1509,6 +1509,7 @@ class PostZetaCrossMarginAccountRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
     compute_limit: int = betterproto.uint32_field(2)
     compute_price: int = betterproto.uint64_field(3)
+    tip: Optional[int] = betterproto.uint64_field(4, optional=True, group="_tip")
 
 
 @dataclass(eq=False, repr=False)
