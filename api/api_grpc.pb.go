@@ -43,6 +43,7 @@ type ApiClient interface {
 	PostOrderV2(ctx context.Context, in *PostOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
 	PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponseV2, error)
 	PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
+	PostZetaCrossMarginAccount(ctx context.Context, in *PostZetaCrossMarginAccountRequest, opts ...grpc.CallOption) (*PostZetaCrossMarginAccountResponse, error)
 	PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error)
 	GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponseV2, error)
 	GetUnsettledV2(ctx context.Context, in *GetUnsettledRequestV2, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
@@ -83,6 +84,7 @@ type ApiClient interface {
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
 	GetTickersStream(ctx context.Context, in *GetTickersStreamRequest, opts ...grpc.CallOption) (Api_GetTickersStreamClient, error)
+	GetZetaTransactionStream(ctx context.Context, in *GetZetaTransactionStreamRequest, opts ...grpc.CallOption) (Api_GetZetaTransactionStreamClient, error)
 	GetTradesStream(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (Api_GetTradesStreamClient, error)
 	GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error)
 	GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error)
@@ -305,6 +307,15 @@ func (c *apiClient) PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRe
 func (c *apiClient) PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error) {
 	out := new(PostOrderResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostReplaceOrderV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostZetaCrossMarginAccount(ctx context.Context, in *PostZetaCrossMarginAccountRequest, opts ...grpc.CallOption) (*PostZetaCrossMarginAccountResponse, error) {
+	out := new(PostZetaCrossMarginAccountResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostZetaCrossMarginAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -704,8 +715,40 @@ func (x *apiGetTickersStreamClient) Recv() (*GetTickersStreamResponse, error) {
 	return m, nil
 }
 
+func (c *apiClient) GetZetaTransactionStream(ctx context.Context, in *GetZetaTransactionStreamRequest, opts ...grpc.CallOption) (Api_GetZetaTransactionStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetZetaTransactionStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetZetaTransactionStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetZetaTransactionStreamClient interface {
+	Recv() (*GetZetaTransactionStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetZetaTransactionStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetZetaTransactionStreamClient) Recv() (*GetZetaTransactionStreamResponse, error) {
+	m := new(GetZetaTransactionStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetTradesStream(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (Api_GetTradesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetTradesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetTradesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -737,7 +780,7 @@ func (x *apiGetTradesStreamClient) Recv() (*GetTradesStreamResponse, error) {
 }
 
 func (c *apiClient) GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetOrderStatusStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetOrderStatusStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -769,7 +812,7 @@ func (x *apiGetOrderStatusStreamClient) Recv() (*GetOrderStatusStreamResponse, e
 }
 
 func (c *apiClient) GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetRecentBlockHashStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetRecentBlockHashStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -801,7 +844,7 @@ func (x *apiGetRecentBlockHashStreamClient) Recv() (*GetRecentBlockHashResponse,
 }
 
 func (c *apiClient) GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetBlockStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetBlockStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -833,7 +876,7 @@ func (x *apiGetBlockStreamClient) Recv() (*GetBlockStreamResponse, error) {
 }
 
 func (c *apiClient) GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetPriorityFeeStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetPriorityFeeStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -865,7 +908,7 @@ func (x *apiGetPriorityFeeStreamClient) Recv() (*GetPriorityFeeResponse, error) 
 }
 
 func (c *apiClient) GetBundleTipStream(ctx context.Context, in *GetBundleTipRequest, opts ...grpc.CallOption) (Api_GetBundleTipStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetBundleTipStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetBundleTipStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -897,7 +940,7 @@ func (x *apiGetBundleTipStreamClient) Recv() (*GetBundleTipResponse, error) {
 }
 
 func (c *apiClient) GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetQuotesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetQuotesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -929,7 +972,7 @@ func (x *apiGetQuotesStreamClient) Recv() (*GetQuotesStreamResponse, error) {
 }
 
 func (c *apiClient) GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPoolReservesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetPoolReservesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -961,7 +1004,7 @@ func (x *apiGetPoolReservesStreamClient) Recv() (*GetPoolReservesStreamResponse,
 }
 
 func (c *apiClient) GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetPricesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetPricesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -993,7 +1036,7 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 }
 
 func (c *apiClient) GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetNewRaydiumPoolsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetNewRaydiumPoolsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1025,7 +1068,7 @@ func (x *apiGetNewRaydiumPoolsStreamClient) Recv() (*GetNewRaydiumPoolsResponse,
 }
 
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1085,6 +1128,7 @@ type ApiServer interface {
 	PostOrderV2(context.Context, *PostOrderRequestV2) (*PostOrderResponse, error)
 	PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponseV2, error)
 	PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error)
+	PostZetaCrossMarginAccount(context.Context, *PostZetaCrossMarginAccountRequest) (*PostZetaCrossMarginAccountResponse, error)
 	PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error)
 	GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponseV2, error)
 	GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error)
@@ -1125,6 +1169,7 @@ type ApiServer interface {
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
 	GetTickersStream(*GetTickersStreamRequest, Api_GetTickersStreamServer) error
+	GetZetaTransactionStream(*GetZetaTransactionStreamRequest, Api_GetZetaTransactionStreamServer) error
 	GetTradesStream(*GetTradesRequest, Api_GetTradesStreamServer) error
 	GetOrderStatusStream(*GetOrderStatusStreamRequest, Api_GetOrderStatusStreamServer) error
 	GetRecentBlockHashStream(*GetRecentBlockHashRequest, Api_GetRecentBlockHashStreamServer) error
@@ -1211,6 +1256,9 @@ func (UnimplementedApiServer) PostCancelOrderV2(context.Context, *PostCancelOrde
 }
 func (UnimplementedApiServer) PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostReplaceOrderV2 not implemented")
+}
+func (UnimplementedApiServer) PostZetaCrossMarginAccount(context.Context, *PostZetaCrossMarginAccountRequest) (*PostZetaCrossMarginAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostZetaCrossMarginAccount not implemented")
 }
 func (UnimplementedApiServer) PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSettleV2 not implemented")
@@ -1319,6 +1367,9 @@ func (UnimplementedApiServer) GetMarketDepthsStream(*GetMarketDepthsRequest, Api
 }
 func (UnimplementedApiServer) GetTickersStream(*GetTickersStreamRequest, Api_GetTickersStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTickersStream not implemented")
+}
+func (UnimplementedApiServer) GetZetaTransactionStream(*GetZetaTransactionStreamRequest, Api_GetZetaTransactionStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetZetaTransactionStream not implemented")
 }
 func (UnimplementedApiServer) GetTradesStream(*GetTradesRequest, Api_GetTradesStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTradesStream not implemented")
@@ -1776,6 +1827,24 @@ func _Api_PostReplaceOrderV2_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostReplaceOrderV2(ctx, req.(*PostReplaceOrderRequestV2))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostZetaCrossMarginAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostZetaCrossMarginAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostZetaCrossMarginAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostZetaCrossMarginAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostZetaCrossMarginAccount(ctx, req.(*PostZetaCrossMarginAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2437,6 +2506,27 @@ func (x *apiGetTickersStreamServer) Send(m *GetTickersStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetZetaTransactionStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetZetaTransactionStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetZetaTransactionStream(m, &apiGetZetaTransactionStreamServer{stream})
+}
+
+type Api_GetZetaTransactionStreamServer interface {
+	Send(*GetZetaTransactionStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetZetaTransactionStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetZetaTransactionStreamServer) Send(m *GetZetaTransactionStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetTradesStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetTradesRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2768,6 +2858,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_PostReplaceOrderV2_Handler,
 		},
 		{
+			MethodName: "PostZetaCrossMarginAccount",
+			Handler:    _Api_PostZetaCrossMarginAccount_Handler,
+		},
+		{
 			MethodName: "PostSettleV2",
 			Handler:    _Api_PostSettleV2_Handler,
 		},
@@ -2914,6 +3008,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetTickersStream",
 			Handler:       _Api_GetTickersStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetZetaTransactionStream",
+			Handler:       _Api_GetZetaTransactionStream_Handler,
 			ServerStreams: true,
 		},
 		{
