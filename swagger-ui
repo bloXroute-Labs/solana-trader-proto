@@ -4532,9 +4532,6 @@
         },
         "useStakedRPCs": {
           "type": "boolean"
-        },
-        "fastBestEffort": {
-          "type": "boolean"
         }
       }
     },
