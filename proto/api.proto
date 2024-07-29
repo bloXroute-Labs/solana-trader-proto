@@ -1159,7 +1159,6 @@ message PostSubmitRequest {
   optional bool frontRunningProtection = 3;
   optional uint64 tip = 4;
   optional bool useStakedRPCs = 6;
-  optional bool fastBestEffort = 7;
 }
 
 message PostSubmitRequestEntry {
