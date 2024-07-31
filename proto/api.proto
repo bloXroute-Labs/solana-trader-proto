@@ -815,6 +815,12 @@ service Api {
       tags: "AMMs";
     };
   }
+
+  rpc GetPumpFunSwapsStream(GetPumpFunSwapsStreamRequest) returns (stream GetPumpFunSwapsStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
 }
 
 message GetMarketsRequest {
@@ -2123,3 +2129,16 @@ message OrderV2 {
 }
 
 //End of Openbook V2 Messages
+
+message GetPumpFunSwapsStreamRequest {
+  repeated string tokens = 1;
+}
+
+message GetPumpFunSwapsStreamResponse {
+  int64 slot = 1;
+  string signature = 2;
+	string source = 3;
+	string destination = 4;
+	uint64 amount = 5;
+  // google.protobuf.Timestamp timestamp = 3;
+}
