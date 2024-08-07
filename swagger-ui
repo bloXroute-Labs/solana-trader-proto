@@ -4486,6 +4486,9 @@
         },
         "useBundle": {
           "type": "boolean"
+        },
+        "frontRunningProtection": {
+          "type": "boolean"
         }
       }
     },

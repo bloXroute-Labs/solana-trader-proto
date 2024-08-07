@@ -1195,6 +1195,7 @@ message PostSubmitBatchRequest {
   repeated PostSubmitRequestEntry entries = 1;
   SubmitStrategy submitStrategy = 2;
   optional bool useBundle = 3;
+  optional bool frontRunningProtection = 4;
 }
 message PostSubmitBatchResponseEntry {
   string signature = 1;
