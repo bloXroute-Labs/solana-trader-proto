@@ -481,10 +481,10 @@ class PostSubmitRequestEntry(betterproto.Message):
 class PostSubmitBatchRequest(betterproto.Message):
     entries: List["PostSubmitRequestEntry"] = betterproto.message_field(1)
     use_bundle: Optional[bool] = betterproto.bool_field(
-        2, optional=True, group="_useBundle"
+        3, optional=True, group="_useBundle"
     )
     front_running_protection: Optional[bool] = betterproto.bool_field(
-        3, optional=True, group="_frontRunningProtection"
+        4, optional=True, group="_frontRunningProtection"
     )
 
 
