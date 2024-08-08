@@ -4481,10 +4481,10 @@
             "$ref": "#/definitions/apiPostSubmitRequestEntry"
           }
         },
-        "submitStrategy": {
-          "$ref": "#/definitions/apiSubmitStrategy"
-        },
         "useBundle": {
+          "type": "boolean"
+        },
+        "frontRunningProtection": {
           "type": "boolean"
         }
       }
@@ -4531,6 +4531,9 @@
           "format": "uint64"
         },
         "useStakedRPCs": {
+          "type": "boolean"
+        },
+        "fastBestEffort": {
           "type": "boolean"
         }
       }
@@ -4936,16 +4939,6 @@
           "format": "int64"
         }
       }
-    },
-    "apiSubmitStrategy": {
-      "type": "string",
-      "enum": [
-        "P_UKNOWN",
-        "P_SUBMIT_ALL",
-        "P_ABORT_ON_FIRST_ERROR",
-        "P_WAIT_FOR_CONFIRMATION"
-      ],
-      "default": "P_UKNOWN"
     },
     "apiTicker": {
       "type": "object",

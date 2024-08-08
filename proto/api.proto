@@ -1177,6 +1177,7 @@ message PostSubmitRequest {
   optional bool frontRunningProtection = 3;
   optional uint64 tip = 4;
   optional bool useStakedRPCs = 6;
+  optional bool fastBestEffort = 7;
 }
 
 message PostSubmitRequestEntry {
@@ -1193,8 +1194,8 @@ enum SubmitStrategy {
 
 message PostSubmitBatchRequest {
   repeated PostSubmitRequestEntry entries = 1;
-  SubmitStrategy submitStrategy = 2;
-  optional bool useBundle = 3;
+  optional bool useBundle = 2;
+  optional bool frontRunningProtection = 3;
 }
 message PostSubmitBatchResponseEntry {
   string signature = 1;
