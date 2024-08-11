@@ -324,17 +324,17 @@ service Api {
     };
   }
 
-  rpc PostZetaCrossMarginAccount(PostZetaCrossMarginAccountRequest) returns (PostZetaCrossMarginAccountResponse) {
-    option (google.api.http) = {
-      post: "/api/v2/zeta/cross-margin-account"
-      body: "*"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Generates a `ZetaMarkets` Cross Margin Account through bloXroute Referral Program";
-      summary: "Zeta Markets Cross Margin Account Creation";
-      tags:["Zeta Markets"];
-    };
-  }
+  // rpc PostZetaCrossMarginAccount(PostZetaCrossMarginAccountRequest) returns (PostZetaCrossMarginAccountResponse) {
+  //   option (google.api.http) = {
+  //     post: "/api/v2/zeta/cross-margin-account"
+  //     body: "*"
+  //   };
+  //   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+  //     description: "Generates a `ZetaMarkets` Cross Margin Account through bloXroute Referral Program";
+  //     summary: "Zeta Markets Cross Margin Account Creation";
+  //     tags:["Zeta Markets"];
+  //   };
+  // }
 
   rpc PostSettleV2(PostSettleRequestV2) returns (PostSettleResponse) {
     option (google.api.http) = {
@@ -744,11 +744,11 @@ service Api {
     };
   }
 
-  rpc GetZetaTransactionStream(GetZetaTransactionStreamRequest) returns (stream GetZetaTransactionStreamResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "System";
-    };
-  }
+  // rpc GetZetaTransactionStream(GetZetaTransactionStreamRequest) returns (stream GetZetaTransactionStreamResponse) {
+  //   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+  //     tags: "System";
+  //   };
+  // }
 
   rpc GetTradesStream(GetTradesRequest) returns (stream GetTradesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
