@@ -2586,6 +2586,53 @@
         }
       }
     },
+    "apiGetPumpFunSwapsStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "txnHash": {
+          "type": "string"
+        },
+        "mintAddress": {
+          "type": "string"
+        },
+        "userTokenAccountAddress": {
+          "type": "string"
+        },
+        "bondingCurveAddress": {
+          "type": "string"
+        },
+        "tokenVaultAddress": {
+          "type": "string"
+        },
+        "solAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "tokenAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "isBuy": {
+          "type": "boolean"
+        },
+        "virtualSolReserves": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "virtualTokenReserves": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "apiGetQuotesResponse": {
       "type": "object",
       "properties": {
