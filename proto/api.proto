@@ -725,6 +725,17 @@ service Api {
     };
   }
 
+  rpc PostubmitMineOre(PostSubmitMineOreRequest) returns (PostSubmitMineOreResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/mine-ore"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits two transactions in sequence for mining ore";
+      summary: "Submit mine ore transactions";
+    };
+  }
+
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -838,6 +849,15 @@ message Market {
 enum MarketStatus {
   MS_UNKNOWN = 0; // unknown
   MS_ONLINE = 1; // online
+}
+
+message PostSubmitMineOreResponse {
+  string status = 1;
+}
+
+message PostSubmitMineOreRequest {
+  PostSubmitRequest first_transaction = 1;
+  PostSubmitRequest second_transaction = 2;
 }
 
 message GetTickersRequest {

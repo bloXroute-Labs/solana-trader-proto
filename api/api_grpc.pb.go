@@ -80,6 +80,7 @@ type ApiClient interface {
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
+	PostubmitMineOre(ctx context.Context, in *PostSubmitMineOreRequest, opts ...grpc.CallOption) (*PostSubmitMineOreResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -613,6 +614,15 @@ func (c *apiClient) GetUnsettled(ctx context.Context, in *GetUnsettledRequest, o
 func (c *apiClient) PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error) {
 	out := new(TradeSwapResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostRouteTradeSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostubmitMineOre(ctx context.Context, in *PostSubmitMineOreRequest, opts ...grpc.CallOption) (*PostSubmitMineOreResponse, error) {
+	out := new(PostSubmitMineOreResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostubmitMineOre", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1165,6 +1175,7 @@ type ApiServer interface {
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
+	PostubmitMineOre(context.Context, *PostSubmitMineOreRequest) (*PostSubmitMineOreResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -1358,6 +1369,9 @@ func (UnimplementedApiServer) GetUnsettled(context.Context, *GetUnsettledRequest
 }
 func (UnimplementedApiServer) PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRouteTradeSwap not implemented")
+}
+func (UnimplementedApiServer) PostubmitMineOre(context.Context, *PostSubmitMineOreRequest) (*PostSubmitMineOreResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostubmitMineOre not implemented")
 }
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
@@ -2443,6 +2457,24 @@ func _Api_PostRouteTradeSwap_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_PostubmitMineOre_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostSubmitMineOreRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostubmitMineOre(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostubmitMineOre",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostubmitMineOre(ctx, req.(*PostSubmitMineOreRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetOrderbooksStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetOrderbooksRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2992,6 +3024,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostRouteTradeSwap",
 			Handler:    _Api_PostRouteTradeSwap_Handler,
+		},
+		{
+			MethodName: "PostubmitMineOre",
+			Handler:    _Api_PostubmitMineOre_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

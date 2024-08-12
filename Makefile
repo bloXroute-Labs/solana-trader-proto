@@ -30,7 +30,7 @@ proto-build-swagger:
 proto-build-api-go:
 	docker run -v $(CURDIR)/api:/go/protobuf/out \
 			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
-		protoc --go_out=../out --go_opt=paths=source_relative  --go-grpc_out=../out --go-grpc_opt=paths=source_relative api.proto
+		protoc --go_out=../out --go_opt=paths=source_relative  --go-grpc_out=../out --go-grpc_opt=paths=source_relative api.proto --platform linux/amd64
 
 proto-build-api-jito:
 	docker run -v $(CURDIR)/mev-protos-go:/go/protobuf/out \
