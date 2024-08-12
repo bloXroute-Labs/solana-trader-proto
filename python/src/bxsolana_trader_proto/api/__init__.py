@@ -14,6 +14,7 @@ from typing import (
 )
 
 import betterproto
+import betterproto.lib.google.protobuf as betterproto_lib_google_protobuf
 import grpclib
 from betterproto.grpc.grpclib_server import ServiceBase
 
@@ -95,6 +96,11 @@ class Market(betterproto.Message):
     base_decimals: int = betterproto.int64_field(6)
     quote_decimals: int = betterproto.int64_field(7)
     project: "Project" = betterproto.enum_field(8)
+
+
+@dataclass(eq=False, repr=False)
+class PostSubmitMineOreRequest(betterproto.Message):
+    transactions: List[str] = betterproto.string_field(1)
 
 
 @dataclass(eq=False, repr=False)
@@ -2524,6 +2530,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def post_submit_mine_ore(
+        self,
+        post_submit_mine_ore_request: "PostSubmitMineOreRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "betterproto_lib_google_protobuf.Empty":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitMineOre",
+            post_submit_mine_ore_request,
+            betterproto_lib_google_protobuf.Empty,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_orderbooks_stream(
         self,
         get_orderbooks_request: "GetOrderbooksRequest",
@@ -3084,6 +3107,11 @@ class ApiBase(ServiceBase):
     ) -> "TradeSwapResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_submit_mine_ore(
+        self, post_submit_mine_ore_request: "PostSubmitMineOreRequest"
+    ) -> "betterproto_lib_google_protobuf.Empty":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_orderbooks_stream(
         self, get_orderbooks_request: "GetOrderbooksRequest"
     ) -> AsyncIterator["GetOrderbooksStreamResponse"]:
@@ -3607,6 +3635,14 @@ class ApiBase(ServiceBase):
         response = await self.post_route_trade_swap(request)
         await stream.send_message(response)
 
+    async def __rpc_post_submit_mine_ore(
+        self,
+        stream: "grpclib.server.Stream[PostSubmitMineOreRequest, betterproto_lib_google_protobuf.Empty]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_mine_ore(request)
+        await stream.send_message(response)
+
     async def __rpc_get_orderbooks_stream(
         self,
         stream: "grpclib.server.Stream[GetOrderbooksRequest, GetOrderbooksStreamResponse]",
@@ -4113,6 +4149,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 RouteTradeSwapRequest,
                 TradeSwapResponse,
+            ),
+            "/api.Api/PostSubmitMineOre": grpclib.const.Handler(
+                self.__rpc_post_submit_mine_ore,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitMineOreRequest,
+                betterproto_lib_google_protobuf.Empty,
             ),
             "/api.Api/GetOrderbooksStream": grpclib.const.Handler(
                 self.__rpc_get_orderbooks_stream,
