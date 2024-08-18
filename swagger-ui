@@ -2552,6 +2552,40 @@
         }
       }
     },
+    "apiGetPumpFunNewTokensStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "txnHash": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "mint": {
+          "type": "string"
+        },
+        "bondingCurve": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "apiGetPumpFunSwapsStreamResponse": {
       "type": "object",
       "properties": {

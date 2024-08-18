@@ -821,6 +821,12 @@ service Api {
       tags: "AMMs";
     };
   }
+
+  rpc GetPumpFunNewTokensStream(GetPumpFunNewTokensStreamRequest) returns (stream GetPumpFunNewTokensStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
 }
 
 message GetMarketsRequest {
@@ -2148,4 +2154,18 @@ message GetPumpFunSwapsStreamResponse {
   uint64 virtualSolReserves = 11;
   uint64 virtualTokenReserves = 12;
   google.protobuf.Timestamp timestamp = 13;
+}
+
+message GetPumpFunNewTokensStreamRequest {}
+
+message GetPumpFunNewTokensStreamResponse {
+  int64 slot = 1;
+  string txnHash = 2;
+  string name = 3;
+	string symbol = 4;
+	string uri = 5;
+	string mint = 6;
+	string bondingCurve = 7;
+	string creator = 8;
+  google.protobuf.Timestamp timestamp = 9;
 }
