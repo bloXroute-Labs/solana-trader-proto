@@ -2154,13 +2154,14 @@ message GetPumpFunSwapsStreamResponse {
   int64 slot = 1;
   string txnHash = 2;
 	string mintAddress = 3;
-	string userTokenAccountAddress = 4;
-	string bondingCurveAddress = 5;
-	string tokenVaultAddress = 6;
-	uint64 solAmount = 7;
-	uint64 tokenAmount = 8;
-  bool isBuy = 9;
-  uint64 virtualSolReserves = 10;
-  uint64 virtualTokenReserves = 11;
-  google.protobuf.Timestamp timestamp = 12;
+	string userAddress = 4;
+	string userTokenAccountAddress = 5;
+	string bondingCurveAddress = 6;
+	string tokenVaultAddress = 7;
+	uint64 solAmount = 8;
+	uint64 tokenAmount = 9;
+  bool isBuy = 10;
+  uint64 virtualSolReserves = 11;
+  uint64 virtualTokenReserves = 12;
+  google.protobuf.Timestamp timestamp = 13;
 }

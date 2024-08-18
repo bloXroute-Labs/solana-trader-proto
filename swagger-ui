@@ -2599,6 +2599,9 @@
         "mintAddress": {
           "type": "string"
         },
+        "userAddress": {
+          "type": "string"
+        },
         "userTokenAccountAddress": {
           "type": "string"
         },
