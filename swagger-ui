@@ -441,40 +441,6 @@
         ]
       }
     },
-    "/api/v1/mine-ore": {
-      "post": {
-        "summary": "Submit mine ore transactions",
-        "description": "Submits two transactions in sequence for mining ore",
-        "operationId": "Api_PostubmitMineOre",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostSubmitMineOreResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiPostSubmitMineOreRequest"
-            }
-          }
-        ],
-        "tags": [
-          "Api"
-        ]
-      }
-    },
     "/api/v1/system/blockhash": {
       "get": {
         "summary": "Recent block hash",
@@ -1256,6 +1222,40 @@
         ],
         "tags": [
           "Jupiter V2"
+        ]
+      }
+    },
+    "/api/v2/mine-ore": {
+      "post": {
+        "summary": "Submit mine ore transactions",
+        "description": "Submits two transactions in sequence for mining ore",
+        "operationId": "Api_PostSubmitMineOre",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Ore"
         ]
       }
     },
@@ -4545,25 +4545,6 @@
         },
         "submitted": {
           "type": "boolean"
-        }
-      }
-    },
-    "apiPostSubmitMineOreRequest": {
-      "type": "object",
-      "properties": {
-        "firstTransaction": {
-          "$ref": "#/definitions/apiPostSubmitRequest"
-        },
-        "secondTransaction": {
-          "$ref": "#/definitions/apiPostSubmitRequest"
-        }
-      }
-    },
-    "apiPostSubmitMineOreResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string"
         }
       }
     },

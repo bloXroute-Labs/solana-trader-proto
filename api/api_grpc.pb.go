@@ -80,7 +80,7 @@ type ApiClient interface {
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
-	PostubmitMineOre(ctx context.Context, in *PostSubmitMineOreRequest, opts ...grpc.CallOption) (*PostSubmitMineOreResponse, error)
+	PostSubmitMineOre(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
@@ -620,9 +620,9 @@ func (c *apiClient) PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRe
 	return out, nil
 }
 
-func (c *apiClient) PostubmitMineOre(ctx context.Context, in *PostSubmitMineOreRequest, opts ...grpc.CallOption) (*PostSubmitMineOreResponse, error) {
-	out := new(PostSubmitMineOreResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostubmitMineOre", in, out, opts...)
+func (c *apiClient) PostSubmitMineOre(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error) {
+	out := new(PostSubmitResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitMineOre", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1175,7 +1175,7 @@ type ApiServer interface {
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
-	PostubmitMineOre(context.Context, *PostSubmitMineOreRequest) (*PostSubmitMineOreResponse, error)
+	PostSubmitMineOre(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
@@ -1370,8 +1370,8 @@ func (UnimplementedApiServer) GetUnsettled(context.Context, *GetUnsettledRequest
 func (UnimplementedApiServer) PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRouteTradeSwap not implemented")
 }
-func (UnimplementedApiServer) PostubmitMineOre(context.Context, *PostSubmitMineOreRequest) (*PostSubmitMineOreResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostubmitMineOre not implemented")
+func (UnimplementedApiServer) PostSubmitMineOre(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitMineOre not implemented")
 }
 func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
@@ -2457,20 +2457,20 @@ func _Api_PostRouteTradeSwap_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_PostubmitMineOre_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostSubmitMineOreRequest)
+func _Api_PostSubmitMineOre_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostSubmitRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).PostubmitMineOre(ctx, in)
+		return srv.(ApiServer).PostSubmitMineOre(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/PostubmitMineOre",
+		FullMethod: "/api.Api/PostSubmitMineOre",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostubmitMineOre(ctx, req.(*PostSubmitMineOreRequest))
+		return srv.(ApiServer).PostSubmitMineOre(ctx, req.(*PostSubmitRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3026,8 +3026,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_PostRouteTradeSwap_Handler,
 		},
 		{
-			MethodName: "PostubmitMineOre",
-			Handler:    _Api_PostubmitMineOre_Handler,
+			MethodName: "PostSubmitMineOre",
+			Handler:    _Api_PostSubmitMineOre_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
