@@ -2386,7 +2386,7 @@ func local_request_Api_PostRouteTradeSwap_0(ctx context.Context, marshaler runti
 }
 
 func request_Api_PostSubmitMineOre_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostSubmitMineOreRequest
+	var protoReq PostSubmitRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -2403,7 +2403,7 @@ func request_Api_PostSubmitMineOre_0(ctx context.Context, marshaler runtime.Mars
 }
 
 func local_request_Api_PostSubmitMineOre_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostSubmitMineOreRequest
+	var protoReq PostSubmitRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)

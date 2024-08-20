@@ -1234,8 +1234,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "type": "object",
-              "properties": {}
+              "$ref": "#/definitions/apiPostSubmitResponse"
             }
           },
           "default": {
@@ -1251,7 +1250,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostSubmitMineOreRequest"
+              "$ref": "#/definitions/apiPostSubmitRequest"
             }
           }
         ],
@@ -4549,17 +4548,6 @@
         },
         "submitted": {
           "type": "boolean"
-        }
-      }
-    },
-    "apiPostSubmitMineOreRequest": {
-      "type": "object",
-      "properties": {
-        "transactions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
