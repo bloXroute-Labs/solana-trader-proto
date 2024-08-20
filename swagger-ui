@@ -2059,6 +2059,40 @@
           "Solana RPC"
         ]
       }
+    },
+    "/api/v2/zeta/cross-margin-account": {
+      "post": {
+        "summary": "Zeta Markets Cross Margin Account Creation",
+        "description": "Generates a `ZetaMarkets` Cross Margin Account through bloXroute Referral Program",
+        "operationId": "Api_PostZetaCrossMarginAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostZetaCrossMarginAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostZetaCrossMarginAccountRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Zeta Markets"
+        ]
+      }
     }
   },
   "definitions": {
@@ -3029,6 +3063,21 @@
           "items": {
             "$ref": "#/definitions/apiUnsettledAccount"
           }
+        }
+      }
+    },
+    "apiGetZetaTransactionStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionZeta"
+        },
+        "meta": {
+          "$ref": "#/definitions/apiTransactionMeta"
         }
       }
     },
@@ -4629,6 +4678,37 @@
         }
       }
     },
+    "apiPostZetaCrossMarginAccountRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        }
+      }
+    },
+    "apiPostZetaCrossMarginAccountResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
     "apiProject": {
       "type": "string",
       "enum": [
@@ -5276,6 +5356,46 @@
         }
       }
     },
+    "apiTransactionMessageHeader": {
+      "type": "object",
+      "properties": {
+        "numRequiredSignatures": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "numReadonlySignedAccounts": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "numReadonlyUnsignedAccounts": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "apiTransactionMessageZeta": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/apiTransactionMessageHeader"
+        },
+        "accountKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recentBlockhash": {
+          "type": "string"
+        },
+        "instructions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiInstruction"
+          }
+        }
+      }
+    },
     "apiTransactionMeta": {
       "type": "object",
       "properties": {
@@ -5359,6 +5479,20 @@
         },
         "owner": {
           "type": "string"
+        }
+      }
+    },
+    "apiTransactionZeta": {
+      "type": "object",
+      "properties": {
+        "signatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "$ref": "#/definitions/apiTransactionMessageZeta"
         }
       }
     },
