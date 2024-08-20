@@ -1,6 +1,6 @@
 [project]
 name = "bxsolana-trader-proto"
-version = "0.0.72"
+version = "0.0.79"
 description = "proto-generated files for solana-trader-api"
 dependencies = [
     "betterproto==v2.0.0b6"

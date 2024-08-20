@@ -1225,6 +1225,40 @@
         ]
       }
     },
+    "/api/v2/mine-ore": {
+      "post": {
+        "summary": "Submit mine ore transactions",
+        "description": "Submits two transactions in sequence for mining ore",
+        "operationId": "Api_PostSubmitMineOre",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Ore"
+        ]
+      }
+    },
     "/api/v2/openbook/cancel": {
       "post": {
         "summary": "Openbook unsigned CancelOrder transaction",
@@ -4520,6 +4554,9 @@
           "$ref": "#/definitions/apiSubmitStrategy"
         },
         "useBundle": {
+          "type": "boolean"
+        },
+        "frontRunningProtection": {
           "type": "boolean"
         }
       }

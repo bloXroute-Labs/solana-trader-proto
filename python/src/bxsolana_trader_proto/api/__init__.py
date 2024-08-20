@@ -484,6 +484,9 @@ class PostSubmitBatchRequest(betterproto.Message):
     use_bundle: Optional[bool] = betterproto.bool_field(
         3, optional=True, group="_useBundle"
     )
+    front_running_protection: Optional[bool] = betterproto.bool_field(
+        4, optional=True, group="_frontRunningProtection"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1073,16 +1076,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List["TransactionMetaInnerInstruction"] = (
-        betterproto.message_field(6)
-    )
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List["TransactionMetaTokenBalance"] = (
-        betterproto.message_field(9)
-    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -2521,6 +2524,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def post_submit_mine_ore(
+        self,
+        post_submit_request: "PostSubmitRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitMineOre",
+            post_submit_request,
+            PostSubmitResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_orderbooks_stream(
         self,
         get_orderbooks_request: "GetOrderbooksRequest",
@@ -2793,7 +2813,6 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
-
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
@@ -3080,6 +3099,11 @@ class ApiBase(ServiceBase):
     async def post_route_trade_swap(
         self, route_trade_swap_request: "RouteTradeSwapRequest"
     ) -> "TradeSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_submit_mine_ore(
+        self, post_submit_request: "PostSubmitRequest"
+    ) -> "PostSubmitResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_orderbooks_stream(
@@ -3605,6 +3629,13 @@ class ApiBase(ServiceBase):
         response = await self.post_route_trade_swap(request)
         await stream.send_message(response)
 
+    async def __rpc_post_submit_mine_ore(
+        self, stream: "grpclib.server.Stream[PostSubmitRequest, PostSubmitResponse]"
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_mine_ore(request)
+        await stream.send_message(response)
+
     async def __rpc_get_orderbooks_stream(
         self,
         stream: "grpclib.server.Stream[GetOrderbooksRequest, GetOrderbooksStreamResponse]",
@@ -4111,6 +4142,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 RouteTradeSwapRequest,
                 TradeSwapResponse,
+            ),
+            "/api.Api/PostSubmitMineOre": grpclib.const.Handler(
+                self.__rpc_post_submit_mine_ore,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitRequest,
+                PostSubmitResponse,
             ),
             "/api.Api/GetOrderbooksStream": grpclib.const.Handler(
                 self.__rpc_get_orderbooks_stream,

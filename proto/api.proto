@@ -8,6 +8,7 @@ import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "common.proto";
+import "google/protobuf/empty.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   security: {
@@ -725,6 +726,20 @@ service Api {
     };
   }
 
+  // Ore
+
+  rpc PostSubmitMineOre(PostSubmitRequest) returns (PostSubmitResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/mine-ore"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits two transactions in sequence for mining ore";
+      summary: "Submit mine ore transactions";
+      tags: ["Ore"];
+    };
+  }
+
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -1208,6 +1223,7 @@ message PostSubmitBatchRequest {
   repeated PostSubmitRequestEntry entries = 1;
   SubmitStrategy submitStrategy = 2;
   optional bool useBundle = 3;
+  optional bool frontRunningProtection = 4;
 }
 message PostSubmitBatchResponseEntry {
   string signature = 1;
