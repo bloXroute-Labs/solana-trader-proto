@@ -1783,7 +1783,7 @@ message LiquidityPoolKeys {
   string baseMint = 2;
   string quoteMint = 3;
   string lpMint = 4;
-  string version = 5;
+  uint32 version = 5;
   string programID = 6;
   string authority = 7;
   string baseVault = 8;

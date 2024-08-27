@@ -3163,7 +3163,8 @@
           "type": "string"
         },
         "version": {
-          "type": "string"
+          "type": "integer",
+          "format": "int64"
         },
         "programID": {
           "type": "string"
