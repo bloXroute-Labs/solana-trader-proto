@@ -1775,7 +1775,34 @@ message ProjectPool {
   string token2MintSymbol = 8;
   uint64 openTime = 9;
   string poolType = 10;
+  LiquidityPoolKeys liquidityPoolKeys = 11;
 }
+
+message LiquidityPoolKeys {
+  string id = 1;
+  string baseMint = 2;
+  string quoteMint = 3;
+  string lpMint = 4;
+  string version = 5;
+  string programID = 6;
+  string authority = 7;
+  string baseVault = 8;
+  string quoteVault = 9;
+  string lpVault = 10;
+  string openOrders = 11;
+  string targetOrders = 12;
+  string withdrawQueue = 13;
+  uint32 marketVersion = 14;
+  string marketProgramID = 15;
+  string marketID = 16;
+  string marketAuthority = 17;
+  string marketBaseVault = 18;
+  string marketQuoteVault = 19;
+  string marketBids = 20;
+  string marketAsks = 21;
+  string marketEventQueue = 22;
+}
+
 
 message GetQuotesStreamRequest {
   repeated Project   projects = 1;

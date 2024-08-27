@@ -3147,6 +3147,78 @@
         }
       }
     },
+    "apiLiquidityPoolKeys": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "baseMint": {
+          "type": "string"
+        },
+        "quoteMint": {
+          "type": "string"
+        },
+        "lpMint": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "programID": {
+          "type": "string"
+        },
+        "authority": {
+          "type": "string"
+        },
+        "baseVault": {
+          "type": "string"
+        },
+        "quoteVault": {
+          "type": "string"
+        },
+        "lpVault": {
+          "type": "string"
+        },
+        "openOrders": {
+          "type": "string"
+        },
+        "targetOrders": {
+          "type": "string"
+        },
+        "withdrawQueue": {
+          "type": "string"
+        },
+        "marketVersion": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "marketProgramID": {
+          "type": "string"
+        },
+        "marketID": {
+          "type": "string"
+        },
+        "marketAuthority": {
+          "type": "string"
+        },
+        "marketBaseVault": {
+          "type": "string"
+        },
+        "marketQuoteVault": {
+          "type": "string"
+        },
+        "marketBids": {
+          "type": "string"
+        },
+        "marketAsks": {
+          "type": "string"
+        },
+        "marketEventQueue": {
+          "type": "string"
+        }
+      }
+    },
     "apiMarket": {
       "type": "object",
       "properties": {
@@ -4672,6 +4744,9 @@
         },
         "poolType": {
           "type": "string"
+        },
+        "liquidityPoolKeys": {
+          "$ref": "#/definitions/apiLiquidityPoolKeys"
         }
       }
     },
