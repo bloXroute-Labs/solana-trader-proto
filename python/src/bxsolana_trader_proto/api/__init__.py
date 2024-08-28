@@ -1555,6 +1555,24 @@ class OrderV2(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetPumpFunNewTokensStreamRequest(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunNewTokensStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    txn_hash: str = betterproto.string_field(2)
+    name: str = betterproto.string_field(3)
+    symbol: str = betterproto.string_field(4)
+    uri: str = betterproto.string_field(5)
+    mint: str = betterproto.string_field(6)
+    bonding_curve: str = betterproto.string_field(7)
+    creator: str = betterproto.string_field(8)
+    timestamp: datetime = betterproto.message_field(9)
+
+
+@dataclass(eq=False, repr=False)
 class GetPumpFunSwapsStreamRequest(betterproto.Message):
     tokens: List[str] = betterproto.string_field(1)
 
@@ -2600,6 +2618,24 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_zeta_transaction_stream(
+        self,
+        get_zeta_transaction_stream_request: "GetZetaTransactionStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetZetaTransactionStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetZetaTransactionStream",
+            get_zeta_transaction_stream_request,
+            GetZetaTransactionStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
     async def get_trades_stream(
         self,
         get_trades_request: "GetTradesRequest",
@@ -2810,6 +2846,24 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetPumpFunSwapsStream",
             get_pump_fun_swaps_stream_request,
             GetPumpFunSwapsStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
+    async def get_pump_fun_new_tokens_stream(
+        self,
+        get_pump_fun_new_tokens_stream_request: "GetPumpFunNewTokensStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPumpFunNewTokensStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPumpFunNewTokensStream",
+            get_pump_fun_new_tokens_stream_request,
+            GetPumpFunNewTokensStreamResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3123,6 +3177,12 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetTickersStreamResponse()
 
+    async def get_zeta_transaction_stream(
+        self, get_zeta_transaction_stream_request: "GetZetaTransactionStreamRequest"
+    ) -> AsyncIterator["GetZetaTransactionStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetZetaTransactionStreamResponse()
+
     async def get_trades_stream(
         self, get_trades_request: "GetTradesRequest"
     ) -> AsyncIterator["GetTradesStreamResponse"]:
@@ -3194,6 +3254,12 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetPumpFunSwapsStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPumpFunSwapsStreamResponse()
+
+    async def get_pump_fun_new_tokens_stream(
+        self, get_pump_fun_new_tokens_stream_request: "GetPumpFunNewTokensStreamRequest"
+    ) -> AsyncIterator["GetPumpFunNewTokensStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPumpFunNewTokensStreamResponse()
 
     async def __rpc_get_rate_limit(
         self, stream: "grpclib.server.Stream[GetRateLimitRequest, GetRateLimitResponse]"
@@ -3660,6 +3726,17 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_zeta_transaction_stream(
+        self,
+        stream: "grpclib.server.Stream[GetZetaTransactionStreamRequest, GetZetaTransactionStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_zeta_transaction_stream,
+            stream,
+            request,
+        )
+
     async def __rpc_get_trades_stream(
         self, stream: "grpclib.server.Stream[GetTradesRequest, GetTradesStreamResponse]"
     ) -> None:
@@ -3786,6 +3863,17 @@ class ApiBase(ServiceBase):
         request = await stream.recv_message()
         await self._call_rpc_handler_server_stream(
             self.get_pump_fun_swaps_stream,
+            stream,
+            request,
+        )
+
+    async def __rpc_get_pump_fun_new_tokens_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunNewTokensStreamRequest, GetPumpFunNewTokensStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_pump_fun_new_tokens_stream,
             stream,
             request,
         )
@@ -4152,6 +4240,12 @@ class ApiBase(ServiceBase):
                 GetTickersStreamRequest,
                 GetTickersStreamResponse,
             ),
+            "/api.Api/GetZetaTransactionStream": grpclib.const.Handler(
+                self.__rpc_get_zeta_transaction_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetZetaTransactionStreamRequest,
+                GetZetaTransactionStreamResponse,
+            ),
             "/api.Api/GetTradesStream": grpclib.const.Handler(
                 self.__rpc_get_trades_stream,
                 grpclib.const.Cardinality.UNARY_STREAM,
@@ -4223,5 +4317,11 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetPumpFunSwapsStreamRequest,
                 GetPumpFunSwapsStreamResponse,
+            ),
+            "/api.Api/GetPumpFunNewTokensStream": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_new_tokens_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPumpFunNewTokensStreamRequest,
+                GetPumpFunNewTokensStreamResponse,
             ),
         }

@@ -2586,6 +2586,40 @@
         }
       }
     },
+    "apiGetPumpFunNewTokensStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "txnHash": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "mint": {
+          "type": "string"
+        },
+        "bondingCurve": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "apiGetPumpFunSwapsStreamResponse": {
       "type": "object",
       "properties": {
@@ -2995,6 +3029,21 @@
           "items": {
             "$ref": "#/definitions/apiUnsettledAccount"
           }
+        }
+      }
+    },
+    "apiGetZetaTransactionStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionZeta"
+        },
+        "meta": {
+          "$ref": "#/definitions/apiTransactionMeta"
         }
       }
     },
@@ -5242,6 +5291,46 @@
         }
       }
     },
+    "apiTransactionMessageHeader": {
+      "type": "object",
+      "properties": {
+        "numRequiredSignatures": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "numReadonlySignedAccounts": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "numReadonlyUnsignedAccounts": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "apiTransactionMessageZeta": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/apiTransactionMessageHeader"
+        },
+        "accountKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recentBlockhash": {
+          "type": "string"
+        },
+        "instructions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiInstruction"
+          }
+        }
+      }
+    },
     "apiTransactionMeta": {
       "type": "object",
       "properties": {
@@ -5325,6 +5414,20 @@
         },
         "owner": {
           "type": "string"
+        }
+      }
+    },
+    "apiTransactionZeta": {
+      "type": "object",
+      "properties": {
+        "signatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "$ref": "#/definitions/apiTransactionMessageZeta"
         }
       }
     },
