@@ -777,6 +777,12 @@ service Api {
     };
   }
 
+  rpc GetZetaTransactionStream(GetZetaTransactionStreamRequest) returns (stream GetZetaTransactionStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
   rpc GetRecentBlockHashStream(GetRecentBlockHashRequest) returns (stream GetRecentBlockHashResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "System";
@@ -832,6 +838,12 @@ service Api {
   }
 
   rpc GetPumpFunSwapsStream(GetPumpFunSwapsStreamRequest) returns (stream GetPumpFunSwapsStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetPumpFunNewTokensStream(GetPumpFunNewTokensStreamRequest) returns (stream GetPumpFunNewTokensStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
     };
@@ -2145,6 +2157,20 @@ message OrderV2 {
 }
 
 //End of Openbook V2 Messages
+
+message GetPumpFunNewTokensStreamRequest {}
+
+message GetPumpFunNewTokensStreamResponse {
+  int64 slot = 1;
+  string txnHash = 2;
+  string name = 3;
+  string symbol = 4;
+  string uri = 5;
+  string mint = 6;
+  string bondingCurve = 7;
+  string creator = 8;
+  google.protobuf.Timestamp timestamp = 9;
+}
 
 message GetPumpFunSwapsStreamRequest {
   repeated string tokens = 1;
