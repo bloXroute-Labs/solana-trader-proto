@@ -759,11 +759,11 @@ service Api {
     };
   }
 
-  // rpc GetZetaTransactionStream(GetZetaTransactionStreamRequest) returns (stream GetZetaTransactionStreamResponse) {
-  //   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-  //     tags: "System";
-  //   };
-  // }
+   rpc GetZetaTransactionStream(GetZetaTransactionStreamRequest) returns (stream GetZetaTransactionStreamResponse) {
+     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+       tags: "System";
+     };
+   }
 
   rpc GetTradesStream(GetTradesRequest) returns (stream GetTradesStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -774,12 +774,6 @@ service Api {
   rpc GetOrderStatusStream(GetOrderStatusStreamRequest) returns (stream GetOrderStatusStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "Trade";
-    };
-  }
-
-  rpc GetZetaTransactionStream(GetZetaTransactionStreamRequest) returns (stream GetZetaTransactionStreamResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: "System";
     };
   }
 
