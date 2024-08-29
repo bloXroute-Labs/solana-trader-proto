@@ -143,6 +143,52 @@ service Api {
     };
   }
 
+  rpc GetRaydiumCLMMQuotes(GetRaydiumCLMMQuotesRequest) returns (GetRaydiumCLMMQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/clmm-quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Raydium CLMM pools";
+      summary: "Raydium CLMM Quotes";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumCLMMPools(GetRaydiumCLMMPoolsRequest) returns (GetRaydiumCLMMPoolsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/clmm-pools"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of Raydium CLMM pools";
+      summary: "Raydium CLMM Pools";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumCLMMSwap(PostRaydiumCLMMSwapRequest) returns (PostRaydiumCLMMSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/clmm-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium CLMMs";
+      summary: "Unsigned Raydium CLMM swap transaction";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumCLMMRouteSwap(PostRaydiumCLMMRouteSwapRequest) returns (PostRaydiumCLMMRouteSwapResponse) {
+    option(google.api.http) = {
+      post: "/api/v2/raydium/clmm-route-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a CLMM swap on Raydium on the specified route";
+      summary: "Unsigned Raydium swap transaction along route";
+      tags: ["Raydium V2"];
+    };
+  }
+
   rpc PostRaydiumSwap(PostRaydiumSwapRequest) returns (PostRaydiumSwapResponse) {
     option (google.api.http) = {
       post: "/api/v2/raydium/swap"
@@ -1452,6 +1498,26 @@ message PostRaydiumSwapResponse{
   repeated common.Fee fees = 5;
 }
 
+message PostRaydiumCLMMRouteSwapRequest {
+  string ownerAddress = 1;
+  repeated RaydiumRouteStep steps = 2;
+  double slippage = 3;
+}
+
+message PostRaydiumCLMMRouteSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+}
+
+message GetRaydiumCLMMPoolsRequest {
+  string pairOrAddress = 1;
+}
+
+message GetRaydiumCLMMPoolsResponse {
+  repeated ProjectPool pools = 1;
+}
+
 message PostJupiterSwapResponse{
   repeated TransactionMessage transactions = 1;
   double outAmount = 2;
@@ -1501,6 +1567,37 @@ message RaydiumRouteStep {
   double outAmountMin = 5;
   string poolAddress = 6;
   StepProject project = 7;
+}
+
+message GetRaydiumCLMMQuotesRequest {
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+}
+
+message GetRaydiumCLMMQuotesResponse{
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated RaydiumQuoteRoute routes = 6;
+}
+
+message PostRaydiumCLMMSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  string poolAddress = 6;
+}
+
+message PostRaydiumCLMMSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
 }
 
 message PostJupiterRouteSwapRequest {
