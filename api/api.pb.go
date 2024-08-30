@@ -13110,155 +13110,6 @@ func (x *OrderV2) GetOpenOrderAccount() string {
 	return ""
 }
 
-type GetPumpFunNewTokensStreamRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *GetPumpFunNewTokensStreamRequest) Reset() {
-	*x = GetPumpFunNewTokensStreamRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_msgTypes[179]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetPumpFunNewTokensStreamRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetPumpFunNewTokensStreamRequest) ProtoMessage() {}
-
-func (x *GetPumpFunNewTokensStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[179]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetPumpFunNewTokensStreamRequest.ProtoReflect.Descriptor instead.
-func (*GetPumpFunNewTokensStreamRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{179}
-}
-
-type GetPumpFunNewTokensStreamResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Slot         int64                `protobuf:"varint,1,opt,name=slot,proto3" json:"slot,omitempty"`
-	TxnHash      string               `protobuf:"bytes,2,opt,name=txnHash,proto3" json:"txnHash,omitempty"`
-	Name         string               `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Symbol       string               `protobuf:"bytes,4,opt,name=symbol,proto3" json:"symbol,omitempty"`
-	Uri          string               `protobuf:"bytes,5,opt,name=uri,proto3" json:"uri,omitempty"`
-	Mint         string               `protobuf:"bytes,6,opt,name=mint,proto3" json:"mint,omitempty"`
-	BondingCurve string               `protobuf:"bytes,7,opt,name=bondingCurve,proto3" json:"bondingCurve,omitempty"`
-	Creator      string               `protobuf:"bytes,8,opt,name=creator,proto3" json:"creator,omitempty"`
-	Timestamp    *timestamp.Timestamp `protobuf:"bytes,9,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) Reset() {
-	*x = GetPumpFunNewTokensStreamResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_msgTypes[180]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetPumpFunNewTokensStreamResponse) ProtoMessage() {}
-
-func (x *GetPumpFunNewTokensStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[180]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetPumpFunNewTokensStreamResponse.ProtoReflect.Descriptor instead.
-func (*GetPumpFunNewTokensStreamResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{180}
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) GetSlot() int64 {
-	if x != nil {
-		return x.Slot
-	}
-	return 0
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) GetTxnHash() string {
-	if x != nil {
-		return x.TxnHash
-	}
-	return ""
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) GetSymbol() string {
-	if x != nil {
-		return x.Symbol
-	}
-	return ""
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) GetUri() string {
-	if x != nil {
-		return x.Uri
-	}
-	return ""
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) GetMint() string {
-	if x != nil {
-		return x.Mint
-	}
-	return ""
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) GetBondingCurve() string {
-	if x != nil {
-		return x.BondingCurve
-	}
-	return ""
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) GetCreator() string {
-	if x != nil {
-		return x.Creator
-	}
-	return ""
-}
-
-func (x *GetPumpFunNewTokensStreamResponse) GetTimestamp() *timestamp.Timestamp {
-	if x != nil {
-		return x.Timestamp
-	}
-	return nil
-}
-
 type GetPumpFunSwapsStreamRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -13270,7 +13121,7 @@ type GetPumpFunSwapsStreamRequest struct {
 func (x *GetPumpFunSwapsStreamRequest) Reset() {
 	*x = GetPumpFunSwapsStreamRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_msgTypes[181]
+		mi := &file_api_proto_msgTypes[179]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13283,7 +13134,7 @@ func (x *GetPumpFunSwapsStreamRequest) String() string {
 func (*GetPumpFunSwapsStreamRequest) ProtoMessage() {}
 
 func (x *GetPumpFunSwapsStreamRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[181]
+	mi := &file_api_proto_msgTypes[179]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13296,7 +13147,7 @@ func (x *GetPumpFunSwapsStreamRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPumpFunSwapsStreamRequest.ProtoReflect.Descriptor instead.
 func (*GetPumpFunSwapsStreamRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{181}
+	return file_api_proto_rawDescGZIP(), []int{179}
 }
 
 func (x *GetPumpFunSwapsStreamRequest) GetTokens() []string {
@@ -13329,7 +13180,7 @@ type GetPumpFunSwapsStreamResponse struct {
 func (x *GetPumpFunSwapsStreamResponse) Reset() {
 	*x = GetPumpFunSwapsStreamResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_proto_msgTypes[182]
+		mi := &file_api_proto_msgTypes[180]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -13342,7 +13193,7 @@ func (x *GetPumpFunSwapsStreamResponse) String() string {
 func (*GetPumpFunSwapsStreamResponse) ProtoMessage() {}
 
 func (x *GetPumpFunSwapsStreamResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[182]
+	mi := &file_api_proto_msgTypes[180]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13355,7 +13206,7 @@ func (x *GetPumpFunSwapsStreamResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPumpFunSwapsStreamResponse.ProtoReflect.Descriptor instead.
 func (*GetPumpFunSwapsStreamResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{182}
+	return file_api_proto_rawDescGZIP(), []int{180}
 }
 
 func (x *GetPumpFunSwapsStreamResponse) GetSlot() int64 {
@@ -13443,6 +13294,155 @@ func (x *GetPumpFunSwapsStreamResponse) GetVirtualTokenReserves() uint64 {
 }
 
 func (x *GetPumpFunSwapsStreamResponse) GetTimestamp() *timestamp.Timestamp {
+	if x != nil {
+		return x.Timestamp
+	}
+	return nil
+}
+
+type GetPumpFunNewTokensStreamRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *GetPumpFunNewTokensStreamRequest) Reset() {
+	*x = GetPumpFunNewTokensStreamRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_proto_msgTypes[181]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPumpFunNewTokensStreamRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPumpFunNewTokensStreamRequest) ProtoMessage() {}
+
+func (x *GetPumpFunNewTokensStreamRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[181]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPumpFunNewTokensStreamRequest.ProtoReflect.Descriptor instead.
+func (*GetPumpFunNewTokensStreamRequest) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{181}
+}
+
+type GetPumpFunNewTokensStreamResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Slot         int64                `protobuf:"varint,1,opt,name=slot,proto3" json:"slot,omitempty"`
+	TxnHash      string               `protobuf:"bytes,2,opt,name=txnHash,proto3" json:"txnHash,omitempty"`
+	Name         string               `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Symbol       string               `protobuf:"bytes,4,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	Uri          string               `protobuf:"bytes,5,opt,name=uri,proto3" json:"uri,omitempty"`
+	Mint         string               `protobuf:"bytes,6,opt,name=mint,proto3" json:"mint,omitempty"`
+	BondingCurve string               `protobuf:"bytes,7,opt,name=bondingCurve,proto3" json:"bondingCurve,omitempty"`
+	Creator      string               `protobuf:"bytes,8,opt,name=creator,proto3" json:"creator,omitempty"`
+	Timestamp    *timestamp.Timestamp `protobuf:"bytes,9,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) Reset() {
+	*x = GetPumpFunNewTokensStreamResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_proto_msgTypes[182]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPumpFunNewTokensStreamResponse) ProtoMessage() {}
+
+func (x *GetPumpFunNewTokensStreamResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[182]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPumpFunNewTokensStreamResponse.ProtoReflect.Descriptor instead.
+func (*GetPumpFunNewTokensStreamResponse) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{182}
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) GetSlot() int64 {
+	if x != nil {
+		return x.Slot
+	}
+	return 0
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) GetTxnHash() string {
+	if x != nil {
+		return x.TxnHash
+	}
+	return ""
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) GetSymbol() string {
+	if x != nil {
+		return x.Symbol
+	}
+	return ""
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) GetUri() string {
+	if x != nil {
+		return x.Uri
+	}
+	return ""
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) GetMint() string {
+	if x != nil {
+		return x.Mint
+	}
+	return ""
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) GetBondingCurve() string {
+	if x != nil {
+		return x.BondingCurve
+	}
+	return ""
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) GetCreator() string {
+	if x != nil {
+		return x.Creator
+	}
+	return ""
+}
+
+func (x *GetPumpFunNewTokensStreamResponse) GetTimestamp() *timestamp.Timestamp {
 	if x != nil {
 		return x.Timestamp
 	}
@@ -15926,62 +15926,62 @@ var file_api_proto_rawDesc = []byte{
 	0x09, 0x52, 0x0d, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x44,
 	0x12, 0x2a, 0x0a, 0x10, 0x6f, 0x70, 0x65, 0x6e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x63, 0x63,
 	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x6f, 0x70, 0x65, 0x6e,
-	0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x22, 0x0a, 0x20,
-	0x47, 0x65, 0x74, 0x50, 0x75, 0x6d, 0x70, 0x46, 0x75, 0x6e, 0x4e, 0x65, 0x77, 0x54, 0x6f, 0x6b,
-	0x65, 0x6e, 0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x22, 0x9b, 0x02, 0x0a, 0x21, 0x47, 0x65, 0x74, 0x50, 0x75, 0x6d, 0x70, 0x46, 0x75, 0x6e, 0x4e,
-	0x65, 0x77, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65,
+	0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x36, 0x0a, 0x1c,
+	0x47, 0x65, 0x74, 0x50, 0x75, 0x6d, 0x70, 0x46, 0x75, 0x6e, 0x53, 0x77, 0x61, 0x70, 0x73, 0x53,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06,
+	0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06, 0x74, 0x6f,
+	0x6b, 0x65, 0x6e, 0x73, 0x22, 0x9f, 0x04, 0x0a, 0x1d, 0x47, 0x65, 0x74, 0x50, 0x75, 0x6d, 0x70,
+	0x46, 0x75, 0x6e, 0x53, 0x77, 0x61, 0x70, 0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65,
 	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x6c, 0x6f, 0x74, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x73, 0x6c, 0x6f, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x74, 0x78,
 	0x6e, 0x48, 0x61, 0x73, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x74, 0x78, 0x6e,
-	0x48, 0x61, 0x73, 0x68, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x79, 0x6d, 0x62,
-	0x6f, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x79, 0x6d, 0x62, 0x6f, 0x6c,
-	0x12, 0x10, 0x0a, 0x03, 0x75, 0x72, 0x69, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75,
-	0x72, 0x69, 0x12, 0x12, 0x0a, 0x04, 0x6d, 0x69, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x04, 0x6d, 0x69, 0x6e, 0x74, 0x12, 0x22, 0x0a, 0x0c, 0x62, 0x6f, 0x6e, 0x64, 0x69, 0x6e,
-	0x67, 0x43, 0x75, 0x72, 0x76, 0x65, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x62, 0x6f,
-	0x6e, 0x64, 0x69, 0x6e, 0x67, 0x43, 0x75, 0x72, 0x76, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72,
-	0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65,
-	0x61, 0x74, 0x6f, 0x72, 0x12, 0x38, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d,
-	0x70, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74,
-	0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x22, 0x36,
-	0x0a, 0x1c, 0x47, 0x65, 0x74, 0x50, 0x75, 0x6d, 0x70, 0x46, 0x75, 0x6e, 0x53, 0x77, 0x61, 0x70,
-	0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16,
-	0x0a, 0x06, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x06,
-	0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x22, 0x9f, 0x04, 0x0a, 0x1d, 0x47, 0x65, 0x74, 0x50, 0x75,
-	0x6d, 0x70, 0x46, 0x75, 0x6e, 0x53, 0x77, 0x61, 0x70, 0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x6c, 0x6f, 0x74,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x73, 0x6c, 0x6f, 0x74, 0x12, 0x18, 0x0a, 0x07,
-	0x74, 0x78, 0x6e, 0x48, 0x61, 0x73, 0x68, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x74,
-	0x78, 0x6e, 0x48, 0x61, 0x73, 0x68, 0x12, 0x20, 0x0a, 0x0b, 0x6d, 0x69, 0x6e, 0x74, 0x41, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x6d, 0x69, 0x6e,
-	0x74, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x20, 0x0a, 0x0b, 0x75, 0x73, 0x65, 0x72,
-	0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x75,
-	0x73, 0x65, 0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x38, 0x0a, 0x17, 0x75, 0x73,
-	0x65, 0x72, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x64,
-	0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x17, 0x75, 0x73, 0x65,
-	0x72, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x12, 0x30, 0x0a, 0x13, 0x62, 0x6f, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x43,
-	0x75, 0x72, 0x76, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x13, 0x62, 0x6f, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x43, 0x75, 0x72, 0x76, 0x65, 0x41,
-	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x2c, 0x0a, 0x11, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x56,
-	0x61, 0x75, 0x6c, 0x74, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x11, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x56, 0x61, 0x75, 0x6c, 0x74, 0x41, 0x64, 0x64,
-	0x72, 0x65, 0x73, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x6f, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
-	0x74, 0x18, 0x08, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x73, 0x6f, 0x6c, 0x41, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x12, 0x20, 0x0a, 0x0b, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e,
-	0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x6d,
-	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x73, 0x42, 0x75, 0x79, 0x18, 0x0a, 0x20,
-	0x01, 0x28, 0x08, 0x52, 0x05, 0x69, 0x73, 0x42, 0x75, 0x79, 0x12, 0x2e, 0x0a, 0x12, 0x76, 0x69,
-	0x72, 0x74, 0x75, 0x61, 0x6c, 0x53, 0x6f, 0x6c, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x65, 0x73,
-	0x18, 0x0b, 0x20, 0x01, 0x28, 0x04, 0x52, 0x12, 0x76, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x53,
-	0x6f, 0x6c, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x65, 0x73, 0x12, 0x32, 0x0a, 0x14, 0x76, 0x69,
-	0x72, 0x74, 0x75, 0x61, 0x6c, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76,
-	0x65, 0x73, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x04, 0x52, 0x14, 0x76, 0x69, 0x72, 0x74, 0x75, 0x61,
-	0x6c, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x65, 0x73, 0x12, 0x38,
-	0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x0d, 0x20, 0x01, 0x28,
+	0x48, 0x61, 0x73, 0x68, 0x12, 0x20, 0x0a, 0x0b, 0x6d, 0x69, 0x6e, 0x74, 0x41, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x6d, 0x69, 0x6e, 0x74, 0x41,
+	0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x20, 0x0a, 0x0b, 0x75, 0x73, 0x65, 0x72, 0x41, 0x64,
+	0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x75, 0x73, 0x65,
+	0x72, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x12, 0x38, 0x0a, 0x17, 0x75, 0x73, 0x65, 0x72,
+	0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x64, 0x64, 0x72,
+	0x65, 0x73, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x17, 0x75, 0x73, 0x65, 0x72, 0x54,
+	0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x41, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x12, 0x30, 0x0a, 0x13, 0x62, 0x6f, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x43, 0x75, 0x72,
+	0x76, 0x65, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x13, 0x62, 0x6f, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x43, 0x75, 0x72, 0x76, 0x65, 0x41, 0x64, 0x64,
+	0x72, 0x65, 0x73, 0x73, 0x12, 0x2c, 0x0a, 0x11, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x56, 0x61, 0x75,
+	0x6c, 0x74, 0x41, 0x64, 0x64, 0x72, 0x65, 0x73, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x11, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x56, 0x61, 0x75, 0x6c, 0x74, 0x41, 0x64, 0x64, 0x72, 0x65,
+	0x73, 0x73, 0x12, 0x1c, 0x0a, 0x09, 0x73, 0x6f, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18,
+	0x08, 0x20, 0x01, 0x28, 0x04, 0x52, 0x09, 0x73, 0x6f, 0x6c, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74,
+	0x12, 0x20, 0x0a, 0x0b, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18,
+	0x09, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0b, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x41, 0x6d, 0x6f, 0x75,
+	0x6e, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x73, 0x42, 0x75, 0x79, 0x18, 0x0a, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x05, 0x69, 0x73, 0x42, 0x75, 0x79, 0x12, 0x2e, 0x0a, 0x12, 0x76, 0x69, 0x72, 0x74,
+	0x75, 0x61, 0x6c, 0x53, 0x6f, 0x6c, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x65, 0x73, 0x18, 0x0b,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x12, 0x76, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x53, 0x6f, 0x6c,
+	0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x65, 0x73, 0x12, 0x32, 0x0a, 0x14, 0x76, 0x69, 0x72, 0x74,
+	0x75, 0x61, 0x6c, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x65, 0x73,
+	0x18, 0x0c, 0x20, 0x01, 0x28, 0x04, 0x52, 0x14, 0x76, 0x69, 0x72, 0x74, 0x75, 0x61, 0x6c, 0x54,
+	0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x65, 0x72, 0x76, 0x65, 0x73, 0x12, 0x38, 0x0a, 0x09,
+	0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
+	0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d,
+	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x22, 0x22, 0x0a, 0x20, 0x47, 0x65, 0x74, 0x50, 0x75, 0x6d,
+	0x70, 0x46, 0x75, 0x6e, 0x4e, 0x65, 0x77, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x73, 0x53, 0x74, 0x72,
+	0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x9b, 0x02, 0x0a, 0x21, 0x47,
+	0x65, 0x74, 0x50, 0x75, 0x6d, 0x70, 0x46, 0x75, 0x6e, 0x4e, 0x65, 0x77, 0x54, 0x6f, 0x6b, 0x65,
+	0x6e, 0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x12, 0x0a, 0x04, 0x73, 0x6c, 0x6f, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04,
+	0x73, 0x6c, 0x6f, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x74, 0x78, 0x6e, 0x48, 0x61, 0x73, 0x68, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x74, 0x78, 0x6e, 0x48, 0x61, 0x73, 0x68, 0x12, 0x12,
+	0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61,
+	0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x79, 0x6d, 0x62, 0x6f, 0x6c, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x06, 0x73, 0x79, 0x6d, 0x62, 0x6f, 0x6c, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x72,
+	0x69, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x75, 0x72, 0x69, 0x12, 0x12, 0x0a, 0x04,
+	0x6d, 0x69, 0x6e, 0x74, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6d, 0x69, 0x6e, 0x74,
+	0x12, 0x22, 0x0a, 0x0c, 0x62, 0x6f, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x43, 0x75, 0x72, 0x76, 0x65,
+	0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x62, 0x6f, 0x6e, 0x64, 0x69, 0x6e, 0x67, 0x43,
+	0x75, 0x72, 0x76, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18,
+	0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x38,
+	0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x09, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x74,
 	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2a, 0x2d, 0x0a, 0x0c, 0x4d, 0x61, 0x72, 0x6b,
@@ -16015,7 +16015,7 @@ var file_api_proto_rawDesc = []byte{
 	0x4a, 0x55, 0x50, 0x49, 0x54, 0x45, 0x52, 0x10, 0x02, 0x12, 0x0d, 0x0a, 0x09, 0x50, 0x5f, 0x52,
 	0x41, 0x59, 0x44, 0x49, 0x55, 0x4d, 0x10, 0x03, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x5f, 0x53, 0x45,
 	0x52, 0x55, 0x4d, 0x10, 0x04, 0x12, 0x0e, 0x0a, 0x0a, 0x50, 0x5f, 0x4f, 0x50, 0x45, 0x4e, 0x42,
-	0x4f, 0x4f, 0x4b, 0x10, 0x05, 0x32, 0xab, 0x6d, 0x0a, 0x03, 0x41, 0x70, 0x69, 0x12, 0xcd, 0x01,
+	0x4f, 0x4f, 0x4b, 0x10, 0x05, 0x32, 0xdb, 0x6f, 0x0a, 0x03, 0x41, 0x70, 0x69, 0x12, 0xcd, 0x01,
 	0x0a, 0x0c, 0x47, 0x65, 0x74, 0x52, 0x61, 0x74, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x18,
 	0x2e, 0x61, 0x70, 0x69, 0x2e, 0x47, 0x65, 0x74, 0x52, 0x61, 0x74, 0x65, 0x4c, 0x69, 0x6d, 0x69,
 	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x47,
@@ -16340,7 +16340,26 @@ var file_api_proto_rawDesc = []byte{
 	0x1a, 0x34, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x73, 0x20, 0x61, 0x20, 0x52, 0x65,
 	0x70, 0x6c, 0x61, 0x63, 0x65, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x20, 0x75, 0x6e, 0x73, 0x69, 0x67,
 	0x6e, 0x65, 0x64, 0x20, 0x74, 0x72, 0x61, 0x6e, 0x73, 0x61, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x20,
-	0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0xd6, 0x01, 0x0a, 0x0c, 0x50, 0x6f, 0x73, 0x74, 0x53,
+	0x6f, 0x62, 0x6a, 0x65, 0x63, 0x74, 0x12, 0xad, 0x02, 0x0a, 0x1a, 0x50, 0x6f, 0x73, 0x74, 0x5a,
+	0x65, 0x74, 0x61, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x4d, 0x61, 0x72, 0x67, 0x69, 0x6e, 0x41, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x26, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f, 0x73, 0x74,
+	0x5a, 0x65, 0x74, 0x61, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x4d, 0x61, 0x72, 0x67, 0x69, 0x6e, 0x41,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e,
+	0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x5a, 0x65, 0x74, 0x61, 0x43, 0x72, 0x6f, 0x73,
+	0x73, 0x4d, 0x61, 0x72, 0x67, 0x69, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0xbd, 0x01, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x26, 0x22,
+	0x21, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x76, 0x32, 0x2f, 0x7a, 0x65, 0x74, 0x61, 0x2f, 0x63, 0x72,
+	0x6f, 0x73, 0x73, 0x2d, 0x6d, 0x61, 0x72, 0x67, 0x69, 0x6e, 0x2d, 0x61, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x3a, 0x01, 0x2a, 0x92, 0x41, 0x8d, 0x01, 0x0a, 0x0c, 0x5a, 0x65, 0x74, 0x61, 0x20,
+	0x4d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x73, 0x12, 0x2a, 0x5a, 0x65, 0x74, 0x61, 0x20, 0x4d, 0x61,
+	0x72, 0x6b, 0x65, 0x74, 0x73, 0x20, 0x43, 0x72, 0x6f, 0x73, 0x73, 0x20, 0x4d, 0x61, 0x72, 0x67,
+	0x69, 0x6e, 0x20, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x20, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x1a, 0x51, 0x47, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x73, 0x20, 0x61,
+	0x20, 0x60, 0x5a, 0x65, 0x74, 0x61, 0x4d, 0x61, 0x72, 0x6b, 0x65, 0x74, 0x73, 0x60, 0x20, 0x43,
+	0x72, 0x6f, 0x73, 0x73, 0x20, 0x4d, 0x61, 0x72, 0x67, 0x69, 0x6e, 0x20, 0x41, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x20, 0x74, 0x68, 0x72, 0x6f, 0x75, 0x67, 0x68, 0x20, 0x62, 0x6c, 0x6f, 0x58,
+	0x72, 0x6f, 0x75, 0x74, 0x65, 0x20, 0x52, 0x65, 0x66, 0x65, 0x72, 0x72, 0x61, 0x6c, 0x20, 0x50,
+	0x72, 0x6f, 0x67, 0x72, 0x61, 0x6d, 0x12, 0xd6, 0x01, 0x0a, 0x0c, 0x50, 0x6f, 0x73, 0x74, 0x53,
 	0x65, 0x74, 0x74, 0x6c, 0x65, 0x56, 0x32, 0x12, 0x18, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f,
 	0x73, 0x74, 0x53, 0x65, 0x74, 0x74, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x56,
 	0x32, 0x1a, 0x17, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x50, 0x6f, 0x73, 0x74, 0x53, 0x65, 0x74, 0x74,
@@ -17119,18 +17138,18 @@ var file_api_proto_goTypes = []interface{}{
 	(*GetUnsettledRequestV2)(nil),               // 183: api.GetUnsettledRequestV2
 	(*GetOpenOrdersResponseV2)(nil),             // 184: api.GetOpenOrdersResponseV2
 	(*OrderV2)(nil),                             // 185: api.OrderV2
-	(*GetPumpFunNewTokensStreamRequest)(nil),    // 186: api.GetPumpFunNewTokensStreamRequest
-	(*GetPumpFunNewTokensStreamResponse)(nil),   // 187: api.GetPumpFunNewTokensStreamResponse
-	(*GetPumpFunSwapsStreamRequest)(nil),        // 188: api.GetPumpFunSwapsStreamRequest
-	(*GetPumpFunSwapsStreamResponse)(nil),       // 189: api.GetPumpFunSwapsStreamResponse
-	nil,                                         // 190: api.GetMarketsResponse.MarketsEntry
-	nil,                                         // 191: api.PostJupiterSwapInstructionsResponse.AddressLookupTableAddressesEntry
-	nil,                                         // 192: api.GetMarketsResponseV2.MarketsEntry
-	(*timestamp.Timestamp)(nil),                 // 193: google.protobuf.Timestamp
-	(common.OrderType)(0),                       // 194: common.OrderType
-	(*common.PriceImpactPercentV2)(nil),         // 195: common.PriceImpactPercentV2
-	(*common.Fee)(nil),                          // 196: common.Fee
-	(*common.PriceImpactPercent)(nil),           // 197: common.PriceImpactPercent
+	(*GetPumpFunSwapsStreamRequest)(nil),        // 186: api.GetPumpFunSwapsStreamRequest
+	(*GetPumpFunSwapsStreamResponse)(nil),       // 187: api.GetPumpFunSwapsStreamResponse
+	(*GetPumpFunNewTokensStreamRequest)(nil),    // 188: api.GetPumpFunNewTokensStreamRequest
+	(*GetPumpFunNewTokensStreamResponse)(nil),   // 189: api.GetPumpFunNewTokensStreamResponse
+	nil,                                 // 190: api.GetMarketsResponse.MarketsEntry
+	nil,                                 // 191: api.PostJupiterSwapInstructionsResponse.AddressLookupTableAddressesEntry
+	nil,                                 // 192: api.GetMarketsResponseV2.MarketsEntry
+	(*timestamp.Timestamp)(nil),         // 193: google.protobuf.Timestamp
+	(common.OrderType)(0),               // 194: common.OrderType
+	(*common.PriceImpactPercentV2)(nil), // 195: common.PriceImpactPercentV2
+	(*common.Fee)(nil),                  // 196: common.Fee
+	(*common.PriceImpactPercent)(nil),   // 197: common.PriceImpactPercent
 }
 var file_api_proto_depIdxs = []int32{
 	190, // 0: api.GetMarketsResponse.markets:type_name -> api.GetMarketsResponse.MarketsEntry
@@ -17317,8 +17336,8 @@ var file_api_proto_depIdxs = []int32{
 	42,  // 181: api.PostZetaCrossMarginAccountResponse.transaction:type_name -> api.TransactionMessage
 	185, // 182: api.GetOpenOrdersResponseV2.orders:type_name -> api.OrderV2
 	193, // 183: api.OrderV2.createdAt:type_name -> google.protobuf.Timestamp
-	193, // 184: api.GetPumpFunNewTokensStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
-	193, // 185: api.GetPumpFunSwapsStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	193, // 184: api.GetPumpFunSwapsStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
+	193, // 185: api.GetPumpFunNewTokensStreamResponse.timestamp:type_name -> google.protobuf.Timestamp
 	9,   // 186: api.GetMarketsResponse.MarketsEntry.value:type_name -> api.Market
 	83,  // 187: api.PostJupiterSwapInstructionsResponse.AddressLookupTableAddressesEntry.value:type_name -> api.PublicKeys
 	165, // 188: api.GetMarketsResponseV2.MarketsEntry.value:type_name -> api.MarketV2
@@ -17345,133 +17364,135 @@ var file_api_proto_depIdxs = []int32{
 	175, // 209: api.Api.PostOrderV2:input_type -> api.PostOrderRequestV2
 	177, // 210: api.Api.PostCancelOrderV2:input_type -> api.PostCancelOrderRequestV2
 	176, // 211: api.Api.PostReplaceOrderV2:input_type -> api.PostReplaceOrderRequestV2
-	179, // 212: api.Api.PostSettleV2:input_type -> api.PostSettleRequestV2
-	182, // 213: api.Api.GetOpenOrdersV2:input_type -> api.GetOpenOrdersRequestV2
-	183, // 214: api.Api.GetUnsettledV2:input_type -> api.GetUnsettledRequestV2
-	141, // 215: api.Api.GetPrice:input_type -> api.GetPriceRequest
-	7,   // 216: api.Api.GetMarkets:input_type -> api.GetMarketsRequest
-	111, // 217: api.Api.GetPools:input_type -> api.GetPoolsRequest
-	10,  // 218: api.Api.GetTickers:input_type -> api.GetTickersRequest
-	13,  // 219: api.Api.GetKline:input_type -> api.GetKlineRequest
-	16,  // 220: api.Api.GetOrderbook:input_type -> api.GetOrderbookRequest
-	20,  // 221: api.Api.GetMarketDepth:input_type -> api.GetMarketDepthRequest
-	24,  // 222: api.Api.GetTrades:input_type -> api.GetTradesRequest
-	72,  // 223: api.Api.GetQuotes:input_type -> api.GetQuotesRequest
-	27,  // 224: api.Api.GetServerTime:input_type -> api.GetServerTimeRequest
-	105, // 225: api.Api.GetRecentBlockHash:input_type -> api.GetRecentBlockHashRequest
-	159, // 226: api.Api.GetPriorityFee:input_type -> api.GetPriorityFeeRequest
-	29,  // 227: api.Api.GetAccountBalance:input_type -> api.GetAccountBalanceRequest
-	32,  // 228: api.Api.GetTokenAccounts:input_type -> api.GetTokenAccountsRequest
-	29,  // 229: api.Api.GetAccountBalanceV2:input_type -> api.GetAccountBalanceRequest
-	35,  // 230: api.Api.PostOrder:input_type -> api.PostOrderRequest
-	53,  // 231: api.Api.PostSubmit:input_type -> api.PostSubmitRequest
-	55,  // 232: api.Api.PostSubmitBatch:input_type -> api.PostSubmitBatchRequest
-	38,  // 233: api.Api.PostCancelOrder:input_type -> api.PostCancelOrderRequest
-	39,  // 234: api.Api.PostCancelByClientOrderID:input_type -> api.PostCancelByClientOrderIDRequest
-	41,  // 235: api.Api.PostCancelAll:input_type -> api.PostCancelAllRequest
-	35,  // 236: api.Api.PostReplaceByClientOrderID:input_type -> api.PostOrderRequest
-	36,  // 237: api.Api.PostReplaceOrder:input_type -> api.PostReplaceOrderRequest
-	44,  // 238: api.Api.PostSettle:input_type -> api.PostSettleRequest
-	79,  // 239: api.Api.PostTradeSwap:input_type -> api.TradeSwapRequest
-	47,  // 240: api.Api.GetOrders:input_type -> api.GetOrdersRequest
-	59,  // 241: api.Api.GetOpenOrders:input_type -> api.GetOpenOrdersRequest
-	61,  // 242: api.Api.GetOrderByID:input_type -> api.GetOrderByIDRequest
-	63,  // 243: api.Api.GetUnsettled:input_type -> api.GetUnsettledRequest
-	91,  // 244: api.Api.PostRouteTradeSwap:input_type -> api.RouteTradeSwapRequest
-	53,  // 245: api.Api.PostSubmitMineOre:input_type -> api.PostSubmitRequest
-	17,  // 246: api.Api.GetOrderbooksStream:input_type -> api.GetOrderbooksRequest
-	21,  // 247: api.Api.GetMarketDepthsStream:input_type -> api.GetMarketDepthsRequest
-	69,  // 248: api.Api.GetTickersStream:input_type -> api.GetTickersStreamRequest
-	147, // 249: api.Api.GetZetaTransactionStream:input_type -> api.GetZetaTransactionStreamRequest
-	24,  // 250: api.Api.GetTradesStream:input_type -> api.GetTradesRequest
-	50,  // 251: api.Api.GetOrderStatusStream:input_type -> api.GetOrderStatusStreamRequest
-	105, // 252: api.Api.GetRecentBlockHashStream:input_type -> api.GetRecentBlockHashRequest
-	108, // 253: api.Api.GetBlockStream:input_type -> api.GetBlockStreamRequest
-	159, // 254: api.Api.GetPriorityFeeStream:input_type -> api.GetPriorityFeeRequest
-	161, // 255: api.Api.GetBundleTipStream:input_type -> api.GetBundleTipRequest
-	132, // 256: api.Api.GetQuotesStream:input_type -> api.GetQuotesStreamRequest
-	156, // 257: api.Api.GetPoolReservesStream:input_type -> api.GetPoolReservesStreamRequest
-	157, // 258: api.Api.GetPricesStream:input_type -> api.GetPricesStreamRequest
-	137, // 259: api.Api.GetNewRaydiumPoolsStream:input_type -> api.GetNewRaydiumPoolsRequest
-	135, // 260: api.Api.GetSwapsStream:input_type -> api.GetSwapsStreamRequest
-	188, // 261: api.Api.GetPumpFunSwapsStream:input_type -> api.GetPumpFunSwapsStreamRequest
-	186, // 262: api.Api.GetPumpFunNewTokensStream:input_type -> api.GetPumpFunNewTokensStreamRequest
-	118, // 263: api.Api.GetRateLimit:output_type -> api.GetRateLimitResponse
-	121, // 264: api.Api.GetTransaction:output_type -> api.GetTransactionResponse
-	58,  // 265: api.Api.PostSubmitV2:output_type -> api.PostSubmitResponse
-	57,  // 266: api.Api.PostSubmitBatchV2:output_type -> api.PostSubmitBatchResponse
-	114, // 267: api.Api.GetRaydiumPools:output_type -> api.GetRaydiumPoolsResponse
-	116, // 268: api.Api.GetRaydiumPoolReserve:output_type -> api.GetRaydiumPoolReserveResponse
-	75,  // 269: api.Api.GetRaydiumQuotes:output_type -> api.GetRaydiumQuotesResponse
-	145, // 270: api.Api.GetRaydiumPrices:output_type -> api.GetRaydiumPricesResponse
-	87,  // 271: api.Api.PostRaydiumSwap:output_type -> api.PostRaydiumSwapResponse
-	89,  // 272: api.Api.PostRaydiumRouteSwap:output_type -> api.PostRaydiumRouteSwapResponse
-	77,  // 273: api.Api.GetJupiterQuotes:output_type -> api.GetJupiterQuotesResponse
-	146, // 274: api.Api.GetJupiterPrices:output_type -> api.GetJupiterPricesResponse
-	88,  // 275: api.Api.PostJupiterSwap:output_type -> api.PostJupiterSwapResponse
-	85,  // 276: api.Api.PostRaydiumSwapInstructions:output_type -> api.PostRaydiumSwapInstructionsResponse
-	84,  // 277: api.Api.PostJupiterSwapInstructions:output_type -> api.PostJupiterSwapInstructionsResponse
-	90,  // 278: api.Api.PostJupiterRouteSwap:output_type -> api.PostJupiterRouteSwapResponse
-	164, // 279: api.Api.GetMarketsV2:output_type -> api.GetMarketsResponseV2
-	167, // 280: api.Api.GetTickersV2:output_type -> api.GetTickersResponseV2
-	170, // 281: api.Api.GetOrderbookV2:output_type -> api.GetOrderbookResponseV2
-	173, // 282: api.Api.GetMarketDepthV2:output_type -> api.GetMarketDepthResponseV2
-	37,  // 283: api.Api.PostOrderV2:output_type -> api.PostOrderResponse
-	178, // 284: api.Api.PostCancelOrderV2:output_type -> api.PostCancelOrderResponseV2
-	37,  // 285: api.Api.PostReplaceOrderV2:output_type -> api.PostOrderResponse
-	45,  // 286: api.Api.PostSettleV2:output_type -> api.PostSettleResponse
-	184, // 287: api.Api.GetOpenOrdersV2:output_type -> api.GetOpenOrdersResponseV2
-	66,  // 288: api.Api.GetUnsettledV2:output_type -> api.GetUnsettledResponse
-	142, // 289: api.Api.GetPrice:output_type -> api.GetPriceResponse
-	8,   // 290: api.Api.GetMarkets:output_type -> api.GetMarketsResponse
-	112, // 291: api.Api.GetPools:output_type -> api.GetPoolsResponse
-	11,  // 292: api.Api.GetTickers:output_type -> api.GetTickersResponse
-	14,  // 293: api.Api.GetKline:output_type -> api.GetKlineResponse
-	18,  // 294: api.Api.GetOrderbook:output_type -> api.GetOrderbookResponse
-	22,  // 295: api.Api.GetMarketDepth:output_type -> api.GetMarketDepthResponse
-	25,  // 296: api.Api.GetTrades:output_type -> api.GetTradesResponse
-	73,  // 297: api.Api.GetQuotes:output_type -> api.GetQuotesResponse
-	28,  // 298: api.Api.GetServerTime:output_type -> api.GetServerTimeResponse
-	106, // 299: api.Api.GetRecentBlockHash:output_type -> api.GetRecentBlockHashResponse
-	160, // 300: api.Api.GetPriorityFee:output_type -> api.GetPriorityFeeResponse
-	30,  // 301: api.Api.GetAccountBalance:output_type -> api.GetAccountBalanceResponse
-	33,  // 302: api.Api.GetTokenAccounts:output_type -> api.GetTokenAccountsResponse
-	30,  // 303: api.Api.GetAccountBalanceV2:output_type -> api.GetAccountBalanceResponse
-	37,  // 304: api.Api.PostOrder:output_type -> api.PostOrderResponse
-	58,  // 305: api.Api.PostSubmit:output_type -> api.PostSubmitResponse
-	57,  // 306: api.Api.PostSubmitBatch:output_type -> api.PostSubmitBatchResponse
-	40,  // 307: api.Api.PostCancelOrder:output_type -> api.PostCancelOrderResponse
-	40,  // 308: api.Api.PostCancelByClientOrderID:output_type -> api.PostCancelOrderResponse
-	43,  // 309: api.Api.PostCancelAll:output_type -> api.PostCancelAllResponse
-	37,  // 310: api.Api.PostReplaceByClientOrderID:output_type -> api.PostOrderResponse
-	37,  // 311: api.Api.PostReplaceOrder:output_type -> api.PostOrderResponse
-	45,  // 312: api.Api.PostSettle:output_type -> api.PostSettleResponse
-	97,  // 313: api.Api.PostTradeSwap:output_type -> api.TradeSwapResponse
-	48,  // 314: api.Api.GetOrders:output_type -> api.GetOrdersResponse
-	60,  // 315: api.Api.GetOpenOrders:output_type -> api.GetOpenOrdersResponse
-	62,  // 316: api.Api.GetOrderByID:output_type -> api.GetOrderByIDResponse
-	66,  // 317: api.Api.GetUnsettled:output_type -> api.GetUnsettledResponse
-	97,  // 318: api.Api.PostRouteTradeSwap:output_type -> api.TradeSwapResponse
-	58,  // 319: api.Api.PostSubmitMineOre:output_type -> api.PostSubmitResponse
-	67,  // 320: api.Api.GetOrderbooksStream:output_type -> api.GetOrderbooksStreamResponse
-	68,  // 321: api.Api.GetMarketDepthsStream:output_type -> api.GetMarketDepthsStreamResponse
-	70,  // 322: api.Api.GetTickersStream:output_type -> api.GetTickersStreamResponse
-	151, // 323: api.Api.GetZetaTransactionStream:output_type -> api.GetZetaTransactionStreamResponse
-	71,  // 324: api.Api.GetTradesStream:output_type -> api.GetTradesStreamResponse
-	51,  // 325: api.Api.GetOrderStatusStream:output_type -> api.GetOrderStatusStreamResponse
-	106, // 326: api.Api.GetRecentBlockHashStream:output_type -> api.GetRecentBlockHashResponse
-	109, // 327: api.Api.GetBlockStream:output_type -> api.GetBlockStreamResponse
-	160, // 328: api.Api.GetPriorityFeeStream:output_type -> api.GetPriorityFeeResponse
-	162, // 329: api.Api.GetBundleTipStream:output_type -> api.GetBundleTipResponse
-	133, // 330: api.Api.GetQuotesStream:output_type -> api.GetQuotesStreamResponse
-	154, // 331: api.Api.GetPoolReservesStream:output_type -> api.GetPoolReservesStreamResponse
-	158, // 332: api.Api.GetPricesStream:output_type -> api.GetPricesStreamResponse
-	138, // 333: api.Api.GetNewRaydiumPoolsStream:output_type -> api.GetNewRaydiumPoolsResponse
-	136, // 334: api.Api.GetSwapsStream:output_type -> api.GetSwapsStreamResponse
-	189, // 335: api.Api.GetPumpFunSwapsStream:output_type -> api.GetPumpFunSwapsStreamResponse
-	187, // 336: api.Api.GetPumpFunNewTokensStream:output_type -> api.GetPumpFunNewTokensStreamResponse
-	263, // [263:337] is the sub-list for method output_type
-	189, // [189:263] is the sub-list for method input_type
+	180, // 212: api.Api.PostZetaCrossMarginAccount:input_type -> api.PostZetaCrossMarginAccountRequest
+	179, // 213: api.Api.PostSettleV2:input_type -> api.PostSettleRequestV2
+	182, // 214: api.Api.GetOpenOrdersV2:input_type -> api.GetOpenOrdersRequestV2
+	183, // 215: api.Api.GetUnsettledV2:input_type -> api.GetUnsettledRequestV2
+	141, // 216: api.Api.GetPrice:input_type -> api.GetPriceRequest
+	7,   // 217: api.Api.GetMarkets:input_type -> api.GetMarketsRequest
+	111, // 218: api.Api.GetPools:input_type -> api.GetPoolsRequest
+	10,  // 219: api.Api.GetTickers:input_type -> api.GetTickersRequest
+	13,  // 220: api.Api.GetKline:input_type -> api.GetKlineRequest
+	16,  // 221: api.Api.GetOrderbook:input_type -> api.GetOrderbookRequest
+	20,  // 222: api.Api.GetMarketDepth:input_type -> api.GetMarketDepthRequest
+	24,  // 223: api.Api.GetTrades:input_type -> api.GetTradesRequest
+	72,  // 224: api.Api.GetQuotes:input_type -> api.GetQuotesRequest
+	27,  // 225: api.Api.GetServerTime:input_type -> api.GetServerTimeRequest
+	105, // 226: api.Api.GetRecentBlockHash:input_type -> api.GetRecentBlockHashRequest
+	159, // 227: api.Api.GetPriorityFee:input_type -> api.GetPriorityFeeRequest
+	29,  // 228: api.Api.GetAccountBalance:input_type -> api.GetAccountBalanceRequest
+	32,  // 229: api.Api.GetTokenAccounts:input_type -> api.GetTokenAccountsRequest
+	29,  // 230: api.Api.GetAccountBalanceV2:input_type -> api.GetAccountBalanceRequest
+	35,  // 231: api.Api.PostOrder:input_type -> api.PostOrderRequest
+	53,  // 232: api.Api.PostSubmit:input_type -> api.PostSubmitRequest
+	55,  // 233: api.Api.PostSubmitBatch:input_type -> api.PostSubmitBatchRequest
+	38,  // 234: api.Api.PostCancelOrder:input_type -> api.PostCancelOrderRequest
+	39,  // 235: api.Api.PostCancelByClientOrderID:input_type -> api.PostCancelByClientOrderIDRequest
+	41,  // 236: api.Api.PostCancelAll:input_type -> api.PostCancelAllRequest
+	35,  // 237: api.Api.PostReplaceByClientOrderID:input_type -> api.PostOrderRequest
+	36,  // 238: api.Api.PostReplaceOrder:input_type -> api.PostReplaceOrderRequest
+	44,  // 239: api.Api.PostSettle:input_type -> api.PostSettleRequest
+	79,  // 240: api.Api.PostTradeSwap:input_type -> api.TradeSwapRequest
+	47,  // 241: api.Api.GetOrders:input_type -> api.GetOrdersRequest
+	59,  // 242: api.Api.GetOpenOrders:input_type -> api.GetOpenOrdersRequest
+	61,  // 243: api.Api.GetOrderByID:input_type -> api.GetOrderByIDRequest
+	63,  // 244: api.Api.GetUnsettled:input_type -> api.GetUnsettledRequest
+	91,  // 245: api.Api.PostRouteTradeSwap:input_type -> api.RouteTradeSwapRequest
+	53,  // 246: api.Api.PostSubmitMineOre:input_type -> api.PostSubmitRequest
+	17,  // 247: api.Api.GetOrderbooksStream:input_type -> api.GetOrderbooksRequest
+	21,  // 248: api.Api.GetMarketDepthsStream:input_type -> api.GetMarketDepthsRequest
+	69,  // 249: api.Api.GetTickersStream:input_type -> api.GetTickersStreamRequest
+	147, // 250: api.Api.GetZetaTransactionStream:input_type -> api.GetZetaTransactionStreamRequest
+	24,  // 251: api.Api.GetTradesStream:input_type -> api.GetTradesRequest
+	50,  // 252: api.Api.GetOrderStatusStream:input_type -> api.GetOrderStatusStreamRequest
+	105, // 253: api.Api.GetRecentBlockHashStream:input_type -> api.GetRecentBlockHashRequest
+	108, // 254: api.Api.GetBlockStream:input_type -> api.GetBlockStreamRequest
+	159, // 255: api.Api.GetPriorityFeeStream:input_type -> api.GetPriorityFeeRequest
+	161, // 256: api.Api.GetBundleTipStream:input_type -> api.GetBundleTipRequest
+	132, // 257: api.Api.GetQuotesStream:input_type -> api.GetQuotesStreamRequest
+	156, // 258: api.Api.GetPoolReservesStream:input_type -> api.GetPoolReservesStreamRequest
+	157, // 259: api.Api.GetPricesStream:input_type -> api.GetPricesStreamRequest
+	137, // 260: api.Api.GetNewRaydiumPoolsStream:input_type -> api.GetNewRaydiumPoolsRequest
+	135, // 261: api.Api.GetSwapsStream:input_type -> api.GetSwapsStreamRequest
+	186, // 262: api.Api.GetPumpFunSwapsStream:input_type -> api.GetPumpFunSwapsStreamRequest
+	188, // 263: api.Api.GetPumpFunNewTokensStream:input_type -> api.GetPumpFunNewTokensStreamRequest
+	118, // 264: api.Api.GetRateLimit:output_type -> api.GetRateLimitResponse
+	121, // 265: api.Api.GetTransaction:output_type -> api.GetTransactionResponse
+	58,  // 266: api.Api.PostSubmitV2:output_type -> api.PostSubmitResponse
+	57,  // 267: api.Api.PostSubmitBatchV2:output_type -> api.PostSubmitBatchResponse
+	114, // 268: api.Api.GetRaydiumPools:output_type -> api.GetRaydiumPoolsResponse
+	116, // 269: api.Api.GetRaydiumPoolReserve:output_type -> api.GetRaydiumPoolReserveResponse
+	75,  // 270: api.Api.GetRaydiumQuotes:output_type -> api.GetRaydiumQuotesResponse
+	145, // 271: api.Api.GetRaydiumPrices:output_type -> api.GetRaydiumPricesResponse
+	87,  // 272: api.Api.PostRaydiumSwap:output_type -> api.PostRaydiumSwapResponse
+	89,  // 273: api.Api.PostRaydiumRouteSwap:output_type -> api.PostRaydiumRouteSwapResponse
+	77,  // 274: api.Api.GetJupiterQuotes:output_type -> api.GetJupiterQuotesResponse
+	146, // 275: api.Api.GetJupiterPrices:output_type -> api.GetJupiterPricesResponse
+	88,  // 276: api.Api.PostJupiterSwap:output_type -> api.PostJupiterSwapResponse
+	85,  // 277: api.Api.PostRaydiumSwapInstructions:output_type -> api.PostRaydiumSwapInstructionsResponse
+	84,  // 278: api.Api.PostJupiterSwapInstructions:output_type -> api.PostJupiterSwapInstructionsResponse
+	90,  // 279: api.Api.PostJupiterRouteSwap:output_type -> api.PostJupiterRouteSwapResponse
+	164, // 280: api.Api.GetMarketsV2:output_type -> api.GetMarketsResponseV2
+	167, // 281: api.Api.GetTickersV2:output_type -> api.GetTickersResponseV2
+	170, // 282: api.Api.GetOrderbookV2:output_type -> api.GetOrderbookResponseV2
+	173, // 283: api.Api.GetMarketDepthV2:output_type -> api.GetMarketDepthResponseV2
+	37,  // 284: api.Api.PostOrderV2:output_type -> api.PostOrderResponse
+	178, // 285: api.Api.PostCancelOrderV2:output_type -> api.PostCancelOrderResponseV2
+	37,  // 286: api.Api.PostReplaceOrderV2:output_type -> api.PostOrderResponse
+	181, // 287: api.Api.PostZetaCrossMarginAccount:output_type -> api.PostZetaCrossMarginAccountResponse
+	45,  // 288: api.Api.PostSettleV2:output_type -> api.PostSettleResponse
+	184, // 289: api.Api.GetOpenOrdersV2:output_type -> api.GetOpenOrdersResponseV2
+	66,  // 290: api.Api.GetUnsettledV2:output_type -> api.GetUnsettledResponse
+	142, // 291: api.Api.GetPrice:output_type -> api.GetPriceResponse
+	8,   // 292: api.Api.GetMarkets:output_type -> api.GetMarketsResponse
+	112, // 293: api.Api.GetPools:output_type -> api.GetPoolsResponse
+	11,  // 294: api.Api.GetTickers:output_type -> api.GetTickersResponse
+	14,  // 295: api.Api.GetKline:output_type -> api.GetKlineResponse
+	18,  // 296: api.Api.GetOrderbook:output_type -> api.GetOrderbookResponse
+	22,  // 297: api.Api.GetMarketDepth:output_type -> api.GetMarketDepthResponse
+	25,  // 298: api.Api.GetTrades:output_type -> api.GetTradesResponse
+	73,  // 299: api.Api.GetQuotes:output_type -> api.GetQuotesResponse
+	28,  // 300: api.Api.GetServerTime:output_type -> api.GetServerTimeResponse
+	106, // 301: api.Api.GetRecentBlockHash:output_type -> api.GetRecentBlockHashResponse
+	160, // 302: api.Api.GetPriorityFee:output_type -> api.GetPriorityFeeResponse
+	30,  // 303: api.Api.GetAccountBalance:output_type -> api.GetAccountBalanceResponse
+	33,  // 304: api.Api.GetTokenAccounts:output_type -> api.GetTokenAccountsResponse
+	30,  // 305: api.Api.GetAccountBalanceV2:output_type -> api.GetAccountBalanceResponse
+	37,  // 306: api.Api.PostOrder:output_type -> api.PostOrderResponse
+	58,  // 307: api.Api.PostSubmit:output_type -> api.PostSubmitResponse
+	57,  // 308: api.Api.PostSubmitBatch:output_type -> api.PostSubmitBatchResponse
+	40,  // 309: api.Api.PostCancelOrder:output_type -> api.PostCancelOrderResponse
+	40,  // 310: api.Api.PostCancelByClientOrderID:output_type -> api.PostCancelOrderResponse
+	43,  // 311: api.Api.PostCancelAll:output_type -> api.PostCancelAllResponse
+	37,  // 312: api.Api.PostReplaceByClientOrderID:output_type -> api.PostOrderResponse
+	37,  // 313: api.Api.PostReplaceOrder:output_type -> api.PostOrderResponse
+	45,  // 314: api.Api.PostSettle:output_type -> api.PostSettleResponse
+	97,  // 315: api.Api.PostTradeSwap:output_type -> api.TradeSwapResponse
+	48,  // 316: api.Api.GetOrders:output_type -> api.GetOrdersResponse
+	60,  // 317: api.Api.GetOpenOrders:output_type -> api.GetOpenOrdersResponse
+	62,  // 318: api.Api.GetOrderByID:output_type -> api.GetOrderByIDResponse
+	66,  // 319: api.Api.GetUnsettled:output_type -> api.GetUnsettledResponse
+	97,  // 320: api.Api.PostRouteTradeSwap:output_type -> api.TradeSwapResponse
+	58,  // 321: api.Api.PostSubmitMineOre:output_type -> api.PostSubmitResponse
+	67,  // 322: api.Api.GetOrderbooksStream:output_type -> api.GetOrderbooksStreamResponse
+	68,  // 323: api.Api.GetMarketDepthsStream:output_type -> api.GetMarketDepthsStreamResponse
+	70,  // 324: api.Api.GetTickersStream:output_type -> api.GetTickersStreamResponse
+	151, // 325: api.Api.GetZetaTransactionStream:output_type -> api.GetZetaTransactionStreamResponse
+	71,  // 326: api.Api.GetTradesStream:output_type -> api.GetTradesStreamResponse
+	51,  // 327: api.Api.GetOrderStatusStream:output_type -> api.GetOrderStatusStreamResponse
+	106, // 328: api.Api.GetRecentBlockHashStream:output_type -> api.GetRecentBlockHashResponse
+	109, // 329: api.Api.GetBlockStream:output_type -> api.GetBlockStreamResponse
+	160, // 330: api.Api.GetPriorityFeeStream:output_type -> api.GetPriorityFeeResponse
+	162, // 331: api.Api.GetBundleTipStream:output_type -> api.GetBundleTipResponse
+	133, // 332: api.Api.GetQuotesStream:output_type -> api.GetQuotesStreamResponse
+	154, // 333: api.Api.GetPoolReservesStream:output_type -> api.GetPoolReservesStreamResponse
+	158, // 334: api.Api.GetPricesStream:output_type -> api.GetPricesStreamResponse
+	138, // 335: api.Api.GetNewRaydiumPoolsStream:output_type -> api.GetNewRaydiumPoolsResponse
+	136, // 336: api.Api.GetSwapsStream:output_type -> api.GetSwapsStreamResponse
+	187, // 337: api.Api.GetPumpFunSwapsStream:output_type -> api.GetPumpFunSwapsStreamResponse
+	189, // 338: api.Api.GetPumpFunNewTokensStream:output_type -> api.GetPumpFunNewTokensStreamResponse
+	264, // [264:339] is the sub-list for method output_type
+	189, // [189:264] is the sub-list for method input_type
 	189, // [189:189] is the sub-list for extension type_name
 	189, // [189:189] is the sub-list for extension extendee
 	0,   // [0:189] is the sub-list for field type_name
@@ -19632,30 +19653,6 @@ func file_api_proto_init() {
 			}
 		}
 		file_api_proto_msgTypes[179].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPumpFunNewTokensStreamRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_api_proto_msgTypes[180].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPumpFunNewTokensStreamResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_api_proto_msgTypes[181].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetPumpFunSwapsStreamRequest); i {
 			case 0:
 				return &v.state
@@ -19667,8 +19664,32 @@ func file_api_proto_init() {
 				return nil
 			}
 		}
-		file_api_proto_msgTypes[182].Exporter = func(v interface{}, i int) interface{} {
+		file_api_proto_msgTypes[180].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetPumpFunSwapsStreamResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_proto_msgTypes[181].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPumpFunNewTokensStreamRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_proto_msgTypes[182].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPumpFunNewTokensStreamResponse); i {
 			case 0:
 				return &v.state
 			case 1:

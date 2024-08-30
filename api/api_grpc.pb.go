@@ -43,6 +43,7 @@ type ApiClient interface {
 	PostOrderV2(ctx context.Context, in *PostOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
 	PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponseV2, error)
 	PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
+	PostZetaCrossMarginAccount(ctx context.Context, in *PostZetaCrossMarginAccountRequest, opts ...grpc.CallOption) (*PostZetaCrossMarginAccountResponse, error)
 	PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error)
 	GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponseV2, error)
 	GetUnsettledV2(ctx context.Context, in *GetUnsettledRequestV2, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
@@ -309,6 +310,15 @@ func (c *apiClient) PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRe
 func (c *apiClient) PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error) {
 	out := new(PostOrderResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostReplaceOrderV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostZetaCrossMarginAccount(ctx context.Context, in *PostZetaCrossMarginAccountRequest, opts ...grpc.CallOption) (*PostZetaCrossMarginAccountResponse, error) {
+	out := new(PostZetaCrossMarginAccountResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostZetaCrossMarginAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1194,6 +1204,7 @@ type ApiServer interface {
 	PostOrderV2(context.Context, *PostOrderRequestV2) (*PostOrderResponse, error)
 	PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponseV2, error)
 	PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error)
+	PostZetaCrossMarginAccount(context.Context, *PostZetaCrossMarginAccountRequest) (*PostZetaCrossMarginAccountResponse, error)
 	PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error)
 	GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponseV2, error)
 	GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error)
@@ -1324,6 +1335,9 @@ func (UnimplementedApiServer) PostCancelOrderV2(context.Context, *PostCancelOrde
 }
 func (UnimplementedApiServer) PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostReplaceOrderV2 not implemented")
+}
+func (UnimplementedApiServer) PostZetaCrossMarginAccount(context.Context, *PostZetaCrossMarginAccountRequest) (*PostZetaCrossMarginAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostZetaCrossMarginAccount not implemented")
 }
 func (UnimplementedApiServer) PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSettleV2 not implemented")
@@ -1901,6 +1915,24 @@ func _Api_PostReplaceOrderV2_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostReplaceOrderV2(ctx, req.(*PostReplaceOrderRequestV2))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostZetaCrossMarginAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostZetaCrossMarginAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostZetaCrossMarginAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostZetaCrossMarginAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostZetaCrossMarginAccount(ctx, req.(*PostZetaCrossMarginAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2972,6 +3004,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostReplaceOrderV2",
 			Handler:    _Api_PostReplaceOrderV2_Handler,
+		},
+		{
+			MethodName: "PostZetaCrossMarginAccount",
+			Handler:    _Api_PostZetaCrossMarginAccount_Handler,
 		},
 		{
 			MethodName: "PostSettleV2",
