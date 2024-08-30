@@ -842,6 +842,12 @@ service Api {
       tags: "AMMs";
     };
   }
+
+  rpc PostPumpFunSwap(PostPumpFunSwapRequest) returns (PostPumpFunSwapResponse){
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
 }
 
 message GetMarketsRequest {
@@ -2184,4 +2190,20 @@ message GetPumpFunNewTokensStreamResponse {
 	string bondingCurve = 7;
 	string creator = 8;
   google.protobuf.Timestamp timestamp = 9;
+}
+
+message PostPumpFunSwapRequest {
+  string bondingCurveAddress = 1;
+  string tokenAddress = 2;
+  double tokenAmount = 3;
+  double solThreshold = 4;
+  bool isBuy = 5;
+}
+
+message PostPumpFunSwapResponse{
+  TransactionMessage transactions = 1;
+  // double solAmount = 2;
+  // double outAmountMin = 3;
+  // common.PriceImpactPercentV2 priceImpact = 4;
+  // repeated common.Fee fees = 5;
 }

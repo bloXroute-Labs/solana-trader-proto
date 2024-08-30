@@ -4111,6 +4111,14 @@
         }
       }
     },
+    "apiPostPumpFunSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
     "apiPostRaydiumRouteSwapRequest": {
       "type": "object",
       "properties": {
