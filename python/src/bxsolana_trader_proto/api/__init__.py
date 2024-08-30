@@ -1155,6 +1155,7 @@ class LiquidityPoolKeys(betterproto.Message):
     market_bids: str = betterproto.string_field(20)
     market_asks: str = betterproto.string_field(21)
     market_event_queue: str = betterproto.string_field(22)
+    trade_fee_rate: int = betterproto.uint64_field(23)
 
 
 @dataclass(eq=False, repr=False)

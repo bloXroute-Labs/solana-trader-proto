@@ -1801,6 +1801,7 @@ message LiquidityPoolKeys {
   string marketBids = 20;
   string marketAsks = 21;
   string marketEventQueue = 22;
+  uint64 tradeFeeRate = 23;
 }
 
 

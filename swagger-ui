@@ -3217,6 +3217,10 @@
         },
         "marketEventQueue": {
           "type": "string"
+        },
+        "tradeFeeRate": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
