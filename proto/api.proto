@@ -8,7 +8,6 @@ import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "common.proto";
-import "google/protobuf/empty.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   security: {
@@ -2193,17 +2192,17 @@ message GetPumpFunNewTokensStreamResponse {
 }
 
 message PostPumpFunSwapRequest {
-  string bondingCurveAddress = 1;
-  string tokenAddress = 2;
-  double tokenAmount = 3;
-  double solThreshold = 4;
-  bool isBuy = 5;
+  string userAddress = 1;
+  string bondingCurveAddress = 2;
+  string tokenAddress = 3;
+  double tokenAmount = 4;
+  double solThreshold = 5;
+  bool isBuy = 6;
+  uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message PostPumpFunSwapResponse{
-  TransactionMessage transactions = 1;
-  // double solAmount = 2;
-  // double outAmountMin = 3;
-  // common.PriceImpactPercentV2 priceImpact = 4;
-  // repeated common.Fee fees = 5;
+  TransactionMessage transaction = 1;
 }
