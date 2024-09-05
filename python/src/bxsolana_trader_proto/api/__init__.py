@@ -1076,16 +1076,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1128,6 +1128,34 @@ class ProjectPool(betterproto.Message):
     token2_mint_symbol: str = betterproto.string_field(8)
     open_time: int = betterproto.uint64_field(9)
     pool_type: str = betterproto.string_field(10)
+    liquidity_pool_keys: "LiquidityPoolKeys" = betterproto.message_field(11)
+
+
+@dataclass(eq=False, repr=False)
+class LiquidityPoolKeys(betterproto.Message):
+    id: str = betterproto.string_field(1)
+    base_mint: str = betterproto.string_field(2)
+    quote_mint: str = betterproto.string_field(3)
+    lp_mint: str = betterproto.string_field(4)
+    version: int = betterproto.uint32_field(5)
+    program_id: str = betterproto.string_field(6)
+    authority: str = betterproto.string_field(7)
+    base_vault: str = betterproto.string_field(8)
+    quote_vault: str = betterproto.string_field(9)
+    lp_vault: str = betterproto.string_field(10)
+    open_orders: str = betterproto.string_field(11)
+    target_orders: str = betterproto.string_field(12)
+    withdraw_queue: str = betterproto.string_field(13)
+    market_version: int = betterproto.uint32_field(14)
+    market_program_id: str = betterproto.string_field(15)
+    market_id: str = betterproto.string_field(16)
+    market_authority: str = betterproto.string_field(17)
+    market_base_vault: str = betterproto.string_field(18)
+    market_quote_vault: str = betterproto.string_field(19)
+    market_bids: str = betterproto.string_field(20)
+    market_asks: str = betterproto.string_field(21)
+    market_event_queue: str = betterproto.string_field(22)
+    trade_fee_rate: int = betterproto.uint64_field(23)
 
 
 @dataclass(eq=False, repr=False)
@@ -2813,6 +2841,7 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
