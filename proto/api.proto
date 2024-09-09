@@ -134,7 +134,7 @@ service Api {
 
   rpc GetRaydiumCPMMQuotes(GetRaydiumCPMMQuotesRequest) returns (GetRaydiumCPMMQuotesResponse) {
     option (google.api.http) = {
-      get: "/api/v2/raydium/clmm-quotes"
+      get: "/api/v2/raydium/cpmm-quotes"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns quotes from Raydium CLMM pools";

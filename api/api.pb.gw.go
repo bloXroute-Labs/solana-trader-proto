@@ -2670,7 +2670,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetRaydiumCPMMQuotes", runtime.WithHTTPPathPattern("/api/v2/raydium/clmm-quotes"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/GetRaydiumCPMMQuotes", runtime.WithHTTPPathPattern("/api/v2/raydium/cpmm-quotes"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4128,7 +4128,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetRaydiumCPMMQuotes", runtime.WithHTTPPathPattern("/api/v2/raydium/clmm-quotes"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/GetRaydiumCPMMQuotes", runtime.WithHTTPPathPattern("/api/v2/raydium/cpmm-quotes"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5254,7 +5254,7 @@ var (
 
 	pattern_Api_GetRaydiumQuotes_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "raydium", "quotes"}, ""))
 
-	pattern_Api_GetRaydiumCPMMQuotes_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "raydium", "clmm-quotes"}, ""))
+	pattern_Api_GetRaydiumCPMMQuotes_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "raydium", "cpmm-quotes"}, ""))
 
 	pattern_Api_GetRaydiumPrices_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "raydium", "prices"}, ""))
 

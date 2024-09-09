@@ -1660,7 +1660,7 @@
         ]
       }
     },
-    "/api/v2/raydium/clmm-quotes": {
+    "/api/v2/raydium/cpmm-quotes": {
       "get": {
         "summary": "Raydium CLMM Quotes",
         "description": "Returns quotes from Raydium CLMM pools",
