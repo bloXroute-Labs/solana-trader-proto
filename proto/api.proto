@@ -132,6 +132,17 @@ service Api {
     };
   }
 
+  rpc GetRaydiumCPMMQuotes(GetRaydiumCPMMQuotesRequest) returns (GetRaydiumCPMMQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/clmm-quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Raydium CLMM pools";
+      summary: "Raydium CLMM Quotes";
+      tags: ["Raydium V2"];
+    };
+  }
+
   rpc GetRaydiumPrices(GetRaydiumPricesRequest) returns (GetRaydiumPricesResponse) {
     option (google.api.http) = {
       get: "/api/v2/raydium/prices"
@@ -166,6 +177,26 @@ service Api {
       tags: ["Raydium V2"];
     };
   }
+
+  rpc PostRaydiumCPMMSwap(PostRaydiumCPMMSwapRequest) returns (PostRaydiumCPMMSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/cpmm-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium CPMMs";
+      summary: "Unsigned Raydium CPMM swap transaction";
+      tags: ["Raydium V2"];
+    };
+  }
+
+
+
+
+
+
+
+
   // End of Raydium V2
 
   // Jupiter V2
@@ -1341,6 +1372,39 @@ message GetRaydiumQuotesResponse{
   double inAmount = 5;
   repeated RaydiumQuoteRoute routes = 6;
 }
+
+message GetRaydiumCPMMQuotesRequest {
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+}
+
+message GetRaydiumCPMMQuotesResponse {
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated RaydiumQuoteRoute routes = 6;
+}
+
+message PostRaydiumCPMMSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  uint64  tradeFeeRate = 6;
+  string poolAddress = 7;
+}
+
+message PostRaydiumCPMMSwapResponse {
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+}
+
 
 message GetJupiterQuotesRequest{
   string inToken = 1;
