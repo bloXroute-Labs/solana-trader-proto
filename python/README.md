@@ -27,7 +27,7 @@ upgrade the version in pyproject.toml
 you can install package locally before uploading it to the pypi
 
 ```shell
-    pip install dist/bxsolana-trader-proto-<your version>.tar.gz
+    pip install dist/bxsolana_trader_proto-<your version>.tar.gz
 ```
 
 now, you can upload the artifact to pypi 
