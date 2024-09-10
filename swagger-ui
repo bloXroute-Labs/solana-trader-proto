@@ -4309,6 +4309,11 @@
         "slippage": {
           "type": "number",
           "format": "double"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       }
     },
