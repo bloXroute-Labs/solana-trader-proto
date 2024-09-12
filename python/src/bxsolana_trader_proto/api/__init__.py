@@ -657,6 +657,9 @@ class PostRaydiumCpmmSwapRequest(betterproto.Message):
     slippage: float = betterproto.double_field(5)
     trade_fee_rate: int = betterproto.uint64_field(6)
     pool_address: str = betterproto.string_field(7)
+    compute_limit: int = betterproto.uint32_field(8)
+    compute_price: int = betterproto.uint64_field(9)
+    tip: Optional[int] = betterproto.uint64_field(10, optional=True, group="_tip")
 
 
 @dataclass(eq=False, repr=False)
