@@ -8,7 +8,6 @@ import "google/api/field_behavior.proto";
 import "google/api/visibility.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "common.proto";
-import "google/protobuf/empty.proto";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   security: {
@@ -830,6 +829,7 @@ service Api {
       tags: "AMMs";
     };
   }
+
   rpc GetPumpFunSwapsStream(GetPumpFunSwapsStreamRequest) returns (stream GetPumpFunSwapsStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
@@ -837,6 +837,12 @@ service Api {
   }
 
   rpc GetPumpFunNewTokensStream(GetPumpFunNewTokensStreamRequest) returns (stream GetPumpFunNewTokensStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc PostPumpFunSwap(PostPumpFunSwapRequest) returns (PostPumpFunSwapResponse){
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
     };
@@ -1449,8 +1455,8 @@ message PostRaydiumSwapRequest {
   string outToken = 3;
   double inAmount = 4;
   double slippage = 5;
-   uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
-   uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
   optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 
 }
@@ -1695,10 +1701,10 @@ message GetRateLimitResponse {
 }
 
 message StreamInfo {
-   string streamName = 1;
-   string subscriptionID = 2;
-   int64 startTime = 3;
-   int64 creditUsed = 4;
+  string streamName = 1;
+  string subscriptionID = 2;
+  int64 startTime = 3;
+  int64 creditUsed = 4;
 }
 
 message GetTransactionRequest {
@@ -1786,35 +1792,7 @@ message ProjectPool {
   string token2MintSymbol = 8;
   uint64 openTime = 9;
   string poolType = 10;
-  LiquidityPoolKeys liquidityPoolKeys = 11;
 }
-
-message LiquidityPoolKeys {
-  string id = 1;
-  string baseMint = 2;
-  string quoteMint = 3;
-  string lpMint = 4;
-  uint32 version = 5;
-  string programID = 6;
-  string authority = 7;
-  string baseVault = 8;
-  string quoteVault = 9;
-  string lpVault = 10;
-  string openOrders = 11;
-  string targetOrders = 12;
-  string withdrawQueue = 13;
-  uint32 marketVersion = 14;
-  string marketProgramID = 15;
-  string marketID = 16;
-  string marketAuthority = 17;
-  string marketBaseVault = 18;
-  string marketQuoteVault = 19;
-  string marketBids = 20;
-  string marketAsks = 21;
-  string marketEventQueue = 22;
-  uint64 tradeFeeRate = 23;
-}
-
 
 message GetQuotesStreamRequest {
   repeated Project   projects = 1;
@@ -1850,7 +1828,7 @@ message GetSwapsStreamResponse {
 }
 
 message GetNewRaydiumPoolsRequest {
-      optional bool includeCPMM = 1;
+  optional bool includeCPMM = 1;
 }
 
 message GetNewRaydiumPoolsResponse {
@@ -1987,7 +1965,7 @@ message GetPricesStreamResponse {
 
 message GetPriorityFeeRequest {
   Project project = 1;
-  optional double percentile = 2; 
+  optional double percentile = 2;
 }
 
 message GetPriorityFeeResponse {
@@ -2088,8 +2066,8 @@ message PostOrderRequestV2 {
   double price = 7 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
   uint64 clientOrderID = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Client defined OrderID"}];
-   uint32 computeLimit = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
-   uint64 computePrice = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  uint32 computeLimit = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
   optional uint64 tip = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
@@ -2104,8 +2082,8 @@ message PostReplaceOrderRequestV2 {
   string openOrdersAddress = 8 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
   uint64 clientOrderID = 9[(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Client defined OrderID"}];
   string orderID = 10 [(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Openbook generated OrderID"}];
-   uint32 computeLimit = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
-   uint64 computePrice = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  uint32 computeLimit = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
   optional uint64 tip = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
@@ -2116,8 +2094,8 @@ message PostCancelOrderRequestV2 {
   string ownerAddress = 4 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
   uint64 clientOrderID = 6[(google.api.field_behavior) = OPTIONAL];
-   uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
-   uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
   optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
@@ -2131,8 +2109,8 @@ message PostSettleRequestV2 {
   string baseTokenWallet = 3 [(google.api.field_behavior) = REQUIRED];
   string quoteTokenWallet = 4 [(google.api.field_behavior) = REQUIRED];
   string openOrdersAddress = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
-   uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
-   uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
   optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
@@ -2178,6 +2156,7 @@ message OrderV2 {
 }
 
 //End of Openbook V2 Messages
+
 message GetPumpFunSwapsStreamRequest {
   repeated string tokens = 1;
 }
@@ -2210,4 +2189,20 @@ message GetPumpFunNewTokensStreamResponse {
   string bondingCurve = 7;
   string creator = 8;
   google.protobuf.Timestamp timestamp = 9;
+}
+
+message PostPumpFunSwapRequest {
+  string userAddress = 1;
+  string bondingCurveAddress = 2;
+  string tokenAddress = 3;
+  double tokenAmount = 4;
+  double solThreshold = 5;
+  bool isBuy = 6;
+  uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostPumpFunSwapResponse{
+  TransactionMessage transaction = 1;
 }
