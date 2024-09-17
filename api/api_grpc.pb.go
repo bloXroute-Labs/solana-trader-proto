@@ -101,6 +101,8 @@ type ApiClient interface {
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
 	GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error)
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
+	GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error)
+	GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error)
 }
 
 type apiClient struct {
@@ -1149,6 +1151,70 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 	return m, nil
 }
 
+func (c *apiClient) GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[15], "/api.Api/GetPumpFunSwapsStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPumpFunSwapsStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPumpFunSwapsStreamClient interface {
+	Recv() (*GetPumpFunSwapsStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPumpFunSwapsStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPumpFunSwapsStreamClient) Recv() (*GetPumpFunSwapsStreamResponse, error) {
+	m := new(GetPumpFunSwapsStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *apiClient) GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[16], "/api.Api/GetPumpFunNewTokensStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPumpFunNewTokensStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPumpFunNewTokensStreamClient interface {
+	Recv() (*GetPumpFunNewTokensStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPumpFunNewTokensStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPumpFunNewTokensStreamClient) Recv() (*GetPumpFunNewTokensStreamResponse, error) {
+	m := new(GetPumpFunNewTokensStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // ApiServer is the server API for Api service.
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
@@ -1236,6 +1302,8 @@ type ApiServer interface {
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
 	GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsRequest, Api_GetNewRaydiumPoolsStreamServer) error
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
+	GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error
+	GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error
 	mustEmbedUnimplementedApiServer()
 }
 
@@ -1473,6 +1541,12 @@ func (UnimplementedApiServer) GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsReques
 }
 func (UnimplementedApiServer) GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetSwapsStream not implemented")
+}
+func (UnimplementedApiServer) GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPumpFunSwapsStream not implemented")
+}
+func (UnimplementedApiServer) GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPumpFunNewTokensStream not implemented")
 }
 func (UnimplementedApiServer) mustEmbedUnimplementedApiServer() {}
 
@@ -2918,6 +2992,48 @@ func (x *apiGetSwapsStreamServer) Send(m *GetSwapsStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetPumpFunSwapsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPumpFunSwapsStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPumpFunSwapsStream(m, &apiGetPumpFunSwapsStreamServer{stream})
+}
+
+type Api_GetPumpFunSwapsStreamServer interface {
+	Send(*GetPumpFunSwapsStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPumpFunSwapsStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPumpFunSwapsStreamServer) Send(m *GetPumpFunSwapsStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Api_GetPumpFunNewTokensStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPumpFunNewTokensStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPumpFunNewTokensStream(m, &apiGetPumpFunNewTokensStreamServer{stream})
+}
+
+type Api_GetPumpFunNewTokensStreamServer interface {
+	Send(*GetPumpFunNewTokensStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPumpFunNewTokensStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPumpFunNewTokensStreamServer) Send(m *GetPumpFunNewTokensStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Api_ServiceDesc is the grpc.ServiceDesc for Api service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3248,6 +3364,16 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetSwapsStream",
 			Handler:       _Api_GetSwapsStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPumpFunSwapsStream",
+			Handler:       _Api_GetPumpFunSwapsStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPumpFunNewTokensStream",
+			Handler:       _Api_GetPumpFunNewTokensStream_Handler,
 			ServerStreams: true,
 		},
 	},

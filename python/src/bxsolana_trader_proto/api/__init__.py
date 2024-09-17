@@ -1076,16 +1076,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List["TransactionMetaInnerInstruction"] = (
-        betterproto.message_field(6)
-    )
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List["TransactionMetaTokenBalance"] = (
-        betterproto.message_field(9)
-    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -1580,6 +1580,48 @@ class OrderV2(betterproto.Message):
     created_at: datetime = betterproto.message_field(7)
     client_order_id: str = betterproto.string_field(8)
     open_order_account: str = betterproto.string_field(9)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunSwapsStreamRequest(betterproto.Message):
+    """End of Openbook V2 Messages"""
+
+    tokens: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunSwapsStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    txn_hash: str = betterproto.string_field(2)
+    mint_address: str = betterproto.string_field(3)
+    user_address: str = betterproto.string_field(4)
+    user_token_account_address: str = betterproto.string_field(5)
+    bonding_curve_address: str = betterproto.string_field(6)
+    token_vault_address: str = betterproto.string_field(7)
+    sol_amount: int = betterproto.uint64_field(8)
+    token_amount: int = betterproto.uint64_field(9)
+    is_buy: bool = betterproto.bool_field(10)
+    virtual_sol_reserves: int = betterproto.uint64_field(11)
+    virtual_token_reserves: int = betterproto.uint64_field(12)
+    timestamp: datetime = betterproto.message_field(13)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunNewTokensStreamRequest(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunNewTokensStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    txn_hash: str = betterproto.string_field(2)
+    name: str = betterproto.string_field(3)
+    symbol: str = betterproto.string_field(4)
+    uri: str = betterproto.string_field(5)
+    mint: str = betterproto.string_field(6)
+    bonding_curve: str = betterproto.string_field(7)
+    creator: str = betterproto.string_field(8)
+    timestamp: datetime = betterproto.message_field(9)
 
 
 class ApiStub(betterproto.ServiceStub):
@@ -2839,9 +2881,44 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_pump_fun_swaps_stream(
+        self,
+        get_pump_fun_swaps_stream_request: "GetPumpFunSwapsStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPumpFunSwapsStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPumpFunSwapsStream",
+            get_pump_fun_swaps_stream_request,
+            GetPumpFunSwapsStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
+    async def get_pump_fun_new_tokens_stream(
+        self,
+        get_pump_fun_new_tokens_stream_request: "GetPumpFunNewTokensStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPumpFunNewTokensStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPumpFunNewTokensStream",
+            get_pump_fun_new_tokens_stream_request,
+            GetPumpFunNewTokensStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
 
 class ApiBase(ServiceBase):
-
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
@@ -3224,6 +3301,18 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetSwapsStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetSwapsStreamResponse()
+
+    async def get_pump_fun_swaps_stream(
+        self, get_pump_fun_swaps_stream_request: "GetPumpFunSwapsStreamRequest"
+    ) -> AsyncIterator["GetPumpFunSwapsStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPumpFunSwapsStreamResponse()
+
+    async def get_pump_fun_new_tokens_stream(
+        self, get_pump_fun_new_tokens_stream_request: "GetPumpFunNewTokensStreamRequest"
+    ) -> AsyncIterator["GetPumpFunNewTokensStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPumpFunNewTokensStreamResponse()
 
     async def __rpc_get_rate_limit(
         self, stream: "grpclib.server.Stream[GetRateLimitRequest, GetRateLimitResponse]"
@@ -3828,6 +3917,28 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_pump_fun_swaps_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunSwapsStreamRequest, GetPumpFunSwapsStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_pump_fun_swaps_stream,
+            stream,
+            request,
+        )
+
+    async def __rpc_get_pump_fun_new_tokens_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunNewTokensStreamRequest, GetPumpFunNewTokensStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_pump_fun_new_tokens_stream,
+            stream,
+            request,
+        )
+
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
             "/api.Api/GetRateLimit": grpclib.const.Handler(
@@ -4267,5 +4378,17 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetSwapsStreamRequest,
                 GetSwapsStreamResponse,
+            ),
+            "/api.Api/GetPumpFunSwapsStream": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_swaps_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPumpFunSwapsStreamRequest,
+                GetPumpFunSwapsStreamResponse,
+            ),
+            "/api.Api/GetPumpFunNewTokensStream": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_new_tokens_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPumpFunNewTokensStreamRequest,
+                GetPumpFunNewTokensStreamResponse,
             ),
         }
