@@ -2706,6 +2706,90 @@
         }
       }
     },
+    "apiGetPumpFunNewTokensStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "txnHash": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "mint": {
+          "type": "string"
+        },
+        "bondingCurve": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "apiGetPumpFunSwapsStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "txnHash": {
+          "type": "string"
+        },
+        "mintAddress": {
+          "type": "string"
+        },
+        "userAddress": {
+          "type": "string"
+        },
+        "userTokenAccountAddress": {
+          "type": "string"
+        },
+        "bondingCurveAddress": {
+          "type": "string"
+        },
+        "tokenVaultAddress": {
+          "type": "string"
+        },
+        "solAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "tokenAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "isBuy": {
+          "type": "boolean"
+        },
+        "virtualSolReserves": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "virtualTokenReserves": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "apiGetQuotesResponse": {
       "type": "object",
       "properties": {

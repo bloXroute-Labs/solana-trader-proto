@@ -861,6 +861,17 @@ service Api {
       tags: "AMMs";
     };
   }
+  rpc GetPumpFunSwapsStream(GetPumpFunSwapsStreamRequest) returns (stream GetPumpFunSwapsStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetPumpFunNewTokensStream(GetPumpFunNewTokensStreamRequest) returns (stream GetPumpFunNewTokensStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
 }
 
 message GetMarketsRequest {
@@ -2234,3 +2245,36 @@ message OrderV2 {
 }
 
 //End of Openbook V2 Messages
+message GetPumpFunSwapsStreamRequest {
+  repeated string tokens = 1;
+}
+
+message GetPumpFunSwapsStreamResponse {
+  int64 slot = 1;
+  string txnHash = 2;
+  string mintAddress = 3;
+  string userAddress = 4;
+  string userTokenAccountAddress = 5;
+  string bondingCurveAddress = 6;
+  string tokenVaultAddress = 7;
+  uint64 solAmount = 8;
+  uint64 tokenAmount = 9;
+  bool isBuy = 10;
+  uint64 virtualSolReserves = 11;
+  uint64 virtualTokenReserves = 12;
+  google.protobuf.Timestamp timestamp = 13;
+}
+
+message GetPumpFunNewTokensStreamRequest {}
+
+message GetPumpFunNewTokensStreamResponse {
+  int64 slot = 1;
+  string txnHash = 2;
+  string name = 3;
+  string symbol = 4;
+  string uri = 5;
+  string mint = 6;
+  string bondingCurve = 7;
+  string creator = 8;
+  google.protobuf.Timestamp timestamp = 9;
+}
