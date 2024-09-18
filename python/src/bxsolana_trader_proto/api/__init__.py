@@ -665,7 +665,7 @@ class PostRaydiumCpmmSwapRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class PostRaydiumCpmmSwapResponse(betterproto.Message):
-    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+    transactions: "TransactionMessage" = betterproto.message_field(1)
     out_amount: float = betterproto.double_field(2)
     out_amount_min: float = betterproto.double_field(3)
 

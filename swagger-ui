@@ -4353,10 +4353,7 @@
       "type": "object",
       "properties": {
         "transactions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiTransactionMessage"
-          }
+          "$ref": "#/definitions/apiTransactionMessage"
         },
         "outAmount": {
           "type": "number",

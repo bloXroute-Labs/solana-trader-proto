@@ -1415,7 +1415,7 @@ message PostRaydiumCPMMSwapRequest {
 }
 
 message PostRaydiumCPMMSwapResponse {
-  repeated TransactionMessage transactions = 1;
+  TransactionMessage transactions = 1;
   double outAmount = 2;
   double outAmountMin = 3;
 }
