@@ -4352,7 +4352,7 @@
     "apiPostRaydiumCPMMSwapResponse": {
       "type": "object",
       "properties": {
-        "transactions": {
+        "transaction": {
           "$ref": "#/definitions/apiTransactionMessage"
         },
         "outAmount": {
