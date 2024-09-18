@@ -4305,6 +4305,14 @@
         }
       }
     },
+    "apiPostPumpFunSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
     "apiPostRaydiumCPMMSwapRequest": {
       "type": "object",
       "properties": {
