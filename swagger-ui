@@ -1636,6 +1636,38 @@
         ]
       }
     },
+    "/api/v2/pumpdotfun/swap": {
+      "post": {
+        "operationId": "Api_PostPumpFunSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostPumpFunSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostPumpFunSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AMMs"
+        ]
+      }
+    },
     "/api/v2/rate-limit": {
       "get": {
         "summary": "Returns the details of an account rate limits",
@@ -4185,6 +4217,46 @@
         },
         "openOrdersAddress": {
           "type": "string"
+        }
+      }
+    },
+    "apiPostPumpFunSwapRequest": {
+      "type": "object",
+      "properties": {
+        "userAddress": {
+          "type": "string"
+        },
+        "bondingCurveAddress": {
+          "type": "string"
+        },
+        "tokenAddress": {
+          "type": "string"
+        },
+        "tokenAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "solThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "isBuy": {
+          "type": "boolean"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       }
     },
