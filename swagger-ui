@@ -2916,6 +2916,10 @@
           "type": "number",
           "format": "double"
         },
+        "tradeFeeRate": {
+          "type": "string",
+          "format": "uint64"
+        },
         "routes": {
           "type": "array",
           "items": {

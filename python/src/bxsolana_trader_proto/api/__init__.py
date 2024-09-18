@@ -645,7 +645,8 @@ class GetRaydiumCpmmQuotesResponse(betterproto.Message):
     out_token: str = betterproto.string_field(3)
     out_token_address: str = betterproto.string_field(4)
     in_amount: float = betterproto.double_field(5)
-    routes: List["RaydiumQuoteRoute"] = betterproto.message_field(6)
+    trade_fee_rate: int = betterproto.uint64_field(6)
+    routes: List["RaydiumQuoteRoute"] = betterproto.message_field(7)
 
 
 @dataclass(eq=False, repr=False)

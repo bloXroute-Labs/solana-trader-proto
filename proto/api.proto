@@ -1397,7 +1397,8 @@ message GetRaydiumCPMMQuotesResponse {
   string outToken = 3;
   string outTokenAddress = 4;
   double inAmount = 5;
-  repeated RaydiumQuoteRoute routes = 6;
+  uint64 tradeFeeRate = 6;
+  repeated RaydiumQuoteRoute routes = 7;
 }
 
 message PostRaydiumCPMMSwapRequest {
