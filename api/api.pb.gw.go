@@ -3858,7 +3858,7 @@ func RegisterApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostPumpFunSwap", runtime.WithHTTPPathPattern("/api/v2/pumpdotfun/swap"))
+		ctx, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/api.Api/PostPumpFunSwap", runtime.WithHTTPPathPattern("/api/v2/pumpfun/swap"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5139,7 +5139,7 @@ func RegisterApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
-		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostPumpFunSwap", runtime.WithHTTPPathPattern("/api/v2/pumpdotfun/swap"))
+		ctx, err = runtime.AnnotateContext(ctx, mux, req, "/api.Api/PostPumpFunSwap", runtime.WithHTTPPathPattern("/api/v2/pumpfun/swap"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5275,7 +5275,7 @@ var (
 
 	pattern_Api_PostSubmitMineOre_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"api", "v2", "mine-ore"}, ""))
 
-	pattern_Api_PostPumpFunSwap_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "pumpdotfun", "swap"}, ""))
+	pattern_Api_PostPumpFunSwap_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"api", "v2", "pumpfun", "swap"}, ""))
 )
 
 var (

@@ -1636,7 +1636,7 @@
         ]
       }
     },
-    "/api/v2/pumpdotfun/swap": {
+    "/api/v2/pumpfun/swap": {
       "post": {
         "operationId": "Api_PostPumpFunSwap",
         "responses": {
