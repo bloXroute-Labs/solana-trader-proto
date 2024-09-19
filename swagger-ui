@@ -4378,6 +4378,14 @@
         }
       }
     },
+    "apiPostPumpFunSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
     "apiPostRaydiumCLMMRouteSwapRequest": {
       "type": "object",
       "properties": {
