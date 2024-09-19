@@ -103,6 +103,7 @@ type ApiClient interface {
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
 	GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error)
 	GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error)
+	PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
 }
 
 type apiClient struct {
@@ -1215,6 +1216,15 @@ func (x *apiGetPumpFunNewTokensStreamClient) Recv() (*GetPumpFunNewTokensStreamR
 	return m, nil
 }
 
+func (c *apiClient) PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
+	out := new(PostPumpFunSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiServer is the server API for Api service.
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
@@ -1304,6 +1314,7 @@ type ApiServer interface {
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
 	GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error
 	GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error
+	PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error)
 	mustEmbedUnimplementedApiServer()
 }
 
@@ -1547,6 +1558,9 @@ func (UnimplementedApiServer) GetPumpFunSwapsStream(*GetPumpFunSwapsStreamReques
 }
 func (UnimplementedApiServer) GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPumpFunNewTokensStream not implemented")
+}
+func (UnimplementedApiServer) PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwap not implemented")
 }
 func (UnimplementedApiServer) mustEmbedUnimplementedApiServer() {}
 
@@ -3034,6 +3048,24 @@ func (x *apiGetPumpFunNewTokensStreamServer) Send(m *GetPumpFunNewTokensStreamRe
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_PostPumpFunSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostPumpFunSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostPumpFunSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostPumpFunSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostPumpFunSwap(ctx, req.(*PostPumpFunSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Api_ServiceDesc is the grpc.ServiceDesc for Api service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3288,6 +3320,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostSubmitMineOre",
 			Handler:    _Api_PostSubmitMineOre_Handler,
+		},
+		{
+			MethodName: "PostPumpFunSwap",
+			Handler:    _Api_PostPumpFunSwap_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
