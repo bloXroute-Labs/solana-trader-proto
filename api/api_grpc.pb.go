@@ -28,6 +28,10 @@ type ApiClient interface {
 	GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error)
 	GetRaydiumCPMMQuotes(ctx context.Context, in *GetRaydiumCPMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCPMMQuotesResponse, error)
 	GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error)
+	GetRaydiumCLMMQuotes(ctx context.Context, in *GetRaydiumCLMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMQuotesResponse, error)
+	GetRaydiumCLMMPools(ctx context.Context, in *GetRaydiumCLMMPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMPoolsResponse, error)
+	PostRaydiumCLMMSwap(ctx context.Context, in *PostRaydiumCLMMSwapRequest, opts ...grpc.CallOption) (*PostRaydiumCLMMSwapResponse, error)
+	PostRaydiumCLMMRouteSwap(ctx context.Context, in *PostRaydiumCLMMRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumCLMMRouteSwapResponse, error)
 	PostRaydiumSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error)
 	PostRaydiumRouteSwap(ctx context.Context, in *PostRaydiumRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumRouteSwapResponse, error)
 	PostRaydiumCPMMSwap(ctx context.Context, in *PostRaydiumCPMMSwapRequest, opts ...grpc.CallOption) (*PostRaydiumCPMMSwapResponse, error)
@@ -187,6 +191,42 @@ func (c *apiClient) GetRaydiumCPMMQuotes(ctx context.Context, in *GetRaydiumCPMM
 func (c *apiClient) GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error) {
 	out := new(GetRaydiumPricesResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumPrices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetRaydiumCLMMQuotes(ctx context.Context, in *GetRaydiumCLMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMQuotesResponse, error) {
+	out := new(GetRaydiumCLMMQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumCLMMQuotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetRaydiumCLMMPools(ctx context.Context, in *GetRaydiumCLMMPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMPoolsResponse, error) {
+	out := new(GetRaydiumCLMMPoolsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumCLMMPools", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostRaydiumCLMMSwap(ctx context.Context, in *PostRaydiumCLMMSwapRequest, opts ...grpc.CallOption) (*PostRaydiumCLMMSwapResponse, error) {
+	out := new(PostRaydiumCLMMSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumCLMMSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostRaydiumCLMMRouteSwap(ctx context.Context, in *PostRaydiumCLMMRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumCLMMRouteSwapResponse, error) {
+	out := new(PostRaydiumCLMMRouteSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumCLMMRouteSwap", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1219,6 +1259,10 @@ type ApiServer interface {
 	GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error)
 	GetRaydiumCPMMQuotes(context.Context, *GetRaydiumCPMMQuotesRequest) (*GetRaydiumCPMMQuotesResponse, error)
 	GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error)
+	GetRaydiumCLMMQuotes(context.Context, *GetRaydiumCLMMQuotesRequest) (*GetRaydiumCLMMQuotesResponse, error)
+	GetRaydiumCLMMPools(context.Context, *GetRaydiumCLMMPoolsRequest) (*GetRaydiumCLMMPoolsResponse, error)
+	PostRaydiumCLMMSwap(context.Context, *PostRaydiumCLMMSwapRequest) (*PostRaydiumCLMMSwapResponse, error)
+	PostRaydiumCLMMRouteSwap(context.Context, *PostRaydiumCLMMRouteSwapRequest) (*PostRaydiumCLMMRouteSwapResponse, error)
 	PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error)
 	PostRaydiumRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error)
 	PostRaydiumCPMMSwap(context.Context, *PostRaydiumCPMMSwapRequest) (*PostRaydiumCPMMSwapResponse, error)
@@ -1326,6 +1370,18 @@ func (UnimplementedApiServer) GetRaydiumCPMMQuotes(context.Context, *GetRaydiumC
 }
 func (UnimplementedApiServer) GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPrices not implemented")
+}
+func (UnimplementedApiServer) GetRaydiumCLMMQuotes(context.Context, *GetRaydiumCLMMQuotesRequest) (*GetRaydiumCLMMQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumCLMMQuotes not implemented")
+}
+func (UnimplementedApiServer) GetRaydiumCLMMPools(context.Context, *GetRaydiumCLMMPoolsRequest) (*GetRaydiumCLMMPoolsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumCLMMPools not implemented")
+}
+func (UnimplementedApiServer) PostRaydiumCLMMSwap(context.Context, *PostRaydiumCLMMSwapRequest) (*PostRaydiumCLMMSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumCLMMSwap not implemented")
+}
+func (UnimplementedApiServer) PostRaydiumCLMMRouteSwap(context.Context, *PostRaydiumCLMMRouteSwapRequest) (*PostRaydiumCLMMRouteSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumCLMMRouteSwap not implemented")
 }
 func (UnimplementedApiServer) PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumSwap not implemented")
@@ -1705,6 +1761,78 @@ func _Api_GetRaydiumPrices_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetRaydiumPrices(ctx, req.(*GetRaydiumPricesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetRaydiumCLMMQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRaydiumCLMMQuotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRaydiumCLMMQuotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRaydiumCLMMQuotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRaydiumCLMMQuotes(ctx, req.(*GetRaydiumCLMMQuotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetRaydiumCLMMPools_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRaydiumCLMMPoolsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRaydiumCLMMPools(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRaydiumCLMMPools",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRaydiumCLMMPools(ctx, req.(*GetRaydiumCLMMPoolsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostRaydiumCLMMSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRaydiumCLMMSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostRaydiumCLMMSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostRaydiumCLMMSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostRaydiumCLMMSwap(ctx, req.(*PostRaydiumCLMMSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostRaydiumCLMMRouteSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRaydiumCLMMRouteSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostRaydiumCLMMRouteSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostRaydiumCLMMRouteSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostRaydiumCLMMRouteSwap(ctx, req.(*PostRaydiumCLMMRouteSwapRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3044,6 +3172,22 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRaydiumPrices",
 			Handler:    _Api_GetRaydiumPrices_Handler,
+		},
+		{
+			MethodName: "GetRaydiumCLMMQuotes",
+			Handler:    _Api_GetRaydiumCLMMQuotes_Handler,
+		},
+		{
+			MethodName: "GetRaydiumCLMMPools",
+			Handler:    _Api_GetRaydiumCLMMPools_Handler,
+		},
+		{
+			MethodName: "PostRaydiumCLMMSwap",
+			Handler:    _Api_PostRaydiumCLMMSwap_Handler,
+		},
+		{
+			MethodName: "PostRaydiumCLMMRouteSwap",
+			Handler:    _Api_PostRaydiumCLMMRouteSwap_Handler,
 		},
 		{
 			MethodName: "PostRaydiumSwap",
