@@ -60,6 +60,7 @@ type ApiClient interface {
 	GetServerTime(ctx context.Context, in *GetServerTimeRequest, opts ...grpc.CallOption) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error)
 	GetPriorityFee(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (*GetPriorityFeeResponse, error)
+	GetPriorityFeeByProgram(ctx context.Context, in *GetPriorityFeeByProgramRequest, opts ...grpc.CallOption) (*GetPriorityFeeByProgramResponse, error)
 	// account endpoints
 	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(ctx context.Context, in *GetTokenAccountsRequest, opts ...grpc.CallOption) (*GetTokenAccountsResponse, error)
@@ -455,6 +456,15 @@ func (c *apiClient) GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHa
 func (c *apiClient) GetPriorityFee(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (*GetPriorityFeeResponse, error) {
 	out := new(GetPriorityFeeResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetPriorityFee", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetPriorityFeeByProgram(ctx context.Context, in *GetPriorityFeeByProgramRequest, opts ...grpc.CallOption) (*GetPriorityFeeByProgramResponse, error) {
+	out := new(GetPriorityFeeByProgramResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPriorityFeeByProgram", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1231,6 +1241,7 @@ type ApiServer interface {
 	GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error)
 	GetPriorityFee(context.Context, *GetPriorityFeeRequest) (*GetPriorityFeeResponse, error)
+	GetPriorityFeeByProgram(context.Context, *GetPriorityFeeByProgramRequest) (*GetPriorityFeeByProgramResponse, error)
 	// account endpoints
 	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(context.Context, *GetTokenAccountsRequest) (*GetTokenAccountsResponse, error)
@@ -1394,6 +1405,9 @@ func (UnimplementedApiServer) GetRecentBlockHash(context.Context, *GetRecentBloc
 }
 func (UnimplementedApiServer) GetPriorityFee(context.Context, *GetPriorityFeeRequest) (*GetPriorityFeeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPriorityFee not implemented")
+}
+func (UnimplementedApiServer) GetPriorityFeeByProgram(context.Context, *GetPriorityFeeByProgramRequest) (*GetPriorityFeeByProgramResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPriorityFeeByProgram not implemented")
 }
 func (UnimplementedApiServer) GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBalance not implemented")
@@ -2217,6 +2231,24 @@ func _Api_GetPriorityFee_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetPriorityFee(ctx, req.(*GetPriorityFeeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetPriorityFeeByProgram_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPriorityFeeByProgramRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPriorityFeeByProgram(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPriorityFeeByProgram",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPriorityFeeByProgram(ctx, req.(*GetPriorityFeeByProgramRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3100,6 +3132,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPriorityFee",
 			Handler:    _Api_GetPriorityFee_Handler,
+		},
+		{
+			MethodName: "GetPriorityFeeByProgram",
+			Handler:    _Api_GetPriorityFeeByProgram_Handler,
 		},
 		{
 			MethodName: "GetAccountBalance",

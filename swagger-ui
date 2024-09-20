@@ -2060,6 +2060,42 @@
         ]
       }
     },
+    "/api/v2/system/priority-fee-by-program": {
+      "get": {
+        "summary": "Estimated priority fee",
+        "description": "Returns an estimated prioritization fee based on recent transactions. supports filtering by program ID",
+        "operationId": "Api_GetPriorityFeeByProgram",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPriorityFeeByProgramResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "programs",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
     "/api/v2/transaction": {
       "get": {
         "summary": "Returns the details of a transaction",
@@ -2633,6 +2669,17 @@
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "apiGetPriorityFeeByProgramResponse": {
+      "type": "object",
+      "properties": {
+        "Data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiProgramPriorityFee"
+          }
         }
       }
     },
@@ -4863,6 +4910,94 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiProgramPriorityFee": {
+      "type": "object",
+      "properties": {
+        "ten": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "hundred": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fifteen": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "twenty": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "twentyFive": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "thirty": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "thirtyFive": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "forty": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fortyFive": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "five": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fifty": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "fiftyFive": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sixty": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "sixtyFive": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "seventy": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "seventyFive": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "eighty": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "eightyFive": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ninety": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "ninetyFive": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "program": {
+          "type": "string"
         }
       }
     },
