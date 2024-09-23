@@ -2012,6 +2012,39 @@
         ]
       }
     },
+    "/api/v2/system/blockhash": {
+      "get": {
+        "summary": "Recent block hash",
+        "description": "Returns recent block hash, supports optional offset",
+        "operationId": "Api_GetRecentBlockHashV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRecentBlockHashResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
     "/api/v2/system/priority-fee": {
       "get": {
         "summary": "Estimated priority fee",
@@ -2904,6 +2937,18 @@
       }
     },
     "apiGetRecentBlockHashResponse": {
+      "type": "object",
+      "properties": {
+        "blockHash": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "apiGetRecentBlockHashResponseV2": {
       "type": "object",
       "properties": {
         "blockHash": {

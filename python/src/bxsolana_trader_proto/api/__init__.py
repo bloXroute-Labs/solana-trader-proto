@@ -948,6 +948,17 @@ class GetRecentBlockHashResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetRecentBlockHashRequestV2(betterproto.Message):
+    offset: int = betterproto.uint32_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetRecentBlockHashResponseV2(betterproto.Message):
+    block_hash: str = betterproto.string_field(1)
+    timestamp: datetime = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
 class Block(betterproto.Message):
     slot: int = betterproto.uint64_field(1)
     hash: str = betterproto.string_field(2)
@@ -1076,16 +1087,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -2287,6 +2298,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def get_recent_block_hash_v2(
+        self,
+        get_recent_block_hash_request_v2: "GetRecentBlockHashRequestV2",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRecentBlockHashResponseV2":
+        return await self._unary_unary(
+            "/api.Api/GetRecentBlockHashV2",
+            get_recent_block_hash_request_v2,
+            GetRecentBlockHashResponseV2,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_priority_fee(
         self,
         get_priority_fee_request: "GetPriorityFeeRequest",
@@ -2952,6 +2980,7 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
@@ -3143,6 +3172,11 @@ class ApiBase(ServiceBase):
     async def get_recent_block_hash(
         self, get_recent_block_hash_request: "GetRecentBlockHashRequest"
     ) -> "GetRecentBlockHashResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_recent_block_hash_v2(
+        self, get_recent_block_hash_request_v2: "GetRecentBlockHashRequestV2"
+    ) -> "GetRecentBlockHashResponseV2":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_priority_fee(
@@ -3640,6 +3674,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_recent_block_hash(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_recent_block_hash_v2(
+        self,
+        stream: "grpclib.server.Stream[GetRecentBlockHashRequestV2, GetRecentBlockHashResponseV2]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_recent_block_hash_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_priority_fee(
@@ -4214,6 +4256,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetRecentBlockHashRequest,
                 GetRecentBlockHashResponse,
+            ),
+            "/api.Api/GetRecentBlockHashV2": grpclib.const.Handler(
+                self.__rpc_get_recent_block_hash_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRecentBlockHashRequestV2,
+                GetRecentBlockHashResponseV2,
             ),
             "/api.Api/GetPriorityFee": grpclib.const.Handler(
                 self.__rpc_get_priority_fee,
