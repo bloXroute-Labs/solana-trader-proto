@@ -1110,9 +1110,14 @@ message PostCancelAllRequest {
   Project project = 7;
 }
 
+
 message TransactionMessage {
   string content = 1;
   bool isCleanup = 2;
+}
+
+message TransactionMessageV2 {
+  string content = 1;
 }
 
 message PostCancelAllResponse {
@@ -2235,5 +2240,5 @@ message PostPumpFunSwapRequest {
 }
 
 message PostPumpFunSwapResponse{
-  TransactionMessage transaction = 1;
+  TransactionMessageV2 transaction = 1;
 }

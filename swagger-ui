@@ -4264,7 +4264,7 @@
       "type": "object",
       "properties": {
         "transaction": {
-          "$ref": "#/definitions/apiTransactionMessage"
+          "$ref": "#/definitions/apiTransactionMessageV2"
         }
       }
     },
@@ -5530,6 +5530,14 @@
         "numReadonlyUnsignedAccounts": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "apiTransactionMessageV2": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
         }
       }
     },
