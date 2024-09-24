@@ -367,6 +367,11 @@ class TransactionMessage(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class TransactionMessageV2(betterproto.Message):
+    content: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostCancelAllResponse(betterproto.Message):
     transactions: List["TransactionMessage"] = betterproto.message_field(1)
 
@@ -1648,7 +1653,7 @@ class PostPumpFunSwapRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class PostPumpFunSwapResponse(betterproto.Message):
-    transaction: "TransactionMessage" = betterproto.message_field(1)
+    transaction: "TransactionMessageV2" = betterproto.message_field(1)
 
 
 class ApiStub(betterproto.ServiceStub):
