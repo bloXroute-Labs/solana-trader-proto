@@ -1659,7 +1659,7 @@ message GetRecentBlockHashResponse {
 }
 
 message GetRecentBlockHashRequestV2 {
-  uint32 offset = 1;
+  uint64 offset = 1;
 }
 
 message GetRecentBlockHashResponseV2 {

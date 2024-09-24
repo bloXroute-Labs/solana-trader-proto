@@ -949,7 +949,7 @@ class GetRecentBlockHashResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetRecentBlockHashRequestV2(betterproto.Message):
-    offset: int = betterproto.uint32_field(1)
+    offset: int = betterproto.uint64_field(1)
 
 
 @dataclass(eq=False, repr=False)
