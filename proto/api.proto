@@ -501,6 +501,17 @@ service Api {
     };
   }
 
+  rpc GetRecentBlockHashV2(GetRecentBlockHashRequestV2) returns (GetRecentBlockHashResponseV2) {
+    option (google.api.http) = {
+      get: "/api/v2/system/blockhash"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns recent block hash, supports optional offset";
+      summary: "Recent block hash";
+      tags: "System";
+    };
+  }
+
   rpc GetPriorityFee(GetPriorityFeeRequest) returns (GetPriorityFeeResponse) {
     option (google.api.http) = {
       get: "/api/v2/system/priority-fee"
@@ -1648,6 +1659,15 @@ message GetRecentBlockHashRequest {
 }
 
 message GetRecentBlockHashResponse {
+  string blockHash = 1;
+  google.protobuf.Timestamp timestamp = 2;
+}
+
+message GetRecentBlockHashRequestV2 {
+  uint64 offset = 1;
+}
+
+message GetRecentBlockHashResponseV2 {
   string blockHash = 1;
   google.protobuf.Timestamp timestamp = 2;
 }
