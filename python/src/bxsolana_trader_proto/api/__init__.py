@@ -636,6 +636,46 @@ class GetRaydiumQuotesResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetRaydiumCpmmQuotesRequest(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    out_token: str = betterproto.string_field(2)
+    in_amount: float = betterproto.double_field(3)
+    slippage: float = betterproto.double_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumCpmmQuotesResponse(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    in_token_address: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    out_token_address: str = betterproto.string_field(4)
+    in_amount: float = betterproto.double_field(5)
+    trade_fee_rate: int = betterproto.uint64_field(6)
+    routes: List["RaydiumQuoteRoute"] = betterproto.message_field(7)
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumCpmmSwapRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    in_token: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    in_amount: float = betterproto.double_field(4)
+    slippage: float = betterproto.double_field(5)
+    trade_fee_rate: int = betterproto.uint64_field(6)
+    pool_address: str = betterproto.string_field(7)
+    compute_limit: int = betterproto.uint32_field(8)
+    compute_price: int = betterproto.uint64_field(9)
+    tip: Optional[int] = betterproto.uint64_field(10, optional=True, group="_tip")
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumCpmmSwapResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
+
+
+@dataclass(eq=False, repr=False)
 class GetJupiterQuotesRequest(betterproto.Message):
     in_token: str = betterproto.string_field(1)
     out_token: str = betterproto.string_field(2)
@@ -1776,6 +1816,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def get_raydium_cpmm_quotes(
+        self,
+        get_raydium_cpmm_quotes_request: "GetRaydiumCpmmQuotesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumCpmmQuotesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRaydiumCPMMQuotes",
+            get_raydium_cpmm_quotes_request,
+            GetRaydiumCpmmQuotesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_raydium_prices(
         self,
         get_raydium_prices_request: "GetRaydiumPricesRequest",
@@ -1822,6 +1879,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostRaydiumRouteSwap",
             post_raydium_route_swap_request,
             PostRaydiumRouteSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_raydium_cpmm_swap(
+        self,
+        post_raydium_cpmm_swap_request: "PostRaydiumCpmmSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostRaydiumCpmmSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostRaydiumCPMMSwap",
+            post_raydium_cpmm_swap_request,
+            PostRaydiumCpmmSwapResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3021,6 +3095,11 @@ class ApiBase(ServiceBase):
     ) -> "GetRaydiumQuotesResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def get_raydium_cpmm_quotes(
+        self, get_raydium_cpmm_quotes_request: "GetRaydiumCpmmQuotesRequest"
+    ) -> "GetRaydiumCpmmQuotesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_raydium_prices(
         self, get_raydium_prices_request: "GetRaydiumPricesRequest"
     ) -> "GetRaydiumPricesResponse":
@@ -3034,6 +3113,11 @@ class ApiBase(ServiceBase):
     async def post_raydium_route_swap(
         self, post_raydium_route_swap_request: "PostRaydiumRouteSwapRequest"
     ) -> "PostRaydiumRouteSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_raydium_cpmm_swap(
+        self, post_raydium_cpmm_swap_request: "PostRaydiumCpmmSwapRequest"
+    ) -> "PostRaydiumCpmmSwapResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_jupiter_quotes(
@@ -3445,6 +3529,14 @@ class ApiBase(ServiceBase):
         response = await self.get_raydium_quotes(request)
         await stream.send_message(response)
 
+    async def __rpc_get_raydium_cpmm_quotes(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumCpmmQuotesRequest, GetRaydiumCpmmQuotesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_raydium_cpmm_quotes(request)
+        await stream.send_message(response)
+
     async def __rpc_get_raydium_prices(
         self,
         stream: "grpclib.server.Stream[GetRaydiumPricesRequest, GetRaydiumPricesResponse]",
@@ -3467,6 +3559,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_raydium_route_swap(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_raydium_cpmm_swap(
+        self,
+        stream: "grpclib.server.Stream[PostRaydiumCpmmSwapRequest, PostRaydiumCpmmSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_raydium_cpmm_swap(request)
         await stream.send_message(response)
 
     async def __rpc_get_jupiter_quotes(
@@ -4076,6 +4176,12 @@ class ApiBase(ServiceBase):
                 GetRaydiumQuotesRequest,
                 GetRaydiumQuotesResponse,
             ),
+            "/api.Api/GetRaydiumCPMMQuotes": grpclib.const.Handler(
+                self.__rpc_get_raydium_cpmm_quotes,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumCpmmQuotesRequest,
+                GetRaydiumCpmmQuotesResponse,
+            ),
             "/api.Api/GetRaydiumPrices": grpclib.const.Handler(
                 self.__rpc_get_raydium_prices,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -4093,6 +4199,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostRaydiumRouteSwapRequest,
                 PostRaydiumRouteSwapResponse,
+            ),
+            "/api.Api/PostRaydiumCPMMSwap": grpclib.const.Handler(
+                self.__rpc_post_raydium_cpmm_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostRaydiumCpmmSwapRequest,
+                PostRaydiumCpmmSwapResponse,
             ),
             "/api.Api/GetJupiterQuotes": grpclib.const.Handler(
                 self.__rpc_get_jupiter_quotes,
