@@ -1674,6 +1674,12 @@
             "type": "string"
           },
           {
+            "name": "bondingCurve",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "amount",
             "in": "query",
             "required": false,
