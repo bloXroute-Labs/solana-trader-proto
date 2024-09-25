@@ -1692,7 +1692,6 @@
         ]
       }
     },
-<<<<<<< HEAD
     "/api/v2/raydium/clmm-pools": {
       "get": {
         "summary": "Raydium CLMM Pools",
@@ -1730,22 +1729,11 @@
         "summary": "Raydium CLMM Quotes",
         "description": "Returns quotes from Raydium CLMM pools",
         "operationId": "Api_GetRaydiumCLMMQuotes",
-=======
-    "/api/v2/raydium/cpmm-quotes": {
-      "get": {
-        "summary": "Raydium CLMM Quotes",
-        "description": "Returns quotes from Raydium CLMM pools",
-        "operationId": "Api_GetRaydiumCPMMQuotes",
->>>>>>> TRAD1123/cpmm
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-<<<<<<< HEAD
               "$ref": "#/definitions/apiGetRaydiumCLMMQuotesResponse"
-=======
-              "$ref": "#/definitions/apiGetRaydiumCPMMQuotesResponse"
->>>>>>> TRAD1123/cpmm
             }
           },
           "default": {
@@ -1788,28 +1776,16 @@
         ]
       }
     },
-<<<<<<< HEAD
     "/api/v2/raydium/clmm-route-swap": {
       "post": {
         "summary": "Unsigned Raydium swap transaction along route",
         "description": "Generates an unsigned transaction object to make a CLMM swap on Raydium on the specified route",
         "operationId": "Api_PostRaydiumCLMMRouteSwap",
-=======
-    "/api/v2/raydium/cpmm-swap": {
-      "post": {
-        "summary": "Unsigned Raydium CPMM swap transaction",
-        "description": "Generates an unsigned transaction object to make a swap on Raydium CPMMs",
-        "operationId": "Api_PostRaydiumCPMMSwap",
->>>>>>> TRAD1123/cpmm
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-<<<<<<< HEAD
               "$ref": "#/definitions/apiPostRaydiumCLMMRouteSwapResponse"
-=======
-              "$ref": "#/definitions/apiPostRaydiumCPMMSwapResponse"
->>>>>>> TRAD1123/cpmm
             }
           },
           "default": {
@@ -1825,7 +1801,6 @@
             "in": "body",
             "required": true,
             "schema": {
-<<<<<<< HEAD
               "$ref": "#/definitions/apiPostRaydiumCLMMRouteSwapRequest"
             }
           }
@@ -1861,9 +1836,92 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/apiPostRaydiumCLMMSwapRequest"
-=======
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/cpmm-quotes": {
+      "get": {
+        "summary": "Raydium CLMM Quotes",
+        "description": "Returns quotes from Raydium CLMM pools",
+        "operationId": "Api_GetRaydiumCPMMQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumCPMMQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/cpmm-swap": {
+      "post": {
+        "summary": "Unsigned Raydium CPMM swap transaction",
+        "description": "Generates an unsigned transaction object to make a swap on Raydium CPMMs",
+        "operationId": "Api_PostRaydiumCPMMSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumCPMMSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
               "$ref": "#/definitions/apiPostRaydiumCPMMSwapRequest"
->>>>>>> TRAD1123/cpmm
             }
           }
         ],
@@ -3056,7 +3114,6 @@
         }
       }
     },
-<<<<<<< HEAD
     "apiGetRaydiumCLMMPoolsResponse": {
       "type": "object",
       "properties": {
@@ -3069,9 +3126,6 @@
       }
     },
     "apiGetRaydiumCLMMQuotesResponse": {
-=======
-    "apiGetRaydiumCPMMQuotesResponse": {
->>>>>>> TRAD1123/cpmm
       "type": "object",
       "properties": {
         "inToken": {
@@ -3090,13 +3144,37 @@
           "type": "number",
           "format": "double"
         },
-<<<<<<< HEAD
-=======
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumQuoteRoute"
+          }
+        }
+      }
+    },
+    "apiGetRaydiumCPMMQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
         "tradeFeeRate": {
           "type": "string",
           "format": "uint64"
         },
->>>>>>> TRAD1123/cpmm
         "routes": {
           "type": "array",
           "items": {
