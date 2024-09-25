@@ -64,6 +64,11 @@ class Step(betterproto.Enum):
     STEP3 = 3
 
 
+class PumpFunQuoteType(betterproto.Enum):
+    BUY = 0
+    SELL = 1
+
+
 class Project(betterproto.Enum):
     P_UNKNOWN = 0
     P_ALL = 1
@@ -636,6 +641,23 @@ class GetRaydiumQuotesResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetPumpFunQuotesRequest(betterproto.Message):
+    quote_type: "PumpFunQuoteType" = betterproto.enum_field(1)
+    mint: str = betterproto.string_field(2)
+    amount: int = betterproto.uint64_field(3)
+    slippage: float = betterproto.double_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunQuotesResponse(betterproto.Message):
+    quote_type: "PumpFunQuoteType" = betterproto.enum_field(1)
+    input_mint: str = betterproto.string_field(2)
+    in_amount: int = betterproto.uint64_field(3)
+    output_mint: str = betterproto.string_field(4)
+    out_amount: int = betterproto.uint64_field(5)
+
+
+@dataclass(eq=False, repr=False)
 class GetJupiterQuotesRequest(betterproto.Message):
     in_token: str = betterproto.string_field(1)
     out_token: str = betterproto.string_field(2)
@@ -1092,16 +1114,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List["TransactionMetaInnerInstruction"] = (
-        betterproto.message_field(6)
-    )
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List["TransactionMetaTokenBalance"] = (
-        betterproto.message_field(9)
-    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -1769,6 +1791,23 @@ class ApiStub(betterproto.ServiceStub):
     ) -> "GetRaydiumQuotesResponse":
         return await self._unary_unary(
             "/api.Api/GetRaydiumQuotes",
+            get_raydium_quotes_request,
+            GetRaydiumQuotesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_pump_fun_quotes(
+        self,
+        get_raydium_quotes_request: "GetRaydiumQuotesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumQuotesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetPumpFunQuotes",
             get_raydium_quotes_request,
             GetRaydiumQuotesResponse,
             timeout=timeout,
@@ -2985,7 +3024,6 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
-
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
@@ -3017,6 +3055,11 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_raydium_quotes(
+        self, get_raydium_quotes_request: "GetRaydiumQuotesRequest"
+    ) -> "GetRaydiumQuotesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_pump_fun_quotes(
         self, get_raydium_quotes_request: "GetRaydiumQuotesRequest"
     ) -> "GetRaydiumQuotesResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
@@ -3443,6 +3486,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_raydium_quotes(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_pump_fun_quotes(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumQuotesRequest, GetRaydiumQuotesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_pump_fun_quotes(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_prices(
@@ -4072,6 +4123,12 @@ class ApiBase(ServiceBase):
             ),
             "/api.Api/GetRaydiumQuotes": grpclib.const.Handler(
                 self.__rpc_get_raydium_quotes,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumQuotesRequest,
+                GetRaydiumQuotesResponse,
+            ),
+            "/api.Api/GetPumpFunQuotes": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_quotes,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetRaydiumQuotesRequest,
                 GetRaydiumQuotesResponse,

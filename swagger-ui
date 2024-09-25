@@ -1636,6 +1636,58 @@
         ]
       }
     },
+    "/api/v2/pumpfun/quotes": {
+      "get": {
+        "summary": "Raydium Quotes",
+        "description": "Returns quotes from Raydium",
+        "operationId": "Api_GetPumpFunQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
     "/api/v2/pumpfun/swap": {
       "post": {
         "operationId": "Api_PostPumpFunSwap",
