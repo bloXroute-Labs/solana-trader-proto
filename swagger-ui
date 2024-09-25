@@ -2782,14 +2782,14 @@
         "quoteType": {
           "$ref": "#/definitions/apiPumpFunQuoteType"
         },
-        "inputMint": {
+        "inToken": {
           "type": "string"
         },
         "inAmount": {
-          "type": "string",
-          "format": "uint64"
+          "type": "number",
+          "format": "double"
         },
-        "outputMint": {
+        "outToken": {
           "type": "string"
         },
         "outAmount": {

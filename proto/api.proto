@@ -1403,10 +1403,10 @@ message GetPumpFunQuotesRequest {
 
 message GetPumpFunQuotesResponse {
   PumpFunQuoteType quote_type = 1;
-  string input_mint = 2;
-  uint64 in_amount = 3;
-  string output_mint = 4;
-  uint64 out_amount = 5;
+  string inToken = 2;
+  double inAmount = 3;
+  string outToken = 4;
+  uint64 outAmount = 5;
 }
 
 message GetJupiterQuotesRequest{

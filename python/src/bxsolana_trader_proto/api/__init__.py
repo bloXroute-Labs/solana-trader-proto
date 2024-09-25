@@ -651,9 +651,9 @@ class GetPumpFunQuotesRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetPumpFunQuotesResponse(betterproto.Message):
     quote_type: "PumpFunQuoteType" = betterproto.enum_field(1)
-    input_mint: str = betterproto.string_field(2)
-    in_amount: int = betterproto.uint64_field(3)
-    output_mint: str = betterproto.string_field(4)
+    in_token: str = betterproto.string_field(2)
+    in_amount: float = betterproto.double_field(3)
+    out_token: str = betterproto.string_field(4)
     out_amount: int = betterproto.uint64_field(5)
 
 
