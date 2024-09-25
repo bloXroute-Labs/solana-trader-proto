@@ -1638,14 +1638,14 @@
     },
     "/api/v2/pumpfun/quotes": {
       "get": {
-        "summary": "Raydium Quotes",
-        "description": "Returns quotes from Raydium",
+        "summary": "Pump Fun Quotes",
+        "description": "Returns quotes from Pump Fun",
         "operationId": "Api_GetPumpFunQuotes",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetRaydiumQuotesResponse"
+              "$ref": "#/definitions/apiGetPumpFunQuotesResponse"
             }
           },
           "default": {
@@ -1657,23 +1657,28 @@
         },
         "parameters": [
           {
-            "name": "inToken",
+            "name": "quoteType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "BUY",
+              "SELL"
+            ],
+            "default": "BUY"
+          },
+          {
+            "name": "mint",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "outToken",
+            "name": "amount",
             "in": "query",
             "required": false,
-            "type": "string"
-          },
-          {
-            "name": "inAmount",
-            "in": "query",
-            "required": false,
-            "type": "number",
-            "format": "double"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "slippage",
@@ -1684,7 +1689,7 @@
           }
         ],
         "tags": [
-          "Raydium V2"
+          "Pump Fun"
         ]
       }
     },
@@ -2768,6 +2773,28 @@
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "apiGetPumpFunQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "quoteType": {
+          "$ref": "#/definitions/apiPumpFunQuoteType"
+        },
+        "inputMint": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "outputMint": {
+          "type": "string"
+        },
+        "outAmount": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
@@ -5054,6 +5081,14 @@
           }
         }
       }
+    },
+    "apiPumpFunQuoteType": {
+      "type": "string",
+      "enum": [
+        "BUY",
+        "SELL"
+      ],
+      "default": "BUY"
     },
     "apiQuoteRoute": {
       "type": "object",

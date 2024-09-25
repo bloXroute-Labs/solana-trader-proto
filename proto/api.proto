@@ -130,14 +130,14 @@ service Api {
       tags: ["Raydium V2"];
     };
   }
-  rpc GetPumpFunQuotes(GetRaydiumQuotesRequest) returns (GetRaydiumQuotesResponse) {
+  rpc GetPumpFunQuotes(GetPumpFunQuotesRequest) returns (GetPumpFunQuotesResponse) {
     option (google.api.http) = {
       get: "/api/v2/pumpfun/quotes"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns quotes from Raydium";
-      summary: "Raydium Quotes";
-      tags: ["Raydium V2"];
+      description: "Returns quotes from Pump Fun";
+      summary: "Pump Fun Quotes";
+      tags: ["Pump Fun"];
     };
   }
 

@@ -1800,16 +1800,16 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_pump_fun_quotes(
         self,
-        get_raydium_quotes_request: "GetRaydiumQuotesRequest",
+        get_pump_fun_quotes_request: "GetPumpFunQuotesRequest",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> "GetRaydiumQuotesResponse":
+    ) -> "GetPumpFunQuotesResponse":
         return await self._unary_unary(
             "/api.Api/GetPumpFunQuotes",
-            get_raydium_quotes_request,
-            GetRaydiumQuotesResponse,
+            get_pump_fun_quotes_request,
+            GetPumpFunQuotesResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3060,8 +3060,8 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_pump_fun_quotes(
-        self, get_raydium_quotes_request: "GetRaydiumQuotesRequest"
-    ) -> "GetRaydiumQuotesResponse":
+        self, get_pump_fun_quotes_request: "GetPumpFunQuotesRequest"
+    ) -> "GetPumpFunQuotesResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_raydium_prices(
@@ -3490,7 +3490,7 @@ class ApiBase(ServiceBase):
 
     async def __rpc_get_pump_fun_quotes(
         self,
-        stream: "grpclib.server.Stream[GetRaydiumQuotesRequest, GetRaydiumQuotesResponse]",
+        stream: "grpclib.server.Stream[GetPumpFunQuotesRequest, GetPumpFunQuotesResponse]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_pump_fun_quotes(request)
@@ -4130,8 +4130,8 @@ class ApiBase(ServiceBase):
             "/api.Api/GetPumpFunQuotes": grpclib.const.Handler(
                 self.__rpc_get_pump_fun_quotes,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                GetRaydiumQuotesRequest,
-                GetRaydiumQuotesResponse,
+                GetPumpFunQuotesRequest,
+                GetPumpFunQuotesResponse,
             ),
             "/api.Api/GetRaydiumPrices": grpclib.const.Handler(
                 self.__rpc_get_raydium_prices,
