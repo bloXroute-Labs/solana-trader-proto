@@ -1398,7 +1398,7 @@ message GetPumpFunQuotesRequest {
   PumpFunQuoteType quote_type = 1;
   string mint = 2;
   string bondingCurve = 3;
-  uint64 amount = 4;
+  double amount = 4;
   double slippage = 5;
 }
 

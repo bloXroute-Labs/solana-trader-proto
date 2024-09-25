@@ -1683,8 +1683,8 @@
             "name": "amount",
             "in": "query",
             "required": false,
-            "type": "string",
-            "format": "uint64"
+            "type": "number",
+            "format": "double"
           },
           {
             "name": "slippage",

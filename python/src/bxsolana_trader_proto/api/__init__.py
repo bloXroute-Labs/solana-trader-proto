@@ -645,7 +645,7 @@ class GetPumpFunQuotesRequest(betterproto.Message):
     quote_type: "PumpFunQuoteType" = betterproto.enum_field(1)
     mint: str = betterproto.string_field(2)
     bonding_curve: str = betterproto.string_field(3)
-    amount: int = betterproto.uint64_field(4)
+    amount: float = betterproto.double_field(4)
     slippage: float = betterproto.double_field(5)
 
 
