@@ -1407,7 +1407,7 @@ message GetPumpFunQuotesResponse {
   string inToken = 2;
   double inAmount = 3;
   string outToken = 4;
-  uint64 outAmount = 5;
+  double outAmount = 5;
 }
 
 message GetJupiterQuotesRequest{

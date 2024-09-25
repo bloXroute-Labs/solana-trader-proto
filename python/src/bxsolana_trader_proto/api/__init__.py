@@ -655,7 +655,7 @@ class GetPumpFunQuotesResponse(betterproto.Message):
     in_token: str = betterproto.string_field(2)
     in_amount: float = betterproto.double_field(3)
     out_token: str = betterproto.string_field(4)
-    out_amount: int = betterproto.uint64_field(5)
+    out_amount: float = betterproto.double_field(5)
 
 
 @dataclass(eq=False, repr=False)

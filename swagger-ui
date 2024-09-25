@@ -2799,8 +2799,8 @@
           "type": "string"
         },
         "outAmount": {
-          "type": "string",
-          "format": "uint64"
+          "type": "number",
+          "format": "double"
         }
       }
     },
