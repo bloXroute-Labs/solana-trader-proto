@@ -1801,7 +1801,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostRaydiumCLMMRouteSwapRequest"
+              "$ref": "#/definitions/apiPostRaydiumSwapRequest"
             }
           }
         ],
@@ -4617,29 +4617,6 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessageV2"
-        }
-      }
-    },
-    "apiPostRaydiumCLMMRouteSwapRequest": {
-      "type": "object",
-      "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
-        "steps": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiRaydiumRouteStep"
-          }
-        },
-        "slippage": {
-          "type": "number",
-          "format": "double"
-        },
-        "tip": {
-          "type": "string",
-          "format": "uint64",
-          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
         }
       }
     },

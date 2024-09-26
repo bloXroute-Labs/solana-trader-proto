@@ -422,7 +422,7 @@ func local_request_Api_PostRaydiumCLMMSwap_0(ctx context.Context, marshaler runt
 }
 
 func request_Api_PostRaydiumCLMMRouteSwap_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostRaydiumCLMMRouteSwapRequest
+	var protoReq PostRaydiumSwapRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -439,7 +439,7 @@ func request_Api_PostRaydiumCLMMRouteSwap_0(ctx context.Context, marshaler runti
 }
 
 func local_request_Api_PostRaydiumCLMMRouteSwap_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostRaydiumCLMMRouteSwapRequest
+	var protoReq PostRaydiumSwapRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)

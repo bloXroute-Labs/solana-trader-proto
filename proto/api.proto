@@ -187,7 +187,7 @@ service Api {
     };
   }
 
-  rpc PostRaydiumCLMMRouteSwap(PostRaydiumCLMMRouteSwapRequest) returns (PostRaydiumCLMMRouteSwapResponse) {
+  rpc PostRaydiumCLMMRouteSwap(PostRaydiumSwapRequest) returns (PostRaydiumCLMMRouteSwapResponse) {
     option(google.api.http) = {
       post: "/api/v2/raydium/clmm-route-swap"
       body: "*"
@@ -1601,13 +1601,6 @@ message PostRaydiumSwapResponse{
   double outAmountMin = 3;
   common.PriceImpactPercentV2 priceImpact = 4;
   repeated common.Fee fees = 5;
-}
-
-message PostRaydiumCLMMRouteSwapRequest {
-  string ownerAddress = 1;
-  repeated RaydiumRouteStep steps = 2;
-  double slippage = 3;
-  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message PostRaydiumCLMMRouteSwapResponse{
