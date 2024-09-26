@@ -1801,7 +1801,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostRaydiumSwapRequest"
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapRequest"
             }
           }
         ],
@@ -1835,7 +1835,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostRaydiumCLMMSwapRequest"
+              "$ref": "#/definitions/apiPostRaydiumSwapRequest"
             }
           }
         ],
@@ -4636,31 +4636,6 @@
         "outAmountMin": {
           "type": "number",
           "format": "double"
-        }
-      }
-    },
-    "apiPostRaydiumCLMMSwapRequest": {
-      "type": "object",
-      "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
-        "inToken": {
-          "type": "string"
-        },
-        "outToken": {
-          "type": "string"
-        },
-        "inAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "slippage": {
-          "type": "number",
-          "format": "double"
-        },
-        "poolAddress": {
-          "type": "string"
         }
       }
     },

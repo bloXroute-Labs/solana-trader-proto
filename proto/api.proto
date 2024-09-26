@@ -175,7 +175,7 @@ service Api {
     };
   }
 
-  rpc PostRaydiumCLMMSwap(PostRaydiumCLMMSwapRequest) returns (PostRaydiumCLMMSwapResponse) {
+  rpc PostRaydiumCLMMSwap(PostRaydiumSwapRequest) returns (PostRaydiumCLMMSwapResponse) {
     option (google.api.http) = {
       post: "/api/v2/raydium/clmm-swap"
       body: "*"
@@ -187,7 +187,7 @@ service Api {
     };
   }
 
-  rpc PostRaydiumCLMMRouteSwap(PostRaydiumSwapRequest) returns (PostRaydiumCLMMRouteSwapResponse) {
+  rpc PostRaydiumCLMMRouteSwap(PostRaydiumRouteSwapRequest) returns (PostRaydiumCLMMRouteSwapResponse) {
     option(google.api.http) = {
       post: "/api/v2/raydium/clmm-route-swap"
       body: "*"
