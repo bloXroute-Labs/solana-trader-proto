@@ -135,9 +135,9 @@ service Api {
       get: "/api/v2/pumpfun/quotes"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns quotes from Pump Fun";
-      summary: "Pump Fun Quotes";
-      tags: ["Pump Fun"];
+      description: "Returns quotes from PumpFun";
+      summary: "PumpFun Quotes";
+      tags: ["PumpFun"];
     };
   }
 
