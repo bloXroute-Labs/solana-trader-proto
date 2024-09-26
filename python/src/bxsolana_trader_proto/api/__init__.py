@@ -64,11 +64,6 @@ class Step(betterproto.Enum):
     STEP3 = 3
 
 
-class PumpFunQuoteType(betterproto.Enum):
-    BUY = 0
-    SELL = 1
-
-
 class Project(betterproto.Enum):
     P_UNKNOWN = 0
     P_ALL = 1
@@ -642,7 +637,7 @@ class GetRaydiumQuotesResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetPumpFunQuotesRequest(betterproto.Message):
-    quote_type: "PumpFunQuoteType" = betterproto.enum_field(1)
+    quote_type: str = betterproto.string_field(1)
     mint: str = betterproto.string_field(2)
     bonding_curve: str = betterproto.string_field(3)
     amount: float = betterproto.double_field(4)
@@ -651,7 +646,7 @@ class GetPumpFunQuotesRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetPumpFunQuotesResponse(betterproto.Message):
-    quote_type: "PumpFunQuoteType" = betterproto.enum_field(1)
+    quote_type: str = betterproto.string_field(1)
     in_token: str = betterproto.string_field(2)
     in_amount: float = betterproto.double_field(3)
     out_token: str = betterproto.string_field(4)

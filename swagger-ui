@@ -1660,12 +1660,7 @@
             "name": "quoteType",
             "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "BUY",
-              "SELL"
-            ],
-            "default": "BUY"
+            "type": "string"
           },
           {
             "name": "mint",
@@ -2786,7 +2781,7 @@
       "type": "object",
       "properties": {
         "quoteType": {
-          "$ref": "#/definitions/apiPumpFunQuoteType"
+          "type": "string"
         },
         "inToken": {
           "type": "string"
@@ -5087,14 +5082,6 @@
           }
         }
       }
-    },
-    "apiPumpFunQuoteType": {
-      "type": "string",
-      "enum": [
-        "BUY",
-        "SELL"
-      ],
-      "default": "BUY"
     },
     "apiQuoteRoute": {
       "type": "object",

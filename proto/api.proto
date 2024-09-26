@@ -1389,13 +1389,8 @@ message GetRaydiumQuotesResponse{
   repeated RaydiumQuoteRoute routes = 6;
 }
 
-enum PumpFunQuoteType {
-  BUY = 0;
-  SELL = 1;
-}
-
 message GetPumpFunQuotesRequest {
-  PumpFunQuoteType quote_type = 1;
+  string quote_type = 1; // BUY,SELL
   string mint = 2;
   string bondingCurve = 3;
   double amount = 4;
@@ -1403,7 +1398,7 @@ message GetPumpFunQuotesRequest {
 }
 
 message GetPumpFunQuotesResponse {
-  PumpFunQuoteType quote_type = 1;
+  string quote_type = 1;
   string inToken = 2;
   double inAmount = 3;
   string outToken = 4;
