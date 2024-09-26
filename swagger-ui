@@ -1638,8 +1638,8 @@
     },
     "/api/v2/pumpfun/quotes": {
       "get": {
-        "summary": "Pump Fun Quotes",
-        "description": "Returns quotes from Pump Fun",
+        "summary": "PumpFun Quotes",
+        "description": "Returns quotes from PumpFun",
         "operationId": "Api_GetPumpFunQuotes",
         "responses": {
           "200": {
@@ -1690,7 +1690,7 @@
           }
         ],
         "tags": [
-          "Pump Fun"
+          "PumpFun"
         ]
       }
     },
