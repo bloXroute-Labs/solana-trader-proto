@@ -26,6 +26,7 @@ type ApiClient interface {
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoolReserveRequest, opts ...grpc.CallOption) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error)
+	GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error)
 	GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error)
 	PostRaydiumSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error)
 	PostRaydiumRouteSwap(ctx context.Context, in *PostRaydiumRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumRouteSwapResponse, error)
@@ -168,6 +169,15 @@ func (c *apiClient) GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoo
 func (c *apiClient) GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error) {
 	out := new(GetRaydiumQuotesResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumQuotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error) {
+	out := new(GetPumpFunQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPumpFunQuotes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1207,6 +1217,7 @@ type ApiServer interface {
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(context.Context, *GetRaydiumPoolReserveRequest) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error)
+	GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error)
 	GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error)
 	PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error)
 	PostRaydiumRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error)
@@ -1309,6 +1320,9 @@ func (UnimplementedApiServer) GetRaydiumPoolReserve(context.Context, *GetRaydium
 }
 func (UnimplementedApiServer) GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumQuotes not implemented")
+}
+func (UnimplementedApiServer) GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPumpFunQuotes not implemented")
 }
 func (UnimplementedApiServer) GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPrices not implemented")
@@ -1655,6 +1669,24 @@ func _Api_GetRaydiumQuotes_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetRaydiumQuotes(ctx, req.(*GetRaydiumQuotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetPumpFunQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPumpFunQuotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPumpFunQuotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPumpFunQuotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPumpFunQuotes(ctx, req.(*GetPumpFunQuotesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3004,6 +3036,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRaydiumQuotes",
 			Handler:    _Api_GetRaydiumQuotes_Handler,
+		},
+		{
+			MethodName: "GetPumpFunQuotes",
+			Handler:    _Api_GetPumpFunQuotes_Handler,
 		},
 		{
 			MethodName: "GetRaydiumPrices",
