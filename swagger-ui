@@ -1663,13 +1663,13 @@
             "type": "string"
           },
           {
-            "name": "mint",
+            "name": "mintAddress",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
-            "name": "bondingCurve",
+            "name": "bondingCurveAddress",
             "in": "query",
             "required": false,
             "type": "string"
@@ -2783,14 +2783,14 @@
         "quoteType": {
           "type": "string"
         },
-        "inToken": {
+        "inTokenAddress": {
           "type": "string"
         },
         "inAmount": {
           "type": "number",
           "format": "double"
         },
-        "outToken": {
+        "outTokenAddress": {
           "type": "string"
         },
         "outAmount": {

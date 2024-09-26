@@ -1390,18 +1390,18 @@ message GetRaydiumQuotesResponse{
 }
 
 message GetPumpFunQuotesRequest {
-  string quote_type = 1; // BUY,SELL
-  string mint = 2;
-  string bondingCurve = 3;
+  string quoteType = 1; // BUY,SELL
+  string mintAddress = 2;
+  string bondingCurveAddress = 3;
   double amount = 4;
   double slippage = 5;
 }
 
 message GetPumpFunQuotesResponse {
-  string quote_type = 1;
-  string inToken = 2;
+  string quoteType = 1;
+  string inTokenAddress = 2;
   double inAmount = 3;
-  string outToken = 4;
+  string outTokenAddress = 4;
   double outAmount = 5;
 }
 

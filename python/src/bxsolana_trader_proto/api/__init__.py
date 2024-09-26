@@ -638,8 +638,8 @@ class GetRaydiumQuotesResponse(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetPumpFunQuotesRequest(betterproto.Message):
     quote_type: str = betterproto.string_field(1)
-    mint: str = betterproto.string_field(2)
-    bonding_curve: str = betterproto.string_field(3)
+    mint_address: str = betterproto.string_field(2)
+    bonding_curve_address: str = betterproto.string_field(3)
     amount: float = betterproto.double_field(4)
     slippage: float = betterproto.double_field(5)
 
@@ -647,9 +647,9 @@ class GetPumpFunQuotesRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetPumpFunQuotesResponse(betterproto.Message):
     quote_type: str = betterproto.string_field(1)
-    in_token: str = betterproto.string_field(2)
+    in_token_address: str = betterproto.string_field(2)
     in_amount: float = betterproto.double_field(3)
-    out_token: str = betterproto.string_field(4)
+    out_token_address: str = betterproto.string_field(4)
     out_amount: float = betterproto.double_field(5)
 
 
