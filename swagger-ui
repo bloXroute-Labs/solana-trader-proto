@@ -1785,7 +1785,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostRaydiumCLMMRouteSwapResponse"
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapResponse"
             }
           },
           "default": {
@@ -1819,7 +1819,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostRaydiumCLMMSwapResponse"
+              "$ref": "#/definitions/apiPostRaydiumSwapResponse"
             }
           },
           "default": {
@@ -4617,44 +4617,6 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessageV2"
-        }
-      }
-    },
-    "apiPostRaydiumCLMMRouteSwapResponse": {
-      "type": "object",
-      "properties": {
-        "transactions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiTransactionMessage"
-          }
-        },
-        "outAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "outAmountMin": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "apiPostRaydiumCLMMSwapResponse": {
-      "type": "object",
-      "properties": {
-        "transactions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiTransactionMessage"
-          }
-        },
-        "outAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "outAmountMin": {
-          "type": "number",
-          "format": "double"
         }
       }
     },
