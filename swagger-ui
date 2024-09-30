@@ -1843,7 +1843,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostRaydiumCLMMRouteSwapResponse"
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapResponse"
             }
           },
           "default": {
@@ -1859,7 +1859,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostRaydiumCLMMRouteSwapRequest"
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapRequest"
             }
           }
         ],
@@ -1877,7 +1877,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiPostRaydiumCLMMSwapResponse"
+              "$ref": "#/definitions/apiPostRaydiumSwapResponse"
             }
           },
           "default": {
@@ -1893,7 +1893,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/apiPostRaydiumCLMMSwapRequest"
+              "$ref": "#/definitions/apiPostRaydiumSwapRequest"
             }
           }
         ],
@@ -4697,92 +4697,6 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessageV2"
-        }
-      }
-    },
-    "apiPostRaydiumCLMMRouteSwapRequest": {
-      "type": "object",
-      "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
-        "steps": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiRaydiumRouteStep"
-          }
-        },
-        "slippage": {
-          "type": "number",
-          "format": "double"
-        },
-        "tip": {
-          "type": "string",
-          "format": "uint64",
-          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
-        }
-      }
-    },
-    "apiPostRaydiumCLMMRouteSwapResponse": {
-      "type": "object",
-      "properties": {
-        "transactions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiTransactionMessage"
-          }
-        },
-        "outAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "outAmountMin": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "apiPostRaydiumCLMMSwapRequest": {
-      "type": "object",
-      "properties": {
-        "ownerAddress": {
-          "type": "string"
-        },
-        "inToken": {
-          "type": "string"
-        },
-        "outToken": {
-          "type": "string"
-        },
-        "inAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "slippage": {
-          "type": "number",
-          "format": "double"
-        },
-        "poolAddress": {
-          "type": "string"
-        }
-      }
-    },
-    "apiPostRaydiumCLMMSwapResponse": {
-      "type": "object",
-      "properties": {
-        "transactions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiTransactionMessage"
-          }
-        },
-        "outAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "outAmountMin": {
-          "type": "number",
-          "format": "double"
         }
       }
     },

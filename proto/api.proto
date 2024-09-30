@@ -185,7 +185,7 @@ service Api {
     };
   }
 
-  rpc PostRaydiumCLMMSwap(PostRaydiumCLMMSwapRequest) returns (PostRaydiumCLMMSwapResponse) {
+  rpc PostRaydiumCLMMSwap(PostRaydiumSwapRequest) returns (PostRaydiumSwapResponse) {
     option (google.api.http) = {
       post: "/api/v2/raydium/clmm-swap"
       body: "*"
@@ -197,7 +197,7 @@ service Api {
     };
   }
 
-  rpc PostRaydiumCLMMRouteSwap(PostRaydiumCLMMRouteSwapRequest) returns (PostRaydiumCLMMRouteSwapResponse) {
+  rpc PostRaydiumCLMMRouteSwap(PostRaydiumRouteSwapRequest) returns (PostRaydiumRouteSwapResponse) {
     option(google.api.http) = {
       post: "/api/v2/raydium/clmm-route-swap"
       body: "*"
@@ -1628,19 +1628,6 @@ message PostRaydiumSwapResponse{
   repeated common.Fee fees = 5;
 }
 
-message PostRaydiumCLMMRouteSwapRequest {
-  string ownerAddress = 1;
-  repeated RaydiumRouteStep steps = 2;
-  double slippage = 3;
-  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
-}
-
-message PostRaydiumCLMMRouteSwapResponse{
-  repeated TransactionMessage transactions = 1;
-  double outAmount = 2;
-  double outAmountMin = 3;
-}
-
 message GetRaydiumCLMMPoolsRequest {
   string pairOrAddress = 1;
 }
@@ -1714,21 +1701,6 @@ message GetRaydiumCLMMQuotesResponse{
   string outTokenAddress = 4;
   double inAmount = 5;
   repeated RaydiumQuoteRoute routes = 6;
-}
-
-message PostRaydiumCLMMSwapRequest {
-  string ownerAddress = 1;
-  string inToken = 2;
-  string outToken = 3;
-  double inAmount = 4;
-  double slippage = 5;
-  string poolAddress = 6;
-}
-
-message PostRaydiumCLMMSwapResponse{
-  repeated TransactionMessage transactions = 1;
-  double outAmount = 2;
-  double outAmountMin = 3;
 }
 
 message PostJupiterRouteSwapRequest {
