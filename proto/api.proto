@@ -146,7 +146,7 @@ service Api {
       get: "/api/v2/raydium/cpmm-quotes"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns quotes from Raydium CLMM pools";
+      description: "Returns quotes from Raydium CPMM pools";
       summary: "Raydium CLMM Quotes";
       tags: ["Raydium V2"];
     };
