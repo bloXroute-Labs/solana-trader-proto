@@ -4720,10 +4720,6 @@
           "type": "number",
           "format": "double"
         },
-        "tradeFeeRate": {
-          "type": "string",
-          "format": "uint64"
-        },
         "poolAddress": {
           "type": "string"
         },
