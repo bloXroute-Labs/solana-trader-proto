@@ -1636,6 +1636,96 @@
         ]
       }
     },
+    "/api/v2/pumpfun/quotes": {
+      "get": {
+        "summary": "PumpFun Quotes",
+        "description": "Returns quotes from PumpFun",
+        "operationId": "Api_GetPumpFunQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPumpFunQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "quoteType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mintAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "bondingCurveAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "PumpFun"
+        ]
+      }
+    },
+    "/api/v2/pumpfun/swap": {
+      "post": {
+        "operationId": "Api_PostPumpFunSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostPumpFunSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostPumpFunSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AMMs"
+        ]
+      }
+    },
     "/api/v2/rate-limit": {
       "get": {
         "summary": "Returns the details of an account rate limits",
@@ -2215,6 +2305,39 @@
         "tags": [
           "Trade",
           "Universal"
+        ]
+      }
+    },
+    "/api/v2/system/blockhash": {
+      "get": {
+        "summary": "Recent block hash",
+        "description": "Returns recent block hash, supports optional offset",
+        "operationId": "Api_GetRecentBlockHashV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRecentBlockHashResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "System"
         ]
       }
     },
@@ -2892,6 +3015,28 @@
         }
       }
     },
+    "apiGetPumpFunQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "quoteType": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiGetPumpFunSwapsStreamResponse": {
       "type": "object",
       "properties": {
@@ -3179,6 +3324,18 @@
       }
     },
     "apiGetRecentBlockHashResponse": {
+      "type": "object",
+      "properties": {
+        "blockHash": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "apiGetRecentBlockHashResponseV2": {
       "type": "object",
       "properties": {
         "blockHash": {
@@ -4495,11 +4652,51 @@
         }
       }
     },
+    "apiPostPumpFunSwapRequest": {
+      "type": "object",
+      "properties": {
+        "userAddress": {
+          "type": "string"
+        },
+        "bondingCurveAddress": {
+          "type": "string"
+        },
+        "tokenAddress": {
+          "type": "string"
+        },
+        "tokenAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "solThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "isBuy": {
+          "type": "boolean"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        }
+      }
+    },
     "apiPostPumpFunSwapResponse": {
       "type": "object",
       "properties": {
         "transaction": {
-          "$ref": "#/definitions/apiTransactionMessage"
+          "$ref": "#/definitions/apiTransactionMessageV2"
         }
       }
     },
@@ -5907,6 +6104,14 @@
         "numReadonlyUnsignedAccounts": {
           "type": "integer",
           "format": "int64"
+        }
+      }
+    },
+    "apiTransactionMessageV2": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
         }
       }
     },

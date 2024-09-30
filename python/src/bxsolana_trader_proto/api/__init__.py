@@ -367,6 +367,11 @@ class TransactionMessage(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class TransactionMessageV2(betterproto.Message):
+    content: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostCancelAllResponse(betterproto.Message):
     transactions: List["TransactionMessage"] = betterproto.message_field(1)
 
@@ -628,6 +633,24 @@ class GetRaydiumQuotesResponse(betterproto.Message):
     out_token_address: str = betterproto.string_field(4)
     in_amount: float = betterproto.double_field(5)
     routes: List["RaydiumQuoteRoute"] = betterproto.message_field(6)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunQuotesRequest(betterproto.Message):
+    quote_type: str = betterproto.string_field(1)
+    mint_address: str = betterproto.string_field(2)
+    bonding_curve_address: str = betterproto.string_field(3)
+    amount: float = betterproto.double_field(4)
+    slippage: float = betterproto.double_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunQuotesResponse(betterproto.Message):
+    quote_type: str = betterproto.string_field(1)
+    in_token_address: str = betterproto.string_field(2)
+    in_amount: float = betterproto.double_field(3)
+    out_token_address: str = betterproto.string_field(4)
+    out_amount: float = betterproto.double_field(5)
 
 
 @dataclass(eq=False, repr=False)
@@ -1042,6 +1065,17 @@ class GetRecentBlockHashRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetRecentBlockHashResponse(betterproto.Message):
+    block_hash: str = betterproto.string_field(1)
+    timestamp: datetime = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class GetRecentBlockHashRequestV2(betterproto.Message):
+    offset: int = betterproto.uint64_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetRecentBlockHashResponseV2(betterproto.Message):
     block_hash: str = betterproto.string_field(1)
     timestamp: datetime = betterproto.message_field(2)
 
@@ -1736,7 +1770,7 @@ class PostPumpFunSwapRequest(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class PostPumpFunSwapResponse(betterproto.Message):
-    transaction: "TransactionMessage" = betterproto.message_field(1)
+    transaction: "TransactionMessageV2" = betterproto.message_field(1)
 
 
 class ApiStub(betterproto.ServiceStub):
@@ -1854,6 +1888,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetRaydiumQuotes",
             get_raydium_quotes_request,
             GetRaydiumQuotesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_pump_fun_quotes(
+        self,
+        get_pump_fun_quotes_request: "GetPumpFunQuotesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetPumpFunQuotesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetPumpFunQuotes",
+            get_pump_fun_quotes_request,
+            GetPumpFunQuotesResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2483,6 +2534,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetRecentBlockHash",
             get_recent_block_hash_request,
             GetRecentBlockHashResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_recent_block_hash_v2(
+        self,
+        get_recent_block_hash_request_v2: "GetRecentBlockHashRequestV2",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRecentBlockHashResponseV2":
+        return await self._unary_unary(
+            "/api.Api/GetRecentBlockHashV2",
+            get_recent_block_hash_request_v2,
+            GetRecentBlockHashResponseV2,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3189,6 +3257,11 @@ class ApiBase(ServiceBase):
     ) -> "GetRaydiumQuotesResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def get_pump_fun_quotes(
+        self, get_pump_fun_quotes_request: "GetPumpFunQuotesRequest"
+    ) -> "GetPumpFunQuotesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_raydium_cpmm_quotes(
         self, get_raydium_cpmm_quotes_request: "GetRaydiumCpmmQuotesRequest"
     ) -> "GetRaydiumCpmmQuotesResponse":
@@ -3375,6 +3448,11 @@ class ApiBase(ServiceBase):
     async def get_recent_block_hash(
         self, get_recent_block_hash_request: "GetRecentBlockHashRequest"
     ) -> "GetRecentBlockHashResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_recent_block_hash_v2(
+        self, get_recent_block_hash_request_v2: "GetRecentBlockHashRequestV2"
+    ) -> "GetRecentBlockHashResponseV2":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_priority_fee(
@@ -3636,6 +3714,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_raydium_quotes(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_pump_fun_quotes(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunQuotesRequest, GetPumpFunQuotesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_pump_fun_quotes(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_cpmm_quotes(
@@ -3920,6 +4006,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_recent_block_hash(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_recent_block_hash_v2(
+        self,
+        stream: "grpclib.server.Stream[GetRecentBlockHashRequestV2, GetRecentBlockHashResponseV2]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_recent_block_hash_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_priority_fee(
@@ -4309,6 +4403,12 @@ class ApiBase(ServiceBase):
                 GetRaydiumQuotesRequest,
                 GetRaydiumQuotesResponse,
             ),
+            "/api.Api/GetPumpFunQuotes": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_quotes,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetPumpFunQuotesRequest,
+                GetPumpFunQuotesResponse,
+            ),
             "/api.Api/GetRaydiumCPMMQuotes": grpclib.const.Handler(
                 self.__rpc_get_raydium_cpmm_quotes,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -4530,6 +4630,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetRecentBlockHashRequest,
                 GetRecentBlockHashResponse,
+            ),
+            "/api.Api/GetRecentBlockHashV2": grpclib.const.Handler(
+                self.__rpc_get_recent_block_hash_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRecentBlockHashRequestV2,
+                GetRecentBlockHashResponseV2,
             ),
             "/api.Api/GetPriorityFee": grpclib.const.Handler(
                 self.__rpc_get_priority_fee,

@@ -26,6 +26,7 @@ type ApiClient interface {
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoolReserveRequest, opts ...grpc.CallOption) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error)
+	GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error)
 	GetRaydiumCPMMQuotes(ctx context.Context, in *GetRaydiumCPMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCPMMQuotesResponse, error)
 	GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error)
 	GetRaydiumCLMMQuotes(ctx context.Context, in *GetRaydiumCLMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMQuotesResponse, error)
@@ -65,6 +66,7 @@ type ApiClient interface {
 	// system API
 	GetServerTime(ctx context.Context, in *GetServerTimeRequest, opts ...grpc.CallOption) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error)
+	GetRecentBlockHashV2(ctx context.Context, in *GetRecentBlockHashRequestV2, opts ...grpc.CallOption) (*GetRecentBlockHashResponseV2, error)
 	GetPriorityFee(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (*GetPriorityFeeResponse, error)
 	// account endpoints
 	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
@@ -173,6 +175,15 @@ func (c *apiClient) GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoo
 func (c *apiClient) GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error) {
 	out := new(GetRaydiumQuotesResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumQuotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error) {
+	out := new(GetPumpFunQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPumpFunQuotes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -506,6 +517,15 @@ func (c *apiClient) GetServerTime(ctx context.Context, in *GetServerTimeRequest,
 func (c *apiClient) GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error) {
 	out := new(GetRecentBlockHashResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRecentBlockHash", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetRecentBlockHashV2(ctx context.Context, in *GetRecentBlockHashRequestV2, opts ...grpc.CallOption) (*GetRecentBlockHashResponseV2, error) {
+	out := new(GetRecentBlockHashResponseV2)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRecentBlockHashV2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1257,6 +1277,7 @@ type ApiServer interface {
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(context.Context, *GetRaydiumPoolReserveRequest) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error)
+	GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error)
 	GetRaydiumCPMMQuotes(context.Context, *GetRaydiumCPMMQuotesRequest) (*GetRaydiumCPMMQuotesResponse, error)
 	GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error)
 	GetRaydiumCLMMQuotes(context.Context, *GetRaydiumCLMMQuotesRequest) (*GetRaydiumCLMMQuotesResponse, error)
@@ -1296,6 +1317,7 @@ type ApiServer interface {
 	// system API
 	GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error)
+	GetRecentBlockHashV2(context.Context, *GetRecentBlockHashRequestV2) (*GetRecentBlockHashResponseV2, error)
 	GetPriorityFee(context.Context, *GetPriorityFeeRequest) (*GetPriorityFeeResponse, error)
 	// account endpoints
 	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
@@ -1364,6 +1386,9 @@ func (UnimplementedApiServer) GetRaydiumPoolReserve(context.Context, *GetRaydium
 }
 func (UnimplementedApiServer) GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumQuotes not implemented")
+}
+func (UnimplementedApiServer) GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPumpFunQuotes not implemented")
 }
 func (UnimplementedApiServer) GetRaydiumCPMMQuotes(context.Context, *GetRaydiumCPMMQuotesRequest) (*GetRaydiumCPMMQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumCPMMQuotes not implemented")
@@ -1475,6 +1500,9 @@ func (UnimplementedApiServer) GetServerTime(context.Context, *GetServerTimeReque
 }
 func (UnimplementedApiServer) GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecentBlockHash not implemented")
+}
+func (UnimplementedApiServer) GetRecentBlockHashV2(context.Context, *GetRecentBlockHashRequestV2) (*GetRecentBlockHashResponseV2, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRecentBlockHashV2 not implemented")
 }
 func (UnimplementedApiServer) GetPriorityFee(context.Context, *GetPriorityFeeRequest) (*GetPriorityFeeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPriorityFee not implemented")
@@ -1725,6 +1753,24 @@ func _Api_GetRaydiumQuotes_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetRaydiumQuotes(ctx, req.(*GetRaydiumQuotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetPumpFunQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPumpFunQuotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPumpFunQuotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPumpFunQuotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPumpFunQuotes(ctx, req.(*GetPumpFunQuotesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2391,6 +2437,24 @@ func _Api_GetRecentBlockHash_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetRecentBlockHash(ctx, req.(*GetRecentBlockHashRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetRecentBlockHashV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecentBlockHashRequestV2)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRecentBlockHashV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRecentBlockHashV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRecentBlockHashV2(ctx, req.(*GetRecentBlockHashRequestV2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3166,6 +3230,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetRaydiumQuotes_Handler,
 		},
 		{
+			MethodName: "GetPumpFunQuotes",
+			Handler:    _Api_GetPumpFunQuotes_Handler,
+		},
+		{
 			MethodName: "GetRaydiumCPMMQuotes",
 			Handler:    _Api_GetRaydiumCPMMQuotes_Handler,
 		},
@@ -3312,6 +3380,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRecentBlockHash",
 			Handler:    _Api_GetRecentBlockHash_Handler,
+		},
+		{
+			MethodName: "GetRecentBlockHashV2",
+			Handler:    _Api_GetRecentBlockHashV2_Handler,
 		},
 		{
 			MethodName: "GetPriorityFee",
