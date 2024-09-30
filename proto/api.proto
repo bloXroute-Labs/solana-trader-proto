@@ -130,6 +130,16 @@ service Api {
       tags: ["Raydium V2"];
     };
   }
+  rpc GetPumpFunQuotes(GetPumpFunQuotesRequest) returns (GetPumpFunQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/pumpfun/quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from PumpFun";
+      summary: "PumpFun Quotes";
+      tags: ["PumpFun"];
+    };
+  }
 
   rpc GetRaydiumCPMMQuotes(GetRaydiumCPMMQuotesRequest) returns (GetRaydiumCPMMQuotesResponse) {
     option (google.api.http) = {
@@ -1455,6 +1465,23 @@ message GetRaydiumQuotesResponse{
   double inAmount = 5;
   repeated RaydiumQuoteRoute routes = 6;
 }
+
+message GetPumpFunQuotesRequest {
+  string quoteType = 1; // BUY,SELL
+  string mintAddress = 2;
+  string bondingCurveAddress = 3;
+  double amount = 4;
+  double slippage = 5;
+}
+
+message GetPumpFunQuotesResponse {
+  string quoteType = 1;
+  string inTokenAddress = 2;
+  double inAmount = 3;
+  string outTokenAddress = 4;
+  double outAmount = 5;
+}
+
 
 message GetRaydiumCPMMQuotesRequest {
   string inToken = 1;

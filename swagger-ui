@@ -1636,6 +1636,64 @@
         ]
       }
     },
+    "/api/v2/pumpfun/quotes": {
+      "get": {
+        "summary": "PumpFun Quotes",
+        "description": "Returns quotes from PumpFun",
+        "operationId": "Api_GetPumpFunQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPumpFunQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "quoteType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mintAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "bondingCurveAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "PumpFun"
+        ]
+      }
+    },
     "/api/v2/pumpfun/swap": {
       "post": {
         "operationId": "Api_PostPumpFunSwap",
@@ -2954,6 +3012,28 @@
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        }
+      }
+    },
+    "apiGetPumpFunQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "quoteType": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
