@@ -1750,6 +1750,244 @@
         ]
       }
     },
+    "/api/v2/raydium/clmm-pools": {
+      "get": {
+        "summary": "Raydium CLMM Pools",
+        "description": "Returns the list of Raydium CLMM pools",
+        "operationId": "Api_GetRaydiumCLMMPools",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumCLMMPoolsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairOrAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/clmm-quotes": {
+      "get": {
+        "summary": "Raydium CLMM Quotes",
+        "description": "Returns quotes from Raydium CLMM pools",
+        "operationId": "Api_GetRaydiumCLMMQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumCLMMQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/clmm-route-swap": {
+      "post": {
+        "summary": "Unsigned Raydium swap transaction along route",
+        "description": "Generates an unsigned transaction object to make a CLMM swap on Raydium on the specified route",
+        "operationId": "Api_PostRaydiumCLMMRouteSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/clmm-swap": {
+      "post": {
+        "summary": "Unsigned Raydium CLMM swap transaction",
+        "description": "Generates an unsigned transaction object to make a swap on Raydium CLMMs",
+        "operationId": "Api_PostRaydiumCLMMSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/cpmm-quotes": {
+      "get": {
+        "summary": "Raydium CLMM Quotes",
+        "description": "Returns quotes from Raydium CPMM pools",
+        "operationId": "Api_GetRaydiumCPMMQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumCPMMQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/cpmm-swap": {
+      "post": {
+        "summary": "Unsigned Raydium CPMM swap transaction",
+        "description": "Generates an unsigned transaction object to make a swap on Raydium CPMMs",
+        "operationId": "Api_PostRaydiumCPMMSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumCPMMSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumCPMMSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
     "/api/v2/raydium/pool-reserves": {
       "get": {
         "summary": "Raydium Pool reserve info",
@@ -2952,6 +3190,75 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiStreamInfo"
+          }
+        }
+      }
+    },
+    "apiGetRaydiumCLMMPoolsResponse": {
+      "type": "object",
+      "properties": {
+        "pools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiProjectPool"
+          }
+        }
+      }
+    },
+    "apiGetRaydiumCLMMQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumQuoteRoute"
+          }
+        }
+      }
+    },
+    "apiGetRaydiumCPMMQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "tradeFeeRate": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumQuoteRoute"
           }
         }
       }
@@ -4390,6 +4697,62 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessageV2"
+        }
+      }
+    },
+    "apiPostRaydiumCPMMSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "poolAddress": {
+          "type": "string"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        }
+      }
+    },
+    "apiPostRaydiumCPMMSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
