@@ -130,6 +130,27 @@ service Api {
       tags: ["Raydium V2"];
     };
   }
+  rpc GetPumpFunQuotes(GetPumpFunQuotesRequest) returns (GetPumpFunQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/pumpfun/quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from PumpFun";
+      summary: "PumpFun Quotes";
+      tags: ["PumpFun"];
+    };
+  }
+
+  rpc GetRaydiumCPMMQuotes(GetRaydiumCPMMQuotesRequest) returns (GetRaydiumCPMMQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/cpmm-quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Raydium CPMM pools";
+      summary: "Raydium CLMM Quotes";
+      tags: ["Raydium V2"];
+    };
+  }
 
   rpc GetRaydiumPrices(GetRaydiumPricesRequest) returns (GetRaydiumPricesResponse) {
     option (google.api.http) = {
@@ -138,6 +159,52 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the list of prices for specified tokens on Raydium";
       summary: "Token prices on Rayidum";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumCLMMQuotes(GetRaydiumCLMMQuotesRequest) returns (GetRaydiumCLMMQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/clmm-quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Raydium CLMM pools";
+      summary: "Raydium CLMM Quotes";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumCLMMPools(GetRaydiumCLMMPoolsRequest) returns (GetRaydiumCLMMPoolsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/clmm-pools"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of Raydium CLMM pools";
+      summary: "Raydium CLMM Pools";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumCLMMSwap(PostRaydiumSwapRequest) returns (PostRaydiumSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/clmm-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium CLMMs";
+      summary: "Unsigned Raydium CLMM swap transaction";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumCLMMRouteSwap(PostRaydiumRouteSwapRequest) returns (PostRaydiumRouteSwapResponse) {
+    option(google.api.http) = {
+      post: "/api/v2/raydium/clmm-route-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a CLMM swap on Raydium on the specified route";
+      summary: "Unsigned Raydium swap transaction along route";
       tags: ["Raydium V2"];
     };
   }
@@ -165,6 +232,26 @@ service Api {
       tags: ["Raydium V2"];
     };
   }
+
+  rpc PostRaydiumCPMMSwap(PostRaydiumCPMMSwapRequest) returns (PostRaydiumCPMMSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/cpmm-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium CPMMs";
+      summary: "Unsigned Raydium CPMM swap transaction";
+      tags: ["Raydium V2"];
+    };
+  }
+
+
+
+
+
+
+
+
   // End of Raydium V2
 
   // Jupiter V2
@@ -1390,6 +1477,58 @@ message GetRaydiumQuotesResponse{
   repeated RaydiumQuoteRoute routes = 6;
 }
 
+message GetPumpFunQuotesRequest {
+  string quoteType = 1; // BUY,SELL
+  string mintAddress = 2;
+  string bondingCurveAddress = 3;
+  double amount = 4;
+  double slippage = 5;
+}
+
+message GetPumpFunQuotesResponse {
+  string quoteType = 1;
+  string inTokenAddress = 2;
+  double inAmount = 3;
+  string outTokenAddress = 4;
+  double outAmount = 5;
+}
+
+message GetRaydiumCPMMQuotesRequest {
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+}
+
+message GetRaydiumCPMMQuotesResponse {
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  uint64 tradeFeeRate = 6;
+  repeated RaydiumQuoteRoute routes = 7;
+}
+
+message PostRaydiumCPMMSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  string poolAddress = 6;
+  uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostRaydiumCPMMSwapResponse {
+  TransactionMessage transaction = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+}
+
+
 message GetJupiterQuotesRequest{
   string inToken = 1;
   string outToken = 2;
@@ -1500,6 +1639,14 @@ message PostRaydiumSwapResponse{
   repeated common.Fee fees = 5;
 }
 
+message GetRaydiumCLMMPoolsRequest {
+  string pairOrAddress = 1;
+}
+
+message GetRaydiumCLMMPoolsResponse {
+  repeated ProjectPool pools = 1;
+}
+
 message PostJupiterSwapResponse{
   repeated TransactionMessage transactions = 1;
   double outAmount = 2;
@@ -1549,6 +1696,22 @@ message RaydiumRouteStep {
   double outAmountMin = 5;
   string poolAddress = 6;
   StepProject project = 7;
+}
+
+message GetRaydiumCLMMQuotesRequest {
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+}
+
+message GetRaydiumCLMMQuotesResponse{
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated RaydiumQuoteRoute routes = 6;
 }
 
 message PostJupiterRouteSwapRequest {
