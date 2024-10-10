@@ -610,6 +610,17 @@ service Api {
     };
   }
 
+  rpc GetPriorityFeeByProgram(GetPriorityFeeByProgramRequest) returns (GetPriorityFeeByProgramResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/system/priority-fee-by-program"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns an estimated prioritization fee based on recent transactions. supports filtering by program ID";
+      summary: "Estimated priority fee";
+      tags: "System";
+    };
+  }
+
   // account endpoints
   rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse) {
     option (google.api.http) = {
@@ -2191,6 +2202,38 @@ message GetPriorityFeeResponse {
   Project project = 1;
   double percentile = 2;
   uint64 feeAtPercentile = 3;
+}
+
+message GetPriorityFeeByProgramRequest {
+  repeated string programs = 1;
+}
+
+message GetPriorityFeeByProgramResponse {
+  repeated ProgramPriorityFee Data = 1;
+}
+
+message ProgramPriorityFee {
+  uint32 ten = 1;
+  uint32 hundred = 2;
+  uint32 fifteen = 3;
+  uint32 twenty = 4;
+  uint32 twentyFive = 5;
+  uint32 thirty = 6;
+  uint32 thirtyFive = 7;
+  uint32 forty = 8;
+  uint32 fortyFive = 9;
+  uint32 five = 10;
+  uint32 fifty = 11;
+  uint32 fiftyFive = 12;
+  uint32 sixty = 13;
+  uint32 sixtyFive = 14;
+  uint32 seventy = 15;
+  uint32 seventyFive = 16;
+  uint32 eighty = 17;
+  uint32 eightyFive = 18;
+  uint32 ninety = 19;
+  uint32 ninetyFive = 20;
+  string program = 21;
 }
 
 message GetBundleTipRequest{}

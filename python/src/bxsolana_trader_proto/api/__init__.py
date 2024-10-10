@@ -1471,6 +1471,41 @@ class GetPriorityFeeResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetPriorityFeeByProgramRequest(betterproto.Message):
+    programs: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetPriorityFeeByProgramResponse(betterproto.Message):
+    data: List["ProgramPriorityFee"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ProgramPriorityFee(betterproto.Message):
+    ten: int = betterproto.uint32_field(1)
+    hundred: int = betterproto.uint32_field(2)
+    fifteen: int = betterproto.uint32_field(3)
+    twenty: int = betterproto.uint32_field(4)
+    twenty_five: int = betterproto.uint32_field(5)
+    thirty: int = betterproto.uint32_field(6)
+    thirty_five: int = betterproto.uint32_field(7)
+    forty: int = betterproto.uint32_field(8)
+    forty_five: int = betterproto.uint32_field(9)
+    five: int = betterproto.uint32_field(10)
+    fifty: int = betterproto.uint32_field(11)
+    fifty_five: int = betterproto.uint32_field(12)
+    sixty: int = betterproto.uint32_field(13)
+    sixty_five: int = betterproto.uint32_field(14)
+    seventy: int = betterproto.uint32_field(15)
+    seventy_five: int = betterproto.uint32_field(16)
+    eighty: int = betterproto.uint32_field(17)
+    eighty_five: int = betterproto.uint32_field(18)
+    ninety: int = betterproto.uint32_field(19)
+    ninety_five: int = betterproto.uint32_field(20)
+    program: str = betterproto.string_field(21)
+
+
+@dataclass(eq=False, repr=False)
 class GetBundleTipRequest(betterproto.Message):
     pass
 
@@ -2541,6 +2576,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def get_priority_fee_by_program(
+        self,
+        get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetPriorityFeeByProgramResponse":
+        return await self._unary_unary(
+            "/api.Api/GetPriorityFeeByProgram",
+            get_priority_fee_by_program_request,
+            GetPriorityFeeByProgramResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_account_balance(
         self,
         get_account_balance_request: "GetAccountBalanceRequest",
@@ -3428,6 +3480,11 @@ class ApiBase(ServiceBase):
     ) -> "GetPriorityFeeResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def get_priority_fee_by_program(
+        self, get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest"
+    ) -> "GetPriorityFeeByProgramResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_account_balance(
         self, get_account_balance_request: "GetAccountBalanceRequest"
     ) -> "GetAccountBalanceResponse":
@@ -3990,6 +4047,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_priority_fee(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_priority_fee_by_program(
+        self,
+        stream: "grpclib.server.Stream[GetPriorityFeeByProgramRequest, GetPriorityFeeByProgramResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_priority_fee_by_program(request)
         await stream.send_message(response)
 
     async def __rpc_get_account_balance(
@@ -4610,6 +4675,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetPriorityFeeRequest,
                 GetPriorityFeeResponse,
+            ),
+            "/api.Api/GetPriorityFeeByProgram": grpclib.const.Handler(
+                self.__rpc_get_priority_fee_by_program,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetPriorityFeeByProgramRequest,
+                GetPriorityFeeByProgramResponse,
             ),
             "/api.Api/GetAccountBalance": grpclib.const.Handler(
                 self.__rpc_get_account_balance,
