@@ -1305,6 +1305,19 @@ class GetNewRaydiumPoolsRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetNewRaydiumPoolsByTransactionRequest(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetNewRaydiumPoolsByTransactionResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    signature: str = betterproto.string_field(2)
+    pool: "ProjectPool" = betterproto.message_field(3)
+    timestamp: datetime = betterproto.message_field(4)
+
+
+@dataclass(eq=False, repr=False)
 class GetNewRaydiumPoolsResponse(betterproto.Message):
     slot: int = betterproto.int64_field(1)
     pool: "ProjectPool" = betterproto.message_field(2)

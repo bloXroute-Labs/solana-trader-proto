@@ -2061,11 +2061,23 @@ message GetNewRaydiumPoolsRequest {
   optional bool includeCPMM = 1;
 }
 
+message GetNewRaydiumPoolsByTransactionRequest {
+}
+
+message GetNewRaydiumPoolsByTransactionResponse {
+  int64 slot = 1;
+  string signature = 2;
+  ProjectPool pool = 3;
+  google.protobuf.Timestamp timestamp = 4;
+}
+
+
 message GetNewRaydiumPoolsResponse {
   int64 slot = 1;
   ProjectPool pool = 2;
   google.protobuf.Timestamp timestamp = 3;
 }
+
 
 message GetSwapsStreamUpdate {
   bool success = 1;
