@@ -3181,6 +3181,24 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_new_raydium_pools_by_transaction_stream(
+        self,
+        get_new_raydium_pools_by_transaction_request: "GetNewRaydiumPoolsByTransactionRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetNewRaydiumPoolsByTransactionResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetNewRaydiumPoolsByTransactionStream",
+            get_new_raydium_pools_by_transaction_request,
+            GetNewRaydiumPoolsByTransactionResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
     async def get_swaps_stream(
         self,
         get_swaps_stream_request: "GetSwapsStreamRequest",
@@ -3676,6 +3694,13 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetNewRaydiumPoolsResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetNewRaydiumPoolsResponse()
+
+    async def get_new_raydium_pools_by_transaction_stream(
+        self,
+        get_new_raydium_pools_by_transaction_request: "GetNewRaydiumPoolsByTransactionRequest",
+    ) -> AsyncIterator["GetNewRaydiumPoolsByTransactionResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetNewRaydiumPoolsByTransactionResponse()
 
     async def get_swaps_stream(
         self, get_swaps_stream_request: "GetSwapsStreamRequest"
@@ -4364,6 +4389,17 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_new_raydium_pools_by_transaction_stream(
+        self,
+        stream: "grpclib.server.Stream[GetNewRaydiumPoolsByTransactionRequest, GetNewRaydiumPoolsByTransactionResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_new_raydium_pools_by_transaction_stream,
+            stream,
+            request,
+        )
+
     async def __rpc_get_swaps_stream(
         self,
         stream: "grpclib.server.Stream[GetSwapsStreamRequest, GetSwapsStreamResponse]",
@@ -4892,6 +4928,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetNewRaydiumPoolsRequest,
                 GetNewRaydiumPoolsResponse,
+            ),
+            "/api.Api/GetNewRaydiumPoolsByTransactionStream": grpclib.const.Handler(
+                self.__rpc_get_new_raydium_pools_by_transaction_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetNewRaydiumPoolsByTransactionRequest,
+                GetNewRaydiumPoolsByTransactionResponse,
             ),
             "/api.Api/GetSwapsStream": grpclib.const.Handler(
                 self.__rpc_get_swaps_stream,

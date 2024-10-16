@@ -2772,6 +2772,25 @@
         }
       }
     },
+    "apiGetNewRaydiumPoolsByTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "signature": {
+          "type": "string"
+        },
+        "pool": {
+          "$ref": "#/definitions/apiProjectPool"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "apiGetNewRaydiumPoolsResponse": {
       "type": "object",
       "properties": {

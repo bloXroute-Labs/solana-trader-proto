@@ -933,6 +933,13 @@ service Api {
     };
   }
 
+  rpc GetNewRaydiumPoolsByTransactionStream(GetNewRaydiumPoolsByTransactionRequest) returns (stream GetNewRaydiumPoolsByTransactionResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+
   rpc GetSwapsStream(GetSwapsStreamRequest) returns (stream GetSwapsStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";

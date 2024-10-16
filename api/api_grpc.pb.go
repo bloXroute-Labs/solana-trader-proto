@@ -105,6 +105,7 @@ type ApiClient interface {
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
 	GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error)
+	GetNewRaydiumPoolsByTransactionStream(ctx context.Context, in *GetNewRaydiumPoolsByTransactionRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsByTransactionStreamClient, error)
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
 	GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error)
 	GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error)
@@ -1170,8 +1171,40 @@ func (x *apiGetNewRaydiumPoolsStreamClient) Recv() (*GetNewRaydiumPoolsResponse,
 	return m, nil
 }
 
+func (c *apiClient) GetNewRaydiumPoolsByTransactionStream(ctx context.Context, in *GetNewRaydiumPoolsByTransactionRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsByTransactionStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetNewRaydiumPoolsByTransactionStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetNewRaydiumPoolsByTransactionStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetNewRaydiumPoolsByTransactionStreamClient interface {
+	Recv() (*GetNewRaydiumPoolsByTransactionResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetNewRaydiumPoolsByTransactionStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetNewRaydiumPoolsByTransactionStreamClient) Recv() (*GetNewRaydiumPoolsByTransactionResponse, error) {
+	m := new(GetNewRaydiumPoolsByTransactionResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[15], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1203,7 +1236,7 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 }
 
 func (c *apiClient) GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[15], "/api.Api/GetPumpFunSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[16], "/api.Api/GetPumpFunSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1235,7 +1268,7 @@ func (x *apiGetPumpFunSwapsStreamClient) Recv() (*GetPumpFunSwapsStreamResponse,
 }
 
 func (c *apiClient) GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[16], "/api.Api/GetPumpFunNewTokensStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[17], "/api.Api/GetPumpFunNewTokensStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1366,6 +1399,7 @@ type ApiServer interface {
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
 	GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsRequest, Api_GetNewRaydiumPoolsStreamServer) error
+	GetNewRaydiumPoolsByTransactionStream(*GetNewRaydiumPoolsByTransactionRequest, Api_GetNewRaydiumPoolsByTransactionStreamServer) error
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
 	GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error
 	GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error
@@ -1619,6 +1653,9 @@ func (UnimplementedApiServer) GetPricesStream(*GetPricesStreamRequest, Api_GetPr
 }
 func (UnimplementedApiServer) GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsRequest, Api_GetNewRaydiumPoolsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetNewRaydiumPoolsStream not implemented")
+}
+func (UnimplementedApiServer) GetNewRaydiumPoolsByTransactionStream(*GetNewRaydiumPoolsByTransactionRequest, Api_GetNewRaydiumPoolsByTransactionStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetNewRaydiumPoolsByTransactionStream not implemented")
 }
 func (UnimplementedApiServer) GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetSwapsStream not implemented")
@@ -3145,6 +3182,27 @@ func (x *apiGetNewRaydiumPoolsStreamServer) Send(m *GetNewRaydiumPoolsResponse) 
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetNewRaydiumPoolsByTransactionStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetNewRaydiumPoolsByTransactionRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetNewRaydiumPoolsByTransactionStream(m, &apiGetNewRaydiumPoolsByTransactionStreamServer{stream})
+}
+
+type Api_GetNewRaydiumPoolsByTransactionStreamServer interface {
+	Send(*GetNewRaydiumPoolsByTransactionResponse) error
+	grpc.ServerStream
+}
+
+type apiGetNewRaydiumPoolsByTransactionStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetNewRaydiumPoolsByTransactionStreamServer) Send(m *GetNewRaydiumPoolsByTransactionResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetSwapsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetSwapsStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -3575,6 +3633,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetNewRaydiumPoolsStream",
 			Handler:       _Api_GetNewRaydiumPoolsStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetNewRaydiumPoolsByTransactionStream",
+			Handler:       _Api_GetNewRaydiumPoolsByTransactionStream_Handler,
 			ServerStreams: true,
 		},
 		{
