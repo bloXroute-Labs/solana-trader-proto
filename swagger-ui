@@ -2782,6 +2782,9 @@
         "signature": {
           "type": "string"
         },
+        "poolCreatorWallet": {
+          "type": "string"
+        },
         "pool": {
           "$ref": "#/definitions/apiProjectPool"
         },

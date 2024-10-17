@@ -2074,8 +2074,10 @@ message GetNewRaydiumPoolsByTransactionRequest {
 message GetNewRaydiumPoolsByTransactionResponse {
   int64 slot = 1;
   string signature = 2;
-  ProjectPool pool = 3;
-  google.protobuf.Timestamp timestamp = 4;
+  string poolCreatorWallet = 3;
+
+  ProjectPool pool = 4;
+  google.protobuf.Timestamp timestamp = 5;
 }
 
 
