@@ -1,0 +1,2491 @@
+syntax = "proto3";
+package api;
+option go_package = "github.com/bloXroute-Labs/solana-trader-proto/api";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/api/field_behavior.proto";
+import "google/api/visibility.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "common.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  security: {
+    security_requirement: {
+      key: "Auth Header";
+      value: {
+        scope: []
+      }
+    }
+  }
+  security_definitions: {
+    security: {
+      key: "Auth Header";
+      value: {
+        type: TYPE_API_KEY;
+        in: IN_HEADER;
+        name: "Authorization";
+      };
+    }
+  };
+  info: {
+    title: "Trader API";
+    version: "1.6";
+    description: "Easy-to-use API for interacting with trader services on the Solana blockchain, powered by bloXroute Labs.";
+    contact: {
+      name: "bloXroute Labs Trader API Documentation";
+      url: "https://docs.bloxroute.com/solana/trader-api";
+      email: "support@bloxroute.com";
+    };
+  };
+
+  consumes: "application/json";
+  produces: "application/json";
+};
+
+service Api {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    external_docs: {
+      description: "Detailed API documentation";
+      url: "https://bloxroute.gitbook.io/serum-api/about/welcome"
+    }
+  };
+
+  rpc GetRateLimit(GetRateLimitRequest) returns (GetRateLimitResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/rate-limit"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the details of an account rate limits";
+      summary: "Returns the details of an account rate limits";
+      tags: ["Solana RPC"];
+    };
+  }
+
+  rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/transaction"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the details of a transaction";
+      summary: "Returns the details of a transaction";
+      tags: ["Solana RPC"];
+    };
+  }
+
+  rpc PostSubmitV2(PostSubmitRequest) returns (PostSubmitResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/submit"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits a signed transaction";
+      summary: "Transaction submit";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
+  rpc PostSubmitBatchV2(PostSubmitBatchRequest) returns (PostSubmitBatchResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/submit-batch"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits a batch of signed transactions";
+      summary: "Transaction batch submit";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
+  // Raydium V2
+  rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/pools"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of Raydium pools";
+      summary: "Raydium Pools";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumPoolReserve(GetRaydiumPoolReserveRequest) returns (GetRaydiumPoolReserveResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/pool-reserves"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the Raydium pool reserve info";
+      summary: "Raydium Pool reserve info";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumQuotes(GetRaydiumQuotesRequest) returns (GetRaydiumQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Raydium";
+      summary: "Raydium Quotes";
+      tags: ["Raydium V2"];
+    };
+  }
+  rpc GetPumpFunQuotes(GetPumpFunQuotesRequest) returns (GetPumpFunQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/pumpfun/quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from PumpFun";
+      summary: "PumpFun Quotes";
+      tags: ["PumpFun"];
+    };
+  }
+
+  rpc GetRaydiumCPMMQuotes(GetRaydiumCPMMQuotesRequest) returns (GetRaydiumCPMMQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/cpmm-quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Raydium CPMM pools";
+      summary: "Raydium CLMM Quotes";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumPrices(GetRaydiumPricesRequest) returns (GetRaydiumPricesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/prices"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for specified tokens on Raydium";
+      summary: "Token prices on Rayidum";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumCLMMQuotes(GetRaydiumCLMMQuotesRequest) returns (GetRaydiumCLMMQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/clmm-quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Raydium CLMM pools";
+      summary: "Raydium CLMM Quotes";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc GetRaydiumCLMMPools(GetRaydiumCLMMPoolsRequest) returns (GetRaydiumCLMMPoolsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/raydium/clmm-pools"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of Raydium CLMM pools";
+      summary: "Raydium CLMM Pools";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumCLMMSwap(PostRaydiumSwapRequest) returns (PostRaydiumSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/clmm-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium CLMMs";
+      summary: "Unsigned Raydium CLMM swap transaction";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumCLMMRouteSwap(PostRaydiumRouteSwapRequest) returns (PostRaydiumRouteSwapResponse) {
+    option(google.api.http) = {
+      post: "/api/v2/raydium/clmm-route-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a CLMM swap on Raydium on the specified route";
+      summary: "Unsigned Raydium swap transaction along route";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumSwap(PostRaydiumSwapRequest) returns (PostRaydiumSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium";
+      summary: "Unsigned Raydium swap transaction";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumRouteSwap(PostRaydiumRouteSwapRequest) returns (PostRaydiumRouteSwapResponse) {
+    option(google.api.http) = {
+      post: "/api/v2/raydium/route-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium on the specified route";
+      summary: "Unsigned Raydium swap transaction along route";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostRaydiumCPMMSwap(PostRaydiumCPMMSwapRequest) returns (PostRaydiumCPMMSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/cpmm-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Raydium CPMMs";
+      summary: "Unsigned Raydium CPMM swap transaction";
+      tags: ["Raydium V2"];
+    };
+  }
+
+
+
+
+
+
+
+
+  // End of Raydium V2
+
+  // Jupiter V2
+  rpc GetJupiterQuotes(GetJupiterQuotesRequest) returns (GetJupiterQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/jupiter/quotes"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from Jupiter";
+      summary: "Jupiter Quotes";
+      tags: ["Jupiter V2"];
+    };
+  }
+
+  rpc GetJupiterPrices(GetJupiterPricesRequest) returns (GetJupiterPricesResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/jupiter/prices"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for specified tokens on Jupiter";
+      summary: "Token prices on Jupiter";
+      tags: ["Jupiter V2"];
+    };
+  }
+
+  rpc PostJupiterSwap(PostJupiterSwapRequest) returns (PostJupiterSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/jupiter/swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Jupiter";
+      summary: "Unsigned Jupiter swap transaction";
+      tags: ["Jupiter V2"];
+    };
+  }
+
+  rpc PostRaydiumSwapInstructions(PostRaydiumSwapInstructionsRequest) returns (PostRaydiumSwapInstructionsResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/raydium/swap-instructions"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object using raydium instructions";
+      summary: "Unsigned Raydium swap transaction from instructions";
+      tags: ["Raydium V2"];
+    };
+  }
+
+  rpc PostJupiterSwapInstructions(PostJupiterSwapInstructionsRequest) returns (PostJupiterSwapInstructionsResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/jupiter/swap-instructions"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object using jupiter instructions";
+      summary: "Unsigned Jupiter swap transaction from instructions";
+      tags: ["Jupiter V2"];
+    };
+  }
+
+  rpc PostJupiterRouteSwap(PostJupiterRouteSwapRequest) returns (PostJupiterRouteSwapResponse) {
+    option(google.api.http) = {
+      post: "/api/v2/jupiter/route-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object to make a swap on Jupiter on the specified route";
+      summary: "Unsigned Jupiter swap transaction along route";
+      tags: ["Jupiter V2"];
+    };
+  }
+  // End of Jupiter V2
+
+
+
+  //Openbook V2
+
+  rpc GetMarketsV2(GetMarketsRequestV2) returns (GetMarketsResponseV2) {
+    option (google.api.http) = {
+      get: "/api/v2/openbook/markets"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of orderbook markets";
+      summary: "Openbook markets";
+      tags: ["Openbook V2"];
+    };
+  }
+
+  rpc GetTickersV2(GetTickersRequestV2) returns (GetTickersResponseV2) {
+    option (google.api.http) = {
+      get: "/api/v2/openbook/tickers/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns updated ticker(s). To receive all tickers use empty string for {market} param value";
+      summary: "Openbook tickers";
+      tags: ["Openbook V2"];
+    };
+  }
+
+  rpc GetOrderbookV2(GetOrderbookRequestV2) returns (GetOrderbookResponseV2) {
+    option (google.api.http) = {
+      get: "/api/v2/openbook/orderbooks/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned";
+      summary: "Openbook market orderbook";
+      tags: ["Openbook V2"];
+    };
+  }
+
+  rpc GetMarketDepthV2(GetMarketDepthRequestV2) returns (GetMarketDepthResponseV2) {
+    option (google.api.http) = {
+      get: "/api/v2/openbook/depth/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns market's aggregated price data. Use limit param to reduce the number of price points returned";
+      summary: "Openbook market depth";
+      tags: ["Openbook V2"];
+    };
+  }
+
+  rpc PostOrderV2(PostOrderRequestV2) returns (PostOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/openbook/place"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a NewOrderV3 unsigned transaction object";
+      summary: "Openbook unsigned NewOrderV3 transaction";
+      tags: ["Openbook V2"];
+    };
+  }
+
+  rpc PostCancelOrderV2(PostCancelOrderRequestV2) returns (PostCancelOrderResponseV2) {
+    option (google.api.http) = {
+      post: "/api/v2/openbook/cancel"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a CancelOrder unsigned transaction object";
+      summary: "Openbook unsigned CancelOrder transaction";
+      tags: ["Openbook V2"];
+    };
+  }
+
+  rpc PostReplaceOrderV2(PostReplaceOrderRequestV2) returns (PostOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/openbook/replace"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a ReplaceOrder unsigned transaction object";
+      summary: "Openbook Unsigned ReplaceOrder transaction";
+      tags:["Openbook V2"];
+    };
+  }
+
+  rpc PostZetaCrossMarginAccount(PostZetaCrossMarginAccountRequest) returns (PostZetaCrossMarginAccountResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/zeta/cross-margin-account"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a `ZetaMarkets` Cross Margin Account through bloXroute Referral Program";
+      summary: "Zeta Markets Cross Margin Account Creation";
+      tags:["Zeta Markets"];
+    };
+  }
+
+  rpc PostSettleV2(PostSettleRequestV2) returns (PostSettleResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/openbook/settle"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a SettleFunds unsigned transaction object";
+      summary: "Openbook unsigned SettleFunds transaction";
+      tags: ["Openbook V2"];
+    };
+  }
+
+  rpc GetOpenOrdersV2(GetOpenOrdersRequestV2) returns (GetOpenOrdersResponseV2) {
+    option (google.api.http) = {
+      get: "/api/v2/openbook/open-orders/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of open orders per user per market";
+      summary: "List of user's open orders in Openbook";
+      tags: ["Openbook V2"];
+    };
+  }
+
+  rpc GetUnsettledV2(GetUnsettledRequestV2) returns (GetUnsettledResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/openbook/unsettled/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the unsettled amounts of user in a market";
+      summary: "Unsettled amounts";
+      tags: ["Openbook V2"];
+    };
+  }
+
+  //end of Openbook V2
+
+  rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/price"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for specified tokens";
+      summary: "Token prices";
+      tags: ["Market", "Universal"];
+    };
+  }
+
+  rpc GetMarkets(GetMarketsRequest) returns (GetMarketsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/markets"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of orderbook markets";
+      summary: "Orderbook markets";
+      tags: ["Market", "Orderbook"];
+    };
+  }
+
+  rpc GetPools(GetPoolsRequest) returns (GetPoolsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/pools"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of supported AMM pools";
+      summary: "AMM Pools";
+      tags: ["Market", "AMM"];
+    };
+  }
+
+
+
+
+
+  rpc GetTickers(GetTickersRequest) returns (GetTickersResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/tickers/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns updated ticker(s). To receive all tickers use empty string for {market} param value";
+      summary: "Orderbook tickers";
+      tags: ["Market", "Orderbook"];
+    };
+  }
+
+  rpc GetKline(GetKlineRequest) returns (GetKlineResponse) {
+    option (google.api.method_visibility).restriction = "INTERNAL";
+    option (google.api.http) = {
+      get: "/api/v1/market/kline/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the KLine per market";
+      summary: "Market KLine";
+      tags: ["Market", "Orderbook"];
+    };
+  }
+
+  rpc GetOrderbook(GetOrderbookRequest) returns (GetOrderbookResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/orderbooks/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns market's orderbook. Use limit param to reduce the number of bids/asks returned";
+      summary: "Market orderbook";
+      tags: ["Market", "Orderbook"];
+    };
+  }
+
+  rpc GetMarketDepth(GetMarketDepthRequest) returns (GetMarketDepthResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/depth/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns market's aggregated price data. Use limit param to reduce the number of price points returned";
+      summary: "Market depth";
+      tags: "Market";
+    };
+  }
+
+  rpc GetTrades(GetTradesRequest) returns (GetTradesResponse) {
+    option (google.api.method_visibility).restriction = "INTERNAL";
+    option (google.api.http) = {
+      get: "/api/v1/market/trades/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns recent trades on the market";
+      summary: "Market trades";
+      tags: ["Market", "Orderbook"];
+    };
+  }
+
+  rpc GetQuotes(GetQuotesRequest) returns (GetQuotesResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/quote"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns quotes from supported AMMs";
+      summary: "AMM Quotes";
+      tags: ["Market", "AMM"];
+    };
+  }
+
+  // system API
+  rpc GetServerTime(GetServerTimeRequest) returns (GetServerTimeResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/system/time"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns current time on the server";
+      summary: "Server time";
+      tags: "System";
+    };
+  }
+
+  rpc GetRecentBlockHash(GetRecentBlockHashRequest) returns (GetRecentBlockHashResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/system/blockhash"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns recent block hash";
+      summary: "Recent block hash";
+      tags: "System";
+    };
+  }
+
+  rpc GetRecentBlockHashV2(GetRecentBlockHashRequestV2) returns (GetRecentBlockHashResponseV2) {
+    option (google.api.http) = {
+      get: "/api/v2/system/blockhash"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns recent block hash, supports optional offset";
+      summary: "Recent block hash";
+      tags: "System";
+    };
+  }
+
+  rpc GetPriorityFee(GetPriorityFeeRequest) returns (GetPriorityFeeResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/system/priority-fee"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns an estimated prioritization fee based on recent transactions";
+      summary: "Estimated priority fee";
+      tags: "System";
+    };
+  }
+
+  rpc GetPriorityFeeByProgram(GetPriorityFeeByProgramRequest) returns (GetPriorityFeeByProgramResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/system/priority-fee-by-program"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns an estimated prioritization fee based on recent transactions. supports filtering by program ID";
+      summary: "Estimated priority fee";
+      tags: "System";
+    };
+  }
+
+  // account endpoints
+  rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/account/balance"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the all token balances for a wallet";
+      summary: "Token balances";
+      tags: "Account";
+    };
+  }
+
+  rpc GetTokenAccounts(GetTokenAccountsRequest) returns (GetTokenAccountsResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/account/token-accounts"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the all token accounts with their balances for a wallet";
+      summary: "Token accounts with balances";
+      tags: "Account";
+    };
+  }
+
+  rpc GetAccountBalanceV2(GetAccountBalanceRequest) returns (GetAccountBalanceResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/balance"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the all token balances for a wallet";
+      summary: "Token balances";
+      tags: "Account";
+    };
+  }
+
+  // trade endpoints
+  rpc PostOrder(PostOrderRequest) returns (PostOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/place"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a NewOrderV3 unsigned transaction object";
+      summary: "Unsigned NewOrderV3 transaction";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc PostSubmit(PostSubmitRequest) returns (PostSubmitResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/submit"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits a signed transaction";
+      summary: "Transaction submit";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
+  rpc PostSubmitBatch(PostSubmitBatchRequest) returns (PostSubmitBatchResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/submit-batch"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits a batch of signed transactions";
+      summary: "Transaction batch submit";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
+  rpc PostCancelOrder(PostCancelOrderRequest) returns (PostCancelOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/cancel"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a CancelOrder unsigned transaction object";
+      summary: "Unsigned CancelOrder transaction";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc PostCancelByClientOrderID(PostCancelByClientOrderIDRequest) returns (PostCancelOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/cancelbyid"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a CancelOrderByID unsigned transaction object";
+      summary: "Unsigned CancelOrderByID transaction";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc PostCancelAll(PostCancelAllRequest) returns (PostCancelAllResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/cancelall"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a CancelAll unsigned transaction object";
+      summary: "Unsigned CancelAll transaction";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc PostReplaceByClientOrderID(PostOrderRequest) returns (PostOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/replacebyclientid"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a ReplaceByClientOrderID unsigned transaction object";
+      summary: "Unsigned ReplaceByClientOrderID transaction";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc PostReplaceOrder(PostReplaceOrderRequest) returns (PostOrderResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/replace"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a ReplaceOrder unsigned transaction object";
+      summary: "Unsigned ReplaceOrder transaction";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc PostSettle(PostSettleRequest) returns (PostSettleResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/settle"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates a SettleFunds unsigned transaction object";
+      summary: "Unsigned SettleFunds transaction";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc PostTradeSwap(TradeSwapRequest) returns (TradeSwapResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/trade/swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object for the best available AMM swap";
+      summary: "Unsigned best available AMM swap transaction";
+      tags: ["Trade", "AMM"];
+    };
+  }
+
+  rpc GetOrders(GetOrdersRequest) returns (GetOrdersResponse) {
+    option (google.api.method_visibility).restriction = "INTERNAL";
+    option (google.api.http) = {
+      get: "/api/v1/trade/orders/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns all user's orders";
+      summary: "List of user's orders";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc GetOpenOrders(GetOpenOrdersRequest) returns (GetOpenOrdersResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/openorders/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of open orders per user per market";
+      summary: "List of user's open orders";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc GetOrderByID(GetOrderByIDRequest) returns (GetOrderByIDResponse) {
+    option (google.api.method_visibility).restriction = "INTERNAL";
+    option (google.api.http) = {
+      get: "/api/v1/trade/orderbyid/{orderID}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns an order by ID";
+      summary: "Order by ID";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc GetUnsettled(GetUnsettledRequest) returns (GetUnsettledResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/trade/unsettled/{market}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the unsettled amounts of user in a market";
+      summary: "Unsettled amounts";
+      tags: ["Trade", "Orderbook"];
+    };
+  }
+
+  rpc PostRouteTradeSwap(RouteTradeSwapRequest) returns (TradeSwapResponse) {
+    option(google.api.http) = {
+      post: "/api/v1/trade/route-swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Generates an unsigned transaction object for the AMM swap on the specified route";
+      summary: "Unsigned AMM swap transaction along route";
+      tags: ["Trade", "AMM"];
+    };
+  }
+
+  // Ore
+
+  rpc PostSubmitMineOre(PostSubmitRequest) returns (PostSubmitResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/mine-ore"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits two transactions in sequence for mining ore";
+      summary: "Submit mine ore transactions";
+      tags: ["Ore"];
+    };
+  }
+
+  // streaming endpoints
+  rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Trade";
+    };
+  }
+
+  rpc GetMarketDepthsStream(GetMarketDepthsRequest) returns (stream GetMarketDepthsStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Trade";
+    };
+  }
+
+  rpc GetTickersStream(GetTickersStreamRequest) returns (stream GetTickersStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Trade";
+    };
+  }
+
+  rpc GetZetaTransactionStream(GetZetaTransactionStreamRequest) returns (stream GetZetaTransactionStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
+  rpc GetTradesStream(GetTradesRequest) returns (stream GetTradesStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Trade";
+    };
+  }
+
+  rpc GetOrderStatusStream(GetOrderStatusStreamRequest) returns (stream GetOrderStatusStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "Trade";
+    };
+  }
+
+  rpc GetRecentBlockHashStream(GetRecentBlockHashRequest) returns (stream GetRecentBlockHashResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
+  rpc GetBlockStream(GetBlockStreamRequest) returns (stream GetBlockStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
+  rpc GetPriorityFeeStream(GetPriorityFeeRequest) returns (stream GetPriorityFeeResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
+  rpc GetBundleTipStream(GetBundleTipRequest) returns (stream GetBundleTipResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
+  rpc GetQuotesStream(GetQuotesStreamRequest) returns (stream GetQuotesStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetPoolReservesStream(GetPoolReservesStreamRequest) returns (stream GetPoolReservesStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetPricesStream(GetPricesStreamRequest) returns (stream GetPricesStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetNewRaydiumPoolsStream(GetNewRaydiumPoolsRequest) returns (stream GetNewRaydiumPoolsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetNewRaydiumPoolsByTransactionStream(GetNewRaydiumPoolsByTransactionRequest) returns (stream GetNewRaydiumPoolsByTransactionResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+
+  rpc GetSwapsStream(GetSwapsStreamRequest) returns (stream GetSwapsStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetPumpFunSwapsStream(GetPumpFunSwapsStreamRequest) returns (stream GetPumpFunSwapsStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetPumpFunNewTokensStream(GetPumpFunNewTokensStreamRequest) returns (stream GetPumpFunNewTokensStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc PostPumpFunSwap(PostPumpFunSwapRequest) returns (PostPumpFunSwapResponse){
+    option (google.api.http) = {
+      post: "/api/v2/pumpfun/swap"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+}
+
+message GetMarketsRequest {
+}
+
+message GetMarketsResponse {
+  map<string, Market> markets = 1;
+}
+
+message Market {
+  string market = 1;
+  MarketStatus status = 2;
+  string address = 3;
+  string baseMint = 4;
+  string quotedMint = 5;
+  int64 baseDecimals = 6;
+  int64 quoteDecimals = 7;
+  Project project = 8;
+}
+
+enum MarketStatus {
+  MS_UNKNOWN = 0; // unknown
+  MS_ONLINE = 1; // online
+}
+
+message GetTickersRequest {
+  string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
+  Project project = 2;
+}
+
+message GetTickersResponse {
+  repeated Ticker tickers = 1;
+}
+
+message Ticker {
+  string market = 1;
+  string marketAddress = 2;
+  double bid = 3;
+  double bidSize = 4;
+  double ask = 5;
+  double askSize = 6;
+  Project project = 7;
+}
+
+message GetKlineRequest {
+  string market = 1;
+  google.protobuf.Timestamp from = 2;
+  google.protobuf.Timestamp to = 3;
+  string resolution = 4; // indicates a duration: e.g. 1d, 4h, 1h, 30m, 15m, 1m
+  uint32 limit = 5;
+}
+
+message GetKlineResponse {
+  string market = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  repeated Candle candles = 3;
+}
+
+message Candle {
+  google.protobuf.Timestamp startTime = 1;
+  google.protobuf.Timestamp updateTime = 2;
+  double open = 3;
+  double close = 4;
+  double low = 5;
+  double high = 6;
+  double amount = 7;
+  double volume = 8;
+  double count = 9;
+}
+
+message GetOrderbookRequest {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
+}
+
+message GetOrderbooksRequest {
+  repeated string markets = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
+}
+
+message GetOrderbookResponse {
+  string market = 1;
+  string marketAddress = 2;
+  repeated OrderbookItem bids = 3;
+  repeated OrderbookItem asks = 4;
+}
+
+message OrderbookItem {
+  double price = 1;
+  double size = 2;
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
+  uint64 clientOrderID = 4;
+  string ownerAddress = 5[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "OpenOrders address for current market"}];
+}
+
+message GetMarketDepthRequest {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
+}
+
+message GetMarketDepthsRequest {
+  repeated string markets = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
+}
+
+message GetMarketDepthResponse {
+  string market = 1;
+  string marketAddress = 2;
+  repeated MarketDepthItem bids = 3;
+  repeated MarketDepthItem asks = 4;
+}
+message MarketDepthItem {
+  double price = 1;
+  double size = 2;
+}
+
+message GetTradesRequest {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  Project project = 3;
+}
+
+message GetTradesResponse {
+  repeated Trade trades = 1;
+}
+
+message Trade {
+  Side side = 1;
+  double size = 2;
+  double fillPrice = 3;
+  string orderID = 4;
+  bool isMaker = 5;
+  string address = 6;
+  double feeOrRebate = 7;
+  double orderPrice = 8;
+}
+
+message GetServerTimeRequest {}
+
+message GetServerTimeResponse {
+  string timestamp = 1;
+}
+
+message GetAccountBalanceRequest {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetAccountBalanceResponse {
+  repeated TokenBalance tokens = 1;
+}
+
+message TokenBalance {
+  string symbol = 1;
+  string tokenMint = 2;
+  double settledAmount = 3;
+  double unsettledAmount = 4;
+  double openOrdersAmount = 5;
+}
+
+message GetTokenAccountsRequest {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetTokenAccountsResponse {
+  repeated TokenAccount accounts = 1;
+}
+
+message TokenAccount {
+  string symbol = 1;
+  string tokenMint = 2;
+  string tokenAccount = 3;
+  double amount = 4;
+}
+
+message PostOrderRequest {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+  string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
+  string market = 3 [(google.api.field_behavior) = REQUIRED];
+  Side side = 4 [(google.api.field_behavior) = REQUIRED];
+  repeated common.OrderType type = 5 [(google.api.field_behavior) = REQUIRED];
+  double amount = 6 [(google.api.field_behavior) = REQUIRED];
+  double price = 7 [(google.api.field_behavior) = REQUIRED];
+  string openOrdersAddress = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Openbook API will lookup the account which can be time consuming"}];
+  uint64 clientOrderID = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Client defined OrderID"}];
+  uint32 computeLimit = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies a tip amount that can be sent to bundle multiple transactions. Minimum value is 1025."}];
+  Project project = 13;
+}
+
+message PostReplaceOrderRequest {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+  string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
+  string market = 3 [(google.api.field_behavior) = REQUIRED];
+  Side side = 4 [(google.api.field_behavior) = REQUIRED];
+  repeated common.OrderType type = 5 [(google.api.field_behavior) = REQUIRED];
+  double amount = 6 [(google.api.field_behavior) = REQUIRED];
+  double price = 7 [(google.api.field_behavior) = REQUIRED];
+  string openOrdersAddress = 8 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
+  uint64 clientOrderID = 9;
+  string orderID = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Openbook generated OrderID"}];
+  uint32 computeLimit = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+  Project project = 14;
+}
+
+enum Side {
+  S_UNKNOWN = 0;
+  S_BID = 1;
+  S_ASK = 2;
+}
+
+message PostOrderResponse {
+  TransactionMessage transaction = 1;
+  string openOrdersAddress = 2;
+}
+
+message PostCancelOrderRequest {
+  string orderID = 1 [(google.api.field_behavior) = REQUIRED];
+  Side side = 2 [(google.api.field_behavior) = REQUIRED];
+  string marketAddress = 3 [(google.api.field_behavior) = REQUIRED];
+  string ownerAddress = 4 [(google.api.field_behavior) = REQUIRED];
+  string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
+  uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+  Project project = 9;
+}
+
+message PostCancelByClientOrderIDRequest {
+  uint64 clientOrderID = 1 [(google.api.field_behavior) = REQUIRED];
+  string marketAddress = 2 [(google.api.field_behavior) = REQUIRED];
+  string ownerAddress = 3 [(google.api.field_behavior) = REQUIRED];
+  string openOrdersAddress = 4 [(google.api.field_behavior) = REQUIRED];
+  uint32 computeLimit = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+  Project project = 8;
+}
+
+message PostCancelOrderResponse {
+  TransactionMessage transaction = 1;
+}
+
+message PostCancelAllRequest {
+  string market = 1 [(google.api.field_behavior) = REQUIRED];
+  string ownerAddress = 2 [(google.api.field_behavior) = REQUIRED];
+  repeated string openOrdersAddresses = 3;
+  uint32 computeLimit = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+  Project project = 7;
+}
+
+
+message TransactionMessage {
+  string content = 1;
+  bool isCleanup = 2;
+}
+
+message TransactionMessageV2 {
+  string content = 1;
+}
+
+message PostCancelAllResponse {
+  repeated TransactionMessage transactions = 1;
+}
+
+message PostSettleRequest {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+  string market = 2 [(google.api.field_behavior) = REQUIRED];
+  string baseTokenWallet = 3 [(google.api.field_behavior) = REQUIRED];
+  string quoteTokenWallet = 4 [(google.api.field_behavior) = REQUIRED];
+  string openOrdersAddress = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
+  uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  Project project = 8;
+}
+
+message PostSettleResponse {
+  TransactionMessage transaction = 1;
+}
+
+message Settlement {
+  string symbol = 1;
+  double unsettled = 2;
+  double amount = 3;
+}
+
+message GetOrdersRequest {
+  string market = 1;
+  OrderStatus status = 2;
+  Side side = 3;
+  repeated common.OrderType types = 4;
+  google.protobuf.Timestamp from = 5;
+  uint32 limit = 6;
+  Direction direction = 7;
+  string address = 8;
+  string openOrdersAddress = 9;
+  Project project = 10;
+}
+
+enum OrderStatus {
+  OS_UNKNOWN = 0;
+  OS_OPEN = 1;
+  OS_PARTIAL_FILL = 2;
+  OS_CANCELLED = 3;
+  OS_FILLED = 4;
+}
+
+enum Direction {
+  D_ASCENDING = 0;
+  D_DESCENDING = 1;
+}
+
+message GetOrdersResponse {
+  repeated Order orders = 1;
+}
+
+message Order {
+  string orderID = 1;
+  string market = 2;
+  Side side = 3;
+  repeated common.OrderType types = 4;
+  double price = 5;
+  double remainingSize = 6;
+  google.protobuf.Timestamp createdAt = 7;
+  string clientOrderID = 8;
+  string openOrderAccount = 9;
+}
+
+message GetOrderStatusStreamRequest {
+  string market = 1;
+  string ownerAddress = 2;
+  Project project = 3;
+}
+
+message GetOrderStatusStreamResponse {
+  int64 slot = 1;
+  GetOrderStatusResponse orderInfo = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message GetOrderStatusResponse {
+  string market = 1;
+  string openOrderAddress = 2;
+  string orderID = 3;
+  uint64 clientOrderID = 4;
+  float quantityReleased = 5;
+  float quantityRemaining = 6;
+  float fillPrice = 7;
+  Side side = 8;
+  OrderStatus orderStatus = 9;
+  float orderPrice = 10;
+}
+
+message PostSubmitRequest {
+  TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
+  bool skipPreFlight = 2;
+  optional bool frontRunningProtection = 3;
+  optional uint64 tip = 4;
+  optional bool useStakedRPCs = 6;
+  optional bool fastBestEffort = 7;
+}
+
+message PostSubmitRequestEntry {
+  TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
+  bool skipPreFlight = 2;
+}
+
+enum SubmitStrategy {
+  P_UKNOWN = 0;
+  P_SUBMIT_ALL = 1;
+  P_ABORT_ON_FIRST_ERROR = 2;
+  P_WAIT_FOR_CONFIRMATION = 3;
+}
+
+message PostSubmitBatchRequest {
+  repeated PostSubmitRequestEntry entries = 1;
+  SubmitStrategy submitStrategy = 2;
+  optional bool useBundle = 3;
+  optional bool frontRunningProtection = 4;
+}
+message PostSubmitBatchResponseEntry {
+  string signature = 1;
+  string error = 2;
+  bool submitted = 3;
+}
+
+message PostSubmitBatchResponse {
+  repeated PostSubmitBatchResponseEntry transactions = 1;
+}
+
+message PostSubmitResponse {
+  string signature = 1;
+}
+
+
+message GetOpenOrdersRequest {
+  string market = 1 [(google.api.field_behavior) = REQUIRED];
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  string address = 3 [(google.api.field_behavior) = OPTIONAL];
+  string openOrdersAddress = 4 [(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming, Setting both address and openOrdersAddress is invalid, openOrdersAddress is preferred."}];
+  Project project = 5;
+}
+
+message GetOpenOrdersResponse {
+  repeated Order orders = 1;
+}
+
+message GetOrderByIDRequest {
+  string orderID = 1 [(google.api.field_behavior) = REQUIRED];
+  string market = 2;
+  Project project = 3;
+}
+
+message GetOrderByIDResponse {
+  Order order = 1;
+}
+
+message GetUnsettledRequest {
+  string market = 1 [(google.api.field_behavior) = REQUIRED];
+  string ownerAddress = 2 [(google.api.field_behavior) = REQUIRED];
+  Project project = 3;
+}
+
+message UnsettledAccountToken {
+  string address = 1;
+  double amount = 2;
+}
+
+message UnsettledAccount {
+  string account = 1;
+  UnsettledAccountToken baseToken = 2;
+  UnsettledAccountToken quoteToken = 3;
+}
+
+message GetUnsettledResponse {
+  string market = 1;
+  repeated UnsettledAccount unsettled = 2;
+}
+
+message GetOrderbooksStreamResponse {
+  int64 slot = 1;
+  GetOrderbookResponse orderbook = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message GetMarketDepthsStreamResponse {
+  int64 slot = 1;
+  GetMarketDepthResponse Data = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message GetTickersStreamRequest {
+  repeated string markets = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
+  Project project = 2;
+}
+
+message GetTickersStreamResponse {
+  int64 slot = 1;
+  GetTickersResponse ticker = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+enum Step {
+  STEP0 = 0;
+  STEP1 = 1;
+  STEP2 = 2;
+  STEP3 = 3;
+}
+
+message GetTradesStreamResponse {
+  int64 slot = 1;
+  GetTradesResponse trades = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message GetQuotesRequest{
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+  int32 limit = 5;
+  repeated Project projects = 6;
+}
+
+message GetQuotesResponse {
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated ProjectQuote quotes = 6;
+}
+
+message GetRaydiumQuotesRequest {
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+}
+
+message GetRaydiumQuotesResponse{
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated RaydiumQuoteRoute routes = 6;
+}
+
+message GetPumpFunQuotesRequest {
+  string quoteType = 1; // BUY,SELL
+  string mintAddress = 2;
+  string bondingCurveAddress = 3;
+  double amount = 4;
+  double slippage = 5;
+}
+
+message GetPumpFunQuotesResponse {
+  string quoteType = 1;
+  string inTokenAddress = 2;
+  double inAmount = 3;
+  string outTokenAddress = 4;
+  double outAmount = 5;
+}
+
+message GetRaydiumCPMMQuotesRequest {
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+}
+
+message GetRaydiumCPMMQuotesResponse {
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  uint64 tradeFeeRate = 6;
+  repeated RaydiumQuoteRoute routes = 7;
+}
+
+message PostRaydiumCPMMSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  string poolAddress = 6;
+  uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostRaydiumCPMMSwapResponse {
+  TransactionMessage transaction = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+}
+
+
+message GetJupiterQuotesRequest{
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+  optional bool fastMode = 5;
+}
+
+message GetJupiterQuotesResponse{
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated JupiterQuoteRoute routes = 6;
+}
+
+message ProjectQuote {
+  Project project = 1;
+  repeated QuoteRoute routes = 2;
+}
+
+message TradeSwapRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  string inToken = 3;
+  string outToken = 4;
+  double inAmount = 5;
+  double slippage = 6;
+  uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostJupiterSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+  optional bool fastMode = 9;
+}
+
+message PostJupiterSwapInstructionsRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+  optional bool fastMode = 9;
+}
+
+message PostRaydiumSwapInstructionsRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PublicKeys {
+  repeated string pks = 1;
+}
+
+message PostJupiterSwapInstructionsResponse {
+  repeated InstructionJupiter instructions = 1;
+  map<string, PublicKeys> addressLookupTableAddresses = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Returns a map[publicKey][]publicKey that is used in solana versioned transaction creation."}];
+  double outAmount = 3;
+  double outAmountMin = 4;
+  common.PriceImpactPercentV2 priceImpact = 5;
+  repeated common.Fee fees = 6;
+}
+
+message PostRaydiumSwapInstructionsResponse {
+  repeated InstructionRaydium instructions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
+
+message PostRaydiumSwapRequest {
+  string ownerAddress = 1;
+  string inToken = 2;
+  string outToken = 3;
+  double inAmount = 4;
+  double slippage = 5;
+  uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+
+}
+
+message PostRaydiumSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
+message GetRaydiumCLMMPoolsRequest {
+  string pairOrAddress = 1;
+}
+
+message GetRaydiumCLMMPoolsResponse {
+  repeated ProjectPool pools = 1;
+}
+
+message PostJupiterSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
+message PostRaydiumRouteSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+}
+
+message PostJupiterRouteSwapResponse{
+  repeated TransactionMessage transactions = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  common.PriceImpactPercentV2 priceImpact = 4;
+  repeated common.Fee fees = 5;
+}
+
+message RouteTradeSwapRequest {
+  Project project = 1;
+  string ownerAddress = 2;
+  repeated RouteStep steps = 3;
+  double slippage = 4;
+  uint32 computeLimit = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostRaydiumRouteSwapRequest {
+  string ownerAddress = 1;
+  repeated RaydiumRouteStep steps = 2;
+  double slippage = 3;
+  uint32 computeLimit = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message RaydiumRouteStep {
+  string inToken = 1;
+  double inAmount = 2;
+  string outToken = 3;
+  double outAmount = 4;
+  double outAmountMin = 5;
+  string poolAddress = 6;
+  StepProject project = 7;
+}
+
+message GetRaydiumCLMMQuotesRequest {
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+  double slippage = 4;
+}
+
+message GetRaydiumCLMMQuotesResponse{
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  repeated RaydiumQuoteRoute routes = 6;
+}
+
+message PostJupiterRouteSwapRequest {
+  string ownerAddress = 1;
+  repeated JupiterRouteStep steps = 2;
+  double slippage = 3;
+  uint32 computeLimit = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 6[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message JupiterRouteStep {
+  string inToken = 1;
+  double inAmount = 2;
+  string outToken = 3;
+  double outAmount = 4;
+  double outAmountMin = 5;
+  StepProject project = 6;
+  common.Fee fee = 7;
+}
+
+message RouteStep {
+  string inToken = 1;
+  double inAmount = 2;
+  string outToken = 3;
+  double outAmount = 4;
+  double outAmountMin = 5;
+  StepProject project = 6;
+  common.Fee fee = 7;
+}
+
+message TradeSwapResponse{
+  Project project = 1;
+  repeated TransactionMessage transactions = 2;
+  double outAmount = 3;
+  double outAmountMin = 4;
+  common.PriceImpactPercent priceImpact = 5;
+  repeated common.Fee fees = 6;
+}
+
+enum Project {
+  P_UNKNOWN = 0;
+  P_ALL = 1;
+  P_JUPITER = 2;
+  P_RAYDIUM = 3;
+  P_SERUM = 4;
+  P_OPENBOOK = 5;
+}
+
+message QuoteRoute {
+  double inAmount = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  repeated QuoteStep steps = 4;
+}
+
+message QuoteStep {
+  StepProject project = 1;
+  string inToken = 2;
+  string inTokenAddress = 3;
+  string outToken = 4;
+  string outTokenAddress = 5;
+  double inAmount = 6;
+  double outAmount = 7;
+  double slippage = 8;
+  common.PriceImpactPercent priceImpactPercent = 9;
+  common.Fee fee = 10;
+  double outAmountMin = 11;
+}
+
+message JupiterQuoteRoute {
+  double inAmount = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  repeated JupiterQuoteStep steps = 4;
+}
+
+message JupiterQuoteStep {
+  StepProject project = 1;
+  string inToken = 2;
+  string inTokenAddress = 3;
+  string outToken = 4;
+  string outTokenAddress = 5;
+  double inAmount = 6;
+  double outAmount = 7;
+  double slippage = 8;
+  common.PriceImpactPercentV2 priceImpactPercent = 9;
+  common.Fee fee = 10;
+  double outAmountMin = 11;
+}
+
+message RaydiumQuoteRoute {
+  double inAmount = 1;
+  double outAmount = 2;
+  double outAmountMin = 3;
+  repeated RaydiumQuoteStep steps = 4;
+}
+
+message RaydiumQuoteStep {
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  double outAmount = 6;
+  double slippage = 7;
+  common.PriceImpactPercentV2 priceImpactPercent = 8;
+  common.Fee fee = 9;
+  double outAmountMin = 10;
+  StepProject project = 11;
+}
+
+message StepProject {
+  string label = 1;
+  string id = 2;
+}
+
+message GetRecentBlockHashRequest {
+}
+
+message GetRecentBlockHashResponse {
+  string blockHash = 1;
+  google.protobuf.Timestamp timestamp = 2;
+}
+
+message GetRecentBlockHashRequestV2 {
+  uint64 offset = 1;
+}
+
+message GetRecentBlockHashResponseV2 {
+  string blockHash = 1;
+  google.protobuf.Timestamp timestamp = 2;
+}
+
+message Block {
+  uint64 slot = 1;
+  string hash = 2;
+  int64 time = 3;
+  uint64 height = 4;
+}
+
+message GetBlockStreamRequest {
+}
+
+message GetBlockStreamResponse {
+  Block block = 1;
+  google.protobuf.Timestamp timestamp = 2;
+}
+
+message InstructionRequest {
+  uint32 program_id_index = 1;
+}
+
+message GetPoolsRequest {
+  repeated Project projects = 1;
+  string pairOrAddress = 2;
+}
+
+message GetPoolsResponse {
+  repeated ProjectPools projects = 1;
+}
+
+message GetRaydiumPoolsRequest {
+}
+
+message GetRaydiumPoolsResponse {
+  repeated ProjectPool pools = 1;
+}
+
+message GetRaydiumPoolReserveRequest {
+  repeated string pairsOrAddresses = 1;
+}
+
+message GetRaydiumPoolReserveResponse {
+  repeated ProjectPool pools = 1;
+}
+
+message GetRateLimitRequest {
+}
+
+message GetRateLimitResponse {
+  string accountID = 1;
+  string tier = 2;
+  string interval = 3;
+  uint64 intervalNum = 4;
+  uint64 limit = 5;
+  uint64 count = 6;
+  uint64 reset = 7;
+  repeated StreamInfo streamInfos = 8;
+}
+
+message StreamInfo {
+  string streamName = 1;
+  string subscriptionID = 2;
+  int64 startTime = 3;
+  int64 creditUsed = 4;
+}
+
+message GetTransactionRequest {
+  string signature = 1;
+}
+
+message GetTransactionResponse {
+  string status = 1;
+  TransactionMeta metadata = 2;
+  uint64 slot = 3;
+  uint64 block_time = 4;
+  int32 version = 5;
+}
+
+message Instruction {
+  uint32 program_id_index = 1;
+  repeated uint32 accounts = 2;
+  bytes data = 3;
+}
+
+message AccountMeta {
+  string programID = 1;
+  bool isSigner = 2;
+  bool isWritable = 3;
+}
+
+message InstructionRaydium {
+  string programID = 1;
+  repeated AccountMeta accounts = 2;
+  bytes data = 3;
+}
+
+message InstructionJupiter {
+  string programID = 1;
+  repeated AccountMeta accounts = 2;
+  bytes data = 3;
+}
+
+message TransactionMeta {
+  string err = 1;
+  bool errored = 2;
+  uint64 fee = 3;
+  repeated uint64 pre_balances = 4;
+  repeated uint64 post_balances = 5;
+  repeated TransactionMetaInnerInstruction inner_instructions = 6;
+  repeated string log_messages = 7;
+  repeated TransactionMetaTokenBalance pre_token_balances = 8;
+  repeated TransactionMetaTokenBalance post_token_balances = 9;
+}
+
+message TransactionMetaInnerInstruction {
+  uint32 index = 1;
+  repeated Instruction instructions = 2;
+}
+
+message TransactionMetaTokenBalance {
+  uint32 accountIndex = 1;
+  string mint = 2;
+  UITokenAmount ui_token_amount = 3;
+  string owner = 4;
+}
+
+message UITokenAmount {
+  double ui_amount = 1;
+  uint32 decimals = 2;
+  string amount = 3;
+  string ui_amount_string = 4;
+}
+
+message ProjectPools {
+  Project project = 1;
+  repeated ProjectPool pools = 2;
+}
+
+message ProjectPool {
+  string pool = 1;
+  string poolAddress = 2;
+
+  int64 token1Reserves = 3;
+  string token1MintAddress = 4;
+  string token1MintSymbol = 5;
+
+  int64 token2Reserves = 6;
+  string token2MintAddress = 7;
+  string token2MintSymbol = 8;
+  uint64 openTime = 9;
+  string poolType = 10;
+  LiquidityPoolKeys liquidityPoolKeys = 11;
+}
+
+message LiquidityPoolKeys {
+  string id = 1;
+  string baseMint = 2;
+  string quoteMint = 3;
+  string lpMint = 4;
+  uint32 version = 5;
+  string programID = 6;
+  string authority = 7;
+  string baseVault = 8;
+  string quoteVault = 9;
+  string lpVault = 10;
+  string openOrders = 11;
+  string targetOrders = 12;
+  string withdrawQueue = 13;
+  uint32 marketVersion = 14;
+  string marketProgramID = 15;
+  string marketID = 16;
+  string marketAuthority = 17;
+  string marketBaseVault = 18;
+  string marketQuoteVault = 19;
+  string marketBids = 20;
+  string marketAsks = 21;
+  string marketEventQueue = 22;
+  uint64 tradeFeeRate = 23;
+}
+
+message GetQuotesStreamRequest {
+  repeated Project   projects = 1;
+  repeated TokenPair tokenPairs = 2;
+}
+
+message GetQuotesStreamResponse {
+  int64 slot = 1;
+  GetQuotesStreamUpdate quote = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message GetQuotesStreamUpdate {
+  string inToken = 1;
+  string inTokenAddress = 2;
+  string outToken = 3;
+  string outTokenAddress = 4;
+  double inAmount = 5;
+  double outAmount = 6;
+  Project project = 7;
+}
+
+message GetSwapsStreamRequest {
+  repeated Project projects = 1;
+  repeated string pools = 2;
+  bool includeFailed = 3;
+}
+
+message GetSwapsStreamResponse {
+  int64 slot = 1;
+  GetSwapsStreamUpdate swap = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message GetNewRaydiumPoolsRequest {
+  optional bool includeCPMM = 1;
+}
+
+message GetNewRaydiumPoolsByTransactionRequest {
+}
+
+message GetNewRaydiumPoolsByTransactionResponse {
+  int64 slot = 1;
+  string signature = 2;
+  string poolCreatorWallet = 3;
+
+  ProjectPool pool = 4;
+  google.protobuf.Timestamp timestamp = 5;
+}
+
+
+message GetNewRaydiumPoolsResponse {
+  int64 slot = 1;
+  ProjectPool pool = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+
+message GetSwapsStreamUpdate {
+  bool success = 1;
+  Project project = 2;
+  string poolAddress = 3;
+  string inToken = 4;
+  string inTokenAddress = 5;
+  string outToken = 6;
+  string outTokenAddress = 7;
+  double inAmount = 8;
+  double outAmountMin = 9;
+  string sourceAccount = 10;
+  string destinationAccount = 11;
+  string ownerAccount = 12;
+  string signature = 13;
+}
+
+message TokenPair {
+  string inToken = 1;
+  string outToken = 2;
+  double inAmount = 3;
+}
+
+message GetPriceRequest {
+  repeated string tokens = 1;
+}
+
+message GetPriceResponse {
+  repeated TokenPrice tokenPrices = 1;
+}
+
+message GetRaydiumPricesRequest {
+  repeated string tokens = 1;
+}
+
+message GetJupiterPricesRequest {
+  repeated string tokens = 1;
+}
+
+message GetRaydiumPricesResponse {
+  repeated TokenPriceV2 tokenPrices = 1;
+}
+
+message GetJupiterPricesResponse {
+  repeated TokenPriceV2 tokenPrices = 1;
+}
+
+message GetZetaTransactionStreamRequest {
+  repeated string instructions = 1;
+}
+
+message TransactionZeta {
+  repeated string signatures = 1;
+  TransactionMessageZeta message = 2;
+}
+
+message TransactionMessageZeta {
+  TransactionMessageHeader header = 2;
+  repeated string account_keys = 3;
+  string recent_blockhash = 4;
+  repeated Instruction instructions = 5;
+}
+
+message TransactionMessageHeader {
+  uint32 num_required_signatures = 1;
+  uint32 num_readonly_signed_accounts = 2;
+  uint32 num_readonly_unsigned_accounts = 3;
+}
+
+
+
+message GetZetaTransactionStreamResponse {
+  int64 slot = 1;
+  TransactionZeta transaction = 2;
+  TransactionMeta meta = 3;
+}
+
+message TokenPrice {
+  string token = 1;
+  string tokenAddress = 2;
+  Project project = 3;
+  double buy = 4;
+  double buySize = 5;
+  double sell = 6;
+  double sellSize = 7;
+}
+
+message TokenPriceV2 {
+  string token = 1;
+  string tokenAddress = 2;
+  double buy = 3;
+  double buySize = 4;
+  double sell = 5;
+  double sellSize = 6;
+}
+
+message GetPoolReservesStreamResponse {
+  int64 slot = 1;
+  PoolReserves reserves = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message PoolReserves {
+  string token1Reserves = 1;
+  string token1Address = 2;
+  string token2Reserves = 3;
+  string token2Address = 4;
+  string poolAddress = 5;
+  Project project = 6;
+}
+
+message GetPoolReservesStreamRequest {
+  repeated Project projects = 1;
+  repeated string pools = 2;
+}
+
+message GetPricesStreamRequest {
+  repeated Project projects = 1;
+  repeated string tokens = 2;
+}
+
+message GetPricesStreamResponse {
+  int64 slot = 1;
+  TokenPrice price = 2;
+  google.protobuf.Timestamp timestamp = 3;
+}
+
+message GetPriorityFeeRequest {
+  Project project = 1;
+  optional double percentile = 2;
+}
+
+message GetPriorityFeeResponse {
+  Project project = 1;
+  double percentile = 2;
+  uint64 feeAtPercentile = 3;
+}
+
+message GetPriorityFeeByProgramRequest {
+  repeated string programs = 1;
+}
+
+message GetPriorityFeeByProgramResponse {
+  repeated ProgramPriorityFee Data = 1;
+}
+
+message ProgramPriorityFee {
+  uint64 ten = 1;
+  uint64 hundred = 2;
+  uint64 fifteen = 3;
+  uint64 twenty = 4;
+  uint64 twentyFive = 5;
+  uint64 thirty = 6;
+  uint64 thirtyFive = 7;
+  uint64 forty = 8;
+  uint64 fortyFive = 9;
+  uint64 five = 10;
+  uint64 fifty = 11;
+  uint64 fiftyFive = 12;
+  uint64 sixty = 13;
+  uint64 sixtyFive = 14;
+  uint64 seventy = 15;
+  uint64 seventyFive = 16;
+  uint64 eighty = 17;
+  uint64 eightyFive = 18;
+  uint64 ninety = 19;
+  uint64 ninetyFive = 20;
+  string program = 21;
+}
+
+message GetBundleTipRequest{}
+
+message GetBundleTipResponse {
+  google.protobuf.Timestamp timestamp = 1;
+  double percentile25 = 2;
+  double percentile50 = 3;
+  double percentile75 = 4;
+  double percentile95 = 5;
+  double percentile99 = 6;
+  double emaPercentile50 = 7;
+}
+
+//Openbook V2 Messages
+message GetMarketsRequestV2 {
+}
+
+message GetMarketsResponseV2 {
+  map<string, MarketV2> markets = 1;
+}
+
+message MarketV2 {
+  string market = 1;
+  string address = 3;
+  string baseMint = 4;
+  string quotedMint = 5;
+  int64 baseDecimals = 6;
+  int64 quoteDecimals = 7;
+}
+
+message GetTickersRequestV2 {
+  string market = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use empty string for all markets"}];
+}
+
+message GetTickersResponseV2 {
+  repeated TickerV2 tickers = 1;
+}
+
+message TickerV2 {
+  string market = 1;
+  string marketAddress = 2;
+  double bid = 3;
+  double bidSize = 4;
+  double ask = 5;
+  double askSize = 6;
+}
+message GetOrderbookRequestV2 {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+}
+
+message GetOrderbookResponseV2 {
+  string market = 1;
+  string marketAddress = 2;
+  repeated OrderbookItemV2 bids = 3;
+  repeated OrderbookItemV2 asks = 4;
+}
+
+message OrderbookItemV2 {
+  double price = 1;
+  double size = 2;
+  string orderID = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Serum generated OrderID"}];
+  uint64 clientOrderID = 4;
+  string ownerAddress = 5[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "OpenOrders address for current market"}];
+}
+
+message GetMarketDepthRequestV2 {
+  string market = 1;
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+}
+
+message GetMarketDepthResponseV2 {
+  string market = 1;
+  string marketAddress = 2;
+  repeated MarketDepthItemV2 bids = 3;
+  repeated MarketDepthItemV2 asks = 4;
+}
+
+message MarketDepthItemV2 {
+  double price = 1;
+  double size = 2;
+}
+
+message PostOrderRequestV2 {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+  string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
+  string market = 3 [(google.api.field_behavior) = REQUIRED];
+  string side = 4 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
+  string type = 5 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Supported values : Limit, IoC, PostOnly"}];
+  double amount = 6 [(google.api.field_behavior) = REQUIRED];
+  double price = 7 [(google.api.field_behavior) = REQUIRED];
+  string openOrdersAddress = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
+  uint64 clientOrderID = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Client defined OrderID"}];
+  uint32 computeLimit = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostReplaceOrderRequestV2 {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+  string payerAddress = 2 [(google.api.field_behavior) = REQUIRED];
+  string market = 3 [(google.api.field_behavior) = REQUIRED];
+  string side = 4 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
+  string type = 5 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Supported values : Limit, IoC, PostOnly"}];
+  double amount = 6 [(google.api.field_behavior) = REQUIRED];
+  double price = 7 [(google.api.field_behavior) = REQUIRED];
+  string openOrdersAddress = 8 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
+  uint64 clientOrderID = 9[(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Client defined OrderID"}];
+  string orderID = 10 [(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Openbook generated OrderID"}];
+  uint32 computeLimit = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostCancelOrderRequestV2 {
+  string orderID = 1 [(google.api.field_behavior) = OPTIONAL];
+  string side = 2 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
+  string marketAddress = 3 [(google.api.field_behavior) = REQUIRED];
+  string ownerAddress = 4 [(google.api.field_behavior) = REQUIRED];
+  string openOrdersAddress = 5 [(google.api.field_behavior) = REQUIRED];
+  uint64 clientOrderID = 6[(google.api.field_behavior) = OPTIONAL];
+  uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostCancelOrderResponseV2 {
+  repeated TransactionMessage transactions = 1;
+}
+
+message PostSettleRequestV2 {
+  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
+  string market = 2 [(google.api.field_behavior) = REQUIRED];
+  string baseTokenWallet = 3 [(google.api.field_behavior) = REQUIRED];
+  string quoteTokenWallet = 4 [(google.api.field_behavior) = REQUIRED];
+  string openOrdersAddress = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming"}];
+  uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostZetaCrossMarginAccountRequest {
+  string owner_address = 1;
+  uint32 computeLimit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostZetaCrossMarginAccountResponse {
+  TransactionMessage transaction = 1;
+}
+
+message GetOpenOrdersRequestV2 {
+  string market = 1 [(google.api.field_behavior) = REQUIRED];
+  uint32 limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Use 0 for no limits"}];
+  string address = 3 [(google.api.field_behavior) = OPTIONAL];
+  string openOrdersAddress = 4 [(google.api.field_behavior) = OPTIONAL, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "If left empty the Serum API will lookup the account which can be time consuming, Setting both address and openOrdersAddress is invalid, openOrdersAddress is preferred."}];
+  string orderID = 5 [(google.api.field_behavior) = OPTIONAL];
+  uint64 clientOrderID = 6[(google.api.field_behavior) = OPTIONAL];
+}
+
+message GetUnsettledRequestV2 {
+  string market = 1 [(google.api.field_behavior) = REQUIRED];
+  string ownerAddress = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message GetOpenOrdersResponseV2 {
+  repeated OrderV2 orders = 1;
+}
+
+message OrderV2 {
+  string orderID = 1;
+  string market = 2;
+  string side = 3 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: " Supported values : Bid, Ask"}];
+  string type = 4 [(google.api.field_behavior) = REQUIRED, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Supported values : Limit, IoC, PostOnly"}];
+  double price = 5;
+  double remainingSize = 6;
+  google.protobuf.Timestamp createdAt = 7;
+  string clientOrderID = 8;
+  string openOrderAccount = 9;
+}
+
+//End of Openbook V2 Messages
+
+message GetPumpFunSwapsStreamRequest {
+  repeated string tokens = 1;
+}
+
+message GetPumpFunSwapsStreamResponse {
+  int64 slot = 1;
+  string txnHash = 2;
+  string mintAddress = 3;
+  string userAddress = 4;
+  string userTokenAccountAddress = 5;
+  string bondingCurveAddress = 6;
+  string tokenVaultAddress = 7;
+  uint64 solAmount = 8;
+  uint64 tokenAmount = 9;
+  bool isBuy = 10;
+  uint64 virtualSolReserves = 11;
+  uint64 virtualTokenReserves = 12;
+  google.protobuf.Timestamp timestamp = 13;
+}
+
+message GetPumpFunNewTokensStreamRequest {}
+
+message GetPumpFunNewTokensStreamResponse {
+  int64 slot = 1;
+  string txnHash = 2;
+  string name = 3;
+  string symbol = 4;
+  string uri = 5;
+  string mint = 6;
+  string bondingCurve = 7;
+  string creator = 8;
+  google.protobuf.Timestamp timestamp = 9;
+}
+
+message PostPumpFunSwapRequest {
+  string userAddress = 1;
+  string bondingCurveAddress = 2;
+  string tokenAddress = 3;
+  double tokenAmount = 4;
+  double solThreshold = 5;
+  bool isBuy = 6;
+  uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+}
+
+message PostPumpFunSwapResponse{
+  TransactionMessageV2 transaction = 1;
+}
