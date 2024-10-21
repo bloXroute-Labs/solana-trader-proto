@@ -1,0 +1,7 @@
+FROM node:lts
+
+RUN npm install -g grpc-tools grpc_tools_node_protoc_ts
+RUN mkdir -p /home/node/out
+RUN mkdir -p /home/node/in
+
+WORKDIR "/home/node/in"

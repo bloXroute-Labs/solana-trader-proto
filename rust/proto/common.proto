@@ -1,0 +1,95 @@
+syntax = "proto3";
+option go_package = "github.com/bloXroute-Labs/solana-trader-proto/common";
+
+package common;
+
+enum OrderType {
+  OT_MARKET = 0;
+  OT_LIMIT = 1; // MARKET and LIMIT are mutually exclusive
+  OT_IOC = 2; // immediate or cancel
+  OT_POST = 3;
+}
+
+// perp types : limit, trigger_market, trigger_limit, market, oracle
+enum PerpOrderType {
+  POT_UNKNOWN = 0;
+  POT_MARKET = 1;
+  POT_LIMIT = 2;
+  POT_TRIGGER_MARKET = 3;
+  POT_TRIGGER_LIMIT = 4;
+}
+
+enum PerpPositionSide {
+  PS_UNKNOWN = 0;
+  PS_LONG = 1;
+  PS_SHORT = 2;
+}
+
+enum PostOnlyParams {
+  PO_NONE = 0;
+  PO_MUST_POST_ONLY = 1;
+  PO_TRY_POST_ONLY = 2;
+}
+
+// don't use this in api.proto
+enum MarginContract {
+  ALL_SPOTS = 0;  // ALL
+  SOL_SPOT = 1;   // SOL
+  USDC_SPOT = 2;  // USDC
+  MSOL_SPOT = 3;  // MSOL
+  WBTC_SPOT = 4;  // WBTC
+  WETH_SPOT = 5;  // WETH
+  USDT_SPOT = 6;  // USDT
+}
+
+enum PerpContract {
+  ALL = 0;
+  SOL_PERP = 1;    // SOL-PERP
+  ETH_PERP = 2;    // ETH-PERP
+  BTC_PERP = 3;    // BTC-PERP
+  APT_PERP = 4;    // APT-PERP
+  BONK_PERP = 5;   // 1MBONK-PERP
+  MATIC_PERP = 6;  // MATIC-PERP
+  ARB_PERP = 7;    // ARB-PERP
+  DOGE_PERP = 8;   // DOGE-PERP
+  BNB_PERP = 9;    // BNB-PERP
+  SUI_PERP = 10;    // SUI-PERP
+  PEPE_PERP = 11;    // PEPE-PERP
+  OP_PERP = 12;    // OP_PERP
+  RNDR_PERP = 13;    // RNDR_PERP
+  XRP_PERP = 14;    // XRP_PERP
+}
+
+enum PerpCollateralType {
+  PCT_DEPOSIT = 0;
+  PCT_WITHDRAWAL = 1;
+  PCT_TRANSFER = 2;
+}
+
+enum PerpCollateralToken {
+  PCTK_USDC = 0;
+  PCTK_SOL = 1;
+}
+
+enum Infinity {
+  INF_NOT = 0;
+  INF_POSITIVE = 1;
+  INF_NEGATIVE = 2;
+}
+
+message PriceImpactPercent {
+  double percent = 1;
+  Infinity infinity = 2;
+}
+
+message PriceImpactPercentV2 {
+  double percent = 1;
+  string infinity = 2; // NOT, NEGATIVE, POSITIVE
+}
+
+message Fee {
+  float amount = 1;
+  string mint = 2;
+  float percent = 3;
+}
+
