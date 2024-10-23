@@ -4,3 +4,4 @@ python/build
 python/src/bxsolana_trader_proto.egg-info/
 /python/.pypirc
 python/.venv
+rust/target
