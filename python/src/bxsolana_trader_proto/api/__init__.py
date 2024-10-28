@@ -1177,16 +1177,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List["TransactionMetaInnerInstruction"] = (
-        betterproto.message_field(6)
-    )
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List["TransactionMetaTokenBalance"] = (
-        betterproto.message_field(9)
-    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -1779,6 +1779,19 @@ class PostPumpFunSwapRequest(betterproto.Message):
     token_address: str = betterproto.string_field(3)
     token_amount: float = betterproto.double_field(4)
     sol_threshold: float = betterproto.double_field(5)
+    is_buy: bool = betterproto.bool_field(6)
+    compute_limit: int = betterproto.uint32_field(7)
+    compute_price: int = betterproto.uint64_field(8)
+    tip: Optional[int] = betterproto.uint64_field(9, optional=True, group="_tip")
+
+
+@dataclass(eq=False, repr=False)
+class PostPumpFunSwapRequestSol(betterproto.Message):
+    user_address: str = betterproto.string_field(1)
+    bonding_curve_address: str = betterproto.string_field(2)
+    token_address: str = betterproto.string_field(3)
+    sol_amount: float = betterproto.double_field(4)
+    slippage: float = betterproto.double_field(5)
     is_buy: bool = betterproto.bool_field(6)
     compute_limit: int = betterproto.uint32_field(7)
     compute_price: int = betterproto.uint64_field(8)
@@ -3271,9 +3284,25 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def post_pump_fun_swap_sol(
+        self,
+        post_pump_fun_swap_request: "PostPumpFunSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostPumpFunSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostPumpFunSwapSol",
+            post_pump_fun_swap_request,
+            PostPumpFunSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
 
 class ApiBase(ServiceBase):
-
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
@@ -3722,6 +3751,11 @@ class ApiBase(ServiceBase):
         yield GetPumpFunNewTokensStreamResponse()
 
     async def post_pump_fun_swap(
+        self, post_pump_fun_swap_request: "PostPumpFunSwapRequest"
+    ) -> "PostPumpFunSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_pump_fun_swap_sol(
         self, post_pump_fun_swap_request: "PostPumpFunSwapRequest"
     ) -> "PostPumpFunSwapResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
@@ -4442,6 +4476,14 @@ class ApiBase(ServiceBase):
         response = await self.post_pump_fun_swap(request)
         await stream.send_message(response)
 
+    async def __rpc_post_pump_fun_swap_sol(
+        self,
+        stream: "grpclib.server.Stream[PostPumpFunSwapRequest, PostPumpFunSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_pump_fun_swap_sol(request)
+        await stream.send_message(response)
+
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
             "/api.Api/GetRateLimit": grpclib.const.Handler(
@@ -4956,6 +4998,12 @@ class ApiBase(ServiceBase):
             ),
             "/api.Api/PostPumpFunSwap": grpclib.const.Handler(
                 self.__rpc_post_pump_fun_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostPumpFunSwapRequest,
+                PostPumpFunSwapResponse,
+            ),
+            "/api.Api/PostPumpFunSwapSol": grpclib.const.Handler(
+                self.__rpc_post_pump_fun_swap_sol,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostPumpFunSwapRequest,
                 PostPumpFunSwapResponse,
