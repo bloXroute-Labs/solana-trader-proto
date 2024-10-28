@@ -3286,7 +3286,7 @@ class ApiStub(betterproto.ServiceStub):
 
     async def post_pump_fun_swap_sol(
         self,
-        post_pump_fun_swap_request: "PostPumpFunSwapRequest",
+        post_pump_fun_swap_request_sol: "PostPumpFunSwapRequestSol",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
@@ -3294,7 +3294,7 @@ class ApiStub(betterproto.ServiceStub):
     ) -> "PostPumpFunSwapResponse":
         return await self._unary_unary(
             "/api.Api/PostPumpFunSwapSol",
-            post_pump_fun_swap_request,
+            post_pump_fun_swap_request_sol,
             PostPumpFunSwapResponse,
             timeout=timeout,
             deadline=deadline,
@@ -3756,7 +3756,7 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def post_pump_fun_swap_sol(
-        self, post_pump_fun_swap_request: "PostPumpFunSwapRequest"
+        self, post_pump_fun_swap_request_sol: "PostPumpFunSwapRequestSol"
     ) -> "PostPumpFunSwapResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
@@ -4478,7 +4478,7 @@ class ApiBase(ServiceBase):
 
     async def __rpc_post_pump_fun_swap_sol(
         self,
-        stream: "grpclib.server.Stream[PostPumpFunSwapRequest, PostPumpFunSwapResponse]",
+        stream: "grpclib.server.Stream[PostPumpFunSwapRequestSol, PostPumpFunSwapResponse]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_pump_fun_swap_sol(request)
@@ -5005,7 +5005,7 @@ class ApiBase(ServiceBase):
             "/api.Api/PostPumpFunSwapSol": grpclib.const.Handler(
                 self.__rpc_post_pump_fun_swap_sol,
                 grpclib.const.Cardinality.UNARY_UNARY,
-                PostPumpFunSwapRequest,
+                PostPumpFunSwapRequestSol,
                 PostPumpFunSwapResponse,
             ),
         }

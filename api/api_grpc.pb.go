@@ -110,7 +110,7 @@ type ApiClient interface {
 	GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error)
 	GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error)
 	PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
-	PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
+	PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
 }
 
 type apiClient struct {
@@ -1309,7 +1309,7 @@ func (c *apiClient) PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequ
 	return out, nil
 }
 
-func (c *apiClient) PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
+func (c *apiClient) PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
 	out := new(PostPumpFunSwapResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwapSol", in, out, opts...)
 	if err != nil {
@@ -1414,7 +1414,7 @@ type ApiServer interface {
 	GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error
 	GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error
 	PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error)
-	PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error)
+	PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error)
 	mustEmbedUnimplementedApiServer()
 }
 
@@ -1680,7 +1680,7 @@ func (UnimplementedApiServer) GetPumpFunNewTokensStream(*GetPumpFunNewTokensStre
 func (UnimplementedApiServer) PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwap not implemented")
 }
-func (UnimplementedApiServer) PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error) {
+func (UnimplementedApiServer) PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwapSol not implemented")
 }
 func (UnimplementedApiServer) mustEmbedUnimplementedApiServer() {}
@@ -3299,7 +3299,7 @@ func _Api_PostPumpFunSwap_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _Api_PostPumpFunSwapSol_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostPumpFunSwapRequest)
+	in := new(PostPumpFunSwapRequestSol)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -3311,7 +3311,7 @@ func _Api_PostPumpFunSwapSol_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/api.Api/PostPumpFunSwapSol",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostPumpFunSwapSol(ctx, req.(*PostPumpFunSwapRequest))
+		return srv.(ApiServer).PostPumpFunSwapSol(ctx, req.(*PostPumpFunSwapRequestSol))
 	}
 	return interceptor(ctx, in, info, handler)
 }

@@ -2772,7 +2772,7 @@ func local_request_Api_PostPumpFunSwap_0(ctx context.Context, marshaler runtime.
 }
 
 func request_Api_PostPumpFunSwapSol_0(ctx context.Context, marshaler runtime.Marshaler, client ApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostPumpFunSwapRequest
+	var protoReq PostPumpFunSwapRequestSol
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -2789,7 +2789,7 @@ func request_Api_PostPumpFunSwapSol_0(ctx context.Context, marshaler runtime.Mar
 }
 
 func local_request_Api_PostPumpFunSwapSol_0(ctx context.Context, marshaler runtime.Marshaler, server ApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq PostPumpFunSwapRequest
+	var protoReq PostPumpFunSwapRequestSol
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
