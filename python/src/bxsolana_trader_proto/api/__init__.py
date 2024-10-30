@@ -1792,10 +1792,9 @@ class PostPumpFunSwapRequestSol(betterproto.Message):
     token_address: str = betterproto.string_field(3)
     sol_amount: float = betterproto.double_field(4)
     slippage: float = betterproto.double_field(5)
-    is_buy: bool = betterproto.bool_field(6)
-    compute_limit: int = betterproto.uint32_field(7)
-    compute_price: int = betterproto.uint64_field(8)
-    tip: Optional[int] = betterproto.uint64_field(9, optional=True, group="_tip")
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
+    tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
 
 
 @dataclass(eq=False, repr=False)

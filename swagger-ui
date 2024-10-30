@@ -4813,9 +4813,6 @@
           "type": "number",
           "format": "double"
         },
-        "isBuy": {
-          "type": "boolean"
-        },
         "computeLimit": {
           "type": "integer",
           "format": "int64",
