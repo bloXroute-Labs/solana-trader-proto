@@ -4809,6 +4809,10 @@
           "type": "number",
           "format": "double"
         },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
         "computeLimit": {
           "type": "integer",
           "format": "int64",
