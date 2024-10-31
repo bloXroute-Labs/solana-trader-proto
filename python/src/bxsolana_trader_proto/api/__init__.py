@@ -641,7 +641,6 @@ class GetPumpFunQuotesRequest(betterproto.Message):
     mint_address: str = betterproto.string_field(2)
     bonding_curve_address: str = betterproto.string_field(3)
     amount: float = betterproto.double_field(4)
-    slippage: float = betterproto.double_field(5)
 
 
 @dataclass(eq=False, repr=False)
@@ -1780,9 +1779,10 @@ class PostPumpFunSwapRequest(betterproto.Message):
     token_amount: float = betterproto.double_field(4)
     sol_threshold: float = betterproto.double_field(5)
     is_buy: bool = betterproto.bool_field(6)
-    compute_limit: int = betterproto.uint32_field(7)
-    compute_price: int = betterproto.uint64_field(8)
-    tip: Optional[int] = betterproto.uint64_field(9, optional=True, group="_tip")
+    slippage: float = betterproto.double_field(7)
+    compute_limit: int = betterproto.uint32_field(8)
+    compute_price: int = betterproto.uint64_field(9)
+    tip: Optional[int] = betterproto.uint64_field(10, optional=True, group="_tip")
 
 
 @dataclass(eq=False, repr=False)
@@ -1791,9 +1791,10 @@ class PostPumpFunSwapRequestSol(betterproto.Message):
     bonding_curve_address: str = betterproto.string_field(2)
     token_address: str = betterproto.string_field(3)
     sol_amount: float = betterproto.double_field(4)
-    compute_limit: int = betterproto.uint32_field(5)
-    compute_price: int = betterproto.uint64_field(6)
-    tip: Optional[int] = betterproto.uint64_field(7, optional=True, group="_tip")
+    slippage: float = betterproto.double_field(5)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
+    tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
 
 
 @dataclass(eq=False, repr=False)
