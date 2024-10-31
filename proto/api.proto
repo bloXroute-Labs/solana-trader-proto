@@ -1499,7 +1499,6 @@ message GetPumpFunQuotesRequest {
   string mintAddress = 2;
   string bondingCurveAddress = 3;
   double amount = 4;
-  double slippage = 5;
 }
 
 message GetPumpFunQuotesResponse {
@@ -2491,9 +2490,10 @@ message PostPumpFunSwapRequest {
   double tokenAmount = 4;
   double solThreshold = 5;
   bool isBuy = 6;
-  uint32 computeLimit = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
-  uint64 computePrice = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
-  optional uint64 tip = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
+  double slippage = 7;
+  uint32 computeLimit = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
+  uint64 computePrice = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
+  optional uint64 tip = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
 }
 
 message PostPumpFunSwapRequestSol {
