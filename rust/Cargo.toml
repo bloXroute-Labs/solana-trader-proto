@@ -2,7 +2,16 @@
 name = "solana-trader-proto"
 version = "0.1.0"
 edition = "2021"
-
+authors = ["support@bloxroute.com"]
+license = "MIT"
+description = "A Solana Trader API protocol implementation."
+documentation = "https://docs.bloxroute.com/solana/trader-api-v2"
+repository = "https://github.com/bloXroute-Labs/solana-trader-proto"
+homepage = "https://bloxroute.com/"
+readme = "README.md"
+keywords = ["solana", "blockchain", "trader", "grpc", "raydium", "jupiter"]
+categories = ["cryptocurrency"]
+include = ["**/*.rs", "Cargo.toml", "Cargo.lock", "README.md", "proto"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]

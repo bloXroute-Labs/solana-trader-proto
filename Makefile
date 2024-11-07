@@ -1,9 +1,12 @@
 PB_GO_IMAGE_NAME=bloxroute/bdn-protobuf:v3.19.3-go
+RUST_PACKAGE_NAME = solana-trader-proto
+CARGO_TOML = rust/Cargo.toml
 
 .PHONY: all test integration fmt
 .PHONY: proto proto-build-gw proto-build-swagger proto-build-api proto-build-common-go
 .PHONY: proto-docker proto-docker-push-go proto-docker-build-go proto-docker-push-js proto-docker-build-js
 .PHONY: cred-github cred-solana data-accounts environment-dev
+.PHONY: proto-build-api-rust proto-package-api-rust proto-publish-api-rust
 
 all: clean proto
 
@@ -56,4 +59,19 @@ proto-docker-push-go:
 proto-docker-build-go:
 	cd proto && docker build . -f Dockerfile-go -t $(PB_GO_IMAGE_NAME) --platform linux/amd64
 
+proto-build-api-rust:
+	@echo "Building release version of $(RUST_PACKAGE_NAME)..."
+	cargo build --release --manifest-path $(CARGO_TOML)
 
+proto-package-api-rust: proto-build-api-rust
+	@echo "Copying proto directory to rust folder..."
+	rm -rf rust/proto
+	mkdir -p rust/proto
+	cp -r proto/* rust/proto/
+	@echo "Packaging $(RUST_PACKAGE_NAME)..."
+	cargo package --manifest-path $(CARGO_TOML)
+
+# We are not publishing to crates.io yet
+# proto-publish-api-rust: proto-package-api-rust
+# 	@echo "Publishing $(RUST_PACKAGE_NAME) to GitHub..."
+# 	cargo publish --manifest-path $(CARGO_TOML)
