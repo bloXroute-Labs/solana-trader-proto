@@ -3,6 +3,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:warning=Proto output dir: {}", out_dir);
 
     tonic_build::configure()
+    .protoc_arg("--experimental_allow_proto3_optional")
         .build_server(false)
         .compile_well_known_types(true)
         .extern_path(
