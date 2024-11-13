@@ -73,7 +73,14 @@ fn add_field_attributes(builder: Builder) -> Builder {
 
     // Reference for how to format path parameter to select elements in proto file:
     // https://docs.rs/tonic-build/latest/tonic_build/struct.Config.html#method.btree_map
+
+    // Field renames
     builder.field_attribute(
+        "programID",
+        "#[serde(rename = \"programID\")]"
+    )
+    // Custom serializations
+    .field_attribute(
         "tradeFeeRate",
         "#[serde(deserialize_with = \"string_to_u64\")]"
     )
