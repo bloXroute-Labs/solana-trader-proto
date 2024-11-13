@@ -59,8 +59,13 @@ pub fn string_to_bytes<'de, D>(deserializer: D) -> Result<Vec<u8>, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
-    let s = String::deserialize(deserializer)?;
-    general_purpose::STANDARD.decode(&s).map_err(serde::de::Error::custom)
+    // First try to deserialize as a string 
+    let s = <String>::deserialize(deserializer).map_err(serde::de::Error::custom)?;
+    
+    // Try to decode the base64 string
+    general_purpose::STANDARD
+        .decode(s.as_bytes())
+        .map_err(|e| serde::de::Error::custom(format!("Failed to decode base64: {}", e)))
 }
 pub fn string_to_f64<'de, D>(deserializer: D) -> Result<f64, D::Error>
 where
