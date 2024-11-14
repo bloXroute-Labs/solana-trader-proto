@@ -5436,6 +5436,12 @@
         },
         "fastBestEffort": {
           "type": "boolean"
+        },
+        "allowBackRun": {
+          "type": "boolean"
+        },
+        "revenueAddress": {
+          "type": "boolean"
         }
       }
     },

@@ -474,6 +474,12 @@ class PostSubmitRequest(betterproto.Message):
     fast_best_effort: Optional[bool] = betterproto.bool_field(
         7, optional=True, group="_fastBestEffort"
     )
+    allow_back_run: Optional[bool] = betterproto.bool_field(
+        8, optional=True, group="_allowBackRun"
+    )
+    revenue_address: Optional[bool] = betterproto.bool_field(
+        9, optional=True, group="_revenueAddress"
+    )
 
 
 @dataclass(eq=False, repr=False)
