@@ -5441,7 +5441,7 @@
           "type": "boolean"
         },
         "revenueAddress": {
-          "type": "boolean"
+          "type": "string"
         }
       }
     },

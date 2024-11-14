@@ -477,7 +477,7 @@ class PostSubmitRequest(betterproto.Message):
     allow_back_run: Optional[bool] = betterproto.bool_field(
         8, optional=True, group="_allowBackRun"
     )
-    revenue_address: Optional[bool] = betterproto.bool_field(
+    revenue_address: Optional[str] = betterproto.string_field(
         9, optional=True, group="_revenueAddress"
     )
 
