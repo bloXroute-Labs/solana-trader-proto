@@ -186,5 +186,10 @@ fn add_field_attributes(builder: Builder) -> Builder {
             "virtualTokenReserves",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
+        .field_attribute(
+            "blockTime",
+            "#[serde(deserialize_with = \"string_to_u64\")]",
+        )
+
         .field_attribute("data", "#[serde(deserialize_with = \"string_to_bytes\")]")
 }
