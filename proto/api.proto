@@ -1345,6 +1345,8 @@ message PostSubmitRequest {
   optional uint64 tip = 4;
   optional bool useStakedRPCs = 6;
   optional bool fastBestEffort = 7;
+  optional bool allowBackRun = 8;
+  optional string revenueAddress = 9;
 }
 
 message PostSubmitRequestEntry {
