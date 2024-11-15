@@ -191,10 +191,5 @@ fn add_field_attributes(builder: Builder) -> Builder {
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
 
-        .field_attribute(
-            ".api.GetTransactionResponse.blockTime",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-
         .field_attribute("data", "#[serde(deserialize_with = \"string_to_bytes\")]")
 }
