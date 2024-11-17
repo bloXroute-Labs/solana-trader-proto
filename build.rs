@@ -187,9 +187,16 @@ fn add_field_attributes(builder: Builder) -> Builder {
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
-            "blockTime",
+            "block_time",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
-
+        .field_attribute(
+            "postBalances",
+            "#[serde(deserialize_with = \"string_to_u64\")]",
+        )
+        .field_attribute(
+            "api.TransactionMeta.fee",
+            "#[serde(deserialize_with = \"string_to_u64\")]",
+        )
         .field_attribute("data", "#[serde(deserialize_with = \"string_to_bytes\")]")
 }
