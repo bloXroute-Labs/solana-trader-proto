@@ -70,6 +70,13 @@ where
     let s = String::deserialize(deserializer)?;
     s.parse::<f64>().map_err(serde::de::Error::custom)
 }
+pub fn string_to_u32<'de, D>(deserializer: D) -> Result<u32, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let s = String::deserialize(deserializer)?;
+    s.parse::<u32>().map_err(serde::de::Error::custom)
+}
 // End of custom code snippet
 "#;
     let generated_file_path = Path::new(&out_dir).join("api.rs");
@@ -199,21 +206,22 @@ fn add_field_attributes(builder: Builder) -> Builder {
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
-            "intervalNum",
+            ".api.GetRateLimitResponse.intervalNum",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
-            "limit",
+            ".api.GetRateLimitResponse.limit",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
-            "count",
+            ".api.GetRateLimitResponse.count",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
-            "reset",
+            ".api.GetRateLimitResponse.reset",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
+        .field_attribute("accountID", "#[serde(rename = \"accountID\")]")
 
         .field_attribute("data", "#[serde(deserialize_with = \"string_to_bytes\")]")
 }
