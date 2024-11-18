@@ -191,12 +191,29 @@ fn add_field_attributes(builder: Builder) -> Builder {
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
-            "postBalances",
+            ".api.GetTransactionResponse.metadata.PostBalances",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
             "api.TransactionMeta.fee",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
+        .field_attribute(
+            "interval_num",
+            "#[serde(deserialize_with = \"string_to_u64\")]",
+        )
+        .field_attribute(
+            "limit",
+            "#[serde(deserialize_with = \"string_to_u64\")]",
+        )
+        .field_attribute(
+            "count",
+            "#[serde(deserialize_with = \"string_to_u64\")]",
+        )
+        .field_attribute(
+            "reset",
+            "#[serde(deserialize_with = \"string_to_u64\")]",
+        )
+
         .field_attribute("data", "#[serde(deserialize_with = \"string_to_bytes\")]")
 }
