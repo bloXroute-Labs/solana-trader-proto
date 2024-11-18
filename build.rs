@@ -191,7 +191,7 @@ fn add_field_attributes(builder: Builder) -> Builder {
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
-            ".api.GetTransactionResponse.metadata.PostBalances",
+            "postBalances",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
@@ -199,7 +199,7 @@ fn add_field_attributes(builder: Builder) -> Builder {
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
-            "interval_num",
+            "intervalNum",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
         .field_attribute(
