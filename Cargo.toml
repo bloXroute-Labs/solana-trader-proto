@@ -10,7 +10,7 @@ repository = "https://github.com/bloXroute-Labs/solana-trader-proto"
 homepage = "https://bloxroute.com/"
 readme = "README.md"
 keywords = ["solana", "blockchain", "trader", "grpc", "raydium"]
-categories = ["cryptocurrency"]
+categories = ["api-bindings"]
 include = ["**/*.rs", "Cargo.toml", "Cargo.lock", "README.md", "proto"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
