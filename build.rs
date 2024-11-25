@@ -77,6 +77,15 @@ where
     let s = String::deserialize(deserializer)?;
     s.parse::<u32>().map_err(serde::de::Error::custom)
 }
+pub fn strings_to_u64s<'de, D>(deserializer: D) -> Result<Vec<u64>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let s = Vec::<String>::deserialize(deserializer)?;
+    s.into_iter()
+        .map(|item| item.parse::<u64>().map_err(serde::de::Error::custom))
+        .collect()
+}
 // End of custom code snippet
 "#;
     let generated_file_path = Path::new(&out_dir).join("api.rs");
@@ -94,9 +103,10 @@ fn add_field_attributes(builder: Builder) -> Builder {
     // Reference for how to format path parameter to select elements in proto file:
     // https://docs.rs/tonic-build/latest/tonic_build/struct.Config.html#method.btree_map
 
-    // Field renames
     builder
+        // Field renames
         .field_attribute("programID", "#[serde(rename = \"programID\")]")
+        .field_attribute("accountID", "#[serde(rename = \"accountID\")]")
         // Custom serializations
         .field_attribute(
             "tradeFeeRate",
@@ -221,7 +231,16 @@ fn add_field_attributes(builder: Builder) -> Builder {
             ".api.GetRateLimitResponse.reset",
             "#[serde(deserialize_with = \"string_to_u64\")]",
         )
-        .field_attribute("accountID", "#[serde(rename = \"accountID\")]")
-
-        .field_attribute("data", "#[serde(deserialize_with = \"string_to_bytes\")]")
+        .field_attribute(
+        "data", 
+        "#[serde(deserialize_with = \"string_to_bytes\")]"
+        )
+        .field_attribute(
+            ".api.TransactionMeta.pre_balances", 
+            "#[serde(deserialize_with = \"strings_to_u64s\")]"
+        )
+        .field_attribute(
+            ".api.TransactionMeta.post_balances", 
+            "#[serde(deserialize_with = \"strings_to_u64s\")]"
+        )
 }
