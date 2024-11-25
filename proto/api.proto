@@ -2241,7 +2241,7 @@ message GetPriorityFeeByProgramRequest {
 }
 
 message GetPriorityFeeByProgramResponse {
-  repeated ProgramPriorityFee Data = 1;
+  repeated ProgramPriorityFee data = 1;
 }
 
 message ProgramPriorityFee {
