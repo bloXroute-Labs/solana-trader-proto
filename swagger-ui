@@ -3051,7 +3051,7 @@
     "apiGetPriorityFeeByProgramResponse": {
       "type": "object",
       "properties": {
-        "Data": {
+        "data": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiProgramPriorityFee"
