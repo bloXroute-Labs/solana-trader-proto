@@ -91,7 +91,7 @@ where
 }
 
 fn modify_64bit_fields(content: String) -> String {
-    let re = regex::Regex::new(r"( *)(pub\s+)?(\w+\s*:\s*(?:::prost::alloc::vec::Vec<)?([uif](64|8)>?).*)").unwrap();
+    let re = regex::Regex::new(r"( *)(pub\s+)?(\w+\s*:\s*(?:::prost::alloc::vec::Vec<)?([ui](64|8)>?).*)").unwrap();
 
     // Replace the field definition with the same definition plus `#[serde(deserialize_with = "...")]`
     re.replace_all(&content, |caps: &regex::Captures| {
