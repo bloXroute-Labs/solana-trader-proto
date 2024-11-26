@@ -40,12 +40,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 // See build.rs for more details.
 use serde::Deserialize;
 use base64::{Engine as _, engine::general_purpose};
-use serde_with::serde_as;
-use serde_with::DisplayFromStr;
 
-#[cfg_attr(feature="serde_test" ,serde(with = "As::<Vec<(Same, Same)>>"))]
-
-pub fn string_to_bytes<'de, D>(deserializer: D) -> Result<Vec<u8>, D::Error>
+pub fn string_to_u64<'de, D>(deserializer: D) -> Result<u64, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let s = String::deserialize(deserializer)?;
+    s.parse::<u64>().map_err(serde::de::Error::custom)
+}
+pub fn string_to_i64<'de, D>(deserializer: D) -> Result<i64, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let s = String::deserialize(deserializer)?;
+    s.parse::<i64>().map_err(serde::de::Error::custom)
+}
+pub fn string_to_u8s<'de, D>(deserializer: D) -> Result<Vec<u8>, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
@@ -53,29 +63,48 @@ where
     general_purpose::STANDARD.decode(s).map_err(serde::de::Error::custom)
 
 }
+pub fn string_to_f64<'de, D>(deserializer: D) -> Result<f64, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let s = String::deserialize(deserializer)?;
+    s.parse::<f64>().map_err(serde::de::Error::custom)
+}
+pub fn string_to_u64s<'de, D>(deserializer: D) -> Result<Vec<u64>, D::Error>
+where
+    D: serde::Deserializer<'de>,
+{
+    let s = Vec::<String>::deserialize(deserializer)?;
+    s.into_iter()
+        .map(|item| item.parse::<u64>().map_err(serde::de::Error::custom))
+        .collect()
+}
 // End of custom code snippet
 "#;
     let generated_file_path = Path::new(&out_dir).join("api.rs");
     let mut generated_code = fs::read_to_string(&generated_file_path)?;
     generated_code = format!("{}{}", code_snippet, generated_code);
-    generated_code = modify_u64_fields(generated_code);
+    generated_code = modify_64bit_fields(generated_code);
     fs::write(generated_file_path, generated_code)?;
 
     Ok(())
 }
 
-fn modify_u64_fields(content: String) -> String {
-    let re = regex::Regex::new(r"(\s*)(pub\s+)?(\w+\s*:\s*[uif]64s?.*)").unwrap();
+fn modify_64bit_fields(content: String) -> String {
+    let re = regex::Regex::new(r"( *)(pub\s+)?(\w+\s*:\s*(?:::prost::alloc::vec::Vec<)?([uif](64|8)>?).*)").unwrap();
 
-    // Replace the field definition with the same definition plus `#[serde_as(as = "DisplayFromStr")]`
+    // Replace the field definition with the same definition plus `#[serde(deserialize_with = "...")]`
     re.replace_all(&content, |caps: &regex::Captures| {
         let padding = &caps[1];
         let access_modifier = &caps[2];
         let field = &caps[3];
+        let mut field_type = String::from(&caps[4]);
+        field_type = field_type.replace(">", "s");
 
         format!(
-            "{}#[serde_as(as = \"DisplayFromStr\")]{}{}{}",
+            "{}#[serde(deserialize_with = \"string_to_{}\")]\n{}{}{}",
             padding,
+            field_type,
             padding,
             access_modifier,
             field
