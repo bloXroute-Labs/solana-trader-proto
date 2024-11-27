@@ -26,8 +26,10 @@ serde = "1.0.214"
 serde_derive = "1.0.214"
 prost-wkt-types = "0.6.0"
 base64 = "0.22.1"
+regex = "1.11.1"
 
 [build-dependencies]
 tonic-build = "0.12.3"
 prost-build = "0.13.3"
 serde = "1.0.214"
+regex = "1.11.1"

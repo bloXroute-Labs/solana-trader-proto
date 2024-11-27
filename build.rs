@@ -55,7 +55,7 @@ where
     let s = String::deserialize(deserializer)?;
     s.parse::<i64>().map_err(serde::de::Error::custom)
 }
-pub fn string_to_bytes<'de, D>(deserializer: D) -> Result<Vec<u8>, D::Error>
+pub fn string_to_u8s<'de, D>(deserializer: D) -> Result<Vec<u8>, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
@@ -70,14 +70,7 @@ where
     let s = String::deserialize(deserializer)?;
     s.parse::<f64>().map_err(serde::de::Error::custom)
 }
-pub fn string_to_u32<'de, D>(deserializer: D) -> Result<u32, D::Error>
-where
-    D: serde::Deserializer<'de>,
-{
-    let s = String::deserialize(deserializer)?;
-    s.parse::<u32>().map_err(serde::de::Error::custom)
-}
-pub fn strings_to_u64s<'de, D>(deserializer: D) -> Result<Vec<u64>, D::Error>
+pub fn string_to_u64s<'de, D>(deserializer: D) -> Result<Vec<u64>, D::Error>
 where
     D: serde::Deserializer<'de>,
 {
@@ -91,9 +84,32 @@ where
     let generated_file_path = Path::new(&out_dir).join("api.rs");
     let mut generated_code = fs::read_to_string(&generated_file_path)?;
     generated_code = format!("{}{}", code_snippet, generated_code);
+    generated_code = modify_64bit_fields(generated_code);
     fs::write(generated_file_path, generated_code)?;
 
     Ok(())
+}
+
+fn modify_64bit_fields(content: String) -> String {
+    let re = regex::Regex::new(r"( *)(pub\s+)?(\w+\s*:\s*(?:::prost::alloc::vec::Vec<)?([ui](64|8)>?).*)").unwrap();
+
+    // Replace the field definition with the same definition plus `#[serde(deserialize_with = "...")]`
+    re.replace_all(&content, |caps: &regex::Captures| {
+        let padding = &caps[1];
+        let access_modifier = &caps[2];
+        let field = &caps[3];
+        let mut field_type = String::from(&caps[4]);
+        field_type = field_type.replace(">", "s");
+
+        format!(
+            "{}#[serde(deserialize_with = \"string_to_{}\")]\n{}{}{}",
+            padding,
+            field_type,
+            padding,
+            access_modifier,
+            field
+        )
+    }).to_string()
 }
 
 fn add_field_attributes(builder: Builder) -> Builder {
@@ -107,140 +123,4 @@ fn add_field_attributes(builder: Builder) -> Builder {
         // Field renames
         .field_attribute("programID", "#[serde(rename = \"programID\")]")
         .field_attribute("accountID", "#[serde(rename = \"accountID\")]")
-        // Custom serializations
-        .field_attribute(
-            "tradeFeeRate",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute("height", "#[serde(deserialize_with = \"string_to_u64\")]")
-        .field_attribute(
-            ".api.ProjectPool.token1Reserves",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.ProjectPool.token2Reserves",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute("time", "#[serde(deserialize_with = \"string_to_i64\")]")
-        .field_attribute("openTime", "#[serde(deserialize_with = \"string_to_u64\")]")
-        .field_attribute(
-            ".api.Block.slot",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            ".api.GetTransactionResponse.slot",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            ".api.GetOrderStatusStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetMarketDepthsStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetQuotesStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetTickersStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetTradesStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetSwapsStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetNewRaydiumPoolsByTransactionResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetNewRaydiumPoolsResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetZetaTransactionStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetPoolReservesStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetPricesStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetPumpFunSwapsStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            ".api.GetPumpFunNewTokensStreamResponse.slot",
-            "#[serde(deserialize_with = \"string_to_i64\")]",
-        )
-        .field_attribute(
-            "feeAtPercentile",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            ".api.PostPumpFunSwapRequestSol.solAmount",
-            "#[serde(deserialize_with = \"string_to_f64\")]",
-        )
-        .field_attribute(
-            ".api.GetPumpFunSwapsStreamResponse.solAmount",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            "virtualSolReserves",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            "virtualTokenReserves",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            "block_time",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            "postBalances",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            "api.TransactionMeta.fee",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            ".api.GetRateLimitResponse.intervalNum",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            ".api.GetRateLimitResponse.limit",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            ".api.GetRateLimitResponse.count",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-            ".api.GetRateLimitResponse.reset",
-            "#[serde(deserialize_with = \"string_to_u64\")]",
-        )
-        .field_attribute(
-        "data", 
-        "#[serde(deserialize_with = \"string_to_bytes\")]"
-        )
-        .field_attribute(
-            ".api.TransactionMeta.pre_balances", 
-            "#[serde(deserialize_with = \"strings_to_u64s\")]"
-        )
-        .field_attribute(
-            ".api.TransactionMeta.post_balances", 
-            "#[serde(deserialize_with = \"strings_to_u64s\")]"
-        )
 }
