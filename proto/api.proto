@@ -958,6 +958,18 @@ service Api {
     };
   }
 
+  rpc GetMoonshotNewTokensStream(GetMoonshotNewTokenStreamRequest) returns (stream GetMoonshotNewTokenStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
+  rpc GetMoonshotSwapStream(GetMoonshotSwapStreamRequest) returns (stream GetMoonshotSwapStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
   rpc PostPumpFunSwap(PostPumpFunSwapRequest) returns (PostPumpFunSwapResponse){
     option (google.api.http) = {
       post: "/api/v2/pumpfun/swap"
@@ -2512,3 +2524,39 @@ message PostPumpFunSwapRequestSol {
 message PostPumpFunSwapResponse{
   TransactionMessageV2 transaction = 1;
 }
+
+// End of pump.fun messages
+
+message GetMoonshotNewTokenStreamRequest {}
+
+message GetMoonshotNewTokenStreamResponse {
+  int64 slot = 1;
+  string txnHash = 2;
+  string name = 3;
+  string symbol = 4;
+  string uri = 5;
+  string mint = 6;
+  string curveAccount = 7;
+  string creator = 8;
+  string decimals = 9;
+  google.protobuf.Timestamp timestamp = 10;
+}
+
+message GetMoonshotSwapStreamRequest {
+  repeated string tokens = 1;
+}
+
+message GetMoonshotSwapStreamResponse {
+  int64 slot = 1;
+  string txnHash = 2;
+  string mintAddress = 3;
+  string userAddress = 4;
+  string userTokenAccount = 5;
+  string curveAddress = 6;
+  string curveTokenAccount = 7;
+  uint64 tokenAmount = 8;
+  bool isBuy = 9;
+  google.protobuf.Timestamp timestamp = 10;
+}
+
+// end of moonshot messages

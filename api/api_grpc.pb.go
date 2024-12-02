@@ -109,6 +109,8 @@ type ApiClient interface {
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
 	GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error)
 	GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error)
+	GetMoonshotNewTokensStream(ctx context.Context, in *GetMoonshotNewTokenStreamRequest, opts ...grpc.CallOption) (Api_GetMoonshotNewTokensStreamClient, error)
+	GetMoonshotSwapStream(ctx context.Context, in *GetMoonshotSwapStreamRequest, opts ...grpc.CallOption) (Api_GetMoonshotSwapStreamClient, error)
 	PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
 	PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
 }
@@ -1300,6 +1302,70 @@ func (x *apiGetPumpFunNewTokensStreamClient) Recv() (*GetPumpFunNewTokensStreamR
 	return m, nil
 }
 
+func (c *apiClient) GetMoonshotNewTokensStream(ctx context.Context, in *GetMoonshotNewTokenStreamRequest, opts ...grpc.CallOption) (Api_GetMoonshotNewTokensStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[18], "/api.Api/GetMoonshotNewTokensStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetMoonshotNewTokensStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetMoonshotNewTokensStreamClient interface {
+	Recv() (*GetMoonshotNewTokenStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetMoonshotNewTokensStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetMoonshotNewTokensStreamClient) Recv() (*GetMoonshotNewTokenStreamResponse, error) {
+	m := new(GetMoonshotNewTokenStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *apiClient) GetMoonshotSwapStream(ctx context.Context, in *GetMoonshotSwapStreamRequest, opts ...grpc.CallOption) (Api_GetMoonshotSwapStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[19], "/api.Api/GetMoonshotSwapStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetMoonshotSwapStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetMoonshotSwapStreamClient interface {
+	Recv() (*GetMoonshotSwapStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetMoonshotSwapStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetMoonshotSwapStreamClient) Recv() (*GetMoonshotSwapStreamResponse, error) {
+	m := new(GetMoonshotSwapStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
 	out := new(PostPumpFunSwapResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwap", in, out, opts...)
@@ -1413,6 +1479,8 @@ type ApiServer interface {
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
 	GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error
 	GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error
+	GetMoonshotNewTokensStream(*GetMoonshotNewTokenStreamRequest, Api_GetMoonshotNewTokensStreamServer) error
+	GetMoonshotSwapStream(*GetMoonshotSwapStreamRequest, Api_GetMoonshotSwapStreamServer) error
 	PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error)
 	PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error)
 	mustEmbedUnimplementedApiServer()
@@ -1676,6 +1744,12 @@ func (UnimplementedApiServer) GetPumpFunSwapsStream(*GetPumpFunSwapsStreamReques
 }
 func (UnimplementedApiServer) GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPumpFunNewTokensStream not implemented")
+}
+func (UnimplementedApiServer) GetMoonshotNewTokensStream(*GetMoonshotNewTokenStreamRequest, Api_GetMoonshotNewTokensStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetMoonshotNewTokensStream not implemented")
+}
+func (UnimplementedApiServer) GetMoonshotSwapStream(*GetMoonshotSwapStreamRequest, Api_GetMoonshotSwapStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetMoonshotSwapStream not implemented")
 }
 func (UnimplementedApiServer) PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwap not implemented")
@@ -3280,6 +3354,48 @@ func (x *apiGetPumpFunNewTokensStreamServer) Send(m *GetPumpFunNewTokensStreamRe
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetMoonshotNewTokensStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetMoonshotNewTokenStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetMoonshotNewTokensStream(m, &apiGetMoonshotNewTokensStreamServer{stream})
+}
+
+type Api_GetMoonshotNewTokensStreamServer interface {
+	Send(*GetMoonshotNewTokenStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetMoonshotNewTokensStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetMoonshotNewTokensStreamServer) Send(m *GetMoonshotNewTokenStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Api_GetMoonshotSwapStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetMoonshotSwapStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetMoonshotSwapStream(m, &apiGetMoonshotSwapStreamServer{stream})
+}
+
+type Api_GetMoonshotSwapStreamServer interface {
+	Send(*GetMoonshotSwapStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetMoonshotSwapStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetMoonshotSwapStreamServer) Send(m *GetMoonshotSwapStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_PostPumpFunSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostPumpFunSwapRequest)
 	if err := dec(in); err != nil {
@@ -3689,6 +3805,16 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetPumpFunNewTokensStream",
 			Handler:       _Api_GetPumpFunNewTokensStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetMoonshotNewTokensStream",
+			Handler:       _Api_GetMoonshotNewTokensStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetMoonshotSwapStream",
+			Handler:       _Api_GetMoonshotSwapStream_Handler,
 			ServerStreams: true,
 		},
 	},
