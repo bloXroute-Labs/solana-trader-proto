@@ -4769,10 +4769,6 @@
         "isBuy": {
           "type": "boolean"
         },
-        "slippage": {
-          "type": "number",
-          "format": "double"
-        },
         "computeLimit": {
           "type": "integer",
           "format": "int64",
@@ -4803,10 +4799,6 @@
           "type": "string"
         },
         "solAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "slippage": {
           "type": "number",
           "format": "double"
         },
