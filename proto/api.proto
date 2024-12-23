@@ -97,6 +97,18 @@ service Api {
     };
   }
 
+  rpc PostSubmitSnipeV2(PostSubmitSnipeRequest) returns (PostSubmitSnipeResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/submit-snipe"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits one or two transactions. First one with tip to Jito directly and optionally a tip to BX for super-bundling. Second is propagated as Staked or FastBestEffort";
+      summary: "Sniping transactions submit";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
   // Raydium V2
   rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
     option (google.api.http) = {
@@ -1372,6 +1384,15 @@ message PostSubmitBatchResponseEntry {
 }
 
 message PostSubmitBatchResponse {
+  repeated PostSubmitBatchResponseEntry transactions = 1;
+}
+
+message PostSubmitSnipeRequest {
+  repeated PostSubmitRequestEntry entries = 1;
+  optional bool useStakedRPCs = 2;
+}
+
+message PostSubmitSnipeResponse {
   repeated PostSubmitBatchResponseEntry transactions = 1;
 }
 

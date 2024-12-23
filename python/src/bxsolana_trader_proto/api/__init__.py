@@ -507,6 +507,19 @@ class PostSubmitBatchResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostSubmitSnipeRequest(betterproto.Message):
+    entries: List["PostSubmitRequestEntry"] = betterproto.message_field(1)
+    use_staked_rp_cs: Optional[bool] = betterproto.bool_field(
+        2, optional=True, group="_useStakedRPCs"
+    )
+
+
+@dataclass(eq=False, repr=False)
+class PostSubmitSnipeResponse(betterproto.Message):
+    transactions: List["PostSubmitBatchResponseEntry"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostSubmitResponse(betterproto.Message):
     signature: str = betterproto.string_field(1)
 
@@ -1866,6 +1879,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostSubmitBatchV2",
             post_submit_batch_request,
             PostSubmitBatchResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_submit_snipe_v2(
+        self,
+        post_submit_snipe_request: "PostSubmitSnipeRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitSnipeResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitSnipeV2",
+            post_submit_snipe_request,
+            PostSubmitSnipeResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3322,6 +3352,11 @@ class ApiBase(ServiceBase):
     ) -> "PostSubmitBatchResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_submit_snipe_v2(
+        self, post_submit_snipe_request: "PostSubmitSnipeRequest"
+    ) -> "PostSubmitSnipeResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_raydium_pools(
         self, get_raydium_pools_request: "GetRaydiumPoolsRequest"
     ) -> "GetRaydiumPoolsResponse":
@@ -3787,6 +3822,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_submit_batch_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_submit_snipe_v2(
+        self,
+        stream: "grpclib.server.Stream[PostSubmitSnipeRequest, PostSubmitSnipeResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_snipe_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_pools(
@@ -4508,6 +4551,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostSubmitBatchRequest,
                 PostSubmitBatchResponse,
+            ),
+            "/api.Api/PostSubmitSnipeV2": grpclib.const.Handler(
+                self.__rpc_post_submit_snipe_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitSnipeRequest,
+                PostSubmitSnipeResponse,
             ),
             "/api.Api/GetRaydiumPools": grpclib.const.Handler(
                 self.__rpc_get_raydium_pools,
