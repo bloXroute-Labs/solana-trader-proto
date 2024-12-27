@@ -2366,6 +2366,39 @@
         ]
       }
     },
+    "/api/v2/system/leader-schedule": {
+      "get": {
+        "summary": "Leaders schedule",
+        "description": "Returns leaders schedule for up to 1-2 next epochs, starting from current slot. Result can be limited by number of slots.",
+        "operationId": "Api_GetLeaderSchedule",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetLeaderScheduleResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxSlots",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
     "/api/v2/system/priority-fee": {
       "get": {
         "summary": "Estimated priority fee",
@@ -2709,6 +2742,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiCandle"
+          }
+        }
+      }
+    },
+    "apiGetLeaderScheduleResponse": {
+      "type": "object",
+      "properties": {
+        "currentSlot": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "leaderSchedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiLeaderSchedule"
           }
         }
       }
@@ -3786,6 +3834,24 @@
         },
         "fee": {
           "$ref": "#/definitions/commonFee"
+        }
+      }
+    },
+    "apiLeaderSchedule": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "leader": {
+          "type": "string"
+        },
+        "isJito": {
+          "type": "boolean"
+        },
+        "isLowRisk": {
+          "type": "boolean"
         }
       }
     },
