@@ -1808,6 +1808,25 @@ class PostPumpFunSwapResponse(betterproto.Message):
     transaction: "TransactionMessageV2" = betterproto.message_field(1)
 
 
+@dataclass(eq=False, repr=False)
+class GetLeaderScheduleRequest(betterproto.Message):
+    max_slots: int = betterproto.uint64_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetLeaderScheduleResponse(betterproto.Message):
+    current_slot: int = betterproto.uint64_field(1)
+    leader_schedule: List["LeaderSchedule"] = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class LeaderSchedule(betterproto.Message):
+    slot: int = betterproto.uint64_field(1)
+    leader: str = betterproto.string_field(2)
+    is_jito: bool = betterproto.bool_field(3)
+    is_low_risk: bool = betterproto.bool_field(4)
+
+
 class ApiStub(betterproto.ServiceStub):
     async def get_rate_limit(
         self,
@@ -3306,6 +3325,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def get_leader_schedule(
+        self,
+        get_leader_schedule_request: "GetLeaderScheduleRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetLeaderScheduleResponse":
+        return await self._unary_unary(
+            "/api.Api/GetLeaderSchedule",
+            get_leader_schedule_request,
+            GetLeaderScheduleResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
 
 class ApiBase(ServiceBase):
 
@@ -3764,6 +3800,11 @@ class ApiBase(ServiceBase):
     async def post_pump_fun_swap_sol(
         self, post_pump_fun_swap_request_sol: "PostPumpFunSwapRequestSol"
     ) -> "PostPumpFunSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_leader_schedule(
+        self, get_leader_schedule_request: "GetLeaderScheduleRequest"
+    ) -> "GetLeaderScheduleResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def __rpc_get_rate_limit(
@@ -4490,6 +4531,14 @@ class ApiBase(ServiceBase):
         response = await self.post_pump_fun_swap_sol(request)
         await stream.send_message(response)
 
+    async def __rpc_get_leader_schedule(
+        self,
+        stream: "grpclib.server.Stream[GetLeaderScheduleRequest, GetLeaderScheduleResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_leader_schedule(request)
+        await stream.send_message(response)
+
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
             "/api.Api/GetRateLimit": grpclib.const.Handler(
@@ -5013,5 +5062,11 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostPumpFunSwapRequestSol,
                 PostPumpFunSwapResponse,
+            ),
+            "/api.Api/GetLeaderSchedule": grpclib.const.Handler(
+                self.__rpc_get_leader_schedule,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetLeaderScheduleRequest,
+                GetLeaderScheduleResponse,
             ),
         }

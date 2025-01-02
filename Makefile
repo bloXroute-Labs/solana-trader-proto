@@ -10,7 +10,7 @@ all: clean proto
 clean:
 	rm -rf js api common
 
-proto: proto-build-api-go proto-build-common-go proto-build-swagger proto-build-gw proto-build-api-python
+proto: proto-build-api-go proto-build-common-go proto-build-swagger proto-build-gw proto-build-api-python proto-build-api-rust
 
 proto-build-gw:
 	docker run -v $(CURDIR)/api:/go/protobuf/out \
@@ -42,6 +42,9 @@ proto-build-api-python:
 		-I $(CURDIR)/proto \
 		--python_betterproto_out=$(CURDIR)/python/src/bxsolana_trader_proto/ \
 		$(CURDIR)/proto/api.proto
+
+proto-build-api-rust:
+	cargo build
 
 proto-build-common-go:
 	docker run -v $(CURDIR)/common:/go/protobuf/out \
