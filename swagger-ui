@@ -2369,7 +2369,7 @@
     "/api/v2/system/leader-schedule": {
       "get": {
         "summary": "Leaders schedule",
-        "description": "Returns leaders schedule for up to 1-2 next epochs, starting from current slot. Result can be limited by number of slots.",
+        "description": "Returns leaders schedule for up to 100000 next slots, starting from the current slot. Result can be limited by number of slots.",
         "operationId": "Api_GetLeaderSchedule",
         "responses": {
           "200": {
