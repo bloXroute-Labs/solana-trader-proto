@@ -513,6 +513,19 @@ class PostSubmitBatchResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostSubmitSnipeRequest(betterproto.Message):
+    entries: List["PostSubmitRequestEntry"] = betterproto.message_field(1)
+    use_staked_rp_cs: Optional[bool] = betterproto.bool_field(
+        2, optional=True, group="_useStakedRPCs"
+    )
+
+
+@dataclass(eq=False, repr=False)
+class PostSubmitSnipeResponse(betterproto.Message):
+    transactions: List["PostSubmitBatchResponseEntry"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostSubmitResponse(betterproto.Message):
     signature: str = betterproto.string_field(1)
 
@@ -1182,16 +1195,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List["TransactionMetaInnerInstruction"] = (
-        betterproto.message_field(6)
-    )
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List["TransactionMetaTokenBalance"] = (
-        betterproto.message_field(9)
-    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -1891,6 +1904,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostSubmitBatchV2",
             post_submit_batch_request,
             PostSubmitBatchResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_submit_snipe_v2(
+        self,
+        post_submit_snipe_request: "PostSubmitSnipeRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitSnipeResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitSnipeV2",
+            post_submit_snipe_request,
+            PostSubmitSnipeResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3344,7 +3374,6 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
-
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
@@ -3363,6 +3392,11 @@ class ApiBase(ServiceBase):
     async def post_submit_batch_v2(
         self, post_submit_batch_request: "PostSubmitBatchRequest"
     ) -> "PostSubmitBatchResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_submit_snipe_v2(
+        self, post_submit_snipe_request: "PostSubmitSnipeRequest"
+    ) -> "PostSubmitSnipeResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_raydium_pools(
@@ -3835,6 +3869,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_submit_batch_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_submit_snipe_v2(
+        self,
+        stream: "grpclib.server.Stream[PostSubmitSnipeRequest, PostSubmitSnipeResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_snipe_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_pools(
@@ -4564,6 +4606,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostSubmitBatchRequest,
                 PostSubmitBatchResponse,
+            ),
+            "/api.Api/PostSubmitSnipeV2": grpclib.const.Handler(
+                self.__rpc_post_submit_snipe_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitSnipeRequest,
+                PostSubmitSnipeResponse,
             ),
             "/api.Api/GetRaydiumPools": grpclib.const.Handler(
                 self.__rpc_get_raydium_pools,

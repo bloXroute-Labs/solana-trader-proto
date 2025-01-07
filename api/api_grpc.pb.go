@@ -22,6 +22,7 @@ type ApiClient interface {
 	GetTransaction(ctx context.Context, in *GetTransactionRequest, opts ...grpc.CallOption) (*GetTransactionResponse, error)
 	PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
 	PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
+	PostSubmitSnipeV2(ctx context.Context, in *PostSubmitSnipeRequest, opts ...grpc.CallOption) (*PostSubmitSnipeResponse, error)
 	// Raydium V2
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoolReserveRequest, opts ...grpc.CallOption) (*GetRaydiumPoolReserveResponse, error)
@@ -152,6 +153,15 @@ func (c *apiClient) PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opt
 func (c *apiClient) PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error) {
 	out := new(PostSubmitBatchResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitBatchV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostSubmitSnipeV2(ctx context.Context, in *PostSubmitSnipeRequest, opts ...grpc.CallOption) (*PostSubmitSnipeResponse, error) {
+	out := new(PostSubmitSnipeResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitSnipeV2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1336,6 +1346,7 @@ type ApiServer interface {
 	GetTransaction(context.Context, *GetTransactionRequest) (*GetTransactionResponse, error)
 	PostSubmitV2(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
 	PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
+	PostSubmitSnipeV2(context.Context, *PostSubmitSnipeRequest) (*PostSubmitSnipeResponse, error)
 	// Raydium V2
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(context.Context, *GetRaydiumPoolReserveRequest) (*GetRaydiumPoolReserveResponse, error)
@@ -1444,6 +1455,9 @@ func (UnimplementedApiServer) PostSubmitV2(context.Context, *PostSubmitRequest) 
 }
 func (UnimplementedApiServer) PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitBatchV2 not implemented")
+}
+func (UnimplementedApiServer) PostSubmitSnipeV2(context.Context, *PostSubmitSnipeRequest) (*PostSubmitSnipeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitSnipeV2 not implemented")
 }
 func (UnimplementedApiServer) GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPools not implemented")
@@ -1778,6 +1792,24 @@ func _Api_PostSubmitBatchV2_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostSubmitBatchV2(ctx, req.(*PostSubmitBatchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostSubmitSnipeV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostSubmitSnipeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostSubmitSnipeV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostSubmitSnipeV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostSubmitSnipeV2(ctx, req.(*PostSubmitSnipeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3370,6 +3402,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostSubmitBatchV2",
 			Handler:    _Api_PostSubmitBatchV2_Handler,
+		},
+		{
+			MethodName: "PostSubmitSnipeV2",
+			Handler:    _Api_PostSubmitSnipeV2_Handler,
 		},
 		{
 			MethodName: "GetRaydiumPools",

@@ -2333,6 +2333,41 @@
         ]
       }
     },
+    "/api/v2/submit-snipe": {
+      "post": {
+        "summary": "Sniping transactions submit",
+        "description": "Submits one or two transactions. First one with tip to Jito directly and optionally a tip to BX for super-bundling. Second is propagated as Staked or FastBestEffort",
+        "operationId": "Api_PostSubmitSnipeV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitSnipeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitSnipeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
     "/api/v2/system/blockhash": {
       "get": {
         "summary": "Recent block hash",
@@ -5527,6 +5562,31 @@
       "properties": {
         "signature": {
           "type": "string"
+        }
+      }
+    },
+    "apiPostSubmitSnipeRequest": {
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPostSubmitRequestEntry"
+          }
+        },
+        "useStakedRPCs": {
+          "type": "boolean"
+        }
+      }
+    },
+    "apiPostSubmitSnipeResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPostSubmitBatchResponseEntry"
+          }
         }
       }
     },
