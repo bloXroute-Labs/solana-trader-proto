@@ -480,6 +480,12 @@ class PostSubmitRequest(betterproto.Message):
     revenue_address: Optional[str] = betterproto.string_field(
         9, optional=True, group="_revenueAddress"
     )
+    sniping: Optional[bool] = betterproto.bool_field(
+        10, optional=True, group="_sniping"
+    )
+    allow_revert: Optional[bool] = betterproto.bool_field(
+        11, optional=True, group="_allowRevert"
+    )
 
 
 @dataclass(eq=False, repr=False)

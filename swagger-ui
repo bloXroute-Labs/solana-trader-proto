@@ -5543,6 +5543,12 @@
         },
         "revenueAddress": {
           "type": "string"
+        },
+        "sniping": {
+          "type": "boolean"
+        },
+        "allowRevert": {
+          "type": "boolean"
         }
       }
     },
