@@ -3159,6 +3159,24 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_priority_fee_by_program_stream(
+        self,
+        get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPriorityFeeByProgramResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPriorityFeeByProgramStream",
+            get_priority_fee_by_program_request,
+            GetPriorityFeeByProgramResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
     async def get_bundle_tip_stream(
         self,
         get_bundle_tip_request: "GetBundleTipRequest",
