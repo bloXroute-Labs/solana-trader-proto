@@ -109,6 +109,18 @@ service Api {
     };
   }
 
+  rpc PostSubmitPaladinV2(PostSubmitPaladinRequest) returns (PostSubmitResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/submit-paladin"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits a signed transaction to Paladin validators";
+      summary: "Transaction submit to Paladin validators";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
   // Raydium V2
   rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
     option (google.api.http) = {
@@ -1370,6 +1382,10 @@ message PostSubmitRequest {
   optional bool fastBestEffort = 7;
   optional bool allowBackRun = 8;
   optional string revenueAddress = 9;
+}
+
+message PostSubmitPaladinRequest {
+  TransactionMessageV2 transaction = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 message PostSubmitRequestEntry {
