@@ -927,6 +927,12 @@ service Api {
     };
   }
 
+  rpc GetPriorityFeeByProgramStream(GetPriorityFeeByProgramRequest) returns (stream GetPriorityFeeByProgramResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
   rpc GetBundleTipStream(GetBundleTipRequest) returns (stream GetBundleTipResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "System";
