@@ -483,6 +483,11 @@ class PostSubmitRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostSubmitPaladinRequest(betterproto.Message):
+    transaction: "TransactionMessageV2" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostSubmitRequestEntry(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
     skip_pre_flight: bool = betterproto.bool_field(2)
@@ -1921,6 +1926,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostSubmitSnipeV2",
             post_submit_snipe_request,
             PostSubmitSnipeResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_submit_paladin_v2(
+        self,
+        post_submit_paladin_request: "PostSubmitPaladinRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitPaladinV2",
+            post_submit_paladin_request,
+            PostSubmitResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3417,6 +3439,11 @@ class ApiBase(ServiceBase):
     ) -> "PostSubmitSnipeResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_submit_paladin_v2(
+        self, post_submit_paladin_request: "PostSubmitPaladinRequest"
+    ) -> "PostSubmitResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_raydium_pools(
         self, get_raydium_pools_request: "GetRaydiumPoolsRequest"
     ) -> "GetRaydiumPoolsResponse":
@@ -3895,6 +3922,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_submit_snipe_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_submit_paladin_v2(
+        self,
+        stream: "grpclib.server.Stream[PostSubmitPaladinRequest, PostSubmitResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_paladin_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_pools(
@@ -4630,6 +4665,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostSubmitSnipeRequest,
                 PostSubmitSnipeResponse,
+            ),
+            "/api.Api/PostSubmitPaladinV2": grpclib.const.Handler(
+                self.__rpc_post_submit_paladin_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitPaladinRequest,
+                PostSubmitResponse,
             ),
             "/api.Api/GetRaydiumPools": grpclib.const.Handler(
                 self.__rpc_get_raydium_pools,

@@ -23,6 +23,7 @@ type ApiClient interface {
 	PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
 	PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
 	PostSubmitSnipeV2(ctx context.Context, in *PostSubmitSnipeRequest, opts ...grpc.CallOption) (*PostSubmitSnipeResponse, error)
+	PostSubmitPaladinV2(ctx context.Context, in *PostSubmitPaladinRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
 	// Raydium V2
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoolReserveRequest, opts ...grpc.CallOption) (*GetRaydiumPoolReserveResponse, error)
@@ -163,6 +164,15 @@ func (c *apiClient) PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRe
 func (c *apiClient) PostSubmitSnipeV2(ctx context.Context, in *PostSubmitSnipeRequest, opts ...grpc.CallOption) (*PostSubmitSnipeResponse, error) {
 	out := new(PostSubmitSnipeResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitSnipeV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostSubmitPaladinV2(ctx context.Context, in *PostSubmitPaladinRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error) {
+	out := new(PostSubmitResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitPaladinV2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1380,6 +1390,7 @@ type ApiServer interface {
 	PostSubmitV2(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
 	PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
 	PostSubmitSnipeV2(context.Context, *PostSubmitSnipeRequest) (*PostSubmitSnipeResponse, error)
+	PostSubmitPaladinV2(context.Context, *PostSubmitPaladinRequest) (*PostSubmitResponse, error)
 	// Raydium V2
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(context.Context, *GetRaydiumPoolReserveRequest) (*GetRaydiumPoolReserveResponse, error)
@@ -1492,6 +1503,9 @@ func (UnimplementedApiServer) PostSubmitBatchV2(context.Context, *PostSubmitBatc
 }
 func (UnimplementedApiServer) PostSubmitSnipeV2(context.Context, *PostSubmitSnipeRequest) (*PostSubmitSnipeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitSnipeV2 not implemented")
+}
+func (UnimplementedApiServer) PostSubmitPaladinV2(context.Context, *PostSubmitPaladinRequest) (*PostSubmitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitPaladinV2 not implemented")
 }
 func (UnimplementedApiServer) GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPools not implemented")
@@ -1847,6 +1861,24 @@ func _Api_PostSubmitSnipeV2_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostSubmitSnipeV2(ctx, req.(*PostSubmitSnipeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostSubmitPaladinV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostSubmitPaladinRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostSubmitPaladinV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostSubmitPaladinV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostSubmitPaladinV2(ctx, req.(*PostSubmitPaladinRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3464,6 +3496,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostSubmitSnipeV2",
 			Handler:    _Api_PostSubmitSnipeV2_Handler,
+		},
+		{
+			MethodName: "PostSubmitPaladinV2",
+			Handler:    _Api_PostSubmitPaladinV2_Handler,
 		},
 		{
 			MethodName: "GetRaydiumPools",
