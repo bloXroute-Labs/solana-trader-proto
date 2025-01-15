@@ -109,6 +109,18 @@ service Api {
     };
   }
 
+  rpc PostSubmitPaladinV2(PostSubmitPaladinRequest) returns (PostSubmitResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/submit-paladin"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits a signed transaction to Paladin validators";
+      summary: "Transaction submit to Paladin validators";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
   // Raydium V2
   rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
     option (google.api.http) = {
@@ -915,6 +927,12 @@ service Api {
     };
   }
 
+  rpc GetPriorityFeeByProgramStream(GetPriorityFeeByProgramRequest) returns (stream GetPriorityFeeByProgramResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
   rpc GetBundleTipStream(GetBundleTipRequest) returns (stream GetBundleTipResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "System";
@@ -1372,6 +1390,10 @@ message PostSubmitRequest {
   optional string revenueAddress = 9;
   optional bool sniping = 10;
   optional bool allowRevert = 11;
+}
+
+message PostSubmitPaladinRequest {
+  TransactionMessageV2 transaction = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 message PostSubmitRequestEntry {

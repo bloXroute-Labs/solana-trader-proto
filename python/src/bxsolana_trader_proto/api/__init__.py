@@ -489,6 +489,11 @@ class PostSubmitRequest(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostSubmitPaladinRequest(betterproto.Message):
+    transaction: "TransactionMessageV2" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostSubmitRequestEntry(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
     skip_pre_flight: bool = betterproto.bool_field(2)
@@ -1932,6 +1937,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def post_submit_paladin_v2(
+        self,
+        post_submit_paladin_request: "PostSubmitPaladinRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitPaladinV2",
+            post_submit_paladin_request,
+            PostSubmitResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_raydium_pools(
         self,
         get_raydium_pools_request: "GetRaydiumPoolsRequest",
@@ -3165,6 +3187,24 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_priority_fee_by_program_stream(
+        self,
+        get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPriorityFeeByProgramResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPriorityFeeByProgramStream",
+            get_priority_fee_by_program_request,
+            GetPriorityFeeByProgramResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
     async def get_bundle_tip_stream(
         self,
         get_bundle_tip_request: "GetBundleTipRequest",
@@ -3403,6 +3443,11 @@ class ApiBase(ServiceBase):
     async def post_submit_snipe_v2(
         self, post_submit_snipe_request: "PostSubmitSnipeRequest"
     ) -> "PostSubmitSnipeResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_submit_paladin_v2(
+        self, post_submit_paladin_request: "PostSubmitPaladinRequest"
+    ) -> "PostSubmitResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_raydium_pools(
@@ -3777,6 +3822,12 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPriorityFeeResponse()
 
+    async def get_priority_fee_by_program_stream(
+        self, get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest"
+    ) -> AsyncIterator["GetPriorityFeeByProgramResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPriorityFeeByProgramResponse()
+
     async def get_bundle_tip_stream(
         self, get_bundle_tip_request: "GetBundleTipRequest"
     ) -> AsyncIterator["GetBundleTipResponse"]:
@@ -3883,6 +3934,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_submit_snipe_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_submit_paladin_v2(
+        self,
+        stream: "grpclib.server.Stream[PostSubmitPaladinRequest, PostSubmitResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_paladin_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_pools(
@@ -4465,6 +4524,17 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_priority_fee_by_program_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPriorityFeeByProgramRequest, GetPriorityFeeByProgramResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_priority_fee_by_program_stream,
+            stream,
+            request,
+        )
+
     async def __rpc_get_bundle_tip_stream(
         self, stream: "grpclib.server.Stream[GetBundleTipRequest, GetBundleTipResponse]"
     ) -> None:
@@ -4618,6 +4688,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostSubmitSnipeRequest,
                 PostSubmitSnipeResponse,
+            ),
+            "/api.Api/PostSubmitPaladinV2": grpclib.const.Handler(
+                self.__rpc_post_submit_paladin_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitPaladinRequest,
+                PostSubmitResponse,
             ),
             "/api.Api/GetRaydiumPools": grpclib.const.Handler(
                 self.__rpc_get_raydium_pools,
@@ -5050,6 +5126,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetPriorityFeeRequest,
                 GetPriorityFeeResponse,
+            ),
+            "/api.Api/GetPriorityFeeByProgramStream": grpclib.const.Handler(
+                self.__rpc_get_priority_fee_by_program_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPriorityFeeByProgramRequest,
+                GetPriorityFeeByProgramResponse,
             ),
             "/api.Api/GetBundleTipStream": grpclib.const.Handler(
                 self.__rpc_get_bundle_tip_stream,
