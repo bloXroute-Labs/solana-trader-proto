@@ -480,6 +480,12 @@ class PostSubmitRequest(betterproto.Message):
     revenue_address: Optional[str] = betterproto.string_field(
         9, optional=True, group="_revenueAddress"
     )
+    sniping: Optional[bool] = betterproto.bool_field(
+        10, optional=True, group="_sniping"
+    )
+    allow_revert: Optional[bool] = betterproto.bool_field(
+        11, optional=True, group="_allowRevert"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -3816,6 +3822,12 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPriorityFeeResponse()
 
+    async def get_priority_fee_by_program_stream(
+        self, get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest"
+    ) -> AsyncIterator["GetPriorityFeeByProgramResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPriorityFeeByProgramResponse()
+
     async def get_bundle_tip_stream(
         self, get_bundle_tip_request: "GetBundleTipRequest"
     ) -> AsyncIterator["GetBundleTipResponse"]:
@@ -4512,6 +4524,17 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_priority_fee_by_program_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPriorityFeeByProgramRequest, GetPriorityFeeByProgramResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_priority_fee_by_program_stream,
+            stream,
+            request,
+        )
+
     async def __rpc_get_bundle_tip_stream(
         self, stream: "grpclib.server.Stream[GetBundleTipRequest, GetBundleTipResponse]"
     ) -> None:
@@ -5103,6 +5126,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetPriorityFeeRequest,
                 GetPriorityFeeResponse,
+            ),
+            "/api.Api/GetPriorityFeeByProgramStream": grpclib.const.Handler(
+                self.__rpc_get_priority_fee_by_program_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPriorityFeeByProgramRequest,
+                GetPriorityFeeByProgramResponse,
             ),
             "/api.Api/GetBundleTipStream": grpclib.const.Handler(
                 self.__rpc_get_bundle_tip_stream,
