@@ -491,6 +491,9 @@ class PostSubmitRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitPaladinRequest(betterproto.Message):
     transaction: "TransactionMessageV2" = betterproto.message_field(1)
+    allow_revert: Optional[bool] = betterproto.bool_field(
+        2, optional=True, group="_allowRevert"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1206,16 +1209,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -3420,6 +3423,7 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
