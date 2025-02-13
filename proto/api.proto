@@ -1394,6 +1394,7 @@ message PostSubmitRequest {
 
 message PostSubmitPaladinRequest {
   TransactionMessageV2 transaction = 1 [(google.api.field_behavior) = REQUIRED];
+  optional bool allowRevert = 2;
 }
 
 message PostSubmitRequestEntry {
