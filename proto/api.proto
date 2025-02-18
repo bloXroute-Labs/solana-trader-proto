@@ -858,20 +858,6 @@ service Api {
     };
   }
 
-  // Ore
-
-  rpc PostSubmitMineOre(PostSubmitRequest) returns (PostSubmitResponse) {
-    option (google.api.http) = {
-      post: "/api/v2/mine-ore"
-      body: "*"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Submits two transactions in sequence for mining ore";
-      summary: "Submit mine ore transactions";
-      tags: ["Ore"];
-    };
-  }
-
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
