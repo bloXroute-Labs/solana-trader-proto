@@ -5510,9 +5510,6 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessageV2"
-        },
-        "allowRevert": {
-          "type": "boolean"
         }
       }
     },
@@ -5545,9 +5542,6 @@
           "type": "string"
         },
         "sniping": {
-          "type": "boolean"
-        },
-        "allowRevert": {
           "type": "boolean"
         }
       }
