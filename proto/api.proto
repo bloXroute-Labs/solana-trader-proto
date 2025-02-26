@@ -1375,12 +1375,10 @@ message PostSubmitRequest {
   optional bool allowBackRun = 8;
   optional string revenueAddress = 9;
   optional bool sniping = 10;
-  optional bool allowRevert = 11;
 }
 
 message PostSubmitPaladinRequest {
   TransactionMessageV2 transaction = 1 [(google.api.field_behavior) = REQUIRED];
-  optional bool allowRevert = 2;
 }
 
 message PostSubmitRequestEntry {
