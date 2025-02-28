@@ -386,6 +386,17 @@ service Api {
     };
   }
 
+  rpc GetPrice(GetPriceRequest) returns (GetPriceResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/market/price"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the list of prices for specified tokens";
+      summary: "Token prices";
+      tags: ["Market", "Universal"];
+    };
+  }
+
   // system API
   rpc GetServerTime(GetServerTimeRequest) returns (GetServerTimeResponse) {
     option (google.api.http) = {
