@@ -28,7 +28,6 @@ type ApiClient interface {
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoolReserveRequest, opts ...grpc.CallOption) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error)
-	GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error)
 	GetRaydiumCPMMQuotes(ctx context.Context, in *GetRaydiumCPMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCPMMQuotesResponse, error)
 	GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error)
 	GetRaydiumCLMMQuotes(ctx context.Context, in *GetRaydiumCLMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMQuotesResponse, error)
@@ -38,33 +37,20 @@ type ApiClient interface {
 	PostRaydiumSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error)
 	PostRaydiumRouteSwap(ctx context.Context, in *PostRaydiumRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumRouteSwapResponse, error)
 	PostRaydiumCPMMSwap(ctx context.Context, in *PostRaydiumCPMMSwapRequest, opts ...grpc.CallOption) (*PostRaydiumCPMMSwapResponse, error)
+	PostRaydiumSwapInstructions(ctx context.Context, in *PostRaydiumSwapInstructionsRequest, opts ...grpc.CallOption) (*PostRaydiumSwapInstructionsResponse, error)
 	// Jupiter V2
 	GetJupiterQuotes(ctx context.Context, in *GetJupiterQuotesRequest, opts ...grpc.CallOption) (*GetJupiterQuotesResponse, error)
 	GetJupiterPrices(ctx context.Context, in *GetJupiterPricesRequest, opts ...grpc.CallOption) (*GetJupiterPricesResponse, error)
 	PostJupiterSwap(ctx context.Context, in *PostJupiterSwapRequest, opts ...grpc.CallOption) (*PostJupiterSwapResponse, error)
-	PostRaydiumSwapInstructions(ctx context.Context, in *PostRaydiumSwapInstructionsRequest, opts ...grpc.CallOption) (*PostRaydiumSwapInstructionsResponse, error)
 	PostJupiterSwapInstructions(ctx context.Context, in *PostJupiterSwapInstructionsRequest, opts ...grpc.CallOption) (*PostJupiterSwapInstructionsResponse, error)
 	PostJupiterRouteSwap(ctx context.Context, in *PostJupiterRouteSwapRequest, opts ...grpc.CallOption) (*PostJupiterRouteSwapResponse, error)
-	GetMarketsV2(ctx context.Context, in *GetMarketsRequestV2, opts ...grpc.CallOption) (*GetMarketsResponseV2, error)
-	GetTickersV2(ctx context.Context, in *GetTickersRequestV2, opts ...grpc.CallOption) (*GetTickersResponseV2, error)
-	GetOrderbookV2(ctx context.Context, in *GetOrderbookRequestV2, opts ...grpc.CallOption) (*GetOrderbookResponseV2, error)
-	GetMarketDepthV2(ctx context.Context, in *GetMarketDepthRequestV2, opts ...grpc.CallOption) (*GetMarketDepthResponseV2, error)
-	PostOrderV2(ctx context.Context, in *PostOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
-	PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponseV2, error)
-	PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
-	PostZetaCrossMarginAccount(ctx context.Context, in *PostZetaCrossMarginAccountRequest, opts ...grpc.CallOption) (*PostZetaCrossMarginAccountResponse, error)
-	PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error)
-	GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponseV2, error)
-	GetUnsettledV2(ctx context.Context, in *GetUnsettledRequestV2, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
-	GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error)
-	GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error)
+	// Pump.fun
+	GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error)
+	PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
+	PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
+	// General
 	GetPools(ctx context.Context, in *GetPoolsRequest, opts ...grpc.CallOption) (*GetPoolsResponse, error)
-	GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error)
-	GetKline(ctx context.Context, in *GetKlineRequest, opts ...grpc.CallOption) (*GetKlineResponse, error)
-	GetOrderbook(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error)
-	GetMarketDepth(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (*GetMarketDepthResponse, error)
-	GetTrades(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (*GetTradesResponse, error)
-	GetQuotes(ctx context.Context, in *GetQuotesRequest, opts ...grpc.CallOption) (*GetQuotesResponse, error)
+	GetLeaderSchedule(ctx context.Context, in *GetLeaderScheduleRequest, opts ...grpc.CallOption) (*GetLeaderScheduleResponse, error)
 	// system API
 	GetServerTime(ctx context.Context, in *GetServerTimeRequest, opts ...grpc.CallOption) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error)
@@ -76,28 +62,9 @@ type ApiClient interface {
 	GetTokenAccounts(ctx context.Context, in *GetTokenAccountsRequest, opts ...grpc.CallOption) (*GetTokenAccountsResponse, error)
 	GetAccountBalanceV2(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	// trade endpoints
-	PostOrder(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error)
 	PostSubmit(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
 	PostSubmitBatch(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
-	PostCancelOrder(ctx context.Context, in *PostCancelOrderRequest, opts ...grpc.CallOption) (*PostCancelOrderResponse, error)
-	PostCancelByClientOrderID(ctx context.Context, in *PostCancelByClientOrderIDRequest, opts ...grpc.CallOption) (*PostCancelOrderResponse, error)
-	PostCancelAll(ctx context.Context, in *PostCancelAllRequest, opts ...grpc.CallOption) (*PostCancelAllResponse, error)
-	PostReplaceByClientOrderID(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error)
-	PostReplaceOrder(ctx context.Context, in *PostReplaceOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error)
-	PostSettle(ctx context.Context, in *PostSettleRequest, opts ...grpc.CallOption) (*PostSettleResponse, error)
-	PostTradeSwap(ctx context.Context, in *TradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
-	GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error)
-	GetOpenOrders(ctx context.Context, in *GetOpenOrdersRequest, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error)
-	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
-	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
-	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
 	// streaming endpoints
-	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
-	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
-	GetTickersStream(ctx context.Context, in *GetTickersStreamRequest, opts ...grpc.CallOption) (Api_GetTickersStreamClient, error)
-	GetZetaTransactionStream(ctx context.Context, in *GetZetaTransactionStreamRequest, opts ...grpc.CallOption) (Api_GetZetaTransactionStreamClient, error)
-	GetTradesStream(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (Api_GetTradesStreamClient, error)
-	GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error)
 	GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error)
 	GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error)
 	GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error)
@@ -111,9 +78,6 @@ type ApiClient interface {
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
 	GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error)
 	GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error)
-	PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
-	PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
-	GetLeaderSchedule(ctx context.Context, in *GetLeaderScheduleRequest, opts ...grpc.CallOption) (*GetLeaderScheduleResponse, error)
 }
 
 type apiClient struct {
@@ -205,15 +169,6 @@ func (c *apiClient) GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRe
 	return out, nil
 }
 
-func (c *apiClient) GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error) {
-	out := new(GetPumpFunQuotesResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetPumpFunQuotes", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *apiClient) GetRaydiumCPMMQuotes(ctx context.Context, in *GetRaydiumCPMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCPMMQuotesResponse, error) {
 	out := new(GetRaydiumCPMMQuotesResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumCPMMQuotes", in, out, opts...)
@@ -295,6 +250,15 @@ func (c *apiClient) PostRaydiumCPMMSwap(ctx context.Context, in *PostRaydiumCPMM
 	return out, nil
 }
 
+func (c *apiClient) PostRaydiumSwapInstructions(ctx context.Context, in *PostRaydiumSwapInstructionsRequest, opts ...grpc.CallOption) (*PostRaydiumSwapInstructionsResponse, error) {
+	out := new(PostRaydiumSwapInstructionsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumSwapInstructions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) GetJupiterQuotes(ctx context.Context, in *GetJupiterQuotesRequest, opts ...grpc.CallOption) (*GetJupiterQuotesResponse, error) {
 	out := new(GetJupiterQuotesResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetJupiterQuotes", in, out, opts...)
@@ -322,15 +286,6 @@ func (c *apiClient) PostJupiterSwap(ctx context.Context, in *PostJupiterSwapRequ
 	return out, nil
 }
 
-func (c *apiClient) PostRaydiumSwapInstructions(ctx context.Context, in *PostRaydiumSwapInstructionsRequest, opts ...grpc.CallOption) (*PostRaydiumSwapInstructionsResponse, error) {
-	out := new(PostRaydiumSwapInstructionsResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumSwapInstructions", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *apiClient) PostJupiterSwapInstructions(ctx context.Context, in *PostJupiterSwapInstructionsRequest, opts ...grpc.CallOption) (*PostJupiterSwapInstructionsResponse, error) {
 	out := new(PostJupiterSwapInstructionsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostJupiterSwapInstructions", in, out, opts...)
@@ -349,117 +304,27 @@ func (c *apiClient) PostJupiterRouteSwap(ctx context.Context, in *PostJupiterRou
 	return out, nil
 }
 
-func (c *apiClient) GetMarketsV2(ctx context.Context, in *GetMarketsRequestV2, opts ...grpc.CallOption) (*GetMarketsResponseV2, error) {
-	out := new(GetMarketsResponseV2)
-	err := c.cc.Invoke(ctx, "/api.Api/GetMarketsV2", in, out, opts...)
+func (c *apiClient) GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error) {
+	out := new(GetPumpFunQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPumpFunQuotes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *apiClient) GetTickersV2(ctx context.Context, in *GetTickersRequestV2, opts ...grpc.CallOption) (*GetTickersResponseV2, error) {
-	out := new(GetTickersResponseV2)
-	err := c.cc.Invoke(ctx, "/api.Api/GetTickersV2", in, out, opts...)
+func (c *apiClient) PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
+	out := new(PostPumpFunSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwap", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *apiClient) GetOrderbookV2(ctx context.Context, in *GetOrderbookRequestV2, opts ...grpc.CallOption) (*GetOrderbookResponseV2, error) {
-	out := new(GetOrderbookResponseV2)
-	err := c.cc.Invoke(ctx, "/api.Api/GetOrderbookV2", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetMarketDepthV2(ctx context.Context, in *GetMarketDepthRequestV2, opts ...grpc.CallOption) (*GetMarketDepthResponseV2, error) {
-	out := new(GetMarketDepthResponseV2)
-	err := c.cc.Invoke(ctx, "/api.Api/GetMarketDepthV2", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostOrderV2(ctx context.Context, in *PostOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error) {
-	out := new(PostOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostOrderV2", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponseV2, error) {
-	out := new(PostCancelOrderResponseV2)
-	err := c.cc.Invoke(ctx, "/api.Api/PostCancelOrderV2", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error) {
-	out := new(PostOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostReplaceOrderV2", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostZetaCrossMarginAccount(ctx context.Context, in *PostZetaCrossMarginAccountRequest, opts ...grpc.CallOption) (*PostZetaCrossMarginAccountResponse, error) {
-	out := new(PostZetaCrossMarginAccountResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostZetaCrossMarginAccount", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error) {
-	out := new(PostSettleResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostSettleV2", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponseV2, error) {
-	out := new(GetOpenOrdersResponseV2)
-	err := c.cc.Invoke(ctx, "/api.Api/GetOpenOrdersV2", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetUnsettledV2(ctx context.Context, in *GetUnsettledRequestV2, opts ...grpc.CallOption) (*GetUnsettledResponse, error) {
-	out := new(GetUnsettledResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetUnsettledV2", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error) {
-	out := new(GetPriceResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetPrice", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetMarkets(ctx context.Context, in *GetMarketsRequest, opts ...grpc.CallOption) (*GetMarketsResponse, error) {
-	out := new(GetMarketsResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetMarkets", in, out, opts...)
+func (c *apiClient) PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
+	out := new(PostPumpFunSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwapSol", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -475,54 +340,9 @@ func (c *apiClient) GetPools(ctx context.Context, in *GetPoolsRequest, opts ...g
 	return out, nil
 }
 
-func (c *apiClient) GetTickers(ctx context.Context, in *GetTickersRequest, opts ...grpc.CallOption) (*GetTickersResponse, error) {
-	out := new(GetTickersResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetTickers", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetKline(ctx context.Context, in *GetKlineRequest, opts ...grpc.CallOption) (*GetKlineResponse, error) {
-	out := new(GetKlineResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetKline", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetOrderbook(ctx context.Context, in *GetOrderbookRequest, opts ...grpc.CallOption) (*GetOrderbookResponse, error) {
-	out := new(GetOrderbookResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetOrderbook", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetMarketDepth(ctx context.Context, in *GetMarketDepthRequest, opts ...grpc.CallOption) (*GetMarketDepthResponse, error) {
-	out := new(GetMarketDepthResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetMarketDepth", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetTrades(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (*GetTradesResponse, error) {
-	out := new(GetTradesResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetTrades", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetQuotes(ctx context.Context, in *GetQuotesRequest, opts ...grpc.CallOption) (*GetQuotesResponse, error) {
-	out := new(GetQuotesResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetQuotes", in, out, opts...)
+func (c *apiClient) GetLeaderSchedule(ctx context.Context, in *GetLeaderScheduleRequest, opts ...grpc.CallOption) (*GetLeaderScheduleResponse, error) {
+	out := new(GetLeaderScheduleResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetLeaderSchedule", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -601,15 +421,6 @@ func (c *apiClient) GetAccountBalanceV2(ctx context.Context, in *GetAccountBalan
 	return out, nil
 }
 
-func (c *apiClient) PostOrder(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error) {
-	out := new(PostOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostOrder", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *apiClient) PostSubmit(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error) {
 	out := new(PostSubmitResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostSubmit", in, out, opts...)
@@ -628,308 +439,8 @@ func (c *apiClient) PostSubmitBatch(ctx context.Context, in *PostSubmitBatchRequ
 	return out, nil
 }
 
-func (c *apiClient) PostCancelOrder(ctx context.Context, in *PostCancelOrderRequest, opts ...grpc.CallOption) (*PostCancelOrderResponse, error) {
-	out := new(PostCancelOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostCancelOrder", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostCancelByClientOrderID(ctx context.Context, in *PostCancelByClientOrderIDRequest, opts ...grpc.CallOption) (*PostCancelOrderResponse, error) {
-	out := new(PostCancelOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostCancelByClientOrderID", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostCancelAll(ctx context.Context, in *PostCancelAllRequest, opts ...grpc.CallOption) (*PostCancelAllResponse, error) {
-	out := new(PostCancelAllResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostCancelAll", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostReplaceByClientOrderID(ctx context.Context, in *PostOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error) {
-	out := new(PostOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostReplaceByClientOrderID", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostReplaceOrder(ctx context.Context, in *PostReplaceOrderRequest, opts ...grpc.CallOption) (*PostOrderResponse, error) {
-	out := new(PostOrderResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostReplaceOrder", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostSettle(ctx context.Context, in *PostSettleRequest, opts ...grpc.CallOption) (*PostSettleResponse, error) {
-	out := new(PostSettleResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostSettle", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostTradeSwap(ctx context.Context, in *TradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error) {
-	out := new(TradeSwapResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostTradeSwap", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error) {
-	out := new(GetOrdersResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetOrders", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetOpenOrders(ctx context.Context, in *GetOpenOrdersRequest, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error) {
-	out := new(GetOpenOrdersResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetOpenOrders", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error) {
-	out := new(GetOrderByIDResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetOrderByID", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error) {
-	out := new(GetUnsettledResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetUnsettled", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error) {
-	out := new(TradeSwapResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostRouteTradeSwap", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[0], "/api.Api/GetOrderbooksStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetOrderbooksStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetOrderbooksStreamClient interface {
-	Recv() (*GetOrderbooksStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetOrderbooksStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetOrderbooksStreamClient) Recv() (*GetOrderbooksStreamResponse, error) {
-	m := new(GetOrderbooksStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiClient) GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[1], "/api.Api/GetMarketDepthsStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetMarketDepthsStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetMarketDepthsStreamClient interface {
-	Recv() (*GetMarketDepthsStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetMarketDepthsStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetMarketDepthsStreamClient) Recv() (*GetMarketDepthsStreamResponse, error) {
-	m := new(GetMarketDepthsStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiClient) GetTickersStream(ctx context.Context, in *GetTickersStreamRequest, opts ...grpc.CallOption) (Api_GetTickersStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[2], "/api.Api/GetTickersStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetTickersStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetTickersStreamClient interface {
-	Recv() (*GetTickersStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetTickersStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetTickersStreamClient) Recv() (*GetTickersStreamResponse, error) {
-	m := new(GetTickersStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiClient) GetZetaTransactionStream(ctx context.Context, in *GetZetaTransactionStreamRequest, opts ...grpc.CallOption) (Api_GetZetaTransactionStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetZetaTransactionStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetZetaTransactionStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetZetaTransactionStreamClient interface {
-	Recv() (*GetZetaTransactionStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetZetaTransactionStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetZetaTransactionStreamClient) Recv() (*GetZetaTransactionStreamResponse, error) {
-	m := new(GetZetaTransactionStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiClient) GetTradesStream(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (Api_GetTradesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetTradesStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetTradesStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetTradesStreamClient interface {
-	Recv() (*GetTradesStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetTradesStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetTradesStreamClient) Recv() (*GetTradesStreamResponse, error) {
-	m := new(GetTradesStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiClient) GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetOrderStatusStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetOrderStatusStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetOrderStatusStreamClient interface {
-	Recv() (*GetOrderStatusStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetOrderStatusStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetOrderStatusStreamClient) Recv() (*GetOrderStatusStreamResponse, error) {
-	m := new(GetOrderStatusStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *apiClient) GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetRecentBlockHashStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[0], "/api.Api/GetRecentBlockHashStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -961,7 +472,7 @@ func (x *apiGetRecentBlockHashStreamClient) Recv() (*GetRecentBlockHashResponse,
 }
 
 func (c *apiClient) GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetBlockStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[1], "/api.Api/GetBlockStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -993,7 +504,7 @@ func (x *apiGetBlockStreamClient) Recv() (*GetBlockStreamResponse, error) {
 }
 
 func (c *apiClient) GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetPriorityFeeStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[2], "/api.Api/GetPriorityFeeStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1025,7 +536,7 @@ func (x *apiGetPriorityFeeStreamClient) Recv() (*GetPriorityFeeResponse, error) 
 }
 
 func (c *apiClient) GetPriorityFeeByProgramStream(ctx context.Context, in *GetPriorityFeeByProgramRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeByProgramStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetPriorityFeeByProgramStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetPriorityFeeByProgramStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1057,7 +568,7 @@ func (x *apiGetPriorityFeeByProgramStreamClient) Recv() (*GetPriorityFeeByProgra
 }
 
 func (c *apiClient) GetBundleTipStream(ctx context.Context, in *GetBundleTipRequest, opts ...grpc.CallOption) (Api_GetBundleTipStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetBundleTipStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetBundleTipStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1089,7 +600,7 @@ func (x *apiGetBundleTipStreamClient) Recv() (*GetBundleTipResponse, error) {
 }
 
 func (c *apiClient) GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetQuotesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetQuotesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1121,7 +632,7 @@ func (x *apiGetQuotesStreamClient) Recv() (*GetQuotesStreamResponse, error) {
 }
 
 func (c *apiClient) GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetPoolReservesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetPoolReservesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1153,7 +664,7 @@ func (x *apiGetPoolReservesStreamClient) Recv() (*GetPoolReservesStreamResponse,
 }
 
 func (c *apiClient) GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetPricesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetPricesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1185,7 +696,7 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 }
 
 func (c *apiClient) GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetNewRaydiumPoolsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetNewRaydiumPoolsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1217,7 +728,7 @@ func (x *apiGetNewRaydiumPoolsStreamClient) Recv() (*GetNewRaydiumPoolsResponse,
 }
 
 func (c *apiClient) GetNewRaydiumPoolsByTransactionStream(ctx context.Context, in *GetNewRaydiumPoolsByTransactionRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsByTransactionStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[15], "/api.Api/GetNewRaydiumPoolsByTransactionStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetNewRaydiumPoolsByTransactionStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1249,7 +760,7 @@ func (x *apiGetNewRaydiumPoolsByTransactionStreamClient) Recv() (*GetNewRaydiumP
 }
 
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[16], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1281,7 +792,7 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 }
 
 func (c *apiClient) GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[17], "/api.Api/GetPumpFunSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetPumpFunSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1313,7 +824,7 @@ func (x *apiGetPumpFunSwapsStreamClient) Recv() (*GetPumpFunSwapsStreamResponse,
 }
 
 func (c *apiClient) GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[18], "/api.Api/GetPumpFunNewTokensStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetPumpFunNewTokensStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1344,33 +855,6 @@ func (x *apiGetPumpFunNewTokensStreamClient) Recv() (*GetPumpFunNewTokensStreamR
 	return m, nil
 }
 
-func (c *apiClient) PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
-	out := new(PostPumpFunSwapResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwap", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
-	out := new(PostPumpFunSwapResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwapSol", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetLeaderSchedule(ctx context.Context, in *GetLeaderScheduleRequest, opts ...grpc.CallOption) (*GetLeaderScheduleResponse, error) {
-	out := new(GetLeaderScheduleResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetLeaderSchedule", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ApiServer is the server API for Api service.
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
@@ -1385,7 +869,6 @@ type ApiServer interface {
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(context.Context, *GetRaydiumPoolReserveRequest) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error)
-	GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error)
 	GetRaydiumCPMMQuotes(context.Context, *GetRaydiumCPMMQuotesRequest) (*GetRaydiumCPMMQuotesResponse, error)
 	GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error)
 	GetRaydiumCLMMQuotes(context.Context, *GetRaydiumCLMMQuotesRequest) (*GetRaydiumCLMMQuotesResponse, error)
@@ -1395,33 +878,20 @@ type ApiServer interface {
 	PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error)
 	PostRaydiumRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error)
 	PostRaydiumCPMMSwap(context.Context, *PostRaydiumCPMMSwapRequest) (*PostRaydiumCPMMSwapResponse, error)
+	PostRaydiumSwapInstructions(context.Context, *PostRaydiumSwapInstructionsRequest) (*PostRaydiumSwapInstructionsResponse, error)
 	// Jupiter V2
 	GetJupiterQuotes(context.Context, *GetJupiterQuotesRequest) (*GetJupiterQuotesResponse, error)
 	GetJupiterPrices(context.Context, *GetJupiterPricesRequest) (*GetJupiterPricesResponse, error)
 	PostJupiterSwap(context.Context, *PostJupiterSwapRequest) (*PostJupiterSwapResponse, error)
-	PostRaydiumSwapInstructions(context.Context, *PostRaydiumSwapInstructionsRequest) (*PostRaydiumSwapInstructionsResponse, error)
 	PostJupiterSwapInstructions(context.Context, *PostJupiterSwapInstructionsRequest) (*PostJupiterSwapInstructionsResponse, error)
 	PostJupiterRouteSwap(context.Context, *PostJupiterRouteSwapRequest) (*PostJupiterRouteSwapResponse, error)
-	GetMarketsV2(context.Context, *GetMarketsRequestV2) (*GetMarketsResponseV2, error)
-	GetTickersV2(context.Context, *GetTickersRequestV2) (*GetTickersResponseV2, error)
-	GetOrderbookV2(context.Context, *GetOrderbookRequestV2) (*GetOrderbookResponseV2, error)
-	GetMarketDepthV2(context.Context, *GetMarketDepthRequestV2) (*GetMarketDepthResponseV2, error)
-	PostOrderV2(context.Context, *PostOrderRequestV2) (*PostOrderResponse, error)
-	PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponseV2, error)
-	PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error)
-	PostZetaCrossMarginAccount(context.Context, *PostZetaCrossMarginAccountRequest) (*PostZetaCrossMarginAccountResponse, error)
-	PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error)
-	GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponseV2, error)
-	GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error)
-	GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error)
-	GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error)
+	// Pump.fun
+	GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error)
+	PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error)
+	PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error)
+	// General
 	GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error)
-	GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error)
-	GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error)
-	GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error)
-	GetMarketDepth(context.Context, *GetMarketDepthRequest) (*GetMarketDepthResponse, error)
-	GetTrades(context.Context, *GetTradesRequest) (*GetTradesResponse, error)
-	GetQuotes(context.Context, *GetQuotesRequest) (*GetQuotesResponse, error)
+	GetLeaderSchedule(context.Context, *GetLeaderScheduleRequest) (*GetLeaderScheduleResponse, error)
 	// system API
 	GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error)
@@ -1433,28 +903,9 @@ type ApiServer interface {
 	GetTokenAccounts(context.Context, *GetTokenAccountsRequest) (*GetTokenAccountsResponse, error)
 	GetAccountBalanceV2(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	// trade endpoints
-	PostOrder(context.Context, *PostOrderRequest) (*PostOrderResponse, error)
 	PostSubmit(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
 	PostSubmitBatch(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
-	PostCancelOrder(context.Context, *PostCancelOrderRequest) (*PostCancelOrderResponse, error)
-	PostCancelByClientOrderID(context.Context, *PostCancelByClientOrderIDRequest) (*PostCancelOrderResponse, error)
-	PostCancelAll(context.Context, *PostCancelAllRequest) (*PostCancelAllResponse, error)
-	PostReplaceByClientOrderID(context.Context, *PostOrderRequest) (*PostOrderResponse, error)
-	PostReplaceOrder(context.Context, *PostReplaceOrderRequest) (*PostOrderResponse, error)
-	PostSettle(context.Context, *PostSettleRequest) (*PostSettleResponse, error)
-	PostTradeSwap(context.Context, *TradeSwapRequest) (*TradeSwapResponse, error)
-	GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error)
-	GetOpenOrders(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error)
-	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
-	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
-	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
 	// streaming endpoints
-	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
-	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
-	GetTickersStream(*GetTickersStreamRequest, Api_GetTickersStreamServer) error
-	GetZetaTransactionStream(*GetZetaTransactionStreamRequest, Api_GetZetaTransactionStreamServer) error
-	GetTradesStream(*GetTradesRequest, Api_GetTradesStreamServer) error
-	GetOrderStatusStream(*GetOrderStatusStreamRequest, Api_GetOrderStatusStreamServer) error
 	GetRecentBlockHashStream(*GetRecentBlockHashRequest, Api_GetRecentBlockHashStreamServer) error
 	GetBlockStream(*GetBlockStreamRequest, Api_GetBlockStreamServer) error
 	GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error
@@ -1468,9 +919,6 @@ type ApiServer interface {
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
 	GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error
 	GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error
-	PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error)
-	PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error)
-	GetLeaderSchedule(context.Context, *GetLeaderScheduleRequest) (*GetLeaderScheduleResponse, error)
 	mustEmbedUnimplementedApiServer()
 }
 
@@ -1505,9 +953,6 @@ func (UnimplementedApiServer) GetRaydiumPoolReserve(context.Context, *GetRaydium
 func (UnimplementedApiServer) GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumQuotes not implemented")
 }
-func (UnimplementedApiServer) GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPumpFunQuotes not implemented")
-}
 func (UnimplementedApiServer) GetRaydiumCPMMQuotes(context.Context, *GetRaydiumCPMMQuotesRequest) (*GetRaydiumCPMMQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumCPMMQuotes not implemented")
 }
@@ -1535,6 +980,9 @@ func (UnimplementedApiServer) PostRaydiumRouteSwap(context.Context, *PostRaydium
 func (UnimplementedApiServer) PostRaydiumCPMMSwap(context.Context, *PostRaydiumCPMMSwapRequest) (*PostRaydiumCPMMSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumCPMMSwap not implemented")
 }
+func (UnimplementedApiServer) PostRaydiumSwapInstructions(context.Context, *PostRaydiumSwapInstructionsRequest) (*PostRaydiumSwapInstructionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumSwapInstructions not implemented")
+}
 func (UnimplementedApiServer) GetJupiterQuotes(context.Context, *GetJupiterQuotesRequest) (*GetJupiterQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetJupiterQuotes not implemented")
 }
@@ -1544,74 +992,26 @@ func (UnimplementedApiServer) GetJupiterPrices(context.Context, *GetJupiterPrice
 func (UnimplementedApiServer) PostJupiterSwap(context.Context, *PostJupiterSwapRequest) (*PostJupiterSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostJupiterSwap not implemented")
 }
-func (UnimplementedApiServer) PostRaydiumSwapInstructions(context.Context, *PostRaydiumSwapInstructionsRequest) (*PostRaydiumSwapInstructionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumSwapInstructions not implemented")
-}
 func (UnimplementedApiServer) PostJupiterSwapInstructions(context.Context, *PostJupiterSwapInstructionsRequest) (*PostJupiterSwapInstructionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostJupiterSwapInstructions not implemented")
 }
 func (UnimplementedApiServer) PostJupiterRouteSwap(context.Context, *PostJupiterRouteSwapRequest) (*PostJupiterRouteSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostJupiterRouteSwap not implemented")
 }
-func (UnimplementedApiServer) GetMarketsV2(context.Context, *GetMarketsRequestV2) (*GetMarketsResponseV2, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMarketsV2 not implemented")
+func (UnimplementedApiServer) GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPumpFunQuotes not implemented")
 }
-func (UnimplementedApiServer) GetTickersV2(context.Context, *GetTickersRequestV2) (*GetTickersResponseV2, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTickersV2 not implemented")
+func (UnimplementedApiServer) PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwap not implemented")
 }
-func (UnimplementedApiServer) GetOrderbookV2(context.Context, *GetOrderbookRequestV2) (*GetOrderbookResponseV2, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOrderbookV2 not implemented")
-}
-func (UnimplementedApiServer) GetMarketDepthV2(context.Context, *GetMarketDepthRequestV2) (*GetMarketDepthResponseV2, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMarketDepthV2 not implemented")
-}
-func (UnimplementedApiServer) PostOrderV2(context.Context, *PostOrderRequestV2) (*PostOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostOrderV2 not implemented")
-}
-func (UnimplementedApiServer) PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponseV2, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostCancelOrderV2 not implemented")
-}
-func (UnimplementedApiServer) PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostReplaceOrderV2 not implemented")
-}
-func (UnimplementedApiServer) PostZetaCrossMarginAccount(context.Context, *PostZetaCrossMarginAccountRequest) (*PostZetaCrossMarginAccountResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostZetaCrossMarginAccount not implemented")
-}
-func (UnimplementedApiServer) PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostSettleV2 not implemented")
-}
-func (UnimplementedApiServer) GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponseV2, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOpenOrdersV2 not implemented")
-}
-func (UnimplementedApiServer) GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUnsettledV2 not implemented")
-}
-func (UnimplementedApiServer) GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPrice not implemented")
-}
-func (UnimplementedApiServer) GetMarkets(context.Context, *GetMarketsRequest) (*GetMarketsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMarkets not implemented")
+func (UnimplementedApiServer) PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwapSol not implemented")
 }
 func (UnimplementedApiServer) GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPools not implemented")
 }
-func (UnimplementedApiServer) GetTickers(context.Context, *GetTickersRequest) (*GetTickersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTickers not implemented")
-}
-func (UnimplementedApiServer) GetKline(context.Context, *GetKlineRequest) (*GetKlineResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetKline not implemented")
-}
-func (UnimplementedApiServer) GetOrderbook(context.Context, *GetOrderbookRequest) (*GetOrderbookResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOrderbook not implemented")
-}
-func (UnimplementedApiServer) GetMarketDepth(context.Context, *GetMarketDepthRequest) (*GetMarketDepthResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMarketDepth not implemented")
-}
-func (UnimplementedApiServer) GetTrades(context.Context, *GetTradesRequest) (*GetTradesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTrades not implemented")
-}
-func (UnimplementedApiServer) GetQuotes(context.Context, *GetQuotesRequest) (*GetQuotesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetQuotes not implemented")
+func (UnimplementedApiServer) GetLeaderSchedule(context.Context, *GetLeaderScheduleRequest) (*GetLeaderScheduleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLeaderSchedule not implemented")
 }
 func (UnimplementedApiServer) GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerTime not implemented")
@@ -1637,68 +1037,11 @@ func (UnimplementedApiServer) GetTokenAccounts(context.Context, *GetTokenAccount
 func (UnimplementedApiServer) GetAccountBalanceV2(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBalanceV2 not implemented")
 }
-func (UnimplementedApiServer) PostOrder(context.Context, *PostOrderRequest) (*PostOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostOrder not implemented")
-}
 func (UnimplementedApiServer) PostSubmit(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmit not implemented")
 }
 func (UnimplementedApiServer) PostSubmitBatch(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitBatch not implemented")
-}
-func (UnimplementedApiServer) PostCancelOrder(context.Context, *PostCancelOrderRequest) (*PostCancelOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostCancelOrder not implemented")
-}
-func (UnimplementedApiServer) PostCancelByClientOrderID(context.Context, *PostCancelByClientOrderIDRequest) (*PostCancelOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostCancelByClientOrderID not implemented")
-}
-func (UnimplementedApiServer) PostCancelAll(context.Context, *PostCancelAllRequest) (*PostCancelAllResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostCancelAll not implemented")
-}
-func (UnimplementedApiServer) PostReplaceByClientOrderID(context.Context, *PostOrderRequest) (*PostOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostReplaceByClientOrderID not implemented")
-}
-func (UnimplementedApiServer) PostReplaceOrder(context.Context, *PostReplaceOrderRequest) (*PostOrderResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostReplaceOrder not implemented")
-}
-func (UnimplementedApiServer) PostSettle(context.Context, *PostSettleRequest) (*PostSettleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostSettle not implemented")
-}
-func (UnimplementedApiServer) PostTradeSwap(context.Context, *TradeSwapRequest) (*TradeSwapResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostTradeSwap not implemented")
-}
-func (UnimplementedApiServer) GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOrders not implemented")
-}
-func (UnimplementedApiServer) GetOpenOrders(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOpenOrders not implemented")
-}
-func (UnimplementedApiServer) GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOrderByID not implemented")
-}
-func (UnimplementedApiServer) GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUnsettled not implemented")
-}
-func (UnimplementedApiServer) PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostRouteTradeSwap not implemented")
-}
-func (UnimplementedApiServer) GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetOrderbooksStream not implemented")
-}
-func (UnimplementedApiServer) GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetMarketDepthsStream not implemented")
-}
-func (UnimplementedApiServer) GetTickersStream(*GetTickersStreamRequest, Api_GetTickersStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetTickersStream not implemented")
-}
-func (UnimplementedApiServer) GetZetaTransactionStream(*GetZetaTransactionStreamRequest, Api_GetZetaTransactionStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetZetaTransactionStream not implemented")
-}
-func (UnimplementedApiServer) GetTradesStream(*GetTradesRequest, Api_GetTradesStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetTradesStream not implemented")
-}
-func (UnimplementedApiServer) GetOrderStatusStream(*GetOrderStatusStreamRequest, Api_GetOrderStatusStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetOrderStatusStream not implemented")
 }
 func (UnimplementedApiServer) GetRecentBlockHashStream(*GetRecentBlockHashRequest, Api_GetRecentBlockHashStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetRecentBlockHashStream not implemented")
@@ -1738,15 +1081,6 @@ func (UnimplementedApiServer) GetPumpFunSwapsStream(*GetPumpFunSwapsStreamReques
 }
 func (UnimplementedApiServer) GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPumpFunNewTokensStream not implemented")
-}
-func (UnimplementedApiServer) PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwap not implemented")
-}
-func (UnimplementedApiServer) PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwapSol not implemented")
-}
-func (UnimplementedApiServer) GetLeaderSchedule(context.Context, *GetLeaderScheduleRequest) (*GetLeaderScheduleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetLeaderSchedule not implemented")
 }
 func (UnimplementedApiServer) mustEmbedUnimplementedApiServer() {}
 
@@ -1923,24 +1257,6 @@ func _Api_GetRaydiumQuotes_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetPumpFunQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPumpFunQuotesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetPumpFunQuotes(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetPumpFunQuotes",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetPumpFunQuotes(ctx, req.(*GetPumpFunQuotesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Api_GetRaydiumCPMMQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRaydiumCPMMQuotesRequest)
 	if err := dec(in); err != nil {
@@ -2103,6 +1419,24 @@ func _Api_PostRaydiumCPMMSwap_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_PostRaydiumSwapInstructions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRaydiumSwapInstructionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostRaydiumSwapInstructions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostRaydiumSwapInstructions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostRaydiumSwapInstructions(ctx, req.(*PostRaydiumSwapInstructionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetJupiterQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetJupiterQuotesRequest)
 	if err := dec(in); err != nil {
@@ -2157,24 +1491,6 @@ func _Api_PostJupiterSwap_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_PostRaydiumSwapInstructions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostRaydiumSwapInstructionsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostRaydiumSwapInstructions(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostRaydiumSwapInstructions",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostRaydiumSwapInstructions(ctx, req.(*PostRaydiumSwapInstructionsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Api_PostJupiterSwapInstructions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostJupiterSwapInstructionsRequest)
 	if err := dec(in); err != nil {
@@ -2211,236 +1527,56 @@ func _Api_PostJupiterRouteSwap_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetMarketsV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMarketsRequestV2)
+func _Api_GetPumpFunQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPumpFunQuotesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).GetMarketsV2(ctx, in)
+		return srv.(ApiServer).GetPumpFunQuotes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/GetMarketsV2",
+		FullMethod: "/api.Api/GetPumpFunQuotes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetMarketsV2(ctx, req.(*GetMarketsRequestV2))
+		return srv.(ApiServer).GetPumpFunQuotes(ctx, req.(*GetPumpFunQuotesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetTickersV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTickersRequestV2)
+func _Api_PostPumpFunSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostPumpFunSwapRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).GetTickersV2(ctx, in)
+		return srv.(ApiServer).PostPumpFunSwap(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/GetTickersV2",
+		FullMethod: "/api.Api/PostPumpFunSwap",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetTickersV2(ctx, req.(*GetTickersRequestV2))
+		return srv.(ApiServer).PostPumpFunSwap(ctx, req.(*PostPumpFunSwapRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetOrderbookV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrderbookRequestV2)
+func _Api_PostPumpFunSwapSol_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostPumpFunSwapRequestSol)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).GetOrderbookV2(ctx, in)
+		return srv.(ApiServer).PostPumpFunSwapSol(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/GetOrderbookV2",
+		FullMethod: "/api.Api/PostPumpFunSwapSol",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOrderbookV2(ctx, req.(*GetOrderbookRequestV2))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetMarketDepthV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMarketDepthRequestV2)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetMarketDepthV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetMarketDepthV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetMarketDepthV2(ctx, req.(*GetMarketDepthRequestV2))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostOrderV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostOrderRequestV2)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostOrderV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostOrderV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostOrderV2(ctx, req.(*PostOrderRequestV2))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostCancelOrderV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCancelOrderRequestV2)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostCancelOrderV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostCancelOrderV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostCancelOrderV2(ctx, req.(*PostCancelOrderRequestV2))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostReplaceOrderV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostReplaceOrderRequestV2)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostReplaceOrderV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostReplaceOrderV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostReplaceOrderV2(ctx, req.(*PostReplaceOrderRequestV2))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostZetaCrossMarginAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostZetaCrossMarginAccountRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostZetaCrossMarginAccount(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostZetaCrossMarginAccount",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostZetaCrossMarginAccount(ctx, req.(*PostZetaCrossMarginAccountRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostSettleV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostSettleRequestV2)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostSettleV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostSettleV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostSettleV2(ctx, req.(*PostSettleRequestV2))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetOpenOrdersV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOpenOrdersRequestV2)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetOpenOrdersV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetOpenOrdersV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOpenOrdersV2(ctx, req.(*GetOpenOrdersRequestV2))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetUnsettledV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUnsettledRequestV2)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetUnsettledV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetUnsettledV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetUnsettledV2(ctx, req.(*GetUnsettledRequestV2))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPriceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetPrice(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetPrice",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetPrice(ctx, req.(*GetPriceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetMarkets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMarketsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetMarkets(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetMarkets",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetMarkets(ctx, req.(*GetMarketsRequest))
+		return srv.(ApiServer).PostPumpFunSwapSol(ctx, req.(*PostPumpFunSwapRequestSol))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2463,110 +1599,20 @@ func _Api_GetPools_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetTickers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTickersRequest)
+func _Api_GetLeaderSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLeaderScheduleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ApiServer).GetTickers(ctx, in)
+		return srv.(ApiServer).GetLeaderSchedule(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/api.Api/GetTickers",
+		FullMethod: "/api.Api/GetLeaderSchedule",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetTickers(ctx, req.(*GetTickersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetKline_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetKlineRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetKline(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetKline",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetKline(ctx, req.(*GetKlineRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetOrderbook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrderbookRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetOrderbook(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetOrderbook",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOrderbook(ctx, req.(*GetOrderbookRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetMarketDepth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMarketDepthRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetMarketDepth(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetMarketDepth",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetMarketDepth(ctx, req.(*GetMarketDepthRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetTrades_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTradesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetTrades(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetTrades",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetTrades(ctx, req.(*GetTradesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetQuotesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetQuotes(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetQuotes",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetQuotes(ctx, req.(*GetQuotesRequest))
+		return srv.(ApiServer).GetLeaderSchedule(ctx, req.(*GetLeaderScheduleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2715,24 +1761,6 @@ func _Api_GetAccountBalanceV2_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_PostOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostOrder(ctx, req.(*PostOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Api_PostSubmit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostSubmitRequest)
 	if err := dec(in); err != nil {
@@ -2767,348 +1795,6 @@ func _Api_PostSubmitBatch_Handler(srv interface{}, ctx context.Context, dec func
 		return srv.(ApiServer).PostSubmitBatch(ctx, req.(*PostSubmitBatchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostCancelOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCancelOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostCancelOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostCancelOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostCancelOrder(ctx, req.(*PostCancelOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostCancelByClientOrderID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCancelByClientOrderIDRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostCancelByClientOrderID(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostCancelByClientOrderID",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostCancelByClientOrderID(ctx, req.(*PostCancelByClientOrderIDRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostCancelAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostCancelAllRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostCancelAll(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostCancelAll",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostCancelAll(ctx, req.(*PostCancelAllRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostReplaceByClientOrderID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostReplaceByClientOrderID(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostReplaceByClientOrderID",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostReplaceByClientOrderID(ctx, req.(*PostOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostReplaceOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostReplaceOrderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostReplaceOrder(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostReplaceOrder",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostReplaceOrder(ctx, req.(*PostReplaceOrderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostSettle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostSettleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostSettle(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostSettle",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostSettle(ctx, req.(*PostSettleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostTradeSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TradeSwapRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostTradeSwap(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostTradeSwap",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostTradeSwap(ctx, req.(*TradeSwapRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrdersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetOrders(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetOrders",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOrders(ctx, req.(*GetOrdersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetOpenOrders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOpenOrdersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetOpenOrders(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetOpenOrders",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOpenOrders(ctx, req.(*GetOpenOrdersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetOrderByID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOrderByIDRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetOrderByID(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetOrderByID",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetOrderByID(ctx, req.(*GetOrderByIDRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetUnsettled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetUnsettledRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetUnsettled(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetUnsettled",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetUnsettled(ctx, req.(*GetUnsettledRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostRouteTradeSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RouteTradeSwapRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostRouteTradeSwap(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostRouteTradeSwap",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostRouteTradeSwap(ctx, req.(*RouteTradeSwapRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetOrderbooksStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetOrderbooksRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetOrderbooksStream(m, &apiGetOrderbooksStreamServer{stream})
-}
-
-type Api_GetOrderbooksStreamServer interface {
-	Send(*GetOrderbooksStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetOrderbooksStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetOrderbooksStreamServer) Send(m *GetOrderbooksStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Api_GetMarketDepthsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetMarketDepthsRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetMarketDepthsStream(m, &apiGetMarketDepthsStreamServer{stream})
-}
-
-type Api_GetMarketDepthsStreamServer interface {
-	Send(*GetMarketDepthsStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetMarketDepthsStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetMarketDepthsStreamServer) Send(m *GetMarketDepthsStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Api_GetTickersStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetTickersStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetTickersStream(m, &apiGetTickersStreamServer{stream})
-}
-
-type Api_GetTickersStreamServer interface {
-	Send(*GetTickersStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetTickersStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetTickersStreamServer) Send(m *GetTickersStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Api_GetZetaTransactionStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetZetaTransactionStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetZetaTransactionStream(m, &apiGetZetaTransactionStreamServer{stream})
-}
-
-type Api_GetZetaTransactionStreamServer interface {
-	Send(*GetZetaTransactionStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetZetaTransactionStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetZetaTransactionStreamServer) Send(m *GetZetaTransactionStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Api_GetTradesStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetTradesRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetTradesStream(m, &apiGetTradesStreamServer{stream})
-}
-
-type Api_GetTradesStreamServer interface {
-	Send(*GetTradesStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetTradesStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetTradesStreamServer) Send(m *GetTradesStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Api_GetOrderStatusStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetOrderStatusStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetOrderStatusStream(m, &apiGetOrderStatusStreamServer{stream})
-}
-
-type Api_GetOrderStatusStreamServer interface {
-	Send(*GetOrderStatusStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetOrderStatusStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetOrderStatusStreamServer) Send(m *GetOrderStatusStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
 }
 
 func _Api_GetRecentBlockHashStream_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -3384,60 +2070,6 @@ func (x *apiGetPumpFunNewTokensStreamServer) Send(m *GetPumpFunNewTokensStreamRe
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Api_PostPumpFunSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostPumpFunSwapRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostPumpFunSwap(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostPumpFunSwap",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostPumpFunSwap(ctx, req.(*PostPumpFunSwapRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostPumpFunSwapSol_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostPumpFunSwapRequestSol)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostPumpFunSwapSol(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostPumpFunSwapSol",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostPumpFunSwapSol(ctx, req.(*PostPumpFunSwapRequestSol))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetLeaderSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetLeaderScheduleRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetLeaderSchedule(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetLeaderSchedule",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetLeaderSchedule(ctx, req.(*GetLeaderScheduleRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Api_ServiceDesc is the grpc.ServiceDesc for Api service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3482,10 +2114,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetRaydiumQuotes_Handler,
 		},
 		{
-			MethodName: "GetPumpFunQuotes",
-			Handler:    _Api_GetPumpFunQuotes_Handler,
-		},
-		{
 			MethodName: "GetRaydiumCPMMQuotes",
 			Handler:    _Api_GetRaydiumCPMMQuotes_Handler,
 		},
@@ -3522,6 +2150,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_PostRaydiumCPMMSwap_Handler,
 		},
 		{
+			MethodName: "PostRaydiumSwapInstructions",
+			Handler:    _Api_PostRaydiumSwapInstructions_Handler,
+		},
+		{
 			MethodName: "GetJupiterQuotes",
 			Handler:    _Api_GetJupiterQuotes_Handler,
 		},
@@ -3534,10 +2166,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_PostJupiterSwap_Handler,
 		},
 		{
-			MethodName: "PostRaydiumSwapInstructions",
-			Handler:    _Api_PostRaydiumSwapInstructions_Handler,
-		},
-		{
 			MethodName: "PostJupiterSwapInstructions",
 			Handler:    _Api_PostJupiterSwapInstructions_Handler,
 		},
@@ -3546,84 +2174,24 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_PostJupiterRouteSwap_Handler,
 		},
 		{
-			MethodName: "GetMarketsV2",
-			Handler:    _Api_GetMarketsV2_Handler,
+			MethodName: "GetPumpFunQuotes",
+			Handler:    _Api_GetPumpFunQuotes_Handler,
 		},
 		{
-			MethodName: "GetTickersV2",
-			Handler:    _Api_GetTickersV2_Handler,
+			MethodName: "PostPumpFunSwap",
+			Handler:    _Api_PostPumpFunSwap_Handler,
 		},
 		{
-			MethodName: "GetOrderbookV2",
-			Handler:    _Api_GetOrderbookV2_Handler,
-		},
-		{
-			MethodName: "GetMarketDepthV2",
-			Handler:    _Api_GetMarketDepthV2_Handler,
-		},
-		{
-			MethodName: "PostOrderV2",
-			Handler:    _Api_PostOrderV2_Handler,
-		},
-		{
-			MethodName: "PostCancelOrderV2",
-			Handler:    _Api_PostCancelOrderV2_Handler,
-		},
-		{
-			MethodName: "PostReplaceOrderV2",
-			Handler:    _Api_PostReplaceOrderV2_Handler,
-		},
-		{
-			MethodName: "PostZetaCrossMarginAccount",
-			Handler:    _Api_PostZetaCrossMarginAccount_Handler,
-		},
-		{
-			MethodName: "PostSettleV2",
-			Handler:    _Api_PostSettleV2_Handler,
-		},
-		{
-			MethodName: "GetOpenOrdersV2",
-			Handler:    _Api_GetOpenOrdersV2_Handler,
-		},
-		{
-			MethodName: "GetUnsettledV2",
-			Handler:    _Api_GetUnsettledV2_Handler,
-		},
-		{
-			MethodName: "GetPrice",
-			Handler:    _Api_GetPrice_Handler,
-		},
-		{
-			MethodName: "GetMarkets",
-			Handler:    _Api_GetMarkets_Handler,
+			MethodName: "PostPumpFunSwapSol",
+			Handler:    _Api_PostPumpFunSwapSol_Handler,
 		},
 		{
 			MethodName: "GetPools",
 			Handler:    _Api_GetPools_Handler,
 		},
 		{
-			MethodName: "GetTickers",
-			Handler:    _Api_GetTickers_Handler,
-		},
-		{
-			MethodName: "GetKline",
-			Handler:    _Api_GetKline_Handler,
-		},
-		{
-			MethodName: "GetOrderbook",
-			Handler:    _Api_GetOrderbook_Handler,
-		},
-		{
-			MethodName: "GetMarketDepth",
-			Handler:    _Api_GetMarketDepth_Handler,
-		},
-		{
-			MethodName: "GetTrades",
-			Handler:    _Api_GetTrades_Handler,
-		},
-		{
-			MethodName: "GetQuotes",
-			Handler:    _Api_GetQuotes_Handler,
+			MethodName: "GetLeaderSchedule",
+			Handler:    _Api_GetLeaderSchedule_Handler,
 		},
 		{
 			MethodName: "GetServerTime",
@@ -3658,10 +2226,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetAccountBalanceV2_Handler,
 		},
 		{
-			MethodName: "PostOrder",
-			Handler:    _Api_PostOrder_Handler,
-		},
-		{
 			MethodName: "PostSubmit",
 			Handler:    _Api_PostSubmit_Handler,
 		},
@@ -3669,98 +2233,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "PostSubmitBatch",
 			Handler:    _Api_PostSubmitBatch_Handler,
 		},
-		{
-			MethodName: "PostCancelOrder",
-			Handler:    _Api_PostCancelOrder_Handler,
-		},
-		{
-			MethodName: "PostCancelByClientOrderID",
-			Handler:    _Api_PostCancelByClientOrderID_Handler,
-		},
-		{
-			MethodName: "PostCancelAll",
-			Handler:    _Api_PostCancelAll_Handler,
-		},
-		{
-			MethodName: "PostReplaceByClientOrderID",
-			Handler:    _Api_PostReplaceByClientOrderID_Handler,
-		},
-		{
-			MethodName: "PostReplaceOrder",
-			Handler:    _Api_PostReplaceOrder_Handler,
-		},
-		{
-			MethodName: "PostSettle",
-			Handler:    _Api_PostSettle_Handler,
-		},
-		{
-			MethodName: "PostTradeSwap",
-			Handler:    _Api_PostTradeSwap_Handler,
-		},
-		{
-			MethodName: "GetOrders",
-			Handler:    _Api_GetOrders_Handler,
-		},
-		{
-			MethodName: "GetOpenOrders",
-			Handler:    _Api_GetOpenOrders_Handler,
-		},
-		{
-			MethodName: "GetOrderByID",
-			Handler:    _Api_GetOrderByID_Handler,
-		},
-		{
-			MethodName: "GetUnsettled",
-			Handler:    _Api_GetUnsettled_Handler,
-		},
-		{
-			MethodName: "PostRouteTradeSwap",
-			Handler:    _Api_PostRouteTradeSwap_Handler,
-		},
-		{
-			MethodName: "PostPumpFunSwap",
-			Handler:    _Api_PostPumpFunSwap_Handler,
-		},
-		{
-			MethodName: "PostPumpFunSwapSol",
-			Handler:    _Api_PostPumpFunSwapSol_Handler,
-		},
-		{
-			MethodName: "GetLeaderSchedule",
-			Handler:    _Api_GetLeaderSchedule_Handler,
-		},
 	},
 	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "GetOrderbooksStream",
-			Handler:       _Api_GetOrderbooksStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetMarketDepthsStream",
-			Handler:       _Api_GetMarketDepthsStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetTickersStream",
-			Handler:       _Api_GetTickersStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetZetaTransactionStream",
-			Handler:       _Api_GetZetaTransactionStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetTradesStream",
-			Handler:       _Api_GetTradesStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetOrderStatusStream",
-			Handler:       _Api_GetOrderStatusStream_Handler,
-			ServerStreams: true,
-		},
 		{
 			StreamName:    "GetRecentBlockHashStream",
 			Handler:       _Api_GetRecentBlockHashStream_Handler,
