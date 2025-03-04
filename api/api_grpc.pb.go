@@ -51,16 +51,14 @@ type ApiClient interface {
 	// General
 	GetPools(ctx context.Context, in *GetPoolsRequest, opts ...grpc.CallOption) (*GetPoolsResponse, error)
 	GetLeaderSchedule(ctx context.Context, in *GetLeaderScheduleRequest, opts ...grpc.CallOption) (*GetLeaderScheduleResponse, error)
+	GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error)
 	// system API
 	GetServerTime(ctx context.Context, in *GetServerTimeRequest, opts ...grpc.CallOption) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error)
 	GetRecentBlockHashV2(ctx context.Context, in *GetRecentBlockHashRequestV2, opts ...grpc.CallOption) (*GetRecentBlockHashResponseV2, error)
 	GetPriorityFee(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (*GetPriorityFeeResponse, error)
 	GetPriorityFeeByProgram(ctx context.Context, in *GetPriorityFeeByProgramRequest, opts ...grpc.CallOption) (*GetPriorityFeeByProgramResponse, error)
-	// account endpoints
-	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(ctx context.Context, in *GetTokenAccountsRequest, opts ...grpc.CallOption) (*GetTokenAccountsResponse, error)
-	GetAccountBalanceV2(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	// trade endpoints
 	PostSubmit(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
 	PostSubmitBatch(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
@@ -349,6 +347,15 @@ func (c *apiClient) GetLeaderSchedule(ctx context.Context, in *GetLeaderSchedule
 	return out, nil
 }
 
+func (c *apiClient) GetPrice(ctx context.Context, in *GetPriceRequest, opts ...grpc.CallOption) (*GetPriceResponse, error) {
+	out := new(GetPriceResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPrice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) GetServerTime(ctx context.Context, in *GetServerTimeRequest, opts ...grpc.CallOption) (*GetServerTimeResponse, error) {
 	out := new(GetServerTimeResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetServerTime", in, out, opts...)
@@ -394,27 +401,9 @@ func (c *apiClient) GetPriorityFeeByProgram(ctx context.Context, in *GetPriority
 	return out, nil
 }
 
-func (c *apiClient) GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error) {
-	out := new(GetAccountBalanceResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetAccountBalance", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *apiClient) GetTokenAccounts(ctx context.Context, in *GetTokenAccountsRequest, opts ...grpc.CallOption) (*GetTokenAccountsResponse, error) {
 	out := new(GetTokenAccountsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetTokenAccounts", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetAccountBalanceV2(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error) {
-	out := new(GetAccountBalanceResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetAccountBalanceV2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -892,16 +881,14 @@ type ApiServer interface {
 	// General
 	GetPools(context.Context, *GetPoolsRequest) (*GetPoolsResponse, error)
 	GetLeaderSchedule(context.Context, *GetLeaderScheduleRequest) (*GetLeaderScheduleResponse, error)
+	GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error)
 	// system API
 	GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error)
 	GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error)
 	GetRecentBlockHashV2(context.Context, *GetRecentBlockHashRequestV2) (*GetRecentBlockHashResponseV2, error)
 	GetPriorityFee(context.Context, *GetPriorityFeeRequest) (*GetPriorityFeeResponse, error)
 	GetPriorityFeeByProgram(context.Context, *GetPriorityFeeByProgramRequest) (*GetPriorityFeeByProgramResponse, error)
-	// account endpoints
-	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(context.Context, *GetTokenAccountsRequest) (*GetTokenAccountsResponse, error)
-	GetAccountBalanceV2(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	// trade endpoints
 	PostSubmit(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
 	PostSubmitBatch(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
@@ -1013,6 +1000,9 @@ func (UnimplementedApiServer) GetPools(context.Context, *GetPoolsRequest) (*GetP
 func (UnimplementedApiServer) GetLeaderSchedule(context.Context, *GetLeaderScheduleRequest) (*GetLeaderScheduleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLeaderSchedule not implemented")
 }
+func (UnimplementedApiServer) GetPrice(context.Context, *GetPriceRequest) (*GetPriceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPrice not implemented")
+}
 func (UnimplementedApiServer) GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerTime not implemented")
 }
@@ -1028,14 +1018,8 @@ func (UnimplementedApiServer) GetPriorityFee(context.Context, *GetPriorityFeeReq
 func (UnimplementedApiServer) GetPriorityFeeByProgram(context.Context, *GetPriorityFeeByProgramRequest) (*GetPriorityFeeByProgramResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPriorityFeeByProgram not implemented")
 }
-func (UnimplementedApiServer) GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBalance not implemented")
-}
 func (UnimplementedApiServer) GetTokenAccounts(context.Context, *GetTokenAccountsRequest) (*GetTokenAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTokenAccounts not implemented")
-}
-func (UnimplementedApiServer) GetAccountBalanceV2(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBalanceV2 not implemented")
 }
 func (UnimplementedApiServer) PostSubmit(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmit not implemented")
@@ -1617,6 +1601,24 @@ func _Api_GetLeaderSchedule_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetPrice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPriceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPrice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPrice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPrice(ctx, req.(*GetPriceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetServerTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetServerTimeRequest)
 	if err := dec(in); err != nil {
@@ -1707,24 +1709,6 @@ func _Api_GetPriorityFeeByProgram_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetAccountBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountBalanceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetAccountBalance(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetAccountBalance",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetAccountBalance(ctx, req.(*GetAccountBalanceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Api_GetTokenAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTokenAccountsRequest)
 	if err := dec(in); err != nil {
@@ -1739,24 +1723,6 @@ func _Api_GetTokenAccounts_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetTokenAccounts(ctx, req.(*GetTokenAccountsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetAccountBalanceV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountBalanceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetAccountBalanceV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetAccountBalanceV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetAccountBalanceV2(ctx, req.(*GetAccountBalanceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2194,6 +2160,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetLeaderSchedule_Handler,
 		},
 		{
+			MethodName: "GetPrice",
+			Handler:    _Api_GetPrice_Handler,
+		},
+		{
 			MethodName: "GetServerTime",
 			Handler:    _Api_GetServerTime_Handler,
 		},
@@ -2214,16 +2184,8 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetPriorityFeeByProgram_Handler,
 		},
 		{
-			MethodName: "GetAccountBalance",
-			Handler:    _Api_GetAccountBalance_Handler,
-		},
-		{
 			MethodName: "GetTokenAccounts",
 			Handler:    _Api_GetTokenAccounts_Handler,
-		},
-		{
-			MethodName: "GetAccountBalanceV2",
-			Handler:    _Api_GetAccountBalanceV2_Handler,
 		},
 		{
 			MethodName: "PostSubmit",

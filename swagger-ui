@@ -26,38 +26,6 @@
     "application/json"
   ],
   "paths": {
-    "/api/v1/account/balance": {
-      "get": {
-        "summary": "Token balances",
-        "description": "Returns the all token balances for a wallet",
-        "operationId": "Api_GetAccountBalance",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetAccountBalanceResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Account"
-        ]
-      }
-    },
     "/api/v1/account/token-accounts": {
       "get": {
         "summary": "Token accounts with balances",
@@ -136,6 +104,43 @@
         "tags": [
           "Market",
           "AMM"
+        ]
+      }
+    },
+    "/api/v1/market/price": {
+      "get": {
+        "summary": "Token prices",
+        "description": "Returns the list of prices for specified tokens",
+        "operationId": "Api_GetPrice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPriceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tokens",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "Market",
+          "Universal"
         ]
       }
     },
@@ -254,38 +259,6 @@
         "tags": [
           "Trade",
           "Universal"
-        ]
-      }
-    },
-    "/api/v2/balance": {
-      "get": {
-        "summary": "Token balances",
-        "description": "Returns the all token balances for a wallet",
-        "operationId": "Api_GetAccountBalanceV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetAccountBalanceResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "ownerAddress",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Account"
         ]
       }
     },
@@ -1462,17 +1435,6 @@
         }
       }
     },
-    "apiGetAccountBalanceResponse": {
-      "type": "object",
-      "properties": {
-        "tokens": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/apiTokenBalance"
-          }
-        }
-      }
-    },
     "apiGetBlockStreamResponse": {
       "type": "object",
       "properties": {
@@ -1632,6 +1594,17 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiProjectPools"
+          }
+        }
+      }
+    },
+    "apiGetPriceResponse": {
+      "type": "object",
+      "properties": {
+        "tokenPrices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTokenPrice"
           }
         }
       }
@@ -3351,29 +3324,6 @@
           "type": "string"
         },
         "amount": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "apiTokenBalance": {
-      "type": "object",
-      "properties": {
-        "symbol": {
-          "type": "string"
-        },
-        "tokenMint": {
-          "type": "string"
-        },
-        "settledAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "unsettledAmount": {
-          "type": "number",
-          "format": "double"
-        },
-        "openOrdersAmount": {
           "type": "number",
           "format": "double"
         }

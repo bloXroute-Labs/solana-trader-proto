@@ -454,16 +454,6 @@ service Api {
   }
 
   // account endpoints
-  rpc GetAccountBalance(GetAccountBalanceRequest) returns (GetAccountBalanceResponse) {
-    option (google.api.http) = {
-      get: "/api/v1/account/balance"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns the all token balances for a wallet";
-      summary: "Token balances";
-      tags: "Account";
-    };
-  }
 
   rpc GetTokenAccounts(GetTokenAccountsRequest) returns (GetTokenAccountsResponse) {
     option (google.api.http) = {
@@ -472,17 +462,6 @@ service Api {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the all token accounts with their balances for a wallet";
       summary: "Token accounts with balances";
-      tags: "Account";
-    };
-  }
-
-  rpc GetAccountBalanceV2(GetAccountBalanceRequest) returns (GetAccountBalanceResponse) {
-    option (google.api.http) = {
-      get: "/api/v2/balance"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns the all token balances for a wallet";
-      summary: "Token balances";
       tags: "Account";
     };
   }
@@ -599,14 +578,6 @@ message GetServerTimeRequest {}
 
 message GetServerTimeResponse {
   string timestamp = 1;
-}
-
-message GetAccountBalanceRequest {
-  string ownerAddress = 1 [(google.api.field_behavior) = REQUIRED];
-}
-
-message GetAccountBalanceResponse {
-  repeated TokenBalance tokens = 1;
 }
 
 message TokenBalance {
