@@ -3882,6 +3882,9 @@
         },
         "isLowRisk": {
           "type": "boolean"
+        },
+        "jitoRegion": {
+          "type": "string"
         }
       }
     },
