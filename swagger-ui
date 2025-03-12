@@ -2720,6 +2720,20 @@
         }
       }
     },
+    "apiGetCopyTradeStreamResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        },
+        "signerAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "apiGetJupiterPricesResponse": {
       "type": "object",
       "properties": {

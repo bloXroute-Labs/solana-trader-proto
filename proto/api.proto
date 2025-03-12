@@ -1004,6 +1004,12 @@ service Api {
       tags: "System";
     };
   }
+
+  rpc GetCopyTradeStream(GetCopyTradeStreamRequest) returns (stream GetCopyTradeStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
 }
 
 message GetMarketsRequest {
@@ -2568,4 +2574,13 @@ message LeaderSchedule {
 	bool isHighRisk = 4;
 	string jitoRegion = 5;
 	bool isMalicious = 6;
+}
+
+message GetCopyTradeStreamRequest {
+  repeated string signerAddresses = 1;
+}
+
+message GetCopyTradeStreamResponse {
+  TransactionMessage transaction = 1;
+  repeated string signerAddresses = 2;
 }

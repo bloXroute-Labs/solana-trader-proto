@@ -114,6 +114,7 @@ type ApiClient interface {
 	PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
 	PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
 	GetLeaderSchedule(ctx context.Context, in *GetLeaderScheduleRequest, opts ...grpc.CallOption) (*GetLeaderScheduleResponse, error)
+	GetCopyTradeStream(ctx context.Context, in *GetCopyTradeStreamRequest, opts ...grpc.CallOption) (Api_GetCopyTradeStreamClient, error)
 }
 
 type apiClient struct {
@@ -1371,6 +1372,38 @@ func (c *apiClient) GetLeaderSchedule(ctx context.Context, in *GetLeaderSchedule
 	return out, nil
 }
 
+func (c *apiClient) GetCopyTradeStream(ctx context.Context, in *GetCopyTradeStreamRequest, opts ...grpc.CallOption) (Api_GetCopyTradeStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[19], "/api.Api/GetCopyTradeStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetCopyTradeStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetCopyTradeStreamClient interface {
+	Recv() (*GetCopyTradeStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetCopyTradeStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetCopyTradeStreamClient) Recv() (*GetCopyTradeStreamResponse, error) {
+	m := new(GetCopyTradeStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // ApiServer is the server API for Api service.
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
@@ -1471,6 +1504,7 @@ type ApiServer interface {
 	PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error)
 	PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error)
 	GetLeaderSchedule(context.Context, *GetLeaderScheduleRequest) (*GetLeaderScheduleResponse, error)
+	GetCopyTradeStream(*GetCopyTradeStreamRequest, Api_GetCopyTradeStreamServer) error
 	mustEmbedUnimplementedApiServer()
 }
 
@@ -1747,6 +1781,9 @@ func (UnimplementedApiServer) PostPumpFunSwapSol(context.Context, *PostPumpFunSw
 }
 func (UnimplementedApiServer) GetLeaderSchedule(context.Context, *GetLeaderScheduleRequest) (*GetLeaderScheduleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLeaderSchedule not implemented")
+}
+func (UnimplementedApiServer) GetCopyTradeStream(*GetCopyTradeStreamRequest, Api_GetCopyTradeStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetCopyTradeStream not implemented")
 }
 func (UnimplementedApiServer) mustEmbedUnimplementedApiServer() {}
 
@@ -3438,6 +3475,27 @@ func _Api_GetLeaderSchedule_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetCopyTradeStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetCopyTradeStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetCopyTradeStream(m, &apiGetCopyTradeStreamServer{stream})
+}
+
+type Api_GetCopyTradeStreamServer interface {
+	Send(*GetCopyTradeStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetCopyTradeStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetCopyTradeStreamServer) Send(m *GetCopyTradeStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Api_ServiceDesc is the grpc.ServiceDesc for Api service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3824,6 +3882,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetPumpFunNewTokensStream",
 			Handler:       _Api_GetPumpFunNewTokensStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetCopyTradeStream",
+			Handler:       _Api_GetCopyTradeStream_Handler,
 			ServerStreams: true,
 		},
 	},
