@@ -3880,11 +3880,14 @@
         "isJito": {
           "type": "boolean"
         },
-        "isLowRisk": {
+        "isHighRisk": {
           "type": "boolean"
         },
         "jitoRegion": {
           "type": "string"
+        },
+        "isMalicious": {
+          "type": "boolean"
         }
       }
     },

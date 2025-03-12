@@ -2565,6 +2565,7 @@ message LeaderSchedule {
   uint64 slot = 1;
 	string leader = 2;
 	bool isJito = 3;
-	bool isLowRisk = 4;
+	bool isHighRisk = 4;
 	string jitoRegion = 5;
+	bool isMalicious = 6;
 }
