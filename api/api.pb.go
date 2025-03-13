@@ -9381,11 +9381,12 @@ type LeaderSchedule struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Slot       uint64 `protobuf:"varint,1,opt,name=slot,proto3" json:"slot,omitempty"`
-	Leader     string `protobuf:"bytes,2,opt,name=leader,proto3" json:"leader,omitempty"`
-	IsJito     bool   `protobuf:"varint,3,opt,name=isJito,proto3" json:"isJito,omitempty"`
-	IsLowRisk  bool   `protobuf:"varint,4,opt,name=isLowRisk,proto3" json:"isLowRisk,omitempty"`
-	JitoRegion string `protobuf:"bytes,5,opt,name=jitoRegion,proto3" json:"jitoRegion,omitempty"`
+	Slot        uint64 `protobuf:"varint,1,opt,name=slot,proto3" json:"slot,omitempty"`
+	Leader      string `protobuf:"bytes,2,opt,name=leader,proto3" json:"leader,omitempty"`
+	IsJito      bool   `protobuf:"varint,3,opt,name=isJito,proto3" json:"isJito,omitempty"`
+	IsHighRisk  bool   `protobuf:"varint,4,opt,name=isHighRisk,proto3" json:"isHighRisk,omitempty"`
+	JitoRegion  string `protobuf:"bytes,5,opt,name=jitoRegion,proto3" json:"jitoRegion,omitempty"`
+	IsMalicious bool   `protobuf:"varint,6,opt,name=isMalicious,proto3" json:"isMalicious,omitempty"`
 }
 
 func (x *LeaderSchedule) Reset() {
@@ -9441,9 +9442,9 @@ func (x *LeaderSchedule) GetIsJito() bool {
 	return false
 }
 
-func (x *LeaderSchedule) GetIsLowRisk() bool {
+func (x *LeaderSchedule) GetIsHighRisk() bool {
 	if x != nil {
-		return x.IsLowRisk
+		return x.IsHighRisk
 	}
 	return false
 }
@@ -9453,6 +9454,13 @@ func (x *LeaderSchedule) GetJitoRegion() string {
 		return x.JitoRegion
 	}
 	return ""
+}
+
+func (x *LeaderSchedule) GetIsMalicious() bool {
+	if x != nil {
+		return x.IsMalicious
+	}
+	return false
 }
 
 var File_api_proto protoreflect.FileDescriptor

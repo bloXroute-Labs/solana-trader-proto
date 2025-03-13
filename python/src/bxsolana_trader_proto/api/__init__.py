@@ -1836,8 +1836,9 @@ class LeaderSchedule(betterproto.Message):
     slot: int = betterproto.uint64_field(1)
     leader: str = betterproto.string_field(2)
     is_jito: bool = betterproto.bool_field(3)
-    is_low_risk: bool = betterproto.bool_field(4)
+    is_high_risk: bool = betterproto.bool_field(4)
     jito_region: str = betterproto.string_field(5)
+    is_malicious: bool = betterproto.bool_field(6)
 
 
 class ApiStub(betterproto.ServiceStub):
