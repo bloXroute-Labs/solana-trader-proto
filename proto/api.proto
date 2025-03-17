@@ -626,6 +626,7 @@ message PostSubmitRequest {
 
 message PostSubmitPaladinRequest {
   TransactionMessageV2 transaction = 1 [(google.api.field_behavior) = REQUIRED];
+  optional bool frontRunningProtection = 2;
 }
 
 message PostSubmitRequestEntry {
