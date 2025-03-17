@@ -109,6 +109,18 @@ service Api {
     };
   }
 
+  rpc PostSubmitPaladinV2(PostSubmitPaladinRequest) returns (PostSubmitResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/submit-paladin"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Submits a signed transaction to Paladin validators";
+      summary: "Transaction submit to Paladin validators";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
   // Raydium V2
   rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
     option (google.api.http) = {
@@ -846,20 +858,6 @@ service Api {
     };
   }
 
-  // Ore
-
-  rpc PostSubmitMineOre(PostSubmitRequest) returns (PostSubmitResponse) {
-    option (google.api.http) = {
-      post: "/api/v2/mine-ore"
-      body: "*"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Submits two transactions in sequence for mining ore";
-      summary: "Submit mine ore transactions";
-      tags: ["Ore"];
-    };
-  }
-
   // streaming endpoints
   rpc GetOrderbooksStream(GetOrderbooksRequest) returns (stream GetOrderbooksStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -910,6 +908,12 @@ service Api {
   }
 
   rpc GetPriorityFeeStream(GetPriorityFeeRequest) returns (stream GetPriorityFeeResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
+  rpc GetPriorityFeeByProgramStream(GetPriorityFeeByProgramRequest) returns (stream GetPriorityFeeByProgramResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "System";
     };
@@ -1370,6 +1374,11 @@ message PostSubmitRequest {
   optional bool fastBestEffort = 7;
   optional bool allowBackRun = 8;
   optional string revenueAddress = 9;
+  optional bool sniping = 10;
+}
+
+message PostSubmitPaladinRequest {
+  TransactionMessageV2 transaction = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 message PostSubmitRequestEntry {
@@ -1584,7 +1593,6 @@ message GetJupiterQuotesRequest{
   string outToken = 2;
   double inAmount = 3;
   double slippage = 4;
-  optional bool fastMode = 5;
 }
 
 message GetJupiterQuotesResponse{
@@ -1622,7 +1630,6 @@ message PostJupiterSwapRequest {
   uint32 computeLimit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies total compute limit to be allocated for all instructions within the created tx"}];
   uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
   optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
-  optional bool fastMode = 9;
 }
 
 message PostJupiterSwapInstructionsRequest {
@@ -1633,7 +1640,6 @@ message PostJupiterSwapInstructionsRequest {
   double slippage = 5;
   uint64 computePrice = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"}];
   optional uint64 tip = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"}];
-  optional bool fastMode = 9;
 }
 
 message PostRaydiumSwapInstructionsRequest {
@@ -2557,7 +2563,9 @@ message GetLeaderScheduleResponse {
 
 message LeaderSchedule {
   uint64 slot = 1;
-	string leader = 2;    
-	bool isJito = 3;    
-	bool isLowRisk = 4; 
+	string leader = 2;
+	bool isJito = 3;
+	bool isHighRisk = 4;
+	string jitoRegion = 5;
+	bool isMalicious = 6;
 }

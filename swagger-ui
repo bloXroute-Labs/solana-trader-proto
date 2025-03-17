@@ -1110,12 +1110,6 @@
             "required": false,
             "type": "number",
             "format": "double"
-          },
-          {
-            "name": "fastMode",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "tags": [
@@ -1222,40 +1216,6 @@
         ],
         "tags": [
           "Jupiter V2"
-        ]
-      }
-    },
-    "/api/v2/mine-ore": {
-      "post": {
-        "summary": "Submit mine ore transactions",
-        "description": "Submits two transactions in sequence for mining ore",
-        "operationId": "Api_PostSubmitMineOre",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiPostSubmitResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/apiPostSubmitRequest"
-            }
-          }
-        ],
-        "tags": [
-          "Ore"
         ]
       }
     },
@@ -2324,6 +2284,41 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/apiPostSubmitBatchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
+    "/api/v2/submit-paladin": {
+      "post": {
+        "summary": "Transaction submit to Paladin validators",
+        "description": "Submits a signed transaction to Paladin validators",
+        "operationId": "Api_PostSubmitPaladinV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitPaladinRequest"
             }
           }
         ],
@@ -3885,7 +3880,13 @@
         "isJito": {
           "type": "boolean"
         },
-        "isLowRisk": {
+        "isHighRisk": {
+          "type": "boolean"
+        },
+        "jitoRegion": {
+          "type": "string"
+        },
+        "isMalicious": {
           "type": "boolean"
         }
       }
@@ -4559,9 +4560,6 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
-        },
-        "fastMode": {
-          "type": "boolean"
         }
       }
     },
@@ -4634,9 +4632,6 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
-        },
-        "fastMode": {
-          "type": "boolean"
         }
       }
     },
@@ -5516,6 +5511,14 @@
         }
       }
     },
+    "apiPostSubmitPaladinRequest": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessageV2"
+        }
+      }
+    },
     "apiPostSubmitRequest": {
       "type": "object",
       "properties": {
@@ -5543,6 +5546,9 @@
         },
         "revenueAddress": {
           "type": "string"
+        },
+        "sniping": {
+          "type": "boolean"
         }
       }
     },

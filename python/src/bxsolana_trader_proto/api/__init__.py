@@ -480,6 +480,14 @@ class PostSubmitRequest(betterproto.Message):
     revenue_address: Optional[str] = betterproto.string_field(
         9, optional=True, group="_revenueAddress"
     )
+    sniping: Optional[bool] = betterproto.bool_field(
+        10, optional=True, group="_sniping"
+    )
+
+
+@dataclass(eq=False, repr=False)
+class PostSubmitPaladinRequest(betterproto.Message):
+    transaction: "TransactionMessageV2" = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)
@@ -716,9 +724,6 @@ class GetJupiterQuotesRequest(betterproto.Message):
     out_token: str = betterproto.string_field(2)
     in_amount: float = betterproto.double_field(3)
     slippage: float = betterproto.double_field(4)
-    fast_mode: Optional[bool] = betterproto.bool_field(
-        5, optional=True, group="_fastMode"
-    )
 
 
 @dataclass(eq=False, repr=False)
@@ -760,9 +765,6 @@ class PostJupiterSwapRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
-    fast_mode: Optional[bool] = betterproto.bool_field(
-        9, optional=True, group="_fastMode"
-    )
 
 
 @dataclass(eq=False, repr=False)
@@ -774,9 +776,6 @@ class PostJupiterSwapInstructionsRequest(betterproto.Message):
     slippage: float = betterproto.double_field(5)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
-    fast_mode: Optional[bool] = betterproto.bool_field(
-        9, optional=True, group="_fastMode"
-    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1195,16 +1194,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1837,7 +1836,9 @@ class LeaderSchedule(betterproto.Message):
     slot: int = betterproto.uint64_field(1)
     leader: str = betterproto.string_field(2)
     is_jito: bool = betterproto.bool_field(3)
-    is_low_risk: bool = betterproto.bool_field(4)
+    is_high_risk: bool = betterproto.bool_field(4)
+    jito_region: str = betterproto.string_field(5)
+    is_malicious: bool = betterproto.bool_field(6)
 
 
 class ApiStub(betterproto.ServiceStub):
@@ -1921,6 +1922,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostSubmitSnipeV2",
             post_submit_snipe_request,
             PostSubmitSnipeResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_submit_paladin_v2(
+        self,
+        post_submit_paladin_request: "PostSubmitPaladinRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitPaladinV2",
+            post_submit_paladin_request,
+            PostSubmitResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2980,23 +2998,6 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
-    async def post_submit_mine_ore(
-        self,
-        post_submit_request: "PostSubmitRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "PostSubmitResponse":
-        return await self._unary_unary(
-            "/api.Api/PostSubmitMineOre",
-            post_submit_request,
-            PostSubmitResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
     async def get_orderbooks_stream(
         self,
         get_orderbooks_request: "GetOrderbooksRequest",
@@ -3153,6 +3154,24 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetPriorityFeeStream",
             get_priority_fee_request,
             GetPriorityFeeResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
+    async def get_priority_fee_by_program_stream(
+        self,
+        get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPriorityFeeByProgramResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPriorityFeeByProgramStream",
+            get_priority_fee_by_program_request,
+            GetPriorityFeeByProgramResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3374,6 +3393,7 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
@@ -3397,6 +3417,11 @@ class ApiBase(ServiceBase):
     async def post_submit_snipe_v2(
         self, post_submit_snipe_request: "PostSubmitSnipeRequest"
     ) -> "PostSubmitSnipeResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_submit_paladin_v2(
+        self, post_submit_paladin_request: "PostSubmitPaladinRequest"
+    ) -> "PostSubmitResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_raydium_pools(
@@ -3712,11 +3737,6 @@ class ApiBase(ServiceBase):
     ) -> "TradeSwapResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def post_submit_mine_ore(
-        self, post_submit_request: "PostSubmitRequest"
-    ) -> "PostSubmitResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
     async def get_orderbooks_stream(
         self, get_orderbooks_request: "GetOrderbooksRequest"
     ) -> AsyncIterator["GetOrderbooksStreamResponse"]:
@@ -3770,6 +3790,12 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetPriorityFeeResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPriorityFeeResponse()
+
+    async def get_priority_fee_by_program_stream(
+        self, get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest"
+    ) -> AsyncIterator["GetPriorityFeeByProgramResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPriorityFeeByProgramResponse()
 
     async def get_bundle_tip_stream(
         self, get_bundle_tip_request: "GetBundleTipRequest"
@@ -3877,6 +3903,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_submit_snipe_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_submit_paladin_v2(
+        self,
+        stream: "grpclib.server.Stream[PostSubmitPaladinRequest, PostSubmitResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_paladin_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_pools(
@@ -4354,13 +4388,6 @@ class ApiBase(ServiceBase):
         response = await self.post_route_trade_swap(request)
         await stream.send_message(response)
 
-    async def __rpc_post_submit_mine_ore(
-        self, stream: "grpclib.server.Stream[PostSubmitRequest, PostSubmitResponse]"
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.post_submit_mine_ore(request)
-        await stream.send_message(response)
-
     async def __rpc_get_orderbooks_stream(
         self,
         stream: "grpclib.server.Stream[GetOrderbooksRequest, GetOrderbooksStreamResponse]",
@@ -4455,6 +4482,17 @@ class ApiBase(ServiceBase):
         request = await stream.recv_message()
         await self._call_rpc_handler_server_stream(
             self.get_priority_fee_stream,
+            stream,
+            request,
+        )
+
+    async def __rpc_get_priority_fee_by_program_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPriorityFeeByProgramRequest, GetPriorityFeeByProgramResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_priority_fee_by_program_stream,
             stream,
             request,
         )
@@ -4612,6 +4650,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostSubmitSnipeRequest,
                 PostSubmitSnipeResponse,
+            ),
+            "/api.Api/PostSubmitPaladinV2": grpclib.const.Handler(
+                self.__rpc_post_submit_paladin_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitPaladinRequest,
+                PostSubmitResponse,
             ),
             "/api.Api/GetRaydiumPools": grpclib.const.Handler(
                 self.__rpc_get_raydium_pools,
@@ -4985,12 +5029,6 @@ class ApiBase(ServiceBase):
                 RouteTradeSwapRequest,
                 TradeSwapResponse,
             ),
-            "/api.Api/PostSubmitMineOre": grpclib.const.Handler(
-                self.__rpc_post_submit_mine_ore,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                PostSubmitRequest,
-                PostSubmitResponse,
-            ),
             "/api.Api/GetOrderbooksStream": grpclib.const.Handler(
                 self.__rpc_get_orderbooks_stream,
                 grpclib.const.Cardinality.UNARY_STREAM,
@@ -5044,6 +5082,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetPriorityFeeRequest,
                 GetPriorityFeeResponse,
+            ),
+            "/api.Api/GetPriorityFeeByProgramStream": grpclib.const.Handler(
+                self.__rpc_get_priority_fee_by_program_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPriorityFeeByProgramRequest,
+                GetPriorityFeeByProgramResponse,
             ),
             "/api.Api/GetBundleTipStream": grpclib.const.Handler(
                 self.__rpc_get_bundle_tip_stream,
