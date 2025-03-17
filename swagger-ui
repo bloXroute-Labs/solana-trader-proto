@@ -5516,6 +5516,9 @@
       "properties": {
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessageV2"
+        },
+        "frontRunningProtection": {
+          "type": "boolean"
         }
       }
     },
