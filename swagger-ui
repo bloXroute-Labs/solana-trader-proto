@@ -5517,7 +5517,7 @@
         "transaction": {
           "$ref": "#/definitions/apiTransactionMessageV2"
         },
-        "frontRunningProtection": {
+        "revertProtection": {
           "type": "boolean"
         }
       }

@@ -488,8 +488,8 @@ class PostSubmitRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitPaladinRequest(betterproto.Message):
     transaction: "TransactionMessageV2" = betterproto.message_field(1)
-    front_running_protection: Optional[bool] = betterproto.bool_field(
-        2, optional=True, group="_frontRunningProtection"
+    revert_protection: Optional[bool] = betterproto.bool_field(
+        2, optional=True, group="_revertProtection"
     )
 
 
