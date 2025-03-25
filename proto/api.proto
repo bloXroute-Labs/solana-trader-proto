@@ -974,7 +974,7 @@ service Api {
     };
   }
 
-  rpc GetPumpFunNewAmmPoolStream(GetPumpFunNewTokensStreamRequest) returns (stream GetPumpFunNewTokensStreamResponse) {
+  rpc GetPumpFunNewAmmPoolStream(GetPumpFunNewAmmPoolStreamRequest) returns (stream GetPumpFunNewAmmPoolStreamResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "AMMs";
     };

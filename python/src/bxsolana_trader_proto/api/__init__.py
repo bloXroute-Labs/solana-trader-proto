@@ -3362,16 +3362,16 @@ class ApiStub(betterproto.ServiceStub):
 
     async def get_pump_fun_new_amm_pool_stream(
         self,
-        get_pump_fun_new_tokens_stream_request: "GetPumpFunNewTokensStreamRequest",
+        get_pump_fun_new_amm_pool_stream_request: "GetPumpFunNewAmmPoolStreamRequest",
         *,
         timeout: Optional[float] = None,
         deadline: Optional["Deadline"] = None,
         metadata: Optional["MetadataLike"] = None
-    ) -> AsyncIterator["GetPumpFunNewTokensStreamResponse"]:
+    ) -> AsyncIterator["GetPumpFunNewAmmPoolStreamResponse"]:
         async for response in self._unary_stream(
             "/api.Api/GetPumpFunNewAmmPoolStream",
-            get_pump_fun_new_tokens_stream_request,
-            GetPumpFunNewTokensStreamResponse,
+            get_pump_fun_new_amm_pool_stream_request,
+            GetPumpFunNewAmmPoolStreamResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3890,10 +3890,11 @@ class ApiBase(ServiceBase):
         yield GetPumpFunNewTokensStreamResponse()
 
     async def get_pump_fun_new_amm_pool_stream(
-        self, get_pump_fun_new_tokens_stream_request: "GetPumpFunNewTokensStreamRequest"
-    ) -> AsyncIterator["GetPumpFunNewTokensStreamResponse"]:
+        self,
+        get_pump_fun_new_amm_pool_stream_request: "GetPumpFunNewAmmPoolStreamRequest",
+    ) -> AsyncIterator["GetPumpFunNewAmmPoolStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-        yield GetPumpFunNewTokensStreamResponse()
+        yield GetPumpFunNewAmmPoolStreamResponse()
 
     async def post_pump_fun_swap(
         self, post_pump_fun_swap_request: "PostPumpFunSwapRequest"
@@ -4640,7 +4641,7 @@ class ApiBase(ServiceBase):
 
     async def __rpc_get_pump_fun_new_amm_pool_stream(
         self,
-        stream: "grpclib.server.Stream[GetPumpFunNewTokensStreamRequest, GetPumpFunNewTokensStreamResponse]",
+        stream: "grpclib.server.Stream[GetPumpFunNewAmmPoolStreamRequest, GetPumpFunNewAmmPoolStreamResponse]",
     ) -> None:
         request = await stream.recv_message()
         await self._call_rpc_handler_server_stream(
@@ -5200,8 +5201,8 @@ class ApiBase(ServiceBase):
             "/api.Api/GetPumpFunNewAmmPoolStream": grpclib.const.Handler(
                 self.__rpc_get_pump_fun_new_amm_pool_stream,
                 grpclib.const.Cardinality.UNARY_STREAM,
-                GetPumpFunNewTokensStreamRequest,
-                GetPumpFunNewTokensStreamResponse,
+                GetPumpFunNewAmmPoolStreamRequest,
+                GetPumpFunNewAmmPoolStreamResponse,
             ),
             "/api.Api/PostPumpFunSwap": grpclib.const.Handler(
                 self.__rpc_post_pump_fun_swap,
