@@ -3175,9 +3175,6 @@
         "lpMint": {
           "type": "string"
         },
-        "bondingCurve": {
-          "type": "string"
-        },
         "timestamp": {
           "type": "string",
           "format": "date-time"

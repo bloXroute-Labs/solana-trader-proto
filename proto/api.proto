@@ -2539,8 +2539,6 @@ message GetPumpFunNewAmmPoolStreamResponse {
   string baseMint = 4;
   string quoteMint = 5;
   string lpMint = 6;
-  string bondingCurve = 7;
-
   google.protobuf.Timestamp timestamp = 9;
 }
 

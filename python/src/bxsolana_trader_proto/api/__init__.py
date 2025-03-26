@@ -1805,7 +1805,6 @@ class GetPumpFunNewAmmPoolStreamResponse(betterproto.Message):
     base_mint: str = betterproto.string_field(4)
     quote_mint: str = betterproto.string_field(5)
     lp_mint: str = betterproto.string_field(6)
-    bonding_curve: str = betterproto.string_field(7)
     timestamp: datetime = betterproto.message_field(9)
 
 
