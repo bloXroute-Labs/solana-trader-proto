@@ -3153,6 +3153,34 @@
         }
       }
     },
+    "apiGetPumpFunNewAmmPoolStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "pool": {
+          "type": "string"
+        },
+        "baseMint": {
+          "type": "string"
+        },
+        "quoteMint": {
+          "type": "string"
+        },
+        "lpMint": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "apiGetPumpFunNewTokensStreamResponse": {
       "type": "object",
       "properties": {
