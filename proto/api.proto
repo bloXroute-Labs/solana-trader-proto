@@ -626,7 +626,7 @@ message PostSubmitRequest {
 
 message PostSubmitPaladinRequest {
   TransactionMessageV2 transaction = 1 [(google.api.field_behavior) = REQUIRED];
-  optional bool frontRunningProtection = 2;
+  optional bool revertProtection = 2;
 }
 
 message PostSubmitRequestEntry {
@@ -1467,6 +1467,18 @@ message GetPumpFunNewTokensStreamResponse {
   string mint = 6;
   string bondingCurve = 7;
   string creator = 8;
+  google.protobuf.Timestamp timestamp = 9;
+}
+
+message GetPumpFunNewAmmPoolStreamRequest {}
+
+message GetPumpFunNewAmmPoolStreamResponse {
+  int64 slot = 1;
+  string creator = 2;
+  string pool = 3;
+  string baseMint = 4;
+  string quoteMint = 5;
+  string lpMint = 6;
   google.protobuf.Timestamp timestamp = 9;
 }
 
