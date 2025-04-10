@@ -5511,6 +5511,10 @@
         },
         "frontRunningProtection": {
           "type": "boolean"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5547,6 +5551,10 @@
         },
         "revertProtection": {
           "type": "boolean"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5580,6 +5588,10 @@
         },
         "sniping": {
           "type": "boolean"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5613,6 +5625,10 @@
         },
         "useStakedRPCs": {
           "type": "boolean"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
