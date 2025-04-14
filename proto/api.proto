@@ -1382,6 +1382,7 @@ message PostSubmitRequest {
   optional string revenueAddress = 9;
   optional bool sniping = 10;
   optional google.protobuf.Timestamp timestamp = 11;
+  optional SubmitProtection submitProtection = 12;
 }
 
 message PostSubmitPaladinRequest {
@@ -1403,12 +1404,19 @@ enum SubmitStrategy {
   P_WAIT_FOR_CONFIRMATION = 3;
 }
 
+enum SubmitProtection {
+  SP_LOW = 0;
+  SP_MEDIUM = 1;
+  SP_HIGH = 2;
+}
+
 message PostSubmitBatchRequest {
   repeated PostSubmitRequestEntry entries = 1;
   SubmitStrategy submitStrategy = 2;
   optional bool useBundle = 3;
   optional bool frontRunningProtection = 4;
   optional google.protobuf.Timestamp timestamp = 5;
+  optional SubmitProtection submitProtection = 6;
 }
 
 message PostSubmitBatchResponseEntry {
