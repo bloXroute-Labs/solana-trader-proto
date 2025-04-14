@@ -1381,12 +1381,14 @@ message PostSubmitRequest {
   optional bool allowBackRun = 8;
   optional string revenueAddress = 9;
   optional bool sniping = 10;
-  optional SubmitProtection submitProtection = 11;
+  optional google.protobuf.Timestamp timestamp = 11;
 }
 
 message PostSubmitPaladinRequest {
   TransactionMessageV2 transaction = 1 [(google.api.field_behavior) = REQUIRED];
   optional bool revertProtection = 2;
+  optional google.protobuf.Timestamp timestamp = 3;
+
 }
 
 message PostSubmitRequestEntry {
@@ -1401,19 +1403,14 @@ enum SubmitStrategy {
   P_WAIT_FOR_CONFIRMATION = 3;
 }
 
-enum SubmitProtection {
-  SP_LOW = 0;
-  SP_MEDIUM = 1;
-  SP_HIGH = 2;
-}
-
 message PostSubmitBatchRequest {
   repeated PostSubmitRequestEntry entries = 1;
   SubmitStrategy submitStrategy = 2;
   optional bool useBundle = 3;
   optional bool frontRunningProtection = 4;
-  optional SubmitProtection submitProtection = 5;
+  optional google.protobuf.Timestamp timestamp = 5;
 }
+
 message PostSubmitBatchResponseEntry {
   string signature = 1;
   string error = 2;
@@ -1427,6 +1424,8 @@ message PostSubmitBatchResponse {
 message PostSubmitSnipeRequest {
   repeated PostSubmitRequestEntry entries = 1;
   optional bool useStakedRPCs = 2;
+  optional google.protobuf.Timestamp timestamp = 3;
+
 }
 
 message PostSubmitSnipeResponse {

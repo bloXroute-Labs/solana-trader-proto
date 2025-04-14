@@ -5512,8 +5512,9 @@
         "frontRunningProtection": {
           "type": "boolean"
         },
-        "submitProtection": {
-          "$ref": "#/definitions/apiSubmitProtection"
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5550,6 +5551,10 @@
         },
         "revertProtection": {
           "type": "boolean"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5584,8 +5589,9 @@
         "sniping": {
           "type": "boolean"
         },
-        "submitProtection": {
-          "$ref": "#/definitions/apiSubmitProtection"
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -5619,6 +5625,10 @@
         },
         "useStakedRPCs": {
           "type": "boolean"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -6106,15 +6116,6 @@
           "format": "int64"
         }
       }
-    },
-    "apiSubmitProtection": {
-      "type": "string",
-      "enum": [
-        "SP_LOW",
-        "SP_MEDIUM",
-        "SP_HIGH"
-      ],
-      "default": "SP_LOW"
     },
     "apiSubmitStrategy": {
       "type": "string",

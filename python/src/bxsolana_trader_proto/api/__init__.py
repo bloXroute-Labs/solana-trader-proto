@@ -57,12 +57,6 @@ class SubmitStrategy(betterproto.Enum):
     P_WAIT_FOR_CONFIRMATION = 3
 
 
-class SubmitProtection(betterproto.Enum):
-    SP_LOW = 0
-    SP_MEDIUM = 1
-    SP_HIGH = 2
-
-
 class Step(betterproto.Enum):
     STEP0 = 0
     STEP1 = 1
@@ -489,8 +483,8 @@ class PostSubmitRequest(betterproto.Message):
     sniping: Optional[bool] = betterproto.bool_field(
         10, optional=True, group="_sniping"
     )
-    submit_protection: Optional["SubmitProtection"] = betterproto.enum_field(
-        11, optional=True, group="_submitProtection"
+    timestamp: Optional[datetime] = betterproto.message_field(
+        11, optional=True, group="_timestamp"
     )
 
 
@@ -499,6 +493,9 @@ class PostSubmitPaladinRequest(betterproto.Message):
     transaction: "TransactionMessageV2" = betterproto.message_field(1)
     revert_protection: Optional[bool] = betterproto.bool_field(
         2, optional=True, group="_revertProtection"
+    )
+    timestamp: Optional[datetime] = betterproto.message_field(
+        3, optional=True, group="_timestamp"
     )
 
 
@@ -518,8 +515,8 @@ class PostSubmitBatchRequest(betterproto.Message):
     front_running_protection: Optional[bool] = betterproto.bool_field(
         4, optional=True, group="_frontRunningProtection"
     )
-    submit_protection: Optional["SubmitProtection"] = betterproto.enum_field(
-        5, optional=True, group="_submitProtection"
+    timestamp: Optional[datetime] = betterproto.message_field(
+        5, optional=True, group="_timestamp"
     )
 
 
@@ -540,6 +537,9 @@ class PostSubmitSnipeRequest(betterproto.Message):
     entries: List["PostSubmitRequestEntry"] = betterproto.message_field(1)
     use_staked_rp_cs: Optional[bool] = betterproto.bool_field(
         2, optional=True, group="_useStakedRPCs"
+    )
+    timestamp: Optional[datetime] = betterproto.message_field(
+        3, optional=True, group="_timestamp"
     )
 
 
