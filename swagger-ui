@@ -5511,6 +5511,9 @@
         },
         "frontRunningProtection": {
           "type": "boolean"
+        },
+        "submitProtection": {
+          "$ref": "#/definitions/apiSubmitProtection"
         }
       }
     },
@@ -5580,6 +5583,9 @@
         },
         "sniping": {
           "type": "boolean"
+        },
+        "submitProtection": {
+          "$ref": "#/definitions/apiSubmitProtection"
         }
       }
     },
@@ -6100,6 +6106,16 @@
           "format": "int64"
         }
       }
+    },
+    "apiSubmitProtection": {
+      "type": "string",
+      "enum": [
+        "SP_UNSPECIFIED",
+        "SP_LOW",
+        "SP_MEDIUM",
+        "SP_HIGH"
+      ],
+      "default": "SP_UNSPECIFIED"
     },
     "apiSubmitStrategy": {
       "type": "string",

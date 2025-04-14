@@ -1381,6 +1381,7 @@ message PostSubmitRequest {
   optional bool allowBackRun = 8;
   optional string revenueAddress = 9;
   optional bool sniping = 10;
+  optional SubmitProtection submitProtection = 11;
 }
 
 message PostSubmitPaladinRequest {
@@ -1400,11 +1401,19 @@ enum SubmitStrategy {
   P_WAIT_FOR_CONFIRMATION = 3;
 }
 
+enum SubmitProtection {
+  SP_UNSPECIFIED = 0;
+  SP_LOW = 1;
+  SP_MEDIUM = 2;
+  SP_HIGH = 3;
+}
+
 message PostSubmitBatchRequest {
   repeated PostSubmitRequestEntry entries = 1;
   SubmitStrategy submitStrategy = 2;
   optional bool useBundle = 3;
   optional bool frontRunningProtection = 4;
+  optional SubmitProtection submitProtection = 5;
 }
 message PostSubmitBatchResponseEntry {
   string signature = 1;

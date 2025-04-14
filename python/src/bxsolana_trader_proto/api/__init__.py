@@ -57,6 +57,13 @@ class SubmitStrategy(betterproto.Enum):
     P_WAIT_FOR_CONFIRMATION = 3
 
 
+class SubmitProtection(betterproto.Enum):
+    SP_UNSPECIFIED = 0
+    SP_LOW = 1
+    SP_MEDIUM = 2
+    SP_HIGH = 3
+
+
 class Step(betterproto.Enum):
     STEP0 = 0
     STEP1 = 1
@@ -483,6 +490,9 @@ class PostSubmitRequest(betterproto.Message):
     sniping: Optional[bool] = betterproto.bool_field(
         10, optional=True, group="_sniping"
     )
+    submit_protection: Optional["SubmitProtection"] = betterproto.enum_field(
+        11, optional=True, group="_submitProtection"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -508,6 +518,9 @@ class PostSubmitBatchRequest(betterproto.Message):
     )
     front_running_protection: Optional[bool] = betterproto.bool_field(
         4, optional=True, group="_frontRunningProtection"
+    )
+    submit_protection: Optional["SubmitProtection"] = betterproto.enum_field(
+        5, optional=True, group="_submitProtection"
     )
 
 
@@ -1197,16 +1210,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -3430,6 +3443,7 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
