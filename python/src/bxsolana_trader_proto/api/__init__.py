@@ -58,10 +58,9 @@ class SubmitStrategy(betterproto.Enum):
 
 
 class SubmitProtection(betterproto.Enum):
-    SP_UNSPECIFIED = 0
-    SP_LOW = 1
-    SP_MEDIUM = 2
-    SP_HIGH = 3
+    SP_LOW = 0
+    SP_MEDIUM = 1
+    SP_HIGH = 2
 
 
 class Step(betterproto.Enum):

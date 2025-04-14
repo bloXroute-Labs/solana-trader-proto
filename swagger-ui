@@ -6110,12 +6110,11 @@
     "apiSubmitProtection": {
       "type": "string",
       "enum": [
-        "SP_UNSPECIFIED",
         "SP_LOW",
         "SP_MEDIUM",
         "SP_HIGH"
       ],
-      "default": "SP_UNSPECIFIED"
+      "default": "SP_LOW"
     },
     "apiSubmitStrategy": {
       "type": "string",
