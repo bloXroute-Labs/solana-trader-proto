@@ -5515,6 +5515,9 @@
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        },
+        "submitProtection": {
+          "$ref": "#/definitions/apiSubmitProtection"
         }
       }
     },
@@ -5592,6 +5595,9 @@
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        },
+        "submitProtection": {
+          "$ref": "#/definitions/apiSubmitProtection"
         }
       }
     },
@@ -6116,6 +6122,15 @@
           "format": "int64"
         }
       }
+    },
+    "apiSubmitProtection": {
+      "type": "string",
+      "enum": [
+        "SP_LOW",
+        "SP_MEDIUM",
+        "SP_HIGH"
+      ],
+      "default": "SP_LOW"
     },
     "apiSubmitStrategy": {
       "type": "string",

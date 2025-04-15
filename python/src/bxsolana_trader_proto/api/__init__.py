@@ -57,6 +57,12 @@ class SubmitStrategy(betterproto.Enum):
     P_WAIT_FOR_CONFIRMATION = 3
 
 
+class SubmitProtection(betterproto.Enum):
+    SP_LOW = 0
+    SP_MEDIUM = 1
+    SP_HIGH = 2
+
+
 class Step(betterproto.Enum):
     STEP0 = 0
     STEP1 = 1
@@ -486,6 +492,9 @@ class PostSubmitRequest(betterproto.Message):
     timestamp: Optional[datetime] = betterproto.message_field(
         11, optional=True, group="_timestamp"
     )
+    submit_protection: Optional["SubmitProtection"] = betterproto.enum_field(
+        12, optional=True, group="_submitProtection"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -517,6 +526,9 @@ class PostSubmitBatchRequest(betterproto.Message):
     )
     timestamp: Optional[datetime] = betterproto.message_field(
         5, optional=True, group="_timestamp"
+    )
+    submit_protection: Optional["SubmitProtection"] = betterproto.enum_field(
+        6, optional=True, group="_submitProtection"
     )
 
 
