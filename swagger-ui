@@ -3153,6 +3153,31 @@
         }
       }
     },
+    "apiGetPumpFunAMMSwapStreamResponse": {
+      "type": "object",
+      "properties": {
+        "pool": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "inMint": {
+          "type": "string"
+        },
+        "outMint": {
+          "type": "string"
+        },
+        "maxInAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
     "apiGetPumpFunNewAmmPoolStreamResponse": {
       "type": "object",
       "properties": {

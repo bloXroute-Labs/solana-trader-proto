@@ -980,6 +980,12 @@ service Api {
     };
   }
 
+  rpc GetPumpFunAMMSwapStream(GetPumpFunAMMSwapStreamRequest) returns (stream GetPumpFunAMMSwapStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "AMMs";
+    };
+  }
+
   rpc PostPumpFunSwap(PostPumpFunSwapRequest) returns (PostPumpFunSwapResponse){
     option (google.api.http) = {
       post: "/api/v2/pumpfun/swap"
@@ -2555,6 +2561,19 @@ message GetPumpFunNewAmmPoolStreamResponse {
   string quoteMint = 5;
   string lpMint = 6;
   google.protobuf.Timestamp timestamp = 9;
+}
+
+message GetPumpFunAMMSwapStreamRequest {
+  repeated string pools = 1;
+}
+
+message GetPumpFunAMMSwapStreamResponse {
+  string pool = 1;
+  string user = 2;
+  string inMint = 3;
+  string outMint = 4;
+  double maxInAmount = 5;
+  double outAmount = 6;
 }
 
 message PostPumpFunSwapRequest {
