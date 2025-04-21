@@ -3162,19 +3162,29 @@
         "user": {
           "type": "string"
         },
-        "inMint": {
+        "isBuy": {
+          "type": "boolean"
+        },
+        "quoteMint": {
           "type": "string"
         },
-        "outMint": {
+        "baseMint": {
           "type": "string"
         },
-        "maxInAmount": {
+        "inAmount": {
           "type": "number",
           "format": "double"
         },
         "outAmount": {
           "type": "number",
           "format": "double"
+        },
+        "txHash": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },

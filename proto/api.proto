@@ -2570,10 +2570,13 @@ message GetPumpFunAMMSwapStreamRequest {
 message GetPumpFunAMMSwapStreamResponse {
   string pool = 1;
   string user = 2;
-  string inMint = 3;
-  string outMint = 4;
-  double maxInAmount = 5;
-  double outAmount = 6;
+  bool isBuy = 3;
+  string quoteMint = 4;
+  string baseMint = 5;
+  double inAmount = 6;
+  double outAmount = 7;
+  string txHash = 8;
+  google.protobuf.Timestamp timestamp = 9;
 }
 
 message PostPumpFunSwapRequest {
