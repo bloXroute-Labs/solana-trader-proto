@@ -1833,6 +1833,24 @@ class GetPumpFunNewAmmPoolStreamResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetPumpFunAmmSwapStreamRequest(betterproto.Message):
+    pools: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunAmmSwapStreamResponse(betterproto.Message):
+    pool: str = betterproto.string_field(1)
+    user: str = betterproto.string_field(2)
+    is_buy: bool = betterproto.bool_field(3)
+    quote_mint: str = betterproto.string_field(4)
+    base_mint: str = betterproto.string_field(5)
+    in_amount: float = betterproto.double_field(6)
+    out_amount: float = betterproto.double_field(7)
+    tx_hash: str = betterproto.string_field(8)
+    timestamp: datetime = betterproto.message_field(9)
+
+
+@dataclass(eq=False, repr=False)
 class PostPumpFunSwapRequest(betterproto.Message):
     user_address: str = betterproto.string_field(1)
     bonding_curve_address: str = betterproto.string_field(2)
@@ -3401,6 +3419,24 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_pump_fun_amm_swap_stream(
+        self,
+        get_pump_fun_amm_swap_stream_request: "GetPumpFunAmmSwapStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPumpFunAmmSwapStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPumpFunAMMSwapStream",
+            get_pump_fun_amm_swap_stream_request,
+            GetPumpFunAmmSwapStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
     async def post_pump_fun_swap(
         self,
         post_pump_fun_swap_request: "PostPumpFunSwapRequest",
@@ -3919,6 +3955,12 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetPumpFunNewAmmPoolStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPumpFunNewAmmPoolStreamResponse()
+
+    async def get_pump_fun_amm_swap_stream(
+        self, get_pump_fun_amm_swap_stream_request: "GetPumpFunAmmSwapStreamRequest"
+    ) -> AsyncIterator["GetPumpFunAmmSwapStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPumpFunAmmSwapStreamResponse()
 
     async def post_pump_fun_swap(
         self, post_pump_fun_swap_request: "PostPumpFunSwapRequest"
@@ -4674,6 +4716,17 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_pump_fun_amm_swap_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunAmmSwapStreamRequest, GetPumpFunAmmSwapStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_pump_fun_amm_swap_stream,
+            stream,
+            request,
+        )
+
     async def __rpc_post_pump_fun_swap(
         self,
         stream: "grpclib.server.Stream[PostPumpFunSwapRequest, PostPumpFunSwapResponse]",
@@ -5227,6 +5280,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetPumpFunNewAmmPoolStreamRequest,
                 GetPumpFunNewAmmPoolStreamResponse,
+            ),
+            "/api.Api/GetPumpFunAMMSwapStream": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_amm_swap_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPumpFunAmmSwapStreamRequest,
+                GetPumpFunAmmSwapStreamResponse,
             ),
             "/api.Api/PostPumpFunSwap": grpclib.const.Handler(
                 self.__rpc_post_pump_fun_swap,

@@ -3153,6 +3153,41 @@
         }
       }
     },
+    "apiGetPumpFunAMMSwapStreamResponse": {
+      "type": "object",
+      "properties": {
+        "pool": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "isBuy": {
+          "type": "boolean"
+        },
+        "quoteMint": {
+          "type": "string"
+        },
+        "baseMint": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "txHash": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "apiGetPumpFunNewAmmPoolStreamResponse": {
       "type": "object",
       "properties": {
