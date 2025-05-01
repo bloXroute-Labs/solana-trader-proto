@@ -3185,6 +3185,10 @@
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        },
+        "slot": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },

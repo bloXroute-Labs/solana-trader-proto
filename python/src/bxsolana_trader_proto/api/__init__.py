@@ -1848,6 +1848,7 @@ class GetPumpFunAmmSwapStreamResponse(betterproto.Message):
     out_amount: float = betterproto.double_field(7)
     tx_hash: str = betterproto.string_field(8)
     timestamp: datetime = betterproto.message_field(9)
+    slot: int = betterproto.uint64_field(10)
 
 
 @dataclass(eq=False, repr=False)
