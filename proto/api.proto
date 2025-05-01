@@ -2577,6 +2577,7 @@ message GetPumpFunAMMSwapStreamResponse {
   double outAmount = 7;
   string txHash = 8;
   google.protobuf.Timestamp timestamp = 9;
+  uint64 slot = 10;
 }
 
 message PostPumpFunSwapRequest {
