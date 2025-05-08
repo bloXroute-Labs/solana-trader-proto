@@ -4699,6 +4699,10 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
+        "jitoDontFront": {
+          "type": "boolean",
+          "description": "Optional: Specifies wether to put use the jitodontfront feature for advanced front running protection within the jito block engine."
         }
       }
     },
@@ -5213,6 +5217,10 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
+        "jitoDontFront": {
+          "type": "boolean",
+          "description": "Optional: Specifies wether to put use the jitodontfront feature for advanced front running protection within the jito block engine."
         }
       }
     },

@@ -792,6 +792,9 @@ class PostJupiterSwapRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    jito_dont_front: Optional[bool] = betterproto.bool_field(
+        9, optional=True, group="_jitoDontFront"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -853,6 +856,9 @@ class PostRaydiumSwapRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    jito_dont_front: Optional[bool] = betterproto.bool_field(
+        9, optional=True, group="_jitoDontFront"
+    )
 
 
 @dataclass(eq=False, repr=False)
