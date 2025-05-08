@@ -1863,6 +1863,9 @@ class PostPumpFunSwapRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(8)
     compute_price: int = betterproto.uint64_field(9)
     tip: Optional[int] = betterproto.uint64_field(10, optional=True, group="_tip")
+    jito_dont_front: Optional[bool] = betterproto.bool_field(
+        11, optional=True, group="_jitoDontFront"
+    )
 
 
 @dataclass(eq=False, repr=False)
