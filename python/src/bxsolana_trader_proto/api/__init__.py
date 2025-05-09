@@ -736,6 +736,9 @@ class PostRaydiumCpmmSwapRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(7)
     compute_price: int = betterproto.uint64_field(8)
     tip: Optional[int] = betterproto.uint64_field(9, optional=True, group="_tip")
+    jito_dont_front: Optional[bool] = betterproto.bool_field(
+        10, optional=True, group="_jitoDontFront"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -806,6 +809,9 @@ class PostJupiterSwapInstructionsRequest(betterproto.Message):
     slippage: float = betterproto.double_field(5)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    jito_dont_front: Optional[bool] = betterproto.bool_field(
+        9, optional=True, group="_jitoDontFront"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -818,6 +824,9 @@ class PostRaydiumSwapInstructionsRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    jito_dont_front: Optional[bool] = betterproto.bool_field(
+        9, optional=True, group="_jitoDontFront"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -924,6 +933,9 @@ class PostRaydiumRouteSwapRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(4)
     compute_price: int = betterproto.uint64_field(5)
     tip: Optional[int] = betterproto.uint64_field(6, optional=True, group="_tip")
+    jito_dont_front: Optional[bool] = betterproto.bool_field(
+        7, optional=True, group="_jitoDontFront"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -963,6 +975,9 @@ class PostJupiterRouteSwapRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(4)
     compute_price: int = betterproto.uint64_field(5)
     tip: Optional[int] = betterproto.uint64_field(6, optional=True, group="_tip")
+    jito_dont_front: Optional[bool] = betterproto.bool_field(
+        7, optional=True, group="_jitoDontFront"
+    )
 
 
 @dataclass(eq=False, repr=False)
