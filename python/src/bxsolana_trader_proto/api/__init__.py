@@ -1796,6 +1796,7 @@ class GetPumpFunSwapsStreamResponse(betterproto.Message):
     virtual_sol_reserves: int = betterproto.uint64_field(11)
     virtual_token_reserves: int = betterproto.uint64_field(12)
     timestamp: datetime = betterproto.message_field(13)
+    creator: str = betterproto.string_field(14)
 
 
 @dataclass(eq=False, repr=False)
@@ -1814,6 +1815,7 @@ class GetPumpFunNewTokensStreamResponse(betterproto.Message):
     bonding_curve: str = betterproto.string_field(7)
     creator: str = betterproto.string_field(8)
     timestamp: datetime = betterproto.message_field(9)
+    creator_vault: str = betterproto.string_field(10)
 
 
 @dataclass(eq=False, repr=False)
@@ -1863,6 +1865,7 @@ class PostPumpFunSwapRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(8)
     compute_price: int = betterproto.uint64_field(9)
     tip: Optional[int] = betterproto.uint64_field(10, optional=True, group="_tip")
+    creator: str = betterproto.string_field(11)
 
 
 @dataclass(eq=False, repr=False)
@@ -1875,6 +1878,7 @@ class PostPumpFunSwapRequestSol(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    creator: str = betterproto.string_field(9)
 
 
 @dataclass(eq=False, repr=False)
