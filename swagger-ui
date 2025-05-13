@@ -3248,6 +3248,9 @@
         "creator": {
           "type": "string"
         },
+        "creatorVault": {
+          "type": "string"
+        },
         "timestamp": {
           "type": "string",
           "format": "date-time"
@@ -4936,6 +4939,9 @@
           "type": "number",
           "format": "double"
         },
+        "creator": {
+          "type": "string"
+        },
         "computeLimit": {
           "type": "integer",
           "format": "int64",
@@ -4972,6 +4978,9 @@
         "slippage": {
           "type": "number",
           "format": "double"
+        },
+        "creator": {
+          "type": "string"
         },
         "computeLimit": {
           "type": "integer",
