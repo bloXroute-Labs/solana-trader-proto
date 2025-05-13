@@ -1813,8 +1813,8 @@ class GetPumpFunNewTokensStreamResponse(betterproto.Message):
     mint: str = betterproto.string_field(6)
     bonding_curve: str = betterproto.string_field(7)
     creator: str = betterproto.string_field(8)
-    creator_vault: str = betterproto.string_field(9)
-    timestamp: datetime = betterproto.message_field(10)
+    timestamp: datetime = betterproto.message_field(9)
+    creator_vault: str = betterproto.string_field(10)
 
 
 @dataclass(eq=False, repr=False)
@@ -1861,10 +1861,10 @@ class PostPumpFunSwapRequest(betterproto.Message):
     sol_threshold: float = betterproto.double_field(5)
     is_buy: bool = betterproto.bool_field(6)
     slippage: float = betterproto.double_field(7)
-    creator: str = betterproto.string_field(8)
-    compute_limit: int = betterproto.uint32_field(9)
-    compute_price: int = betterproto.uint64_field(10)
-    tip: Optional[int] = betterproto.uint64_field(11, optional=True, group="_tip")
+    compute_limit: int = betterproto.uint32_field(8)
+    compute_price: int = betterproto.uint64_field(9)
+    tip: Optional[int] = betterproto.uint64_field(10, optional=True, group="_tip")
+    creator: str = betterproto.string_field(11)
 
 
 @dataclass(eq=False, repr=False)
@@ -1874,10 +1874,10 @@ class PostPumpFunSwapRequestSol(betterproto.Message):
     token_address: str = betterproto.string_field(3)
     sol_amount: float = betterproto.double_field(4)
     slippage: float = betterproto.double_field(5)
-    creator: str = betterproto.string_field(6)
-    compute_limit: int = betterproto.uint32_field(7)
-    compute_price: int = betterproto.uint64_field(8)
-    tip: Optional[int] = betterproto.uint64_field(9, optional=True, group="_tip")
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
+    tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    creator: str = betterproto.string_field(9)
 
 
 @dataclass(eq=False, repr=False)

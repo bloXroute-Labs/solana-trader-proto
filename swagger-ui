@@ -3248,12 +3248,12 @@
         "creator": {
           "type": "string"
         },
-        "creatorVault": {
-          "type": "string"
-        },
         "timestamp": {
           "type": "string",
           "format": "date-time"
+        },
+        "creatorVault": {
+          "type": "string"
         }
       }
     },
@@ -4939,9 +4939,6 @@
           "type": "number",
           "format": "double"
         },
-        "creator": {
-          "type": "string"
-        },
         "computeLimit": {
           "type": "integer",
           "format": "int64",
@@ -4956,6 +4953,9 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
+        "creator": {
+          "type": "string"
         }
       }
     },
@@ -4979,9 +4979,6 @@
           "type": "number",
           "format": "double"
         },
-        "creator": {
-          "type": "string"
-        },
         "computeLimit": {
           "type": "integer",
           "format": "int64",
@@ -4996,6 +4993,9 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
+        "creator": {
+          "type": "string"
         }
       }
     },
