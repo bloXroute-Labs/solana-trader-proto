@@ -1796,6 +1796,7 @@ class GetPumpFunSwapsStreamResponse(betterproto.Message):
     virtual_sol_reserves: int = betterproto.uint64_field(11)
     virtual_token_reserves: int = betterproto.uint64_field(12)
     timestamp: datetime = betterproto.message_field(13)
+    creator: str = betterproto.string_field(14)
 
 
 @dataclass(eq=False, repr=False)
