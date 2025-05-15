@@ -3322,12 +3322,6 @@
           "type": "string",
           "format": "date-time"
         },
-        "baseMintVault": {
-          "type": "string"
-        },
-        "quoteMintVault": {
-          "type": "string"
-        },
         "tokenCreator": {
           "type": "string"
         }
