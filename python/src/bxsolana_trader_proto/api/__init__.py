@@ -1832,6 +1832,9 @@ class GetPumpFunNewAmmPoolStreamResponse(betterproto.Message):
     quote_mint: str = betterproto.string_field(5)
     lp_mint: str = betterproto.string_field(6)
     timestamp: datetime = betterproto.message_field(9)
+    base_mint_vault: str = betterproto.string_field(10)
+    quote_mint_vault: str = betterproto.string_field(11)
+    token_creator: str = betterproto.string_field(12)
 
 
 @dataclass(eq=False, repr=False)
