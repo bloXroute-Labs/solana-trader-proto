@@ -115,6 +115,8 @@ type ApiClient interface {
 	GetPumpFunAMMSwapStream(ctx context.Context, in *GetPumpFunAMMSwapStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunAMMSwapStreamClient, error)
 	PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
 	PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
+	GetPumpFunAmmQuotes(ctx context.Context, in *GetPumpFunAmmQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunAmmQuotesResponse, error)
+	PostPumpFunAmmSwap(ctx context.Context, in *PostPumpFunAmmSwapRequest, opts ...grpc.CallOption) (*PostPumpFunAmmSwapResponse, error)
 	GetLeaderSchedule(ctx context.Context, in *GetLeaderScheduleRequest, opts ...grpc.CallOption) (*GetLeaderScheduleResponse, error)
 }
 
@@ -1428,6 +1430,24 @@ func (c *apiClient) PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapR
 	return out, nil
 }
 
+func (c *apiClient) GetPumpFunAmmQuotes(ctx context.Context, in *GetPumpFunAmmQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunAmmQuotesResponse, error) {
+	out := new(GetPumpFunAmmQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPumpFunAmmQuotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostPumpFunAmmSwap(ctx context.Context, in *PostPumpFunAmmSwapRequest, opts ...grpc.CallOption) (*PostPumpFunAmmSwapResponse, error) {
+	out := new(PostPumpFunAmmSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunAmmSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) GetLeaderSchedule(ctx context.Context, in *GetLeaderScheduleRequest, opts ...grpc.CallOption) (*GetLeaderScheduleResponse, error) {
 	out := new(GetLeaderScheduleResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetLeaderSchedule", in, out, opts...)
@@ -1538,6 +1558,8 @@ type ApiServer interface {
 	GetPumpFunAMMSwapStream(*GetPumpFunAMMSwapStreamRequest, Api_GetPumpFunAMMSwapStreamServer) error
 	PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error)
 	PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error)
+	GetPumpFunAmmQuotes(context.Context, *GetPumpFunAmmQuotesRequest) (*GetPumpFunAmmQuotesResponse, error)
+	PostPumpFunAmmSwap(context.Context, *PostPumpFunAmmSwapRequest) (*PostPumpFunAmmSwapResponse, error)
 	GetLeaderSchedule(context.Context, *GetLeaderScheduleRequest) (*GetLeaderScheduleResponse, error)
 	mustEmbedUnimplementedApiServer()
 }
@@ -1818,6 +1840,12 @@ func (UnimplementedApiServer) PostPumpFunSwap(context.Context, *PostPumpFunSwapR
 }
 func (UnimplementedApiServer) PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwapSol not implemented")
+}
+func (UnimplementedApiServer) GetPumpFunAmmQuotes(context.Context, *GetPumpFunAmmQuotesRequest) (*GetPumpFunAmmQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPumpFunAmmQuotes not implemented")
+}
+func (UnimplementedApiServer) PostPumpFunAmmSwap(context.Context, *PostPumpFunAmmSwapRequest) (*PostPumpFunAmmSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunAmmSwap not implemented")
 }
 func (UnimplementedApiServer) GetLeaderSchedule(context.Context, *GetLeaderScheduleRequest) (*GetLeaderScheduleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLeaderSchedule not implemented")
@@ -3536,6 +3564,42 @@ func _Api_PostPumpFunSwapSol_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetPumpFunAmmQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPumpFunAmmQuotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPumpFunAmmQuotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPumpFunAmmQuotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPumpFunAmmQuotes(ctx, req.(*GetPumpFunAmmQuotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostPumpFunAmmSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostPumpFunAmmSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostPumpFunAmmSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostPumpFunAmmSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostPumpFunAmmSwap(ctx, req.(*PostPumpFunAmmSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetLeaderSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetLeaderScheduleRequest)
 	if err := dec(in); err != nil {
@@ -3840,6 +3904,14 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostPumpFunSwapSol",
 			Handler:    _Api_PostPumpFunSwapSol_Handler,
+		},
+		{
+			MethodName: "GetPumpFunAmmQuotes",
+			Handler:    _Api_GetPumpFunAmmQuotes_Handler,
+		},
+		{
+			MethodName: "PostPumpFunAmmSwap",
+			Handler:    _Api_PostPumpFunAmmSwap_Handler,
 		},
 		{
 			MethodName: "GetLeaderSchedule",
