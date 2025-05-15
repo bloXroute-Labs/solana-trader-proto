@@ -2582,7 +2582,7 @@ message GetPumpFunNewAmmPoolStreamResponse {
   string quoteMint = 5;
   string lpMint = 6;
   google.protobuf.Timestamp timestamp = 9;
-  string tokenCreator = 10;
+  string coinCreator = 10;
 }
 
 message GetPumpFunAMMSwapStreamRequest {
