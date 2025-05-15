@@ -3322,7 +3322,7 @@
           "type": "string",
           "format": "date-time"
         },
-        "tokenCreator": {
+        "coinCreator": {
           "type": "string"
         }
       }
