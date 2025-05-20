@@ -1025,17 +1025,6 @@ service Api {
       tags: "AMMs";
     };
   }
-
-  rpc GetLeaderSchedule(GetLeaderScheduleRequest) returns (GetLeaderScheduleResponse) {
-    option (google.api.http) = {
-      get: "/api/v2/system/leader-schedule"
-    };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns leaders schedule for up to 100000 next slots, starting from the current slot. Result can be limited by number of slots.";
-      summary: "Leaders schedule";
-      tags: "System";
-    };
-  }
 }
 
 message GetMarketsRequest {
@@ -2665,23 +2654,4 @@ message PostPumpFunAmmSwapResponse {
 
 message PostPumpFunSwapResponse{
   TransactionMessageV2 transaction = 1;
-}
-
-
-message GetLeaderScheduleRequest {
-  uint64 maxSlots = 1;
-}
-
-message GetLeaderScheduleResponse {
-  uint64 currentSlot = 1;  
-	repeated LeaderSchedule leaderSchedule = 2;
-}
-
-message LeaderSchedule {
-  uint64 slot = 1;
-	string leader = 2;
-	bool isJito = 3;
-	bool isHighRisk = 4;
-	string jitoRegion = 5;
-	bool isMalicious = 6;
 }

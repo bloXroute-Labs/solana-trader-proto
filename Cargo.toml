@@ -1,6 +1,6 @@
 [package]
 name = "solana-trader-proto"
-version = "0.2.5"
+version = "0.2.6"
 edition = "2021"
 authors = ["support@bloxroute.com"]
 license = "MIT"
