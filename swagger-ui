@@ -3211,16 +3211,20 @@
     "apiGetPumpFunAmmQuotesRequest": {
       "type": "object",
       "properties": {
-        "quoteType": {
+        "inToken": {
           "type": "string"
         },
-        "mintAddress": {
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outToken": {
           "type": "string"
         },
-        "poolAddress": {
+        "pool": {
           "type": "string"
         },
-        "amount": {
+        "slippage": {
           "type": "number",
           "format": "double"
         }
@@ -3232,14 +3236,14 @@
         "quoteType": {
           "type": "string"
         },
-        "inTokenAddress": {
+        "inToken": {
           "type": "string"
         },
         "inAmount": {
           "type": "number",
           "format": "double"
         },
-        "outTokenAddress": {
+        "outToken": {
           "type": "string"
         },
         "outAmount": {

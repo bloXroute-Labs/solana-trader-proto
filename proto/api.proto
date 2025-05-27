@@ -2618,17 +2618,18 @@ message PostPumpFunSwapRequestSol {
 }
 
 message GetPumpFunAmmQuotesRequest {
-  string quoteType = 1; // BUY,SELL
-  string mintAddress = 2;
-  string poolAddress = 3;
-  double amount = 4;
+  string inToken = 1;
+  double inAmount = 2;
+  string outToken = 3;
+  string pool = 4;
+  double slippage = 5;
 }
 
 message GetPumpFunAmmQuotesResponse {
   string quoteType = 1;
-  string inTokenAddress = 2;
+  string inToken = 2;
   double inAmount = 3;
-  string outTokenAddress = 4;
+  string outToken = 4;
   double outAmount = 5;
 }
 

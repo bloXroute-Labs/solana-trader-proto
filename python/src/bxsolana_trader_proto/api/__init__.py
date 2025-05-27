@@ -1884,18 +1884,19 @@ class PostPumpFunSwapRequestSol(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetPumpFunAmmQuotesRequest(betterproto.Message):
-    quote_type: str = betterproto.string_field(1)
-    mint_address: str = betterproto.string_field(2)
-    pool_address: str = betterproto.string_field(3)
-    amount: float = betterproto.double_field(4)
+    in_token: str = betterproto.string_field(1)
+    in_amount: float = betterproto.double_field(2)
+    out_token: str = betterproto.string_field(3)
+    pool: str = betterproto.string_field(4)
+    slippage: float = betterproto.double_field(5)
 
 
 @dataclass(eq=False, repr=False)
 class GetPumpFunAmmQuotesResponse(betterproto.Message):
     quote_type: str = betterproto.string_field(1)
-    in_token_address: str = betterproto.string_field(2)
+    in_token: str = betterproto.string_field(2)
     in_amount: float = betterproto.double_field(3)
-    out_token_address: str = betterproto.string_field(4)
+    out_token: str = betterproto.string_field(4)
     out_amount: float = betterproto.double_field(5)
 
 
