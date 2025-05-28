@@ -5003,16 +5003,37 @@
             "$ref": "#/definitions/apiTransactionMessage"
           }
         },
-        "outAmount": {
+        "buyQuoteAmountIn": {
           "type": "number",
           "format": "double"
         },
-        "outAmountMin": {
+        "buyUserQuoteAmountIn": {
           "type": "number",
           "format": "double"
         },
-        "priceImpact": {
-          "$ref": "#/definitions/commonPriceImpactPercentV2"
+        "buyMaxQuoteAmountIn": {
+          "type": "number",
+          "format": "double"
+        },
+        "buyBaseAmountOut": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellBaseAmountIn": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellMinQuoteAmountOut": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellQuoteAmountOut": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellUserQuoteAmountOut": {
+          "type": "number",
+          "format": "double"
         },
         "fees": {
           "type": "array",

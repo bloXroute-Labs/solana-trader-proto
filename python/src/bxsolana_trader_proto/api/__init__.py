@@ -1916,10 +1916,15 @@ class PostPumpFunAmmSwapRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostPumpFunAmmSwapResponse(betterproto.Message):
     transactions: List["TransactionMessage"] = betterproto.message_field(1)
-    out_amount: float = betterproto.double_field(2)
-    out_amount_min: float = betterproto.double_field(3)
-    price_impact: "_common__.PriceImpactPercentV2" = betterproto.message_field(4)
-    fees: List["_common__.Fee"] = betterproto.message_field(5)
+    buy_quote_amount_in: float = betterproto.double_field(2)
+    buy_user_quote_amount_in: float = betterproto.double_field(3)
+    buy_max_quote_amount_in: float = betterproto.double_field(4)
+    buy_base_amount_out: float = betterproto.double_field(5)
+    sell_base_amount_in: float = betterproto.double_field(6)
+    sell_min_quote_amount_out: float = betterproto.double_field(7)
+    sell_quote_amount_out: float = betterproto.double_field(8)
+    sell_user_quote_amount_out: float = betterproto.double_field(9)
+    fees: List["_common__.Fee"] = betterproto.message_field(10)
 
 
 @dataclass(eq=False, repr=False)

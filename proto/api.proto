@@ -2647,10 +2647,18 @@ message PostPumpFunAmmSwapRequest {
 
 message PostPumpFunAmmSwapResponse {
   repeated TransactionMessage transactions = 1;
-  double outAmount = 2;
-  double outAmountMin = 3;
-  common.PriceImpactPercentV2 priceImpact = 4;
-  repeated common.Fee fees = 5;
+
+  double buyQuoteAmountIn = 2;
+  double buyUserQuoteAmountIn = 3;
+  double buyMaxQuoteAmountIn = 4;
+  double buyBaseAmountOut = 5;
+
+  double sellBaseAmountIn = 6;
+  double sellMinQuoteAmountOut = 7;
+  double sellQuoteAmountOut = 8;
+  double sellUserQuoteAmountOut = 9;
+
+  repeated common.Fee fees = 10;
 }
 
 message PostPumpFunSwapResponse{
