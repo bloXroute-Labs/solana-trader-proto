@@ -2187,6 +2187,7 @@ message GetSwapsStreamUpdate {
   string destinationAccount = 11;
   string ownerAccount = 12;
   string signature = 13;
+  bool cpmm = 14;
 }
 
 message TokenPair {
