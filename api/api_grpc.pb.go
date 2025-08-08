@@ -18,6 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
+	GetTransactionMetadata(ctx context.Context, in *GetTransactionMetadataRequest, opts ...grpc.CallOption) (*GetTransactionMetadataResponse, error)
 	GetRateLimit(ctx context.Context, in *GetRateLimitRequest, opts ...grpc.CallOption) (*GetRateLimitResponse, error)
 	GetTransaction(ctx context.Context, in *GetTransactionRequest, opts ...grpc.CallOption) (*GetTransactionResponse, error)
 	PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
@@ -125,6 +126,15 @@ type apiClient struct {
 
 func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 	return &apiClient{cc}
+}
+
+func (c *apiClient) GetTransactionMetadata(ctx context.Context, in *GetTransactionMetadataRequest, opts ...grpc.CallOption) (*GetTransactionMetadataResponse, error) {
+	out := new(GetTransactionMetadataResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetTransactionMetadata", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *apiClient) GetRateLimit(ctx context.Context, in *GetRateLimitRequest, opts ...grpc.CallOption) (*GetRateLimitResponse, error) {
@@ -1451,6 +1461,7 @@ func (c *apiClient) PostPumpFunAmmSwap(ctx context.Context, in *PostPumpFunAmmSw
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
 type ApiServer interface {
+	GetTransactionMetadata(context.Context, *GetTransactionMetadataRequest) (*GetTransactionMetadataResponse, error)
 	GetRateLimit(context.Context, *GetRateLimitRequest) (*GetRateLimitResponse, error)
 	GetTransaction(context.Context, *GetTransactionRequest) (*GetTransactionResponse, error)
 	PostSubmitV2(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
@@ -1557,6 +1568,9 @@ type ApiServer interface {
 type UnimplementedApiServer struct {
 }
 
+func (UnimplementedApiServer) GetTransactionMetadata(context.Context, *GetTransactionMetadataRequest) (*GetTransactionMetadataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionMetadata not implemented")
+}
 func (UnimplementedApiServer) GetRateLimit(context.Context, *GetRateLimitRequest) (*GetRateLimitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRateLimit not implemented")
 }
@@ -1847,6 +1861,24 @@ type UnsafeApiServer interface {
 
 func RegisterApiServer(s grpc.ServiceRegistrar, srv ApiServer) {
 	s.RegisterService(&Api_ServiceDesc, srv)
+}
+
+func _Api_GetTransactionMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionMetadataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetTransactionMetadata(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetTransactionMetadata",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetTransactionMetadata(ctx, req.(*GetTransactionMetadataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Api_GetRateLimit_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -3593,6 +3625,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "api.Api",
 	HandlerType: (*ApiServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetTransactionMetadata",
+			Handler:    _Api_GetTransactionMetadata_Handler,
+		},
 		{
 			MethodName: "GetRateLimit",
 			Handler:    _Api_GetRateLimit_Handler,

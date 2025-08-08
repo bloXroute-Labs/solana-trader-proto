@@ -51,6 +51,17 @@ service Api {
     }
   };
 
+  rpc GetTransactionMetadata(GetTransactionMetadataRequest) returns (GetTransactionMetadataResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/transaction-metadata"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns diagnostic information reguarding a transaction propagated with the Solana Trader API";
+      summary: "Returns diagnostic information reguarding a transaction propagated with the Solana Trader API";
+      tags: ["Trade"];
+    };
+  }
+
   rpc GetRateLimit(GetRateLimitRequest) returns (GetRateLimitResponse) {
     option (google.api.http) = {
       get: "/api/v2/rate-limit"
@@ -1025,6 +1036,21 @@ service Api {
       tags: "AMMs";
     };
   }
+}
+
+message GetTransactionMetadataRequest {
+  string signature = 1;
+}
+
+message GetTransactionMetadataResponse {
+  repeated BundleInfo bundleInfo = 1;
+}
+
+message BundleInfo {
+  string bundleId = 1;
+  string region = 2;
+  int64 submissionSlot = 3;
+  int64 delayedSlots = 4; 
 }
 
 message GetMarketsRequest {
