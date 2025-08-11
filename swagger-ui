@@ -498,30 +498,6 @@
         ]
       }
     },
-    "/api/v1/system/time": {
-      "get": {
-        "summary": "Server time",
-        "description": "Returns current time on the server",
-        "operationId": "Api_GetServerTime",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetServerTimeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "tags": [
-          "System"
-        ]
-      }
-    },
     "/api/v1/trade/cancel": {
       "post": {
         "summary": "Unsigned CancelOrder transaction",
@@ -2572,6 +2548,30 @@
             "collectionFormat": "multi"
           }
         ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/api/v2/system/time": {
+      "get": {
+        "summary": "Server time",
+        "description": "Returns current time on the server",
+        "operationId": "Api_GetServerTime",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetServerTimeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
         "tags": [
           "System"
         ]
