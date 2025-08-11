@@ -67,6 +67,7 @@ type ApiClient interface {
 	GetQuotes(ctx context.Context, in *GetQuotesRequest, opts ...grpc.CallOption) (*GetQuotesResponse, error)
 	// system API
 	GetServerTime(ctx context.Context, in *GetServerTimeRequest, opts ...grpc.CallOption) (*GetServerTimeResponse, error)
+	GetSlotInfo(ctx context.Context, in *GetSlotInfoRequest, opts ...grpc.CallOption) (*GetSlotInfoResponse, error)
 	GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error)
 	GetRecentBlockHashV2(ctx context.Context, in *GetRecentBlockHashRequestV2, opts ...grpc.CallOption) (*GetRecentBlockHashResponseV2, error)
 	GetPriorityFee(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (*GetPriorityFeeResponse, error)
@@ -535,6 +536,15 @@ func (c *apiClient) GetQuotes(ctx context.Context, in *GetQuotesRequest, opts ..
 func (c *apiClient) GetServerTime(ctx context.Context, in *GetServerTimeRequest, opts ...grpc.CallOption) (*GetServerTimeResponse, error) {
 	out := new(GetServerTimeResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetServerTime", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetSlotInfo(ctx context.Context, in *GetSlotInfoRequest, opts ...grpc.CallOption) (*GetSlotInfoResponse, error) {
+	out := new(GetSlotInfoResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetSlotInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1500,6 +1510,7 @@ type ApiServer interface {
 	GetQuotes(context.Context, *GetQuotesRequest) (*GetQuotesResponse, error)
 	// system API
 	GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error)
+	GetSlotInfo(context.Context, *GetSlotInfoRequest) (*GetSlotInfoResponse, error)
 	GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error)
 	GetRecentBlockHashV2(context.Context, *GetRecentBlockHashRequestV2) (*GetRecentBlockHashResponseV2, error)
 	GetPriorityFee(context.Context, *GetPriorityFeeRequest) (*GetPriorityFeeResponse, error)
@@ -1694,6 +1705,9 @@ func (UnimplementedApiServer) GetQuotes(context.Context, *GetQuotesRequest) (*Ge
 }
 func (UnimplementedApiServer) GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerTime not implemented")
+}
+func (UnimplementedApiServer) GetSlotInfo(context.Context, *GetSlotInfoRequest) (*GetSlotInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSlotInfo not implemented")
 }
 func (UnimplementedApiServer) GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecentBlockHash not implemented")
@@ -2673,6 +2687,24 @@ func _Api_GetServerTime_Handler(srv interface{}, ctx context.Context, dec func(i
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetServerTime(ctx, req.(*GetServerTimeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetSlotInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSlotInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetSlotInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetSlotInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetSlotInfo(ctx, req.(*GetSlotInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3776,6 +3808,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetServerTime",
 			Handler:    _Api_GetServerTime_Handler,
+		},
+		{
+			MethodName: "GetSlotInfo",
+			Handler:    _Api_GetSlotInfo_Handler,
 		},
 		{
 			MethodName: "GetRecentBlockHash",

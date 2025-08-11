@@ -601,6 +601,17 @@ service Api {
     };
   }
 
+  rpc GetSlotInfo(GetSlotInfoRequest) returns (GetSlotInfoResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/system/slot-info"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns information about the requested slot. note  - limited to 2 epochs before and after current slot";
+      summary: "Slot info";
+      tags: "System";
+    };
+  }
+
   rpc GetRecentBlockHash(GetRecentBlockHashRequest) returns (GetRecentBlockHashResponse) {
     option (google.api.http) = {
       get: "/api/v1/system/blockhash"
@@ -1170,6 +1181,16 @@ message GetServerTimeRequest {}
 
 message GetServerTimeResponse {
   string timestamp = 1;
+}
+
+message GetSlotInfoRequest {
+  uint64 slot = 1;
+}
+
+message GetSlotInfoResponse {
+   uint64 slot = 1;
+  string leader = 2;
+  bool  malicious = 3;
 }
 
 message GetAccountBalanceRequest {

@@ -465,6 +465,39 @@
         ]
       }
     },
+    "/api/v1/system/slot-info": {
+      "get": {
+        "summary": "Slot info",
+        "description": "Returns information about the requested slot. note  - limited to 2 epochs before and after current slot",
+        "operationId": "Api_GetSlotInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetSlotInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slot",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
     "/api/v1/system/time": {
       "get": {
         "summary": "Server time",
@@ -3660,6 +3693,21 @@
       "properties": {
         "timestamp": {
           "type": "string"
+        }
+      }
+    },
+    "apiGetSlotInfoResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "leader": {
+          "type": "string"
+        },
+        "malicious": {
+          "type": "boolean"
         }
       }
     },

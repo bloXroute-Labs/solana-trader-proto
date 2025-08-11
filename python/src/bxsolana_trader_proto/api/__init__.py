@@ -248,6 +248,18 @@ class GetServerTimeResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetSlotInfoRequest(betterproto.Message):
+    slot: int = betterproto.uint64_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetSlotInfoResponse(betterproto.Message):
+    slot: int = betterproto.uint64_field(1)
+    leader: str = betterproto.string_field(2)
+    malicious: bool = betterproto.bool_field(3)
+
+
+@dataclass(eq=False, repr=False)
 class GetAccountBalanceRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
 
@@ -1221,16 +1233,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List["TransactionMetaInnerInstruction"] = (
-        betterproto.message_field(6)
-    )
+    inner_instructions: List[
+        "TransactionMetaInnerInstruction"
+    ] = betterproto.message_field(6)
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List["TransactionMetaTokenBalance"] = (
-        betterproto.message_field(9)
-    )
+    post_token_balances: List[
+        "TransactionMetaTokenBalance"
+    ] = betterproto.message_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -2715,6 +2727,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def get_slot_info(
+        self,
+        get_slot_info_request: "GetSlotInfoRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetSlotInfoResponse":
+        return await self._unary_unary(
+            "/api.Api/GetSlotInfo",
+            get_slot_info_request,
+            GetSlotInfoResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_recent_block_hash(
         self,
         get_recent_block_hash_request: "GetRecentBlockHashRequest",
@@ -3537,7 +3566,6 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
-
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
@@ -3769,6 +3797,11 @@ class ApiBase(ServiceBase):
     async def get_server_time(
         self, get_server_time_request: "GetServerTimeRequest"
     ) -> "GetServerTimeResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_slot_info(
+        self, get_slot_info_request: "GetSlotInfoRequest"
+    ) -> "GetSlotInfoResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_recent_block_hash(
@@ -4381,6 +4414,13 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_server_time(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_slot_info(
+        self, stream: "grpclib.server.Stream[GetSlotInfoRequest, GetSlotInfoResponse]"
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_slot_info(request)
         await stream.send_message(response)
 
     async def __rpc_get_recent_block_hash(
@@ -5088,6 +5128,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetServerTimeRequest,
                 GetServerTimeResponse,
+            ),
+            "/api.Api/GetSlotInfo": grpclib.const.Handler(
+                self.__rpc_get_slot_info,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetSlotInfoRequest,
+                GetSlotInfoResponse,
             ),
             "/api.Api/GetRecentBlockHash": grpclib.const.Handler(
                 self.__rpc_get_recent_block_hash,
