@@ -468,7 +468,7 @@
     "/api/v1/system/slot-info": {
       "get": {
         "summary": "Slot info",
-        "description": "Returns information about the requested slot. note  - limited to 2 epochs before and after current slot",
+        "description": "Returns information about the requested slot. note - limited to 2 epochs before and after current slot",
         "operationId": "Api_GetSlotInfo",
         "responses": {
           "200": {

@@ -606,7 +606,7 @@ service Api {
       get: "/api/v1/system/slot-info"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Returns information about the requested slot. note  - limited to 2 epochs before and after current slot";
+      description: "Returns information about the requested slot. note - limited to 2 epochs before and after current slot";
       summary: "Slot info";
       tags: "System";
     };
@@ -1188,7 +1188,7 @@ message GetSlotInfoRequest {
 }
 
 message GetSlotInfoResponse {
-   uint64 slot = 1;
+  uint64 slot = 1;
   string leader = 2;
   bool  malicious = 3;
 }
