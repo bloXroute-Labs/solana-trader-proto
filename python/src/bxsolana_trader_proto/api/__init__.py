@@ -1384,6 +1384,7 @@ class GetSwapsStreamUpdate(betterproto.Message):
     destination_account: str = betterproto.string_field(11)
     owner_account: str = betterproto.string_field(12)
     signature: str = betterproto.string_field(13)
+    cpmm: bool = betterproto.bool_field(14)
 
 
 @dataclass(eq=False, repr=False)

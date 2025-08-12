@@ -3722,6 +3722,9 @@
         },
         "signature": {
           "type": "string"
+        },
+        "cpmm": {
+          "type": "boolean"
         }
       }
     },
