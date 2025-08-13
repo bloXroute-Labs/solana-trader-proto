@@ -465,16 +465,16 @@
         ]
       }
     },
-    "/api/v1/system/slot-info": {
+    "/api/v1/system/time": {
       "get": {
-        "summary": "Slot info",
-        "description": "Returns information about the requested slot. note - limited to 2 epochs before and after current slot",
-        "operationId": "Api_GetSlotInfo",
+        "summary": "Server time",
+        "description": "Returns current time on the server",
+        "operationId": "Api_GetServerTime",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetSlotInfoResponse"
+              "$ref": "#/definitions/apiGetServerTimeResponse"
             }
           },
           "default": {
@@ -484,15 +484,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "slot",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "uint64"
-          }
-        ],
         "tags": [
           "System"
         ]
@@ -2553,16 +2544,16 @@
         ]
       }
     },
-    "/api/v2/system/time": {
+    "/api/v2/system/slot-info": {
       "get": {
-        "summary": "Server time",
-        "description": "Returns current time on the server",
-        "operationId": "Api_GetServerTime",
+        "summary": "Slot info",
+        "description": "Returns information about the requested slot. note - limited to 2 epochs before and after current slot",
+        "operationId": "Api_GetSlotInfo",
         "responses": {
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/apiGetServerTimeResponse"
+              "$ref": "#/definitions/apiGetSlotInfoResponse"
             }
           },
           "default": {
@@ -2572,6 +2563,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "slot",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
         "tags": [
           "System"
         ]

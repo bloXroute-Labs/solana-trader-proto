@@ -592,7 +592,7 @@ service Api {
   // system API
   rpc GetServerTime(GetServerTimeRequest) returns (GetServerTimeResponse) {
     option (google.api.http) = {
-      get: "/api/v2/system/time"
+      get: "/api/v1/system/time"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns current time on the server";
@@ -603,7 +603,7 @@ service Api {
 
   rpc GetSlotInfo(GetSlotInfoRequest) returns (GetSlotInfoResponse) {
     option (google.api.http) = {
-      get: "/api/v1/system/slot-info"
+      get: "/api/v2/system/slot-info"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns information about the requested slot. note - limited to 2 epochs before and after current slot";
