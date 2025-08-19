@@ -498,9 +498,6 @@ class PostSubmitRequest(betterproto.Message):
     revenue_address: Optional[str] = betterproto.string_field(
         9, optional=True, group="_revenueAddress"
     )
-    sniping: Optional[bool] = betterproto.bool_field(
-        10, optional=True, group="_sniping"
-    )
     timestamp: Optional[datetime] = betterproto.message_field(
         11, optional=True, group="_timestamp"
     )
@@ -529,10 +526,6 @@ class PostSubmitRequestEntry(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitBatchRequest(betterproto.Message):
     entries: List["PostSubmitRequestEntry"] = betterproto.message_field(1)
-    submit_strategy: "SubmitStrategy" = betterproto.enum_field(2)
-    use_bundle: Optional[bool] = betterproto.bool_field(
-        3, optional=True, group="_useBundle"
-    )
     front_running_protection: Optional[bool] = betterproto.bool_field(
         4, optional=True, group="_frontRunningProtection"
     )

@@ -5733,12 +5733,6 @@
             "$ref": "#/definitions/apiPostSubmitRequestEntry"
           }
         },
-        "submitStrategy": {
-          "$ref": "#/definitions/apiSubmitStrategy"
-        },
-        "useBundle": {
-          "type": "boolean"
-        },
         "frontRunningProtection": {
           "type": "boolean"
         },
@@ -5818,9 +5812,6 @@
         },
         "revenueAddress": {
           "type": "string"
-        },
-        "sniping": {
-          "type": "boolean"
         },
         "timestamp": {
           "type": "string",
@@ -6361,16 +6352,6 @@
         "SP_HIGH"
       ],
       "default": "SP_LOW"
-    },
-    "apiSubmitStrategy": {
-      "type": "string",
-      "enum": [
-        "P_UKNOWN",
-        "P_SUBMIT_ALL",
-        "P_ABORT_ON_FIRST_ERROR",
-        "P_WAIT_FOR_CONFIRMATION"
-      ],
-      "default": "P_UKNOWN"
     },
     "apiTicker": {
       "type": "object",
