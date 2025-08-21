@@ -80,6 +80,24 @@ class Project(betterproto.Enum):
 
 
 @dataclass(eq=False, repr=False)
+class GetTransactionTraceRequest(betterproto.Message):
+    signature: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetTransactionTraceResponse(betterproto.Message):
+    signature: str = betterproto.string_field(1)
+    first_received_time: datetime = betterproto.message_field(2)
+    first_released_time: datetime = betterproto.message_field(3)
+    first_received_slot: int = betterproto.int64_field(4)
+    first_released_slot: int = betterproto.int64_field(5)
+    first_received_region: str = betterproto.string_field(6)
+    first_released_region: str = betterproto.string_field(7)
+    delayed: bool = betterproto.bool_field(8)
+    delayed_slots: int = betterproto.int64_field(9)
+
+
+@dataclass(eq=False, repr=False)
 class GetMarketsRequest(betterproto.Message):
     pass
 
@@ -1233,16 +1251,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1958,6 +1976,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetRateLimit",
             get_rate_limit_request,
             GetRateLimitResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_transaction_trace(
+        self,
+        get_transaction_trace_request: "GetTransactionTraceRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetTransactionTraceResponse":
+        return await self._unary_unary(
+            "/api.Api/GetTransactionTrace",
+            get_transaction_trace_request,
+            GetTransactionTraceResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3567,9 +3602,15 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_transaction_trace(
+        self, get_transaction_trace_request: "GetTransactionTraceRequest"
+    ) -> "GetTransactionTraceResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_transaction(
@@ -4068,6 +4109,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_rate_limit(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_transaction_trace(
+        self,
+        stream: "grpclib.server.Stream[GetTransactionTraceRequest, GetTransactionTraceResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_transaction_trace(request)
         await stream.send_message(response)
 
     async def __rpc_get_transaction(
@@ -4859,6 +4908,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetRateLimitRequest,
                 GetRateLimitResponse,
+            ),
+            "/api.Api/GetTransactionTrace": grpclib.const.Handler(
+                self.__rpc_get_transaction_trace,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetTransactionTraceRequest,
+                GetTransactionTraceResponse,
             ),
             "/api.Api/GetTransaction": grpclib.const.Handler(
                 self.__rpc_get_transaction,

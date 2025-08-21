@@ -2577,6 +2577,38 @@
         ]
       }
     },
+    "/api/v2/system/trace": {
+      "get": {
+        "summary": "Returns the details when a transaction was received, released, and MEV-protection delay information",
+        "description": "Returns the details when a transaction was received, released, and MEV-protection delay information",
+        "operationId": "Api_GetTransactionTrace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTransactionTraceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "signature",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
     "/api/v2/transaction": {
       "get": {
         "summary": "Returns the details of a transaction",
@@ -2606,38 +2638,6 @@
         ],
         "tags": [
           "Solana RPC"
-        ]
-      }
-    },
-    "/api/v2/transaction-trace": {
-      "get": {
-        "summary": "Returns the details when a transaction was received, released, and MEV-protection delay information",
-        "description": "Returns the details when a transaction was received, released, and MEV-protection delay information",
-        "operationId": "Api_GetTransactionTrace",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetTransactionTraceResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "signature",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Trace"
         ]
       }
     },
