@@ -2609,6 +2609,38 @@
         ]
       }
     },
+    "/api/v2/transaction-trace": {
+      "get": {
+        "summary": "Returns the details when a transaction was received, released, and MEV-protection delay information",
+        "description": "Returns the details when a transaction was received, released, and MEV-protection delay information",
+        "operationId": "Api_GetTransactionTrace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTransactionTraceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "signature",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Trace"
+        ]
+      }
+    },
     "/api/v2/zeta/cross-margin-account": {
       "post": {
         "summary": "Zeta Markets Cross Margin Account Creation",
@@ -3872,6 +3904,43 @@
         "version": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "apiGetTransactionTraceResponse": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string"
+        },
+        "firstReceivedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "firstReleasedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "firstReceivedSlot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "firstReleasedSlot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "firstReceivedRegion": {
+          "type": "string"
+        },
+        "firstReleasedRegion": {
+          "type": "string"
+        },
+        "delayed": {
+          "type": "boolean"
+        },
+        "delayedSlots": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },
