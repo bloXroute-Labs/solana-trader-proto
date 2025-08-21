@@ -62,6 +62,17 @@ service Api {
     };
   }
 
+  rpc GetTransactionTrace(GetTransactionTraceRequest) returns (GetTransactionTraceResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/transaction-trace"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns the details when a transaction was received, released, and MEV-protection delay information";
+      summary: "Returns the details when a transaction was received, released, and MEV-protection delay information";
+      tags: ["Trace"];
+    };
+  }
+
   rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse) {
     option (google.api.http) = {
       get: "/api/v2/transaction"
@@ -1036,6 +1047,22 @@ service Api {
       tags: "AMMs";
     };
   }
+}
+
+message GetTransactionTraceRequest {
+  string signature = 1;
+}
+
+message GetTransactionTraceResponse {
+  string signature = 1;
+  google.protobuf.Timestamp firstReceivedTime = 2;
+  google.protobuf.Timestamp firstReleasedTime = 3;
+  int64 firstReceivedSlot = 4;
+  int64 firstReleasedSlot = 5;
+  string firstReceivedRegion = 6;
+  string firstReleasedRegion = 7;
+  bool delayed = 8;
+  int64 delayedSlots = 9;
 }
 
 message GetMarketsRequest {

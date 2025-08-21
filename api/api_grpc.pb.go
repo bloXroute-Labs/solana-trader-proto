@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
 	GetRateLimit(ctx context.Context, in *GetRateLimitRequest, opts ...grpc.CallOption) (*GetRateLimitResponse, error)
+	GetTransactionTrace(ctx context.Context, in *GetTransactionTraceRequest, opts ...grpc.CallOption) (*GetTransactionTraceResponse, error)
 	GetTransaction(ctx context.Context, in *GetTransactionRequest, opts ...grpc.CallOption) (*GetTransactionResponse, error)
 	PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
 	PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
@@ -131,6 +132,15 @@ func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 func (c *apiClient) GetRateLimit(ctx context.Context, in *GetRateLimitRequest, opts ...grpc.CallOption) (*GetRateLimitResponse, error) {
 	out := new(GetRateLimitResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRateLimit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetTransactionTrace(ctx context.Context, in *GetTransactionTraceRequest, opts ...grpc.CallOption) (*GetTransactionTraceResponse, error) {
+	out := new(GetTransactionTraceResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetTransactionTrace", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1462,6 +1472,7 @@ func (c *apiClient) PostPumpFunAmmSwap(ctx context.Context, in *PostPumpFunAmmSw
 // for forward compatibility
 type ApiServer interface {
 	GetRateLimit(context.Context, *GetRateLimitRequest) (*GetRateLimitResponse, error)
+	GetTransactionTrace(context.Context, *GetTransactionTraceRequest) (*GetTransactionTraceResponse, error)
 	GetTransaction(context.Context, *GetTransactionRequest) (*GetTransactionResponse, error)
 	PostSubmitV2(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
 	PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
@@ -1570,6 +1581,9 @@ type UnimplementedApiServer struct {
 
 func (UnimplementedApiServer) GetRateLimit(context.Context, *GetRateLimitRequest) (*GetRateLimitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRateLimit not implemented")
+}
+func (UnimplementedApiServer) GetTransactionTrace(context.Context, *GetTransactionTraceRequest) (*GetTransactionTraceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionTrace not implemented")
 }
 func (UnimplementedApiServer) GetTransaction(context.Context, *GetTransactionRequest) (*GetTransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransaction not implemented")
@@ -1877,6 +1891,24 @@ func _Api_GetRateLimit_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetRateLimit(ctx, req.(*GetRateLimitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetTransactionTrace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionTraceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetTransactionTrace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetTransactionTrace",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetTransactionTrace(ctx, req.(*GetTransactionTraceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3628,6 +3660,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRateLimit",
 			Handler:    _Api_GetRateLimit_Handler,
+		},
+		{
+			MethodName: "GetTransactionTrace",
+			Handler:    _Api_GetTransactionTrace_Handler,
 		},
 		{
 			MethodName: "GetTransaction",
