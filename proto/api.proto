@@ -64,12 +64,12 @@ service Api {
 
   rpc GetTransactionTrace(GetTransactionTraceRequest) returns (GetTransactionTraceResponse) {
     option (google.api.http) = {
-      get: "/api/v2/transaction-trace"
+      get: "/api/v2/system/trace"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       description: "Returns the details when a transaction was received, released, and MEV-protection delay information";
       summary: "Returns the details when a transaction was received, released, and MEV-protection delay information";
-      tags: ["Trace"];
+      tags: ["System"];
     };
   }
 
