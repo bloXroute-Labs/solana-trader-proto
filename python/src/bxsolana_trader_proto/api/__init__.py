@@ -57,6 +57,12 @@ class SubmitStrategy(betterproto.Enum):
     P_WAIT_FOR_CONFIRMATION = 3
 
 
+class SubmitProtection(betterproto.Enum):
+    SP_LOW = 0
+    SP_MEDIUM = 1
+    SP_HIGH = 2
+
+
 class Step(betterproto.Enum):
     STEP0 = 0
     STEP1 = 1
@@ -71,6 +77,24 @@ class Project(betterproto.Enum):
     P_RAYDIUM = 3
     P_SERUM = 4
     P_OPENBOOK = 5
+
+
+@dataclass(eq=False, repr=False)
+class GetTransactionTraceRequest(betterproto.Message):
+    signature: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetTransactionTraceResponse(betterproto.Message):
+    signature: str = betterproto.string_field(1)
+    first_received_time: datetime = betterproto.message_field(2)
+    first_released_time: datetime = betterproto.message_field(3)
+    first_received_slot: int = betterproto.int64_field(4)
+    first_released_slot: int = betterproto.int64_field(5)
+    first_received_region: str = betterproto.string_field(6)
+    first_released_region: str = betterproto.string_field(7)
+    delayed: bool = betterproto.bool_field(8)
+    delayed_slots: int = betterproto.int64_field(9)
 
 
 @dataclass(eq=False, repr=False)
@@ -242,6 +266,18 @@ class GetServerTimeResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetSlotInfoRequest(betterproto.Message):
+    slot: int = betterproto.uint64_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetSlotInfoResponse(betterproto.Message):
+    slot: int = betterproto.uint64_field(1)
+    leader: str = betterproto.string_field(2)
+    malicious: bool = betterproto.bool_field(3)
+
+
+@dataclass(eq=False, repr=False)
 class GetAccountBalanceRequest(betterproto.Message):
     owner_address: str = betterproto.string_field(1)
 
@@ -367,6 +403,11 @@ class TransactionMessage(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class TransactionMessageV2(betterproto.Message):
+    content: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostCancelAllResponse(betterproto.Message):
     transactions: List["TransactionMessage"] = betterproto.message_field(1)
 
@@ -468,6 +509,32 @@ class PostSubmitRequest(betterproto.Message):
     fast_best_effort: Optional[bool] = betterproto.bool_field(
         5, optional=True, group="_fastBestEffort"
     )
+    allow_back_run: Optional[bool] = betterproto.bool_field(
+        8, optional=True, group="_allowBackRun"
+    )
+    revenue_address: Optional[str] = betterproto.string_field(
+        9, optional=True, group="_revenueAddress"
+    )
+    sniping: Optional[bool] = betterproto.bool_field(
+        10, optional=True, group="_sniping"
+    )
+    timestamp: Optional[datetime] = betterproto.message_field(
+        11, optional=True, group="_timestamp"
+    )
+    submit_protection: Optional["SubmitProtection"] = betterproto.enum_field(
+        12, optional=True, group="_submitProtection"
+    )
+
+
+@dataclass(eq=False, repr=False)
+class PostSubmitPaladinRequest(betterproto.Message):
+    transaction: "TransactionMessageV2" = betterproto.message_field(1)
+    revert_protection: Optional[bool] = betterproto.bool_field(
+        2, optional=True, group="_revertProtection"
+    )
+    timestamp: Optional[datetime] = betterproto.message_field(
+        3, optional=True, group="_timestamp"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -483,6 +550,15 @@ class PostSubmitBatchRequest(betterproto.Message):
     use_bundle: Optional[bool] = betterproto.bool_field(
         3, optional=True, group="_useBundle"
     )
+    front_running_protection: Optional[bool] = betterproto.bool_field(
+        4, optional=True, group="_frontRunningProtection"
+    )
+    timestamp: Optional[datetime] = betterproto.message_field(
+        5, optional=True, group="_timestamp"
+    )
+    submit_protection: Optional["SubmitProtection"] = betterproto.enum_field(
+        6, optional=True, group="_submitProtection"
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -495,13 +571,27 @@ class PostSubmitBatchResponseEntry(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitBatchResponse(betterproto.Message):
     transactions: List["PostSubmitBatchResponseEntry"] = betterproto.message_field(1)
-    uuid: Optional[str] = betterproto.string_field(4, optional=True, group="_uuid")
+
+
+@dataclass(eq=False, repr=False)
+class PostSubmitSnipeRequest(betterproto.Message):
+    entries: List["PostSubmitRequestEntry"] = betterproto.message_field(1)
+    use_staked_rp_cs: Optional[bool] = betterproto.bool_field(
+        2, optional=True, group="_useStakedRPCs"
+    )
+    timestamp: Optional[datetime] = betterproto.message_field(
+        3, optional=True, group="_timestamp"
+    )
+
+
+@dataclass(eq=False, repr=False)
+class PostSubmitSnipeResponse(betterproto.Message):
+    transactions: List["PostSubmitBatchResponseEntry"] = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)
 class PostSubmitResponse(betterproto.Message):
     signature: str = betterproto.string_field(1)
-    uuid: Optional[str] = betterproto.string_field(2, optional=True, group="_uuid")
 
 
 @dataclass(eq=False, repr=False)
@@ -629,14 +719,67 @@ class GetRaydiumQuotesResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetPumpFunQuotesRequest(betterproto.Message):
+    quote_type: str = betterproto.string_field(1)
+    mint_address: str = betterproto.string_field(2)
+    bonding_curve_address: str = betterproto.string_field(3)
+    amount: float = betterproto.double_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunQuotesResponse(betterproto.Message):
+    quote_type: str = betterproto.string_field(1)
+    in_token_address: str = betterproto.string_field(2)
+    in_amount: float = betterproto.double_field(3)
+    out_token_address: str = betterproto.string_field(4)
+    out_amount: float = betterproto.double_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumCpmmQuotesRequest(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    out_token: str = betterproto.string_field(2)
+    in_amount: float = betterproto.double_field(3)
+    slippage: float = betterproto.double_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumCpmmQuotesResponse(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    in_token_address: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    out_token_address: str = betterproto.string_field(4)
+    in_amount: float = betterproto.double_field(5)
+    trade_fee_rate: int = betterproto.uint64_field(6)
+    routes: List["RaydiumQuoteRoute"] = betterproto.message_field(7)
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumCpmmSwapRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    in_token: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    in_amount: float = betterproto.double_field(4)
+    slippage: float = betterproto.double_field(5)
+    pool_address: str = betterproto.string_field(6)
+    compute_limit: int = betterproto.uint32_field(7)
+    compute_price: int = betterproto.uint64_field(8)
+    tip: Optional[int] = betterproto.uint64_field(9, optional=True, group="_tip")
+
+
+@dataclass(eq=False, repr=False)
+class PostRaydiumCpmmSwapResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+    out_amount: float = betterproto.double_field(2)
+    out_amount_min: float = betterproto.double_field(3)
+
+
+@dataclass(eq=False, repr=False)
 class GetJupiterQuotesRequest(betterproto.Message):
     in_token: str = betterproto.string_field(1)
     out_token: str = betterproto.string_field(2)
     in_amount: float = betterproto.double_field(3)
     slippage: float = betterproto.double_field(4)
-    fast_mode: Optional[bool] = betterproto.bool_field(
-        5, optional=True, group="_fastMode"
-    )
 
 
 @dataclass(eq=False, repr=False)
@@ -678,9 +821,6 @@ class PostJupiterSwapRequest(betterproto.Message):
     compute_limit: int = betterproto.uint32_field(6)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
-    fast_mode: Optional[bool] = betterproto.bool_field(
-        9, optional=True, group="_fastMode"
-    )
 
 
 @dataclass(eq=False, repr=False)
@@ -692,9 +832,6 @@ class PostJupiterSwapInstructionsRequest(betterproto.Message):
     slippage: float = betterproto.double_field(5)
     compute_price: int = betterproto.uint64_field(7)
     tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
-    fast_mode: Optional[bool] = betterproto.bool_field(
-        9, optional=True, group="_fastMode"
-    )
 
 
 @dataclass(eq=False, repr=False)
@@ -757,6 +894,16 @@ class PostRaydiumSwapResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetRaydiumClmmPoolsRequest(betterproto.Message):
+    pair_or_address: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumClmmPoolsResponse(betterproto.Message):
+    pools: List["ProjectPool"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class PostJupiterSwapResponse(betterproto.Message):
     transactions: List["TransactionMessage"] = betterproto.message_field(1)
     out_amount: float = betterproto.double_field(2)
@@ -811,6 +958,24 @@ class RaydiumRouteStep(betterproto.Message):
     out_amount_min: float = betterproto.double_field(5)
     pool_address: str = betterproto.string_field(6)
     project: "StepProject" = betterproto.message_field(7)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumClmmQuotesRequest(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    out_token: str = betterproto.string_field(2)
+    in_amount: float = betterproto.double_field(3)
+    slippage: float = betterproto.double_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class GetRaydiumClmmQuotesResponse(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    in_token_address: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    out_token_address: str = betterproto.string_field(4)
+    in_amount: float = betterproto.double_field(5)
+    routes: List["RaydiumQuoteRoute"] = betterproto.message_field(6)
 
 
 @dataclass(eq=False, repr=False)
@@ -946,6 +1111,17 @@ class GetRecentBlockHashResponse(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class GetRecentBlockHashRequestV2(betterproto.Message):
+    offset: int = betterproto.uint64_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetRecentBlockHashResponseV2(betterproto.Message):
+    block_hash: str = betterproto.string_field(1)
+    timestamp: datetime = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
 class Block(betterproto.Message):
     slot: int = betterproto.uint64_field(1)
     hash: str = betterproto.string_field(2)
@@ -962,6 +1138,11 @@ class GetBlockStreamRequest(betterproto.Message):
 class GetBlockStreamResponse(betterproto.Message):
     block: "Block" = betterproto.message_field(1)
     timestamp: datetime = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class InstructionRequest(betterproto.Message):
+    program_id_index: int = betterproto.uint32_field(1)
 
 
 @dataclass(eq=False, repr=False)
@@ -1069,16 +1250,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -1120,6 +1301,35 @@ class ProjectPool(betterproto.Message):
     token2_mint_address: str = betterproto.string_field(7)
     token2_mint_symbol: str = betterproto.string_field(8)
     open_time: int = betterproto.uint64_field(9)
+    pool_type: str = betterproto.string_field(10)
+    liquidity_pool_keys: "LiquidityPoolKeys" = betterproto.message_field(11)
+
+
+@dataclass(eq=False, repr=False)
+class LiquidityPoolKeys(betterproto.Message):
+    id: str = betterproto.string_field(1)
+    base_mint: str = betterproto.string_field(2)
+    quote_mint: str = betterproto.string_field(3)
+    lp_mint: str = betterproto.string_field(4)
+    version: int = betterproto.uint32_field(5)
+    program_id: str = betterproto.string_field(6)
+    authority: str = betterproto.string_field(7)
+    base_vault: str = betterproto.string_field(8)
+    quote_vault: str = betterproto.string_field(9)
+    lp_vault: str = betterproto.string_field(10)
+    open_orders: str = betterproto.string_field(11)
+    target_orders: str = betterproto.string_field(12)
+    withdraw_queue: str = betterproto.string_field(13)
+    market_version: int = betterproto.uint32_field(14)
+    market_program_id: str = betterproto.string_field(15)
+    market_id: str = betterproto.string_field(16)
+    market_authority: str = betterproto.string_field(17)
+    market_base_vault: str = betterproto.string_field(18)
+    market_quote_vault: str = betterproto.string_field(19)
+    market_bids: str = betterproto.string_field(20)
+    market_asks: str = betterproto.string_field(21)
+    market_event_queue: str = betterproto.string_field(22)
+    trade_fee_rate: int = betterproto.uint64_field(23)
 
 
 @dataclass(eq=False, repr=False)
@@ -1162,7 +1372,23 @@ class GetSwapsStreamResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetNewRaydiumPoolsRequest(betterproto.Message):
+    include_cpmm: Optional[bool] = betterproto.bool_field(
+        1, optional=True, group="_includeCPMM"
+    )
+
+
+@dataclass(eq=False, repr=False)
+class GetNewRaydiumPoolsByTransactionRequest(betterproto.Message):
     pass
+
+
+@dataclass(eq=False, repr=False)
+class GetNewRaydiumPoolsByTransactionResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    signature: str = betterproto.string_field(2)
+    pool_creator_wallet: str = betterproto.string_field(3)
+    pool: "ProjectPool" = betterproto.message_field(4)
+    timestamp: datetime = betterproto.message_field(5)
 
 
 @dataclass(eq=False, repr=False)
@@ -1187,18 +1413,7 @@ class GetSwapsStreamUpdate(betterproto.Message):
     destination_account: str = betterproto.string_field(11)
     owner_account: str = betterproto.string_field(12)
     signature: str = betterproto.string_field(13)
-
-
-@dataclass(eq=False, repr=False)
-class GetBundleResultRequest(betterproto.Message):
-    uuid: str = betterproto.string_field(1)
-
-
-@dataclass(eq=False, repr=False)
-class GetBundleResultResponse(betterproto.Message):
-    uuid: str = betterproto.string_field(1)
-    bundle_result: str = betterproto.string_field(2)
-    timestamp: datetime = betterproto.message_field(3)
+    cpmm: bool = betterproto.bool_field(14)
 
 
 @dataclass(eq=False, repr=False)
@@ -1236,6 +1451,39 @@ class GetRaydiumPricesResponse(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class GetJupiterPricesResponse(betterproto.Message):
     token_prices: List["TokenPriceV2"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetZetaTransactionStreamRequest(betterproto.Message):
+    instructions: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionZeta(betterproto.Message):
+    signatures: List[str] = betterproto.string_field(1)
+    message: "TransactionMessageZeta" = betterproto.message_field(2)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionMessageZeta(betterproto.Message):
+    header: "TransactionMessageHeader" = betterproto.message_field(2)
+    account_keys: List[str] = betterproto.string_field(3)
+    recent_blockhash: str = betterproto.string_field(4)
+    instructions: List["Instruction"] = betterproto.message_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class TransactionMessageHeader(betterproto.Message):
+    num_required_signatures: int = betterproto.uint32_field(1)
+    num_readonly_signed_accounts: int = betterproto.uint32_field(2)
+    num_readonly_unsigned_accounts: int = betterproto.uint32_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class GetZetaTransactionStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    transaction: "TransactionZeta" = betterproto.message_field(2)
+    meta: "TransactionMeta" = betterproto.message_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -1308,6 +1556,41 @@ class GetPriorityFeeResponse(betterproto.Message):
     project: "Project" = betterproto.enum_field(1)
     percentile: float = betterproto.double_field(2)
     fee_at_percentile: int = betterproto.uint64_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class GetPriorityFeeByProgramRequest(betterproto.Message):
+    programs: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetPriorityFeeByProgramResponse(betterproto.Message):
+    data: List["ProgramPriorityFee"] = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class ProgramPriorityFee(betterproto.Message):
+    ten: int = betterproto.uint64_field(1)
+    hundred: int = betterproto.uint64_field(2)
+    fifteen: int = betterproto.uint64_field(3)
+    twenty: int = betterproto.uint64_field(4)
+    twenty_five: int = betterproto.uint64_field(5)
+    thirty: int = betterproto.uint64_field(6)
+    thirty_five: int = betterproto.uint64_field(7)
+    forty: int = betterproto.uint64_field(8)
+    forty_five: int = betterproto.uint64_field(9)
+    five: int = betterproto.uint64_field(10)
+    fifty: int = betterproto.uint64_field(11)
+    fifty_five: int = betterproto.uint64_field(12)
+    sixty: int = betterproto.uint64_field(13)
+    sixty_five: int = betterproto.uint64_field(14)
+    seventy: int = betterproto.uint64_field(15)
+    seventy_five: int = betterproto.uint64_field(16)
+    eighty: int = betterproto.uint64_field(17)
+    eighty_five: int = betterproto.uint64_field(18)
+    ninety: int = betterproto.uint64_field(19)
+    ninety_five: int = betterproto.uint64_field(20)
+    program: str = betterproto.string_field(21)
 
 
 @dataclass(eq=False, repr=False)
@@ -1477,6 +1760,19 @@ class PostSettleRequestV2(betterproto.Message):
 
 
 @dataclass(eq=False, repr=False)
+class PostZetaCrossMarginAccountRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    compute_limit: int = betterproto.uint32_field(2)
+    compute_price: int = betterproto.uint64_field(3)
+    tip: Optional[int] = betterproto.uint64_field(4, optional=True, group="_tip")
+
+
+@dataclass(eq=False, repr=False)
+class PostZetaCrossMarginAccountResponse(betterproto.Message):
+    transaction: "TransactionMessage" = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
 class GetOpenOrdersRequestV2(betterproto.Message):
     market: str = betterproto.string_field(1)
     limit: int = betterproto.uint32_field(2)
@@ -1510,6 +1806,162 @@ class OrderV2(betterproto.Message):
     open_order_account: str = betterproto.string_field(9)
 
 
+@dataclass(eq=False, repr=False)
+class GetPumpFunSwapsStreamRequest(betterproto.Message):
+    tokens: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunSwapsStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    txn_hash: str = betterproto.string_field(2)
+    mint_address: str = betterproto.string_field(3)
+    user_address: str = betterproto.string_field(4)
+    user_token_account_address: str = betterproto.string_field(5)
+    bonding_curve_address: str = betterproto.string_field(6)
+    token_vault_address: str = betterproto.string_field(7)
+    sol_amount: int = betterproto.uint64_field(8)
+    token_amount: int = betterproto.uint64_field(9)
+    is_buy: bool = betterproto.bool_field(10)
+    virtual_sol_reserves: int = betterproto.uint64_field(11)
+    virtual_token_reserves: int = betterproto.uint64_field(12)
+    timestamp: datetime = betterproto.message_field(13)
+    creator: str = betterproto.string_field(14)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunNewTokensStreamRequest(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunNewTokensStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    txn_hash: str = betterproto.string_field(2)
+    name: str = betterproto.string_field(3)
+    symbol: str = betterproto.string_field(4)
+    uri: str = betterproto.string_field(5)
+    mint: str = betterproto.string_field(6)
+    bonding_curve: str = betterproto.string_field(7)
+    creator: str = betterproto.string_field(8)
+    timestamp: datetime = betterproto.message_field(9)
+    creator_vault: str = betterproto.string_field(10)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunNewAmmPoolStreamRequest(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunNewAmmPoolStreamResponse(betterproto.Message):
+    slot: int = betterproto.int64_field(1)
+    creator: str = betterproto.string_field(2)
+    pool: str = betterproto.string_field(3)
+    base_mint: str = betterproto.string_field(4)
+    quote_mint: str = betterproto.string_field(5)
+    lp_mint: str = betterproto.string_field(6)
+    timestamp: datetime = betterproto.message_field(9)
+    coin_creator: str = betterproto.string_field(10)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunAmmSwapStreamRequest(betterproto.Message):
+    pools: List[str] = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunAmmSwapStreamResponse(betterproto.Message):
+    pool: str = betterproto.string_field(1)
+    user: str = betterproto.string_field(2)
+    is_buy: bool = betterproto.bool_field(3)
+    quote_mint: str = betterproto.string_field(4)
+    base_mint: str = betterproto.string_field(5)
+    in_amount: float = betterproto.double_field(6)
+    out_amount: float = betterproto.double_field(7)
+    tx_hash: str = betterproto.string_field(8)
+    timestamp: datetime = betterproto.message_field(9)
+    slot: int = betterproto.uint64_field(10)
+
+
+@dataclass(eq=False, repr=False)
+class PostPumpFunSwapRequest(betterproto.Message):
+    user_address: str = betterproto.string_field(1)
+    bonding_curve_address: str = betterproto.string_field(2)
+    token_address: str = betterproto.string_field(3)
+    token_amount: float = betterproto.double_field(4)
+    sol_threshold: float = betterproto.double_field(5)
+    is_buy: bool = betterproto.bool_field(6)
+    slippage: float = betterproto.double_field(7)
+    compute_limit: int = betterproto.uint32_field(8)
+    compute_price: int = betterproto.uint64_field(9)
+    tip: Optional[int] = betterproto.uint64_field(10, optional=True, group="_tip")
+    creator: str = betterproto.string_field(11)
+
+
+@dataclass(eq=False, repr=False)
+class PostPumpFunSwapRequestSol(betterproto.Message):
+    user_address: str = betterproto.string_field(1)
+    bonding_curve_address: str = betterproto.string_field(2)
+    token_address: str = betterproto.string_field(3)
+    sol_amount: float = betterproto.double_field(4)
+    slippage: float = betterproto.double_field(5)
+    compute_limit: int = betterproto.uint32_field(6)
+    compute_price: int = betterproto.uint64_field(7)
+    tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
+    creator: str = betterproto.string_field(9)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunAmmQuotesRequest(betterproto.Message):
+    in_token: str = betterproto.string_field(1)
+    in_amount: float = betterproto.double_field(2)
+    out_token: str = betterproto.string_field(3)
+    pool: str = betterproto.string_field(4)
+    slippage: float = betterproto.double_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class GetPumpFunAmmQuotesResponse(betterproto.Message):
+    quote_type: str = betterproto.string_field(1)
+    in_token: str = betterproto.string_field(2)
+    in_amount: float = betterproto.double_field(3)
+    out_token: str = betterproto.string_field(4)
+    out_amount: float = betterproto.double_field(5)
+
+
+@dataclass(eq=False, repr=False)
+class PostPumpFunAmmSwapRequest(betterproto.Message):
+    owner_address: str = betterproto.string_field(1)
+    in_token: str = betterproto.string_field(2)
+    out_token: str = betterproto.string_field(3)
+    pool: str = betterproto.string_field(4)
+    in_amount: float = betterproto.double_field(5)
+    slippage: float = betterproto.double_field(6)
+    compute_limit: int = betterproto.uint32_field(7)
+    compute_price: int = betterproto.uint64_field(8)
+    tip: Optional[int] = betterproto.uint64_field(9, optional=True, group="_tip")
+
+
+@dataclass(eq=False, repr=False)
+class PostPumpFunAmmSwapResponse(betterproto.Message):
+    transactions: List["TransactionMessage"] = betterproto.message_field(1)
+    buy_quote_amount_in: float = betterproto.double_field(2)
+    buy_user_quote_amount_in: float = betterproto.double_field(3)
+    buy_max_quote_amount_in: float = betterproto.double_field(4)
+    buy_base_amount_out: float = betterproto.double_field(5)
+    sell_base_amount_in: float = betterproto.double_field(6)
+    sell_min_quote_amount_out: float = betterproto.double_field(7)
+    sell_quote_amount_out: float = betterproto.double_field(8)
+    sell_user_quote_amount_out: float = betterproto.double_field(9)
+    fees: List["_common__.Fee"] = betterproto.message_field(10)
+
+
+@dataclass(eq=False, repr=False)
+class PostPumpFunSwapResponse(betterproto.Message):
+    transaction: "TransactionMessageV2" = betterproto.message_field(1)
+
+
 class ApiStub(betterproto.ServiceStub):
     async def get_rate_limit(
         self,
@@ -1523,6 +1975,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetRateLimit",
             get_rate_limit_request,
             GetRateLimitResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_transaction_trace(
+        self,
+        get_transaction_trace_request: "GetTransactionTraceRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetTransactionTraceResponse":
+        return await self._unary_unary(
+            "/api.Api/GetTransactionTrace",
+            get_transaction_trace_request,
+            GetTransactionTraceResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -1579,6 +2048,40 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def post_submit_snipe_v2(
+        self,
+        post_submit_snipe_request: "PostSubmitSnipeRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitSnipeResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitSnipeV2",
+            post_submit_snipe_request,
+            PostSubmitSnipeResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_submit_paladin_v2(
+        self,
+        post_submit_paladin_request: "PostSubmitPaladinRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostSubmitResponse":
+        return await self._unary_unary(
+            "/api.Api/PostSubmitPaladinV2",
+            post_submit_paladin_request,
+            PostSubmitResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_raydium_pools(
         self,
         get_raydium_pools_request: "GetRaydiumPoolsRequest",
@@ -1630,6 +2133,40 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def get_pump_fun_quotes(
+        self,
+        get_pump_fun_quotes_request: "GetPumpFunQuotesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetPumpFunQuotesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetPumpFunQuotes",
+            get_pump_fun_quotes_request,
+            GetPumpFunQuotesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_raydium_cpmm_quotes(
+        self,
+        get_raydium_cpmm_quotes_request: "GetRaydiumCpmmQuotesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumCpmmQuotesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRaydiumCPMMQuotes",
+            get_raydium_cpmm_quotes_request,
+            GetRaydiumCpmmQuotesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_raydium_prices(
         self,
         get_raydium_prices_request: "GetRaydiumPricesRequest",
@@ -1642,6 +2179,74 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetRaydiumPrices",
             get_raydium_prices_request,
             GetRaydiumPricesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_raydium_clmm_quotes(
+        self,
+        get_raydium_clmm_quotes_request: "GetRaydiumClmmQuotesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumClmmQuotesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRaydiumCLMMQuotes",
+            get_raydium_clmm_quotes_request,
+            GetRaydiumClmmQuotesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_raydium_clmm_pools(
+        self,
+        get_raydium_clmm_pools_request: "GetRaydiumClmmPoolsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRaydiumClmmPoolsResponse":
+        return await self._unary_unary(
+            "/api.Api/GetRaydiumCLMMPools",
+            get_raydium_clmm_pools_request,
+            GetRaydiumClmmPoolsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_raydium_clmm_swap(
+        self,
+        post_raydium_swap_request: "PostRaydiumSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostRaydiumSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostRaydiumCLMMSwap",
+            post_raydium_swap_request,
+            PostRaydiumSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_raydium_clmm_route_swap(
+        self,
+        post_raydium_route_swap_request: "PostRaydiumRouteSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostRaydiumRouteSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostRaydiumCLMMRouteSwap",
+            post_raydium_route_swap_request,
+            PostRaydiumRouteSwapResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -1676,6 +2281,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostRaydiumRouteSwap",
             post_raydium_route_swap_request,
             PostRaydiumRouteSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_raydium_cpmm_swap(
+        self,
+        post_raydium_cpmm_swap_request: "PostRaydiumCpmmSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostRaydiumCpmmSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostRaydiumCPMMSwap",
+            post_raydium_cpmm_swap_request,
+            PostRaydiumCpmmSwapResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -1902,6 +2524,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def post_zeta_cross_margin_account(
+        self,
+        post_zeta_cross_margin_account_request: "PostZetaCrossMarginAccountRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostZetaCrossMarginAccountResponse":
+        return await self._unary_unary(
+            "/api.Api/PostZetaCrossMarginAccount",
+            post_zeta_cross_margin_account_request,
+            PostZetaCrossMarginAccountResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def post_settle_v2(
         self,
         post_settle_request_v2: "PostSettleRequestV2",
@@ -2123,6 +2762,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def get_slot_info(
+        self,
+        get_slot_info_request: "GetSlotInfoRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetSlotInfoResponse":
+        return await self._unary_unary(
+            "/api.Api/GetSlotInfo",
+            get_slot_info_request,
+            GetSlotInfoResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_recent_block_hash(
         self,
         get_recent_block_hash_request: "GetRecentBlockHashRequest",
@@ -2140,6 +2796,23 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
+    async def get_recent_block_hash_v2(
+        self,
+        get_recent_block_hash_request_v2: "GetRecentBlockHashRequestV2",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetRecentBlockHashResponseV2":
+        return await self._unary_unary(
+            "/api.Api/GetRecentBlockHashV2",
+            get_recent_block_hash_request_v2,
+            GetRecentBlockHashResponseV2,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
     async def get_priority_fee(
         self,
         get_priority_fee_request: "GetPriorityFeeRequest",
@@ -2152,6 +2825,23 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetPriorityFee",
             get_priority_fee_request,
             GetPriorityFeeResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_priority_fee_by_program(
+        self,
+        get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetPriorityFeeByProgramResponse":
+        return await self._unary_unary(
+            "/api.Api/GetPriorityFeeByProgram",
+            get_priority_fee_by_program_request,
+            GetPriorityFeeByProgramResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2429,23 +3119,6 @@ class ApiStub(betterproto.ServiceStub):
             metadata=metadata,
         )
 
-    async def get_bundle_result_v2(
-        self,
-        get_bundle_result_request: "GetBundleResultRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "GetBundleResultResponse":
-        return await self._unary_unary(
-            "/api.Api/GetBundleResultV2",
-            get_bundle_result_request,
-            GetBundleResultResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
     async def get_unsettled(
         self,
         get_unsettled_request: "GetUnsettledRequest",
@@ -2528,6 +3201,24 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetTickersStream",
             get_tickers_stream_request,
             GetTickersStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
+    async def get_zeta_transaction_stream(
+        self,
+        get_zeta_transaction_stream_request: "GetZetaTransactionStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetZetaTransactionStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetZetaTransactionStream",
+            get_zeta_transaction_stream_request,
+            GetZetaTransactionStreamResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -2624,6 +3315,24 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_priority_fee_by_program_stream(
+        self,
+        get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPriorityFeeByProgramResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPriorityFeeByProgramStream",
+            get_priority_fee_by_program_request,
+            GetPriorityFeeByProgramResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
     async def get_bundle_tip_stream(
         self,
         get_bundle_tip_request: "GetBundleTipRequest",
@@ -2714,6 +3423,24 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_new_raydium_pools_by_transaction_stream(
+        self,
+        get_new_raydium_pools_by_transaction_request: "GetNewRaydiumPoolsByTransactionRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetNewRaydiumPoolsByTransactionResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetNewRaydiumPoolsByTransactionStream",
+            get_new_raydium_pools_by_transaction_request,
+            GetNewRaydiumPoolsByTransactionResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
     async def get_swaps_stream(
         self,
         get_swaps_stream_request: "GetSwapsStreamRequest",
@@ -2732,11 +3459,157 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
+    async def get_pump_fun_swaps_stream(
+        self,
+        get_pump_fun_swaps_stream_request: "GetPumpFunSwapsStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPumpFunSwapsStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPumpFunSwapsStream",
+            get_pump_fun_swaps_stream_request,
+            GetPumpFunSwapsStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
+    async def get_pump_fun_new_tokens_stream(
+        self,
+        get_pump_fun_new_tokens_stream_request: "GetPumpFunNewTokensStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPumpFunNewTokensStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPumpFunNewTokensStream",
+            get_pump_fun_new_tokens_stream_request,
+            GetPumpFunNewTokensStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
+    async def get_pump_fun_new_amm_pool_stream(
+        self,
+        get_pump_fun_new_amm_pool_stream_request: "GetPumpFunNewAmmPoolStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPumpFunNewAmmPoolStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPumpFunNewAmmPoolStream",
+            get_pump_fun_new_amm_pool_stream_request,
+            GetPumpFunNewAmmPoolStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
+    async def get_pump_fun_amm_swap_stream(
+        self,
+        get_pump_fun_amm_swap_stream_request: "GetPumpFunAmmSwapStreamRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> AsyncIterator["GetPumpFunAmmSwapStreamResponse"]:
+        async for response in self._unary_stream(
+            "/api.Api/GetPumpFunAMMSwapStream",
+            get_pump_fun_amm_swap_stream_request,
+            GetPumpFunAmmSwapStreamResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        ):
+            yield response
+
+    async def post_pump_fun_swap(
+        self,
+        post_pump_fun_swap_request: "PostPumpFunSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostPumpFunSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostPumpFunSwap",
+            post_pump_fun_swap_request,
+            PostPumpFunSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_pump_fun_swap_sol(
+        self,
+        post_pump_fun_swap_request_sol: "PostPumpFunSwapRequestSol",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostPumpFunSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostPumpFunSwapSol",
+            post_pump_fun_swap_request_sol,
+            PostPumpFunSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_pump_fun_amm_quotes(
+        self,
+        get_pump_fun_amm_quotes_request: "GetPumpFunAmmQuotesRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetPumpFunAmmQuotesResponse":
+        return await self._unary_unary(
+            "/api.Api/GetPumpFunAmmQuotes",
+            get_pump_fun_amm_quotes_request,
+            GetPumpFunAmmQuotesResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_pump_fun_amm_swap(
+        self,
+        post_pump_fun_amm_swap_request: "PostPumpFunAmmSwapRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostPumpFunAmmSwapResponse":
+        return await self._unary_unary(
+            "/api.Api/PostPumpFunAmmSwap",
+            post_pump_fun_amm_swap_request,
+            PostPumpFunAmmSwapResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
 
 class ApiBase(ServiceBase):
+
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_transaction_trace(
+        self, get_transaction_trace_request: "GetTransactionTraceRequest"
+    ) -> "GetTransactionTraceResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_transaction(
@@ -2754,6 +3627,16 @@ class ApiBase(ServiceBase):
     ) -> "PostSubmitBatchResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_submit_snipe_v2(
+        self, post_submit_snipe_request: "PostSubmitSnipeRequest"
+    ) -> "PostSubmitSnipeResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_submit_paladin_v2(
+        self, post_submit_paladin_request: "PostSubmitPaladinRequest"
+    ) -> "PostSubmitResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_raydium_pools(
         self, get_raydium_pools_request: "GetRaydiumPoolsRequest"
     ) -> "GetRaydiumPoolsResponse":
@@ -2769,9 +3652,39 @@ class ApiBase(ServiceBase):
     ) -> "GetRaydiumQuotesResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def get_pump_fun_quotes(
+        self, get_pump_fun_quotes_request: "GetPumpFunQuotesRequest"
+    ) -> "GetPumpFunQuotesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_raydium_cpmm_quotes(
+        self, get_raydium_cpmm_quotes_request: "GetRaydiumCpmmQuotesRequest"
+    ) -> "GetRaydiumCpmmQuotesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_raydium_prices(
         self, get_raydium_prices_request: "GetRaydiumPricesRequest"
     ) -> "GetRaydiumPricesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_raydium_clmm_quotes(
+        self, get_raydium_clmm_quotes_request: "GetRaydiumClmmQuotesRequest"
+    ) -> "GetRaydiumClmmQuotesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_raydium_clmm_pools(
+        self, get_raydium_clmm_pools_request: "GetRaydiumClmmPoolsRequest"
+    ) -> "GetRaydiumClmmPoolsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_raydium_clmm_swap(
+        self, post_raydium_swap_request: "PostRaydiumSwapRequest"
+    ) -> "PostRaydiumSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_raydium_clmm_route_swap(
+        self, post_raydium_route_swap_request: "PostRaydiumRouteSwapRequest"
+    ) -> "PostRaydiumRouteSwapResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def post_raydium_swap(
@@ -2782,6 +3695,11 @@ class ApiBase(ServiceBase):
     async def post_raydium_route_swap(
         self, post_raydium_route_swap_request: "PostRaydiumRouteSwapRequest"
     ) -> "PostRaydiumRouteSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_raydium_cpmm_swap(
+        self, post_raydium_cpmm_swap_request: "PostRaydiumCpmmSwapRequest"
+    ) -> "PostRaydiumCpmmSwapResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_jupiter_quotes(
@@ -2851,6 +3769,12 @@ class ApiBase(ServiceBase):
     ) -> "PostOrderResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_zeta_cross_margin_account(
+        self,
+        post_zeta_cross_margin_account_request: "PostZetaCrossMarginAccountRequest",
+    ) -> "PostZetaCrossMarginAccountResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def post_settle_v2(
         self, post_settle_request_v2: "PostSettleRequestV2"
     ) -> "PostSettleResponse":
@@ -2916,14 +3840,29 @@ class ApiBase(ServiceBase):
     ) -> "GetServerTimeResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def get_slot_info(
+        self, get_slot_info_request: "GetSlotInfoRequest"
+    ) -> "GetSlotInfoResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_recent_block_hash(
         self, get_recent_block_hash_request: "GetRecentBlockHashRequest"
     ) -> "GetRecentBlockHashResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def get_recent_block_hash_v2(
+        self, get_recent_block_hash_request_v2: "GetRecentBlockHashRequestV2"
+    ) -> "GetRecentBlockHashResponseV2":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_priority_fee(
         self, get_priority_fee_request: "GetPriorityFeeRequest"
     ) -> "GetPriorityFeeResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_priority_fee_by_program(
+        self, get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest"
+    ) -> "GetPriorityFeeByProgramResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_account_balance(
@@ -3006,11 +3945,6 @@ class ApiBase(ServiceBase):
     ) -> "GetOrderByIdResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
-    async def get_bundle_result_v2(
-        self, get_bundle_result_request: "GetBundleResultRequest"
-    ) -> "GetBundleResultResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
     async def get_unsettled(
         self, get_unsettled_request: "GetUnsettledRequest"
     ) -> "GetUnsettledResponse":
@@ -3038,6 +3972,12 @@ class ApiBase(ServiceBase):
     ) -> AsyncIterator["GetTickersStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetTickersStreamResponse()
+
+    async def get_zeta_transaction_stream(
+        self, get_zeta_transaction_stream_request: "GetZetaTransactionStreamRequest"
+    ) -> AsyncIterator["GetZetaTransactionStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetZetaTransactionStreamResponse()
 
     async def get_trades_stream(
         self, get_trades_request: "GetTradesRequest"
@@ -3069,6 +4009,12 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetPriorityFeeResponse()
 
+    async def get_priority_fee_by_program_stream(
+        self, get_priority_fee_by_program_request: "GetPriorityFeeByProgramRequest"
+    ) -> AsyncIterator["GetPriorityFeeByProgramResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPriorityFeeByProgramResponse()
+
     async def get_bundle_tip_stream(
         self, get_bundle_tip_request: "GetBundleTipRequest"
     ) -> AsyncIterator["GetBundleTipResponse"]:
@@ -3099,17 +4045,77 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetNewRaydiumPoolsResponse()
 
+    async def get_new_raydium_pools_by_transaction_stream(
+        self,
+        get_new_raydium_pools_by_transaction_request: "GetNewRaydiumPoolsByTransactionRequest",
+    ) -> AsyncIterator["GetNewRaydiumPoolsByTransactionResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetNewRaydiumPoolsByTransactionResponse()
+
     async def get_swaps_stream(
         self, get_swaps_stream_request: "GetSwapsStreamRequest"
     ) -> AsyncIterator["GetSwapsStreamResponse"]:
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetSwapsStreamResponse()
 
+    async def get_pump_fun_swaps_stream(
+        self, get_pump_fun_swaps_stream_request: "GetPumpFunSwapsStreamRequest"
+    ) -> AsyncIterator["GetPumpFunSwapsStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPumpFunSwapsStreamResponse()
+
+    async def get_pump_fun_new_tokens_stream(
+        self, get_pump_fun_new_tokens_stream_request: "GetPumpFunNewTokensStreamRequest"
+    ) -> AsyncIterator["GetPumpFunNewTokensStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPumpFunNewTokensStreamResponse()
+
+    async def get_pump_fun_new_amm_pool_stream(
+        self,
+        get_pump_fun_new_amm_pool_stream_request: "GetPumpFunNewAmmPoolStreamRequest",
+    ) -> AsyncIterator["GetPumpFunNewAmmPoolStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPumpFunNewAmmPoolStreamResponse()
+
+    async def get_pump_fun_amm_swap_stream(
+        self, get_pump_fun_amm_swap_stream_request: "GetPumpFunAmmSwapStreamRequest"
+    ) -> AsyncIterator["GetPumpFunAmmSwapStreamResponse"]:
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+        yield GetPumpFunAmmSwapStreamResponse()
+
+    async def post_pump_fun_swap(
+        self, post_pump_fun_swap_request: "PostPumpFunSwapRequest"
+    ) -> "PostPumpFunSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_pump_fun_swap_sol(
+        self, post_pump_fun_swap_request_sol: "PostPumpFunSwapRequestSol"
+    ) -> "PostPumpFunSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_pump_fun_amm_quotes(
+        self, get_pump_fun_amm_quotes_request: "GetPumpFunAmmQuotesRequest"
+    ) -> "GetPumpFunAmmQuotesResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def post_pump_fun_amm_swap(
+        self, post_pump_fun_amm_swap_request: "PostPumpFunAmmSwapRequest"
+    ) -> "PostPumpFunAmmSwapResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def __rpc_get_rate_limit(
         self, stream: "grpclib.server.Stream[GetRateLimitRequest, GetRateLimitResponse]"
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_rate_limit(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_transaction_trace(
+        self,
+        stream: "grpclib.server.Stream[GetTransactionTraceRequest, GetTransactionTraceResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_transaction_trace(request)
         await stream.send_message(response)
 
     async def __rpc_get_transaction(
@@ -3133,6 +4139,22 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_submit_batch_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_submit_snipe_v2(
+        self,
+        stream: "grpclib.server.Stream[PostSubmitSnipeRequest, PostSubmitSnipeResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_snipe_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_submit_paladin_v2(
+        self,
+        stream: "grpclib.server.Stream[PostSubmitPaladinRequest, PostSubmitResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_submit_paladin_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_pools(
@@ -3159,12 +4181,60 @@ class ApiBase(ServiceBase):
         response = await self.get_raydium_quotes(request)
         await stream.send_message(response)
 
+    async def __rpc_get_pump_fun_quotes(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunQuotesRequest, GetPumpFunQuotesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_pump_fun_quotes(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_raydium_cpmm_quotes(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumCpmmQuotesRequest, GetRaydiumCpmmQuotesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_raydium_cpmm_quotes(request)
+        await stream.send_message(response)
+
     async def __rpc_get_raydium_prices(
         self,
         stream: "grpclib.server.Stream[GetRaydiumPricesRequest, GetRaydiumPricesResponse]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_raydium_prices(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_raydium_clmm_quotes(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumClmmQuotesRequest, GetRaydiumClmmQuotesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_raydium_clmm_quotes(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_raydium_clmm_pools(
+        self,
+        stream: "grpclib.server.Stream[GetRaydiumClmmPoolsRequest, GetRaydiumClmmPoolsResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_raydium_clmm_pools(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_raydium_clmm_swap(
+        self,
+        stream: "grpclib.server.Stream[PostRaydiumSwapRequest, PostRaydiumSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_raydium_clmm_swap(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_raydium_clmm_route_swap(
+        self,
+        stream: "grpclib.server.Stream[PostRaydiumRouteSwapRequest, PostRaydiumRouteSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_raydium_clmm_route_swap(request)
         await stream.send_message(response)
 
     async def __rpc_post_raydium_swap(
@@ -3181,6 +4251,14 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_raydium_route_swap(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_raydium_cpmm_swap(
+        self,
+        stream: "grpclib.server.Stream[PostRaydiumCpmmSwapRequest, PostRaydiumCpmmSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_raydium_cpmm_swap(request)
         await stream.send_message(response)
 
     async def __rpc_get_jupiter_quotes(
@@ -3284,6 +4362,14 @@ class ApiBase(ServiceBase):
         response = await self.post_replace_order_v2(request)
         await stream.send_message(response)
 
+    async def __rpc_post_zeta_cross_margin_account(
+        self,
+        stream: "grpclib.server.Stream[PostZetaCrossMarginAccountRequest, PostZetaCrossMarginAccountResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_zeta_cross_margin_account(request)
+        await stream.send_message(response)
+
     async def __rpc_post_settle_v2(
         self, stream: "grpclib.server.Stream[PostSettleRequestV2, PostSettleResponse]"
     ) -> None:
@@ -3379,6 +4465,13 @@ class ApiBase(ServiceBase):
         response = await self.get_server_time(request)
         await stream.send_message(response)
 
+    async def __rpc_get_slot_info(
+        self, stream: "grpclib.server.Stream[GetSlotInfoRequest, GetSlotInfoResponse]"
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_slot_info(request)
+        await stream.send_message(response)
+
     async def __rpc_get_recent_block_hash(
         self,
         stream: "grpclib.server.Stream[GetRecentBlockHashRequest, GetRecentBlockHashResponse]",
@@ -3387,12 +4480,28 @@ class ApiBase(ServiceBase):
         response = await self.get_recent_block_hash(request)
         await stream.send_message(response)
 
+    async def __rpc_get_recent_block_hash_v2(
+        self,
+        stream: "grpclib.server.Stream[GetRecentBlockHashRequestV2, GetRecentBlockHashResponseV2]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_recent_block_hash_v2(request)
+        await stream.send_message(response)
+
     async def __rpc_get_priority_fee(
         self,
         stream: "grpclib.server.Stream[GetPriorityFeeRequest, GetPriorityFeeResponse]",
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_priority_fee(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_priority_fee_by_program(
+        self,
+        stream: "grpclib.server.Stream[GetPriorityFeeByProgramRequest, GetPriorityFeeByProgramResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_priority_fee_by_program(request)
         await stream.send_message(response)
 
     async def __rpc_get_account_balance(
@@ -3516,14 +4625,6 @@ class ApiBase(ServiceBase):
         response = await self.get_order_by_id(request)
         await stream.send_message(response)
 
-    async def __rpc_get_bundle_result_v2(
-        self,
-        stream: "grpclib.server.Stream[GetBundleResultRequest, GetBundleResultResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.get_bundle_result_v2(request)
-        await stream.send_message(response)
-
     async def __rpc_get_unsettled(
         self, stream: "grpclib.server.Stream[GetUnsettledRequest, GetUnsettledResponse]"
     ) -> None:
@@ -3567,6 +4668,17 @@ class ApiBase(ServiceBase):
         request = await stream.recv_message()
         await self._call_rpc_handler_server_stream(
             self.get_tickers_stream,
+            stream,
+            request,
+        )
+
+    async def __rpc_get_zeta_transaction_stream(
+        self,
+        stream: "grpclib.server.Stream[GetZetaTransactionStreamRequest, GetZetaTransactionStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_zeta_transaction_stream,
             stream,
             request,
         )
@@ -3625,6 +4737,17 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_priority_fee_by_program_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPriorityFeeByProgramRequest, GetPriorityFeeByProgramResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_priority_fee_by_program_stream,
+            stream,
+            request,
+        )
+
     async def __rpc_get_bundle_tip_stream(
         self, stream: "grpclib.server.Stream[GetBundleTipRequest, GetBundleTipResponse]"
     ) -> None:
@@ -3679,6 +4802,17 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_new_raydium_pools_by_transaction_stream(
+        self,
+        stream: "grpclib.server.Stream[GetNewRaydiumPoolsByTransactionRequest, GetNewRaydiumPoolsByTransactionResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_new_raydium_pools_by_transaction_stream,
+            stream,
+            request,
+        )
+
     async def __rpc_get_swaps_stream(
         self,
         stream: "grpclib.server.Stream[GetSwapsStreamRequest, GetSwapsStreamResponse]",
@@ -3690,6 +4824,82 @@ class ApiBase(ServiceBase):
             request,
         )
 
+    async def __rpc_get_pump_fun_swaps_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunSwapsStreamRequest, GetPumpFunSwapsStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_pump_fun_swaps_stream,
+            stream,
+            request,
+        )
+
+    async def __rpc_get_pump_fun_new_tokens_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunNewTokensStreamRequest, GetPumpFunNewTokensStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_pump_fun_new_tokens_stream,
+            stream,
+            request,
+        )
+
+    async def __rpc_get_pump_fun_new_amm_pool_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunNewAmmPoolStreamRequest, GetPumpFunNewAmmPoolStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_pump_fun_new_amm_pool_stream,
+            stream,
+            request,
+        )
+
+    async def __rpc_get_pump_fun_amm_swap_stream(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunAmmSwapStreamRequest, GetPumpFunAmmSwapStreamResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        await self._call_rpc_handler_server_stream(
+            self.get_pump_fun_amm_swap_stream,
+            stream,
+            request,
+        )
+
+    async def __rpc_post_pump_fun_swap(
+        self,
+        stream: "grpclib.server.Stream[PostPumpFunSwapRequest, PostPumpFunSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_pump_fun_swap(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_pump_fun_swap_sol(
+        self,
+        stream: "grpclib.server.Stream[PostPumpFunSwapRequestSol, PostPumpFunSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_pump_fun_swap_sol(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_pump_fun_amm_quotes(
+        self,
+        stream: "grpclib.server.Stream[GetPumpFunAmmQuotesRequest, GetPumpFunAmmQuotesResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_pump_fun_amm_quotes(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_pump_fun_amm_swap(
+        self,
+        stream: "grpclib.server.Stream[PostPumpFunAmmSwapRequest, PostPumpFunAmmSwapResponse]",
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_pump_fun_amm_swap(request)
+        await stream.send_message(response)
+
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
             "/api.Api/GetRateLimit": grpclib.const.Handler(
@@ -3697,6 +4907,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetRateLimitRequest,
                 GetRateLimitResponse,
+            ),
+            "/api.Api/GetTransactionTrace": grpclib.const.Handler(
+                self.__rpc_get_transaction_trace,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetTransactionTraceRequest,
+                GetTransactionTraceResponse,
             ),
             "/api.Api/GetTransaction": grpclib.const.Handler(
                 self.__rpc_get_transaction,
@@ -3716,6 +4932,18 @@ class ApiBase(ServiceBase):
                 PostSubmitBatchRequest,
                 PostSubmitBatchResponse,
             ),
+            "/api.Api/PostSubmitSnipeV2": grpclib.const.Handler(
+                self.__rpc_post_submit_snipe_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitSnipeRequest,
+                PostSubmitSnipeResponse,
+            ),
+            "/api.Api/PostSubmitPaladinV2": grpclib.const.Handler(
+                self.__rpc_post_submit_paladin_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostSubmitPaladinRequest,
+                PostSubmitResponse,
+            ),
             "/api.Api/GetRaydiumPools": grpclib.const.Handler(
                 self.__rpc_get_raydium_pools,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -3734,11 +4962,47 @@ class ApiBase(ServiceBase):
                 GetRaydiumQuotesRequest,
                 GetRaydiumQuotesResponse,
             ),
+            "/api.Api/GetPumpFunQuotes": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_quotes,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetPumpFunQuotesRequest,
+                GetPumpFunQuotesResponse,
+            ),
+            "/api.Api/GetRaydiumCPMMQuotes": grpclib.const.Handler(
+                self.__rpc_get_raydium_cpmm_quotes,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumCpmmQuotesRequest,
+                GetRaydiumCpmmQuotesResponse,
+            ),
             "/api.Api/GetRaydiumPrices": grpclib.const.Handler(
                 self.__rpc_get_raydium_prices,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetRaydiumPricesRequest,
                 GetRaydiumPricesResponse,
+            ),
+            "/api.Api/GetRaydiumCLMMQuotes": grpclib.const.Handler(
+                self.__rpc_get_raydium_clmm_quotes,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumClmmQuotesRequest,
+                GetRaydiumClmmQuotesResponse,
+            ),
+            "/api.Api/GetRaydiumCLMMPools": grpclib.const.Handler(
+                self.__rpc_get_raydium_clmm_pools,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRaydiumClmmPoolsRequest,
+                GetRaydiumClmmPoolsResponse,
+            ),
+            "/api.Api/PostRaydiumCLMMSwap": grpclib.const.Handler(
+                self.__rpc_post_raydium_clmm_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostRaydiumSwapRequest,
+                PostRaydiumSwapResponse,
+            ),
+            "/api.Api/PostRaydiumCLMMRouteSwap": grpclib.const.Handler(
+                self.__rpc_post_raydium_clmm_route_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostRaydiumRouteSwapRequest,
+                PostRaydiumRouteSwapResponse,
             ),
             "/api.Api/PostRaydiumSwap": grpclib.const.Handler(
                 self.__rpc_post_raydium_swap,
@@ -3751,6 +5015,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostRaydiumRouteSwapRequest,
                 PostRaydiumRouteSwapResponse,
+            ),
+            "/api.Api/PostRaydiumCPMMSwap": grpclib.const.Handler(
+                self.__rpc_post_raydium_cpmm_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostRaydiumCpmmSwapRequest,
+                PostRaydiumCpmmSwapResponse,
             ),
             "/api.Api/GetJupiterQuotes": grpclib.const.Handler(
                 self.__rpc_get_jupiter_quotes,
@@ -3830,6 +5100,12 @@ class ApiBase(ServiceBase):
                 PostReplaceOrderRequestV2,
                 PostOrderResponse,
             ),
+            "/api.Api/PostZetaCrossMarginAccount": grpclib.const.Handler(
+                self.__rpc_post_zeta_cross_margin_account,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostZetaCrossMarginAccountRequest,
+                PostZetaCrossMarginAccountResponse,
+            ),
             "/api.Api/PostSettleV2": grpclib.const.Handler(
                 self.__rpc_post_settle_v2,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -3908,17 +5184,35 @@ class ApiBase(ServiceBase):
                 GetServerTimeRequest,
                 GetServerTimeResponse,
             ),
+            "/api.Api/GetSlotInfo": grpclib.const.Handler(
+                self.__rpc_get_slot_info,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetSlotInfoRequest,
+                GetSlotInfoResponse,
+            ),
             "/api.Api/GetRecentBlockHash": grpclib.const.Handler(
                 self.__rpc_get_recent_block_hash,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetRecentBlockHashRequest,
                 GetRecentBlockHashResponse,
             ),
+            "/api.Api/GetRecentBlockHashV2": grpclib.const.Handler(
+                self.__rpc_get_recent_block_hash_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetRecentBlockHashRequestV2,
+                GetRecentBlockHashResponseV2,
+            ),
             "/api.Api/GetPriorityFee": grpclib.const.Handler(
                 self.__rpc_get_priority_fee,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetPriorityFeeRequest,
                 GetPriorityFeeResponse,
+            ),
+            "/api.Api/GetPriorityFeeByProgram": grpclib.const.Handler(
+                self.__rpc_get_priority_fee_by_program,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetPriorityFeeByProgramRequest,
+                GetPriorityFeeByProgramResponse,
             ),
             "/api.Api/GetAccountBalance": grpclib.const.Handler(
                 self.__rpc_get_account_balance,
@@ -4016,12 +5310,6 @@ class ApiBase(ServiceBase):
                 GetOrderByIdRequest,
                 GetOrderByIdResponse,
             ),
-            "/api.Api/GetBundleResultV2": grpclib.const.Handler(
-                self.__rpc_get_bundle_result_v2,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                GetBundleResultRequest,
-                GetBundleResultResponse,
-            ),
             "/api.Api/GetUnsettled": grpclib.const.Handler(
                 self.__rpc_get_unsettled,
                 grpclib.const.Cardinality.UNARY_UNARY,
@@ -4051,6 +5339,12 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetTickersStreamRequest,
                 GetTickersStreamResponse,
+            ),
+            "/api.Api/GetZetaTransactionStream": grpclib.const.Handler(
+                self.__rpc_get_zeta_transaction_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetZetaTransactionStreamRequest,
+                GetZetaTransactionStreamResponse,
             ),
             "/api.Api/GetTradesStream": grpclib.const.Handler(
                 self.__rpc_get_trades_stream,
@@ -4082,6 +5376,12 @@ class ApiBase(ServiceBase):
                 GetPriorityFeeRequest,
                 GetPriorityFeeResponse,
             ),
+            "/api.Api/GetPriorityFeeByProgramStream": grpclib.const.Handler(
+                self.__rpc_get_priority_fee_by_program_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPriorityFeeByProgramRequest,
+                GetPriorityFeeByProgramResponse,
+            ),
             "/api.Api/GetBundleTipStream": grpclib.const.Handler(
                 self.__rpc_get_bundle_tip_stream,
                 grpclib.const.Cardinality.UNARY_STREAM,
@@ -4112,10 +5412,64 @@ class ApiBase(ServiceBase):
                 GetNewRaydiumPoolsRequest,
                 GetNewRaydiumPoolsResponse,
             ),
+            "/api.Api/GetNewRaydiumPoolsByTransactionStream": grpclib.const.Handler(
+                self.__rpc_get_new_raydium_pools_by_transaction_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetNewRaydiumPoolsByTransactionRequest,
+                GetNewRaydiumPoolsByTransactionResponse,
+            ),
             "/api.Api/GetSwapsStream": grpclib.const.Handler(
                 self.__rpc_get_swaps_stream,
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetSwapsStreamRequest,
                 GetSwapsStreamResponse,
+            ),
+            "/api.Api/GetPumpFunSwapsStream": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_swaps_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPumpFunSwapsStreamRequest,
+                GetPumpFunSwapsStreamResponse,
+            ),
+            "/api.Api/GetPumpFunNewTokensStream": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_new_tokens_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPumpFunNewTokensStreamRequest,
+                GetPumpFunNewTokensStreamResponse,
+            ),
+            "/api.Api/GetPumpFunNewAmmPoolStream": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_new_amm_pool_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPumpFunNewAmmPoolStreamRequest,
+                GetPumpFunNewAmmPoolStreamResponse,
+            ),
+            "/api.Api/GetPumpFunAMMSwapStream": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_amm_swap_stream,
+                grpclib.const.Cardinality.UNARY_STREAM,
+                GetPumpFunAmmSwapStreamRequest,
+                GetPumpFunAmmSwapStreamResponse,
+            ),
+            "/api.Api/PostPumpFunSwap": grpclib.const.Handler(
+                self.__rpc_post_pump_fun_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostPumpFunSwapRequest,
+                PostPumpFunSwapResponse,
+            ),
+            "/api.Api/PostPumpFunSwapSol": grpclib.const.Handler(
+                self.__rpc_post_pump_fun_swap_sol,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostPumpFunSwapRequestSol,
+                PostPumpFunSwapResponse,
+            ),
+            "/api.Api/GetPumpFunAmmQuotes": grpclib.const.Handler(
+                self.__rpc_get_pump_fun_amm_quotes,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetPumpFunAmmQuotesRequest,
+                GetPumpFunAmmQuotesResponse,
+            ),
+            "/api.Api/PostPumpFunAmmSwap": grpclib.const.Handler(
+                self.__rpc_post_pump_fun_amm_swap,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostPumpFunAmmSwapRequest,
+                PostPumpFunAmmSwapResponse,
             ),
         }

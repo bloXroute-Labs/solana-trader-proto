@@ -1029,38 +1029,6 @@
         ]
       }
     },
-    "/api/v2/bundle-result/{uuid}": {
-      "get": {
-        "summary": "bundle status based on uuid",
-        "description": "returns bundle result status based on uuid",
-        "operationId": "Api_GetBundleResultV2",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetBundleResultResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "Trade"
-        ]
-      }
-    },
     "/api/v2/jupiter/prices": {
       "get": {
         "summary": "Token prices on Jupiter",
@@ -1142,12 +1110,6 @@
             "required": false,
             "type": "number",
             "format": "double"
-          },
-          {
-            "name": "fastMode",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "tags": [
@@ -1634,6 +1596,185 @@
         ]
       }
     },
+    "/api/v2/pumpfun/amm/quotes": {
+      "post": {
+        "operationId": "Api_GetPumpFunAmmQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPumpFunAmmQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiGetPumpFunAmmQuotesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AMMs"
+        ]
+      }
+    },
+    "/api/v2/pumpfun/amm/swap": {
+      "post": {
+        "operationId": "Api_PostPumpFunAmmSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostPumpFunAmmSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostPumpFunAmmSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AMMs"
+        ]
+      }
+    },
+    "/api/v2/pumpfun/quotes": {
+      "get": {
+        "summary": "PumpFun Quotes",
+        "description": "Returns quotes from PumpFun",
+        "operationId": "Api_GetPumpFunQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPumpFunQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "quoteType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mintAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "bondingCurveAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "PumpFun"
+        ]
+      }
+    },
+    "/api/v2/pumpfun/swap": {
+      "post": {
+        "operationId": "Api_PostPumpFunSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostPumpFunSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostPumpFunSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "AMMs"
+        ]
+      }
+    },
+    "/api/v2/pumpfun/swap-sol": {
+      "post": {
+        "operationId": "Api_PostPumpFunSwapSol",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostPumpFunSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostPumpFunSwapRequestSol"
+            }
+          }
+        ],
+        "tags": [
+          "AMMs"
+        ]
+      }
+    },
     "/api/v2/rate-limit": {
       "get": {
         "summary": "Returns the details of an account rate limits",
@@ -1655,6 +1796,244 @@
         },
         "tags": [
           "Solana RPC"
+        ]
+      }
+    },
+    "/api/v2/raydium/clmm-pools": {
+      "get": {
+        "summary": "Raydium CLMM Pools",
+        "description": "Returns the list of Raydium CLMM pools",
+        "operationId": "Api_GetRaydiumCLMMPools",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumCLMMPoolsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pairOrAddress",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/clmm-quotes": {
+      "get": {
+        "summary": "Raydium CLMM Quotes",
+        "description": "Returns quotes from Raydium CLMM pools",
+        "operationId": "Api_GetRaydiumCLMMQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumCLMMQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/clmm-route-swap": {
+      "post": {
+        "summary": "Unsigned Raydium swap transaction along route",
+        "description": "Generates an unsigned transaction object to make a CLMM swap on Raydium on the specified route",
+        "operationId": "Api_PostRaydiumCLMMRouteSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumRouteSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/clmm-swap": {
+      "post": {
+        "summary": "Unsigned Raydium CLMM swap transaction",
+        "description": "Generates an unsigned transaction object to make a swap on Raydium CLMMs",
+        "operationId": "Api_PostRaydiumCLMMSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/cpmm-quotes": {
+      "get": {
+        "summary": "Raydium CLMM Quotes",
+        "description": "Returns quotes from Raydium CPMM pools",
+        "operationId": "Api_GetRaydiumCPMMQuotes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRaydiumCPMMQuotesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "inToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "outToken",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "inAmount",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "slippage",
+            "in": "query",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "tags": [
+          "Raydium V2"
+        ]
+      }
+    },
+    "/api/v2/raydium/cpmm-swap": {
+      "post": {
+        "summary": "Unsigned Raydium CPMM swap transaction",
+        "description": "Generates an unsigned transaction object to make a swap on Raydium CPMMs",
+        "operationId": "Api_PostRaydiumCPMMSwap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumCPMMSwapResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostRaydiumCPMMSwapRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Raydium V2"
         ]
       }
     },
@@ -1978,6 +2357,109 @@
         ]
       }
     },
+    "/api/v2/submit-paladin": {
+      "post": {
+        "summary": "Transaction submit to Paladin validators",
+        "description": "Submits a signed transaction to Paladin validators",
+        "operationId": "Api_PostSubmitPaladinV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitPaladinRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
+    "/api/v2/submit-snipe": {
+      "post": {
+        "summary": "Sniping transactions submit",
+        "description": "Submits one or two transactions. First one with tip to Jito directly and optionally a tip to BX for super-bundling. Second is propagated as Staked or FastBestEffort",
+        "operationId": "Api_PostSubmitSnipeV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitSnipeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostSubmitSnipeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
+    "/api/v2/system/blockhash": {
+      "get": {
+        "summary": "Recent block hash",
+        "description": "Returns recent block hash, supports optional offset",
+        "operationId": "Api_GetRecentBlockHashV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRecentBlockHashResponseV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
     "/api/v2/system/priority-fee": {
       "get": {
         "summary": "Estimated priority fee",
@@ -2026,6 +2508,107 @@
         ]
       }
     },
+    "/api/v2/system/priority-fee-by-program": {
+      "get": {
+        "summary": "Estimated priority fee",
+        "description": "Returns an estimated prioritization fee based on recent transactions. supports filtering by program ID",
+        "operationId": "Api_GetPriorityFeeByProgram",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPriorityFeeByProgramResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "programs",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/api/v2/system/slot-info": {
+      "get": {
+        "summary": "Slot info",
+        "description": "Returns information about the requested slot. note - limited to 2 epochs before and after current slot",
+        "operationId": "Api_GetSlotInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetSlotInfoResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "slot",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
+    "/api/v2/system/trace": {
+      "get": {
+        "summary": "Returns the details when a transaction was received, released, and MEV-protection delay information",
+        "description": "Returns the details when a transaction was received, released, and MEV-protection delay information",
+        "operationId": "Api_GetTransactionTrace",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTransactionTraceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "signature",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "System"
+        ]
+      }
+    },
     "/api/v2/transaction": {
       "get": {
         "summary": "Returns the details of a transaction",
@@ -2055,6 +2638,40 @@
         ],
         "tags": [
           "Solana RPC"
+        ]
+      }
+    },
+    "/api/v2/zeta/cross-margin-account": {
+      "post": {
+        "summary": "Zeta Markets Cross Margin Account Creation",
+        "description": "Generates a `ZetaMarkets` Cross Margin Account through bloXroute Referral Program",
+        "operationId": "Api_PostZetaCrossMarginAccount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostZetaCrossMarginAccountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostZetaCrossMarginAccountRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Zeta Markets"
         ]
       }
     }
@@ -2159,22 +2776,6 @@
       "properties": {
         "block": {
           "$ref": "#/definitions/apiBlock"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "apiGetBundleResultResponse": {
-      "type": "object",
-      "properties": {
-        "uuid": {
-          "type": "string"
-        },
-        "bundleResult": {
-          "type": "string",
-          "description": "bundleResult contains a string description of the status of a bundle after it has been submitted. Based on the result, (rejected, accepted, processed, dropped), there will be some different fields provided to give information about what happened in the bundle"
         },
         "timestamp": {
           "type": "string",
@@ -2352,6 +2953,28 @@
           "additionalProperties": {
             "$ref": "#/definitions/apiMarketV2"
           }
+        }
+      }
+    },
+    "apiGetNewRaydiumPoolsByTransactionResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "signature": {
+          "type": "string"
+        },
+        "poolCreatorWallet": {
+          "type": "string"
+        },
+        "pool": {
+          "$ref": "#/definitions/apiProjectPool"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -2584,6 +3207,17 @@
         }
       }
     },
+    "apiGetPriorityFeeByProgramResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiProgramPriorityFee"
+          }
+        }
+      }
+    },
     "apiGetPriorityFeeResponse": {
       "type": "object",
       "properties": {
@@ -2597,6 +3231,232 @@
         "feeAtPercentile": {
           "type": "string",
           "format": "uint64"
+        }
+      }
+    },
+    "apiGetPumpFunAMMSwapStreamResponse": {
+      "type": "object",
+      "properties": {
+        "pool": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "isBuy": {
+          "type": "boolean"
+        },
+        "quoteMint": {
+          "type": "string"
+        },
+        "baseMint": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "txHash": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "slot": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
+    },
+    "apiGetPumpFunAmmQuotesRequest": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "pool": {
+          "type": "string"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiGetPumpFunAmmQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "quoteType": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiGetPumpFunNewAmmPoolStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "pool": {
+          "type": "string"
+        },
+        "baseMint": {
+          "type": "string"
+        },
+        "quoteMint": {
+          "type": "string"
+        },
+        "lpMint": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "coinCreator": {
+          "type": "string"
+        }
+      }
+    },
+    "apiGetPumpFunNewTokensStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "txnHash": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "mint": {
+          "type": "string"
+        },
+        "bondingCurve": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "creatorVault": {
+          "type": "string"
+        }
+      }
+    },
+    "apiGetPumpFunQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "quoteType": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "apiGetPumpFunSwapsStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "txnHash": {
+          "type": "string"
+        },
+        "mintAddress": {
+          "type": "string"
+        },
+        "userAddress": {
+          "type": "string"
+        },
+        "userTokenAccountAddress": {
+          "type": "string"
+        },
+        "bondingCurveAddress": {
+          "type": "string"
+        },
+        "tokenVaultAddress": {
+          "type": "string"
+        },
+        "solAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "tokenAmount": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "isBuy": {
+          "type": "boolean"
+        },
+        "virtualSolReserves": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "virtualTokenReserves": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "creator": {
+          "type": "string"
         }
       }
     },
@@ -2707,6 +3567,75 @@
         }
       }
     },
+    "apiGetRaydiumCLMMPoolsResponse": {
+      "type": "object",
+      "properties": {
+        "pools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiProjectPool"
+          }
+        }
+      }
+    },
+    "apiGetRaydiumCLMMQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumQuoteRoute"
+          }
+        }
+      }
+    },
+    "apiGetRaydiumCPMMQuotesResponse": {
+      "type": "object",
+      "properties": {
+        "inToken": {
+          "type": "string"
+        },
+        "inTokenAddress": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "outTokenAddress": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "tradeFeeRate": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRaydiumQuoteRoute"
+          }
+        }
+      }
+    },
     "apiGetRaydiumPoolReserveResponse": {
       "type": "object",
       "properties": {
@@ -2779,11 +3708,38 @@
         }
       }
     },
+    "apiGetRecentBlockHashResponseV2": {
+      "type": "object",
+      "properties": {
+        "blockHash": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
     "apiGetServerTimeResponse": {
       "type": "object",
       "properties": {
         "timestamp": {
           "type": "string"
+        }
+      }
+    },
+    "apiGetSlotInfoResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "leader": {
+          "type": "string"
+        },
+        "malicious": {
+          "type": "boolean"
         }
       }
     },
@@ -2846,6 +3802,9 @@
         },
         "signature": {
           "type": "string"
+        },
+        "cpmm": {
+          "type": "boolean"
         }
       }
     },
@@ -2948,6 +3907,43 @@
         }
       }
     },
+    "apiGetTransactionTraceResponse": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string"
+        },
+        "firstReceivedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "firstReleasedTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "firstReceivedSlot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "firstReleasedSlot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "firstReceivedRegion": {
+          "type": "string"
+        },
+        "firstReleasedRegion": {
+          "type": "string"
+        },
+        "delayed": {
+          "type": "boolean"
+        },
+        "delayedSlots": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "apiGetUnsettledResponse": {
       "type": "object",
       "properties": {
@@ -2959,6 +3955,21 @@
           "items": {
             "$ref": "#/definitions/apiUnsettledAccount"
           }
+        }
+      }
+    },
+    "apiGetZetaTransactionStreamResponse": {
+      "type": "object",
+      "properties": {
+        "slot": {
+          "type": "string",
+          "format": "int64"
+        },
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionZeta"
+        },
+        "meta": {
+          "$ref": "#/definitions/apiTransactionMeta"
         }
       }
     },
@@ -3109,6 +4120,83 @@
         },
         "fee": {
           "$ref": "#/definitions/commonFee"
+        }
+      }
+    },
+    "apiLiquidityPoolKeys": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "baseMint": {
+          "type": "string"
+        },
+        "quoteMint": {
+          "type": "string"
+        },
+        "lpMint": {
+          "type": "string"
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "programID": {
+          "type": "string"
+        },
+        "authority": {
+          "type": "string"
+        },
+        "baseVault": {
+          "type": "string"
+        },
+        "quoteVault": {
+          "type": "string"
+        },
+        "lpVault": {
+          "type": "string"
+        },
+        "openOrders": {
+          "type": "string"
+        },
+        "targetOrders": {
+          "type": "string"
+        },
+        "withdrawQueue": {
+          "type": "string"
+        },
+        "marketVersion": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "marketProgramID": {
+          "type": "string"
+        },
+        "marketID": {
+          "type": "string"
+        },
+        "marketAuthority": {
+          "type": "string"
+        },
+        "marketBaseVault": {
+          "type": "string"
+        },
+        "marketQuoteVault": {
+          "type": "string"
+        },
+        "marketBids": {
+          "type": "string"
+        },
+        "marketAsks": {
+          "type": "string"
+        },
+        "marketEventQueue": {
+          "type": "string"
+        },
+        "tradeFeeRate": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },
@@ -3704,9 +4792,6 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
-        },
-        "fastMode": {
-          "type": "boolean"
         }
       }
     },
@@ -3779,9 +4864,6 @@
           "type": "string",
           "format": "uint64",
           "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
-        },
-        "fastMode": {
-          "type": "boolean"
         }
       }
     },
@@ -3989,6 +5071,246 @@
         },
         "openOrdersAddress": {
           "type": "string"
+        }
+      }
+    },
+    "apiPostPumpFunAmmSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "pool": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        }
+      }
+    },
+    "apiPostPumpFunAmmSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTransactionMessage"
+          }
+        },
+        "buyQuoteAmountIn": {
+          "type": "number",
+          "format": "double"
+        },
+        "buyUserQuoteAmountIn": {
+          "type": "number",
+          "format": "double"
+        },
+        "buyMaxQuoteAmountIn": {
+          "type": "number",
+          "format": "double"
+        },
+        "buyBaseAmountOut": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellBaseAmountIn": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellMinQuoteAmountOut": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellQuoteAmountOut": {
+          "type": "number",
+          "format": "double"
+        },
+        "sellUserQuoteAmountOut": {
+          "type": "number",
+          "format": "double"
+        },
+        "fees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonFee"
+          }
+        }
+      }
+    },
+    "apiPostPumpFunSwapRequest": {
+      "type": "object",
+      "properties": {
+        "userAddress": {
+          "type": "string"
+        },
+        "bondingCurveAddress": {
+          "type": "string"
+        },
+        "tokenAddress": {
+          "type": "string"
+        },
+        "tokenAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "solThreshold": {
+          "type": "number",
+          "format": "double"
+        },
+        "isBuy": {
+          "type": "boolean"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
+        "creator": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostPumpFunSwapRequestSol": {
+      "type": "object",
+      "properties": {
+        "userAddress": {
+          "type": "string"
+        },
+        "bondingCurveAddress": {
+          "type": "string"
+        },
+        "tokenAddress": {
+          "type": "string"
+        },
+        "solAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        },
+        "creator": {
+          "type": "string"
+        }
+      }
+    },
+    "apiPostPumpFunSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessageV2"
+        }
+      }
+    },
+    "apiPostRaydiumCPMMSwapRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "inToken": {
+          "type": "string"
+        },
+        "outToken": {
+          "type": "string"
+        },
+        "inAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "slippage": {
+          "type": "number",
+          "format": "double"
+        },
+        "poolAddress": {
+          "type": "string"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        }
+      }
+    },
+    "apiPostRaydiumCPMMSwapResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        },
+        "outAmount": {
+          "type": "number",
+          "format": "double"
+        },
+        "outAmountMin": {
+          "type": "number",
+          "format": "double"
         }
       }
     },
@@ -4485,6 +5807,16 @@
         },
         "useBundle": {
           "type": "boolean"
+        },
+        "frontRunningProtection": {
+          "type": "boolean"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "submitProtection": {
+          "$ref": "#/definitions/apiSubmitProtection"
         }
       }
     },
@@ -4496,9 +5828,6 @@
           "items": {
             "$ref": "#/definitions/apiPostSubmitBatchResponseEntry"
           }
-        },
-        "uuid": {
-          "type": "string"
         }
       }
     },
@@ -4513,6 +5842,21 @@
         },
         "submitted": {
           "type": "boolean"
+        }
+      }
+    },
+    "apiPostSubmitPaladinRequest": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessageV2"
+        },
+        "revertProtection": {
+          "type": "boolean"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -4533,6 +5877,22 @@
         },
         "fastBestEffort": {
           "type": "boolean"
+        },
+        "allowBackRun": {
+          "type": "boolean"
+        },
+        "revenueAddress": {
+          "type": "string"
+        },
+        "sniping": {
+          "type": "boolean"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "submitProtection": {
+          "$ref": "#/definitions/apiSubmitProtection"
         }
       }
     },
@@ -4552,8 +5912,153 @@
       "properties": {
         "signature": {
           "type": "string"
+        }
+      }
+    },
+    "apiPostSubmitSnipeRequest": {
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPostSubmitRequestEntry"
+          }
         },
-        "uuid": {
+        "useStakedRPCs": {
+          "type": "boolean"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "apiPostSubmitSnipeResponse": {
+      "type": "object",
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiPostSubmitBatchResponseEntry"
+          }
+        }
+      }
+    },
+    "apiPostZetaCrossMarginAccountRequest": {
+      "type": "object",
+      "properties": {
+        "ownerAddress": {
+          "type": "string"
+        },
+        "computeLimit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Optional: specifies total compute limit to be allocated for all instructions within the created tx"
+        },
+        "computePrice": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: specifies compute price in microlamports to be included as a part of instruction, known as priority fee"
+        },
+        "tip": {
+          "type": "string",
+          "format": "uint64",
+          "description": "Optional: Specifies a tip amount that will be used to pay for front-running protection and/or bundle submission services. Minimum value is 1025"
+        }
+      }
+    },
+    "apiPostZetaCrossMarginAccountResponse": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/apiTransactionMessage"
+        }
+      }
+    },
+    "apiProgramPriorityFee": {
+      "type": "object",
+      "properties": {
+        "ten": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "hundred": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "fifteen": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "twenty": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "twentyFive": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "thirty": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "thirtyFive": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "forty": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "fortyFive": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "five": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "fifty": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "fiftyFive": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "sixty": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "sixtyFive": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "seventy": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "seventyFive": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "eighty": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "eightyFive": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "ninety": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "ninetyFive": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "program": {
           "type": "string"
         }
       }
@@ -4602,6 +6107,12 @@
         "openTime": {
           "type": "string",
           "format": "uint64"
+        },
+        "poolType": {
+          "type": "string"
+        },
+        "liquidityPoolKeys": {
+          "$ref": "#/definitions/apiLiquidityPoolKeys"
         }
       }
     },
@@ -4907,6 +6418,15 @@
         }
       }
     },
+    "apiSubmitProtection": {
+      "type": "string",
+      "enum": [
+        "SP_LOW",
+        "SP_MEDIUM",
+        "SP_HIGH"
+      ],
+      "default": "SP_LOW"
+    },
     "apiSubmitStrategy": {
       "type": "string",
       "enum": [
@@ -5202,6 +6722,54 @@
         }
       }
     },
+    "apiTransactionMessageHeader": {
+      "type": "object",
+      "properties": {
+        "numRequiredSignatures": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "numReadonlySignedAccounts": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "numReadonlyUnsignedAccounts": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "apiTransactionMessageV2": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string"
+        }
+      }
+    },
+    "apiTransactionMessageZeta": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "$ref": "#/definitions/apiTransactionMessageHeader"
+        },
+        "accountKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recentBlockhash": {
+          "type": "string"
+        },
+        "instructions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiInstruction"
+          }
+        }
+      }
+    },
     "apiTransactionMeta": {
       "type": "object",
       "properties": {
@@ -5285,6 +6853,20 @@
         },
         "owner": {
           "type": "string"
+        }
+      }
+    },
+    "apiTransactionZeta": {
+      "type": "object",
+      "properties": {
+        "signatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "$ref": "#/definitions/apiTransactionMessageZeta"
         }
       }
     },

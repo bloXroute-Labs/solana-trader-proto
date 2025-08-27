@@ -19,16 +19,26 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ApiClient interface {
 	GetRateLimit(ctx context.Context, in *GetRateLimitRequest, opts ...grpc.CallOption) (*GetRateLimitResponse, error)
+	GetTransactionTrace(ctx context.Context, in *GetTransactionTraceRequest, opts ...grpc.CallOption) (*GetTransactionTraceResponse, error)
 	GetTransaction(ctx context.Context, in *GetTransactionRequest, opts ...grpc.CallOption) (*GetTransactionResponse, error)
 	PostSubmitV2(ctx context.Context, in *PostSubmitRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
 	PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
+	PostSubmitSnipeV2(ctx context.Context, in *PostSubmitSnipeRequest, opts ...grpc.CallOption) (*PostSubmitSnipeResponse, error)
+	PostSubmitPaladinV2(ctx context.Context, in *PostSubmitPaladinRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
 	// Raydium V2
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoolReserveRequest, opts ...grpc.CallOption) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error)
+	GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error)
+	GetRaydiumCPMMQuotes(ctx context.Context, in *GetRaydiumCPMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCPMMQuotesResponse, error)
 	GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error)
+	GetRaydiumCLMMQuotes(ctx context.Context, in *GetRaydiumCLMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMQuotesResponse, error)
+	GetRaydiumCLMMPools(ctx context.Context, in *GetRaydiumCLMMPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMPoolsResponse, error)
+	PostRaydiumCLMMSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error)
+	PostRaydiumCLMMRouteSwap(ctx context.Context, in *PostRaydiumRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumRouteSwapResponse, error)
 	PostRaydiumSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error)
 	PostRaydiumRouteSwap(ctx context.Context, in *PostRaydiumRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumRouteSwapResponse, error)
+	PostRaydiumCPMMSwap(ctx context.Context, in *PostRaydiumCPMMSwapRequest, opts ...grpc.CallOption) (*PostRaydiumCPMMSwapResponse, error)
 	// Jupiter V2
 	GetJupiterQuotes(ctx context.Context, in *GetJupiterQuotesRequest, opts ...grpc.CallOption) (*GetJupiterQuotesResponse, error)
 	GetJupiterPrices(ctx context.Context, in *GetJupiterPricesRequest, opts ...grpc.CallOption) (*GetJupiterPricesResponse, error)
@@ -43,6 +53,7 @@ type ApiClient interface {
 	PostOrderV2(ctx context.Context, in *PostOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
 	PostCancelOrderV2(ctx context.Context, in *PostCancelOrderRequestV2, opts ...grpc.CallOption) (*PostCancelOrderResponseV2, error)
 	PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrderRequestV2, opts ...grpc.CallOption) (*PostOrderResponse, error)
+	PostZetaCrossMarginAccount(ctx context.Context, in *PostZetaCrossMarginAccountRequest, opts ...grpc.CallOption) (*PostZetaCrossMarginAccountResponse, error)
 	PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error)
 	GetOpenOrdersV2(ctx context.Context, in *GetOpenOrdersRequestV2, opts ...grpc.CallOption) (*GetOpenOrdersResponseV2, error)
 	GetUnsettledV2(ctx context.Context, in *GetUnsettledRequestV2, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
@@ -57,8 +68,11 @@ type ApiClient interface {
 	GetQuotes(ctx context.Context, in *GetQuotesRequest, opts ...grpc.CallOption) (*GetQuotesResponse, error)
 	// system API
 	GetServerTime(ctx context.Context, in *GetServerTimeRequest, opts ...grpc.CallOption) (*GetServerTimeResponse, error)
+	GetSlotInfo(ctx context.Context, in *GetSlotInfoRequest, opts ...grpc.CallOption) (*GetSlotInfoResponse, error)
 	GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error)
+	GetRecentBlockHashV2(ctx context.Context, in *GetRecentBlockHashRequestV2, opts ...grpc.CallOption) (*GetRecentBlockHashResponseV2, error)
 	GetPriorityFee(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (*GetPriorityFeeResponse, error)
+	GetPriorityFeeByProgram(ctx context.Context, in *GetPriorityFeeByProgramRequest, opts ...grpc.CallOption) (*GetPriorityFeeByProgramResponse, error)
 	// account endpoints
 	GetAccountBalance(ctx context.Context, in *GetAccountBalanceRequest, opts ...grpc.CallOption) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(ctx context.Context, in *GetTokenAccountsRequest, opts ...grpc.CallOption) (*GetTokenAccountsResponse, error)
@@ -77,24 +91,34 @@ type ApiClient interface {
 	GetOrders(ctx context.Context, in *GetOrdersRequest, opts ...grpc.CallOption) (*GetOrdersResponse, error)
 	GetOpenOrders(ctx context.Context, in *GetOpenOrdersRequest, opts ...grpc.CallOption) (*GetOpenOrdersResponse, error)
 	GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, opts ...grpc.CallOption) (*GetOrderByIDResponse, error)
-	GetBundleResultV2(ctx context.Context, in *GetBundleResultRequest, opts ...grpc.CallOption) (*GetBundleResultResponse, error)
 	GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(ctx context.Context, in *RouteTradeSwapRequest, opts ...grpc.CallOption) (*TradeSwapResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(ctx context.Context, in *GetOrderbooksRequest, opts ...grpc.CallOption) (Api_GetOrderbooksStreamClient, error)
 	GetMarketDepthsStream(ctx context.Context, in *GetMarketDepthsRequest, opts ...grpc.CallOption) (Api_GetMarketDepthsStreamClient, error)
 	GetTickersStream(ctx context.Context, in *GetTickersStreamRequest, opts ...grpc.CallOption) (Api_GetTickersStreamClient, error)
+	GetZetaTransactionStream(ctx context.Context, in *GetZetaTransactionStreamRequest, opts ...grpc.CallOption) (Api_GetZetaTransactionStreamClient, error)
 	GetTradesStream(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (Api_GetTradesStreamClient, error)
 	GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error)
 	GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error)
 	GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error)
 	GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error)
+	GetPriorityFeeByProgramStream(ctx context.Context, in *GetPriorityFeeByProgramRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeByProgramStreamClient, error)
 	GetBundleTipStream(ctx context.Context, in *GetBundleTipRequest, opts ...grpc.CallOption) (Api_GetBundleTipStreamClient, error)
 	GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error)
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
 	GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error)
 	GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error)
+	GetNewRaydiumPoolsByTransactionStream(ctx context.Context, in *GetNewRaydiumPoolsByTransactionRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsByTransactionStreamClient, error)
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
+	GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error)
+	GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error)
+	GetPumpFunNewAmmPoolStream(ctx context.Context, in *GetPumpFunNewAmmPoolStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewAmmPoolStreamClient, error)
+	GetPumpFunAMMSwapStream(ctx context.Context, in *GetPumpFunAMMSwapStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunAMMSwapStreamClient, error)
+	PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
+	PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
+	GetPumpFunAmmQuotes(ctx context.Context, in *GetPumpFunAmmQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunAmmQuotesResponse, error)
+	PostPumpFunAmmSwap(ctx context.Context, in *PostPumpFunAmmSwapRequest, opts ...grpc.CallOption) (*PostPumpFunAmmSwapResponse, error)
 }
 
 type apiClient struct {
@@ -108,6 +132,15 @@ func NewApiClient(cc grpc.ClientConnInterface) ApiClient {
 func (c *apiClient) GetRateLimit(ctx context.Context, in *GetRateLimitRequest, opts ...grpc.CallOption) (*GetRateLimitResponse, error) {
 	out := new(GetRateLimitResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRateLimit", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetTransactionTrace(ctx context.Context, in *GetTransactionTraceRequest, opts ...grpc.CallOption) (*GetTransactionTraceResponse, error) {
+	out := new(GetTransactionTraceResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetTransactionTrace", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -141,6 +174,24 @@ func (c *apiClient) PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRe
 	return out, nil
 }
 
+func (c *apiClient) PostSubmitSnipeV2(ctx context.Context, in *PostSubmitSnipeRequest, opts ...grpc.CallOption) (*PostSubmitSnipeResponse, error) {
+	out := new(PostSubmitSnipeResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitSnipeV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostSubmitPaladinV2(ctx context.Context, in *PostSubmitPaladinRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error) {
+	out := new(PostSubmitResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitPaladinV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error) {
 	out := new(GetRaydiumPoolsResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumPools", in, out, opts...)
@@ -168,9 +219,63 @@ func (c *apiClient) GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRe
 	return out, nil
 }
 
+func (c *apiClient) GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error) {
+	out := new(GetPumpFunQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPumpFunQuotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetRaydiumCPMMQuotes(ctx context.Context, in *GetRaydiumCPMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCPMMQuotesResponse, error) {
+	out := new(GetRaydiumCPMMQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumCPMMQuotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error) {
 	out := new(GetRaydiumPricesResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumPrices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetRaydiumCLMMQuotes(ctx context.Context, in *GetRaydiumCLMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMQuotesResponse, error) {
+	out := new(GetRaydiumCLMMQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumCLMMQuotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetRaydiumCLMMPools(ctx context.Context, in *GetRaydiumCLMMPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMPoolsResponse, error) {
+	out := new(GetRaydiumCLMMPoolsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumCLMMPools", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostRaydiumCLMMSwap(ctx context.Context, in *PostRaydiumSwapRequest, opts ...grpc.CallOption) (*PostRaydiumSwapResponse, error) {
+	out := new(PostRaydiumSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumCLMMSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostRaydiumCLMMRouteSwap(ctx context.Context, in *PostRaydiumRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumRouteSwapResponse, error) {
+	out := new(PostRaydiumRouteSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumCLMMRouteSwap", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -189,6 +294,15 @@ func (c *apiClient) PostRaydiumSwap(ctx context.Context, in *PostRaydiumSwapRequ
 func (c *apiClient) PostRaydiumRouteSwap(ctx context.Context, in *PostRaydiumRouteSwapRequest, opts ...grpc.CallOption) (*PostRaydiumRouteSwapResponse, error) {
 	out := new(PostRaydiumRouteSwapResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumRouteSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostRaydiumCPMMSwap(ctx context.Context, in *PostRaydiumCPMMSwapRequest, opts ...grpc.CallOption) (*PostRaydiumCPMMSwapResponse, error) {
+	out := new(PostRaydiumCPMMSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostRaydiumCPMMSwap", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -312,6 +426,15 @@ func (c *apiClient) PostReplaceOrderV2(ctx context.Context, in *PostReplaceOrder
 	return out, nil
 }
 
+func (c *apiClient) PostZetaCrossMarginAccount(ctx context.Context, in *PostZetaCrossMarginAccountRequest, opts ...grpc.CallOption) (*PostZetaCrossMarginAccountResponse, error) {
+	out := new(PostZetaCrossMarginAccountResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostZetaCrossMarginAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) PostSettleV2(ctx context.Context, in *PostSettleRequestV2, opts ...grpc.CallOption) (*PostSettleResponse, error) {
 	out := new(PostSettleResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostSettleV2", in, out, opts...)
@@ -429,6 +552,15 @@ func (c *apiClient) GetServerTime(ctx context.Context, in *GetServerTimeRequest,
 	return out, nil
 }
 
+func (c *apiClient) GetSlotInfo(ctx context.Context, in *GetSlotInfoRequest, opts ...grpc.CallOption) (*GetSlotInfoResponse, error) {
+	out := new(GetSlotInfoResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetSlotInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (*GetRecentBlockHashResponse, error) {
 	out := new(GetRecentBlockHashResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRecentBlockHash", in, out, opts...)
@@ -438,9 +570,27 @@ func (c *apiClient) GetRecentBlockHash(ctx context.Context, in *GetRecentBlockHa
 	return out, nil
 }
 
+func (c *apiClient) GetRecentBlockHashV2(ctx context.Context, in *GetRecentBlockHashRequestV2, opts ...grpc.CallOption) (*GetRecentBlockHashResponseV2, error) {
+	out := new(GetRecentBlockHashResponseV2)
+	err := c.cc.Invoke(ctx, "/api.Api/GetRecentBlockHashV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiClient) GetPriorityFee(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (*GetPriorityFeeResponse, error) {
 	out := new(GetPriorityFeeResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetPriorityFee", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetPriorityFeeByProgram(ctx context.Context, in *GetPriorityFeeByProgramRequest, opts ...grpc.CallOption) (*GetPriorityFeeByProgramResponse, error) {
+	out := new(GetPriorityFeeByProgramResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPriorityFeeByProgram", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -591,15 +741,6 @@ func (c *apiClient) GetOrderByID(ctx context.Context, in *GetOrderByIDRequest, o
 	return out, nil
 }
 
-func (c *apiClient) GetBundleResultV2(ctx context.Context, in *GetBundleResultRequest, opts ...grpc.CallOption) (*GetBundleResultResponse, error) {
-	out := new(GetBundleResultResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetBundleResultV2", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *apiClient) GetUnsettled(ctx context.Context, in *GetUnsettledRequest, opts ...grpc.CallOption) (*GetUnsettledResponse, error) {
 	out := new(GetUnsettledResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetUnsettled", in, out, opts...)
@@ -714,8 +855,40 @@ func (x *apiGetTickersStreamClient) Recv() (*GetTickersStreamResponse, error) {
 	return m, nil
 }
 
+func (c *apiClient) GetZetaTransactionStream(ctx context.Context, in *GetZetaTransactionStreamRequest, opts ...grpc.CallOption) (Api_GetZetaTransactionStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetZetaTransactionStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetZetaTransactionStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetZetaTransactionStreamClient interface {
+	Recv() (*GetZetaTransactionStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetZetaTransactionStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetZetaTransactionStreamClient) Recv() (*GetZetaTransactionStreamResponse, error) {
+	m := new(GetZetaTransactionStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetTradesStream(ctx context.Context, in *GetTradesRequest, opts ...grpc.CallOption) (Api_GetTradesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[3], "/api.Api/GetTradesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetTradesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -747,7 +920,7 @@ func (x *apiGetTradesStreamClient) Recv() (*GetTradesStreamResponse, error) {
 }
 
 func (c *apiClient) GetOrderStatusStream(ctx context.Context, in *GetOrderStatusStreamRequest, opts ...grpc.CallOption) (Api_GetOrderStatusStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[4], "/api.Api/GetOrderStatusStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetOrderStatusStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -779,7 +952,7 @@ func (x *apiGetOrderStatusStreamClient) Recv() (*GetOrderStatusStreamResponse, e
 }
 
 func (c *apiClient) GetRecentBlockHashStream(ctx context.Context, in *GetRecentBlockHashRequest, opts ...grpc.CallOption) (Api_GetRecentBlockHashStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[5], "/api.Api/GetRecentBlockHashStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetRecentBlockHashStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -811,7 +984,7 @@ func (x *apiGetRecentBlockHashStreamClient) Recv() (*GetRecentBlockHashResponse,
 }
 
 func (c *apiClient) GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[6], "/api.Api/GetBlockStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetBlockStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -843,7 +1016,7 @@ func (x *apiGetBlockStreamClient) Recv() (*GetBlockStreamResponse, error) {
 }
 
 func (c *apiClient) GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[7], "/api.Api/GetPriorityFeeStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetPriorityFeeStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -874,8 +1047,40 @@ func (x *apiGetPriorityFeeStreamClient) Recv() (*GetPriorityFeeResponse, error) 
 	return m, nil
 }
 
+func (c *apiClient) GetPriorityFeeByProgramStream(ctx context.Context, in *GetPriorityFeeByProgramRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeByProgramStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetPriorityFeeByProgramStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPriorityFeeByProgramStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPriorityFeeByProgramStreamClient interface {
+	Recv() (*GetPriorityFeeByProgramResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPriorityFeeByProgramStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPriorityFeeByProgramStreamClient) Recv() (*GetPriorityFeeByProgramResponse, error) {
+	m := new(GetPriorityFeeByProgramResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetBundleTipStream(ctx context.Context, in *GetBundleTipRequest, opts ...grpc.CallOption) (Api_GetBundleTipStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[8], "/api.Api/GetBundleTipStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetBundleTipStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -907,7 +1112,7 @@ func (x *apiGetBundleTipStreamClient) Recv() (*GetBundleTipResponse, error) {
 }
 
 func (c *apiClient) GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[9], "/api.Api/GetQuotesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetQuotesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -939,7 +1144,7 @@ func (x *apiGetQuotesStreamClient) Recv() (*GetQuotesStreamResponse, error) {
 }
 
 func (c *apiClient) GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPoolReservesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetPoolReservesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -971,7 +1176,7 @@ func (x *apiGetPoolReservesStreamClient) Recv() (*GetPoolReservesStreamResponse,
 }
 
 func (c *apiClient) GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetPricesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetPricesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1003,7 +1208,7 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 }
 
 func (c *apiClient) GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetNewRaydiumPoolsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetNewRaydiumPoolsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1034,8 +1239,40 @@ func (x *apiGetNewRaydiumPoolsStreamClient) Recv() (*GetNewRaydiumPoolsResponse,
 	return m, nil
 }
 
+func (c *apiClient) GetNewRaydiumPoolsByTransactionStream(ctx context.Context, in *GetNewRaydiumPoolsByTransactionRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsByTransactionStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[15], "/api.Api/GetNewRaydiumPoolsByTransactionStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetNewRaydiumPoolsByTransactionStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetNewRaydiumPoolsByTransactionStreamClient interface {
+	Recv() (*GetNewRaydiumPoolsByTransactionResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetNewRaydiumPoolsByTransactionStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetNewRaydiumPoolsByTransactionStreamClient) Recv() (*GetNewRaydiumPoolsByTransactionResponse, error) {
+	m := new(GetNewRaydiumPoolsByTransactionResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[16], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1066,21 +1303,195 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 	return m, nil
 }
 
+func (c *apiClient) GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[17], "/api.Api/GetPumpFunSwapsStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPumpFunSwapsStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPumpFunSwapsStreamClient interface {
+	Recv() (*GetPumpFunSwapsStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPumpFunSwapsStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPumpFunSwapsStreamClient) Recv() (*GetPumpFunSwapsStreamResponse, error) {
+	m := new(GetPumpFunSwapsStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *apiClient) GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[18], "/api.Api/GetPumpFunNewTokensStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPumpFunNewTokensStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPumpFunNewTokensStreamClient interface {
+	Recv() (*GetPumpFunNewTokensStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPumpFunNewTokensStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPumpFunNewTokensStreamClient) Recv() (*GetPumpFunNewTokensStreamResponse, error) {
+	m := new(GetPumpFunNewTokensStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *apiClient) GetPumpFunNewAmmPoolStream(ctx context.Context, in *GetPumpFunNewAmmPoolStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewAmmPoolStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[19], "/api.Api/GetPumpFunNewAmmPoolStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPumpFunNewAmmPoolStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPumpFunNewAmmPoolStreamClient interface {
+	Recv() (*GetPumpFunNewAmmPoolStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPumpFunNewAmmPoolStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPumpFunNewAmmPoolStreamClient) Recv() (*GetPumpFunNewAmmPoolStreamResponse, error) {
+	m := new(GetPumpFunNewAmmPoolStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *apiClient) GetPumpFunAMMSwapStream(ctx context.Context, in *GetPumpFunAMMSwapStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunAMMSwapStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[20], "/api.Api/GetPumpFunAMMSwapStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPumpFunAMMSwapStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPumpFunAMMSwapStreamClient interface {
+	Recv() (*GetPumpFunAMMSwapStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPumpFunAMMSwapStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPumpFunAMMSwapStreamClient) Recv() (*GetPumpFunAMMSwapStreamResponse, error) {
+	m := new(GetPumpFunAMMSwapStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *apiClient) PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
+	out := new(PostPumpFunSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
+	out := new(PostPumpFunSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwapSol", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetPumpFunAmmQuotes(ctx context.Context, in *GetPumpFunAmmQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunAmmQuotesResponse, error) {
+	out := new(GetPumpFunAmmQuotesResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetPumpFunAmmQuotes", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostPumpFunAmmSwap(ctx context.Context, in *PostPumpFunAmmSwapRequest, opts ...grpc.CallOption) (*PostPumpFunAmmSwapResponse, error) {
+	out := new(PostPumpFunAmmSwapResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunAmmSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ApiServer is the server API for Api service.
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
 type ApiServer interface {
 	GetRateLimit(context.Context, *GetRateLimitRequest) (*GetRateLimitResponse, error)
+	GetTransactionTrace(context.Context, *GetTransactionTraceRequest) (*GetTransactionTraceResponse, error)
 	GetTransaction(context.Context, *GetTransactionRequest) (*GetTransactionResponse, error)
 	PostSubmitV2(context.Context, *PostSubmitRequest) (*PostSubmitResponse, error)
 	PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
+	PostSubmitSnipeV2(context.Context, *PostSubmitSnipeRequest) (*PostSubmitSnipeResponse, error)
+	PostSubmitPaladinV2(context.Context, *PostSubmitPaladinRequest) (*PostSubmitResponse, error)
 	// Raydium V2
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(context.Context, *GetRaydiumPoolReserveRequest) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error)
+	GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error)
+	GetRaydiumCPMMQuotes(context.Context, *GetRaydiumCPMMQuotesRequest) (*GetRaydiumCPMMQuotesResponse, error)
 	GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error)
+	GetRaydiumCLMMQuotes(context.Context, *GetRaydiumCLMMQuotesRequest) (*GetRaydiumCLMMQuotesResponse, error)
+	GetRaydiumCLMMPools(context.Context, *GetRaydiumCLMMPoolsRequest) (*GetRaydiumCLMMPoolsResponse, error)
+	PostRaydiumCLMMSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error)
+	PostRaydiumCLMMRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error)
 	PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error)
 	PostRaydiumRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error)
+	PostRaydiumCPMMSwap(context.Context, *PostRaydiumCPMMSwapRequest) (*PostRaydiumCPMMSwapResponse, error)
 	// Jupiter V2
 	GetJupiterQuotes(context.Context, *GetJupiterQuotesRequest) (*GetJupiterQuotesResponse, error)
 	GetJupiterPrices(context.Context, *GetJupiterPricesRequest) (*GetJupiterPricesResponse, error)
@@ -1095,6 +1506,7 @@ type ApiServer interface {
 	PostOrderV2(context.Context, *PostOrderRequestV2) (*PostOrderResponse, error)
 	PostCancelOrderV2(context.Context, *PostCancelOrderRequestV2) (*PostCancelOrderResponseV2, error)
 	PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error)
+	PostZetaCrossMarginAccount(context.Context, *PostZetaCrossMarginAccountRequest) (*PostZetaCrossMarginAccountResponse, error)
 	PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error)
 	GetOpenOrdersV2(context.Context, *GetOpenOrdersRequestV2) (*GetOpenOrdersResponseV2, error)
 	GetUnsettledV2(context.Context, *GetUnsettledRequestV2) (*GetUnsettledResponse, error)
@@ -1109,8 +1521,11 @@ type ApiServer interface {
 	GetQuotes(context.Context, *GetQuotesRequest) (*GetQuotesResponse, error)
 	// system API
 	GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error)
+	GetSlotInfo(context.Context, *GetSlotInfoRequest) (*GetSlotInfoResponse, error)
 	GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error)
+	GetRecentBlockHashV2(context.Context, *GetRecentBlockHashRequestV2) (*GetRecentBlockHashResponseV2, error)
 	GetPriorityFee(context.Context, *GetPriorityFeeRequest) (*GetPriorityFeeResponse, error)
+	GetPriorityFeeByProgram(context.Context, *GetPriorityFeeByProgramRequest) (*GetPriorityFeeByProgramResponse, error)
 	// account endpoints
 	GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error)
 	GetTokenAccounts(context.Context, *GetTokenAccountsRequest) (*GetTokenAccountsResponse, error)
@@ -1129,24 +1544,34 @@ type ApiServer interface {
 	GetOrders(context.Context, *GetOrdersRequest) (*GetOrdersResponse, error)
 	GetOpenOrders(context.Context, *GetOpenOrdersRequest) (*GetOpenOrdersResponse, error)
 	GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error)
-	GetBundleResultV2(context.Context, *GetBundleResultRequest) (*GetBundleResultResponse, error)
 	GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error)
 	PostRouteTradeSwap(context.Context, *RouteTradeSwapRequest) (*TradeSwapResponse, error)
 	// streaming endpoints
 	GetOrderbooksStream(*GetOrderbooksRequest, Api_GetOrderbooksStreamServer) error
 	GetMarketDepthsStream(*GetMarketDepthsRequest, Api_GetMarketDepthsStreamServer) error
 	GetTickersStream(*GetTickersStreamRequest, Api_GetTickersStreamServer) error
+	GetZetaTransactionStream(*GetZetaTransactionStreamRequest, Api_GetZetaTransactionStreamServer) error
 	GetTradesStream(*GetTradesRequest, Api_GetTradesStreamServer) error
 	GetOrderStatusStream(*GetOrderStatusStreamRequest, Api_GetOrderStatusStreamServer) error
 	GetRecentBlockHashStream(*GetRecentBlockHashRequest, Api_GetRecentBlockHashStreamServer) error
 	GetBlockStream(*GetBlockStreamRequest, Api_GetBlockStreamServer) error
 	GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error
+	GetPriorityFeeByProgramStream(*GetPriorityFeeByProgramRequest, Api_GetPriorityFeeByProgramStreamServer) error
 	GetBundleTipStream(*GetBundleTipRequest, Api_GetBundleTipStreamServer) error
 	GetQuotesStream(*GetQuotesStreamRequest, Api_GetQuotesStreamServer) error
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
 	GetPricesStream(*GetPricesStreamRequest, Api_GetPricesStreamServer) error
 	GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsRequest, Api_GetNewRaydiumPoolsStreamServer) error
+	GetNewRaydiumPoolsByTransactionStream(*GetNewRaydiumPoolsByTransactionRequest, Api_GetNewRaydiumPoolsByTransactionStreamServer) error
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
+	GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error
+	GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error
+	GetPumpFunNewAmmPoolStream(*GetPumpFunNewAmmPoolStreamRequest, Api_GetPumpFunNewAmmPoolStreamServer) error
+	GetPumpFunAMMSwapStream(*GetPumpFunAMMSwapStreamRequest, Api_GetPumpFunAMMSwapStreamServer) error
+	PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error)
+	PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error)
+	GetPumpFunAmmQuotes(context.Context, *GetPumpFunAmmQuotesRequest) (*GetPumpFunAmmQuotesResponse, error)
+	PostPumpFunAmmSwap(context.Context, *PostPumpFunAmmSwapRequest) (*PostPumpFunAmmSwapResponse, error)
 	mustEmbedUnimplementedApiServer()
 }
 
@@ -1157,6 +1582,9 @@ type UnimplementedApiServer struct {
 func (UnimplementedApiServer) GetRateLimit(context.Context, *GetRateLimitRequest) (*GetRateLimitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRateLimit not implemented")
 }
+func (UnimplementedApiServer) GetTransactionTrace(context.Context, *GetTransactionTraceRequest) (*GetTransactionTraceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTransactionTrace not implemented")
+}
 func (UnimplementedApiServer) GetTransaction(context.Context, *GetTransactionRequest) (*GetTransactionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTransaction not implemented")
 }
@@ -1165,6 +1593,12 @@ func (UnimplementedApiServer) PostSubmitV2(context.Context, *PostSubmitRequest) 
 }
 func (UnimplementedApiServer) PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitBatchV2 not implemented")
+}
+func (UnimplementedApiServer) PostSubmitSnipeV2(context.Context, *PostSubmitSnipeRequest) (*PostSubmitSnipeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitSnipeV2 not implemented")
+}
+func (UnimplementedApiServer) PostSubmitPaladinV2(context.Context, *PostSubmitPaladinRequest) (*PostSubmitResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitPaladinV2 not implemented")
 }
 func (UnimplementedApiServer) GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPools not implemented")
@@ -1175,14 +1609,35 @@ func (UnimplementedApiServer) GetRaydiumPoolReserve(context.Context, *GetRaydium
 func (UnimplementedApiServer) GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumQuotes not implemented")
 }
+func (UnimplementedApiServer) GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPumpFunQuotes not implemented")
+}
+func (UnimplementedApiServer) GetRaydiumCPMMQuotes(context.Context, *GetRaydiumCPMMQuotesRequest) (*GetRaydiumCPMMQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumCPMMQuotes not implemented")
+}
 func (UnimplementedApiServer) GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPrices not implemented")
+}
+func (UnimplementedApiServer) GetRaydiumCLMMQuotes(context.Context, *GetRaydiumCLMMQuotesRequest) (*GetRaydiumCLMMQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumCLMMQuotes not implemented")
+}
+func (UnimplementedApiServer) GetRaydiumCLMMPools(context.Context, *GetRaydiumCLMMPoolsRequest) (*GetRaydiumCLMMPoolsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumCLMMPools not implemented")
+}
+func (UnimplementedApiServer) PostRaydiumCLMMSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumCLMMSwap not implemented")
+}
+func (UnimplementedApiServer) PostRaydiumCLMMRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumCLMMRouteSwap not implemented")
 }
 func (UnimplementedApiServer) PostRaydiumSwap(context.Context, *PostRaydiumSwapRequest) (*PostRaydiumSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumSwap not implemented")
 }
 func (UnimplementedApiServer) PostRaydiumRouteSwap(context.Context, *PostRaydiumRouteSwapRequest) (*PostRaydiumRouteSwapResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumRouteSwap not implemented")
+}
+func (UnimplementedApiServer) PostRaydiumCPMMSwap(context.Context, *PostRaydiumCPMMSwapRequest) (*PostRaydiumCPMMSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostRaydiumCPMMSwap not implemented")
 }
 func (UnimplementedApiServer) GetJupiterQuotes(context.Context, *GetJupiterQuotesRequest) (*GetJupiterQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetJupiterQuotes not implemented")
@@ -1223,6 +1678,9 @@ func (UnimplementedApiServer) PostCancelOrderV2(context.Context, *PostCancelOrde
 func (UnimplementedApiServer) PostReplaceOrderV2(context.Context, *PostReplaceOrderRequestV2) (*PostOrderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostReplaceOrderV2 not implemented")
 }
+func (UnimplementedApiServer) PostZetaCrossMarginAccount(context.Context, *PostZetaCrossMarginAccountRequest) (*PostZetaCrossMarginAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostZetaCrossMarginAccount not implemented")
+}
 func (UnimplementedApiServer) PostSettleV2(context.Context, *PostSettleRequestV2) (*PostSettleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSettleV2 not implemented")
 }
@@ -1262,11 +1720,20 @@ func (UnimplementedApiServer) GetQuotes(context.Context, *GetQuotesRequest) (*Ge
 func (UnimplementedApiServer) GetServerTime(context.Context, *GetServerTimeRequest) (*GetServerTimeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerTime not implemented")
 }
+func (UnimplementedApiServer) GetSlotInfo(context.Context, *GetSlotInfoRequest) (*GetSlotInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSlotInfo not implemented")
+}
 func (UnimplementedApiServer) GetRecentBlockHash(context.Context, *GetRecentBlockHashRequest) (*GetRecentBlockHashResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecentBlockHash not implemented")
 }
+func (UnimplementedApiServer) GetRecentBlockHashV2(context.Context, *GetRecentBlockHashRequestV2) (*GetRecentBlockHashResponseV2, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRecentBlockHashV2 not implemented")
+}
 func (UnimplementedApiServer) GetPriorityFee(context.Context, *GetPriorityFeeRequest) (*GetPriorityFeeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPriorityFee not implemented")
+}
+func (UnimplementedApiServer) GetPriorityFeeByProgram(context.Context, *GetPriorityFeeByProgramRequest) (*GetPriorityFeeByProgramResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPriorityFeeByProgram not implemented")
 }
 func (UnimplementedApiServer) GetAccountBalance(context.Context, *GetAccountBalanceRequest) (*GetAccountBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBalance not implemented")
@@ -1316,9 +1783,6 @@ func (UnimplementedApiServer) GetOpenOrders(context.Context, *GetOpenOrdersReque
 func (UnimplementedApiServer) GetOrderByID(context.Context, *GetOrderByIDRequest) (*GetOrderByIDResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrderByID not implemented")
 }
-func (UnimplementedApiServer) GetBundleResultV2(context.Context, *GetBundleResultRequest) (*GetBundleResultResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetBundleResultV2 not implemented")
-}
 func (UnimplementedApiServer) GetUnsettled(context.Context, *GetUnsettledRequest) (*GetUnsettledResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUnsettled not implemented")
 }
@@ -1333,6 +1797,9 @@ func (UnimplementedApiServer) GetMarketDepthsStream(*GetMarketDepthsRequest, Api
 }
 func (UnimplementedApiServer) GetTickersStream(*GetTickersStreamRequest, Api_GetTickersStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTickersStream not implemented")
+}
+func (UnimplementedApiServer) GetZetaTransactionStream(*GetZetaTransactionStreamRequest, Api_GetZetaTransactionStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetZetaTransactionStream not implemented")
 }
 func (UnimplementedApiServer) GetTradesStream(*GetTradesRequest, Api_GetTradesStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTradesStream not implemented")
@@ -1349,6 +1816,9 @@ func (UnimplementedApiServer) GetBlockStream(*GetBlockStreamRequest, Api_GetBloc
 func (UnimplementedApiServer) GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPriorityFeeStream not implemented")
 }
+func (UnimplementedApiServer) GetPriorityFeeByProgramStream(*GetPriorityFeeByProgramRequest, Api_GetPriorityFeeByProgramStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPriorityFeeByProgramStream not implemented")
+}
 func (UnimplementedApiServer) GetBundleTipStream(*GetBundleTipRequest, Api_GetBundleTipStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetBundleTipStream not implemented")
 }
@@ -1364,8 +1834,35 @@ func (UnimplementedApiServer) GetPricesStream(*GetPricesStreamRequest, Api_GetPr
 func (UnimplementedApiServer) GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsRequest, Api_GetNewRaydiumPoolsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetNewRaydiumPoolsStream not implemented")
 }
+func (UnimplementedApiServer) GetNewRaydiumPoolsByTransactionStream(*GetNewRaydiumPoolsByTransactionRequest, Api_GetNewRaydiumPoolsByTransactionStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetNewRaydiumPoolsByTransactionStream not implemented")
+}
 func (UnimplementedApiServer) GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetSwapsStream not implemented")
+}
+func (UnimplementedApiServer) GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPumpFunSwapsStream not implemented")
+}
+func (UnimplementedApiServer) GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPumpFunNewTokensStream not implemented")
+}
+func (UnimplementedApiServer) GetPumpFunNewAmmPoolStream(*GetPumpFunNewAmmPoolStreamRequest, Api_GetPumpFunNewAmmPoolStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPumpFunNewAmmPoolStream not implemented")
+}
+func (UnimplementedApiServer) GetPumpFunAMMSwapStream(*GetPumpFunAMMSwapStreamRequest, Api_GetPumpFunAMMSwapStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPumpFunAMMSwapStream not implemented")
+}
+func (UnimplementedApiServer) PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwap not implemented")
+}
+func (UnimplementedApiServer) PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwapSol not implemented")
+}
+func (UnimplementedApiServer) GetPumpFunAmmQuotes(context.Context, *GetPumpFunAmmQuotesRequest) (*GetPumpFunAmmQuotesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPumpFunAmmQuotes not implemented")
+}
+func (UnimplementedApiServer) PostPumpFunAmmSwap(context.Context, *PostPumpFunAmmSwapRequest) (*PostPumpFunAmmSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunAmmSwap not implemented")
 }
 func (UnimplementedApiServer) mustEmbedUnimplementedApiServer() {}
 
@@ -1394,6 +1891,24 @@ func _Api_GetRateLimit_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetRateLimit(ctx, req.(*GetRateLimitRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetTransactionTrace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTransactionTraceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetTransactionTrace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetTransactionTrace",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetTransactionTrace(ctx, req.(*GetTransactionTraceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1452,6 +1967,42 @@ func _Api_PostSubmitBatchV2_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_PostSubmitSnipeV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostSubmitSnipeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostSubmitSnipeV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostSubmitSnipeV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostSubmitSnipeV2(ctx, req.(*PostSubmitSnipeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostSubmitPaladinV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostSubmitPaladinRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostSubmitPaladinV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostSubmitPaladinV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostSubmitPaladinV2(ctx, req.(*PostSubmitPaladinRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetRaydiumPools_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRaydiumPoolsRequest)
 	if err := dec(in); err != nil {
@@ -1506,6 +2057,42 @@ func _Api_GetRaydiumQuotes_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetPumpFunQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPumpFunQuotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPumpFunQuotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPumpFunQuotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPumpFunQuotes(ctx, req.(*GetPumpFunQuotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetRaydiumCPMMQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRaydiumCPMMQuotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRaydiumCPMMQuotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRaydiumCPMMQuotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRaydiumCPMMQuotes(ctx, req.(*GetRaydiumCPMMQuotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetRaydiumPrices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRaydiumPricesRequest)
 	if err := dec(in); err != nil {
@@ -1520,6 +2107,78 @@ func _Api_GetRaydiumPrices_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetRaydiumPrices(ctx, req.(*GetRaydiumPricesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetRaydiumCLMMQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRaydiumCLMMQuotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRaydiumCLMMQuotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRaydiumCLMMQuotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRaydiumCLMMQuotes(ctx, req.(*GetRaydiumCLMMQuotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetRaydiumCLMMPools_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRaydiumCLMMPoolsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRaydiumCLMMPools(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRaydiumCLMMPools",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRaydiumCLMMPools(ctx, req.(*GetRaydiumCLMMPoolsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostRaydiumCLMMSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRaydiumSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostRaydiumCLMMSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostRaydiumCLMMSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostRaydiumCLMMSwap(ctx, req.(*PostRaydiumSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostRaydiumCLMMRouteSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRaydiumRouteSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostRaydiumCLMMRouteSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostRaydiumCLMMRouteSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostRaydiumCLMMRouteSwap(ctx, req.(*PostRaydiumRouteSwapRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1556,6 +2215,24 @@ func _Api_PostRaydiumRouteSwap_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostRaydiumRouteSwap(ctx, req.(*PostRaydiumRouteSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostRaydiumCPMMSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostRaydiumCPMMSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostRaydiumCPMMSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostRaydiumCPMMSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostRaydiumCPMMSwap(ctx, req.(*PostRaydiumCPMMSwapRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1794,6 +2471,24 @@ func _Api_PostReplaceOrderV2_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_PostZetaCrossMarginAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostZetaCrossMarginAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostZetaCrossMarginAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostZetaCrossMarginAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostZetaCrossMarginAccount(ctx, req.(*PostZetaCrossMarginAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_PostSettleV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PostSettleRequestV2)
 	if err := dec(in); err != nil {
@@ -2028,6 +2723,24 @@ func _Api_GetServerTime_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetSlotInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSlotInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetSlotInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetSlotInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetSlotInfo(ctx, req.(*GetSlotInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetRecentBlockHash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRecentBlockHashRequest)
 	if err := dec(in); err != nil {
@@ -2046,6 +2759,24 @@ func _Api_GetRecentBlockHash_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Api_GetRecentBlockHashV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecentBlockHashRequestV2)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetRecentBlockHashV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetRecentBlockHashV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetRecentBlockHashV2(ctx, req.(*GetRecentBlockHashRequestV2))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Api_GetPriorityFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetPriorityFeeRequest)
 	if err := dec(in); err != nil {
@@ -2060,6 +2791,24 @@ func _Api_GetPriorityFee_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetPriorityFee(ctx, req.(*GetPriorityFeeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetPriorityFeeByProgram_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPriorityFeeByProgramRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPriorityFeeByProgram(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPriorityFeeByProgram",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPriorityFeeByProgram(ctx, req.(*GetPriorityFeeByProgramRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2352,24 +3101,6 @@ func _Api_GetOrderByID_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Api_GetBundleResultV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBundleResultRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetBundleResultV2(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetBundleResultV2",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetBundleResultV2(ctx, req.(*GetBundleResultRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Api_GetUnsettled_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUnsettledRequest)
 	if err := dec(in); err != nil {
@@ -2466,6 +3197,27 @@ type apiGetTickersStreamServer struct {
 }
 
 func (x *apiGetTickersStreamServer) Send(m *GetTickersStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Api_GetZetaTransactionStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetZetaTransactionStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetZetaTransactionStream(m, &apiGetZetaTransactionStreamServer{stream})
+}
+
+type Api_GetZetaTransactionStreamServer interface {
+	Send(*GetZetaTransactionStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetZetaTransactionStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetZetaTransactionStreamServer) Send(m *GetZetaTransactionStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -2574,6 +3326,27 @@ func (x *apiGetPriorityFeeStreamServer) Send(m *GetPriorityFeeResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetPriorityFeeByProgramStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPriorityFeeByProgramRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPriorityFeeByProgramStream(m, &apiGetPriorityFeeByProgramStreamServer{stream})
+}
+
+type Api_GetPriorityFeeByProgramStreamServer interface {
+	Send(*GetPriorityFeeByProgramResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPriorityFeeByProgramStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPriorityFeeByProgramStreamServer) Send(m *GetPriorityFeeByProgramResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetBundleTipStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetBundleTipRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2679,6 +3452,27 @@ func (x *apiGetNewRaydiumPoolsStreamServer) Send(m *GetNewRaydiumPoolsResponse) 
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetNewRaydiumPoolsByTransactionStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetNewRaydiumPoolsByTransactionRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetNewRaydiumPoolsByTransactionStream(m, &apiGetNewRaydiumPoolsByTransactionStreamServer{stream})
+}
+
+type Api_GetNewRaydiumPoolsByTransactionStreamServer interface {
+	Send(*GetNewRaydiumPoolsByTransactionResponse) error
+	grpc.ServerStream
+}
+
+type apiGetNewRaydiumPoolsByTransactionStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetNewRaydiumPoolsByTransactionStreamServer) Send(m *GetNewRaydiumPoolsByTransactionResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetSwapsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetSwapsStreamRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2700,6 +3494,162 @@ func (x *apiGetSwapsStreamServer) Send(m *GetSwapsStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetPumpFunSwapsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPumpFunSwapsStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPumpFunSwapsStream(m, &apiGetPumpFunSwapsStreamServer{stream})
+}
+
+type Api_GetPumpFunSwapsStreamServer interface {
+	Send(*GetPumpFunSwapsStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPumpFunSwapsStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPumpFunSwapsStreamServer) Send(m *GetPumpFunSwapsStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Api_GetPumpFunNewTokensStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPumpFunNewTokensStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPumpFunNewTokensStream(m, &apiGetPumpFunNewTokensStreamServer{stream})
+}
+
+type Api_GetPumpFunNewTokensStreamServer interface {
+	Send(*GetPumpFunNewTokensStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPumpFunNewTokensStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPumpFunNewTokensStreamServer) Send(m *GetPumpFunNewTokensStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Api_GetPumpFunNewAmmPoolStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPumpFunNewAmmPoolStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPumpFunNewAmmPoolStream(m, &apiGetPumpFunNewAmmPoolStreamServer{stream})
+}
+
+type Api_GetPumpFunNewAmmPoolStreamServer interface {
+	Send(*GetPumpFunNewAmmPoolStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPumpFunNewAmmPoolStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPumpFunNewAmmPoolStreamServer) Send(m *GetPumpFunNewAmmPoolStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Api_GetPumpFunAMMSwapStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPumpFunAMMSwapStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPumpFunAMMSwapStream(m, &apiGetPumpFunAMMSwapStreamServer{stream})
+}
+
+type Api_GetPumpFunAMMSwapStreamServer interface {
+	Send(*GetPumpFunAMMSwapStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPumpFunAMMSwapStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPumpFunAMMSwapStreamServer) Send(m *GetPumpFunAMMSwapStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Api_PostPumpFunSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostPumpFunSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostPumpFunSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostPumpFunSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostPumpFunSwap(ctx, req.(*PostPumpFunSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostPumpFunSwapSol_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostPumpFunSwapRequestSol)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostPumpFunSwapSol(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostPumpFunSwapSol",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostPumpFunSwapSol(ctx, req.(*PostPumpFunSwapRequestSol))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetPumpFunAmmQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPumpFunAmmQuotesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetPumpFunAmmQuotes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetPumpFunAmmQuotes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetPumpFunAmmQuotes(ctx, req.(*GetPumpFunAmmQuotesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostPumpFunAmmSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostPumpFunAmmSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostPumpFunAmmSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostPumpFunAmmSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostPumpFunAmmSwap(ctx, req.(*PostPumpFunAmmSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Api_ServiceDesc is the grpc.ServiceDesc for Api service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2710,6 +3660,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRateLimit",
 			Handler:    _Api_GetRateLimit_Handler,
+		},
+		{
+			MethodName: "GetTransactionTrace",
+			Handler:    _Api_GetTransactionTrace_Handler,
 		},
 		{
 			MethodName: "GetTransaction",
@@ -2724,6 +3678,14 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_PostSubmitBatchV2_Handler,
 		},
 		{
+			MethodName: "PostSubmitSnipeV2",
+			Handler:    _Api_PostSubmitSnipeV2_Handler,
+		},
+		{
+			MethodName: "PostSubmitPaladinV2",
+			Handler:    _Api_PostSubmitPaladinV2_Handler,
+		},
+		{
 			MethodName: "GetRaydiumPools",
 			Handler:    _Api_GetRaydiumPools_Handler,
 		},
@@ -2736,8 +3698,32 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetRaydiumQuotes_Handler,
 		},
 		{
+			MethodName: "GetPumpFunQuotes",
+			Handler:    _Api_GetPumpFunQuotes_Handler,
+		},
+		{
+			MethodName: "GetRaydiumCPMMQuotes",
+			Handler:    _Api_GetRaydiumCPMMQuotes_Handler,
+		},
+		{
 			MethodName: "GetRaydiumPrices",
 			Handler:    _Api_GetRaydiumPrices_Handler,
+		},
+		{
+			MethodName: "GetRaydiumCLMMQuotes",
+			Handler:    _Api_GetRaydiumCLMMQuotes_Handler,
+		},
+		{
+			MethodName: "GetRaydiumCLMMPools",
+			Handler:    _Api_GetRaydiumCLMMPools_Handler,
+		},
+		{
+			MethodName: "PostRaydiumCLMMSwap",
+			Handler:    _Api_PostRaydiumCLMMSwap_Handler,
+		},
+		{
+			MethodName: "PostRaydiumCLMMRouteSwap",
+			Handler:    _Api_PostRaydiumCLMMRouteSwap_Handler,
 		},
 		{
 			MethodName: "PostRaydiumSwap",
@@ -2746,6 +3732,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostRaydiumRouteSwap",
 			Handler:    _Api_PostRaydiumRouteSwap_Handler,
+		},
+		{
+			MethodName: "PostRaydiumCPMMSwap",
+			Handler:    _Api_PostRaydiumCPMMSwap_Handler,
 		},
 		{
 			MethodName: "GetJupiterQuotes",
@@ -2800,6 +3790,10 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_PostReplaceOrderV2_Handler,
 		},
 		{
+			MethodName: "PostZetaCrossMarginAccount",
+			Handler:    _Api_PostZetaCrossMarginAccount_Handler,
+		},
+		{
 			MethodName: "PostSettleV2",
 			Handler:    _Api_PostSettleV2_Handler,
 		},
@@ -2852,12 +3846,24 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetServerTime_Handler,
 		},
 		{
+			MethodName: "GetSlotInfo",
+			Handler:    _Api_GetSlotInfo_Handler,
+		},
+		{
 			MethodName: "GetRecentBlockHash",
 			Handler:    _Api_GetRecentBlockHash_Handler,
 		},
 		{
+			MethodName: "GetRecentBlockHashV2",
+			Handler:    _Api_GetRecentBlockHashV2_Handler,
+		},
+		{
 			MethodName: "GetPriorityFee",
 			Handler:    _Api_GetPriorityFee_Handler,
+		},
+		{
+			MethodName: "GetPriorityFeeByProgram",
+			Handler:    _Api_GetPriorityFeeByProgram_Handler,
 		},
 		{
 			MethodName: "GetAccountBalance",
@@ -2924,16 +3930,28 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Api_GetOrderByID_Handler,
 		},
 		{
-			MethodName: "GetBundleResultV2",
-			Handler:    _Api_GetBundleResultV2_Handler,
-		},
-		{
 			MethodName: "GetUnsettled",
 			Handler:    _Api_GetUnsettled_Handler,
 		},
 		{
 			MethodName: "PostRouteTradeSwap",
 			Handler:    _Api_PostRouteTradeSwap_Handler,
+		},
+		{
+			MethodName: "PostPumpFunSwap",
+			Handler:    _Api_PostPumpFunSwap_Handler,
+		},
+		{
+			MethodName: "PostPumpFunSwapSol",
+			Handler:    _Api_PostPumpFunSwapSol_Handler,
+		},
+		{
+			MethodName: "GetPumpFunAmmQuotes",
+			Handler:    _Api_GetPumpFunAmmQuotes_Handler,
+		},
+		{
+			MethodName: "PostPumpFunAmmSwap",
+			Handler:    _Api_PostPumpFunAmmSwap_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
@@ -2950,6 +3968,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetTickersStream",
 			Handler:       _Api_GetTickersStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetZetaTransactionStream",
+			Handler:       _Api_GetZetaTransactionStream_Handler,
 			ServerStreams: true,
 		},
 		{
@@ -2978,6 +4001,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
+			StreamName:    "GetPriorityFeeByProgramStream",
+			Handler:       _Api_GetPriorityFeeByProgramStream_Handler,
+			ServerStreams: true,
+		},
+		{
 			StreamName:    "GetBundleTipStream",
 			Handler:       _Api_GetBundleTipStream_Handler,
 			ServerStreams: true,
@@ -3003,8 +4031,33 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
+			StreamName:    "GetNewRaydiumPoolsByTransactionStream",
+			Handler:       _Api_GetNewRaydiumPoolsByTransactionStream_Handler,
+			ServerStreams: true,
+		},
+		{
 			StreamName:    "GetSwapsStream",
 			Handler:       _Api_GetSwapsStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPumpFunSwapsStream",
+			Handler:       _Api_GetPumpFunSwapsStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPumpFunNewTokensStream",
+			Handler:       _Api_GetPumpFunNewTokensStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPumpFunNewAmmPoolStream",
+			Handler:       _Api_GetPumpFunNewAmmPoolStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPumpFunAMMSwapStream",
+			Handler:       _Api_GetPumpFunAMMSwapStream_Handler,
 			ServerStreams: true,
 		},
 	},
