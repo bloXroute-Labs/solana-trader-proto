@@ -1446,6 +1446,7 @@ message PostSubmitRequest {
   optional bool sniping = 10;
   optional google.protobuf.Timestamp timestamp = 11;
   optional SubmitProtection submitProtection = 12;
+  optional bool revertProtection = 13;
 }
 
 message PostSubmitPaladinRequest {
