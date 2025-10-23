@@ -5897,6 +5897,9 @@
         },
         "submitProtection": {
           "$ref": "#/definitions/apiSubmitProtection"
+        },
+        "revertProtection": {
+          "type": "boolean"
         }
       }
     },
