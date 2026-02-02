@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package bundle;
+
+option go_package = "github.com/bloXroute-Labs/solana-trader-proto/harmonic-go/bundle";
+
+import "harmonic_proto/packet.proto";
+import "harmonic_proto/shared.proto";
+
+// A bundle of transactions to be executed atomically
+message Bundle {
+  shared.Header header = 2;
+  repeated packet.Packet packets = 3;
+}

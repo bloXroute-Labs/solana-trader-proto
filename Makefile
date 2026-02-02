@@ -10,7 +10,7 @@ all: clean proto
 clean:
 	rm -rf js api common
 
-proto: proto-build-api-go proto-build-common-go proto-build-swagger proto-build-gw proto-build-api-python proto-build-api-rust
+proto: proto-build-api-go proto-build-common-go proto-build-swagger proto-build-gw proto-build-api-python proto-build-api-rust proto-build-api-harmonic
 
 proto-build-gw:
 	docker run -v $(CURDIR)/api:/go/protobuf/out \
@@ -59,4 +59,8 @@ proto-docker-push-go:
 proto-docker-build-go:
 	cd proto && docker build . -f Dockerfile-go -t $(PB_GO_IMAGE_NAME) --platform linux/amd64
 
+proto-build-api-harmonic:
+	docker run -v $(CURDIR)/harmonic-go:/go/protobuf/out \
+			   -v $(CURDIR)/proto:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
+		protoc --go_out=../out --go_opt=module=github.com/bloXroute-Labs/solana-trader-proto/harmonic-go --go-grpc_out=../out --go-grpc_opt=module=github.com/bloXroute-Labs/solana-trader-proto/harmonic-go harmonic_proto/auth.proto harmonic_proto/bundle.proto harmonic_proto/packet.proto harmonic_proto/searcher.proto harmonic_proto/shared.proto
 

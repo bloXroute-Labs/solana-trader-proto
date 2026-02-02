@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package shared;
+
+option go_package = "github.com/bloXroute-Labs/solana-trader-proto/harmonic-go/shared";
+
+import "google/protobuf/timestamp.proto";
+
+message Header {
+  google.protobuf.Timestamp ts = 1;
+}
