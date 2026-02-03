@@ -177,5 +177,5 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "harmonic_proto/auth.proto",
+	Metadata: "auth.proto",
 }

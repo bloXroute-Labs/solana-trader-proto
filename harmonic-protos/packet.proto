@@ -6,18 +6,18 @@ option go_package = "github.com/bloXroute-Labs/solana-trader-proto/harmonic-go/p
 
 message Packet {
   bytes data = 1;
-  PktMeta meta = 2;
+  Meta meta = 2;
 }
 
-message PktMeta {
+message Meta {
   uint64 size = 1;
   string addr = 2;
   uint32 port = 3;
-  PktFlags flags = 4;
+  Flags flags = 4;
   uint64 sender_stake = 5;
 }
 
-message PktFlags {
+message Flags {
   bool discard = 1;
   bool forwarded = 2;
   bool repair = 3;
