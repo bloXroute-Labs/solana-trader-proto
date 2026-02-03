@@ -32,7 +32,7 @@ func NewSearcherServiceClient(cc grpc.ClientConnInterface) SearcherServiceClient
 
 func (c *searcherServiceClient) SendBundle(ctx context.Context, in *SendBundleRequest, opts ...grpc.CallOption) (*SendBundleResponse, error) {
 	out := new(SendBundleResponse)
-	err := c.cc.Invoke(ctx, "/searcher.SearcherService/SendBundle", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/harmonic.searcher.SearcherService/SendBundle", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -78,7 +78,7 @@ func _SearcherService_SendBundle_Handler(srv interface{}, ctx context.Context, d
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/searcher.SearcherService/SendBundle",
+		FullMethod: "/harmonic.searcher.SearcherService/SendBundle",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SearcherServiceServer).SendBundle(ctx, req.(*SendBundleRequest))
@@ -90,7 +90,7 @@ func _SearcherService_SendBundle_Handler(srv interface{}, ctx context.Context, d
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SearcherService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "searcher.SearcherService",
+	ServiceName: "harmonic.searcher.SearcherService",
 	HandlerType: (*SearcherServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

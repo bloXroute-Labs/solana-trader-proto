@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package auth;
+package harmonic.auth;
 
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/harmonic-go/auth";
 

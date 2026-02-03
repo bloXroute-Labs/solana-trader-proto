@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package searcher;
+package harmonic.searcher;
 
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/harmonic-go/searcher";
 

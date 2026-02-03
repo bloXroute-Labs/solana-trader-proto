@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package bundle;
+package harmonic.bundle;
 
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/harmonic-go/bundle";
 

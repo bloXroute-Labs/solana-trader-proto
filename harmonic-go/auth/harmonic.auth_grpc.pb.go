@@ -37,7 +37,7 @@ func NewAuthServiceClient(cc grpc.ClientConnInterface) AuthServiceClient {
 
 func (c *authServiceClient) GenerateAuthChallenge(ctx context.Context, in *GenerateAuthChallengeRequest, opts ...grpc.CallOption) (*GenerateAuthChallengeResponse, error) {
 	out := new(GenerateAuthChallengeResponse)
-	err := c.cc.Invoke(ctx, "/auth.AuthService/GenerateAuthChallenge", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/harmonic.auth.AuthService/GenerateAuthChallenge", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -46,7 +46,7 @@ func (c *authServiceClient) GenerateAuthChallenge(ctx context.Context, in *Gener
 
 func (c *authServiceClient) GenerateAuthTokens(ctx context.Context, in *GenerateAuthTokensRequest, opts ...grpc.CallOption) (*GenerateAuthTokensResponse, error) {
 	out := new(GenerateAuthTokensResponse)
-	err := c.cc.Invoke(ctx, "/auth.AuthService/GenerateAuthTokens", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/harmonic.auth.AuthService/GenerateAuthTokens", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func (c *authServiceClient) GenerateAuthTokens(ctx context.Context, in *Generate
 
 func (c *authServiceClient) RefreshAccessToken(ctx context.Context, in *RefreshAccessTokenRequest, opts ...grpc.CallOption) (*RefreshAccessTokenResponse, error) {
 	out := new(RefreshAccessTokenResponse)
-	err := c.cc.Invoke(ctx, "/auth.AuthService/RefreshAccessToken", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/harmonic.auth.AuthService/RefreshAccessToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ func _AuthService_GenerateAuthChallenge_Handler(srv interface{}, ctx context.Con
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/auth.AuthService/GenerateAuthChallenge",
+		FullMethod: "/harmonic.auth.AuthService/GenerateAuthChallenge",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).GenerateAuthChallenge(ctx, req.(*GenerateAuthChallengeRequest))
@@ -130,7 +130,7 @@ func _AuthService_GenerateAuthTokens_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/auth.AuthService/GenerateAuthTokens",
+		FullMethod: "/harmonic.auth.AuthService/GenerateAuthTokens",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).GenerateAuthTokens(ctx, req.(*GenerateAuthTokensRequest))
@@ -148,7 +148,7 @@ func _AuthService_RefreshAccessToken_Handler(srv interface{}, ctx context.Contex
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/auth.AuthService/RefreshAccessToken",
+		FullMethod: "/harmonic.auth.AuthService/RefreshAccessToken",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthServiceServer).RefreshAccessToken(ctx, req.(*RefreshAccessTokenRequest))
@@ -160,7 +160,7 @@ func _AuthService_RefreshAccessToken_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AuthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "auth.AuthService",
+	ServiceName: "harmonic.auth.AuthService",
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
