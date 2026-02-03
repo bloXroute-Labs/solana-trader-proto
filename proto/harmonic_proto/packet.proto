@@ -13,7 +13,7 @@ message Meta {
   uint64 size = 1;
   string addr = 2;
   uint32 port = 3;
-  PacketFlags flags = 4;
+  packet.PacketFlags flags = 4;
   uint64 sender_stake = 5;
 }
 
