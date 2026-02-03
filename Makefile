@@ -62,5 +62,5 @@ proto-docker-build-go:
 proto-build-api-harmonic:
 	docker run -v $(CURDIR)/harmonic-go:/go/protobuf/out \
 			   -v $(CURDIR)/harmonic-protos:/go/protobuf/in $(PB_GO_IMAGE_NAME) \
-		protoc --go_out=../out --go_opt=module=github.com/bloXroute-Labs/solana-trader-proto/harmonic-go --go-grpc_out=../out --go-grpc_opt=module=github.com/bloXroute-Labs/solana-trader-proto/harmonic-go auth.proto bundle.proto packet.proto searcher.proto shared.proto
+		protoc --go_out=../out --go_opt=module=github.com/bloXroute-Labs/solana-trader-proto/harmonic-go --go-grpc_out=../out --go-grpc_opt=module=github.com/bloXroute-Labs/solana-trader-proto/harmonic-go harmonic.auth.proto harmonic.bundle.proto harmonic.packet.proto harmonic.searcher.proto harmonic.shared.proto
 

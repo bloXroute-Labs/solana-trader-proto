@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.26.0
 // 	protoc        v3.19.3
-// source: searcher.proto
+// source: harmonic.searcher.proto
 
 package searcher
 

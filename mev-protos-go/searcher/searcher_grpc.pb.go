@@ -421,5 +421,5 @@ var SearcherService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "searcher.proto",
+	Metadata: "harmonic.searcher.proto",
 }

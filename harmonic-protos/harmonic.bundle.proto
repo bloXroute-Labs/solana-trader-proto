@@ -4,8 +4,8 @@ package bundle;
 
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/harmonic-go/bundle";
 
-import "packet.proto";
-import "shared.proto";
+import "harmonic.packet.proto";
+import "harmonic.shared.proto";
 
 // A bundle of transactions to be executed atomically
 message Bundle {

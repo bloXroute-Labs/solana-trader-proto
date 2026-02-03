@@ -4,7 +4,7 @@ package searcher;
 
 option go_package = "github.com/bloXroute-Labs/solana-trader-proto/harmonic-go/searcher";
 
-import "bundle.proto";
+import "harmonic.bundle.proto";
 
 message SendBundleRequest {
   bundle.Bundle bundle = 1;

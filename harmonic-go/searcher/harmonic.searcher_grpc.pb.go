@@ -99,5 +99,5 @@ var SearcherService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "searcher.proto",
+	Metadata: "harmonic.searcher.proto",
 }
