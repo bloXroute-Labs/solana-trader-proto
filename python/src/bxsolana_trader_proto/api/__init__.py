@@ -2,7 +2,7 @@
 # sources: api.proto
 # plugin: python-betterproto
 # This file has been @generated
-
+import warnings
 from dataclasses import dataclass
 from datetime import datetime
 from typing import (
@@ -18,7 +18,6 @@ import grpclib
 from betterproto.grpc.grpclib_server import ServiceBase
 
 from .. import common as _common__
-
 
 if TYPE_CHECKING:
     import grpclib.server
@@ -563,6 +562,14 @@ class PostSubmitBatchRequest(betterproto.Message):
     submit_protection: Optional["SubmitProtection"] = betterproto.enum_field(
         6, optional=True, group="_submitProtection"
     )
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        if self.is_set("submit_strategy"):
+            warnings.warn(
+                "PostSubmitBatchRequest.submit_strategy is deprecated",
+                DeprecationWarning,
+            )
 
 
 @dataclass(eq=False, repr=False)
@@ -1254,16 +1261,16 @@ class TransactionMeta(betterproto.Message):
     fee: int = betterproto.uint64_field(3)
     pre_balances: List[int] = betterproto.uint64_field(4)
     post_balances: List[int] = betterproto.uint64_field(5)
-    inner_instructions: List[
-        "TransactionMetaInnerInstruction"
-    ] = betterproto.message_field(6)
+    inner_instructions: List["TransactionMetaInnerInstruction"] = (
+        betterproto.message_field(6)
+    )
     log_messages: List[str] = betterproto.string_field(7)
     pre_token_balances: List["TransactionMetaTokenBalance"] = betterproto.message_field(
         8
     )
-    post_token_balances: List[
-        "TransactionMetaTokenBalance"
-    ] = betterproto.message_field(9)
+    post_token_balances: List["TransactionMetaTokenBalance"] = (
+        betterproto.message_field(9)
+    )
 
 
 @dataclass(eq=False, repr=False)
@@ -3605,6 +3612,7 @@ class ApiStub(betterproto.ServiceStub):
 
 
 class ApiBase(ServiceBase):
+
     async def get_rate_limit(
         self, get_rate_limit_request: "GetRateLimitRequest"
     ) -> "GetRateLimitResponse":
