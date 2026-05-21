@@ -530,6 +530,10 @@ class PostSubmitRequest(betterproto.Message):
 
     def __post_init__(self) -> None:
         super().__post_init__()
+        if self.is_set("fast_best_effort"):
+            warnings.warn(
+                "PostSubmitRequest.fast_best_effort is deprecated", DeprecationWarning
+            )
         if self.is_set("sniping"):
             warnings.warn("PostSubmitRequest.sniping is deprecated", DeprecationWarning)
 
@@ -632,7 +636,7 @@ class GetBackrunsRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class BackrunResult(betterproto.Message):
     rev_share_address: str = betterproto.string_field(1)
-    rev_share_total_lamports: int = betterproto.uint64_field(2)
+    rev_share_total_sol: float = betterproto.double_field(2)
     total_backruns: int = betterproto.uint64_field(3)
 
 
