@@ -1466,7 +1466,7 @@ message PostSubmitRequest {
   optional bool fastBestEffort = 7;
   optional bool allowBackRun = 8;
   optional string revenueAddress = 9;
-  optional bool sniping = 10;
+  optional bool sniping = 10 [deprecated = true];
   optional google.protobuf.Timestamp timestamp = 11;
   optional SubmitProtection submitProtection = 12;
   optional bool revertProtection = 13;
