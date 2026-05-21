@@ -1499,7 +1499,7 @@ enum SubmitProtection {
 
 message PostSubmitBatchRequest {
   repeated PostSubmitRequestEntry entries = 1;
-  SubmitStrategy submitStrategy = 2;
+  SubmitStrategy submitStrategy = 2 [deprecated = true];
   optional bool useBundle = 3;
   optional bool frontRunningProtection = 4;
   optional google.protobuf.Timestamp timestamp = 5;
