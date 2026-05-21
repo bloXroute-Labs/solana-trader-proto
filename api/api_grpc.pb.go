@@ -25,6 +25,8 @@ type ApiClient interface {
 	PostSubmitBatchV2(ctx context.Context, in *PostSubmitBatchRequest, opts ...grpc.CallOption) (*PostSubmitBatchResponse, error)
 	PostSubmitSnipeV2(ctx context.Context, in *PostSubmitSnipeRequest, opts ...grpc.CallOption) (*PostSubmitSnipeResponse, error)
 	PostSubmitPaladinV2(ctx context.Context, in *PostSubmitPaladinRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error)
+	PostBackrunsV2(ctx context.Context, in *PostBackrunsRequest, opts ...grpc.CallOption) (*PostBackrunsResponse, error)
+	GetBackrunsV2(ctx context.Context, in *GetBackrunsRequest, opts ...grpc.CallOption) (*GetBackrunsResponse, error)
 	// Raydium V2
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoolReserveRequest, opts ...grpc.CallOption) (*GetRaydiumPoolReserveResponse, error)
@@ -186,6 +188,24 @@ func (c *apiClient) PostSubmitSnipeV2(ctx context.Context, in *PostSubmitSnipeRe
 func (c *apiClient) PostSubmitPaladinV2(ctx context.Context, in *PostSubmitPaladinRequest, opts ...grpc.CallOption) (*PostSubmitResponse, error) {
 	out := new(PostSubmitResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/PostSubmitPaladinV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) PostBackrunsV2(ctx context.Context, in *PostBackrunsRequest, opts ...grpc.CallOption) (*PostBackrunsResponse, error) {
+	out := new(PostBackrunsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/PostBackrunsV2", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *apiClient) GetBackrunsV2(ctx context.Context, in *GetBackrunsRequest, opts ...grpc.CallOption) (*GetBackrunsResponse, error) {
+	out := new(GetBackrunsResponse)
+	err := c.cc.Invoke(ctx, "/api.Api/GetBackrunsV2", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1478,6 +1498,8 @@ type ApiServer interface {
 	PostSubmitBatchV2(context.Context, *PostSubmitBatchRequest) (*PostSubmitBatchResponse, error)
 	PostSubmitSnipeV2(context.Context, *PostSubmitSnipeRequest) (*PostSubmitSnipeResponse, error)
 	PostSubmitPaladinV2(context.Context, *PostSubmitPaladinRequest) (*PostSubmitResponse, error)
+	PostBackrunsV2(context.Context, *PostBackrunsRequest) (*PostBackrunsResponse, error)
+	GetBackrunsV2(context.Context, *GetBackrunsRequest) (*GetBackrunsResponse, error)
 	// Raydium V2
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(context.Context, *GetRaydiumPoolReserveRequest) (*GetRaydiumPoolReserveResponse, error)
@@ -1599,6 +1621,12 @@ func (UnimplementedApiServer) PostSubmitSnipeV2(context.Context, *PostSubmitSnip
 }
 func (UnimplementedApiServer) PostSubmitPaladinV2(context.Context, *PostSubmitPaladinRequest) (*PostSubmitResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PostSubmitPaladinV2 not implemented")
+}
+func (UnimplementedApiServer) PostBackrunsV2(context.Context, *PostBackrunsRequest) (*PostBackrunsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PostBackrunsV2 not implemented")
+}
+func (UnimplementedApiServer) GetBackrunsV2(context.Context, *GetBackrunsRequest) (*GetBackrunsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBackrunsV2 not implemented")
 }
 func (UnimplementedApiServer) GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumPools not implemented")
@@ -1999,6 +2027,42 @@ func _Api_PostSubmitPaladinV2_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).PostSubmitPaladinV2(ctx, req.(*PostSubmitPaladinRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_PostBackrunsV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PostBackrunsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).PostBackrunsV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/PostBackrunsV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).PostBackrunsV2(ctx, req.(*PostBackrunsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Api_GetBackrunsV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBackrunsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiServer).GetBackrunsV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.Api/GetBackrunsV2",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiServer).GetBackrunsV2(ctx, req.(*GetBackrunsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3684,6 +3748,14 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PostSubmitPaladinV2",
 			Handler:    _Api_PostSubmitPaladinV2_Handler,
+		},
+		{
+			MethodName: "PostBackrunsV2",
+			Handler:    _Api_PostBackrunsV2_Handler,
+		},
+		{
+			MethodName: "GetBackrunsV2",
+			Handler:    _Api_GetBackrunsV2_Handler,
 		},
 		{
 			MethodName: "GetRaydiumPools",

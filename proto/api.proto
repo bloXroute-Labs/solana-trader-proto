@@ -132,6 +132,29 @@ service Api {
     };
   }
 
+  rpc PostBackrunsV2(PostBackrunsRequest) returns (PostBackrunsResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/backruns"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Endpoint for OFA partners, to call and confirms a landed backrun and associated information";
+      summary: "Backruns";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
+  rpc GetBackrunsV2(GetBackrunsRequest) returns (GetBackrunsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/backruns"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns backrun summary grouped by revenue share address for a time range";
+      summary: "Backruns summary";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
   // Raydium V2
   rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
     option (google.api.http) = {
@@ -1506,6 +1529,33 @@ message PostSubmitSnipeResponse {
 
 message PostSubmitResponse {
   string signature = 1;
+}
+
+message PostBackrunsRequest {
+  string signature = 1 [(google.api.field_behavior) = REQUIRED];
+  string backrunSignature = 2 [(google.api.field_behavior) = REQUIRED];
+  uint64 revShareLamports = 3 [(google.api.field_behavior) = REQUIRED];
+  string revShareAddress = 4 [(google.api.field_behavior) = REQUIRED];
+}
+
+message PostBackrunsResponse {
+}
+
+message GetBackrunsRequest {
+  google.protobuf.Timestamp startTime = 1 [(google.api.field_behavior) = REQUIRED];
+  google.protobuf.Timestamp endTime = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+message BackrunResult {
+  string revShareAddress = 1;
+  uint64 revShareTotalLamports = 2;
+  uint64 totalBackruns = 3;
+}
+
+message GetBackrunsResponse {
+  google.protobuf.Timestamp startTime = 1;
+  google.protobuf.Timestamp endTime = 2;
+  repeated BackrunResult results = 3;
 }
 
 
