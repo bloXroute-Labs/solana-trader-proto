@@ -1039,7 +1039,7 @@
       },
       "post": {
         "summary": "Backruns",
-        "description": "Endpoint for OFA partners, to call and confirms a landed backrun and associated information",
+        "description": "Endpoint for OFA partners, to call and confirm a landed backrun and associated information",
         "operationId": "Api_PostBackrunsV2",
         "responses": {
           "200": {
@@ -6066,9 +6066,15 @@
       "type": "object",
       "properties": {
         "signature": {
-          "type": "string"
+          "type": "string",
+          "required": [
+            "signature"
+          ]
         }
-      }
+      },
+      "required": [
+        "signature"
+      ]
     },
     "apiPostSubmitSnipeRequest": {
       "type": "object",
