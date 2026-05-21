@@ -138,7 +138,7 @@ service Api {
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      description: "Endpoint for OFA partners, to call and confirms a landed backrun and associated information";
+      description: "Endpoint for OFA partners, to call and confirm a landed backrun and associated information";
       summary: "Backruns";
       tags: ["Trade", "Universal"];
     };
@@ -1528,7 +1528,7 @@ message PostSubmitSnipeResponse {
 }
 
 message PostSubmitResponse {
-  string signature = 1;
+  string signature = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 message PostBackrunsRequest {
