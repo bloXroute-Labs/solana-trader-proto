@@ -1073,7 +1073,7 @@ service Api {
 }
 
 message GetTransactionTraceRequest {
-  string signature = 1;
+  string signature = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 message GetTransactionTraceResponse {
@@ -1528,7 +1528,7 @@ message PostSubmitSnipeResponse {
 }
 
 message PostSubmitResponse {
-  string signature = 1 [(google.api.field_behavior) = REQUIRED];
+  string signature = 1;
 }
 
 message PostBackrunsRequest {

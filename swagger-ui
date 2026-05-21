@@ -2674,7 +2674,7 @@
           {
             "name": "signature",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -6066,15 +6066,9 @@
       "type": "object",
       "properties": {
         "signature": {
-          "type": "string",
-          "required": [
-            "signature"
-          ]
+          "type": "string"
         }
-      },
-      "required": [
-        "signature"
-      ]
+      }
     },
     "apiPostSubmitSnipeRequest": {
       "type": "object",
