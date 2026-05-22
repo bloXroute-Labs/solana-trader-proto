@@ -642,9 +642,8 @@ class BackrunResult(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetBackrunsResponse(betterproto.Message):
-    start_time: datetime = betterproto.message_field(1)
-    end_time: datetime = betterproto.message_field(2)
-    results: List["BackrunResult"] = betterproto.message_field(3)
+    date: datetime = betterproto.message_field(1)
+    results: List["BackrunResult"] = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)

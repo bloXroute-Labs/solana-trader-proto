@@ -2857,11 +2857,7 @@
     "apiGetBackrunsResponse": {
       "type": "object",
       "properties": {
-        "startTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "endTime": {
+        "date": {
           "type": "string",
           "format": "date-time"
         },
