@@ -19,6 +19,7 @@ from betterproto.grpc.grpclib_server import ServiceBase
 
 from .. import common as _common__
 
+
 if TYPE_CHECKING:
     import grpclib.server
     from betterproto.grpc.grpclib_client import MetadataLike
@@ -629,8 +630,7 @@ class PostBackrunsResponse(betterproto.Message):
 
 @dataclass(eq=False, repr=False)
 class GetBackrunsRequest(betterproto.Message):
-    start_time: datetime = betterproto.message_field(1)
-    end_time: datetime = betterproto.message_field(2)
+    date: datetime = betterproto.message_field(1)
 
 
 @dataclass(eq=False, repr=False)

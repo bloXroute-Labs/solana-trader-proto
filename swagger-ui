@@ -1018,16 +1018,9 @@
         },
         "parameters": [
           {
-            "name": "startTime",
+            "name": "date",
             "in": "query",
-            "required": true,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "name": "endTime",
-            "in": "query",
-            "required": true,
+            "required": false,
             "type": "string",
             "format": "date-time"
           }
