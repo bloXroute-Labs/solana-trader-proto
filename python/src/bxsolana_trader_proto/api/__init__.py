@@ -637,7 +637,7 @@ class GetBackrunsRequest(betterproto.Message):
 class BackrunResult(betterproto.Message):
     rev_share_address: str = betterproto.string_field(1)
     rev_share_total_sol: float = betterproto.double_field(2)
-    total_backruns: int = betterproto.uint64_field(3)
+    total_backruns: int = betterproto.uint32_field(3)
 
 
 @dataclass(eq=False, repr=False)

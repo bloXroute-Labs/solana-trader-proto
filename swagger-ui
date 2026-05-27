@@ -2769,8 +2769,8 @@
           "format": "double"
         },
         "totalBackruns": {
-          "type": "string",
-          "format": "uint64"
+          "type": "integer",
+          "format": "int64"
         }
       }
     },

@@ -1548,7 +1548,7 @@ message GetBackrunsRequest {
 message BackrunResult {
   string revShareAddress = 1;
   double revShareTotalSol = 2;
-  uint64 totalBackruns = 3;
+  uint32 totalBackruns = 3;
 }
 
 message GetBackrunsResponse {
