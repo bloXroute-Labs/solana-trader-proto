@@ -997,6 +997,73 @@
         ]
       }
     },
+    "/api/v2/backruns": {
+      "get": {
+        "summary": "Backruns summary",
+        "description": "Returns backrun summary grouped by revenue share address for a time range",
+        "operationId": "Api_GetBackrunsV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetBackrunsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      },
+      "post": {
+        "summary": "Backruns",
+        "description": "Endpoint for OFA partners, to call and confirm a landed backrun and associated information",
+        "operationId": "Api_PostBackrunsV2",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiPostBackrunsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiPostBackrunsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Trade",
+          "Universal"
+        ]
+      }
+    },
     "/api/v2/balance": {
       "get": {
         "summary": "Token balances",
@@ -2600,7 +2667,7 @@
           {
             "name": "signature",
             "in": "query",
-            "required": false,
+            "required": true,
             "type": "string"
           }
         ],
@@ -2691,6 +2758,22 @@
         }
       }
     },
+    "apiBackrunResult": {
+      "type": "object",
+      "properties": {
+        "revShareAddress": {
+          "type": "string"
+        },
+        "revShareTotalSol": {
+          "type": "number",
+          "format": "double"
+        },
+        "totalBackruns": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
     "apiBlock": {
       "type": "object",
       "properties": {
@@ -2767,6 +2850,21 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiTokenBalance"
+          }
+        }
+      }
+    },
+    "apiGetBackrunsResponse": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiBackrunResult"
           }
         }
       }
@@ -4458,6 +4556,45 @@
           "$ref": "#/definitions/apiProject"
         }
       }
+    },
+    "apiPostBackrunsRequest": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "required": [
+            "signature"
+          ]
+        },
+        "backrunSignature": {
+          "type": "string",
+          "required": [
+            "backrunSignature"
+          ]
+        },
+        "revShareLamports": {
+          "type": "string",
+          "format": "uint64",
+          "required": [
+            "revShareLamports"
+          ]
+        },
+        "revShareAddress": {
+          "type": "string",
+          "required": [
+            "revShareAddress"
+          ]
+        }
+      },
+      "required": [
+        "signature",
+        "backrunSignature",
+        "revShareLamports",
+        "revShareAddress"
+      ]
+    },
+    "apiPostBackrunsResponse": {
+      "type": "object"
     },
     "apiPostCancelAllRequest": {
       "type": "object",

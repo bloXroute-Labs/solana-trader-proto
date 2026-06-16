@@ -132,6 +132,29 @@ service Api {
     };
   }
 
+  rpc PostBackrunsV2(PostBackrunsRequest) returns (PostBackrunsResponse) {
+    option (google.api.http) = {
+      post: "/api/v2/backruns"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Endpoint for OFA partners, to call and confirm a landed backrun and associated information";
+      summary: "Backruns";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
+  rpc GetBackrunsV2(GetBackrunsRequest) returns (GetBackrunsResponse) {
+    option (google.api.http) = {
+      get: "/api/v2/backruns"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Returns backrun summary grouped by revenue share address for a time range";
+      summary: "Backruns summary";
+      tags: ["Trade", "Universal"];
+    };
+  }
+
   // Raydium V2
   rpc GetRaydiumPools(GetRaydiumPoolsRequest) returns (GetRaydiumPoolsResponse) {
     option (google.api.http) = {
@@ -1050,7 +1073,7 @@ service Api {
 }
 
 message GetTransactionTraceRequest {
-  string signature = 1;
+  string signature = 1 [(google.api.field_behavior) = REQUIRED];
 }
 
 message GetTransactionTraceResponse {
@@ -1440,10 +1463,10 @@ message PostSubmitRequest {
   optional bool frontRunningProtection = 3;
   optional uint64 tip = 4;
   optional bool useStakedRPCs = 6;
-  optional bool fastBestEffort = 7;
+  optional bool fastBestEffort = 7 [deprecated = true];
   optional bool allowBackRun = 8;
   optional string revenueAddress = 9;
-  optional bool sniping = 10;
+  optional bool sniping = 10 [deprecated = true];
   optional google.protobuf.Timestamp timestamp = 11;
   optional SubmitProtection submitProtection = 12;
   optional bool revertProtection = 13;
@@ -1506,6 +1529,31 @@ message PostSubmitSnipeResponse {
 
 message PostSubmitResponse {
   string signature = 1;
+}
+
+message PostBackrunsRequest {
+  string signature = 1 [(google.api.field_behavior) = REQUIRED];
+  string backrunSignature = 2 [(google.api.field_behavior) = REQUIRED];
+  uint64 revShareLamports = 3 [(google.api.field_behavior) = REQUIRED];
+  string revShareAddress = 4 [(google.api.field_behavior) = REQUIRED];
+}
+
+message PostBackrunsResponse {
+}
+
+message GetBackrunsRequest {
+  google.protobuf.Timestamp date = 1;
+}
+
+message BackrunResult {
+  string revShareAddress = 1;
+  double revShareTotalSol = 2;
+  uint32 totalBackruns = 3;
+}
+
+message GetBackrunsResponse {
+  google.protobuf.Timestamp date = 1;
+  repeated BackrunResult results = 2;
 }
 
 

@@ -19,6 +19,7 @@ from betterproto.grpc.grpclib_server import ServiceBase
 
 from .. import common as _common__
 
+
 if TYPE_CHECKING:
     import grpclib.server
     from betterproto.grpc.grpclib_client import MetadataLike
@@ -528,6 +529,15 @@ class PostSubmitRequest(betterproto.Message):
         13, optional=True, group="_revertProtection"
     )
 
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        if self.is_set("fast_best_effort"):
+            warnings.warn(
+                "PostSubmitRequest.fast_best_effort is deprecated", DeprecationWarning
+            )
+        if self.is_set("sniping"):
+            warnings.warn("PostSubmitRequest.sniping is deprecated", DeprecationWarning)
+
 
 @dataclass(eq=False, repr=False)
 class PostSubmitPaladinRequest(betterproto.Message):
@@ -603,6 +613,37 @@ class PostSubmitSnipeResponse(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitResponse(betterproto.Message):
     signature: str = betterproto.string_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class PostBackrunsRequest(betterproto.Message):
+    signature: str = betterproto.string_field(1)
+    backrun_signature: str = betterproto.string_field(2)
+    rev_share_lamports: int = betterproto.uint64_field(3)
+    rev_share_address: str = betterproto.string_field(4)
+
+
+@dataclass(eq=False, repr=False)
+class PostBackrunsResponse(betterproto.Message):
+    pass
+
+
+@dataclass(eq=False, repr=False)
+class GetBackrunsRequest(betterproto.Message):
+    date: datetime = betterproto.message_field(1)
+
+
+@dataclass(eq=False, repr=False)
+class BackrunResult(betterproto.Message):
+    rev_share_address: str = betterproto.string_field(1)
+    rev_share_total_sol: float = betterproto.double_field(2)
+    total_backruns: int = betterproto.uint32_field(3)
+
+
+@dataclass(eq=False, repr=False)
+class GetBackrunsResponse(betterproto.Message):
+    date: datetime = betterproto.message_field(1)
+    results: List["BackrunResult"] = betterproto.message_field(2)
 
 
 @dataclass(eq=False, repr=False)
@@ -2088,6 +2129,40 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/PostSubmitPaladinV2",
             post_submit_paladin_request,
             PostSubmitResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def post_backruns_v2(
+        self,
+        post_backruns_request: "PostBackrunsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "PostBackrunsResponse":
+        return await self._unary_unary(
+            "/api.Api/PostBackrunsV2",
+            post_backruns_request,
+            PostBackrunsResponse,
+            timeout=timeout,
+            deadline=deadline,
+            metadata=metadata,
+        )
+
+    async def get_backruns_v2(
+        self,
+        get_backruns_request: "GetBackrunsRequest",
+        *,
+        timeout: Optional[float] = None,
+        deadline: Optional["Deadline"] = None,
+        metadata: Optional["MetadataLike"] = None
+    ) -> "GetBackrunsResponse":
+        return await self._unary_unary(
+            "/api.Api/GetBackrunsV2",
+            get_backruns_request,
+            GetBackrunsResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3648,6 +3723,16 @@ class ApiBase(ServiceBase):
     ) -> "PostSubmitResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
+    async def post_backruns_v2(
+        self, post_backruns_request: "PostBackrunsRequest"
+    ) -> "PostBackrunsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
+    async def get_backruns_v2(
+        self, get_backruns_request: "GetBackrunsRequest"
+    ) -> "GetBackrunsResponse":
+        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
+
     async def get_raydium_pools(
         self, get_raydium_pools_request: "GetRaydiumPoolsRequest"
     ) -> "GetRaydiumPoolsResponse":
@@ -4166,6 +4251,20 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.post_submit_paladin_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_post_backruns_v2(
+        self, stream: "grpclib.server.Stream[PostBackrunsRequest, PostBackrunsResponse]"
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.post_backruns_v2(request)
+        await stream.send_message(response)
+
+    async def __rpc_get_backruns_v2(
+        self, stream: "grpclib.server.Stream[GetBackrunsRequest, GetBackrunsResponse]"
+    ) -> None:
+        request = await stream.recv_message()
+        response = await self.get_backruns_v2(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_pools(
@@ -4954,6 +5053,18 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 PostSubmitPaladinRequest,
                 PostSubmitResponse,
+            ),
+            "/api.Api/PostBackrunsV2": grpclib.const.Handler(
+                self.__rpc_post_backruns_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                PostBackrunsRequest,
+                PostBackrunsResponse,
+            ),
+            "/api.Api/GetBackrunsV2": grpclib.const.Handler(
+                self.__rpc_get_backruns_v2,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                GetBackrunsRequest,
+                GetBackrunsResponse,
             ),
             "/api.Api/GetRaydiumPools": grpclib.const.Handler(
                 self.__rpc_get_raydium_pools,
