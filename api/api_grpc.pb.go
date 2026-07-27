@@ -106,6 +106,7 @@ type ApiClient interface {
 	GetBlockStream(ctx context.Context, in *GetBlockStreamRequest, opts ...grpc.CallOption) (Api_GetBlockStreamClient, error)
 	GetPriorityFeeStream(ctx context.Context, in *GetPriorityFeeRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeStreamClient, error)
 	GetPriorityFeeByProgramStream(ctx context.Context, in *GetPriorityFeeByProgramRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeByProgramStreamClient, error)
+	GetPriorityFeeCUStream(ctx context.Context, in *GetPriorityFeeCUStreamRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeCUStreamClient, error)
 	GetBundleTipStream(ctx context.Context, in *GetBundleTipRequest, opts ...grpc.CallOption) (Api_GetBundleTipStreamClient, error)
 	GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error)
 	GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error)
@@ -1099,8 +1100,40 @@ func (x *apiGetPriorityFeeByProgramStreamClient) Recv() (*GetPriorityFeeByProgra
 	return m, nil
 }
 
+func (c *apiClient) GetPriorityFeeCUStream(ctx context.Context, in *GetPriorityFeeCUStreamRequest, opts ...grpc.CallOption) (Api_GetPriorityFeeCUStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetPriorityFeeCUStream", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &apiGetPriorityFeeCUStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Api_GetPriorityFeeCUStreamClient interface {
+	Recv() (*GetPriorityFeeCUStreamResponse, error)
+	grpc.ClientStream
+}
+
+type apiGetPriorityFeeCUStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *apiGetPriorityFeeCUStreamClient) Recv() (*GetPriorityFeeCUStreamResponse, error) {
+	m := new(GetPriorityFeeCUStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *apiClient) GetBundleTipStream(ctx context.Context, in *GetBundleTipRequest, opts ...grpc.CallOption) (Api_GetBundleTipStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[10], "/api.Api/GetBundleTipStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetBundleTipStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1132,7 +1165,7 @@ func (x *apiGetBundleTipStreamClient) Recv() (*GetBundleTipResponse, error) {
 }
 
 func (c *apiClient) GetQuotesStream(ctx context.Context, in *GetQuotesStreamRequest, opts ...grpc.CallOption) (Api_GetQuotesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[11], "/api.Api/GetQuotesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetQuotesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1164,7 +1197,7 @@ func (x *apiGetQuotesStreamClient) Recv() (*GetQuotesStreamResponse, error) {
 }
 
 func (c *apiClient) GetPoolReservesStream(ctx context.Context, in *GetPoolReservesStreamRequest, opts ...grpc.CallOption) (Api_GetPoolReservesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[12], "/api.Api/GetPoolReservesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetPoolReservesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1196,7 +1229,7 @@ func (x *apiGetPoolReservesStreamClient) Recv() (*GetPoolReservesStreamResponse,
 }
 
 func (c *apiClient) GetPricesStream(ctx context.Context, in *GetPricesStreamRequest, opts ...grpc.CallOption) (Api_GetPricesStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[13], "/api.Api/GetPricesStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetPricesStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1228,7 +1261,7 @@ func (x *apiGetPricesStreamClient) Recv() (*GetPricesStreamResponse, error) {
 }
 
 func (c *apiClient) GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[14], "/api.Api/GetNewRaydiumPoolsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[15], "/api.Api/GetNewRaydiumPoolsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1260,7 +1293,7 @@ func (x *apiGetNewRaydiumPoolsStreamClient) Recv() (*GetNewRaydiumPoolsResponse,
 }
 
 func (c *apiClient) GetNewRaydiumPoolsByTransactionStream(ctx context.Context, in *GetNewRaydiumPoolsByTransactionRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsByTransactionStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[15], "/api.Api/GetNewRaydiumPoolsByTransactionStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[16], "/api.Api/GetNewRaydiumPoolsByTransactionStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1292,7 +1325,7 @@ func (x *apiGetNewRaydiumPoolsByTransactionStreamClient) Recv() (*GetNewRaydiumP
 }
 
 func (c *apiClient) GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[16], "/api.Api/GetSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[17], "/api.Api/GetSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1324,7 +1357,7 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 }
 
 func (c *apiClient) GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[17], "/api.Api/GetPumpFunSwapsStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[18], "/api.Api/GetPumpFunSwapsStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1356,7 +1389,7 @@ func (x *apiGetPumpFunSwapsStreamClient) Recv() (*GetPumpFunSwapsStreamResponse,
 }
 
 func (c *apiClient) GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[18], "/api.Api/GetPumpFunNewTokensStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[19], "/api.Api/GetPumpFunNewTokensStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1388,7 +1421,7 @@ func (x *apiGetPumpFunNewTokensStreamClient) Recv() (*GetPumpFunNewTokensStreamR
 }
 
 func (c *apiClient) GetPumpFunNewAmmPoolStream(ctx context.Context, in *GetPumpFunNewAmmPoolStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewAmmPoolStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[19], "/api.Api/GetPumpFunNewAmmPoolStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[20], "/api.Api/GetPumpFunNewAmmPoolStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1420,7 +1453,7 @@ func (x *apiGetPumpFunNewAmmPoolStreamClient) Recv() (*GetPumpFunNewAmmPoolStrea
 }
 
 func (c *apiClient) GetPumpFunAMMSwapStream(ctx context.Context, in *GetPumpFunAMMSwapStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunAMMSwapStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[20], "/api.Api/GetPumpFunAMMSwapStream", opts...)
+	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[21], "/api.Api/GetPumpFunAMMSwapStream", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1579,6 +1612,7 @@ type ApiServer interface {
 	GetBlockStream(*GetBlockStreamRequest, Api_GetBlockStreamServer) error
 	GetPriorityFeeStream(*GetPriorityFeeRequest, Api_GetPriorityFeeStreamServer) error
 	GetPriorityFeeByProgramStream(*GetPriorityFeeByProgramRequest, Api_GetPriorityFeeByProgramStreamServer) error
+	GetPriorityFeeCUStream(*GetPriorityFeeCUStreamRequest, Api_GetPriorityFeeCUStreamServer) error
 	GetBundleTipStream(*GetBundleTipRequest, Api_GetBundleTipStreamServer) error
 	GetQuotesStream(*GetQuotesStreamRequest, Api_GetQuotesStreamServer) error
 	GetPoolReservesStream(*GetPoolReservesStreamRequest, Api_GetPoolReservesStreamServer) error
@@ -1846,6 +1880,9 @@ func (UnimplementedApiServer) GetPriorityFeeStream(*GetPriorityFeeRequest, Api_G
 }
 func (UnimplementedApiServer) GetPriorityFeeByProgramStream(*GetPriorityFeeByProgramRequest, Api_GetPriorityFeeByProgramStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPriorityFeeByProgramStream not implemented")
+}
+func (UnimplementedApiServer) GetPriorityFeeCUStream(*GetPriorityFeeCUStreamRequest, Api_GetPriorityFeeCUStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPriorityFeeCUStream not implemented")
 }
 func (UnimplementedApiServer) GetBundleTipStream(*GetBundleTipRequest, Api_GetBundleTipStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetBundleTipStream not implemented")
@@ -3411,6 +3448,27 @@ func (x *apiGetPriorityFeeByProgramStreamServer) Send(m *GetPriorityFeeByProgram
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Api_GetPriorityFeeCUStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPriorityFeeCUStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(ApiServer).GetPriorityFeeCUStream(m, &apiGetPriorityFeeCUStreamServer{stream})
+}
+
+type Api_GetPriorityFeeCUStreamServer interface {
+	Send(*GetPriorityFeeCUStreamResponse) error
+	grpc.ServerStream
+}
+
+type apiGetPriorityFeeCUStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *apiGetPriorityFeeCUStreamServer) Send(m *GetPriorityFeeCUStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Api_GetBundleTipStream_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetBundleTipRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -4075,6 +4133,11 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetPriorityFeeByProgramStream",
 			Handler:       _Api_GetPriorityFeeByProgramStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPriorityFeeCUStream",
+			Handler:       _Api_GetPriorityFeeCUStream_Handler,
 			ServerStreams: true,
 		},
 		{

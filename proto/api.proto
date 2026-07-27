@@ -964,6 +964,12 @@ service Api {
     };
   }
 
+  rpc GetPriorityFeeCUStream(GetPriorityFeeCUStreamRequest) returns (stream GetPriorityFeeCUStreamResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: "System";
+    };
+  }
+
   rpc GetBundleTipStream(GetBundleTipRequest) returns (stream GetBundleTipResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: "System";
@@ -2438,6 +2444,29 @@ message ProgramPriorityFee {
   uint64 ninety = 19;
   uint64 ninetyFive = 20;
   string program = 21;
+}
+
+message GetPriorityFeeCUStreamRequest {
+  repeated string validators = 1;
+  uint64 lookback_slots = 2;
+}
+
+message PriorityFeeCUPercentiles {
+  uint64 samples = 1;
+  uint64 p50 = 2;
+  uint64 p75 = 3;
+  uint64 p90 = 4;
+  uint64 p95 = 5;
+  uint64 p99 = 6;
+}
+
+message GetPriorityFeeCUStreamResponse {
+  uint64 last_slot = 1;
+  uint64 last_filtered_slot = 2;
+  uint64 lookback_slots = 3;
+  repeated string validators = 4;
+  PriorityFeeCUPercentiles global = 5;
+  PriorityFeeCUPercentiles filtered = 6;
 }
 
 message GetBundleTipRequest{}
