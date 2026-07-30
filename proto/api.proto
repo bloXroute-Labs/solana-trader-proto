@@ -2447,7 +2447,10 @@ message ProgramPriorityFee {
 }
 
 message GetPriorityFeeCUStreamRequest {
-  repeated string validators = 1;
+  // ClientType IDs from go-tpu-client/pkg/gossipcontact/client_ids.go.
+  // Server aggregates samples for leaders whose gossip-published ClientType matches.
+  // Empty list -> filtered percentiles are omitted; only `global` is returned.
+  repeated uint32 client_ids = 1;
   uint64 lookback_slots = 2;
 }
 
@@ -2464,7 +2467,10 @@ message GetPriorityFeeCUStreamResponse {
   uint64 last_slot = 1;
   uint64 last_filtered_slot = 2;
   uint64 lookback_slots = 3;
-  repeated string validators = 4;
+  // Echoes the requested ClientType IDs.
+  repeated uint32 client_ids = 4;
+  // Validator pubkeys whose samples were aggregated into `filtered` (for observability).
+  repeated string resolved_validators = 7;
   PriorityFeeCUPercentiles global = 5;
   PriorityFeeCUPercentiles filtered = 6;
 }
