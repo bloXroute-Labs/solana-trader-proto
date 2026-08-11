@@ -31,7 +31,6 @@ type ApiClient interface {
 	GetRaydiumPools(ctx context.Context, in *GetRaydiumPoolsRequest, opts ...grpc.CallOption) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoolReserveRequest, opts ...grpc.CallOption) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error)
-	GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error)
 	GetRaydiumCPMMQuotes(ctx context.Context, in *GetRaydiumCPMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCPMMQuotesResponse, error)
 	GetRaydiumPrices(ctx context.Context, in *GetRaydiumPricesRequest, opts ...grpc.CallOption) (*GetRaydiumPricesResponse, error)
 	GetRaydiumCLMMQuotes(ctx context.Context, in *GetRaydiumCLMMQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumCLMMQuotesResponse, error)
@@ -113,14 +112,6 @@ type ApiClient interface {
 	GetNewRaydiumPoolsStream(ctx context.Context, in *GetNewRaydiumPoolsRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsStreamClient, error)
 	GetNewRaydiumPoolsByTransactionStream(ctx context.Context, in *GetNewRaydiumPoolsByTransactionRequest, opts ...grpc.CallOption) (Api_GetNewRaydiumPoolsByTransactionStreamClient, error)
 	GetSwapsStream(ctx context.Context, in *GetSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetSwapsStreamClient, error)
-	GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error)
-	GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error)
-	GetPumpFunNewAmmPoolStream(ctx context.Context, in *GetPumpFunNewAmmPoolStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewAmmPoolStreamClient, error)
-	GetPumpFunAMMSwapStream(ctx context.Context, in *GetPumpFunAMMSwapStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunAMMSwapStreamClient, error)
-	PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
-	PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error)
-	GetPumpFunAmmQuotes(ctx context.Context, in *GetPumpFunAmmQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunAmmQuotesResponse, error)
-	PostPumpFunAmmSwap(ctx context.Context, in *PostPumpFunAmmSwapRequest, opts ...grpc.CallOption) (*PostPumpFunAmmSwapResponse, error)
 }
 
 type apiClient struct {
@@ -233,15 +224,6 @@ func (c *apiClient) GetRaydiumPoolReserve(ctx context.Context, in *GetRaydiumPoo
 func (c *apiClient) GetRaydiumQuotes(ctx context.Context, in *GetRaydiumQuotesRequest, opts ...grpc.CallOption) (*GetRaydiumQuotesResponse, error) {
 	out := new(GetRaydiumQuotesResponse)
 	err := c.cc.Invoke(ctx, "/api.Api/GetRaydiumQuotes", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetPumpFunQuotes(ctx context.Context, in *GetPumpFunQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunQuotesResponse, error) {
-	out := new(GetPumpFunQuotesResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetPumpFunQuotes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1323,170 +1305,6 @@ func (x *apiGetSwapsStreamClient) Recv() (*GetSwapsStreamResponse, error) {
 	return m, nil
 }
 
-func (c *apiClient) GetPumpFunSwapsStream(ctx context.Context, in *GetPumpFunSwapsStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunSwapsStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[17], "/api.Api/GetPumpFunSwapsStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetPumpFunSwapsStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetPumpFunSwapsStreamClient interface {
-	Recv() (*GetPumpFunSwapsStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetPumpFunSwapsStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetPumpFunSwapsStreamClient) Recv() (*GetPumpFunSwapsStreamResponse, error) {
-	m := new(GetPumpFunSwapsStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiClient) GetPumpFunNewTokensStream(ctx context.Context, in *GetPumpFunNewTokensStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewTokensStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[18], "/api.Api/GetPumpFunNewTokensStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetPumpFunNewTokensStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetPumpFunNewTokensStreamClient interface {
-	Recv() (*GetPumpFunNewTokensStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetPumpFunNewTokensStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetPumpFunNewTokensStreamClient) Recv() (*GetPumpFunNewTokensStreamResponse, error) {
-	m := new(GetPumpFunNewTokensStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiClient) GetPumpFunNewAmmPoolStream(ctx context.Context, in *GetPumpFunNewAmmPoolStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunNewAmmPoolStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[19], "/api.Api/GetPumpFunNewAmmPoolStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetPumpFunNewAmmPoolStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetPumpFunNewAmmPoolStreamClient interface {
-	Recv() (*GetPumpFunNewAmmPoolStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetPumpFunNewAmmPoolStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetPumpFunNewAmmPoolStreamClient) Recv() (*GetPumpFunNewAmmPoolStreamResponse, error) {
-	m := new(GetPumpFunNewAmmPoolStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiClient) GetPumpFunAMMSwapStream(ctx context.Context, in *GetPumpFunAMMSwapStreamRequest, opts ...grpc.CallOption) (Api_GetPumpFunAMMSwapStreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Api_ServiceDesc.Streams[20], "/api.Api/GetPumpFunAMMSwapStream", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &apiGetPumpFunAMMSwapStreamClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Api_GetPumpFunAMMSwapStreamClient interface {
-	Recv() (*GetPumpFunAMMSwapStreamResponse, error)
-	grpc.ClientStream
-}
-
-type apiGetPumpFunAMMSwapStreamClient struct {
-	grpc.ClientStream
-}
-
-func (x *apiGetPumpFunAMMSwapStreamClient) Recv() (*GetPumpFunAMMSwapStreamResponse, error) {
-	m := new(GetPumpFunAMMSwapStreamResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *apiClient) PostPumpFunSwap(ctx context.Context, in *PostPumpFunSwapRequest, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
-	out := new(PostPumpFunSwapResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwap", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostPumpFunSwapSol(ctx context.Context, in *PostPumpFunSwapRequestSol, opts ...grpc.CallOption) (*PostPumpFunSwapResponse, error) {
-	out := new(PostPumpFunSwapResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunSwapSol", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) GetPumpFunAmmQuotes(ctx context.Context, in *GetPumpFunAmmQuotesRequest, opts ...grpc.CallOption) (*GetPumpFunAmmQuotesResponse, error) {
-	out := new(GetPumpFunAmmQuotesResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/GetPumpFunAmmQuotes", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *apiClient) PostPumpFunAmmSwap(ctx context.Context, in *PostPumpFunAmmSwapRequest, opts ...grpc.CallOption) (*PostPumpFunAmmSwapResponse, error) {
-	out := new(PostPumpFunAmmSwapResponse)
-	err := c.cc.Invoke(ctx, "/api.Api/PostPumpFunAmmSwap", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ApiServer is the server API for Api service.
 // All implementations must embed UnimplementedApiServer
 // for forward compatibility
@@ -1504,7 +1322,6 @@ type ApiServer interface {
 	GetRaydiumPools(context.Context, *GetRaydiumPoolsRequest) (*GetRaydiumPoolsResponse, error)
 	GetRaydiumPoolReserve(context.Context, *GetRaydiumPoolReserveRequest) (*GetRaydiumPoolReserveResponse, error)
 	GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error)
-	GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error)
 	GetRaydiumCPMMQuotes(context.Context, *GetRaydiumCPMMQuotesRequest) (*GetRaydiumCPMMQuotesResponse, error)
 	GetRaydiumPrices(context.Context, *GetRaydiumPricesRequest) (*GetRaydiumPricesResponse, error)
 	GetRaydiumCLMMQuotes(context.Context, *GetRaydiumCLMMQuotesRequest) (*GetRaydiumCLMMQuotesResponse, error)
@@ -1586,14 +1403,6 @@ type ApiServer interface {
 	GetNewRaydiumPoolsStream(*GetNewRaydiumPoolsRequest, Api_GetNewRaydiumPoolsStreamServer) error
 	GetNewRaydiumPoolsByTransactionStream(*GetNewRaydiumPoolsByTransactionRequest, Api_GetNewRaydiumPoolsByTransactionStreamServer) error
 	GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error
-	GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error
-	GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error
-	GetPumpFunNewAmmPoolStream(*GetPumpFunNewAmmPoolStreamRequest, Api_GetPumpFunNewAmmPoolStreamServer) error
-	GetPumpFunAMMSwapStream(*GetPumpFunAMMSwapStreamRequest, Api_GetPumpFunAMMSwapStreamServer) error
-	PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error)
-	PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error)
-	GetPumpFunAmmQuotes(context.Context, *GetPumpFunAmmQuotesRequest) (*GetPumpFunAmmQuotesResponse, error)
-	PostPumpFunAmmSwap(context.Context, *PostPumpFunAmmSwapRequest) (*PostPumpFunAmmSwapResponse, error)
 	mustEmbedUnimplementedApiServer()
 }
 
@@ -1636,9 +1445,6 @@ func (UnimplementedApiServer) GetRaydiumPoolReserve(context.Context, *GetRaydium
 }
 func (UnimplementedApiServer) GetRaydiumQuotes(context.Context, *GetRaydiumQuotesRequest) (*GetRaydiumQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumQuotes not implemented")
-}
-func (UnimplementedApiServer) GetPumpFunQuotes(context.Context, *GetPumpFunQuotesRequest) (*GetPumpFunQuotesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPumpFunQuotes not implemented")
 }
 func (UnimplementedApiServer) GetRaydiumCPMMQuotes(context.Context, *GetRaydiumCPMMQuotesRequest) (*GetRaydiumCPMMQuotesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRaydiumCPMMQuotes not implemented")
@@ -1868,30 +1674,6 @@ func (UnimplementedApiServer) GetNewRaydiumPoolsByTransactionStream(*GetNewRaydi
 func (UnimplementedApiServer) GetSwapsStream(*GetSwapsStreamRequest, Api_GetSwapsStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetSwapsStream not implemented")
 }
-func (UnimplementedApiServer) GetPumpFunSwapsStream(*GetPumpFunSwapsStreamRequest, Api_GetPumpFunSwapsStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetPumpFunSwapsStream not implemented")
-}
-func (UnimplementedApiServer) GetPumpFunNewTokensStream(*GetPumpFunNewTokensStreamRequest, Api_GetPumpFunNewTokensStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetPumpFunNewTokensStream not implemented")
-}
-func (UnimplementedApiServer) GetPumpFunNewAmmPoolStream(*GetPumpFunNewAmmPoolStreamRequest, Api_GetPumpFunNewAmmPoolStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetPumpFunNewAmmPoolStream not implemented")
-}
-func (UnimplementedApiServer) GetPumpFunAMMSwapStream(*GetPumpFunAMMSwapStreamRequest, Api_GetPumpFunAMMSwapStreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetPumpFunAMMSwapStream not implemented")
-}
-func (UnimplementedApiServer) PostPumpFunSwap(context.Context, *PostPumpFunSwapRequest) (*PostPumpFunSwapResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwap not implemented")
-}
-func (UnimplementedApiServer) PostPumpFunSwapSol(context.Context, *PostPumpFunSwapRequestSol) (*PostPumpFunSwapResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunSwapSol not implemented")
-}
-func (UnimplementedApiServer) GetPumpFunAmmQuotes(context.Context, *GetPumpFunAmmQuotesRequest) (*GetPumpFunAmmQuotesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPumpFunAmmQuotes not implemented")
-}
-func (UnimplementedApiServer) PostPumpFunAmmSwap(context.Context, *PostPumpFunAmmSwapRequest) (*PostPumpFunAmmSwapResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PostPumpFunAmmSwap not implemented")
-}
 func (UnimplementedApiServer) mustEmbedUnimplementedApiServer() {}
 
 // UnsafeApiServer may be embedded to opt out of forward compatibility for this service.
@@ -2117,24 +1899,6 @@ func _Api_GetRaydiumQuotes_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ApiServer).GetRaydiumQuotes(ctx, req.(*GetRaydiumQuotesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetPumpFunQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPumpFunQuotesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetPumpFunQuotes(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetPumpFunQuotes",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetPumpFunQuotes(ctx, req.(*GetPumpFunQuotesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3558,162 +3322,6 @@ func (x *apiGetSwapsStreamServer) Send(m *GetSwapsStreamResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Api_GetPumpFunSwapsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetPumpFunSwapsStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetPumpFunSwapsStream(m, &apiGetPumpFunSwapsStreamServer{stream})
-}
-
-type Api_GetPumpFunSwapsStreamServer interface {
-	Send(*GetPumpFunSwapsStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetPumpFunSwapsStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetPumpFunSwapsStreamServer) Send(m *GetPumpFunSwapsStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Api_GetPumpFunNewTokensStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetPumpFunNewTokensStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetPumpFunNewTokensStream(m, &apiGetPumpFunNewTokensStreamServer{stream})
-}
-
-type Api_GetPumpFunNewTokensStreamServer interface {
-	Send(*GetPumpFunNewTokensStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetPumpFunNewTokensStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetPumpFunNewTokensStreamServer) Send(m *GetPumpFunNewTokensStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Api_GetPumpFunNewAmmPoolStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetPumpFunNewAmmPoolStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetPumpFunNewAmmPoolStream(m, &apiGetPumpFunNewAmmPoolStreamServer{stream})
-}
-
-type Api_GetPumpFunNewAmmPoolStreamServer interface {
-	Send(*GetPumpFunNewAmmPoolStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetPumpFunNewAmmPoolStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetPumpFunNewAmmPoolStreamServer) Send(m *GetPumpFunNewAmmPoolStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Api_GetPumpFunAMMSwapStream_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetPumpFunAMMSwapStreamRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ApiServer).GetPumpFunAMMSwapStream(m, &apiGetPumpFunAMMSwapStreamServer{stream})
-}
-
-type Api_GetPumpFunAMMSwapStreamServer interface {
-	Send(*GetPumpFunAMMSwapStreamResponse) error
-	grpc.ServerStream
-}
-
-type apiGetPumpFunAMMSwapStreamServer struct {
-	grpc.ServerStream
-}
-
-func (x *apiGetPumpFunAMMSwapStreamServer) Send(m *GetPumpFunAMMSwapStreamResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Api_PostPumpFunSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostPumpFunSwapRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostPumpFunSwap(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostPumpFunSwap",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostPumpFunSwap(ctx, req.(*PostPumpFunSwapRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostPumpFunSwapSol_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostPumpFunSwapRequestSol)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostPumpFunSwapSol(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostPumpFunSwapSol",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostPumpFunSwapSol(ctx, req.(*PostPumpFunSwapRequestSol))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_GetPumpFunAmmQuotes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPumpFunAmmQuotesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).GetPumpFunAmmQuotes(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/GetPumpFunAmmQuotes",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).GetPumpFunAmmQuotes(ctx, req.(*GetPumpFunAmmQuotesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Api_PostPumpFunAmmSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PostPumpFunAmmSwapRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ApiServer).PostPumpFunAmmSwap(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/api.Api/PostPumpFunAmmSwap",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ApiServer).PostPumpFunAmmSwap(ctx, req.(*PostPumpFunAmmSwapRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Api_ServiceDesc is the grpc.ServiceDesc for Api service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3768,10 +3376,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRaydiumQuotes",
 			Handler:    _Api_GetRaydiumQuotes_Handler,
-		},
-		{
-			MethodName: "GetPumpFunQuotes",
-			Handler:    _Api_GetPumpFunQuotes_Handler,
 		},
 		{
 			MethodName: "GetRaydiumCPMMQuotes",
@@ -4009,22 +3613,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "PostRouteTradeSwap",
 			Handler:    _Api_PostRouteTradeSwap_Handler,
 		},
-		{
-			MethodName: "PostPumpFunSwap",
-			Handler:    _Api_PostPumpFunSwap_Handler,
-		},
-		{
-			MethodName: "PostPumpFunSwapSol",
-			Handler:    _Api_PostPumpFunSwapSol_Handler,
-		},
-		{
-			MethodName: "GetPumpFunAmmQuotes",
-			Handler:    _Api_GetPumpFunAmmQuotes_Handler,
-		},
-		{
-			MethodName: "PostPumpFunAmmSwap",
-			Handler:    _Api_PostPumpFunAmmSwap_Handler,
-		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -4110,26 +3698,6 @@ var Api_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetSwapsStream",
 			Handler:       _Api_GetSwapsStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetPumpFunSwapsStream",
-			Handler:       _Api_GetPumpFunSwapsStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetPumpFunNewTokensStream",
-			Handler:       _Api_GetPumpFunNewTokensStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetPumpFunNewAmmPoolStream",
-			Handler:       _Api_GetPumpFunNewAmmPoolStream_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetPumpFunAMMSwapStream",
-			Handler:       _Api_GetPumpFunAMMSwapStream_Handler,
 			ServerStreams: true,
 		},
 	},

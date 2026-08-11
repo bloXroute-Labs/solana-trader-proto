@@ -19,7 +19,6 @@ from betterproto.grpc.grpclib_server import ServiceBase
 
 from .. import common as _common__
 
-
 if TYPE_CHECKING:
     import grpclib.server
     from betterproto.grpc.grpclib_client import MetadataLike
@@ -768,23 +767,6 @@ class GetRaydiumQuotesResponse(betterproto.Message):
     out_token_address: str = betterproto.string_field(4)
     in_amount: float = betterproto.double_field(5)
     routes: List["RaydiumQuoteRoute"] = betterproto.message_field(6)
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunQuotesRequest(betterproto.Message):
-    quote_type: str = betterproto.string_field(1)
-    mint_address: str = betterproto.string_field(2)
-    bonding_curve_address: str = betterproto.string_field(3)
-    amount: float = betterproto.double_field(4)
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunQuotesResponse(betterproto.Message):
-    quote_type: str = betterproto.string_field(1)
-    in_token_address: str = betterproto.string_field(2)
-    in_amount: float = betterproto.double_field(3)
-    out_token_address: str = betterproto.string_field(4)
-    out_amount: float = betterproto.double_field(5)
 
 
 @dataclass(eq=False, repr=False)
@@ -1858,162 +1840,6 @@ class OrderV2(betterproto.Message):
     open_order_account: str = betterproto.string_field(9)
 
 
-@dataclass(eq=False, repr=False)
-class GetPumpFunSwapsStreamRequest(betterproto.Message):
-    tokens: List[str] = betterproto.string_field(1)
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunSwapsStreamResponse(betterproto.Message):
-    slot: int = betterproto.int64_field(1)
-    txn_hash: str = betterproto.string_field(2)
-    mint_address: str = betterproto.string_field(3)
-    user_address: str = betterproto.string_field(4)
-    user_token_account_address: str = betterproto.string_field(5)
-    bonding_curve_address: str = betterproto.string_field(6)
-    token_vault_address: str = betterproto.string_field(7)
-    sol_amount: int = betterproto.uint64_field(8)
-    token_amount: int = betterproto.uint64_field(9)
-    is_buy: bool = betterproto.bool_field(10)
-    virtual_sol_reserves: int = betterproto.uint64_field(11)
-    virtual_token_reserves: int = betterproto.uint64_field(12)
-    timestamp: datetime = betterproto.message_field(13)
-    creator: str = betterproto.string_field(14)
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunNewTokensStreamRequest(betterproto.Message):
-    pass
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunNewTokensStreamResponse(betterproto.Message):
-    slot: int = betterproto.int64_field(1)
-    txn_hash: str = betterproto.string_field(2)
-    name: str = betterproto.string_field(3)
-    symbol: str = betterproto.string_field(4)
-    uri: str = betterproto.string_field(5)
-    mint: str = betterproto.string_field(6)
-    bonding_curve: str = betterproto.string_field(7)
-    creator: str = betterproto.string_field(8)
-    timestamp: datetime = betterproto.message_field(9)
-    creator_vault: str = betterproto.string_field(10)
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunNewAmmPoolStreamRequest(betterproto.Message):
-    pass
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunNewAmmPoolStreamResponse(betterproto.Message):
-    slot: int = betterproto.int64_field(1)
-    creator: str = betterproto.string_field(2)
-    pool: str = betterproto.string_field(3)
-    base_mint: str = betterproto.string_field(4)
-    quote_mint: str = betterproto.string_field(5)
-    lp_mint: str = betterproto.string_field(6)
-    timestamp: datetime = betterproto.message_field(9)
-    coin_creator: str = betterproto.string_field(10)
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunAmmSwapStreamRequest(betterproto.Message):
-    pools: List[str] = betterproto.string_field(1)
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunAmmSwapStreamResponse(betterproto.Message):
-    pool: str = betterproto.string_field(1)
-    user: str = betterproto.string_field(2)
-    is_buy: bool = betterproto.bool_field(3)
-    quote_mint: str = betterproto.string_field(4)
-    base_mint: str = betterproto.string_field(5)
-    in_amount: float = betterproto.double_field(6)
-    out_amount: float = betterproto.double_field(7)
-    tx_hash: str = betterproto.string_field(8)
-    timestamp: datetime = betterproto.message_field(9)
-    slot: int = betterproto.uint64_field(10)
-
-
-@dataclass(eq=False, repr=False)
-class PostPumpFunSwapRequest(betterproto.Message):
-    user_address: str = betterproto.string_field(1)
-    bonding_curve_address: str = betterproto.string_field(2)
-    token_address: str = betterproto.string_field(3)
-    token_amount: float = betterproto.double_field(4)
-    sol_threshold: float = betterproto.double_field(5)
-    is_buy: bool = betterproto.bool_field(6)
-    slippage: float = betterproto.double_field(7)
-    compute_limit: int = betterproto.uint32_field(8)
-    compute_price: int = betterproto.uint64_field(9)
-    tip: Optional[int] = betterproto.uint64_field(10, optional=True, group="_tip")
-    creator: str = betterproto.string_field(11)
-
-
-@dataclass(eq=False, repr=False)
-class PostPumpFunSwapRequestSol(betterproto.Message):
-    user_address: str = betterproto.string_field(1)
-    bonding_curve_address: str = betterproto.string_field(2)
-    token_address: str = betterproto.string_field(3)
-    sol_amount: float = betterproto.double_field(4)
-    slippage: float = betterproto.double_field(5)
-    compute_limit: int = betterproto.uint32_field(6)
-    compute_price: int = betterproto.uint64_field(7)
-    tip: Optional[int] = betterproto.uint64_field(8, optional=True, group="_tip")
-    creator: str = betterproto.string_field(9)
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunAmmQuotesRequest(betterproto.Message):
-    in_token: str = betterproto.string_field(1)
-    in_amount: float = betterproto.double_field(2)
-    out_token: str = betterproto.string_field(3)
-    pool: str = betterproto.string_field(4)
-    slippage: float = betterproto.double_field(5)
-
-
-@dataclass(eq=False, repr=False)
-class GetPumpFunAmmQuotesResponse(betterproto.Message):
-    quote_type: str = betterproto.string_field(1)
-    in_token: str = betterproto.string_field(2)
-    in_amount: float = betterproto.double_field(3)
-    out_token: str = betterproto.string_field(4)
-    out_amount: float = betterproto.double_field(5)
-
-
-@dataclass(eq=False, repr=False)
-class PostPumpFunAmmSwapRequest(betterproto.Message):
-    owner_address: str = betterproto.string_field(1)
-    in_token: str = betterproto.string_field(2)
-    out_token: str = betterproto.string_field(3)
-    pool: str = betterproto.string_field(4)
-    in_amount: float = betterproto.double_field(5)
-    slippage: float = betterproto.double_field(6)
-    compute_limit: int = betterproto.uint32_field(7)
-    compute_price: int = betterproto.uint64_field(8)
-    tip: Optional[int] = betterproto.uint64_field(9, optional=True, group="_tip")
-
-
-@dataclass(eq=False, repr=False)
-class PostPumpFunAmmSwapResponse(betterproto.Message):
-    transactions: List["TransactionMessage"] = betterproto.message_field(1)
-    buy_quote_amount_in: float = betterproto.double_field(2)
-    buy_user_quote_amount_in: float = betterproto.double_field(3)
-    buy_max_quote_amount_in: float = betterproto.double_field(4)
-    buy_base_amount_out: float = betterproto.double_field(5)
-    sell_base_amount_in: float = betterproto.double_field(6)
-    sell_min_quote_amount_out: float = betterproto.double_field(7)
-    sell_quote_amount_out: float = betterproto.double_field(8)
-    sell_user_quote_amount_out: float = betterproto.double_field(9)
-    fees: List["_common__.Fee"] = betterproto.message_field(10)
-
-
-@dataclass(eq=False, repr=False)
-class PostPumpFunSwapResponse(betterproto.Message):
-    transaction: "TransactionMessageV2" = betterproto.message_field(1)
-
-
 class ApiStub(betterproto.ServiceStub):
     async def get_rate_limit(
         self,
@@ -2214,23 +2040,6 @@ class ApiStub(betterproto.ServiceStub):
             "/api.Api/GetRaydiumQuotes",
             get_raydium_quotes_request,
             GetRaydiumQuotesResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
-    async def get_pump_fun_quotes(
-        self,
-        get_pump_fun_quotes_request: "GetPumpFunQuotesRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "GetPumpFunQuotesResponse":
-        return await self._unary_unary(
-            "/api.Api/GetPumpFunQuotes",
-            get_pump_fun_quotes_request,
-            GetPumpFunQuotesResponse,
             timeout=timeout,
             deadline=deadline,
             metadata=metadata,
@@ -3545,146 +3354,6 @@ class ApiStub(betterproto.ServiceStub):
         ):
             yield response
 
-    async def get_pump_fun_swaps_stream(
-        self,
-        get_pump_fun_swaps_stream_request: "GetPumpFunSwapsStreamRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> AsyncIterator["GetPumpFunSwapsStreamResponse"]:
-        async for response in self._unary_stream(
-            "/api.Api/GetPumpFunSwapsStream",
-            get_pump_fun_swaps_stream_request,
-            GetPumpFunSwapsStreamResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        ):
-            yield response
-
-    async def get_pump_fun_new_tokens_stream(
-        self,
-        get_pump_fun_new_tokens_stream_request: "GetPumpFunNewTokensStreamRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> AsyncIterator["GetPumpFunNewTokensStreamResponse"]:
-        async for response in self._unary_stream(
-            "/api.Api/GetPumpFunNewTokensStream",
-            get_pump_fun_new_tokens_stream_request,
-            GetPumpFunNewTokensStreamResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        ):
-            yield response
-
-    async def get_pump_fun_new_amm_pool_stream(
-        self,
-        get_pump_fun_new_amm_pool_stream_request: "GetPumpFunNewAmmPoolStreamRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> AsyncIterator["GetPumpFunNewAmmPoolStreamResponse"]:
-        async for response in self._unary_stream(
-            "/api.Api/GetPumpFunNewAmmPoolStream",
-            get_pump_fun_new_amm_pool_stream_request,
-            GetPumpFunNewAmmPoolStreamResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        ):
-            yield response
-
-    async def get_pump_fun_amm_swap_stream(
-        self,
-        get_pump_fun_amm_swap_stream_request: "GetPumpFunAmmSwapStreamRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> AsyncIterator["GetPumpFunAmmSwapStreamResponse"]:
-        async for response in self._unary_stream(
-            "/api.Api/GetPumpFunAMMSwapStream",
-            get_pump_fun_amm_swap_stream_request,
-            GetPumpFunAmmSwapStreamResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        ):
-            yield response
-
-    async def post_pump_fun_swap(
-        self,
-        post_pump_fun_swap_request: "PostPumpFunSwapRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "PostPumpFunSwapResponse":
-        return await self._unary_unary(
-            "/api.Api/PostPumpFunSwap",
-            post_pump_fun_swap_request,
-            PostPumpFunSwapResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
-    async def post_pump_fun_swap_sol(
-        self,
-        post_pump_fun_swap_request_sol: "PostPumpFunSwapRequestSol",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "PostPumpFunSwapResponse":
-        return await self._unary_unary(
-            "/api.Api/PostPumpFunSwapSol",
-            post_pump_fun_swap_request_sol,
-            PostPumpFunSwapResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
-    async def get_pump_fun_amm_quotes(
-        self,
-        get_pump_fun_amm_quotes_request: "GetPumpFunAmmQuotesRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "GetPumpFunAmmQuotesResponse":
-        return await self._unary_unary(
-            "/api.Api/GetPumpFunAmmQuotes",
-            get_pump_fun_amm_quotes_request,
-            GetPumpFunAmmQuotesResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
-    async def post_pump_fun_amm_swap(
-        self,
-        post_pump_fun_amm_swap_request: "PostPumpFunAmmSwapRequest",
-        *,
-        timeout: Optional[float] = None,
-        deadline: Optional["Deadline"] = None,
-        metadata: Optional["MetadataLike"] = None
-    ) -> "PostPumpFunAmmSwapResponse":
-        return await self._unary_unary(
-            "/api.Api/PostPumpFunAmmSwap",
-            post_pump_fun_amm_swap_request,
-            PostPumpFunAmmSwapResponse,
-            timeout=timeout,
-            deadline=deadline,
-            metadata=metadata,
-        )
-
 
 class ApiBase(ServiceBase):
 
@@ -3746,11 +3415,6 @@ class ApiBase(ServiceBase):
     async def get_raydium_quotes(
         self, get_raydium_quotes_request: "GetRaydiumQuotesRequest"
     ) -> "GetRaydiumQuotesResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
-    async def get_pump_fun_quotes(
-        self, get_pump_fun_quotes_request: "GetPumpFunQuotesRequest"
-    ) -> "GetPumpFunQuotesResponse":
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
 
     async def get_raydium_cpmm_quotes(
@@ -4154,51 +3818,6 @@ class ApiBase(ServiceBase):
         raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
         yield GetSwapsStreamResponse()
 
-    async def get_pump_fun_swaps_stream(
-        self, get_pump_fun_swaps_stream_request: "GetPumpFunSwapsStreamRequest"
-    ) -> AsyncIterator["GetPumpFunSwapsStreamResponse"]:
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-        yield GetPumpFunSwapsStreamResponse()
-
-    async def get_pump_fun_new_tokens_stream(
-        self, get_pump_fun_new_tokens_stream_request: "GetPumpFunNewTokensStreamRequest"
-    ) -> AsyncIterator["GetPumpFunNewTokensStreamResponse"]:
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-        yield GetPumpFunNewTokensStreamResponse()
-
-    async def get_pump_fun_new_amm_pool_stream(
-        self,
-        get_pump_fun_new_amm_pool_stream_request: "GetPumpFunNewAmmPoolStreamRequest",
-    ) -> AsyncIterator["GetPumpFunNewAmmPoolStreamResponse"]:
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-        yield GetPumpFunNewAmmPoolStreamResponse()
-
-    async def get_pump_fun_amm_swap_stream(
-        self, get_pump_fun_amm_swap_stream_request: "GetPumpFunAmmSwapStreamRequest"
-    ) -> AsyncIterator["GetPumpFunAmmSwapStreamResponse"]:
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-        yield GetPumpFunAmmSwapStreamResponse()
-
-    async def post_pump_fun_swap(
-        self, post_pump_fun_swap_request: "PostPumpFunSwapRequest"
-    ) -> "PostPumpFunSwapResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
-    async def post_pump_fun_swap_sol(
-        self, post_pump_fun_swap_request_sol: "PostPumpFunSwapRequestSol"
-    ) -> "PostPumpFunSwapResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
-    async def get_pump_fun_amm_quotes(
-        self, get_pump_fun_amm_quotes_request: "GetPumpFunAmmQuotesRequest"
-    ) -> "GetPumpFunAmmQuotesResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
-    async def post_pump_fun_amm_swap(
-        self, post_pump_fun_amm_swap_request: "PostPumpFunAmmSwapRequest"
-    ) -> "PostPumpFunAmmSwapResponse":
-        raise grpclib.GRPCError(grpclib.const.Status.UNIMPLEMENTED)
-
     async def __rpc_get_rate_limit(
         self, stream: "grpclib.server.Stream[GetRateLimitRequest, GetRateLimitResponse]"
     ) -> None:
@@ -4289,14 +3908,6 @@ class ApiBase(ServiceBase):
     ) -> None:
         request = await stream.recv_message()
         response = await self.get_raydium_quotes(request)
-        await stream.send_message(response)
-
-    async def __rpc_get_pump_fun_quotes(
-        self,
-        stream: "grpclib.server.Stream[GetPumpFunQuotesRequest, GetPumpFunQuotesResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.get_pump_fun_quotes(request)
         await stream.send_message(response)
 
     async def __rpc_get_raydium_cpmm_quotes(
@@ -4934,82 +4545,6 @@ class ApiBase(ServiceBase):
             request,
         )
 
-    async def __rpc_get_pump_fun_swaps_stream(
-        self,
-        stream: "grpclib.server.Stream[GetPumpFunSwapsStreamRequest, GetPumpFunSwapsStreamResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        await self._call_rpc_handler_server_stream(
-            self.get_pump_fun_swaps_stream,
-            stream,
-            request,
-        )
-
-    async def __rpc_get_pump_fun_new_tokens_stream(
-        self,
-        stream: "grpclib.server.Stream[GetPumpFunNewTokensStreamRequest, GetPumpFunNewTokensStreamResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        await self._call_rpc_handler_server_stream(
-            self.get_pump_fun_new_tokens_stream,
-            stream,
-            request,
-        )
-
-    async def __rpc_get_pump_fun_new_amm_pool_stream(
-        self,
-        stream: "grpclib.server.Stream[GetPumpFunNewAmmPoolStreamRequest, GetPumpFunNewAmmPoolStreamResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        await self._call_rpc_handler_server_stream(
-            self.get_pump_fun_new_amm_pool_stream,
-            stream,
-            request,
-        )
-
-    async def __rpc_get_pump_fun_amm_swap_stream(
-        self,
-        stream: "grpclib.server.Stream[GetPumpFunAmmSwapStreamRequest, GetPumpFunAmmSwapStreamResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        await self._call_rpc_handler_server_stream(
-            self.get_pump_fun_amm_swap_stream,
-            stream,
-            request,
-        )
-
-    async def __rpc_post_pump_fun_swap(
-        self,
-        stream: "grpclib.server.Stream[PostPumpFunSwapRequest, PostPumpFunSwapResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.post_pump_fun_swap(request)
-        await stream.send_message(response)
-
-    async def __rpc_post_pump_fun_swap_sol(
-        self,
-        stream: "grpclib.server.Stream[PostPumpFunSwapRequestSol, PostPumpFunSwapResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.post_pump_fun_swap_sol(request)
-        await stream.send_message(response)
-
-    async def __rpc_get_pump_fun_amm_quotes(
-        self,
-        stream: "grpclib.server.Stream[GetPumpFunAmmQuotesRequest, GetPumpFunAmmQuotesResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.get_pump_fun_amm_quotes(request)
-        await stream.send_message(response)
-
-    async def __rpc_post_pump_fun_amm_swap(
-        self,
-        stream: "grpclib.server.Stream[PostPumpFunAmmSwapRequest, PostPumpFunAmmSwapResponse]",
-    ) -> None:
-        request = await stream.recv_message()
-        response = await self.post_pump_fun_amm_swap(request)
-        await stream.send_message(response)
-
     def __mapping__(self) -> Dict[str, grpclib.const.Handler]:
         return {
             "/api.Api/GetRateLimit": grpclib.const.Handler(
@@ -5083,12 +4618,6 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_UNARY,
                 GetRaydiumQuotesRequest,
                 GetRaydiumQuotesResponse,
-            ),
-            "/api.Api/GetPumpFunQuotes": grpclib.const.Handler(
-                self.__rpc_get_pump_fun_quotes,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                GetPumpFunQuotesRequest,
-                GetPumpFunQuotesResponse,
             ),
             "/api.Api/GetRaydiumCPMMQuotes": grpclib.const.Handler(
                 self.__rpc_get_raydium_cpmm_quotes,
@@ -5545,53 +5074,5 @@ class ApiBase(ServiceBase):
                 grpclib.const.Cardinality.UNARY_STREAM,
                 GetSwapsStreamRequest,
                 GetSwapsStreamResponse,
-            ),
-            "/api.Api/GetPumpFunSwapsStream": grpclib.const.Handler(
-                self.__rpc_get_pump_fun_swaps_stream,
-                grpclib.const.Cardinality.UNARY_STREAM,
-                GetPumpFunSwapsStreamRequest,
-                GetPumpFunSwapsStreamResponse,
-            ),
-            "/api.Api/GetPumpFunNewTokensStream": grpclib.const.Handler(
-                self.__rpc_get_pump_fun_new_tokens_stream,
-                grpclib.const.Cardinality.UNARY_STREAM,
-                GetPumpFunNewTokensStreamRequest,
-                GetPumpFunNewTokensStreamResponse,
-            ),
-            "/api.Api/GetPumpFunNewAmmPoolStream": grpclib.const.Handler(
-                self.__rpc_get_pump_fun_new_amm_pool_stream,
-                grpclib.const.Cardinality.UNARY_STREAM,
-                GetPumpFunNewAmmPoolStreamRequest,
-                GetPumpFunNewAmmPoolStreamResponse,
-            ),
-            "/api.Api/GetPumpFunAMMSwapStream": grpclib.const.Handler(
-                self.__rpc_get_pump_fun_amm_swap_stream,
-                grpclib.const.Cardinality.UNARY_STREAM,
-                GetPumpFunAmmSwapStreamRequest,
-                GetPumpFunAmmSwapStreamResponse,
-            ),
-            "/api.Api/PostPumpFunSwap": grpclib.const.Handler(
-                self.__rpc_post_pump_fun_swap,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                PostPumpFunSwapRequest,
-                PostPumpFunSwapResponse,
-            ),
-            "/api.Api/PostPumpFunSwapSol": grpclib.const.Handler(
-                self.__rpc_post_pump_fun_swap_sol,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                PostPumpFunSwapRequestSol,
-                PostPumpFunSwapResponse,
-            ),
-            "/api.Api/GetPumpFunAmmQuotes": grpclib.const.Handler(
-                self.__rpc_get_pump_fun_amm_quotes,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                GetPumpFunAmmQuotesRequest,
-                GetPumpFunAmmQuotesResponse,
-            ),
-            "/api.Api/PostPumpFunAmmSwap": grpclib.const.Handler(
-                self.__rpc_post_pump_fun_amm_swap,
-                grpclib.const.Cardinality.UNARY_UNARY,
-                PostPumpFunAmmSwapRequest,
-                PostPumpFunAmmSwapResponse,
             ),
         }
