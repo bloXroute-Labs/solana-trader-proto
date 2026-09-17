@@ -138,7 +138,9 @@ class TransactionMessageV2(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitRequest(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
-    skip_pre_flight: bool = betterproto.bool_field(2)
+    skip_pre_flight: Optional[bool] = betterproto.bool_field(
+        2, optional=True, group="_skipPreFlight"
+    )
     front_running_protection: Optional[bool] = betterproto.bool_field(
         3, optional=True, group="_frontRunningProtection"
     )
@@ -192,7 +194,9 @@ class PostSubmitPaladinRequest(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class PostSubmitRequestEntry(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
-    skip_pre_flight: bool = betterproto.bool_field(2)
+    skip_pre_flight: Optional[bool] = betterproto.bool_field(
+        2, optional=True, group="_skipPreFlight"
+    )
 
 
 @dataclass(eq=False, repr=False)

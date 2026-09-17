@@ -443,7 +443,9 @@ class GetOrderStatusResponse(betterproto.Message):
 @dataclass
 class PostSubmitRequest(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
-    skip_pre_flight: bool = betterproto.bool_field(2)
+    skip_pre_flight: Optional[bool] = betterproto.bool_field(
+        2, optional=True, group="_skipPreFlight"
+    )
 
 
 @dataclass
@@ -459,7 +461,9 @@ class PostSubmitJitoBundleResponse(betterproto.Message):
 @dataclass
 class PostSubmitRequestEntry(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
-    skip_pre_flight: bool = betterproto.bool_field(2)
+    skip_pre_flight: Optional[bool] = betterproto.bool_field(
+        2, optional=True, group="_skipPreFlight"
+    )
 
 
 @dataclass
