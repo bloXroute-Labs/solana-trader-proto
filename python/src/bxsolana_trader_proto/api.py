@@ -2156,12 +2156,13 @@ class ApiStub(betterproto.ServiceStub):
         self,
         *,
         transaction: Optional["TransactionMessage"] = None,
-        skip_pre_flight: bool = False,
+        skip_pre_flight: Optional[bool] = None,
     ) -> PostSubmitResponse:
         request = PostSubmitRequest()
         if transaction is not None:
             request.transaction = transaction
-        request.skip_pre_flight = skip_pre_flight
+        if skip_pre_flight is not None:
+            request.skip_pre_flight = skip_pre_flight
 
         return await self._unary_unary(
             "/api.Api/PostSubmitV2",
@@ -3286,12 +3287,13 @@ class ApiStub(betterproto.ServiceStub):
         self,
         *,
         transaction: Optional["TransactionMessage"] = None,
-        skip_pre_flight: bool = False,
+        skip_pre_flight: Optional[bool] = None,
     ) -> PostSubmitResponse:
         request = PostSubmitRequest()
         if transaction is not None:
             request.transaction = transaction
-        request.skip_pre_flight = skip_pre_flight
+        if skip_pre_flight is not None:
+            request.skip_pre_flight = skip_pre_flight
 
         return await self._unary_unary(
             "/api.Api/PostSubmit",
