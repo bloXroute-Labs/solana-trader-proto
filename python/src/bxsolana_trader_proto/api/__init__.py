@@ -170,6 +170,10 @@ class PostSubmitRequest(betterproto.Message):
 
     def __post_init__(self) -> None:
         super().__post_init__()
+        if self.is_set("skip_pre_flight"):
+            warnings.warn(
+                "PostSubmitRequest.skip_pre_flight is deprecated", DeprecationWarning
+            )
         if self.is_set("fast_best_effort"):
             warnings.warn(
                 "PostSubmitRequest.fast_best_effort is deprecated", DeprecationWarning
@@ -193,6 +197,14 @@ class PostSubmitPaladinRequest(betterproto.Message):
 class PostSubmitRequestEntry(betterproto.Message):
     transaction: "TransactionMessage" = betterproto.message_field(1)
     skip_pre_flight: bool = betterproto.bool_field(2)
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        if self.is_set("skip_pre_flight"):
+            warnings.warn(
+                "PostSubmitRequestEntry.skip_pre_flight is deprecated",
+                DeprecationWarning,
+            )
 
 
 @dataclass(eq=False, repr=False)

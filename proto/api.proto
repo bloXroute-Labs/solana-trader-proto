@@ -445,7 +445,7 @@ message TransactionMessageV2 {
 
 message PostSubmitRequest {
   TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
-  bool skipPreFlight = 2;
+  bool skipPreFlight = 2 [deprecated = true];
   optional bool frontRunningProtection = 3;
   optional uint64 tip = 4;
   optional bool useStakedRPCs = 6;
@@ -467,7 +467,7 @@ message PostSubmitPaladinRequest {
 
 message PostSubmitRequestEntry {
   TransactionMessage transaction = 1 [(google.api.field_behavior) = REQUIRED];
-  bool skipPreFlight = 2;
+  bool skipPreFlight = 2 [deprecated = true];
 }
 
 enum SubmitStrategy {
