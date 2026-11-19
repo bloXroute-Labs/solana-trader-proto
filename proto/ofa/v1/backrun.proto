@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package bloxroute.ofa.v1;
+
+option go_package = "github.com/bloXroute-Labs/solana-trader-proto/ofa/v1;ofav1";
+
+// Searcher hosts this RPC; Trader API uses existing bearer authentication.
+// Responses echo original_signature on the originating stream;
+// opportunities may be received out of order.
+service BackrunCoordination {
+  rpc CoordinateBackruns(stream BackrunOpportunity)
+      returns (stream BackrunResponse) {}
+}
+
+message BackrunOpportunity {
+  // base58 backrunnable signature
+  string original_signature = 1;
+}
+
+// Reply within the intent window. Yes holds normal forwarding until the backrun hold deadline.
+message BackrunIntent {
+  string original_signature = 1;
+
+  bool wants_backrun = 2;
+}
+
+// Without a prior yes, must arrive within the intent window and counts as yes.
+// With a timely yes, may arrive until the hold deadline.
+// Accepted backrun txs/bundles are bundled immediately;
+// the original tx stays held until the hold period ends.
+message BackrunCandidate {
+  string original_signature = 1;
+
+  repeated bytes backrun_transactions = 2;
+}
+
+message BackrunResponse {
+  oneof payload {
+    BackrunIntent intent = 1;
+    BackrunCandidate candidate = 2;
+  }
+}
