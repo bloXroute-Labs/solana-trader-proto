@@ -60,3 +60,9 @@ proto-docker-build-go:
 	cd proto && docker build . -f Dockerfile-go -t $(PB_GO_IMAGE_NAME) --platform linux/amd64
 
 
+
+# Generate only the optional OFA coordination service (protoc and Go plugins on PATH).
+.PHONY: proto-build-ofa-go
+proto-build-ofa-go:
+	protoc -I proto --go_out=. --go_opt=module=github.com/bloXroute-Labs/solana-trader-proto \
+		--go-grpc_out=. --go-grpc_opt=module=github.com/bloXroute-Labs/solana-trader-proto ofa/v1/backrun.proto
